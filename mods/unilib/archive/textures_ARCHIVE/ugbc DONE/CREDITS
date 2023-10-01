@@ -1,0 +1,15 @@
+---------------------------------------------------------------------------------------------------
+-- From:    ugbc
+-- Media:   GPLv2
+---------------------------------------------------------------------------------------------------
+
+unilib_stone_marble_cream.png
+    Adapted from /src/main/resources/assets/undergroundbiomes/textures/blocks/marble.png
+unilib_stone_marble_cream_block.png
+    Adapted from /src/main/resources/assets/undergroundbiomes/textures/blocks/marble_slab_top.png
+unilib_stone_marble_cream_brick.png
+    Adapted from /src/main/resources/assets/undergroundbiomes/textures/blocks/marble_brick.png
+unilib_stone_marble_cream_cobble.png
+    Adapted from /src/main/resources/assets/undergroundbiomes/textures/blocks/marble_cobble.png
+unilib_stone_marble_cream_slab.png
+    Adapted from /src/main/resources/assets/undergroundbiomes/textures/blocks/marble_slab_side.png

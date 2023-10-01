@@ -1,0 +1,85 @@
+# "xtraores" remix - contains almost everything from xtraores/xtraores (but not the other mods in
+#       that modpack)
+# Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium,
+#       palatinium and tritonium to avoid clashing with any code that wants the real-life metals
+# Does not include support for awards (yet)
+
+# node_name | original_mod
+
+# xtraores packages
+metal_adamantite|xtraores
+metal_geminitinum|xtraores
+metal_ozymandium|xtraores
+metal_palatinium|xtraores
+metal_rarium|xtraores
+metal_sybilline|xtraores
+metal_tritonium|xtraores
+metal_unobtainium|xtraores
+ore_xtraores_stone_ordinary_with_adamantite|xtraores
+ore_xtraores_stone_ordinary_with_geminitinum|xtraores
+ore_xtraores_stone_ordinary_with_ozymandium|xtraores
+ore_xtraores_stone_ordinary_with_palatinium|xtraores
+ore_xtraores_stone_ordinary_with_rarium|xtraores
+ore_xtraores_stone_ordinary_with_sybilline|xtraores
+ore_xtraores_stone_ordinary_with_tritonium|xtraores
+ore_xtraores_stone_ordinary_with_unobtainium|xtraores
+stone_ordinary_with_adamantite|xtraores
+stone_ordinary_with_geminitinum|xtraores
+stone_ordinary_with_ozymandium|xtraores
+stone_ordinary_with_palatinium|xtraores
+stone_ordinary_with_rarium|xtraores
+stone_ordinary_with_sybilline|xtraores
+stone_ordinary_with_tritonium|xtraores
+stone_ordinary_with_unobtainium|xtraores
+tool_axe_ozymandium|xtraores
+tool_axe_palatinium|xtraores
+tool_axe_sybilline|xtraores
+tool_chainsaw_adamantite|xtraores
+tool_chainsaw_geminitinum|xtraores
+tool_chainsaw_rarium|xtraores
+tool_chainsaw_tritonium|xtraores
+tool_chainsaw_unobtainium|xtraores
+tool_drill_geminitinum|xtraores
+tool_drill_rarium|xtraores
+tool_drill_tritonium|xtraores
+tool_drill_unobtainium|xtraores
+tool_pick_adamantite|xtraores
+tool_pick_ozymandium|xtraores
+tool_pick_palatinium|xtraores
+tool_pick_sybilline|xtraores
+tool_shovel_adamantite|xtraores
+tool_shovel_ozymandium|xtraores
+tool_shovel_palatinium|xtraores
+tool_shovel_sybilline|xtraores
+tool_spear_adamantite|xtraores
+tool_spear_geminitinum|xtraores
+tool_spear_gungir|xtraores
+tool_spear_ozymandium|xtraores
+tool_spear_palatinium|xtraores
+tool_spear_rarium|xtraores
+tool_spear_sybilline|xtraores
+tool_spear_tritonium|xtraores
+tool_spear_unobtainium|xtraores
+tool_sword_adamantite|xtraores
+tool_sword_excalibur|xtraores
+tool_sword_geminitinum|xtraores
+tool_sword_ozymandium|xtraores
+tool_sword_palatinium|xtraores
+tool_sword_rarium|xtraores
+tool_sword_sybilline|xtraores
+tool_sword_tritonium|xtraores
+tool_sword_unobtainium|xtraores
+
+# supporting packages (.depends)
+metal_iron|default
+metal_steel|default technic
+mineral_diamond|default mtg_plus
+mineral_mese|default
+stone_ordinary|default moreblocks technic
+tool_sword_diamond|default
+
+# supporting packages (.optional)
+#grass_jungle|default
+#item_screwdriver_ordinary|screwdriver
+#metal_gold|default technic
+#moss_green|sickles

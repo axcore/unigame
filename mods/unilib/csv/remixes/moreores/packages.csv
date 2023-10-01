@@ -1,0 +1,37 @@
+# "moreores" remix - contains almost everything from moreores except the tin items already provided
+#       by minetest_game
+# Includes the deprecated mithril/silver hoes
+# Does not include support for frames/toolranks (yet)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# moreblocks packages
+metal_mithril|moreores technic
+metal_silver|moreores technic
+ore_moreores_stone_ordinary_with_mithril|moreores
+ore_moreores_stone_ordinary_with_silver|moreores
+rail_copper|moreores
+stone_ordinary_with_mithril|moreores
+stone_ordinary_with_silver|moreores
+tool_axe_mithril|moreores
+tool_axe_silver|moreores
+tool_hoe_mithril|moreores
+tool_hoe_silver|moreores
+tool_pick_mithril|moreores
+tool_pick_silver|moreores
+tool_shovel_mithril|moreores
+tool_shovel_silver|moreores
+tool_sword_mithril|moreores
+tool_sword_silver|moreores
+
+# supporting packages (.depends)
+metal_copper|default moreblocks technic
+shared_carts|unilib
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#container_chest_ordinary|default
+#grass_jungle|default
+#mineral_mese|default
+#moss_green|sickles

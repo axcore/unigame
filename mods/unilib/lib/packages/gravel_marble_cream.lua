@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    UGBC
+-- Code:    GPLv2
+-- Media:   unknown
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.gravel_marble_cream = {}
+
+local S = unilib.intllib
+local mode = unilib.imported_mod_table.ugbc.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.gravel_marble_cream.init()
+
+    return {
+        description = "Cream marble gravel",
+    }
+
+end
+
+function unilib.pkg.gravel_marble_cream.exec()
+
+    unilib.register_node("unilib:gravel_marble_cream", nil, mode, {
+        -- Texture from UGBC, marble_gravel.png. Original code
+        description = S("Cream Marble Gravel"),
+        tiles = {"unilib_gravel_marble_cream.png"},
+        groups = {crumbly = 3, falling_node = 1},
+        sounds = unilib.sound_table.gravel,
+    })
+
+end

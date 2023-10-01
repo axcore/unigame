@@ -1,0 +1,108 @@
+# "beautiflowers" remix - contains everything from the beautiflowers mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# beautiflowers packages
+deco_beautiflowers_mixed|beautiflowers
+deco_beautiflowers_grass_ryegrass|beautiflowers
+deco_beautiflowers_plant_shrub_bonsai|beautiflowers
+flower_ada|beautiflowers
+flower_agnes|beautiflowers
+flower_alicia|beautiflowers
+flower_alma|beautiflowers
+flower_amaya|beautiflowers
+flower_anastasia|beautiflowers
+flower_anni|beautiflowers
+flower_arcoiris|beautiflowers
+flower_arleth|beautiflowers
+flower_astrid|beautiflowers
+flower_beatrice|beautiflowers
+flower_belen|beautiflowers
+flower_berta|beautiflowers
+flower_bianca|beautiflowers
+flower_carla|beautiflowers
+flower_cassandra|beautiflowers
+flower_chloe|beautiflowers
+flower_christina|beautiflowers
+flower_clara|beautiflowers
+flower_claudia|beautiflowers
+flower_dana|beautiflowers
+flower_daphne|beautiflowers
+flower_delia|beautiflowers
+flower_diana|beautiflowers
+flower_elena|beautiflowers
+flower_erica|beautiflowers
+flower_estella|beautiflowers
+flower_eva|beautiflowers
+flower_fabiola|beautiflowers
+flower_fiona|beautiflowers
+flower_gala|beautiflowers
+flower_genesis|beautiflowers
+flower_gisela|beautiflowers
+flower_gloria|beautiflowers
+flower_hadassa|beautiflowers
+flower_ingrid|beautiflowers
+flower_irene|beautiflowers
+flower_iris_white|beautiflowers
+flower_jennifer|beautiflowers
+flower_lara|beautiflowers
+flower_laura|beautiflowers
+flower_lucy|beautiflowers
+flower_lydia|beautiflowers
+flower_mara|beautiflowers
+flower_martina|beautiflowers
+flower_melania|beautiflowers
+flower_michelle|beautiflowers
+flower_minerva|beautiflowers
+flower_mireia|beautiflowers
+flower_miriam|beautiflowers
+flower_nadya|beautiflowers
+flower_nazareth|beautiflowers
+flower_nerea|beautiflowers
+flower_noelia|beautiflowers
+flower_noemi|beautiflowers
+flower_olga|beautiflowers
+flower_olympia|beautiflowers
+flower_oriana|beautiflowers
+flower_paula|beautiflowers
+flower_pia|beautiflowers
+flower_raquel|beautiflowers
+flower_regina|beautiflowers
+flower_rocio|beautiflowers
+flower_ruth|beautiflowers
+flower_sabrina|beautiflowers
+flower_sandra|beautiflowers
+flower_sara|beautiflowers
+flower_sonya|beautiflowers
+flower_sophia|beautiflowers
+flower_suri|beautiflowers
+flower_sylvia|beautiflowers
+flower_talia|beautiflowers
+flower_thais|beautiflowers
+flower_valentina|beautiflowers
+flower_valeria|beautiflowers
+flower_vanessa|beautiflowers
+flower_vera|beautiflowers
+flower_victoria|beautiflowers
+flower_virginia|beautiflowers
+flower_xena|beautiflowers
+flower_xenia|beautiflowers
+flower_yvette|beautiflowers
+flower_zaida|beautiflowers
+grass_ryegrass|beautiflowers
+plant_shrub_bonsai|beautiflowers
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#mineral_mese|default
+#moss_green|sickles
+#soil_ordinary|farming
+#tree_apple|default doors moreblocks

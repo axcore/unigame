@@ -1,0 +1,52 @@
+# "technic" remix - contains some items from the technic modpack
+# From technic_worldgen, provides all nodes, craftitems, ore distributions, and the rubber tree
+# The craft recipes for some ingots require a (technic) alloy machine. If technic is not loaded,
+#       unilib provides alternative craft recipes using just the crafting grid and an ordinary
+#       furnace
+# Technic's tree tap is modified to work with the rubber tree, if that package is executed
+# Unilib creates uranium ores/lumps, but the corresponding uranium ingot/block is only created if
+#       technic is not loaded (otherwise, nuclear power would not be available to the player)
+# From technic, provides various powders
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# technic_worldgen packages
+metal_chromium|technic_worldgen technic
+metal_iron_cast|technic_worldgen technic
+metal_iron_wrought|technic_worldgen
+metal_lead|technic_worldgen technic
+metal_steel_carbon|technic_worldgen technic
+metal_steel_stainless|technic_worldgen technic
+metal_uranium|technic_worldgen technic
+metal_zinc|technic_worldgen technic
+mineral_sulphur|technic_worldgen technic
+ore_technic_stone_granite_dark|technic_worldgen
+ore_technic_stone_marble_brown|technic_worldgen
+ore_technic_stone_ordinary_with_chromium|technic_worldgen
+ore_technic_stone_ordinary_with_lead|technic_worldgen
+ore_technic_stone_ordinary_with_sulphur|technic_worldgen
+ore_technic_stone_ordinary_with_uranium|technic_worldgen
+ore_technic_stone_ordinary_with_zinc|technic_worldgen
+stone_granite_dark|technic_worldgen
+stone_marble_brown|technic_worldgen
+stone_ordinary_with_chromium|technic_worldgen
+stone_ordinary_with_lead|technic_worldgen
+stone_ordinary_with_sulphur|technic_worldgen
+stone_ordinary_with_uranium|technic_worldgen
+stone_ordinary_with_zinc|technic_worldgen
+tree_rubber|moretrees technic_worldgen
+
+# supporting packages (.depends)
+liquid_lava_ordinary|default
+metal_iron|default
+metal_steel|default technic
+shared_moretrees|moretrees
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#grass_jungle|default
+#mineral_coal|default technic
+#mineral_mese|default
+#moss_green|sickles
+#stone_obsidian|default moreblocks

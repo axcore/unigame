@@ -1,0 +1,55 @@
+# "mtgame_biomes" remix - all biome packages from the "mtgame" remix
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Biomes
+biome_default_desert|default
+biome_default_desert_cold|default
+biome_default_desert_sandstone|default
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_grassland_snowy|default
+biome_default_icesheet|default
+biome_default_rainforest|default
+biome_default_savanna|default
+biome_default_taiga|default
+biome_default_tundra|default
+
+# N.B. all supporting packages are commented out, as this remix is intended to be used with other
+#   remixes
+
+# supporting packages (.depends)
+#dirt_dry|default
+#dirt_ordinary|default farming moreblocks
+#dirt_permafrost|default
+#gravel_ordinary|default mtg_plus
+#ice_ordinary|default ethereal mtg_plus
+#liquid_lava_ordinary|default
+#liquid_water_ordinary|default
+#mineral_flint|default fire mtg_plus
+#sand_desert|default farming
+#sand_ordinary|default
+#sand_silver|default
+#snow_ordinary|default ethereal mtg_plus
+#soil_sand_desert|farming
+#stone_desert|default moreblocks
+#stone_ordinary|default moreblocks technic
+#stone_sandstone_ordinary|default moreblocks mtg_plus
+
+# supporting packages (.optional)
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#metal_steel|default technic
+#mineral_coal|default technic
+#mineral_mese|default
+#moss_green|sickles
+#soil_arid|farming
+#soil_ordinary|farming
+#stone_obsidian|default moreblocks

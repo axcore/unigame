@@ -1,0 +1,60 @@
+# "basic_materials" remix - contains everything from basic_materials
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# basic_materials packages
+chain_brass|basic_materials
+chain_steel|basic_materials
+component_circuit_integrated|basic_materials
+component_crystal_energy|basic_materials
+component_element_heating|basic_materials
+component_gear_steel|basic_materials
+component_motor_simple|basic_materials
+item_padlock_normal|basic_materials
+item_spool_empty|basic_materials
+material_cement_industrial|basic_materials
+material_concrete_industrial|basic_materials
+material_oil_extract|basic_materials
+material_paraffin|basic_materials
+material_plastic|basic_materials
+material_silicon|basic_materials
+material_terracotta|basic_materials
+metal_brass|basic_materials technic
+metal_copper_strip|basic_materials
+metal_copper_wire|basic_materials
+metal_gold_wire|basic_materials
+metal_steel_bar|basic_materials
+metal_steel_strip|basic_materials
+metal_steel_wire|basic_materials
+metal_silver_wire|basic_materials
+
+# supporting packages (.depends)
+clay_ordinary|default
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+gravel_ordinary|default mtg_plus
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_silver|moreores technic
+metal_steel|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+sand_ordinary|default
+torch_ordinary|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#container_chest_ordinary|default
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#metal_tin|default technic
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#soil_ordinary|farming

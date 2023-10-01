@@ -1,0 +1,32 @@
+# Environment constants for the "glemr11" remix, replacing temperature/humidity/elevation values in
+#       the corresponding biomes.csv/decorations.csv files
+
+# Temperatures
+HOT|100
+WARM|75
+TEMPERATE|50
+COOL|25
+COLD|0
+
+# Humidities
+HUMID|100
+SEMIHUMID|75
+TEMPERATE|50
+SEMIARID|25
+ARID|0
+
+# Elevations
+OCEAN|-192
+BEACH_MIN|-4
+SEA_LEVEL|0
+BEACH_MAX|4
+COASTAL|40
+LOWLAND|80
+SHELF|120
+HIGHLAND|160
+MOUNTAIN|200
+SNOW_MIN|240
+SNOW_MAX|320
+STRATO|480
+
+# Blend values

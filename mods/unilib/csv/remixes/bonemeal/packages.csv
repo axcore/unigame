@@ -1,0 +1,27 @@
+# "bonemeal" remix - contains everything from the bonemeal mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# bonemeal packages
+ingredient_gelatin_powder|bonemeal
+item_bone|bonemeal
+item_fertiliser_bonemeal|bonemeal
+item_fertiliser_compound|bonemeal
+item_fertiliser_mulch|bonemeal
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+mineral_coal|default technic
+torch_ordinary|default
+
+# supporting packages (.optional)
+#coral_block_skeleton|default
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#soil_ordinary|farming
+
+# supporting packages (.suggested)
+#bucket_steel|bucket

@@ -1,0 +1,21 @@
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/boats
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_boat_wood_acacia_inv.png
+    Adapted from /mods/boats/textures/boats_inventory.png
+unilib_boat_wood_acacia_wield.png
+    Adapted from /mods/boats/textures/boats_wield.png
+unilib_boat_wood_aspen_inv.png
+    Adapted from /mods/boats/textures/boats_inventory.png
+unilib_boat_wood_aspen_wield.png
+    Adapted from /mods/boats/textures/boats_wield.png
+unilib_boat_wood_jungle_inv.png
+    Adapted from /mods/boats/textures/boats_inventory.png
+unilib_boat_wood_jungle_wield.png
+    Adapted from /mods/boats/textures/boats_wield.png
+unilib_boat_wood_pine_inv.png
+    Adapted from /mods/boats/textures/boats_inventory.png
+unilib_boat_wood_pine_wield.png
+    Adapted from /mods/boats/textures/boats_wield.png

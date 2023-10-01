@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------------------------------
+-- From:    xdecor
+-- Media:   WTFPL/CC BY-SA/CC BY 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_container_cabinet_drawer_bottom_front.png
+    Adapted from /textures/xdecor_half_cabinet_front.png
+unilib_container_cabinet_drawer_bottom_side.png
+    Adapted from /textures/xdecor_half_cabinet_sides.png
+unilib_furniture_curtain_overlay.png
+    Adapted from /textures/xdecor_curtain_open_overlay.png
+
+---------------------------------------------------------------------------------------------------
+-- From:    xdecor (MCLx86 fork, https://github.com/MCLx86/xdecor)
+-- Media:   CC BY 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_candle_normal_hanging.png
+unilib_gadget_radio_back.png    
+unilib_gadget_radio_front.png
+unilib_gadget_radio_side.png
+unilib_gadget_radio_top.png
+unilib_gadget_speaker_back.png
+unilib_gadget_speaker_front.png
+unilib_gadget_speaker_side.png
+unilib_gadget_speaker_top.png
+unilib_misc_weathervane_rooster.png
+    Replaced non-free textures in the original mod with alternative textures from the fork

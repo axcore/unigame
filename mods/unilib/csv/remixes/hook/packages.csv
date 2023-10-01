@@ -1,0 +1,27 @@
+# "hook" remix - contains everything from the hook mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# hook packages
+container_chest_portable|hook
+device_breather|hook
+hook_grappling|hook
+hook_grappling_throw|hook
+hook_grappling_throw_locked|hook
+shared_hook|hook
+tool_slingshot_normal|hook
+
+# supporting packages (.depends)
+container_chest_ordinary|default
+item_stick_ordinary|default
+metal_iron|default
+metal_steel|default technic
+mineral_diamond|default mtg_plus
+shared_default_chest|unilib
+
+# supporting packages (.optional)
+#metal_bronze|default technic
+#metal_copper|default moreblocks technic
+#metal_gold|default technic
+#plant_shrub_dry|default

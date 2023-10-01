@@ -1,0 +1,12 @@
+# "grailtest" remix - contains a few stone nodes only
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# grailtest/material and grailtest/mineral packages
+stone_basalt_brown|material mineral
+stone_bluestone|material mineral
+stone_greenstone|material mineral
+stone_whitestone|material mineral
+
+# (no supporting packages for this remix)

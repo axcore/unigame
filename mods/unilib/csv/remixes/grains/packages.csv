@@ -1,0 +1,36 @@
+# "grains" remix - contains everything from the "grains" mod that was not already imported via
+#       another mod (mostly from "farming_redo")
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# grains packages
+crop_quadrotriticale|grains
+food_bread_barley|grains
+food_bread_oat|grains
+food_bread_quadrotriticale|grains
+food_bread_rye|grains
+ingredient_flour_barley|grains
+ingredient_flour_oat|grains
+ingredient_flour_quadrotriticale|grains
+ingredient_flour_rye|grains
+
+# supporting packages (.depends)
+crop_barley|farming
+crop_oat|farming
+crop_rye|farming
+crop_wheat|farming
+dye_basic|dye bakedclay
+ingredient_sugar_normal|farming
+plant_papyrus_ordinary|default mtg_plus
+
+# supporting packages (.at_least_one)
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#ingredient_flour_ordinary|farming
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#utensil_mortar_pestle|farming

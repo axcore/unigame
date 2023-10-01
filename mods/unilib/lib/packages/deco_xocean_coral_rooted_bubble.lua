@@ -1,0 +1,89 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    xocean
+-- Code:    MIT
+-- Media:   MIT
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.deco_xocean_coral_rooted_bubble = {}
+
+local S = unilib.intllib
+local mode = unilib.imported_mod_table.xocean.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.deco_xocean_coral_rooted_bubble.init()
+
+    return {
+        description = "Rooted bubble coral as decoration",
+        depends = "coral_rooted_bubble",
+        at_least_one = {
+            "biome_default_desert_cold",
+            "biome_default_desert_sandstone",
+            "biome_default_forest_coniferous",
+            "biome_default_forest_deciduous",
+            "biome_default_grassland",
+            "biome_default_grassland_snowy",
+            "biome_default_taiga",
+            "coral_block_bubble",
+            "coral_block_fire",
+            "coral_block_horn",
+            "coral_block_rose",
+            "coral_block_tube",
+        },
+    }
+
+end
+
+function unilib.pkg.deco_xocean_coral_rooted_bubble.post()
+
+    unilib.register_decoration_now("xocean_coral_rooted_bubble", nil, {
+        -- From xocean/init.lua
+        -- Completes decoration in package "coral_rooted_bubble"
+        biomes = {
+            "default_desert_cold_ocean",
+            "default_desert_sandstone_ocean",
+            "default_forest_coniferous_ocean",
+            "default_forest_deciduous_ocean",
+            "default_grassland_ocean",
+            "default_grassland_snowy_ocean",
+            "default_taiga_ocean",
+        },
+        place_on = {
+            "unilib:coral_block_bubble",
+            "unilib:coral_block_fire",
+            "unilib:coral_block_horn",
+            "unilib:coral_block_rose",
+            "unilib:coral_block_tube",
+        },
+        y_max = -5,
+        y_min = -50,
+    })
+
+    unilib.register_decoration_now("xocean_coral_rooted_bubble_skeleton", nil, {
+        -- From xocean/init.lua
+        -- Completes decoration in package "coral_rooted_bubble"
+        biomes = {
+            "default_desert_cold_ocean",
+            "default_desert_sandstone_ocean",
+            "default_forest_coniferous_ocean",
+            "default_forest_deciduous_ocean",
+            "default_grassland_ocean",
+            "default_grassland_snowy_ocean",
+            "default_taiga_ocean",
+        },
+        place_on = {
+            "unilib:coral_block_bubble",
+            "unilib:coral_block_fire",
+            "unilib:coral_block_horn",
+            "unilib:coral_block_rose",
+            "unilib:coral_block_tube",
+        },
+        y_max = -5,
+        y_min = -50,
+    })
+
+end

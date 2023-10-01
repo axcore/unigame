@@ -1,0 +1,276 @@
+# "misc" remix - contains material from various small mods that don't merit their own remix
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# agriculture packages
+crop_beet_sugar|agriculture
+misc_scarecrow_straw|agriculture
+
+# anvil packages
+machine_anvil_fancy|anvil
+shared_anvil|anvil
+tool_hammer_blacksmith|anvil cottages
+
+# beacons packages
+gadget_beacon_basic|beacons
+
+# bread packages
+food_bread_pitta|bread
+food_bread_wholegrain_carrot|bread
+ingredient_dough_pitta|bread
+ingredient_dough_wholegrain_carrot|bread
+
+# bridges packages
+misc_bridge_basic|bridges
+
+# bucket_wooden packages
+bucket_wood|bucket_wooden
+override_bucket_wooden|bucket_wooden
+
+# carpet packages
+carpet_basic|carpet
+
+# cement packages
+item_sander_normal|cement
+material_cement_normal|cement
+material_concrete_normal|cement
+
+# chocolate packages
+food_chocolate_white|chocolate
+
+# chunkkeeper packages
+admin_machine_caretaker|chunkkeeper
+machine_caretaker|chunkkeeper
+shared_chunkkeeper|chunkkeeper
+
+# colored_beds packages
+bed_ordinary_quilt|colored_beds
+bed_fancy_quilt|colored_beds
+
+# clock/compass packages (various mods)
+decor_block_compass|compass
+item_compass_death|death_compass
+item_compass_magnetic|realcompass
+item_compass_origin|nextgen_compass
+item_compass_spawn|nextgen_compass
+item_watch_pocket|24hr_clock
+
+# fachwerk/plaster packages
+decor_block_plaster|plaster
+decor_frame_timber_basic|fachwerk
+decor_frame_timber_brick|fachwerk
+decor_frame_timber_clay|fachwerk
+decor_frame_timber_glass|fachwerk
+decor_frame_timber_glass_tinted|fachwerk
+decor_frame_timber_wool|fachwerk
+material_lime_crushed|aotearoa plaster
+shared_fachwerk|fachwerk
+
+# factory_bridges packages
+misc_walkway|factory_bridges
+
+# fireextinguisher packages
+misc_extinguisher_automatic|fireextinguisher
+
+# flowerpot packages
+flowerpot_normal|flowerpot
+
+# forest packages
+liquid_mud_normal|forest
+liquid_oil_normal|forest
+misc_heap_gravel|forest
+misc_heap_sand|forest
+misc_heap_sand_desert|forest
+
+# hangglider packages
+item_hangglider|hangglider
+
+# labels/roads packages
+item_cartridge_ink_extra|offend_flags labels
+
+# ldm32 packages
+machine_meter_distance_short|ldm32
+machine_meter_distance_long|ldm32
+machine_meter_distance_medium|ldm32
+machine_meter_surveyor_long|ldm32
+machine_meter_surveyor_medium|ldm32
+machine_meter_surveyor_short|ldm32
+shared_ldm32|ldm32
+
+# minimap_radar packages
+item_kit_radar|minimap_radar
+
+# more_coral packages
+coral_growing_basic|more_coral
+deco_more_coral_coral_growing|more_coral
+
+# morelamps packages
+light_post_mithril|default morelamps
+light_block_mithril|default morelamps
+
+# nyancat packages
+misc_nyancat|nyancat
+
+# pizza packages
+food_pizza_margherita|pizza
+food_pizza_mushroom_brown|pizza
+food_pizza_mushroom_red|pizza
+
+# plastic_block packages
+decor_block_plastic_basic|plastic_block
+
+# real_torch packages
+item_match_ordinary|real_torch
+torch_unlit|real_torch
+
+# replacer packages
+item_inspector|replacer
+item_replacer|replacer
+
+# scaffolding packages
+item_wrench_scaffold|scaffolding
+scaffold_iron|scaffolding
+scaffold_wood|scaffolding
+shared_scaffolding|scaffolding
+
+# simple_furniture packages
+furniture_basic|simple_furniture
+
+# sounding_line packages
+item_line_sounding|sounding_line
+
+# steampunk packages
+liquid_grease_normal|steampunk
+
+# stripped_tree packages
+item_bark_tree|stripped_tree
+item_chisel_tree|stripped_tree
+machine_chiselling|stripped_tree
+
+# trash_can packages
+misc_bin_skip|trash_can
+misc_bin_wooden|trash_can
+
+# tsm_pyramids packages
+shared_tsm_pyramids|tsm_pyramids
+stone_sandstone_desert_trap|tsm_pyramids
+stone_sandstone_desert_with_engraving|tsm_pyramids
+stone_sandstone_ordinary_trap|tsm_pyramids
+stone_sandstone_ordinary_with_engraving|tsm_pyramids
+
+# twchests packages
+container_chest_bottomless|twchests
+container_chest_compact|twchests
+
+# supporting packages (.depends)
+brick_ordinary|default
+bucket_steel|bucket
+clay_ordinary|default
+container_chest_ordinary|default
+coral_block_skeleton|default
+crop_cotton|farming
+crop_sunflower_giant|farming
+crop_wheat|farming
+dye_basic|dye bakedclay
+food_seed_sunflower_toasted|farming
+glass_ordinary|default moreblocks vessels
+glass_tinted|farlands
+grass_jungle|default
+gravel_ordinary|default mtg_plus
+ice_ordinary|default ethereal mtg_plus
+ingredient_dough_pizza|cucina_vegana
+ingredient_flour_ordinary|farming
+ingredient_sauce_tomato|bbq
+ingredient_sugar_normal|farming
+item_paper_ordinary|default moreblocks
+item_screwdriver_ordinary|screwdriver
+item_stick_ordinary|default
+light_block_mese|default
+material_oil_extract|basic_materials
+material_paraffin|basic_materials
+material_plastic|basic_materials
+metal_bronze|default technic
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_mithril|moreores technic
+metal_steel|default technic
+metal_tin|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+misc_straw_ordinary|farming darkage
+mushroom_brown|flowers
+mushroom_red|flowers
+plant_papyrus_ordinary|default mtg_plus
+produce_carrot_normal|farming
+rope_normal|moreblocks
+sand_desert|default farming
+sand_ordinary|default
+shared_cartridges|offend_flags
+shared_default_chest|unilib
+shared_map|unilib
+shared_screwdriver|screwdriver
+snow_ordinary|default ethereal mtg_plus
+soil_sand_desert|farming
+torch_ordinary|default
+utensil_bowl_wooden|farming thirsty
+vessel_bottle_glass_empty|thirsty vessels
+vessel_glass_empty|thirsty vessels
+vessel_glass_water|farming
+wool_basic|wool
+
+# supporting packages (.at_least_one)
+biome_default_desert|default
+biome_default_rainforest|default
+biome_default_savanna|default
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+liquid_water_ordinary|default
+liquid_water_river|default
+machine_anvil_simple|cottages
+
+# supporting packages (.optional)
+#bed_fancy|beds
+#bed_ordinary|beds
+#bush_blueberry_ordinary|default
+#clay_baked_basic|bakedclay
+#clay_brown|underch
+#crop_rice_white|farming
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#glass_clean|moreblocks
+#glass_clean_rhombus|darkage
+#glass_clean_round|darkage
+#glass_clean_square|darkage
+#glass_coal|moreblocks
+#glass_dirty|mtg_plus
+#glass_glow|moreblocks
+#glass_glow_rhombus|darkage
+#glass_glow_round|darkage
+#glass_glow_square|darkage
+#glass_glow_super|moreblocks
+#glass_iron|moreblocks
+#glass_obsidian|default moreblocks
+#ingredient_cocoa_normal|cacaotree
+#item_fibre_hemp|farming
+#item_string_ordinary|farming
+#liquid_lava_ordinary|default
+#metal_silver|moreores technic
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#trapdoor_wood_ordinary|doors
+#tree_apple|default doors moreblocks
+#utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)
+#food_cheese_vegan|farming
+#food_milk_soy_red|cucina_vegana
+#ingredient_oil_sunflower|farming
+#produce_cocoa_jungle|farming
+#produce_tomato_salad|farming
+#rope_mining|ropes
+#stone_limestone_coquina|aotearoa
+#tool_pick_wood|default

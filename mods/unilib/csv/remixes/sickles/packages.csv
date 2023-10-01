@@ -1,0 +1,32 @@
+# "sickles" remix - contains everything from the sickles mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# sickles packages
+misc_petals|sickles
+moss_blue|sickles
+moss_green|sickles
+moss_purple|sickles
+moss_yellow|sickles
+shared_sickles|sickles
+tool_scythe_bronze|sickles
+tool_scythe_steel|sickles
+tool_sickle_bronze|sickles
+tool_sickle_gold|sickles
+tool_sickle_steel|sickles
+
+# supporting packages (.depends)
+metal_bronze|default technic
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+
+# supporting packages (.optional)
+#dirt_ordinary|default farming moreblocks
+#dye_basic|dye bakedclay
+#flower_dandelion_white|flowers
+#misc_hay_ordinary|cottages
+#tool_pitchfork|cottages

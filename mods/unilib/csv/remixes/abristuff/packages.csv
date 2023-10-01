@@ -1,0 +1,52 @@
+# "abristuff" remix - contains items from abriglass and other related packages
+# From abriglass itself, contains everything except the hidden light and crystal
+# From abriflame/abripanes/abritorch, contains everything
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# abriflame packages
+fire_permanent_tinted|abriflame
+
+# abriglass packages
+decor_wall_clay_dark|abriglass
+decor_wall_clay_pale|abriglass
+glass_artisanal_basic|abriglass
+glass_artisanal_clear|abriglass
+glass_ornamental_blue|abriglass
+glass_ornamental_cross|abriglass
+glass_ornamental_green|abriglass
+glass_ornamental_tiles_dark|abriglass
+glass_ornamental_tiles_pale|abriglass
+glass_ornamental_tiles_small|abriglass
+glass_ornamental_yellow|abriglass
+glass_porthole|abriglass
+glass_secret|abriglass
+
+# abripanes packages
+pane_glass_artisanal_basic|abripanes
+
+# abritorch packages
+torch_tinted|abritorch
+
+# supporting packages (.depends)
+clay_ordinary|default
+dye_basic|dye bakedclay
+glass_ordinary|default moreblocks vessels
+metal_iron|default
+metal_steel|default technic
+mineral_coal|default technic
+mineral_mese|default
+torch_ordinary|default
+
+# supporting packages (.at_least_one)
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+stone_sandstone_desert|default mtg_plus
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_silver|default mtg_plus
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default

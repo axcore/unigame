@@ -1,0 +1,57 @@
+# "nbea" remix - contains decorative items and mesecons compatibility, but no furniture
+# Warning - some of these items are processor-intensive, and should not be used on a server
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# nbea packages
+light_lantern_glass_stained|nbea
+light_lantern_steel|nbea
+misc_box_crest_castle|nbea
+misc_box_disco|nbea
+misc_box_steel_with_core|nbea
+misc_box_wood_reinforced|nbea
+misc_frame_steel_ornate|nbea
+misc_frame_steel_with_core|nbea
+misc_frame_steel_with_core_sample|nbea
+misc_frame_wood_ornate|nbea
+misc_frame_wood_simple|nbea
+misc_frame_wood_with_fireflies|nbea
+misc_ornament_diorama|nbea
+misc_ornament_sheep|nbea
+
+# supporting packages (.depends)
+crop_cotton|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+fruit_apple|default
+glass_ordinary|default moreblocks vessels
+grass_ordinary|default
+item_stick_ordinary|default
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_mithril|moreores technic
+metal_steel|default technic
+mineral_coal|default technic
+mineral_mese|default
+misc_firefly|fireflies
+plant_cactus_ordinary|default
+sand_ordinary|default
+stone_obsidian|default moreblocks
+stone_ordinary|default moreblocks technic
+tree_apple|default doors moreblocks
+tree_jungle|default doors moreblocks
+vessel_bottle_glass_empty|thirsty vessels
+vessel_bottle_glass_with_firefly|fireflies
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_oat|farming
+#crop_wheat|farming
+#grass_dry|default
+#grass_jungle|default
+#moss_green|sickles
+#mushroom_brown|flowers
+#plant_shrub_dry|default
+#soil_ordinary|farming

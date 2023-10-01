@@ -1,0 +1,305 @@
+# "farlands" remix - contains many (but not all) items from the farlands game, concentrating on the
+#       farlands/decoblocks and farlands/mapgen mods. Includes all biomes, decorations and ores
+#       (except those in farlands/farming)
+# Because many farlands mods share a name with minetest_game mods, everything has been grouped into
+#       a hypothetical "farlands" mod. Original names for items are only specified in code when
+#       their mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+base_farlands|farlands
+biome_farlands_desert|farlands
+biome_farlands_desert_sandstone|farlands
+biome_farlands_forest_bamboo|farlands
+biome_farlands_forest_coniferous|farlands
+biome_farlands_forest_deciduous|farlands
+biome_farlands_grassland|farlands
+biome_farlands_grassland_snowy|farlands
+biome_farlands_icesheet|farlands
+biome_farlands_rainforest|farlands
+biome_farlands_savanna|farlands
+biome_farlands_swamp|farlands
+biome_farlands_taiga|farlands
+biome_farlands_tundra|farlands
+biome_farlands_underground|farlands
+bush_acacia_exotic|farlands
+bush_exotic|farlands
+coral_rooted_blue|farlands
+coral_rooted_orange|farlands
+coral_rooted_pink_big|farlands
+coral_rooted_red|farlands
+deco_farlands_bush_acacia_exotic|farlands
+deco_farlands_bush_exotic|farlands
+deco_farlands_fern_broad_leaf|farlands
+deco_farlands_fern_dicksonia|farlands
+deco_farlands_fern_lady|farlands
+deco_farlands_flower_mixed|farlands
+deco_farlands_flower_waterlily_exotic_pink|farlands
+deco_farlands_flower_waterlily_exotic_yellow|farlands
+deco_farlands_grass_bamboo|farlands
+deco_farlands_grass_dead|farlands
+deco_farlands_grass_deciduous|farlands
+deco_farlands_grass_dry|farlands
+deco_farlands_grass_frozen|farlands
+deco_farlands_grass_giant|farlands
+deco_farlands_grass_jungle|farlands
+deco_farlands_grass_ordinary|farlands
+deco_farlands_grass_rainforest|farlands
+deco_farlands_grass_swamp|farlands
+deco_farlands_grass_tall|farlands
+deco_farlands_moss_normal_thick|farlands
+deco_farlands_plant_aloe_vera|farlands
+deco_farlands_plant_bamboo_small|farlands
+deco_farlands_plant_cactus_exotic|farlands
+deco_farlands_plant_cactus_small|farlands
+deco_farlands_plant_oat_wild|farlands
+deco_farlands_plant_papyrus_ordinary|farlands
+deco_farlands_plant_shrub_banana|farlands
+deco_farlands_plant_shrub_dry|farlands
+deco_farlands_plant_shrub_forest_deciduous|farlands
+deco_farlands_plant_shrub_hog_peanut|farlands
+deco_farlands_plant_weed_bindweed|farlands
+deco_farlands_tree_acacia_exotic|farlands
+deco_farlands_tree_acacia_exotic_log|farlands
+deco_farlands_tree_apple|farlands
+deco_farlands_tree_apple_log|farlands
+deco_farlands_tree_aspen_exotic|farlands
+deco_farlands_tree_aspen_exotic_log|farlands
+deco_farlands_tree_bamboo_exotic|farlands
+deco_farlands_tree_baobab|farlands
+deco_farlands_tree_exotic|farlands
+deco_farlands_tree_ipe_yellow|farlands
+deco_farlands_tree_jungle_exotic|farlands
+deco_farlands_tree_jungle_exotic_log|farlands
+deco_farlands_tree_palm_exotic|farlands
+deco_farlands_tree_willow_exotic|farlands
+deco_farlands_tree_young_jungle|farlands
+decor_pillar_bone|farlands
+decor_stone_disintegrating|farlands
+decor_stone_tiles|farlands
+dirt_coarse|farlands
+dirt_ordinary_with_cover_fungi|farlands
+dirt_ordinary_with_litter_leafy|farlands
+dirt_ordinary_with_turf_forest|farlands
+dirt_ordinary_with_turf_swamp|farlands
+dirt_parched|farlands
+door_wood_acacia_exotic|farlands
+door_wood_aspen_exotic|farlands
+door_wood_bamboo_exotic|farlands
+door_wood_baobab|farlands
+door_wood_exotic|farlands
+door_wood_ipe_yellow|farlands
+door_wood_jungle_exotic|farlands
+door_wood_palm_exotic|farlands
+door_wood_pine_exotic|farlands
+door_wood_willow_exotic|farlands
+feature_coral_reef|farlands
+feature_farlands_stone_desert|farlands
+feature_farlands_stone_ordinary|farlands
+feature_farlands_stone_savanna|farlands
+fern_broad_leaf|farlands
+fern_cave|farlands
+fern_dicksonia|farlands
+fern_lady|farlands
+flower_allium_purple|farlands
+flower_daisy_oxeye|farlands
+flower_foxglove_pink|farlands
+flower_foxglove_purple|farlands
+flower_ground|farlands
+flower_lantana|farlands
+flower_lavender|farlands
+flower_lily_flame|farlands
+flower_lobelia|farlands
+flower_pansy_blue|farlands
+flower_pansy_purple|farlands
+flower_petunia_blue|farlands
+flower_petunia_pink|farlands
+flower_petunia_white|farlands
+flower_rose_frozen|farlands
+flower_waterlily_exotic_pink|farlands
+flower_waterlily_exotic_yellow|farlands
+fruit_apple_exotic|farlands
+fruit_berry_exotic|farlands
+fruit_cactus_exotic|farlands
+fruit_coconut_exotic|farlands
+fruit_mango_exotic|farlands
+fruit_orange_exotic|farlands
+fruit_peach_exotic|farlands
+fruit_pear_exotic|farlands
+fruit_plum_exotic|farlands
+glass_framed_wood|farlands
+glass_tinted|farlands
+grass_bamboo|farlands
+grass_dead|farlands
+grass_deciduous|farlands
+grass_frozen|farlands
+grass_giant|farlands
+grass_rainforest|farlands
+grass_seagrass|farlands
+grass_swamp|farlands
+grass_tall|farlands
+light_lantern_paper|farlands
+liquid_water_dirty|farlands
+mapgen_farlands_grasses|farlands
+mapgen_farlands_sealife|farlands
+material_stucco|farlands
+metal_steel_rusty|farlands
+misc_icicle|farlands
+misc_scarecrow_pumpkin|farlands
+misc_skeleton_human|farlands
+misc_skeleton_skull_human|farlands
+misc_spikes|farlands
+misc_stalactite|farlands
+misc_stalagmite|farlands
+misc_stalagmite_crystal|farlands
+misc_vase|farlands
+misc_walkway_wood|farlands
+moss_normal_thick|farlands
+mushroom_white_glowing|farlands
+ore_farlands_bush_exotic|farlands
+ore_farlands_dirt_coarse|farlands
+ore_farlands_dirt_ordinary|farlands
+ore_farlands_dirt_parched|farlands
+ore_farlands_liquid_water_dirty|farlands
+ore_farlands_mineral_mese_block|farlands
+ore_farlands_sand_ordinary|farlands
+ore_farlands_stone_granite_pink|farlands
+ore_farlands_stone_granite_white|farlands
+ore_farlands_stone_limestone_white|farlands
+ore_farlands_stone_ordinary_with_coal|default farlands
+ore_farlands_stone_ordinary_with_copper|default farlands
+ore_farlands_stone_ordinary_with_cover_seagrass|farlands
+ore_farlands_stone_ordinary_with_diamond|default farlands
+ore_farlands_stone_ordinary_with_fossil_ammonite|farlands
+ore_farlands_stone_ordinary_with_fossil_bone|farlands
+ore_farlands_stone_ordinary_with_gold|default farlands
+ore_farlands_stone_ordinary_with_iron|default farlands
+ore_farlands_stone_ordinary_with_mese|default farlands
+ore_farlands_stone_ordinary_with_tin|default farlands
+ore_farlands_stone_savanna_with_coal|farlands
+ore_farlands_stone_savanna_with_iron|farlands
+ore_farlands_tree_acacia_exotic|farlands
+ore_farlands_tree_exotic|farlands
+ore_farlands_tree_jungle_exotic|farlands
+ore_farlands_tree_palm_exotic|farlands
+pane_glass_framed_wood|farlands
+pane_glass_tinted|farlands
+pane_ice_ordinary|farlands
+pane_lattice_stick|farlands
+plant_aloe_vera|farlands
+plant_anemone|farlands
+plant_bamboo_small|farlands
+plant_cactus_exotic|farlands
+plant_cactus_small|farlands
+plant_cattail_normal|farlands
+plant_kelp_green|farlands
+plant_oat_wild|farlands
+plant_shrub_banana|farlands
+plant_shrub_forest_deciduous|farlands
+plant_shrub_hog_peanut|farlands
+plant_weed_bindweed|farlands
+produce_radish|farlands
+stone_granite_pink|farlands
+stone_granite_white|farlands
+stone_limestone_white|farlands
+stone_marble_white|farlands
+stone_ordinary_with_coal|default
+stone_ordinary_with_copper|default
+stone_ordinary_with_cover_seagrass|farlands
+stone_ordinary_with_diamond|default
+stone_ordinary_with_fossil_ammonite|farlands
+stone_ordinary_with_fossil_bone|farlands
+stone_ordinary_with_gold|default
+stone_ordinary_with_iron|default
+stone_ordinary_with_mese|default
+stone_ordinary_with_tin|default
+stone_sandstone_ordinary_with_mural|farlands
+stone_sandstone_ornate|farlands
+stone_savanna|farlands
+stone_savanna_with_coal|farlands
+stone_savanna_with_iron|farlands
+tree_acacia_exotic|farlands
+tree_aspen_exotic|farlands
+tree_bamboo_exotic|farlands
+tree_baobab|farlands
+tree_exotic|farlands
+tree_ipe_yellow|farlands
+tree_jungle_exotic|farlands
+# (Commented out because the nodes are not placed in the world)
+#tree_mushroom_mixed|farlands glemr11
+tree_palm_exotic|farlands
+tree_pine_exotic|farlands
+tree_willow_exotic|farlands
+tree_young_jungle|farlands
+vine_jungle|farlands
+
+# default packages, duplicated in farlands/mapgen
+ore_default_clay_ordinary|default
+ore_default_gravel_ordinary|default
+
+# supporting packages (.depends)
+clay_ordinary|default
+coral_block_brown|default
+coral_block_orange|default
+coral_block_skeleton|default
+crop_wheat|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+fruit_apple|default
+glass_ordinary|default moreblocks vessels
+grass_dry|default
+grass_jungle|default
+grass_ordinary|default
+gravel_ordinary|default mtg_plus
+ice_ordinary|default ethereal mtg_plus
+item_bone|bonemeal
+item_paper_ordinary|default moreblocks
+item_stick_ordinary|default
+liquid_water_ordinary|default
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+misc_straw_ordinary|farming darkage
+mushroom_brown|flowers
+mushroom_red|flowers
+plant_papyrus_ordinary|default mtg_plus
+plant_shrub_dry|default
+produce_pumpkin_yellow|farming
+sand_desert|default farming
+sand_ordinary|default
+snow_ordinary|default ethereal mtg_plus
+soil_sand_desert|farming
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+stone_sandstone_ordinary|default moreblocks mtg_plus
+torch_ordinary|default
+tree_apple|default doors moreblocks
+utensil_board_cutting|farming
+
+# supporting packages (.at_least_one)
+brick_ordinary|default
+dirt_dry|default
+sand_silver|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_barley|farming
+#crop_cotton|farming
+#crop_oat|farming
+#crop_rice_white|farming
+#crop_rye|farming
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#liquid_lava_ordinary|default
+#liquid_water_river|default
+#moss_green|sickles
+#plant_cactus_ordinary|default
+#soil_ordinary|farming

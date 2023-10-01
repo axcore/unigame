@@ -1,0 +1,4 @@
+# Template vein ore table for the "empty" remix
+
+# ore|ore_param2|wherein|clust_scarcity|clust_num_ores|clust_size|y_max|y_min|flags|noise_threshold|np_offset|np_scale|np_spread|np_seed|np_octaves|np_persist|biomes|random_factor
+#unilib:node_test||unilib:stone_ordinary||||Y_MAX|1||0.5|0|3|x = 100, y = 100, z = 100|99|4|0.5||0

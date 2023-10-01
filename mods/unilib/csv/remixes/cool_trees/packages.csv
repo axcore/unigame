@@ -1,0 +1,135 @@
+# "cool_trees" remix - contains most things from the cool_trees modpack
+# Bamboo trees, palm trees and pineapples were not imported (packages from ethereal-ng provide
+#       similar functionality); however the palm tree door was imported
+# Did not import the python_locale_tool mod
+# Longer growth times in cool_trees were not implemented for any package
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# baldcypress packages
+deco_cool_trees_tree_cypress_bald|baldcypress
+tree_cypress_bald|baldcypress
+
+# birch packages
+deco_cool_trees_tree_birch_mature|birch
+door_wood_birch_mature|birch
+tree_birch_mature|birch
+
+# cacaotree packages
+deco_cool_trees_tree_cacao|cacaotree
+food_cake_chocolate|cacaotree
+food_chocolate_milk|cacaotree
+ingredient_cocoa_normal|cacaotree
+tree_cacao|cacaotree
+
+# cherrytree packages
+deco_cool_trees_tree_cherry|cherrytree
+fruit_cherry|cherrytree
+tree_cherry|cherrytree
+
+# chestnuttree packages
+deco_cool_trees_tree_chestnut|chestnuttree
+door_wood_chestnut|chestnuttree
+food_chestnut|chestnuttree
+tree_chestnut|chestnuttree
+
+# clementinetree packages
+deco_cool_trees_tree_clementine|clementinetree
+door_wood_clementine|clementinetree
+fruit_clementine|clementinetree
+tree_clementine|clementinetree
+
+# ebony packages
+deco_cool_trees_tree_ebony|ebony
+fruit_persimmon|ebony
+tree_ebony|ebony
+
+# hollytree packages
+deco_cool_trees_tree_holly|hollytree
+tree_holly|hollytree
+
+# jacaranda packages
+deco_cool_trees_tree_jacaranda|jacaranda
+tree_jacaranda|jacaranda
+
+# larch packages
+deco_cool_trees_tree_larch|larch
+door_wood_larch|larch
+tree_larch|larch
+
+# lemontree packages
+deco_cool_trees_tree_lemon_mature|lemontree
+fruit_lemon_mature|lemontree
+tree_lemon_mature|lemontree
+
+# mahogany packages
+deco_cool_trees_tree_mahogany|mahogany
+tree_mahogany|mahogany
+
+# maple packages
+deco_cool_trees_tree_maple_red|maple
+door_wood_maple_red|maple
+tree_maple_red|maple
+
+# oak packages
+deco_cool_trees_tree_oak_mature|oak
+door_wood_oak_mature|oak
+ingredient_acorn_oak_mature|oak
+tree_oak_mature|oak
+
+# palm packages
+door_wood_palm|palm
+
+# plumtree packages
+deco_cool_trees_tree_plum|plumtree
+fruit_plum|plumtree
+tree_plum|plumtree
+
+# pomegranate packages
+deco_cool_trees_tree_pomegranate|pomegranate
+fruit_pomegranate|pomegranate
+tree_pomegranate|pomegranate
+
+# sequoia packages
+deco_cool_trees_tree_sequoia_mature|sequoia
+tree_sequoia_mature|sequoia
+
+# willow packages
+deco_cool_trees_tree_willow_mature|willow
+tree_willow_mature|willow
+
+# supporting packages (.depends)
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_rainforest|default
+biome_default_savanna|default
+bucket_steel|bucket
+crop_wheat|farming
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+fruit_coconut|ethereal
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+metal_iron|default
+metal_steel|default technic
+sand_ordinary|default
+stone_ordinary|default moreblocks technic
+tree_palm|ethereal
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#liquid_water_river|default
+#mineral_mese|default
+#moss_green|sickles
+#soil_arid|farming
+#soil_ordinary|farming
+#stone_obsidian|default moreblocks
+#utensil_board_cutting|farming
+
+# supporting packages (.suggested)
+#produce_cocoa_jungle|farming

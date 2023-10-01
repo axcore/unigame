@@ -1,0 +1,4 @@
+# Template blob ore table for the "empty" remix
+
+# ore|ore_param2|wherein|clust_scarcity|clust_num_ores|clust_size|y_max|y_min|flags|noise_threshold|np_offset|np_scale|np_spread|np_seed|np_octaves|np_persist|biomes
+#unilib:clay_ordinary||unilib:sand_ordinary|16 * 16 * 16||5|0|-15||0|0.5|0.2|x = 5, y = 5, z = 5|-316|1|0|

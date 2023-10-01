@@ -1,0 +1,40 @@
+# "carvings" remix - contains everything from columnia, facade and mymillwork
+# Code handling carvings from these mods has been incorporated directly into unilib's core code
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# columnia packages
+decor_block_metal_rusty|columnia
+light_lamp_ceiling_normal|columnia
+misc_blueprint_column|columnia
+misc_bracket_rusty|columnia
+
+# facade packages
+machine_carving|facade
+
+# mymillwork packages
+machine_milling|mymillwork
+
+# supporting packages (.depends)
+glass_ordinary|default moreblocks vessels
+item_paper_ordinary|default moreblocks
+metal_iron|default
+metal_steel|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+plant_papyrus_ordinary|default mtg_plus
+stone_ordinary|default moreblocks technic
+torch_ordinary|default
+
+# supporting packages (.at_least_one)
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+liquid_water_ordinary|default
+liquid_water_river|default
+
+# supporting packages (.optional)
+#grass_jungle|default
+#metal_gold|default technic
+#mineral_mese|default
+#moss_green|sickles

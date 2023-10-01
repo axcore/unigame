@@ -1,0 +1,64 @@
+# "icecream" remix - contains everything from the icecream mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# icecream packages
+food_cone_icecream|icecream
+food_icecream_apple|icecream
+food_icecream_banana|icecream
+food_icecream_blueberry|icecream
+food_icecream_carrot|icecream
+food_icecream_chocolate|icecream
+food_icecream_garlic|icecream
+food_icecream_grape|icecream
+food_icecream_mint|icecream
+food_icecream_orange|icecream
+food_icecream_pineapple|icecream
+food_icecream_pumpkin|icecream
+food_icecream_raspberry|icecream
+food_icecream_strawberry|icecream
+food_icecream_vanilla|icecream
+food_icecream_watermelon|icecream
+ingredient_dough_cone|icecream
+
+# supporting packages (.depends)
+crop_mint_normal|farming
+crop_wheat|farming
+food_chocolate_dark|farming
+fruit_apple|default
+fruit_banana|ethereal
+fruit_orange|ethereal
+ingredient_flour_ordinary|farming
+item_stick_ordinary|default
+liquid_water_ordinary|default
+metal_iron|default
+metal_steel|default technic
+misc_trellis|farming
+produce_carrot_normal|farming
+produce_garlic_normal|farming
+produce_grape|farming
+produce_melon|farming
+produce_pineapple|farming
+produce_pumpkin_yellow|farming
+produce_raspberry|farming
+produce_strawberry_normal|ethereal
+produce_vanilla|farming
+snow_ordinary|default ethereal mtg_plus
+utensil_board_cutting|farming
+
+# supporting packages (.at_least_one)
+fruit_blueberry_ordinary|default
+produce_blueberry_highbush|farming
+
+# supporting packages (.optional)
+#dirt_ordinary|default farming moreblocks
+#dye_basic|dye bakedclay
+#food_chocolate_biscuit|farming
+#ingredient_cocoa_normal|cacaotree
+#plant_shrub_dry|default
+#utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)
+#food_icecream|cheese
+#produce_cocoa_jungle|farming

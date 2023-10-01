@@ -1,0 +1,32 @@
+# "decoblocks" remix - contains a small selection of natural materials from the decoblocks game
+#       (because they are required by GLEM)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# decoblocks packages
+gravel_dark|decoblocks
+mineral_sodalite|decoblocks
+mineral_sodalite_rock|decoblocks
+sand_pale|decoblocks
+stone_basalt_grey|decoblocks
+stone_brownstone_pale|decoblocks
+stone_granite_black|decoblocks
+stone_granite_brown|decoblocks
+stone_granite_grey|decoblocks
+stone_granite_red|decoblocks
+stone_limestone_dark|decoblocks
+stone_marble_red|decoblocks
+stone_sandstone_beige|decoblocks
+stone_serpentinite_pale|decoblocks
+stone_travertine|decoblocks
+
+# supporting packages (.depends)
+mineral_flint|default fire mtg_plus
+
+# supporting packages (.optional)
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#metal_steel|default technic
+#mineral_coal|default technic
+#sand_beige|unilib

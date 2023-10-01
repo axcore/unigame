@@ -1,0 +1,205 @@
+# "underch-jit" remix - almost exactly the same as the "underch" remix (see below for a list of
+#       removed packages), but uses code from the "experimental" version of the underch mod, to
+#       produce just-in-time underground biome generation
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# underch/uchu packages
+clay_brown|underch
+dirt_mossy|underch
+food_slimestone_eye_baked|bakedeye
+gravel_mossy|underch
+light_block_sichamine|underch
+mapgen_underch_jit|underch
+mineral_amethyst|underch
+mineral_aquamarine|underch
+mineral_coal_block_with_diamond|underch
+mineral_emerald|underch
+mineral_mese_crystal_large|underch
+mineral_quartz_white|underch
+mineral_ruby|underch
+mineral_sapphire|underch
+misc_granules_coal|underch
+misc_granules_fiery|underch
+misc_granules_normal|underch
+misc_granules_ruby|underch
+misc_matrix|underch
+misc_stone_burner|underch
+moss_mould_underground|underch
+moss_underground|underch
+moss_underground_dry|underch
+mushroom_black|underch
+mushroom_burning|underch
+mushroom_green|underch
+mushroom_orange|underch
+plant_bush_underground|underch
+plant_bush_underground_dead|underch
+plant_torchberry|underch
+plant_tuber_dark|underch
+shared_underch_slime|underch
+stone_afualite|underch compressed condensed
+stone_amphibolite|underch compressed condensed
+stone_andesite_dark|underch compressed condensed
+stone_aplite|underch compressed condensed
+stone_basalt_blue|underch compressed condensed
+stone_diorite_pale|underch compressed condensed
+stone_dolostone_pale|underch compressed condensed
+stone_emutite|underch compressed condensed
+stone_gabbro_brown|underch compressed condensed
+stone_gneiss_black|underch compressed condensed
+stone_goldstone|underch
+stone_granite_salmon|underch compressed condensed
+stone_hektorite|underch compressed condensed
+stone_leafstone|underch
+stone_limestone_grey|underch compressed condensed
+stone_malachite|underch
+stone_marble_carrara|underch compressed condensed
+stone_obscurite|underch
+stone_omphyrite|underch compressed condensed
+stone_omphyrite_extra|underch
+stone_ordinary_with_amethyst|underch
+stone_ordinary_with_aquamarine|underch
+stone_ordinary_with_coal_dense|underch
+stone_ordinary_with_copper_dense|underch
+stone_ordinary_with_emerald|underch
+stone_ordinary_with_gold_dense|underch
+stone_ordinary_with_iron_dense|underch
+stone_ordinary_with_quartz_white|underch
+stone_ordinary_with_ruby|underch
+stone_ordinary_with_sapphire|underch
+stone_pegmatite_red|underch compressed condensed
+stone_peridotite_dark|underch compressed condensed
+stone_phonolite|underch compressed condensed
+stone_phyllite|underch compressed condensed
+stone_quartzite_brown|underch compressed condensed
+stone_schist_red|underch compressed condensed
+stone_shinestone|underch
+stone_sichamine|underch compressed condensed
+stone_sichamine_extra|underch
+stone_slate_red|underch compressed condensed
+stone_slate_red_extra|underch
+stone_slimestone_green|underch compressed condensed
+stone_slimestone_green_extra|underch
+stone_slimestone_purple|underch compressed condensed
+stone_slimestone_purple_extra|underch
+stone_slimestone_red|underch compressed condensed
+stone_slimestone_red_extra|underch
+stone_vindesite_blue|underch compressed condensed
+stone_vindesite_white|underch compressed condensed
+stone_vindesite_white_with_quartz_white|underch
+tool_axe_emerald|gemtools
+tool_pick_emerald|gemtools
+tool_shovel_emerald|gemtools
+tool_sword_emerald|gemtools
+tool_axe_sapphire|gemtools
+tool_pick_sapphire|gemtools
+tool_shovel_sapphire|gemtools
+tool_sword_sapphire|gemtools
+tool_axe_ruby|gemtools
+tool_pick_ruby|gemtools
+tool_shovel_ruby|gemtools
+tool_sword_ruby|gemtools
+vine_fiery|underch
+vine_underground|underch
+
+# supporting packages
+brick_ordinary|default
+dirt_ordinary|default farming moreblocks
+fire_permanent|fire underch
+gravel_ordinary|default mtg_plus
+item_stick_ordinary|default
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+mushroom_brown|flowers
+mushroom_red|flowers
+ore_default_stone_ordinary_with_coal|default
+ore_default_stone_ordinary_with_copper|default
+ore_default_stone_ordinary_with_diamond|default
+ore_default_stone_ordinary_with_gold|default
+ore_default_stone_ordinary_with_iron|default
+ore_default_stone_ordinary_with_mese|default
+ore_default_stone_ordinary_with_tin|default
+ore_moreores_stone_ordinary_with_mithril|moreores
+ore_moreores_stone_ordinary_with_silver|moreores
+ore_technic_stone_ordinary_with_chromium|technic_worldgen
+ore_technic_stone_ordinary_with_lead|technic_worldgen
+ore_technic_stone_ordinary_with_uranium|technic_worldgen
+ore_technic_stone_ordinary_with_zinc|technic_worldgen
+ore_xtraores_stone_ordinary_with_adamantite|xtraores
+ore_xtraores_stone_ordinary_with_geminitinum|xtraores
+ore_xtraores_stone_ordinary_with_palatinium|xtraores
+ore_xtraores_stone_ordinary_with_rarium|xtraores
+ore_xtraores_stone_ordinary_with_sybilline|xtraores
+ore_xtraores_stone_ordinary_with_tritonium|xtraores
+ore_xtraores_stone_ordinary_with_unobtainium|xtraores
+sand_silver|default
+stone_desert|default moreblocks
+stone_obsidian|default moreblocks
+stone_ordinary|default moreblocks technic
+stone_ordinary_with_adamantite|xtraores
+stone_ordinary_with_chromium|technic_worldgen
+stone_ordinary_with_coal|default
+stone_ordinary_with_copper|default
+stone_ordinary_with_diamond|default
+stone_ordinary_with_geminitinum|xtraores
+stone_ordinary_with_gold|default
+stone_ordinary_with_iron|default
+stone_ordinary_with_lead|technic_worldgen
+stone_ordinary_with_mese|default
+stone_ordinary_with_palatinium|xtraores
+stone_ordinary_with_rarium|xtraores
+stone_ordinary_with_tin|default
+stone_ordinary_with_mithril|moreores
+stone_ordinary_with_silver|moreores
+stone_ordinary_with_sybilline|xtraores
+stone_ordinary_with_tritonium|xtraores
+stone_ordinary_with_unobtainium|xtraores
+stone_ordinary_with_uranium|technic_worldgen
+stone_ordinary_with_zinc|technic_worldgen
+stone_sandstone_desert|default mtg_plus
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_silver|default mtg_plus
+torch_ordinary|default
+
+# packages used by "regular" underch, but commented out in "experimental" underch
+#ore_underch_clay_brown|underch
+#ore_underch_gravel_mossy|underch
+#ore_underch_stone_ordinary_cobble|underch
+
+# supporting packages (.depends) (all appear above)
+#dirt_ordinary|default farming moreblocks
+#fire_permanent|fire underch
+#gravel_ordinary|default mtg_plus
+#liquid_lava_ordinary|default
+#metal_copper|default moreblocks technic
+#metal_gold|default technic
+#metal_iron|default
+#mineral_coal|default technic
+#mineral_diamond|default mtg_plus
+#mineral_flint|default fire mtg_plus
+#mineral_mese|default
+#stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#brick_ordinary|default
+#fire_ordinary|fire
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#item_stick_ordinary|default
+#metal_steel|default technic
+#metal_tin|default technic
+#moss_green|sickles
+#soil_ordinary|farming
+#stone_obsidian|default moreblocks
+#torch_ordinary|default

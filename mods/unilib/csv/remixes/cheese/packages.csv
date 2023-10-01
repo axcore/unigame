@@ -1,0 +1,112 @@
+# "cheese" remix - contains everything from the fantasy cheeses/effects
+#
+# General usage:
+# 1. Boil milk in a cauldron to obtain curd (and whey)
+# 2. Place the whey in a cheese rack, in a dark place, to obtain aged cheeses. Curd and whey can
+#       also be cooked in a furnace to produce a small range of cheeses
+# 3. Craft stretched cheese from curd, water and salt, which produces cheeses like mozzarella. Of
+#       those, caciovallo must be hanged on a string (in a dark place) before it becomes eatable
+# 4. Right-click a cream centrigue with either whey or milk to produce cream
+# 5. Right-click a churn with either cream or milk to produce butter
+#
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# cheese packages
+bucket_steel_with_bones|cheese
+bucket_steel_with_seaweed|cheese
+container_cheese_rack_cobble|cheese
+container_cheese_rack_stone|cheese
+container_cheese_rack_wood|cheese
+drink_tonic_fruit|cheese
+food_cheese_asiago|cheese
+food_cheese_brie|cheese
+food_cheese_caciocavallo|cheese
+food_cheese_emmental|cheese
+food_cheese_fondue|cheese
+food_cheese_fontal|cheese
+food_cheese_gorgonzola|cheese
+food_cheese_gouda|cheese
+food_cheese_gruyere|cheese
+food_cheese_monteray_jack|cheese
+food_cheese_mozzarella|cheese
+food_cheese_parmesan|cheese
+food_cheese_ricotta|cheese
+food_cheese_scamorza|cheese
+food_cheese_stilton|cheese
+food_cheese_stracchino|cheese
+food_cheese_toma|cheese
+food_icecream|cheese
+food_icecream_banana_split|cheese
+food_icecream_neapolitan|cheese
+food_icecream_vegan|cheese
+ingredient_butter_normal|cheese
+ingredient_butter_vegetable|cheese
+ingredient_cheese_stretched|cheese
+ingredient_cream_cactus|cheese
+ingredient_cream_coconut|cheese
+ingredient_cream_milk|cheese
+ingredient_curd|cheese
+ingredient_oil_nut|cheese
+ingredient_whey|cheese
+machine_cauldron_milk|cheese
+machine_centrifuge_cream|cheese
+machine_churn_milk|cheese
+shared_cheese_rack|cheese
+
+# supporting packages (.depends)
+bucket_steel|bucket
+crop_cotton|farming
+fruit_apple|default
+glass_ordinary|default moreblocks vessels
+ingredient_extract_vanilla|farming
+ingredient_salt_normal|farming
+item_stick_ordinary|default
+item_string_ordinary|farming
+liquid_water_ordinary|default
+metal_copper|default moreblocks technic
+metal_iron|default
+metal_steel|default technic
+plant_seaweed_undersea|ethereal
+produce_vanilla|farming
+snow_ordinary|default ethereal mtg_plus
+stone_ordinary|default moreblocks technic
+tree_apple|default doors moreblocks
+utensil_mortar_pestle|farming
+vessel_bottle_glass_empty|thirsty vessels
+vessel_bottle_glass_ethanol|farming
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+food_milk_coconut|moretrees
+food_milk_soy|farming
+food_milk_soy_red|cucina_vegana
+liquid_water_river|default
+
+# supporting packages (.optional)
+#bucket_wood|bucket_wooden
+#dirt_ordinary|default farming moreblocks
+#dye_basic|dye bakedclay
+#food_porridge|farming
+#food_pulp_cactus|ethereal
+#grass_jungle|default
+#ingredient_agar_powder|ethereal
+#ingredient_gelatin_powder|bonemeal
+#liquid_lava_ordinary|default
+#mineral_mese|default
+#moss_green|sickles
+#mushroom_brown|flowers
+#plant_shrub_dry|default
+
+# supporting packages (.suggested)
+#food_cheese_vegan|farming
+#food_chocolate_dark|farming
+#food_nuts_cedar|moretrees
+#fruit_banana|ethereal
+#fruit_orange|ethereal
+#ingredient_oil_sunflower|farming
+#ingredient_sugar_normal|farming
+#produce_corn_normal|farming
+#produce_grape|farming
+#produce_strawberry_normal|ethereal

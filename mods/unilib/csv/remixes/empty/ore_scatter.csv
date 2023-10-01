@@ -1,0 +1,4 @@
+# Template scatter ore table for the "empty" remix
+
+# ore|ore_param2|wherein|clust_scarcity|clust_num_ores|clust_size|y_max|y_min|flags|noise_threshold|np_offset|np_scale|np_spread|np_seed|np_octaves|np_persist|biomes
+#unilib:mineral_mese_block||unilib:stone_ordinary|36 * 36 * 36|3|2|Y_MAX|1025|||||||||

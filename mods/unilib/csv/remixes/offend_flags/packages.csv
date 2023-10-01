@@ -1,0 +1,34 @@
+# "offend_flags" remix - contains the flag printer and flag-generation code from the "offend_flags"
+#       mod, and a (new) set of national flags
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# offend_flags packages
+item_cartridge_ink|offend_flags
+machine_printer_flag|offend_flags
+shared_cartridges|offend_flags
+shared_offend_flags|offend_flags
+
+# supporting packages (.depends)
+dye_basic|dye bakedclay
+item_paper_ordinary|default moreblocks
+material_oil_extract|basic_materials
+material_paraffin|basic_materials
+material_plastic|basic_materials
+metal_bronze|default technic
+metal_copper|default moreblocks technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+plant_papyrus_ordinary|default mtg_plus
+
+# supporting packages (.at_least_one)
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#shared_screwdriver|screwdriver

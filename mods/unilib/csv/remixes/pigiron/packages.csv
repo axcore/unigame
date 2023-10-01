@@ -1,0 +1,35 @@
+# "pigiron" remix - contains some crafting overrides and tools from the pigiron mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# bonemeal packages
+override_pigiron_crafting|pigiron
+override_pigiron_tools|pigiron
+tool_axe_iron_pig|pigiron
+tool_hoe_iron_pig|pigiron
+tool_pick_iron_pig|pigiron
+tool_shovel_iron_pig|pigiron
+tool_sword_iron_pig|pigiron
+
+# supporting packages (.depends)
+metal_iron|default
+metal_iron_pig|real_minerals
+metal_steel|default technic
+
+# supporting packages (.at_least_one)
+material_charcoal_artificial_lump|ethereal
+mineral_charcoal_natural|real_minerals
+tool_axe_bronze|default
+tool_axe_steel|default
+tool_pick_bronze|default
+tool_pick_steel|default
+tool_shovel_bronze|default
+tool_shovel_steel|default
+tool_sword_bronze|default
+tool_sword_steel|default
+
+# supporting packages (.optional)
+#mineral_haematite|real_minerals
+#mineral_limonite|real_minerals
+#mineral_magnetite|real_minerals

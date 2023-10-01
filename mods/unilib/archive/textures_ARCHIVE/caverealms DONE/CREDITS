@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------------------------------
+-- From:    caverealms
+-- Media:   WTFPL
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_cavern_crystal_glow_1_inv.png
+unilib_misc_cavern_crystal_glow_2_inv.png
+unilib_misc_cavern_crystal_glow_3_inv.png
+unilib_misc_cavern_crystal_glow_4_inv.png
+unilib_misc_cavern_crystal_glow_5_inv.png
+    Adapted from /textures/caverealms_glow_gem.png
+    
+unilib_misc_cavern_crystal_salt_1_inv.png
+unilib_misc_cavern_crystal_salt_2_inv.png
+unilib_misc_cavern_crystal_salt_3_inv.png
+unilib_misc_cavern_crystal_salt_4_inv.png
+unilib_misc_cavern_crystal_salt_5_inv.png
+    Adapted from /textures/caverealms_salt_gem.png
+
+unilib_misc_cavern_crystal_spike_1_inv.png
+unilib_misc_cavern_crystal_spike_2_inv.png
+unilib_misc_cavern_crystal_spike_3_inv.png
+unilib_misc_cavern_crystal_spike_4_inv.png
+unilib_misc_cavern_crystal_spike_5_inv.png
+    Adapted from /textures/caverealms_spike.png

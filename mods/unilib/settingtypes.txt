@@ -1,0 +1,697 @@
+# -------------------------------------------------------------------------------------------------
+# unilib settings
+# -------------------------------------------------------------------------------------------------
+
+# A string containing one or more remixes, separated by whitespace (e.g. "mtgame bonemeal")
+# Each remix name matches the name of a directory in ../csv/remix
+# Note that the "default" remix contains material from minetest_game's default mod; it is not
+# unilib's default remix
+unilib_remix_set (Remixes) string playme
+
+# -------------------------------------------------------------------------------------------------
+# Log settings
+# -------------------------------------------------------------------------------------------------
+
+# Show information messages in the debug file and the chat window
+unilib_show_msg_flag (Enable to show information messages) bool true
+# Show error messages in the debug file and the chat window
+unilib_show_error_flag (Enable to show error messages) bool true
+# Show warning messages in the debug file and the chat window
+unilib_show_warning_flag (Enable to show warning messages) bool true
+
+# Show information message for every package that appears more than once in the remix(es)
+unilib_show_pkg_remix_flag (Enable to show repeating packages) bool false
+# Show information message for every loaded package
+unilib_show_pkg_load_flag (Enable to show loaded packages) bool false
+# Show information message for every initialised package
+unilib_show_pkg_init_flag (Enable to show initialised packages) bool false
+# Show information message for every executed package
+unilib_show_pkg_exec_flag (Enable to show executed packages) bool false
+# Show information message for every post-executed package
+unilib_show_pkg_post_flag (Enable to show post-executed packages) bool false
+# Show extra debug messages when packages are being imported
+unilib_show_pkg_debug_flag (Enable to show package import debug messages) bool false
+
+# Show simple analysis about every dependent package that is not specified by a remix
+unilib_show_dependency_simple_flag (Show simple analysis about remix dependencies) bool false
+# Show detailed analysis about every dependent package that is not specified by a remix
+unilib_show_dependency_detailed_flag (Show detailed analysis about remix dependencies) bool false
+# Flag set to true, if all specified remixes should be combined in one analysis; false if each
+# specified remix should be analysed separately
+unilib_show_dependency_combined_flag (Combine remixes when analysing dependencies) bool false
+# Flag set to true, if the dependency analysis should not progress beyond the first hard dependency
+# (not recommended)
+unilib_show_dependency_hard_limit_flag (Stop remix analysis at first hard dependency) bool false
+# Flag set to true, if the dependency analysis should not progress beyond the first soft dependency
+# (recommended)
+unilib_show_dependency_soft_limit_flag (Stop remix analysis at first soft dependency) bool true
+
+# -------------------------------------------------------------------------------------------------
+# Remix settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if, during the initialisation phase of ../lib/system/import_pkg.lua, any
+# package's hard dependencies should be loaded and initialised, if they haven't already been
+unilib_force_load_dependent_pkg_flag (Load missing hard package dependencies) bool true
+# Flag set to true if, during the initialisation phase of ../lib/system/import_pkg.lua, any
+# package's minimal ("at least one") dependencies should be loaded and initialised, if they haven't
+# already been
+unilib_force_load_minimal_pkg_flag (Load missing minimal package dependencies) bool false
+# Flag set to true if, during the initialisation phase of ../lib/system/import_pkg.lua, any
+# package's soft dependencies should be loaded and initialised, if they haven't already been
+unilib_force_load_optional_pkg_flag (Load missing soft package dependencies) bool false
+# Flag set to true if, during the initialisation phase of ../lib/system/import_pkg.lua, any
+# package's suggested dependencies should be loaded and initialised, if they haven't already been
+unilib_force_load_suggested_pkg_flag (Load missing suggested package dependencies) bool false
+
+# -------------------------------------------------------------------------------------------------
+# Base package settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if packages should be prevented from clearing registered biomes
+unilib_protect_biomes_flag (Prevent clearing of registered biomes) bool false
+# Flag set to true if packages should be prevented from clearing registered decorations
+unilib_protect_decorations_flag (Prevent clearing of registered decorations) bool false
+# Flag set to true if packages should be prevented from clearing registered ores
+unilib_protect_ores_flag (Prevent clearing of registered ores) bool false
+
+# -------------------------------------------------------------------------------------------------
+# minetest_game settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if code adapted from minetest_game should be allowed to create items which don't
+# exist in the original code (i.e. an apple wood bookshelf exists and is created by the "tree_apple"
+# package, but an aspen wood bookshelf does not exist, yet it is created by the "tree_aspen"
+# package
+# The value of the flag also applies to tweaks; for example, moreblocks updates some craft recipes
+# from minetest_game; if this flag is true, the updates are applied to unilib as well
+unilib_mtgame_tweak_flag (Allow tweaks to code adapted from minetest_game) bool true
+
+# -------------------------------------------------------------------------------------------------
+# Original mod settings (general)
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if all the replace mode "replace" should apply to all source mods, replacing the
+# value specified in ../csv/mods/imported.csv
+unilib_force_replace_flag (Force replacement of items from original mods) bool false
+# Flag set to true to force unilib panes to use the "unipane" group, rather than the original "pane"
+# group. If false, the "unipane" group is used only when running on top of minetest_game
+unilib_force_unipanes_flag (Force use of unipane group) bool false
+
+# -------------------------------------------------------------------------------------------------
+# Original mod settings (specific)
+# -------------------------------------------------------------------------------------------------
+
+# advtrains
+
+# Flag set to true if train platforms should be created for all suitable stone nodes. Automatically
+# set back to false if advtrains is not loaded
+unilib_advtrains_update_flag (Create advtrains platforms from unilib stones) bool true
+
+# beacons
+
+# Max height (in blocks) of a beacon, or 0 for infinite height
+unilib_beacons_height_max (Max height of a beacon, or 0 for infinite height) int 0
+
+# beautiflowers
+
+# Amount of flowers to be generated (5 = normal, < 5 few, > 5 many)
+unilib_beautiflowers_spawn_ratio (Amount of beautiflowers to be created) int 5
+
+# biome_lib
+
+# The mod provides an API with two functions, both are simulated crudely by unilib decorations
+# For replacing biome_lib.register_on_generate() calls, a factor by which the equivalent
+# decoration's .fill_ratio is multiplied, so that the decorations are not too numerous
+unilib_biome_lib_spawn_factor (Reduce spawning of biome_lib decorations by factor) float 0.1
+# For replacing biome_lib.register_active_spawner() calls, the static value for the decoration's
+# .fill_ratio
+unilib_biome_lib_fill_ratio (Static value for biome_lib decorations) float 0.001
+
+# cheese
+
+# Allow imitation milks such as soy to be used in the cheese production process
+unilib_cheese_allow_imitation_flag (Use imitation milks in cheese production) bool true
+
+# compass mods (various)
+
+# (death_compass) The number of seconds for which a death compass will remain active. Use 0 to let
+# the compass be active indefinitely
+unilib_death_compass_duration (Duration of death compass) int 0
+# (death_compass) Give a death compass to a player automatically, when they die
+unilib_death_compass_auto_flag (Give death compass to player on death) bool false
+
+# cottages
+
+# Flag set to true if items from the cottages mode should be tweaked for slower computers
+unilib_cottages_slow_flag (Tweak cottages code for slower machines) bool false
+# Flag set to true if pitchforks should be able to dig all "fertile" turfs; false if they should dig
+# only ordinary dirt with turf
+unilib_cottages_versatile_pitchfork_flag (Pitchforks make hay from all turfs) bool false
+# The style of country roads to create (when the "road_country" package is loaded): "simple" for
+# full nodes with straight roads and no curves or junctions, "flat" for full nodes with curves and
+# junctions, "nodebox" like flat, but has a nodebox that fits to the node, "mesh" like nodebox, but
+# using a nice, roundish model
+unilib_cottages_road_mode ("simple"/"flat"/"nodebox"/"mesh" country roads) string mesh
+        
+# cropocalypse
+
+# Flag set to true to allow saltwater kelp "farming" in jars, providing a limitless food source
+unilib_cropocalypse_infinite_kelp_flag (Infinite saltwater kelp farming) bool false
+
+# cucina_vegana
+
+# Flag set to false for "farming" mod crops, true for "farming_redo" crops
+unilib_cucina_vegana_redo_flag (Create farming_redo style crops) bool true
+
+# earthbuild
+
+# Flag set to true if the turf cutter can be used on all compatible dirt-with-turf nodes, or false
+# if it can only be used on ordinary dirt with turf (as in the original mod)
+unilib_earthbuild_extend_cutter_flag (Tool cutter works on most dirt-with-turf nodes) bool true
+
+# ethereal-ng
+
+# Maximum fishing time, in seconds (the minimum is a third of this value; the maximum can be further
+# reduced by 20 seconds using bait, so don't use a value lower than 25)
+unilib_ethereal_fishing_time (Maximum fishing time) int 45
+# Flag set to true if fishing should produce fewer fish, and more junk items (makes fishing harder)
+unilib_ethereal_fishing_hard_flag (Makes fishing harder) bool false
+
+# facade, mymillwork
+
+# Flag for carving and milling machines. Set to true if only the owner can use them, set to false if
+# everyone can use them. Even when false, only the owner can remove the machine
+unilib_protect_machines_flag (Only owner can use carving/milling machines) bool false
+
+# fachwerk
+
+# Fachwerk provides some timber-frame nodes that are actually duplicates, once they have been
+# adjusted with a screwdriver. Flag set to true to omit the duplicates, or false to provide all
+# all timber-frame nodes
+unilib_fachwerk_all_frames_flag (Provide more timber-framed nodes) bool false
+# unilib packages based on fachwerk can create a large number of timber-frame nodes that weren't
+# present in the original (using baked clay and various glass nodes). Flag set to true to allow
+# this, or false to not
+unilib_fachwerk_extra_nodes_flag (Provide more timber-framed nodes) bool false
+
+# flowerpot
+
+# Flag set to true if all suitable flowers can be added to compatible flowerpots
+unilib_flowerpot_add_flowers_flag (Add all suitable flowers to compatible flowerpots) bool true
+# Flag set to true if all suitable mushrooms can be added to compatible flowerpots
+unilib_flowerpot_add_mushrooms_flag (Add all suitable mushrooms to compatible flowerpots) bool false
+# Flag set to true if all suitable ferns, grasses and plants can be added to compatible flowerpots
+unilib_flowerpot_add_plants_flag (Add all suitable plants to compatible flowerpots) bool false
+# Flag set to true if all suitable saplings can be added to compatible flowerpots
+unilib_flowerpot_add_saplings_flag (Add all suitable saplings to compatible flowerpots) bool false
+
+# GLEM
+
+# Flag set to true if custom dirts should be created on demand (i.e. when used in a custom biome),
+# or false if all possible custom dirts should be created
+unilib_glem_dirt_on_demand_flag (Create GLEM custom dirts on demand) bool true
+# Flag set to true if GLEM biome blending should be enabled
+unilib_glem_biome_blend_flag (Blend GLEM biomes) bool true
+
+# hangglider
+
+# Warning time before hanggliders are shot down in no-fly zones
+unilib_hangglider_no_fly_time (No-fly zone warning time) int 3
+
+# mesecons
+
+# Flag set to true if mesecon circuits should automatically open/close doors
+unilib_mesecons_door_flag (Mesecon circuits can open/close doors) bool true
+# Flag set to true if mesecon circuits should automatically open/close trapdoors
+unilib_mesecons_trapdoor_flag (Mesecon circuits can open/close trapdoors) bool true
+
+# nettle
+
+# Damage factor for nettles (default value is 1)
+unilib_nettle_damage_factor (Damage factor for nettles) int 1
+
+# nsspf
+
+# Scarcity factor. In the original code, mushrooms/fungi are extremely common (and therefore food is
+# easy to find). Increase this value to make NSSPF mushrooms/fungi more scarce
+unilib_nsspf_scarcity_factor (Make mushrooms/fungi more scarce) int 1
+# Flag set to true if truffles can be found on the surface (ideal for servers); false if they are
+# found just beneath the surface (ideal for single player worlds)
+unilib_nsspf_exposed_truffle_flag (Place truffles at surface) bool false
+
+# pedology
+
+# Drip mode (applies to certain items from pedology): "none" - don't use water drips, "entity" -
+# use entity-based water drips, "particle" - use particle-based water drips
+unilib_pedology_drip_mode (Drip mode for permeable materials) string none
+# Minimum light level at which permeable nodes dry out from direct sunlight
+unilib_pedology_dry_light (Minimum light at which permeable nodes dry out) int 13
+
+# plantlife
+
+# Use larger textures for ordinary grass
+unilib_plantlife_long_grass_flag (Use longer textures for ordinary grass) bool false
+# Flag set to true is poison ivy grows on a range of suitable surfaces, false if it grows only on a 
+# small selection of nodes (as in the original code)
+unilib_plantlife_poison_ivy_unfussy_flag (Posion ivy grows on many surfaces) bool false
+# Flag set to true if poison ivy requires light (but not too much) to grow, false if poison ivy
+# grows in all all conditions
+unilib_plantlife_poison_ivy_light_flag (Poison ivy requires suitable light to grow) bool false
+# Flag set to true if poison ivy is actually poisonous, false if it is harmless (as in the original
+# mod)
+unilib_plantlife_poison_ivy_poison_flag (Poison ivy is actually poisonous) bool false
+
+# real_torch
+# Minimum time (in seconds) after which an ordinary torch burns out, becoming an unlit torch
+unilib_real_torch_min_time (Minimum burn time for ordinary torches) int 480
+# Maximum time (in seconds) after which an ordinary torch burns out, becoming an unlit torch
+unilib_real_torch_max_time (Maximum burn time for ordinary torches) int 600
+
+# sickles
+
+# Flag set to true if scythes should use the mechanic from the sickles mod (replant crops/produce
+# in the surrounding soil), false if scythes should use the mechanic from the farming_redo mod
+# (harvested crops/produce and seeds are dropped to the ground)
+unilib_sickles_replant_flag (Scythes replant seeds) bool true
+# Flag set to true if the sickle mechanic should override the pitchfork mechanic inherited from the
+# the cottages mod
+unilib_sickles_override_pitchfork_flag (Override pitchfork with sickle mechanic) bool false
+
+# snow
+
+# Flag set to true to reduce the system resources required to produce falling snowflakes
+unilib_snow_reduce_snowflakes_flag (Reduce snowflakes) bool true
+
+# technic
+
+# Flag set to true if technic should be given grinding recipes for suitable stone types, metal lumps
+# and mineral lumps. Automatically set back to false if technic is not loaded
+unilib_technic_update_flag (Add technic grinding recipes) bool true
+# Flag set to true if technic should be given additional recipes, mostly for foods and ingredients
+# (this may include grinder recipes)
+unilib_technic_extra_flag (Add extra technic recipes) bool true
+# How much powder is produced when grinding metal ores (minimum 1, recommended 2)
+unilib_grind_metal_ratio (Amount of powder produced by grinding metal ore) int 2
+# How much powder is produced when grinding mineral ores (minimum 1, recommended 2)
+unilib_grind_mineral_ratio (Amount of powder produced by grinding mineral ore) int 2
+# How much powder is produced when grinding stone (minimum 1, recommended 1)
+unilib_grind_stone_ratio (Amount of powder produced by grinding stone) int 1
+
+# toolranks
+
+# Flag set to true if toolranks should be enabled for compatible tools
+unilib_toolranks_enable_flag (Enable toolranks) bool true
+# Number of levels for toolranks
+unilib_toolranks_max_levels (Number of toolranks levels) int 10
+# Number of nodes that need to be dug to reach the next tool level
+unilib_toolranks_nodes_per_level (Digs per toolranks level) int 500
+# Maximum dig speed multiplier for toolranks (1.0 to disable)
+unilib_toolranks_speed_multiplier (Dig speed multiplier) float 2.0 1.0 10.0
+# Maximum durability multiplier for toolranks (1.0 to disable)
+unilib_toolranks_use_multiplier (Durability multiplier) float 2.0 1.0 10.0
+
+# Flag set to true if the server's most advanced tool should be announced in chat
+unilib_toolranks_announce_flag (Announce best tool in chat) bool false
+# Flag set to true if levelling should be progressive (each new level takes 50% more time than the
+# previous one)
+unilib_toolranks_progressive_flag (Progressive levelling) bool true
+# Flag set to true if the tool's description should show how long until level-up
+unilib_toolranks_countdown_flag (Show nodes to next level) bool true
+
+# towercrane
+
+# Maximum crane height in nodes (8..n)
+unilib_crane_max_height (Maximum crane height) int 32
+# Maximum crane width in nodes (8..n)
+unilib_crane_max_width (Maximum crane width) int 32
+# Crane rope length in nodes (max_height .. max_height+x). If the rope length is larger than the
+# crane height, the crane can be placed on buildings and the player still reaches the ground
+unilib_crane_rope_length (Crane rope lenght) int 40
+
+# trash_can
+# Allow player to throw items into rubbish bin / dumpster (requires some additional processing time)
+unilib_trash_can_throw_flag (Allow throwing into bins) bool true
+
+# tsm_pyramids
+
+# Flag set to true if sandstone traps collapse under the player, false if they are merely decorative
+unilib_tsm_pyramids_real_trap_flag (Sandstone traps collapse under player) bool true
+        
+# underch, uchu
+
+# Flag set to true if code adapted from underch should be modified to include updates in uchu
+unilib_underch_tweak_flag (Allow tweaks to code adapted from underch) bool true
+# Flag set to true if flowing ordinary lava should cool into basalt, rather than cooling into
+# ordinary stone (i.e. set to true to apply the underch override)
+unilib_underch_override_abm_flag (Flowing lava cools into basalt) bool true
+# Flag set to true if condensed cobble/rubble nodes should have a maximum stack size of 999
+unilib_underch_overstack_condensed_flag (Condensed cobble/rubble has 999 stack max) bool true
+
+# unifieddyes
+
+# Flag set to true if suitable items can be dyed. Automatically set back to false if unifieddyes is
+# not loaded
+unilib_unifieddyes_update_flag (Add technic grinding recipes) bool true
+
+# unified_inventory
+
+# Flag set to true if unified_inventory should be given textures for group craft recipes.
+# Automatically set back to false if unified_inventory is not loaded
+unilib_unified_inventory_update_flag (Update unified_inventory groups) bool true
+
+# -------------------------------------------------------------------------------------------------
+# Biome/decoration/ore settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if a seed offset is applied to decorations and ores, so that distributions are
+# different in each world
+unilib_random_seed_offset_flag (Biomes, decorations and ores use randomised seeds) bool false
+
+# -------------------------------------------------------------------------------------------------
+# Environment settings
+# -------------------------------------------------------------------------------------------------
+
+# Super stones - a set of stone types that can be used to craft derivative products (for example, we
+# don't create timber-framed nodes from every available stone, but only from super stones). Note
+# that some items may not be available in every stone type (e.g. sandstones, stones of a hardness
+# that could produce cobble/rubble variants, but don't). If the set contains the word "everything",
+# then all suitable stones are super stones. If the set contains the word "nothing", then no stones
+# are super stones, overriding "everything"
+unilib_super_stone_set (Super stone types that can craft anything) string desert ordinary
+# Super trees - a set of tree types that can be used to craft derivative products (for example, we
+# we don't create bookshelves out of every available tree, but only from super trees). Note that
+# some items may not be available in every tree type (e.g. wooden boats). Note also that fences/
+# gates are created for every tree, when possible. If the set contains the word "everything", then
+# all suitable trees are super trees (some trees are not suitable, usually because they have no wood
+# nodes). If the set contains the word "nothing", then no trees are super trees, overriding
+# "everything"
+unilib_super_tree_set (Super tree types that can craft anything) string acacia aspen apple jungle pine
+
+# In the original mods, some stones have unrealistic hardnesses (e.g. sandstones in minetest_game).
+# Flag set to true if these should be replaced by a "real-world" hardness
+unilib_real_stone_hardness_flag (Stones have real-life hardness) bool false
+# Sandstones should not produce cobble or rubble when dug, by default. When the original mod
+# specifies a cobble or rubble, that choice is respected. Otherwise, cobble or rubble is produced
+# only when this flag is true
+unilib_sandstone_cobble_rubble_flag (Many sandstones produce cobble or rubble, when dug) bool false
+
+# Flag set to true if caves chop through (most) dirt nodes, including dirt-with-turf nodes
+unilib_caves_chop_dirt_flag (Caves chop through dirt) bool true
+# Flag set to true if dirt-with-turf nodes should use the top texture on all sides (except the
+# bottom); if false, both the turf and the dirt is usually visible on the sides
+unilib_overgrown_turf_flag (Only turf visible on sides of dirt-with-turf nodes) bool false
+
+# Flag set to true if wooden planks, when placed in the world, should be auto-rotated to face a
+# standard direction
+unilib_auto_rotate_wood_flag (Auto-rotate wooden planks when placed) bool false
+# Flag set to true if leaves should be 3d-rendered in the player's inventory and when wielded, false
+# if not. (You may find it easier to distinguish leaves in the inventory when they are not
+# 3d-rendered)
+unilib_rendered_leaves_flag (3d-rendered leaves in inventory) bool false
+# Flag set to true if trees should have plant-like leaves (which can improve frame rates for some
+# users, without restoring to making leaves opaque)
+unilib_plantlike_leaves_flag (Plant-like leaves for better framerates) bool false
+# Flag set to true if the player can walk on leaves, false if not
+unilib_walkable_leaves_flag (Walkable leaves) bool false
+# Flag set to true if most fruit, nuts, cones etc should regrow after being picked
+unilib_regrow_fruit_flag (Fruit regrows automatically) bool true
+# Flag set to true if most leaves should drop ordinary sticks (as well as saplings)
+unilib_leaves_drop_sticks_flag (Leaves drop sticks as well as sapling) bool false
+
+# Minimum sapling growth time. Actual time is a random value between the minimum/maximum times
+unilib_sapling_grow_min (Minimum sapling growth time) int 300
+# Maxium sapling growth time. Actual time is a random value between the minimum/maximum times
+unilib_sapling_grow_max (Maximum sapling growth time) int 1500
+# Standard sapling growth time, when a non-random value is required
+unilib_sapling_grow_default (Non-random sapling growth time) int 300
+# Sapling growth retry time (if growth cannot occur, the time before trying again)
+unilib_sapling_grow_retry (Sapling growth retry time) int 300
+# Flag set to true if sapling growth times should be replaced with very short values (5 seconds) for
+# testing purposes. If true, overrides the growths settings above
+unilib_sapling_quick_grow_flag (Very quick sapling growth for testing) bool false
+# Flag set to true if tree sapling growth times should be adjusted, based on the height of the tree
+# (so redwoods take much longer to grow, on average, than acacia trees). Does not work with trees
+# using custom/LBM code, or with bushes, or when very quick sapling growth for testing is enabled
+unilib_sapling_variable_grow_flag (Average sapling growth time depends on tree height) bool false
+# Flag set to true if a sapling that requires specific dirts can grow on any dirt, if the specific
+# dirts have not been loaded
+unilib_sapling_override_flag (If saplings require an unavailable dirt, can grow anywhere) bool true
+# Flag set to true if all saplings should grow on all dirts, overriding package preferences
+unilib_sapling_everywhere_flag (All saplings can grow on all dirts) bool false
+
+# Standard growth time for a stage of crop/produce growth, in seconds
+unilib_crop_produce_grow_default (Length of growth stage for crops/produce, in seconds) float 160.0
+
+# Flag set to true if flora should be floodable (items are destroyed by a flowing liquid). This
+# setting applies to most flowers, plants, mushrooms, ferns, crops, produce (even those from other
+# mods)
+unilib_floodable_flora_flag (Flora are destroyed in flowing liquids) bool false
+# Flag set to true if flora should be flushable (items are uprooted by a flowing liquid, as in
+# Minecraft). If the floodable flag is also true, this one takes precedence
+unilib_flushable_flora_flag (Flora are uprooted in flowing liquids) bool false
+
+# Flag set to true if papyrus should be impassable
+unilib_blocking_papyrus_flag (Papyrus is impassable) bool true
+# Flag set to true if waterlilies should be walkable
+unilib_walkable_waterlilies_flag (Waterlilies are walkable) bool true
+
+# ABM Spread factor. If 1, flora, mushrooms and turf spread at their normal rate. If 2, they spread
+# twice as quickly. If 0.5, they spread twice as slowly
+unilib_abm_spread_factor (Flora/mushrooms/turf spread factor) int 1
+
+# -------------------------------------------------------------------------------------------------
+# Non-environment settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true to disable unilib's standard ABMs/LBMs. If false, the standard ABMs/LBMs are
+# enabled only when a suitable base package like "base_mtgame" asks for them to be enabled
+unilib_disable_standard_abm_lbm_flag (Forcibly disable unilib standard ABMs/LBMs) bool false
+# Flag set to true to enable unilib's standard ABMs/LBMs, even if no suitable base package like
+# "base_mtgame" has asked for them to be enabled. However, this flag is IGNORED if the disable
+# setting just above is true
+unilib_enable_standard_abm_lbm_flag (Try to enable unilib standard ABMs/LBMs) bool false
+
+# Flag set to true if brick blocks (including decorative bricks), when placed in the world, should
+# be auto-rotated to face a standard direction
+unilib_auto_rotate_brick_flag (Auto-rotate brick blocks when placed) bool false
+
+# Flag to allow player to craft dyes from crops, fruit, etc. (Note that almost all flowers can be
+# used to craft dyes, by default)
+unilib_dye_from_crops_flag  (Craft dyes from crops) bool false
+unilib_dye_from_fruit_flag  (Craft dyes from fruit) bool false
+unilib_dye_from_produce_flag  (Craft dyes from produce) bool false
+
+# -------------------------------------------------------------------------------------------------
+# Stair/wall/carving settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if suitable nodes (stone, wood etc) should be given basic stairs
+unilib_add_stairs_basic_flag (Enable basic stairs) bool true
+# Flag set to true if basic stairs should appear in the creative inventory
+unilib_show_stairs_basic_flag (Show basic stairs in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the stairs_redo mod
+unilib_add_stairs_stairs_redo_flag (Enable stairs from stairs_redo) bool false
+# Flag set to true if stairs from stairs_redo should appear in the creative inventory
+unilib_show_stairs_stairs_redo_flag (Show stairs from stairs_redo in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the stairsplus mod
+unilib_add_stairs_stairsplus_flag (Enable stairs from stairsplus) bool false
+# Flag set to true if stairs from stairsplus should appear in the creative inventory
+unilib_show_stairs_stairsplus_flag (Show stairs from stairsplus in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the moreblocks mod
+unilib_add_stairs_moreblocks_flag (Enable stairs from moreblocks) bool false
+# Flag set to true if stairs from moreblocks should appear in the creative inventory
+unilib_show_stairs_moreblocks_flag (Show stairs from moreblocks in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the plantlife mod
+unilib_add_stairs_plantlife_flag (Enable stairs from plantlife) bool false
+# Flag set to true if stairs from plantlife should appear in the creative inventory
+unilib_show_stairs_plantlife_flag (Show stairs from plantlife in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the castle modpack
+unilib_add_stairs_castle_flag (Enable stairs from castle modpack) bool false
+# Flag set to true if stairs from the castle modpack should appear in the creative inventory
+unilib_show_stairs_castle_flag (Show stairs from castle modpack in creative inventory) bool false
+# Flag set to true if suitable nodes should be given stairs from the pkarcs modpack
+unilib_add_stairs_pkarcs_flag (Enable stairs from pkarcs modpack) bool false
+# Flag set to true if stairs from the pkarcs modpack should appear in the creative inventory
+unilib_show_stairs_pkarcs_flag (Show stairs from pkarcs modpack in creative inventory) bool false
+
+# Flag set to true if stairs made from smooth stone just drop stairs made from cobblestone, when
+# dug (applies to all suitable stair nodes)
+unilib_convert_stairs_on_drop_flag (Convert smooth stairs to cobble when dug) bool true
+# Flag set to true if the amount of light generated by stairs as light sources reduces by volume,
+# false if not (the effect is more drastic than for moreblocks)
+unilib_reduce_stair_light_flag (Light from stairs depends on volume) bool true
+# Flag set to true if node roation is handled as it is in moreblocks; false when node rotation is
+# is handled as it is minetest_game/stairs. Note that moreblocks-style rotation is not applied to
+# to stair types from plantlife. Note also that separate code handles rotation for stair types from
+# pkarcs, ignoring other settings
+unilib_advanced_stair_rotation_flag (Enable advanced node rotation) bool true
+
+# Flag set to true if suitable nodes (mostly stone) should be given walls
+unilib_add_walls_flag (Enable walls for suitable nodes) bool true
+
+# Flag set to true if suitable nodes (stone, wood etc) should be given column carvings
+unilib_add_carvings_column_flag (Enable column carvings) bool true
+# Flag set to true if column carvings should appear in the creative inventory
+unilib_show_carvings_column_flag (Show column carvings in creative inventory) bool false
+# Flag set to true if suitable nodes (stone, wood etc) should be given facade carvings
+unilib_add_carvings_facade_flag (Enable facade carvings) bool false
+# Flag set to true if facade carvings should appear in the creative inventory
+unilib_show_carvings_facade_flag (Show facade carvings in creative inventory) bool false
+# Flag set to true if suitable nodes (stone, wood etc) should be given millwork carvings
+unilib_add_carvings_millwork_flag (Enable millwork carvings) bool false
+# Flag set to true if millwork carvings should appear in the creative inventory
+unilib_show_carvings_millwork_flag (Show millwork carvings in creative inventory) bool false
+
+# Flag set to true if the amount of light generated by carvings as light sources reduces by volume,
+# false if not (the effect is less drastic than for stair nodes in moreblocks)
+unilib_reduce_carving_light_flag (Reduce light from carvings) bool true
+
+# -------------------------------------------------------------------------------------------------
+# Player effects settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if the player should be warned that their tool is about to break
+unilib_toolranks_warn_break_flag (Warn player before tool breaks) bool true
+
+# Flag set to true to make (most) beds bouncy
+unilib_effects_bouncy_beds_flag (Make most beds bouncy) bool true
+# Flag set to true if bright items, when wielded, illuminate the player's surroundings
+unilib_effects_wield_light_flag (Bright items illuminate player's surroundings) bool true
+
+# Flag set to true to pick up items automatically (Minecraft-style)
+unilib_magnet_auto_get_flag (Pick up nearby items automatically) bool false
+# Flag set to true to drop items automatically, when dug (Minecraft-style)
+unilib_magnet_auto_drop_flag (Drop items automatically on dig) bool false
+# Flag set to true if a key should be pressed to auto-get items
+unilib_magnet_get_key_flag (Use a key to pick up items) bool true
+# Flag set to true if a key should NOT be pressed in order to auto-get items
+unilib_magnet_no_get_key_flag (Use a key to pick up items) bool true
+# The auto-get keytype
+unilib_magnet_get_key_type (Auto-get keytype) enum Use Use,Sneak,LeftAndRight,RMB,SneakAndRMB
+# The volume of the auto-get sound
+unilib_magnet_auto_get_volume (Auto-get volume) float 0.4
+# Flag set to true to display particles on auto-get
+unilib_magnet_auto_get_particle_flag (Show particles on auto-get) bool true
+# The magnet radius (in blocks) in which auto-get works
+unilib_magnet_auto_get_radius (Auto-get radius) float 0.75
+# The magnet radius (in blocks) in which items fly towards the player. Set to -1 to disable item
+# flying
+unilib_magnet_auto_fly_radius (Magnet radius) float -1
+# Maximum item flight duration (in seconds). After the time has elapsed, items are added to the
+# player's inventory
+unilib_magnet_auto_fly_time (Magnet time) float 5.0
+# Time delay (in seconds) before auto-getting an item if it's dropped by a player
+unilib_magnet_auto_get_delay (Auto-get delay after drop) float 0.5
+# Flag set to true if getting an item using a mouse click is enabled
+unilib_magnet_click_get_flag (Get using a mouse) bool true
+
+# Hotbar size, a value between 1 and 32. Use 0 if you don't want to interfere with the hotbar size
+unilib_hotbar_size (Hotbar size, 1-32) int 8
+
+# Flag set to true to enabled advanced cuisine (eating the same food types reduces their satiating
+# effect; drinks improve hydration if enabled, otherwise behave as foods)
+unilib_cuisine_advanced_flag (Advanced eating/drinking) bool true
+# Size of the cuisine history (a list of food groups, so the actual number of food items eaten may
+# be fewer). The larger the number, the more a player must vary their diet
+unilib_cuisine_history_max_size (Size of cuisine history) int 10
+# Satiation bonus, applied when the player eats something new (ignored if player activity statistics
+# are disabled). Use 2 to double the satiation for eating a new food, or 0.5 to halve it. Bonus does
+# not apply to poisonous/zero-satiation items, or to drinks when hydration is enabled
+unilib_cuisine_novelty_factor (Satiation multiplication factor for new foods) float 1.5
+
+# Flag set to true to enable player hunger (separated from player health)
+unilib_hunger_enable_flag (Enable hunger) bool true
+# Hunger factor - use 2 to double the rate at which the player becomes hungry, or 0.5 to halve it
+unilib_hunger_factor (Hunger multiplication factor) float 1.0
+# Flag set to true to enable player hunger due to sprinting
+unilib_hunger_on_sprint_flag (Increase hunger due to sprinting) bool true
+# Sprinting factor - use 2 to double the rate at which the player becomes hungry due to sprinting,
+# or 0.5 to halve it
+unilib_hunger_on_sprint_factor (Hunger due to sprinting multiplication factor) float 1.0
+
+# Flag set to true to enable player hydration (thirst)
+unilib_thirst_enable_flag (Enable hydration/thirst) bool false
+# Thirst factor - use 2 to double the rate at which player becomes thirsty, or 0.5 to halve it
+unilib_thirst_factor (Thirst multiplication factor) float 1.0
+
+# Flag set to true to enable HUD windows identifying the node at which the mouse is pointed. The
+# window is shown or hidden when the player types /what
+unilib_identify_enable_hud_flag (Enable HUD window identifying the pointed node) bool true
+# Flag set to true to optimise the HUD window for servers (only appears when a node is punched)
+unilib_identify_optimise_hud_flag (Optimise HUD window on servers) bool false
+# Flag set to true to show the parent unilib package, rather than the mod name, when possible
+unilib_identify_package_name_flag (Show unilib package in HUD) bool false
+
+# Flag set to true to enable daily alarms
+unilib_alarm_enable_flag (Enable daily alarms) bool true
+
+# -------------------------------------------------------------------------------------------------
+# Player effects settings (statistics and calendars)
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true, if player's biographical data (births, deaths etc) should be stored in player
+# attributes
+unilib_stats_bio_flag (Store player biographical data) bool true
+# Flag set to true, if player's activity data (nodes dug/placed etc) should be stored in player
+# attributes
+unilib_stats_activity_flag (Store player activity data) bool true
+
+# Calendar offset, specifying the year at which the calendar starts
+unilib_calendar_year_offset (Calendar starts on year) int 1000
+# Calendar offset, specifying the month at which the calendar starts
+unilib_calendar_month_offset (Calendar starts on month) int 1
+# Calendar offset, specifying the day at which the calendar starts
+unilib_calendar_day_offset (Calendar starts on day) int 1
+# Calendar system; a string describing the date system. An empty string is acceptable, in which
+# case the system isn't added to a date string
+unilib_calendar_system (Calendar system) string A.D.
+# Flag set to true if leap years are in effect, false if not. If true, a leap day is added to the
+# the second month of the year
+unilib_calendar_leap_year_flag (Leap years in effect) bool true
+# Standard date string format, in which certain values are substituted
+unilib_calendar_format_string (Calendar date string format) string %D, %d %M %y %S %E %T
+# Flag set to true if calendar tooltips are enabled. If false, the tooltip text can be viewed by
+# clicking on each day's button
+unilib_calendar_enable_tooltips_flag (Enable calendar tooltips) bool true
+# Offset controlling which day the calendar week starts, e.g. 0 for Sunday, 1 for Monday, etc
+unilib_calendar_week_start_offset (Start of calendar week) int 1
+
+# -------------------------------------------------------------------------------------------------
+# Age-appropriate settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true if packages providing alcoholic drinks are enabled. If false, any such package
+# is not executed, even when it is specified by a remix. Note that unilib treats these items like
+# ordinary drinks; there are no game mechanics simulating intoxication. Note also that unilib does
+# not provide any other controlled substances (such as tobacco or narcotics)
+unilib_enable_adult_content_flag (Allow alcoholic drinks) bool false
+
+# -------------------------------------------------------------------------------------------------
+# Debug settings
+# -------------------------------------------------------------------------------------------------
+
+# Flag set to true to remove the not_in_creative_inventory group from all nodes, craftitems and
+# tools
+unilib_debug_all_inventory_flag (Show all items in creative inventory) bool false
+# Flag set to true if the full name of a node/craftitem/tool should be added to its description, so
+# that it is visible in the inventory
+unilib_debug_add_name_flag (Add full names to descriptions) bool false
+# Flag set to true if the original name of a node/craftitem/tool should be added to its description,
+# so that it is visible in the inventory. Applies only to unilib items
+unilib_debug_add_orig_name_flag (Add original names to descriptions) bool false
+# Ambient light level, an integer in the range 0-14. If above 0, all (unilib) nodes emit at least
+# that amount of light. Recommended values: 0 or 4-5
+unilib_debug_force_light_source (Make all nodes emit light) int 0
+# Flag set to true to make all stone transparent, and disable falling nodes (used for checking ore
+# distributions)
+# N.B. This setting disables decorations (both in unilib, and in the original mod)
+# N.B. It is recommended that the debug ambient light setting be increased from 0
+# N.B. See also the /trench command
+unilib_debug_xray_flag (Make stone transparent and disable falling nodes) bool false
+# Flag set to true if all biomes, decorations and ores should be checked for valid values of
+# .y_max and .y_min
+unilib_debug_check_heights_flag (Check valid height values for biomes, decorations, ores) bool false
+# Forced biome. If set, only the specified unilib biome will be created, and its height/heat/
+# humidity parameters will be reset, so that it occurs all over the world
+unilib_debug_forced_biome (Deregister all unilib biomes but this one) string

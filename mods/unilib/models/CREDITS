@@ -1,0 +1,368 @@
+---------------------------------------------------------------------------------------------------
+-- From:    abritorch
+-- Media:   CC-BY 3.0/CC0
+---------------------------------------------------------------------------------------------------
+
+unilib_torch_tinted_floor.obj
+unilib_torch_tinted_wall.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    agriculture
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_scarecrow_straw.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    basic_materials
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_metal_chain.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    castle/castle_tapestries
+-- Media:   MIT/WTFPL
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_tapestry_long.obj
+unilib_misc_tapestry_medium.obj
+unilib_misc_tapestry_short.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    cottages
+-- Media:   CC/CC-by-SA/WTFPL
+---------------------------------------------------------------------------------------------------
+
+unilib_container_barrel_normal.obj
+unilib_container_barrel_normal_horizontal.obj
+unilib_container_barrel_normal_horizontal_open.obj
+unilib_container_barrel_normal_open.obj
+unilib_machine_mill_hand.obj
+unilib_misc_tub.obj
+unilib_road_country_crossing.obj
+unilib_road_country_curve.obj
+unilib_road_country_end.obj
+unilib_road_country_junction.obj
+unilib_road_country_slope.obj
+unilib_road_country_slope_long.obj
+unilib_road_country_straight.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    drinks
+-- Media:   CC by SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_container_barrel_juice.obj
+unilib_container_silo_juice.obj
+unilib_machine_press_juice.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    farlands/decoblocks
+-- Media:   CC-BY-SA 3.0 UNPORTED
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_scarecrow.obj
+unilib_misc_skeleton_human.obj
+unilib_misc_skeleton_human_old.obj
+unilib_misc_skeleton_skull_human.obj
+unilib_misc_vase.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    farlands/mapgen
+-- Media:   CC-BY-SA 3.0 UNPORTED
+---------------------------------------------------------------------------------------------------
+
+unilib_fern_dicksonia.b3d
+unilib_fern_lady.b3d
+unilib_flower_waterlily_exotic.b3d
+unilib_plant_cactus_exotic.b3d
+unilib_plant_shrub_hog_peanut.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    flowerpot
+-- Media:   CC-BY-SA-3.0/Public Domain
+---------------------------------------------------------------------------------------------------
+
+unilib_flowerpot_normal.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    GLEMr4
+-- Metia:   unknown
+---------------------------------------------------------------------------------------------------
+
+unilib_plant_shrub_banana_large.b3d
+
+---------------------------------------------------------------------------------------------------
+-- From:    hangglider
+-- Media:   CC-BY-SA 3.0 UNPORTED/CC-BY-SA 3.0/CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_item_hangglider.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    hook
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_hook_generic.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    ldm32
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_machine_meter.obj
+unilib_machine_meter_beam.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/boats
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_boat.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/carts
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_cart.b3d
+unilib_cart.blend
+
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/default
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_chest_open.obj
+unilib_torch_ceiling.obj
+unilib_torch_wall.obj
+unilib_torch_floor.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/doors
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_door_a.obj
+unilib_door_a2.obj
+unilib_door_b.obj
+unilib_door_b2.obj
+unilib_gate_closed.obj
+unilib_gate_open.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/player_api
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_character.b3d
+unilib_character.blend
+unilib_character.png
+
+---------------------------------------------------------------------------------------------------
+-- From:    moreblocks/stairsplus
+-- Media:   CC BY-SA 3.0 Unported
+---------------------------------------------------------------------------------------------------
+
+unilib_slope.obj
+unilib_slope_cut.obj
+unilib_slope_half.obj
+unilib_slope_half_raised.obj
+unilib_slope_inner.obj
+unilib_slope_inner_cut.obj
+unilib_slope_inner_cut_half.obj
+unilib_slope_inner_cut_half_raised.obj
+unilib_slope_inner_half.obj
+unilib_slope_inner_half_raised.obj
+unilib_slope_outer.obj
+unilib_slope_outer_cut.obj
+unilib_slope_outer_cut_half.obj
+unilib_slope_outer_cut_half_raised.obj
+unilib_slope_outer_half.obj
+unilib_slope_outer_half_raised.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    morelights
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_chain_metal.obj
+unilib_chain_metal_ceiling.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    morelights_modern
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_light_lamp_can.obj
+unilib_light_lamp_table.obj
+unilib_light_lamp_wall.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    morelights_vintage
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_light_chandelier_vintageg.obj
+unilib_light_lamp_vintage_bulb.obj
+unilib_light_lamp_vintage_ceiling.obj
+unilib_light_lamp_vintage_floor.obj
+unilib_light_lamp_vintage_oil.obj
+unilib_light_lamp_vintage_wall.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    mymillwork
+-- Media:   DWYWPL
+---------------------------------------------------------------------------------------------------
+
+unilib_mill_base.obj
+unilib_mill_base_corner_inner.obj
+unilib_mill_base_corner_outer.obj
+unilib_mill_base_fancy.obj
+unilib_mill_base_fancy_corner_inner.obj
+unilib_mill_base_fancy_corner_outer.obj
+unilib_mill_beam.obj
+unilib_mill_beam_t.obj
+unilib_mill_ceiling.obj
+unilib_mill_ceiling_beam_t.obj
+unilib_mill_ceiling_post.obj
+unilib_mill_column.obj
+unilib_mill_column_base.obj
+unilib_mill_column_half.obj
+unilib_mill_column_half_base.obj
+unilib_mill_column_half_base_beam.obj
+unilib_mill_column_quarter.obj
+unilib_mill_column_quarter_bace_fancy.obj
+unilib_mill_column_quarter_base.obj
+unilib_mill_column_quarter_base_board.obj
+unilib_mill_crownmould.obj
+unilib_mill_crownmould_beam.obj
+unilib_mill_crownmould_corner_inner.obj
+unilib_mill_crownmould_corner_outer.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    nettle
+-- Media:   MIT
+---------------------------------------------------------------------------------------------------
+
+unilib_plant_nettle.obj
+unilib_plant_nettle_scotch_broom.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    nsspf
+-- Media:   CC BY-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_mushroom_amanita.b3d
+unilib_mushroom_azurea.b3d
+unilib_mushroom_black_morel.b3d
+unilib_mushroom_black_snowbank.b3d
+unilib_mushroom_bolete.b3d
+unilib_mushroom_brain.b3d
+unilib_mushroom_chanterelle.b3d
+unilib_mushroom_common_ink_cap.b3d
+unilib_mushroom_gold_cap.b3d
+unilib_mushroom_hairy.b3d
+unilib_mushroom_parasol.b3d
+unilib_mushroom_pink_bonnet.b3d
+unilib_mushroom_pink_snowbank.b3d
+unilib_mushroom_porcini.b3d
+unilib_mushroom_puffball.b3d
+unilib_mushroom_shrimp.b3d
+unilib_mushroom_white_snowbank.b3d
+unilib_plant_fungus_beefsteak.b3d
+unilib_plant_fungus_honey.b3d
+unilib_plant_fungus_nightlight.b3d
+unilib_plant_fungus_pingpong_bats.b3d
+unilib_plant_fungus_tinder.b3d
+
+---------------------------------------------------------------------------------------------------
+-- From:    offend_flags
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_flag_mast_lower.obj
+unilib_flag_mast_upper.obj
+unilib_flag_waving.b3d
+
+---------------------------------------------------------------------------------------------------
+-- From:    pkarcs/pkarcs_doors
+-- Media:   CC-BY-SA-4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_door_arched_left_closed.obj
+unilib_door_arched_left_open.obj
+unilib_door_arched_right_closed.obj
+unilib_door_arched_right_open.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    pkarcs/pkarcs_doors3
+-- Media:   CC-BY-SA-4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_door_arched_tall_left_closed.obj
+unilib_door_arched_tall_left_open.obj
+unilib_door_arched_tall_right_closed.obj
+unilib_door_arched_tall_right_open.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    plantlife/bushes_classic
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_bush_ornamental.obj
+unilib_item_basket_empty.obj
+unilib_item_basket_full.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    plantlife/cavestuff
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_pebble_large.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    plantlife/dryplants
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_plant_reedmace.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    plantlife/molehills
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_molehill.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    plantlife/pl_sunflowers
+-- Media:   CC-by-SA 4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_flower_helianthus.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    snow
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_item_sledge.x
+
+---------------------------------------------------------------------------------------------------
+-- From:    steel
+-- Media:   CC-BY-SA-4.0
+---------------------------------------------------------------------------------------------------
+
+unilib_metal_steel_strut.obj
+
+---------------------------------------------------------------------------------------------------
+-- From:    underch
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_mineral_crystal_large.obj
+unilib_plant_tuber_dark.obj
+

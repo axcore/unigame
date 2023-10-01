@@ -1,0 +1,206 @@
+# "glem_new" remix - contains all new packages in all GLEM remixes, except biome, decoration and
+#       ore packages, and custom dirt packages
+# ("new" means that the material was imported directly from GLEM, not from one of GLEM's source
+#       mods)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# glemr4 packages
+decor_rockwall_stone_ordinary|glemr4
+dirt_black|glemr4
+dirt_brown|glemr4
+fern_broad_leaf_young|glemr4
+fern_horsetail_broad_leaf|glemr4
+fern_lady_small|glemr4
+gravel_sandstone_desert|glemr4
+ingredient_cone_spruce_mature|glemr4
+misc_leaves_autumn|glemr4
+misc_pile_logs|glemr4
+mushroom_blotchy|glemr4
+plant_cactus_purple|glemr4
+plant_cactus_purple_small|glemr4
+plant_cactus_thorny|glemr4
+plant_palmetto_saw|glemr4
+plant_shrub_banana_large|glemr4
+plant_shrub_scorched|glemr4
+sand_volcanic_dust|glemr4
+sand_white|glemr4
+stone_andesite_grey|glemr4
+stone_brownstone_dark|glemr4
+stone_desert_with_cracks|glemr4
+stone_desert_with_sand|glemr4
+stone_ordinary_with_dirt|glemr4
+stone_sandstone_brown|glemr4
+stone_sandstone_white|glemr4
+tree_ash|glemr4
+tree_banana_exposed|glemr4
+tree_beech_mature|glemr4
+tree_birch_small|glemr4
+tree_cherry_blossom|glemr4
+tree_chestnut_exotic|glemr4
+tree_cypress|glemr4
+tree_deciduous_mature|glemr4
+tree_deciduous_normal|glemr4
+tree_dry|glemr4
+tree_eucalyptus|glemr4
+tree_fern_yellow|glemr4
+tree_fir_douglas_coast|glemr4
+tree_jungle_ancient|glemr4
+tree_jungle_mature|glemr4
+tree_mangrove_green|glemr4
+tree_maple_sugar|glemr4
+tree_mushroom_mixed|farlands glemr11
+tree_palm_jungle|glemr4
+tree_palm_plain|glemr4
+tree_pine_ancient|glemr4
+tree_pine_exposed|glemr4
+tree_spruce_mature|glemr4
+tree_willow_ancient|glemr4
+tree_young_palm_desert|glemr4
+vine_jungle_knotted|glemr4
+
+# glemr6 packages
+coral_pillar_orange|glemr6
+decor_rockwall_stone_desert_dark|glemr6
+decor_rockwall_stone_ordinary_dark|glemr6
+decor_paving_slate|glemr6
+dirt_mud_wet|glemr6
+dirt_permafrost_dark|glemr6
+liquid_water_murky|glemr6
+misc_frame_steel_simple|glemr6
+misc_frame_steel_thin|glemr6
+misc_frame_wood_rose|glemr6
+misc_frame_wood_screen|glemr6
+misc_frame_wood_thin|glemr6
+plant_kelp_yellow|glemr6
+sand_silica|glemr6
+stone_desert_with_dirt|glemr6
+stone_sandstone_ordinary_with_mural|farlands
+
+# glemr11 packages
+bucket_clay|earthbuild
+bush_hawthorn|glemr11
+bush_rhododendron|glemr11
+coral_rooted_spider|glemr11
+coral_sponge|glemr11
+flower_dandelion_white_cluster|glemr11
+flower_dandelion_yellow_cluster|glemr11
+flower_dandelion_yellow_tall|glemr11
+flower_geranium_blue_cluster|glemr11
+flower_rose_black_cluster|glemr11
+flower_rose_red_cluster|glemr11
+flower_rose_red_tall|glemr11
+fruit_lavender|glemr11
+fruit_mirabelle|glemr11
+grass_golden|glemr11
+grass_swamp_dark|glemr11
+grass_wild|glemr11
+gravel_stone_desert|glemr11
+liquid_lava_cooling|glemr11
+liquid_molten_bronze|glemr11
+liquid_molten_chromium|glemr11
+liquid_molten_copper|glemr11
+liquid_molten_gold|glemr11
+liquid_molten_lead|glemr11
+liquid_molten_mercury|glemr11
+liquid_molten_mese|glemr11
+liquid_molten_mithril|glemr11
+liquid_molten_silver|glemr11
+liquid_molten_steel|glemr11
+liquid_molten_tin|glemr11
+liquid_molten_zinc|glemr11
+liquid_water_swamp|glemr11
+mushroom_green_lime|glemr11
+mushroom_milkcap|glemr11
+mushroom_parasol_shaggy|glemr11
+mushroom_purple|glemr11
+mushroom_shaggy_mane|glemr11
+mushroom_sulphur_tuft|glemr11
+plant_cactus_prickly_pear|glemr11
+plant_cactus_purple_small_mature|glemr11
+plant_cattail_large|glemr11
+plant_cattail_parched|glemr11
+plant_heath_gold|glemr11
+plant_heath_green|glemr11
+plant_heath_purple|glemr11
+plant_heath_red|glemr11
+plant_sandwort|glemr11
+plant_saxifrage_purple|glemr11
+plant_shrub_banana_young|glemr11
+plant_shrub_dead|glemr11
+plant_shrub_green|glemr11
+plant_shrub_green_dark|glemr11
+plant_shrub_green_light|glemr11
+plant_shrub_white|glemr11
+plant_weed_crabgrass|glemr11
+produce_gourd_bottle|glemr11
+tree_beech_southern|glemr11
+tree_ginkgo|glemr11
+tree_lavender|glemr11
+tree_maple_mature|glemr11
+tree_mirabelle|glemr11
+#tree_mushroom_mixed|farlands glemr11
+tree_oak_red|glemr11
+tree_palm_caribbean|glemr11
+tree_palm_desert|glemr11
+tree_palm_desert_ancient|glemr11
+tree_palm_desert_mature|glemr11
+tree_teak|glemr11
+
+# supporting packages (auto-generated)
+
+# supporting packages (.depends)
+clay_ordinary|default
+coral_block_skeleton|default
+dye_basic|dye bakedclay
+fruit_coconut|ethereal
+glass_ordinary|default moreblocks vessels
+gravel_ordinary|default mtg_plus
+ingredient_acorn|moretrees
+item_stick_ordinary|default
+liquid_water_ordinary|default
+metal_bronze|default technic
+metal_chromium|technic_worldgen technic
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_lead|technic_worldgen technic
+metal_mercury|unilib
+metal_mithril|moreores technic
+metal_silver|moreores technic
+metal_steel|default technic
+metal_tin|default technic
+metal_zinc|technic_worldgen technic
+mineral_coal|default technic
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+plant_shrub_banana|farlands
+roof_slate_normal|cottages
+sand_ordinary|default
+shared_coral_pillar|glemr6
+shared_xocean|xocean
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+tree_fern_giant|ferns
+tree_jungle|default doors moreblocks
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#container_chest_ordinary|default
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#flower_dandelion_white|flowers
+#flower_dandelion_yellow|flowers
+#flower_geranium_blue|flowers
+#flower_rose_black|cropocalypse
+#flower_rose_red|flowers
+#grass_jungle|default
+#moss_green|sickles
+#mushroom_brown|flowers
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#sand_brown|unilib
+#soil_ordinary|farming
+#stone_obsidian|default moreblocks
+#utensil_board_cutting|farming

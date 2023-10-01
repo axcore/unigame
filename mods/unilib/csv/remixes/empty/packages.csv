@@ -1,0 +1,7 @@
+# "empty" remix - a remix containing templates for all standard .csv files
+# If you want to create your own remix, you can copy this folder and its files into
+#       ../custom/remixes
+# Any .csv files you don't need can be discarded (but note that this file is compulsory)
+
+# node_name | original_mod
+#stone_ordinary|default

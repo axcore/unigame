@@ -1,0 +1,68 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    ethereal-ng
+-- Code:    MIT
+-- Media:   MIT/CC0
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.biome_ethereal_grove = {}
+
+local S = unilib.intllib
+local mode = unilib.imported_mod_table.ethereal.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.biome_ethereal_grove.init()
+
+    return {
+        description = "Grove biomes",
+        depends = {
+            "dirt_ordinary",
+            "dirt_ordinary_with_turf_grove",
+            "sand_ordinary",
+            "stone_ordinary",
+        },
+    }
+
+end
+
+function unilib.pkg.biome_ethereal_grove.post()
+
+    unilib.register_biome({
+        -- From ethereal-ng/biomes.lua, "grove" biome
+        name = "ethereal_grove",
+        description = unilib.brackets(S("Grove biome"), "ethereal"),
+        node_top = "unilib:dirt_ordinary_with_turf_grove",
+        depth_top = 1,
+        node_filler = "unilib:dirt_ordinary",
+        depth_filler = 3,
+        node_dungeon = "unilib:stone_ordinary_cobble",
+        node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
+        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        y_max = 23,
+        y_min = 3,
+        heat_point = 45,
+        humidity_point = 35,
+    })
+
+    unilib.register_biome({
+        -- From ethereal-ng/biomes.lua, "grove_ocean" biome
+        name = "ethereal_grove_ocean",
+        description = unilib.brackets(S("Grove ocean biome"), "ethereal"),
+        node_top = "unilib:sand_ordinary",
+        depth_top = 1,
+        node_filler = "unilib:sand_ordinary",
+        depth_filler = 2,
+        node_dungeon = "unilib:stone_ordinary_cobble",
+        node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
+        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        y_max = 2,
+        y_min = -192,
+        heat_point = 45,
+        humidity_point = 35,
+    })
+
+end

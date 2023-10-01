@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    cool_trees/plumtree
+-- Code:    GPLv3
+-- Media:   GPLv3
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.deco_cool_trees_tree_plum = {}
+
+local S = unilib.intllib
+local mode = unilib.imported_mod_table.plumtree.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.deco_cool_trees_tree_plum.init()
+
+    return {
+        description = "Plum tree as decoration",
+        depends = {"biome_default_grassland", "dirt_ordinary", "tree_plum"},
+    }
+
+end
+
+function unilib.pkg.deco_cool_trees_tree_plum.post()
+
+    unilib.register_decoration_now("cool_trees_tree_plum", nil, {
+        -- From plumtree/init.lua
+        -- Completes decoration in package "tree_plum"
+        biomes = "default_grassland",
+        place_on = "unilib:dirt_ordinary_with_turf",
+        y_max = 80,
+        y_min = 1,
+    })
+
+end

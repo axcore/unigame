@@ -1,0 +1,133 @@
+# "elements" remix - contains packages which provide all 118 chemical elements, in the form of
+#       ingots/blocks/powder, or chunks, or samples, or mineral lumps (as appropriate)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# packages
+metal_actinium|unilib
+metal_aluminium|real_minerals
+metal_americium|unilib
+metal_antimony|unilib
+metal_arsenic|unilib
+metal_barium|unilib
+metal_berkelium|unilib
+metal_beryllium|unilib
+metal_bismuth|real_minerals
+metal_bohrium|unilib
+metal_boron|unilib
+metal_cadmium|unilib
+metal_caesium|unilib
+metal_calcium|unilib
+metal_californium|unilib
+metal_cerium|unilib
+metal_chromium|technic_worldgen technic
+metal_cobalt|unilib
+metal_copernecium|unilib
+metal_copper|default moreblocks technic
+metal_curium|unilib
+metal_darmstadtium|unilib
+metal_dubnium|unilib
+metal_dysprosium|unilib
+metal_einsteinium|unilib
+metal_erbium|unilib
+metal_europium|unilib
+metal_fermium|unilib
+metal_flerovium|unilib
+metal_francium|unilib
+metal_gadolinium|unilib
+metal_gallium|unilib
+metal_germanium|unilib
+metal_gold|default technic
+metal_hafnium|unilib
+metal_hassium|unilib
+metal_holmium|unilib
+metal_indium|unilib
+metal_iridium|unilib
+metal_iron|default
+metal_lanthanum|unilib
+metal_lawrencium|unilib
+metal_lead|technic_worldgen technic
+metal_lithium|unilib
+metal_livermorium|unilib
+metal_lutetium|unilib
+metal_magnesium|unilib
+metal_manganese|unilib
+metal_meitnerium|unilib
+metal_mendelevium|unilib
+metal_mercury|unilib
+metal_molybdenum|unilib
+metal_moscovium|unilib
+metal_neodymium|unilib
+metal_neptunium|unilib
+metal_nickel|real_minerals
+metal_nihonium|unilib
+metal_niobium|unilib
+metal_nobelium|unilib
+metal_osmium|unilib
+metal_palladium|unilib
+metal_platinum|unilib
+metal_plutonium|unilib
+metal_polonium|unilib
+metal_potassium|unilib
+metal_praseodymium|unilib
+metal_promethium|unilib
+metal_protactinium|unilib
+metal_radium|unilib
+metal_rhenium|unilib
+metal_rhodium|unilib
+metal_roentgenium|unilib
+metal_rubidium|unilib
+metal_ruthenium|unilib
+metal_rutherfordium|unilib
+metal_samarium|unilib
+metal_scandium|unilib
+metal_seaborgium|unilib
+metal_silicon|unilib
+metal_silver|moreores technic
+metal_sodium|unilib
+metal_strontium|unilib
+metal_tantalum|unilib
+metal_technetium|unilib
+metal_tellurium|unilib
+metal_terbium|unilib
+metal_thallium|unilib
+metal_thorium|unilib
+metal_thulium|unilib
+metal_tin|default technic
+metal_titanium|unilib
+metal_tungsten|unilib
+metal_uranium|technic_worldgen technic
+metal_vanadium|unilib
+metal_ytterbium|unilib
+metal_yttrium|unilib
+metal_zinc|technic_worldgen technic
+metal_zirconium|unilib
+mineral_sulphur|technic_worldgen technic
+substance_argon|unilib
+substance_astatine|unilib
+substance_bromine|unilib
+substance_carbon|unilib
+substance_chlorine|unilib
+substance_fluorine|unilib
+substance_helium|unilib
+substance_hydrogen|unilib
+substance_iodine|unilib
+substance_krypton|unilib
+substance_neon|unilib
+substance_nitrogen|unilib
+substance_oganesson|unilib
+substance_oxygen|unilib
+substance_phosphorus|unilib
+substance_radon|unilib
+substance_selenium|unilib
+substance_tennessine|unilib
+substance_xenon|unilib
+
+# supporting packages (.depends)
+mineral_bauxite|real_minerals
+mineral_bismuthinite|real_minerals
+mineral_garnierite|real_minerals
+
+# supporting packages (.optional)
+#container_chest_ordinary|default

@@ -1,0 +1,64 @@
+# "plants" remix - contains many flowers, plants and mushrooms from the plants mod, but some have
+#       been omitted. Dependence on the "habitat" mod has been replaced with standard decorations.
+#       Support for plant regeneration was not imported
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# plants packages
+deco_plants_flower_chamomile|plants
+deco_plants_flower_crocus_autumn|plants
+deco_plants_flower_lavender_wild|plants
+deco_plants_flower_poppy_wild|plants
+deco_plants_mushroom_blue_glowing|plants
+deco_plants_mushroom_red_glowing|plants
+deco_plants_plant_aloe_wild|plants
+deco_plants_plant_cacao_wild|plants
+deco_plants_plant_corn_ancient_wild|plants
+deco_plants_plant_cotton_ancient_wild|plants
+deco_plants_plant_potato_ancient_wild|plants
+deco_plants_plant_tansy_common|plants
+deco_plants_plant_weed_wild|plants
+flower_chamomile|plants
+flower_crocus_autumn|plants
+flower_lavender_wild|plants
+flower_poppy_wild|plants
+mushroom_blue_glowing|plants
+mushroom_red_glowing|plants
+plant_aloe_wild|plants
+plant_cacao_wild|plants
+plant_corn_ancient_wild|plants
+plant_cotton_ancient_wild|plants
+plant_potato_ancient_wild|plants
+plant_tansy_common|plants
+plant_weed_wild|plants
+
+# supporting packages (.depends)
+crop_cotton|farming
+dirt_ordinary|default farming moreblocks
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+metal_iron|default
+mineral_coal|default technic
+produce_corn_normal|farming
+produce_potato_normal|farming
+sand_desert|default farming
+sand_ordinary|default
+soil_sand_desert|farming
+stone_ordinary|default moreblocks technic
+stone_ordinary_with_coal|default
+stone_ordinary_with_iron|default
+
+# supporting packages (.at_least_one)
+grass_jungle|default
+plant_cactus_ordinary|default
+tree_jungle|default doors moreblocks
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_ordinary|default
+#mineral_mese|default
+#moss_green|sickles
+#soil_ordinary|farming
+#stone_obsidian|default moreblocks

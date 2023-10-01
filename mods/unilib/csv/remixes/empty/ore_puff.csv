@@ -1,0 +1,4 @@
+# Template puff ore table for the "empty" remix
+
+# ore|ore_param2|wherein|clust_scarcity|clust_num_ores|clust_size|y_max|y_min|flags|noise_threshold|np_offset|np_scale|np_spread|np_seed|np_octaves|np_persist|biomes|nppt_offset|nppt_scale|nppt_spread|nppt_seed|nppt_octaves|nppt_persist|nppb_offset|nppb_scale|nppb_spread|nppb_seed|nppb_octaves|nppb_persist
+#unilib:sand_ordinary_with_pipi||unilib:sand_ordinary|16 * 16 * 16||3|0|-7||0.19|0|0.7|x = 32, y = 32, z = 32|4661|2|0.5|aotearoa_shore_sandy_beach aotearoa_shore_shelly_beach aotearoa_shore_gravel_beach||||||||||||

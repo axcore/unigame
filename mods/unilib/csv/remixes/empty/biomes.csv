@@ -1,0 +1,4 @@
+# Template biome table for the "empty" remix
+
+# Biome name|Description|Original biome name|Dust node|Top node and depth|Fill node and depth|Stone node|Top water node and depth|Water node|River node|Riverbed node and depth|Cave liquid node|Dungeon node|Dungeon alternative node|Dungeon stair node|Max height|Min height|Vertical blend|Heat|Humidity
+#default_grassland|Grassland biome|grassland||unilib:dirt_ordinary_with_turf 1|unilib:dirt_ordinary 1|||||unilib:sand_ordinary 2||unilib:stone_ordinary_cobble|unilib:stone_ordinary_cobble_mossy|unilib:stone_ordinary_cobble_stair_simple|Y_MAX|6||50|35

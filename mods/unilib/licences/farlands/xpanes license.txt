@@ -1,0 +1,10 @@
+﻿License of source code
+----------------------
+
+The MIT License (MIT)
+Copyright (C) 2014-2016 xyz
+Copyright (C) 2014-2016 BlockMen
+Copyright (C) 2016 Auke Kok <sofar@foo-projects.org>
+Copyright (C) 2014-2016 Various Minetest developers and contributors
+
+all textures by tobyplowy (aka toby109tt) 

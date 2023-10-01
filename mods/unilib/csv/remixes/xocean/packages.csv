@@ -1,0 +1,57 @@
+# "xocean" remix - contains everything from the xocean mod, except mobs and food items derived from
+#       them
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# xocean packages
+coral_block_bubble|xocean
+coral_block_fire|xocean
+coral_block_horn|xocean
+coral_block_rose|xocean
+coral_block_tube|xocean
+coral_rooted_bubble|xocean
+coral_rooted_fire|xocean
+coral_rooted_horn|xocean
+coral_rooted_rose|xocean
+coral_rooted_tube|xocean
+deco_xocean_coral_block_bubble|xocean
+deco_xocean_coral_block_fire|xocean
+deco_xocean_coral_block_horn|xocean
+deco_xocean_coral_block_rose|xocean
+deco_xocean_coral_block_tube|xocean
+deco_xocean_coral_rooted_bubble|xocean
+deco_xocean_coral_rooted_fire|xocean
+deco_xocean_coral_rooted_horn|xocean
+deco_xocean_coral_rooted_rose|xocean
+deco_xocean_coral_rooted_tube|xocean
+deco_xocean_plant_pickle_sea|xocean
+deco_xocean_plant_seagrass_sickle|xocean
+decor_stone_ocean|xocean
+light_lantern_sea|xocean
+ore_xocean_stone_ocean|xocean
+plant_kelp_ordinary_dried|xocean
+plant_pickle_sea|xocean
+plant_seagrass_sickle|xocean
+shared_xocean|xocean
+stone_ocean|xocean
+
+# supporting packages (.depends)
+glass_ordinary|default moreblocks vessels
+liquid_water_ordinary|default
+mineral_coal|default technic
+plant_kelp_ordinary|default
+sand_ordinary|default
+torch_ordinary|default
+
+# supporting packages (.at_least_one)
+biome_default_desert_cold|default
+biome_default_desert_sandstone|default
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_grassland_snowy|default
+biome_default_taiga|default
+
+# supporting packages (.optional)
+#mineral_mese|default

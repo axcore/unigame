@@ -1,0 +1,46 @@
+# "rocks" remix - contains a few items from rocks that are not found in AATO/PFAA (but are required
+#       by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest
+#       mod, everything has been grouped into a hypothetical "rocks" mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# rocks/mineral packages
+ore_rocks_stone_pegmatite_white_with_cassiterite|rocks
+ore_rocks_stone_skarn_with_chalcopyrite|rocks
+ore_rocks_stone_skarn_with_galena|rocks
+ore_rocks_stone_skarn_with_magnesite|rocks
+ore_rocks_stone_skarn_with_magnetite|rocks
+ore_rocks_stone_skarn_with_malachite|rocks
+ore_rocks_stone_skarn_with_sphalerite|rocks
+stone_pegmatite_white_with_cassiterite|rocks
+stone_skarn_with_chalcopyrite|rocks
+stone_skarn_with_galena|rocks
+stone_skarn_with_magnesite|rocks
+stone_skarn_with_magnetite|rocks
+stone_skarn_with_malachite|rocks
+stone_skarn_with_sphalerite|rocks
+
+# rocks/rocks packages
+
+# pfaa packages which duplicate rocks content
+clay_vermiculite|pfaa
+
+# supporting packages (.depends)
+mineral_cassiterite|real_minerals
+mineral_chalcopyrite|unilib
+mineral_galena|real_minerals
+mineral_magnesite|unilib
+mineral_magnetite|real_minerals
+mineral_malachite|real_minerals
+mineral_sphalerite|real_minerals
+stone_pegmatite_white|pfaa
+stone_skarn|pfaa
+
+# supporting packages (.optional)
+#metal_copper|default moreblocks technic
+#metal_iron_wrought|technic_worldgen
+#metal_lead|technic_worldgen technic
+#metal_magnesium|unilib
+#metal_tin|default technic
+#metal_zinc|technic_worldgen technic

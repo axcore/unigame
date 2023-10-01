@@ -1,0 +1,61 @@
+# "aqua_farming" remix - contains everything from the aqua_farming mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# aqua_farming packages
+crop_undersea_algae|aqua_farming
+crop_undersea_anemone|aqua_farming
+crop_undersea_cucumber|aqua_farming
+crop_undersea_grass|aqua_farming
+crop_undersea_strawberry|aqua_farming
+deco_aqua_farming_crop_undersea_algae|aqua_farming
+deco_aqua_farming_crop_undersea_anemone|aqua_farming
+deco_aqua_farming_crop_undersea_cucumber|aqua_farming
+deco_aqua_farming_crop_undersea_grass|aqua_farming
+deco_aqua_farming_crop_undersea_strawberry|aqua_farming
+food_cake_strawberry_sea|aqua_farming
+food_grass_undersea|aqua_farming
+ingredient_salt_bay|aqua_farming
+shared_aqua_farming|aqua_farming
+soil_undersea|aqua_farming
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+gravel_ordinary|default mtg_plus
+mineral_flint|default fire mtg_plus
+sand_ordinary|default
+
+# supporting packages (.at_least_one)
+biome_default_desert|default
+biome_default_desert_cold|default
+biome_default_desert_sandstone|default
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_grassland_snowy|default
+biome_default_icesheet|default
+biome_default_rainforest|default
+biome_default_savanna|default
+biome_default_taiga|default
+biome_default_tundra|default
+sand_desert|default farming
+sand_silver|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#metal_steel|default technic
+#mineral_coal|default technic
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#soil_ordinary|farming
+
+# supporting packages (.suggested)
+#bucket_steel|bucket
+#ingredient_flour_ordinary|farming

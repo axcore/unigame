@@ -1,0 +1,28 @@
+# "drinks" remix - contains everything from the "drinks" mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# drinks packages
+container_barrel_juice|drinks
+container_silo_juice|drinks
+machine_press_juice|drinks
+shared_drinks|drinks
+
+# supporting packages (.depends)
+bucket_steel|bucket
+glass_ordinary|default moreblocks vessels
+item_stick_ordinary|default
+metal_iron|default
+metal_steel|default technic
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.optional)
+#liquid_lava_ordinary|default
+#liquid_water_ordinary|default
+#liquid_water_river|default
+#mineral_mese|default
+#plant_papyrus_ordinary|default mtg_plus
+#plant_shrub_dry|default
+#vessel_bottle_glass_empty|thirsty vessels
+#vessel_bottle_steel_empty|thirsty vessels

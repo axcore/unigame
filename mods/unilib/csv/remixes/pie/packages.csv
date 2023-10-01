@@ -1,0 +1,43 @@
+# "pie" remix - contains everything from the pie mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# pie packages
+food_cake_banana|pie
+food_cake_coffee|pie
+food_cake_meat|pie
+food_cake_normal|pie
+food_cake_red_velvet|pie
+food_cheesecake_strawberry|pie
+food_pie_orange|pie
+food_pudding_bread|pie
+food_pudding_chocolate|pie
+shared_pie|pie
+
+# supporting packages (.depends)
+dye_basic|dye bakedclay
+
+# supporting packages (.optional)
+#bucket_steel|bucket
+#bucket_wood|bucket_wooden
+#bush_blueberry_ordinary|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#shared_screwdriver|screwdriver
+#vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.suggested)
+#crop_wheat|farming
+#food_bread_ordinary|farming
+#food_cheese_vegan|farming
+#food_meat_imitation|cucina_vegana
+#food_milk_soy_red|cucina_vegana
+#fruit_banana|ethereal
+#fruit_orange|ethereal
+#ingredient_cream_milk|cheese
+#ingredient_flour_ordinary|farming
+#ingredient_sugar_normal|farming
+#produce_cocoa_jungle|farming
+#produce_coffee|farming
+#produce_strawberry_normal|ethereal

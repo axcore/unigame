@@ -1,0 +1,41 @@
+# "morebricks" remix - contains everything from morebricks
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# morebricks packages
+brick_black|morebricks
+brick_blue|morebricks
+brick_brown|morebricks
+brick_copper|morebricks
+brick_cyan|morebricks
+brick_gold|morebricks
+brick_green|morebricks
+brick_green_dark|morebricks
+brick_grey|morebricks
+brick_grey_dark|morebricks
+brick_magenta|morebricks
+brick_orange|morebricks
+brick_pink|morebricks
+brick_steel|morebricks
+brick_violet|morebricks
+brick_white|morebricks
+brick_yellow|morebricks
+
+# supporting packages (.depends)
+brick_ordinary|default
+clay_baked_basic|bakedclay
+dye_basic|dye bakedclay
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+
+# supporting packages (.at_least_one)
+clay_brown|underch
+clay_ordinary|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default

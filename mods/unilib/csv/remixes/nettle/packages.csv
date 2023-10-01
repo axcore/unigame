@@ -1,0 +1,16 @@
+# "nettle" remix - contains everything from the nettle mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# nettle packages
+abm_nettle_plant_nettle_place|nettle
+abm_nettle_plant_nettle_spread|nettle
+plant_nettle_carduus|nettle
+plant_nettle_cleavers|nettle
+plant_nettle_hogweed_giant|nettle
+plant_nettle_impatiens|nettle
+plant_nettle_normal|nettle
+plant_nettle_scotch_broom|nettle
+
+# (no supporting packages for this remix)

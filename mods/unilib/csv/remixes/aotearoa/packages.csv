@@ -1,0 +1,264 @@
+# "aotearoa" remix - contains nearly everything from the aotearoa mod
+# Ambient sounds were not imported, and unilib does not create stairs from tree trunks (for
+#       consistency with everything else)
+# It is recommended that this remix is used together with the "mtgame_mini" and "mtgame_ores"
+#       remixes
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# aotearoa packages
+base_aotearoa|aotearoa
+biome_aotearoa_alpine|aotearoa
+biome_aotearoa_basement|aotearoa
+biome_aotearoa_coastal|aotearoa
+biome_aotearoa_dunes|aotearoa
+biome_aotearoa_highland|aotearoa
+biome_aotearoa_lowland|aotearoa
+biome_aotearoa_mantle|aotearoa
+biome_aotearoa_ocean|aotearoa
+biome_aotearoa_scrubland|aotearoa
+biome_aotearoa_shore|aotearoa
+biome_aotearoa_wetland|aotearoa
+bush_kokomuka|aotearoa
+bush_leatherwood|aotearoa
+clay_antipodean|aotearoa
+clay_gumland|aotearoa
+deco_aotearoa_bush_kokomuka|aotearoa
+deco_aotearoa_bush_leatherwood|aotearoa
+deco_aotearoa_fern_crown_antipodean|aotearoa
+deco_aotearoa_grass_kauri|aotearoa
+deco_aotearoa_grass_spinifex|aotearoa
+deco_aotearoa_gravel_ordinary|aotearoa
+deco_aotearoa_misc_wood_rotten|aotearoa
+deco_aotearoa_moss_antipodean_thick|aotearoa
+deco_aotearoa_plant_bracken|aotearoa
+deco_aotearoa_plant_flax_antipodean|aotearoa
+deco_aotearoa_plant_kiokio|aotearoa
+deco_aotearoa_plant_pingao|aotearoa
+deco_aotearoa_plant_pohuehue|aotearoa
+deco_aotearoa_plant_raupo|aotearoa
+deco_aotearoa_plant_rush_sea|aotearoa
+deco_aotearoa_plant_tussock_bristle|aotearoa
+deco_aotearoa_plant_tussock_red|aotearoa
+deco_aotearoa_plant_wiwi|aotearoa
+deco_aotearoa_stone_andesite_antipodean|aotearoa
+deco_aotearoa_stone_schist_antipodean|aotearoa
+deco_aotearoa_stone_scoria|aotearoa
+deco_aotearoa_tree_beech_black|aotearoa
+deco_aotearoa_tree_beech_mountain|aotearoa
+deco_aotearoa_tree_beech_silver|aotearoa
+deco_aotearoa_tree_cabbage|aotearoa
+deco_aotearoa_tree_common_daisy|aotearoa
+deco_aotearoa_tree_fern_silver|aotearoa
+deco_aotearoa_tree_hinau|aotearoa
+deco_aotearoa_tree_kahikatea|aotearoa
+deco_aotearoa_tree_kamahi|aotearoa
+deco_aotearoa_tree_karaka|aotearoa
+deco_aotearoa_tree_karo|aotearoa
+deco_aotearoa_tree_kauri|aotearoa
+deco_aotearoa_tree_kawakawa|aotearoa
+deco_aotearoa_tree_kowhai|aotearoa
+deco_aotearoa_tree_mahoe|aotearoa
+deco_aotearoa_tree_maire_black|aotearoa
+deco_aotearoa_tree_mamaku|aotearoa
+deco_aotearoa_tree_mangrove_white|aotearoa
+deco_aotearoa_tree_manuka|aotearoa
+deco_aotearoa_tree_matagouri|aotearoa
+deco_aotearoa_tree_miro|aotearoa
+deco_aotearoa_tree_pahautea|aotearoa
+deco_aotearoa_tree_palm_nikau|aotearoa
+deco_aotearoa_tree_pohutukawa|aotearoa
+deco_aotearoa_tree_rangiora|aotearoa
+deco_aotearoa_tree_rimu|aotearoa
+deco_aotearoa_tree_tawa|aotearoa
+deco_aotearoa_tree_totara|aotearoa
+deco_aotearoa_tree_wheki|aotearoa
+dirt_antipodean|aotearoa
+dirt_antipodean_dark|aotearoa
+dirt_antipodean_dark_with_litter_beech|aotearoa
+dirt_antipodean_dark_with_litter_wet|aotearoa
+dirt_antipodean_with_moss|aotearoa
+dirt_ordinary_with_litter_dry|aotearoa
+dirt_mud_antipodean|aotearoa
+dirt_mud_antipodean_with_cockles|aotearoa
+dirt_peat_antipodean|aotearoa
+dirt_peat_forest|aotearoa
+dirt_peat_restiad|aotearoa
+feature_aotearoa_liquid_mud_boiling|aotearoa
+fern_crown_antipodean|aotearoa
+food_cake_pungapunga|aotearoa
+food_cake_seed|aotearoa
+food_clam_cockle|aotearoa
+food_clam_pipi|aotearoa
+food_pith_mamaku|aotearoa
+food_root_bracken|aotearoa
+food_root_cabbage|aotearoa
+food_root_raupo|aotearoa
+food_shoots_cabbage|aotearoa
+food_shoots_nikau|aotearoa
+fruit_hinau|aotearoa
+fruit_karaka|aotearoa
+fruit_kawakawa|aotearoa
+fruit_miro|aotearoa
+fruit_tawa|aotearoa
+grass_kauri|aotearoa
+grass_spinifex|aotearoa
+gravel_ordinary_with_algae|aotearoa
+ingredient_meal_seed|aotearoa
+liquid_mud_boiling|aotearoa
+material_concrete_antipodean|aotearoa
+material_gum_kauri|aotearoa
+material_lime_crushed|aotearoa plaster
+material_quicklime|aotearoa earthbuild
+mineral_cassiterite_antipodean_rock|aotearoa
+mineral_chalcopyrite_antipodean_rock|aotearoa
+mineral_limonite_antipodean_rock|aotearoa
+misc_fence_ponga|aotearoa
+misc_wood_rotten|aotearoa
+moss_antipodean_thick|aotearoa
+ore_aotearoa_air|aotearoa
+ore_aotearoa_dirt_mud_antipodean|aotearoa
+ore_aotearoa_dirt_mud_antipodean_with_cockles|aotearoa
+ore_aotearoa_liquid_water_river|aotearoa
+ore_aotearoa_mineral_cassiterite_antipodean_rock|aotearoa
+ore_aotearoa_mineral_chalcopyrite_antipodean_rock|aotearoa
+ore_aotearoa_mineral_coal|aotearoa
+ore_aotearoa_mineral_diamond|aotearoa
+ore_aotearoa_mineral_limonite_antipodean_rock|aotearoa
+ore_aotearoa_sand_ironsand|aotearoa
+ore_aotearoa_sand_ironsand_with_pipi|aotearoa
+ore_aotearoa_sand_ordinary_with_pipi|aotearoa
+ore_aotearoa_sand_volcanic|aotearoa
+ore_aotearoa_stone_andesite_antipodean|aotearoa
+ore_aotearoa_stone_basalt_black|aotearoa
+ore_aotearoa_stone_claystone_white|aotearoa
+ore_aotearoa_stone_conglomerate_normal|aotearoa
+ore_aotearoa_stone_desert|aotearoa
+ore_aotearoa_stone_gneiss_antipodean|aotearoa
+ore_aotearoa_stone_granite_antipodean|aotearoa
+ore_aotearoa_stone_greywacke_dark|aotearoa
+ore_aotearoa_stone_limestone_antipodean|aotearoa
+ore_aotearoa_stone_limestone_coquina|aotearoa
+ore_aotearoa_stone_obsidian|aotearoa
+ore_aotearoa_stone_pounamu|aotearoa
+ore_aotearoa_stone_quartz_antipodean|aotearoa
+ore_aotearoa_stone_sandstone_grey|aotearoa
+ore_aotearoa_stone_sandstone_pale|aotearoa
+ore_aotearoa_stone_schist_antipodean|aotearoa
+ore_aotearoa_stone_scoria|aotearoa
+ore_aotearoa_stone_siltstone_dark|aotearoa
+plant_bracken|aotearoa
+plant_flax_antipodean|aotearoa
+plant_kiokio|aotearoa
+plant_pingao|aotearoa
+plant_pohuehue|aotearoa
+plant_raupo|aotearoa
+plant_rush_sea|aotearoa
+plant_tussock_bristle|aotearoa
+plant_tussock_red|aotearoa
+plant_wiwi|aotearoa
+rope_flax|aotearoa
+sand_ironsand|aotearoa
+sand_ironsand_with_pipi|aotearoa
+sand_ordinary_with_pipi|aotearoa
+sand_seashells|aotearoa
+sand_volcanic|aotearoa
+sand_river|aotearoa
+sand_silt_antipodean|aotearoa
+stone_andesite_antipodean|aotearoa
+stone_basalt_black|aotearoa
+stone_claystone_white|aotearoa
+stone_conglomerate_normal|aotearoa
+stone_gneiss_antipodean|aotearoa
+stone_granite_antipodean|aotearoa
+stone_greywacke_dark|aotearoa
+stone_limestone_antipodean|aotearoa
+stone_limestone_coquina|aotearoa
+stone_pounamu|aotearoa
+stone_quartz_antipodean|aotearoa
+stone_sandstone_grey|aotearoa
+stone_sandstone_pale|aotearoa
+stone_schist_antipodean|aotearoa
+stone_scoria|aotearoa
+stone_siltstone_dark|aotearoa
+tool_shovel_pounamu|aotearoa
+tree_beech_black|aotearoa
+tree_beech_mountain|aotearoa
+tree_beech_silver|aotearoa
+tree_cabbage|aotearoa
+tree_common_daisy|aotearoa
+tree_fern_silver|aotearoa
+tree_hinau|aotearoa
+tree_kahikatea|aotearoa
+tree_kamahi|aotearoa
+tree_karaka|aotearoa
+tree_karo|aotearoa
+tree_kauri|aotearoa
+tree_kawakawa|aotearoa
+tree_kowhai|aotearoa
+tree_mahoe|aotearoa
+tree_maire_black|aotearoa
+tree_mamaku|aotearoa
+tree_manuka|aotearoa
+tree_mangrove_white|aotearoa
+tree_matagouri|aotearoa
+tree_miro|aotearoa
+tree_pahautea|aotearoa
+tree_palm_nikau|aotearoa
+tree_pohutukawa|aotearoa
+tree_rangiora|aotearoa
+tree_rimu|aotearoa
+tree_tawa|aotearoa
+tree_totara|aotearoa
+tree_wheki|aotearoa
+
+# supporting packages (.depends)
+clay_ordinary|default
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+gravel_ordinary|default mtg_plus
+ice_ordinary|default ethereal mtg_plus
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+liquid_water_river|default
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+sand_ordinary|default
+snow_ordinary|default ethereal mtg_plus
+stone_desert|default moreblocks
+stone_obsidian|default moreblocks
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.at_least_one)
+coral_block_skeleton|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#coral_block_brown|default
+#coral_block_orange|default
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#food_fiddlehead|ferns
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#gravel_stone_desert|glemr11
+#item_paper_ordinary|default moreblocks
+#item_stick_ordinary|default
+#mineral_mese|default
+#moss_green|sickles
+#override_ethereal_coral|ethereal
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#soil_ordinary|farming
+#stone_sandstone_desert|default mtg_plus
+#stone_sandstone_ordinary|default moreblocks mtg_plus
+#stone_sandstone_silver|default mtg_plus
+#torch_ordinary|default

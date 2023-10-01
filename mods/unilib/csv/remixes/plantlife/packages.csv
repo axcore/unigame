@@ -1,0 +1,130 @@
+# "plantlife" remix - contains everything from the plantlife modpack
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+# For all plantlife mods, calls to biome_lib have been crudely emulated by Minetest decorations, so
+#       trees will not spawn in the same positions/quantities
+# Did not import anything from the 3dmushrooms, nature_classic or vines mods
+# From cavestuff, imported the pebbles, did not import the stalactites
+# From dryplants, imported everything except the greater concentration of grass
+# From poisonivy, imported everything and made the ivy poisonous
+# From trunks, imported everything except roots (marked as "for testing purposes"), log decorations
+#       and moss on trees
+
+# node_name | original_mod
+
+# bushes packages
+bush_branching_green|bushes
+bush_branching_shrub|bushes
+bush_branching_yellow|bushes
+deco_bushes_bush_branching_green|bushes
+deco_bushes_bush_branching_shrub|bushes
+deco_bushes_bush_branching_yellow|bushes
+shared_bushes|bushes
+
+# bushes_classic packages
+bush_ornamental_blackberry|bushes_classic
+bush_ornamental_blueberry|bushes_classic
+bush_ornamental_fruitless|bushes_classic
+bush_ornamental_gooseberry|bushes_classic
+bush_ornamental_raspberry|bushes_classic
+bush_ornamental_strawberry|bushes_classic
+deco_bushes_classic_bush_ornamental|bushes_classic
+shared_bushes_classic|bushes_classic
+
+# cavestuff packages
+deco_cavestuff_pebble_large_stone_desert|cavestuff
+deco_cavestuff_pebble_large_stone_ordinary|cavestuff
+pebble_large|cavestuff
+
+# dryplants packages
+deco_dryplants_plant_juncus|dryplants
+deco_dryplants_plant_reedmace|dryplants
+dirt_ordinary_with_turf_short|dryplants
+misc_reed_normal|dryplants
+misc_patch_grass|dryplants
+plant_juncus|dryplants
+#plant_bulrush|dryplants
+plant_reedmace|dryplants
+tool_sickle_grass|dryplants
+
+# ferns packages
+deco_ferns_fern_horsetail|ferns
+deco_ferns_tree_fern|ferns
+deco_ferns_tree_fern_giant|ferns
+fern_horsetail|ferns
+fern_ordinary_tuber|ferns
+food_fiddlehead|ferns
+tree_fern|ferns
+tree_fern_giant|ferns
+
+# molehills packages
+deco_molehills_misc_molehill|molehills
+misc_molehill|molehills
+
+# pl_seaweed packages
+deco_pl_seaweed_plant_seaweed_normal|pl_seaweed
+plant_seaweed_normal|pl_seaweed
+
+# pl_sunflowers packages
+flower_helianthus|pl_sunflowers
+deco_pl_sunflowers_flower_helianthus|pl_sunflowers
+
+# pl_waterlilies packages
+deco_pl_waterlilies_flower_waterlily_ordinary_alt|pl_waterlilies
+flower_waterlily_ordinary_alt|pl_waterlilies
+
+# poisonivy packages
+deco_poisonivy_plant_ivy_poison|poisonivy
+plant_ivy_poison|poisonivy
+
+# trunks packages
+deco_trunks_item_twig_normal|trunks
+deco_trunks_moss_normal|trunks
+item_twig_normal|trunks
+moss_normal|trunks
+
+# woodsoils packages
+dirt_ordinary_with_litter_forest|woodsoils
+
+# youngtrees packages
+deco_youngtrees_tree_young_apple|youngtrees
+deco_youngtrees_tree_young_bamboo|youngtrees
+tree_young_apple|youngtrees
+tree_young_bamboo|youngtrees
+
+# supporting packages (.depends)
+crop_wheat|farming
+dirt_ordinary|default farming moreblocks
+ingredient_flour_ordinary|farming
+item_stick_ordinary|default
+liquid_water_ordinary|default
+sand_ordinary|default
+
+# supporting packages (.at_least_one)
+biome_default_forest_deciduous|default
+biome_default_rainforest|default
+biome_default_savanna|default
+dirt_permafrost|default
+fern_ordinary|default
+gravel_ordinary|default mtg_plus
+liquid_water_river|default
+sand_desert|default farming
+soil_ordinary|farming
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+tree_jungle|default doors moreblocks
+
+# supporting packages (.optional)
+#brick_ordinary|default
+#dye_basic|dye bakedclay
+#flower_waterlily_ordinary|flowers
+#fruit_blueberry_ordinary|default
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#plant_bulrush|dryplants
+#plant_papyrus_ordinary|default mtg_plus
+#plant_shrub_dry|default
+#stone_ordinary_with_coal|default
+#stone_ordinary_with_iron|default
+#tree_apple|default doors moreblocks
+#utensil_mortar_pestle|farming

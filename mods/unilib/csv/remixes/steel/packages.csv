@@ -1,0 +1,18 @@
+# "steel" remix - contains everything from the steel mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# steel packages
+metal_steel_fence_hard|steel
+metal_steel_fence_soft|steel
+metal_steel_plate_hard|steel
+metal_steel_plate_rusted|steel
+metal_steel_plate_soft|steel
+metal_steel_scrap|steel
+metal_steel_strut|steel
+roof_steel_corrugated|steel
+
+# supporting packages (.depends)
+metal_iron|default
+metal_steel|default technic

@@ -1,0 +1,941 @@
+---------------------------------------------------------------------------------------------------
+-- From:    unilib
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_admin_tool_vapouriser.png
+    Original to unilib
+unilib_admin_trampoline_invisible.png
+    Original to unilib
+unilib_brick_ordinary_block_vertical.png
+    Adapted from minetest_game, /mods/default/textures/default_brick.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_black_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_black.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_blue_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_blue.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_brown_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_brown.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_cyan_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_cyan.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_green_dark_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_dark_green.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_green_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_green.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_grey_dark_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_dark_grey.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_grey_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_grey.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_magenta_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_magenta.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_orange_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_orange.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_pink_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_pink.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_red_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_red.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_violet_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_violet.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_white_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_white.png
+    Media: CC BY-SA 3.0
+unilib_bucket_water_dyed_yellow_overlay.png
+    Adapted from minetest_game, /mods/dye/textures/dye_yellow.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_bottomless_front.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_front.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_bottomless_inside.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_inside.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_bottomless_locked.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_lock.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_bottomless_side.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_side.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_bottomless_top.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_top.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_compact_front.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_front.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_compact_inside.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_inside.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_compact_locked.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_lock.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_compact_side.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_side.png
+    Media: CC BY-SA 3.0
+unilib_container_chest_compact_top.png
+    Adapted from minetest_game, /mods/default/textures/default_chest_top.png
+    Media: CC BY-SA 3.0
+unilib_gravel_sandstone_ordinary.png
+    Adapted from darkage, /textures/darkage_cob.png
+    Media: WTFPL
+unilib_gravel_sandstone_silver.png
+    Adapted from darkage, /textures/darkage_cob.png
+    Media: WTFPL
+unilib_liquid_water_dyed.png
+    Adapted from minetest_game, /mods/default/textures/default_water.png
+    Media: CC BY-SA 3.0
+unilib_liquid_water_dyed_flowing_animated.png
+    Adapted from minetest_game, /mods/default/textures/default_water_flowing_animated.png
+    Media: CC BY-SA 3.0
+unilib_liquid_water_dyed_source_animated.png
+    Adapted from minetest_game, /mods/default/textures/default_water_source_animated.png
+    Media: CC BY-SA 3.0
+unilib_metal_actinium_sample.png
+    Original to unilib
+unilib_metal_americium_sample.png
+    Original to unilib
+unilib_metal_antimony_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_arsenic_sample.png
+    Original to unilib
+unilib_metal_barium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_berkelium_sample.png
+    Original to unilib
+unilib_metal_beryllium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_bohrium_sample.png
+    Original to unilib
+unilib_metal_boron_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_cadmium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_cadmium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_cadmium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_caesium_sample.png
+    Original to unilib
+unilib_metal_calcium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_californium_sample.png
+    Original to unilib
+unilib_metal_cerium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_cobalt_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_cobalt_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_cobalt_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_copernecium_sample.png
+    Original to unilib
+unilib_metal_curium_sample.png
+    Original to unilib
+unilib_metal_darmstadtium_sample.png
+    Original to unilib
+unilib_metal_dubnium_sample.png
+    Original to unilib
+unilib_metal_dysprosium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_einsteinium_sample.png
+    Original to unilib
+unilib_metal_erbium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_erbium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_erbium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_europium_sample.png
+    Original to unilib
+unilib_metal_fermium_sample.png
+    Original to unilib
+unilib_metal_flerovium_sample.png
+    Original to unilib
+unilib_metal_francium_sample.png
+    Original to unilib
+unilib_metal_gadolinium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_gallium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_gallium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_gallium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_germanium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_germanium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_germanium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_hafnium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_hafnium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_hafnium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_hassium_sample.png
+    Original to unilib
+unilib_metal_holmium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_indium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_indium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_indium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_iridium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_iridium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_iridium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_lanthanum_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_lawrencium_sample.png
+    Original to unilib
+unilib_metal_lithium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_livermorium_sample.png
+    Original to unilib
+unilib_metal_lutetium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_magnesium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_magnesium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_magnesium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_manganese_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_manganese_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_manganese_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_meitnerium_sample.png
+    Original to unilib
+unilib_metal_mendelevium_sample.png
+    Original to unilib
+unilib_metal_mercury_sample.png
+    Original to unilib
+unilib_metal_molybdenum_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_molybdenum_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_molybdenum_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_moscovium_sample.png
+    Original to unilib
+unilib_metal_neodymium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_neptunium_sample.png
+    Original to unilib
+unilib_metal_nihonium_sample.png
+    Original to unilib
+unilib_metal_niobium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_niobium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_niobium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_nobelium_sample.png
+    Original to unilib
+unilib_metal_osmium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_osmium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_osmium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_palladium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_palladium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_palladium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_platinum_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_platinum_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_platinum_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_plutonium_sample.png
+    Original to unilib
+unilib_metal_polonium_sample.png
+    Original to unilib
+unilib_metal_potassium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_praseodymium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_promethium_sample.png
+    Original to unilib
+unilib_metal_protactinium_sample.png
+    Original to unilib
+unilib_metal_radium_sample.png
+    Original to unilib
+unilib_metal_rhenium_sample.png
+    Original to unilib
+unilib_metal_rhodium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_rhodium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_rhodium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_roentgenium_sample.png
+    Original to unilib
+unilib_metal_rubidium_sample.png
+    Original to unilib
+unilib_metal_ruthenium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_ruthenium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_ruthenium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_rutherfordium_sample.png
+    Original to unilib
+unilib_metal_samarium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_scandium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_scandium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_scandium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_seaborgium_sample.png
+    Original to unilib
+unilib_metal_silicon_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_sodium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_strontium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_tantalum_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_tantalum_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_tantalum_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_technetium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_technetium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_technetium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_tellurium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_tellurium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_tellurium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_terbium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_thallium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_thorium_sample.png
+    Original to unilib
+unilib_metal_thulium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_titanium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_titanium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_titanium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_tungsten_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_tungsten_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_tungsten_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_vanadium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_vanadium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_vanadium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_metal_ytterbium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_yttrium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_metal_zirconium_block.png
+    Adapted from minetest_game, /mods/default/textures/default_steel_block.png
+    Media: CC BY-SA 3.0
+unilib_metal_zirconium_ingot.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/ingot.png
+    Media: Artistic-2.0
+unilib_metal_zirconium_powder.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/dust_large.png
+    Media: Artistic-2.0
+unilib_mineral_acanthite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/acanthite.png
+    Media: GPL 3.0
+unilib_mineral_agate_rock.png
+    Original to unilib
+unilib_mineral_alabandite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/alabandite.png
+    Media: GPL 3.0
+unilib_mineral_almandine_rock.png
+    Original to unilib
+unilib_mineral_alunite.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/mediumOreRock_alunite.png
+    Media: Artistic-2.0
+unilib_mineral_amazonite_rock.png
+    Original to unilib
+unilib_mineral_amethyst_dark_rock.png
+    Original to unilib
+unilib_mineral_anatase_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/anatase.png
+    Media: GPL 3.0
+unilib_mineral_andradite_rock.png
+    Original to unilib
+unilib_mineral_anglesite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/anglesite.png
+    Media: GPL 3.0
+unilib_mineral_anhydrite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/anhydrite.png
+    Media: GPL 3.0
+unilib_mineral_apatite_rock.png
+    Original to unilib
+unilib_mineral_argutite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/argutite.png
+    Media: GPL 3.0
+unilib_mineral_arsenopyrite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/arsenopyrite.png
+    Media: GPL 3.0
+unilib_mineral_azurite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/azurite.png
+    Media: GPL 3.0
+unilib_mineral_barite_rock.png
+    Original to unilib
+unilib_mineral_bismite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/bismite.png
+    Media: GPL 3.0
+unilib_mineral_bismuth_native_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/native_bismuth.png
+    Media: GPL 3.0
+unilib_mineral_borax.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/weakOreRock_borax.png
+    Media: Artistic-2.0
+unilib_mineral_bornite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/bornite.png
+    Media: GPL 3.0
+unilib_mineral_boulangerite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/boulangerite.png
+    Media: GPL 3.0
+unilib_mineral_brookite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/brookite.png
+    Media: GPL 3.0
+unilib_mineral_brucite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/brucite.png
+    Media: GPL 3.0
+unilib_mineral_calcite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/calcite.png
+    Media: GPL 3.0
+unilib_mineral_carnelian_rock.png
+    Original to unilib
+unilib_mineral_carnallite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/carnallite.png
+    Media: GPL 3.0
+unilib_mineral_carnotite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/carnotite.png
+    Media: GPL 3.0
+unilib_mineral_carrollite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/carrollite.png
+    Media: GPL 3.0
+unilib_mineral_cerussite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/cerussite.png
+    Media: GPL 3.0
+unilib_mineral_chalcocite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/chalcocite.png
+    Media: GPL 3.0
+unilib_mineral_charcoal_natural_rock.png
+    Original to unilib
+unilib_mineral_chrysocolla_rock.png
+    Original to unilib
+unilib_mineral_chrysoprase_rock.png
+    Original to unilib
+unilib_mineral_chrysotile_rock.png
+    Original to unilib
+unilib_mineral_clausthalite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/clausthalite.png
+    Media: GPL 3.0
+unilib_mineral_cobaltite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/cobaltite.png
+    Media: GPL 3.0
+unilib_mineral_coke_natural_rock.png
+    Original to unilib
+unilib_mineral_columbite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/columbite.png
+    Media: GPL 3.0
+unilib_mineral_covellite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/covellite.png
+    Media: GPL 3.0
+unilib_mineral_cryolite_rock.png
+    Original to unilib
+unilib_mineral_descloizite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/descloizite.png
+    Media: GPL 3.0
+unilib_mineral_enargite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/enargite.png
+    Media: GPL 3.0
+unilib_mineral_ferberite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/ferberite.png
+    Media: GPL 3.0
+unilib_mineral_fluorite_rock.png
+    Original to unilib
+unilib_mineral_flux_rock.png
+    Original to unilib
+unilib_mineral_franklinite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/franklinite.png
+    Media: GPL 3.0
+unilib_mineral_freibergite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/freibergite.png
+    Media: GPL 3.0
+unilib_mineral_garnierite_rock.png
+    Original to unilib
+unilib_mineral_germanite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/germanite.png
+    Media: GPL 3.0
+unilib_mineral_gersdorffite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/gersdorffite.png
+    Media: GPL 3.0
+unilib_mineral_gold_native_rock.png
+    Original to unilib
+unilib_mineral_greenockite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/greenockite.png
+    Media: GPL 3.0
+unilib_mineral_halite.png
+    Adapted from aato, /src/main/resources/assets/almostalltheores/textures/block/halite.png
+    Media: Artistic-2.0
+unilib_mineral_hausmannite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/hausmannite.png
+    Media: GPL 3.0
+unilib_mineral_hauyne_rock.png
+    Original to unilib
+unilib_mineral_hemimorphite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/hemimorphite.png
+    Media: GPL 3.0
+unilib_mineral_heliotrope_rock.png
+    Original to unilib
+unilib_mineral_hollandite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/hollandite.png
+    Media: GPL 3.0
+unilib_mineral_hubnerite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/hubnerite.png
+    Media: GPL 3.0
+unilib_mineral_hydrozincite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/hydrozincite.png
+    Media: GPL 3.0
+unilib_mineral_iron_telluric_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/telluric_iron.png
+    Media: GPL 3.0
+unilib_mineral_jade_rock.png
+    Original to unilib
+unilib_mineral_jet_dark_rock.png
+    Original to unilib
+unilib_mineral_jet_rock.png
+    Original to unilib
+unilib_mineral_kainite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/kainite.png
+    Media: GPL 3.0
+unilib_mineral_kaolinite_rock.png
+    Original to unilib
+unilib_mineral_kesterite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/kesterite.png
+    Media: GPL 3.0
+unilib_mineral_kieserite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/kieserite.png
+    Media: GPL 3.0
+unilib_mineral_kyanite_rock.png
+    Original to unilib
+unilib_mineral_lamproite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/lamproite.png
+    Media: GPL 3.0
+unilib_mineral_langbeinite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/langbeinite.png
+    Media: GPL 3.0
+unilib_mineral_lazurite_rock.png
+    Original to unilib
+unilib_mineral_lepidolite_rock.png
+    Original to unilib
+unilib_mineral_magnetite_vanadium_rock.png
+    Original to unilib
+unilib_mineral_mica_rock.png
+    Original to unilib
+unilib_mineral_mirabilite.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/weakOreRock_mirabilite.png
+    Media: Artistic-2.0
+unilib_mineral_moonstone_rock.png
+    Original to unilib
+unilib_mineral_nickeline_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/nickeline.png
+    Media: GPL 3.0
+unilib_mineral_nitratine_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/nitratine.png
+    Media: GPL 3.0
+unilib_mineral_olivine_rock.png
+    Original to unilib
+unilib_mineral_onyx_rock.png
+    Original to unilib
+unilib_mineral_opal_rock.png
+    Original to unilib
+unilib_mineral_peridot_rock.png
+    Original to unilib
+unilib_mineral_perlite.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/strongOreRock_perlite.png
+    Media: Artistic-2.0
+unilib_mineral_phosphorite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/phosphorite.png
+    Media: GPL 3.0
+unilib_mineral_pitchblende_rock.png
+    Original to unilib
+unilib_mineral_platinum_native_rock.png
+    Original to unilib
+unilib_mineral_pollucite_rock.png
+    Original to unilib
+unilib_mineral_polyhalite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/polyhalite.png
+    Media: GPL 3.0
+unilib_mineral_pumice.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/strongOreRock_pumice.png
+    Media: Artistic-2.0
+unilib_mineral_pyromorphite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/pyromorphite.png
+    Media: GPL 3.0
+unilib_mineral_pyrope_rock.png
+    Original to unilib
+unilib_mineral_quartz_brown_rock.png
+    Original to unilib
+unilib_mineral_rhodochrosite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/rhodochrosite.png
+    Media: GPL 3.0
+unilib_mineral_ruby_dark_rock.png
+    Original to unilib
+unilib_mineral_rutile_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/rutile.png
+    Media: GPL 3.0
+unilib_mineral_saltpetre_rock.png
+    Original to unilib
+unilib_mineral_sapphire_dark_rock.png
+    Original to unilib
+unilib_mineral_satinspar_rock.png
+    Original to unilib
+unilib_mineral_selenite_rock.png
+    Original to unilib
+unilib_mineral_serpentinite_rock.png
+    Original to unilib
+unilib_mineral_siderite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/siderite.png
+    Media: GPL 3.0
+unilib_mineral_skutterudite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/skutterudite.png
+    Media: GPL 3.0
+unilib_mineral_sodalite.png
+    Adapted from decoblocks, /mods/default/textures/default_sodalite.png
+    Media: WTFPL
+unilib_mineral_spessartine_rock.png
+    Original to unilib
+unilib_mineral_spinel_rock.png
+    Original to unilib
+unilib_mineral_spodumene_rock.png
+    Original to unilib
+unilib_mineral_steatite_rock.png
+    Original to unilib
+unilib_mineral_stephanite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/stephanite.png
+    Media: GPL 3.0
+unilib_mineral_strontianite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/strontianite.png
+    Media: GPL 3.0
+unilib_mineral_sugilite_rock.png
+    Original to unilib
+unilib_mineral_sulphur_real_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/sulphur.png
+    Media: GPL 3.0
+unilib_mineral_tanzanite_rock.png
+    Original to unilib
+unilib_mineral_teallite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/teallite.png
+    Media: GPL 3.0
+unilib_mineral_tennantite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/tennantite.png
+    Media: GPL 3.0
+unilib_mineral_tenorite_rock.png
+    Original to unilib
+unilib_mineral_thorite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/thorite.png
+    Media: GPL 3.0
+unilib_mineral_thortveitite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/thortveitite.png
+    Media: GPL 3.0
+unilib_mineral_titanite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/titanite.png
+    Media: GPL 3.0
+unilib_mineral_topaz_rock.png
+    Original to unilib
+unilib_mineral_torbernite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/torbernite.png
+    Media: GPL 3.0
+unilib_mineral_tourmaline_rock.png
+    Original to unilib
+unilib_mineral_trona.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/weakOreRock_trona.png
+    Media: Artistic-2.0
+unilib_mineral_tsavorite_rock.png
+    Original to unilib
+unilib_mineral_turquoise_rock.png
+    Original to unilib
+unilib_mineral_unakite_rock.png
+    Original to unilib
+unilib_mineral_vanadinite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/vanadinite.png
+    Media: GPL 3.0
+unilib_mineral_wolframite_rock.png
+    Original to unilib
+unilib_mineral_wollastonite.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/mediumOreRock_wollastonite.png
+    Media: Artistic-2.0
+unilib_mineral_wulfenite_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/wulfenite.png
+    Media: GPL 3.0
+unilib_mineral_zeolite.png
+    Adapted from PFAA, /src/main/resources/assets/geologica/textures/blocks/mediumOreRock_zeolite.png
+    Media: Artistic-2.0
+unilib_mineral_zircon_rock.png
+    Adapted from AATO, /src/main/resources/assets/almostalltheores/textures/block/zircon.png
+    Media: GPL 3.0
+unilib_misc_calendar_bg_ancient.png
+    Original to unilib
+unilib_misc_calendar_bg_anniversary.png
+    Original to unilib
+unilib_misc_calendar_bg_combined.png
+    Original to unilib
+unilib_misc_calendar_bg_default.png
+    Original to unilib
+unilib_misc_calendar_bg_future.png
+    Original to unilib
+unilib_misc_calendar_bg_holiday.png
+    Original to unilib
+unilib_misc_calendar_event_death_overlay.png
+    Original to unilib
+unilib_misc_calendar_event_default_overlay.png
+    Original to unilib
+unilib_misc_calendar_event_other_overlay.png
+    Original to unilib
+unilib_misc_calendar_fancy.png
+    Original to unilib
+unilib_misc_calendar_simple.png
+    Original to unilib
+unilib_numeric_overlay_0.png
+    Original to unilib
+unilib_numeric_overlay_1.png
+    Original to unilib
+unilib_numeric_overlay_2.png
+    Original to unilib
+unilib_numeric_overlay_3.png
+    Original to unilib
+unilib_numeric_overlay_4.png
+    Original to unilib
+unilib_numeric_overlay_5.png
+    Original to unilib
+unilib_numeric_overlay_6.png
+    Original to unilib
+unilib_numeric_overlay_7.png
+    Original to unilib
+unilib_numeric_overlay_8.png
+    Original to unilib
+unilib_numeric_overlay_9.png
+    Original to unilib
+unilib_numeric_overlay_10.png
+    Original to unilib
+unilib_numeric_overlay_11.png
+    Original to unilib
+unilib_numeric_overlay_12.png
+    Original to unilib
+unilib_numeric_overlay_13.png
+    Original to unilib
+unilib_numeric_overlay_14.png
+    Original to unilib
+unilib_numeric_overlay_15.png
+    Original to unilib
+unilib_numeric_overlay_16.png
+    Original to unilib
+unilib_numeric_overlay_17.png
+    Original to unilib
+unilib_numeric_overlay_18.png
+    Original to unilib
+unilib_numeric_overlay_19.png
+    Original to unilib
+unilib_sand_beige.png
+    Original to unilib
+unilib_sand_brown.png
+    Original to unilib
+unilib_sand_pink.png
+    Original to unilib
+unilib_sand_red.png
+    Original to unilib
+unilib_stone_desert_powder.png
+    Adapted from technic, /technic/textures/technic_stone_dust.png
+    Media: unknown
+unilib_substance_argon_sample.png
+    Original to unilib
+unilib_substance_astatine_sample.png
+    Original to unilib
+unilib_substance_bromine_sample.png
+    Original to unilib
+unilib_substance_carbon_sample.png
+    Original to unilib
+unilib_substance_chlorine_sample.png
+    Original to unilib
+unilib_substance_fluorine_sample.png
+    Original to unilib
+unilib_substance_helium_sample.png
+    Original to unilib
+unilib_substance_hydrogen_sample.png
+    Original to unilib
+unilib_substance_iodine_sample.png
+    Original to unilib
+unilib_substance_krypton_sample.png
+    Original to unilib
+unilib_substance_neon_sample.png
+    Original to unilib
+unilib_substance_nitrogen_sample.png
+    Original to unilib
+unilib_substance_oganesson_sample.png
+    Original to unilib
+unilib_substance_oxygen_sample.png
+    Original to unilib
+unilib_substance_phosphorus_sample.png
+    Original to unilib
+unilib_substance_radon_sample.png
+    Original to unilib
+unilib_substance_selenium_chunk.png
+    Adapted from pfaa, /src/main/resources/assets/chemica/textures/items/crushed.png
+    Media: Artistic-2.0
+unilib_substance_tennessine_sample.png
+    Original to unilib
+unilib_substance_xenon_sample.png
+    Original to unilib
+unilib_tree_lemon_trunk.png
+    Original to unilib
+unilib_tree_lemon_trunk_top.png
+    Original to unilib
+unilib_tree_lemon_wood.png
+    Original to unilib
+unilib_unknown.png
+    Original to unilib
+unilib_unknown_2.png
+    Original to unilib
+unilib_unknown_3.png
+    Original to unilib
+unilib_unknown_4.png
+    Original to unilib
+unilib_unknown_5.png
+    Original to unilib
+
+

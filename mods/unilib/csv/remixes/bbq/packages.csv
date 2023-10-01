@@ -1,0 +1,118 @@
+# "bbq" remix - contains everything from the bbq mod except a few items provided by other mods
+#       (charcoal, molasses and sugar)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# bbq packages
+drink_beer_normal|bbq
+food_bacon|bbq
+food_beef_corned|bbq
+food_beef_jerky|bbq
+food_beef_london_broil|bbq
+food_beef_normal|bbq
+food_beef_ribs_barbecued|bbq
+food_brisket_barbecued|bbq
+food_cheeseburger_bacon|bbq
+food_chicken_barbecued|bbq
+food_chicken_hot_wings|bbq
+food_corn_grilled|bbq
+food_ham|bbq
+food_hamburger|bbq
+food_hotdog|bbq
+food_kebab_lamb|bbq
+food_kebab_veggie|bbq
+food_lamb_leg|bbq
+food_lamb_rack|bbq
+food_mushroom_stuffed|bbq
+food_packet_veggie|bbq
+food_pepper_pickled|bbq
+food_pepper_smoked|bbq
+food_pepper_stuffed|bbq
+food_pizza_grilled|bbq
+food_pork_chop_stuffed|bbq
+food_pork_pulled|bbq
+food_steak_cheese|bbq
+food_steak_pepper|bbq
+food_steak_portobello|bbq
+food_tomato_grilled|bbq
+ingredient_brine|bbq
+ingredient_liquid_smoke|bbq
+ingredient_paprika_smoked|bbq
+ingredient_salt_sea|bbq
+ingredient_sauce_barbecue|bbq
+ingredient_sauce_hot|bbq
+ingredient_sauce_steak|bbq
+ingredient_sauce_tomato|bbq
+ingredient_vinegar|bbq
+ingredient_yeast|bbq
+item_bag_charcoal|bbq
+item_foil_kitchen|bbq
+machine_grill_kettle|bbq
+machine_grill_propane|bbq
+machine_grill_propane_pro|bbq
+machine_grill_smoker|bbq
+material_charcoal_artificial_briquette|bbq
+misc_blueprint_grill_smoker|bbq
+misc_guide_butcher_beef|bbq
+misc_pile_wood|bbq
+misc_propane|bbq
+misc_sawdust|bbq
+misc_smoke_chimney|bbq
+shared_bbq|bbq
+shared_bbq_grill|bbq
+utensil_brush_basting|bbq
+utensil_brush_grill|bbq
+utensil_spatula|bbq
+
+# supporting packages (.depends)
+crop_wheat|farming
+dye_basic|dye bakedclay
+food_bread_ordinary|farming
+fruit_apple|default
+glass_ordinary|default moreblocks vessels
+ingredient_flour_ordinary|farming
+ingredient_molasses|cucina_vegana
+ingredient_sugar_normal|farming
+item_stick_ordinary|default
+material_charcoal_artificial_lump|ethereal
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+mineral_coal|default technic
+mushroom_brown|flowers
+plant_papyrus_ordinary|default mtg_plus
+torch_ordinary|default
+vessel_bottle_glass_empty|thirsty vessels
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+crop_cotton|farming
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_beet_sugar|agriculture
+#crop_kohlrabi|cucina_vegana
+#ingredient_sugar_cane|better_farming
+#mineral_mese|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#tree_apple|default doors moreblocks
+#tree_scorched|ethereal
+#utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)
+#bucket_steel|bucket
+#food_cheese_vegan|farming
+#food_honey_synthetic|xdecor
+#food_pepper|farming
+#ingredient_pepper_ground|farming
+#ingredient_salt_normal|farming
+#produce_corn_normal|farming
+#produce_garlic_normal|farming
+#produce_onion_normal|farming
+#produce_pepper|farming
+#produce_potato_normal|farming
+#produce_tomato_salad|farming

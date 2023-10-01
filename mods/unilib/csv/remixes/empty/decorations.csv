@@ -1,0 +1,4 @@
+# Template decoration table for the "empty" remix
+
+# Deco type|Deco name|Max height|Min height|Biomes|Place on|Spawn by|Num spawn by|Fill ratio|Height max|Flags|Side length
+#simple|default_grass_jungle|Y_MAX|1|default_rainforest|unilib:dirt_ordinary_with_litter_rainforest|||0.1|||80

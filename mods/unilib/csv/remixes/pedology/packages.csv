@@ -1,0 +1,32 @@
+# "pedology" remix - contains everything from the pedology mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# pedology packages
+clay_permeable|pedology
+dirt_peat_permeable_fibric|pedology
+dirt_peat_permeable_hemic|pedology
+dirt_peat_permeable_sapric|pedology
+dirt_silt_permeable_coarse|pedology
+dirt_silt_permeable_fine|pedology
+dirt_silt_permeable_medium|pedology
+gravel_permeable_coarse|pedology
+gravel_permeable_fine|pedology
+gravel_permeable_medium|pedology
+ice_pure|pedology
+ice_white|pedology
+liquid_water_fresh|pedology
+liquid_water_pond|pedology
+sand_permeable_coarse|pedology
+sand_permeable_fine|pedology
+sand_permeable_medium|pedology
+shared_pedology|pedology
+snow_clump|pedology
+snow_compacted|pedology
+snow_firn|pedology
+snow_heavy|pedology
+snow_slushy|pedology
+snow_soft|pedology
+
+# (no supporting packages for this remix)

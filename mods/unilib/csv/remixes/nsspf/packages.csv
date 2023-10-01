@@ -1,0 +1,86 @@
+# "nsspf" remix - contains all mushrooms, fungi and truffles from the "nsspf" (Not So Simple Plants
+#       and Fungi) mod, but their behaviour has been changed in order to drastically improve the
+#       player experience (removing most ABMs)
+# Mushrooms/fungi growing on the ground now behave like minetest_game mushrooms (i.e. they are
+#       spreadable). Other mushrooms/fungi tend to grow on trees, and are not spreadable or
+#       placeable. Truffles can be found growing at the base of some trees, just below the surface.
+#       Spores have not been imported at all
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# nsspf packages
+deco_nsspf_mushroom_amanita_fly|nsspf
+deco_nsspf_mushroom_black_snowbank|nsspf
+deco_nsspf_mushroom_brain|nsspf
+deco_nsspf_mushroom_chanterelle|nsspf
+deco_nsspf_mushroom_common_ink_cap|nsspf
+deco_nsspf_mushroom_death_cap|nsspf
+deco_nsspf_mushroom_devils_bolete|nsspf
+deco_nsspf_mushroom_gold_cap|nsspf
+deco_nsspf_mushroom_larch_bolete|nsspf
+deco_nsspf_mushroom_morel_black|nsspf
+deco_nsspf_mushroom_parasol|nsspf
+deco_nsspf_mushroom_pine_bolete|nsspf
+deco_nsspf_mushroom_pink_snowbank|nsspf
+deco_nsspf_mushroom_porcini|nsspf
+deco_nsspf_mushroom_puffball|nsspf
+deco_nsspf_mushroom_shrimp|nsspf
+deco_nsspf_mushroom_white_snowbank|nsspf
+item_amadou|nsspf
+mushroom_amanita_fly|nsspf
+mushroom_azurea|nsspf
+mushroom_black_snowbank|nsspf
+mushroom_brain|nsspf
+mushroom_chanterelle|nsspf
+mushroom_common_ink_cap|nsspf
+mushroom_death_cap|nsspf
+mushroom_devils_bolete|nsspf
+mushroom_gold_cap|nsspf
+mushroom_hairy|nsspf
+mushroom_larch_bolete|nsspf
+mushroom_parasol|nsspf
+mushroom_morel_black|nsspf
+mushroom_pine_bolete|nsspf
+mushroom_pink_bonnet|nsspf
+mushroom_pink_snowbank|nsspf
+mushroom_porcini|nsspf
+mushroom_puffball|nsspf
+mushroom_reishi|nsspf
+mushroom_shrimp|nsspf
+mushroom_white_snowbank|nsspf
+plant_fungus_beefsteak|nsspf
+plant_fungus_honey|nsspf
+plant_fungus_nightlight|nsspf
+plant_fungus_pingpong_bats|nsspf
+plant_fungus_tinder|nsspf
+plant_tuber_truffle_bianchetto|nsspf
+plant_tuber_truffle_black|nsspf
+plant_tuber_truffle_desert|nsspf
+plant_tuber_truffle_white|nsspf
+shared_nsspf|nsspf
+
+# supporting packages (.depends)
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+fruit_apple|default
+tree_acacia|default doors moreblocks
+tree_apple|default doors moreblocks
+tree_aspen|default doors moreblocks
+tree_jungle|default doors moreblocks
+tree_pine|default doors moreblocks
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#item_book_ordinary|default
+#item_stick_ordinary|default
+#item_sweeper|moreblocks
+#mushroom_brown|flowers
+#mushroom_red|flowers
+#soil_arid|farming
+#soil_ordinary|farming
+#tnt_ordinary|tnt
+#vessel_bottle_glass_empty|thirsty vessels

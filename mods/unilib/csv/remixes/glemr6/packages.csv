@@ -1,0 +1,626 @@
+# "glemr6" remix - contains almost everything from revision 6 of lib_materials/lib_ecology,
+#       (19th Apr 2019, dev branch). Some material of little value has been omitted. Code for
+#       modifying terrain (e.g. producing lakes) has also been omitted
+# The original mods were not suitable for use in survival mode, and the same applies to this remix.
+#       Instead, this remix should be used as the basis for your own remixes. In particular, because
+#       so many items do not actually spawn in the world, you can omit everything that is not
+#       required for biomes and decorations. The section containing ore packages can also be
+#       removed, as it is again not very useful in survival mode
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# glemr6 packages
+# ---------------
+
+base_glem|unilib
+
+# other essential packages
+# ------------------------
+
+bucket_steel|bucket
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+liquid_water_river|default
+soil_arid|farming
+soil_ordinary|farming
+stone_ordinary|default moreblocks technic
+
+# lib_materials packages
+# ----------------------
+
+# (used in custom dirts)
+dirt_custom_glemr6|glemr6
+clay_ordinary|default
+clay_red|valleys_c
+dirt_black|glemr4
+dirt_brown|glemr4
+dirt_clayey|valleys_c
+dirt_coarse|farlands
+dirt_dark|darkage
+dirt_mud_swamp|30biomes
+dirt_ordinary|default farming moreblocks
+dirt_parched|farlands
+dirt_sandy|valleys_c
+dirt_silt_coarse|valleys_c
+dirt_silt_fine|valleys_c
+sand_silt|darkage
+
+# (used in biomes)
+biome_glemr6|glemr6
+#clay_ordinary|default
+dirt_ordinary_with_cover_fungi|farlands
+dirt_ordinary_with_turf_grey|ethereal
+dirt_permafrost_dark|glemr6
+gravel_sandstone_desert|glemr4
+ice_ordinary|default ethereal mtg_plus
+#liquid_lava_ordinary|default
+sand_desert|default farming
+sand_ordinary|default
+sand_silica|glemr6
+sand_silver|default
+sand_white|glemr4
+sand_volcanic_dust|glemr4
+snow_ordinary|default ethereal mtg_plus
+stone_andesite_grey|glemr4
+stone_basalt_brown|material mineral
+stone_basalt_dark|darkage
+stone_bluestone|material mineral
+stone_brownstone_dark|glemr4
+stone_claystone_red|pfaa
+stone_desert|default moreblocks
+stone_diorite_dark|pfaa
+stone_gabbro_red|pfaa
+stone_gneiss_brown|pfaa
+stone_granite_dark|technic_worldgen
+stone_granite_pink|farlands
+stone_granite_white|farlands
+stone_greenstone|material mineral
+stone_limestone_white|farlands
+stone_mudstone|pfaa
+#stone_ordinary|default moreblocks technic
+stone_sandstone_brown|glemr4
+stone_sandstone_desert|default mtg_plus
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_silver|default mtg_plus
+stone_sandstone_white|glemr4
+stone_savanna|farlands
+stone_schist_grey|darkage
+
+# (used in ores; can be commented out, if ores are not required)
+ore_glemr6|glemr6
+dirt_mud_wet|glemr6
+gravel_ordinary|default mtg_plus
+#liquid_water_ordinary|default
+sand_quicksand|ethereal
+stone_chalk_white|darkage
+stone_desert_with_iron|darkage
+stone_gneiss_white|darkage
+stone_marble_grey|darkage
+stone_ordinary_with_coal|default
+stone_ordinary_with_copper|default
+stone_ordinary_with_diamond|default
+stone_ordinary_with_gold|default
+stone_ordinary_with_iron|default
+stone_ordinary_with_lead|technic_worldgen
+stone_ordinary_with_mese|default
+stone_ordinary_with_quartz_white|underch
+stone_ordinary_with_silver|moreores
+stone_pegmatite_white|pfaa
+stone_pegmatite_white_with_cassiterite|rocks
+stone_sandstone_old_red|darkage
+stone_serpentine|darkage
+stone_shale_brown|darkage
+stone_skarn|pfaa
+stone_skarn_with_chalcopyrite|rocks
+stone_skarn_with_galena|rocks
+stone_skarn_with_magnetite|rocks
+stone_skarn_with_malachite|rocks
+stone_skarn_with_sphalerite|rocks
+stone_slate_grey|darkage
+stone_tuff|darkage
+stone_tuff_rhyolitic|darkage
+
+# (NOT used in ores any more)
+#   sand_undersea|ethereal
+
+# (other lib_materials items not used in biomes, decorations or ores; can be commented out, if not
+#       required)
+brick_ordinary|default
+clay_baked_basic|bakedclay
+#clay_ordinary|default
+clay_ordinary_hardened|xdecor
+clay_vermiculite|pfaa
+decor_block_ice_packed|xdecor
+decor_block_metal_rusty|columnia
+decor_block_tar|moreblocks
+decor_bricks_runestone|xdecor
+decor_bricks_stone_circle|moreblocks
+decor_bricks_stone_coal|moreblocks
+decor_bricks_stone_grey|moreblocks
+decor_rockwall_stone_desert|unilib
+decor_rockwall_stone_desert_dark|glemr6
+decor_rockwall_stone_ordinary|glemr4
+decor_rockwall_stone_ordinary_dark|glemr6
+decor_stone_castle_dungeon|castle_masonry
+decor_paving_normal|castle_masonry
+decor_stone_castle_rubble|castle_masonry
+decor_paving_slate|glemr6
+decor_stone_castle_wall|castle_masonry
+decor_stone_coal|moreblocks
+decor_stone_disintegrating|farlands
+decor_stone_iron|moreblocks
+decor_stone_plaster|darkage
+decor_stone_tiles|farlands
+decor_tiled_coal|xdecor
+decor_tiled_coal_checker|moreblocks
+decor_tiled_iron_checker|moreblocks
+decor_tiled_stone|moreblocks
+decor_tiled_stone_desert|xdecor
+decor_tiled_stone_split|moreblocks
+dirt_dried|ethereal
+dirt_mud_dry|darkage
+#dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_leafy|farlands
+dirt_ordinary_with_turf_bamboo|ethereal
+dirt_ordinary_with_turf_cold|ethereal
+dirt_ordinary_with_turf_crystal|ethereal
+dirt_ordinary_with_turf_fiery|ethereal
+dirt_ordinary_with_turf_forest|farlands
+#dirt_ordinary_with_turf_grey|ethereal
+dirt_ordinary_with_turf_grove|ethereal
+dirt_ordinary_with_turf_mushroom|ethereal
+dirt_ordinary_with_turf_prairie|ethereal
+dirt_ordinary_with_turf_rainforest|ethereal
+dirt_ordinary_with_turf_swamp|farlands
+glass_clean_rhombus|darkage
+glass_clean_round|darkage
+glass_clean_square|darkage
+#ice_ordinary|default ethereal mtg_plus
+ice_thin|caverealms
+light_lantern_glass_stained|nbea
+liquid_grease_normal|steampunk
+liquid_mud_normal|forest
+liquid_oil_normal|forest
+liquid_water_murky|glemr6
+#liquid_water_ordinary|default
+#liquid_water_river|default
+liquid_water_river_muddy|australia
+material_stucco|farlands
+metal_brass|basic_materials technic
+metal_bronze|default technic
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_iron_cast|technic_worldgen technic
+metal_iron_wrought|technic_worldgen
+metal_lead|technic_worldgen technic
+metal_silver|moreores technic
+metal_steel|default technic
+metal_steel_carbon|technic_worldgen technic
+metal_steel_stainless|technic_worldgen technic
+metal_tin|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+mineral_quartz_white|underch
+misc_adobe|darkage
+misc_frame_steel_simple|glemr6
+misc_frame_steel_thin|glemr6
+misc_frame_wood_ornate|nbea
+misc_frame_wood_rose|glemr6
+misc_frame_wood_rustic|darkage
+misc_frame_wood_screen|glemr6
+misc_frame_wood_thin|glemr6
+sand_ordinary_with_rocks|valleys_c
+#sand_silt|darkage
+shared_tsm_pyramids|tsm_pyramids
+#snow_ordinary|default ethereal mtg_plus
+#stone_basalt_dark|darkage
+stone_basalt_red|pfaa
+#stone_bluestone|material mineral
+#stone_chalk_white|darkage
+stone_conglomerate_rough|pfaa
+#stone_desert|default moreblocks
+stone_desert_with_cracks|glemr4
+stone_desert_with_dirt|glemr6
+stone_desert_with_sand|glemr4
+#stone_gneiss_white|darkage
+stone_granite_black|decoblocks
+stone_granite_brown|decoblocks
+#stone_granite_pink|farlands
+#stone_granite_white|farlands
+stone_granite_pale|pfaa
+#stone_greenstone|material mineral
+stone_laterite|pfaa
+stone_limestone_red|pfaa
+stone_marble_brown|technic_worldgen
+#stone_marble_grey|darkage
+stone_marble_white|farlands
+stone_obsidian|default moreblocks
+#stone_ordinary|default moreblocks technic
+stone_ordinary_with_cover_seagrass|farlands
+stone_ordinary_with_dirt|glemr4
+stone_ordinary_with_tin|default
+#stone_rhyolite_pale|pfaa
+#stone_sandstone_desert|default mtg_plus
+stone_sandstone_desert_trap|tsm_pyramids
+stone_sandstone_desert_with_engraving|tsm_pyramids
+#stone_sandstone_old_red|darkage
+#stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_ordinary_with_mural|farlands
+stone_sandstone_ornate|farlands
+#stone_sandstone_silver|default mtg_plus
+#stone_sandstone_white|glemr4
+#stone_savanna|farlands
+stone_savanna_with_coal|farlands
+stone_savanna_with_iron|farlands
+stone_serpentinite_pale|decoblocks
+stone_skarn_with_magnesite|rocks
+stone_slate_black|pfaa
+#stone_slate_grey|darkage
+stone_travertine|decoblocks
+#stone_tuff|darkage
+#stone_tuff_rhyolitic|darkage
+stone_whitestone|material mineral
+
+# (NOT used as other items any more)
+#   dirt_ordinary_with_turf_mushroom|ethereal
+#   glass_clean|moreblocks
+#   glass_coal|moreblocks
+#   glass_iron|moreblocks
+
+# lib_ecology packages
+# ----------------------
+
+# (used in decorations)
+deco_glemr6|glemr6
+
+# (regular trees/bushes used as decorations)
+fruit_apple|default
+fruit_apple_golden|ethereal
+fruit_banana|ethereal
+fruit_coconut|ethereal
+fruit_date|moretrees
+fruit_orange|ethereal
+ingredient_acorn|moretrees
+ingredient_cone_cedar|moretrees
+ingredient_cone_spruce|moretrees
+ingredient_cone_spruce_mature|glemr4
+tree_acacia|default doors moreblocks
+tree_apple|default doors moreblocks
+tree_apple_mature|moretrees
+tree_ash|glemr4
+tree_aspen|default doors moreblocks
+tree_bamboo|ethereal
+tree_bamboo_exotic|farlands
+tree_banana|ethereal
+tree_banana_exposed|glemr4
+tree_baobab|farlands
+tree_beech_mature|glemr4
+tree_birch|ethereal
+tree_birch_small|glemr4
+tree_cedar|moretrees
+tree_cherry_blossom|glemr4
+tree_chestnut_exotic|glemr4
+tree_cypress|glemr4
+tree_deciduous_mature|glemr4
+tree_deciduous_normal|glemr4
+tree_dry|glemr4
+tree_eucalyptus|glemr4
+tree_fern|ferns
+tree_fern_giant|ferns
+tree_fern_yellow|glemr4
+tree_fir|30biomes
+tree_fir_douglas_coast|glemr4
+tree_frost|ethereal
+tree_healing|ethereal
+tree_jungle|default doors moreblocks
+tree_jungle_ancient|glemr4
+tree_jungle_exotic|farlands
+tree_jungle_mature|glemr4
+tree_ipe_yellow|farlands
+tree_mangrove_green|glemr4
+tree_maple_sugar|glemr4
+tree_oak|moretrees
+tree_orange|ethereal
+tree_palm|ethereal
+tree_palm_date|moretrees
+tree_palm_exotic|farlands
+#   tree_palm_exposed|moretrees
+tree_palm_jungle|glemr4
+tree_palm_plain|glemr4
+tree_pine|default doors moreblocks
+tree_pine_ancient|glemr4
+tree_pine_exposed|glemr4
+tree_poplar|moretrees
+tree_redwood|ethereal
+tree_rubber|moretrees technic_worldgen
+tree_scorched|ethereal
+tree_sequoia|moretrees
+tree_spruce|moretrees
+tree_spruce_mature|glemr4
+tree_willow_ancient|glemr4
+tree_willow_exotic|farlands
+tree_willow_large|moretrees
+tree_willow_weeping|ethereal
+
+# (plants and other items used as decorations)
+coral_block_brown|default
+coral_block_orange|default
+coral_block_skeleton|default
+coral_brain|australia
+coral_rooted_blue|farlands
+coral_rooted_blue_glow|ethereal
+coral_rooted_cyan|default
+coral_rooted_green|default
+coral_rooted_green_glow|ethereal
+coral_rooted_orange|farlands
+coral_rooted_orange_glow|ethereal
+coral_rooted_pink|default
+coral_rooted_pink_big|farlands
+coral_rooted_pink_glow|ethereal
+coral_rooted_red|farlands
+fern_broad_leaf|farlands
+fern_broad_leaf_young|glemr4
+fern_christmas|moreplants
+fern_dicksonia|farlands
+fern_horsetail|ferns
+fern_lady|farlands
+fern_lady_small|glemr4
+fern_ordinary|default
+flower_daisy_oxeye|farlands
+flower_delphinium_blue|bakedclay
+flower_lazarus_bell|bakedclay
+flower_lily_calla|valleys_c
+flower_orchid|valleys_c
+flower_petunia_blue|farlands
+flower_petunia_pink|farlands
+flower_petunia_white|farlands
+flower_reed_mannagrass|bakedclay
+flower_thistle|bakedclay
+flower_waterlily_exotic_pink|farlands
+flower_waterlily_exotic_yellow|farlands
+grass_bamboo|farlands
+grass_deciduous|farlands
+grass_dry|default
+grass_frozen|farlands
+grass_giant|farlands
+grass_jungle|default
+grass_marram|default
+grass_ordinary|default
+grass_rainforest|farlands
+grass_seagrass|farlands
+grass_swamp|farlands
+grass_tall|farlands
+misc_patch_grass|dryplants
+plant_aloe_vera|farlands
+plant_anemone|farlands
+plant_arrow_arum|valleys_c
+plant_bulrush_mature|moreplants
+plant_cactus_ordinary|default
+plant_cactus_purple|glemr4
+plant_cactus_purple_small|glemr4
+plant_cactus_small|farlands
+plant_cactus_thorny|glemr4
+plant_cactus_tiny|moreplants
+plant_cattail_normal|farlands
+plant_enigma|moreplants
+plant_juncus|dryplants
+plant_kelp_green|farlands
+plant_kelp_yellow|glemr6
+plant_nettle_carduus|nettle
+plant_nettle_impatiens|nettle
+plant_nettle_scotch_broom|nettle
+plant_oat_wild|farlands
+plant_palmetto_saw|glemr4
+plant_papyrus_ordinary|default mtg_plus
+plant_seaweed_undersea|ethereal
+plant_shrub_banana|farlands
+plant_shrub_banana_large|glemr4
+plant_shrub_forest_deciduous|farlands
+plant_shrub_hog_peanut|farlands
+plant_shrub_snowy|ethereal
+plant_shrub_taiga|moreplants
+plant_weed_stone|moreplants
+produce_pineapple|farming
+tree_young_jungle|farlands
+tree_young_palm_desert|glemr4
+
+# (other lib_ecology items not used in biomes, decorations or ores; can be commented out, if not
+#       required)
+bush_blueberry_ordinary|default
+bush_ordinary|default
+candle_basic|ethereal
+coral_pillar_blue|glemr6
+coral_pillar_brown|glemr6
+coral_pillar_cyan|glemr6
+coral_pillar_green|glemr6
+coral_pillar_orange|glemr6
+coral_pillar_purple|glemr6
+coral_pillar_red|glemr6
+coral_pillar_yellow|glemr6
+fern_big|moreplants
+fern_boston|ethereal
+fern_horsetail_broad_leaf|glemr4
+fern_mangrove|australia
+fern_ordinary_tuber|ferns
+fern_ostrich|moreplants
+fern_spike|moreplants
+fire_permanent|fire underch
+flower_allium_purple|farlands
+flower_bird_of_paradise|valleys_c
+flower_canna|moreplants
+flower_cave_pink|moreplants
+flower_chrysanthemum_green|flowers
+flower_clematis_rebecca|moreplants
+flower_curly|moreplants
+flower_dandelion_white|flowers
+flower_dandelion_yellow|flowers
+flower_fire|ethereal
+flower_foxglove_pink|farlands
+flower_foxglove_purple|farlands
+flower_gerbera|valleys_c
+flower_geranium_blue|flowers
+flower_ground|farlands
+flower_hibiscus|valleys_c
+flower_jungle|moreplants
+flower_lantana|farlands
+flower_lavender|farlands
+flower_lily_fire|moreplants
+flower_lily_flame|farlands
+flower_lobelia|farlands
+flower_lungwort|moreplants
+flower_moonflower|moreplants
+flower_pansy_blue|farlands
+flower_pansy_purple|farlands
+flower_rose_frozen|farlands
+flower_rose_red|flowers
+flower_spike_blue|moreplants
+flower_tulip_black|flowers
+flower_tulip_orange|flowers
+flower_viola_purple|flowers
+food_bar_date_nut|moretrees
+food_bread_banana|ethereal
+food_cake_date_nut|moretrees
+food_fiddlehead|ferns
+food_fish_cooked|ethereal
+food_milk_coconut|moretrees
+food_muffin_acorn|moretrees
+food_nuts_cedar|moretrees
+food_nuts_fir_douglas|moretrees
+food_nuts_spruce|moretrees
+food_pulp_cactus|ethereal
+food_sashimi|ethereal
+food_snack_date_nut|moretrees
+food_soup_mushroom|ethereal
+food_stew_hearty|ethereal
+fruit_blueberry_ordinary|default
+#fruit_coconut|ethereal
+fruit_curly|moreplants
+#fruit_date|moretrees
+grass_dead|farlands
+ingredient_batter_date_nut|moretrees
+ingredient_batter_muffin_acorn|moretrees
+ingredient_cone_fir_douglas|moretrees
+ingredient_dough_banana|ethereal
+ingredient_fish_basic|ethereal
+item_rod_fishing|ethereal
+item_stick_ordinary|default
+item_worm_juicy|ethereal
+ladder_stone|ethereal
+material_charcoal_artificial_lump|ethereal
+material_wax_palm|ethereal
+mineral_crystallinum|ethereal
+mineral_salt|caverealms
+misc_leaves_autumn|glemr4
+misc_pile_logs|glemr4
+misc_stalactite_small|valleys_c
+misc_stalagmite_small|valleys_c
+mushroom_blotchy|glemr4
+mushroom_brown|flowers
+mushroom_cave_blue|moreplants
+mushroom_fire|moreplants
+mushroom_pink|moreplants
+mushroom_red|flowers
+mushroom_white_glowing|farlands
+plant_bamboo_small|farlands
+plant_bulrush|dryplants
+plant_clover|moreplants
+plant_fungus_glowing_yellow|moreplants
+plant_fungus_ground|moreplants
+plant_nettle_cleavers|nettle
+plant_nettle_hogweed_giant|nettle
+plant_nettle_normal|nettle
+plant_reedmace|dryplants
+plant_shrub_crystal|ethereal
+plant_shrub_dry|default
+plant_shrub_dry_fiery|ethereal
+plant_shrub_scorched|glemr4
+plant_weed_bindweed|farlands
+plant_weed_dead|moreplants
+plant_weed_eye|moreplants
+plant_weed_normal|moreplants
+plant_weed_umbrella|moreplants
+produce_onion_wild|ethereal
+produce_strawberry_normal|ethereal
+shared_coral_pillar|glemr6
+stone_ordinary_hot|caverealms
+tree_mushroom_mixed|farlands glemr11
+tree_mushroom_red|ethereal
+utensil_bowl_wooden|farming thirsty
+vine_jungle|farlands
+vine_jungle_knotted|glemr4
+vine_normal|ethereal
+vine_string_light|ethereal
+
+# (NOT used as plants or other items any more)
+flower_waterlily_ordinary|flowers
+item_bone|bonemeal
+item_fertiliser_bonemeal|bonemeal
+plant_cactus_exotic|farlands
+sand_undersea|ethereal
+stone_obsidian_hot|caverealms
+stone_ordinary_with_fungus_glowing_purple|valleys_c
+
+# supporting packages (auto-generated)
+# ------------------------------------
+
+# supporting packages (.depends)
+crop_cotton|farming
+crop_wheat|farming
+decor_bricks_stone_chalked|darkage
+dirt_dry|default
+dye_basic|dye bakedclay
+glass_ordinary|default moreblocks vessels
+item_string_ordinary|farming
+mineral_cassiterite|real_minerals
+mineral_chalcopyrite|unilib
+mineral_galena|real_minerals
+mineral_magnesite|unilib
+mineral_magnetite|real_minerals
+mineral_malachite|real_minerals
+mineral_sphalerite|real_minerals
+misc_sponge|ethereal
+misc_straw_ordinary|farming darkage
+plant_fungus_glowing_purple|caverealms
+roof_slate_normal|cottages
+shared_moretrees|moretrees
+soil_sand_desert|farming
+utensil_board_cutting|farming
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+clay_brown|underch
+ingredient_flour_ordinary|farming
+
+# supporting packages (.optional)
+#container_chest_ordinary|default
+#crop_barley|farming
+#crop_oat|farming
+#crop_rice_white|farming
+#crop_rye|farming
+#fire_ordinary|fire
+#fruit_cactus_exotic|farlands
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#item_book_ordinary|default
+#item_paper_ordinary|default moreblocks
+#item_sweeper|moreblocks
+#metal_chromium|technic_worldgen technic
+#metal_magnesium|unilib
+#metal_zinc|technic_worldgen technic
+#misc_blueprint_column|columnia
+#misc_petals|sickles
+#moss_green|sickles
+#sand_brown|unilib
+#sand_red|unilib
+#shared_darkage|darkage
+#torch_ordinary|default
+#vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.suggested)
+#produce_bean_green|farming
+#produce_onion_normal|farming
+#tool_pick_wood|default

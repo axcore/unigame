@@ -1,0 +1,64 @@
+# "glass_stained" remix - contains everything from the fancy stained glass mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# glass_stained packages
+decor_sheet_steel_bar|glass_stained
+decor_sheet_steel_spiked|glass_stained
+glass_sheet_obsidian|glass_stained
+glass_sheet_ordinary|glass_stained
+glass_stained_diamond_blue|glass_stained
+glass_stained_diamond_green|glass_stained
+glass_stained_gem_blue|glass_stained
+glass_stained_gem_red_blue|glass_stained
+glass_stained_jewel_blue|glass_stained
+glass_stained_jewel_red|glass_stained
+glass_stained_mosaic_green|glass_stained
+glass_stained_mosaic_red|glass_stained
+glass_stained_mosaic_yellow|glass_stained
+glass_stained_mosaic_purple|glass_stained
+glass_stained_porthole_blue|glass_stained
+glass_stained_porthole_green|glass_stained
+glass_stained_rhombus_blue|glass_stained
+glass_stained_rhombus_green_blue|glass_stained
+glass_stained_rhombus_green_yellow|glass_stained
+glass_stained_rhombus_red_blue|glass_stained
+glass_stained_square_blue|glass_stained
+glass_stained_square_green|glass_stained
+pane_steel_spiked|glass_stained
+shared_glass_stained|glass_stained
+
+# unilib packages
+glass_sheet_clean|unilib
+glass_sheet_glow|unilib
+pane_glass_clean|unilib
+pane_glass_glow|unilib
+
+# glass_stained packages (duplicating content from xpanes)
+pane_glass_ordinary|xpanes
+pane_glass_obsidian|xpanes
+
+# supporting packages (.depends)
+dye_basic|dye bakedclay
+glass_clean|moreblocks
+glass_glow|moreblocks
+glass_obsidian|default moreblocks
+glass_ordinary|default moreblocks vessels
+grass_jungle|default
+item_stick_ordinary|default
+item_sweeper|moreblocks
+metal_iron|default
+metal_steel|default technic
+mineral_coal|default technic
+mineral_mese|default
+pane_steel_bar|xpanes
+stone_obsidian|default moreblocks
+torch_ordinary|default
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_cotton|farming
+#crop_rice_white|farming
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default

@@ -1,0 +1,25 @@
+# "30biomes" remix - contains only the fir tree and mud from 30biomes
+# The _biomes.csv in this remix is not loaded, by default. See the notes in that file
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# 30biomes packages
+deco_30biomes_tree_fir|30biomes
+deco_30biomes_tree_fir_log|30biomes
+dirt_mud_swamp|30biomes
+tree_fir|30biomes
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+mushroom_red|flowers
+
+# supporting packages (.at_least_one)
+biome_default_forest_coniferous|default
+biome_default_taiga|default
+
+# supporting packages (.optional)
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#soil_ordinary|farming

@@ -1,0 +1,178 @@
+# "playme" remix
+# A collection of remixes and packages, ready for use in a typical Minetest game
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# ================================================================================================
+# CORE STUFF
+
+# Everything from minetest_game except biomes, decorations and ores (and the base package)
+
+@mtgame_mini
+
+# Above-ground biomes
+# The GLEM packages (based on lib_materials/lib_ecology/GAL) provide a large selection of
+#       naturalistic biomes and decorations, and additional ores
+# Choose only one of these three, commenting out the other two
+
+# @glemr4
+# @glemr6
+@glemr11
+
+# Below-ground biomes
+# Choose only one of these four, commenting out the other three
+
+# @mtgame_ores
+# @underch
+# @underch_jit
+@underch_jit_unilib
+
+# Underwater "biomes". Note that @xoceans creates minetest_game biomes, so it has been commented
+#       out for the moment; uncomment it, if you like
+
+@decorations_sea
+# @xocean
+
+# If minetest_game biomes are enabled, then we can add most of the farming remixes
+# If you like, uncomment @mtgame_biomes, and then any of the others in this list
+
+# @mtgame_biomes
+# @beautiflowers
+# @better_farming
+# @cropocalypse
+# @cucina_vegana
+# @farming_redo
+
+# ================================================================================================
+# CRAFTING STUFF
+
+@abristuff
+@bakedclay
+@basic_materials
+@bonemeal
+@carvings
+@castle
+@cottages
+@darkage
+@earthbuild
+@glass_stained
+@hook
+@moreblocks
+@morebricks
+@morelights
+@moretrapdoors
+@mtg_plus
+@offend_flags
+@orienteering
+@pkarcs
+@ropes
+@towercrane
+@xdecor
+
+# ================================================================================================
+# EATING/DRINKING STUFF
+
+@bbq
+@drinks
+@sickles
+@tea
+
+# ================================================================================================
+# MISC PACKAGES (from the "misc" remix)
+
+# agriculture packages
+crop_beet_sugar|agriculture
+misc_scarecrow_straw|agriculture
+
+# anvil packages
+machine_anvil_fancy|anvil
+shared_anvil|anvil
+tool_hammer_blacksmith|anvil cottages
+
+# beacons packages
+gadget_beacon_basic|beacons
+
+# bread packages
+food_bread_pitta|bread
+food_bread_wholegrain_carrot|bread
+ingredient_dough_pitta|bread
+ingredient_dough_wholegrain_carrot|bread
+
+# bucket_wooden packages
+bucket_wood|bucket_wooden
+override_bucket_wooden|bucket_wooden
+
+# carpet packages
+carpet_basic|carpet
+
+# colored_beds packages
+bed_ordinary_quilt|colored_beds
+bed_fancy_quilt|colored_beds
+
+# clock/compass packages (various mods)
+decor_block_compass|compass
+item_compass_death|death_compass
+item_compass_magnetic|realcompass
+item_compass_origin|nextgen_compass
+item_compass_spawn|nextgen_compass
+item_watch_pocket|24hr_clock
+
+# fachwerk/plaster packages
+decor_block_plaster|plaster
+decor_frame_timber_basic|fachwerk
+decor_frame_timber_brick|fachwerk
+decor_frame_timber_clay|fachwerk
+decor_frame_timber_glass|fachwerk
+decor_frame_timber_glass_tinted|fachwerk
+decor_frame_timber_wool|fachwerk
+material_lime_crushed|aotearoa plaster
+shared_fachwerk|fachwerk
+
+# hangglider packages
+item_hangglider|hangglider
+
+# labels/roads packages
+item_cartridge_ink_extra|offend_flags labels
+
+# ldm32 packages
+machine_meter_distance_short|ldm32
+machine_meter_distance_long|ldm32
+machine_meter_distance_medium|ldm32
+machine_meter_surveyor_long|ldm32
+machine_meter_surveyor_medium|ldm32
+machine_meter_surveyor_short|ldm32
+shared_ldm32|ldm32
+
+# minimap_radar packages
+item_kit_radar|minimap_radar
+
+# morelamps packages
+light_post_mithril|default morelamps
+light_block_mithril|default morelamps
+
+# nyancat packages
+misc_nyancat|nyancat
+
+# real_torch packages
+item_match_ordinary|real_torch
+torch_unlit|real_torch
+
+# replacer packages
+item_inspector|replacer
+item_replacer|replacer
+
+# simple_furniture packages
+furniture_basic|simple_furniture
+
+# sounding_line packages
+item_line_sounding|sounding_line
+
+# stripped_tree packages
+item_bark_tree|stripped_tree
+item_chisel_tree|stripped_tree
+machine_chiselling|stripped_tree
+
+# twchests packages
+container_chest_bottomless|twchests
+container_chest_compact|twchests

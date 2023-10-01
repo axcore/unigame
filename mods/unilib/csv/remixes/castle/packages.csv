@@ -1,0 +1,96 @@
+# "castle" remix - contains everything in the castle modpack except the mods "anvil",
+#       "castle_weapons", "crafting_bench" and "ropes", from which nothing has been imported (in
+#       the case of "ropes", material has imported from the standalone mod with the same name)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# castle_farming packages
+misc_hide_animal|castle_farming
+misc_straw_ordinary_bound|castle_farming
+misc_straw_ordinary_dummy|castle_farming
+
+# castle_gates packages
+door_steel_dungeon|castle_gates
+door_wood_oak_heavy|castle_gates
+gateway_portcullis_basic|castle_gates
+gateway_slot_basic|castle_gates
+gateway_slot_extra|castle_gates
+gateway_wood_basic|castle_gates
+pane_steel_dungeon|castle_gates
+shared_castle_gates|castle_gates
+
+# castle_lighting packages
+light_brazier_floor|castle_lighting
+light_brazier_pillar|castle_lighting
+light_chandelier_castle|castle_lighting
+light_lantern_castle|castle_lighting
+shared_castle_lighting|castle_lighting
+
+# castle_masonry packages
+decor_stone_castle_corner|castle_masonry
+decor_stone_castle_dungeon|castle_masonry
+decor_paving_normal|castle_masonry
+decor_stone_castle_rubble|castle_masonry
+decor_stone_castle_wall|castle_masonry
+roof_slate_castle|castle_masonry
+
+# castle_shields packages
+item_misc_shield_mounted|castle_shields
+shared_castle_shields|castle_shields
+
+# castle_storage packages
+container_box_ironbound|castle_storage
+container_box_storage|castle_storage
+
+# castle_tapestries packages
+misc_tapestry|castle_tapestries
+
+# orbs_of_time packages
+staff_time|orbs_of_time
+
+# supporting packages (.depends)
+crop_cotton|farming
+crop_wheat|farming
+decor_block_tar|moreblocks
+dye_basic|dye bakedclay
+fire_permanent|fire underch
+glass_ordinary|default moreblocks vessels
+gravel_ordinary|default mtg_plus
+item_stick_ordinary|default
+metal_iron|default
+metal_steel|default technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+misc_straw_ordinary|farming darkage
+stone_desert|default moreblocks
+stone_obsidian|default moreblocks
+stone_ordinary|default moreblocks technic
+stone_sandstone_ordinary|default moreblocks mtg_plus
+torch_ordinary|default
+tree_pine|default doors moreblocks
+wool_basic|wool
+
+# supporting packages (.at_least_one)
+rope_mining|ropes
+tree_apple|default doors moreblocks
+tree_oak|moretrees
+tree_oak_mature|oak
+
+# supporting packages (.optional)
+#brick_ordinary|default
+#bush_blueberry_ordinary|default
+#fire_ordinary|fire
+#grass_jungle|default
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#ice_ordinary|default ethereal mtg_plus
+#metal_gold|default technic
+#moss_green|sickles
+#mushroom_red|flowers
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#sand_ordinary|default
+#snow_ordinary|default ethereal mtg_plus

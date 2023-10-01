@@ -1,0 +1,237 @@
+# "default" remix - contains almost everything from minetest_game/default
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Base packages
+base_default|unilib
+# Biomes
+biome_default_desert|default
+biome_default_desert_cold|default
+biome_default_desert_sandstone|default
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_grassland_snowy|default
+biome_default_icesheet|default
+biome_default_rainforest|default
+biome_default_savanna|default
+biome_default_taiga|default
+biome_default_tundra|default
+# Boats
+boat_simple|boats
+# Bricks
+brick_ordinary|default
+# Bushes
+bush_acacia|default
+bush_blueberry_ordinary|default
+bush_ordinary|default
+bush_pine|default
+# Clay
+clay_ordinary|default
+# Containers
+container_chest_ordinary|default
+# Coral
+coral_block_brown|default
+coral_block_orange|default
+coral_block_skeleton|default
+coral_rooted_cyan|default
+coral_rooted_green|default
+coral_rooted_pink|default
+# Decorations
+# N.B. deco_mtgame_dirt_dry must come before all other savanna decorations
+deco_default_dirt_dry|default
+# For everything else, the order is not important
+deco_default_bush_ordinary|default
+deco_default_bush_blueberry_ordinary|default
+deco_default_bush_acacia|default
+deco_default_bush_pine|default
+deco_default_coral_mixed|default
+deco_default_dirt_permafrost_with_moss|default
+deco_default_fern_ordinary|default
+deco_default_grass_dry|default
+deco_default_grass_jungle|default
+deco_default_grass_marram|default
+deco_default_grass_ordinary|default
+deco_default_plant_cactus_ordinary|default
+deco_default_plant_kelp_ordinary|default
+deco_default_plant_papyrus_ordinary|default
+deco_default_plant_shrub_dry|default
+deco_default_snow_ordinary|default
+deco_default_tree_acacia|default
+deco_default_tree_acacia_log|default
+deco_default_tree_apple|default
+deco_default_tree_apple_log|default
+deco_default_tree_aspen|default
+deco_default_tree_aspen_log|default
+deco_default_tree_jungle|default
+deco_default_tree_jungle_log|default
+deco_default_tree_pine|default
+deco_default_tree_pine_log|default
+# Dirt
+dirt_dry|default
+dirt_ordinary|default farming moreblocks
+dirt_permafrost|default
+# Ferns
+fern_ordinary|default
+# Fruit
+fruit_apple|default
+fruit_blueberry_ordinary|default
+# Furniture
+furniture_shelf_bookshelf|default
+furniture_shelf_vessel|vessels
+# Glass
+glass_obsidian|default moreblocks
+glass_ordinary|default moreblocks vessels
+# Grass
+grass_dry|default
+grass_jungle|default
+grass_marram|default
+grass_ordinary|default
+# Gravel
+gravel_ordinary|default mtg_plus
+# Ice
+ice_ordinary|default ethereal mtg_plus
+# Items
+item_book_ordinary|default
+item_key_ordinary|default
+item_key_skeleton|default
+item_paper_ordinary|default moreblocks
+item_stick_ordinary|default
+# Ladders
+ladder_steel|default
+ladder_wood_ordinary|default
+# Lights
+light_block_mese|default
+light_post_mese|default
+# Liquids
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+liquid_water_river|default
+# Dungeon loot
+loot_default|default
+# Machines
+machine_furnace_ordinary|default aotearoa
+# Metals
+metal_bronze|default technic
+metal_copper|default moreblocks technic
+metal_gold|default technic
+metal_iron|default
+metal_steel|default technic
+metal_tin|default technic
+# Minerals
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_flint|default fire mtg_plus
+mineral_mese|default
+# Misc
+misc_cloud_ordinary|default
+# Optional packages for remixes
+opt_default|unilib
+# Ore distributions
+ore_default_clay_ordinary|default
+ore_default_dirt_ordinary|default
+ore_default_gravel_ordinary|default
+ore_default_mineral_mese_block|default
+ore_default_sand_silver|default
+ore_default_stone_ordinary_with_coal|default
+ore_default_stone_ordinary_with_copper|default
+ore_default_stone_ordinary_with_diamond|default
+ore_default_stone_ordinary_with_gold|default
+ore_default_stone_ordinary_with_iron|default
+ore_default_stone_ordinary_with_mese|default
+ore_default_stone_ordinary_with_tin|default
+ore_default_stone_sandstone_desert|default
+ore_default_stone_sandstone_ordinary|default
+ore_default_stone_sandstone_silver|default
+# Plants
+plant_cactus_ordinary|default
+plant_kelp_ordinary|default
+plant_papyrus_ordinary|default mtg_plus
+plant_shrub_dry|default
+# Sand
+sand_desert_nosoil|default
+sand_ordinary|default
+sand_silver|default
+# Shared functions
+shared_default_chest|unilib
+shared_default_furnace|default
+# Signs
+sign_wall_wood|default
+sign_wall_steel|default
+# Snow
+snow_ordinary|default ethereal mtg_plus
+# Stone
+stone_desert|default moreblocks
+stone_obsidian|default moreblocks
+stone_ordinary|default moreblocks technic
+stone_ordinary_with_coal|default
+stone_ordinary_with_copper|default
+stone_ordinary_with_diamond|default
+stone_ordinary_with_gold|default
+stone_ordinary_with_iron|default
+stone_ordinary_with_mese|default
+stone_ordinary_with_tin|default
+stone_sandstone_desert|default mtg_plus
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_silver|default mtg_plus
+# Tools
+tool_axe_bronze|default
+tool_axe_diamond|default
+tool_axe_mese|default
+tool_axe_steel|default
+tool_axe_stone|default aotearoa
+tool_axe_wood|default
+tool_pick_bronze|default
+tool_pick_diamond|default
+tool_pick_mese|default
+tool_pick_steel|default
+tool_pick_stone|default
+tool_pick_wood|default
+tool_shovel_bronze|default
+tool_shovel_diamond|default
+tool_shovel_mese|default
+tool_shovel_steel|default
+tool_shovel_stone|default
+tool_shovel_wood|default
+tool_sword_bronze|default
+tool_sword_diamond|default
+tool_sword_mese|default
+tool_sword_steel|default
+tool_sword_stone|default
+tool_sword_wood|default
+# Torches
+torch_ordinary|default
+# Trees
+tree_acacia|default doors moreblocks
+tree_apple|default doors moreblocks
+tree_aspen|default doors moreblocks
+tree_jungle|default doors moreblocks
+tree_pine|default doors moreblocks
+
+# supporting packages (.depends)
+mushroom_brown|flowers
+mushroom_red|flowers
+sand_desert|default farming
+soil_sand_desert|farming
+
+# supporting packages (.optional)
+#crop_barley|farming
+#crop_cotton|farming
+#crop_oat|farming
+#crop_rice_white|farming
+#crop_rye|farming
+#crop_wheat|farming
+#dye_basic|dye bakedclay
+#fire_ordinary|fire
+#fire_permanent|fire underch
+#gravel_sandstone_desert|glemr4
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#item_sweeper|moreblocks
+#moss_green|sickles
+#soil_arid|farming
+#soil_ordinary|farming
+
+# supporting packages (.suggested)
+#vessel_bottle_glass_empty|thirsty vessels

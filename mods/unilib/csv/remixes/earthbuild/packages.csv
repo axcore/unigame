@@ -1,0 +1,65 @@
+# "earthbuild" remix - contains everything from the earthbuild mod, except the bottlegourd cup
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# earthbuild packages
+abm_earthbuild_degrade|earthbuild
+bed_primitive|earthbuild
+bucket_clay|earthbuild
+container_gourd_bottle|earthbuild
+container_pot_clay|earthbuild
+container_pot_weaved|earthbuild
+decor_stone_drystack|earthbuild
+dirt_compacted|earthbuild
+dirt_construction|earthbuild
+dirt_drystack|earthbuild
+dirt_rammed|earthbuild
+door_wattle|earthbuild
+item_stick_fire|earthbuild
+machine_furnace_earthen|earthbuild
+material_cob|earthbuild
+material_cob_whitewashed|earthbuild
+material_lime_slaked|earthbuild
+material_wattle|earthbuild
+material_wattle_whitewashed|earthbuild
+misc_hearth|earthbuild
+misc_mat_woven|earthbuild
+misc_platform_stick|earthbuild
+misc_straw_plastered|earthbuild
+misc_straw_plastered_whitewashed|earthbuild
+roof_cob|earthbuild
+roof_dirt|earthbuild
+roof_dirt_whitewashed|earthbuild
+roof_thatch|earthbuild
+tool_axe_flint|earthbuild
+tool_compactor_dirt|earthbuild
+tool_cutter_turf|earthbuild
+tool_knife_flint|earthbuild
+trapdoor_wattle|earthbuild
+
+# supporting packages (.depends)
+clay_ordinary|default
+dirt_ordinary|default farming moreblocks
+fire_ordinary|fire
+item_stick_ordinary|default
+material_quicklime|aotearoa earthbuild
+shared_default_furnace|default
+tool_shovel_wood|default
+
+# supporting packages (.at_least_one)
+coral_block_skeleton|default
+dirt_dry|default
+gravel_ordinary|default mtg_plus
+material_lime_crushed|aotearoa plaster
+mineral_flint|default fire mtg_plus
+misc_straw_ordinary|farming darkage
+
+# supporting packages (.optional)
+#crop_wheat|farming
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#plant_papyrus_ordinary|default mtg_plus
+#plant_shrub_dry|default
+#soil_ordinary|farming

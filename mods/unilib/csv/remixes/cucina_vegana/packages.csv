@@ -1,0 +1,171 @@
+# "cucina_vegana" remix - contains everything from the cucina_vegana mod, except for support for
+#       various technology/mob mods, and for some food mods that are not currently imported into
+#       unilib (but might be in the future)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# cucina_vegana packages
+crop_asparagus_white|cucina_vegana
+crop_banana_dwarf|cucina_vegana
+crop_carrot_nantes|cucina_vegana
+crop_chilli_gorria|cucina_vegana
+crop_chives|cucina_vegana
+crop_flax_golden|cucina_vegana
+crop_garlic_silverskin|cucina_vegana
+crop_kohlrabi|cucina_vegana
+crop_onion_sweet|cucina_vegana
+crop_parsley_curly|cucina_vegana
+crop_peanut|cucina_vegana
+crop_potato_russet|cucina_vegana
+crop_radicchio|cucina_vegana
+crop_rice_brown|cucina_vegana
+crop_rosemary|cucina_vegana
+crop_soy_red|cucina_vegana
+crop_sunflower_dwarf|cucina_vegana
+crop_tomato_beefsteak|cucina_vegana
+deco_cucina_vegana_plant_asparagus_white_wild|cucina_vegana
+deco_cucina_vegana_plant_banana_dwarf_wild|cucina_vegana
+deco_cucina_vegana_plant_carrot_nantes_wild|cucina_vegana
+deco_cucina_vegana_plant_chilli_gorria_wild|cucina_vegana
+deco_cucina_vegana_plant_chives_wild|cucina_vegana
+deco_cucina_vegana_plant_flax_golden_wild|cucina_vegana
+deco_cucina_vegana_plant_garlic_silverskin_wild|cucina_vegana
+deco_cucina_vegana_plant_kohlrabi_wild|cucina_vegana
+deco_cucina_vegana_plant_onion_sweet_wild|cucina_vegana
+deco_cucina_vegana_plant_parsley_curly_wild|cucina_vegana
+deco_cucina_vegana_plant_peanut_wild|cucina_vegana
+deco_cucina_vegana_plant_potato_russet_wild|cucina_vegana
+deco_cucina_vegana_plant_radicchio_wild|cucina_vegana
+deco_cucina_vegana_plant_rice_brown_wild|cucina_vegana
+deco_cucina_vegana_plant_rosemary_wild|cucina_vegana
+deco_cucina_vegana_plant_soy_red_wild|cucina_vegana
+deco_cucina_vegana_plant_sunflower_dwarf_wild|cucina_vegana
+deco_cucina_vegana_plant_tomato_beefsteak_wild|cucina_vegana
+food_asparagus_hollandaise|cucina_vegana
+food_asparagus_rice|cucina_vegana
+food_bread_ciabatta|cucina_vegana
+food_bread_sunflower_dwarf|cucina_vegana
+food_cheese_imitation|cucina_vegana
+food_chicken_imitation|cucina_vegana
+food_chicken_imitation_fryer|cucina_vegana
+food_edamame|cucina_vegana
+food_fish_imitation|cucina_vegana
+food_fish_parsley_rosemary|cucina_vegana
+food_honey_dandelion|cucina_vegana
+food_hotpot_blueberry|cucina_vegana
+food_hotpot_dandelion|cucina_vegana
+food_jam_blueberry|cucina_vegana
+food_kohlrabi_roasted|cucina_vegana
+food_meat_imitation|cucina_vegana
+food_milk_soy_red|cucina_vegana
+food_peanut_butter|cucina_vegana
+food_pizza_funghi|cucina_vegana
+food_pizza_vegana|cucina_vegana
+food_puree_blueberry|cucina_vegana
+food_rice_brown|cucina_vegana
+food_salad_green|cucina_vegana
+food_salad_hollandaise|cucina_vegana
+food_salad_sea|cucina_vegana
+food_seed_sunflower_dwarf|cucina_vegana
+food_soup_asparagus|cucina_vegana
+food_soup_kohlrabi|cucina_vegana
+food_soup_soy|cucina_vegana
+food_sushi_imitation|cucina_vegana
+food_tofu_red|cucina_vegana
+food_tofu_red_chives_rosemary|cucina_vegana
+glass_glow_mushroom|cucina_vegana
+ingredient_butter_imitation|cucina_vegana
+ingredient_dough_ciabatta|cucina_vegana
+ingredient_dough_pizza|cucina_vegana
+ingredient_dough_sunflower_seed|cucina_vegana
+ingredient_flour_rice_brown|cucina_vegana
+ingredient_flour_sunflower_seed|cucina_vegana
+ingredient_molasses|cucina_vegana
+ingredient_oil_flax_seed|cucina_vegana
+ingredient_oil_peanut|cucina_vegana
+ingredient_oil_salad|cucina_vegana
+ingredient_oil_sunflower_seed|cucina_vegana
+ingredient_sauce_hollandaise|cucina_vegana
+ingredient_starch_rice|cucina_vegana
+material_flax_roasted|cucina_vegana
+plant_asparagus_white_wild|cucina_vegana
+plant_banana_dwarf_wild|cucina_vegana
+plant_carrot_nantes_wild|cucina_vegana
+plant_chilli_gorria_wild|cucina_vegana
+plant_chives_wild|cucina_vegana
+plant_flax_golden_wild|cucina_vegana
+plant_garlic_silverskin_wild|cucina_vegana
+plant_kohlrabi_wild|cucina_vegana
+plant_onion_sweet_wild|cucina_vegana
+plant_parsley_curly_wild|cucina_vegana
+plant_peanut_wild|cucina_vegana
+plant_potato_russet_wild|cucina_vegana
+plant_radicchio_wild|cucina_vegana
+plant_rice_brown_wild|cucina_vegana
+plant_rosemary_wild|cucina_vegana
+plant_soy_red_wild|cucina_vegana
+plant_sunflower_dwarf_wild|cucina_vegana
+plant_tomato_beefsteak_wild|cucina_vegana
+utensil_bowl_glass|cucina_vegana
+utensil_plate_ceramic|cucina_vegana
+
+# supporting packages (.depends)
+clay_ordinary|default
+crop_cotton|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+flower_dandelion_yellow|flowers
+glass_ordinary|default moreblocks vessels
+ingredient_sugar_normal|farming
+item_paper_ordinary|default moreblocks
+item_stick_ordinary|default
+mineral_coal|default technic
+mushroom_brown|flowers
+torch_ordinary|default
+vessel_bottle_glass_empty|thirsty vessels
+vessel_glass_empty|thirsty vessels
+wool_basic|wool
+
+# supporting packages (.at_least_one)
+bush_ornamental_blueberry|bushes_classic
+crop_flax_brown|cropocalypse
+dirt_dry|default
+fruit_blueberry_ordinary|default
+liquid_water_ordinary|default
+liquid_water_river|default
+plant_papyrus_ordinary|default mtg_plus
+produce_blueberry_highbush|farming
+rope_mining|ropes
+rope_normal|moreblocks
+rope_sturdy|cottages
+sand_ordinary|default
+sand_silver|default
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+tree_apple|default doors moreblocks
+tree_aspen|default doors moreblocks
+tree_jungle|default doors moreblocks
+utensil_mortar_pestle|farming
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_beet_sugar|agriculture
+#flower_helianthus|pl_sunflowers
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#ingredient_flour_ordinary|farming
+#ingredient_sugar_cane|better_farming
+#mineral_mese|default
+#plant_cactus_ordinary|default
+#plant_kelp_ordinary|default
+#plant_shrub_dry|default
+#soil_ordinary|farming
+
+# supporting packages (.suggested)
+#bucket_steel|bucket
+#crop_rice_white|farming
+#food_cheese_vegan|farming
+#ingredient_butter_normal|cheese
+#ingredient_oil_sunflower|farming

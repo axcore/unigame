@@ -1,0 +1,26 @@
+# "ropes" remix - contains almost everything from the ropes mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# ropes packages
+ladder_rope|ropes
+ladder_steel_extendable|ropes
+ladder_wood_extendable|ropes
+misc_platform_wood|ropes
+rope_mining|ropes
+rope_mining_spool_copper|ropes
+rope_mining_spool_steel|ropes
+rope_mining_spool_wood|ropes
+shared_ropes|ropes
+
+# supporting packages (.depends)
+metal_copper|default moreblocks technic
+metal_iron|default
+metal_steel|default technic
+
+# supporting packages (.optional)
+#rope_sturdy|cottages
+
+# supporting packages (.suggested)
+#crop_cotton|farming

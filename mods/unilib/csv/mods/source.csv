@@ -1,0 +1,235 @@
+# mod_name | optional_modpack_name | download_date | download_url | author | code_licence | media_licence | notes
+unilib||20211001|https://github.com/axcore/unilib|A S Lewis|LGPL 2.1|CC BY-SA 3.0|Any original material is marked as being "imported" from unilib
+
+# From minetest_game
+default|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything except GUI/legacy/mapgen v6 stuff, and the hand/cloud code
+beds|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything, but removed backwards compatibility with PilzAdam's bed mod
+binoculars|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+boats|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+bucket|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything
+butterflies|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+carts|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+doors|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+dye|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+env_sounds|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC0 1.0 Universal (CC0 1.0) Public Domain Dedication|Imported everything, the unmodified env_sounds mod is still available in unigame
+farming|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+fire|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything
+fireflies|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+flowers|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+map|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+player_api|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything, but the namespace has been changed to unilib.player_api, and the unmodified player_api mod is still available in unigame
+screwdriver|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|unknown|Imported everything
+stairs|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|unknown|Imported everything
+tnt|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+vessels|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything
+walls|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|n/a|Imported everything
+wool|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+xpanes|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+
+# From castle modpack
+castle_farming|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0/CC BY 3.0|Imported everything
+castle_gates|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0|Imported everything
+castle_lighting|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0|Imported everything
+castle_masonry|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0|Imported everything
+castle_shields|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|MIT|Imported everything
+castle_storage|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0|Imported everything
+castle_tapestries|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|MIT/WTFPL|Imported everything
+orbs_of_time|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY 3.0/CC-BY-SA 3.0|Imported everything
+
+# From cool_trees
+baldcypress|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything. Note that longer growth times on all cool_trees are not implemented
+birch|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+cacaotree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+cherrytree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+chestnuttree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+clementinetree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+ebony|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+hollytree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+jacaranda|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+larch|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+lemontree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+mahogany|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+maple|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+oak|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+palm|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Only the door was imported
+plumtree|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+pomegranate|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+sequoia|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+willow|cool_trees|20220615|https://github.com/runsy/cool_trees/|celeron55/runs|GPLv3|GPLv3|Imported everything
+
+# From GLEM (GAL, lib_materials, lib_ecology)
+glemr4||20181212|https://github.com/ShadMOrdre/lib_materials/tree/ShadMOrdre-v2.0|ShadMOrdre|LGPL 2.1|unknown|Revision 4 of lib_materials and lib_ecology, also known as v2.0. Contains almost everything from those revisions, though some material of little value has been omitted. The remix is not suitable for survival mode (see the notes for more details)
+glemr6||20190419|https://github.com/ShadMOrdre/lib_materials|ShadMOrdre|LGPL 2.1|unknown|Revision 6 of lib_materials and lib_ecology, also known as v5.0. Contains almost everything from those revisions. Some material of little value has been omitted. Code for modifying terrain (e.g. producing lakes) has also been omitted. The remix is not suitable for survival mode (see the notes for more details)
+glemr11||20190831|https://github.com/ShadMOrdre/lib_materials|ShadMOrdre|LGPL 2.1|unknown|Revision 11 of lib_materials and lib_ecology, also known as v5.02. Contains almost everything from those revisions. Some material of little value has been omitted. Code for modifying terrain (e.g. producing lakes) has also been omitted. The remix is not suitable for survival mode (see the notes for more details)
+
+# From grailtest
+material|grailtest|20220908|https://github.com/0-afflatus/grailtest|Tim Hawthorn|LGPL v2.1|CC BY-SA|Imported a few stone nodes only
+mineral|grailtest|20220908|https://github.com/0-afflatus/grailtest|Tim Hawthorn|LGPL v2.1|CC BY-SA|Imported a few stone nodes only
+
+# From morelights
+morelights|morelights|20211129|https://github.com/random-geek/morelights|random-geek|LGPL v3.0|CC BY-SA 4.0|Imported everything
+morelights_extras|morelights|20211129|https://github.com/random-geek/morelights|random-geek|LGPL v3.0|CC BY-SA 4.0|Imported everything
+morelights_modern|morelights|20211129|https://github.com/random-geek/morelights|random-geek|LGPL v3.0|CC BY-SA 4.0|Imported everything
+morelights_vintage|morelights|20211129|https://github.com/random-geek/morelights|random-geek|LGPL v3.0|CC BY-SA 4.0|Imported everything
+
+# From pkarcs
+pkarcs|pkarcs|20221202|https://github.com/TumeniNodes/pkarcs|PEAK/TumeniNodes|LGPL-2.1|CC-BY-SA-4.0|Using TumeniNode's fork (identical to original mod by PEAK). Imported everything
+pkarcs_doors|pkarcs|20221202|https://github.com/TumeniNodes/pkarcs|TumeniNodes|LGPL-2.1|CC-BY-SA-4.0|Imported everything
+pkarcs_doors3|pkarcs|20221202|https://github.com/TumeniNodes/pkarcs|TumeniNodes|LGPL-2.1|CC-BY-SA-4.0|Imported everything
+
+# From plantlife
+bushes|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything. For all plantlife mods, calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in the same positions/quantities
+bushes_classic|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+cavestuff|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported the pebbles, did not import the stalactites
+dryplants|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything except the greater concentration of grass
+ferns|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+molehills|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+pl_seaweed|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+pl_sunflowers|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+pl_waterlilies|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+poisonivy|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything, and made the ivy poisonous
+trunks|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything except roots (marked as "for testing purposes"), log decorations and moss on trees
+woodsoils|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+youngtrees|plantlife|20220501|https://github.com/mt-mods/plantlife_modpack|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything
+
+# From technic
+technic|technic|20211121|https://github.com/minetest-mods/technic|RealBadAngel et al|LGPL 2.0|unknown|Imported various dusts (renamed as powders) and associated grinding recipes. Unsuitable tools are not repairable in unilib anvils if the "shared_anvil" package is loaded
+technic_worldgen|technic|20211121|https://github.com/minetest-mods/technic|RealBadAngel et al|LGPL 2.0|unknown|Imported all nodes, craftitems and ore distributions. The rubber tree is imported from the moretrees version
+
+# From underch/uchu
+underch||20211106|https://gitlab.com/h2mm/underch|Hume2|CC0|CC-BY-SA 3.0|Using v1.1.4. Imported everything
+bakedeye|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+compressed|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC-BY-SA 3.0|Imported everything
+condensed|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC-BY-SA 3.0|Imported everything
+gemtools|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC BY-SA 3.0|Imported everything
+gravelcraft|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|n/a|Imported everything
+
+# From xtraores
+xtraores|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything except awards. Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium, palatinium and tritonium to avoid clashing with any code that wants the real-life metals
+
+# All other mods
+24hr_clock||20221126|https://github.com/kestral246/24hr_clock|David_G et al|WTFPL/CC0|CC BY-SA|Imported everything
+30biomes||20211210|https://github.com/Gael-de-Sailly/30-biomes|Gael-de-Sailly|WTFPL|WTFPL|Imported the fir tree and mud node only. Did not import biomes, decorations (except for the fir tree) or ores. (The biomes are actually available in a CSV file that is not loaded, by default. See the notes in the remix's _biomes.csv)
+aato||20220903|https://github.com/waylanderou/almost-all-the-ores|waylanderou|GPL 3.0|GPL 3.0|AATO/Almost All the Ores, a Minecraft mod. Imported all suitable textures from the mod, with original code and (where necessary) original textures. Only natural materials were imported; no machinery was imported
+abriflame||20221114|https://github.com/mt-mods/abriflame|Shara RedCat|MIT|CC-BY-SA 3.0/CC0|Imported everything
+abriglass||20221114|https://github.com/mt-mods/abriglass|Shara RedCat|MIT|CC BY-SA 4.0|Imported everything except the hidden light and crystal
+abripanes||20221114|https://github.com/mt-mods/abripanes|Shara RedCat|MIT|CC BY-SA 4.0|Imported everything
+abritorch||20221114|https://github.com/mt-mods/abritorch|Shara RedCat|MIT|CC-BY 3.0/CC0|Imported everything
+agriculture|agriculture|20230215|https://github.com/JBBgameich/agriculture/|Linus John|WTFPL|CC BY-SA 4.0|Imported the sugar beet crop and the scarecrow; did not import anything from else from any mod in the "agriculture" modpack
+anvil||20221208|https://github.com/minetest-mods/anvil|Sokomine/FaceDeer|GPL-3.0-only|GPL-3.0-only|Imported everything
+aotearoa||20220629|https://github.com/DokimiCU/aotearoa|Dokimi|LGPLv2+|CC BY-SA 3.0 Unported|Imported everything except ambient sounds and stairs for tree trunks
+aqua_farming||20230315|https://github.com/acmgit/aqua_farming|Clyde|GPL 3.0|CC-BY-3.0|Imported everything
+australia||20220620|https://github.com/vlapsley/australia|vlapsley|GPLv3/LGPL 2.1/BSD|CC by 3.0/CC BY-SA 3.0/WTFPL|Imported everything except the sunken ship, submarine and their chests
+bakedclay||20211117|https://notabug.org/tenplus1/bakedclay|TenPlus1|MIT|CC|Imported everything except luckyblocks/coloured_clay/flowerpot compatibility code
+basic_materials||20211113|https://gitlab.com/VanessaE/basic_materials|Vanessa Dannenberg|LGPL 3.0|CC-by-SA 4.0|Imported everything
+bbq||20230307|https://github.com/Grizzly-Adam/BBQ|Grizzly Adam|LGPL-2.1+|CC-BY-SA-3.0/CC-BY-3.0|Imported everything except a few items provided by other mods (charcoal, molasses and sugar)
+beacons||20221202|https://notabug.org/SpaghettiToastBook/beacons|SpaghettiToastBook|CC0|CC0|Imported everything
+beautiflowers||20220210|https://github.com/minefaco/beautiflowers|minefaco|GPLv3.0|CC0|Imported everything
+better_farming||20230212|https://forum.minetest.net/viewtopic.php?f=9&t=28849|Atlante|MIT|MIT|Imported everything from the better_farming mod except the onigiri, which is already provided by another package, and crates shaped as stairs
+bonemeal||20220427|https://notabug.org/tenplus1/bonemeal|TenPlus1|MIT|CC0-1.0|Imported everything
+bread||20230302|https://codeberg.org/Lahusen/bread.git|Marc/Lahusen|MIT|CC0/CC-BY-SA 3.0|Imported everything
+bridges||20230310|https://github.com/mt-historical/bridges|Sokomine|GPL 3.0|n/a|Imported everything
+bucket_wooden||20211114|https://gitlab.com/h2mm/wooden_bucket|Hume2|LGPL 2.1|CC BY-SA 3.0|Imported everything
+carpet||20230314|https://github.com/minetest-mods/carpets|bell07|LGPL-2.1+|n/a|Imported everything
+caverealms||20220828|https://github.com/HeroOfTheWinds/minetest-caverealms/|HeroOfTheWinds|WTFPL|WTFPL|Imported most individual items, but not the fort/fountain structures, nor the crystal and mushroom structures. The code to dig enormous caves below the ground is also not included
+cement||20221111|https://gitlab.com/4w/cement|Linuxdirk|GPLv3.0|GPLv3.0|Imported everything
+cheese||20230303|https://github.com/AnnalysaTheMinetester/cheese|Annalysa|LGPL 2.1|CC-BY-SA 3.0 UNPORTED/CC0|Imported everything except the fantasy cheeses and effects
+chocolate||20230306|https://content.minetest.net/packages/MCL/chocolate/|MCL|MIT|CC-BY-4.0|Imported the white chocolate only
+chunkkeeper||20221125|https://github.com/Beanzilla/chunkkeeper|Beanzilla|MIT|MIT|Imported everything
+colored_beds||20221113|https://forum.minetest.net/viewtopic.php?f=9&t=18775#|BlockMen|MIT|CC BY-SA 3.0|Used version 2 of the mod. Imported the full range of beds, retaining code from the original beds mod
+columnia||20211103|https://github.com/Glunggi/columnia|Glunggi|LGPLv2.1+|CC BY-SA 3.0|Imported everything
+compass||20221125|https://github.com/Sokomine/compass|Sokomine|WTFPL|WTFPL|Also called "Static Compass". Imported everything
+cottages||20211123|https://github.com/Sokomine/cottages|Sokomine|GPLv3|CC/CC-by-SA/WTFPL|Imported everything except the rope-rail item
+cropocalypse||20230316|https://content.minetest.net/packages/Tarruvi/cropocalypse/|Tarruvi|MIT|MIT|Imported everything except the wooden bowl, light blue dye, the ABMs for spawning full-block pumpkins/watermelons and the custom ABMs for plant spread (which unilib already handles)
+cucina_vegana||20230207|https://github.com/acmgit/cucina_vegana|Clyde|LGPL3.0|LGPL3.0|Imported everything from the cucina_vegana mod, except for support for various technology/mob mods, and for some food mods that are not currently imported into unilib (but might be in the future)
+darkage||20211117|https://github.com/adrido/darkage|addi, Master Gollum|WTFPL|WTFPL|addrido fork of Master Gollum original. Imported everything
+death_compass||20221125|https://github.com/minetest-mods/death_compass|FaceDeer et al|MIT|CC0|Imported everything
+decoblocks|decoblocks|20220906|https://forum.minetest.net/viewtopic.php?t=6420|Thermal_Shock|WTFPL|WTFPL|Imported a small selection of natural materials from the decoblocks game (because they are required by GLEM)
+decorations_sea||20230315|https://github.com/mt-historical/decorations_sea|unknown|GPLv3|CC BY 4.0|Imported everything
+display_biome||20211025|https://github.com/kestral246/display_biome|kestral246|LGPL 2.1|CC BY-SA 4.0|Imported the /biomes command. Did not import mapgen v6 or biomeinfo mod support
+dreambuilder_hotbar||20221128|https://github.com/mt-mods/dreambuilder_hotbar|Calinou et al|LGPL 3.0|CC-by-SA 4.0|Imported code to set the hotbar size, using minetest settings. Did not import code to set the hotbar size from a chat command
+drinks||20230215|https://github.com/minetest-mods/drinks|Nathan Salapat|MIT|CC by SA 3.0|Imported everything
+earthbuild||20230313|https://github.com/DokimiCU/earthbuild|Dokimi|GPLv3|CC BY-SA 3.0 Unported|Imported everything except the bottlegourd cup
+ethereal||20220121|https://notabug.org/TenPlus1/ethereal|ChinChow/TenPlus1|MIT|MIT/CC0|ethereal-ng. Imported everything. Sapling growth has been standardised, replacing the ABM used in ethereal-ng
+facade||20211103|https://github.com/TumeniNodes/facade|TumeniNodes|LGPL 2.1|CC BY-SA 4.0|Imported everything
+fachwerk||20221202|https://github.com/JBBgameich/fachwerk|JBB|WTFPL|CC BY-SA 3.0|Imported everything
+factory_bridges||20230309|https://github.com/mt-mods/factory_bridges|narrnika|LGPL-2.1|LGPL-2.1|Imported everything
+farlands|farlands|20220818|https://github.com/Skamiz/farlands|D00Med|LGPL 2.1|CC-BY-SA 3.0 UNPORTED|Imported many (but not all) items, including all biomes, decorations and ores (except those in farlands/farming). Because many farlands mods share a name with minetest_game mods, everything has been grouped into a hypothetical "farlands" mod. Original names for items are only specified in code when their mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc)
+#farming||20211129|https://notabug.org/TenPlus1/Farming|TenPlus1|MIT|CC BY-SA 3.0/CC0|Mod is named "farming_redo". Imported everything that hasn't already been provided by other mods. Note that lucky_block stuff has not been imported, and that the sand soil created by minetest_game, but removed by farming_redo, is preserved in unilib
+farming_flood||20230809|https://github.com/AFCMS/farming_flood|Sokomine|GPL-3.0-only|n/a|Imported everything
+findbiomes||20211025|https://repo.or.cz/w/minetest_findbiomes|paramat/Wuzzy|MIT|unknown|Imported the /findbiome command. Did not import mapgen v6 or biomeinfo mod support
+fireextinguisher||20230314|https://forum.minetest.net/viewtopic.php?f=11&t=23524|Bad-Command, Odracir|LGPL 2.1|LGPL 2.1/WTFPL/CC0|Imported everything
+flowerpot||20220211|https://github.com/minetest-mods/flowerpot|Auke Kok|LGPLv2.1|CC-BY-SA-3.0/Public Domain|Imported everything
+forest||20211210|https://github.com/Gael-de-Sailly/forest|Gael-de-Sailly|unknown|unknown|Imported mud, oil, and gravel/sand heaps only
+glass_stained||20221129|https://github.com/v-rob/glass_stained|v-rob|MIT|CC BY-SA 3.0|Imported everything
+grains||20230210|https://github.com/v-rob/grains|v-rob|MIT|CC BY 3.0|Imported everything from the "grains" mod that was not already imported via another mod (mostly from "farming_redo")
+grave||20230320|https://github.com/ElCeejo/grave|ElCeejo|GPL-3.0|GPL-3.0|Imported only dirt, trees and biomes (no mobs were imported)
+hangglider||20221208|https://notabug.org/Piezo_/minetest-hangglider|Piezo_/kestral246/cd2|LGPL 3.0+|CC-BY-SA 3.0 UNPORTED/CC-BY-SA 3.0/CC BY-SA 4.0|Imported everything
+herbs||20230228|https://github.com/acmgit/herbs|bas080|GPL 3.0|GPL 3.0|Imported everything
+hook||20211124|https://github.com/AiTechEye/hook|AiTechEye|LGPL-2.1|CC BY-SA 4.0|Imported everything
+icecream||20230306|https://github.com/Can202/minetest_icecream|Can202|GPL-3.0|GPL-3.0|Imported everything
+item_drop||20221113|https://github.com/minetest-mods/item_drop|PilzAdam/texmex|LGPLv2.1|CC BY-SA 3.0|Imported all functionality (there are no new items). Minecraft-style item drop/get can be enabled/disabled/configured with Minetest settings
+labels|roads|20221201|https://cheapiesystems.com/git/roads/|cheapie|CC-BY-SA-3.0|CC-BY-SA-3.0|Imported only the ink cartridges
+ldm32||20221214|https://github.com/laza83/ldm32|laza|LGPL 2.1+|CC BY-SA 3.0|Imported everything
+maptools||20221116|https://github.com/minetest-mods/maptools|Hugo Locurcio|zlib|zlib|Imported everything except the unbreakable fake nodes, the coins, the permanent/fake fires and the smoke block. The admin pickaxe does not interact with clouds
+minimap_radar||20221128|https://github.com/OgelGames/minimap_radar|OgelGames|MIT|CC BY-SA 4.0|Imported everything
+more_coral||20211126|https://github.com/NathanSalapat/more_coral|NathanSalapat|MIT|CC BY-SA|Imported everything
+moreblocks||20211026|https://github.com/minetest-mods/moreblocks/|Hugo Locurcio et al|zlib|CC BY-SA 3.0 Unported/CC0 1.0 Universal|All stair-creation code has been imported into unilib's core code. Imported the circular saw and all decorative nodes
+morebricks||20211129|https://gitlab.com/KaylebJay/morebricks-v2.0/tree/master|CalebJ|MIT|MIT|From version v2.0, imported everything
+morelamps||20230310|https://forum.minetest.net/viewtopic.php?f=9&t=18173|Sam Hocevar|WTFPL|WTFPL|Imported the mithril lamps/posts; other mods already provide mese lamps/posts
+moreores||20211113|https://github.com/minetest-mods/moreores|Hugo Locurcio|zlib|CC BY-SA 3.0|Imported everything not already in minetest_game. frame/toolranks support not imported
+moreplants||20221025|https://github.com/D00Med/moreplants|DOOmed|LGPL 2.1+|CC-BY-SA 3.0 UNPORTED|Imported everything except the (unfinished) palm tree
+moretrapdoors||20230310|https://github.com/AtlanteFr/More-Trapdoors|Atlante|MIT|MIT|Imported everything
+moretrees||20220608|https://github.com/mt-mods/moretrees|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything, but some code has been simplified. Coconuts and dates do not regrow, and date palm trees are not pollinated. Raw coconuts have been merged with coconut slices from ethereal-ng. Calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in the same positions/quantities. Coconuts can only be cut with cutting boards
+mtg_plus||20220425|https://repo.or.cz/minetest_mtg_plus.git|Wuzzy|MIT|CC-BY-SA 3.0/CC-BY 3.0/MIT|Imported everything except the duplicate ice bricks, and the special textures for stairs/slabs
+mymillwork||20211103|https://github.com/minetest-mods/mymillwork|Don|DWYWPL|DWYWPL|Imported everything
+nbea||20220812|https://github.com/Napiophelios/NBox_Abuse|Napiophelios|WTFPL|CC BY-SA 3.0|Imported decorative items and compatibility with mesecons, but no furniture
+nettle||20220213|https://gitlab.com/h2mm/nettle|Hume2|MIT|MIT|Imported everything
+nextgen_compass||20221126|https://github.com/starninjas/nextgen_compass|StarNinjas et al|GPLv3|CC BY-SA 4.0|Imported everything, creating two separate compasses pointing at origin and spawn
+nsspf||20230217|https://github.com/NPXcoot/nsspf|npx|LGPL|CC BY-SA 4.0|Imported all mushrooms, fungi and truffles, but their behaviour has been changed to drastically improve the player experience (removing most ABMs). Mushrooms/funig growing on the ground now behave like minetest_game mushrooms (i.e. they are spreadable). Other mushrooms/fungi tend to grow on trees, and are not spreadable or placeable. Truffles can be found growing at the base of some trees, just below the surface. Spores have not been imported at all
+nyancat||20211210|https://github.com/minetest-mods/nyancat|rubenwardy et al|LGPL 2.1|CC BY-SA 3.0|Imported everything
+offend_flags||20221201|https://github.com/lestrol/offend_flags|Donald Trump et al|LGPL-3.0|CC BY-SA 3.0|Imported the flag printer and flag generation code. Did not import any of the mod's flags, instead created a new set of flags using textures from Wikipedia
+orienteering||20221126|https://repo.or.cz/minetest_orienteering.git|Wuzzy|MIT|MIT|Imported everything. Minetest settings controlling the position of the HUD have not been imported
+pedology||20230302|https://repo.or.cz/minetest_pedology.git|Wuzzy|WTFPL|WTFPL|Imported everything
+pfaa||20220903|https://github.com/lawremi/PerFabricaAdAstra|lawremi|Artistic-2.0|Artistic-2.0|PFAA/Per Fabrica Ad Astra, a Minecraft mod. Imported all suitable textures from the mod, with original code and (where necessary) original textures. Only natural materials were imported; no machinery was imported
+pie||20230306|https://notabug.org/TenPlus1/pie|TenPlus1|MIT|CC-BY-SA 3.0|Imported everything
+pigiron||20220812|https://notabug.org/TenPlus1/pigiron|TenPlus1|MIT|CC BY-SA 3.0|Imported some crafting overrides and tools only
+pipeworks||20230829|https://github.com/mt-mods/pipeworks|VanessaE|LGPL 3.0|CC-by-SA 4.0|Imported only two textures used with chests; no code or items imported. unilib chests and furnaces are generally compatible with pipeworks
+pizza||20230309|https://github.com/camus14/pizza|oscar14|MIT|MIT|Imported the three pizzas, but not any ingredients (other mods already provide equivalents); also did not import any player effects
+plants||20230228|https://github.com/bas080/plants|bas080|WTFPL|WTFPL|Imported many flowers, plants and mushrooms from the plants mod, but some have been omitted. Dependence on the "habitat" mod has been replaced with standard decorations. Support for plant regeneration was not imported
+plaster||20221202|https://github.com/Extex101/plaster|Extex101|CC BY-SA 3.0|CC BY-SA 3.0|Imported the plaster block, reusing the crushed lime from aotearoa to craft it. The shared fachwerk code produces its own timber frames, and new frames matching the ones in this mod (using new textures)
+plastic_block||20230815|https://github.com/Ghaydn/plastic_block|Nikita Egorov|LGPL 3.0|CC-by-SA 4.0|Imported everything
+ptime||20220902|https://github.com/xenonca/ptime|xenonca|MIT|MIT|Imported the chat commands, but not the unified_inventory button
+real_minerals||20211115|https://github.com/FaceDeer/real_minerals|FaceDeer|GPL 3.0|unknown|Mod adapted from RealTest, which was adapted from TerraFirmaCraft (MC). Imported everything
+real_torch||20221125|https://notabug.org/TenPlus1/real_torch|TenPlus1|MIT|CC BY-SA 3.0|Imported the unlit torch. Imported the coal powder as a match (to avoid clashing with other coal powders). Did not import compatibility with TNT
+realcompass||20221126|https://github.com/kestral246/realcompass|David_G et al|WTFPL/CC0|CC BY-SA|Imported everything
+replacer||20230724|https://github.com/Sokomine/replacer|Sokomine|GPL 3.0|GPL 3.0|Imported everything
+rocks||20220906|https://github.com/Gael-de-Sailly/rocks|Tomas Brod/Gael-de-Sailly|GPLv2|GPLv2|Imported a few items from rocks that are not found in AATO/PFAA (but are required by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest mod, everything has been grouped into a hypothetical "rocks" mod. The trench-digging code was imported as a separate chat command, /trench
+ropes||20211117|https://github.com/minetest-mods/ropes|unknown|MIT|unknown (textures), CC0 (sounds)|unknown|Imported everything
+scaffolding||20221116|https://bitbucket.org/Infinatum/scaffolding/src/master/|Semmett9|CC-BY-SA-4.0|CC-BY-SA-4.0|Imported everything
+sickles||20220213|https://github.com/t-affeldt/sickles|TestificateMods|LGPL v3|CC BY-SA 3.0/4.0|Imported everything
+simple_furniture||20230310|https://content.minetest.net/packages/Tarruvi/simple_furniture/|Tarruvi|MIT|n/a|Imported only furniture crafted from the five basic tree types
+simple_xray||20230206|https://github.com/MikeRedwood/simple_xray|MikeRedwood|LGPL 2.1|n/a|Imported support for all unilib stone types, enabled with a Minetest setting
+snow||20221212|https://github.com/Splizard/minetest-mod-snow|Splizard/HybridDog/LazyJ|GPL 3.0|CC BY-SA 3.0|"Snow biomes" mod. Imported everything except the v6 mapgen stuff and the snowman skin
+sounding_line||20221125|https://github.com/minetest-mods/sounding_line|FaceDeer|MIT|CC-BY-SA 3.0|Imported everything except dungeon loot compatibility
+#stairs||20211102|https://notabug.org/tenplus1/stairs|Kahrl et al|LGPLv2.1+|CC BY-SA 3.0|Mod is named "stairs_redo". All stair-creation code has been imported into unilib's core code. Also imported the wool sound effect
+stairsplus||20211026|https://github.com/CasimirKaPazi/stairsplus|Calinou/Casimir|zlib|CC BY-SA 3.0 Unported|All stair-creation code has been imported into unilib's core code, except for three craft recipes in corner.lua whose output does not exist
+stamina||20221206|https://github.com/minetest-mods/stamina|BlockMen/Auke Kok|LGPL-2.1+|CC-BY 3.0/WTFPL|Imported everything
+steampunk||20220818|https://forum.minetest.net/viewtopic.php?t=18118|blueph03nix|unknown|unknown|Imported grease only
+steel||20230310|https://github.com/mt-mods/steel|João Matos et al|GPL-2.0|CC-BY-SA-4.0|Imported everything
+stripped_tree||20221110|https://github.com/minefaco/stripped_tree|minefaco|GPLv3.0|GPLv3.0|Imported everything except axe overrides (so a chisel is required to scrape bark from tree trunks)
+tea||20230210|https://github.com/Mathiaszero/Minetest-tea-abandoned|Mathias|LGPL v2.1|CC BY 3.0|Imported everything, adding new code for 8 textures that were unused in the original mod
+thirsty||20221206|https://forum.minetest.net/viewtopic.php?f=9&t=11820|Ben Deutsch|LGPL 2.1|CC-BY-SA-4.0|Imported everything
+toolranks||20221205|https://github.com/lisacvuk/minetest-toolranks|lisacvuk|LGPLv2.1+|CC BY 3.0|Imported everything, and improved the functionality. toolranks support is enabled for (most) axes, picks, shovels and swords, but not for other types of tools (such as hoes)
+towercrane||20211126|https://github.com/minetest-mods/towercrane|Joachim Stolberg|LGPL 2.1|CC0/CC BY-SA 4.0|Imported everything
+trash_can||20230206|https://github.com/minetest-mods/trash_can|EvergreenTree|MIT|MIT|Imported everything
+tsm_pyramids||20220811|https://repo.or.cz/minetest_pyramids/tsm_pyramids|Wuzzy|MIT|MIT|Imported a few decorative stones
+twchests||20221201|https://github.com/axcore/twchests|A S Lewis|LGPL 2.1|CC BY-SA 3.0|Imported everything
+ugbc||20220911|https://github.com/LemADEC/UndergroundBiomesConstructs|unknown|GPLv2|GPLv2|UGBC/Underground Biomes Constructs, a Minecraft mod forked several times since the original release. Imported all clay, gravel, sand and stone textures and created original code. Did not import the moss, fossils or items supporting third-party minecraft mods
+vallee_des_roses||20230309|https://github.com/ViriLikesTea/Vallee-Des-Roses|Roux|Unlicense|Unlicense|Imported only the flowers
+valleys_c||20220902|https://git.minetest.org/blert2112/valleys_c|Duane Robertson|GPL 3.0/BSD/WTFPL|GPL 3.0/BSD/WTFPL|blert2112's fork, since the original version is no longer available for download. Imported a selection of items from the Valleys Helper mod, suitable for use in biomes and ores, or as decorations
+what_is_this_owo||20230316|https://github.com/Rotfuchs-von-Vulpes/what_is_this_owo-minetest|Rotfuchs von Vulpes|MIT|MIT|Imported everything, combining it with the imported code from "what_is_this_uwu". A Minetest setting can be used to toggle between the two
+what_is_this_uwu||20230316|https://github.com/Rotfuchs-von-Vulpes/what_is_this_uwu-minetest/|Rotfuchs von Vulpes|MIT|MIT|Imported everything as a player effect; the chat command is changed to /what
+wielded_light||20221113|https://github.com/minetest-mods/wielded_light|bell07|GPLv3.0|unknown|Imported all functionality (there are no new items). Wielded light can be enabled/disabled with a Minetest setting
+xdecor||20220831|https://github.com/minetest-mods/xdecor|kilbith|BSD|WTFPL/CC BY-SA/CC BY 3.0|Imported everything except the cauldron/soup, enchanting table, workbench and chess set. Some non-free textures were replaced using alternatives in MCLx86's fork (https://github.com/MCLx86/xdecor)
+xocean||20220812|https://github.com/starninjas/xocean|starninjas|MIT|MIT|Imported everything except mobs and food items derived from them

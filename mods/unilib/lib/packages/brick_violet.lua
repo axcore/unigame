@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    morebricks
+-- Code:    MIT
+-- Media:   MIT
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.brick_violet = {}
+
+local S = unilib.intllib
+local mode = unilib.imported_mod_table.morebricks.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.brick_violet.init()
+
+    return {
+        description = "Violet brick",
+        depends = {"clay_baked_basic", "brick_ordinary"},
+    }
+
+end
+
+function unilib.pkg.brick_violet.exec()
+
+    unilib.register_coloured_brick_block({
+        -- From morebricks:violet and morebricks:violetvertical, creates unilib:brick_violet_block
+        --      and unilib:brick_violet_block_vertical
+        part_name = "violet",
+        horizontal_orig_name = "morebricks:violet",
+        vertical_orig_name = "morebricks:violetvertical",
+        major_ingredient = "unilib:brick_ordinary",
+        minor_ingredient = "unilib:clay_baked_violet",
+
+        replace_mode = mode,
+        description = S("Violet Brick Block"),
+    })
+
+end

@@ -1,0 +1,235 @@
+# mod_name | detect_mode | replace_mode | notes
+unilib|ignore|replace|By using "replace", packages whose source mod is marked as unilib in the remix will be executed
+
+# From minetest_game
+default|detect|replace|
+beds|detect|replace|
+binoculars|detect|replace|
+boats|detect|replace|
+bucket|detect|replace|
+butterflies|detect|replace|
+carts|detect|replace|
+doors|detect|replace|
+dye|detect|replace|
+env_sounds|detect|replace|
+farming|detect|replace|
+fire|detect|replace|
+fireflies|detect|replace|
+flowers|detect|replace|
+map|detect|replace|
+player_api|ignore|defer|There is nothing to "replace"
+screwdriver|detect|replace|
+stairs|detect|replace|When "hide" or "replace" is specified, original stair nodes are removed. However, unilib equivalents are only added when Minetest settings allow
+tnt|detect|replace|
+vessels|detect|replace|
+walls|detect|replace|When "hide" or "replace" is specified, original wall nodes are removed. However, unilib equivalents are only added when the Minetest setting is set
+wool|detect|replace|
+xpanes|detect|replace|
+
+# From castle modpack
+castle_farming|detect|defer|
+castle_gates|detect|defer|
+castle_lighting|detect|defer|
+castle_shields|detect|defer|
+castle_storage|detect|defer|
+castle_tapestries|detect|defer|
+castle_masonry|detect|defer|
+orbs_of_time|detect|defer|
+
+# From cool_trees
+baldcypress|detect|defer|
+birch|detect|defer|
+cacaotree|detect|defer|
+cherrytree|detect|defer|
+chestnuttree|detect|defer|
+clementinetree|detect|defer|
+ebony|detect|defer|
+hollytree|detect|defer|
+jacaranda|detect|defer|
+larch|detect|defer|
+lemontree|detect|defer|
+mahogany|detect|defer|
+maple|detect|defer|
+oak|detect|defer|
+palm|detect|defer|
+plumtree|detect|defer|
+pomegranate|detect|defer|
+sequoia|detect|defer|
+willow|detect|defer|
+
+# From GLEM (GAL, lib_materials, lib_ecology)
+glemr4|detect|defer|
+glemr6|detect|defer|
+glemr11|detect|defer|
+
+# From grailtest
+material|detect|defer|
+mineral|detect|defer|
+
+# From morelights
+morelights|detect|defer|
+morelights_extras|detect|defer|
+morelights_modern|detect|defer|
+morelights_vintage|detect|defer|
+
+# From pkarcs
+pkarcs|detect|defer|
+pkarcs_doors|detect|defer|
+pkarcs_doors3|detect|defer|
+
+# From plantlife
+bushes|detect|defer|
+bushes_classic|detect|defer|
+cavestuff|detect|defer|
+dryplants|detect|defer|
+ferns|detect|defer|
+molehills|detect|defer|
+pl_seaweed|detect|defer|
+pl_sunflowers|detect|defer|
+pl_waterlilies|detect|defer|
+poisonivy|detect|defer|
+trunks|detect|defer|
+woodsoils|detect|defer|
+youngtrees|detect|defer|
+
+# From technic
+technic|detect|defer|
+technic_worldgen|detect|defer|
+
+# From underch/uchu
+underch|detect|defer|
+bakedeye|detect|defer|
+compressed|detect|defer|
+condensed|detect|defer|
+gemtools|detect|defer|
+gravelcraft|detect|defer|There is nothing to "replace"
+
+# From xtraores
+xtraores|detect|defer|
+
+# All other mods
+24hr_clock|detect|defer|
+30biomes|detect|defer|
+aato|detect|defer|
+abriflame|detect|defer|
+abriglass|detect|defer|
+abripanes|detect|defer|
+abritorch|detect|defer|
+agriculture|detect|defer|
+anvil|detect|defer|
+aotearoa|detect|defer|
+aqua_farming|detect|defer|
+australia|detect|defer|
+bakedclay|detect|defer|
+basic_materials|detect|defer|
+bbq|detect|defer|
+beacons|detect|defer|
+beautiflowers|detect|defer|
+better_farming|detect|defer|
+bonemeal|detect|defer|
+bread|detect|defer|
+bridges|detect|defer|
+bucket_wooden|detect|defer|
+carpet|detect|defer|
+caverealms|detect|defer|
+cement|detect|defer|
+cheese|detect|defer|
+chocolate|detect|defer|
+chunkkeeper|detect|defer|
+columnia|detect|defer|When "hide" or "replace" is specified, original carving nodes are removed. However, unilib equivalents are only added when Minetest settings allow
+colored_beds|detect|defer|
+compass|detect|defer|
+cottages|detect|defer|
+cropocalypse|detect|defer|
+cucina_vegana|detect|defer|
+darkage|detect|defer|
+death_compass|detect|defer|
+decoblocks|detect|defer|
+decorations_sea|detect|defer|
+display_biome|ignore|defer|There is nothing to "replace"
+dreambuilder_hotbar|detect|defer|
+drinks|detect|defer|
+earthbuild|detect|defer|
+ethereal|detect|defer|
+facade|detect|defer|When "hide" or "replace" is specified, original carving nodes are removed. However, unilib equivalents are only added when Minetest settings allow
+fachwerk|detect|defer|
+factory_bridges|detect|defer|
+farlands|detect|defer|
+#farming|detect|defer|Mod is named "farming_redo"
+farming_flood|detect|defer|
+findbiomes|ignore|defer|There is nothing to "replace"
+fireextinguisher|detect|defer|
+flowerpot|detect|defer|
+forest|detect|defer|
+glass_stained|detect|defer|
+grains|detect|defer|
+grave|detect|defer|
+hangglider|detect|defer|
+herbs|detect|defer|
+hook|detect|defer|
+icecream|detect|defer|
+item_drop|detect|defer|
+labels|detect|defer|
+ldm32|detect|defer|
+maptools|detect|defer|
+minimap_radar|detect|defer|
+more_coral|detect|defer|
+moreblocks|detect|defer|When "hide" or "replace" is specified, original stair nodes are removed. However, unilib equivalents are only added when Minetest settings allow. Almost all non-stair code has been imported
+morebricks|detect|defer|
+morelamps|detect|defer|
+moreores|detect|defer|
+moreplants|detect|defer|
+moretrapdoors|detect|defer|
+moretrees|detect|defer|
+mtg_plus|detect|defer|
+mymillwork|detect|defer|unilib cannot "hide" or "replace" carving nodes from this mod, due to arbitrary naming conventions
+nbea|detect|defer|
+nettle|detect|defer|
+nextgen_compass|detect|defer|
+nsspf|detect|defer|
+nyancat|detect|defer|
+offend_flags|detect|defer|
+orienteering|detect|defer|
+pedology|detect|defer|
+pfaa|detect|defer|
+pie|detect|defer|
+pigiron|detect|defer|
+pipeworks|detect|defer|
+pizza|detect|defer|
+plants|detect|defer|
+plaster|detect|defer|
+plastic_block|detect|defer|
+ptime|detect|defer|
+realcompass|detect|defer|
+real_minerals|detect|defer|
+real_torch|detect|defer|
+replacer|detect|defer|
+rocks|detect|defer|
+ropes|detect|defer|
+scaffolding|detect|defer|
+sickles|detect|defer|
+simple_furniture|detect|defer|
+simple_xray|detect|defer|
+snow|detect|defer|
+#stairs|ignore|defer|Mod is named "stairs_redo". Original stair nodes are removed according to the replace mode of minetest_game/stairs (above). However, unilib equivalents are only added when Minetest settings allow
+stairsplus|detect|defer|When "hide" or "replace" is specified, original stair nodes are removed. However, unilib equivalents are only added when Minetest settings allow
+stamina|detect|defer|
+steampunk|detect|defer|
+steel|detect|defer|
+stripped_tree|detect|defer|
+sounding_line|detect|defer|
+tea|detect|defer|
+thirsty|detect|defer|
+toolranks|detect|defer|
+towercrane|detect|defer|
+trash_can|detect|defer|
+tsm_pyramids|detect|defer|
+twchests|detect|defer|
+ugbc|detect|defer|
+vallee_des_roses|detect|defer|
+valleys_c|detect|defer|
+what_is_this_owo|detect|defer|
+what_is_this_uwu|detect|defer|
+wielded_light|detect|defer|
+xdecor|detect|defer|
+xocean|detect|defer|

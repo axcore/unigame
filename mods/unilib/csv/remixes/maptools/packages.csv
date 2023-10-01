@@ -1,0 +1,23 @@
+# "maptools" remix - contains many items from the maptools mod
+# Does not include the unbreakable fake nodes, the coins, the permanent/fake fires or the smoke
+#       block. The admin pickaxe does not interact with clouds
+# Note that the advertised light-blocking node is missing from the original mod's code
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# maptools packages
+admin_fruit_apple|maptools
+admin_fuel_infinite|maptools
+admin_ladder_invisible|maptools
+admin_light_invisible|maptools
+admin_node_colour|maptools
+admin_node_danger|maptools
+admin_node_igniter|maptools
+admin_node_invisible|maptools
+admin_node_void|maptools
+admin_tool_pick|maptools
+admin_trampoline_invisible|maptools
+shared_maptools|maptools
+
+# (no supporting packages for this remix)

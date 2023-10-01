@@ -1,0 +1,61 @@
+# Biome table for the "30biomes" remix
+# THIS FILE WAS CREATED FOR TESTING PURPOSES. The biomes in the "30biomes" mod do not cover all
+#       heights, heats and humidities, so they are not suitable for use in a real game (unless
+#       combined with other mods and/or packages that provide additional biomes)
+# If you want unilib to read this file and create the biomes, then rename this file as biomes.csv
+
+# Biome name|Description|Original biome name|Dust node|Top node and depth|Fill node and depth|Stone node|Top water node and depth|Water node|River node|Riverbed node and depth|Cave liquid node|Dungeon node|Dungeon alternative node|Dungeon stair node|Max height|Min height|Vertical blend|Heat|Humidity
+
+# Main biomes
+30biomes_bushes|Bushes biome|bushes||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary|unilib:stone_ordinary||||unilib:sand_ordinary|||||Y_MAX|7||43|30
+30biomes_desert|Desert biome|desert||unilib:sand_desert|unilib:sand_desert 3|unilib:stone_desert||||unilib:sand_ordinary 3|||||Y_MAX|7||89|9
+30biomes_desert_cold|Cold desert biome|cold_desert||||unilib:stone_ordinary||||unilib:gravel_ordinary|||||Y_MAX|3||32|-3
+30biomes_desert_gravel|Desert gravel biome|gravel_desert||unilib:gravel_ordinary|unilib:gravel_ordinary 2|unilib:stone_ordinary||||unilib:gravel_ordinary 2|||||Y_MAX|2||20|-2
+30biomes_desert_gravel_cold|Cold desert gravel biome|cold_gravel_desert|unilib:snow_ordinary|unilib:gravel_ordinary|unilib:gravel_ordinary|unilib:stone_ordinary||||unilib:gravel_ordinary|||||Y_MAX|-6||-2|2
+30biomes_desert_sandstone|Sandstone desert biome|sandstone_desert||unilib:sand_desert|unilib:sand_desert|unilib:stone_sandstone_ordinary||||unilib:sand_ordinary 2|||||Y_MAX|6||60|0
+30biomes_desert_stone_grassland|Grassland and desert stone biome|desert_stone_grasslands||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary|unilib:stone_desert||||unilib:sand_ordinary 2|||||Y_MAX|4||90|41
+30biomes_forest_coniferous|Coniferous forest biome|coniferous_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_ordinary||||unilib:gravel_ordinary|||||Y_MAX|5||22|71
+30biomes_forest_deciduous|Deciduous forest biome|deciduous_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 3|unilib:stone_ordinary||||unilib:dirt_ordinary 3|||||Y_MAX|5||45|65
+30biomes_forest_deciduous_cold|Cold deciduous forest biome|cold_deciduous_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_ordinary||||unilib:dirt_ordinary 2|||||Y_MAX|4||31|48
+30biomes_forest_deciduous_hot|Hot deciduous forest biome|hot_deciduous_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_ordinary||||unilib:dirt_ordinary 3|||||Y_MAX|5||61|58
+30biomes_forest_hot_pine|Hot pine forest biome|hot_pine_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary|unilib:stone_ordinary||||unilib:gravel_ordinary|||||Y_MAX|6||65|35
+30biomes_forest_mixed|Mixed forest biome|mixed_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_ordinary||||unilib:dirt_ordinary 2|||||Y_MAX|5||24|56
+30biomes_forest_semitropical|Semi-tropical forest biome|semi-tropical_forest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 3|unilib:stone_ordinary||||unilib:dirt_ordinary 3|||||Y_MAX|4||72|61
+30biomes_glacier_1|Glacier biome|glacier_1|unilib:snow_ordinary_block|unilib:ice_ordinary 2||unilib:stone_ordinary|unilib:ice_ordinary 2||unilib:ice_ordinary||||||Y_MAX|-6||-11|20
+30biomes_glacier_2|Glacier biome|glacier_2|unilib:snow_ordinary_block|unilib:snow_ordinary_block 3|unilib:ice_ordinary 4|unilib:stone_ordinary|unilib:ice_ordinary 6||unilib:ice_ordinary||||||Y_MAX|1||-19|40
+30biomes_glacier_3|Glacier biome|glacier_3|unilib:snow_ordinary_block|unilib:snow_ordinary_block 5|unilib:ice_ordinary 12|unilib:stone_ordinary|unilib:ice_ordinary 10||unilib:ice_ordinary||||||Y_MAX|1||-27|80
+30biomes_grassland_sandstone|Grassland and sandstone biome|sandstone_grasslands||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_sandstone_ordinary||||unilib:dirt_ordinary 2|||||Y_MAX|3||55|15
+30biomes_grassland_stone|Grassland and stone biome|stone_grasslands||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary|unilib:stone_ordinary||||unilib:sand_ordinary|||||Y_MAX|4||29|22
+30biomes_orchard|Orchard biome|orchard||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 2|unilib:stone_ordinary||||unilib:dirt_ordinary|||||Y_MAX|6||40|40
+30biomes_rainforest|Rainforest biome|rainforest||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 4|unilib:stone_ordinary||||unilib:dirt_ordinary 3|||||Y_MAX|1||89|76
+30biomes_savanna|Savanna biome|savanna||unilib:dirt_ordinary_with_turf_dry|unilib:dirt_ordinary|unilib:stone_ordinary||||unilib:sand_ordinary 2|||||Y_MAX|6||80|24
+30biomes_savanna_red|Red savanna biome|red_savanna||unilib:dirt_ordinary_with_turf_dry|unilib:dirt_ordinary|unilib:stone_desert||||unilib:sand_ordinary 2|||||Y_MAX|5||90|31
+30biomes_scrub|Scrub biome|scrub||unilib:dirt_ordinary_with_turf_dry|unilib:dirt_ordinary|unilib:stone_ordinary||||unilib:sand_ordinary|||||Y_MAX|8||57|25
+30biomes_swamp|Swamp biome|swamp||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 3|unilib:stone_ordinary||||unilib:dirt_mud_swamp 2|||||Y_MAX|1||30|114
+30biomes_swamp_hot|Hot swamp biome|hot_swamp||unilib:dirt_ordinary_with_turf|unilib:dirt_ordinary 4|unilib:stone_ordinary||||unilib:dirt_mud_swamp 3|||||Y_MAX|1||83|116
+30biomes_swamp_icy|Icy swamp biome|icy_swamp|unilib:snow_ordinary|unilib:dirt_ordinary_with_cover_snow|unilib:dirt_ordinary 3|unilib:stone_ordinary|unilib:ice_ordinary||unilib:ice_ordinary|unilib:dirt_mud_swamp 2|||||Y_MAX|1||-10|107
+30biomes_taiga|Taiga biome|taiga|unilib:snow_ordinary|unilib:dirt_ordinary_with_cover_snow|unilib:dirt_ordinary 5|unilib:stone_ordinary||||unilib:gravel_ordinary|||||Y_MAX|4||11|67
+30biomes_tundra|Tundra biome|tundra||unilib:dirt_ordinary_with_cover_snow|unilib:dirt_ordinary 2|unilib:stone_ordinary|||||||||Y_MAX|3||4|32
+30biomes_tundra_dry|Dry tundra biome|dry_tundra||unilib:dirt_ordinary_with_cover_snow|unilib:dirt_ordinary 2|unilib:stone_ordinary|||||||||Y_MAX|2||4|12
+
+# Beach biomes
+30biomes_beach_gravel|Gravel beach biome|gravel_beach||unilib:gravel_ordinary|unilib:gravel_ordinary 3|unilib:stone_ordinary||||unilib:gravel_ordinary 3|||||6|-7||19|19
+30biomes_beach_dunes_sand|Sand dunes biome|sand_dunes||unilib:sand_ordinary|unilib:sand_ordinary 3|unilib:stone_ordinary||||unilib:sand_ordinary 4|||||5|-5||21|61
+30biomes_dunes_desert|Desert dunes biome|desert_dunes||unilib:sand_ordinary|unilib:sand_ordinary 2|unilib:stone_ordinary||||unilib:sand_ordinary 3|||||6|-5||70|6
+30biomes_dunes_sand_hot|Hot sand dunes biome|hot_sand_dunes||unilib:sand_ordinary|unilib:sand_ordinary 3|unilib:stone_ordinary||||unilib:sand_ordinary 3|||||5|-5||106|49
+30biomes_dunes_tundra|Tundra dunes biome|tundra_dunes|unilib:snow_ordinary|unilib:sand_ordinary 2|unilib:gravel_ordinary|unilib:stone_ordinary||||unilib:gravel_ordinary|||||2|-5||5|21
+30biomes_glacier_2_shore|Glacier shore biome|glacier_2_shore|unilib:snow_ordinary_block|unilib:ice_ordinary 4||unilib:stone_ordinary|unilib:ice_ordinary 6||unilib:ice_ordinary||||||0|-4||-19|40
+30biomes_glacier_3_shore|Glacier shore biome|glacier_3_shore|unilib:snow_ordinary_block|unilib:ice_ordinary 12||unilib:stone_ordinary|unilib:ice_ordinary 6||unilib:ice_ordinary||||||0|-4||-27|80
+30biomes_mangrove|Mangrove biome|mangrove||unilib:dirt_ordinary|unilib:dirt_ordinary 4|unilib:stone_ordinary||||unilib:dirt_ordinary 5|||||0|-4||96|106
+30biomes_swamp_shore|Swamp shore biome|swamp_shore||unilib:dirt_ordinary|unilib:dirt_ordinary 3|unilib:stone_ordinary||||unilib:dirt_mud_swamp 3|||||0|-3||30|114
+30biomes_swamp_shore_hot|Hot swamp shore biome|hot_swamp_shore||unilib:dirt_ordinary|unilib:dirt_ordinary 4|unilib:stone_ordinary||||unilib:dirt_mud_swamp 3|||||0|-3||83|116
+30biomes_swamp_shore_icy|Icy swamp shore biome|icy_swamp_shore|unilib:snow_ordinary|unilib:dirt_ordinary 3|unilib:dirt_ordinary 4|unilib:stone_ordinary|unilib:ice_ordinary||unilib:ice_ordinary|unilib:dirt_mud_swamp 3|||||0|-4||-10|107
+
+# Sea biomes
+30biomes_ice_pack|Ice pack biome|pack_ice|unilib:snow_ordinary|unilib:gravel_ordinary||unilib:stone_ordinary|unilib:ice_ordinary 5||unilib:ice_ordinary||||||-6|-112||-24|41
+30biomes_sea_cold|Cold sea biome|cold_sea||unilib:gravel_ordinary 2||unilib:stone_ordinary|||||||||-6|-112||20|47
+30biomes_sea_tempered|Tempered sea biome|tempered_sea||unilib:sand_ordinary 2||unilib:stone_ordinary|||||||||-6|-112||41|48
+30biomes_sea_warm|Warm sea biome|warm_sea||unilib:sand_ordinary|unilib:sand_ordinary 2|unilib:stone_ordinary|||||||||-6|-112||89|51
+
+#Underground
+30biomes_underground|Underground biome|underground||||unilib:stone_ordinary|||||||||-113|Y_MIN||50|50

@@ -1,0 +1,59 @@
+---------------------------------------------------------------------------------------------------
+-- From:    GLEMr4 (lib_ecology / lib_materials)
+-- Media:   unknown
+---------------------------------------------------------------------------------------------------
+
+unilib_gravel_sandstone_desert.png
+    Adapted from darkage, /textures/darkage_cob.png
+    Media: WTFPL
+unilib_tree_deciduous_mature_sapling.png
+    Adapted from minetest_game, /mods/default/textures/default_aspen_sapling.png
+    Media: CC BY-SA 3.0
+unilib_tree_deciduous_mature_wood.png
+    Adapted from minetest_game, /mods/default/textures/default_aspen_wood.png
+    Media: CC BY-SA 3.0
+unilib_tree_deciduous_mature_trunk_top.png
+    Adapted from minetest_game, /mods/default/textures/default_aspen_tree_top.png
+    Media: CC BY-SA 3.0
+unilib_tree_deciduous_normal_sapling.png
+    Adapted from minetest_game, /mods/default/textures/default_pine_sapling.png
+    Media: CC BY-SA 3.0
+unilib_tree_deciduous_normal_wood.png
+    Adapted from minetest_game, /mods/default/textures/default_pine_wood.png
+    Media: CC BY-SA 3.0
+unilib_tree_deciduous_normal_trunk_top.png
+    Adapted from minetest_game, /mods/default/textures/default_pine_tree_top.png
+    Media: CC BY-SA 3.0
+unilib_tree_fir_douglas_coast_leaves.png
+    Adapted from /lib_ecology/textures/lib_ecology_tree_fir_coast_leaves.png
+    Media: CC BY-SA 3.0
+unilib_tree_fir_douglas_coast_sapling.png
+    Adapted from /lib_ecology/textures/lib_ecology_tree_fir_coast_sapling.png
+    Media: CC BY-SA 3.0
+unilib_tree_fir_douglas_coast_trunk.png
+    Adapted from /lib_ecology/textures/lib_ecology_tree_fir_coast_trunk.png
+    Media: CC BY-SA 3.0
+unilib_tree_fir_douglas_coast_trunk_top.png
+    Adapted from /lib_ecology/textures/lib_ecology_tree_fir_coast_trunk_top.png
+    Media: CC BY-SA 3.0
+unilib_tree_fir_douglas_coast_wood.png
+    Adapted from /lib_ecology/textures/lib_ecology_tree_fir_coast_wood.png
+    Media: CC BY-SA 3.0
+unilib_tree_palm_plain_trunk.png
+    Adapted from farlands, /mods/mapgen/textures/mapgen_willow_tree.png
+    Media: CC-BY-SA 3.0 UNPORTED
+unilib_tree_palm_plain_trunk_top.png
+    Adapted from farlands, /mods/mapgen/textures/mapgen_willow_tree_top.png
+    Media: CC-BY-SA 3.0 UNPORTED
+unilib_tree_palm_plain_wood.png
+    Adapted from farlands, /mods/mapgen/textures/mapgen_willow_wood.png
+    Media: CC-BY-SA 3.0 UNPORTED
+unilib_tree_pine_exposed_sapling.png
+    Adapted from farlands, /mods/default/textures/default_pine_sapling.png
+    Media: CC-BY-SA 3.0 UNPORTED
+unilib_tree_pine_exposed_trunk_top.png
+    Adapted from minetest_game, /mods/default/textures/default_pine_tree_top.png
+    Media: CC BY-SA 3.0
+unilib_tree_pine_exposed_wood.png
+    Adapted from minetest_game, /mods/default/textures/default_pine_wood.png
+    Media: CC BY-SA 3.0

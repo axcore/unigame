@@ -1,0 +1,62 @@
+# CSV read by the "shared_offend_flags" package
+
+#unique flag name|flag image|description
+
+# National flags
+australia||Australia
+austria||Austria
+belgium||Belgium
+bulgaria||Bulgaria
+canada||Canada
+croatia||Croatia
+cyprus||Cyprus
+czech||Czech Republic
+denmark||Denmark
+england||England
+estonia||Estonia
+falklands||Falklands
+finland||Finland
+france||France
+georgia||Georgia
+germany||Germany
+gibraltar||Gibraltar
+greece||Greece
+guernsey||Guernsey
+hungary||Hungary
+iceland||Iceland
+ireland||Ireland
+italy||Italy
+jersey||Jersey
+latvia||Latvia
+lithuania||Lithuania
+luxembourg||Luxembourg
+malta||Malta
+manx||Isle of Man
+moldova||Moldova
+netherlands||The Netherlands
+ni||Northern Ireland
+norway||Norway
+nz||New Zealand
+poland||Poland
+portugal||Portugal
+romania||Romania
+scotland||Scotland
+spain||Spain
+sweden||Sweden
+switzerland||Switzerland
+uk||United Kingdom
+ukraine||Ukraine
+usa||United States
+wales||Wales
+
+# Other flags
+ensign||Naval Ensign
+miner||Miner
+minetest||Minetest
+raf||Royal Air Force
+royal||Royal Standard
+swim_bathing||Surfing Area
+swim_danger||Danger No Bathing
+swim_surfing||Safe Bathing
+tricolor||Tricolor
+un||United Nations

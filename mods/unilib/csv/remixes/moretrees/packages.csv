@@ -1,0 +1,85 @@
+# "moretrees" remix - contains everything from moretrees
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+# Some code has been simplified. Coconuts and dates do not regrow. Date palm trees are not
+#       pollinated
+# Raw coconuts have been merged with coconut slices from ethereal-ng
+# Calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in
+#       the same positions/quantities
+# Coconuts can only be cut with cutting boards
+
+# node_name | original_mod
+
+# moretrees packages
+deco_moretrees_tree_apple_mature|moretrees
+deco_moretrees_tree_beech_common|moretrees
+deco_moretrees_tree_birch_large|moretrees
+deco_moretrees_tree_cedar|moretrees
+deco_moretrees_tree_fir_douglas|moretrees
+deco_moretrees_tree_jungle_large|moretrees
+deco_moretrees_tree_oak|moretrees
+deco_moretrees_tree_palm_date|moretrees
+deco_moretrees_tree_palm_exposed|moretrees
+deco_moretrees_tree_poplar|moretrees
+deco_moretrees_tree_rubber|moretrees
+deco_moretrees_tree_sequoia|moretrees
+deco_moretrees_tree_spruce|moretrees
+deco_moretrees_tree_willow_large|moretrees
+food_bar_date_nut|moretrees
+food_cake_date_nut|moretrees
+food_milk_coconut|moretrees
+food_muffin_acorn|moretrees
+food_nuts_cedar|moretrees
+food_nuts_fir_douglas|moretrees
+food_nuts_spruce|moretrees
+food_snack_date_nut|moretrees
+fruit_date|moretrees
+ingredient_acorn|moretrees
+ingredient_batter_date_nut|moretrees
+ingredient_batter_muffin_acorn|moretrees
+ingredient_cone_cedar|moretrees
+ingredient_cone_fir_douglas|moretrees
+ingredient_cone_spruce|moretrees
+shared_moretrees|moretrees
+tree_apple_mature|moretrees
+tree_beech_common|moretrees
+tree_birch_large|moretrees
+tree_cedar|moretrees
+tree_fir_douglas|moretrees
+tree_jungle_large|moretrees technic_worldgen
+tree_oak|moretrees
+tree_palm_date|moretrees
+tree_palm_exposed|moretrees
+tree_poplar|moretrees
+tree_rubber|moretrees technic_worldgen
+tree_sequoia|moretrees
+tree_spruce|moretrees
+tree_willow_large|moretrees
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+fruit_apple|default
+fruit_coconut|ethereal
+glass_ordinary|default moreblocks vessels
+liquid_water_ordinary|default
+metal_iron|default
+metal_steel|default technic
+sand_desert|default farming
+sand_ordinary|default
+soil_sand_desert|farming
+tree_birch|ethereal
+tree_jungle|default doors moreblocks
+tree_palm|ethereal
+utensil_board_cutting|farming
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+ingredient_flour_ordinary|farming
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#mineral_mese|default
+#mushroom_brown|flowers
+#soil_ordinary|farming

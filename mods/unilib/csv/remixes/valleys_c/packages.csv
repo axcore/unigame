@@ -1,0 +1,34 @@
+# "valleys_c" remix - contains a selection of items from the Valleys Helper mod, suitable for use
+#       in biomes and ores, or as decorations
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# valleys_c packages
+clay_red|valleys_c
+dirt_clayey|valleys_c
+dirt_sandy|valleys_c
+dirt_silt_coarse|valleys_c
+dirt_silt_fine|valleys_c
+flower_bird_of_paradise|valleys_c
+flower_gerbera|valleys_c
+flower_hibiscus|valleys_c
+flower_lily_calla|valleys_c
+flower_orchid|valleys_c
+misc_stalactite_small|valleys_c
+misc_stalagmite_small|valleys_c
+plant_arrow_arum|valleys_c
+sand_ordinary_glow|valleys_c
+sand_ordinary_with_rocks|valleys_c
+stone_ordinary_with_fungus_glowing_purple|valleys_c
+
+# supporting packages (.depends)
+plant_fungus_glowing_purple|caverealms
+sand_ordinary|default
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#grass_jungle|default
+#ice_ordinary|default ethereal mtg_plus
+#mineral_mese|default
+#moss_green|sickles

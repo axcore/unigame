@@ -1,0 +1,34 @@
+# "moretrapdoors" remix - contains everything from the moretrapdoors mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# moretrapdoors packages
+door_wood_acacia_ornate|moretrapdoors
+door_wood_apple_ornate|moretrapdoors
+door_wood_aspen_ornate|moretrapdoors
+door_wood_jungle_ornate|moretrapdoors
+door_wood_pine_ornate|moretrapdoors
+door_wood_saloon|moretrapdoors
+trapdoor_wood_acacia_ornate|moretrapdoors
+trapdoor_wood_apple_ornate|moretrapdoors
+trapdoor_wood_aspen_ornate|moretrapdoors
+trapdoor_wood_jungle_ornate|moretrapdoors
+trapdoor_wood_pine_ornate|moretrapdoors
+
+# supporting packages (.depends)
+fruit_apple|default
+tree_acacia|default doors moreblocks
+tree_apple|default doors moreblocks
+tree_aspen|default doors moreblocks
+tree_jungle|default doors moreblocks
+tree_pine|default doors moreblocks
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#item_book_ordinary|default
+#item_stick_ordinary|default
+#item_sweeper|moreblocks
+#mushroom_brown|flowers
+#mushroom_red|flowers
+#vessel_bottle_glass_empty|thirsty vessels

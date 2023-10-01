@@ -1,0 +1,216 @@
+# "farming_redo" remix - contains everything in farming_redo that hasn't already been provided by
+#       other mods. Note that lucky_block stuff has not been imported, and that the sand soil
+#       created by minetest_game, but removed by farming_redo, is preserved in unilib
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# farming_redo packages
+admin_tool_hoe|farming
+crop_barley|farming
+crop_hemp|farming
+crop_mint_normal|farming
+crop_oat|farming
+crop_rice_white|farming
+crop_rye|farming
+crop_sunflower_giant|farming
+deco_farming_redo_crop_hemp|farming
+deco_farming_redo_crop_mint_normal|farming
+deco_farming_redo_crop_sunflower_giant|farming
+deco_farming_redo_produce_artichoke|farming
+deco_farming_redo_produce_bean_green|farming
+deco_farming_redo_produce_beetroot_normal|farming
+deco_farming_redo_produce_blackberry|farming
+deco_farming_redo_produce_blueberry_highbush|farming
+deco_farming_redo_produce_cabbage_normal|farming
+deco_farming_redo_produce_carrot_normal|farming
+deco_farming_redo_produce_chilli_normal|farming
+deco_farming_redo_produce_coffee|farming
+deco_farming_redo_produce_corn_normal|farming
+deco_farming_redo_produce_cucumber_normal|farming
+deco_farming_redo_produce_garlic_normal|farming
+deco_farming_redo_produce_grape|farming
+deco_farming_redo_produce_lettuce|farming
+deco_farming_redo_produce_melon|farming
+deco_farming_redo_produce_onion_normal|farming
+deco_farming_redo_produce_parsley_flatleaf|farming
+deco_farming_redo_produce_pea|farming
+deco_farming_redo_produce_pepper|farming
+deco_farming_redo_produce_pineapple|farming
+deco_farming_redo_produce_potato_normal|farming
+deco_farming_redo_produce_pumpkin_yellow|farming
+deco_farming_redo_produce_raspberry|farming
+deco_farming_redo_produce_rhubarb|farming
+deco_farming_redo_produce_soy_normal|farming
+deco_farming_redo_produce_tomato_salad|farming
+deco_farming_redo_produce_vanilla|farming
+drink_cup_coffee|farming
+drink_cup_tea_mint|farming
+drink_juice_carrot|farming
+drink_juice_pineapple|farming
+food_bibimbap|farming
+food_bread_garlic|farming
+food_bread_multigrain|farming
+food_bread_pumpkin|farming
+food_bread_rice|farming
+food_bread_sliced|farming
+food_bread_sunflower|farming
+food_bread_toast|farming
+food_cake_jaffa|farming
+food_carrot_gold|farming
+food_cheese_vegan|farming
+food_cheeseburger|farming
+food_chilli_bowl|farming
+food_chocolate_biscuit|farming
+food_chocolate_dark|farming
+food_corn_cob|farming
+food_doughnut_apple|farming
+food_doughnut_chocolate|farming
+food_doughnut_normal|farming
+food_flan_vanilla|farming
+food_gyoza|farming
+food_juice_cactus|farming
+food_milk_soy|farming
+food_mochi|farming
+food_muffin_blueberry|farming
+food_omelette_potato|farming
+food_onigiri|farming
+food_paella|farming
+food_pasta|farming
+food_pea|farming
+food_pepper|farming
+food_pie_apple|farming
+food_pie_blueberry_simple|farming
+food_pie_rhubarb|farming
+food_popcorn|farming
+food_porridge|farming
+food_potato_baked|farming
+food_potato_spanish|farming
+food_salad_normal|farming
+food_salad_potato|farming
+food_seed_sunflower_toasted|farming
+food_smoothie_berry|farming
+food_smoothie_raspberry|farming
+food_soup_beetroot|farming
+food_soup_onion|farming
+food_soup_pea|farming
+food_soup_tomato|farming
+food_soy_beans|farming
+food_spaghetti|farming
+food_tofu|farming
+food_turkish_delight|farming
+ingredient_caramel|farming
+ingredient_cornstarch|farming
+ingredient_extract_vanilla|farming
+ingredient_flour_multigrain|farming
+ingredient_flour_rice|farming
+ingredient_oil_hemp|farming
+ingredient_oil_sunflower|farming
+ingredient_pepper_ground|farming
+ingredient_salt_normal|farming
+ingredient_sauce_soy|farming
+ingredient_sugar_normal|farming
+item_fibre_hemp|farming
+light_lantern_jack_yellow|farming
+misc_beanpole|farming
+misc_braid_garlic|farming
+misc_scarecrow_base|farming
+misc_trellis|farming
+produce_artichoke|farming
+produce_bean_green|farming
+produce_beetroot_normal|farming
+produce_blackberry|farming
+produce_blueberry_highbush|farming
+produce_cabbage_normal|farming
+produce_carrot_normal|farming
+produce_chilli_normal|farming
+produce_cocoa_jungle|farming
+produce_coffee|farming
+produce_corn_normal|farming
+produce_cucumber_normal|farming
+produce_garlic_normal|farming
+produce_grape|farming
+produce_lettuce|farming
+produce_melon|farming
+produce_onion_normal|farming
+produce_parsley_flatleaf|farming
+produce_pea|farming
+produce_pepper|farming
+produce_pineapple|farming
+produce_potato_normal|farming
+produce_pumpkin_yellow|farming
+produce_raspberry|farming
+produce_rhubarb|farming
+produce_soy_normal|farming
+produce_tomato_salad|farming
+produce_vanilla|farming
+rope_hemp|farming
+tool_scythe_mithril|farming
+utensil_board_cutting|farming
+utensil_bowl_mixing_glass|farming
+utensil_bowl_wooden|farming thirsty
+utensil_juicer_normal|farming
+utensil_mortar_pestle|farming
+utensil_pot_cooking|farming
+utensil_saucepan_normal|farming
+utensil_skillet_normal|farming
+utensil_tray_baking|farming
+vessel_bottle_glass_ethanol|farming
+vessel_glass_water|farming
+vessel_bottle_glass_water_rose|farming
+
+# supporting packages (.depends)
+brick_ordinary|default
+bucket_steel|bucket
+clay_ordinary|default
+crop_cotton|farming
+crop_wheat|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+flower_rose_red|flowers
+food_bread_ordinary|farming
+fruit_apple|default
+glass_ordinary|default moreblocks vessels
+ingredient_flour_ordinary|farming
+item_stick_ordinary|default
+liquid_water_ordinary|default
+metal_gold|default technic
+metal_iron|default
+metal_mithril|moreores technic
+metal_steel|default technic
+mineral_coal|default technic
+plant_cactus_ordinary|default
+plant_papyrus_ordinary|default mtg_plus
+snow_ordinary|default ethereal mtg_plus
+torch_ordinary|default
+tree_jungle|default doors moreblocks
+vessel_bottle_glass_empty|thirsty vessels
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+dirt_dry|default
+item_paper_ordinary|default moreblocks
+item_string_ordinary|farming
+liquid_water_river|default
+
+# supporting packages (.optional)
+#bucket_wood|bucket_wooden
+#bush_blueberry_ordinary|default
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#ingredient_cocoa_normal|cacaotree
+#liquid_lava_ordinary|default
+#mineral_mese|default
+#plant_shrub_dry|default
+#soil_ordinary|farming
+
+# supporting packages (.suggested)
+#food_milk_soy_red|cucina_vegana
+#fruit_banana|ethereal
+#fruit_lemon|ethereal
+#fruit_orange|ethereal
+#ingredient_butter_normal|cheese
+#mushroom_brown|flowers
+#plant_seaweed_undersea|ethereal
+#produce_strawberry_normal|ethereal

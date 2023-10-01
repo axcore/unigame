@@ -1,0 +1,66 @@
+# "herbs" remix - contains everything from the herbs mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# herbs packages
+deco_herbs_flower_achillea_white|herbs
+deco_herbs_flower_anagallis_yellow|herbs
+deco_herbs_flower_antirrhinum|herbs
+deco_herbs_flower_campanula_blue|herbs
+deco_herbs_flower_centaurea|herbs
+deco_herbs_flower_digitalis_blue|herbs
+deco_herbs_flower_digitalis_yellow|herbs
+deco_herbs_flower_drosera|herbs
+deco_herbs_flower_iris_blue|herbs
+deco_herbs_flower_leontopodium_white|herbs
+deco_herbs_flower_leucanthemum_white|herbs
+deco_herbs_flower_papaver_red|herbs
+deco_herbs_flower_plantago|herbs
+deco_herbs_flower_trifolium_red|herbs
+deco_herbs_flower_trifolium_white|herbs
+deco_herbs_mushroom_amanita_green|herbs
+deco_herbs_mushroom_boletus|herbs
+deco_herbs_mushroom_cantharellus|herbs
+deco_herbs_mushroom_galerina|herbs
+deco_herbs_mushroom_gyromitra|herbs
+deco_herbs_mushroom_macrolepiota|herbs
+flower_achillea_white|herbs
+flower_anagallis_yellow|herbs
+flower_antirrhinum|herbs
+flower_campanula_blue|herbs
+flower_centaurea|herbs
+flower_digitalis_blue|herbs
+flower_digitalis_yellow|herbs
+flower_drosera|herbs
+flower_iris_blue|herbs
+flower_leontopodium_white|herbs
+flower_leucanthemum_white|herbs
+flower_papaver_red|herbs
+flower_plantago|herbs
+flower_trifolium_red|herbs
+flower_trifolium_white|herbs
+mushroom_amanita_green|herbs
+mushroom_boletus|herbs
+mushroom_cantharellus|herbs
+mushroom_galerina|herbs
+mushroom_gyromitra|herbs
+mushroom_macrolepiota|herbs
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+
+# supporting packages (.at_least_one)
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_rainforest|default
+biome_default_savanna|default
+biome_ethereal_mountain|ethereal
+dirt_dry|default
+
+# supporting packages (.optional)
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#soil_ordinary|farming

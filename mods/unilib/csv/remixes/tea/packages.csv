@@ -1,0 +1,46 @@
+# "tea" remix - contains everything from the "tea" mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# tea packages
+drink_cup_tea_chrysanthemum|tea
+drink_cup_tea_dandelion|tea
+drink_cup_tea_fern|tea
+drink_cup_tea_geranium|tea
+drink_cup_tea_grass|tea
+drink_cup_tea_grass_jungle|tea
+drink_cup_tea_nettle|tea
+drink_cup_tea_pine|tea
+drink_cup_tea_rose|tea
+drink_cup_tea_thistle|tea
+
+# supporting packages (.depends)
+fern_ordinary|default
+flower_chrysanthemum_green|flowers
+flower_geranium_blue|flowers
+flower_rose_red|flowers
+flower_thistle|bakedclay
+glass_ordinary|default moreblocks vessels
+grass_jungle|default
+grass_ordinary|default
+mineral_coal|default technic
+plant_nettle_normal|nettle
+torch_ordinary|default
+tree_pine|default doors moreblocks
+vessel_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+flower_dandelion_white|flowers
+flower_dandelion_yellow|flowers
+
+# supporting packages (.optional)
+#crop_cotton|farming
+#crop_oat|farming
+#crop_rice_white|farming
+#crop_wheat|farming
+#mineral_mese|default
+#mushroom_red|flowers
+
+# supporting packages (.suggested)
+#bucket_steel|bucket

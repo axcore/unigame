@@ -1,0 +1,175 @@
+---------------------------------------------------------------------------------------------------
+-- From:    aato
+-- Media:   GPL 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_mineral_acanthite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/acanthite.png
+unilib_mineral_alabandite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/alabandite.png
+unilib_mineral_anatase_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/anatase.png
+unilib_mineral_anglesite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/anglesite.png
+unilib_mineral_anhydrite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/anhydrite.png
+unilib_mineral_argutite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/argutite.png
+unilib_mineral_arsenopyrite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/arsenopyrite.png
+unilib_mineral_azurite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/azurite.png
+unilib_mineral_bismite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/bismite.png
+unilib_mineral_bismuth_native_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/native_bismuth.png
+unilib_mineral_bornite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/bornite.png
+unilib_mineral_boulangerite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/boulangerite.png
+unilib_mineral_brookite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/brookite.png
+unilib_mineral_brucite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/brucite.png
+unilib_mineral_calcite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/calcite.png
+unilib_mineral_carnallite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/carnallite.png
+unilib_mineral_carnotite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/carnotite.png
+unilib_mineral_carrollite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/carrollite.png
+unilib_mineral_cerussite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/cerussite.png
+unilib_mineral_chalcocite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/chalcocite.png
+unilib_mineral_clausthalite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/clausthalite.png
+unilib_mineral_cobaltite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/cobaltite.png
+unilib_mineral_columbite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/columbite.png
+unilib_mineral_covellite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/covellite.png
+unilib_mineral_cuprite.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/cuprite.png
+unilib_mineral_cuprite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/cuprite.png
+unilib_mineral_descloizite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/descloizite.png
+unilib_mineral_enargite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/enargite.png
+unilib_mineral_ferberite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/ferberite.png
+unilib_mineral_franklinite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/franklinite.png
+unilib_mineral_freibergite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/freibergite.png
+unilib_mineral_germanite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/germanite.png
+unilib_mineral_gersdorffite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/gersdorffite.png
+unilib_mineral_greenockite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/greenockite.png
+unilib_mineral_hausmannite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/hausmannite.png
+unilib_mineral_hemimorphite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/hemimorphite.png
+unilib_mineral_hollandite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/hollandite.png
+unilib_mineral_hubnerite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/hubnerite.png
+unilib_mineral_hydrozincite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/hydrozincite.png
+unilib_mineral_iron_telluric_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/telluric_iron.png
+unilib_mineral_kainite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/kainite.png
+unilib_mineral_kesterite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/kesterite.png
+unilib_mineral_kieserite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/kieserite.png
+unilib_mineral_lamproite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/lamproite.png
+unilib_mineral_langbeinite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/langbeinite.png
+unilib_mineral_leucite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/leucite.png
+unilib_mineral_loellingite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/lollingite.png
+unilib_mineral_manganite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/manganite.png
+unilib_mineral_millerite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/millerite.png
+unilib_mineral_monazite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/monazite.png
+unilib_mineral_nepheline_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/nepheline.png
+unilib_mineral_nepouite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/nepouite.png
+unilib_mineral_nickeline_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/nickeline.png
+unilib_mineral_nitratine_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/nitratine.png
+unilib_mineral_orpiment_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/orpiment.png
+unilib_mineral_otavite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/otavite.png
+unilib_mineral_petalite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/petalite.png
+unilib_mineral_phosphorite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/phosphorite.png
+unilib_mineral_polyhalite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/polyhalite.png
+unilib_mineral_polylithionite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/polylithionite.png
+unilib_mineral_proustite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/proustite.png
+unilib_mineral_pyromorphite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/pyromorphite.png
+unilib_mineral_rhodochrosite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/rhodochrosite.png
+unilib_mineral_rhodonite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/rhodonite.png
+unilib_mineral_rutile_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/rutile.png
+unilib_mineral_samarskite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/samarskite_y.png
+unilib_mineral_siderite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/siderite.png
+unilib_mineral_skutterudite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/skutterudite.png
+unilib_mineral_smithsonite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/smithsonite.png
+unilib_mineral_stannite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/stannite.png
+unilib_mineral_stephanite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/stephanite.png
+unilib_mineral_strontianite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/strontianite.png
+unilib_mineral_teallite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/teallite.png
+unilib_mineral_tennantite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/tennantite.png
+unilib_mineral_thorite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/thorite.png
+unilib_mineral_thortveitite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/thortveitite.png
+unilib_mineral_tin_native_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/native_tin.png
+unilib_mineral_titanite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/titanite.png
+unilib_mineral_torbernite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/torbernite.png
+unilib_mineral_uraninite.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/uraninite.png
+unilib_mineral_uraninite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/uraninite.png
+unilib_mineral_vanadinite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/vanadinite.png
+unilib_mineral_wulfenite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/wulfenite.png
+unilib_mineral_zincite_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/zincite.png
+unilib_mineral_zircon_lump.png
+    Adapted from /src/main/resources/assets/almostalltheores/textures/block/zircon.png

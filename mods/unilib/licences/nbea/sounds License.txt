@@ -1,0 +1,48 @@
+--------------------------------------------
+file name:  nbea_sheep.ogg / nbea_sheep_hurt.ogg
+original file name: sheepHit.flac / sheepBleet.flac
+Author: Blender Foundation
+http://opengameart.org/content/sheep-sound-bleats-yo-frankie
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+--------------------------------------------
+file name: nbea_bounce.ogg
+original file name: BounceYoFrankie.flac
+Author: Blender Foundation
+http://opengameart.org/content/funny-comic-cartoon-bounce-sound
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+--------------------------------------------
+file_name: nbea_mc.0.ogg
+sample from "Lunar Harvest"
+Author: FoxSynergy
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+original_file_name: Lunar Harvest v1_0.mp3
+http://opengameart.org/content/lunar-harvest
+--------------------------------------------
+file_name: nbea_mc.1.ogg
+sample from "Man-Made Messiah"
+Author: FoxSynergy
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+original_file_name: Man-Made Messiah v0_8.mp3
+http://opengameart.org/content/man-made-messiah
+--------------------------------------------
+file_name: nbea_mc.2.ogg
+sample from "A Journey Awaits"
+by Pierre Bondoerffer (@pbondoer)
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+http://www.gnu.org/licenses/gpl-3.0.html
+original_file_name: A Journey Awaits.mp3
+http://opengameart.org/content/a-journey-awaits
+--------------------------------------------
+file_name: nbea_mc.3.ogg
+sample from "1Kiss 1Credit"
+Author: FoxSynergy
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+original_file_name: FoxSynergy - 1 KISS 1 CREDIT.mp3
+http://opengameart.org/content/1-kiss-1-credit
+--------------------------------------------

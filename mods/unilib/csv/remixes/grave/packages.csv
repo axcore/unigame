@@ -1,0 +1,33 @@
+# "grave" remix - contains only dirt, trees and biomes from the grave mod (no mobs were imported)
+# Also contains some packages from the "cropocalypse" mod which were only available when the "grave"
+#       mod was loaded. In the "cropocalypse" remix, those packages are commented out
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# grave packages
+biome_grave_graveyard|grave
+deco_grave_tree_oak_graveyard|grave
+dirt_graveyard|grave
+tree_oak_graveyard|grave
+
+# cropocalypse packages
+abm_cropocalypse_grave_plants|cropocalypse
+deco_cropocalypse_flower_rose_black|cropocalypse
+deco_cropocalypse_grass_graveyard|cropocalypse
+deco_cropocalypse_mushroom_amanita_deadly|cropocalypse
+deco_cropocalypse_plant_devils_club|cropocalypse
+deco_cropocalypse_tree_young_dead|cropocalypse
+flower_rose_black|cropocalypse
+grass_graveyard|cropocalypse
+mushroom_amanita_deadly|cropocalypse
+plant_devils_club|cropocalypse
+tree_young_dead|cropocalypse
+
+# supporting packages (.depends)
+stone_ordinary|default moreblocks technic
+
+# supporting packages (.optional)
+#grass_jungle|default
+#mineral_mese|default
+#moss_green|sickles

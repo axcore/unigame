@@ -2,7 +2,6 @@
 # Does not include the unbreakable fake nodes, the coins, the permanent/fake fires or the smoke
 #       block. The admin pickaxe does not interact with clouds
 # Note that the advertised light-blocking node is missing from the original mod's code
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -20,4 +19,10 @@ admin_tool_pick|maptools
 admin_trampoline_invisible|maptools
 shared_maptools|maptools
 
-# (no supporting packages for this remix)
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

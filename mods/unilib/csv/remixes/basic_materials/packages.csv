@@ -1,16 +1,33 @@
 # "basic_materials" remix - contains everything from basic_materials
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # basic_materials packages
-chain_brass|basic_materials
-chain_steel|basic_materials
 component_circuit_integrated|basic_materials
 component_crystal_energy|basic_materials
 component_element_heating|basic_materials
 component_gear_steel|basic_materials
 component_motor_simple|basic_materials
+hardware_bar_aluminium|basic_materials
+hardware_bar_steel_carbon|basic_materials
+hardware_bar_steel|basic_materials
+hardware_bar_steel_stainless|basic_materials
+hardware_chain_brass|basic_materials
+hardware_chainlink_brass|basic_materials
+hardware_chain_steel|basic_materials
+hardware_chainlink_steel|basic_materials
+hardware_strip_aluminium|basic_materials
+hardware_strip_copper|basic_materials
+hardware_strip_gold|basic_materials
+hardware_strip_lead|basic_materials
+hardware_strip_steel|basic_materials
+hardware_strip_steel_stainless|basic_materials
+hardware_wire_aluminium|basic_materials
+hardware_wire_copper|basic_materials
+hardware_wire_gold|basic_materials
+hardware_wire_silver|basic_materials
+hardware_wire_steel|basic_materials
+hardware_wire_steel_stainless|basic_materials
 item_padlock_normal|basic_materials
 item_spool_empty|basic_materials
 material_cement_industrial|basic_materials
@@ -21,40 +38,44 @@ material_plastic|basic_materials
 material_silicon|basic_materials
 material_terracotta|basic_materials
 metal_brass|basic_materials technic
-metal_copper_strip|basic_materials
-metal_copper_wire|basic_materials
-metal_gold_wire|basic_materials
-metal_steel_bar|basic_materials
-metal_steel_strip|basic_materials
-metal_steel_wire|basic_materials
-metal_silver_wire|basic_materials
 
 # supporting packages (.depends)
 clay_ordinary|default
 dirt_ordinary|default farming moreblocks
 dye_basic|dye bakedclay
 gravel_ordinary|default mtg_plus
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_aluminium|real_minerals
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_silver|moreores technic
-metal_steel|default technic
+metal_lead|glemr11 technic_worldgen technic
+metal_silver|glemr11 moreores technic
+metal_steel|default glemr11 technic
+metal_steel_carbon|technic_worldgen technic
+metal_steel_stainless|technic_worldgen technic
+mineral_bauxite|real_minerals
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 sand_ordinary|default
 torch_ordinary|default
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #container_chest_ordinary|default
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
-#metal_tin|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
+#metal_chromium|glemr11 technic_worldgen technic
+#metal_tin|default glemr11 technic
+#mineral_flint|default fire mtg_plus
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.plant_rush_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_rush_sea.exec()
 
     unilib.register_node("unilib:plant_rush_sea", "aotearoa:sea_rush", mode, {
         -- From aotearoa:sea_rush
-        description = unilib.annotate(S("Sea Rush"), "Juncus kraussii"),
+        description = unilib.utils.annotate(S("Sea Rush"), "Juncus kraussii"),
         tiles = {"unilib_plant_rush_sea.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, grass = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_rush_sea.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_rush_sea", "aotearoa:sea_rush")
 
-    unilib.register_decoration("aotearoa_plant_rush_sea", {
+    unilib.register_decoration_generic("aotearoa_plant_rush_sea", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_rush_sea",

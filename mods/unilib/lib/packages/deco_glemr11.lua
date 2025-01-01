@@ -9,10 +9,8 @@
 unilib.pkg.deco_glemr11 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
--- Table of biome names, compiled from minetest.registered_biomes() and unilib.biome_setup_list()
-local biome_check_table = {}
 -- Flag set to true, if we should check that specified nodes and biomes exist, showing a warning for
 --      any problems. This flag can be disabled once any changes to the remix and its packages have
 --      been checked
@@ -27,7 +25,9 @@ local exception_table = {
 }
 
 -- In the code below, we need to be able to check both biomes that have been created, and those
---      that are waiting to be created (in unilib.biome_setup_list)
+--      that are waiting to be created
+-- Table of biome names, compiled from core.registered_biomes() and
+--      unilib.global.biome_csv_setup_list()
 local biome_check_table = {}
 
 ---------------------------------------------------------------------------------------------------
@@ -36,8 +36,8 @@ local biome_check_table = {}
 
 local function convert_to_list(arg)
 
-    -- Modified version of unilib.convert_to_list() (from utils.lua), taking into account that a
-    --      string may be a list of whitespace-separated values
+    -- Modified version of unilib.utils.convert_to_list() (from utils.lua), taking into account that
+    --      a string may be a list of whitespace-separated values
 
     if type(arg) == "table" then
 
@@ -51,7 +51,7 @@ local function convert_to_list(arg)
 
     else
 
-        return unilib.split_string_by_whitespace(arg, true)
+        return unilib.utils.split_string_by_whitespace(arg, true)
 
     end
 
@@ -62,11 +62,12 @@ local function check_biomes(biome_list)
     -- Check arguments
     for _, biome_name in pairs(biome_list) do
 
-        if minetest.registered_biomes[biome_name] == nil and
+        if core.registered_biomes[biome_name] == nil and
+                unilib.global.biome_name_check_table[biome_name] == nil and
                 biome_check_table[biome_name] == nil then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr11 package: Unrecognised biome", biome_name)
+                unilib.utils.show_warning("deco_glemr11 package: Unrecognised biome", biome_name)
             end
 
             return false
@@ -82,11 +83,11 @@ end
 local function check_nodes(node_list)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr11" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, full_name in pairs(node_list) do
 
-            if minetest.registered_nodes[full_name] == nil and
+            if core.registered_nodes[full_name] == nil and
                     unilib.pkg.dirt_custom_glemr11.dirt_table[full_name] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr11.dirt_table[full_name]
@@ -114,19 +115,19 @@ local function check_nodes(node_list)
     -- Check arguments
     for _, full_name in pairs(node_list) do
 
-        if not unilib.is_registered_node_or_mtgame_alias(full_name) then
+        if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr11 package: Unrecognised node", full_name)
+                unilib.utils.show_warning("deco_glemr11 package: Unrecognised node", full_name)
             end
 
             return false
 
-        elseif unilib.get_mod_name(full_name) ~= "unilib" then
+        elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
             -- (Not a fatal error)
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr11 package: Non-unilib node", full_name)
+                unilib.utils.show_warning("deco_glemr11 package: Non-unilib node", full_name)
             end
 
         end
@@ -137,25 +138,29 @@ local function check_nodes(node_list)
 
 end
 
-local function check_schematic(schem_list)
+local function check_schematics(schem_list)
 
     -- Check arguments
     for _, schem_name in pairs(schem_list) do
 
-        if not unilib.is_file(unilib.path_mod .. "/mts/" .. schem_name .. ".mts") then
+        if not unilib.utils.is_file(unilib.core.path_mod .. "/mts/" .. schem_name .. ".mts") then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr11 package: Missing schematic file", schem_name)
+
+                unilib.utils.show_warning(
+                    "deco_glemr11 package: Missing schematic file", schem_name
+                )
+
             end
 
             return false
 
         elseif exception_table[schem_name] ~= nil and
-                unilib.pkg_executed_table[exception_table[schem_name]] == nil then
+                unilib.global.pkg_executed_table[exception_table[schem_name]] == nil then
 
             if debug_warning_flag then
 
-                unilib.show_warning(
+                unilib.utils.show_warning(
                     "deco_glemr11 package: Can\'t use decoration schematic because package not" ..
                             " executed",
                     schem_name,
@@ -176,25 +181,47 @@ end
 
 local function check_deco(data_table)
 
-    -- Checks one of the values in unilib.deco_setup_list (representing a decoration that hasn't
-    --      been created yet) for validity
+    -- Checks one of the values in unilib.global.deco_csv_setup_list (representing a decoration that
+    --      hasn't been created yet) for validity
 
      -- (Don't act on decorations provides by other remixes)
     if data_table.remix_name ~= "glemr11" then
         return false
     end
 
-        -- If required, check that nodes actually exist, and register dirt on demand
     if data_table.deco_type == "simple" then
 
+        -- If required, check that nodes actually exist, and register dirt on demand
         if not check_nodes(convert_to_list(data_table.deco_name)) then
             return false
         end
 
+    elseif data_table.deco_type == "treelog" then
+
+        -- Items in "treelog" constructions can the name of the schematic for the tree itself, or
+        --      the full_name of the trunk node used to construct the log
+        for _, item_name in ipairs(convert_to_list(data_table.deco_name)) do
+
+            if not string.find(item_name, ":") then
+
+                if not check_schematics({item_name}) then
+                    return
+                end
+
+            else
+
+                if not check_nodes({item_name}) then
+                    return
+                end
+
+            end
+
+        end
+
     else
 
-        -- If required, check that the schematic actually exists and is suitable for use
-        if not check_schematic(convert_to_list(data_table.deco_name)) then
+        -- If required, check that the schematics actually exist and are suitable for use
+        if not check_schematics(convert_to_list(data_table.deco_name)) then
             return false
         end
 
@@ -217,7 +244,7 @@ local function check_deco(data_table)
     end
 
     -- If required, check that biomes actually exist
-    for _, biome_table in pairs(unilib.biome_setup_list) do
+    for _, biome_table in pairs(unilib.global.biome_csv_setup_list) do
         biome_check_table[biome_table.biome_name] = true
     end
 
@@ -259,21 +286,23 @@ end
 function unilib.pkg.deco_glemr11.post()
 
     -- (Most) decorations for this remix are provided by the file decorations.csv. When loaded, the
-    --      data is stored in unilib.deco_setup_list until unilib is ready to create the decorations
+    --      data is stored in unilib.global.deco_csv_setup_list until unilib is ready to create the
+    --      decorations
 
     -- Compile a table of biome names for checking
-    -- Some biomes have already been registered in minetest.registered_nodes(), others are waiting
-    --      to be registered in unilib.biome_setup_list()
-    for name, _ in pairs(minetest.registered_biomes) do
+    -- Some biomes have already been registered in core.registered_nodes(), others are waiting to be
+    --      registered in unilib.global.biome_csv_setup_list()
+    for name, _ in pairs(core.registered_biomes) do
         biome_check_table[name] = true
     end
 
-    for _, data_table in pairs(unilib.biome_setup_list) do
+    for _, data_table in pairs(unilib.global.biome_csv_setup_list) do
         biome_check_table[data_table.biome_name] = true
     end
 
+    -- Check decorations loaded from CSV, filtering out any that are invalid
     local new_setup_list = {}
-    for _, data_table in ipairs(unilib.deco_setup_list) do
+    for _, data_table in ipairs(unilib.global.deco_csv_setup_list) do
 
         if check_deco(data_table) then
             table.insert(new_setup_list, data_table)
@@ -282,7 +311,7 @@ function unilib.pkg.deco_glemr11.post()
     end
 
     -- Update global variables
-    unilib.deco_setup_list = new_setup_list
+    unilib.global.deco_csv_setup_list = new_setup_list
 
     -- Add remaining GLEMr11 decorations (those not defined by the .csv)
 
@@ -317,7 +346,7 @@ function unilib.pkg.deco_glemr11.post()
             spread = {x = 50, y = 50, z = 50},
         },
         place_offset_y = -1,
-        place_on = {"unilib:sand_ordinary", "unilib:dirt_silt_coarse"},
+        place_on = {"unilib:dirt_silt_coarse", "unilib:sand_ordinary"},
         sidelen = 4,
         y_max = -2,
         y_min = -12,
@@ -333,7 +362,7 @@ function unilib.pkg.deco_glemr11.post()
             "unilib:coral_rooted_orange_glow",
             "unilib:coral_rooted_pink_big",
             "unilib:coral_rooted_pink_glow",
-            "unilib:plant_anemone",
+            "unilib:plant_anemone_normal",
         },
 
         biomes = {
@@ -350,7 +379,7 @@ function unilib.pkg.deco_glemr11.post()
             seed = 7013,
         },
         place_offset_y = -1,
-        place_on = {"unilib:sand_ordinary", "unilib:dirt_silt_coarse"},
+        place_on = {"unilib:dirt_silt_coarse", "unilib:sand_ordinary"},
         sidelen = 4,
         y_max = -4,
         y_min = -14,
@@ -378,8 +407,9 @@ function unilib.pkg.deco_glemr11.post()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = "unilib:sand_ordinary",
         sidelen = 16,
@@ -408,8 +438,9 @@ function unilib.pkg.deco_glemr11.post()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = "unilib:sand_ordinary",
         sidelen = 16,
@@ -438,8 +469,9 @@ function unilib.pkg.deco_glemr11.post()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = "unilib:sand_ordinary",
         sidelen = 16,
@@ -468,8 +500,9 @@ function unilib.pkg.deco_glemr11.post()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = "unilib:sand_ordinary",
         sidelen = 16,
@@ -487,10 +520,10 @@ function unilib.pkg.deco_glemr11.post()
         },
 
         biomes = {
-            "hot_semiarid_ocean",
-            "warm_semiarid_ocean",
-            "temperate_semiarid_ocean",
-            "cool_semiarid_ocean",
+            "glemr11_hot_semiarid_ocean",
+            "glemr11_warm_semiarid_ocean",
+            "glemr11_temperate_semiarid_ocean",
+            "glemr11_cool_semiarid_ocean",
         },
         flags = "force_placement",
         noise_params = {
@@ -501,8 +534,9 @@ function unilib.pkg.deco_glemr11.post()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = "unilib:sand_ordinary",
         sidelen = 16,

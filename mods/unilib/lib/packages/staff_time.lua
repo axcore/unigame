@@ -9,7 +9,7 @@
 unilib.pkg.staff_time = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orbs_of_time.add_mode
+local mode = unilib.global.imported_mod_table.orbs_of_time.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,12 +44,12 @@ function unilib.pkg.staff_time.exec()
 
         on_use = function(itemstack, user)
 
-            minetest.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
-            minetest.set_timeofday(0.5)
-            minetest.sound_play("unilib_staff_time_birds", {pos = user:get_pos(), loop = false})
+            core.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
+            core.set_timeofday(0.5)
+            core.sound_play("unilib_staff_time_birds", {pos = user:get_pos(), loop = false})
 
-            if not minetest.setting_getbool("creative_mode") then
-                itemstack:add_wear(65535/8)
+            if not core.setting_getbool("creative_mode") then
+                itemstack:add_wear(unilib.constant.max_tool_wear / 8)
             end
 
             return itemstack
@@ -65,7 +65,7 @@ function unilib.pkg.staff_time.exec()
             {c_diamond, c_diamond, c_diamond},
         },
     })
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:staff_time_day", S("This staff is too exotic to be repaired")
     )
 
@@ -82,12 +82,12 @@ function unilib.pkg.staff_time.exec()
 
         on_use = function(itemstack, user)
 
-            minetest.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
-            minetest.set_timeofday(0)
-            minetest.sound_play("unilib_staff_time_owl", {pos = user:get_pos(), loop = false})
+            core.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
+            core.set_timeofday(0)
+            core.sound_play("unilib_staff_time_owl", {pos = user:get_pos(), loop = false})
 
-            if not minetest.setting_getbool("creative_mode") then
-                itemstack:add_wear(65535/8)
+            if not core.setting_getbool("creative_mode") then
+                itemstack:add_wear(unilib.constant.max_tool_wear / 8)
             end
 
             return itemstack
@@ -103,7 +103,7 @@ function unilib.pkg.staff_time.exec()
             {c_diamond, c_diamond, c_diamond},
         },
     })
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:staff_time_night", S("This staff is too exotic to be repaired")
     )
 
@@ -121,12 +121,12 @@ function unilib.pkg.staff_time.exec()
 
         on_use = function(itemstack, user)
 
-            minetest.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
-            minetest.set_timeofday(0.2)
-            minetest.sound_play("unilib_staff_time_birds", {pos = user:get_pos(), loop = false})
+            core.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
+            core.set_timeofday(0.2)
+            core.sound_play("unilib_staff_time_birds", {pos = user:get_pos(), loop = false})
 
-            if not minetest.setting_getbool("creative_mode") then
-                itemstack:add_wear(65535/8)
+            if not core.setting_getbool("creative_mode") then
+                itemstack:add_wear(unilib.constant.max_tool_wear / 8)
             end
 
             return itemstack
@@ -141,7 +141,7 @@ function unilib.pkg.staff_time.exec()
             {"unilib:staff_time_night"},
         },
     })
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:staff_time_dawn", S("This staff is too exotic to be repaired")
     )
 
@@ -159,12 +159,12 @@ function unilib.pkg.staff_time.exec()
 
         on_use = function(itemstack, user)
 
-            minetest.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
-            minetest.set_timeofday(0.8)
-            minetest.sound_play("unilib_staff_time_owl", {pos = user:get_pos(), loop = false})
+            core.sound_play("unilib_staff_time_ding", {pos = user:get_pos(), loop = false})
+            core.set_timeofday(0.8)
+            core.sound_play("unilib_staff_time_owl", {pos = user:get_pos(), loop = false})
 
-            if not minetest.setting_getbool("creative_mode") then
-                itemstack:add_wear(65535/8)
+            if not core.setting_getbool("creative_mode") then
+                itemstack:add_wear(unilib.constant.max_tool_wear / 8)
             end
 
             return itemstack
@@ -179,7 +179,7 @@ function unilib.pkg.staff_time.exec()
             {"unilib:staff_time_day"},
         },
     })
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:staff_time_dusk", S("This staff is too exotic to be repaired")
     )
 

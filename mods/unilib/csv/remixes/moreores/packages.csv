@@ -2,13 +2,12 @@
 #       by minetest_game
 # Includes the deprecated mithril/silver hoes
 # Does not include support for frames/toolranks (yet)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # moreblocks packages
-metal_mithril|moreores technic
-metal_silver|moreores technic
+metal_mithril|glemr11 moreores technic
+metal_silver|glemr11 moreores technic
 ore_moreores_stone_ordinary_with_mithril|moreores
 ore_moreores_stone_ordinary_with_silver|moreores
 rail_copper|moreores
@@ -26,12 +25,17 @@ tool_sword_mithril|moreores
 tool_sword_silver|moreores
 
 # supporting packages (.depends)
-metal_copper|default moreblocks technic
-shared_carts|unilib
+metal_copper|default glemr11 moreblocks technic
+shared_carts|carts
 stone_ordinary|default moreblocks technic
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #container_chest_ordinary|default
 #grass_jungle|default
-#mineral_mese|default
+#machine_furnace_induction|unilib
+#mineral_mese|default glemr11
 #moss_green|sickles
+
+# supporting packages (.suggested)

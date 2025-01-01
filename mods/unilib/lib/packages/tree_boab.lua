@@ -9,7 +9,7 @@
 unilib.pkg.tree_boab = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_boab.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Adansonia gregorii"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_boab.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_boab_closed
+        -- Original to unilib. Creates unilib:gate_boab_closed, etc
         part_name = "boab",
         orig_name = {nil, nil},
 
@@ -122,10 +122,10 @@ function unilib.pkg.tree_boab.exec()
     -- N.B. Tweaked these schematics to remove a rogue tree trunk node at the top
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_boab_in_kimberley_" .. i, {
+        unilib.register_decoration_generic("australia_tree_boab_in_kimberley_" .. i, {
             -- From australia/biome_kimberley.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_boab_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_boab_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 10000,
             flags = "place_center_x, place_center_z",

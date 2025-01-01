@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_onion = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_soup_onion.exec()
         -- N.B. no food_onion in original code
         groups = {flammable = 2, food_onion_soup = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_soup_onion", 6, "unilib:utensil_bowl_wooden"
         ),
     })
@@ -46,7 +46,7 @@ function unilib.pkg.food_soup_onion.exec()
         recipe = {
             {"group:food_onion", "group:food_onion", "group:food_onion"},
             {"group:food_onion", "unilib:utensil_pot_cooking", "group:food_onion"},
-            {"", "unilib:utensil_bowl_wooden", ""}
+            {"", "unilib:utensil_bowl_wooden", ""},
         },
         replacements = {
             {"unilib:utensil_pot_cooking", "unilib:utensil_pot_cooking"},

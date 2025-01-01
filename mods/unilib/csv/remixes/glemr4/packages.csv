@@ -5,7 +5,6 @@
 #       so many items do not actually spawn in the world, you can omit everything that is not
 #       required for biomes and decorations. The section containing ore packages can also be
 #       removed, as it is again not very useful in survival mode
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -136,11 +135,17 @@ decor_bricks_runestone|xdecor
 decor_bricks_stone_circle|moreblocks
 decor_bricks_stone_coal|moreblocks
 decor_bricks_stone_grey|moreblocks
-decor_rockwall_stone_desert|unilib
-decor_rockwall_stone_ordinary|glemr4
+decor_rockwall_stone_desert|glemr4 glemr6
+decor_rockwall_stone_ordinary|glemr4 glemr6
+decor_rockwall_stone_sandstone_desert|glemr4 glemr6
+decor_rockwall_stone_sandstone_ordinary|glemr4 glemr6
+decor_rockwall_stone_sandstone_silver|glemr4 glemr6
 decor_stone_coal|moreblocks
+decor_stone_cracked|glemr4
+decor_stone_dirty|glemr4
 decor_stone_iron|moreblocks
 decor_stone_plaster|darkage
+decor_stone_sandy|glemr4
 decor_tiled_coal|xdecor
 decor_tiled_coal_checker|moreblocks
 decor_tiled_iron_checker|moreblocks
@@ -158,23 +163,23 @@ gravel_sandstone_desert|glemr4
 liquid_grease_normal|steampunk
 #liquid_water_ordinary|default
 liquid_water_river_muddy|australia
+material_adobe|darkage
 metal_brass|basic_materials technic
 metal_iron_cast|technic_worldgen technic
 metal_iron_wrought|technic_worldgen
-metal_lead|technic_worldgen technic
-metal_silver|moreores technic
+metal_lead|glemr11 technic_worldgen technic
+metal_silver|glemr11 moreores technic
 metal_steel_carbon|technic_worldgen technic
 metal_steel_stainless|technic_worldgen technic
 mineral_quartz_white|underch
-misc_adobe|darkage
 sand_ordinary_with_rocks|valleys_c
 sand_white|glemr4
-shared_tsm_pyramids|tsm_pyramids
+shared_bakedclay|bakedclay
+shared_tsm_pyramids_engravings|tsm_pyramids
+shared_tsm_pyramids_traps|tsm_pyramids
 stone_basalt_red|pfaa
 stone_claystone_red|pfaa
 stone_conglomerate_rough|pfaa
-stone_desert_with_cracks|glemr4
-stone_desert_with_sand|glemr4
 stone_granite_pale|pfaa
 stone_laterite|pfaa
 stone_limestone_red|pfaa
@@ -183,7 +188,6 @@ stone_marble_white|farlands
 stone_mudstone|pfaa
 stone_obsidian|default moreblocks
 stone_ordinary_with_cover_seagrass|farlands
-stone_ordinary_with_dirt|glemr4
 stone_sandstone_desert_trap|tsm_pyramids
 stone_sandstone_desert_with_engraving|tsm_pyramids
 stone_savanna_with_coal|farlands
@@ -211,6 +215,7 @@ ingredient_acorn|moretrees
 ingredient_cone_cedar|moretrees
 ingredient_cone_spruce|moretrees
 ingredient_cone_spruce_mature|glemr4
+shared_farlands_fruit|unilib
 tree_acacia|default doors moreblocks
 tree_apple|default doors moreblocks
 tree_apple_mature|moretrees
@@ -295,7 +300,7 @@ grass_ordinary|default
 grass_rainforest|farlands
 grass_swamp|farlands
 grass_tall|farlands
-mineral_crystallinum|ethereal
+mineral_crystallite|ethereal
 misc_patch_grass|dryplants
 mushroom_brown|flowers
 mushroom_red|flowers
@@ -395,7 +400,7 @@ misc_leaves_autumn|glemr4
 misc_pile_logs|glemr4
 mushroom_blotchy|glemr4
 mushroom_white_glowing|farlands
-plant_anemone|farlands
+plant_anemone_normal|farlands
 plant_cactus_ordinary|default
 plant_kelp_green|farlands
 #plant_oat_wild|farlands
@@ -409,6 +414,7 @@ plant_weed_bindweed|farlands
 #produce_pineapple|farming
 #produce_strawberry_normal|ethereal
 #snow_ordinary|default ethereal mtg_plus
+tree_mushroom_generic|ethereal
 tree_mushroom_mixed|farlands glemr11
 tree_mushroom_red|ethereal
 utensil_bowl_wooden|farming thirsty
@@ -421,19 +427,24 @@ food_fish_cooked|ethereal
 food_sashimi|ethereal
 #ice_ordinary|default ethereal mtg_plus
 ingredient_fish_basic|ethereal
+ingredient_fish_bonus|ethereal
+ingredient_fish_junk|ethereal
 item_bone|bonemeal
 item_fertiliser_bonemeal|bonemeal
 item_rod_fishing|ethereal
 item_worm_juicy|ethereal
 #sand_undersea|ethereal
+shared_ethereal_candle|ethereal
+shared_ethereal_fish|ethereal
 #snow_ordinary|default ethereal mtg_plus
 
 # (other items, /valleys_c subfolder; can be commented out, if not required)
 fire_permanent|fire underch
-ice_thin|caverealms
+ice_blue|caverealms
 mineral_salt|caverealms
 misc_stalactite_small|valleys_c
 misc_stalagmite_small|valleys_c
+pebble_small|valleys_c
 stone_ordinary_hot|caverealms
 stone_ordinary_with_fungus_glowing_purple|valleys_c
 
@@ -447,23 +458,24 @@ crop_wheat|farming
 decor_bricks_stone_chalked|darkage
 dirt_dry|default
 dye_basic|dye bakedclay
+fruit_coconut_exotic|farlands
+fruit_mango_exotic|farlands
 glass_ordinary|default moreblocks vessels
 item_string_ordinary|farming
 item_sweeper|moreblocks
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_cassiterite|real_minerals
 mineral_chalcopyrite|unilib
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_flint|default fire mtg_plus
 mineral_galena|real_minerals
 mineral_magnesite|unilib
 mineral_magnetite|real_minerals
 mineral_malachite|real_minerals
-mineral_mese|default
+mineral_mese|default glemr11
 mineral_sphalerite|real_minerals
 misc_sponge|ethereal
 misc_straw_ordinary|farming darkage
@@ -478,6 +490,7 @@ clay_brown|underch
 ingredient_flour_ordinary|farming
 
 # supporting packages (.optional)
+#abm_farlands_bushes_trees|unilib
 #bush_blueberry_ordinary|default
 #container_chest_ordinary|default
 #coral_block_skeleton|default
@@ -485,16 +498,19 @@ ingredient_flour_ordinary|farming
 #crop_oat|farming
 #crop_rice_white|farming
 #crop_rye|farming
-#fire_ordinary|fire
 #fruit_cactus_exotic|farlands
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
 #item_book_ordinary|default
 #item_paper_ordinary|default moreblocks
-#metal_chromium|technic_worldgen technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
+#metal_chromium|glemr11 technic_worldgen technic
 #metal_magnesium|unilib
-#metal_tin|default technic
-#metal_zinc|technic_worldgen technic
+#metal_tin|default glemr11 technic
+#metal_zinc|glemr11 technic_worldgen technic
+#mineral_flint|default fire mtg_plus
 #misc_blueprint_column|columnia
 #misc_petals|sickles
 #moss_green|sickles

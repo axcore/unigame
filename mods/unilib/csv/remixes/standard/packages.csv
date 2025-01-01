@@ -1,0 +1,53 @@
+# "standard" remix - contains packages providing a "standard" set of ABMs and LBMs, imported from
+#       various source mods
+# Note that these packages are also specified in other remixes; those from minetest_game appear are
+#       specified by the "mtgame" remix, those from ethereal-ng are also specified by the "ethereal"
+#       remix, and so on
+
+# node_name | original_mod
+
+# ABM packages
+abm_standard_cactus_grow|default
+abm_standard_crop_grow|farming
+abm_standard_dirt_convert|ethereal
+abm_standard_flame_ignite|fire
+abm_standard_flame_remove|fire
+abm_standard_flora_spread|flowers
+abm_standard_ice_snow_melt|snow
+abm_standard_lava_cool|default
+abm_standard_leaves_falling|ethereal
+abm_standard_moss_grow|default underch
+abm_standard_moss_spread|snow
+abm_standard_mushroom_spread|flowers
+abm_standard_oil_ignite|forest
+abm_standard_papyrus_grow|default
+abm_standard_soil_convert|farming
+abm_standard_tnt_ignite|tnt
+abm_standard_torch_extinguish|ethereal
+abm_standard_turf_kill|default
+abm_standard_turf_spread|default
+abm_standard_water_freeze|ethereal
+
+# LBM packages
+lbm_standard_pane_rotate|xpanes
+
+# Shared packages
+shared_standard|flowers fire
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+fire_ordinary|fire
+ice_ordinary|default ethereal mtg_plus
+liquid_water_ordinary|default
+mineral_coal|default technic
+torch_ordinary|default
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#soil_ordinary|farming
+
+# supporting packages (.suggested)

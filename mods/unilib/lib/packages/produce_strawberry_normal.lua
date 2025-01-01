@@ -9,7 +9,7 @@
 unilib.pkg.produce_strawberry_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -52,15 +52,16 @@ function unilib.pkg.produce_strawberry_normal.exec()
                     items = {
                         {items = {"unilib:produce_strawberry_normal_harvest"}, rarity = 2},
                         {items = {"unilib:produce_strawberry_normal_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
                 drop = {
                     items = {
                         {items = {"unilib:produce_strawberry_normal_harvest"}, rarity = 1},
-                        {items = {"unilib:produce_strawberry_normal_harvest 2"}, rarity = 3},
-                    }
+                        -- N.B. Confirmed with original mod author, dropping 1 is not a typo
+                        {items = {"unilib:produce_strawberry_normal_harvest"}, rarity = 3},
+                    },
                 },
             },
             {
@@ -68,7 +69,7 @@ function unilib.pkg.produce_strawberry_normal.exec()
                     items = {
                         {items = {"unilib:produce_strawberry_normal_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_strawberry_normal_harvest 3"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
@@ -77,7 +78,8 @@ function unilib.pkg.produce_strawberry_normal.exec()
         min_light = 13,
         waving = 1,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -94,7 +96,24 @@ function unilib.pkg.produce_strawberry_normal.exec()
         juice_description = S("Strawberry"),
         juice_type = "strawberry",
         rgb = "#ff3636",
+
         orig_flag = true,
+    })
+
+    unilib.register_decoration_generic("ethereal_produce_strawberry_normal", {
+        -- From ethereal-ng/decor.lua
+        deco_type = "simple",
+        decoration = "unilib:produce_strawberry_normal_grow_7",
+
+        noise_params = {
+            octaves = 3,
+            offset = 0,
+            persist = 0.6,
+            scale = 0.002,
+            seed = 143,
+            spread = {x = 100, y = 100, z = 100},
+        },
+        sidelen = 16,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.deco_glemr6 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr6.add_mode
+local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
 -- Environmental constants (from lib_ecology/init.lua; must match values in the "biome_glemr6"
 --      package)
@@ -46,10 +46,11 @@ local function check_biomes(biome_list)
     -- Check arguments
     for _, biome_name in pairs(biome_list) do
 
-        if minetest.registered_biomes[biome_name] == nil then
+        if core.registered_biomes[biome_name] == nil and
+                unilib.global.biome_name_check_table[biome_name] == nil then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr6 package: Unrecognised biome", biome_name)
+                unilib.utils.show_warning("deco_glemr6 package: Unrecognised biome", biome_name)
             end
 
             return false
@@ -65,11 +66,11 @@ end
 local function check_nodes(node_list)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr6" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, full_name in pairs(node_list) do
 
-            if minetest.registered_nodes[full_name] == nil and
+            if core.registered_nodes[full_name] == nil and
                     unilib.pkg.dirt_custom_glemr6.dirt_table[full_name] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr6.dirt_table[full_name]
@@ -97,19 +98,19 @@ local function check_nodes(node_list)
     -- Check arguments
     for _, full_name in pairs(node_list) do
 
-        if not unilib.is_registered_node_or_mtgame_alias(full_name) then
+        if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr6 package: Unrecognised node", full_name)
+                unilib.utils.show_warning("deco_glemr6 package: Unrecognised node", full_name)
             end
 
             return false
 
-        elseif unilib.get_mod_name(full_name) ~= "unilib" then
+        elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
             -- (Not a fatal error)
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr6 package: Non-unilib node", full_name)
+                unilib.utils.show_warning("deco_glemr6 package: Non-unilib node", full_name)
             end
 
         end
@@ -151,7 +152,7 @@ local function add_schem(a, b, c, d, e, f, g, h)
 
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/" .. g .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/" .. g .. ".mts",
 
         place_on = a,
         sidelen = b,
@@ -173,7 +174,7 @@ local function add_schem_offset(a, b, c, d, e, f, g, h, i)
 
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/" .. g .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/" .. g .. ".mts",
 
         place_on = a,
         sidelen = b,
@@ -196,7 +197,7 @@ local function add_schem_no_rotate(a, b, c, d, e, f, g, h)
 
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/" .. g .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/" .. g .. ".mts",
 
         place_on = a,
         sidelen = b,
@@ -949,7 +950,7 @@ local function add_decorations_warm_temperate()
 
     -- glemr6_warm_temperate_lowland
     -- trees
-    if unilib.pkg_executed_table["tree_apple_mature"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_apple_mature"] ~= nil then
         add_schem({"unilib:dirt_brown_with_turf_warm_temperate_lowland"}, 80, 0.015, {"glemr6_warm_temperate_lowland"}, 35, 42, "unilib_glem_tree_banana_1")
     end
     add_schem({"unilib:dirt_brown_with_turf_warm_temperate_lowland"}, 80, 0.04, {"glemr6_warm_temperate_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_apple_1")
@@ -1094,9 +1095,9 @@ local function add_decorations_temperate_humid()
     add_node({"unilib:sand_silt"}, 0.04, {"glemr6_temperate_humid_ocean"}, -35, -2, {"unilib:plant_seaweed_undersea"}, nil, nil, nil)
 
     -- glemr6_temperate_humid_beach
-    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_1"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_2"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_3"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_1"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_2"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.04, {"glemr6_temperate_humid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_3"}, nil, nil, nil)
 
     -- glemr6_temperate_humid_coastal
     -- trees
@@ -1215,9 +1216,9 @@ local function add_decorations_temperate_semihumid()
     -- glemr6_temperate_semihumid_ocean
 
     -- glemr6_temperate_semihumid_beach
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_1"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_2"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_3"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_1"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_2"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_semihumid_beach"}, 1, 4, {"unilib:grass_marram_ordinary_3"}, nil, nil, nil)
 
     -- glemr6_temperate_semihumid_coastal
     -- trees
@@ -1306,9 +1307,9 @@ local function add_decorations_temperate_temperate()
     -- glemr6_temperate_temperate_ocean
 
     -- glemr6_temperate_temperate_beach
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_1"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_2"}, nil, nil, nil)
-    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_3"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_ordinary_1"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_ordinary_2"}, nil, nil, nil)
+    add_node({"unilib:sand_ordinary"}, 0.05, {"glemr6_temperate_temperate_beach"}, 1, 4, {"unilib:grass_marram_ordinary_3"}, nil, nil, nil)
 
     -- glemr6_temperate_temperate_coastal
     -- trees
@@ -2085,13 +2086,13 @@ local function add_decorations_cold_semihumid()
     -- glemr6_cold_semihumid_ocean
 
     -- glemr6_cold_semihumid_beach
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_4"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_5"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:plant_shrub_snowy"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:stone_brownstone_dark"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:plant_shrub_snowy"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr6_cold_semihumid_beach"}, 1, HEIGHT_BEACH_MAX, {"unilib:stone_brownstone_dark"}, nil, nil, nil)
 
     -- glemr6_cold_semihumid_coastal
     -- trees
@@ -2299,7 +2300,7 @@ local function add_decorations_generic()
         add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr6_generic_burned"}, 130, 145, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
 
         -- glemr6_generic_volcanic
-        add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr6_generic_volcanic"}, 145, unilib.y_max, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
+        add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr6_generic_volcanic"}, 145, unilib.constant.y_max, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
 
         -- glemr6_generic_mushroom
         add_schem({"unilib:dirt_ordinary_with_cover_fungi"}, 80, 0.003, {"glemr6_generic_mushroom"}, 30, 50, "unilib_glem_mushroom_blotchy", "place_center_x, place_center_z")
@@ -2388,7 +2389,7 @@ local function add_decorations_tropical_rainforest_swamp()
     add_schem({"unilib:dirt_mud_swamp"}, 80, 0.05, {"glemr6_valleys_tropical_rainforest_swamp"}, -2, 0, "unilib_glem_flower_waterlily_exotic_yellow")
     add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_tropical_rainforest_swamp"}, -1, 1, {"unilib:plant_papyrus_ordinary"}, 4, "unilib:liquid_water_ordinary_source", 1)
     add_node({"unilib:dirt_mud_swamp"}, 0.08, {"glemr6_valleys_tropical_rainforest_swamp"}, -1, 1, {"unilib:plant_papyrus_ordinary"}, 3, "unilib:dirt_mud_swamp", 1)
-    add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_tropical_rainforest_swamp"}, 1, 2, {"unilib:plant_bulrush_mature"}, 1, nil, nil)
+    add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_tropical_rainforest_swamp"}, 1, 2, {"unilib:plant_bulrush_small"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_tropical_rainforest_swamp"}, 1, 2, {"unilib:plant_nettle_impatiens"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_tropical_rainforest_swamp"}, 2, 4, {"unilib:misc_patch_grass"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_tropical_rainforest_swamp"}, 2, 4, {"unilib:grass_giant"}, 1, nil, nil)
@@ -2408,7 +2409,7 @@ local function add_decorations_subtropical_rainforest_swamp()
     add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_subtropical_rainforest_swamp"}, -1, 1, {"unilib:plant_papyrus_ordinary"}, 4, "unilib:liquid_water_ordinary_source", 1)
     add_node({"unilib:dirt_mud_swamp"}, 0.08, {"glemr6_valleys_subtropical_rainforest_swamp"}, -1, 1, {"unilib:plant_papyrus_ordinary"}, 3, "unilib:dirt_mud_swamp", 1)
     add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_subtropical_rainforest_swamp"}, 1, 2, {"unilib:plant_cattail_normal"}, 1, nil, nil)
-    add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_subtropical_rainforest_swamp"}, 1, 2, {"unilib:plant_bulrush_mature"}, 1, nil, nil)
+    add_node({"unilib:dirt_mud_swamp"}, 0.2, {"glemr6_valleys_subtropical_rainforest_swamp"}, 1, 2, {"unilib:plant_bulrush_small"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_subtropical_rainforest_swamp"}, 1, 2, {"unilib:plant_nettle_impatiens"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_subtropical_rainforest_swamp"}, 2, 4, {"unilib:misc_patch_grass"}, 1, nil, nil)
     add_node({"unilib:dirt_mud_swamp"}, 0.1, {"glemr6_valleys_subtropical_rainforest_swamp"}, 2, 4, {"unilib:grass_giant"}, 1, nil, nil)
@@ -2491,7 +2492,7 @@ local function add_decorations_mixed()
     -- Large cactus
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
         biomes = {"glemr6_warm_arid_lowland", "glem6_temperate_arid_lowland"},
         fill_ratio = 0.002,
@@ -2499,7 +2500,7 @@ local function add_decorations_mixed()
         place_on = {"unilib:dirt_parched_with_turf_dry", "unilib:sand_ordinary"},
         rotation = "random",
         sidelen = 16,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
     })
 
@@ -2522,14 +2523,14 @@ local function add_decorations_mixed()
             "unilib:sand_ordinary",
         },
         sidelen = 16,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
     })
 
     -- Papyrus
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
 
         biomes = {
             "glemr6_hot_humid_coastal",
@@ -2620,7 +2621,7 @@ local function add_decorations_bakedclay()
 
     unilib.register_decoration_simple({
         deco_type = "simple",
-        decoration = "unilib:flower_reed_mannagrass",
+        decoration = "unilib:grass_reed_mannagrass",
 
         noise_params = {
             octaves = 3,
@@ -2689,7 +2690,7 @@ local function add_decorations_ocean()
             "unilib:coral_rooted_orange_glow",
             "unilib:coral_rooted_pink_big",
             "unilib:coral_rooted_pink_glow",
-            "unilib:plant_anemone",
+            "unilib:plant_anemone_normal",
         },
 
         biomes = {
@@ -2739,8 +2740,9 @@ local function add_decorations_ocean()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = {"unilib:dirt_silt_coarse", "unilib:sand_ordinary"},
         sidelen = 16,
@@ -2772,8 +2774,9 @@ local function add_decorations_ocean()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Removed apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
         place_offset_y = -1,
         place_on = {"unilib:sand_ordinary"},
         sidelen = 16,

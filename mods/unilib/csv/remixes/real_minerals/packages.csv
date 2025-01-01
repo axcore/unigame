@@ -1,6 +1,5 @@
 # "real_minerals" remix - contains all metals, minerals and ores from real_minerals. Does not
 #       contain the molds commented out molds in the original code
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -9,28 +8,28 @@ dirt_peat|real_minerals
 metal_albata|real_minerals
 metal_aluminium|real_minerals
 metal_bismuth|real_minerals
-metal_brass_real|real_minerals
+metal_brass_rare|real_minerals
 metal_bronze_bismuth|real_minerals
 metal_bronze_black|real_minerals
-metal_bronze_real|real_minerals
-metal_copper_real|real_minerals
-metal_gold_real|real_minerals
+metal_bronze_rare|real_minerals
+metal_copper_rare|real_minerals
+metal_gold_rare|real_minerals
 metal_gold_rose|real_minerals
 metal_iron_pig|real_minerals
-metal_iron_wrought_real|real_minerals
-metal_lead_real|real_minerals
+metal_iron_wrought_rare|real_minerals
+metal_lead_rare|real_minerals
 metal_monel|real_minerals
 metal_nickel|real_minerals
 metal_oroide|real_minerals
-metal_platinum_real|real_minerals
+metal_platinum_rare|real_minerals
 metal_silver_german|real_minerals
-metal_silver_real|real_minerals
+metal_silver_rare|real_minerals
 metal_silver_sterling|real_minerals
 metal_steel_black|real_minerals
-metal_steel_real|real_minerals
-metal_tin_real|real_minerals
+metal_steel_rare|real_minerals
+metal_tin_rare|real_minerals
 metal_tumbaga|real_minerals
-metal_zinc_real|real_minerals
+metal_zinc_rare|real_minerals
 mineral_anthracite|real_minerals
 mineral_bauxite|real_minerals
 mineral_bismuthinite|real_minerals
@@ -65,7 +64,7 @@ mineral_selenite|real_minerals
 mineral_serpentinite|real_minerals
 mineral_silver_native|real_minerals
 mineral_sphalerite|real_minerals
-mineral_sulphur_real|real_minerals
+mineral_sulphur_rare|real_minerals
 mineral_sylvite|real_minerals
 mineral_tenorite|real_minerals
 mineral_tetrahedrite|real_minerals
@@ -107,7 +106,7 @@ ore_real_minerals_stone_ordinary_with_selenite|real_minerals
 ore_real_minerals_stone_ordinary_with_serpentinite|real_minerals
 ore_real_minerals_stone_ordinary_with_silver_native|real_minerals
 ore_real_minerals_stone_ordinary_with_sphalerite|real_minerals
-ore_real_minerals_stone_ordinary_with_sulphur_real|real_minerals
+ore_real_minerals_stone_ordinary_with_sulphur_rare|real_minerals
 ore_real_minerals_stone_ordinary_with_sylvite|real_minerals
 ore_real_minerals_stone_ordinary_with_tenorite|real_minerals
 ore_real_minerals_stone_ordinary_with_tetrahedrite|real_minerals
@@ -148,7 +147,7 @@ stone_ordinary_with_selenite|real_minerals
 stone_ordinary_with_serpentinite|real_minerals
 stone_ordinary_with_silver_native|real_minerals
 stone_ordinary_with_sphalerite|real_minerals
-stone_ordinary_with_sulphur_real|real_minerals
+stone_ordinary_with_sulphur_rare|real_minerals
 stone_ordinary_with_sylvite|real_minerals
 stone_ordinary_with_tenorite|real_minerals
 stone_ordinary_with_tetrahedrite|real_minerals
@@ -168,18 +167,22 @@ mineral_tin_native|aato
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_stone_desert|glemr11
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
+#machine_polishing|unilib
+#metal_copper|default glemr11 moreblocks technic
+#metal_gold|default glemr11 technic
 #metal_iron_wrought|technic_worldgen
-#metal_lead|technic_worldgen technic
-#metal_mercury|unilib
+#metal_lead|glemr11 technic_worldgen technic
+#metal_mercury|glemr11 unilib
 #metal_platinum|unilib
 #metal_potassium|unilib
-#metal_silver|moreores technic
-#metal_tin|default technic
+#metal_silver|glemr11 moreores technic
+#metal_tin|default glemr11 technic
 #metal_uranium|technic_worldgen technic
-#metal_zinc|technic_worldgen technic
+#metal_zinc|glemr11 technic_worldgen technic
 #mineral_coal|default technic
-#mineral_mese|default
+#mineral_diamond|default mtg_plus
+#mineral_mese|default glemr11
 #moss_green|sickles
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

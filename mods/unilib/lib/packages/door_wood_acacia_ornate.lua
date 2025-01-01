@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_acacia_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_acacia_ornate.exec()
 
     unilib.register_door({
-        -- From moretrapdoors:acacia_door. Creates unilib:door_wood_acacia_ornate
+        -- From moretrapdoors:acacia_door. Creates unilib:door_wood_acacia_ornate_closed_left, etc
         part_name = "wood_acacia_ornate",
-        orig_name = {
+        orig_name_list = {
             "doors:acacia_door_a",
             "doors:acacia_door_b",
             "doors:acacia_door_c",
@@ -48,7 +48,7 @@ function unilib.pkg.door_wood_acacia_ornate.exec()
                 {"unilib:tree_acacia_wood", "unilib:tree_acacia_wood"},
                 {"unilib:tree_acacia_trunk", "unilib:tree_acacia_trunk"},
                 {"unilib:tree_acacia_wood", "unilib:tree_acacia_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

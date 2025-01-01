@@ -9,7 +9,7 @@
 unilib.pkg.glass_porthole = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriglass.add_mode
+local mode = unilib.global.imported_mod_table.abriglass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -56,7 +56,7 @@ function unilib.pkg.glass_porthole.post()
 
     for _, mini_table in pairs(update_list) do
 
-        if unilib.super_tree_table[mini_table.part_name] ~= nil then
+        if unilib.global.super_tree_table[mini_table.part_name] ~= nil then
             porthole_table[mini_table.part_name] = mini_table
         end
 
@@ -64,12 +64,12 @@ function unilib.pkg.glass_porthole.post()
 
     for _, mini_table in pairs(porthole_table) do
 
-        local data_table = unilib.tree_table[mini_table.part_name]
+        local data_table = unilib.global.tree_table[mini_table.part_name]
         local ingredient = mini_table.ingredient or
                 "unilib:tree_" .. mini_table.part_name .. "_wood"
 
-        if unilib.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             local orig_name = nil
             if mini_table.orig_part_name ~= nil then
@@ -92,7 +92,7 @@ function unilib.pkg.glass_porthole.post()
                     },
                     groups = {choppy = 2, flammable = 2, wood = 1},
                     -- N.B. no sounds in original code
-                    sounds = unilib.sound_table.wood,
+                    sounds = unilib.global.sound_table.wood,
 
                     drawtype = "nodebox",
                     is_ground_content = false,

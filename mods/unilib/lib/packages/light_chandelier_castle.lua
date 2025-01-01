@@ -9,7 +9,7 @@
 unilib.pkg.light_chandelier_castle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_lighting.add_mode
+local mode = unilib.global.imported_mod_table.castle_lighting.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,10 +41,12 @@ function unilib.pkg.light_chandelier_castle.exec()
             },
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_light_chandelier_castle_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 14,
         paramtype = "light",
         selection_box = {
@@ -76,10 +78,12 @@ function unilib.pkg.light_chandelier_castle.exec()
             tiles = {"unilib_light_chandelier_castle_chain.png"},
             groups = {cracky = 2},
             -- N.B. glass in the original code
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             drawtype = "plantlike",
             inventory_image = "unilib_light_chandelier_castle_chain.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             selection_box = {
                 type = "fixed",
@@ -98,7 +102,7 @@ function unilib.pkg.light_chandelier_castle.exec()
             {"", "unilib:metal_steel_ingot", ""},
             {"", "", ""},
             {"","unilib:metal_steel_ingot",""},
-        }
+        },
     })
 
 end

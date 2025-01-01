@@ -9,7 +9,7 @@
 unilib.pkg.crop_beet_sugar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.agriculture.add_mode
+local mode = unilib.global.imported_mod_table.agriculture.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,8 @@ function unilib.pkg.crop_beet_sugar.exec()
         recipe = "unilib:crop_beet_sugar_harvest",
         cooktime = 15,
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -69,5 +70,14 @@ function unilib.pkg.crop_beet_sugar.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_beet_sugar_harvest",
+        juice_description = S("Beet"),
+        juice_type = "beet",
+        rgb = "#682a2f",
+
+        orig_flag = false,
+    })
 
 end

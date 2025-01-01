@@ -9,7 +9,7 @@
 unilib.pkg.food_lemon_sweetened = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,12 @@ function unilib.pkg.food_lemon_sweetened.exec()
         -- From ethereal:candied_lemon
         description = S("Sugar-Coated Lemon"),
         inventory_image = "unilib_food_lemon_sweetened.png",
-        -- N.B. Use both original and adapted groups
-        groups = {food_candied_lemon = 1, food_sweetened_lemon = 1},
+        -- N.B. Use both original ("food_candied_lemon") and adapted groups
+        groups = {flammable = 2, food_candied_lemon = 1, food_sweetened_lemon = 1},
 
         wield_image = "unilib_food_lemon_sweetened.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_lemon_sweetened", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_lemon_sweetened", 5),
     })
     unilib.register_craft({
         -- From ethereal:candied_lemon

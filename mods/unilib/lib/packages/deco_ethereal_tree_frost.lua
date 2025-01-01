@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_frost = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_frost.post()
 
-    unilib.register_decoration_now("ethereal_tree_frost", nil, {
+    unilib.register_decoration_complete("ethereal_tree_frost", nil, {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "tree_frost"
         biomes = {"ethereal_frost", "ethereal_frost_floatland"},

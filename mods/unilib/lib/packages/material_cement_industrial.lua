@@ -9,7 +9,7 @@
 unilib.pkg.material_cement_industrial = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,10 @@ function unilib.pkg.material_cement_industrial.exec()
             description = S("Industrial Cement Block"),
             tiles = {"unilib_material_cement_industrial_block.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. true in original code
+            is_ground_content = false,
         }
     )
     unilib.register_craft({
@@ -55,7 +58,7 @@ function unilib.pkg.material_cement_industrial.exec()
         type = "cooking",
         output = "unilib:material_cement_industrial_block",
         recipe = "unilib:material_cement_industrial_wet",
-        cooktime = 8
+        cooktime = 8,
     })
 
 end
@@ -73,7 +76,7 @@ function unilib.pkg.material_cement_industrial.post()
             "unilib:dye_grey_dark",
             "group:craftable_bucket",
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

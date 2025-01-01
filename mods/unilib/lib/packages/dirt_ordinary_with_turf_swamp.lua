@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_turf_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,12 +39,12 @@ function unilib.pkg.dirt_ordinary_with_turf_swamp.exec()
                 "unilib_dirt_ordinary.png",
                 "unilib_dirt_ordinary.png^unilib_turf_swamp_side.png",
             },
-            groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            sounds = unilib.global.sound_table.dirt,
 
             -- N.B. Not in original code
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,

@@ -9,7 +9,7 @@
 unilib.pkg.decor_stone_castle_corner = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_masonry.add_mode
+local mode = unilib.global.imported_mod_table.castle_masonry.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,9 +42,11 @@ function unilib.pkg.decor_stone_castle_corner.exec()
                 "unilib_decor_stone_castle_corner_2.png",
             },
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code; added to match other decor items
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "facedir",
         }
@@ -55,7 +57,7 @@ function unilib.pkg.decor_stone_castle_corner.exec()
         recipe = {
             {"", "unilib:decor_stone_castle_wall"},
             {"unilib:decor_stone_castle_wall", "unilib:stone_sandstone_ordinary"},
-        }
+        },
     })
 
 end

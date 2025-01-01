@@ -17,9 +17,9 @@
 unilib.pkg.stone_phonolite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_phonolite.exec()
         description = S("Phonolite"),
 
         category = "extrusive",
+        colour = "#616256",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_phonolite.exec()
         wall_orig_name = "underch:phonolite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:phonolite. Creates unilib:stone_phonolite_cobble_compressed
+        part_name = "phonolite",
+        orig_name = "compressed:phonolite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:phonolite. Creates unilib:stone_phonolite_cobble_compressed
-            part_name = "phonolite",
-            orig_name = "compressed:phonolite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Phonolite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Phonolite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:phonolite. Creates unilib:stone_phonolite_cobble_condensed
+        part_name = "phonolite",
+        orig_name = "condensed:phonolite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:phonolite. Creates unilib:stone_phonolite_cobble_condensed
-            part_name = "phonolite",
-            orig_name = "condensed:phonolite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Phonolite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Phonolite Cobble"),
+    })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.bush_ornamental_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -23,7 +23,7 @@ function unilib.pkg.bush_ornamental_blueberry.init()
                 " ordinary blueberries (from the \"fruit_blueberry_ordinary\" package), but" ..
                 " just one, rather than a bunch",
         depends = {"bush_ornamental_fruitless", "shared_bushes_classic"},
-        optional = "fruit_blueberry_ordinary",
+        optional = {"fruit_blueberry_ordinary", "item_stick_ordinary"},
     }
 
 end
@@ -45,7 +45,8 @@ function unilib.pkg.bush_ornamental_blueberry.exec()
 
         description = S("Picked Blueberry"),
     })
-    if unilib.pkg_executed_table["fruit_blueberry_ordinary"] == nil then
+    if unilib.global.pkg_executed_table["fruit_blueberry_ordinary"] == nil or
+            unilib.global.pkg_executed_table["item_stick_ordinary"] == nil then
 
         -- (The "fruit_blueberry_ordinary", if available, package already creates blueberry juice)
         unilib.register_juice({
@@ -53,6 +54,7 @@ function unilib.pkg.bush_ornamental_blueberry.exec()
             juice_description = S("Blueberry"),
             juice_type = "blueberry",
             rgb = "#521dcb",
+
             orig_flag = true,
         })
 
@@ -64,7 +66,10 @@ function unilib.pkg.bush_ornamental_blueberry.exec()
             -- Original to unilib
             output = "unilib:fruit_blueberry_picked 2",
             recipe = {
-                {"unilib:fruit_blueberry_ordinary"},
+                {"unilib:fruit_blueberry_ordinary", "unilib:item_stick_ordinary"},
+            },
+            replacements = {
+                {"unilib:item_stick_ordinary", "unilib:item_stick_ordinary"},
             },
         })
 

@@ -9,7 +9,7 @@
 unilib.pkg.dirt_silt_permeable_fine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,7 @@ function unilib.pkg.dirt_silt_permeable_fine.exec()
         damage_per_second = 0,
         drowning = 5,
         flowing_description = S("Flowing Muddy Fine Silt"),
-        post_effect_color_table = {r = 137, g = 82, b = 0, a = 230},
+        rgb_table = {r = 137, g = 82, b = 0, a = 230},
         sludge_flag = true,
         source_description = S("Muddy Fine Silt Source"),
         viscosity = 6,
@@ -76,7 +76,7 @@ function unilib.pkg.dirt_silt_permeable_fine.exec()
         damage_per_second = 0,
         drowning = 5,
         flowing_description = S("Flowing Fine Silt Slurry"),
-        post_effect_color_table = {r = 179, g = 117, b = 59, a = 166},
+        rgb_table = {r = 179, g = 117, b = 59, a = 166},
         sludge_flag = true,
         source_description = S("Fine Silt Slurry Source"),
         viscosity = 4,

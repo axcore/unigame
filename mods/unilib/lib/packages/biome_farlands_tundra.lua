@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_tundra = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,11 +29,11 @@ function unilib.pkg.biome_farlands_tundra.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "tundra" biome
         name = "farlands_tundra",
-        description = unilib.brackets(S("Tundra biome"), "farlands"),
+        description = unilib.utils.brackets(S("Tundra biome"), "farlands"),
         node_dust = "unilib:snow_ordinary_block",
         node_riverbed = "unilib:gravel_ordinary",
         depth_riverbed = 2,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 2,
         heat_point = 0,
         humidity_point = 40,
@@ -42,7 +42,7 @@ function unilib.pkg.biome_farlands_tundra.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "tundra_beach" biome
         name = "farlands_tundra_beach",
-        description = unilib.brackets(S("Tundra beach biome"), "farlands"),
+        description = unilib.utils.brackets(S("Tundra beach biome"), "farlands"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:gravel_ordinary",
@@ -58,7 +58,7 @@ function unilib.pkg.biome_farlands_tundra.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "tundra_ocean" biome
         name = "farlands_tundra_ocean",
-        description = unilib.brackets(S("Tundra ocean biome"), "farlands"),
+        description = unilib.utils.brackets(S("Tundra ocean biome"), "farlands"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

@@ -9,7 +9,7 @@
 unilib.pkg.liquid_grease_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.steampunk.add_mode
+local mode = unilib.global.imported_mod_table.steampunk.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -52,7 +52,7 @@ function unilib.pkg.liquid_grease_normal.exec()
             },
         },
         groups = {cools_lava = 1, liquid = 3, puts_out_fire = 1, water = 3},
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         diggable = false,
@@ -90,7 +90,7 @@ function unilib.pkg.liquid_grease_normal.exec()
         groups = {
             cools_lava = 1, liquid = 3, not_in_creative_inventory = 1, puts_out_fire = 1, water = 3,
         },
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         diggable = false,
@@ -146,7 +146,7 @@ function unilib.pkg.liquid_grease_normal.post()
             {c_coal, "group:craftable_bucket", c_coal},
             {c_coal, c_coal, c_coal},
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

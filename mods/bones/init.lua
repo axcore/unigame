@@ -16,6 +16,27 @@ local function is_owner(pos, name)
 	return false
 end
 
+local function drop(pos, itemstack)
+	local obj = minetest.add_item(pos, itemstack:take_item(itemstack:get_count()))
+	if obj then
+		obj:set_velocity({
+			x = math.random(-10, 10) / 9,
+			y = 5,
+			z = math.random(-10, 10) / 9,
+		})
+	end
+end
+
+local function drop_contents(pos)
+	local inv = minetest.get_meta(pos):get_inventory()
+
+	for i = 1, inv:get_size("main") do
+		local stk = inv:get_stack("main", i)
+		drop(pos, stk)
+	end
+	minetest.remove_node(pos)
+end
+
 local bones_formspec =
 	"size[8,9]" ..
 	"list[current_name;main;0,0.3;8,4;]" ..
@@ -28,7 +49,7 @@ local bones_formspec =
 local share_bones_time = tonumber(minetest.settings:get("share_bones_time")) or 1200
 local share_bones_time_early = tonumber(minetest.settings:get("share_bones_time_early")) or share_bones_time / 4
 
-minetest.register_node("bones:bones", {
+local bones_def = {
 	description = S("Bones"),
 	tiles = {
 		"bones_top.png^[transform2",
@@ -87,6 +108,11 @@ minetest.register_node("bones:bones", {
 			return
 		end
 
+		if not player:is_player() then
+			drop_contents(pos)
+			return
+		end
+
 		if minetest.get_meta(pos):get_string("infotext") == "" then
 			return
 		end
@@ -130,7 +156,11 @@ minetest.register_node("bones:bones", {
 	end,
 	on_blast = function(pos)
 	end,
-})
+}
+
+default.set_inventory_action_loggers(bones_def, "bones")
+
+minetest.register_node("bones:bones", bones_def)
 
 local function may_replace(pos, player)
 	local node_name = minetest.get_node(pos).name
@@ -165,17 +195,6 @@ local function may_replace(pos, player)
 	-- default to each nodes buildable_to; if a placed block would replace it, why shouldn't bones?
 	-- flowers being squished by bones are more realistical than a squished stone, too
 	return node_definition.buildable_to
-end
-
-local drop = function(pos, itemstack)
-	local obj = minetest.add_item(pos, itemstack:take_item(itemstack:get_count()))
-	if obj then
-		obj:set_velocity({
-			x = math.random(-10, 10) / 9,
-			y = 5,
-			z = math.random(-10, 10) / 9,
-		})
-	end
 end
 
 local player_inventory_lists = { "main", "craft" }
@@ -224,7 +243,7 @@ minetest.register_on_dieplayer(function(player)
 	-- check if it's possible to place bones, if not find space near player
 	if bones_mode == "bones" and not may_replace(pos, player) then
 		local air = minetest.find_node_near(pos, 1, {"air"})
-		if air and not minetest.is_protected(air, player_name) then
+		if air then
 			pos = air
 		else
 			bones_mode = "drop"

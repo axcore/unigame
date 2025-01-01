@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_timor_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,18 +18,18 @@ local mode = unilib.imported_mod_table.australia.add_mode
 function unilib.pkg.biome_australia_timor_sea.init()
 
     return {
-        description = "Timor sea biome",
+        description = "Timor Sea biome",
         depends = "sand_ordinary",
     }
 
 end
 
-function unilib.pkg.biome_australia_timor_sea.exec()
+function unilib.pkg.biome_australia_timor_sea.post()
 
     unilib.register_biome({
         -- From australia/biome_timor_sea.lua, "timor_sea" biome
         name = "australia_timor_sea",
-        description = unilib.brackets(S("Timor sea biome"), "australia"),
+        description = unilib.utils.brackets(S("Timor Sea biome"), "australia"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

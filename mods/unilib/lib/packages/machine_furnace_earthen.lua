@@ -9,11 +9,11 @@
 unilib.pkg.machine_furnace_earthen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 -- Pipeworks compatibility
 local pipeworks_flag = false
-if minetest.get_modpath("pipeworks") then
+if core.get_modpath("pipeworks") then
     pipeworks_flag = true
 end
 
@@ -112,12 +112,11 @@ function unilib.pkg.machine_furnace_earthen.exec()
 
     end
 
-    unilib.register_node("unilib:machine_furnace_earthen", "earthbuild:earthen_furnace", mode, {
-        -- From earthbuild:earthen_furnace
+    local inactive_def_table = {
         description = S("Earthen Furnace"),
         tiles = inactive_img_list,
         groups = inactive_group_table,
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -141,18 +140,18 @@ function unilib.pkg.machine_furnace_earthen.exec()
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "src", drops)
-            unilib.get_inventory_drops(pos, "fuel", drops)
-            unilib.get_inventory_drops(pos, "dst", drops)
+            unilib.misc.get_inventory_drops(pos, "src", drops)
+            unilib.misc.get_inventory_drops(pos, "fuel", drops)
+            unilib.misc.get_inventory_drops(pos, "dst", drops)
             drops[#drops + 1] = "unilib:machine_furnace_earthen"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size("src", 1)
             inv:set_size("fuel", 1)
@@ -168,20 +167,20 @@ function unilib.pkg.machine_furnace_earthen.exec()
         end,
 
         on_metadata_inventory_move = function(pos)
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Start timer function, it will sort out whether furnace can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_take = function(pos)
 
             -- Check whether the furnace is empty or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -199,14 +198,21 @@ function unilib.pkg.machine_furnace_earthen.exec()
             )
 
         end,
-    })
-    if unilib.pkg_executed_table["material_cob"] ~= nil then
+    }
+
+    unilib.utils.set_inventory_action_loggers(inactive_def_table, "furnace")
+    unilib.register_node(
+        -- From earthbuild:earthen_furnace
+        "unilib:machine_furnace_earthen", "earthbuild:earthen_furnace", mode, inactive_def_table
+    )
+
+    if unilib.global.pkg_executed_table["material_cob"] ~= nil then
 
         local c_brick = "unilib:material_cob_brick"
 
         unilib.register_craft({
-            -- From unilib:machine_furnace_earthen
-            output = "unilib:machine_furnace_ordinary",
+            -- From earthbuild:earthen_furnace
+            output = "unilib:machine_furnace_earthen",
             recipe = {
                 {"unilib:material_cob", "unilib:material_cob", "unilib:material_cob"},
                 {"unilib:material_cob", "", "unilib:material_cob"},
@@ -215,8 +221,8 @@ function unilib.pkg.machine_furnace_earthen.exec()
         })
 
         unilib.register_craft({
-            -- From unilib:machine_furnace_earthen
-            output = "unilib:machine_furnace_ordinary",
+            -- From earthbuild:earthen_furnace
+            output = "unilib:machine_furnace_earthen",
             recipe = {
                 {c_brick, c_brick, c_brick},
                 {c_brick, "", c_brick},
@@ -225,11 +231,11 @@ function unilib.pkg.machine_furnace_earthen.exec()
         })
 
     end
-    if unilib.pkg_executed_table["dirt_rammed"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_rammed"] ~= nil then
 
         unilib.register_craft({
-            -- From unilib:machine_furnace_earthen
-            output = "unilib:machine_furnace_ordinary",
+            -- From earthbuild:earthen_furnace
+            output = "unilib:machine_furnace_earthen",
             recipe = {
                 {"unilib:dirt_rammed", "unilib:dirt_rammed", "unilib:dirt_rammed"},
                 {"unilib:dirt_rammed", "", "unilib:dirt_rammed"},
@@ -239,53 +245,58 @@ function unilib.pkg.machine_furnace_earthen.exec()
 
     end
 
+    local active_def_table = {
+        description = S("Earthen Furnace"),
+        tiles = active_img_list,
+        groups = active_group_table,
+        sounds = unilib.global.sound_table.stone,
+
+        drop = "unilib:machine_furnace_earthen",
+        is_ground_content = false,
+        light_source = 8,
+        paramtype2 = "facedir",
+        tube = tube_table,
+
+        after_dig_node = after_dig_node,
+
+        after_place_node = after_place_node,
+
+        allow_metadata_inventory_move =
+                unilib.pkg.shared_default_furnace.allow_metadata_inventory_move,
+
+        allow_metadata_inventory_put =
+                unilib.pkg.shared_default_furnace.allow_metadata_inventory_put,
+
+        allow_metadata_inventory_take =
+                unilib.pkg.shared_default_furnace.allow_metadata_inventory_take,
+
+        can_dig = unilib.pkg.shared_default_furnace.can_dig,
+
+        on_destruct = unilib.pkg.shared_default_furnace.stop_furnace_sound,
+
+        on_receive_fields = active_on_receive_fields,
+
+        on_rotate = on_rotate,
+
+        on_timer = function(pos, elapsed)
+
+            return unilib.pkg.shared_default_furnace.furnace_node_timer(
+                pos,
+                elapsed,
+                "unilib:machine_furnace_earthen",
+                "unilib:machine_furnace_earthen_active"
+            )
+
+        end,
+    }
+
+    unilib.utils.set_inventory_action_loggers(active_def_table, "furnace")
     unilib.register_node(
         -- From earthbuild:earthen_furnace_active
         "unilib:machine_furnace_earthen_active",
         "earthbuild:earthen_furnace_active",
         mode,
-        {
-            description = S("Earthen Furnace"),
-            tiles = active_img_list,
-            groups = active_group_table,
-            sounds = unilib.sound_table.stone,
-
-            drop = "unilib:machine_furnace_earthen",
-            is_ground_content = false,
-            light_source = 8,
-            paramtype2 = "facedir",
-            tube = tube_table,
-
-            after_dig_node = after_dig_node,
-
-            after_place_node = after_place_node,
-
-            allow_metadata_inventory_move =
-                    unilib.pkg.shared_default_furnace.allow_metadata_inventory_move,
-
-            allow_metadata_inventory_put =
-                    unilib.pkg.shared_default_furnace.allow_metadata_inventory_put,
-
-            allow_metadata_inventory_take =
-                    unilib.pkg.shared_default_furnace.allow_metadata_inventory_take,
-
-            can_dig = unilib.pkg.shared_default_furnace.can_dig,
-
-            on_receive_fields = active_on_receive_fields,
-
-            on_rotate = on_rotate,
-
-            on_timer = function(pos, elapsed)
-
-                return unilib.pkg.shared_default_furnace.furnace_node_timer(
-                    pos,
-                    elapsed,
-                    "unilib:machine_furnace_earthen",
-                    "unilib:machine_furnace_earthen_active"
-                )
-
-            end,
-        }
+        active_def_table
     )
 
 end

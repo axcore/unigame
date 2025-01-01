@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_oil_sunflower = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,12 +29,14 @@ end
 
 function unilib.pkg.ingredient_oil_sunflower.exec()
 
+    local c_seed_group = "group:food_sunflower_seeds"
+
     unilib.register_node("unilib:ingredient_oil_sunflower", "farming:sunflower_oil", mode, {
         -- From farming:sunflower_oil
         description = S("Bottle of Sunflower Oil"),
         tiles = {"unilib_ingredient_oil_sunflower.png"},
         groups = {attached_node = 1, dig_immediate = 3, flammable = 2, food_oil = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_oil_sunflower.png",
@@ -51,22 +53,10 @@ function unilib.pkg.ingredient_oil_sunflower.exec()
         -- From farming:sunflower_oil
         output = "unilib:ingredient_oil_sunflower",
         recipe = {
-            {
-                "group:food_sunflower_seeds",
-                "group:food_sunflower_seeds",
-                "group:food_sunflower_seeds",
-            },
-            {
-                "group:food_sunflower_seeds",
-                "group:food_sunflower_seeds",
-                "group:food_sunflower_seeds",
-            },
-            {
-                "group:food_sunflower_seeds",
-                "unilib:vessel_bottle_glass_empty",
-                "group:food_sunflower_seeds",
-            },
-        }
+            {c_seed_group, c_seed_group, c_seed_group},
+            {c_seed_group, c_seed_group, c_seed_group},
+            {c_seed_group, "unilib:vessel_bottle_glass_empty", c_seed_group},
+        },
     })
     unilib.register_craft({
         -- From farming:sunflower_oil

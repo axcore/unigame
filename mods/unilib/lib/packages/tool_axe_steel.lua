@@ -9,7 +9,7 @@
 unilib.pkg.tool_axe_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_axe_steel.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_axe({
         -- From default:axe_steel
         part_name = "steel",
         ingredient = "unilib:metal_steel_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_axe_steel", "axe")
+    unilib.tools.apply_toolranks("unilib:tool_axe_steel", "axe")
 
 end

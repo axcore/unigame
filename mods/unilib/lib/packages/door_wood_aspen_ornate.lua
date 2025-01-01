@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_aspen_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_aspen_ornate.exec()
 
     unilib.register_door({
-        -- From moretrapdoors:aspen_doors. Creates unilib:door_wood_aspen_ornate
+        -- From moretrapdoors:aspen_doors. Creates unilib:door_wood_aspen_ornate_closed_left, etc
         part_name = "wood_aspen_ornate",
-        orig_name = {
+        orig_name_list = {
             "doors:aspen_doors_a",
             "doors:aspen_doors_b",
             "doors:aspen_doors_c",
@@ -48,7 +48,7 @@ function unilib.pkg.door_wood_aspen_ornate.exec()
                 {"unilib:tree_aspen_wood", "unilib:tree_aspen_wood"},
                 {"unilib:tree_aspen_trunk", "unilib:tree_aspen_trunk"},
                 {"unilib:tree_aspen_wood", "unilib:tree_aspen_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

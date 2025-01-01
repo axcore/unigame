@@ -9,7 +9,7 @@
 unilib.pkg.stone_peridotite_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_peridotite_pale.exec()
         description = S("Pale Peridotite"),
 
         category = "intrusive",
+        colour = "#9E9B74",
         grinder_flag = true,
         hardness = 4,
     })
@@ -64,6 +65,24 @@ function unilib.pkg.stone_peridotite_pale.exec()
         replace_mode = mode,
         description = S("Pale Peridotite Bricks"),
         img_list = {"unilib_stone_peridotite_pale.png^unilib_stone_brick_overlay.png"},
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_peridotite_pale_compressed
+        part_name = "peridotite_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pale Peridotite"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_peridotite_pale_condensed
+        part_name = "peridotite_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pale Peridotite"),
     })
 
 end

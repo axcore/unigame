@@ -9,7 +9,7 @@
 unilib.pkg.tree_lavender = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,8 +27,8 @@ end
 
 function unilib.pkg.tree_lavender.exec()
 
-    -- (no burnlevel)
-    -- (no sci_name)
+    local burnlevel = 2
+    local sci_name = "Lavandula angustifolia"
 
     unilib.register_tree({
         -- Original to unilib
@@ -66,8 +66,10 @@ function unilib.pkg.tree_lavender.exec()
     })
     unilib.register_leafdecay({
         -- From lib_ecology:tree_lavender_leaves
+        trunk_type = "lavender",
         trunks = {"unilib:tree_lavender_trunk"},
-        leaves = {"unilib:tree_lavender_leaves", "unilib:fruit_lavender"},
+        leaves = {"unilib:tree_lavender_leaves"},
+        others = {"unilib:fruit_lavender"},
         radius = 3,
     })
 
@@ -98,10 +100,10 @@ function unilib.pkg.tree_lavender.exec()
         rail_description = S("Lavender Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("glem_tree_lavender_1", {
+    unilib.register_decoration_generic("glem_tree_lavender_1", {
         -- Original to unilib
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_tree_lavender_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_lavender_1.mts",
 
         fill_ratio = 0.005,
         flags = "place_center_x, place_center_z",

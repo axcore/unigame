@@ -9,7 +9,7 @@
 unilib.pkg.food_snack_date_nut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_snack_date_nut.exec()
         -- N.B. No groups in original code
         groups = {food_date = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_snack_date_nut", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_snack_date_nut", 4),
     })
     unilib.register_craft({
         -- From moretrees:date_nut_snack

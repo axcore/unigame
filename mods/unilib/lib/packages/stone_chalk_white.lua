@@ -9,7 +9,7 @@
 unilib.pkg.stone_chalk_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_chalk_white.exec()
         description = S("White Chalk"),
 
         category = "sedimentary",
+        colour = "#D0CCC7",
         grinder_flag = false,
         hardness = 2,
         not_super_flag = true,
@@ -43,7 +44,7 @@ function unilib.pkg.stone_chalk_white.exec()
         tiles = {"unilib_stone_chalk_white.png"},
         -- N.B. stone = 1 not in original code
         groups = {cracky = 2, crumbly = 2, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_chalk_white_powder 2",
     })

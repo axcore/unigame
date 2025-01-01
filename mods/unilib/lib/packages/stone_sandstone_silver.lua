@@ -13,8 +13,8 @@
 unilib.pkg.stone_sandstone_silver = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local mtg_plus_add_mode = unilib.imported_mod_table.mtg_plus.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local mtg_plus_add_mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,6 +37,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
 
         basic_platform_flag = true,
         category = "sedimentary",
+        colour = "#C4C2B7",
         grinder_flag = true,
         grinder_powder = "unilib:sand_silver",
         grinder_gravel = "unilib:gravel_sandstone_silver",
@@ -46,7 +47,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_silver", 3, 2)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_silver", 3, 2)
 
     unilib.register_node(
         -- From default:silver_sandstone
@@ -57,7 +58,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
             description = S("Silver Sandstone"),
             tiles = {"unilib_stone_sandstone_silver.png"},
             groups = {cracky = smooth_cracky, crumbly = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
         }
     )
     unilib.register_craft_2x2({
@@ -70,10 +71,10 @@ function unilib.pkg.stone_sandstone_silver.exec()
         output = "unilib:sand_silver 4",
         recipe = {
             {"unilib:stone_sandstone_silver"},
-        }
+        },
     })
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_silver", {
             drop_name = "unilib:stone_sandstone_silver_rubble",
@@ -104,7 +105,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
             description = S("Silver Sandstone Block"),
             tiles = {"unilib_stone_sandstone_silver_block.png"},
             groups = {cracky = block_cracky},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -133,7 +134,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
             description = S("Silver Sandstone Bricks"),
             tiles = {"unilib_stone_sandstone_silver_brick.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -155,9 +156,11 @@ function unilib.pkg.stone_sandstone_silver.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_silver",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_silver_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_silver_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_node(
             -- From mtg_plus:silver_sandstone_cobble
@@ -168,7 +171,7 @@ function unilib.pkg.stone_sandstone_silver.exec()
                 description = S("Cobbled Silver Sandstone"),
                 tiles = {"unilib_stone_sandstone_silver_cobble.png"},
                 groups = {cracky = 3},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
             }
@@ -212,24 +215,39 @@ function unilib.pkg.stone_sandstone_silver.exec()
 
     -- N.B. The cobble above is a decorative item, not produced when digging smoothstone; so this
     --      package also includes a rubble
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
-        if unilib.get_stone_actual_hardness("sandstone_ordinary") == 1 then
+        if unilib.stone.get_actual_hardness("sandstone_silver") == 1 then
 
             unilib.register_stone_rubble({
                 -- Original to unilib. Creates unilib:stone_sandstone_silver_rubble
                 part_name = "sandstone_silver",
                 orig_name = nil,
 
-                replace_mode = mode,
+                replace_mode = default_add_mode,
                 description = S("Silver Sandstone Rubble"),
                 img_list = {"unilib_stone_sandstone_silver.png^unilib_stone_rubble_overlay.png"},
             })
-            minetest.override("unilib:stone_sandstone_silver", {
+            unilib.override_item("unilib:stone_sandstone_silver", {
                 drop = "unilib:stone_sandstone_silver_rubble",
             })
-            unilib.register_stone_rubble_cuttings({
+
+            unilib.register_stone_rubble_compressed({
+                -- Original to unilib. Creates unilib:stone_sandstone_silver_rubble_compressed
                 part_name = "sandstone_silver",
+                orig_name = nil,
+
+                replace_mode = default_add_mode,
+                description = S("Compressed Silver Sandstone Rubble"),
+            })
+
+            unilib.register_stone_rubble_condensed({
+                -- Original to unilib. Creates unilib:stone_sandstone_silver_rubble_condensed
+                part_name = "sandstone_silver",
+                orig_name = nil,
+
+                replace_mode = default_add_mode,
+                description = S("Condensed Silver Sandstone Rubble"),
             })
 
         end

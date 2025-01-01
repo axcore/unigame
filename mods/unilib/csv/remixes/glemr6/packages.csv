@@ -6,7 +6,6 @@
 #       so many items do not actually spawn in the world, you can omit everything that is not
 #       required for biomes and decorations. The section containing ore packages can also be
 #       removed, as it is again not very useful in survival mode
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -126,6 +125,7 @@ stone_tuff_rhyolitic|darkage
 
 # (other lib_materials items not used in biomes, decorations or ores; can be commented out, if not
 #       required)
+abm_farlands_disintegrate|farlands
 brick_ordinary|default
 clay_baked_basic|bakedclay
 #clay_ordinary|default
@@ -138,19 +138,23 @@ decor_bricks_runestone|xdecor
 decor_bricks_stone_circle|moreblocks
 decor_bricks_stone_coal|moreblocks
 decor_bricks_stone_grey|moreblocks
-decor_rockwall_stone_desert|unilib
-decor_rockwall_stone_desert_dark|glemr6
-decor_rockwall_stone_ordinary|glemr4
-decor_rockwall_stone_ordinary_dark|glemr6
+decor_disintegrating_stone_ordinary|farlands
+decor_rockwall_stone_desert|glemr4 glemr6
+decor_rockwall_stone_ordinary|glemr4 glemr6
+decor_rockwall_stone_sandstone_desert|glemr4 glemr6
+decor_rockwall_stone_sandstone_ordinary|glemr4 glemr6
+decor_rockwall_stone_sandstone_silver|glemr4 glemr6
 decor_stone_castle_dungeon|castle_masonry
 decor_paving_normal|castle_masonry
 decor_stone_castle_rubble|castle_masonry
 decor_paving_slate|glemr6
 decor_stone_castle_wall|castle_masonry
 decor_stone_coal|moreblocks
-decor_stone_disintegrating|farlands
+decor_stone_cracked|glemr4
+decor_stone_dirty|glemr4
 decor_stone_iron|moreblocks
 decor_stone_plaster|darkage
+decor_stone_sandy|glemr4
 decor_stone_tiles|farlands
 decor_tiled_coal|xdecor
 decor_tiled_coal_checker|moreblocks
@@ -176,8 +180,8 @@ dirt_ordinary_with_turf_swamp|farlands
 glass_clean_rhombus|darkage
 glass_clean_round|darkage
 glass_clean_square|darkage
+ice_blue|caverealms
 #ice_ordinary|default ethereal mtg_plus
-ice_thin|caverealms
 light_lantern_glass_stained|nbea
 liquid_grease_normal|steampunk
 liquid_mud_normal|forest
@@ -186,26 +190,26 @@ liquid_water_murky|glemr6
 #liquid_water_ordinary|default
 #liquid_water_river|default
 liquid_water_river_muddy|australia
+material_adobe|darkage
 material_stucco|farlands
 metal_brass|basic_materials technic
-metal_bronze|default technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
 metal_iron_cast|technic_worldgen technic
 metal_iron_wrought|technic_worldgen
-metal_lead|technic_worldgen technic
-metal_silver|moreores technic
-metal_steel|default technic
+metal_lead|glemr11 technic_worldgen technic
+metal_silver|glemr11 moreores technic
+metal_steel|default glemr11 technic
 metal_steel_carbon|technic_worldgen technic
 metal_steel_stainless|technic_worldgen technic
-metal_tin|default technic
+metal_tin|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 mineral_quartz_white|underch
-misc_adobe|darkage
 misc_frame_steel_simple|glemr6
 misc_frame_steel_thin|glemr6
 misc_frame_wood_ornate|nbea
@@ -215,7 +219,9 @@ misc_frame_wood_screen|glemr6
 misc_frame_wood_thin|glemr6
 sand_ordinary_with_rocks|valleys_c
 #sand_silt|darkage
-shared_tsm_pyramids|tsm_pyramids
+shared_bakedclay|bakedclay
+shared_tsm_pyramids_engravings|tsm_pyramids
+shared_tsm_pyramids_traps|tsm_pyramids
 #snow_ordinary|default ethereal mtg_plus
 #stone_basalt_dark|darkage
 stone_basalt_red|pfaa
@@ -223,9 +229,6 @@ stone_basalt_red|pfaa
 #stone_chalk_white|darkage
 stone_conglomerate_rough|pfaa
 #stone_desert|default moreblocks
-stone_desert_with_cracks|glemr4
-stone_desert_with_dirt|glemr6
-stone_desert_with_sand|glemr4
 #stone_gneiss_white|darkage
 stone_granite_black|decoblocks
 stone_granite_brown|decoblocks
@@ -241,7 +244,6 @@ stone_marble_white|farlands
 stone_obsidian|default moreblocks
 #stone_ordinary|default moreblocks technic
 stone_ordinary_with_cover_seagrass|farlands
-stone_ordinary_with_dirt|glemr4
 stone_ordinary_with_tin|default
 #stone_rhyolite_pale|pfaa
 #stone_sandstone_desert|default mtg_plus
@@ -249,8 +251,9 @@ stone_sandstone_desert_trap|tsm_pyramids
 stone_sandstone_desert_with_engraving|tsm_pyramids
 #stone_sandstone_old_red|darkage
 #stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_ordinary_pillar|farlands
+stone_sandstone_ordinary_tile_painted|farlands
 stone_sandstone_ordinary_with_mural|farlands
-stone_sandstone_ornate|farlands
 #stone_sandstone_silver|default mtg_plus
 #stone_sandstone_white|glemr4
 #stone_savanna|farlands
@@ -288,6 +291,7 @@ ingredient_acorn|moretrees
 ingredient_cone_cedar|moretrees
 ingredient_cone_spruce|moretrees
 ingredient_cone_spruce_mature|glemr4
+shared_farlands_fruit|unilib
 tree_acacia|default doors moreblocks
 tree_apple|default doors moreblocks
 tree_apple_mature|moretrees
@@ -378,7 +382,6 @@ flower_orchid|valleys_c
 flower_petunia_blue|farlands
 flower_petunia_pink|farlands
 flower_petunia_white|farlands
-flower_reed_mannagrass|bakedclay
 flower_thistle|bakedclay
 flower_waterlily_exotic_pink|farlands
 flower_waterlily_exotic_yellow|farlands
@@ -388,17 +391,18 @@ grass_dry|default
 grass_frozen|farlands
 grass_giant|farlands
 grass_jungle|default
-grass_marram|default
+grass_marram_ordinary|default
 grass_ordinary|default
 grass_rainforest|farlands
+grass_reed_mannagrass|bakedclay
 grass_seagrass|farlands
 grass_swamp|farlands
 grass_tall|farlands
 misc_patch_grass|dryplants
 plant_aloe_vera|farlands
-plant_anemone|farlands
+plant_anemone_normal|farlands
 plant_arrow_arum|valleys_c
-plant_bulrush_mature|moreplants
+plant_bulrush_small|moreplants
 plant_cactus_ordinary|default
 plant_cactus_purple|glemr4
 plant_cactus_purple_small|glemr4
@@ -409,7 +413,7 @@ plant_cattail_normal|farlands
 plant_enigma|moreplants
 plant_juncus|dryplants
 plant_kelp_green|farlands
-plant_kelp_yellow|glemr6
+plant_kelp_yellow|farlands
 plant_nettle_carduus|nettle
 plant_nettle_impatiens|nettle
 plant_nettle_scotch_broom|nettle
@@ -506,13 +510,15 @@ ingredient_batter_muffin_acorn|moretrees
 ingredient_cone_fir_douglas|moretrees
 ingredient_dough_banana|ethereal
 ingredient_fish_basic|ethereal
+ingredient_fish_bonus|ethereal
+ingredient_fish_junk|ethereal
 item_rod_fishing|ethereal
 item_stick_ordinary|default
 item_worm_juicy|ethereal
 ladder_stone|ethereal
 material_charcoal_artificial_lump|ethereal
 material_wax_palm|ethereal
-mineral_crystallinum|ethereal
+mineral_crystallite|ethereal
 mineral_salt|caverealms
 misc_leaves_autumn|glemr4
 misc_pile_logs|glemr4
@@ -525,6 +531,7 @@ mushroom_fire|moreplants
 mushroom_pink|moreplants
 mushroom_red|flowers
 mushroom_white_glowing|farlands
+pebble_small|valleys_c
 plant_bamboo_small|farlands
 plant_bulrush|dryplants
 plant_clover|moreplants
@@ -546,7 +553,10 @@ plant_weed_umbrella|moreplants
 produce_onion_wild|ethereal
 produce_strawberry_normal|ethereal
 shared_coral_pillar|glemr6
+shared_ethereal_candle|ethereal
+shared_ethereal_fish|ethereal
 stone_ordinary_hot|caverealms
+tree_mushroom_generic|ethereal
 tree_mushroom_mixed|farlands glemr11
 tree_mushroom_red|ethereal
 utensil_bowl_wooden|farming thirsty
@@ -573,6 +583,8 @@ crop_wheat|farming
 decor_bricks_stone_chalked|darkage
 dirt_dry|default
 dye_basic|dye bakedclay
+fruit_coconut_exotic|farlands
+fruit_mango_exotic|farlands
 glass_ordinary|default moreblocks vessels
 item_string_ordinary|farming
 mineral_cassiterite|real_minerals
@@ -588,6 +600,7 @@ plant_fungus_glowing_purple|caverealms
 roof_slate_normal|cottages
 shared_moretrees|moretrees
 soil_sand_desert|farming
+stone_sandstone_ordinary_with_engraving|tsm_pyramids
 utensil_board_cutting|farming
 vessel_glass_empty|thirsty vessels
 
@@ -596,6 +609,7 @@ clay_brown|underch
 ingredient_flour_ordinary|farming
 
 # supporting packages (.optional)
+#abm_farlands_bushes_trees|unilib
 #container_chest_ordinary|default
 #crop_barley|farming
 #crop_oat|farming
@@ -608,12 +622,16 @@ ingredient_flour_ordinary|farming
 #item_book_ordinary|default
 #item_paper_ordinary|default moreblocks
 #item_sweeper|moreblocks
-#metal_chromium|technic_worldgen technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
+#metal_chromium|glemr11 technic_worldgen technic
 #metal_magnesium|unilib
-#metal_zinc|technic_worldgen technic
+#metal_zinc|glemr11 technic_worldgen technic
 #misc_blueprint_column|columnia
 #misc_petals|sickles
 #moss_green|sickles
+#moss_pink|unilib
 #sand_brown|unilib
 #sand_red|unilib
 #shared_darkage|darkage

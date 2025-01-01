@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mud_antipodean_with_cockles = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,18 +36,18 @@ function unilib.pkg.dirt_mud_antipodean_with_cockles.exec()
             description = S("Antipodean Mud with Cockles"),
             tiles = {"unilib_dirt_mud_antipodean_with_cockles.png"},
             groups = {crumbly = 3, puts_out_fire = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
                 dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             }),
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
 
             on_punch = function(pos, node, puncher)
 
                 -- Dig up cockles
                 puncher:get_inventory():add_item("main", "unilib:food_clam_cockle")
-                minetest.set_node(pos, {name = "unilib:dirt_mud_antipodean_dry"})
+                core.set_node(pos, {name = "unilib:dirt_mud_antipodean_dry"})
 
             end,
         }

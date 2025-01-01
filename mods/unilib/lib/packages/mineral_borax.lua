@@ -13,8 +13,8 @@
 unilib.pkg.mineral_borax = {}
 
 local S = unilib.intllib
-local pfaa_add_mode = unilib.imported_mod_table.pfaa.add_mode
-local real_minerals_add_mode = unilib.imported_mod_table.real_minerals.add_mode
+local pfaa_add_mode = unilib.global.imported_mod_table.pfaa.add_mode
+local real_minerals_add_mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,7 @@ function unilib.pkg.mineral_borax.exec()
         description = S("Borax Lump"),
         inventory_image = "unilib_mineral_borax_lump.png",
     })
-    if unilib.pkg_executed_table["metal_boron"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_boron"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

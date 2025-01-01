@@ -9,7 +9,7 @@
 unilib.pkg.food_fiddlehead = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.food_fiddlehead.exec()
         -- N.B. No groups in original code
         groups = {food_fiddlehead = 1},
 
-        -- N.B. No call to unilib.cuisine_eat_on_use(); checking food history doesn't matter for
+        -- N.B. No call to unilib.cuisine.eat_on_use(); checking food history doesn't matter for
         --      poisonous foods
-        on_use = minetest.item_eat(-1),
+        on_use = core.item_eat(-1),
     })
-    if unilib.pkg_executed_table["fern_ordinary"] ~= nil and
-            unilib.pkg_executed_table["fern_ordinary_tuber"] ~= nil then
+    if unilib.global.pkg_executed_table["fern_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["fern_ordinary_tuber"] ~= nil then
 
         unilib.register_craft({
             -- From ferns:fiddlehead
@@ -55,7 +55,7 @@ function unilib.pkg.food_fiddlehead.exec()
         })
 
     end
-    if unilib.pkg_executed_table["tree_fern"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_fern"] ~= nil then
 
         unilib.register_craft({
             -- From ferns:fiddlehead
@@ -65,7 +65,7 @@ function unilib.pkg.food_fiddlehead.exec()
                 "unilib:tree_fern_crown_large",
             },
             replacements = {
-                {"unilib:tree_fern_crown_large", "unilib:tree_fern_sapling"}
+                {"unilib:tree_fern_crown_large", "unilib:tree_fern_sapling"},
             },
         })
 
@@ -78,8 +78,8 @@ function unilib.pkg.food_fiddlehead.exec()
         -- N.B. No groups in original code
         groups = {food_fiddlehead = 1},
 
---      on_use = minetest.item_eat(1),
-        on_use = unilib.cuisine_eat_on_use("unilib:food_fiddlehead_cooked", 1),
+--      on_use = core.item_eat(1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_fiddlehead_cooked", 1),
     })
     unilib.register_craft({
         -- From ferns:fiddlehead_roasted

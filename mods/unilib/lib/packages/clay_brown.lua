@@ -9,7 +9,7 @@
 unilib.pkg.clay_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,9 @@ function unilib.pkg.clay_brown.exec()
         -- From underch:clay
         description = S("Brown Clay"),
         tiles = {"unilib_clay_brown.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        -- N.B. clay = 1 not in original code
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = 'unilib:clay_brown_lump 4',
     })
@@ -39,6 +40,10 @@ function unilib.pkg.clay_brown.exec()
         -- From underch:clay
         output = "unilib:clay_brown",
         ingredient = "unilib:clay_brown_lump",
+    })
+    unilib.register_carvings("unilib:clay_brown", {
+        facade_flag = true,
+        millwork_flag = true,
     })
 
     unilib.register_craftitem("unilib:clay_brown_lump", "underch:clay_lump", mode, {
@@ -51,9 +56,9 @@ function unilib.pkg.clay_brown.exec()
         output = "unilib:clay_brown_lump 4",
         recipe = {
             {"unilib:clay_brown"},
-        }
+        },
     })
-    if unilib.pkg_executed_table["brick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["brick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From underch:clay_lump

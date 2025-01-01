@@ -9,7 +9,7 @@
 unilib.pkg.flower_hyacinth = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,15 +27,16 @@ function unilib.pkg.flower_hyacinth.exec()
 
     unilib.register_node("unilib:flower_hyacinth", "vallee_des_roses:hyacinth", mode, {
         -- From vallee_des_roses:hyacinth
-        description = unilib.annotate(S("Hyacinth"), "Hyacinthus"),
+        description = unilib.utils.annotate(S("Hyacinth"), "Hyacinthus"),
         tiles = {"unilib_flower_hyacinth.png"},
         -- N.B. Changed groups to resemble those used in minetest_game/flowers
 --      groups = {oddly_breakable_by_hand = 3, snappy = 3},
         groups = {
-            attached_node = 1, color_violet = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_violet = 1, colour_violet = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_hyacinth.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_hyacinth", "vallee_des_roses:hyacinth")
 
-    unilib.register_decoration("vallee_des_roses_flower_hyacinth", {
+    unilib.register_decoration_generic("vallee_des_roses_flower_hyacinth", {
         -- From vallee_des_roses:hyacinth
         deco_type = "simple",
         decoration = "unilib:flower_hyacinth",

@@ -9,7 +9,7 @@
 unilib.pkg.tnt_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.tnt.add_mode
+local mode = unilib.global.imported_mod_table.tnt.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ function unilib.pkg.tnt_ordinary.init()
             "shared_tnt",
             "torch_ordinary",
         },
-        -- One of these is required by the ABM in ../lib/system/abms.lua
+        -- One of these is required by the ABM in the "abm_standard_tnt_ignite" package
         at_least_one = {"fire_ordinary", "liquid_lava_ordinary"},
     }
 
@@ -62,7 +62,7 @@ function unilib.pkg.tnt_ordinary.exec()
         drawtype = "airlike",
         drop = "",
         inventory_image = "unilib_tnt_ordinary_boom.png",
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         walkable = false,
         wield_image = "unilib_tnt_ordinary_boom.png",
 
@@ -81,11 +81,11 @@ function unilib.pkg.tnt_ordinary.exec()
         },
         groups = {
             attached_node = 1,
-            connect_to_raillike = minetest.raillike_group("gunpowder"),
+            connect_to_raillike = core.raillike_group("gunpowder"),
             dig_immediate = 2,
             flammable = 5,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "raillike",
         inventory_image = "unilib_tnt_gunpowder_inv.png",
@@ -100,27 +100,30 @@ function unilib.pkg.tnt_ordinary.exec()
         wield_image = "unilib_tnt_gunpowder_inv.png",
 
         on_blast = function(pos, intensity)
-            minetest.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
+            core.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
         end,
 
         on_burn = function(pos)
-            minetest.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
+            core.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
         end,
 
         on_ignite = function(pos, igniter)
-            minetest.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
+            core.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
         end,
 
         on_punch = function(pos, node, puncher)
 
             if puncher:get_wielded_item():get_name() == "unilib:torch_ordinary" then
 
-                minetest.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
-                unilib.log(
+                core.set_node(pos, {name = "unilib:tnt_gunpowder_burning"})
+                --[[
+                unilib.utils.log(
                     "action",
                     puncher:get_player_name() .. " ignites gunpowder at " ..
-                            minetest.pos_to_string(pos)
+                            core.pos_to_string(pos)
                 )
+                ]]--
+                unilib.utils.log_player_action(puncher, "ignites gunpowder at", pos)
 
             end
 
@@ -130,7 +133,7 @@ function unilib.pkg.tnt_ordinary.exec()
         -- From tnt:gunpowder
         type = "shapeless",
         output = "unilib:tnt_gunpowder 5",
-        recipe = {"unilib:gravel_ordinary", "unilib:mineral_coal_lump"}
+        recipe = {"unilib:gravel_ordinary", "unilib:mineral_coal_lump"},
     })
 
     unilib.register_node("unilib:tnt_gunpowder_burning", "tnt:gunpowder_burning", mode, {
@@ -143,7 +146,7 @@ function unilib.pkg.tnt_ordinary.exec()
                 aspect_w = 16,
                 aspect_h = 16,
                 length = 1,
-            }
+            },
         },
         {
             name = "unilib_tnt_gunpowder_curved_burning_animated.png",
@@ -152,7 +155,7 @@ function unilib.pkg.tnt_ordinary.exec()
                 aspect_w = 16,
                 aspect_h = 16,
                 length = 1,
-            }
+            },
         },
         {
             name = "unilib_tnt_gunpowder_tjunction_burning_animated.png",
@@ -161,7 +164,7 @@ function unilib.pkg.tnt_ordinary.exec()
                 aspect_w = 16,
                 aspect_h = 16,
                 length = 1,
-            }
+            },
         },
         {
             name = "unilib_tnt_gunpowder_crossing_burning_animated.png",
@@ -170,15 +173,15 @@ function unilib.pkg.tnt_ordinary.exec()
                 aspect_w = 16,
                 aspect_h = 16,
                 length = 1,
-            }
+            },
         }},
         groups = {
             attached_node = 1,
-            connect_to_raillike = minetest.raillike_group("gunpowder"),
+            connect_to_raillike = core.raillike_group("gunpowder"),
             dig_immediate = 2,
             not_in_creative_inventory = 1
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "raillike",
         drop = "",
@@ -196,8 +199,8 @@ function unilib.pkg.tnt_ordinary.exec()
 
         on_construct = function(pos)
 
-            minetest.sound_play("unilib_gunpowder_burning", {pos = pos, gain = 2}, true)
-            minetest.get_node_timer(pos):start(1)
+            core.sound_play("unilib_gunpowder_burning", {pos = pos, gain = 1.0}, true)
+            core.get_node_timer(pos):start(1)
 
         end,
 
@@ -225,7 +228,7 @@ function unilib.pkg.tnt_ordinary.exec()
 
             end
 
-            minetest.remove_node(pos)
+            core.remove_node(pos)
 
         end,
     })
@@ -236,7 +239,7 @@ function unilib.pkg.tnt_ordinary.exec()
         inventory_image = "unilib_tnt_ordinary_stick.png",
         groups = {flammable = 5},
     })
-    if unilib.enable_tnt_flag then
+    if unilib.global.enable_explosives_flag then
 
         unilib.register_craft({
             output = "unilib:tnt_ordinary_stick 2",
@@ -244,7 +247,7 @@ function unilib.pkg.tnt_ordinary.exec()
                 {"unilib:tnt_gunpowder", "", "unilib:tnt_gunpowder"},
                 {"unilib:tnt_gunpowder", "unilib:item_paper_ordinary", "unilib:tnt_gunpowder"},
                 {"unilib:tnt_gunpowder", "", "unilib:tnt_gunpowder"},
-            }
+            },
         })
 
     end
@@ -259,7 +262,7 @@ function unilib.pkg.tnt_ordinary.exec()
 
         replace_mode = mode,
     })
-    if unilib.enable_tnt_flag then
+    if unilib.global.enable_explosives_flag then
 
         unilib.register_craft_3x3({
             output = "unilib:tnt_ordinary",

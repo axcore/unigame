@@ -9,7 +9,7 @@
 unilib.pkg.crop_strawberry_gariguette = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,8 @@ function unilib.pkg.crop_strawberry_gariguette.exec()
         seed_description = S("Gariguette Strawberry Seed"),
         seed_group_table = {attached_node = 1, flammable = 2, seed = 1, snappy = 3},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -66,7 +67,16 @@ function unilib.pkg.crop_strawberry_gariguette.exec()
 
     end
 
-    unilib.register_decoration("better_farming_crop_strawberry_gariguette", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_strawberry_gariguette_harvest",
+        juice_description = S("Strawberry"),
+        juice_type = "strawberry",
+        rgb = "#ff3636",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_crop_strawberry_gariguette", {
         -- From better_farming:strawberry_8
         deco_type = "simple",
         decoration = "unilib:crop_strawberry_gariguette_grow_8",

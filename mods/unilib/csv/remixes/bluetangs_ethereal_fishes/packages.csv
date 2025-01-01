@@ -1,0 +1,17 @@
+# "bluetangs_ethereal_fishes" remix - contains packages providing original code for many (but not
+#       all) textures in the "Bluetangs-ethereal-fishes" mod that are not already in the
+#       "ethereal-ng" mod
+
+# node_name | original_mod
+
+# bluetangs_ethereal_fishes packages
+ingredient_fish_extended|bluetangs_ethereal_fishes
+
+# supporting packages (.depends)
+shared_ethereal_fish|ethereal
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.plant_clover = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ function unilib.pkg.plant_clover.exec()
 
     unilib.register_node("unilib:plant_clover", "moreplants:clover", mode, {
         -- From moreplants:clover
-        description = unilib.annotate(S("Clover"), "Trifolium"),
+        description = unilib.utils.annotate(S("Clover"), "Trifolium"),
         tiles = {
             "unilib_plant_clover.png",
             "blank.png",
@@ -38,7 +38,7 @@ function unilib.pkg.plant_clover.exec()
         },
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_clover.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("moreplants_plant_clover", {
+    unilib.register_decoration_generic("moreplants_plant_clover", {
         -- From moreplants:clover
         deco_type = "simple",
         decoration = "unilib:plant_clover",

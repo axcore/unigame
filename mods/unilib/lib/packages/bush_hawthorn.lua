@@ -9,7 +9,7 @@
 unilib.pkg.bush_hawthorn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 function unilib.pkg.bush_hawthorn.exec()
 
     local burnlevel = 2
-    -- (no sci_name)
+    local sci_name = "Crataegus monogyna"
 
     unilib.register_bush_stem({
         -- Original to unilib. Creates unilib:bush_hawthorn_stem
@@ -39,14 +39,14 @@ function unilib.pkg.bush_hawthorn.exec()
         description = S("Hawthorn Bush Stem"),
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16},
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
             output = "unilib:item_stick_ordinary",
             recipe = {
                 {"unilib:bush_hawthorn_stem"},
-            }
+            },
         })
 
     end
@@ -54,7 +54,7 @@ function unilib.pkg.bush_hawthorn.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_hawthorn_stem",
-        burntime = unilib.bush_burn_table.stem[burnlevel],
+        burntime = unilib.global.bush_burn_table.stem[burnlevel],
     })
 
     unilib.register_bush_leaves({
@@ -89,13 +89,13 @@ function unilib.pkg.bush_hawthorn.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_hawthorn_sapling",
-        burntime = unilib.bush_burn_table.sapling[burnlevel],
+        burntime = unilib.global.bush_burn_table.sapling[burnlevel],
     })
 
-    unilib.register_decoration("glem_bush_hawthorn", {
+    unilib.register_decoration_generic("glem_bush_hawthorn", {
         -- Original to unilib
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_bush_hawthorn.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_bush_hawthorn.mts",
 
         fill_ratio = 0.005,
         flags = "place_center_x, place_center_z",

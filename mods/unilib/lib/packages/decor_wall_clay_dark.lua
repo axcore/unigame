@@ -9,7 +9,7 @@
 unilib.pkg.decor_wall_clay_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriglass.add_mode
+local mode = unilib.global.imported_mod_table.abriglass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,6 +35,8 @@ function unilib.pkg.decor_wall_clay_dark.exec()
         groups = {cracky = 3},
         -- (no sounds)
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
     unilib.register_craft({

@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_scorched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_scorched.post()
 
-    unilib.register_decoration_now("ethereal_tree_scorched", nil, {
+    unilib.register_decoration_complete("ethereal_tree_scorched", nil, {
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "tree_scorched"
         biomes = "ethereal_plains",

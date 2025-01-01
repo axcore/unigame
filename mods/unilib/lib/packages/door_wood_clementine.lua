@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_clementine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.clementinetree.add_mode
+local mode = unilib.global.imported_mod_table.clementinetree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,9 +28,9 @@ function unilib.pkg.door_wood_clementine.exec()
 
     unilib.register_door({
         -- From cool_trees/clementinetree, doors:door_clementinetree_wood. Creates
-        --      unilib:door_wood_clementine
+        --      unilib:door_wood_clementine_closed_left, etc
         part_name = "wood_clementine",
-        orig_name = {
+        orig_name_list = {
             "doors:door_clementinetree_wood_a",
             "doors:door_clementinetree_wood_b",
             "doors:door_clementinetree_wood_c",
@@ -47,7 +47,7 @@ function unilib.pkg.door_wood_clementine.exec()
                 {"unilib:tree_clementine_wood", "unilib:tree_clementine_wood"},
                 {"unilib:tree_clementine_wood", "unilib:tree_clementine_wood"},
                 {"unilib:tree_clementine_wood", "unilib:tree_clementine_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

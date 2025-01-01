@@ -9,7 +9,7 @@
 unilib.pkg.mineral_clausthalite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_clausthalite_rock.exec()
 
     local c_lump = "unilib:mineral_clausthalite_lump"
-    local hardness = unilib.mineral_table["clausthalite"]["hardness"]
+    local hardness = unilib.global.mineral_table["clausthalite"]["hardness"]
 
     unilib.register_mineral_rock("clausthalite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_clausthalite_rock.exec()
         description = S("Clausthalite Rock"),
         tiles = {"unilib_mineral_clausthalite_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

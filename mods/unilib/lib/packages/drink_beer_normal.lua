@@ -9,7 +9,7 @@
 unilib.pkg.drink_beer_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.drink_beer_normal.exec()
             "unilib_drink_beer_normal.png^[transformFx",
         },
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         inventory_image = "unilib_drink_beer_normal.png",
@@ -60,7 +60,7 @@ function unilib.pkg.drink_beer_normal.exec()
         use_texture_alpha = "clip",
         wield_image = "unilib_drink_beer_normal.png",
 
-        on_use = unilib.cuisine_drink_on_use("unilib:drink_beer_normal", 6)
+        on_use = unilib.cuisine.drink_on_use("unilib:drink_beer_normal", 6)
     })
 
 end
@@ -78,7 +78,7 @@ function unilib.pkg.drink_beer_normal.post()
             "group:food_sugar",
             "unilib:vessel_glass_empty",
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

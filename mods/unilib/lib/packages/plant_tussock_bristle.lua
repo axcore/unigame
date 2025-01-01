@@ -9,7 +9,7 @@
 unilib.pkg.plant_tussock_bristle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_tussock_bristle.exec()
 
     unilib.register_node("unilib:plant_tussock_bristle", "aotearoa:bristle_tussock", mode, {
         -- From aotearoa:bristle_tussock
-        description = unilib.annotate(S("Bristle Tussock"), "Rytidosperma setifolium"),
+        description = unilib.utils.annotate(S("Bristle Tussock"), "Rytidosperma setifolium"),
         tiles = {"unilib_plant_tussock_bristle.png"},
         groups = {attached_node = 1, dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_tussock_bristle.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_tussock_bristle", "aotearoa:bristle_tussock")
 
-    unilib.register_decoration("aotearoa_plant_tussock_bristle", {
+    unilib.register_decoration_generic("aotearoa_plant_tussock_bristle", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_tussock_bristle",

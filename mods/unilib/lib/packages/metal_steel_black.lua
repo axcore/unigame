@@ -9,7 +9,7 @@
 unilib.pkg.metal_steel_black = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.metal_steel_black.init()
 
     return {
         description = "Black steel",
-        depends = {"metal_bronze_black", "metal_steel_real", "metal_nickel"},
+        depends = {"metal_bronze_black", "metal_steel_rare", "metal_nickel"},
     }
 
 end
@@ -62,8 +62,8 @@ function unilib.pkg.metal_steel_black.exec()
         type = "shapeless",
         output = "unilib:metal_steel_black_ingot 4",
         recipe = {
-            "unilib:metal_steel_real_ingot",
-            "unilib:metal_steel_real_ingot",
+            "unilib:metal_steel_rare_ingot",
+            "unilib:metal_steel_rare_ingot",
             "unilib:metal_nickel_ingot",
             "unilib:metal_bronze_black_ingot",
         },
@@ -73,7 +73,7 @@ function unilib.pkg.metal_steel_black.exec()
         output = "unilib:metal_steel_black_ingot 9",
         recipe = {
             {"unilib:metal_steel_black_block"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -84,8 +84,10 @@ function unilib.pkg.metal_steel_black.exec()
         {
             description = S("Black Steel Block"),
             tiles = {"unilib_metal_steel_black_block.png"},
-            groups = {bendy = 2, cracky = 2, level = 5, melty = 2, snappy = 1},
-            sounds = unilib.sound_table.metal,
+            -- N.B. level = 5 in original code; reduced to 3 because only admin-restricted unilib
+            --      tools can dig level = 5
+            groups = {bendy = 2, cracky = 2, level = 3, melty = 2, snappy = 1},
+            sounds = unilib.global.sound_table.metal,
 
             -- N.B. true in original code
             is_ground_content = false,
@@ -97,5 +99,24 @@ function unilib.pkg.metal_steel_black.exec()
         ingredient = "unilib:metal_steel_black_ingot",
     })
     unilib.register_stairs("unilib:metal_steel_black_block")
+    unilib.register_carvings("unilib:metal_steel_black_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_steel_black_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Black Steel Block"),
+            tiles = {"unilib_metal_steel_black_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("steel_black")
+
+    end
 
 end

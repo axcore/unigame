@@ -9,7 +9,7 @@
 unilib.pkg.ladder_rope = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 -- (As long as the shortest mining rope)
 local max_length = 50
@@ -40,7 +40,7 @@ function unilib.pkg.ladder_rope.exec()
         description = S("Rope Ladder"),
         tiles = {"unilib_ladder_wood_ordinary.png^unilib_ladder_rope_top_overlay.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "signlike",
@@ -69,8 +69,8 @@ function unilib.pkg.ladder_rope.exec()
         after_place_node = function(pos, placer)
 
             local pos_below = {x = pos.x, y = pos.y - 1, z = pos.z}
-            local node_below = minetest.get_node(pos_below)
-            local this_node = minetest.get_node(pos)
+            local node_below = core.get_node(pos_below)
+            local this_node = core.get_node(pos)
             local placer_name = placer:get_player_name()
 
             -- param2 holds the facing direction of this node. If it's 0 or 1 the node is "flat" and
@@ -78,16 +78,16 @@ function unilib.pkg.ladder_rope.exec()
             if unilib.pkg.shared_ropes.can_place_rope_in_node(node_below.name) and
                     this_node.param2 > 1 and
                     (
-                        not minetest.is_protected(pos_below, placer_name)
-                        or minetest.check_player_privs(placer_name, "protection_bypass")
+                        not core.is_protected(pos_below, placer_name)
+                        or core.check_player_privs(placer_name, "protection_bypass")
                     ) then
 
-                minetest.add_node(
+                core.add_node(
                     pos_below,
                     {name = "unilib:ladder_rope_bottom", param2 = this_node.param2}
                 )
 
-                local meta = minetest.get_meta(pos_below)
+                local meta = core.get_meta(pos_below)
                 meta:set_int("length_remaining", max_length)
                 meta:set_string("placer", placer_name)
 
@@ -99,15 +99,15 @@ function unilib.pkg.ladder_rope.exec()
 
             if pointed_thing.type == "node" then
 
-                local target_node = minetest.get_node(pointed_thing.under)
-                local target_def = minetest.registered_nodes[target_node.name]
+                local target_node = core.get_node(pointed_thing.under)
+                local target_def = core.registered_nodes[target_node.name]
                 if target_def.walkable == false then
                     return itemstack
                 end
 
             end
 
-            return minetest.item_place(itemstack, placer, pointed_thing)
+            return core.item_place(itemstack, placer, pointed_thing)
 
         end,
     })
@@ -118,7 +118,7 @@ function unilib.pkg.ladder_rope.exec()
             {"", "group:stick", ""},
             {"group:vines", "group:stick", "group:vines"},
             {"", "group:stick", ""},
-        }
+        },
     })
     unilib.register_craft({
         -- From ropes:ropeladder_top
@@ -132,7 +132,7 @@ function unilib.pkg.ladder_rope.exec()
         description = S("Rope Ladder"),
         tiles = {"unilib_ladder_wood_ordinary.png^unilib_ladder_rope_overlay.png"},
         groups = {choppy = 2, flammable = 2, not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drop = "",
@@ -164,7 +164,7 @@ function unilib.pkg.ladder_rope.exec()
         description = S("Rope Ladder"),
         tiles = {"unilib_ladder_wood_ordinary.png^unilib_ladder_rope_bottom_overlay.png"},
         groups = {choppy = 2, flammable = 2, not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drop = "",
@@ -191,7 +191,7 @@ function unilib.pkg.ladder_rope.exec()
 
         on_construct = function(pos)
 
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(1)
 
         end,
@@ -204,7 +204,7 @@ function unilib.pkg.ladder_rope.exec()
         description = S("Rope Ladder"),
         tiles = {"unilib_ladder_wood_ordinary.png^unilib_ladder_rope_overlay.png"},
         groups = {flammable = 2, not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drop = "",
@@ -223,7 +223,7 @@ function unilib.pkg.ladder_rope.exec()
 
         on_construct = function(pos)
 
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(1)
 
         end,
@@ -231,7 +231,7 @@ function unilib.pkg.ladder_rope.exec()
         on_timer = function(pos, elapsed)
 
             local pos_below = {x = pos.x, y = pos.y - 1, z = pos.z}
-            local node_below = minetest.get_node(pos_below)
+            local node_below = core.get_node(pos_below)
 
             if node_below.name ~= "ignore" then
 
@@ -244,11 +244,11 @@ function unilib.pkg.ladder_rope.exec()
                     }
                 )
 
-                minetest.swap_node(pos, {name = "air"})
+                core.swap_node(pos, {name = "air"})
 
             else
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 timer:start(1)
 
             end

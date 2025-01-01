@@ -9,7 +9,7 @@
 unilib.pkg.flower_lily_darling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,15 +27,15 @@ function unilib.pkg.flower_lily_darling.exec()
 
     unilib.register_node("unilib:flower_lily_darling", "australia:darling_lily", mode, {
         -- From australia:darling_lily
-        description = unilib.annotate(S("Darling Lily"), "Crinum flaccidum"),
+        description = unilib.utils.annotate(S("Darling Lily"), "Crinum flaccidum"),
         tiles = {"unilib_flower_lily_darling.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_grey_dark = 1, flammable = 1, flora = 1, flower = 1,
-            snappy = 3,
+            attached_node = 1, color_grey_dark = 1, colour_grey_dark = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -53,7 +53,7 @@ function unilib.pkg.flower_lily_darling.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_lily_darling", "australia:darling_lily")
 
-    unilib.register_decoration("australia_flower_lily_darling", {
+    unilib.register_decoration_generic("australia_flower_lily_darling", {
         -- From australia:darling_lily
         deco_type = "simple",
         decoration = "unilib:flower_lily_darling",

@@ -9,7 +9,7 @@
 unilib.pkg.moss_snow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,7 @@ function unilib.pkg.moss_snow.exec()
         },
         walkable = false,
     })
-    if unilib.pkg_executed_table["tree_pine_frozen"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_pine_frozen"] ~= nil then
 
         unilib.register_craft({
             -- From snow:moss

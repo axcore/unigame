@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_wood_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_frame_wood_simple.exec()
         description = S("Simple Wooden Frame"),
         tiles = {"unilib_tree_apple_wood.png"},
         groups = {choppy = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",

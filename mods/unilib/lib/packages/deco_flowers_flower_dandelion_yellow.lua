@@ -9,7 +9,7 @@
 unilib.pkg.deco_flowers_flower_dandelion_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ end
 
 function unilib.pkg.deco_flowers_flower_dandelion_yellow.post()
 
-    unilib.register_decoration_now("flowers_flower_dandelion_yellow", nil, {
+    unilib.register_decoration_complete("flowers_flower_dandelion_yellow", nil, {
         -- From flowers/mapgen.lua
         -- Completes decoration in package "flower_dandelion_yellow"
         biomes = {"default_forest_deciduous", "default_grassland"},
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

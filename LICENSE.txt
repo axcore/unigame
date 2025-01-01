@@ -1,18 +1,18 @@
 License of media (textures and sounds)
 --------------------------------------
-Copyright (C) 2023 A S Lewis <aslewis@cpan.org>
+Copyright (C) 2021-2025 A S Lewis <aslewis@cpan.org>
 See README.txt in each mod directory for information about other authors.
 
 Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
 http://creativecommons.org/licenses/by-sa/3.0/
 
 License of menu/header.png
-Copyright (C) 2023 A S Lewis CC BY-SA 3.0
+Copyright (C) 2021-2025 A S Lewis CC BY-SA 3.0
 
 
 License of source code
 ----------------------
-Copyright (C) 2023 A S Lewis <aslewis@cpan.org>
+Copyright (C) 2021-2025 A S Lewis <aslewis@cpan.org>
 See README.txt in each mod directory for information about other authors.
 
                   GNU LESSER GENERAL PUBLIC LICENSE

@@ -9,7 +9,7 @@
 unilib.pkg.fern_flowering = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.fern_flowering.exec()
         tiles = {"unilib_fern_flowering.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, decorative_plants = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -47,7 +47,7 @@ function unilib.pkg.fern_flowering.exec()
         waving = 1,
         wield_image = "unilib_fern_flowering.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:flowering_fern
@@ -60,7 +60,7 @@ function unilib.pkg.fern_flowering.exec()
     end
     unilib.register_plant_in_pot("unilib:fern_flowering", "cropocalypse:flowering_fern")
 
-    unilib.register_decoration("cropocalypse_fern_flowering", {
+    unilib.register_decoration_generic("cropocalypse_fern_flowering", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:fern_flowering",

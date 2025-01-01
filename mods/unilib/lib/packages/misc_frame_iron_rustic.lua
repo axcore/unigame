@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_iron_rustic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.misc_frame_iron_rustic.exec()
         description = S("Iron Frame"),
         tiles = {"unilib_misc_frame_iron_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 3, snappy = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "glasslike_framed",
         inventory_image = "unilib_misc_frame_iron_rustic.png",
@@ -47,7 +47,7 @@ function unilib.pkg.misc_frame_iron_rustic.exec()
             {"unilib:item_stick_iron",    "", "unilib:item_stick_iron"},
             {"", "unilib:glass_ordinary", ""},
             {"unilib:item_stick_iron",    "", "unilib:item_stick_iron"},
-        }
+        },
     })
     unilib.register_craft({
         -- Original to unilib

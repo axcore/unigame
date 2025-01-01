@@ -9,7 +9,7 @@
 unilib.pkg.gravel_lignite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,13 +26,17 @@ end
 
 function unilib.pkg.gravel_lignite.exec()
 
-    local drop = nil
-    if unilib.pkg_executed_table["mineral_lignite"] ~= nil then
+    local drop = "unilib:gravel_lignite"
+    if unilib.global.pkg_executed_table["mineral_lignite"] ~= nil and
+            unilib.setting.gravel_sand_bonus_rate > 0 then
 
         drop = {
             max_items = 1,
             items = {
-                {items = {"unilib:mineral_lignite_lump"}, rarity = 16},
+                {
+                    items = {"unilib:mineral_lignite_lump"},
+                    rarity = unilib.setting.gravel_sand_bonus_rate,
+                },
                 {items = {"unilib:gravel_lignite"}},
             },
         }
@@ -43,8 +47,8 @@ function unilib.pkg.gravel_lignite.exec()
         -- Texture from UGBC, lignite_gravel.png. Original code
         description = S("Lignite Gravel"),
         tiles = {"unilib_gravel_lignite.png"},
-        groups = {crumbly = 3, falling_node = 1},
-        sounds = unilib.sound_table.gravel,
+        groups = {crumbly = 3, falling_node = 1, gravel = 1},
+        sounds = unilib.global.sound_table.gravel,
 
         drop = drop,
     })

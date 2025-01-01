@@ -9,7 +9,7 @@
 unilib.pkg.food_tomato_grilled = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_tomato_grilled.exec()
         description = S("Grilled Tomato"),
         inventory_image = "unilib_food_tomato_grilled.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_tomato_grilled", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_tomato_grilled", 5),
     })
     unilib.register_craft({
         -- From bbq:grilled_tomato

@@ -9,7 +9,7 @@
 unilib.pkg.misc_blueprint_column = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.columnia.add_mode
+local mode = unilib.global.imported_mod_table.columnia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

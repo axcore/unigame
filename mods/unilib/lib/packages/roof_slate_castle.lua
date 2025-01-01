@@ -9,7 +9,7 @@
 unilib.pkg.roof_slate_castle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_masonry.add_mode
+local mode = unilib.global.imported_mod_table.castle_masonry.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,11 +32,13 @@ function unilib.pkg.roof_slate_castle.exec()
         tiles = {"unilib_roof_slate_castle.png"},
         groups = {attached_node = 1, cracky = 3},
         -- N.B. glass in original code
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         climbable = true,
         drawtype = "raillike",
         inventory_image = "unilib_roof_slate_castle.png",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",

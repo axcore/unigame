@@ -9,7 +9,7 @@
 unilib.pkg.deco_cavestuff_pebble_large_stone_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cavestuff.add_mode
+local mode = unilib.global.imported_mod_table.cavestuff.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_cavestuff_pebble_large_stone_desert.post()
 
-    unilib.register_decoration_now("cavestuff_pebble_large_stone_desert", nil, {
+    unilib.register_decoration_complete("cavestuff_pebble_large_stone_desert", nil, {
         -- From cavestuff/magpen.lua
         -- Completes decoration in package "pebble_large"
         place_on = {"unilib:sand_desert", "unilib:stone_desert"},

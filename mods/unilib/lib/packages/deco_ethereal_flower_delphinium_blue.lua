@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_flower_delphinium_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_ethereal_flower_delphinium_blue.post()
 
-    unilib.register_decoration_now(
+    unilib.register_decoration_complete(
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "flower_delphinium_blue"
         "bakedclay_flower_delphinium_blue",

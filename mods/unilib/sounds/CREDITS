@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------------------------
 
 unilib_machine_anvil_fancy_clang.ogg
+unilib_machine_anvil_fancy_dull.ogg
 
 ---------------------------------------------------------------------------------------------------
 -- From:    aotearoa
@@ -154,7 +155,7 @@ unilib_dig_cracky.1.ogg
 unilib_dig_cracky.2.ogg
 unilib_dig_cracky.3.ogg
 unilib_dig_crumbly.ogg
-unilib_dig_dig_immediate.ogg
+unilib_dig_immediate.ogg
 unilib_dig_metal.ogg
 unilib_dig_oddly_breakable_by_hand.ogg
 unilib_dig_snappy.ogg
@@ -188,10 +189,10 @@ unilib_ice_dug.ogg
 unilib_ice_footstep.1.ogg
 unilib_ice_footstep.2.ogg
 unilib_ice_footstep.3.ogg
-unilib_item_smoke.ogg
 unilib_metal_footstep.1.ogg
 unilib_metal_footstep.2.ogg
 unilib_metal_footstep.3.ogg
+unilib_misc_smoke.ogg
 unilib_place_node.1.ogg
 unilib_place_node.2.ogg
 unilib_place_node.3.ogg
@@ -214,7 +215,6 @@ unilib_tool_breaks.3.ogg
 unilib_water_footstep.1.ogg
 unilib_water_footstep.2.ogg
 unilib_water_footstep.3.ogg
-unilib_water_footstep.4.ogg
 unilib_wood_footstep.1.ogg
 unilib_wood_footstep.2.ogg
 
@@ -388,7 +388,7 @@ unilib_moss_dug.ogg
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
 
-unilib_item_line_sounding.ogg
+unilib_misc_line_sounding.ogg
 
 ---------------------------------------------------------------------------------------------------
 -- From:    stamina
@@ -431,10 +431,18 @@ unilib_alarm.1.ogg
     Author: Mike Koenig
     Source: https://soundbible.com/165-Door-Bell.html
     Licence: Attribution 3.0
+unilib_ice_melt_1.ogg
+unilib_ice_melt_2.ogg
+unilib_ice_melt_3.ogg
+    Author: Takkyi
+    Source: https://freesound.org/people/Takkyi/sounds/546831/
+    Licence: CC0 1.0
     
 ---------------------------------------------------------------------------------------------------
 -- From:    xdecor
 -- Media:   WTFPL/CC BY-SA/CC BY 3.0
 ---------------------------------------------------------------------------------------------------
 
+unilib_cauldron_boiling.ogg
+unilib_machine_table_enchanting_simple.ogg
 unilib_misc_trampoline.ogg

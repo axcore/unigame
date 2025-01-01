@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_flower_lupin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ end
 
 function unilib.pkg.deco_cropocalypse_flower_lupin.post()
 
-    unilib.register_decoration_now("cropocalypse_flower_lupin", nil, {
+    unilib.register_decoration_complete("cropocalypse_flower_lupin", nil, {
         -- From cropocalypse/decorative_plants.lua
         -- Completes decoration in package "flower_lupin"
         biomes = {"default_forest_coniferous", "default_grassland"},
         place_on = {"group:sand", "group:soil"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

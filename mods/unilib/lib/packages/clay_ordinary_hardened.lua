@@ -9,7 +9,7 @@
 unilib.pkg.clay_ordinary_hardened = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.clay_ordinary_hardened.exec()
         description = S("Hardened Ordinary Clay"),
         tiles = {"unilib_clay_ordinary_hardened.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         paramtype2 = "facedir",
     })

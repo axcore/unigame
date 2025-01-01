@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_plant_papyrus_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,10 @@ end
 
 function unilib.pkg.deco_default_plant_papyrus_ordinary.post()
 
-    if unilib.pkg_executed_table["biome_default_rainforest"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_default_rainforest"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("default_plant_papyrus_ordinary_1", nil, {
+        unilib.register_decoration_complete("default_plant_papyrus_ordinary_1", nil, {
             -- From default/mapgen.lua
             -- Completes decoration in package "plant_papyrus_ordinary"
             biomes = "default_rainforest_swamp",
@@ -46,10 +46,10 @@ function unilib.pkg.deco_default_plant_papyrus_ordinary.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_default_savanna"] ~= nil and
-            unilib.pkg_executed_table["dirt_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_default_savanna"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_dry"] ~= nil then
 
-        unilib.register_decoration_now("default_plant_papyrus_ordinary_2", nil, {
+        unilib.register_decoration_complete("default_plant_papyrus_ordinary_2", nil, {
             -- From default/mapgen.lua
             -- Completes decoration in package "plant_papyrus_ordinary"
             biomes = "default_savanna_shore",

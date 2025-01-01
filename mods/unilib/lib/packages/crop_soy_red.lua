@@ -9,7 +9,7 @@
 unilib.pkg.crop_soy_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_soy_red.exec()
         table.insert(orig_name_list, "cucina_vegana:soy_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/soy_default.lua
         unilib.register_crop_mtgame({
@@ -51,7 +51,7 @@ function unilib.pkg.crop_soy_red.exec()
             harvest_description = S("Red Soy Beans"),
             -- N.B. food = 1, food_soybean = 1 not in original code
             harvest_group_table = {flammable = 4, food = 1, food_soy = 1, food_soybean = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 12,
             seed_description = S("Red Soy Seed"),
             seed_group_table = {attached_node = 1, flammable = 4, seed_soy = 1},
@@ -131,7 +131,8 @@ function unilib.pkg.crop_soy_red.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

@@ -9,7 +9,7 @@
 unilib.pkg.food_fugu = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,19 +38,19 @@ function unilib.pkg.food_fugu.exec()
         -- From ethereal:fugu
         description = S("Fugusashi"),
         inventory_image = "unilib_food_fugu.png",
-        -- N.B. No groups in original code
-        groups = {food_fugu = 1},
+        -- N.B. food_fugu = 1 not in original code
+        groups = {flammable = 2, food_fugu = 1},
 
-        -- N.B. No call to unilib.cuisine_eat_on_use(); checking food history doesn't matter when
+        -- N.B. No call to unilib.cuisine.eat_on_use(); checking food history doesn't matter when
         --      a food can be both nutritious and poisonous
         on_use = function(itemstack, user, pointed_thing)
 
             if user then
 
                 if math.random(12) == 1 then
-                    return minetest.do_item_eat(-16, nil, itemstack, user, pointed_thing)
+                    return core.do_item_eat(-16, nil, itemstack, user, pointed_thing)
                 else
-                    return minetest.do_item_eat(4, nil, itemstack, user, pointed_thing)
+                    return core.do_item_eat(4, nil, itemstack, user, pointed_thing)
                 end
 
             end

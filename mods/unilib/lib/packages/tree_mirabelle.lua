@@ -9,7 +9,7 @@
 unilib.pkg.tree_mirabelle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_mirabelle.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Prunus domestica syriaca"
 
     unilib.register_tree({
@@ -68,8 +68,10 @@ function unilib.pkg.tree_mirabelle.exec()
     })
     unilib.register_leafdecay({
         -- From lib_ecology:tree_mirabelle_leaves
+        trunk_type = "mirabelle",
         trunks = {"unilib:tree_mirabelle_trunk"},
-        leaves = {"unilib:tree_mirabelle_leaves", "unilib:fruit_mirabelle"},
+        leaves = {"unilib:tree_mirabelle_leaves"},
+        others = {"unilib:fruit_mirabelle"},
         radius = 3,
     })
 
@@ -101,10 +103,10 @@ function unilib.pkg.tree_mirabelle.exec()
         rail_description = S("Mirabelle Wood Fence Gate"),
     })
 
-    unilib.register_decoration("glem_tree_mirabelle_1", {
+    unilib.register_decoration_generic("glem_tree_mirabelle_1", {
         -- Original to unilib
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_tree_mirabelle_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_mirabelle_1.mts",
 
         fill_ratio = 0.005,
         flags = "place_center_x, place_center_z",

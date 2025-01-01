@@ -9,7 +9,7 @@
 unilib.pkg.crop_flax_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,14 +50,14 @@ function unilib.pkg.crop_flax_brown.exec()
         harvest_description = S("Brown Flax"),
         -- N.B. string = 1 not in original code; added to match "crop_flax_golden" package
         harvest_group_table = {crop_flax = 1, flammable = 4, string = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         place_param2 = 3,
         seed_description = S("Brown Flax Seed"),
         -- N.B. Not in original code; added to match code in "crop_flax_brown" package
         seed_group_table = {attached_node = 1, flammable = 4, seed_flax = 1},
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         -- N.B. In original code, flax creates a light blue dye (but that dye was not imported)
         unilib.register_craft({
@@ -69,7 +69,7 @@ function unilib.pkg.crop_flax_brown.exec()
         })
 
     end
-    if unilib.pkg_executed_table["item_string_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_string_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:flax

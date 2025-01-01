@@ -9,7 +9,7 @@
 unilib.pkg.tree_mulga = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,39 +25,51 @@ end
 
 function unilib.pkg.tree_mulga.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Acacia aneura"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "mulga",
         description = S("Mulga Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_mulga_trunk", "australia:mulga_tree", mode, {
         -- From australia:mulga_tree
-        description = unilib.annotate(S("Mulga Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Mulga Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_mulga_trunk_top.png",
             "unilib_tree_mulga_trunk_top.png",
             "unilib_tree_mulga_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_mulga_trunk_stripped
+        part_name = "mulga",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Mulga Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -125,7 +137,7 @@ function unilib.pkg.tree_mulga.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_mulga_closed
+        -- Original to unilib. Creates unilib:gate_mulga_closed, etc
         part_name = "mulga",
         orig_name = {nil, nil},
 
@@ -136,10 +148,10 @@ function unilib.pkg.tree_mulga.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_mulga_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic("australia_tree_mulga_in_mulga_lands_" .. i, {
             -- From australia/biome_mulga_lands.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_mulga_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_mulga_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 4000,
             flags = "place_center_x, place_center_z",

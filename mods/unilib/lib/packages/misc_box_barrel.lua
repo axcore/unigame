@@ -9,7 +9,7 @@
 unilib.pkg.misc_box_barrel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,11 +35,13 @@ function unilib.pkg.misc_box_barrel.exec()
             "unilib_misc_box_barrel_side.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
     unilib.register_craft({
         -- From xdecor:barrel
@@ -47,8 +49,8 @@ function unilib.pkg.misc_box_barrel.exec()
         recipe = {
             {"group:wood", "group:wood", "group:wood"},
             {"unilib:metal_iron_lump", "", "unilib:metal_iron_lump"},
-            {"group:wood", "group:wood", "group:wood"}
-        }
+            {"group:wood", "group:wood", "group:wood"},
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.crop_rice_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,8 @@ function unilib.pkg.crop_rice_white.exec()
         place_param2 = 3,
         seed_description = S("White Rice Grains"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

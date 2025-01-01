@@ -9,7 +9,7 @@
 unilib.pkg.flower_crocus_autumn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,15 @@ function unilib.pkg.flower_crocus_autumn.exec()
 
     unilib.register_node("unilib:flower_crocus_autumn", "plants:colchicum_wild", mode, {
         -- From plants:colchicum_wild
-        description = unilib.annotate(S("Autumn Crocus"), "Colchicum autumnale"),
+        description = unilib.utils.annotate(S("Autumn Crocus"), "Colchicum autumnale"),
         tiles = {"unilib_flower_crocus_autumn.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 2, snappy = 3},
         groups = {
-            attached_node = 1, color_violet = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_violet = 1, colour_violet = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,7 +51,7 @@ function unilib.pkg.flower_crocus_autumn.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_crocus_autumn", "plants:colchicum_wild")
 
-    unilib.register_decoration("plants_flower_crocus_autumn", {
+    unilib.register_decoration_generic("plants_flower_crocus_autumn", {
         -- Original to unilib, based on decorations in the "flowers" mod
         deco_type = "simple",
         decoration = "unilib:flower_crocus_autumn",

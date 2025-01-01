@@ -13,7 +13,7 @@
 unilib.pkg.decor_block_metal_rusty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.columnia.add_mode
+local mode = unilib.global.imported_mod_table.columnia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.decor_block_metal_rusty.exec()
         description = S("Rusty Metal Block"),
         tiles = {"unilib_decor_block_metal_rusty.png"},
         groups = {cracky = 1, level = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -50,7 +50,7 @@ function unilib.pkg.decor_block_metal_rusty.exec()
         column_flag = true,
     })
 
-    if unilib.pkg_executed_table["misc_blueprint_column"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_blueprint_column"] ~= nil then
 
         unilib.register_node(
             -- From columnia:rusty_block
@@ -61,7 +61,10 @@ function unilib.pkg.decor_block_metal_rusty.exec()
                 description = S("Etched Rusty Metal Block"),
                 tiles = {"unilib_decor_block_metal_rusty_etched.png"},
                 groups = {cracky = 1, level = 2},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
+
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
             }
         )
         unilib.register_craft({
@@ -91,41 +94,16 @@ function unilib.pkg.decor_block_metal_rusty.post()
 
     local c_steel_ingot = "unilib:metal_steel_ingot"
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
-
-        local c_ordinary_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
-        local c_river_bucket = "unilib:" .. bucket_type .. "_with_water_river"
-        local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"
-
-        if unilib.pkg_executed_table["liquid_water_ordinary"] ~= nil then
-
-            -- N.B. original code used "default:water_source" instead of a bucket
-            unilib.register_craft({
-                -- From GLEMr4, lib_materials:rusty
-                output = "unilib:decor_block_metal_rusty 8",
-                recipe = {
-                    {c_steel_ingot, c_steel_ingot, c_steel_ingot},
-                    {c_steel_ingot, c_ordinary_bucket, c_steel_ingot},
-                    {c_steel_ingot, c_steel_ingot, c_steel_ingot},
-                },
-            })
-
-        end
-
-        if unilib.pkg_executed_table["liquid_water_river"] ~= nil then
-
-            unilib.register_craft({
-                -- Original to unilib
-                output = "unilib:decor_block_metal_rusty 8",
-                recipe = {
-                    {c_steel_ingot, c_steel_ingot, c_steel_ingot},
-                    {c_steel_ingot, c_river_bucket, c_steel_ingot},
-                    {c_steel_ingot, c_steel_ingot, c_steel_ingot},
-                },
-            })
-
-        end
-
-    end
+    -- N.B. original code used "default:water_source" instead of a bucket
+    unilib.register_craft({
+        -- From GLEMr4, lib_materials:rusty
+        output = "unilib:decor_block_metal_rusty 8",
+        recipe = {
+            {c_steel_ingot, c_steel_ingot, c_steel_ingot},
+            {c_steel_ingot, "group:craftable_bucket", c_steel_ingot},
+            {c_steel_ingot, c_steel_ingot, c_steel_ingot},
+        },
+        replacements = unilib.global.craftable_bucket_list,
+    })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.clay_kaolinite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_kaolinite.exec()
         -- Texture from PFAA, weakOreClay_kaolinite.png. Original code
         description = S("Kaolinite Clay"),
         tiles = {"unilib_clay_kaolinite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:clay_kaolinite_lump 4",
     })
@@ -38,6 +38,10 @@ function unilib.pkg.clay_kaolinite.exec()
         -- Texture from PFAA, weakOreClay_kaolinite.png. Original code
         output = "unilib:clay_kaolinite",
         ingredient = "unilib:clay_kaolinite_lump",
+    })
+    unilib.register_carvings("unilib:clay_kaolinite", {
+        facade_flag = true,
+        millwork_flag = true,
     })
 
     unilib.register_craftitem("unilib:clay_kaolinite_lump", nil, mode, {
@@ -50,7 +54,7 @@ function unilib.pkg.clay_kaolinite.exec()
         output = "unilib:clay_kaolinite_lump 4",
         recipe = {
             {"unilib:clay_kaolinite"},
-        }
+        },
     })
 
 end

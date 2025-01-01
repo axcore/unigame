@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_dough_sunflower_seed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.ingredient_dough_sunflower_seed.exec()
             inventory_image = "unilib_ingredient_dough_sunflower_seed.png",
             groups = {bread_dough = 1, eatable = 1, food = 1, food_vegan = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:ingredient_dough_sunflower_seed", 2),
+            on_use = unilib.cuisine.eat_on_use("unilib:ingredient_dough_sunflower_seed", 2),
         }
     )
     -- N.B. In original code, one of the craft recipes is redundant, as ordinary flour already has

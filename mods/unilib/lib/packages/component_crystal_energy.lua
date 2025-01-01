@@ -9,7 +9,7 @@
 unilib.pkg.component_crystal_energy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.component_crystal_energy.exec()
     unilib.register_craftitem(
         -- From basic_materials:energy_crystal_simple
         "unilib:component_crystal_energy",
-        "basic_materials:energy_crystal_simple",
+        {"basic_materials:energy_crystal_simple", "homedecor:power_crystal"},
         mode,
         {
             description = S("Simple Energy Crystal"),
@@ -49,7 +49,7 @@ function unilib.pkg.component_crystal_energy.exec()
                 "unilib:mineral_diamond_gem",
                 "unilib:metal_gold_ingot",
                 "unilib:mineral_diamond_gem",
-            }
+            },
         },
     })
 

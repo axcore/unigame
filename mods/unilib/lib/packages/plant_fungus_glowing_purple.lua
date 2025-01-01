@@ -9,7 +9,7 @@
 unilib.pkg.plant_fungus_glowing_purple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,5 +47,7 @@ function unilib.pkg.plant_fungus_glowing_purple.exec()
         wield_image = "unilib_plant_fungus_glowing_purple.png",
     })
     unilib.register_plant_in_pot("unilib:plant_fungus_glowing_purple", "caverealms:fungus")
+
+    unilib.register_decoration_spare("unilib:plant_fungus_glowing_purple")
 
 end

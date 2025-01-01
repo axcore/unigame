@@ -9,7 +9,7 @@
 unilib.pkg.fruit_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.fruit_apple.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_apple = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_fruit_apple.png",
@@ -47,13 +47,19 @@ function unilib.pkg.fruit_apple.exec()
         sunlight_propagates = true,
         walkable = false,
 
-        after_place_node = function(pos, placer, itemstack)
-            minetest.set_node(pos, {name = "unilib:fruit_apple", param2 = 1})
+        -- N.B. No placer:is_player() check in original code
+        after_place_node = function(pos, placer)
+
+            if placer:is_player() then
+                core.set_node(pos, {name = "unilib:fruit_apple", param2 = 1})
+            end
+
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_apple", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_apple", 2),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -70,6 +76,7 @@ function unilib.pkg.fruit_apple.exec()
         juice_description = S("Apple"),
         juice_type = "apple",
         rgb = "#ecff56",
+
         orig_flag = true,
     })
 
@@ -77,7 +84,7 @@ end
 
 function unilib.pkg.fruit_apple.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_apple",
 
         replace_mode = mode,

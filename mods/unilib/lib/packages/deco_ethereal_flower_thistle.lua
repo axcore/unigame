@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_flower_thistle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ end
 
 function unilib.pkg.deco_ethereal_flower_thistle.exec()
 
-    unilib.register_decoration("ethereal_flower_thistle", {
+    unilib.register_decoration_generic("ethereal_flower_thistle", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:flower_thistle",
@@ -52,7 +52,7 @@ end
 
 function unilib.pkg.deco_ethereal_flower_thistle.post()
 
-    unilib.register_decoration_now("ethereal_flower_thistle", nil, {
+    unilib.register_decoration_complete("ethereal_flower_thistle", nil, {
         -- From ethereal-ng/decor.lua
         place_on = {
             "unilib:dirt_ordinary_with_turf",

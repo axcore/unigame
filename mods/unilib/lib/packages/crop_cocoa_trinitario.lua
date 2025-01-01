@@ -9,7 +9,7 @@
 unilib.pkg.crop_cocoa_trinitario = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.crop_cocoa_trinitario.exec()
         harvest_description = S("Trinitario Cocoa"),
         -- N.B. food = 1 not in original code
         harvest_group_table = {flammable = 4, food = 1, food_cocoa = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         seed_description = S("Trinitario Cocoa Seed"),
     })
@@ -70,7 +70,7 @@ function unilib.pkg.crop_cocoa_trinitario.exec()
 
     end
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:cocao

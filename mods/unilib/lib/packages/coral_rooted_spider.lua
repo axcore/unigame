@@ -9,12 +9,13 @@
 unilib.pkg.coral_rooted_spider = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+--[[
 local function on_place_coral(itemstack, placer, pointed_thing)
 
     return unilib.pkg.shared_xocean.on_place(
@@ -34,6 +35,7 @@ local function on_place_skeleton(itemstack, placer, pointed_thing)
     )
 
 end
+]]--
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +45,7 @@ function unilib.pkg.coral_rooted_spider.init()
 
     return {
         description = "Rooted spider coral",
-        depends = {"coral_block_skeleton", "liquid_water_ordinary", "shared_xocean"},
+        depends = {"coral_block_skeleton", "liquid_water_ordinary"},
     }
 
 end
@@ -59,7 +61,7 @@ function unilib.pkg.coral_rooted_spider.exec()
         description = S("Rooted Spider Coral"),
         tiles = {"unilib_coral_rooted_spider.png"},
         groups = {sea = 1, snappy = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         buildable_to = false,
         drawtype = "plantlike_rooted",
@@ -80,7 +82,7 @@ function unilib.pkg.coral_rooted_spider.exec()
         wield_image = "unilib_coral_rooted_spider.png",
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_skeleton"})
         end,
 
         on_place = function(itemstack, placer, pointed_thing)
@@ -93,21 +95,21 @@ function unilib.pkg.coral_rooted_spider.exec()
             local pos_under = pointed_thing.under
             local pos_above = pointed_thing.above
 
-            if minetest.get_node(pos_under).name ~= "unilib:coral_block_skeleton" or
-                    minetest.get_node(pos_above).name ~= "unilib:liquid_water_ordinary_source" then
+            if core.get_node(pos_under).name ~= "unilib:coral_block_skeleton" or
+                    core.get_node(pos_above).name ~= "unilib:liquid_water_ordinary_source" then
                 return itemstack
             end
 
-            if minetest.is_protected(pos_under, player_name) or
-                    minetest.is_protected(pos_above, player_name) then
+            if core.is_protected(pos_under, player_name) or
+                    core.is_protected(pos_above, player_name) then
 
-                minetest.chat_send_player(player_name, S("Node is protected"))
-                minetest.record_protection_violation(pos_under, player_name)
+                core.chat_send_player(player_name, S("Node is protected"))
+                core.record_protection_violation(pos_under, player_name)
                 return itemstack
 
             end
 
-            minetest.set_node(pos_under, {name = "unilib:coral_rooted_spider"})
+            core.set_node(pos_under, {name = "unilib:coral_rooted_spider"})
             if not (creative and creative.is_enabled_for(player_name)) then
                 itemstack:take_item()
             end
@@ -118,7 +120,7 @@ function unilib.pkg.coral_rooted_spider.exec()
     ]]--
 
     local img = "unilib_coral_block_skeleton.png"
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
         img = "unilib_coral_block_skeleton_farlands.png"
     end
 
@@ -126,8 +128,9 @@ function unilib.pkg.coral_rooted_spider.exec()
         -- From GLEMr11, lib_ecology:coral_purple
         description = S("Rooted Spider Coral"),
         tiles = {img},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -151,18 +154,29 @@ function unilib.pkg.coral_rooted_spider.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_skeleton"})
         end,
 
-        on_place = on_place_coral,
+--      on_place = on_place_coral,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_skeleton",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
     unilib.register_node("unilib:coral_rooted_spider_skeleton", nil, mode, {
         -- Original to unilib, adapted from xocean:skeleton_fire
         description = S("Rooted Spider Coral Skeleton"),
         tiles = {img},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -185,10 +199,21 @@ function unilib.pkg.coral_rooted_spider.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_skeleton"})
         end,
 
-        on_place = on_place_skeleton,
+--      on_place = on_place_coral,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_skeleton",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
 end

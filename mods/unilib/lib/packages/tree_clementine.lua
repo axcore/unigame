@@ -9,7 +9,7 @@
 unilib.pkg.tree_clementine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.clementinetree.add_mode
+local mode = unilib.global.imported_mod_table.clementinetree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -73,9 +73,11 @@ function unilib.pkg.tree_clementine.exec()
     })
     unilib.register_leafdecay({
         -- From clementinetree:leaves
+        trunk_type = "clementine",
         trunks = {"unilib:tree_clementine_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_clementine_leaves", "unilib:fruit_clementine"},
+        leaves = {"unilib:tree_clementine_leaves"},
+        others = {"unilib:fruit_clementine"},
         radius = 3,
     })
 
@@ -121,7 +123,7 @@ function unilib.pkg.tree_clementine.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From clementinetree:gate. Creates unilib:gate_clementine_closed
+        -- From clementinetree:gate_closed, etc. Creates unilib:gate_clementine_closed, etc
         part_name = "clementine",
         orig_name = {"clementinetree:gate_closed", "clementinetree:gate_open"},
 
@@ -131,10 +133,10 @@ function unilib.pkg.tree_clementine.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_clementine", {
+    unilib.register_decoration_generic("cool_trees_tree_clementine", {
         -- From clementinetree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_clementine.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_clementine.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

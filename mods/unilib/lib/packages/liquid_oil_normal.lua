@@ -9,7 +9,7 @@
 unilib.pkg.liquid_oil_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.forest.add_mode
+local mode = unilib.global.imported_mod_table.forest.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -60,7 +60,9 @@ function unilib.pkg.liquid_oil_normal.exec()
         drawtype = "liquid",
         drop = "",
         drowning = 1,
-        inventory_image = minetest.inventorycube("unilib_liquid_oil_normal.png"),
+        inventory_image = core.inventorycube("unilib_liquid_oil_normal.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = "unilib:liquid_oil_normal_flowing",
         liquid_alternative_source = "unilib:liquid_oil_normal_source",
         liquid_viscosity = 4,
@@ -78,7 +80,7 @@ function unilib.pkg.liquid_oil_normal.exec()
                     length = 22,
                 },
                 backface_culling = false,
-            }
+            },
         },
         walkable = false,
     })
@@ -96,7 +98,9 @@ function unilib.pkg.liquid_oil_normal.exec()
         drawtype = "flowingliquid",
         drop = "",
         drowning = 1,
-        inventory_image = minetest.inventorycube("unilib_liquid_oil_normal.png"),
+        inventory_image = core.inventorycube("unilib_liquid_oil_normal.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = "unilib:liquid_oil_normal_flowing",
         liquid_alternative_source = "unilib:liquid_oil_normal_source",
         liquid_viscosity = 4,

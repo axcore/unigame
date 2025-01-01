@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_produce_ginger = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_better_farming_produce_ginger.post()
 
-    unilib.register_decoration_now("better_farming_produce_ginger", nil, {
+    unilib.register_decoration_complete("better_farming_produce_ginger", nil, {
         -- From better_farming, ginger.lua
         -- Completes decoration in package "produce_ginger"
         biomes = {"default_taiga", "default_tundra"},
@@ -35,7 +35,7 @@ function unilib.pkg.deco_better_farming_produce_ginger.post()
             "unilib:dirt_ordinary_with_litter_rainforest",
             "unilib:dirt_ordinary_with_cover_snow",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

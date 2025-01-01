@@ -9,7 +9,7 @@
 unilib.pkg.plant_seagrass_tape_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decorations_sea.add_mode
+local mode = unilib.global.imported_mod_table.decorations_sea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

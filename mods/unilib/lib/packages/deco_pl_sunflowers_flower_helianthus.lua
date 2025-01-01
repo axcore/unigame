@@ -9,7 +9,7 @@
 unilib.pkg.deco_pl_sunflowers_flower_helianthus = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pl_sunflowers.add_mode
+local mode = unilib.global.imported_mod_table.pl_sunflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,13 +24,13 @@ function unilib.pkg.deco_pl_sunflowers_flower_helianthus.init()
 
 end
 
-function unilib.pkg.deco_pl_sunflowers_flower_helianthus.exec()
+function unilib.pkg.deco_pl_sunflowers_flower_helianthus.post()
 
-    unilib.register_decoration_now("convert_flower_helianthus", nil, {
+    unilib.register_decoration_complete("convert_flower_helianthus", nil, {
         -- From pl_sunflowers/init.lua
         -- Completes decoration in package "convert_flower_helianthus"
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 0,
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.glass_clean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.glass_clean.exec()
         description = S("Clean Glass"),
         tiles = {"unilib_glass_clean.png", "unilib_glass_clean_detail.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -48,6 +48,9 @@ function unilib.pkg.glass_clean.exec()
     })
     unilib.register_stairs("unilib:glass_clean", {
         glass_flag = true,
+    })
+    unilib.register_carvings("unilib:glass_clean", {
+        millwork_flag = true,
     })
     unilib.register_glass_trap({
         -- From moreblocks:trap_clean_glass. Creates unilib:glass_clean_trap

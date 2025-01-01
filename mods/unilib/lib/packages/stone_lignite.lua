@@ -9,7 +9,7 @@
 unilib.pkg.stone_lignite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_lignite.exec()
         description = S("Lignite Stone"),
 
         category = "sedimentary",
+        colour = "#252621",
         grinder_flag = true,
         hardness = 1,
         not_super_flag = true,

@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_dacite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_dacite.exec()
         description = S("Dacite Sandstone"),
 
         category = "sedimentary",
+        colour = "#C0BEA5",
         grinder_flag = true,
         grinder_powder = "unilib:sand_dacite",
         grinder_gravel = "unilib:gravel_dacite",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_dacite.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_dacite_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, dacite_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_dacite.exec()
             replace_mode = mode,
             description = S("Dacite Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_dacite_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_dacite_cobble_compressed
+            part_name = "sandstone_dacite",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Dacite Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_dacite_cobble_condensed
+            part_name = "sandstone_dacite",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Dacite Sandstone Cobble"),
         })
 
     end

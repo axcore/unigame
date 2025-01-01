@@ -9,7 +9,7 @@
 unilib.pkg.item_string_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.item_string_ordinary.exec()
         recipe = {
             {"unilib:crop_cotton_harvest"},
             {"unilib:crop_cotton_harvest"},
-        }
+        },
     })
     unilib.register_craft({
         -- From farming:string

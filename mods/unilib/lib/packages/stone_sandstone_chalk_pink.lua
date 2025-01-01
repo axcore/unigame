@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_chalk_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_chalk_pink.exec()
         description = S("Pink Chalk Sandstone"),
 
         category = "sedimentary",
+        colour = "#D7CEB3",
         grinder_flag = true,
         grinder_powder = "unilib:sand_chalk_pink",
         grinder_gravel = "unilib:gravel_chalk_pink",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_chalk_pink.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_chalk_pink_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, chalk_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_chalk_pink.exec()
             replace_mode = mode,
             description = S("Pink Chalk Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_chalk_pink_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_chalk_pink_cobble_compressed
+            part_name = "sandstone_chalk_pink",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Pink Chalk Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_chalk_pink_cobble_condensed
+            part_name = "sandstone_chalk_pink",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Pink Chalk Sandstone Cobble"),
         })
 
     end

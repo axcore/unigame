@@ -9,7 +9,7 @@
 unilib.pkg.tree_fern_giant = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -21,7 +21,7 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
     pos = {x = pos.x, y = pos.y - 1, z = pos.z}
 
     local pos_aux = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local name = minetest.get_node(pos_aux).name
+    local name = core.get_node(pos_aux).name
     if name ~= "air" and
             name ~= "unilib:tree_fern_giant_sapling" and
             name ~= "unilib:grass_jungle" then
@@ -39,8 +39,8 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
                 {x = pos.x + 1, y = pos.y + size - 1, z = pos.z},
                 {x = pos.x + 2, y = pos.y + size, z = pos.z},
                 {x = pos.x + 3, y = pos.y + size - 1, z = pos.z},
-                {x = pos.x + 4, y = pos.y + size - 2, z = pos.z}
-            }
+                {x = pos.x + 4, y = pos.y + size - 2, z = pos.z},
+            },
         },
         {
             direction = 1,
@@ -48,8 +48,8 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
                 {x = pos.x - 1, y = pos.y + size - 1, z = pos.z},
                 {x = pos.x - 2, y = pos.y + size, z = pos.z},
                 {x = pos.x - 3, y = pos.y + size - 1, z = pos.z},
-                {x = pos.x - 4, y = pos.y + size - 2, z = pos.z}
-            }
+                {x = pos.x - 4, y = pos.y + size - 2, z = pos.z},
+            },
         },
         {
             direction = 2,
@@ -57,8 +57,8 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
                 {x = pos.x, y = pos.y + size - 1, z = pos.z + 1},
                 {x = pos.x, y = pos.y + size, z = pos.z + 2},
                 {x = pos.x, y = pos.y + size - 1, z = pos.z + 3},
-                {x = pos.x, y = pos.y + size - 2, z = pos.z + 4}
-            }
+                {x = pos.x, y = pos.y + size - 2, z = pos.z + 4},
+            },
         },
         {
             direction = 0,
@@ -66,16 +66,16 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
                 {x = pos.x, y = pos.y + size - 1, z = pos.z - 1},
                 {x = pos.x, y = pos.y + size, z = pos.z - 2},
                 {x = pos.x, y = pos.y + size - 1, z = pos.z - 3},
-                {x = pos.x, y = pos.y + size - 2, z = pos.z - 4}
-            }
-        }
+                {x = pos.x, y = pos.y + size - 2, z = pos.z - 4},
+            },
+        },
     }
 
     local break_flag = false
     for i = 1, (size - 3) do
 
         pos_aux.y = pos.y + i
-        local name = minetest.get_node(pos_aux).name
+        local name = core.get_node(pos_aux).name
         if not (name == "air" or (i == 1 and name == "unilib:tree_fern_giant_sapling")) then
 
             break_flag = true
@@ -83,7 +83,7 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
 
         end
 
-        minetest.swap_node(
+        core.swap_node(
             {x = pos.x, y = pos.y + i, z = pos.z},
             {name = "unilib:tree_fern_giant_trunk"}
         )
@@ -92,12 +92,12 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
 
     if not break_flag then
 
-        minetest.swap_node(
+        core.swap_node(
             {x = pos.x, y = pos.y + size-2, z = pos.z},
             {name = "unilib:tree_fern_giant_trunk_apex"}
         )
 
-        minetest.swap_node(
+        core.swap_node(
             {x = pos.x, y = pos.y + size-1, z = pos.z},
             {name = "unilib:tree_fern_giant_crown_start"}
         )
@@ -116,9 +116,9 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
             -- Add leaves so long as the destination nodes are air
             for j = 1, 3 do
 
-                if minetest.get_node(positions[j]).name == "air" then
+                if core.get_node(positions[j]).name == "air" then
 
-                    minetest.swap_node(positions[j], {name = "unilib:tree_fern_giant_crown_middle"})
+                    core.swap_node(positions[j], {name = "unilib:tree_fern_giant_crown_middle"})
 
                 else
 
@@ -130,11 +130,11 @@ function unilib.pkg.tree_fern_giant.grow_func(pos)
             end
 
             -- Add the terminating leaf if required and possible
-            if endpos == 4 and minetest.get_node(positions[endpos]).name == "air" then
+            if endpos == 4 and core.get_node(positions[endpos]).name == "air" then
 
-                minetest.swap_node(
+                core.swap_node(
                     positions[endpos],
-                    {name="unilib:tree_fern_giant_crown_end", param2 = rot}
+                    {name = "unilib:tree_fern_giant_crown_end", param2 = rot}
                 )
 
             end
@@ -159,8 +159,13 @@ end
 
 function unilib.pkg.tree_fern_giant.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Dicksonia"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -168,82 +173,88 @@ function unilib.pkg.tree_fern_giant.exec()
         description = S("Giant Fern Tree Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_fern_giant_trunk", "ferns:fern_trunk_big", mode, {
         -- From ferns:fern_trunk_big
-        description = S("Giant Fern Tree Trunk"),
+        description = unilib.utils.annotate(S("Giant Fern Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_fern_giant_trunk_top.png",
             "unilib_tree_fern_giant_trunk_top.png",
             "unilib_tree_fern_giant_trunk.png"
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, tree = 1, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
-        node_box = {
-            type = "fixed",
-            fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
-        },
+        -- N.B. .is_ground_content not in original code
+        is_ground_content = false,
+        node_box = node_box,
         paramtype = "light",
-        sci_name = sci_name,
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
 
+        --[[
         after_destruct = function(pos, oldnode)
 
-            local node = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local node = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if node.name == "unilib:tree_fern_giant_trunk" or
                     node.name == "unilib:tree_fern_giant_trunk_apex" then
 
-                minetest.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
-                minetest.add_item(pos, "unilib:tree_fern_giant_trunk")
+                core.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.add_item(pos, "unilib:tree_fern_giant_trunk")
 
             end
 
         end,
+        ]]--
+        after_destruct = function(pos, oldnode)
+
+            unilib.flora.collapse_slim_tree(
+                pos,
+                oldnode,
+                {"unilib:tree_fern_giant_trunk", "unilib:tree_fern_giant_trunk_apex"}
+            )
+
+        end,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
 
     unilib.register_node("unilib:tree_fern_giant_trunk_apex", "ferns:fern_trunk_big_top", mode, {
         -- From ferns:fern_trunk_big_top
-        description = S("Giant Fern Tree Trunk"),
+        description = unilib.utils.annotate(S("Giant Fern Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_fern_giant_trunk_top.png^unilib_tree_fern_giant_trunk_apex_overlay.png",
             "unilib_tree_fern_giant_trunk_top.png^unilib_tree_fern_giant_trunk_apex_overlay.png",
             "unilib_tree_fern_giant_trunk.png"
         },
+        -- N.B. leafdecay = 3 in original code
         groups = {
-            choppy = 2,
-            flammable = 3,
-            -- N.B. leafdecay = 3 in original code
-            leafdecay = 1,
-            not_in_creative_inventory = 1,
-            oddly_breakable_by_hand = 2,
-            tree = 1,
-            wood = 1,
+            choppy = 2, flammable = 3, leafdecay = 1, not_in_creative_inventory = 1,
+            oddly_breakable_by_hand = 2, tree = 1, wood = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         drop = "unilib:tree_fern_giant_trunk",
+        -- N.B. .is_ground_content not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
-                {-1/2,  33/64, -1/2, 1/2, 33/64, 1/2},
+                {-1/2, 33/64, -1/2, 1/2, 33/64, 1/2},
                 {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
-            }
+            },
         },
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
     })
+
+    -- (no wood; instead, trunks can be crafted into sticks)
 
     unilib.register_node(
         -- From ferns:tree_fern_leaves_giant
@@ -251,15 +262,13 @@ function unilib.pkg.tree_fern_giant.exec()
         "ferns:tree_fern_leaves_giant",
         mode,
         {
-            description = S("Giant Fern Tree Crown"),
+            description = unilib.utils.annotate(S("Giant Fern Tree Crown"), sci_name),
             tiles = {"unilib_tree_fern_giant_crown_start.png"},
             groups = {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "plantlike",
-            -- Notes from ferns mod:
-            -- Occasionally, drop a second sapling instead of leaves
-            -- (Extra saplings can also be obtained by replanting and reharvesting leaves)
+            -- N.B. Drop either 2 saplings, or 1 crown and 1 sapling
             drop = {
                 max_items = 2,
                 items = {
@@ -289,24 +298,25 @@ function unilib.pkg.tree_fern_giant.exec()
 
     unilib.register_node("unilib:tree_fern_giant_crown_middle", "ferns:tree_fern_leave_big", mode, {
         -- From ferns:tree_fern_leave_big
-        description = S("Giant Fern Tree Crown"),
+        description = unilib.utils.annotate(S("Giant Fern Tree Crown"), sci_name),
         tiles = {"unilib_tree_fern_giant_crown_middle.png"},
         groups = {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "raillike",
         drop = "",
         paramtype = "light",
         walkable = false,
 
+        -- (This callback causes the middle/end leaves to be destroyed, when the trunk is destroyed)
         after_destruct = function(pos, oldnode)
 
             for _, d in pairs(
                 {{x = -1, z = 0}, {x = 1, z = 0}, {x = 0, z = -1}, {x = 0, z = 1}}
             ) do
-                local node = minetest.get_node({x = pos.x + d.x, y = pos.y + 1, z = pos.z + d.z})
+                local node = core.get_node({x = pos.x + d.x, y = pos.y + 1, z = pos.z + d.z})
                 if node.name == "unilib:tree_fern_giant_crown_middle" then
-                    minetest.dig_node({x = pos.x + d.x, y = pos.y + 1, z = pos.z + d.z})
+                    core.dig_node({x = pos.x + d.x, y = pos.y + 1, z = pos.z + d.z})
                 end
 
             end
@@ -320,22 +330,22 @@ function unilib.pkg.tree_fern_giant.exec()
         "ferns:tree_fern_leave_big_end",
         mode,
         {
-            description = S("Giant Fern Tree Crown"),
+            description = unilib.utils.annotate(S("Giant Fern Tree Crown"), sci_name),
             tiles = {"unilib_tree_fern_giant_crown_end.png"},
             groups = {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "nodebox",
             drop = "",
             node_box = {
                 type = "fixed",
-                fixed = {-1/2, -1/2,   1/2, 1/2,   33/64, 1/2},
+                fixed = {-1/2, -1/2, 1/2, 1/2, 33/64, 1/2},
             },
             paramtype = "light",
             paramtype2 = "facedir",
             selection_box = {
                 type = "fixed",
-                fixed = {-1/2, -1/2,   1/2, 1/2,   33/64, 1/2},
+                fixed = {-1/2, -1/2, 1/2, 1/2, 33/64, 1/2},
             },
             use_texture_alpha = "clip",
             walkable = false,
@@ -344,16 +354,15 @@ function unilib.pkg.tree_fern_giant.exec()
 
     unilib.register_node("unilib:tree_fern_giant_sapling", "ferns:sapling_giant_tree_fern", mode, {
         -- From ferns:sapling_giant_tree_fern
-        description = S("Giant Fern Tree Sapling"),
+        description = unilib.utils.annotate(S("Giant Fern Tree Sapling"), sci_name),
         tiles = {"unilib_tree_fern_giant_sapling.png"},
         -- N.B. removed flora = 1 to prevent spreading
         groups = {attached_node = 1, flammable = 2, sapling = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_tree_fern_giant_sapling.png",
         paramtype = "light",
-        sci_name = sci_name,
         selection_box = {
             type = "fixed",
             fixed = {-7/16, -1/2, -7/16, 7/16, 0, 7/16},
@@ -372,13 +381,13 @@ function unilib.pkg.tree_fern_giant.exec()
         replace_mode = mode,
 
         climate_table = {
-            humidity_max = unilib.convert_biome_lib_temp(-1.0),
-            humidity_min = unilib.convert_biome_lib_temp(0.4),
-            temp_max = unilib.convert_biome_lib_temp(-0.5),
-            temp_min = unilib.convert_biome_lib_temp(0.13),
+            humidity_max = unilib.utils.convert_biome_lib_temp(-1.0),
+            humidity_min = unilib.utils.convert_biome_lib_temp(0.4),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.5),
+            temp_min = unilib.utils.convert_biome_lib_temp(0.13),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 85,
                 plantlife_limit = -0.9,
             }),
@@ -396,13 +405,13 @@ function unilib.pkg.tree_fern_giant.exec()
         replace_mode = mode,
 
         climate_table = {
-            humidity_max = unilib.convert_biome_lib_temp(-1.0),
-            humidity_min = unilib.convert_biome_lib_temp(1.0),
-            temp_max = unilib.convert_biome_lib_temp(-1.0),
-            temp_min = unilib.convert_biome_lib_temp(1.0),
+            humidity_max = unilib.utils.convert_biome_lib_temp(-1.0),
+            humidity_min = unilib.utils.convert_biome_lib_temp(1.0),
+            temp_max = unilib.utils.convert_biome_lib_temp(-1.0),
+            temp_min = unilib.utils.convert_biome_lib_temp(1.0),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 90,
                 plantlife_limit = -0.9,
             }),

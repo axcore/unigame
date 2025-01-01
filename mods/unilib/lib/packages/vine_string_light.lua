@@ -9,7 +9,7 @@
 unilib.pkg.vine_string_light = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,14 @@ end
 
 function unilib.pkg.vine_string_light.exec()
 
+    local c_vine = "unilib:vine_normal"
+
     unilib.register_node("unilib:vine_string_light", "ethereal:lightstring", mode, {
         -- From ethereal:lightstring
         description = S("Light String Vine"),
         tiles = {"unilib_vine_string_light.png"},
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "signlike",
@@ -50,10 +52,10 @@ function unilib.pkg.vine_string_light.exec()
         -- From ethereal:lightstring
         output = "unilib:vine_string_light 8",
         recipe = {
-            {"unilib:vine_normal", "unilib:vine_normal", "unilib:vine_normal"},
-            {"unilib:vine_normal", "unilib:flower_fire_dust", "unilib:vine_normal"},
-            {"unilib:vine_normal", "unilib:vine_normal", "unilib:vine_normal"},
-        }
+            {c_vine, c_vine, c_vine},
+            {c_vine, "unilib:flower_fire_dust", c_vine},
+            {c_vine, c_vine, c_vine},
+        },
     })
 
 end

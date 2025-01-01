@@ -9,7 +9,7 @@
 unilib.pkg.glass_glow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.glass_glow.exec()
             "unilib_glass_ordinary_detail.png^[colorize:#E9CD61",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -53,16 +53,19 @@ function unilib.pkg.glass_glow.exec()
     unilib.register_stairs("unilib:glass_glow", {
         glass_flag = true,
     })
+    unilib.register_carvings("unilib:glass_glow", {
+        millwork_flag = true,
+    })
 
     unilib.register_node("unilib:glass_glow_trap", "moreblocks:trap_glow_glass", mode, {
         -- From moreblocks:trap_glow_glass
-        description = unilib.brackets(S("Glow Glass"), S("Trap")),
+        description = unilib.utils.brackets(S("Glow Glass"), S("Trap")),
         tiles = {
             "unilib_glass_ordinary.png^[colorize:#E9CD61^unilib_trap_glass_box_overlay.png",
             "unilib_glass_ordinary_detail.png^[colorize:#E9CD61",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -89,7 +92,7 @@ function unilib.pkg.glass_glow.exec()
         recipe = {"unilib:mineral_mese_crystal_fragment", "unilib:glass_glow"},
     })
 
-    if unilib.pkg_executed_table["item_sweeper"] ~= nil then
+    if unilib.global.pkg_executed_table["item_sweeper"] ~= nil then
 
         unilib.register_node("unilib:glass_glow_clean", "moreblocks:clean_glow_glass", mode, {
             -- From moreblocks:clean_glow_glass
@@ -99,7 +102,7 @@ function unilib.pkg.glass_glow.exec()
                 "unilib_glass_clean_detail.png^[colorize:#E9CD61",
             },
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "glasslike_framed_optional",
             light_source = 11,
@@ -123,6 +126,9 @@ function unilib.pkg.glass_glow.exec()
         unilib.register_stairs("unilib:glass_glow_clean", {
             glass_flag = true,
         })
+        unilib.register_carvings("unilib:glass_glow_clean", {
+            millwork_flag = true,
+        })
 
         unilib.register_node(
             -- From moreblocks:trap_clean_glow_glass
@@ -130,13 +136,13 @@ function unilib.pkg.glass_glow.exec()
             "moreblocks:trap_clean_glow_glass",
             mode,
             {
-                description = unilib.brackets(S("Clean Glow Glass"), S("Trap")),
+                description = unilib.utils.brackets(S("Clean Glow Glass"), S("Trap")),
                 tiles = {
                     "unilib_glass_clean.png^[colorize:#E9CD61^unilib_trap_glass_box_overlay.png",
                     "unilib_glass_clean_detail.png^[colorize:#E9CD61",
                 },
                 groups = {cracky = 3, oddly_breakable_by_hand = 3},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 drawtype = "glasslike_framed_optional",
                 is_ground_content = false,

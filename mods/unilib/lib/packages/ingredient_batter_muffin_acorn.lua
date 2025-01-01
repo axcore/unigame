@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_batter_muffin_acorn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.tool_shovel_wood.exec()
         },
         wield_image = "unilib_tool_shovel_wood.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From default:shovel_wood
@@ -55,6 +55,6 @@ function unilib.pkg.tool_shovel_wood.exec()
         recipe = "unilib:tool_shovel_wood",
         burntime = 4,
     })
-    unilib.apply_toolranks("unilib:tool_shovel_wood", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_wood", "shovel")
 
 end

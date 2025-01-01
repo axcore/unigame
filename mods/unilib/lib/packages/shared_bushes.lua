@@ -9,7 +9,7 @@
 unilib.pkg.shared_bushes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes.add_mode
+local mode = unilib.global.imported_mod_table.bushes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -44,29 +44,16 @@ local function do_grow_bush(pos, dir, part_name)
 
     end
 
-    if minetest.get_node(right_here).name == "air" or
-            minetest.get_node(right_here).name == "unilib:grass_jungle" then
+    -- N.B. removed the check for jungle grass; it's not necessary when this shrub is implemented as
+    --      a standard Minetest decoration
+    core.swap_node(right_here, {name = right_here_node, param2 = dir})
+    core.swap_node(above_right_here, {name = "unilib:" .. part_name .. "_leaves"})
 
-        minetest.swap_node(
-            right_here,
-            {name = right_here_node, param2 = dir}
-        )
+    local chance_of_high_leaves = math.random(1, 10)
+    if chance_of_high_leaves > 5 then
 
-        minetest.swap_node(
-            above_right_here,
-            {name ="unilib:" .. part_name .. "_leaves"}
-        )
-
-        local chance_of_high_leaves = math.random(1, 10)
-        if chance_of_high_leaves > 5 then
-
-            local two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
-            minetest.swap_node(
-                two_above_right_here,
-                {name = "unilib:" .. part_name .. "_leaves"}
-            )
-
-        end
+        local two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
+        core.swap_node(two_above_right_here, {name = "unilib:" .. part_name .. "_leaves"})
 
     end
 
@@ -74,38 +61,35 @@ end
 
 local function do_grow_shrub(pos, height)
 
-    local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local above_right_here = {x = pos.x, y = pos.y + 2, z = pos.z}
-    local two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
-    local three_above_right_here = {x = pos.x, y = pos.y + 4, z = pos.z}
+    -- N.B. Original code fails when the specified "height" is not 4; this version of the code
+    --      assumes a "height" of at least 3
+    -- Also removed the check for jungle grass; it's not necessary when this shrub is implemented as
+    --      a standard Minetest decoration
 
-    if minetest.get_node(right_here).name == "air" or
-            minetest.get_node(right_here).name == "unilib:grass_jungle" then
+    core.swap_node(
+        {x = pos.x, y = pos.y + height, z = pos.z},
+        {name = "unilib:bush_branching_yellow_leaves"}
+    )
+    core.swap_node(
+        {x = pos.x, y = pos.y + height, z = pos.z - 1},
+        {name = "unilib:bush_branching_yellow_leaves"}
+    )
 
-        if height == 4 then
+    core.swap_node(
+        {x = pos.x, y = pos.y + height - 1, z = pos.z},
+        {name = "unilib:bush_branching_yellow_arm", param2 = 2}
+    )
+    core.swap_node(
+        {x = pos.x, y = pos.y + height - 1, z = pos.z - 1},
+        {name = "unilib:bush_branching_yellow_arm", param2 = 0}
+    )
 
-            local two_above_right_here_south = {x = pos.x, y = pos.y + 3, z = pos.z - 1}
-            local three_above_right_here_south = {x = pos.x, y = pos.y + 4, z = pos.z - 1}
-            minetest.swap_node(right_here, {name = "unilib:bush_branching_shrub"})
-            minetest.swap_node(above_right_here, {name = "unilib:bush_branching_shrub"})
-            minetest.swap_node(
-                two_above_right_here,
-                {name = "unilib:bush_branching_yellow_arm", param2 = 2}
-            )
-            minetest.swap_node(
-                two_above_right_here_south,
-                {name = "unilib:bush_branching_yellow_arm", param2 = 0}
-            )
-            minetest.swap_node(
-                three_above_right_here,
-                {name = "unilib:bush_branching_yellow_leaves"}
-            )
-            minetest.swap_node(
-                three_above_right_here_south,
-                {name = "unilib:bush_branching_yellow_leaves"}
-            )
+    for i = (height - 2), 1, -1 do
 
-        end
+        core.swap_node(
+            {x = pos.x, y = pos.y + i, z = pos.z},
+            {name = "unilib:bush_branching_shrub"}
+        )
 
     end
 
@@ -121,8 +105,9 @@ function unilib.pkg.shared_bushes.register_bush_stem(
     unilib.register_node(full_name, orig_name, mode, {
         description = description,
         tiles = {leaves_img, centre_img},
-        groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        -- N.B. no bushstem = 1 in original code
+        groups = {attached_node = 1, bushstem = 1, flammable = 2, leaves = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         drop = "unilib:item_stick_ordinary 4",
         drawtype = "nodebox",
@@ -152,8 +137,9 @@ function unilib.pkg.shared_bushes.register_bush_arm(
     unilib.register_node(full_name, orig_name, mode, {
         description = description,
         tiles = {leaves_img, centre_img, left_img, right_img, centre_img, right_img},
-        groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        -- N.B. no bushstem = 1 in original code
+        groups = {attached_node = 1, bushstem = 1, flammable = 2, leaves = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         drop = "unilib:item_stick_ordinary 3",
         drawtype = "nodebox",
@@ -181,13 +167,13 @@ end
 function unilib.pkg.shared_bushes.register_bush_leaves(
     full_name, orig_name, description, leaves_img
 )
-    local inv_img = unilib.filter_leaves_img(leaves_img)
+    local inv_img = unilib.flora.filter_leaves_img(leaves_img)
 
     unilib.register_node(full_name, orig_name, mode, {
         description = description,
         tiles = {leaves_img},
         groups = {attached_node = 1, flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "allfaces_optional",
         inventory_image = inv_img,
@@ -242,13 +228,8 @@ end
 
 function unilib.pkg.shared_bushes.grow_shrub(pos, part_name)
 
-    -- N.B. In the original code, the value 5 is ignored, if specified
-    --[[
-    local height = math.random(4,5)
-    do_grow_shrub(pos, height)
-    ]]--
-
-    do_grow_shrub(pos, 4)
+    -- N.B. In the original code. math.random(4, 5), but the value of 5 is ignored, if specified
+    do_grow_shrub(pos, math.random(3, 5))
 
 end
 

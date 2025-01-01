@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_soy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.food_soup_soy.exec()
         description = S("Uncooked Soy Soup"),
         tiles = {"unilib_food_soup_soy_raw.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_soup = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_soup_soy_raw.png",
@@ -59,7 +59,7 @@ function unilib.pkg.food_soup_soy.exec()
         recipe = {
             {"unilib:crop_chives_harvest", "group:food_oil", "unilib:crop_parsley_curly_harvest"},
             {"", "unilib:food_milk_soy_red", ""},
-            {"", "unilib:utensil_plate_ceramic", ""}
+            {"", "unilib:utensil_plate_ceramic", ""},
         },
         replacements = {
             {"group:food_milk", "unilib:vessel_bottle_glass_empty"},
@@ -72,7 +72,7 @@ function unilib.pkg.food_soup_soy.exec()
         description = S("Cooked Soy Soup"),
         tiles = {"unilib_food_soup_soy_cooked.png"},
         groups = {attached_node = 1, dig_immediate = 3, eatable = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_soup_soy_cooked.png",
@@ -85,7 +85,7 @@ function unilib.pkg.food_soup_soy.exec()
         walkable = false,
         wield_image = "unilib_food_soup_soy_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_soup_soy_cooked", 5, "unilib:utensil_plate_ceramic"
         ),
     })

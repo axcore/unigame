@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_fern_giant = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,12 +19,14 @@ function unilib.pkg.deco_australia_tree_fern_giant.init()
 
     return {
         description = "Giant fern tree as decoration",
-        depends = {"dirt_ordinary", "tree_fern_giant"},
-        at_least_one = {
+        depends = "tree_fern_giant",
+        optional = {
             "biome_australia_great_dividing_range",
             "biome_australia_far_north_queensland",
             "biome_australia_tasmania",
             "biome_australia_victorian_forests",
+            "dirt_custom_antipodean",
+            "dirt_ordinary",
         },
     }
 
@@ -108,48 +110,72 @@ end
 
 function unilib.pkg.deco_australia_tree_fern_giant.post()
 
-    if unilib.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now("convert_tree_fern_giant_in_range", nil, {
+        unilib.register_decoration_complete("convert_tree_fern_giant_in_range", nil, {
             -- From australia/biome_great_dividing_range.lua
             biomes = "australia_great_dividing_range",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_with_turf_great_dividing_range",
+            },
             y_max = 70,
             y_min = 36,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_far_north_queensland"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_far_north_queensland"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now("convert_tree_fern_giant_in_queensland", nil, {
+        unilib.register_decoration_complete("convert_tree_fern_giant_in_queensland", nil, {
             -- From australia/biome_far_north_queensland.lua
             biomes = "australia_far_north_queensland",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_with_turf_far_north_queensland",
+            },
             y_max = 20,
             y_min = 6,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_tasmania"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now("convert_tree_fern_giant_in_tasmania", nil, {
+        unilib.register_decoration_complete("convert_tree_fern_giant_in_tasmania", nil, {
             -- From australia/biome_tasmania.lua
             biomes = "australia_tasmania",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_dark_with_turf_tasmania",
+            },
             y_max = 70,
             y_min = 36,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now("convert_tree_fern_giant_in_victoria", nil, {
+        unilib.register_decoration_complete("convert_tree_fern_giant_in_victoria", nil, {
             -- From australia/biome_victorian_forests.lua
             biomes = "australia_victorian_forests",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+            },
             y_max = 70,
             y_min = 36,
         })

@@ -9,7 +9,7 @@
 unilib.pkg.grass_swamp_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,13 @@ end
 
 function unilib.pkg.grass_swamp_dark.exec()
 
-    unilib.register_node("unilib:grass_swamp_dark", "lib_ecology:grass_swamp", mode, {
+    local full_name = "unilib:grass_swamp_dark"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "lib_ecology:grass_swamp", mode, {
         -- From GLEMr11, lib_ecology:grass_swamp
         description = S("Dark Swamp Grass"),
         tiles = {"unilib_grass_swamp_dark.png"},
@@ -35,15 +41,17 @@ function unilib.pkg.grass_swamp_dark.exec()
             leaves = 1, oddly_breakable_by_hand = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
+        drop = drop,
         -- N.B. floodable no longer required, because of unilib's flooding effects
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_grass_swamp_dark.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other grasses
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,6 +63,8 @@ function unilib.pkg.grass_swamp_dark.exec()
         waving = 1,
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
-    unilib.register_plant_in_pot("unilib:grass_swamp_dark", "lib_ecology:grass_swamp")
+    unilib.register_plant_in_pot(full_name, "lib_ecology:grass_swamp")
+
+    unilib.register_decoration_spare(full_name)
 
 end

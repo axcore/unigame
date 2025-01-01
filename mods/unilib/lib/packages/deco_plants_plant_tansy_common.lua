@@ -9,7 +9,7 @@
 unilib.pkg.deco_plants_plant_tansy_common = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_plants_plant_tansy_common.post()
 
-    unilib.register_decoration_now("plants_plant_tansy_common", nil, {
+    unilib.register_decoration_complete("plants_plant_tansy_common", nil, {
         -- Original to unilib
         -- Completes decoration in package "plant_tansy_common"
         place_on = "unilib:dirt_ordinary_with_turf",

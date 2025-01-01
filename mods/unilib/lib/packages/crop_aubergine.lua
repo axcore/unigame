@@ -9,7 +9,7 @@
 unilib.pkg.crop_aubergine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,13 +47,14 @@ function unilib.pkg.crop_aubergine.exec()
         eat = 1,
         fertility_list = fertility_list,
         harvest_description = S("Aubergine"),
-        -- N.B. food_aubergine not in original code
-        harvest_group_table = {flammable = 3, food_aubergine = 1},
+        -- N.B. food_aubergine = 1, food_eggplant = 1 not in original code
+        harvest_group_table = {flammable = 3, food_aubergine = 1, food_eggplant = 1},
         min_light = 7,
         seed_description = S("Aubergine Seed"),
         seed_group_table = {attached_node = 1, flammable = 2, seed = 1, snappy = 3},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,7 +66,16 @@ function unilib.pkg.crop_aubergine.exec()
 
     end
 
-    unilib.register_decoration("better_farming_crop_aubergine", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_aubergine_harvest",
+        juice_description = S("Aubergine"),
+        juice_type = "aubergine",
+        rgb = "#392949",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_crop_aubergine", {
         -- From better_farming:eggplants_4
         deco_type = "simple",
         decoration = "unilib:crop_aubergine_grow_4",

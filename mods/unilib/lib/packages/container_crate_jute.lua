@@ -9,7 +9,7 @@
 unilib.pkg.container_crate_jute = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.container_crate_jute.exec()
             "unilib_container_crate_jute_side.png",
         },
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -53,7 +53,7 @@ function unilib.pkg.container_crate_jute.exec()
             {c_harvest, c_harvest, c_harvest},
             {c_harvest, "group:wood", "unilib:item_string_ordinary"},
             {c_harvest, c_harvest, c_harvest},
-        }
+        },
     })
 
 end

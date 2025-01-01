@@ -9,7 +9,7 @@
 unilib.pkg.shared_sickles = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions (register moss)
@@ -61,7 +61,7 @@ function unilib.pkg.shared_sickles.register_moss(data_table)
         wall_bottom = { -0.5, -0.5, -0.5, 0.5, -0.45, 0.5 }
     }
 
-    local sound_table = unilib.node_sound_dirt_defaults({
+    local sound_table = unilib.sound.generate_dirt({
         footstep = "unilib_grass_footstep",
         dug = "unilib_moss_dug",
         place = "unilib_moss_dug",
@@ -82,7 +82,8 @@ function unilib.pkg.shared_sickles.register_moss(data_table)
         -- N.B. floodable no longer required, because of unilib's flooding effects
 --        floodable = true,
         inventory_image = "unilib_moss_green_inv.png" .. overlay_img,
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mosses
+--      is_ground_content = false,
         node_box = node_box,
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -92,7 +93,7 @@ function unilib.pkg.shared_sickles.register_moss(data_table)
         walkable = false,
         wield_image = "unilib_moss_green_inv.png" .. overlay_img,
 
-        on_use = unilib.cuisine_eat_on_use(moss_name, 1),
+        on_use = unilib.cuisine.eat_on_use(moss_name, 1),
     })
     unilib.register_craft({
         output = moss_name .. " 3",
@@ -104,7 +105,7 @@ function unilib.pkg.shared_sickles.register_moss(data_table)
     -- Moss block
     unilib.register_node(block_name, block_orig_name, replace_mode, {
         description = block_description,
-        tiles = {"unilib_moss_ordinary.png" .. overlay_img},
+        tiles = {"unilib_moss_green_top.png" .. overlay_img},
         groups = {fall_damage_add_percent = -80, flammable = 2, moss_block = 1, snappy = 3},
         sounds = sound_table,
 
@@ -117,11 +118,11 @@ function unilib.pkg.shared_sickles.register_moss(data_table)
             {moss_name, moss_name, moss_name},
             {moss_name, moss_name, moss_name},
             {moss_name, moss_name, moss_name},
-        }
+        },
     })
     unilib.register_stairs(block_name)
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             type = "shapeless",
@@ -169,18 +170,18 @@ function unilib.pkg.shared_sickles.exec()
     })
 
     -- Override the pitchfork mechanic with the sickle mechanic, if required
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil and
-            unilib.pkg_executed_table["misc_hay_ordinary"] ~= nil and
-            unilib.pkg_executed_table["tool_pitchfork"] ~= nil and
-            unilib.sickles_override_pitchfork_flag then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["misc_hay_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["tool_pitchfork"] ~= nil and
+            unilib.setting.sickles_override_pitchfork_flag then
 
         unilib.override_item("unilib:dirt_ordinary_with_turf", {
             after_dig_node = function() end
         })
 
-        local group_table = minetest.registered_tools["unilib:tool_pitchfork"].groups
+        local group_table = core.registered_tools["unilib:tool_pitchfork"].groups
         group_table.sickle = 1
-        group_table.sickle_uses = 12
+        group_table.sickle_uses = 120
         unilib.override_item("unilib:tool_pitchfork", {
             groups = group_table
         })

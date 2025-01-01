@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_pink.exec()
         description = S("Pink Sandstone"),
 
         category = "sedimentary",
+        colour = "#E4B47A",
         grinder_flag = true,
         grinder_powder = "unilib:sand_pink",
         hardness = 4,
@@ -58,7 +59,7 @@ function unilib.pkg.stone_sandstone_pink.exec()
         output = "unilib:sand_pink 4",
         recipe = {
             {"unilib:stone_sandstone_pink"},
-        }
+        },
     })
 
     unilib.register_stone_block({
@@ -79,6 +80,24 @@ function unilib.pkg.stone_sandstone_pink.exec()
         replace_mode = mode,
         description = S("Pink Sandstone Bricks"),
         img_list = {"unilib_stone_sandstone_pink.png^unilib_stone_brick_overlay.png"},
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_sandstone_pink_compressed
+        part_name = "sandstone_pink",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pink Sandstone"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_sandstone_pink_condensed
+        part_name = "sandstone_pink",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pink Sandstone"),
     })
 
 end

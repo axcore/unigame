@@ -9,7 +9,7 @@
 unilib.pkg.tree_pine_huon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_pine_huon.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Lagarostrobos franklinii"
 
     unilib.register_tree({
@@ -107,7 +107,7 @@ function unilib.pkg.tree_pine_huon.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_pine_huon_closed
+        -- Original to unilib. Creates unilib:gate_pine_huon_closed, etc
         part_name = "pine_huon",
         orig_name = {nil, nil},
 
@@ -116,10 +116,10 @@ function unilib.pkg.tree_pine_huon.exec()
         group_table = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("australia_tree_pine_huon_in_tasmania", {
+    unilib.register_decoration_generic("australia_tree_pine_huon_in_tasmania", {
         -- From australia/biome_tasmania.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_huon.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_huon.mts",
 
         fill_ratio = 1 / 15000,
         flags = "place_center_x, place_center_z",

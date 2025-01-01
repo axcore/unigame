@@ -9,7 +9,7 @@
 unilib.pkg.misc_hay_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_hay_ordinary.exec()
         description = S("Pile of Hay"),
         tiles = {"unilib_misc_straw_ordinary.png^[multiply:#88BB88"},
         groups = {flammable = 3, hay = 3, oddly_breakable_by_hand = 2, snappy = 2},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -43,14 +43,14 @@ function unilib.pkg.misc_hay_ordinary.exec()
             type = "leveled",
             fixed = {
                 {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
-            }
+            },
         },
         paramtype2 = "leveled",
 
         -- Randomly vary the height of the hay (for aesthetics)
         after_place_node = function(pos, placer, itemstack, pointed_thing)
 
-            minetest.swap_node(
+            core.swap_node(
                 pos,
                 {name = "unilib:misc_hay_ordinary_pile", param2 = math.random(2, 25)}
             )
@@ -59,11 +59,11 @@ function unilib.pkg.misc_hay_ordinary.exec()
 
         on_timer = function(pos, elapsed)
 
-            local node = minetest.get_node(pos)
+            local node = core.get_node(pos)
             if node and node.name == "unilib:misc_hay_ordinary_pile" then
 
-                minetest.remove_node(pos)
-                minetest.check_for_falling(pos)
+                core.remove_node(pos)
+                core.check_for_falling(pos)
 
             end
 
@@ -82,7 +82,7 @@ function unilib.pkg.misc_hay_ordinary.exec()
         description = S("Ordinary Hay"),
         tiles = {"unilib_misc_straw_ordinary.png^[multiply:#88BB88"},
         groups = {flammable = 3, hay = 3, oddly_breakable_by_hand = 2, snappy = 2},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         is_ground_content = false,
     })
@@ -101,7 +101,7 @@ function unilib.pkg.misc_hay_ordinary.exec()
         description = S("Ordinary Hay Bale"),
         tiles = {"unilib_misc_straw_ordinary_bale.png^[multiply:#88BB88"},
         groups = {flammable = 3, hay = 3, oddly_breakable_by_hand = 2, snappy = 2},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -111,14 +111,14 @@ function unilib.pkg.misc_hay_ordinary.exec()
             type = "fixed",
             fixed = {
                 {-0.45, -0.5, -0.45, 0.45, 0.45, 0.45},
-            }
+            },
         },
         paramtype = "light",
         selection_box = {
             type = "fixed",
             fixed = {
                 {-0.45, -0.5, -0.45, 0.45, 0.45, 0.45},
-            }
+            },
         },
     })
     unilib.register_craft({

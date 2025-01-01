@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_grass_kauri = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_aotearoa_grass_kauri.post()
 
-    unilib.register_decoration_now("aotearoa_grass_kauri", nil, {
+    unilib.register_decoration_complete("aotearoa_grass_kauri", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "grass_kauri"
         biomes = "aotearoa_lowland_kauri_forest",

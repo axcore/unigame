@@ -9,7 +9,7 @@
 unilib.pkg.plant_bush_underground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.plant_bush_underground.exec()
         description = S("Underground Bush"),
         tiles = {img},
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "allfaces",
         is_ground_content = false,
@@ -47,7 +47,7 @@ function unilib.pkg.plant_bush_underground.exec()
         recipe = "unilib:plant_bush_underground",
         burntime = 5,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] then
 
         unilib.register_craft({
             -- From underch:underground_bush
@@ -58,5 +58,7 @@ function unilib.pkg.plant_bush_underground.exec()
 
     end
     -- (not compatible with flowerpots)
+
+    unilib.register_decoration_spare("unilib:plant_bush_underground")
 
 end

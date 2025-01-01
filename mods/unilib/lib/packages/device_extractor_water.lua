@@ -9,7 +9,7 @@
 unilib.pkg.device_extractor_water = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.thirsty.add_mode
+local mode = unilib.global.imported_mod_table.thirsty.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ end
 function unilib.pkg.device_extractor_water.exec()
 
     -- N.B. Most of the code providing functionality for this craftitem is in
-    --      ../effects/hydration.lua
+    --      ../lib/effects/hydration/hydration_base.lua
 
     unilib.register_craftitem("unilib:device_extractor_water", "thirsty:extractor", mode, {
         -- From thirsty:extractor
@@ -52,7 +52,7 @@ function unilib.pkg.device_extractor_water.post()
             {c_diamond, "group:craftable_bucket", c_diamond},
             {c_mese, c_diamond, c_mese}
         },
-        -- N.B. no replacement table with unilib.craftable_bucket_list required
+        -- N.B. no replacement table with unilib.global.craftable_bucket_list required
     })
 
 end

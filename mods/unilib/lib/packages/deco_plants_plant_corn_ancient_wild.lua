@@ -9,7 +9,7 @@
 unilib.pkg.deco_plants_plant_corn_ancient_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_plants_plant_corn_ancient_wild.post()
 
-    unilib.register_decoration_now("plants_plant_corn_ancient_wild", nil, {
+    unilib.register_decoration_complete("plants_plant_corn_ancient_wild", nil, {
         -- Original to unilib, replacing the calls to the habitat mod in the original code
         -- Completes decoration in package "plant_corn_ancient_wild"
         place_on = "unilib:dirt_ordinary_with_turf",

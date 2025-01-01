@@ -9,7 +9,7 @@
 unilib.pkg.light_brazier_pillar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_lighting.add_mode
+local mode = unilib.global.imported_mod_table.castle_lighting.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.light_brazier_pillar.exec()
 
     local material_list = {}
 
-    if unilib.pkg_executed_table["decor_stone_castle_wall"] ~= nil then
+    if unilib.global.pkg_executed_table["decor_stone_castle_wall"] ~= nil then
 
         -- Creates unilib:light_pillar_brazier_decor_stone_castle_wall
         table.insert(material_list, {
@@ -56,7 +56,7 @@ function unilib.pkg.light_brazier_pillar.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
         -- Creates unilib:light_pillar_brazier_stone_desert
         table.insert(material_list, {
@@ -84,7 +84,7 @@ function unilib.pkg.light_brazier_pillar.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_obsidian"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_obsidian"] ~= nil then
 
         -- Creates unilib:light_pillar_brazier_stone_obsidian_brick
         table.insert(material_list, {
@@ -100,7 +100,7 @@ function unilib.pkg.light_brazier_pillar.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
         -- Creates unilib:light_pillar_brazier_stone_ordinary
         table.insert(material_list, {
@@ -140,7 +140,7 @@ function unilib.pkg.light_brazier_pillar.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         -- Creates unilib:light_pillar_brazier_stone_sandstone
         table.insert(material_list, {

@@ -9,7 +9,7 @@
 unilib.pkg.glass_artisanal_clear = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriflame.add_mode
+local mode = unilib.global.imported_mod_table.abriflame.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,15 +31,17 @@ function unilib.pkg.glass_artisanal_clear.exec()
         description = S("Clear Artisanal Glass"),
         tiles = {"unilib_glass_artisanal_clear.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
+        -- N.B. is_ground_content = false not in original code; added to match other glass items
+        is_ground_content = false,
         paramtype = "light",
         sunlight_propagates = true,
         use_texture_alpha = "blend",
     })
     -- Notes from abriglass: intentional lower yield
-    minetest.register_craft({
+    unilib.register_craft({
         output = "unilib:glass_artisanal_clear 4",
         recipe = {
             {"unilib:glass_ordinary", "", "unilib:glass_ordinary"},

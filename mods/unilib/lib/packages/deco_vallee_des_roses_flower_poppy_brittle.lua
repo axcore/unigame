@@ -9,7 +9,7 @@
 unilib.pkg.deco_vallee_des_roses_flower_poppy_brittle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_vallee_des_roses_flower_poppy_brittle.post()
 
-    unilib.register_decoration_now("vallee_des_roses_flower_poppy_brittle", nil, {
+    unilib.register_decoration_complete("vallee_des_roses_flower_poppy_brittle", nil, {
         -- Original to unilib, based on the decoration in the "flower_poppy_brittle" package
         -- Completes decoration in package "flower_poppy_brittle"
         biomes = {"default_forest_coniferous", "default_forest_deciduous", "default_grassland"},

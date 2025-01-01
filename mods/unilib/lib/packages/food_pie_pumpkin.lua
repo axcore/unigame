@@ -9,7 +9,7 @@
 unilib.pkg.food_pie_pumpkin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.food_pie_pumpkin.exec()
             inventory_image = "unilib_food_pie_pumpkin_uncooked.png",
             groups = {flammable = 1, food_uncooked_pumpkin_pie = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_pie_pumpkin_uncooked", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_pie_pumpkin_uncooked", 4),
         }
     )
     unilib.register_craft({
@@ -55,8 +55,8 @@ function unilib.pkg.food_pie_pumpkin.exec()
             "unilib:plant_pumpkin_red_wild_chunk",
             "unilib:plant_pumpkin_red_wild_chunk",
             "unilib:plant_pumpkin_red_wild_chunk",
-            "unilib:food_milk_soy_yellow"
-        }
+            "unilib:food_milk_soy_yellow",
+        },
     })
 
     unilib.register_craftitem("unilib:food_pie_pumpkin", "cropocalypse:cooked_pumpkin_pie", mode, {
@@ -65,7 +65,7 @@ function unilib.pkg.food_pie_pumpkin.exec()
         inventory_image = "unilib_food_pie_pumpkin.png",
         groups = {flammable = 1, food_cooked_pumpkin_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pie_pumpkin", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pie_pumpkin", 8),
     })
     unilib.register_craft({
         -- From cropocalypse:cooked_pumpkin_pie

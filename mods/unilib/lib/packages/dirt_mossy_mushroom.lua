@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mossy_mushroom = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,7 @@ function unilib.pkg.dirt_mossy_mushroom.init()
         description = "Mushroom Mossy Dirt",
         notes = "This item does not spawn in the world, as ethereal biomes do not specify it" ..
                 " (but it can crafted, and is itself used as a crafting ingredient)",
-        depends = {"dirt_ordinary", "tree_mushroom_red"}
+        depends = {"dirt_ordinary", "grass_spore"},
     }
 
 end
@@ -33,17 +33,18 @@ function unilib.pkg.dirt_mossy_mushroom.exec()
         description = S("Mushroom Mossy Dirt"),
         tiles = {"unilib_turf_mushroom_top.png"},
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
 
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft({
         -- From ethereal:mushroom_moss
-        type = "shapeless",
         output = "unilib:dirt_mossy_mushroom",
-        recipe = {"unilib:dirt_ordinary", "unilib:tree_mushroom_red_cap"},
+        recipe = {
+            {"unilib:dirt_ordinary", "unilib:grass_spore"},
+        },
     })
 
 end

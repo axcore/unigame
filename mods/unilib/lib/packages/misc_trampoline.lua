@@ -9,7 +9,7 @@
 unilib.pkg.misc_trampoline = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,12 +29,15 @@ function unilib.pkg.misc_trampoline.exec()
     local c_ingot = "unilib:metal_steel_ingot"
     local c_string = "unilib:item_string_ordinary"
 
+    -- N.B. In the original code, the trampoline is transparent from the bottom. Create a new
+    --  nodebox and replaced the transparent texture
     unilib.register_node("unilib:misc_trampoline", "xdecor:trampoline", mode, {
         -- From xdecor:trampoline
         description = S("Trampoline"),
         tiles = {
-            "unilib_misc_trampoline.png",
-            "blank.png",
+            "unilib_misc_trampoline_top.png",
+--          "blank.png",
+            "unilib_misc_trampoline_bottom.png",
             "unilib_misc_trampoline_side.png",
         },
         groups = {
@@ -51,9 +54,27 @@ function unilib.pkg.misc_trampoline.exec()
         },
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        --[[
         node_box = {
             type = "fixed",
             fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+        },
+        ]]--
+        node_box = {
+            type = "fixed",
+            fixed = {
+                {-8/16, -5/16, -8/16, 8/16, 0, 8/16},       -- Top
+                {8/16, -6/16, 8/16, 2/16, 0, 2/16},         -- NW upper leg
+                {8/16, -8/16, 8/16, 3/16, 0, 3/16},         -- NW lower leg
+                {8/16, -6/16, -8/16, 2/16, 0, -2/16},       -- NE upper leg
+                {8/16, -8/16, -8/16, 3/16, 0, -3/16},       -- NE lower leg
+                {-8/16, -6/16, 8/16, -2/16, 0, 2/16},       -- SW upper leg
+                {-8/16, -8/16, 8/16, -3/16, 0, 3/16},       -- SW lower leg
+                {-8/16, -6/16, -8/16, -2/16, 0, -2/16},     -- SE upper leg
+                {-8/16, -8/16, -8/16, -3/16, 0, -3/16},     -- SE lower leg
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",

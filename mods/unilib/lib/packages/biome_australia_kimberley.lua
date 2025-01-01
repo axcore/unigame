@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_kimberley = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,12 +24,12 @@ function unilib.pkg.biome_australia_kimberley.init()
 
 end
 
-function unilib.pkg.biome_australia_kimberley.exec()
+function unilib.pkg.biome_australia_kimberley.post()
 
     unilib.register_biome({
         -- From australia/biome_kimberley.lua, "kimberley" biome
         name = "australia_kimberley",
-        description = unilib.brackets(S("Kimberley biome"), "australia"),
+        description = unilib.utils.brackets(S("Kimberley biome"), "australia"),
         node_top = "unilib:dirt_red_antipodean",
         depth_top = 2,
         node_filler = "unilib:stone_sandstone_ordinary",

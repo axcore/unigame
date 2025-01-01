@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_brown.exec()
         description = S("Brown Sandstone"),
 
         category = "sedimentary",
+        colour = "#443716",
         grinder_flag = true,
         grinder_powder = "unilib:sand_brown",
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 4)
@@ -40,14 +41,14 @@ function unilib.pkg.stone_sandstone_brown.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_brown", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_brown", 3, nil)
 
     unilib.register_node("unilib:stone_sandstone_brown", "lib_materials:stone_sand", mode, {
         -- From GLEMr4, lib_materials:stone_sand
         description = S("Brown Sandstone"),
         tiles = {"unilib_stone_sandstone_brown.png"},
         groups = {cracky = smooth_cracky, level = 2, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft_2x2({
         -- Original to unilib
@@ -59,10 +60,10 @@ function unilib.pkg.stone_sandstone_brown.exec()
         output = "unilib:sand_brown 4",
         recipe = {
             {"unilib:stone_sandstone_brown"},
-        }
+        },
     })
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_brown", {
             drop_name = "unilib:stone_sandstone_brown_rubble",
@@ -104,7 +105,7 @@ function unilib.pkg.stone_sandstone_brown.exec()
         img_list = {"unilib_stone_sandstone_brown.png^unilib_stone_brick_overlay.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble_or_rubble_or_nothing({
             -- Original to unilib. Depending on real hardness, creates
@@ -112,7 +113,13 @@ function unilib.pkg.stone_sandstone_brown.exec()
             --      nothing
             part_name = "sandstone_brown",
             cobble_description = S("Brown Sandstone Cobble"),
+            cobble_compressed_description = S("Compressed Brown Sandstone Cobble"),
+            cobble_condensed_description = S("Condensed Brown Sandstone Cobble"),
             rubble_description = S("Brown Sandstone Rubble"),
+            rubble_compressed_description = S("Compressed Brown Sandstone Rubble"),
+            rubble_condensed_description = S("Condensed Brown Sandstone Rubble"),
+            smooth_compressed_description = S("Compressed Brown Sandstone"),
+            smooth_condensed_description = S("Condensed Brown Sandstone"),
 
             replace_mode = mode,
             override_drop_flag = true,

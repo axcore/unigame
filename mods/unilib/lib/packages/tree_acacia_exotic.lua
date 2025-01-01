@@ -9,7 +9,7 @@
 unilib.pkg.tree_acacia_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,11 +22,22 @@ function unilib.pkg.tree_acacia_exotic.init()
         notes = "This package was created because the minetest_game and farlands versions of the" ..
                 " five basic trees had similar (but not identical) textures; the farlands trees" ..
                 " are therefore named \"exotic\"",
+        depends = "fruit_orange_exotic",
+        optional = {
+            -- If the "ore_farlands_tree_acacia_exotic" package is not loaded, then the shared
+            --      package will use an ABM to place leaves-with-fruit nodes instead
+            "abm_farlands_bushes_trees",
+            -- Create fruit-as-node variants for use in schematics
+            "shared_farlands_fruit",
+        },
     }
 
 end
 
 function unilib.pkg.tree_acacia_exotic.exec()
+
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
 
     -- (Using same level as the equivalent tree in default)
     local burnlevel = 4
@@ -71,7 +82,58 @@ function unilib.pkg.tree_acacia_exotic.exec()
         description = S("Exotic Acacia Tree Leaves"),
         special_list = {"unilib_tree_acacia_exotic_leaves_simple.png"},
     })
-    unilib.register_quick_tree_leafdecay("acacia_exotic", 2)
+    -- (unilib.register_leafdecay() occurs below)
+
+    unilib.register_node(
+        -- From farlands, fruit:leaves_with_orange
+        "unilib:tree_acacia_exotic_leaves_with_orange",
+        "fruit:leaves_with_orange",
+        mode,
+        {
+            description = S("Exotic Acacia Leaves with Oranges"),
+            tiles = {"unilib_tree_acacia_exotic_leaves.png^unilib_fruit_orange_exotic_overlay.png"},
+            groups = {leaves = 1, not_in_creative_inventory = 1, snappy = 3},
+            sounds = unilib.global.sound_table.leaves,
+
+            drawtype = "allfaces_optional",
+            drop = "unilib:tree_acacia_exotic_leaves",
+            -- N.B. is_ground_content = false not in original code; added to match other leaves
+            is_ground_content = false,
+            paramtype = "light",
+            special_tiles = {
+                "unilib_tree_acacia_exotic_leaves_simple.png^unilib_fruit_orange_exotic_overlay.png"
+            },
+            waving = 1,
+
+            on_destruct = function(pos)
+                core.add_item(pos, "unilib:fruit_orange_exotic")
+            end,
+
+            on_rightclick = function(pos)
+                core.set_node(pos, {name = "unilib:tree_acacia_exotic_leaves"})
+            end,
+        }
+    )
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        -- Create the fruit-as-node variant for use in schematics, unilib:fruit_orange_exotic_node
+        unilib.pkg.shared_farlands_fruit.create_fruit_nodes("orange", "food_orange")
+
+    end
+
+    unilib.register_leafdecay({
+        -- From farlands, default:acacia_leaves
+        trunk_type = "acacia_exotic",
+        trunks = {"unilib:tree_acacia_exotic_trunk"},
+        leaves = {
+            "unilib:tree_acacia_exotic_leaves",
+            "unilib:tree_acacia_exotic_leaves_with_orange",
+        },
+        -- N.B. required if the "shared_farlands_fruit" package is loaded
+        others = {"unilib:fruit_orange_exotic_node"},
+        radius = 2,
+    })
 
     unilib.register_tree_sapling({
         -- From farlands, default:acacia_sapling. Creates unilib:tree_acacia_exotic_sapling
@@ -126,10 +188,10 @@ function unilib.pkg.tree_acacia_exotic.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("farlands_tree_acacia_exotic", {
+    unilib.register_decoration_generic("farlands_tree_acacia_exotic", {
         -- From farlands, mapgen/mapgen.lua, ../default/schematics/acacia_tree.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_acacia_exotic.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_acacia_exotic.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -144,10 +206,10 @@ function unilib.pkg.tree_acacia_exotic.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_tree_acacia_exotic_log", {
+    unilib.register_decoration_generic("farlands_tree_acacia_exotic_log", {
         -- From farlands, mapgen/mapgen.lua (schematic in code)
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_acacia_exotic_log.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_acacia_exotic_log.mts",
 
         flags = "place_center_x",
         noise_params = {
@@ -161,5 +223,21 @@ function unilib.pkg.tree_acacia_exotic.exec()
         rotation = "random",
         sidelen = 16,
     })
+
+end
+
+function unilib.pkg.tree_acacia_exotic.post()
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        unilib.register_regrowing_fruit({
+            fruit_name = "unilib:fruit_orange_exotic_node",
+
+            replace_mode = mode,
+            leaves_list = {"unilib:tree_acacia_exotic_leaves"},
+            pkg_list = {"tree_acacia_exotic"},
+        })
+
+    end
 
 end

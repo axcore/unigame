@@ -9,7 +9,7 @@
 unilib.pkg.mineral_pitchblende = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,7 @@ function unilib.pkg.mineral_pitchblende.exec()
             inventory_image = "unilib_mineral_pitchblende_lump.png",
         }
     )
-    if unilib.pkg_executed_table["metal_uranium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_uranium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

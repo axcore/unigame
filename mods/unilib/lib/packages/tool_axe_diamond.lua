@@ -9,7 +9,7 @@
 unilib.pkg.tool_axe_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_axe_diamond.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_axe({
         -- From default:axe_diamond
         part_name = "diamond",
         ingredient = "unilib:mineral_diamond_gem",
     })
-    unilib.apply_toolranks("unilib:tool_axe_diamond", "axe")
+    unilib.tools.apply_toolranks("unilib:tool_axe_diamond", "axe")
 
 end

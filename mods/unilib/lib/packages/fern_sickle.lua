@@ -9,7 +9,7 @@
 unilib.pkg.fern_sickle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ function unilib.pkg.fern_sickle.exec()
 
     unilib.register_node("unilib:fern_sickle", "australia:small_fern", mode, {
         -- From australia:small_fern
-        description = unilib.annotate(S("Sickle Fern"), "Pellaea falcata"),
+        description = unilib.utils.annotate(S("Sickle Fern"), "Pellaea falcata"),
         tiles = {"unilib_fern_sickle.png"},
         -- N.B. "not_in_creative_inventory = 1" in original code, but removed
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.fern_sickle.exec()
     })
     unilib.register_plant_in_pot("unilib:fern_sickle", "australia:small_fern")
 
-    unilib.register_decoration("australia_fern_sickle_1", {
+    unilib.register_decoration_generic("australia_fern_sickle_1", {
         -- From australia:small_fern
         deco_type = "simple",
         decoration = "unilib:fern_sickle",
@@ -63,7 +63,7 @@ function unilib.pkg.fern_sickle.exec()
         },
         sidelen = 16,
     })
-    unilib.register_decoration("australia_fern_sickle_2", {
+    unilib.register_decoration_generic("australia_fern_sickle_2", {
         -- From australia:small_fern
         deco_type = "simple",
         decoration = "unilib:fern_sickle",

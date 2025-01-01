@@ -1,0 +1,92 @@
+# "darkage_mini" remix - the "darkage" remix without biomes, decorations or ores (there are no base
+#       packages or ABM/LBM packages to omit)
+
+# node_name | original_mod
+
+# darkage packages
+container_box_simple|darkage
+decor_bricks_stone_chalked|darkage
+decor_bricks_stone_small|darkage
+decor_frame_reinforced_basic|darkage
+decor_stone_plaster|darkage
+dirt_dark|darkage
+dirt_mud_dry|darkage
+furniture_shelf_fancy|darkage
+glass_clean_rhombus|darkage
+glass_clean_round|darkage
+glass_clean_square|darkage
+glass_glow_rhombus|darkage
+glass_glow_round|darkage
+glass_glow_square|darkage
+glass_milk_rhombus|darkage
+glass_milk_round|darkage
+glass_milk_square|darkage
+item_stick_iron|darkage
+ladder_chain|darkage
+light_lantern_wicker|darkage
+mapgen_darkage|darkage
+material_adobe|darkage
+misc_bars_iron|darkage
+misc_bars_wood|darkage
+misc_frame_iron_rustic|unilib
+misc_frame_wood_rustic|darkage
+misc_grille_iron|darkage
+misc_grille_wood|darkage
+misc_pile_leaves_dried|darkage
+#ore_darkage_stone_chalk_white|darkage
+#ore_darkage_stone_desert_with_iron|darkage
+#ore_darkage_stone_sandstone_old_red|darkage
+#ore_darkage_stone_tuff|darkage
+#ore_darkage_stone_tuff_rhyolitic|darkage
+sand_silt|darkage
+shared_darkage|darkage
+stone_basalt_dark|darkage
+stone_chalk_white|darkage
+stone_desert_with_iron|darkage
+stone_gneiss_white|darkage
+stone_marble_grey|darkage
+stone_sandstone_old_red|darkage
+stone_schist_grey|darkage
+stone_serpentine|darkage
+stone_shale_brown|darkage
+stone_slate_grey|darkage
+stone_tuff|darkage
+stone_tuff_rhyolitic|darkage
+
+# supporting packages (.depends)
+clay_ordinary|default
+crop_wheat|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+glass_ordinary|default moreblocks vessels
+gravel_ordinary|default mtg_plus
+liquid_water_ordinary|default
+metal_iron|default
+metal_steel|default glemr11 technic
+mineral_coal|default technic
+misc_straw_ordinary|farming darkage
+sand_ordinary|default
+soil_ordinary|farming
+stone_desert|default moreblocks
+stone_ordinary|default moreblocks technic
+torch_ordinary|default
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#grass_dry|default
+#grass_jungle|default
+#grass_ordinary|default
+#gravel_stone_desert|glemr11
+#machine_furnace_induction|unilib
+#mineral_flint|default fire mtg_plus
+#mineral_mese|default glemr11
+#moss_green|sickles
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#sand_red|unilib
+#stone_sandstone_ordinary|default moreblocks mtg_plus
+#stone_serpentinite_pale|decoblocks
+
+# supporting packages (.suggested)

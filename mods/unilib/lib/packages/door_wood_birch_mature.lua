@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_birch_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.birch.add_mode
+local mode = unilib.global.imported_mod_table.birch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,10 @@ end
 function unilib.pkg.door_wood_birch_mature.exec()
 
     unilib.register_door({
-        -- From cool_trees/birch, doors:door_birch_wood. Creates unilib:door_wood_birch_mature
+        -- From cool_trees/birch, doors:door_birch_wood. Creates
+        --      unilib:door_wood_birch_mature_closed_left, etc
         part_name = "wood_birch_mature",
-        orig_name = {
+        orig_name_list = {
             "doors:door_birch_wood_a",
             "doors:door_birch_wood_b",
             "doors:door_birch_wood_c",
@@ -46,7 +47,7 @@ function unilib.pkg.door_wood_birch_mature.exec()
                 {"unilib:tree_birch_mature_wood", "unilib:tree_birch_mature_wood"},
                 {"unilib:tree_birch_mature_wood", "unilib:tree_birch_mature_wood"},
                 {"unilib:tree_birch_mature_wood", "unilib:tree_birch_mature_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

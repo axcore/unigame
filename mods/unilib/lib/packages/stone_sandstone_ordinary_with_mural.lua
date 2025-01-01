@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_ordinary_with_mural = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.stone_sandstone_ordinary_with_mural.init()
 
     return {
         description = "Sandstone with inscriptions",
-        depends = {"dye_basic", "sand_ordinary"},
+        depends = {"dye_basic", "sand_ordinary", "stone_sandstone_ordinary_with_engraving"},
     }
 
 end
@@ -44,7 +44,7 @@ function unilib.pkg.stone_sandstone_ordinary_with_mural.exec()
                 "unilib_stone_sandstone_ordinary_with_mural_4.png",
             },
             groups = {cracky = 3, stone = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             paramtype2 = "facedir",
         }

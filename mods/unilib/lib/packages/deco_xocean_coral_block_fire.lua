@@ -9,7 +9,7 @@
 unilib.pkg.deco_xocean_coral_block_fire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.deco_xocean_coral_block_fire.init()
 
     return {
         description = "Fire coral block as decoration",
-        depends = {"coral_block_fire", "liquid_water_ordinary", "sand_ordinary"},
+        depends = {"coral_block_fire", "liquid_water_ordinary", "sand_ordinary", "shared_xocean"},
         at_least_one = {
             "biome_default_desert_cold",
             "biome_default_desert_sandstone",
@@ -35,10 +35,11 @@ end
 
 function unilib.pkg.deco_xocean_coral_block_fire.exec()
 
-    unilib.register_decoration("xocean_coral_block_fire_1", {
+    --[[
+    unilib.register_decoration_generic("xocean_coral_block_fire_1", {
         -- From xocean/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_coral_block_fire_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_coral_block_fire_1.mts",
 
         flags = "force_placement",
         noise_params = {
@@ -55,10 +56,10 @@ function unilib.pkg.deco_xocean_coral_block_fire.exec()
         sidelen = 2,
     })
 
-    unilib.register_decoration("xocean_coral_block_fire_2", {
+    unilib.register_decoration_generic("xocean_coral_block_fire_2", {
         -- From xocean/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_coral_block_fire_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_coral_block_fire_2.mts",
 
         flags = "force_placement",
         noise_params = {
@@ -74,12 +75,17 @@ function unilib.pkg.deco_xocean_coral_block_fire.exec()
         place_offset_y = -1,
         sidelen = 2,
     })
+    ]]--
+
+    unilib.pkg.shared_xocean.create_generic_rare_block("fire", 20)
+    unilib.pkg.shared_xocean.create_generic_common_block("fire", 12)
 
 end
 
 function unilib.pkg.deco_xocean_coral_block_fire.post()
 
-    unilib.register_decoration_now("xocean_coral_block_fire_1", nil, {
+    --[[
+    unilib.register_decoration_complete("xocean_coral_block_fire_1", nil, {
         -- From xocean/init.lua
         biomes = {
             "default_desert_cold_ocean",
@@ -95,7 +101,7 @@ function unilib.pkg.deco_xocean_coral_block_fire.post()
         y_min = -16,
     })
 
-    unilib.register_decoration_now("xocean_coral_block_fire_2", nil, {
+    unilib.register_decoration_complete("xocean_coral_block_fire_2", nil, {
         -- From xocean/init.lua
         biomes = {
             "default_desert_cold_ocean",
@@ -110,5 +116,26 @@ function unilib.pkg.deco_xocean_coral_block_fire.post()
         y_max = -6,
         y_min = -16,
     })
+    ]]--
+
+    for i = 1, 2 do
+
+        unilib.register_decoration_complete("xocean_coral_block_fire_" .. i, nil, {
+            -- From xocean/init.lua
+            biomes = {
+                "default_desert_cold_ocean",
+                "default_desert_sandstone_ocean",
+                "default_forest_coniferous_ocean",
+                "default_forest_deciduous_ocean",
+                "default_grassland_ocean",
+                "default_grassland_snowy_ocean",
+                "default_taiga_ocean",
+            },
+            place_on = "unilib:sand_ordinary",
+            y_max = -6,
+            y_min = -16,
+        })
+
+    end
 
 end

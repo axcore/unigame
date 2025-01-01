@@ -9,7 +9,7 @@
 unilib.pkg.crop_beetroot_merlin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,7 +53,8 @@ function unilib.pkg.crop_beetroot_merlin.exec()
         seed_description = S("Merlin Beetroot Seed"),
         seed_group_table = {attached_node = 1, flammable = 2, seed = 1, snappy = 3},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,7 +66,16 @@ function unilib.pkg.crop_beetroot_merlin.exec()
 
     end
 
-    unilib.register_decoration("better_farming_crop_beetroot_merlin", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_beetroot_merlin_harvest",
+        juice_description = S("Beet"),
+        juice_type = "beet",
+        rgb = "#682a2f",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_crop_beetroot_merlin", {
         -- From better_farming:beetroot_4
         deco_type = "simple",
         decoration = "unilib:crop_beetroot_merlin_grow_4",

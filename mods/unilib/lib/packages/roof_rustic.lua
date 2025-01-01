@@ -9,7 +9,7 @@
 unilib.pkg.roof_rustic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.roof_rustic.exec()
     local roof_wood_img = "unilib_tree_apple_trunk.png"
     local roof_side_img = "unilib_tree_apple_wood.png"
 
-    if unilib.pkg_executed_table["misc_straw_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_straw_ordinary"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             -- From cottages:roof_straw, cottages:roof_connector_straw and cottages:roof_flat_straw.
@@ -57,7 +57,7 @@ function unilib.pkg.roof_rustic.exec()
 
     end
 
-    if unilib.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             part_name = "thatch",
@@ -90,7 +90,7 @@ function unilib.pkg.roof_rustic.exec()
         replace_mode = mode,
     })
 
-    if unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             part_name = "shingles_asphalt",
@@ -112,7 +112,7 @@ function unilib.pkg.roof_rustic.exec()
 
     end
 
-    if unilib.pkg_executed_table["brick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["brick_ordinary"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             part_name = "shingles_terracotta",
@@ -132,7 +132,7 @@ function unilib.pkg.roof_rustic.exec()
             shingles_flag = true,
         })
 
-        if unilib.pkg_executed_table["material_terracotta"] ~= nil then
+        if unilib.global.pkg_executed_table["material_terracotta"] ~= nil then
 
             unilib.register_craft({
                 -- Original to unilib
@@ -140,15 +140,15 @@ function unilib.pkg.roof_rustic.exec()
                    recipe = {
                     {"unilib:material_terracotta_base", "", "unilib:roof_rustic_wood"},
                     {"", "unilib:roof_rustic_wood", ""},
-                    {"unilib:roof_rustic_wood", "", ""}
-                }
+                    {"unilib:roof_rustic_wood", "", ""},
+                },
             })
 
         end
 
     end
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             part_name = "shingles_dirt",
@@ -170,7 +170,7 @@ function unilib.pkg.roof_rustic.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
         unilib.pkg.shared_cottages.register_roof({
             part_name = "slate",

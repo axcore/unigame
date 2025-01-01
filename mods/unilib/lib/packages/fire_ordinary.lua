@@ -9,7 +9,7 @@
 unilib.pkg.fire_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fire.add_mode
+local mode = unilib.global.imported_mod_table.fire.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,16 @@ function unilib.pkg.fire_ordinary.exec()
 
     -- Prepare the node definition
     -- From fire:basic_flame
-    local def_table = table.copy(unilib.get_generic_fire())
+    local def_table = table.copy(unilib.fire.get_generic_definition())
 
     def_table.description = S("Ordinary Fire")
     def_table.groups.not_in_creative_inventory = 1
 
     def_table.on_timer = function(pos)
 
-        if not minetest.find_node_near(pos, 1, {"group:flammable"}) then
+        if not core.find_node_near(pos, 1, {"group:flammable"}) then
 
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return
 
         end
@@ -47,7 +47,7 @@ function unilib.pkg.fire_ordinary.exec()
     end
 
     def_table.on_construct = function(pos)
-        minetest.get_node_timer(pos):start(math.random(30, 60))
+        core.get_node_timer(pos):start(math.random(30, 60))
     end
 
     -- Register the node

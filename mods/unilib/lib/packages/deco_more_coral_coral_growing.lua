@@ -9,7 +9,7 @@
 unilib.pkg.deco_more_coral_coral_growing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.more_coral.add_mode
+local mode = unilib.global.imported_mod_table.more_coral.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ function unilib.pkg.deco_more_coral_coral_growing.init()
 
 end
 
-function unilib.pkg.deco_more_coral_coral_growing.exec()
+function unilib.pkg.deco_more_coral_coral_growing.post()
 
-    unilib.register_decoration_now("more_coral_coral_growing_basic", nil, {
+    unilib.register_decoration_complete("more_coral_coral_growing_basic", nil, {
         -- From more_coral/init.lua
         -- Completes decoration in package "coral_growing_basic"
         biomes = {

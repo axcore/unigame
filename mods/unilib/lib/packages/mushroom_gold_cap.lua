@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_gold_cap = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ function unilib.pkg.mushroom_gold_cap.exec()
 
     unilib.register_node("unilib:mushroom_gold_cap", "nsspf:psilocybe_cubensis", mode, {
         -- From nsspf:psilocybe_cubensis
-        description = unilib.annotate(S("Gold Cap Mushroom"), "Psilocybe cubensis"),
+        description = unilib.utils.annotate(S("Gold Cap Mushroom"), "Psilocybe cubensis"),
         tiles = {"unilib_mushroom_gold_cap.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -47,7 +47,7 @@ function unilib.pkg.mushroom_gold_cap.exec()
             fixed = {-0.1, -0.49, -0.1, 0.1, -0.1, 0.1},
         },
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_gold_cap", -7),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_gold_cap", -7),
     })
     -- (not compatible with flowerpots)
 
@@ -62,7 +62,7 @@ function unilib.pkg.mushroom_gold_cap.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, food_mushroom = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -77,7 +77,7 @@ function unilib.pkg.mushroom_gold_cap.exec()
                 fixed = {-0.1, -0.49, -0.1, 0.1, -0.1, 0.1},
             },
 
-            on_use = unilib.cuisine_eat_on_use("unilib:mushroom_gold_cap_cooked", 2),
+            on_use = unilib.cuisine.eat_on_use("unilib:mushroom_gold_cap_cooked", 2),
         }
     )
     unilib.register_craft({
@@ -88,7 +88,7 @@ function unilib.pkg.mushroom_gold_cap.exec()
         cooktime = 10,
     })
 
-    unilib.register_decoration("nsspf_mushroom_gold_cap", {
+    unilib.register_decoration_generic("nsspf_mushroom_gold_cap", {
         -- Adapted from flowers:mushroom_brown, replacing the collection of ABMs in the original
         --      nsspf code
         deco_type = "simple",
@@ -98,7 +98,7 @@ function unilib.pkg.mushroom_gold_cap.exec()
             octaves = 3,
             offset = 0,
             persist = 0.66,
-            scale = 0.006 / unilib.nsspf_scarcity_factor,
+            scale = 0.006 / unilib.setting.nsspf_scarcity_factor,
             seed = 43630,      -- New random seed, generated for unilib
             spread = {x = 250, y = 250, z = 250},
         },

@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_plant_squirreltail = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ function unilib.pkg.deco_cropocalypse_plant_squirreltail.init()
             "biome_default_savanna",
             "biome_default_tundra",
         },
-        optional = "dirt_permafrost",
+        optional = "dirt_permafrost_ordinary",
     }
 
 end
 
 function unilib.pkg.deco_cropocalypse_plant_squirreltail.post()
 
-    unilib.register_decoration_now("cropocalypse_plant_squirreltail", nil, {
+    unilib.register_decoration_complete("cropocalypse_plant_squirreltail", nil, {
         -- From cropocalypse/decorative_plants.lua
         -- Completes decoration in package "plant_squirreltail"
         biomes = {
@@ -47,10 +47,10 @@ function unilib.pkg.deco_cropocalypse_plant_squirreltail.post()
         place_on = {
             "group:sand",
             "group:soil",
-            "unilib:dirt_permafrost_with_moss",
-            "unilib:dirt_permafrost_with_stonelet",
+            "unilib:dirt_permafrost_ordinary_with_moss",
+            "unilib:dirt_permafrost_ordinary_with_litter_stone",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

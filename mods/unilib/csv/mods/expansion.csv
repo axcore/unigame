@@ -1,0 +1,3 @@
+# expansion_pack_name | download_url | notes
+
+unitest|https://github.com/axcore/unitest|Specimen expansion pack. Provides a single remix "unitest" and a single package "test_node", which overrides unilib's "test_node" package if loaded

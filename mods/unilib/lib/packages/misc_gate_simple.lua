@@ -9,7 +9,7 @@
 unilib.pkg.misc_gate_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_gate_simple.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -56,30 +56,30 @@ function unilib.pkg.misc_gate_simple.exec()
         },
 
         on_rightclick = function(pos, node, puncher)
-            minetest.swap_node(pos, {name = "unilib:misc_gate_simple_open", param2 = node.param2})
+            core.swap_node(pos, {name = "unilib:misc_gate_simple_open", param2 = node.param2})
         end,
     })
-    minetest.register_craft({
+    unilib.register_craft({
         -- From cottages:gate_closed
         output = "unilib:misc_gate_simple_closed",
         recipe = {
             {"group:stick", "group:stick", "group:wood"},
-        }
+        },
     })
     -- (For convenience, convert open/closed simple gates)
-    minetest.register_craft({
+    unilib.register_craft({
         -- From cottages:gate_closed
         output = "unilib:misc_gate_simple_closed",
         recipe = {
             {"unilib:misc_gate_simple_open"},
-        }
+        },
     })
-    minetest.register_craft({
+    unilib.register_craft({
         -- From cottages:gate_open
         output = "unilib:misc_gate_simple_open",
         recipe = {
             {"unilib:misc_gate_simple_closed"},
-        }
+        },
     })
 
     unilib.register_node("unilib:misc_gate_simple_open", "cottages:gate_open", mode, {
@@ -90,7 +90,7 @@ function unilib.pkg.misc_gate_simple.exec()
             choppy = 2, not_in_creative_inventory = 1, oddly_breakable_by_hand = 2, snappy = 2,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         drop = "unilib:misc_gate_simple_closed",
@@ -116,7 +116,7 @@ function unilib.pkg.misc_gate_simple.exec()
         },
 
         on_rightclick = function(pos, node, puncher)
-            minetest.swap_node(pos, {name = "unilib:misc_gate_simple_closed", param2 = node.param2})
+            core.swap_node(pos, {name = "unilib:misc_gate_simple_closed", param2 = node.param2})
         end,
     })
 

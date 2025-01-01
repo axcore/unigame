@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.tool_spear_gungir = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.tool_spear_gungir.init()
 
     return {
         description = "Gungir spear",
-        depends = {"metal_geminitinum", "tool_spear_geminitinum", "tool_sword_excalibur"},
+        depends = {"metal_geminitium", "tool_spear_geminitium", "tool_sword_excalibur"},
     }
 
 end
@@ -50,20 +50,21 @@ function unilib.pkg.tool_spear_gungir.exec()
         recipe = {
             {
                 "unilib:tool_sword_excalibur",
-                "unilib:metal_geminitinum_ingot",
+                "unilib:metal_geminitium_ingot",
                 "unilib:tool_sword_excalibur",
             },
             {
-                "unilib:metal_geminitinum_ingot",
-                "unilib:tool_spear_geminitinum",
-                "unilib:metal_geminitinum_ingot",
+                "unilib:metal_geminitium_ingot",
+                "unilib:tool_spear_geminitium",
+                "unilib:metal_geminitium_ingot",
             },
             {
                 "unilib:tool_sword_excalibur",
-                "unilib:metal_geminitinum_ingot",
+                "unilib:metal_geminitium_ingot",
                 "unilib:tool_sword_excalibur",
             },
         },
     })
+    unilib.tools.apply_toolranks("unilib:tool_spear_gungir", "spear")
 
 end

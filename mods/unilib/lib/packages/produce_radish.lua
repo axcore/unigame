@@ -9,7 +9,7 @@
 unilib.pkg.produce_radish = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,14 +53,15 @@ function unilib.pkg.produce_radish.exec()
                     items = {
                         {items = {"unilib:produce_radish_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_radish_harvest"}, rarity = 2},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_radish = 1, seed = 2},
         min_light = 13,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,7 +73,16 @@ function unilib.pkg.produce_radish.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_radish", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_radish_harvest",
+        juice_description = S("Radish"),
+        juice_type = "radish",
+        rgb = "#b55e66",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_produce_radish", {
         -- Original to unilib
         deco_type = "simple",
         decoration = "unilib:produce_radish_grow_5",

@@ -9,7 +9,7 @@
 unilib.pkg.dirt_drystack = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.dirt_drystack.exec()
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         -- Original mod behaviour: the turf cutter works with only one dirt-with-turf node
         unilib.register_node(
@@ -40,7 +40,7 @@ function unilib.pkg.dirt_drystack.exec()
             "earthbuild:turf_and_drystack",
             mode,
             {
-                description = unilib.brackets(S("Drystack Dirt"), S("Turf")),
+                description = unilib.utils.brackets(S("Drystack Dirt"), S("Turf")),
                 tiles = {
                     "unilib_turf_ordinary_top.png",
                     "unilib_dirt_compacted.png",
@@ -50,9 +50,11 @@ function unilib.pkg.dirt_drystack.exec()
                     "unilib_dirt_drystack.png",
                 },
                 groups = {cracky = 3, crumbly = 1, falling_node = 1, oddly_breakable_by_hand = 1},
-                sounds = unilib.sound_table.dirt,
+                sounds = unilib.global.sound_table.dirt,
 
                 drawtype = "normal",
+                -- N.B. is_ground_content = false not in original code; added to match other dirts
+                is_ground_content = false,
                 paramtype = "light",
             }
         )
@@ -71,27 +73,29 @@ end
 
 function unilib.pkg.dirt_drystack.post()
 
-    if unilib.earthbuild_extend_cutter_flag then
+    if unilib.setting.earthbuild_extend_cutter_flag then
 
         -- Add compatibility with other "fertile" dirts
-        for fertile_name, data_table in pairs(unilib.dirt_with_turf_table) do
+        for fertile_name, data_table in pairs(unilib.global.dirt_with_turf_table) do
 
             local drystack_name = "unilib:dirt_drystack_with_" .. data_table.turf_part_name
 
             -- (Avoid duplicate turfs on different bare dirts, e.g. those created by various GLEM
             --      packages)
-            if minetest.registered_nodes[drystack_name] == nil and
+            if core.registered_nodes[drystack_name] == nil and
                     fertile_name ~= "unilib:dirt_ordinary_with_turf" then
 
                 local construction_name = "unilib:dirt_construction_with_" ..
                         data_table.turf_part_name
                 local turf_name = "unilib:" .. data_table.dirt_part_name .. "_with_" ..
                         data_table.turf_part_name
-                local turf_def_table = minetest.registered_nodes[turf_name]
+                local turf_def_table = core.registered_nodes[turf_name]
 
                 unilib.register_node(drystack_name, nil, mode, {
                     -- Original to unilib
-                    description = unilib.brackets(S("Drystack Dirt"), data_table.turf_description),
+                    description = unilib.utils.brackets(
+                        S("Drystack Dirt"), data_table.turf_description
+                    ),
                     tiles = {
                         turf_def_table.tiles[1],
                         "unilib_dirt_compacted.png",
@@ -103,9 +107,12 @@ function unilib.pkg.dirt_drystack.post()
                     groups = {
                         cracky = 3, crumbly = 1, falling_node = 1, oddly_breakable_by_hand = 1,
                     },
-                    sounds = unilib.sound_table.dirt,
+                    sounds = unilib.global.sound_table.dirt,
 
                     drawtype = "normal",
+                    -- N.B. is_ground_content = false not in original code; added to match other
+                    --      dirts
+                    is_ground_content = false,
                     paramtype = "light",
                 })
                 unilib.register_craft({

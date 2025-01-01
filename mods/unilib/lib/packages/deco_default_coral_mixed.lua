@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_coral_mixed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,11 +47,11 @@ end
 
 function unilib.pkg.deco_default_coral_mixed.post()
 
-    if unilib.pkg_executed_table["biome_default_desert"] ~= nil or
-            unilib.pkg_executed_table["biome_default_rainforest"] ~= nil or
-            unilib.pkg_executed_table["biome_default_savanna"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_default_desert"] ~= nil or
+            unilib.global.pkg_executed_table["biome_default_rainforest"] ~= nil or
+            unilib.global.pkg_executed_table["biome_default_savanna"] ~= nil then
 
-        unilib.register_decoration_now("default_coral_mixed", nil, {
+        unilib.register_decoration_complete("default_coral_mixed", nil, {
             -- From default/mapgen.lua
             biomes = {
                 "default_desert_ocean",

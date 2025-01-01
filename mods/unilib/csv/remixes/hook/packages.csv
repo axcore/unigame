@@ -1,5 +1,4 @@
 # "hook" remix - contains everything from the hook mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -16,12 +15,18 @@ tool_slingshot_normal|hook
 container_chest_ordinary|default
 item_stick_ordinary|default
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_diamond|default mtg_plus
-shared_default_chest|unilib
+shared_default_chest|default pipeworks
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
-#metal_bronze|default technic
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_bronze|default glemr11 technic
+#metal_copper|default glemr11 moreblocks technic
+#metal_gold|default glemr11 technic
 #plant_shrub_dry|default
+
+# supporting packages (.suggested)

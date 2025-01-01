@@ -1,5 +1,4 @@
 # "moreplants" remix - contains everything except the (unfinished) palm tree
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -18,7 +17,7 @@ deco_moreplants_flower_moonflower|moreplants
 deco_moreplants_flower_spike_blue|moreplants
 deco_moreplants_grass_long|moreplants
 deco_moreplants_mushroom_pink|moreplants
-deco_moreplants_plant_bulrush_mature|moreplants
+deco_moreplants_plant_bulrush_small|moreplants
 deco_moreplants_plant_cactus_tiny|moreplants
 deco_moreplants_plant_clover|moreplants
 deco_moreplants_plant_enigma|moreplants
@@ -48,7 +47,7 @@ meta_moreplants_underground|moreplants
 mushroom_cave_blue|moreplants
 mushroom_fire|moreplants
 mushroom_pink|moreplants
-plant_bulrush_mature|moreplants
+plant_bulrush_small|moreplants
 plant_cactus_tiny|moreplants
 plant_clover|moreplants
 plant_enigma|moreplants
@@ -67,11 +66,10 @@ biome_default_forest_deciduous|default
 biome_default_grassland|default
 biome_default_tundra|default
 dirt_ordinary|default farming moreblocks
-dirt_permafrost|default
+dirt_permafrost_ordinary|default
 gravel_ordinary|default mtg_plus
 liquid_lava_ordinary|default
 liquid_water_ordinary|default
-mineral_flint|default fire mtg_plus
 sand_desert|default farming
 sand_ordinary|default
 snow_ordinary|default ethereal mtg_plus
@@ -86,17 +84,16 @@ biome_default_taiga|default
 
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_stone_desert|glemr11
 #item_paper_ordinary|default moreblocks
-#metal_steel|default technic
-#mineral_coal|default technic
-#mineral_mese|default
+#mineral_flint|default fire mtg_plus
+#mineral_mese|default glemr11
 #moss_green|sickles
 #plant_cactus_ordinary|default
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

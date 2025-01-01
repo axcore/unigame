@@ -9,7 +9,7 @@
 unilib.pkg.produce_cucumber_english = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.produce_cucumber_english.exec()
                     items = {
                         {items = {"unilib:produce_cucumber_english_harvest"}, rarity = 1},
                         {items = {"unilib:produce_cucumber_english_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
@@ -57,14 +57,15 @@ function unilib.pkg.produce_cucumber_english.exec()
                     items = {
                         {items = {"unilib:produce_cucumber_english_harvest"}, rarity = 1},
                         {items = {"unilib:produce_cucumber_english_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_cucumber = 1, seed = 2},
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -76,7 +77,16 @@ function unilib.pkg.produce_cucumber_english.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_cucumber_english", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_cucumber_english_harvest",
+        juice_description = S("Cucumber"),
+        juice_type = "cucumber",
+        rgb = "#73af59",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_produce_cucumber_english", {
         -- From better_farming:cucumber_4
         deco_type = "simple",
         decoration = "unilib:produce_cucumber_english_grow_4",

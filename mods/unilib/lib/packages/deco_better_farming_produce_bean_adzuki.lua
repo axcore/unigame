@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_produce_bean_adzuki = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ end
 
 function unilib.pkg.deco_better_farming_produce_bean_adzuki.post()
 
-    unilib.register_decoration_now("better_farming_produce_bean_adzuki", nil, {
+    unilib.register_decoration_complete("better_farming_produce_bean_adzuki", nil, {
         -- From better_farming, adzuki.lua
         -- Completes decoration in package "produce_bean_adzuki"
         biomes = "default_grassland", "default_rainforest",
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

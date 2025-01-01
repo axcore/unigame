@@ -9,7 +9,7 @@
 unilib.pkg.ore_aotearoa_dirt_mud_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,8 +48,8 @@ function unilib.pkg.ore_aotearoa_dirt_mud_antipodean.post()
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.0,
-        y_max                   = unilib.y_max,
-        y_min                   = unilib.y_min,
+        y_max                   = unilib.constant.y_max,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

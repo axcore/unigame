@@ -9,7 +9,7 @@
 unilib.pkg.deco_moreplants_fern_big = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_moreplants_fern_big.post()
 
-    unilib.register_decoration_now("moreplants_fern_big", nil, {
+    unilib.register_decoration_complete("moreplants_fern_big", nil, {
         -- From moreplants/init.lua
         -- Completes decoration in package "fern_big"
         biomes = {"default_rainforest", "default_forest_coniferous"},

@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.plant_shrub_dry.exec()
         tiles = {"unilib_plant_shrub_dry.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, flammable = 3, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -56,7 +56,7 @@ function unilib.pkg.plant_shrub_dry.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_dry", "default:dry_shrub")
 
-    unilib.register_decoration("default_plant_shrub_dry", {
+    unilib.register_decoration_generic("default_plant_shrub_dry", {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_dry",

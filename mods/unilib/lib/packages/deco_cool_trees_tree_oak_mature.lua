@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_oak_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.oak.add_mode
+local mode = unilib.global.imported_mod_table.oak.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_oak_mature.post()
 
-    unilib.register_decoration_now("cool_trees_tree_oak_mature", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_oak_mature", nil, {
         -- From oak/init.lua
         -- Completes decoration in package "tree_oak_mature"
         biomes = "default_grassland",

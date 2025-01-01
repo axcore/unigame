@@ -9,7 +9,7 @@
 unilib.pkg.metal_indium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,7 @@ function unilib.pkg.metal_indium.exec()
         output = "unilib:metal_indium_ingot 9",
         recipe = {
             {"unilib:metal_indium_block"},
-        }
+        },
     })
 
     unilib.register_node("unilib:metal_indium_block", nil, mode, {
@@ -62,7 +62,7 @@ function unilib.pkg.metal_indium.exec()
         description = S("Indium Block"),
         tiles = {"unilib_metal_indium_block.png"},
         groups = {cracky = 1, level = 2},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         is_ground_content = false,
     })
@@ -71,5 +71,25 @@ function unilib.pkg.metal_indium.exec()
         output = "unilib:metal_indium_block",
         ingredient = "unilib:metal_indium_ingot",
     })
+    unilib.register_stairs("unilib:metal_indium_block")
+    unilib.register_carvings("unilib:metal_indium_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_indium_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Indium Block"),
+            tiles = {"unilib_metal_indium_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("indium")
+
+    end
 
 end

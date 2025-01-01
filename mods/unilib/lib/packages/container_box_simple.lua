@@ -9,7 +9,7 @@
 unilib.pkg.container_box_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,8 +25,7 @@ end
 
 function unilib.pkg.container_box_simple.exec()
 
-    unilib.register_node("unilib:container_box_simple", "darkage:box", mode, {
-        -- From darkage:box
+    local def_table = {
         description = S("Simple Box"),
         tiles = {
             "unilib_container_box_simple_top.png",
@@ -34,19 +33,33 @@ function unilib.pkg.container_box_simple.exec()
             "unilib_container_box_simple.png",
         },
         groups = {snappy = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
+
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
 
         can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             return inv:is_empty("main")
 
         end,
 
+        -- N.B. No .on_blast() in original code
+        on_blast = function(pos)
+
+            local drops = {}
+            unilib.misc.get_inventory_drops(pos, "main", drops)
+            drops[#drops + 1] = full_name
+            core.remove_node(pos)
+            return drops
+
+        end,
+
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             --[[
             meta:set_string(
                 "formspec",
@@ -73,37 +86,46 @@ function unilib.pkg.container_box_simple.exec()
 
         end,
 
+        --[[
         on_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff in simple box at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items in simple box at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
 
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff to simple box at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items to simple box at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
 
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " takes stuff from simple box at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " takes items from simple box at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
-    })
+        ]]--
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "simple box")
+    unilib.register_node(
+        -- From darkage:box
+        "unilib:container_box_simple", "darkage:box", mode, def_table
+    )
+
     -- (Original code used "default:wood" as the ingredient, but we will permit any kind of wood)
     unilib.register_craft({
         -- From darkage:box
@@ -112,7 +134,7 @@ function unilib.pkg.container_box_simple.exec()
             {"group:wood", "", "group:wood"},
             {"", "", ""},
             {"group:wood", "", "group:wood"},
-        }
+        },
     })
 
 end

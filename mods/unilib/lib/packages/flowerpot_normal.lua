@@ -9,7 +9,7 @@
 unilib.pkg.flowerpot_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowerpot.add_mode
+local mode = unilib.global.imported_mod_table.flowerpot.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -34,12 +34,12 @@ local function insert_flower(pos, node, clicker, itemstack, pointed_thing)
     -- When an empty normal flowerpot is right-clicked with a compatible flower, swaps the empty
     --      flowerpot for a full one
 
-    if clicker and not minetest.check_player_privs(clicker, "protection_bypass") then
+    if clicker and not core.check_player_privs(clicker, "protection_bypass") then
 
         local name = clicker:get_player_name()
-        if minetest.is_protected(pos, name) then
+        if core.is_protected(pos, name) then
 
-            minetest.record_protection_violation(pos, name)
+            core.record_protection_violation(pos, name)
             return false
 
         end
@@ -51,15 +51,15 @@ local function insert_flower(pos, node, clicker, itemstack, pointed_thing)
         return false
     end
 
-    local full_name = "unilib:flowerpot_normal_with_" .. unilib.get_item_name(flower_name)
-    local def_table = minetest.registered_nodes[full_name]
+    local full_name = "unilib:flowerpot_normal_with_" .. unilib.utils.get_item_name(flower_name)
+    local def_table = core.registered_nodes[full_name]
     if def_table == nil then
         return itemstack
     end
 
-    minetest.sound_play(def_table.sounds.place, {pos = pos})
-    minetest.swap_node(pos, {name = full_name})
-    if not minetest.settings:get_bool("creative_mode") then
+    core.sound_play(def_table.sounds.place, {pos = pos})
+    core.swap_node(pos, {name = full_name})
+    if not core.settings:get_bool("creative_mode") then
         itemstack:take_item()
     end
 
@@ -94,7 +94,7 @@ function unilib.pkg.flowerpot_normal.exec()
             {name = "blank.png"},
         },
         groups = {attached_node = 1, cracky = 1, dig_immediate = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         collision_box = {
             type = "fixed",
@@ -102,6 +102,8 @@ function unilib.pkg.flowerpot_normal.exec()
         },
         drawtype = "mesh",
         inventory_image = "unilib_flowerpot_normal_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_flowerpot_normal.obj",
         paramtype = "light",
         selection_box = {
@@ -109,7 +111,7 @@ function unilib.pkg.flowerpot_normal.exec()
             fixed = {-1/4, -1/2, -1/4, 1/4, -1/16, 1/4},
         },
         sunlight_propagates = true,
-        use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "clip" or true,
+        use_texture_alpha = core.features.use_texture_alpha_string_modes and "clip" or true,
         wield_image = "unilib_flowerpot_normal_inv.png",
 
         on_rightclick = insert_flower,
@@ -120,7 +122,7 @@ function unilib.pkg.flowerpot_normal.exec()
         recipe = {
             {"unilib:brick_ordinary", "", "unilib:brick_ordinary"},
             {"", "unilib:brick_ordinary", ""},
-        }
+        },
     })
 
 end
@@ -128,14 +130,14 @@ end
 function unilib.pkg.flowerpot_normal.post()
 
     -- Create flowerpots for every compatible flower/plant/etc
-    for full_name, orig_name in pairs(unilib.flowerpot_compat_table) do
+    for full_name, orig_name in pairs(unilib.global.flowerpot_compat_table) do
 
-        local def_table = minetest.registered_nodes[full_name]
+        local def_table = core.registered_nodes[full_name]
         if def_table == nil then
             return false
         end
 
-        local item_name = unilib.get_item_name(def_table.name)
+        local item_name = unilib.utils.get_item_name(def_table.name)
         local pot_orig_name = nil
         if orig_name ~= "" then
             pot_orig_name = "flowerpot:" .. orig_name:gsub(":", "_")
@@ -143,17 +145,21 @@ function unilib.pkg.flowerpot_normal.post()
 
         local img_list
         if def_table.drawtype == "plantlike" then
+
             img_list = {
                 {name = "unilib_flowerpot_normal.png"},
                 {name = get_tile(def_table)},
                 {name = "blank.png"},
             }
+
         else
+
             img_list = {
                 {name = "unilib_flowerpot_normal.png"},
                 {name = "blank.png"},
                 {name = get_tile(def_table)},
             }
+
         end
 
         unilib.register_node("unilib:flowerpot_normal_with_" .. item_name, pot_orig_name, mode, {
@@ -165,7 +171,7 @@ function unilib.pkg.flowerpot_normal.post()
                 attached_node = 1, not_in_creative_inventory = 1, oddly_breakable_by_hand = 1,
                 snappy = 3,
             },
-            sounds = unilib.sound_table.node,
+            sounds = unilib.global.sound_table.node,
 
             collision_box = {
                 type = "fixed",
@@ -179,9 +185,11 @@ function unilib.pkg.flowerpot_normal.post()
                         items = {"unilib:flowerpot_normal_empty", full_name},
                         rarity = 1,
                     },
-                }
+                },
             },
             flowerpot_plantname = full_name,
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             -- N.B. light_source not in original code; the flowerpot should glow with the same
             --      luminosity as its flower
             light_source = def_table.light_source,
@@ -192,14 +200,13 @@ function unilib.pkg.flowerpot_normal.post()
                 fixed = {-1/4, -1/2, -1/4, 1/4, 7/16, 1/4},
             },
             sunlight_propagates = true,
-            use_texture_alpha = minetest.features.use_texture_alpha_string_modes and
-                    "clip" or true,
+            use_texture_alpha = core.features.use_texture_alpha_string_modes and "clip" or true,
 
             on_dig = function(pos, node, digger)
 
-                minetest.set_node(pos, {name = "unilib:flowerpot_normal_empty"})
-                local def = minetest.registered_nodes[node.name]
-                minetest.add_item(pos, full_name)
+                core.set_node(pos, {name = "unilib:flowerpot_normal_empty"})
+                local def = core.registered_nodes[node.name]
+                core.add_item(pos, full_name)
 
             end,
         })

@@ -9,7 +9,7 @@
 unilib.pkg.deco_plants_flower_chamomile = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_plants_flower_chamomile.post()
 
-    unilib.register_decoration_now("plants_flower_chamomile", nil, {
+    unilib.register_decoration_complete("plants_flower_chamomile", nil, {
         -- Original to unilib, replacing the calls to the habitat mod in the original code
         -- Completes decoration in package "flower_chamomile"
         place_on = "unilib:dirt_ordinary_with_turf",

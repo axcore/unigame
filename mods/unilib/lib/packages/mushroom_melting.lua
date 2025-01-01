@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_melting = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,8 +28,8 @@ function unilib.pkg.mushroom_melting.exec()
 
     -- Add a special mushroom-spreading ABM, and a particle-spawning ABM. To avoid creating these
     --      additional ABMs, just omit the "shared_cropocalypse_mushroom" package from your remixes
-    if unilib.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
-            unilib.pkg_executed_table["stone_ordinary_with_diamond"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
+            unilib.global.pkg_executed_table["stone_ordinary_with_diamond"] ~= nil then
 
         unilib.pkg.shared_cropocalypse_mushroom.register_abms(
             "melting", "group:melting_mushroom", "unilib:stone_ordinary_with_diamond"
@@ -46,7 +46,7 @@ function unilib.pkg.mushroom_melting.exec()
             attached_node = 1, flammable = 1, food_melting_mushroom = 1, melting_mushroom = 1,
             mushroom = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -61,11 +61,11 @@ function unilib.pkg.mushroom_melting.exec()
         walkable = false,
         wield_image = "unilib_mushroom_melting.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_melting", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_melting", 4),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_melting", "cropocalypse:melting_mushroom")
 
-    unilib.register_decoration("cropocalypse_mushroom_melting", {
+    unilib.register_decoration_generic("cropocalypse_mushroom_melting", {
         -- From cropocalypse/glowing_mushrooms.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_melting",

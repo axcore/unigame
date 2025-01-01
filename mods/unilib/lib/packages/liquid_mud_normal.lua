@@ -9,7 +9,7 @@
 unilib.pkg.liquid_mud_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.forest.add_mode
+local mode = unilib.global.imported_mod_table.forest.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,9 @@ function unilib.pkg.liquid_mud_normal.exec()
         drawtype = "liquid",
         drop = "",
         drowning = 1,
-        inventory_image = minetest.inventorycube("unilib_liquid_mud_normal.png"),
+        inventory_image = core.inventorycube("unilib_liquid_mud_normal.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = "unilib:liquid_mud_normal_flowing",
         liquid_alternative_source = "unilib:liquid_mud_normal_source",
         liquid_viscosity = 6,
@@ -75,7 +77,7 @@ function unilib.pkg.liquid_mud_normal.exec()
                     length = 9,
                 },
                 backface_culling = false,
-            }
+            },
         },
         paramtype = "light",
         pointable = false,
@@ -97,7 +99,9 @@ function unilib.pkg.liquid_mud_normal.exec()
         drawtype = "flowingliquid",
         drop = "",
         drowning = 1,
-        inventory_image = minetest.inventorycube("unilib_liquid_mud_normal.png"),
+        inventory_image = core.inventorycube("unilib_liquid_mud_normal.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = "unilib:liquid_mud_normal_flowing",
         liquid_alternative_source = "unilib:liquid_mud_normal_source",
         liquid_viscosity = 6,
@@ -135,7 +139,7 @@ end
 
 function unilib.pkg.liquid_mud_normal.post()
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_mud_bucket = "unilib:" .. bucket_type .. "_with_mud_normal"

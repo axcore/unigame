@@ -9,7 +9,7 @@
 unilib.pkg.rail_ordinary_brake = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.carts.add_mode
+local mode = unilib.global.imported_mod_table.carts.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 function unilib.pkg.rail_ordinary_brake.exec()
 
     local multiple
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
         multiple = 18       -- From carts
     else
         multiple = 27       -- From moreblocks
@@ -54,7 +54,7 @@ function unilib.pkg.rail_ordinary_brake.exec()
             {"unilib:metal_steel_ingot", "group:wood", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "unilib:mineral_coal_lump", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "group:wood", "unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

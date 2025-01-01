@@ -9,7 +9,7 @@
 unilib.pkg.food_pulp_cactus = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.food_pulp_cactus.post()
 
-    for bucket_type, def_table in pairs(unilib.generic_bucket_table) do
+    for bucket_type, def_table in pairs(unilib.global.generic_bucket_table) do
 
         local c_pulp_bucket = "unilib:" .. bucket_type .. "_with_pulp_cactus"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"
@@ -35,15 +35,15 @@ function unilib.pkg.food_pulp_cactus.post()
 
         unilib.register_craftitem(c_pulp_bucket, "ethereal:bucket_cactus", mode, {
             -- From ethereal:bucket_cactus
-            description = unilib.brackets(def_table.description, S("Cactus Pulp")),
+            description = unilib.utils.brackets(def_table.description, S("Cactus Pulp")),
             inventory_image = img,
-            -- N.B. no food_cactus in original code
+            -- N.B. food_cactus = 1 not in original code; flammable = 2 omitted from original code
             groups = {drink = 1, food_cactus = 1, vessel = 1},
 
             stack_max = 1,
             wield_image = img,
 
-            on_use = unilib.cuisine_eat_on_use(c_pulp_bucket, 2, c_empty_bucket),
+            on_use = unilib.cuisine.eat_on_use(c_pulp_bucket, 2, c_empty_bucket),
         })
         unilib.register_craft({
             -- From ethereal:bucket_cactus

@@ -9,7 +9,7 @@
 unilib.pkg.utensil_plate_ceramic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.utensil_plate_ceramic.exec()
         description = S("Ceramic Plate"),
         tiles = {"unilib_utensil_plate_ceramic.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_plate = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_utensil_plate_ceramic.png",
@@ -52,7 +52,7 @@ function unilib.pkg.utensil_plate_ceramic.exec()
         output = "unilib:utensil_plate_ceramic 5",
         recipe = {
             {"unilib:clay_ordinary_lump", "", "unilib:clay_ordinary_lump"},
-            {"unilib:clay_ordinary_lump", "group:cobble", "unilib:clay_ordinary_lump"}
+            {"unilib:clay_ordinary_lump", "group:cobble", "unilib:clay_ordinary_lump"},
         },
     })
 

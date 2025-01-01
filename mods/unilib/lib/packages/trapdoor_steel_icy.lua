@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_steel_icy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,16 @@ end
 function unilib.pkg.trapdoor_steel_icy.exec()
 
     unilib.register_trapdoor({
-        -- From mtg_plus:trapdoor_icesteel. Creates unilib:trapdoor_steel_icy
+        -- From mtg_plus:trapdoor_icesteel. Creates unilib:trapdoor_steel_icy_closed, etc
         part_name = "steel_icy",
-        orig_name = {"mtg_plus:trapdoor_icesteel", "mtg_plus:trapdoor_icesteel_open"},
+        orig_name_list = {"mtg_plus:trapdoor_icesteel", "mtg_plus:trapdoor_icesteel_open"},
         def_table = {
             description = S("Icy Steel Trapdoor"),
             -- (no tiles)
             groups = {
                 bendy = 2, cracky = 3, door = 1, level = 2, melty = 3, slippery = 1, snappy = 1,
             },
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = "unilib_trapdoor_steel_icy.png",
             protected_flag = true,

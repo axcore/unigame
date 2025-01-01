@@ -9,7 +9,7 @@
 unilib.pkg.stone_basalt_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_basalt_red.exec()
         description = S("Red Basalt"),
 
         category = "extrusive",
+        colour = "#3B3131",
         grinder_flag = true,
         hardness = 3,
     })
@@ -73,6 +74,24 @@ function unilib.pkg.stone_basalt_red.exec()
         replace_mode = mode,
         description = S("Red Basalt Cobble"),
         img_list = {"unilib_stone_basalt_red.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_basalt_red_cobble_compressed
+        part_name = "basalt_red",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Red Basalt Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_basalt_red_cobble_condensed
+        part_name = "basalt_red",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Red Basalt Cobble"),
     })
 
 end

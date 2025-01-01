@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_coral = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,9 +43,9 @@ end
 
 function unilib.pkg.ore_australia_coral.post()
 
-    if unilib.pkg_executed_table["biome_australia_great_barrier_reef"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_barrier_reef"] ~= nil then
 
-        if unilib.pkg_executed_table["coral_brain"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_brain"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -63,7 +63,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cauliflower_brown"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cauliflower_brown"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -81,7 +81,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cauliflower_green"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cauliflower_green"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -99,7 +99,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cauliflower_pink"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cauliflower_pink"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -117,7 +117,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cluster_green"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cluster_green"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -135,7 +135,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cluster_orange"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cluster_orange"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -153,7 +153,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_cluster_purple"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_cluster_purple"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -171,7 +171,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_hammer"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_hammer"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -189,7 +189,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_staghorn_blue"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_staghorn_blue"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -207,7 +207,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_staghorn_pink"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_staghorn_pink"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -225,7 +225,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_staghorn_purple"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_staghorn_purple"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -243,7 +243,7 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["coral_staghorn_yellow"] ~= nil then
+        if unilib.global.pkg_executed_table["coral_staghorn_yellow"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
@@ -261,12 +261,12 @@ function unilib.pkg.ore_australia_coral.post()
 
         end
 
-        if unilib.pkg_executed_table["stone_ordinary_with_coral"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_ordinary_with_coral"] ~= nil then
 
             unilib.register_ore({
                 -- From australia/biome_great_barrier_reef.lua
                 ore_type            = "scatter",
-                ore                 = "unilib:stone_ordinary_with_coral_seafan",
+                ore                 = "unilib:stone_ordinary_with_coral_seafan_white",
                 wherein             = "unilib:sand_ordinary",
 
                 biomes              = "australia_great_barrier_reef",

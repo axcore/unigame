@@ -9,7 +9,7 @@
 unilib.pkg.produce_onion_spanish = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,7 +53,7 @@ function unilib.pkg.produce_onion_spanish.exec()
                     items = {
                         {items = {"unilib:produce_onion_spanish_harvest"}, rarity = 1},
                         {items = {"unilib:produce_onion_spanish_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
@@ -61,14 +61,15 @@ function unilib.pkg.produce_onion_spanish.exec()
                     items = {
                         {items = {"unilib:produce_onion_spanish_harvest"}, rarity = 1},
                         {items = {"unilib:produce_onion_spanish_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_onion = 1, seed = 2},
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -80,7 +81,16 @@ function unilib.pkg.produce_onion_spanish.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_onion_spanish", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_onion_spanish_harvest",
+        juice_description = S("Onion"),
+        juice_type = "onion",
+        rgb = "#e1ae99",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_produce_onion_spanish", {
         -- From better_farming:onion_8
         deco_type = "simple",
         decoration = "unilib:produce_onion_spanish_grow_8",

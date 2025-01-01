@@ -9,7 +9,7 @@
 unilib.pkg.tree_banksia_coast = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_banksia_coast.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Banksia integrifolia"
 
     unilib.register_tree({
@@ -112,7 +112,7 @@ function unilib.pkg.tree_banksia_coast.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_banksia_coast_closed
+        -- Original to unilib. Creates unilib:gate_banksia_coast_closed, etc
         part_name = "banksia_coast",
         orig_name = {nil, nil},
 
@@ -123,10 +123,10 @@ function unilib.pkg.tree_banksia_coast.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_banksia_coast_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_banksia_coast_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_banksia_coast_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_banksia_coast_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -137,10 +137,10 @@ function unilib.pkg.tree_banksia_coast.exec()
     end
     for i = 3, 4 do
 
-        unilib.register_decoration("australia_tree_banksia_coast_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_banksia_coast_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_banksia_coast_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_banksia_coast_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

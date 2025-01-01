@@ -9,7 +9,7 @@
 unilib.pkg.material_concrete_industrial = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.material_concrete_industrial.init()
 
     return {
         description = "Industrial concrete",
-        depends = {"gravel_ordinary", "material_cement_industrial", "metal_steel_bar"},
+        depends = {"gravel_ordinary", "hardware_bar_steel", "material_cement_industrial"},
     }
 
 end
@@ -35,12 +35,15 @@ function unilib.pkg.material_concrete_industrial.exec()
             description = S("Industrial Concrete Block"),
             tiles = {"unilib_material_concrete_industrial_block.png"},
             groups = {concrete = 1, cracky = 1, level = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. no .is_ground_content in original code
+            is_ground_content = false,
         }
     )
     unilib.register_craft({
         -- From basic_materials:concrete_block
-        output = "unilib:material_concrete_industrial_block",
+        output = "unilib:material_concrete_industrial_block 6",
         recipe = {
             {
                 "group:sand",
@@ -48,16 +51,16 @@ function unilib.pkg.material_concrete_industrial.exec()
                 "unilib:gravel_ordinary",
             },
             {
-                "unilib:metal_steel_bar",
+                "unilib:hardware_bar_steel",
                 "unilib:material_cement_industrial_wet",
-                "unilib:metal_steel_bar",
+                "unilib:hardware_bar_steel",
             },
             {
                 "unilib:gravel_ordinary",
                 "unilib:material_cement_industrial_wet",
                 "group:sand",
             },
-        }
+        },
     })
 
 end

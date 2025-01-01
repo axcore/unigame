@@ -9,7 +9,7 @@
 unilib.pkg.tree_apple_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_apple_mature.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 4
     local sci_name = "Malus sieversii"
 
     unilib.register_tree({
@@ -47,7 +47,6 @@ function unilib.pkg.tree_apple_mature.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -75,9 +74,11 @@ function unilib.pkg.tree_apple_mature.exec()
     })
     unilib.register_leafdecay({
         -- From moretrees:apple_tree_leaves
+        trunk_type = "apple_mature",
         trunks = {"unilib:tree_apple_mature_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_apple_mature_leaves", "unilib:fruit_apple"},
+        leaves = {"unilib:tree_apple_mature_leaves"},
+        others = {"unilib:fruit_apple"},
         radius = 5,
     })
     unilib.register_craft({
@@ -141,7 +142,7 @@ function unilib.pkg.tree_apple_mature.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:apple_tree_gate. Creates unilib:gate_apple_mature_closed
+        -- From moretrees:apple_tree_gate_closed, etc. Creates unilib:gate_apple_mature_closed, etc
         part_name = "apple_mature",
         orig_name = {"moretrees:apple_tree_gate_closed", "moretrees:apple_tree_gate_open"},
 
@@ -156,11 +157,11 @@ function unilib.pkg.tree_apple_mature.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(-0.15),
-            temp_min = unilib.convert_biome_lib_temp(0.1),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.15),
+            temp_min = unilib.utils.convert_biome_lib_temp(0.1),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 75,
             }),
         },

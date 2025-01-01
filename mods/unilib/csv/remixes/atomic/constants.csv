@@ -1,0 +1,31 @@
+# Constants for the "atomic" remix, replacing values in the corresponding construct.csv and
+#       vapourise.csv files
+
+# Atomic constructor constants
+CONSTRUCT_SAMPLE|20
+CONSTRUCT_CHUNK|50
+CONSTRUCT_LUMP|50
+CONSTRUCT_POWDER|100
+
+# Atomic vapouriser constants (put the output from the constructor back in the vapouriser, lose at
+#   least 33% even at peak efficiency)
+VAPOURISE_SAMPLE|0.125
+VAPOURISE_CHUNK|0.175
+VAPOURISE_LUMP|0.175
+VAPOURISE_POWDER|0.66
+
+VAPOURISE_METAL_INGOT|0.67
+VAPOURISE_METAL_BLOCK|1
+VAPOURISE_METAL_BRICK|1
+
+VAPOURISE_MINERAL_ROCK|1
+VAPOURISE_MINERAL_LUMP|0.5
+VAPOURISE_MINERAL_GEM|0.33
+VAPOURISE_MINERAL_BLOCK|1
+
+VAPOURISE_STONE|1
+VAPOURISE_COBBLE|0.66
+VAPOURISE_RUBBLE|0.5
+
+# For items with the "other" component, the vapourisation factor is ignored
+IGNORE|1

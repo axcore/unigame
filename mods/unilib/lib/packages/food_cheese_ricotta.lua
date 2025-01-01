@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_ricotta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_cheese_ricotta.exec()
         inventory_image = "unilib_food_cheese_ricotta.png",
         groups = {food_cheese = 1, food_cream = 1, food = 5},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_ricotta", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_ricotta", 5),
     })
     unilib.register_craft({
         -- From cheese:ricotta

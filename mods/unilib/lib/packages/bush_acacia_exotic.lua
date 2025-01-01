@@ -9,7 +9,7 @@
 unilib.pkg.bush_acacia_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,9 @@ function unilib.pkg.bush_acacia_exotic.init()
 
     return {
         description = "Exotic acacia bush",
-        -- (Allow crafting bush stem into exotic acacia tree wood)
+        -- If the "ore_farlands_bush_exotic" package is not loaded, then the shared package will use
+        --      an ABM to place leaves-with-fruit nodes instead
+        -- Also allow crafting bush stem into exotic tree wood
         optional = "tree_acacia_exotic",
     }
 
@@ -41,14 +43,14 @@ function unilib.pkg.bush_acacia_exotic.exec()
         description = S("Exotic Acacia Bush Stem"),
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16},
     })
-    if unilib.pkg_executed_table["tree_acacia_exotic"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_acacia_exotic"] ~= nil then
 
         unilib.register_craft({
             -- From farlands, default:acacia_bush_stem
             output = "unilib:tree_acacia_exotic_wood",
             recipe = {
                 {"unilib:bush_acacia_exotic_stem"},
-            }
+            },
         })
 
     end
@@ -56,7 +58,7 @@ function unilib.pkg.bush_acacia_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_acacia_exotic_stem",
-        burntime = unilib.bush_burn_table.stem[burnlevel],
+        burntime = unilib.global.bush_burn_table.stem[burnlevel],
     })
 
     unilib.register_bush_leaves({
@@ -88,13 +90,13 @@ function unilib.pkg.bush_acacia_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_acacia_exotic_sapling",
-        burntime = unilib.bush_burn_table.sapling[burnlevel],
+        burntime = unilib.global.bush_burn_table.sapling[burnlevel],
     })
 
-    unilib.register_decoration("farlands_bush_acacia_exotic", {
+    unilib.register_decoration_generic("farlands_bush_acacia_exotic", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_acacia_exotic.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_acacia_exotic.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

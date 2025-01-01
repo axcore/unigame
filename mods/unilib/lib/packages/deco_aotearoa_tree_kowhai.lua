@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_kowhai = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,6 +24,7 @@ function unilib.pkg.deco_aotearoa_tree_kowhai.init()
             {"biome_aotearoa_coastal", "biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
             {
                 "dirt_antipodean",
+                "dirt_custom_antipodean",
                 "dirt_mud_antipodean",
                 "dirt_ordinary",
                 "gravel_ordinary",
@@ -40,7 +41,7 @@ function unilib.pkg.deco_aotearoa_tree_kowhai.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_kowhai_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_kowhai_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_kowhai"
             biomes = {
@@ -57,9 +58,9 @@ function unilib.pkg.deco_aotearoa_tree_kowhai.post()
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_beech",
                 "unilib:dirt_antipodean_dark_with_litter_wet",
+                "unilib:dirt_antipodean_with_turf_coastal_scrub",
                 "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_ordinary_with_litter_rainforest",
-                "unilib:dirt_ordinary_with_turf",
             },
             spawn_by = {
                 "unilib:dirt_mud_antipodean_dry",

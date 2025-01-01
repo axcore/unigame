@@ -9,7 +9,7 @@
 unilib.pkg.container_pot_weaved = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,8 +17,8 @@ local mode = unilib.imported_mod_table.earthbuild.add_mode
 
 local function is_owner(pos, name)
 
-    local owner = minetest.get_meta(pos):get_string("owner")
-    if owner == "" or owner == name or minetest.check_player_privs(name, "protection_bypass") then
+    local owner = core.get_meta(pos):get_string("owner")
+    if owner == "" or owner == name or core.check_player_privs(name, "protection_bypass") then
         return true
     end
 
@@ -53,8 +53,7 @@ end
 
 function unilib.pkg.container_pot_weaved.exec()
 
-    unilib.register_node("unilib:container_pot_weaved", "earthbuild:basket", mode, {
-        -- From earthbuild:basket
+    local def_table = {
         description = S("Weaved pot"),
         tiles = {
             "unilib_container_pot_weaved_top.png",
@@ -65,9 +64,11 @@ function unilib.pkg.container_pot_weaved.exec()
             "unilib_container_pot_weaved.png",
         },
         groups = {oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -94,8 +95,9 @@ function unilib.pkg.container_pot_weaved.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            if is_owner(pos, player:get_player_name()) and
-                    not string.match(stack:get_name(), "backpacks:") then
+--          if is_owner(pos, player:get_player_name()) and
+--                  not string.match(stack:get_name(), "backpacks:") then
+            if is_owner(pos, player:get_player_name()) then
                 return stack:get_count()
             end
 
@@ -115,7 +117,7 @@ function unilib.pkg.container_pot_weaved.exec()
 
         can_dig = function(pos, player)
 
-            local inv = minetest.get_meta(pos):get_inventory()
+            local inv = core.get_meta(pos):get_inventory()
             local name = ""
             if player then
                 name = player:get_player_name()
@@ -129,7 +131,7 @@ function unilib.pkg.container_pot_weaved.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_storage_formspec(pos, 8, 2))
             local inv = meta:get_inventory()
             inv:set_size("main", 8*2)
@@ -137,14 +139,15 @@ function unilib.pkg.container_pot_weaved.exec()
 
         end,
 
+        --[[
         on_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff in weaved pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items in weaved pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -152,10 +155,10 @@ function unilib.pkg.container_pot_weaved.exec()
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff to weaved pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items to weaved pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -163,14 +166,22 @@ function unilib.pkg.container_pot_weaved.exec()
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " takes stuff from weaved pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " takes items from weaved pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
-    })
+        ]]--
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "weaved pot")
+    unilib.register_node(
+        -- From earthbuild:basket
+        "unilib:container_pot_weaved", "earthbuild:basket", mode, def_table
+    )
+
     unilib.register_craft({
         -- From earthbuild:basket
         output = "unilib:container_pot_weaved",
@@ -178,7 +189,7 @@ function unilib.pkg.container_pot_weaved.exec()
             {"unilib:misc_mat_woven", "unilib:misc_mat_woven", "unilib:misc_mat_woven"},
             {"unilib:misc_mat_woven", "", "unilib:misc_mat_woven"},
             {"unilib:misc_mat_woven", "unilib:misc_mat_woven", "unilib:misc_mat_woven"},
-        }
+        },
     })
     unilib.register_craft({
         -- From earthbuild:basket

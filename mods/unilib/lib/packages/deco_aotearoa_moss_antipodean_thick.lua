@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_moss_antipodean_thick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.deco_aotearoa_moss_antipodean_thick.init()
             {
                 "clay_gumland",
                 "dirt_antipodean",
+                "dirt_custom_antipodean",
                 "dirt_ordinary",
                 "dirt_peat_forest",
                 "dirt_peat_restiad",
@@ -47,7 +48,7 @@ end
 
 function unilib.pkg.deco_aotearoa_moss_antipodean_thick.post()
 
-    unilib.register_decoration_now("aotearoa_moss_antipodean_thick_dense", nil, {
+    unilib.register_decoration_complete("aotearoa_moss_antipodean_thick_dense", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "moss_antipodean_thick"
         biomes = {
@@ -73,7 +74,7 @@ function unilib.pkg.deco_aotearoa_moss_antipodean_thick.post()
         y_max = 120,
         y_min = 3,
     })
-    unilib.register_decoration_now("aotearoa_moss_antipodean_thick_rare", nil, {
+    unilib.register_decoration_complete("aotearoa_moss_antipodean_thick_rare", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "moss_antipodean_thick"
         biomes = {
@@ -95,9 +96,9 @@ function unilib.pkg.deco_aotearoa_moss_antipodean_thick.post()
             "unilib:clay_gumland_topsoil",
             "unilib:dirt_antipodean_dark_with_litter_beech",
             "unilib:dirt_antipodean_dark_with_litter_wet",
+            "unilib:dirt_ordinary_with_turf_highland_mountain_tussock",
             "unilib:dirt_ordinary_with_litter_dry",
             "unilib:dirt_ordinary_with_litter_rainforest",
-            "unilib:dirt_ordinary_with_turf_dry",
             "unilib:dirt_peat_restiad",
             "unilib:stone_schist_antipodean",
         },

@@ -13,8 +13,8 @@
 unilib.pkg.mineral_coal = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,7 +51,7 @@ function unilib.pkg.mineral_coal.exec()
         output = "unilib:mineral_coal_lump 9",
         recipe = {
             {"unilib:mineral_coal_block"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:coal_lump
@@ -80,7 +80,7 @@ function unilib.pkg.mineral_coal.exec()
         description = S("Coal Block"),
         tiles = {"unilib_mineral_coal_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -95,6 +95,7 @@ function unilib.pkg.mineral_coal.exec()
         recipe = "unilib:mineral_coal_block",
         burntime = 370,
     })
+    unilib.register_stairs("unilib:mineral_coal_block")
     unilib.register_carvings("unilib:mineral_coal_block", {
         millwork_flag = true,
     })

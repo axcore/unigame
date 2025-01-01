@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_cover_seagrass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.stone_ordinary_with_cover_seagrass.exec()
                 },
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:grass_seagrass_1",
         }

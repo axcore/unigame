@@ -9,7 +9,7 @@
 unilib.pkg.ore_rocks_stone_pegmatite_white_with_cassiterite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.rocks.add_mode
+local mode = unilib.global.imported_mod_table.rocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

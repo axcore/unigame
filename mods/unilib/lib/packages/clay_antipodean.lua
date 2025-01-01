@@ -9,7 +9,7 @@
 unilib.pkg.clay_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,15 +34,11 @@ function unilib.pkg.clay_antipodean.exec()
         -- From aotearoa, default:clay
         description = S("Antipodean Clay"),
         tiles = {"unilib_clay_antipodean.png"},
-        groups = {crumbly = 3, soil = 1},
-        sounds = unilib.sound_table.dirt,
-
-        drop = "unilib:clay_antipodean",
+        -- N.B. clay = 1 not in original code
+        groups = {clay = 1, crumbly = 3, soil = 1},
+        sounds = unilib.global.sound_table.dirt,
     })
-    unilib.register_stairs("unilib:clay_antipodean", {
-        basic_flag = true,
-    })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa, default:clay

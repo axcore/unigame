@@ -9,7 +9,7 @@
 unilib.pkg.plant_carrot_nantes_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,14 @@ function unilib.pkg.plant_carrot_nantes_wild.exec()
 
     unilib.register_node("unilib:plant_carrot_nantes_wild", "cucina_vegana:wild_carrot", mode, {
         -- From cucina_vegana:wild_carrot
-        description = unilib.annotate(S("Wild Nantes Carrot Plant"), "Daucus carota sativus"),
+        description = unilib.utils.annotate(S("Wild Nantes Carrot Plant"), "Daucus carota sativus"),
         tiles = {"unilib_crop_carrot_nantes_grow_6.png"},
         -- N.B. flora = 1, not_in_creative_inventory = 1 not in original code
         groups = {
             attached_node = 1, dig_immediate = 1, flammable = 2, flora = 1,
             not_in_creative_inventory = 1, plant = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -44,8 +44,6 @@ function unilib.pkg.plant_carrot_nantes_wild.exec()
                 {items = {"unilib:crop_carrot_nantes_harvest 3"}},
             },
         },
-        -- N.B. Not in original code
-        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         selection_box = {
@@ -59,7 +57,7 @@ function unilib.pkg.plant_carrot_nantes_wild.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cucina_vegana_plant_carrot_nantes_wild", {
+    unilib.register_decoration_generic("cucina_vegana_plant_carrot_nantes_wild", {
         -- From cucina_vegana, carrot.lua
         deco_type = "simple",
         decoration = "unilib:plant_carrot_nantes_wild",

@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_wicker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,9 +33,11 @@ function unilib.pkg.light_lantern_wicker.exec()
         groups = {
             cracky = 3, flammable = 1, oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
-        light_source = unilib.light_max - 1,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max - 1,
         paramtype = "light",
         sunlight_propagates = true,
     })
@@ -43,10 +45,10 @@ function unilib.pkg.light_lantern_wicker.exec()
         -- From darkage:lamp
         output = "unilib:light_lantern_wicker",
         recipe = {
-            {"group:stick",    "", "group:stick"},
+            {"group:stick", "", "group:stick"},
             {"", "unilib:torch_ordinary", ""},
-            {"group:stick",    "", "group:stick"},
-        }
+            {"group:stick", "", "group:stick"},
+        },
     })
 
 end

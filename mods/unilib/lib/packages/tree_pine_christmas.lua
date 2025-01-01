@@ -9,7 +9,7 @@
 unilib.pkg.tree_pine_christmas = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.tree_pine_christmas.exec()
 
     unilib.register_node("unilib:tree_pine_christmas_leaves", "snow:needles_decorated", mode, {
         -- From snow:needles
-        description = unilib.annotate(S("Christmas Pine Tree Needles"), sci_name),
+        description = unilib.utils.annotate(S("Christmas Pine Tree Needles"), sci_name),
         tiles = {
             {
                 name = "unilib_tree_pine_christmas_leaves_animated.png",
@@ -57,7 +57,7 @@ function unilib.pkg.tree_pine_christmas.exec()
             },
         },
         groups = {snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "allfaces_optional",
         drop = {
@@ -69,12 +69,14 @@ function unilib.pkg.tree_pine_christmas.exec()
             },
         },
         furnace_burntime = 1,
-        inventory_image = minetest.inventorycube("unilib_tree_pine_christmas_leaves.png"),
+        inventory_image = core.inventorycube("unilib_tree_pine_christmas_leaves.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other leaves
+        is_ground_content = false,
         light_source = 5,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
+        visual_scale = unilib.global.leaves_visual_scale,
         -- N.B. walkable not in original code
-        walkable = unilib.walkable_leaves_flag,
+        walkable = unilib.setting.walkable_leaves_flag,
     })
 
     unilib.register_tree_sapling({
@@ -98,12 +100,14 @@ function unilib.pkg.tree_pine_christmas.exec()
         description = S("Christmas Pine Tree Star"),
         tiles = {"unilib_tree_pine_christmas_star.png"},
         groups = {choppy = 1, cracky = 1, crumbly = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.node_sound_glass_defaults({
+        sounds = unilib.sound.generate_glass({
             dig = {name = "unilib_glass_footstep", gain = 0.2},
         }),
 
         drawtype = "plantlike",
         inventory_image = "unilib_tree_pine_christmas_star.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         walkable = false,
         wield_image = "unilib_tree_pine_christmas_star.png",
@@ -111,7 +115,7 @@ function unilib.pkg.tree_pine_christmas.exec()
         on_punch = function(pos, node)
 
             node.name = "unilib:tree_pine_christmas_star_lit"
-            minetest.set_node(pos, node)
+            core.set_node(pos, node)
 
         end,
     })
@@ -124,20 +128,22 @@ function unilib.pkg.tree_pine_christmas.exec()
             choppy = 1, cracky = 1, crumbly = 1, not_in_creative_inventory = 1,
             oddly_breakable_by_hand = 1,
         },
-        sounds = unilib.node_sound_glass_defaults({
+        sounds = unilib.sound.generate_glass({
             dig = {name = "unilib_glass_footstep", gain = 0.2},
         }),
 
         drawtype = "plantlike",
         drop = "unilib:tree_pine_christmas_star",
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
         walkable = false,
 
         on_punch = function(pos, node)
 
             node.name = "unilib:tree_pine_christmas_star"
-            minetest.set_node(pos, node)
+            core.set_node(pos, node)
 
         end,
     })

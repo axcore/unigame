@@ -1,0 +1,12 @@
+This folder contains files to patch the mesecons modpack to work with unilib.
+
+init.lua
+Copy this file to ../meseconds/gamecompat, replacing the existing init.lua
+
+compat_unilib.lua
+Also copy this file to ../meseconds/gamecompat, not replacing any existing file
+
+You must also make sure that unilib is loaded first, probably by adding unilib to
+    ../meseconds/gamecompat/mod.conf, for example:
+
+    optional_depends = fire, default, dye, mesecons_mvps, tnt, unilib

@@ -9,7 +9,7 @@
 unilib.pkg.stone_diorite_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_diorite_dark.exec()
         description = S("Dark Diorite"),
 
         category = "intrusive",
+        colour = "#595C5A",
         grinder_flag = true,
         hardness = 4,
     })
@@ -64,6 +65,24 @@ function unilib.pkg.stone_diorite_dark.exec()
         replace_mode = mode,
         description = S("Dark Diorite Bricks"),
         img_list = {"unilib_stone_diorite_dark.png^unilib_stone_brick_overlay.png"},
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_diorite_dark_compressed
+        part_name = "diorite_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Dark Diorite"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_diorite_dark_condensed
+        part_name = "diorite_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Dark Diorite"),
     })
 
 end

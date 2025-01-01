@@ -13,7 +13,7 @@
 unilib.pkg.dye_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dye.add_mode
+local mode = unilib.global.imported_mod_table.dye.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared variables
@@ -53,7 +53,7 @@ end
 
 function unilib.pkg.dye_basic.exec()
 
-    for _, row_list in ipairs(unilib.pkg.dye_basic.dye_list) do
+    for i, row_list in ipairs(unilib.pkg.dye_basic.dye_list) do
 
         local part_name = row_list[1]
 
@@ -72,6 +72,7 @@ function unilib.pkg.dye_basic.exec()
 
             replace_mode = mode,
             description = description,
+            palette_pos = i,
             translated_name = translated_name,
         })
 
@@ -81,16 +82,16 @@ function unilib.pkg.dye_basic.exec()
     unilib.register_craft({
         output = "unilib:dye_black 4",
         recipe = {
-            {"group:coal"}
+            {"group:coal"},
         },
     })
 
-    if unilib.pkg_executed_table["bush_blueberry_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["bush_blueberry_ordinary"] ~= nil then
 
         unilib.register_craft({
             output = "unilib:dye_violet 2",
             recipe = {
-                {"unilib:fruit_blueberry_ordinary"}
+                {"unilib:fruit_blueberry_ordinary"},
             },
         })
 
@@ -100,10 +101,10 @@ function unilib.pkg.dye_basic.exec()
     unilib.register_craft({
         type = "shapeless",
         output = "unilib:dye_grey_dark 3",
-        recipe = {"unilib:dye_black", "unilib:dye_black", "unilib:dye_white"}
+        recipe = {"unilib:dye_black", "unilib:dye_black", "unilib:dye_white"},
     })
 
-    if not minetest.get_modpath("unifieddyes") then
+    if not core.get_modpath("unifieddyes") then
 
         -- (Conflicts with a unifieddyes recipe)
         unilib.register_craft({
@@ -114,22 +115,22 @@ function unilib.pkg.dye_basic.exec()
 
     end
 
-    if unilib.pkg_executed_table["plant_cactus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_cactus_ordinary"] ~= nil then
 
         unilib.register_craft({
             type = "shapeless",
             output = "unilib:dye_green 4",
-            recipe = {"unilib:plant_cactus_ordinary"}
+            recipe = {"unilib:plant_cactus_ordinary"},
         })
 
     end
 
-    if unilib.pkg_executed_table["plant_shrub_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_shrub_dry"] ~= nil then
 
         unilib.register_craft({
             type = "shapeless",
             output = "unilib:dye_brown 4",
-            recipe = {"unilib:plant_shrub_dry"}
+            recipe = {"unilib:plant_shrub_dry"},
         })
 
     end
@@ -149,7 +150,7 @@ function unilib.pkg.dye_basic.exec()
         {"cyan", "yellow", "green"},
         {"cyan", "magenta", "blue"},
         {"yellow", "magenta", "red"},
-        -- Other mixes that result in a color we have
+        -- Other mixes that result in a colour we have
         {"red", "green", "brown"},
         {"magenta", "blue", "violet"},
         {"green", "blue", "cyan"},
@@ -176,10 +177,10 @@ function unilib.pkg.dye_basic.exec()
     end
 
     -- This package provides a craft recipe with deliberately missing ingredients
-    unilib.register_craft_missing_ingredients(
+    unilib.register_craft_missing_ingredients({
         -- Package "dye_basic"; no flower package provides dark grey dye (which is instead crafted
         --      from black and white dyes)
-        {"unilib:dye_grey_dark", "group:flower,color_grey_dark"}
-    )
+        {"unilib:dye_grey_dark", "group:flower,colour_grey_dark"},
+    })
 
 end

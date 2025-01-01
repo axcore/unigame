@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mud_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,13 +32,13 @@ function unilib.pkg.dirt_mud_antipodean.exec()
         description = S("Dry Antipodean Mud"),
         tiles = {"unilib_dirt_mud_antipodean_dry.png"},
         groups = {crumbly = 3, puts_out_fire = 1},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
 
         drop = "unilib:sand_silt_antipodean",
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
 
     unilib.register_node("unilib:dirt_mud_antipodean_wet", "aotearoa:mud_sinking", mode, {
@@ -56,7 +56,7 @@ function unilib.pkg.dirt_mud_antipodean.exec()
             },
         },
         groups = {cools_lava = 1, crumbly = 3, puts_out_fire = 1},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_water_footstep", gain = 0.2},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
@@ -64,7 +64,7 @@ function unilib.pkg.dirt_mud_antipodean.exec()
         buildable_to = true,
         drop = "unilib:sand_silt_antipodean",
         drowning = 1,
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
         paramtype = "light",
         post_effect_color = {r = 20, g = 20, b = 20, a = 250},
         walkable = false,

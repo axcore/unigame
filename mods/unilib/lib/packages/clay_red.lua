@@ -9,7 +9,7 @@
 unilib.pkg.clay_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.valleys_c.add_mode
+local mode = unilib.global.imported_mod_table.valleys_c.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,9 @@ function unilib.pkg.clay_red.exec()
         -- From valleys_c:red_clay
         description = S("Red Clay"),
         tiles = {"unilib_clay_red.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        -- N.B. clay = 1 not in original code
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
     })
 
 end

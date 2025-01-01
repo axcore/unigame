@@ -9,7 +9,7 @@
 unilib.pkg.deco_poisonivy_plant_ivy_poison = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.poisonivy.add_mode
+local mode = unilib.global.imported_mod_table.poisonivy.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,9 +24,9 @@ function unilib.pkg.deco_poisonivy_plant_ivy_poison.init()
 
 end
 
-function unilib.pkg.deco_poisonivy_plant_ivy_poison.exec()
+function unilib.pkg.deco_poisonivy_plant_ivy_poison.post()
 
-    unilib.register_decoration_now("plant_ivy_poison", nil, {
+    unilib.register_decoration_complete("plant_ivy_poison", nil, {
         -- From poisonivy/init.lua
         -- Completes decoration in package "plant_poison_ivy"
         place_on = "unilib:dirt_ordinary_with_turf",

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_dough_ciabatta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,7 +51,7 @@ function unilib.pkg.ingredient_dough_ciabatta.exec()
         output = "unilib:ingredient_dough_ciabatta",
         recipe = {
             {"unilib:food_milk_soy_red", "unilib:ingredient_oil_sunflower_seed", ""},
-            {"group:food_flour", "unilib:crop_rosemary_harvest", ""}
+            {"group:food_flour", "unilib:crop_rosemary_harvest", ""},
         },
         replacements = {
             {"unilib:food_milk_soy_red", "unilib:vessel_glass_empty"},

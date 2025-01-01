@@ -9,7 +9,7 @@
 unilib.pkg.flower_daffodil = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,15 @@ function unilib.pkg.flower_daffodil.exec()
 
     unilib.register_node("unilib:flower_daffodil", "cropocalypse:daffodil", mode, {
         -- From cropocalypse:daffodil
-        description = unilib.annotate(S("Daffodil"), "Narcissus"),
+        description = unilib.utils.annotate(S("Daffodil"), "Narcissus"),
         tiles = {"unilib_flower_daffodil.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, decorative_plants = 1, flammable = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_yellow = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_yellow = 1, colour_yellow = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,7 +51,7 @@ function unilib.pkg.flower_daffodil.exec()
         waving = 1,
         wield_image = "unilib_flower_daffodil.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:daffodil
@@ -63,7 +64,7 @@ function unilib.pkg.flower_daffodil.exec()
     end
     unilib.register_flower_in_pot("unilib:flower_daffodil", "cropocalypse:daffodil")
 
-    unilib.register_decoration("cropocalypse_flower_daffodil", {
+    unilib.register_decoration_generic("cropocalypse_flower_daffodil", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:flower_daffodil",

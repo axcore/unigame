@@ -9,7 +9,7 @@
 unilib.pkg.furniture_table_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,9 +30,11 @@ function unilib.pkg.furniture_table_simple.exec()
         description = S("Simple Table"),
         tiles = {"unilib_misc_wood_simple.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code; added to match other furniture
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -50,7 +52,7 @@ function unilib.pkg.furniture_table_simple.exec()
         recipe = {
             {"group:wood_stair_slab", "group:wood_stair_slab", "group:wood_stair_slab"},
             {"", "group:stick", ""},
-            {"", "group:stick", ""}
+            {"", "group:stick", ""},
         },
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_sauce_soy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.ingredient_sauce_soy.init()
 
     return {
         description = "Soy sauce",
-        depends = {"utensil_juicer_normal", "vessel_bottle_glass_empty"},
+        depends = {"utensil_press_hand", "vessel_bottle_glass_empty"},
         suggested = {
             "bucket_steel",                     -- group:potable_bucket
             "ingredient_salt_normal",           -- group:food_salt
@@ -39,10 +39,12 @@ function unilib.pkg.ingredient_sauce_soy.exec()
         groups = {
             attached_node = 1, dig_immediate = 3, food_sauce = 1, food_soy_sauce = 1, vessel = 1,
         },
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_sauce_soy.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -56,15 +58,15 @@ end
 
 function unilib.pkg.ingredient_sauce_soy.post()
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
-    table.insert(replace_list, {"unilib:utensil_juicer_normal", "unilib:utensil_juicer_normal"})
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
+    table.insert(replace_list, {"unilib:utensil_press_hand", "unilib:utensil_press_hand"})
 
     unilib.register_craft({
         -- From farming:soy_sauce
         output = "unilib:ingredient_sauce_soy",
         recipe = {
             {"group:food_soy", "group:food_salt", "group:food_soy"},
-            {"", "unilib:utensil_juicer_normal", ""},
+            {"", "unilib:utensil_press_hand", ""},
             {"", "group:potable_bucket", "unilib:vessel_bottle_glass_empty"},
         },
         replacements = replace_list,

@@ -9,7 +9,7 @@
 unilib.pkg.utensil_mortar_pestle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,8 +37,8 @@ function unilib.pkg.utensil_mortar_pestle.exec()
         -- N.B. original code used unilib:stone_ordinary
         recipe = {
             {"group:stone", "group:stick", "group:stone"},
-            {"", "group:stone", ""}
-        }
+            {"", "group:stone", ""},
+        },
     })
 
 end

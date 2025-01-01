@@ -9,7 +9,7 @@
 unilib.pkg.roof_thatch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,9 +37,11 @@ function unilib.pkg.roof_thatch.exec()
         description = S("Thatch Roofing"),
         tiles = {"unilib_roof_thatch.png"},
         groups = {flammable = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         paramtype = "light",
     })
     --[[
@@ -123,7 +125,7 @@ function unilib.pkg.roof_thatch.exec()
             {"group:junglegrass", "group:junglegrass", "group:junglegrass"},
         },
     })
-    if unilib.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
 
         --[[
         unilib.register_craft({

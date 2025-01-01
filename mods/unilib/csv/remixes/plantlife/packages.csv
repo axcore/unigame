@@ -1,5 +1,4 @@
 # "plantlife" remix - contains everything from the plantlife modpack
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 # For all plantlife mods, calls to biome_lib have been crudely emulated by Minetest decorations, so
 #       trees will not spawn in the same positions/quantities
 # Did not import anything from the 3dmushrooms, nature_classic or vines mods
@@ -77,13 +76,18 @@ deco_poisonivy_plant_ivy_poison|poisonivy
 plant_ivy_poison|poisonivy
 
 # trunks packages
-deco_trunks_item_twig_normal|trunks
+deco_trunks_misc_twig_normal|trunks
 deco_trunks_moss_normal|trunks
-item_twig_normal|trunks
+misc_twig_normal|trunks
 moss_normal|trunks
 
 # woodsoils packages
+# (This package provides litters based on ordinary dirt, as in the original mod)
 dirt_ordinary_with_litter_forest|woodsoils
+# (This package provides litters based on all super dirts; choose one or the other package)
+#dirt_super_with_litter_forest|unilib
+# (This package is required by both of the packages above)
+shared_woodsoils|woodsoils
 
 # youngtrees packages
 deco_youngtrees_tree_young_apple|youngtrees
@@ -103,7 +107,7 @@ sand_ordinary|default
 biome_default_forest_deciduous|default
 biome_default_rainforest|default
 biome_default_savanna|default
-dirt_permafrost|default
+dirt_permafrost_ordinary|default
 fern_ordinary|default
 gravel_ordinary|default mtg_plus
 liquid_water_river|default
@@ -128,3 +132,5 @@ tree_jungle|default doors moreblocks
 #stone_ordinary_with_iron|default
 #tree_apple|default doors moreblocks
 #utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)

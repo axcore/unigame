@@ -9,7 +9,9 @@
 unilib.pkg.shared_chunkkeeper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chunkkeeper.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.chunkkeeper.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared variables
@@ -61,9 +63,9 @@ function unilib.pkg.shared_chunkkeeper.after_place_node(pos, placer)
     -- Only update the owner when we have an owner
     if placer and placer:is_player() then
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         meta:set_string("owner", placer:get_player_name())
-        minetest.get_node_timer(pos):start(1)
+        core.get_node_timer(pos):start(1)
 
         if meta:get_int("super_user") == 0 then
             unilib.pkg.shared_chunkkeeper.update_formspec(pos)
@@ -77,7 +79,7 @@ end
 
 function unilib.pkg.shared_chunkkeeper.on_receive_fields(pos, formname, fields, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local run = meta:get_int("running") == 1
     local hide_owner = meta:get_int("hide_owner") == 1
     local super = meta:get_int("super_user") == 1
@@ -85,7 +87,7 @@ function unilib.pkg.shared_chunkkeeper.on_receive_fields(pos, formname, fields, 
 
     if owner ~= "" and player:get_player_name() ~= owner then
 
-        if not minetest.check_player_privs(player, {protection_bypass = true}) then
+        if not core.check_player_privs(player, {protection_bypass = true}) then
             return
         end
 
@@ -98,23 +100,23 @@ function unilib.pkg.shared_chunkkeeper.on_receive_fields(pos, formname, fields, 
 
             meta:set_int("running", 0)
             if not super then
-                minetest.swap_node(pos, {name = "unilib:machine_caretaker_off"})
+                core.swap_node(pos, {name = "unilib:machine_caretaker_off"})
             else
-                minetest.swap_node(pos, {name = "unilib:admin_machine_caretaker_off"})
+                core.swap_node(pos, {name = "unilib:admin_machine_caretaker_off"})
             end
 
-            minetest.forceload_free_block(pos)
+            core.forceload_free_block(pos)
 
         else
 
             meta:set_int("running", 1)
             if not super then
-                minetest.swap_node(pos, {name = "unilib:machine_caretaker_on"})
+                core.swap_node(pos, {name = "unilib:machine_caretaker_on"})
             else
-                minetest.swap_node(pos, {name = "unilib:admin_machine_caretaker_on"})
+                core.swap_node(pos, {name = "unilib:admin_machine_caretaker_on"})
             end
 
-            minetest.forceload_block(pos)
+            core.forceload_block(pos)
 
         end
 
@@ -152,8 +154,8 @@ function unilib.pkg.shared_chunkkeeper.process_fuel(pos)
 
     -- Removes time from the time_left, except for admin caretaker machines
 
-    local node = minetest.get_node_or_nil(pos)
-    local meta = minetest.get_meta(pos)
+    local node = core.get_node_or_nil(pos)
+    local meta = core.get_meta(pos)
     local timer = meta:get_int("time_left") or 0
     local super = meta:get_int("super_user") == 1
     local run = meta:get_int("running") == 1
@@ -174,8 +176,8 @@ function unilib.pkg.shared_chunkkeeper.process_fuel(pos)
                 meta:set_int("time_left", timer)
                 run = false
                 dirty_flag = true
-                minetest.swap_node(pos, {name = "unilib:machine_caretaker_off"})
-                minetest.forceload_free_block(pos)
+                core.swap_node(pos, {name = "unilib:machine_caretaker_off"})
+                core.forceload_free_block(pos)
 
             end
 
@@ -207,7 +209,7 @@ end
 
 function unilib.pkg.shared_chunkkeeper.update_formspec(pos)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local timer = meta:get_int("time_left")
     local super = meta:get_int("super_user") == 1
@@ -237,13 +239,12 @@ function unilib.pkg.shared_chunkkeeper.update_formspec(pos)
         "size[8,6]" ..
 --      "label[0.3,0.3;" .. time_str .. "]" ..
 --      "list[context;main;2,0;1,1;]" ..
-        "label[0,0.25;" .. S("Fuel") .. ":]" ..
+        "label[0,0.25;" .. FS("Fuel") .. ":]" ..
         "list[context;main;1,0;1,1;]" ..
-        "label[3,0.25;" .. S("Force-load mapblock") .. ": " .. time_str .. "]" ..
---      "button[0,1; 1.5,1;toggle_running;" .. minetest.formspec_escape(running_button) .. "]" ..
-        "button[0,1; 2.5,1;toggle_running;" .. minetest.formspec_escape(running_button) .. "]" ..
-        "button[3,1; 2.5,1;toggle_hide_owner;" .. minetest.formspec_escape(hide_owner_button) ..
-                "]" ..
+        "label[3,0.25;" .. FS("Force-load mapblock") .. ": " .. F(time_str) .. "]" ..
+--      "button[0,1; 1.5,1;toggle_running;" .. F(running_button) .. "]" ..
+        "button[0,1; 2.5,1;toggle_running;" .. F(running_button) .. "]" ..
+        "button[3,1; 2.5,1;toggle_hide_owner;" .. F(hide_owner_button) .. "]" ..
         "list[current_player;main;0,2;8,4;]" ..
         "listring[current_player;main]" ..
         "listring[context;main]"
@@ -254,17 +255,23 @@ function unilib.pkg.shared_chunkkeeper.update_formspec(pos)
     if not super then
 
         if hide_owner or owner == "" then
-            title = unilib.brackets(S("Caretaker Machine"), tostring(time_str))
+            title = unilib.utils.brackets(S("Caretaker Machine"), tostring(time_str))
         else
-            title = unilib.brackets(S("@1's Caretaker Machine", owner), tostring(time_str))
+            title = unilib.utils.brackets(S("@1's Caretaker Machine", owner), tostring(time_str))
         end
 
     else
 
         if hide_owner or owner == "" then
-            title = unilib.brackets(S("Admin Caretaker Machine"), tostring(time_str))
+
+            title = unilib.utils.brackets(S("Admin Caretaker Machine"), tostring(time_str))
+
         else
-            title = unilib.brackets(S("@1's Adming Caretaker Machine", owner), tostring(time_str))
+
+            title = unilib.utils.brackets(
+                S("@1's Adming Caretaker Machine", owner), tostring(time_str)
+            )
+
         end
 
     end
@@ -275,7 +282,7 @@ end
 
 function unilib.pkg.shared_chunkkeeper.update_formspec_admin(pos)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local timer = meta:get_int("time_left")
     local super = meta:get_int("super_user") == 1
@@ -304,12 +311,11 @@ function unilib.pkg.shared_chunkkeeper.update_formspec_admin(pos)
     meta:set_string("formspec",
         "size[8,6]" ..
 --      "label[0.3,0.3;Inf]" ..
-        "label[0,0.25;" .. S("No fuel required") .. "]" ..
-        "label[3,0.25;" .. S("Force-load mapblock") .. ": " .. S("Indefinite") .. "]" ..
---      "button[0,1; 1.5,1;toggle_running;"..minetest.formspec_escape(running_button).."]" ..
-        "button[0,1; 2.5,1;toggle_running;"..minetest.formspec_escape(running_button).."]" ..
-        "button[3,1; 2.5,1;toggle_hide_owner;" .. minetest.formspec_escape(hide_owner_button) ..
-                "]" ..
+        "label[0,0.25;" .. FS("No fuel required") .. "]" ..
+        "label[3,0.25;" .. FS("Force-load mapblock") .. ": " .. FS("Indefinite") .. "]" ..
+--      "button[0,1; 1.5,1;toggle_running;" .. F(running_button).."]" ..
+        "button[0,1; 2.5,1;toggle_running;" .. F(running_button).."]" ..
+        "button[3,1; 2.5,1;toggle_hide_owner;" .. F(hide_owner_button) .. "]" ..
         "list[current_player;main;0,2;8,4;]" ..
         "listring[current_player;main]"  ..
         "listring[context;main]"
@@ -320,17 +326,23 @@ function unilib.pkg.shared_chunkkeeper.update_formspec_admin(pos)
     if not super then
 
         if hide_owner or owner == "" then
-            title = unilib.brackets(S("Caretaker Machine"), tostring(time_str))
+            title = unilib.utils.brackets(S("Caretaker Machine"), tostring(time_str))
         else
-            title = unilib.brackets(S("@1's Caretaker Machine", owner), tostring(time_str))
+            title = unilib.utils.brackets(S("@1's Caretaker Machine", owner), tostring(time_str))
         end
 
     else
 
         if hide_owner or owner == "" then
-            title = unilib.brackets(S("Admin Caretaker Machine"), tostring(time_str))
+
+            title = unilib.utils.brackets(S("Admin Caretaker Machine"), tostring(time_str))
+
         else
-            title = unilib.brackets(S("@1's Admin Caretaker Machine", owner), tostring(time_str))
+
+            title = unilib.utils.brackets(
+                S("@1's Admin Caretaker Machine", owner), tostring(time_str)
+            )
+
         end
 
     end

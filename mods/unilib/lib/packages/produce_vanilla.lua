@@ -9,7 +9,7 @@
 unilib.pkg.produce_vanilla = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -72,7 +72,8 @@ function unilib.pkg.produce_vanilla.exec()
         },
         harvest_group_table = {flammable = 2, food_vanilla = 1, seed = 2},
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -84,7 +85,7 @@ function unilib.pkg.produce_vanilla.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_vanilla", {
+    unilib.register_decoration_generic("farming_redo_produce_vanilla", {
         -- From farming_redo/mapgen.lua
         -- N.B. The original code does not use the final growth stage for the decoration
         deco_type = "simple",
@@ -94,8 +95,8 @@ function unilib.pkg.produce_vanilla.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 476,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

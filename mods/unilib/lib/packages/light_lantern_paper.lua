@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_paper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.light_lantern_paper.exec()
             "unilib_light_lantern_paper.png",
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 3, snappy = 2, wool = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         is_ground_content = false,
         light_source = 13,
@@ -51,7 +51,7 @@ function unilib.pkg.light_lantern_paper.exec()
             {"group:wood", c_paper, "group:wood"},
             {c_paper, "unilib:torch_ordinary", c_paper},
             {"group:wood", c_paper, "group:wood"},
-        }
+        },
     })
 
     unilib.register_abm({
@@ -64,7 +64,7 @@ function unilib.pkg.light_lantern_paper.exec()
 
         action = function(pos, node)
 
-            minetest.add_particle({
+            core.add_particle({
                 acceleration = {x = 0, y = 0, z = 0},
                 animation = {
                     type = "vertical_frames",

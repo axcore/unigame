@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_street_light = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,23 +29,25 @@ function unilib.pkg.light_lamp_street_light.exec()
 
     unilib.register_node("unilib:light_lamp_street_light_connecting", nil, mode, {
         -- Original to unilib, adapted from morelights_modern:barlight_c
-        description = unilib.brackets(S("Light-Coloured Street Light"), S("Connecting")),
+        description = unilib.utils.brackets(S("Light-Coloured Street Light"), S("Connecting")),
         tiles = {
-            "unilib_pole_metal_light.png",
+            "unilib_hardware_pole_metal_light.png",
             "unilib_light_lamp_street.png",
-            "unilib_pole_metal_light.png"
+            "unilib_hardware_pole_metal_light.png",
         },
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sound = unilib.sound_table.glass,
+        sound = unilib.global.sound_table.glass,
 
         connects_to = {
+            "unilib:hardware_lamppost_metal_dark",
+            "unilib:hardware_lamppost_metal_light",
             "unilib:light_lamp_street_light_connecting",
             "unilib:light_lamp_street_light_straight",
-            "unilib:pole_metal_dark_street",
-            "unilib:pole_metal_light_street"
         },
         drawtype = "nodebox",
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         node_box = {
             type = "connected",
             fixed = {-1/8,  3/8, -1/8, 1/8,  1/2, 1/8},
@@ -62,8 +64,8 @@ function unilib.pkg.light_lamp_street_light.exec()
         output = "unilib:light_lamp_street_light_connecting 4",
         recipe = {
             {"unilib:metal_copper_ingot", "unilib:metal_copper_ingot", "unilib:metal_copper_ingot"},
-            {"unilib:metal_steel_ingot", "unilib:glass_ordinary", "unilib:metal_steel_ingot"}
-        }
+            {"unilib:metal_steel_ingot", "unilib:glass_ordinary", "unilib:metal_steel_ingot"},
+        },
     })
     unilib.register_craft({
         -- Original to unilib, adapted from morelights_modern:barlight_c
@@ -74,17 +76,19 @@ function unilib.pkg.light_lamp_street_light.exec()
 
     unilib.register_node("unilib:light_lamp_street_light_straight", nil, mode, {
         -- Original to unilib, adapted from morelights_modern:barlight_S
-        description = unilib.brackets(S("Light-Coloured Street Light"), S("Straight")),
+        description = unilib.utils.brackets(S("Light-Coloured Street Light"), S("Straight")),
         tiles = {
-            "unilib_pole_metal_light.png",
+            "unilib_hardware_pole_metal_light.png",
             "unilib_light_lamp_street.png",
-            "unilib_pole_metal_light.png"
+            "unilib_hardware_pole_metal_light.png",
         },
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sound = unilib.sound_table.glass,
+        sound = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         node_box = {
             type = "fixed",
             fixed = {-1/2, 3/8, -1/8, 1/2, 1/2, 1/8},
@@ -97,7 +101,7 @@ function unilib.pkg.light_lamp_street_light.exec()
         -- Original to unilib, adapted from morelights_modern:barlight_S
         type = "shapeless",
         output = "unilib:light_lamp_street_light_straight",
-        recipe = {"unilib:light_lamp_street_light_connecting"}
+        recipe = {"unilib:light_lamp_street_light_connecting"},
     })
 
 end

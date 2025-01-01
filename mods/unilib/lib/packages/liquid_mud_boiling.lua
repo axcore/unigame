@@ -9,7 +9,7 @@
 unilib.pkg.liquid_mud_boiling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,7 @@ function unilib.pkg.liquid_mud_boiling.exec()
             },
         },
         groups = {liquid = 2},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
@@ -98,7 +98,7 @@ function unilib.pkg.liquid_mud_boiling.exec()
             description = S("Flowing Boiling Mud"),
             tiles = {"unilib_liquid_mud_boiling_flowing.png"},
             groups = {liquid = 2, not_in_creative_inventory = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
                 dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             }),

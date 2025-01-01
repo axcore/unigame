@@ -9,7 +9,7 @@
 unilib.pkg.mineral_quartz_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.mineral_quartz_white.exec()
         -- From underch:quartz
         type = "shapeless",
         output = "unilib:mineral_quartz_white_crystal 9",
-        recipe = {"unilib:mineral_quartz_white_block"}
+        recipe = {"unilib:mineral_quartz_white_block"},
     })
     unilib.register_craft({
         -- From underch:quartz
         type = "shapeless",
         output = "unilib:mineral_quartz_white_crystal 2",
-        recipe = {"unilib:mineral_quartz_white_crystal_large"}
+        recipe = {"unilib:mineral_quartz_white_crystal_large"},
     })
 
     unilib.register_node("unilib:mineral_quartz_white_block", "underch:quartz_block", mode, {
@@ -56,7 +56,7 @@ function unilib.pkg.mineral_quartz_white.exec()
         description = S("White Quartz Block"),
         tiles = {"unilib_mineral_quartz_white_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         is_ground_content = false,
     })
@@ -66,6 +66,9 @@ function unilib.pkg.mineral_quartz_white.exec()
         ingredient = "unilib:mineral_quartz_white_crystal",
     })
     unilib.register_stairs("unilib:mineral_quartz_white_block")
+    unilib.register_carvings("unilib:mineral_quartz_white_block", {
+        millwork_flag = true,
+    })
 
     unilib.register_node(
         -- From underch:quartz_crystal
@@ -76,7 +79,7 @@ function unilib.pkg.mineral_quartz_white.exec()
             description = S("Large White Quartz Crystal"),
             tiles = {"unilib_mineral_quartz_white_crystal_large.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "mesh",
             is_ground_content = false,

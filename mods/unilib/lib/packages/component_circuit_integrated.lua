@@ -9,7 +9,7 @@
 unilib.pkg.component_circuit_integrated = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,11 +26,16 @@ end
 
 function unilib.pkg.component_circuit_integrated.exec()
 
-    unilib.register_craftitem("unilib:component_circuit_integrated", "basic_materials:ic", mode, {
+    unilib.register_craftitem(
         -- From basic_materials:ic
-        description = S("Simple Integrated Circuit"),
-        inventory_image = "unilib_component_circuit_integrated.png",
-    })
+        "unilib:component_circuit_integrated",
+        {"basic_materials:ic", "homedecor:ic"},
+        mode,
+        {
+            description = S("Simple Integrated Circuit"),
+            inventory_image = "unilib_component_circuit_integrated.png",
+        }
+    )
     unilib.register_craft( {
         -- From basic_materials:ic
         output = "unilib:component_circuit_integrated 4",

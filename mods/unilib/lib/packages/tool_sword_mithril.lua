@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_mithril = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreores.add_mode
+local mode = unilib.global.imported_mod_table.moreores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,13 +45,13 @@ function unilib.pkg.tool_sword_mithril.exec()
             max_drop_level = 3,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From moreores:sword_mithril
         part_name = "mithril",
         ingredient = "unilib:metal_mithril_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_sword_mithril", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_mithril", "sword")
 
 end

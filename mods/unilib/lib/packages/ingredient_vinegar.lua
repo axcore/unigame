@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_vinegar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,12 @@ function unilib.pkg.ingredient_vinegar.exec()
         description = S("Vinegar"),
         tiles = {"unilib_ingredient_vinegar.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_vinegar.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_vinegar.png",
@@ -48,10 +50,12 @@ function unilib.pkg.ingredient_vinegar.exec()
         description = S("Vinegar Mother"),
         tiles = {"unilib_ingredient_vinegar_mother.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_vinegarmother = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_vinegar_mother.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_vinegar_mother.png",
@@ -66,7 +70,7 @@ function unilib.pkg.ingredient_vinegar.post()
         type = "shapeless",
         output = "unilib:ingredient_vinegar",
         recipe = {"group:food_vinegarmother", "group:food_sugar", "group:potable_bucket"},
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

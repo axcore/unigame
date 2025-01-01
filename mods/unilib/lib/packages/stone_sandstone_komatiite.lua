@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_komatiite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_komatiite.exec()
         description = S("Komatiite Sandstone"),
 
         category = "sedimentary",
+        colour = "#BBA772",
         grinder_flag = true,
         grinder_powder = "unilib:sand_komatiite",
         grinder_gravel = "unilib:gravel_komatiite",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_komatiite.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_komatiite_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, komatiite_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_komatiite.exec()
             replace_mode = mode,
             description = S("Komatiite Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_komatiite_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_komatiite_cobble_compressed
+            part_name = "sandstone_komatiite",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Komatiite Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_komatiite_cobble_condensed
+            part_name = "sandstone_komatiite",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Komatiite Sandstone Cobble"),
         })
 
     end

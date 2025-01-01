@@ -5,28 +5,30 @@
 # Note that ethereal-ng adds more ore distributions that appear in desert stone, assuming that the
 #       ore distributions from minetest_game are still present
 # Coconuts now drop themselves, rather than coconut slices, for consistency with moretrees coconuts
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # ethereal-ng packages
 base_ethereal|ethereal
-abm_ethereal_dirt_soak|ethereal
+abm_ethereal_dirt_convert|ethereal
 abm_ethereal_flora_spread|ethereal
 abm_ethereal_ice_snow_melt|ethereal
+abm_ethereal_leaves_falling|ethereal
+abm_ethereal_mould_spread|ethereal
 abm_ethereal_mushroom_spread|ethereal
-abm_ethereal_papyrus_bamboo_spread|ethereal
 abm_ethereal_torch_extinguish|ethereal
 abm_ethereal_water_freeze|ethereal
 biome_ethereal_bamboo|ethereal
 biome_ethereal_caves|ethereal
 biome_ethereal_desert|ethereal
+biome_ethereal_desert_cold|ethereal
 biome_ethereal_fiery|ethereal
 biome_ethereal_forest_coniferous|ethereal
 biome_ethereal_forest_deciduous|ethereal
 biome_ethereal_frost|ethereal
 biome_ethereal_glacier|ethereal
 biome_ethereal_grassland|ethereal
+biome_ethereal_grassland_snowy|ethereal
 biome_ethereal_grassy|ethereal
 biome_ethereal_grayness|ethereal
 biome_ethereal_grove|ethereal
@@ -37,16 +39,13 @@ biome_ethereal_mountain|ethereal
 biome_ethereal_mushroom|ethereal
 biome_ethereal_plains|ethereal
 biome_ethereal_prairie|ethereal
-biome_ethereal_quicksand|ethereal
 biome_ethereal_rainforest|ethereal
-biome_ethereal_sakura|ethereal
-biome_ethereal_sand_clay|ethereal
-biome_ethereal_sandstone|ethereal
+biome_ethereal_sandstone_desert|ethereal
 biome_ethereal_savanna|ethereal
 biome_ethereal_swamp|ethereal
 biome_ethereal_taiga|ethereal
 biome_ethereal_tundra|ethereal
-biome_ethereal_underground|ethereal
+bush_basandra|ethereal
 bush_oriental|ethereal
 candle_basic|ethereal
 clay_baked_ethereal|ethereal
@@ -55,68 +54,75 @@ coral_rooted_green_glow|ethereal
 coral_rooted_orange_glow|ethereal
 coral_rooted_pink_glow|ethereal
 deco_ethereal_bush_acacia|ethereal
+deco_ethereal_bush_basandra|ethereal
 deco_ethereal_bush_blueberry_ordinary|ethereal
 deco_ethereal_bush_ordinary|ethereal
+deco_ethereal_bush_oriental|ethereal
 deco_ethereal_bush_pine|ethereal
 deco_ethereal_coral_mixed|ethereal
-deco_ethereal_crop_mint_normal|ethereal
+deco_ethereal_crystal_mixed|ethereal
 deco_ethereal_dirt_dry|ethereal
-deco_ethereal_dirt_permafrost_with_moss|ethereal
-deco_ethereal_farming_mixed|ethereal
-deco_ethereal_farming_mixed_dirt|ethereal
+deco_ethereal_dirt_permafrost_ordinary_with_moss|ethereal
 deco_ethereal_fern_boston|ethereal
 deco_ethereal_fern_ordinary|ethereal
 deco_ethereal_flower_delphinium_blue|ethereal
 deco_ethereal_flower_lazarus_bell|ethereal
-deco_ethereal_flower_reed_mannagrass|ethereal
+deco_ethereal_flower_lilac|ethereal
+deco_ethereal_flower_mixed|ethereal
 deco_ethereal_flower_thistle|ethereal
 deco_ethereal_flower_waterlily_ordinary|ethereal
-deco_ethereal_flower_with_strawberry|ethereal
 deco_ethereal_grass_dry|ethereal
 deco_ethereal_grass_jungle|ethereal
-deco_ethereal_grass_marram|ethereal
+deco_ethereal_grass_marram_ordinary|ethereal
 deco_ethereal_grass_ordinary|ethereal
+deco_ethereal_grass_reed_mannagrass|ethereal
+deco_ethereal_grass_spore|ethereal
+deco_ethereal_ice_thin|ethereal
+deco_ethereal_illumishroom_mixed|ethereal
 deco_ethereal_liquid_water_ordinary|ethereal
-deco_ethereal_mineral_crystallinum|ethereal
 deco_ethereal_misc_butterfly|ethereal
 deco_ethereal_misc_firefly|ethereal
-deco_ethereal_mushroom_brown_red|ethereal
-deco_ethereal_mushroom_red|ethereal
+deco_ethereal_mushroom_mixed|ethereal
 deco_ethereal_plant_cactus_ordinary|ethereal
 deco_ethereal_plant_cotton_wild|ethereal
 deco_ethereal_plant_kelp_ordinary|ethereal
+deco_ethereal_plant_mould_slime|ethereal
 deco_ethereal_plant_papyrus_ordinary|ethereal
 deco_ethereal_plant_shrub_dry|ethereal
 deco_ethereal_plant_shrub_dry_fiery|ethereal
 deco_ethereal_plant_shrub_firethorn|ethereal
 deco_ethereal_plant_shrub_snowy|ethereal
-deco_ethereal_produce_bean_green|ethereal
-deco_ethereal_produce_grape|ethereal
-deco_ethereal_produce_melon_pumpkin|ethereal
 deco_ethereal_produce_onion_wild|ethereal
-deco_ethereal_produce_parsley_flatleaf|ethereal
-deco_ethereal_produce_potato_normal|ethereal
+deco_ethereal_produce_strawberry_normal|ethereal
+deco_ethereal_shrub_mixed|ethereal
 deco_ethereal_snow_ordinary|ethereal
+deco_ethereal_snow_ordinary_patchy|ethereal
 deco_ethereal_tree_acacia|ethereal
+deco_ethereal_tree_acacia_log|ethereal
 deco_ethereal_tree_apple|ethereal
+deco_ethereal_tree_apple_log|ethereal
 deco_ethereal_tree_aspen|ethereal
 deco_ethereal_tree_bamboo|ethereal
 deco_ethereal_tree_banana|ethereal
+deco_ethereal_tree_banana_log|ethereal
 deco_ethereal_tree_birch|ethereal
 deco_ethereal_tree_frost|ethereal
 deco_ethereal_tree_healing|ethereal
 deco_ethereal_tree_jungle|ethereal
+deco_ethereal_tree_jungle_log|ethereal
 deco_ethereal_tree_lemon|ethereal
+deco_ethereal_tree_mushroom_brown|ethereal
 deco_ethereal_tree_mushroom_red|ethereal
 deco_ethereal_tree_normal|ethereal
 deco_ethereal_tree_olive|ethereal
 deco_ethereal_tree_orange|ethereal
-deco_ethereal_bush_oriental|ethereal
 deco_ethereal_tree_palm|ethereal
 deco_ethereal_tree_pine|ethereal
+deco_ethereal_tree_pine_log|ethereal
 deco_ethereal_tree_redwood|ethereal
 deco_ethereal_tree_sakura|ethereal
 deco_ethereal_tree_scorched|ethereal
+deco_ethereal_tree_scorched_log|ethereal
 deco_ethereal_tree_vine|ethereal
 deco_ethereal_tree_willow_weeping|ethereal
 dirt_dried|ethereal
@@ -139,16 +145,23 @@ drink_lemonade|ethereal
 feature_ethereal_crater_lava|ethereal
 fern_boston|ethereal
 flower_fire|ethereal
+flower_lilac|ethereal
+flower_poppy_normal|ethereal
 food_beef_teriyaki|ethereal
 food_bread_banana|ethereal
 food_chicken_teriyaki|ethereal
+food_fish_and_chips|ethereal
+food_fish_calamari|ethereal
 food_fish_cooked|ethereal
+food_fish_shrimp_boiled|ethereal
+food_fish_shrimp_garlic_butter|ethereal
 food_fugu|ethereal
 food_jelly_firethorn|ethereal
 food_lemon_sweetened|ethereal
 food_nuts_pine|ethereal
 food_pulp_cactus|ethereal
 food_sashimi|ethereal
+food_salad_jellyfish|ethereal
 food_soup_mushroom|ethereal
 food_stew_hearty|ethereal
 food_sushi_kappamaki|ethereal
@@ -160,11 +173,13 @@ fruit_coconut|ethereal
 fruit_lemon|ethereal
 fruit_olive|ethereal
 fruit_orange|ethereal
-hedge_decorative_light|ethereal
-hedge_decorative_dark|ethereal
+grass_spore|ethereal
+ice_thin|ethereal
 ingredient_agar_powder|ethereal
 ingredient_dough_banana|ethereal
 ingredient_fish_basic|ethereal
+ingredient_fish_bonus|ethereal
+ingredient_fish_junk|ethereal
 ingredient_oil_olive|ethereal
 item_rod_fishing|ethereal
 item_worm_juicy|ethereal
@@ -172,10 +187,10 @@ ladder_stone|ethereal
 light_block_glowstone|ethereal
 material_charcoal_artificial_lump|ethereal
 material_wax_palm|ethereal
-meta_ethereal_illumishrooms|ethereal
 mineral_aetherium|ethereal
-mineral_crystallinum|ethereal
+mineral_crystallite|ethereal
 misc_flooring_bamboo|ethereal
+misc_leaves_pruned|ethereal
 misc_screen_shoji|ethereal
 misc_sponge|ethereal
 mushroom_illumishroom_cyan|ethereal
@@ -191,12 +206,11 @@ ore_ethereal_stone_desert_with_gold|ethereal
 ore_ethereal_stone_desert_with_iron|ethereal
 ore_ethereal_stone_desert_with_mese|ethereal
 ore_ethereal_stone_ordinary_with_aetherium|ethereal
-override_ethereal_coral|ethereal
 override_ethereal_crafting|ethereal
-override_ethereal_ice|ethereal
 override_ethereal_item|ethereal
-override_ethereal_tree|ethereal
-override_ethereal_utensil|ethereal
+override_ethereal_papyrus_bamboo|ethereal
+override_ethereal_tree_pine|ethereal
+plant_mould_slime|ethereal
 plant_seaweed_undersea|ethereal
 plant_shrub_crystal|ethereal
 plant_shrub_dry_fiery|ethereal
@@ -207,6 +221,8 @@ produce_onion_wild|ethereal
 produce_strawberry_normal|ethereal
 sand_quicksand|ethereal
 sand_undersea|ethereal
+shared_ethereal_candle|ethereal
+shared_ethereal_fish|ethereal
 staff_gilly|ethereal
 staff_light|ethereal
 stone_desert_with_aetherium|ethereal
@@ -219,16 +235,18 @@ stone_desert_with_mese|unilib
 stone_marble_blue|ethereal
 stone_ordinary_with_aetherium|ethereal
 structure_ethereal_igloo|ethereal
-tool_axe_crystallinum|ethereal
-tool_pick_crystallinum|ethereal
-tool_shovel_crystallinum|ethereal
-tool_sword_crystallinum|ethereal
+tool_axe_crystallite|ethereal
+tool_pick_crystallite|ethereal
+tool_shovel_crystallite|ethereal
+tool_sword_crystallite|ethereal
 tree_bamboo|ethereal
 tree_banana|ethereal
 tree_birch|ethereal
 tree_frost|ethereal
 tree_healing|ethereal
 tree_lemon|ethereal
+tree_mushroom_brown|ethereal
+tree_mushroom_generic|ethereal
 tree_mushroom_red|ethereal
 tree_normal|ethereal
 tree_olive|ethereal
@@ -250,10 +268,9 @@ bush_ordinary|default
 bush_pine|default
 clay_ordinary|default
 crop_cotton|farming
-crop_mint_normal|farming
 dirt_dry|default
 dirt_ordinary|default farming moreblocks
-dirt_permafrost|default
+dirt_permafrost_ordinary|default
 dye_basic|dye bakedclay
 fern_ordinary|default
 flower_dandelion_white|flowers
@@ -261,7 +278,6 @@ flower_dandelion_yellow|flowers
 flower_delphinium_blue|bakedclay
 flower_geranium_blue|flowers
 flower_lazarus_bell|bakedclay
-flower_reed_mannagrass|bakedclay
 flower_rose_red|flowers
 flower_thistle|bakedclay
 flower_tulip_orange|flowers
@@ -271,43 +287,43 @@ fruit_apple|default
 fruit_blueberry_ordinary|default
 glass_ordinary|default moreblocks vessels
 grass_jungle|default
+grass_marram_ordinary|default
+grass_ordinary|default
+grass_reed_mannagrass|bakedclay
 gravel_ordinary|default mtg_plus
 ice_ordinary|default ethereal mtg_plus
 item_paper_ordinary|default moreblocks
-item_stick_ordinary|default
 item_string_ordinary|farming
 liquid_lava_ordinary|default
 liquid_water_ordinary|default
 liquid_water_river|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_flint|default fire mtg_plus
-mineral_mese|default
-misc_beanpole|farming
+mineral_mese|default glemr11
 misc_butterfly|butterflies
 misc_firefly|fireflies
-misc_trellis|farming
 mushroom_brown|flowers
 mushroom_red|flowers
 plant_cactus_ordinary|default
 plant_cotton_wild|farming
 plant_kelp_ordinary|default
+plant_papyrus_ordinary|default mtg_plus
 plant_shrub_dry|default
-produce_bean_green|farming
-produce_grape|farming
 sand_desert|default farming
 sand_ordinary|default
 sand_silver|default
+shared_standard|flowers fire
 snow_ordinary|default ethereal mtg_plus
 soil_sand_desert|farming
 stone_desert|default moreblocks
 stone_obsidian|default moreblocks
 stone_ordinary|default moreblocks technic
 stone_ordinary_with_coal|default
+stone_sandstone_desert|default mtg_plus
 stone_sandstone_ordinary|default moreblocks mtg_plus
 torch_ordinary|default
 tree_acacia|default doors moreblocks
@@ -317,9 +333,10 @@ tree_jungle|default doors moreblocks
 tree_pine|default doors moreblocks
 utensil_board_cutting|farming
 utensil_bowl_wooden|farming thirsty
-utensil_juicer_normal|farming
 utensil_mortar_pestle|farming
+utensil_press_hand|farming
 utensil_saucepan_normal|farming
+utensil_skillet_normal|farming
 utensil_tray_baking|farming
 vessel_bottle_glass_empty|thirsty vessels
 vessel_glass_empty|thirsty vessels
@@ -332,50 +349,27 @@ coral_block_skeleton|default
 coral_rooted_cyan|default
 coral_rooted_green|default
 coral_rooted_pink|default
-crop_hemp|farming
-crop_sunflower_giant|farming
-grass_marram|default
-grass_ordinary|default
-plant_papyrus_ordinary|default mtg_plus
-produce_artichoke|farming
-produce_beetroot_normal|farming
-produce_blackberry|farming
-produce_blueberry_highbush|farming
-produce_cabbage_normal|farming
-produce_carrot_normal|farming
-produce_chilli_normal|farming
-produce_coffee|farming
-produce_corn_normal|farming
-produce_cucumber_normal|farming
-produce_garlic_normal|farming
-produce_lettuce|farming
-produce_melon|farming
-produce_onion_normal|farming
-produce_parsley_flatleaf|farming
-produce_pea|farming
-produce_pepper|farming
-produce_pineapple|farming
-produce_potato_normal|farming
-produce_pumpkin_yellow|farming
-produce_raspberry|farming
-produce_rhubarb|farming
-produce_soy_normal|farming
-produce_tomato_salad|farming
-produce_vanilla|farming
 
 # supporting packages (.optional)
+#crop_oat|farming
 #crop_rice_white|farming
-#fire_permanent|fire underch
+#crop_wheat|farming
 #flower_chrysanthemum_green|flowers
 #flower_tulip_black|flowers
 #flower_waterlily_ordinary_alt|pl_waterlilies
 #grass_dry|default
+#gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
 #item_book_ordinary|default
+#item_stick_ordinary|default
 #item_sweeper|moreblocks
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#mineral_flint|default fire mtg_plus
 #misc_petals|sickles
 #moss_green|sickles
+#shared_hangglider|hangglider
 #soil_arid|farming
 #soil_ordinary|farming
 #stone_sandstone_silver|default mtg_plus
@@ -383,8 +377,15 @@ produce_vanilla|farming
 # supporting packages (.suggested)
 #bucket_steel|bucket
 #fire_ordinary|fire
+#ingredient_butter_normal|cheese
 #ingredient_cornstarch|farming
 #ingredient_flour_ordinary|farming
 #ingredient_sauce_soy|farming
 #ingredient_sugar_normal|farming
 #machine_furnace_ordinary|default aotearoa
+#produce_bean_green|farming
+#produce_cabbage_normal|farming
+#produce_cucumber_normal|farming
+#produce_garlic_normal|farming
+#produce_onion_normal|farming
+#produce_potato_normal|farming

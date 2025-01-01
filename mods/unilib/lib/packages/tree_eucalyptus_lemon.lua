@@ -9,7 +9,7 @@
 unilib.pkg.tree_eucalyptus_lemon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_eucalyptus_lemon.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Eucalyptus citriodora"
 
     unilib.register_tree({
@@ -111,7 +111,7 @@ function unilib.pkg.tree_eucalyptus_lemon.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_eucalyptus_lemon_closed
+        -- Original to unilib. Creates unilib:gate_eucalyptus_lemon_closed, etc
         part_name = "eucalyptus_lemon",
         orig_name = {nil, nil},
 
@@ -122,10 +122,10 @@ function unilib.pkg.tree_eucalyptus_lemon.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_eucalyptus_lemon_in_queensland_" .. i, {
+        unilib.register_decoration_generic("australia_tree_eucalyptus_lemon_in_queensland_" .. i, {
             -- From australia/biome_far_north_queensland.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_eucalyptus_lemon_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_eucalyptus_lemon_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",

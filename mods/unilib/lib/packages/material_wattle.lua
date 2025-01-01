@@ -9,7 +9,7 @@
 unilib.pkg.material_wattle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.material_wattle.exec()
             "unilib_material_wattle.png",
         },
         groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         connects_to = {
             "group:crumbly",
@@ -53,6 +53,8 @@ function unilib.pkg.material_wattle.exec()
         },
         drawtype = "nodebox",
         inventory_image = "unilib_material_wattle.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "connected",
             fixed = {
@@ -126,7 +128,7 @@ function unilib.pkg.material_wattle.exec()
             "unilib_material_wattle_loose.png",
         },
         groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         connects_to = {
             "group:crumbly",
@@ -139,6 +141,8 @@ function unilib.pkg.material_wattle.exec()
         },
         drawtype = "nodebox",
         inventory_image = "unilib_material_wattle_loose.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "connected",
             fixed = {
@@ -175,7 +179,7 @@ function unilib.pkg.material_wattle.exec()
         burntime = 1.5,
     })
 
-    if unilib.pkg_executed_table["material_cob"] ~= nil then
+    if unilib.global.pkg_executed_table["material_cob"] ~= nil then
 
         unilib.register_node(
             -- From earthbuild:wattle_and_daub
@@ -186,7 +190,7 @@ function unilib.pkg.material_wattle.exec()
                 description = S("Wattle and Daub"),
                 tiles = {"unilib_material_wattle_and_daub.png"},
                 groups = {choppy = 2, cracky = 3, crumbly = 2},
-                sounds = unilib.sound_table.dirt,
+                sounds = unilib.global.sound_table.dirt,
 
                 connects_to = {
                     "group:crumbly",
@@ -199,6 +203,8 @@ function unilib.pkg.material_wattle.exec()
                 drawtype = "nodebox",
                 -- N.B. The item looks better when it is 3D-rendered in the inventory
 --              inventory_image = "unilib_material_wattle_and_daub.png",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 node_box = {
                     type = "connected",
                     fixed = {
@@ -228,7 +234,7 @@ function unilib.pkg.material_wattle.exec()
                 {"unilib:material_wattle", "unilib:material_wattle", "unilib:material_wattle"},
                 {"unilib:material_wattle", "unilib:material_wattle", "unilib:material_wattle"},
                 {"", "unilib:material_cob", ""},
-            }
+            },
         })
 
     end

@@ -1,11 +1,11 @@
 # "valleys_c" remix - contains a selection of items from the Valleys Helper mod, suitable for use
 #       in biomes and ores, or as decorations
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # valleys_c packages
 clay_red|valleys_c
+deco_valleys_c_pebble_small|valleys_c
 dirt_clayey|valleys_c
 dirt_sandy|valleys_c
 dirt_silt_coarse|valleys_c
@@ -17,6 +17,7 @@ flower_lily_calla|valleys_c
 flower_orchid|valleys_c
 misc_stalactite_small|valleys_c
 misc_stalagmite_small|valleys_c
+pebble_small|valleys_c
 plant_arrow_arum|valleys_c
 sand_ordinary_glow|valleys_c
 sand_ordinary_with_rocks|valleys_c
@@ -27,8 +28,12 @@ plant_fungus_glowing_purple|caverealms
 sand_ordinary|default
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #grass_jungle|default
 #ice_ordinary|default ethereal mtg_plus
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
+
+# supporting packages (.suggested)

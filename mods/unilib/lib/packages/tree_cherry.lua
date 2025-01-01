@@ -9,7 +9,7 @@
 unilib.pkg.tree_cherry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cherrytree.add_mode
+local mode = unilib.global.imported_mod_table.cherrytree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -61,39 +61,41 @@ function unilib.pkg.tree_cherry.exec()
         group_table = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 1, wood = 1},
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_cherry_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_cherry_leaves.png")
     unilib.register_node("unilib:tree_cherry_leaves", "cherrytree:blossom_leaves", mode, {
         -- From cherrytree:blossom_leaves
-        description = unilib.annotate(S("Cherry Tree Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Cherry Tree Leaves"), sci_name),
         tiles = {"unilib_tree_cherry_leaves.png"},
         groups = {flammable = 2, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:tree_cherry_sapling"}, rarity = 12},
-                {items = {"unilib:tree_cherry_leaves"}}
-            }
+                {items = {"unilib:tree_cherry_leaves"}},
+            },
         },
         inventory_image = inv_img,
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
         -- N.B. visual_scale not in original code
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
 
         on_timer = function(pos)
 
             pos.y = pos.y - 1
-            local node = minetest.get_node_or_nil(pos)
+            local node = core.get_node_or_nil(pos)
             if node and node.name == "air" then
 
-                minetest.set_node(pos, {name = "unilib:fruit_cherry"})
+                core.set_node(pos, {name = "unilib:fruit_cherry"})
                 return false
 
             else
@@ -106,11 +108,14 @@ function unilib.pkg.tree_cherry.exec()
     })
     unilib.register_leafdecay({
         -- From cherrytree:blossom_leaves
+        trunk_type = "cherry",
         trunks = {"unilib:tree_cherry_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_cherry_leaves", "unilib:fruit_cherry"},
+        leaves = {"unilib:tree_cherry_leaves"},
+        others = {"unilib:fruit_cherry"},
         radius = 3,
     })
+    unilib.register_tree_leaves_compacted("unilib:tree_cherry_leaves", mode)
 
     unilib.register_tree_sapling({
         -- From cherrytree:sapling. Creates unilib:tree_cherry_sapling
@@ -154,7 +159,7 @@ function unilib.pkg.tree_cherry.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From cherrytree:gate. Creates unilib:gate_cherry_closed
+        -- From cherrytree:gate_closed, etc. Creates unilib:gate_cherry_closed, etc
         part_name = "cherry",
         orig_name = {"cherrytree:gate_closed", "cherrytree:gate_open"},
 
@@ -164,10 +169,10 @@ function unilib.pkg.tree_cherry.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_cherry", {
+    unilib.register_decoration_generic("cool_trees_tree_cherry", {
         -- From cherrytree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_cherry.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_cherry.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

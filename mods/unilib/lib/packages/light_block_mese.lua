@@ -9,7 +9,7 @@
 unilib.pkg.light_block_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,11 @@ function unilib.pkg.light_block_mese.exec()
         description = S("Mese Lamp"),
         tiles = {"unilib_light_block_mese.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         is_ground_content = false,
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
         sunlight_propagates = true,
     })

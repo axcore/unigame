@@ -9,7 +9,7 @@
 unilib.pkg.tree_pomegranate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pomegranate.add_mode
+local mode = unilib.global.imported_mod_table.pomegranate.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -74,9 +74,11 @@ function unilib.pkg.tree_pomegranate.exec()
     })
     unilib.register_leafdecay({
         -- From pomegranate:leaves
+        trunk_type = "pomegranate",
         trunks = {"unilib:tree_pomegranate_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_pomegranate_leaves", "unilib:fruit_pomegranate"},
+        leaves = {"unilib:tree_pomegranate_leaves"},
+        others = {"unilib:fruit_pomegranate"},
         radius = 3,
     })
 
@@ -124,7 +126,7 @@ function unilib.pkg.tree_pomegranate.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From pomegranate:gate. Creates unilib:gate_pomegranate_closed
+        -- From pomegranate:gate_closed, etc. Creates unilib:gate_pomegranate_closed, etc
         part_name = "pomegranate",
         orig_name = {"pomegranate:gate_closed", "pomegranate:gate_open"},
 
@@ -134,10 +136,10 @@ function unilib.pkg.tree_pomegranate.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_pomegranate", {
+    unilib.register_decoration_generic("cool_trees_tree_pomegranate", {
         -- From pomegranate/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pomegranate.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pomegranate.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

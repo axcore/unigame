@@ -9,7 +9,7 @@
 unilib.pkg.utensil_saucepan_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,8 +37,8 @@ function unilib.pkg.utensil_saucepan_normal.exec()
         output = "unilib:utensil_saucepan_normal",
         recipe = {
             {"unilib:metal_steel_ingot", "", ""},
-            {"", "group:stick", ""}
-        }
+            {"", "group:stick", ""},
+        },
     })
 
 end

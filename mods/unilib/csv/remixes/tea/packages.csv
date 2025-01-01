@@ -1,5 +1,4 @@
 # "tea" remix - contains everything from the "tea" mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -39,7 +38,7 @@ flower_dandelion_yellow|flowers
 #crop_oat|farming
 #crop_rice_white|farming
 #crop_wheat|farming
-#mineral_mese|default
+#mineral_mese|default glemr11
 #mushroom_red|flowers
 
 # supporting packages (.suggested)

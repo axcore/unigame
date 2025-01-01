@@ -9,7 +9,7 @@
 unilib.pkg.food_corn_grilled = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,13 +35,13 @@ function unilib.pkg.food_corn_grilled.exec()
         description = S("Raw Grilled Corn"),
         inventory_image = "unilib_food_corn_grilled_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_corn_grilled_raw", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_corn_grilled_raw", 5),
     })
     unilib.register_craft({
         -- From bbq:grilled_corn_raw
         type = "shapeless",
         output = "unilib:food_corn_grilled_raw 2",
-        recipe = {"group:food_cheese", "unilib:ingredient_paprika_smoked", "group:food_corn"}
+        recipe = {"group:food_cheese", "unilib:ingredient_paprika_smoked", "group:food_corn"},
     })
 
     unilib.register_craftitem("unilib:food_corn_grilled", "bbq:grilled_corn", mode, {
@@ -49,7 +49,7 @@ function unilib.pkg.food_corn_grilled.exec()
         description = S("Grilled Corn"),
         inventory_image = "unilib_food_corn_grilled.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_corn_grilled", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_corn_grilled", 8),
     })
     unilib.register_craft({
         -- From bbq:grilled_corn

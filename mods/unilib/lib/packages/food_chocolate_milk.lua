@@ -9,7 +9,7 @@
 unilib.pkg.food_chocolate_milk = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cacaotree.add_mode
+local mode = unilib.global.imported_mod_table.cacaotree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,19 +39,19 @@ function unilib.pkg.food_chocolate_milk.exec()
         -- In original code, also flammable = 2, food = 2,
         groups = {food_chocolate = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chocolate_milk_bar", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chocolate_milk_bar", 4),
     })
     unilib.register_craft( {
         -- Original to unilib, comparable to the craft recipe in the "food_chocolate_dark" package
         output = "unilib:food_chocolate_milk_bar 3",
         recipe = {
-            {"group:food_cocoa", "group:milk_bucket", "group:food_cocoa"}
+            {"group:food_cocoa", "group:milk_bucket", "group:food_cocoa"},
         },
         replacements = {
             {"group:milk_bucket", "unilib:bucket_steel_empty"},
         },
     })
-    if unilib.pkg_executed_table["ingredient_cocoa_normal"] ~= nil then
+    if unilib.global.pkg_executed_table["ingredient_cocoa_normal"] ~= nil then
 
         unilib.register_craft( {
             -- Original to unilib
@@ -70,7 +70,7 @@ function unilib.pkg.food_chocolate_milk.exec()
         output = "unilib:food_chocolate_milk_bar 9",
         recipe = {
             {"unilib:food_chocolate_milk_block"},
-        }
+        },
     })
     unilib.register_external_ingredient("unilib:food_chocolate_milk_bar", {
         "group:milk_bucket",                    -- Originally group:milk_bucket
@@ -81,7 +81,7 @@ function unilib.pkg.food_chocolate_milk.exec()
         description = S("Block of Milk Chocolate"),
         tiles = {"unilib_food_chocolate_milk_block.png"},
         groups = {cracky = 2, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })

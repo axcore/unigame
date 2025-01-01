@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_litter_leafy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,15 +39,15 @@ function unilib.pkg.dirt_ordinary_with_litter_leafy.exec()
                 "unilib_dirt_ordinary.png",
                 "unilib_dirt_ordinary.png^unilib_litter_leafy_side.png",
             },
-            groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            sounds = unilib.global.sound_table.dirt,
 
             -- N.B. no drop in original code
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         -- N.B. no soil in original code
         unilib.override_item("unilib:dirt_ordinary_with_litter_leafy", {

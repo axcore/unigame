@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_ornamental_cross = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,10 +35,10 @@ function unilib.pkg.pane_glass_ornamental_cross.exec()
         part_name = "glass_ornamental_cross",
         orig_name = {},
         def_table = {
-            description = unilib.brackets(S("Ornamental Glass Pane"), S("Cross Pattern")),
+            description = unilib.utils.brackets(S("Ornamental Glass Pane"), S("Cross Pattern")),
             textures = {img, "", "unilib_pane_glass_obsidian_edge.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = img,
             light_source = 5,

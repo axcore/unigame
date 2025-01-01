@@ -9,7 +9,7 @@
 unilib.pkg.plant_cactus_prickly_pear = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.plant_cactus_prickly_pear.exec()
                 oddly_breakable_by_hand = 1, snappy = 3,
             },
             -- N.B. No sounds in original code
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = false,
             damage_per_second = 1,
@@ -47,7 +47,8 @@ function unilib.pkg.plant_cactus_prickly_pear.exec()
 --          floodable = true,
             -- N.B. inventory_image not in original code
             inventory_image = "unilib_plant_cactus_prickly_pear.png",
-            is_ground_content = false,
+            -- N.B. removed is_ground_content = false to match other plants
+--          is_ground_content = false,
             paramtype = "light",
             selection_box = {
                 type = "fixed",
@@ -63,5 +64,7 @@ function unilib.pkg.plant_cactus_prickly_pear.exec()
     unilib.register_plant_in_pot(
         "unilib:plant_cactus_prickly_pear", "lib_ecology:cactus_prickly_pear"
     )
+
+    unilib.register_decoration_spare("unilib:plant_cactus_prickly_pear")
 
 end

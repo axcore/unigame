@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_fungus_glowing_purple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.valleys_c.add_mode
+local mode = unilib.global.imported_mod_table.valleys_c.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.stone_ordinary_with_fungus_glowing_purple.exec()
                         "^unilib_stone_ordinary_with_fungus_glowing_purple_overlay.png",
             },
             groups = {cracky = 3, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drop = {
                 items = {

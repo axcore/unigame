@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_toast = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_bread_toast.exec()
         inventory_image = "unilib_food_bread_toast.png",
         groups = {flammable = 2, food_toast = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_toast", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_toast", 1),
     })
     unilib.register_craft({
         -- From farming:toast
@@ -49,7 +49,7 @@ function unilib.pkg.food_bread_toast.exec()
         -- N.B. no food_toast in original code
         groups = {flammable = 2, food_toast = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_toast_sandwich", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_toast_sandwich", 4),
     })
 
     unilib.register_craft({

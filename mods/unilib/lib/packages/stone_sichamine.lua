@@ -17,9 +17,9 @@
 unilib.pkg.stone_sichamine = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_sichamine.exec()
         description = S("Sichamine"),
 
         category = "other",
+        colour = "#00DEFA",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -96,26 +97,22 @@ function unilib.pkg.stone_sichamine.exec()
         wall_orig_name = "underch:sichamine_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:sichamine. Creates unilib:stone_sichamine_cobble_compressed
+        part_name = "sichamine",
+        orig_name = "compressed:sichamine",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:sichamine. Creates unilib:stone_sichamine_cobble_compressed
-            part_name = "sichamine",
-            orig_name = "compressed:sichamine",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Sichamine Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Sichamine Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:sichamine. Creates unilib:stone_sichamine_cobble_condensed
+        part_name = "sichamine",
+        orig_name = "condensed:sichamine",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:sichamine. Creates unilib:stone_sichamine_cobble_condensed
-            part_name = "sichamine",
-            orig_name = "condensed:sichamine",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Sichamine Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Sichamine Cobble"),
+    })
 
 end

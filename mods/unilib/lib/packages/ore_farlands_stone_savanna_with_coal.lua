@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_stone_savanna_with_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.ore_farlands_stone_savanna_with_coal.post()
         clust_num_ores          = 9,
         clust_scarcity          = 8 * 8 * 8,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1025,
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.rope_hemp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,11 +33,13 @@ function unilib.pkg.rope_hemp.exec()
         description = S("Hemp Rope"),
         tiles = {"unilib_rope_hemp.png"},
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "plantlike",
         inventory_image = "unilib_rope_hemp.png",
+        -- N.B. is_ground_content = false not in original code; added to match other ropes
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -54,7 +56,7 @@ function unilib.pkg.rope_hemp.exec()
             {"unilib:item_fibre_hemp", "unilib:item_fibre_hemp", "unilib:item_fibre_hemp"},
             {c_cotton, c_cotton, c_cotton},
             {"unilib:item_fibre_hemp", "unilib:item_fibre_hemp", "unilib:item_fibre_hemp"},
-        }
+        },
     })
 
 end

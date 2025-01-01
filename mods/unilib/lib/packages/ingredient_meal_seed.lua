@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_meal_seed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.ingredient_meal_seed.exec()
         description = S("Seed Meal"),
         inventory_image = "unilib_ingredient_meal_seed.png",
     })
-    if unilib.pkg_executed_table["fruit_hinau"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_hinau"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:seed_meal
@@ -47,7 +47,7 @@ function unilib.pkg.ingredient_meal_seed.exec()
         })
 
     end
-    if unilib.pkg_executed_table["fruit_karaka"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_karaka"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:seed_meal
@@ -62,7 +62,7 @@ function unilib.pkg.ingredient_meal_seed.exec()
         })
 
     end
-    if unilib.pkg_executed_table["fruit_tawa"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_tawa"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:seed_meal

@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_bamboo_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_farlands_plant_bamboo_small.post()
 
-    unilib.register_decoration_now("farlands_plant_bamboo_small_mini", nil, {
+    unilib.register_decoration_complete("farlands_plant_bamboo_small_mini", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "plant_bamboo_small"
         biomes = "farlands_forest_bamboo",
@@ -35,12 +35,12 @@ function unilib.pkg.deco_farlands_plant_bamboo_small.post()
         -- (no y_min)
     })
 
-    unilib.register_decoration_now("farlands_plant_bamboo_small", nil, {
+    unilib.register_decoration_complete("farlands_plant_bamboo_small", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "plant_bamboo_small"
         biomes = "farlands_forest_bamboo",
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

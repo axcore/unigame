@@ -9,7 +9,7 @@
 unilib.pkg.food_pizza_mushroom_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pizza.add_mode
+local mode = unilib.global.imported_mod_table.pizza.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,6 +29,9 @@ end
 
 function unilib.pkg.food_pizza_mushroom_brown.exec()
 
+    local c_dough = "unilib:ingredient_dough_pizza"
+    local c_sauce = "unilib:ingredient_sauce_tomato"
+
     unilib.register_craftitem(
         -- From pizza:uncooked_bmush
         "unilib:food_pizza_mushroom_brown_raw",
@@ -46,8 +49,8 @@ function unilib.pkg.food_pizza_mushroom_brown.exec()
         output = "unilib:food_pizza_mushroom_brown_raw",
         recipe = {
             {"unilib:mushroom_brown", "group:food_cheese", "unilib:mushroom_brown"},
-            {"unilib:mushroom_brown", "unilib:ingredient_sauce_tomato", "unilib:mushroom_brown"},
-            {"unilib:mushroom_brown", "unilib:ingredient_dough_pizza", "unilib:mushroom_brown"},
+            {"unilib:mushroom_brown", c_sauce, "unilib:mushroom_brown"},
+            {"unilib:mushroom_brown", c_dough, "unilib:mushroom_brown"},
         },
     })
 
@@ -59,7 +62,7 @@ function unilib.pkg.food_pizza_mushroom_brown.exec()
         stack_max = 8,
 
         -- N.B. Replace player effects in original code, with a simple health boost
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_mushroom_brown_slice", 10),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_mushroom_brown_slice", 10),
     })
     unilib.register_craft({
         -- From pizza:bmush

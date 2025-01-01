@@ -9,7 +9,7 @@
 unilib.pkg.drink_cup_tea_mint = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.drink_cup_tea_mint.init()
 
     return {
         description = "Cup of mint tea",
-        depends = {"utensil_juicer_normal", "vessel_glass_empty"},
+        depends = {"utensil_press_hand", "vessel_glass_empty"},
         suggested = {
             "bucket_steel",                     -- group:potable_bucket
             "crop_mint_normal",                 -- group:food_mint
@@ -37,7 +37,7 @@ function unilib.pkg.drink_cup_tea_mint.exec()
         -- N.B. no drink/food_tea in original code
         groups = {drink = 1, flammable = 4, food_tea = 1},
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_cup_tea_mint", 2, "unilib:vessel_glass_empty"
         ),
     })
@@ -53,9 +53,9 @@ function unilib.pkg.drink_cup_tea_mint.post()
         output = "unilib:drink_cup_tea_mint",
         recipe = {
             {c_mint, c_mint, c_mint},
-            {"group:potable_bucket", "unilib:utensil_juicer_normal", "unilib:vessel_glass_empty"},
+            {"group:potable_bucket", "unilib:utensil_press_hand", "unilib:vessel_glass_empty"},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

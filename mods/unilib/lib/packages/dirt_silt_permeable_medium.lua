@@ -9,7 +9,7 @@
 unilib.pkg.dirt_silt_permeable_medium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,7 @@ function unilib.pkg.dirt_silt_permeable_medium.exec()
         damage_per_second = 0,
         drowning = 5,
         flowing_description = S("Flowing Muddy Medium Permeable Silt"),
-        post_effect_color_table = {r = 165, g = 131, b = 0, a = 220},
+        rgb_table = {r = 165, g = 131, b = 0, a = 220},
         sludge_flag = true,
         source_description = S("Muddy Medium Permeable Silt Source"),
         viscosity = 6,

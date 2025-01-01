@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_ordinary_with_kelp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ end
 
 function unilib.pkg.ore_australia_stone_ordinary_with_kelp.post()
 
-    if unilib.pkg_executed_table["biome_australia_great_australian_bight"] ~= nil and
-            unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_australian_bight"] ~= nil and
+            unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_great_australian_bight.lua
@@ -52,8 +52,8 @@ function unilib.pkg.ore_australia_stone_ordinary_with_kelp.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_indian_ocean"] ~= nil and
-            unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_indian_ocean"] ~= nil and
+            unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_indian_ocean.lua
@@ -71,8 +71,8 @@ function unilib.pkg.ore_australia_stone_ordinary_with_kelp.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_tasman_sea"] ~= nil and
-            unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_tasman_sea"] ~= nil and
+            unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_tasman_sea.lua

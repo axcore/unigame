@@ -9,7 +9,7 @@
 unilib.pkg.dirt_construction = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ end
 
 function unilib.pkg.dirt_construction.exec()
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         -- Original mod behaviour: the turf cutter works with only one dirt-with-turf node
         unilib.register_node("unilib:dirt_construction_with_turf", "earthbuild:turf", mode, {
             -- From earthbuild:turf
-            description = unilib.brackets(S("Construction Dirt"), S("Turf")),
+            description = unilib.utils.brackets(S("Construction Dirt"), S("Turf")),
             tiles = {
                 "unilib_turf_ordinary_top.png",
                 "unilib_dirt_compacted.png",
@@ -43,9 +43,11 @@ function unilib.pkg.dirt_construction.exec()
                 "unilib_dirt_construction.png",
             },
             groups = {crumbly = 2, falling_node = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code; added to match other dirts
+            is_ground_content = false,
             paramtype = "light",
         })
         unilib.register_stairs("unilib:dirt_construction_with_turf", {
@@ -58,26 +60,26 @@ end
 
 function unilib.pkg.dirt_construction.post()
 
-    if unilib.earthbuild_extend_cutter_flag then
+    if unilib.setting.earthbuild_extend_cutter_flag then
 
         -- Add compatibility with other "fertile" dirts
-        for fertile_name, data_table in pairs(unilib.dirt_with_turf_table) do
+        for fertile_name, data_table in pairs(unilib.global.dirt_with_turf_table) do
 
             local construction_name = "unilib:dirt_construction_with_" ..
                     data_table.turf_part_name
 
             -- (Avoid duplicate turfs on different bare dirts, e.g. those created by various GLEM
             --      packages)
-            if minetest.registered_nodes[construction_name] == nil and
+            if core.registered_nodes[construction_name] == nil and
                     fertile_name ~= "unilib:dirt_ordinary_with_turf" then
 
                 local turf_name = "unilib:" .. data_table.dirt_part_name .. "_with_" ..
                         data_table.turf_part_name
-                local turf_def_table = minetest.registered_nodes[turf_name]
+                local turf_def_table = core.registered_nodes[turf_name]
 
                 unilib.register_node(construction_name, nil, mode, {
                     -- Original to unilib
-                    description = unilib.brackets(
+                    description = unilib.utils.brackets(
                         S("Construction Dirt"), data_table.turf_description
                     ),
                     tiles = {
@@ -89,9 +91,12 @@ function unilib.pkg.dirt_construction.post()
                         "unilib_dirt_construction.png",
                     },
                     groups = {crumbly = 2, falling_node = 1},
-                    sounds = unilib.sound_table.dirt,
+                    sounds = unilib.global.sound_table.dirt,
 
                     drawtype = "normal",
+                    -- N.B. is_ground_content = false not in original code; added to match other
+                    --      dirts
+                    is_ground_content = false,
                     paramtype = "light",
                 })
                 unilib.register_stairs(construction_name, {

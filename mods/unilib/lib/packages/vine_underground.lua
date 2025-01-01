@@ -9,7 +9,7 @@
 unilib.pkg.vine_underground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.vine_underground.exec()
         description = S("Underground Vine"),
         tiles = {img},
         groups = {choppy = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "signlike",

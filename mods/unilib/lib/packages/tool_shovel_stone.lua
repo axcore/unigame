@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_stone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_shovel_stone.exec()
         },
         wield_image = "unilib_tool_shovel_stone.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From default:shovel_stone
         part_name = "stone",
         ingredient = "group:stone",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_stone", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_stone", "shovel")
 
 end

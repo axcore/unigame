@@ -17,10 +17,10 @@
 unilib.pkg.stone_ordinary = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
-local walls_add_mode = unilib.imported_mod_table.walls.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
+local walls_add_mode = unilib.global.imported_mod_table.walls.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,6 +44,10 @@ function unilib.pkg.stone_ordinary.exec()
 
         basic_platform_flag = true,
         category = "other",
+        -- N.B. This is used as the default colour for calls to unilib.register_stone() that don't
+        --      specify a .colour
+--      colour = "#615E5D",
+        colour = nil,
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -55,7 +59,7 @@ function unilib.pkg.stone_ordinary.exec()
         description = S("Ordinary Stone"),
         tiles = {"unilib_stone_ordinary.png"},
         groups = {cracky = 3, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_ordinary_cobble",
     })
@@ -73,9 +77,9 @@ function unilib.pkg.stone_ordinary.exec()
 
         drop_name = "unilib:stone_ordinary_cobble",
     })
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil and
-            moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil and
+            (moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")) then
 
         unilib.register_stone_trap({
             -- From moreblocks:trap_stone. Creates unilib:stone_ordinary_trap
@@ -92,7 +96,7 @@ function unilib.pkg.stone_ordinary.exec()
         description = S("Ordinary Stone Block"),
         tiles = {"unilib_stone_ordinary_block.png"},
         groups = {cracky = 2, stone = 1, stoneblock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -116,7 +120,7 @@ function unilib.pkg.stone_ordinary.exec()
         description = S("Ordinary Stone Bricks"),
         tiles = {"unilib_stone_ordinary_brick.png"},
         groups = {cracky = 2, stone = 1, stonebrick = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -138,14 +142,16 @@ function unilib.pkg.stone_ordinary.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "ordinary",
     })
-    unilib.set_auto_rotate("unilib:stone_ordinary_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_ordinary_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_node("unilib:stone_ordinary_cobble", "default:cobble", default_add_mode, {
         -- From default:cobble
         description = S("Ordinary Cobblestone"),
         tiles = {"unilib_stone_ordinary_cobble.png"},
         groups = {cobble = 1, cracky = 3, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -191,7 +197,7 @@ function unilib.pkg.stone_ordinary.exec()
             description = S("Mossy Ordinary Cobblestone"),
             tiles = {"unilib_stone_ordinary_cobble_mossy.png"},
             groups = {cracky = 3, mossycobble = 1, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -202,9 +208,10 @@ function unilib.pkg.stone_ordinary.exec()
         output = "unilib:stone_ordinary",
         recipe = "unilib:stone_ordinary_cobble_mossy",
     })
-    if unilib.mtgame_tweak_flag and unilib.pkg_executed_table["grass_jungle"] ~= nil then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["grass_jungle"] ~= nil then
 
-        minetest.register_craft({
+        unilib.register_craft({
             -- From moreblocks
             type = "shapeless",
             output = "unilib:stone_ordinary_cobble_mossy",
@@ -236,17 +243,17 @@ function unilib.pkg.stone_ordinary.exec()
         replace_mode = default_add_mode,
         wall_orig_name = "walls:mossycobble",
     })
-    if unilib.pkg_executed_table["moss_green"] ~= nil then
+    if unilib.global.pkg_executed_table["moss_green"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:stone_ordinary_cobble_mossy",
             "unilib:stone_ordinary_cobble",
             "unilib:moss_green"
         )
 
-        if minetest.registered_nodes["unilib:stone_ordinary_cobble_mossy_wall"] then
+        if core.registered_nodes["unilib:stone_ordinary_cobble_mossy_wall"] then
 
-            unilib.register_cuttable(
+            unilib.tools.make_cuttable(
                 "unilib:stone_ordinary_cobble_mossy_wall",
                 "unilib:stone_ordinary_cobble_wall",
                 "unilib:moss_green"
@@ -254,27 +261,27 @@ function unilib.pkg.stone_ordinary.exec()
 
         end
 
-        if minetest.registered_nodes["unilib:stone_ordinary_cobble_mossy_stair_slab"] then
+        if core.registered_nodes["unilib:stone_ordinary_cobble_mossy_stair_slab"] then
 
-            unilib.register_cuttable(
+            unilib.tools.make_cuttable(
                 "unilib:stone_ordinary_cobble_mossy_stair_slab",
                 "unilib:stone_ordinary_cobble_stair_slab",
                 "unilib:moss_green"
             )
 
-            unilib.register_cuttable(
+            unilib.tools.make_cuttable(
                 "unilib:stone_ordinary_cobble_mossy_stair_simple",
                 "unilib:stone_ordinary_cobble_stair_simple",
                 "unilib:moss_green"
             )
 
-            unilib.register_cuttable(
+            unilib.tools.make_cuttable(
                 "unilib:stone_ordinary_cobble_mossy_stair_outer",
                 "unilib:stone_ordinary_cobble_stair_outer",
                 "unilib:moss_green"
             )
 
-            unilib.register_cuttable(
+            unilib.tools.make_cuttable(
                 "unilib:stone_ordinary_cobble_mossy_stair_inner",
                 "unilib:stone_ordinary_cobble_stair_inner",
                 "unilib:moss_green"
@@ -284,10 +291,11 @@ function unilib.pkg.stone_ordinary.exec()
 
     end
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.squeezed_stone_flag and (
+        moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         -- N.B. moreblocks code tweaked to match compressed cobbles in underch
-
         unilib.register_node(
             -- From moreblocks:cobble_compressed
             "unilib:stone_ordinary_cobble_compressed",
@@ -298,23 +306,17 @@ function unilib.pkg.stone_ordinary.exec()
                 tiles = {"unilib_stone_ordinary_cobble_compressed.png"},
 --              groups = {compressedstone = 1, cracky = 1},
                 groups = {compressedstone = 1, cracky = 3},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
+                stack_max = unilib.global.squeezed_stack_max,
             }
         )
-        unilib.register_craft_3x3({
+        unilib.misc.set_squeezed_recipes(
             -- From moreblocks:cobble_compressed
-            output = "unilib:stone_ordinary_cobble_compressed",
-            ingredient = "unilib:stone_ordinary_cobble",
-        })
-        unilib.register_craft({
-            -- From moreblocks:cobble_compressed
-            output = "unilib:stone_ordinary_cobble 9",
-            recipe = {
-                {"unilib:stone_ordinary_cobble_compressed"},
-            }
-        })
+            "unilib:stone_ordinary_cobble",
+            "unilib:stone_ordinary_cobble_compressed"
+        )
         unilib.register_craft({
             -- Original to unilib
             type = "cooking",
@@ -325,10 +327,9 @@ function unilib.pkg.stone_ordinary.exec()
 
     end
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.squeezed_stone_flag then
 
         -- N.B. condensed cobble does not appear in moreblocks
-
         unilib.register_stone_cobble_condensed({
             -- Original to unilib. Creates unilib:stone_ordinary_cobble_condensed
             part_name = "ordinary",
@@ -340,10 +341,10 @@ function unilib.pkg.stone_ordinary.exec()
 
     end
 
-    if unilib.technic_update_flag then
+    if unilib.setting.technic_update_flag then
 
-        -- (The technic grinding recipe is provided in ../lib/system/import_pkg.lua)
-
+        -- (The technic grinding recipe is provided in
+        --      ../lib/system/load/load_consolidate_technic.lua)
         unilib.register_craftitem(
             -- From technic:stone_dust
             "unilib:stone_ordinary_powder",

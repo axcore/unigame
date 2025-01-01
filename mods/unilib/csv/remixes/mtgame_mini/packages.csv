@@ -1,11 +1,25 @@
-# "mtgame_mini" remix - the "mtgame" remix without biomes, decorations or ores (or the base package)
+# "mtgame_mini" remix - the "mtgame" remix without biomes, decorations or ores, without ABM and LBM
+#       packages, and without the base package
 # If you want to create a world that is free of minetest_game biomes, decorations and ores - but
 #       which contains everything else - then this remix should be used alongside the "minimal"
 #       remix (which provides a base package; note that the one below is commented out)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
+# ABM packages
+#abm_standard_cactus_grow|default
+#abm_standard_crop_grow|farming
+#abm_standard_flame_ignite|fire
+#abm_standard_flame_remove|fire
+#abm_standard_flora_spread|flowers
+#abm_standard_lava_cool|default
+#abm_standard_moss_grow|default underch
+#abm_standard_mushroom_spread|flowers
+#abm_standard_papyrus_grow|default
+#abm_standard_soil_convert|farming
+#abm_standard_tnt_ignite|tnt
+#abm_standard_turf_kill|default
+#abm_standard_turf_spread|default
 # Base packages
 #base_mtgame|unilib
 # Beds
@@ -61,11 +75,11 @@ crop_wheat|farming
 #deco_default_bush_acacia|default
 #deco_default_bush_pine|default
 #deco_default_coral_mixed|default
-#deco_default_dirt_permafrost_with_moss|default
+#deco_default_dirt_permafrost_ordinary_with_moss|default
 #deco_default_fern_ordinary|default
 #deco_default_grass_dry|default
 #deco_default_grass_jungle|default
-#deco_default_grass_marram|default
+#deco_default_grass_marram_ordinary|default
 #deco_default_grass_ordinary|default
 #deco_default_plant_cactus_ordinary|default
 #deco_default_plant_kelp_ordinary|default
@@ -98,7 +112,7 @@ crop_wheat|farming
 # Dirt
 dirt_dry|default
 dirt_ordinary|default farming moreblocks
-dirt_permafrost|default
+dirt_permafrost_ordinary|default
 # Doors
 door_glass_obsidian|doors
 door_glass_ordinary|doors
@@ -136,7 +150,7 @@ glass_ordinary|default moreblocks vessels
 # Grass
 grass_dry|default
 grass_jungle|default
-grass_marram|default
+grass_marram_ordinary|default
 grass_ordinary|default
 # Gravel
 gravel_ordinary|default mtg_plus
@@ -147,8 +161,8 @@ ingredient_flour_ordinary|farming
 # Items
 item_binoculars_ordinary|binoculars
 item_book_ordinary|default
-item_key_ordinary|default
-item_key_skeleton|default
+item_key_ordinary|keys
+item_key_skeleton|keys
 item_kit_mapping|map
 item_net_bug|fireflies
 item_paper_ordinary|default moreblocks
@@ -158,6 +172,8 @@ item_string_ordinary|farming
 # Ladders
 ladder_steel|default
 ladder_wood_ordinary|default
+# LBM packages
+#lbm_standard_pane_rotate|xpanes
 # Lights
 light_block_mese|default
 light_post_mese|default
@@ -174,17 +190,17 @@ loot_vessels|vessels
 # Machines
 machine_furnace_ordinary|default aotearoa
 # Metals
-metal_bronze|default technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 # Minerals
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 # Misc
 misc_butterfly|butterflies
 misc_cloud_ordinary|default
@@ -229,13 +245,17 @@ rail_ordinary_brake|carts
 sand_desert|default farming
 sand_ordinary|default
 sand_silver|default
-# Shared functions
-shared_carts|unilib
-shared_default_chest|unilib
+# Shared packages
+shared_beds|beds
+shared_boats|boats
+shared_carts|carts
+shared_default_chest|default pipeworks
 shared_default_furnace|default
-shared_map|unilib
+shared_default_sign|default
+shared_map|map
 shared_screwdriver|screwdriver
-shared_tnt|unilib
+shared_tnt|tnt
+shared_wool|wool
 # Signs
 sign_wall_wood|default
 sign_wall_steel|default
@@ -312,6 +332,10 @@ vessel_glass_empty|thirsty vessels
 # Wool
 wool_basic|wool
 
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #crop_barley|farming
 #crop_oat|farming
@@ -321,5 +345,10 @@ wool_basic|wool
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
 #item_sweeper|moreblocks
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
 #moss_green|sickles
 #utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.produce_rice_arborio = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.produce_rice_arborio.exec()
 
     unilib.register_produce_fredo({
         -- From better_farming:rice_arborio (creates unilib:produce_rice_arborio_harvest),
-        --      better_farming:rice_1 etc (creates unilib:produce_rice_arborio_rice_1 etc)
+        --      better_farming:rice_1 etc (creates unilib:produce_rice_arborio_grow_1 etc)
         -- N.B. Ignored stack_max = 300 in original code
         part_name = "rice_arborio",
         grow_orig_name = orig_name_list,
@@ -54,7 +54,7 @@ function unilib.pkg.produce_rice_arborio.exec()
                     items = {
                         {items = {"unilib:produce_rice_arborio_harvest 3"}, rarity = 1},
                         {items = {"unilib:produce_rice_arborio_harvest 5"}, rarity = 2},
-                    }
+                    },
                 },
             },
             {
@@ -62,14 +62,15 @@ function unilib.pkg.produce_rice_arborio.exec()
                     items = {
                         {items = {"unilib:produce_rice_arborio_harvest 3"}, rarity = 1},
                         {items = {"unilib:produce_rice_arborio_harvest 7"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_rice = 1, seed = 2},
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -81,10 +82,10 @@ function unilib.pkg.produce_rice_arborio.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_rice_arborio", {
+    unilib.register_decoration_generic("better_farming_produce_rice_arborio", {
         -- From better_farming:rice_8
         deco_type = "simple",
-        decoration = "unilib:produce_rice_arborio_rice_8",
+        decoration = "unilib:produce_rice_arborio_grow_8",
 
         noise_params = {
             octaves = 3,

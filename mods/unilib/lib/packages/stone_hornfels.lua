@@ -9,7 +9,7 @@
 unilib.pkg.stone_hornfels = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_hornfels.exec()
         description = S("Hornfels"),
 
         category = "metamorphic",
+        colour = "#AA8E79",
         grinder_flag = true,
         hardness = 4,
     })
@@ -64,6 +65,24 @@ function unilib.pkg.stone_hornfels.exec()
         replace_mode = mode,
         description = S("Hornfels Bricks"),
         img_list = {"unilib_stone_hornfels.png^unilib_stone_brick_overlay.png"},
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_hornfels_compressed
+        part_name = "hornfels",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Hornfels"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_hornfels_condensed
+        part_name = "hornfels",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Hornfels"),
     })
 
 end

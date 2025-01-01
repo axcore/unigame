@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_sapphire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.gemtools.add_mode
+local mode = unilib.global.imported_mod_table.gemtools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,13 +44,13 @@ function unilib.pkg.tool_shovel_sapphire.exec()
         -- N.B. no transform in original code
         wield_image = "unilib_tool_shovel_sapphire.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From gemtools:shovel_sapphire
         part_name = "sapphire",
         ingredient = "unilib:mineral_sapphire_gem",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_sapphire", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_sapphire", "shovel")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.tree_cacao = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cacaotree.add_mode
+local mode = unilib.global.imported_mod_table.cacaotree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.tree_cacao.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_cacao_creeper_flowers.png",
@@ -69,7 +69,7 @@ function unilib.pkg.tree_cacao.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_cacao_liana.png",
@@ -95,7 +95,7 @@ function unilib.pkg.tree_cacao.exec()
             "unilib_tree_cacao_pod_front.png",
         },
         groups = {dig_immediate = 3, flammable = 2, fleshy = 3, leafdecay = 3, leafdecay_drop = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         drop = "unilib:ingredient_cocoa_normal_beans 10",
@@ -147,10 +147,11 @@ function unilib.pkg.tree_cacao.exec()
     })
     unilib.register_leafdecay({
         -- From cacaotree:leaves
+        trunk_type = "cacao",
         trunks = {"unilib:tree_cacao_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {
-            "unilib:tree_cacao_leaves",
+        leaves = {"unilib:tree_cacao_leaves"},
+        others = {
             "unilib:tree_cacao_creeper_flowers",
             "unilib:tree_cacao_liana",
             "unilib:tree_cacao_pod",
@@ -200,7 +201,7 @@ function unilib.pkg.tree_cacao.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From cacaotree:gate. Creates unilib:gate_cacao_closed
+        -- From cacaotree:gate_closed, etc. Creates unilib:gate_cacao_closed, etc
         part_name = "cacao",
         orig_name = {"cacaotree:gate_closed", "cacaotree:gate_open"},
 
@@ -210,10 +211,10 @@ function unilib.pkg.tree_cacao.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_cacao", {
+    unilib.register_decoration_generic("cool_trees_tree_cacao", {
         -- From cacaotree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_cacao.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_cacao.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

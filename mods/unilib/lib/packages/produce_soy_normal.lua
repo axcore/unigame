@@ -9,7 +9,7 @@
 unilib.pkg.produce_soy_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -83,7 +83,8 @@ function unilib.pkg.produce_soy_normal.exec()
         place_param2 = 3,
         waving = 1,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -95,18 +96,18 @@ function unilib.pkg.produce_soy_normal.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_soy_normal", {
+    unilib.register_decoration_generic("farming_redo_produce_soy_normal", {
         -- From farming_redo/mapgen.lua
         -- N.B. The original code does not use the final growth stage for the decoration
         deco_type = "simple",
-        decoration = "unilib:produce_soy_normal_grow_6",
+        decoration = "unilib:produce_soy_normal_grow_5",
 
         noise_params = {
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 809,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

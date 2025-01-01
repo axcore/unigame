@@ -9,7 +9,7 @@
 unilib.pkg.glass_ornamental_tiles_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriglass.add_mode
+local mode = unilib.global.imported_mod_table.abriglass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,12 +41,14 @@ function unilib.pkg.glass_ornamental_tiles_dark.exec()
         "abriglass:stainedglass_tiles_dark",
         mode,
         {
-            description = unilib.brackets(S("Ornamental Glass"), S("Dark Tiles")),
+            description = unilib.utils.brackets(S("Ornamental Glass"), S("Dark Tiles")),
             tiles = {"unilib_glass_ornamental_tiles_dark.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "glasslike",
+            -- N.B. is_ground_content = false not in original code; added to match other glass items
+            is_ground_content = false,
             light_source = 5,
             paramtype = "light",
             paramtype2 = "facedir",

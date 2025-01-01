@@ -9,7 +9,7 @@
 unilib.pkg.food_packet_veggie = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_packet_veggie.exec()
         description = S("Raw Veggie Packet"),
         inventory_image = "unilib_food_packet_veggie_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_packet_veggie_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_packet_veggie_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:veggie_packet
@@ -57,7 +57,7 @@ function unilib.pkg.food_packet_veggie.exec()
         description = S("Veggie Packet"),
         inventory_image = "unilib_food_packet_veggie.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_packet_veggie", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_packet_veggie", 5),
     })
     unilib.register_craft({
         -- From bbq:veggie_packet

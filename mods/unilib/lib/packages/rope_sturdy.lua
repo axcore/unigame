@@ -9,7 +9,7 @@
 unilib.pkg.rope_sturdy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.rope_sturdy.exec()
         -- N.B. removed the "connect_to_raillike" group in original code, as it doesn't seem to work
         groups = {choppy = 3, oddly_breakable_by_hand = 3, rail = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "plantlike",
@@ -47,12 +47,12 @@ function unilib.pkg.rope_sturdy.exec()
 
         can_dig = function(pos, player)
 
-            local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
+            local below = core.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
             if below and below.name and below.name == "unilib:rope_sturdy" then
 
                 if player then
 
-                    minetest.chat_send_player(
+                    core.chat_send_player(
                         player:get_player_name(),
                         S("The entire rope would be too heavy. Start digging at its lowest end!")
                     )
@@ -69,7 +69,7 @@ function unilib.pkg.rope_sturdy.exec()
 
         end
     })
-    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway" package
+    -- N.B. Original craft recipe conflicts with recipe in "item_paper_ordinary" package
     --[[
     unilib.register_craft({
         -- From cottages:rope

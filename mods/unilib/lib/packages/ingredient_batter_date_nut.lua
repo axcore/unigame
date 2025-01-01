@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_batter_date_nut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,11 +33,11 @@ end
 function unilib.pkg.ingredient_batter_date_nut.exec()
 
     local flour_list = {}
-    if unilib.pkg_executed_table["ingredient_batter_muffin_acorn"] ~= nil then
+    if unilib.global.pkg_executed_table["ingredient_batter_muffin_acorn"] ~= nil then
         table.insert(flour_list, "unilib:ingredient_batter_muffin_acorn")
     end
 
-    if unilib.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
         table.insert(flour_list, "unilib:ingredient_flour_ordinary")
     end
 
@@ -69,8 +69,8 @@ function unilib.pkg.ingredient_batter_date_nut.exec()
                 "unilib:fruit_coconut_slice",
             },
             replacements = {
-                {"unilib:food_milk_coconut", "unilib:vessel_glass_empty 2"}
-            }
+                {"unilib:food_milk_coconut", "unilib:vessel_glass_empty 2"},
+            },
         })
 
     end

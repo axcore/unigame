@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.tool_spear_adamantite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,5 +49,6 @@ function unilib.pkg.tool_spear_adamantite.exec()
         part_name = "adamantite",
         ingredient = "unilib:metal_adamantite_ingot",
     })
+    unilib.tools.apply_toolranks("unilib:tool_spear_adamantite", "spear")
 
 end

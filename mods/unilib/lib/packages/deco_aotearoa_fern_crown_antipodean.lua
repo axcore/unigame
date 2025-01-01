@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_fern_crown_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.deco_aotearoa_fern_crown_antipodean.post()
 
-    unilib.register_decoration_now("aotearoa_fern_crown_antipodean_normal", nil, {
+    unilib.register_decoration_complete("aotearoa_fern_crown_antipodean_normal", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "fern_crown_antipodean_normal"
         biomes = {
@@ -51,7 +51,7 @@ function unilib.pkg.deco_aotearoa_fern_crown_antipodean.post()
         y_max = 120,
         y_min = 3,
     })
-    unilib.register_decoration_now("aotearoa_fern_crown_antipodean_dense", nil, {
+    unilib.register_decoration_complete("aotearoa_fern_crown_antipodean_dense", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "fern_crown_antipodean_dense"
         biomes = {

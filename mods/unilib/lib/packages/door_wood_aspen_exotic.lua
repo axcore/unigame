@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_aspen_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,10 @@ function unilib.pkg.door_wood_aspen_exotic.exec()
     local burnlevel = 1
 
     unilib.register_door({
-        -- From farlands, doors:door_aspen_wood. Creates unilib:door_wood_aspen_exotic
+        -- From farlands, doors:door_aspen_wood. Creates
+        --      unilib:door_wood_aspen_exotic_closed_left, etc
         part_name = "wood_aspen_exotic",
-        orig_name = {nil, nil, nil, nil},
+        orig_name_list = {nil, nil, nil, nil},
         def_table = {
             description = S("Exotic Aspen Wood Door"),
             tiles = {{name = "unilib_door_wood_aspen_exotic.png", backface_culling = true}},
@@ -54,7 +55,7 @@ function unilib.pkg.door_wood_aspen_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:door_wood_aspen_exotic",
-        burntime = unilib.tree_burn_table.door[burnlevel]
+        burntime = unilib.global.tree_burn_table.door[burnlevel]
     })
 
 end

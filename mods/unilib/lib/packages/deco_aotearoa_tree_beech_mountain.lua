@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_beech_mountain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.deco_aotearoa_tree_beech_mountain.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_beech_mountain_dense_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_beech_mountain_dense_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_beech_mountain"
             biomes = "aotearoa_highland_mountain_beech_forest",
@@ -37,7 +37,7 @@ function unilib.pkg.deco_aotearoa_tree_beech_mountain.post()
             y_max = 120,
             y_min = 78,
         })
-        unilib.register_decoration_now("aotearoa_tree_beech_mountain_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_beech_mountain_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_beech_mountain"
             biomes = "aotearoa_lowland_kamahi_forest",

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_jet_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

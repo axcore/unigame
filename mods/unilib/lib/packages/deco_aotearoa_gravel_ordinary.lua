@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_gravel_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_aotearoa_gravel_ordinary.exec()
 
-    unilib.register_decoration("aotearoa_gravel_ordinary", {
+    unilib.register_decoration_generic("aotearoa_gravel_ordinary", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:gravel_ordinary",
@@ -50,7 +50,7 @@ end
 
 function unilib.pkg.deco_aotearoa_gravel_ordinary.post()
 
-    unilib.register_decoration_now("aotearoa_gravel_ordinary", nil, {
+    unilib.register_decoration_complete("aotearoa_gravel_ordinary", nil, {
         -- From aotearoa/spawn_plants.lua
         biomes = {"aotearoa_alpine_fellfield", "aotearoa_shore_subantarctic"},
         place_on = {"unilib:stone_andesite_antipodean", "unilib:stone_schist_antipodean"},

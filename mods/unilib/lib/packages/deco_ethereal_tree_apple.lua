@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ end
 
 function unilib.pkg.deco_ethereal_tree_apple.exec()
 
-    unilib.register_decoration("ethereal_tree_apple", {
+    unilib.register_decoration_generic("ethereal_tree_apple", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_apple.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_apple.mts",
 
         fill_ratio = 0.025,
         flags = "place_center_x, place_center_z",
@@ -41,7 +41,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_apple.post()
 
-    unilib.register_decoration_now("ethereal_tree_apple", nil, {
+    unilib.register_decoration_complete("ethereal_tree_apple", nil, {
         -- From ethereal-ng/schems.lua
         biomes = {"ethereal_forest_deciduous", "ethereal_jumble"},
         place_on = "unilib:dirt_ordinary_with_turf",

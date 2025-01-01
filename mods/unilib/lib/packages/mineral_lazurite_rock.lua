@@ -9,7 +9,7 @@
 unilib.pkg.mineral_lazurite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_lazurite_rock.exec()
 
     local c_lump = "unilib:mineral_lazurite_lump"
-    local hardness = unilib.mineral_table["lazurite"]["hardness"]
+    local hardness = unilib.global.mineral_table["lazurite"]["hardness"]
 
     unilib.register_mineral_rock("lazurite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_lazurite_rock.exec()
         description = S("Lazurite Rock"),
         tiles = {"unilib_mineral_lazurite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

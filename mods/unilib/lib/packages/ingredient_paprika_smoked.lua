@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_paprika_smoked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,12 @@ function unilib.pkg.ingredient_paprika_smoked.exec()
         description = S("Smoked Paprika"),
         tiles = {"unilib_ingredient_paprika_smoked.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_paprika_smoked.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_paprika_smoked.png",

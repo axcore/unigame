@@ -9,7 +9,7 @@
 unilib.pkg.decor_block_tar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.decor_block_tar.exec()
         description = S("Block of Tar"),
         tiles = {"unilib_decor_block_tar.png"},
         groups = {cracky = 2, tar_block = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -44,7 +44,7 @@ function unilib.pkg.decor_block_tar.exec()
         output = "unilib:decor_block_tar",
         recipe = "unilib:tree_pine_trunk",
     })
-    if unilib.pkg_executed_table["gravel_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

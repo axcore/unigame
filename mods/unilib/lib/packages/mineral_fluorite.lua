@@ -9,7 +9,7 @@
 unilib.pkg.mineral_fluorite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.mineral_fluorite.exec()
         description = S("Fluorite Lump"),
         inventory_image = "unilib_mineral_fluorite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_calcium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_calcium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

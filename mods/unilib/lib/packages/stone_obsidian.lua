@@ -13,8 +13,8 @@
 unilib.pkg.stone_obsidian = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,6 +38,7 @@ function unilib.pkg.stone_obsidian.exec()
 
         basic_platform_flag = true,
         category = "extrusive",
+        colour = "#1F2631",
         grinder_flag = false,
         hardness = 4,
     })
@@ -47,7 +48,7 @@ function unilib.pkg.stone_obsidian.exec()
         description = S("Obsidian Stone"),
         tiles = {"unilib_stone_obsidian.png"},
         groups = {cracky = 1, level = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft_3x3({
         -- From default:obsidian
@@ -67,9 +68,9 @@ function unilib.pkg.stone_obsidian.exec()
 
         drop_name = "unilib:stone_obsidian",
     })
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil and
-            moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil and
+            (moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")) then
 
         unilib.register_stone_trap({
             -- From moreblocks:trap_obsidian. Creates unilib:stone_obsidian_trap
@@ -90,7 +91,7 @@ function unilib.pkg.stone_obsidian.exec()
             description = S("Obsidian Stone Block"),
             tiles = {"unilib_stone_obsidian_block.png"},
             groups = {cracky = 1, level = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -115,7 +116,7 @@ function unilib.pkg.stone_obsidian.exec()
         description = S("Obsidian Stone Bricks"),
         tiles = {"unilib_stone_obsidian_brick.png"},
         groups = {cracky = 1, level = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -136,7 +137,9 @@ function unilib.pkg.stone_obsidian.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "obsidian",
     })
-    unilib.set_auto_rotate("unilib:stone_obsidian_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_obsidian_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_craftitem(
         -- From default:obsidian_shard
@@ -152,8 +155,8 @@ function unilib.pkg.stone_obsidian.exec()
         -- From default:obsidian_shard
         output = "unilib:stone_obsidian_shard 9",
         recipe = {
-            {"unilib:stone_obsidian"}
-        }
+            {"unilib:stone_obsidian"},
+        },
     })
 
 end

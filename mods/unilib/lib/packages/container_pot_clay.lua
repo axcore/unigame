@@ -9,7 +9,7 @@
 unilib.pkg.container_pot_clay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,8 +17,8 @@ local mode = unilib.imported_mod_table.earthbuild.add_mode
 
 local function is_owner(pos, name)
 
-    local owner = minetest.get_meta(pos):get_string("owner")
-    if owner == "" or owner == name or minetest.check_player_privs(name, "protection_bypass") then
+    local owner = core.get_meta(pos):get_string("owner")
+    if owner == "" or owner == name or core.check_player_privs(name, "protection_bypass") then
         return true
     end
 
@@ -82,8 +82,7 @@ function unilib.pkg.container_pot_clay.exec()
         },
     })
 
-    unilib.register_node("unilib:container_pot_clay", "earthbuild:storage_pot", mode, {
-        -- From earthbuild:storage_pot
+    local def_table = {
         description = S("Clay Storage Pot"),
         tiles = {
             "unilib_container_pot_clay_top.png",
@@ -94,9 +93,11 @@ function unilib.pkg.container_pot_clay.exec()
             "unilib_container_pot_clay.png",
         },
         groups = {oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -122,8 +123,9 @@ function unilib.pkg.container_pot_clay.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            if is_owner(pos, player:get_player_name()) and
-                    not string.match(stack:get_name(), "backpacks:") then
+--          if is_owner(pos, player:get_player_name()) and
+--                  not string.match(stack:get_name(), "backpacks:") then
+            if is_owner(pos, player:get_player_name()) then
                 return stack:get_count()
             end
 
@@ -143,7 +145,7 @@ function unilib.pkg.container_pot_clay.exec()
 
         can_dig = function(pos, player)
 
-            local inv = minetest.get_meta(pos):get_inventory()
+            local inv = core.get_meta(pos):get_inventory()
             local name = ""
             if player then
                 name = player:get_player_name()
@@ -157,7 +159,7 @@ function unilib.pkg.container_pot_clay.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_storage_formspec(pos, 8, 2))
             local inv = meta:get_inventory()
             inv:set_size("main", 8 * 3)
@@ -165,14 +167,15 @@ function unilib.pkg.container_pot_clay.exec()
 
         end,
 
+        --[[
         on_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff in clay storage pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items in clay storage pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -180,10 +183,10 @@ function unilib.pkg.container_pot_clay.exec()
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff to clay storage pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items to clay storage pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -191,14 +194,22 @@ function unilib.pkg.container_pot_clay.exec()
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " takes stuff from clay storage pot at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " takes items from clay storage pot at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
-    })
+        ]]--
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "clay storage pot")
+    unilib.register_node(
+        -- From earthbuild:storage_pot
+        "unilib:container_pot_clay", "earthbuild:storage_pot", mode, def_table
+    )
+
     unilib.register_craft({
         -- From earthbuild:storage_pot
         type = "cooking",

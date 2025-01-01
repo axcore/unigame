@@ -9,7 +9,7 @@
 unilib.pkg.tree_young_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.youngtrees.add_mode
+local mode = unilib.global.imported_mod_table.youngtrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -23,10 +23,10 @@ local function do_register(part_name, orig_name)
         description = S("Young Apple Tree"),
         tiles = {img},
         groups = {attached_node = 1, flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
-        drop = "unilib:item_twig_normal_1",
+        drop = "unilib:misc_twig_normal_1",
         inventory_image = img,
         paramtype = "light",
         selection_box = {
@@ -46,30 +46,38 @@ end
 function unilib.pkg.tree_young_apple.grow_func(pos)
 
     local height = math.random(1, 3)
+
+    local right_here, above_right_here, two_above_right_here
     local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local above_right_here = {x = pos.x, y = pos.y + 2, z = pos.z}
+    if height > 1 then
+
+        above_right_here = {x = pos.x, y = pos.y + 2, z = pos.z}
+        if height > 2 then
+            two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
+        end
+
+    end
 
     -- N.B. Original code checks for both air and jungle grass. This seems to be a copy-paste error,
     --      because the original code doesn't spawn this tree and jungle grass in the same biomes
-    if minetest.get_node(right_here).name == "air" then
+    if core.get_node(right_here).name == "air" then
 
         if height == 1 then
-            minetest.swap_node(right_here, {name = "unilib:tree_young_apple_top"})
+            core.swap_node(right_here, {name = "unilib:tree_young_apple_top"})
         end
 
         if height == 2 then
 
-            minetest.swap_node(right_here, {name = "unilib:tree_young_apple_bottom"})
-            minetest.swap_node(above_right_here, {name = "unilib:tree_young_apple_top"})
+            core.swap_node(right_here, {name = "unilib:tree_young_apple_bottom"})
+            core.swap_node(above_right_here, {name = "unilib:tree_young_apple_top"})
 
         end
 
         if height == 3 then
 
-            local two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
-            minetest.swap_node(right_here, {name = "unilib:tree_young_apple_bottom"})
-            minetest.swap_node(above_right_here, {name = "unilib:tree_young_apple_middle"})
-            minetest.swap_node(two_above_right_here, {name = "unilib:tree_young_apple_top"})
+            core.swap_node(right_here, {name = "unilib:tree_young_apple_bottom"})
+            core.swap_node(above_right_here, {name = "unilib:tree_young_apple_middle"})
+            core.swap_node(two_above_right_here, {name = "unilib:tree_young_apple_top"})
 
         end
     end
@@ -85,7 +93,7 @@ function unilib.pkg.tree_young_apple.init()
     return {
         description = "Young apple tree",
         notes = "Currently, does not grow into a full apple tree",
-        depends = "item_twig_normal",
+        depends = "misc_twig_normal",
     }
 
 end
@@ -106,7 +114,7 @@ function unilib.pkg.tree_young_apple.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 100,
                 rarity_fertility = 0.5,
                 plantlife_limit = -0.3,

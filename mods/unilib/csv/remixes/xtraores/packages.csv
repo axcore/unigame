@@ -1,85 +1,138 @@
-# "xtraores" remix - contains almost everything from xtraores/xtraores (but not the other mods in
-#       that modpack)
+# "xtraores" remix - contains almost everything from xtraores/xtraores, xtraores/xtraors_armor and
+#       xtraores/xtraores_rainbow, but not the other mods in that modpack
+# See also the "xtraores_mini" remix which contains only items from xtraores_xtraores
 # Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium,
-#       palatinium and tritonium to avoid clashing with any code that wants the real-life metals
+#       planexium and tritonium to avoid clashing with any code that wants the real-life metals
+# The spelling of geminitinum has been tweaked to geminitium, because no-one can type it
 # Does not include support for awards (yet)
 
 # node_name | original_mod
 
 # xtraores packages
 metal_adamantite|xtraores
-metal_geminitinum|xtraores
+metal_geminitium|xtraores
 metal_ozymandium|xtraores
-metal_palatinium|xtraores
+metal_planexium|xtraores
 metal_rarium|xtraores
 metal_sybilline|xtraores
 metal_tritonium|xtraores
 metal_unobtainium|xtraores
 ore_xtraores_stone_ordinary_with_adamantite|xtraores
-ore_xtraores_stone_ordinary_with_geminitinum|xtraores
+ore_xtraores_stone_ordinary_with_geminitium|xtraores
 ore_xtraores_stone_ordinary_with_ozymandium|xtraores
-ore_xtraores_stone_ordinary_with_palatinium|xtraores
+ore_xtraores_stone_ordinary_with_planexium|xtraores
 ore_xtraores_stone_ordinary_with_rarium|xtraores
 ore_xtraores_stone_ordinary_with_sybilline|xtraores
 ore_xtraores_stone_ordinary_with_tritonium|xtraores
 ore_xtraores_stone_ordinary_with_unobtainium|xtraores
 stone_ordinary_with_adamantite|xtraores
-stone_ordinary_with_geminitinum|xtraores
+stone_ordinary_with_geminitium|xtraores
 stone_ordinary_with_ozymandium|xtraores
-stone_ordinary_with_palatinium|xtraores
+stone_ordinary_with_planexium|xtraores
 stone_ordinary_with_rarium|xtraores
 stone_ordinary_with_sybilline|xtraores
 stone_ordinary_with_tritonium|xtraores
 stone_ordinary_with_unobtainium|xtraores
 tool_axe_ozymandium|xtraores
-tool_axe_palatinium|xtraores
+tool_axe_planexium|xtraores
 tool_axe_sybilline|xtraores
 tool_chainsaw_adamantite|xtraores
-tool_chainsaw_geminitinum|xtraores
+tool_chainsaw_geminitium|xtraores
 tool_chainsaw_rarium|xtraores
 tool_chainsaw_tritonium|xtraores
 tool_chainsaw_unobtainium|xtraores
-tool_drill_geminitinum|xtraores
+tool_drill_geminitium|xtraores
 tool_drill_rarium|xtraores
 tool_drill_tritonium|xtraores
 tool_drill_unobtainium|xtraores
 tool_pick_adamantite|xtraores
 tool_pick_ozymandium|xtraores
-tool_pick_palatinium|xtraores
+tool_pick_planexium|xtraores
 tool_pick_sybilline|xtraores
 tool_shovel_adamantite|xtraores
 tool_shovel_ozymandium|xtraores
-tool_shovel_palatinium|xtraores
+tool_shovel_planexium|xtraores
 tool_shovel_sybilline|xtraores
 tool_spear_adamantite|xtraores
-tool_spear_geminitinum|xtraores
+tool_spear_geminitium|xtraores
 tool_spear_gungir|xtraores
 tool_spear_ozymandium|xtraores
-tool_spear_palatinium|xtraores
+tool_spear_planexium|xtraores
 tool_spear_rarium|xtraores
 tool_spear_sybilline|xtraores
 tool_spear_tritonium|xtraores
 tool_spear_unobtainium|xtraores
 tool_sword_adamantite|xtraores
 tool_sword_excalibur|xtraores
-tool_sword_geminitinum|xtraores
+tool_sword_geminitium|xtraores
 tool_sword_ozymandium|xtraores
-tool_sword_palatinium|xtraores
+tool_sword_planexium|xtraores
 tool_sword_rarium|xtraores
 tool_sword_sybilline|xtraores
 tool_sword_tritonium|xtraores
 tool_sword_unobtainium|xtraores
 
+# xtraores_armor packages
+armour_boots_adamantite|xtraores_armor
+armour_boots_ozymandium|xtraores_armor
+armour_boots_planexium|xtraores_armor
+armour_boots_rarium|xtraores_armor
+armour_boots_sybilline|xtraores_armor
+armour_boots_tritonium|xtraores_armor
+armour_boots_unobtainium|xtraores_armor
+armour_chestplate_adamantite|xtraores_armor
+armour_chestplate_ozymandium|xtraores_armor
+armour_chestplate_planexium|xtraores_armor
+armour_chestplate_rarium|xtraores_armor
+armour_chestplate_sybilline|xtraores_armor
+armour_chestplate_tritonium|xtraores_armor
+armour_chestplate_unobtainium|xtraores_armor
+armour_helmet_adamantite|xtraores_armor
+armour_helmet_ozymandium|xtraores_armor
+armour_helmet_planexium|xtraores_armor
+armour_helmet_rarium|xtraores_armor
+armour_helmet_sybilline|xtraores_armor
+armour_helmet_tritonium|xtraores_armor
+armour_helmet_unobtainium|xtraores_armor
+armour_leggings_adamantite|xtraores_armor
+armour_leggings_ozymandium|xtraores_armor
+armour_leggings_planexium|xtraores_armor
+armour_leggings_rarium|xtraores_armor
+armour_leggings_sybilline|xtraores_armor
+armour_leggings_tritonium|xtraores_armor
+armour_leggings_unobtainium|xtraores_armor
+armour_shield_adamantite|xtraores_armor
+armour_shield_ozymandium|xtraores_armor
+armour_shield_planexium|xtraores_armor
+armour_shield_rarium|xtraores_armor
+armour_shield_sybilline|xtraores_armor
+armour_shield_tritonium|xtraores_armor
+armour_shield_unobtainium|xtraores_armor
+
+# xtraores_rainbow packages
+decor_block_rainbow_glass|xtraores_rainbow
+decor_block_rainbow_stone|xtraores_rainbow
+decor_block_rainbow_wood|xtraores_rainbow
+
 # supporting packages (.depends)
+glass_ordinary|default moreblocks vessels
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_diamond|default mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
+shared_armour_shield|shields
 stone_ordinary|default moreblocks technic
 tool_sword_diamond|default
+
+# supporting packages (.at_least_one)
+misc_nyancat|nyancat
 
 # supporting packages (.optional)
 #grass_jungle|default
 #item_screwdriver_ordinary|screwdriver
-#metal_gold|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_gold|default glemr11 technic
 #moss_green|sickles
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.override_ethereal_crafting = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,13 +36,13 @@ end
 
 function unilib.pkg.override_ethereal_crafting.exec()
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         -- N.B. The same craft recipe is already provided by "gravel_ordinary", but only when
-        --      unilib.underch_tweak_flag is set
-        if unilib.pkg_executed_table["gravel_ordinary"] ~= nil and
-                unilib.pkg_executed_table["stone_ordinary"] ~= nil and
-                not unilib.underch_tweak_flag then
+        --      unilib.setting.underch_tweak_flag is set
+        if unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["stone_ordinary"] ~= nil and
+                not unilib.setting.underch_tweak_flag then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua
@@ -56,8 +56,8 @@ function unilib.pkg.override_ethereal_crafting.exec()
 
          end
 
-        if unilib.pkg_executed_table["dirt_ordinary"] ~= nil and
-                unilib.pkg_executed_table["gravel_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua
@@ -71,8 +71,8 @@ function unilib.pkg.override_ethereal_crafting.exec()
 
         end
 
-        if unilib.pkg_executed_table["dirt_ordinary"] ~= nil and
-                unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua
@@ -86,8 +86,8 @@ function unilib.pkg.override_ethereal_crafting.exec()
 
         end
 
-        if unilib.pkg_executed_table["ice_ordinary"] ~= nil and
-                unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["ice_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua
@@ -101,8 +101,8 @@ function unilib.pkg.override_ethereal_crafting.exec()
 
         end
 
-        if unilib.pkg_executed_table["dirt_dried"] ~= nil and
-                unilib.pkg_executed_table["sand_desert"] ~= nil then
+        if unilib.global.pkg_executed_table["dirt_dried"] ~= nil and
+                unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua
@@ -116,8 +116,8 @@ function unilib.pkg.override_ethereal_crafting.exec()
 
         end
 
-        if unilib.pkg_executed_table["stone_ordinary"] ~= nil and
-                unilib.pkg_executed_table["stone_sandstone_silver"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["stone_sandstone_silver"] ~= nil then
 
             unilib.register_craft( {
                 -- Adapted from ethereal-ng/extra.lua

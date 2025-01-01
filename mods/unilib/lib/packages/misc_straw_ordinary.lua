@@ -13,8 +13,8 @@
 unilib.pkg.misc_straw_ordinary = {}
 
 local S = unilib.intllib
-local darkage_add_mode = unilib.imported_mod_table.darkage.add_mode
-local farming_add_mode = unilib.imported_mod_table.farming.add_mode
+local darkage_add_mode = unilib.global.imported_mod_table.darkage.add_mode
+local farming_add_mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.misc_straw_ordinary.exec()
         tiles = {"unilib_misc_straw_ordinary.png"},
         -- ("hay" group from the cottages mod)
         groups = {fall_damage_add_percent = -30, flammable = 4, hay = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         is_ground_content = false,
     })
@@ -57,7 +57,7 @@ function unilib.pkg.misc_straw_ordinary.exec()
         output = c_wheat .. " 3",
         recipe = {
             {"unilib:misc_straw_ordinary"},
-        }
+        },
     })
     -- Notes from default:
     -- Registered before the stairs so the stairs get fuel recipes
@@ -69,7 +69,7 @@ function unilib.pkg.misc_straw_ordinary.exec()
     })
     unilib.register_stairs("unilib:misc_straw_ordinary")
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_node(
             -- From darkage:straw_bale
@@ -81,7 +81,7 @@ function unilib.pkg.misc_straw_ordinary.exec()
                 tiles = {"unilib_misc_straw_ordinary_bale.png"},
                 -- ("hay" group from the cottages mod)
                 groups = {flammable = 2, hay = 3, snappy = 2},
-                sounds = unilib.sound_table.leaves,
+                sounds = unilib.global.sound_table.leaves,
 
                 drop = "unilib:misc_straw_ordinary 4",
                 is_ground_content = false,
@@ -93,7 +93,7 @@ function unilib.pkg.misc_straw_ordinary.exec()
             recipe = {
                 {"unilib:misc_straw_ordinary", "unilib:misc_straw_ordinary"},
                 {"unilib:misc_straw_ordinary", "unilib:misc_straw_ordinary"},
-            }
+            },
         })
         unilib.register_stairs("unilib:misc_straw_ordinary_bale", {
             drop_name = "unilib:misc_straw_ordinary",

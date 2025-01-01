@@ -9,7 +9,7 @@
 unilib.pkg.test_node = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.test_node.exec()
         description = S("Test Node"),
         tiles = {"unilib_unknown.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
     })
 
 end

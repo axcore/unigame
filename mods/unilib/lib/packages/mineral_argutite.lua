@@ -9,7 +9,7 @@
 unilib.pkg.mineral_argutite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_argutite.exec()
         description = S("Argutite Lump"),
         inventory_image = "unilib_mineral_argutite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_germanium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_germanium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

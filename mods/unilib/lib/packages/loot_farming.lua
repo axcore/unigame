@@ -9,7 +9,7 @@
 unilib.pkg.loot_farming = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,8 +19,8 @@ function unilib.pkg.loot_farming.init()
 
     return {
         description = "Dungeon loot from the \"farming\" mod",
-        -- Registers farming stuff as dungeon loot, if available
-        mod_optional = "dungeon_loot",
+        notes = "Registers farming items as dungeon loot, if available",
+        mod_depends = "dungeon_loot",
         -- (Don't declare optional packages; it's up to the remix to decide which of these packages
         --      should be executed)
 --      optional = {"crop_cotton", "crop_wheat", "item_string_ordinary"},
@@ -30,48 +30,42 @@ end
 
 function unilib.pkg.loot_farming.post()
 
-    -- Register farming stuff as dungeon loot, if available
-    if minetest.global_exists("dungeon_loot") then
+    -- Adapted from bucket/init.lua
+    local loot_table = {}
 
-        -- Adapted from bucket/init.lua
+    if unilib.global.pkg_executed_table["crop_cotton"] ~= nil then
 
-        local loot_table = {}
+        table.insert(loot_table, {
+            name = "unilib:crop_cotton_seed",
+            chance = 0.4,
+            count = {1, 4},
+            types = {"normal"},
+        })
 
-        if unilib.pkg_executed_table["crop_cotton"] ~= nil then
+    end
 
-            table.insert(loot_table, {
-                name = "unilib:crop_cotton_seed",
-                chance = 0.4,
-                count = {1, 4},
-                types = {"normal"},
-            })
+    if unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
 
-        end
+        table.insert(loot_table, {
+            name = "unilib:crop_wheat_harvest",
+            chance = 0.5,
+            count = {2, 5},
+        })
 
-        if unilib.pkg_executed_table["crop_wheat"] ~= nil then
+    end
 
-            table.insert(loot_table, {
-                name = "unilib:crop_wheat_harvest",
-                chance = 0.5,
-                count = {2, 5},
-            })
+    if unilib.global.pkg_executed_table["item_string_ordinary"] ~= nil then
 
-        end
+        table.insert(loot_table, {
+            name = "unilib:item_string_ordinary",
+            chance = 0.5,
+            count = {1, 8},
+        })
 
-        if unilib.pkg_executed_table["item_string_ordinary"] ~= nil then
+    end
 
-            table.insert(loot_table, {
-                name = "unilib:item_string_ordinary",
-                chance = 0.5,
-                count = {1, 8},
-            })
-
-        end
-
-        if #loot_table > 0 then
-            dungeon_loot.register(loot_table)
-        end
-
+    if #loot_table > 0 then
+        dungeon_loot.register(loot_table)
     end
 
 end

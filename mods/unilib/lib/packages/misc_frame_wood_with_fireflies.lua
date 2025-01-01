@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_wood_with_fireflies = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_frame_wood_with_fireflies.exec()
         description = S("Wood-Framed Glass with Fireflies"),
         tiles = {"unilib_misc_frame_wood_overlay.png"},
         groups = {choppy = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.node_sound_wood_defaults({
+        sounds = unilib.sound.generate_wood({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),
@@ -79,7 +79,7 @@ function unilib.pkg.misc_frame_wood_with_fireflies.exec()
 
         after_destruct = function(pos)
 
-            minetest.add_particle({
+            core.add_particle({
                 acc = {x = 0.010, y = 0.025, z = 0.010},
                 collisiondetection = true,
                 expirationtime = 5,
@@ -87,7 +87,7 @@ function unilib.pkg.misc_frame_wood_with_fireflies.exec()
                 maxsize = 2,
                 minsize = 1,
                 pos = {x = pos.x, y = pos.y, z = pos.z},
-                texture = "unilib_misc_firefly_particle_1.png",
+                texture = "unilib_particle_misc_firefly_1.png",
                 vel = {x = 0.25, y = 0.05, z = 0.25},
             })
 
@@ -106,13 +106,11 @@ function unilib.pkg.misc_frame_wood_with_fireflies.exec()
 
             local num = math.random(4)
 
-            minetest.add_particlespawner({
+            core.add_particlespawner({
                 amount = 6,
                 time = 3,
+                texture = "unilib_particle_misc_firefly_" .. num .. ".png",
 
-                collisiondetection = true,
-                collision_removal = true,
-                glow = 8,
                 maxacc = {x = 0.015, y = 0.05, z = 0.015},
                 minacc = {x = -0.125, y = -0.15, z = -0.125},
                 maxexptime = 1.75,
@@ -123,7 +121,10 @@ function unilib.pkg.misc_frame_wood_with_fireflies.exec()
                 minsize = 0.5,
                 maxvel = {x = 0.001, y = 0.001, z = 0.001},
                 minvel = {x = -0.01, y = -0.02, z = -0.01},
-                texture = "unilib_misc_firefly_particle_" .. num .. ".png",
+
+                collisiondetection = true,
+                collision_removal = true,
+                glow = 8,
             })
 
         end,

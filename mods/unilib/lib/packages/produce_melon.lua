@@ -9,7 +9,7 @@
 unilib.pkg.produce_melon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.produce_melon.exec()
         groups = {flammable = 3, food_melon_slice = 1, seed = 2},
 
         -- (on_place is added in the call to unilib.register_produce_fredo() )
-        on_use = unilib.cuisine_eat_on_use("unilib:produce_melon_slice", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:produce_melon_slice", 2),
     })
     unilib.register_craft({
         -- From farming:melon_slice
@@ -46,7 +46,7 @@ function unilib.pkg.produce_melon.exec()
         recipe = {
             {"unilib:produce_melon_slice", "unilib:produce_melon_slice"},
             {"unilib:produce_melon_slice", "unilib:produce_melon_slice"},
-        }
+        },
     })
     unilib.register_craft({
         -- From farming:melon_slice
@@ -56,9 +56,10 @@ function unilib.pkg.produce_melon.exec()
         },
         replacements = {
             {"unilib:utensil_board_cutting", "unilib:utensil_board_cutting"},
-        }
+        },
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -105,12 +106,12 @@ function unilib.pkg.produce_melon.exec()
                     flammable = 2, food_melon = 1, oddly_breakable_by_hand = 1, plant = 1,
                     snappy = 2,
                 },
-                sounds = unilib.sound_table.wood,
+                sounds = unilib.global.sound_table.wood,
 
                 drop = "unilib:produce_melon_harvest",
                 paramtype2 = "facedir",
 
-                on_place = minetest.rotate_node,
+                on_place = core.rotate_node,
             },
         },
         no_harvest_flag = true,
@@ -122,11 +123,12 @@ function unilib.pkg.produce_melon.exec()
         juice_description = S("Melon"),
         juice_type = "melon",
         rgb = "#ef4646",
+
         orig_flag = true,
     })
-    unilib.register_juice_duplicate("melon", "unilib:produce_melon_slice")
+    unilib.juice.register_duplicate("melon", "unilib:produce_melon_slice")
 
-    unilib.register_decoration("farming_redo_produce_melon", {
+    unilib.register_decoration_generic("farming_redo_produce_melon", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_melon_grow_8",
@@ -135,8 +137,8 @@ function unilib.pkg.produce_melon.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.009,
+            seed = 790,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

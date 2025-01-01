@@ -9,7 +9,7 @@
 unilib.pkg.misc_pile_logs = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local function
@@ -52,10 +52,12 @@ local function do_register(data_table)
         },
         groups = {choppy = 3, falling_node = 1, flammable = 1, oddly_breakable_by_hand = 1},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         drop = ingredient .. " 3",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -65,7 +67,7 @@ local function do_register(data_table)
                 {-0.4375, -0.5, -0.5, -0.125, -0.0625, 0.5},
                 {-0.125, -0.0625, -0.5, 0.1875, 0.375, 0.5},
                 {-0.1875, 0, -0.5, 0.25, 0.3125, 0.5},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
@@ -88,27 +90,27 @@ function unilib.pkg.misc_pile_logs.init()
 
     return {
         description = "Log pile set",
-        notes = "This package creates bookshelves from the full range of super trees",
+        notes = "This package creates log piles from the full range of super trees",
     }
 
 end
 
 function unilib.pkg.misc_pile_logs.post()
 
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
-        local data_table = unilib.tree_table[tree_type]
+        local data_table = unilib.global.tree_table[tree_type]
         local ingredient = "unilib:tree_" .. tree_type .. "_trunk"
 
-        if unilib.pkg_executed_table["tree_" .. tree_type] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. tree_type] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             do_register({
                 part_name = tree_type,
                 ingredient = ingredient,
 
                 replace_mode = mode,
-                description = unilib.brackets(S("Log Pile"), data_table.description),
+                description = unilib.utils.brackets(S("Log Pile"), data_table.description),
             })
 
         end

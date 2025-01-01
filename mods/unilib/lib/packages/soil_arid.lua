@@ -9,7 +9,7 @@
 unilib.pkg.soil_arid = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,14 +39,14 @@ function unilib.pkg.soil_arid.exec()
             arid_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, savanna = 1,
             soil = 2,
         },
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_dry",
         soil = {
             base = "unilib:dirt_dry",
             dry = "unilib:soil_arid",
             wet = "unilib:soil_arid_wet",
-        }
+        },
     })
 
     unilib.register_node("unilib:soil_arid_wet", "farming:dry_soil_wet", mode, {
@@ -62,14 +62,14 @@ function unilib.pkg.soil_arid.exec()
             arid_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, savanna = 1,
             soil = 3, wet = 1,
         },
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_dry",
         soil = {
             base = "unilib:dirt_dry",
             dry = "unilib:soil_arid",
             wet = "unilib:soil_arid_wet",
-        }
+        },
     })
 
 end

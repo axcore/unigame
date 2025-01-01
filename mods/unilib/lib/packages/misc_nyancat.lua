@@ -9,7 +9,7 @@
 unilib.pkg.misc_nyancat = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nyancat.add_mode
+local mode = unilib.global.imported_mod_table.nyancat.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -21,15 +21,15 @@ local function place(pos, facedir, length)
         facedir = 0
     end
 
-    local tailvec = minetest.facedir_to_dir(facedir)
+    local tailvec = core.facedir_to_dir(facedir)
     local p = {x = pos.x, y = pos.y, z = pos.z}
 
-    minetest.set_node(p, {name = "unilib:misc_nyancat", param2 = facedir})
+    core.set_node(p, {name = "unilib:misc_nyancat", param2 = facedir})
     for i = 1, length do
 
         p.x = p.x + tailvec.x
         p.z = p.z + tailvec.z
-        minetest.set_node(p, {name = "unilib:misc_nyancat_rainbow", param2 = facedir})
+        core.set_node(p, {name = "unilib:misc_nyancat_rainbow", param2 = facedir})
 
     end
 
@@ -37,7 +37,7 @@ end
 
 local function generate(minp, maxp, seed)
 
-    local height_min = unilib.y_min
+    local height_min = unilib.constant.y_min
     local height_max = -32
     if maxp.y < height_min or minp.y > height_max then
         return
@@ -92,10 +92,10 @@ function unilib.pkg.misc_nyancat.exec()
             "unilib_misc_nyancat_front.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         is_ground_content = false,
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -115,10 +115,10 @@ function unilib.pkg.misc_nyancat.exec()
             "unilib_misc_nyancat_rainbow.png"
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         is_ground_content = false,
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -130,7 +130,7 @@ function unilib.pkg.misc_nyancat.exec()
     })
 
     -- Mapgen
-    minetest.register_on_generated(function(minp, maxp, seed)
+    core.register_on_generated(function(minp, maxp, seed)
         generate(minp, maxp, seed)
     end)
 

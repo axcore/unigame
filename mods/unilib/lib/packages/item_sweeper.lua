@@ -9,7 +9,7 @@
 unilib.pkg.item_sweeper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.item_sweeper.exec()
         recipe = {
             {"unilib:grass_jungle"},
             {"unilib:item_stick_ordinary"},
-        }
+        },
     })
     ]]--
     unilib.register_craft({

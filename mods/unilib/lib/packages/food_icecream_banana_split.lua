@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream_banana_split = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_icecream_banana_split.exec()
         inventory_image = "unilib_food_icecream_banana_split.png",
         groups = {food = 15, food_icecream = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_banana_split", 15),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_banana_split", 15),
     })
     unilib.register_craft({
         -- From cheese:banana_split

@@ -9,7 +9,7 @@
 unilib.pkg.bed_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beds.add_mode
+local mode = unilib.global.imported_mod_table.beds.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.bed_ordinary.init()
 
     return {
         description = "Ordinary bed",
-        depends = "wool_basic",
+        depends = {"shared_beds", "wool_basic"},
     }
 
 end
@@ -27,13 +27,13 @@ end
 function unilib.pkg.bed_ordinary.exec()
 
     local recipe_table = {}
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         -- Current minetest_game recipe
         recipe_table = {
             {"", "", ""},
             {"unilib:wool_white", "unilib:wool_white", "unilib:wool_white"},
-            {"group:wood", "group:wood", "group:wood"}
+            {"group:wood", "group:wood", "group:wood"},
         }
 
     else
@@ -42,22 +42,22 @@ function unilib.pkg.bed_ordinary.exec()
         recipe_table = {
             {"", "", ""},
             {"unilib:wool_red", "unilib:wool_red", "unilib:wool_white"},
-            {"group:wood", "group:wood", "group:wood"}
+            {"group:wood", "group:wood", "group:wood"},
         }
 
     end
 
-    unilib.register_bed({
+    unilib.pkg.shared_beds.register_bed({
         -- From beds:bed. Creates unilib:bed_ordinary
         part_name = "ordinary",
-        orig_name = {"beds:bed_bottom", "beds:bed_top"},
+        orig_name_list = {"beds:bed_bottom", "beds:bed_top"},
         recipe_table = recipe_table,
         tile_table = {
             bottom = {
                 "unilib_bed_generic_top_bottom.png^[transformR90",
                 "unilib_bed_generic_under.png",
                 "unilib_bed_generic_side_bottom_r.png",
-                "unilib_bed_generic_side_bottom_r.png^[transformfx",
+                "unilib_bed_generic_side_bottom_r.png^[transformFx",
                 "blank.png",
                 "unilib_bed_generic_side_bottom.png"
             },
@@ -65,10 +65,10 @@ function unilib.pkg.bed_ordinary.exec()
                 "unilib_bed_generic_top_top.png^[transformR90",
                 "unilib_bed_generic_under.png",
                 "unilib_bed_generic_side_top_r.png",
-                "unilib_bed_generic_side_top_r.png^[transformfx",
+                "unilib_bed_generic_side_top_r.png^[transformFx",
                 "unilib_bed_generic_side_top.png",
                 "blank.png",
-            }
+            },
         },
 
         replace_mode = mode,

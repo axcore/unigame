@@ -7,19 +7,18 @@
 # Unilib creates uranium ores/lumps, but the corresponding uranium ingot/block is only created if
 #       technic is not loaded (otherwise, nuclear power would not be available to the player)
 # From technic, provides various powders
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # technic_worldgen packages
-metal_chromium|technic_worldgen technic
+metal_chromium|glemr11 technic_worldgen technic
 metal_iron_cast|technic_worldgen technic
 metal_iron_wrought|technic_worldgen
-metal_lead|technic_worldgen technic
+metal_lead|glemr11 technic_worldgen technic
 metal_steel_carbon|technic_worldgen technic
 metal_steel_stainless|technic_worldgen technic
 metal_uranium|technic_worldgen technic
-metal_zinc|technic_worldgen technic
+metal_zinc|glemr11 technic_worldgen technic
 mineral_sulphur|technic_worldgen technic
 ore_technic_stone_granite_dark|technic_worldgen
 ore_technic_stone_marble_brown|technic_worldgen
@@ -40,13 +39,18 @@ tree_rubber|moretrees technic_worldgen
 # supporting packages (.depends)
 liquid_lava_ordinary|default
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 shared_moretrees|moretrees
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #grass_jungle|default
+#machine_furnace_induction|unilib
 #mineral_coal|default technic
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

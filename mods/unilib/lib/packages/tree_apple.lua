@@ -17,9 +17,9 @@
 unilib.pkg.tree_apple = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local doors_add_mode = unilib.imported_mod_table.doors.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local doors_add_mode = unilib.global.imported_mod_table.doors.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,6 @@ function unilib.pkg.tree_apple.exec()
         common_group = 2,
         description = S("Apple Tree Trunk"),
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -72,15 +71,16 @@ function unilib.pkg.tree_apple.exec()
         common_group = 2,
         description = S("Apple Tree Wood Planks"),
     })
-    if unilib.mtgame_tweak_flag and unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
-        minetest.register_craft({
+        unilib.register_craft({
             -- From moreblocks
             output = "unilib:tree_apple_wood",
             recipe = {
                 {"unilib:item_stick_ordinary", "unilib:item_stick_ordinary"},
                 {"unilib:item_stick_ordinary", "unilib:item_stick_ordinary"},
-            }
+            },
         })
 
     end
@@ -97,8 +97,10 @@ function unilib.pkg.tree_apple.exec()
     })
     unilib.register_leafdecay({
         -- From default:leaves
+        trunk_type = "apple",
         trunks = {"unilib:tree_apple_trunk"},
-        leaves = {"unilib:fruit_apple", "unilib:tree_apple_leaves"},
+        leaves = {"unilib:tree_apple_leaves"},
+        others = {"unilib:fruit_apple"},
         radius = 3,
     })
 
@@ -119,7 +121,9 @@ function unilib.pkg.tree_apple.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and (
+            moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_tree_panel({
             -- From moreblocks:all_faces_tree. Creates unilib:tree_apple_panel
@@ -154,10 +158,10 @@ function unilib.pkg.tree_apple.exec()
         description = S("Apple Tree Wood Fence Rail"),
     })
 
-    if doors_add_mode ~= "defer" then
+    if doors_add_mode ~= "defer" or not core.get_modpath("doors") then
 
         unilib.register_fence_gate_quick({
-            -- From doors:gate_wood. Creates unilib:gate_apple_closed
+            -- From doors:gate_wood_closed etc. Creates unilib:gate_apple_closed, etc
             part_name = "apple",
             orig_name = {"doors:gate_wood_closed", "doors:gate_wood_open"},
 
@@ -168,10 +172,10 @@ function unilib.pkg.tree_apple.exec()
 
     end
 
-    unilib.register_decoration("default_tree_apple", {
+    unilib.register_decoration_generic("default_tree_apple", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_apple.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_apple.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -186,12 +190,12 @@ function unilib.pkg.tree_apple.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil then
 
-        unilib.register_decoration("default_tree_apple_log", {
+        unilib.register_decoration_generic("default_tree_apple_log", {
             -- From default/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_apple_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_apple_log.mts",
 
             flags = "place_center_x",
             noise_params = {

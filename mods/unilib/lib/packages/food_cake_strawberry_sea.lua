@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_strawberry_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -52,7 +52,7 @@ function unilib.pkg.food_cake_strawberry_sea.exec()
             inventory_image = "unilib_food_cake_strawberry_sea_slice.png",
             groups = {food = 1, food_sweet = 1, food_vegan = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_cake_strawberry_sea_slice", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_cake_strawberry_sea_slice", 3),
         }
     )
     unilib.register_craft({
@@ -77,7 +77,7 @@ function unilib.pkg.food_cake_strawberry_sea.post()
             {"group:food_flour", "unilib:dye_pink", "group:food_flour"},
             {"", "group:potable_bucket", ""},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

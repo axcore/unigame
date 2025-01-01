@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_litter_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,16 @@ function unilib.pkg.dirt_ordinary_with_litter_dry.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
 

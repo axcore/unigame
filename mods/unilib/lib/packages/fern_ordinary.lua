@@ -9,7 +9,7 @@
 unilib.pkg.fern_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,7 +17,7 @@ local mode = unilib.imported_mod_table.default.add_mode
 
 local function do_decoration(seed, length)
 
-    unilib.register_decoration("default_fern_ordinary_" .. length, {
+    unilib.register_decoration_generic("default_fern_ordinary_" .. length, {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:fern_ordinary_" .. length,
@@ -59,7 +59,7 @@ function unilib.pkg.fern_ordinary.exec()
         description = S("Ordinary Fern"),
         tiles = {"unilib_fern_ordinary_1.png"},
         groups = {attached_node = 1, fern = 1, flammable = 3, flora = 1, grass = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -79,7 +79,7 @@ function unilib.pkg.fern_ordinary.exec()
 
             -- Place a random fern variant
             local stack = ItemStack("unilib:fern_ordinary_" .. math.random(1,3))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
+            local ret = core.item_place(stack, placer, pointed_thing)
             return ItemStack("unilib:fern_ordinary_1 " ..
                     itemstack:get_count() - (1 - ret:get_count()))
 
@@ -103,7 +103,7 @@ function unilib.pkg.fern_ordinary.exec()
                 attached_node = 1, fern = 1, flammable = 3, flora = 1, grass = 1,
                 not_in_creative_inventory = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",

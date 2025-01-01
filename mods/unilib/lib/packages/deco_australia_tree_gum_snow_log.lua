@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_gum_snow_log = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ function unilib.pkg.deco_australia_tree_gum_snow_log.init()
 
 end
 
-function unilib.pkg.deco_australia_tree_gum_snow_log.exec()
+function unilib.pkg.deco_australia_tree_gum_snow_log.post()
 
-    unilib.register_decoration_now("australia_tree_gum_snow_log", nil, {
+    unilib.register_decoration_complete("australia_tree_gum_snow_log", nil, {
         -- From australia/biome_australian_alps.lua
         biomes = "australia_australian_alps",
         place_on = "unilib:snow_ordinary_block",

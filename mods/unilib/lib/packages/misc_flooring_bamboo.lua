@@ -9,7 +9,7 @@
 unilib.pkg.misc_flooring_bamboo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,12 @@ function unilib.pkg.misc_flooring_bamboo.exec()
         description = S("Bamboo Flooring"),
         tiles = {"unilib_misc_flooring_bamboo.png"},
         groups = {choppy = 3, flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_flooring_bamboo.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "wallmounted",
             wall_top = {-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5},
@@ -53,7 +55,7 @@ function unilib.pkg.misc_flooring_bamboo.exec()
         recipe = {
             {"unilib:tree_bamboo_trunk", "unilib:tree_bamboo_trunk"},
             {"unilib:tree_bamboo_trunk", "unilib:tree_bamboo_trunk"},
-        }
+        },
     })
     unilib.register_craft({
         -- From ethereal:bamboo_floor

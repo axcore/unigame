@@ -9,7 +9,7 @@
 unilib.pkg.stone_limestone_coquina = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_limestone_coquina.exec()
         description = S("Coquina Limestone"),
 
         category = "sedimentary",
+        colour = "#CCAF71",
         grinder_flag = true,
         hardness = 1,
     })
@@ -44,12 +45,12 @@ function unilib.pkg.stone_limestone_coquina.exec()
         groups = {
             cracky = 3, crumbly = 1, limestone = 1, smoothstone = 1, stone = 1, soft_stone = 1,
         },
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drops smoothstone in original code
         drop = "unilib:stone_limestone_coquina_rubble",
     })
-    if unilib.pkg_executed_table["sand_seashells"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_seashells"] ~= nil then
 
         unilib.register_craft_2x2({
             -- From aotearoa:coquina_limestone
@@ -88,7 +89,10 @@ function unilib.pkg.stone_limestone_coquina.exec()
             tiles = {"unilib_stone_limestone_coquina_block.png"},
             -- N.B. stone = 1, stoneblock = 1 not in original code
             groups = {cracky = 2, soft_stone = 1, stone = 1, stoneblock = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_3x3x9({
@@ -115,7 +119,10 @@ function unilib.pkg.stone_limestone_coquina.exec()
             tiles = {"unilib_stone_limestone_coquina_brick.png"},
             -- N.B. stone = 1, stonebrick = 1 not in original code
             groups = {cracky = 2, soft_stone = 1, stone = 1, stonebrick = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_2x2x4({
@@ -131,7 +138,9 @@ function unilib.pkg.stone_limestone_coquina.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "limestone_coquina",
     })
-    unilib.set_auto_rotate("unilib:stone_limestone_coquina_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_limestone_coquina_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_stone_rubble({
         -- Original to unilib. Creates unilib:stone_limestone_coquina_rubble
@@ -141,6 +150,24 @@ function unilib.pkg.stone_limestone_coquina.exec()
         replace_mode = mode,
         description = S("Coquina Limestone Rubble"),
         img_list = {"unilib_stone_limestone_coquina.png^unilib_stone_rubble_overlay.png"},
+    })
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_limestone_coquina_rubble_compressed
+        part_name = "limestone_coquina",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Coquina Limestone Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_limestone_coquina_rubble_condensed
+        part_name = "limestone_coquina",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Coquina Limestone Rubble"),
     })
 
 end

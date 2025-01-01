@@ -9,7 +9,7 @@
 unilib.pkg.food_chicken_imitation_fryer = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -93,7 +93,7 @@ function unilib.pkg.food_chicken_imitation_fryer.exec()
             walkable = false,
             wield_image = "unilib_food_chicken_imitation_fryer_cooked.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_chicken_imitation_fryer_cooked", 8),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_chicken_imitation_fryer_cooked", 8),
         }
     )
     unilib.register_craft({

@@ -9,7 +9,7 @@
 unilib.pkg.tool_hoe_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,5 +47,6 @@ function unilib.pkg.tool_hoe_wood.exec()
         recipe = "unilib:tool_hoe_wood",
         burntime = 5,
     })
+    unilib.tools.apply_toolranks("unilib:tool_hoe_wood", "hoe")
 
 end

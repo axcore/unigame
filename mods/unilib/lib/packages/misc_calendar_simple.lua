@@ -9,7 +9,7 @@
 unilib.pkg.misc_calendar_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.misc_calendar_simple.init()
 
     return {
         description = "Simple calendar",
-        depends = {"dye_basic", "item_paper_ordinary", "item_string_ordinary"},
+        depends = {"dye_basic", "item_paper_ordinary", "item_string_ordinary", "shared_calendars"},
     }
 
 end
@@ -30,10 +30,10 @@ function unilib.pkg.misc_calendar_simple.exec()
 
     unilib.register_node("unilib:misc_calendar_simple", nil, mode, {
         -- Original to unilib
-        description = unilib.brackets(S("Simple Calendar"), S("right-click to open")),
+        description = unilib.utils.brackets(S("Simple Calendar"), S("right-click to open")),
         tiles = {"unilib_misc_calendar_simple.png"},
         groups = {attached_node = 1, flammable = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "signlike",
         inventory_image = "unilib_misc_calendar_simple.png",
@@ -48,7 +48,7 @@ function unilib.pkg.misc_calendar_simple.exec()
         wield_image = "unilib_misc_calendar_simple.png",
 
         on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-            unilib.open_simple_calendar(clicker)
+            unilib.pkg.shared_calendars.open_simple_calendar(clicker)
         end,
     })
     unilib.register_craft({

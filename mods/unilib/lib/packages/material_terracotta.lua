@@ -9,7 +9,7 @@
 unilib.pkg.material_terracotta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.material_terracotta.exec()
     unilib.register_craftitem(
         -- From basic_materials:terracotta_base
         "unilib:material_terracotta_base",
-        "basic_materials:terracotta_base",
+        {"basic_materials:terracotta_base", "homedecor:terracotta_base"},
         mode,
         {
             description = S("Uncooked Terracotta Base"),
@@ -46,7 +46,7 @@ function unilib.pkg.material_terracotta.post()
         type = "shapeless",
         output = "unilib:material_terracotta_base 8",
         recipe = {"group:craftable_bucket", "unilib:clay_ordinary_lump", "unilib:gravel_ordinary"},
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

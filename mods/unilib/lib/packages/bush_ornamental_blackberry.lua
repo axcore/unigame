@@ -9,7 +9,7 @@
 unilib.pkg.bush_ornamental_blackberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,6 +46,7 @@ function unilib.pkg.bush_ornamental_blackberry.exec()
         juice_description = S("Blackberry"),
         juice_type = "blackberry",
         rgb = "#581845",
+
         orig_flag = true,
     })
 

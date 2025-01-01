@@ -9,7 +9,7 @@
 unilib.pkg.plant_juncus = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dryplants.add_mode
+local mode = unilib.global.imported_mod_table.dryplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -21,13 +21,13 @@ local function place_func(pos)
     local juncus_type = math.random(2, 3)
     local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
 
-    if minetest.get_node(right_here).name == "air" or
-            minetest.get_node(right_here).name == "unilib:grass_jungle" then
+    if core.get_node(right_here).name == "air" or
+            core.get_node(right_here).name == "unilib:grass_jungle" then
 
         if juncus_type == 2 then
-            minetest.swap_node(right_here, {name = "unilib:plant_juncus_brown"})
+            core.swap_node(right_here, {name = "unilib:plant_juncus_brown"})
         else
-            minetest.swap_node(right_here, {name = "unilib:plant_juncus_white"})
+            core.swap_node(right_here, {name = "unilib:plant_juncus_white"})
         end
 
     end
@@ -55,10 +55,10 @@ function unilib.pkg.plant_juncus.exec()
 
     unilib.register_node("unilib:plant_juncus_white", "dryplants:juncus", mode, {
         -- From dryplants:juncus
-        description = unilib.annotate(S("Juncus"), "Juncus"),
+        description = unilib.utils.annotate(S("Juncus"), "Juncus"),
         tiles = {"unilib_plant_juncus_white.png"},
         groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -74,10 +74,10 @@ function unilib.pkg.plant_juncus.exec()
         on_place = function(itemstack, placer, pointed_thing)
 
             local playername = placer:get_player_name()
-            if minetest.is_protected(pointed_thing.above, playername) or
-                    minetest.is_protected(pointed_thing.under, playername) then
+            if core.is_protected(pointed_thing.above, playername) or
+                    core.is_protected(pointed_thing.under, playername) then
 
-                minetest.chat_send_player(playername, S("Someone else owns that spot"))
+                core.chat_send_player(playername, S("Someone else owns that spot"))
                 return
 
             end
@@ -86,12 +86,12 @@ function unilib.pkg.plant_juncus.exec()
             local juncus_type = math.random(2, 3)
             local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
             if juncus_type == 2 then
-                minetest.swap_node(right_here, {name = "unilib:plant_juncus_brown"})
+                core.swap_node(right_here, {name = "unilib:plant_juncus_brown"})
             else
-                minetest.swap_node(right_here, {name = "unilib:plant_juncus_white"})
+                core.swap_node(right_here, {name = "unilib:plant_juncus_white"})
             end
 
-            if not minetest.setting_getbool("creative_mode") then
+            if not core.setting_getbool("creative_mode") then
                 itemstack:take_item()
             end
 
@@ -106,7 +106,7 @@ function unilib.pkg.plant_juncus.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 101 - 75,
                 plantlife_limit = -0.9,
             }),
@@ -119,7 +119,7 @@ function unilib.pkg.plant_juncus.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 101 - 75,
                 plantlife_limit = -0.9,
             }),
@@ -129,12 +129,12 @@ function unilib.pkg.plant_juncus.exec()
 
     unilib.register_node("unilib:plant_juncus_brown", "dryplants:juncus_02", mode, {
         -- From dryplants:juncus_02
-        description = unilib.annotate(S("Juncus"), "Juncus"),
+        description = unilib.utils.annotate(S("Juncus"), "Juncus"),
         tiles = {"unilib_plant_juncus_brown.png"},
         groups = {
             attached_node = 1, flammable = 2, flora = 1, not_in_creative_inventory = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",

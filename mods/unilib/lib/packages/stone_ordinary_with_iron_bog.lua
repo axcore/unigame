@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_iron_bog = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.stone_ordinary_with_iron_bog.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_iron_bog", nil, mode, {
         -- Texture from PFAA, weakOreGround_bogIron.png. Original code
-        description = unilib.brackets(S("Bog Iron Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Bog Iron Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_iron_bog.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_iron_lump",
     })

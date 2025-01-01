@@ -1,0 +1,117 @@
+# "3d_armor" remix - contains everything from the 3d_armor modpack
+# See also the "armour" remix, which contains items from both the 3d_armor modpack and a number of
+#       other armour-related mods
+
+# node_name | original_mod
+
+# 3d_armor/3d_armor packages
+# (Code imported to ../lib/shared/armour.lua)
+
+# 3d_armor/3d_armor_ip packages
+inventory_armour_ip|3d_armor_ip
+
+# 3d_armor/3d_armor_sfinv packages
+inventory_armour_sfinv|3d_armor_sfinv
+
+# 3d_armor/3d_armor_stand packages
+misc_stand_armour|3d_armor_stand
+
+# 3d_armor/3d_armor_ui packages
+inventory_armour_ui|3d_armor_ui
+
+# 3d_armor/armor_admin packages
+armour_boots_admin|armor_admin
+armour_chestplate_admin|armor_admin
+armour_helmet_admin|armor_admin
+armour_leggings_admin|armor_admin
+
+# 3d_armor/armor_bronze packages
+armour_boots_bronze|armor_bronze
+armour_chestplate_bronze|armor_bronze
+armour_helmet_bronze|armor_bronze
+armour_leggings_bronze|armor_bronze
+
+# 3d_armor/armor_cactus packages
+armour_boots_cactus|armor_cactus
+armour_chestplate_cactus|armor_cactus
+armour_helmet_cactus|armor_cactus
+armour_leggings_cactus|armor_cactus
+
+# 3d_armor/armor_crystal packages
+armour_boots_crystallite|armor_crystal
+armour_chestplate_crystallite|armor_crystal
+armour_helmet_crystallite|armor_crystal
+armour_leggings_crystallite|armor_crystal
+
+# 3d_armor/armor_diamond packages
+armour_boots_diamond|armor_diamond
+armour_chestplate_diamond|armor_diamond
+armour_helmet_diamond|armor_diamond
+armour_leggings_diamond|armor_diamond
+
+# 3d_armor/armor_gold packages
+armour_boots_gold|armor_gold
+armour_chestplate_gold|armor_gold
+armour_helmet_gold|armor_gold
+armour_leggings_gold|armor_gold
+
+# 3d_armor/armor_mithril packages
+armour_boots_mithril|armor_mithril
+armour_chestplate_mithril|armor_mithril
+armour_helmet_mithril|armor_mithril
+armour_leggings_mithril|armor_mithril
+
+# 3d_armor/armor_nether packages
+armour_boots_nether|armor_nether
+armour_chestplate_nether|armor_nether
+armour_helmet_nether|armor_nether
+armour_leggings_nether|armor_nether
+
+# 3d_armor/armor_steel packages
+armour_boots_steel|armor_steel
+armour_chestplate_steel|armor_steel
+armour_helmet_steel|armor_steel
+armour_leggings_steel|armor_steel
+
+# 3d_armor/armor_wood packages
+armour_boots_wood|armor_wood
+armour_chestplate_wood|armor_wood
+armour_helmet_wood|armor_wood
+armour_leggings_wood|armor_wood
+
+# 3d_armor/shields packages
+armour_shield_admin|shields
+armour_shield_bronze|shields
+armour_shield_cactus|shields
+armour_shield_crystallite|shields
+armour_shield_diamond|shields
+armour_shield_gold|shields
+armour_shield_mithril|shields
+armour_shield_nether|shields
+armour_shield_steel|shields
+armour_shield_wood|shields
+shared_armour_shield|shields
+
+# 3d_armor/wieldview packages
+# (Code imported to ../lib/effects/wieldview.lua)
+
+# supporting packages (.depends)
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
+metal_iron|default
+metal_mithril|glemr11 moreores technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+mineral_crystallite|ethereal
+mineral_diamond|default mtg_plus
+plant_cactus_ordinary|default
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#mineral_mese|default glemr11
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.tool_sword_wood.exec()
             max_drop_level = 0,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From default:sword_wood
@@ -54,6 +54,6 @@ function unilib.pkg.tool_sword_wood.exec()
         recipe = "unilib:tool_sword_wood",
         burntime = 5,
     })
-    unilib.apply_toolranks("unilib:tool_sword_wood", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_wood", "sword")
 
 end

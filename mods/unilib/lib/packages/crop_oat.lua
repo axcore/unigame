@@ -9,7 +9,7 @@
 unilib.pkg.crop_oat = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,12 @@ function unilib.pkg.crop_oat.init()
     return {
         description = "Oat",
         notes = "Oat seeds are dropped randomly by ordinary grass",
-        optional = {"dye_basic", "ingredient_flour_ordinary", "utensil_mortar_pestle"},
+        optional = {
+            "dye_basic",
+            "ingredient_flour_oat",
+            "ingredient_flour_ordinary",
+            "utensil_mortar_pestle",
+        },
     }
 
 end
@@ -52,15 +57,18 @@ function unilib.pkg.crop_oat.exec()
         place_param2 = 3,
         seed_description = S("Oat Seed"),
     })
-    if unilib.pkg_executed_table["ingredient_flour_ordinary"] ~= nil and
-            unilib.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
+    -- N.B. The "ingredient_flour_oat" package, if loaded, uses an identical recipe to craft oat
+    --      flour
+    if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["utensil_mortar_pestle"] ~= nil and
+            unilib.global.pkg_executed_table["ingredient_flour_oat"] == nil then
 
         unilib.register_craft({
             -- From farming:oat
             output = "unilib:ingredient_flour_ordinary",
             recipe = {
                 {"unilib:crop_oat_harvest", "unilib:crop_oat_harvest", "unilib:crop_oat_harvest"},
-                {"unilib:crop_oat_harvest", "unilib:utensil_mortar_pestle", ""}
+                {"unilib:crop_oat_harvest", "unilib:utensil_mortar_pestle", ""},
             },
             replacements = {
                 {"group:food_mortar_pestle", "unilib:utensil_mortar_pestle"},
@@ -68,7 +76,8 @@ function unilib.pkg.crop_oat.exec()
         })
 
     end
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

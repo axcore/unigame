@@ -9,7 +9,7 @@
 unilib.pkg.stone_quartzite_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_quartzite_white.exec()
         description = S("White Quartzite"),
 
         category = "metamorphic",
+        colour = "#A7A8A0",
         grinder_flag = true,
         hardness = 4,
     })
@@ -64,6 +65,24 @@ function unilib.pkg.stone_quartzite_white.exec()
         replace_mode = mode,
         description = S("White Quartzite Bricks"),
         img_list = {"unilib_stone_quartzite_white.png^unilib_stone_brick_overlay.png"},
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_quartzite_white_compressed
+        part_name = "quartzite_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed White Quartzite"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_quartzite_white_condensed
+        part_name = "quartzite_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed White Quartzite"),
     })
 
 end

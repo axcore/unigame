@@ -13,8 +13,8 @@
 unilib.pkg.stone_greenstone = {}
 
 local S = unilib.intllib
-local material_add_mode = unilib.imported_mod_table.material.add_mode
-local mineral_add_mode = unilib.imported_mod_table.mineral.add_mode
+local material_add_mode = unilib.global.imported_mod_table.material.add_mode
+local mineral_add_mode = unilib.global.imported_mod_table.mineral.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,6 +36,7 @@ function unilib.pkg.stone_greenstone.exec()
         description = S("Greenstone"),
 
         category = "metamorphic",
+        colour = "#60756B",
         grinder_flag = true,
         hardness = 3,
     })
@@ -82,6 +83,24 @@ function unilib.pkg.stone_greenstone.exec()
         replace_mode = mineral_add_mode,
         description = S("Greenstone Cobble"),
         img_list = {"unilib_stone_greenstone.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_greenstone_cobble_compressed
+        part_name = "greenstone",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Compressed Greenstone Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_greenstone_cobble_condensed
+        part_name = "greenstone",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Condensed Greenstone Cobble"),
     })
 
 end

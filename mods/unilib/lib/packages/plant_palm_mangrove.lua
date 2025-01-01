@@ -9,7 +9,7 @@
 unilib.pkg.plant_palm_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.plant_palm_mangrove.exec()
         "australia:mangrove_palm_trunk",
         mode,
         {
-            description = unilib.annotate(S("Mangrove Palm Trunk"), "Nypa fruticans"),
+            description = unilib.utils.annotate(S("Mangrove Palm Trunk"), "Nypa fruticans"),
             tiles = {
                 "unilib_plant_palm_mangrove_trunk.png",
                 "unilib_dirt_mud_mangrove.png",
@@ -40,18 +40,19 @@ function unilib.pkg.plant_palm_mangrove.exec()
             },
             -- N.B. removed flora = 1 to prevent nonsensical spreading
             groups = {attached_node = 1, choppy = 2, flammable = 2, oddly_breakable_by_hand = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
-            inventory_image = "unilib_plant_palm_mangrove_trunk.png",
+            -- N.B. removed inventory/wield images so the node appears in 3d in player's inventory
+--          inventory_image = "unilib_plant_palm_mangrove_trunk.png",
             paramtype = "light",
             paramtype2 = "facedir",
             selection_box = {
                 type = "fixed",
                 fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
             },
-            wield_image = "unilib_plant_palm_mangrove_trunk.png",
+--          wield_image = "unilib_plant_palm_mangrove_trunk.png",
 
-            on_place = minetest.rotate_node,
+            on_place = core.rotate_node,
         }
     )
     -- (not compatible with flowerpots)
@@ -62,11 +63,11 @@ function unilib.pkg.plant_palm_mangrove.exec()
         "australia:mangrove_palm_leaf_bot",
         mode,
         {
-            description = unilib.annotate(S("Mangrove Palm Leaf"), "Nypa fruticans"),
+            description = unilib.utils.annotate(S("Mangrove Palm Leaf"), "Nypa fruticans"),
             tiles = {"unilib_plant_palm_mangrove_leaf_bottom.png"},
             -- N.B. removed flora = 1 to prevent nonsensical spreading
             groups = {attached_node = 1, flammable = 2, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "nodebox",
             inventory_image = "unilib_plant_palm_mangrove_leaf_bottom.png",
@@ -91,11 +92,11 @@ function unilib.pkg.plant_palm_mangrove.exec()
         "australia:mangrove_palm_leaf_top",
         mode,
         {
-            description = unilib.annotate(S("Mangrove Palm Leaf"), "Nypa fruticans"),
+            description = unilib.utils.annotate(S("Mangrove Palm Leaf"), "Nypa fruticans"),
             tiles = {"unilib_plant_palm_mangrove_leaf_top.png"},
             -- N.B. removed flora = 1 to prevent nonsensical spreading
             groups = {attached_node = 1, flammable = 2, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "nodebox",
             inventory_image = "unilib_plant_palm_mangrove_leaf_top.png",
@@ -114,10 +115,10 @@ function unilib.pkg.plant_palm_mangrove.exec()
         }
     )
 
-    unilib.register_decoration("australia_plant_palm_mangrove", {
+    unilib.register_decoration_generic("australia_plant_palm_mangrove", {
         -- From australia/biome_mangroves.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_palm_mangrove.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_palm_mangrove.mts",
 
         fill_ratio = 0.3,
         flags = "force_placement",

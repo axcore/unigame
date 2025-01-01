@@ -9,7 +9,7 @@
 unilib.pkg.plant_honeypot_couch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_honeypot_couch.exec()
 
     unilib.register_node("unilib:plant_honeypot_couch", "australia:couch_honeypot", mode, {
         -- From australia:couch_honeypot
-        description = unilib.annotate(S("Couch Honeypot"), "Banksia dallanneyi"),
+        description = unilib.utils.annotate(S("Couch Honeypot"), "Banksia dallanneyi"),
         tiles = {"unilib_plant_honeypot_couch.png"},
         groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.plant_honeypot_couch.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_honeypot_couch", "australia:couch_honeypot")
 
-    unilib.register_decoration("australia_plant_honeypot_couch", {
+    unilib.register_decoration_generic("australia_plant_honeypot_couch", {
         -- From australia:couch_honeypot
         deco_type = "simple",
         decoration = "unilib:plant_honeypot_couch",

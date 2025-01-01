@@ -9,7 +9,7 @@
 unilib.pkg.moss_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.trunks.add_mode
+local mode = unilib.global.imported_mod_table.trunks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -23,9 +23,9 @@ local function place_func(pos)
 
     -- (1 in 21 chance of placing moss with fungus)
     if moss_type == 1 then
-        minetest.swap_node(on_ground, {name = "unilib:moss_normal_with_fungus_" .. rot, param2 = 1})
+        core.swap_node(on_ground, {name = "unilib:moss_normal_with_fungus_" .. rot, param2 = 1})
     else
-        minetest.swap_node(on_ground, {name = "unilib:moss_normal_" .. rot, param2 = 1})
+        core.swap_node(on_ground, {name = "unilib:moss_normal_" .. rot, param2 = 1})
     end
 
 end
@@ -73,7 +73,7 @@ function unilib.pkg.moss_normal.exec()
             description = S("Normal Moss"),
             tiles = {moss_img .. transform},
             groups = group_table,
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "nodebox",
@@ -97,7 +97,7 @@ function unilib.pkg.moss_normal.exec()
                 description = S("Normal Moss with Fungus"),
                 tiles = {fungus_img .. transform},
                 groups = group_table,
-                sounds = unilib.sound_table.leaves,
+                sounds = unilib.global.sound_table.leaves,
 
                 buildable_to = true,
                 drawtype = "nodebox",
@@ -122,7 +122,7 @@ function unilib.pkg.moss_normal.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 79,
                 plantlife_limit = -0.9,
             }),

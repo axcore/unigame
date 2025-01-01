@@ -9,7 +9,7 @@
 unilib.pkg.liquid_lava_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -78,7 +78,7 @@ function unilib.pkg.liquid_lava_ordinary.exec()
             drop = "",
             drowning = 1,
             is_ground_content = false,
-            light_source = unilib.light_max - 1,
+            light_source = unilib.constant.light_max - 1,
             liquid_alternative_flowing = "unilib:liquid_lava_ordinary_flowing",
             liquid_alternative_source = "unilib:liquid_lava_ordinary_source",
             liquid_renewable = false,
@@ -96,7 +96,7 @@ function unilib.pkg.liquid_lava_ordinary.exec()
         recipe = "unilib:liquid_lava_ordinary_source",
         burntime = 60,
     })
-    if unilib.pkg_executed_table["stone_obsidian"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_obsidian"] ~= nil then
 
         unilib.register_lava({
             cooled_name = "unilib:stone_obsidian",
@@ -123,7 +123,7 @@ function unilib.pkg.liquid_lava_ordinary.exec()
             drop = "",
             drowning = 1,
             is_ground_content = false,
-            light_source = unilib.light_max - 1,
+            light_source = unilib.constant.light_max - 1,
             liquid_alternative_flowing = "unilib:liquid_lava_ordinary_flowing",
             liquid_alternative_source = "unilib:liquid_lava_ordinary_source",
             liquid_renewable = false,

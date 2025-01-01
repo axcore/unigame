@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_sequoia_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sequoia.add_mode
+local mode = unilib.global.imported_mod_table.sequoia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ function unilib.pkg.deco_cool_trees_tree_sequoia_mature.post()
 
     for _, part_name in ipairs({"small", "medium", "large"}) do
 
-        unilib.register_decoration_now("cool_trees_tree_sequoia_mature_" .. part_name, nil, {
+        unilib.register_decoration_complete("cool_trees_tree_sequoia_mature_" .. part_name, nil, {
             -- From sequoia/init.lua
             -- Completes decoration in package "tree_sequoia_mature"
             biomes = "default_grassland",

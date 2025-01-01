@@ -9,7 +9,7 @@
 unilib.pkg.produce_cabbage_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -60,7 +60,8 @@ function unilib.pkg.produce_cabbage_normal.exec()
         harvest_group_table = {flammable = 2, food_cabbage = 1, seed = 2},
         waving = 1,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,7 +73,16 @@ function unilib.pkg.produce_cabbage_normal.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_cabbage_normal", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_cabbage_normal_harvest",
+        juice_description = S("Cabbage"),
+        juice_type = "cabbage",
+        rgb = "#a4c088",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_produce_cabbage_normal", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_cabbage_normal_grow_6",
@@ -81,8 +91,8 @@ function unilib.pkg.produce_cabbage_normal.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 789,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

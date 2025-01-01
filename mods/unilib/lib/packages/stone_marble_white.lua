@@ -9,7 +9,7 @@
 unilib.pkg.stone_marble_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.stone_marble_white.exec()
         description = S("White Marble"),
 
         category = "metamorphic",
+        colour = "#F1EDF7",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 3)
         hardness = 1,
         hardness_real = 3,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("marble_white", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("marble_white", 3, nil)
 
     unilib.register_node("unilib:stone_marble_white", "mapgen:marble", mode, {
         -- From farlands, mapgen:marble
@@ -45,7 +46,7 @@ function unilib.pkg.stone_marble_white.exec()
         tiles = {"unilib_stone_marble_white.png"},
         -- N.B. marble = 1, smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, marble = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drop not in original code
     })
@@ -78,7 +79,13 @@ function unilib.pkg.stone_marble_white.exec()
         --      unilib:stone_marble_white_cobble, or unilib:stone_marble_white_rubble, or nothing
         part_name = "marble_white",
         cobble_description = S("White Marble Cobble"),
+        cobble_compressed_description = S("Compressed White Marble Cobble"),
+        cobble_condensed_description = S("Condensed White Marble Cobble"),
         rubble_description = S("White Marble Rubble"),
+        rubble_compressed_description = S("Compressed White Marble Rubble"),
+        rubble_condensed_description = S("Condensed White Marble Rubble"),
+        smooth_compressed_description = S("Compressed White Marble"),
+        smooth_condensed_description = S("Condensed White Marble"),
 
         replace_mode = mode,
         override_drop_flag = true,

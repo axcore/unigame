@@ -9,7 +9,7 @@
 unilib.pkg.flower_lily_peace = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,15 @@ function unilib.pkg.flower_lily_peace.exec()
 
     unilib.register_node("unilib:flower_lily_peace", "cropocalypse:peace_lily", mode, {
         -- From cropocalypse:peace_lily
-        description = unilib.annotate(S("Peace Lily"), "Spathiphyllum wallisii"),
+        description = unilib.utils.annotate(S("Peace Lily"), "Spathiphyllum wallisii"),
         tiles = {"unilib_flower_lily_peace.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, decorative_plants = 1, flammable = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_orange = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_orange = 1, colour_orange = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,7 +51,7 @@ function unilib.pkg.flower_lily_peace.exec()
         waving = 1,
         wield_image = "unilib_flower_lily_peace.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:peace_lily
@@ -63,7 +64,7 @@ function unilib.pkg.flower_lily_peace.exec()
     end
     unilib.register_flower_in_pot("unilib:flower_lily_peace", "cropocalypse:peace_lily")
 
-    unilib.register_decoration("cropocalypse_flower_lily_peace", {
+    unilib.register_decoration_generic("cropocalypse_flower_lily_peace", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:flower_lily_peace",

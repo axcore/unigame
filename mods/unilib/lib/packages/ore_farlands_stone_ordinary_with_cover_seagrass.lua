@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_stone_ordinary_with_cover_seagrass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

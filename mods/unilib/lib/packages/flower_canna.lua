@@ -9,7 +9,7 @@
 unilib.pkg.flower_canna = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,20 +27,22 @@ function unilib.pkg.flower_canna.exec()
 
     unilib.register_node("unilib:flower_canna", "moreplants:bigflower", mode, {
         -- From moreplants:bigflower
-        description = unilib.annotate(S("Canna Flower"), "Canna"),
+        description = unilib.utils.annotate(S("Canna Flower"), "Canna"),
         tiles = {"unilib_flower_canna.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 1, flower = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_magenta = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_magenta = 1, colour_magenta = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_flower_canna.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other flowers
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -54,7 +56,7 @@ function unilib.pkg.flower_canna.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_canna", "moreplants:bigflower")
 
-    unilib.register_decoration("moreplants_flower_canna", {
+    unilib.register_decoration_generic("moreplants_flower_canna", {
         -- From moreplants:bigflower
         deco_type = "simple",
         decoration = "unilib:flower_canna",

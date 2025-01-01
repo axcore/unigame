@@ -9,7 +9,7 @@
 unilib.pkg.dirt_parched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,12 +34,14 @@ function unilib.pkg.dirt_parched.exec()
             tiles = {"unilib_dirt_parched.png"},
             -- N.B. dry_dirt = 1 not in original code
             groups = {crumbly = 3, dry_dirt = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
+        compressed_description = S("Compressed Parched Dirt"),
+        compressed_group_table = {crumbly = 2},
         -- N.B. no soil in original code; but since "unilib:dirt_dry" has soil, this dirt does too
         dry_soil = "unilib:soil_arid",
         wet_soil = "unilib:soil_arid_wet",

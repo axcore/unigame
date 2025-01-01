@@ -9,7 +9,7 @@
 unilib.pkg.stone_siltstone_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_siltstone_pale.exec()
         description = S("Pale Siltstone"),
 
         category = "sedimentary",
+        colour = "#F0B9A6",
         grinder_flag = true,
         grinder_powder = "unilib:sand_silt",
         hardness = 2,
@@ -74,6 +75,24 @@ function unilib.pkg.stone_siltstone_pale.exec()
         replace_mode = mode,
         description = S("Pale Siltstone Cobble"),
         img_list = {"unilib_stone_siltstone_pale.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_siltstone_pale_cobble_compressed
+        part_name = "siltstone_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pale Siltstone Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_siltstone_pale_cobble_condensed
+        part_name = "siltstone_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pale Siltstone Cobble"),
     })
 
 end

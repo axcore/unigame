@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_stone_schist_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_aotearoa_stone_schist_antipodean.post()
 
-    unilib.register_decoration_now("aotearoa_stone_schist_antipodean", nil, {
+    unilib.register_decoration_complete("aotearoa_stone_schist_antipodean", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "stone_schist_antipodean"
         biomes = "aotearoa_alpine_fellfield",

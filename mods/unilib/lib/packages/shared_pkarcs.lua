@@ -13,7 +13,7 @@
 unilib.pkg.shared_pkarcs = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pkarcs_doors.add_mode
+local mode = unilib.global.imported_mod_table.pkarcs_doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -23,21 +23,21 @@ local function do_open(pos, node, part_name, side, door_sound)
 
     if not side or side == "left" then
 
-        minetest.swap_node(
+        core.swap_node(
             pos,
             {name = "unilib:door_arched_" .. part_name .. "_left_open", param2 = node.param2}
         )
 
     elseif side == "right" or side then
 
-        minetest.swap_node(
+        core.swap_node(
             pos,
             {name = "unilib:door_arched_" .. part_name .. "_right_open", param2 = node.param2}
         )
 
     end
 
-    minetest.sound_play(door_sound .. "_open", {pos = pos, gain = 0.20, max_hear_distance = 10})
+    core.sound_play(door_sound .. "_open", {pos = pos, gain = 0.20, max_hear_distance = 10})
 
 end
 
@@ -45,21 +45,21 @@ local function do_close(pos, node, part_name, side, door_sound)
 
     if not side or side == "left" then
 
-        minetest.swap_node(
+        core.swap_node(
             pos,
             {name = "unilib:door_arched_" .. part_name .. "_left_closed", param2 = node.param2}
         )
 
     elseif side == "right" or side then
 
-        minetest.swap_node(
+        core.swap_node(
             pos,
             {name = "unilib:door_arched_" .. part_name .. "_right_closed", param2 = node.param2}
         )
 
     end
 
-    minetest.sound_play(door_sound .. "_close", {pos = pos, gain = 0.15, max_hear_distance = 10})
+    core.sound_play(door_sound .. "_close", {pos = pos, gain = 0.15, max_hear_distance = 10})
 
 end
 
@@ -97,13 +97,13 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
     local open_sound = data_table.open_sound or "unilib_door"
     local sound_type = data_table.sound_type or "wood"
 
-    local mesecons_flag = unilib.mesecons_door_flag and minetest.get_modpath("mesecons")
+    local mesecons_flag = unilib.setting.mesecons_door_flag and core.get_modpath("mesecons")
 
     local left_closed_table = {
         description = description,
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -133,7 +133,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -173,7 +173,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
         -- (no description)
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -202,7 +202,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -234,7 +234,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
         description = description,
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -264,7 +264,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -297,14 +297,14 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
             {"", "", ""},
             {"", ingredient, ""},
             {"", ingredient, ingredient},
-        }
+        },
     })
 
     local right_open_table = {
         -- (no description)
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -333,7 +333,7 @@ function unilib.pkg.shared_pkarcs.register_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -393,13 +393,13 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
     local open_sound = data_table.open_sound or "unilib_door"
     local sound_type = data_table.sound_type or "wood"
 
-    local mesecons_flag = unilib.mesecons_door_flag and minetest.get_modpath("mesecons")
+    local mesecons_flag = unilib.setting.mesecons_door_flag and core.get_modpath("mesecons")
 
     local left_closed_table = {
         description = description,
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -429,7 +429,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -469,7 +469,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
         -- (no description)
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -498,7 +498,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -530,7 +530,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
         description = description,
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -560,7 +560,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 
@@ -600,7 +600,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
         -- (no description)
         tiles = {img_list},
         groups = group_table,
-        sounds = unilib.sound_table[sound_type],
+        sounds = unilib.global.sound_table[sound_type],
 
         collision_box = {
             type = "fixed",
@@ -629,7 +629,7 @@ function unilib.pkg.shared_pkarcs.register_tall_arched_door(data_table)
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
                 unilib.pkg.shared_screwdriver.rotate_simple(pos, node, user, mode, new_param2)
             end
 

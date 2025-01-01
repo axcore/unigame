@@ -9,7 +9,7 @@
 unilib.pkg.misc_smoke_chimney = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,6 +48,8 @@ function unilib.pkg.misc_smoke_chimney.exec()
 
         drawtype = "plantlike",
         inventory_image = "unilib_misc_smoke_chimney.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         sunlight_propagates = true,
@@ -61,8 +63,8 @@ function unilib.pkg.misc_smoke_chimney.exec()
         recipe = {
             {"", "group:wood", ""},
             {"", "group:wood", ""},
-            {"", "unilib:torch_ordinary", ""}
-        }
+            {"", "unilib:torch_ordinary", ""},
+        },
     })
 
 end

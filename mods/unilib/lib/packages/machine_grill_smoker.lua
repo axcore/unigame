@@ -9,7 +9,7 @@
 unilib.pkg.machine_grill_smoker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 local empty_msg = S("Smoker grill is empty")
 local active_msg = S("Smoker grill active")
@@ -43,7 +43,7 @@ function unilib.pkg.machine_grill_smoker.exec()
         },
         groups = {cracky = 2},
         -- N.B. "stone" in original code
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -95,18 +95,18 @@ function unilib.pkg.machine_grill_smoker.exec()
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "src", drops)
-            unilib.get_inventory_drops(pos, "fuel", drops)
-            unilib.get_inventory_drops(pos, "dst", drops)
+            unilib.misc.get_inventory_drops(pos, "src", drops)
+            unilib.misc.get_inventory_drops(pos, "fuel", drops)
+            unilib.misc.get_inventory_drops(pos, "dst", drops)
             drops[#drops + 1] = "unilib:machine_grill_smoker"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_grill_inactive_formspec())
             local inv = meta:get_inventory()
             inv:set_size("src", 1)
@@ -117,14 +117,14 @@ function unilib.pkg.machine_grill_smoker.exec()
 
         on_metadata_inventory_move = function(pos)
 
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Start timer function, it decides whether the grill can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -146,8 +146,8 @@ function unilib.pkg.machine_grill_smoker.exec()
         recipe = {
             {"", "", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "group:wood", "unilib:metal_steel_ingot"},
-            {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"}
-        }
+            {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
+        },
     })
 
     unilib.register_node("unilib:machine_grill_smoker_active", "bbq:smoker_active", mode, {
@@ -199,7 +199,7 @@ function unilib.pkg.machine_grill_smoker.exec()
         },
         groups = {cracky = 2, not_in_creative_inventory = 1},
         -- N.B. "stone" in original code
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         drop = "unilib:machine_grill_smoker",

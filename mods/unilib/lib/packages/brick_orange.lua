@@ -9,7 +9,7 @@
 unilib.pkg.brick_orange = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_orange.init()
 
     return {
         description = "Orange brick",
-        depends = {"clay_baked_basic", "brick_ordinary"},
+        depends = {"brick_ordinary", "clay_baked_basic", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_orange.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:orange and morebricks:orangevertical, creates unilib:brick_orange_block
         --      and unilib:brick_orange_block_vertical
         part_name = "orange",
@@ -39,7 +39,7 @@ function unilib.pkg.brick_orange.exec()
         description = S("Orange Brick Block"),
     })
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:orangeaged and morebricks:orangeagedvertical, creates
         --      unilib:brick_orange_old_block and unilib:brick_orange_old_block_vertical
         part_name = "orange_old",

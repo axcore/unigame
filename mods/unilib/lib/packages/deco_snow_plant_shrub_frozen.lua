@@ -9,7 +9,7 @@
 unilib.pkg.deco_snow_plant_shrub_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,9 +30,9 @@ function unilib.pkg.deco_snow_plant_shrub_frozen.post()
     -- N.B. Original code placed dry shrubs as decorations, rather than frozen shrubs, for no
     --      obvious reason
 
-    if unilib.pkg_executed_table["biome_snow_normal"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_snow_normal"] ~= nil then
 
-        unilib.register_decoration_now("snow_plant_shrub_frozen", nil, {
+        unilib.register_decoration_complete("snow_plant_shrub_frozen", nil, {
             -- From snow/mapgen_v7.lua
             -- Completes the decoration in "plant_shrub_frozen"
             biomes = "snow_normal",
@@ -41,10 +41,10 @@ function unilib.pkg.deco_snow_plant_shrub_frozen.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_snow_forest"] ~= nil or
-            unilib.pkg_executed_table["biome_snow_lush"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_snow_forest"] ~= nil or
+            unilib.global.pkg_executed_table["biome_snow_lush"] ~= nil then
 
-        unilib.register_decoration_now("snow_plant_shrub_frozen_covered", nil, {
+        unilib.register_decoration_complete("snow_plant_shrub_frozen_covered", nil, {
             -- From snow/mapgen_v7.lua
             -- Completes the decoration in "plant_shrub_frozen"
             biomes = {"snow_forest", "snow_lush"},

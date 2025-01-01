@@ -9,7 +9,7 @@
 unilib.pkg.misc_calendar_fancy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,9 @@ function unilib.pkg.misc_calendar_fancy.init()
 
     return {
         description = "Fancy calendar",
-        depends = {"dye_basic", "item_paper_ordinary", "metal_steel"},
+        notes = "When player stats are disabled in settings, this calendar behaves the same as" ..
+                " a simple calendar",
+        depends = {"dye_basic", "item_paper_ordinary", "metal_steel", "shared_calendars"},
     }
 
 end
@@ -30,10 +32,10 @@ function unilib.pkg.misc_calendar_fancy.exec()
 
     unilib.register_node("unilib:misc_calendar_fancy", nil, mode, {
         -- Original to unilib
-        description = unilib.brackets(S("Fancy Calendar"), S("right-click to open")),
+        description = unilib.utils.brackets(S("Fancy Calendar"), S("right-click to open")),
         tiles = {"unilib_misc_calendar_fancy.png"},
         groups = {attached_node = 1, flammable = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "signlike",
         inventory_image = "unilib_misc_calendar_fancy.png",
@@ -48,7 +50,19 @@ function unilib.pkg.misc_calendar_fancy.exec()
         wield_image = "unilib_misc_calendar_fancy.png",
 
         on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-            unilib.open_fancy_calendar(clicker, "unilib:misc_calendar_fancy")
+
+            if not unilib.setting.stats_bio_flag then
+
+                unilib.pkg.shared_calendars.open_simple_calendar(clicker)
+
+            else
+
+                unilib.pkg.shared_calendars.open_fancy_calendar(
+                    clicker, "unilib:misc_calendar_fancy"
+                )
+
+            end
+
         end,
     })
     unilib.register_craft({
@@ -61,8 +75,8 @@ function unilib.pkg.misc_calendar_fancy.exec()
         },
     })
 
-    minetest.register_on_player_receive_fields(function(player, formname, fields)
-        unilib.calendar_on_receive_fields(player, formname, fields, "unilib:misc_calendar_fancy")
+    core.register_on_player_receive_fields(function(player, formname, fields)
+        unilib.calendars.on_receive_fields(player, formname, fields, "unilib:misc_calendar_fancy")
     end)
 
 end

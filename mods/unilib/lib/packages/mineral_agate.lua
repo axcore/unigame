@@ -9,7 +9,7 @@
 unilib.pkg.mineral_agate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,6 +19,7 @@ function unilib.pkg.mineral_agate.init()
 
     return {
         description = "Agate (as a mineral)",
+        optional = "machine_polishing",
     }
 
 end
@@ -38,5 +39,41 @@ function unilib.pkg.mineral_agate.exec()
         description = S("Agate Lump"),
         inventory_image = "unilib_mineral_agate_lump.png",
     })
+
+    if unilib.global.pkg_executed_table["machine_polishing"] ~= nil then
+
+        unilib.register_craftitem("unilib:mineral_agate_gem", nil, mode, {
+            -- Original to unilib
+            description = S("Agate Gem"),
+            inventory_image = "unilib_mineral_agate_gem.png",
+        })
+        unilib.register_craft({
+            -- Original to unilib
+            output = "unilib:mineral_agate_gem 9",
+            recipe = {
+                {"unilib:mineral_agate_block"},
+            },
+        })
+
+        unilib.register_node("unilib:mineral_agate_block", nil, mode, {
+            -- Original to unilib
+            description = S("Agate Block"),
+            tiles = {"unilib_mineral_agate_block.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.glass,
+
+            is_ground_content = false,
+        })
+        unilib.register_craft_3x3({
+            -- Original to unilib
+            output = "unilib:mineral_agate_block",
+            ingredient = "unilib:mineral_agate_gem",
+        })
+        unilib.register_stairs("unilib:mineral_agate_block")
+        unilib.register_carvings("unilib:mineral_agate_block", {
+            millwork_flag = true,
+        })
+
+    end
 
 end

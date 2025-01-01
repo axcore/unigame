@@ -9,7 +9,7 @@
 unilib.pkg.deco_cucina_vegana_plant_potato_russet_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_cucina_vegana_plant_potato_russet_wild.post()
 
-    unilib.register_decoration_now("cucina_vegana_plant_potato_russet_wild", nil, {
+    unilib.register_decoration_complete("cucina_vegana_plant_potato_russet_wild", nil, {
         -- From cucina_vegana, potato.lua
         -- Completes decoration in package "plant_potato_russet_wild"
         place_on = {

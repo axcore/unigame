@@ -9,7 +9,7 @@
 unilib.pkg.tree_fir_douglas_coast = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_fir_douglas_coast.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Pseudotsuga menziesii"
 
     unilib.register_tree({
@@ -105,10 +105,10 @@ function unilib.pkg.tree_fir_douglas_coast.exec()
 
     for i = 1, 6 do
 
-        unilib.register_decoration("glem_tree_fir_douglas_coast_" .. i, {
+        unilib.register_decoration_generic("glem_tree_fir_douglas_coast_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod ..
+            schematic = unilib.core.path_mod ..
                     "/mts/unilib_glem_tree_fir_douglas_coast_" .. i .. ".mts",
 
             fill_ratio = 0.005,

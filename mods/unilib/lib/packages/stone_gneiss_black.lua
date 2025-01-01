@@ -17,9 +17,9 @@
 unilib.pkg.stone_gneiss_black = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_gneiss_black.exec()
         description = S("Black Gneiss"),
 
         category = "metamorphic",
+        colour = "#53555B",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_gneiss_black.exec()
         wall_orig_name = "underch:gneiss_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:gneiss. Creates unilib:stone_gneiss_black_cobble_compressed
+        part_name = "gneiss_black",
+        orig_name = "compressed:gneiss",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:gneiss. Creates unilib:stone_gneiss_black_cobble_compressed
-            part_name = "gneiss_black",
-            orig_name = "compressed:gneiss",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Black Gneiss Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Black Gneiss Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:gneiss. Creates unilib:stone_gneiss_black_cobble_condensed
+        part_name = "gneiss_black",
+        orig_name = "condensed:gneiss",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:gneiss. Creates unilib:stone_gneiss_black_cobble_condensed
-            part_name = "gneiss_black",
-            orig_name = "condensed:gneiss",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Black Gneiss Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Black Gneiss Cobble"),
+    })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.stone_limestone_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_limestone_dark.exec()
         description = S("Dark Limestone"),
 
         category = "sedimentary",
+        colour = "#5C595A",
         grinder_flag = true,
         hardness = 1,
     })
@@ -42,7 +43,7 @@ function unilib.pkg.stone_limestone_dark.exec()
         tiles = {"unilib_stone_limestone_dark.png"},
         -- N.B. limestone = 1, smoothstone = 1 not in original code
         groups = {cracky = 3, limestone = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drop not in original code
         drop = "unilib:stone_limestone_dark_rubble",
@@ -81,6 +82,24 @@ function unilib.pkg.stone_limestone_dark.exec()
         replace_mode = mode,
         description = S("Dark Limestone Rubble"),
         img_list = {"unilib_stone_limestone_dark.png^unilib_stone_rubble_overlay.png"},
+    })
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_limestone_dark_rubble_compressed
+        part_name = "limestone_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Dark Limestone Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_limestone_dark_rubble_condensed
+        part_name = "limestone_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Dark Limestone Rubble"),
     })
 
 end

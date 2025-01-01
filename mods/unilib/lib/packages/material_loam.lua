@@ -9,7 +9,7 @@
 unilib.pkg.material_loam = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.material_loam.exec()
         -- N.B. Duplicate groups in original code
 --      groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         is_ground_content = false,
     })
@@ -46,11 +46,11 @@ function unilib.pkg.material_loam.exec()
         recipe = {
             {"unilib:sand_ordinary"},
             {"unilib:clay_ordinary"},
-        }
+        },
     })
     unilib.register_stairs("unilib:material_loam")
 
-    if unilib.pkg_executed_table["bed_mat_straw"] ~= nil then
+    if unilib.global.pkg_executed_table["bed_mat_straw"] ~= nil then
 
         unilib.register_node("unilib:material_loam_with_straw", "cottages:straw_ground", mode, {
             -- From cottages:straw_ground
@@ -59,7 +59,7 @@ function unilib.pkg.material_loam.exec()
             -- N.B. Duplicate groups in original code
 --          groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             is_ground_content = false,
         })
@@ -68,8 +68,8 @@ function unilib.pkg.material_loam.exec()
             output = "unilib:material_loam_with_straw 2",
             recipe = {
                 {"unilib:bed_mat_straw"},
-                {"unilib:material_loam"}
-            }
+                {"unilib:material_loam"},
+            },
         })
 
     end

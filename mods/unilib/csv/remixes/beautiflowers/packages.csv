@@ -1,5 +1,4 @@
 # "beautiflowers" remix - contains everything from the beautiflowers mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -97,12 +96,16 @@ plant_shrub_bonsai|beautiflowers
 dirt_ordinary|default farming moreblocks
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #soil_ordinary|farming
 #tree_apple|default doors moreblocks
+
+# supporting packages (.suggested)

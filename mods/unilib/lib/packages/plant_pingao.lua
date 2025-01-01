@@ -9,7 +9,7 @@
 unilib.pkg.plant_pingao = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,11 +27,11 @@ function unilib.pkg.plant_pingao.exec()
 
     unilib.register_node("unilib:plant_pingao", "aotearoa:pingao", mode, {
         -- From aotearoa:pingao
-        description = unilib.annotate(S("Pingao"), "Ficinia spiralis"),
+        description = unilib.utils.annotate(S("Pingao"), "Ficinia spiralis"),
         tiles = {"unilib_plant_pingao.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -55,7 +55,7 @@ function unilib.pkg.plant_pingao.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_pingao", "aotearoa:pingao")
 
-    unilib.register_decoration("aotearoa_plant_pingao", {
+    unilib.register_decoration_generic("aotearoa_plant_pingao", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_pingao",

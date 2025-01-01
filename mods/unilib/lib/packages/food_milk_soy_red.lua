@@ -9,7 +9,7 @@
 unilib.pkg.food_milk_soy_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,9 +32,14 @@ function unilib.pkg.food_milk_soy_red.exec()
         -- From cucina_vegana:soy_milk
         description = S("Red Soybean Milk"),
         inventory_image = "unilib_food_milk_soy_red.png",
-        groups = {eatable = 1, flammable = 1, food = 1, food_milk = 1, food_vegan = 1},
+        -- N.B. replaced original food_milk = 1 from original code, with food_milk_glass = 1
+        -- N.B. no food_soy_milk in original code
+        groups = {
+            eatable = 1, flammable = 1, food = 1, food_milk_glass = 1, food_soy_milk = 1,
+            food_vegan = 1,
+        },
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_milk_soy_red", 1, "unilib:vessel_glass_empty"
         ),
     })
@@ -48,7 +53,7 @@ function unilib.pkg.food_milk_soy_red.exec()
         },
     })
 
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_extractor_recipe({
             -- From cucina_vegana:soy_milk

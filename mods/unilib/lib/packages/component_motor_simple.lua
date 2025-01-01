@@ -9,7 +9,7 @@
 unilib.pkg.component_motor_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,10 +20,10 @@ function unilib.pkg.component_motor_simple.init()
     return {
         description = "Simple motor",
         depends = {
+            "hardware_wire_copper",
             "item_spool_empty",
             "material_plastic",
             "metal_copper",
-            "metal_copper_wire",
             "metal_steel",
             "mineral_mese",
         },
@@ -33,18 +33,23 @@ end
 
 function unilib.pkg.component_motor_simple.exec()
 
-    unilib.register_craftitem("unilib:component_motor_simple", "basic_materials:motor", mode, {
+    unilib.register_craftitem(
         -- From basic_materials:motor
-        description = S("Simple Motor"),
-        inventory_image = "unilib_component_motor_simple.png",
-    })
+        "unilib:component_motor_simple",
+        {"basic_materials:motor", "homedecor:motor", "technic:motor"},
+        mode,
+        {
+            description = S("Simple Motor"),
+            inventory_image = "unilib_component_motor_simple.png",
+        }
+    )
     unilib.register_craft({
         -- From basic_materials:motor
         output = "unilib:component_motor_simple 2",
         recipe = {
             {
                 "unilib:mineral_mese_crystal_fragment",
-                "unilib:metal_copper_wire",
+                "unilib:hardware_wire_copper",
                 "unilib:material_plastic_sheet",
             },
             {
@@ -54,14 +59,14 @@ function unilib.pkg.component_motor_simple.exec()
             },
             {
                 "unilib:mineral_mese_crystal_fragment",
-                "unilib:metal_copper_wire",
+                "unilib:hardware_wire_copper",
                 "unilib:material_plastic_sheet",
-            }
+            },
         },
         replacements = {
-            {"unilib:metal_copper_wire", "unilib:item_spool_empty"},
-            {"unilib:metal_copper_wire", "unilib:item_spool_empty"},
-        }
+            {"unilib:hardware_wire_copper", "unilib:item_spool_empty"},
+            {"unilib:hardware_wire_copper", "unilib:item_spool_empty"},
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.item_binoculars_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.binoculars.add_mode
+local mode = unilib.global.imported_mod_table.binoculars.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.item_binoculars_ordinary.exec()
 
         if player:get_inventory():contains_item("main", "unilib:item_binoculars_ordinary") then
             new_zoom_fov = 10
-        elseif unilib.is_creative(player:get_player_name()) then
+        elseif unilib.utils.is_creative(player:get_player_name()) then
             new_zoom_fov = 15
         end
 
@@ -47,27 +47,27 @@ function unilib.pkg.item_binoculars_ordinary.exec()
     end
 
     -- Set player property 'on joinplayer'
-    minetest.register_on_joinplayer(function(player)
+    core.register_on_joinplayer(function(player)
         update_player_property(player)
     end)
 
     -- Cyclic update of player property
     local function cyclic_update()
 
-        for _, player in ipairs(minetest.get_connected_players()) do
+        for _, player in ipairs(core.get_connected_players()) do
             update_player_property(player)
         end
 
-        minetest.after(4.7, cyclic_update)
+        core.after(4.7, cyclic_update)
 
     end
 
-    minetest.after(4.7, cyclic_update)
+    core.after(4.7, cyclic_update)
 
     -- Binoculars item
     unilib.register_craftitem("unilib:item_binoculars_ordinary", "binoculars:binoculars", mode, {
         -- From binoculars:binoculars
-        description = S("Ordinary Binoculars") .. "\n" .. S("Use with 'Zoom' key"),
+        description = unilib.utils.hint(S("Ordinary Binoculars"), S("use with 'Zoom' key")),
         inventory_image = "unilib_item_binoculars_ordinary.png",
         groups = {tool = 1},
 
@@ -84,7 +84,7 @@ function unilib.pkg.item_binoculars_ordinary.exec()
             {"unilib:glass_obsidian", "", "unilib:glass_obsidian"},
             {"unilib:metal_bronze_ingot", "unilib:metal_bronze_ingot", "unilib:metal_bronze_ingot"},
             {"unilib:glass_obsidian", "", "unilib:glass_obsidian"},
-        }
+        },
     })
 
 end

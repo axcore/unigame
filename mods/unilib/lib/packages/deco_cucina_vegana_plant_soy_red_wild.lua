@@ -9,7 +9,7 @@
 unilib.pkg.deco_cucina_vegana_plant_soy_red_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cucina_vegana_plant_soy_red_wild.post()
 
-    unilib.register_decoration_now("cucina_vegana_plant_soy_red_wild", nil, {
+    unilib.register_decoration_complete("cucina_vegana_plant_soy_red_wild", nil, {
         -- From cucina_vegana, soy.lua
         -- Completes decoration in package "plant_soy_red_wild"
         place_on = "unilib:dirt_ordinary_with_turf",

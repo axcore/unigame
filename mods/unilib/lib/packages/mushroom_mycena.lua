@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_mycena = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -60,5 +60,7 @@ function unilib.pkg.mushroom_mycena.exec()
         output = "unilib:mushroom_mycena_powder",
         recipe = {"unilib:mushroom_mycena"},
     })
+
+    unilib.register_decoration_spare("unilib:mushroom_mycena")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.brick_dirt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.brick_dirt.exec()
         description = S("Soft Dirt Brick"),
         tiles = {"unilib_brick_dirt_soft.png"},
         groups = {crumbly = 2, soil = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_ordinary",
         is_ground_content = false,
@@ -44,14 +44,14 @@ function unilib.pkg.brick_dirt.exec()
             {"unilib:dirt_ordinary", "unilib:dirt_ordinary"},
         },
     })
-    unilib.set_auto_rotate("unilib:brick_dirt_soft", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate("unilib:brick_dirt_soft", unilib.setting.auto_rotate_brick_flag)
 
     unilib.register_node("unilib:brick_dirt_hard", "mtg_plus:harddirtbrick", mode, {
         -- From mtg_plus:harddirtbrick
         description = S("Hardened Dirt Brick"),
         tiles = {"unilib_brick_dirt_hard.png"},
         groups = {crumbly = 1, level = 1, soil = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         is_ground_content = false,
     })
@@ -63,6 +63,6 @@ function unilib.pkg.brick_dirt.exec()
         cooktime = 5,
     })
     unilib.register_stairs("unilib:brick_dirt_hard")
-    unilib.set_auto_rotate("unilib:brick_dirt_hard", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate("unilib:brick_dirt_hard", unilib.setting.auto_rotate_brick_flag)
 
 end

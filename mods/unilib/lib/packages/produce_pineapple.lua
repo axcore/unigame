@@ -9,7 +9,7 @@
 unilib.pkg.produce_pineapple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,7 +48,8 @@ function unilib.pkg.produce_pineapple.exec()
         walkable = false,
         wield_image = "unilib_produce_pineapple_harvest.png",
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -77,7 +78,7 @@ function unilib.pkg.produce_pineapple.exec()
         inventory_image = "unilib_food_ring_pineapple.png",
         groups = {flammable = 2, food_pineapple_ring = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_ring_pineapple", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_ring_pineapple", 1),
     })
     unilib.register_craft( {
         -- From farming:pineapple_ring
@@ -87,7 +88,7 @@ function unilib.pkg.produce_pineapple.exec()
         },
         replacements = {
             {"unilib:produce_pineapple_harvest", "unilib:produce_pineapple_top"},
-        }
+        },
     })
 
     local orig_name_list = {}
@@ -121,7 +122,7 @@ function unilib.pkg.produce_pineapple.exec()
                     items = {
                         {items = {"unilib:produce_pineapple_harvest"}, rarity = 1},
                         {items = {"unilib:produce_pineapple_harvest"}, rarity = 10}
-                    }
+                    },
                 },
                 visual_scale = 1.50,
             },
@@ -137,11 +138,12 @@ function unilib.pkg.produce_pineapple.exec()
         juice_description = S("Pineapple"),
         juice_type = "pineapple",
         rgb = "#dcd611",
+
         orig_flag = true,
     })
-    unilib.register_juice_duplicate("pineapple", "unilib:food_ring_pineapple")
+    unilib.juice.register_duplicate("pineapple", "unilib:food_ring_pineapple")
 
-    unilib.register_decoration("farming_redo_produce_pineapple", {
+    unilib.register_decoration_generic("farming_redo_produce_pineapple", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_pineapple_grow_8",
@@ -150,8 +152,8 @@ function unilib.pkg.produce_pineapple.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 917,
+            scale = 0.003,
+            seed = 354,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

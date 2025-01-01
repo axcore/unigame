@@ -9,7 +9,7 @@
 unilib.pkg.deco_decorations_sea_plant_seagrass_tape_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decorations_sea.add_mode
+local mode = unilib.global.imported_mod_table.decorations_sea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,18 +31,22 @@ function unilib.pkg.deco_decorations_sea_plant_seagrass_tape_green.post()
 
     for i, mini_list in ipairs(height_list) do
 
-        unilib.register_decoration_now("decoration_sea_plant_seagrass_tape_green_tall_" .. i, nil, {
+        unilib.register_decoration_complete(
             -- From decorations_sea/mapgen.lua
             -- Completes decoration in package "plant_seagrass_tape_green"
-            biomes = unilib.pkg.shared_decorations_sea.temperate_biome_list,
-            num_spawn_by = 1,
-            place_on = "unilib:sand_ordinary",
-            spawn_by = "unilib:liquid_water_ordinary_source",
-            y_max = mini_list[1] * -1,
-            y_min = -32,
-        })
+            "decoration_sea_plant_seagrass_tape_green_tall_" .. i,
+            nil,
+            {
+                biomes = unilib.pkg.shared_decorations_sea.temperate_biome_list,
+                num_spawn_by = 1,
+                place_on = "unilib:sand_ordinary",
+                spawn_by = "unilib:liquid_water_ordinary_source",
+                y_max = mini_list[1] * -1,
+                y_min = -32,
+            }
+        )
 
-        unilib.register_decoration_now(
+        unilib.register_decoration_complete(
             -- From decorations_sea/mapgen.lua
             -- Completes decoration in package "plant_seagrass_tape_green"
             "decoration_sea_plant_seagrass_tape_green_tall_" .. i + 3,
@@ -59,7 +63,7 @@ function unilib.pkg.deco_decorations_sea_plant_seagrass_tape_green.post()
 
     end
 
-    unilib.register_decoration_now("decoration_sea_plant_seagrass_tape_green_1", nil, {
+    unilib.register_decoration_complete("decoration_sea_plant_seagrass_tape_green_1", nil, {
         -- From decorations_sea/mapgen.lua
         -- Completes decoration in package "plant_seagrass_tape_green"
         biomes = unilib.pkg.shared_decorations_sea.temperate_biome_list,
@@ -70,7 +74,7 @@ function unilib.pkg.deco_decorations_sea_plant_seagrass_tape_green.post()
         y_min = -32,
     })
 
-    unilib.register_decoration_now("decoration_sea_plant_seagrass_tape_green_2", nil, {
+    unilib.register_decoration_complete("decoration_sea_plant_seagrass_tape_green_2", nil, {
         -- From decorations_sea/mapgen.lua
         -- Completes decoration in package "plant_seagrass_tape_green"
         biomes = unilib.pkg.shared_decorations_sea.warm_biome_list,

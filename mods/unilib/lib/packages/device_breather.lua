@@ -9,7 +9,7 @@
 unilib.pkg.device_breather = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hook.add_mode
+local mode = unilib.global.imported_mod_table.hook.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,8 +48,8 @@ function unilib.pkg.device_breather.exec()
 
             else
 
-                local use = itemstack:get_wear() + (65536 / 10)
-                if use < 65536 then
+                local use = itemstack:get_wear() + (unilib.constant.max_tool_wear / 10)
+                if use <= unilib.constant.max_tool_wear then
 
                     itemstack:set_wear(use)
                     user:set_breath(11)
@@ -69,9 +69,9 @@ function unilib.pkg.device_breather.exec()
             {"", c_ingot, ""},
             {c_ingot, c_ingot, c_ingot},
             {c_ingot, "", c_ingot},
-        }
+        },
     })
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:device_breather", S("This assembly cannot be repaired")
     )
 

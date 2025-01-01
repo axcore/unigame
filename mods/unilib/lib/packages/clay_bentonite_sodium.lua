@@ -9,7 +9,7 @@
 unilib.pkg.clay_bentonite_sodium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_bentonite_sodium.exec()
         -- Texture from PFAA, weakOreClay_sodiumBentonite.png. Original code
         description = S("Sodium Bentonite Clay"),
         tiles = {"unilib_clay_bentonite_sodium.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:clay_bentonite_sodium_lump 4",
     })
@@ -38,6 +38,10 @@ function unilib.pkg.clay_bentonite_sodium.exec()
         -- Texture from PFAA, weakOreClay_sodiumBentonite.png. Original code
         output = "unilib:clay_bentonite_sodium",
         ingredient = "unilib:clay_bentonite_sodium_lump",
+    })
+    unilib.register_carvings("unilib:clay_bentonite_sodium", {
+        facade_flag = true,
+        millwork_flag = true,
     })
 
     unilib.register_craftitem("unilib:clay_bentonite_sodium_lump", nil, mode, {

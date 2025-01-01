@@ -9,7 +9,7 @@
 unilib.pkg.misc_granules_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_granules_coal.exec()
         description = S("Block of Coal Granules"),
         tiles = {"unilib_misc_granules_coal_block.png"},
         groups = {crumbly = 2, falling_node = 1, flammable = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         is_ground_content = false,
     })
@@ -42,7 +42,7 @@ function unilib.pkg.misc_granules_coal.exec()
         recipe = "unilib:misc_granules_coal_block",
         burntime = 40,
     })
-    if unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         unilib.register_craft_3x3({
             -- From underch:coal_dust

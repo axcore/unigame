@@ -9,7 +9,7 @@
 unilib.pkg.decor_frame_timber_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fachwerk.add_mode
+local mode = unilib.global.imported_mod_table.fachwerk.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.decor_frame_timber_basic.post()
 
     -- Now compile a table of super stones
     local stone_table = {}
-    for stone_type, _ in pairs(unilib.super_stone_table) do
+    for stone_type, _ in pairs(unilib.global.super_stone_table) do
 
         stone_table[stone_type] = {
             part_name = stone_type,
@@ -64,10 +64,10 @@ function unilib.pkg.decor_frame_timber_basic.post()
     -- Finally, create the new nodes
     for part_name, mini_table in pairs(stone_table) do
 
-        if unilib.pkg_executed_table["stone_" .. mini_table.part_name] ~= nil then
+        if unilib.global.pkg_executed_table["stone_" .. mini_table.part_name] ~= nil then
 
             local smooth_ingredient = "unilib:stone_" .. part_name
-            if minetest.registered_nodes[smooth_ingredient] ~= nil then
+            if core.registered_nodes[smooth_ingredient] ~= nil then
 
                 unilib.pkg.shared_fachwerk.register_timber_frame({
                     ingredient = smooth_ingredient,
@@ -80,7 +80,7 @@ function unilib.pkg.decor_frame_timber_basic.post()
             end
 
             local brick_ingredient = "unilib:stone_" .. part_name .. "_brick"
-            if minetest.registered_nodes[brick_ingredient] ~= nil then
+            if core.registered_nodes[brick_ingredient] ~= nil then
 
                 unilib.pkg.shared_fachwerk.register_timber_frame({
                     ingredient = brick_ingredient,
@@ -93,7 +93,7 @@ function unilib.pkg.decor_frame_timber_basic.post()
             end
 
             local cobble_ingredient = "unilib:stone_" .. part_name .. "_cobble"
-            if minetest.registered_nodes[cobble_ingredient] ~= nil then
+            if core.registered_nodes[cobble_ingredient] ~= nil then
 
                 unilib.pkg.shared_fachwerk.register_timber_frame({
                     ingredient = cobble_ingredient,
@@ -123,7 +123,7 @@ function unilib.pkg.decor_frame_timber_basic.post()
 
     -- Now compile a table of super trees
     local tree_table = {}
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
         tree_table[tree_type] = {
             part_name = tree_type,
@@ -145,8 +145,8 @@ function unilib.pkg.decor_frame_timber_basic.post()
 
         local ingredient = "unilib:tree_" .. part_name .. "_wood"
 
-        if unilib.pkg_executed_table["tree_" .. part_name] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. part_name] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             unilib.pkg.shared_fachwerk.register_timber_frame({
                 ingredient = ingredient,
@@ -158,7 +158,7 @@ function unilib.pkg.decor_frame_timber_basic.post()
         end
 
         -- This package provides deliberate craft recipe conflicts
-        unilib.register_craft_conflicts(
+        unilib.register_craft_conflicts({
             {
                 "unilib:tree_" .. part_name .. "_wood_with_beam_oblique_down 8",
                 "unilib:tree_" .. part_name .. "_wood_with_beam_oblique_up 8",
@@ -174,8 +174,8 @@ function unilib.pkg.decor_frame_timber_basic.post()
             {
                 "unilib:tree_" .. part_name .. "_wood_with_beam_oblique_up 8",
                 "unilib:tree_" .. part_name .. "_wood_with_beam_diagonal_up 8",
-            }
-        )
+            },
+        })
 
     end
 

@@ -9,7 +9,7 @@
 unilib.pkg.rope_flax = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.rope_flax.exec()
         description = S("Flax Rope"),
         tiles = {"unilib_rope_flax.png"},
         groups = {flammable = 2, oddly_breakable_by_hand = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "signlike",

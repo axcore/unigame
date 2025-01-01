@@ -13,7 +13,7 @@
 unilib.pkg.grass_jungle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,11 +34,17 @@ function unilib.pkg.grass_jungle.exec()
 
     local img = "unilib_grass_jungle.png"
     -- (farming_redo provides a nicer texture)
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
         img = "unilib_grass_jungle_alt.png"
     end
 
-    unilib.register_node("unilib:grass_jungle", "default:junglegrass", mode, {
+    local full_name = "unilib:grass_jungle"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "default:junglegrass", mode, {
         -- From default:junglegrass
         description = S("Jungle Grass"),
         tiles = {img},
@@ -47,7 +53,7 @@ function unilib.pkg.grass_jungle.exec()
             attached_node = 1, flammable = 1, flora = 1, grass = 1, jungle_grass = 1,
             junglegrass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -66,15 +72,15 @@ function unilib.pkg.grass_jungle.exec()
     unilib.register_craft({
         -- From default:junglegrass
         type = "fuel",
-        recipe = "unilib:grass_jungle",
+        recipe = full_name,
         burntime = 3,
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("default_grass_jungle", {
+    unilib.register_decoration_generic("default_grass_jungle", {
         -- From default/mapgen.lua
         deco_type = "simple",
-        decoration = "unilib:grass_jungle",
+        decoration = full_name,
 
         fill_ratio = 0.1,
         sidelen = 80,
@@ -85,57 +91,110 @@ end
 function unilib.pkg.grass_jungle.post()
 
     -- Occasionally drop cotton and/or rice seeds
-    if unilib.pkg_executed_table["crop_cotton"] ~= nil and
-            unilib.pkg_executed_table["crop_rice_white"] ~= nil then
+    if not unilib.setting.disable_grass_drop_flag then
 
-        -- Adapted from farming_redo
-        unilib.override_item("unilib:grass_jungle", {
-            drop = {
-                max_items = 1,
-                items = {
-                    {items = {"unilib:crop_cotton_seed"}, rarity = 8},
-                    {items = {"unilib:crop_rice_white_seed"},rarity = 8},
-                    {items = {"unilib:grass_jungle"}}
-                }
-            }
-        })
+        if unilib.global.pkg_executed_table["crop_cotton"] ~= nil and
+                unilib.global.pkg_executed_table["crop_rice_white"] ~= nil then
 
-    elseif unilib.pkg_executed_table["crop_cotton"] ~= nil then
-
-        -- In minetest_game, dropping cotton seeds was marked as deprecated (even though jungle
-        --      grass producing cotton made no sense, jungle grass was the only plant available to
-        --      be a source of cotton seeds)
-        -- For compatibility, unilib retains it, but only if the "plant_cotton_wild" package has not
-        --      been executed
-
-        -- Adapted from minetest_game/farming
-        if unilib.pkg_executed_table["plant_cotton_wild"] == nil then
-
+            -- Adapted from farming_redo
             unilib.override_item("unilib:grass_jungle", {
                 drop = {
                     max_items = 1,
                     items = {
                         {items = {"unilib:crop_cotton_seed"}, rarity = 8},
+                        {items = {"unilib:crop_rice_white_seed"},rarity = 8},
+                        {items = {"unilib:grass_jungle"}}
+                    },
+                },
+            })
+
+        elseif unilib.global.pkg_executed_table["crop_cotton"] ~= nil then
+
+            -- In minetest_game, dropping cotton seeds was marked as deprecated (even though jungle
+            --      grass producing cotton made no sense, jungle grass was the only plant available
+            --      to be a source of cotton seeds)
+            -- For compatibility, unilib retains it, but only if the "plant_cotton_wild" package has
+            --      not been executed
+
+            -- Adapted from minetest_game/farming
+            if unilib.global.pkg_executed_table["plant_cotton_wild"] == nil then
+
+                unilib.override_item("unilib:grass_jungle", {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_cotton_seed"}, rarity = 8},
+                            {items = {"unilib:grass_jungle"}},
+                        },
+                    },
+                })
+
+            end
+
+        elseif unilib.global.pkg_executed_table["crop_rice_white"] ~= nil then
+
+            -- Original to unilib
+            unilib.override_item("unilib:grass_jungle", {
+                drop = {
+                    max_items = 1,
+                    items = {
+                        {items = {"unilib:crop_rice_white_seed"}, rarity = 8},
                         {items = {"unilib:grass_jungle"}},
-                    }
-                }
+                    },
+                },
             })
 
         end
 
-    elseif unilib.pkg_executed_table["crop_rice_white"] ~= nil then
+    else
 
-        -- Original to unilib
+        if unilib.global.pkg_executed_table["crop_cotton"] ~= nil and
+                unilib.global.pkg_executed_table["crop_rice_white"] ~= nil then
 
-        unilib.override_item("unilib:grass_jungle", {
-            drop = {
-                max_items = 1,
-                items = {
-                    {items = {"unilib:crop_rice_white_seed"}, rarity = 8},
-                    {items = {"unilib:grass_jungle"}},
-                }
-            }
-        })
+            -- Adapted from farming_redo
+            unilib.override_item("unilib:grass_jungle", {
+                drop = {
+                    max_items = 1,
+                    items = {
+                        {items = {"unilib:crop_cotton_seed"}, rarity = 8},
+                        {items = {"unilib:crop_rice_white_seed"}, rarity = 8},
+--                      {items = {"unilib:grass_jungle"}}
+                    },
+                },
+            })
+
+        elseif unilib.global.pkg_executed_table["crop_cotton"] ~= nil then
+
+            -- Adapted from minetest_game/farming
+            if unilib.global.pkg_executed_table["plant_cotton_wild"] == nil then
+
+                unilib.override_item("unilib:grass_jungle", {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_cotton_seed"}, rarity = 8},
+--                          {items = {"unilib:grass_jungle"}},
+                        },
+                    },
+                })
+
+            end
+
+        elseif unilib.global.pkg_executed_table["crop_rice_white"] ~= nil then
+
+            -- Original to unilib
+
+            unilib.override_item("unilib:grass_jungle", {
+                drop = {
+                    max_items = 1,
+                    items = {
+                        {items = {"unilib:crop_rice_white_seed"}, rarity = 8},
+--                      {items = {"unilib:grass_jungle"}},
+                    },
+                },
+            })
+
+        end
 
     end
 

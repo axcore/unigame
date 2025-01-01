@@ -9,7 +9,26 @@
 unilib.pkg.misc_stalagmite_crystal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- Local functions
+---------------------------------------------------------------------------------------------------
+
+local function on_place(itemstack, placer, pointed_thing)
+
+    -- Allow placing the node only on floors
+    local dir = core.dir_to_wallmounted(
+        vector.subtract(pointed_thing.under, pointed_thing.above)
+    )
+
+    if dir == 1 then
+        core.item_place(itemstack, placer, pointed_thing, 1)
+    end
+
+    return itemstack
+
+end
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,6 +38,8 @@ function unilib.pkg.misc_stalagmite_crystal.init()
 
     return {
         description = "Cyrstal stalagmite",
+        notes = "Use the \"meta_farlands_underground\" package to generate these stalagmites in" ..
+                " ordinary stone caves",
         depends = "stone_ordinary",
     }
 
@@ -39,7 +60,7 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
             },
         }},
         groups = {cracky = 2, dig_immediate = 3, flammable = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         light_source = 7,
@@ -59,6 +80,9 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
         paramtype = "light",
         paramtype2 = "facedir",
         use_texture_alpha = "blend",
+
+        -- N.B. No .on_place() in original code
+        on_place = on_place,
     })
 
     unilib.register_abm({
@@ -71,7 +95,7 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
 
         action = function(pos, node)
 
-            minetest.add_particle({
+            core.add_particle({
                 acceleration = {x = 0, y = 0, z = 0},
                 animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
                 collisiondetection = false,
@@ -101,7 +125,7 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
             },
         }},
         groups = {cracky = 2, dig_immediate = 3, flammable = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         light_source = 7,
@@ -123,6 +147,9 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
         paramtype = "light",
         paramtype2 = "facedir",
         use_texture_alpha = "blend",
+
+        -- N.B. No .on_place() in original code
+        on_place = on_place,
     })
 
     unilib.register_abm({
@@ -135,7 +162,7 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
 
         action = function(pos, node)
 
-            minetest.add_particle({
+            core.add_particle({
                 acceleration = {x = 0, y = 0, z = 0},
                 animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
                 collisiondetection = false,
@@ -165,7 +192,7 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
             },
         }},
         groups = {cracky = 2, dig_immediate = 3, flammable = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         light_source = 7,
@@ -198,50 +225,5 @@ function unilib.pkg.misc_stalagmite_crystal.exec()
             {"unilib:misc_stalagmite_crystal_small"},
         },
     })
-
-end
-
-function unilib.pkg.misc_stalagmite_crystal.post()
-
-    -- Add crystal stalagmites to suitable cave locations
-    minetest.register_on_generated(function(minp, maxp)
-
-        if maxp.y < -2000 or maxp.y > 1500 then
-            return
-        end
-
-        local stone = minetest.find_nodes_in_area(minp, maxp, {"unilib:stone_ordinary"})
-
-        for n = 1, #stone do
-
-            if math.random(1, 150) == 1 then
-
-                local pos = {x = stone[n].x, y = stone[n].y, z = stone[n].z}
-
-                if minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name == "air" then
-
-                    if math.random(1, 5) == 1 then
-
-                        minetest.add_node(
-                            {x = pos.x, y = pos.y + 1, z = pos.z},
-                            {name = "unilib:misc_stalagmite_crystal_small"}
-                        )
-
-                    else
-
-                        minetest.add_node(
-                            {x = pos.x, y = pos.y + 1, z = pos.z},
-                            {name = "unilib:misc_stalagmite_crystal"}
-                        )
-
-                    end
-
-                end
-
-            end
-
-        end
-
-    end)
 
 end

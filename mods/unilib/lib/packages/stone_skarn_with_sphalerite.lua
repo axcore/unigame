@@ -9,7 +9,7 @@
 unilib.pkg.stone_skarn_with_sphalerite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.rocks.add_mode
+local mode = unilib.global.imported_mod_table.rocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,11 @@ function unilib.pkg.stone_skarn_with_sphalerite.exec()
         "mineral:skarn_sphalerite",
         mode,
         {
-            description = unilib.brackets(S("Sphalerite Ore"), S("Skarn")),
+            description = unilib.utils.brackets(S("Sphalerite Ore"), S("Skarn")),
             tiles = {"unilib_stone_skarn.png^unilib_mineral_sphalerite_alt.png"},
-            groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 3, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:mineral_sphalerite_lump",
         }

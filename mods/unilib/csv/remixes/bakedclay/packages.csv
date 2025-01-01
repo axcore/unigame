@@ -1,5 +1,4 @@
 # "bakedclay" remix - contains everything except luckyblocks/coloured_clay compatibility code
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -7,12 +6,13 @@
 clay_baked_basic|bakedclay
 deco_bakedclay_flower_delphinium_blue|bakedclay
 deco_bakedclay_flower_lazarus_bell|bakedclay
-deco_bakedclay_flower_reed_mannagrass|bakedclay
 deco_bakedclay_flower_thistle|bakedclay
+deco_bakedclay_grass_reed_mannagrass|bakedclay
 flower_delphinium_blue|bakedclay
 flower_lazarus_bell|bakedclay
-flower_reed_mannagrass|bakedclay
 flower_thistle|bakedclay
+grass_reed_mannagrass|bakedclay
+shared_bakedclay|bakedclay
 
 # supporting packages (.depends)
 dirt_ordinary|default farming moreblocks
@@ -34,3 +34,5 @@ sand_ordinary|default
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

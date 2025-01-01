@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_fern_broad_leaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_farlands_fern_broad_leaf.post()
 
-    unilib.register_decoration_now("farlands_fern_broad_leaf", nil, {
+    unilib.register_decoration_complete("farlands_fern_broad_leaf", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "fern_broad_leaf"
         biomes = "farlands_rainforest",

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_nepouite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_nepouite.exec()
         description = S("Nepouite Lump"),
         inventory_image = "unilib_mineral_nepouite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_nickel"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_nickel"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

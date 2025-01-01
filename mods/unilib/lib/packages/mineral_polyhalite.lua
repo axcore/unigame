@@ -9,7 +9,7 @@
 unilib.pkg.mineral_polyhalite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_polyhalite.exec()
         description = S("Polyhalite Lump"),
         inventory_image = "unilib_mineral_polyhalite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_potassium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_potassium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

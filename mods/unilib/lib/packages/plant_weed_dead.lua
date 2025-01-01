@@ -9,7 +9,7 @@
 unilib.pkg.plant_weed_dead = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,13 @@ function unilib.pkg.plant_weed_dead.exec()
 --      groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         groups = {attached_node = 1, flammable = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_weed_dead.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         light_source = 2,
         paramtype = "light",
         selection_box = {
@@ -52,7 +53,7 @@ function unilib.pkg.plant_weed_dead.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_weed_dead", "moreplants:deadweed")
 
-    unilib.register_decoration("moreplants_plant_weed_dead", {
+    unilib.register_decoration_generic("moreplants_plant_weed_dead", {
         -- From moreplants:deadweed
         deco_type = "simple",
         decoration = "unilib:plant_weed_dead",

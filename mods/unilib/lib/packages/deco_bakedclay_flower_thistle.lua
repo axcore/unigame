@@ -9,7 +9,7 @@
 unilib.pkg.deco_bakedclay_flower_thistle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,9 +24,9 @@ function unilib.pkg.deco_bakedclay_flower_thistle.init()
 
 end
 
-function unilib.pkg.deco_bakedclay_flower_thistle.exec()
+function unilib.pkg.deco_bakedclay_flower_thistle.post()
 
-    unilib.register_decoration_now("bakedclay_flower_thistle", nil, {
+    unilib.register_decoration_complete("bakedclay_flower_thistle", nil, {
         -- From bakedclay/init.lua
         -- Completes decoration in package "flower_thistle"
         place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary_with_turf_dry"},

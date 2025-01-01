@@ -9,7 +9,7 @@
 unilib.pkg.coral_brain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.coral_brain.exec()
 
     unilib.register_node("unilib:coral_brain", "australia:brain_coral", mode, {
         -- From australia:brain_coral
-        description = unilib.annotate(S("Brain Coral"), "Dipsastraea speciosa"),
+        description = unilib.utils.annotate(S("Brain Coral"), "Dipsastraea speciosa"),
         tiles = {"unilib_coral_brain.png"},
         groups = {attached_node = 1, coral = 1, cracky = 3, sea = 1, stone = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         -- N.B. Removed image so user can see the item's unique shape in inventory

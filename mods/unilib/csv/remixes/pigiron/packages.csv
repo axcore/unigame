@@ -1,5 +1,4 @@
 # "pigiron" remix - contains some crafting overrides and tools from the pigiron mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -15,7 +14,7 @@ tool_sword_iron_pig|pigiron
 # supporting packages (.depends)
 metal_iron|default
 metal_iron_pig|real_minerals
-metal_steel|default technic
+metal_steel|default glemr11 technic
 
 # supporting packages (.at_least_one)
 material_charcoal_artificial_lump|ethereal
@@ -30,6 +29,9 @@ tool_sword_bronze|default
 tool_sword_steel|default
 
 # supporting packages (.optional)
+#machine_furnace_induction|unilib
 #mineral_haematite|real_minerals
 #mineral_limonite|real_minerals
 #mineral_magnetite|real_minerals
+
+# supporting packages (.suggested)

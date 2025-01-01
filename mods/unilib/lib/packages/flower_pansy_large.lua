@@ -9,7 +9,7 @@
 unilib.pkg.flower_pansy_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,15 @@ function unilib.pkg.flower_pansy_large.exec()
 
     unilib.register_node("unilib:flower_pansy_large", "cropocalypse:pansy", mode, {
         -- From cropocalypse:pansy
-        description = unilib.annotate(S("Large Pansy"), "Viola × wittrockiana"),
+        description = unilib.utils.annotate(S("Large Pansy"), "Viola × wittrockiana"),
         tiles = {"unilib_flower_pansy_large.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, decorative_plants = 1, flammable = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_violet = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_violet = 1, colour_violet = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,7 +51,7 @@ function unilib.pkg.flower_pansy_large.exec()
         waving = 1,
         wield_image = "unilib_flower_pansy_large.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:pansy
@@ -63,7 +64,7 @@ function unilib.pkg.flower_pansy_large.exec()
     end
     unilib.register_flower_in_pot("unilib:flower_pansy_large", "cropocalypse:pansy")
 
-    unilib.register_decoration("cropocalypse_flower_pansy_large", {
+    unilib.register_decoration_generic("cropocalypse_flower_pansy_large", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:flower_pansy_large",

@@ -9,7 +9,7 @@
 unilib.pkg.deco_xocean_coral_rooted_tube = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.deco_xocean_coral_rooted_tube.init()
 
     return {
         description = "Rooted tube coral as decoration",
-        depends = "coral_rooted_tube",
+        depends = {"coral_rooted_tube", "shared_xocean"},
         at_least_one = {
             "biome_default_desert_cold",
             "biome_default_desert_sandstone",
@@ -40,7 +40,8 @@ end
 
 function unilib.pkg.deco_xocean_coral_rooted_tube.post()
 
-    unilib.register_decoration_now("xocean_coral_rooted_tube", nil, {
+    --[[
+    unilib.register_decoration_complete("xocean_coral_rooted_tube", nil, {
         -- From xocean/init.lua
         -- Completes decoration in package "coral_rooted_tube"
         biomes = {
@@ -63,7 +64,7 @@ function unilib.pkg.deco_xocean_coral_rooted_tube.post()
         y_min = -50,
     })
 
-    unilib.register_decoration_now("xocean_coral_rooted_tube_skeleton", nil, {
+    unilib.register_decoration_complete("xocean_coral_rooted_tube_skeleton", nil, {
         -- From xocean/init.lua
         -- Completes decoration in package "coral_rooted_tube"
         biomes = {
@@ -85,5 +86,33 @@ function unilib.pkg.deco_xocean_coral_rooted_tube.post()
         y_max = -5,
         y_min = -50,
     })
+    ]]--
+
+    for _, part_name in pairs({"", "_skeleton"}) do
+
+        unilib.register_decoration_complete("xocean_coral_rooted_tube" .. part_name, nil, {
+            -- From xocean/init.lua
+            -- Completes decoration in package "coral_rooted_tube"
+            biomes = {
+                "default_desert_cold_ocean",
+                "default_desert_sandstone_ocean",
+                "default_forest_coniferous_ocean",
+                "default_forest_deciduous_ocean",
+                "default_grassland_ocean",
+                "default_grassland_snowy_ocean",
+                "default_taiga_ocean",
+            },
+            place_on = {
+                "unilib:coral_block_bubble",
+                "unilib:coral_block_fire",
+                "unilib:coral_block_horn",
+                "unilib:coral_block_rose",
+                "unilib:coral_block_tube",
+            },
+            y_max = -5,
+            y_min = -50,
+        })
+
+    end
 
 end

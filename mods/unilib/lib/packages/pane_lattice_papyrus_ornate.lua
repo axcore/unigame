@@ -9,7 +9,7 @@
 unilib.pkg.pane_lattice_papyrus_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.pane_lattice_papyrus_ornate.exec()
         {c_papyrus, c_string, c_papyrus},
         {c_papyrus, c_string, c_papyrus},
     }
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         -- N.B. If allowed, tweak the original recipe so that it matches the one in the
         --      "pane_lattice_papyrus_simple" package
@@ -55,7 +55,7 @@ function unilib.pkg.pane_lattice_papyrus_ornate.exec()
             description = S("Ornate Papyrus Lattice"),
             textures = {img, img, img},
             groups = {choppy = 1, flammable = 2, snappy = 2},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             inventory_image = img,
             recipe = recipe_table,

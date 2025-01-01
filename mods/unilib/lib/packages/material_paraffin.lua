@@ -9,7 +9,7 @@
 unilib.pkg.material_paraffin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,11 +26,16 @@ end
 
 function unilib.pkg.material_paraffin.exec()
 
-    unilib.register_craftitem("unilib:material_paraffin", "basic_materials:paraffin", mode, {
+    unilib.register_craftitem(
         -- From basic_materials:paraffin
-        description = S("Unprocessed Paraffin"),
-        inventory_image = "unilib_material_paraffin.png",
-    })
+        "unilib:material_paraffin",
+        {"basic_materials:paraffin", "homedecor:paraffin", "homedecor:plastic_base"},
+        mode,
+        {
+            description = S("Unprocessed Paraffin"),
+            inventory_image = "unilib_material_paraffin.png",
+        }
+    )
     unilib.register_craft({
         -- From basic_materials:paraffin
         type = "cooking",

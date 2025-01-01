@@ -9,7 +9,7 @@
 unilib.pkg.tree_bamboo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,6 +37,7 @@ function unilib.pkg.tree_bamboo.exec()
         description = S("Bamboo Tree Stalk"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_bamboo_trunk", "ethereal:bamboo", mode, {
@@ -44,21 +45,27 @@ function unilib.pkg.tree_bamboo.exec()
         description = S("Bamboo Tree Stalk"),
         tiles = {"unilib_tree_bamboo_trunk.png"},
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
+        collision_box = {
+            type = "fixed",
+            fixed = {-0.15, -0.5, -0.15, 0.15, 0.5, 0.15},
+        },
         drawtype = "plantlike",
         inventory_image = "unilib_tree_bamboo_trunk.png",
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
-            fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}
+            fixed = {-0.15, -0.5, -0.15, 0.15, 0.5, 0.15},
         },
         sunlight_propagates = true,
-        walkable = unilib.walkable_leaves_flag,
+        walkable = unilib.setting.walkable_leaves_flag,
         wield_image = "unilib_tree_bamboo_trunk.png",
 
         after_dig_node = function(pos, node, metadata, digger)
-            unilib.dig_up(pos, node, digger)
+            unilib.misc.dig_up(pos, node, digger)
         end
     })
     unilib.register_craft({
@@ -67,7 +74,7 @@ function unilib.pkg.tree_bamboo.exec()
         recipe = "unilib:tree_bamboo_trunk",
         burntime = 2,
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:bamboo
@@ -76,7 +83,7 @@ function unilib.pkg.tree_bamboo.exec()
                 {"unilib:tree_bamboo_trunk", "unilib:tree_bamboo_trunk"},
                 {"unilib:tree_bamboo_trunk", "unilib:tree_bamboo_trunk"},
                 {"unilib:tree_bamboo_trunk", "unilib:tree_bamboo_trunk"},
-            }
+            },
         })
 
     end
@@ -87,8 +94,10 @@ function unilib.pkg.tree_bamboo.exec()
         description = S("Bamboo Tree Block"),
         tiles = {"unilib_misc_flooring_bamboo.png"},
         groups = {choppy = 3 , flammable = 2, snappy = 3, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. is_ground_content = false not in original code; added to match other woods
+        is_ground_content = false,
         paramtype = "light",
     })
     unilib.register_craft_3x3({
@@ -105,9 +114,9 @@ function unilib.pkg.tree_bamboo.exec()
         description = S("Bamboo Tree Leaves"),
         tiles = {"unilib_tree_bamboo_leaves.png"},
         groups = {flammable = 2, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
@@ -116,15 +125,17 @@ function unilib.pkg.tree_bamboo.exec()
             },
         },
         inventory_image = "unilib_tree_bamboo_leaves.png",
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_image = "unilib_tree_bamboo_leaves.png",
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
     })
-    unilib.register_quick_tree_leafdecay("bamboo", 2)
+    unilib.register_quick_tree_leafdecay("bamboo", 3)
 
     unilib.register_tree_sapling({
         -- From ethereal:bamboo_sprout. Creates unilib:tree_bamboo_sapling
@@ -139,7 +150,7 @@ function unilib.pkg.tree_bamboo.exec()
         maxp_table = {x = 1, y = 18, z = 1},
         minp_table = {x = -1, y = 1, z = -1},
         offset_list = {1, 0, 1},
-        select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 0, 4 / 16},
+        select_table = {-3 / 16, -0.5, -3 / 16, 3 / 16, -0.1, 3 / 16},
         under_list = {"unilib:dirt_ordinary_with_turf_bamboo", "ethereal:bamboo_dirt"},
     })
     unilib.override_item("unilib:tree_bamboo_sapling", {
@@ -147,9 +158,9 @@ function unilib.pkg.tree_bamboo.exec()
             attached_node = 1, dig_immediate = 3, flammable = 2, food_bamboo_sprout = 1,
             sapling = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:tree_bamboo_sapling", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:tree_bamboo_sapling", 2),
     })
 
     unilib.register_fence_quick({
@@ -179,7 +190,7 @@ function unilib.pkg.tree_bamboo.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_bamboo_closed
+        -- Original to unilib. Creates unilib:gate_bamboo_closed, etc
         part_name = "bamboo",
         orig_name = {nil, nil},
 
@@ -191,10 +202,10 @@ function unilib.pkg.tree_bamboo.exec()
         ingredient = "unilib:tree_bamboo_block",
     })
 
-    unilib.register_decoration("ethereal_tree_bamboo", {
+    unilib.register_decoration_generic("ethereal_tree_bamboo", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_bamboo.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_bamboo.mts",
 
         fill_ratio = 0.025,
         flags = "place_center_x, place_center_z",

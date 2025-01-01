@@ -9,7 +9,7 @@
 unilib.pkg.food_puree_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,26 +43,26 @@ function unilib.pkg.food_puree_blueberry.exec()
             inventory_image = "unilib_food_puree_blueberry.png",
             groups = {food = 1, food_berry = 1, food_blueberry = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_puree_blueberry", 4)
+            on_use = unilib.cuisine.eat_on_use("unilib:food_puree_blueberry", 4)
         }
     )
 
     local berry_list= {}
-    if unilib.pkg_executed_table["fruit_blueberry_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_blueberry_ordinary"] ~= nil then
         table.insert(berry_list, "unilib:fruit_blueberry_ordinary")
     end
-    if unilib.pkg_executed_table["produce_blueberry_highbush"] ~= nil then
+    if unilib.global.pkg_executed_table["produce_blueberry_highbush"] ~= nil then
         table.insert(berry_list, "unilib:produce_blueberry_highbush_harvest")
     end
     -- N.B. This recipe is removed, because unilib:fruit_blueberry_ordinary can craft
     --      unilib:fruit_blueberry_picked)
     --[[
-    if unilib.pkg_executed_table["bush_ornamental_blueberry"] ~= nil then
+    if unilib.global.pkg_executed_table["bush_ornamental_blueberry"] ~= nil then
         table.insert(berry_list, "unilib:fruit_blueberry_picked")
     end
     ]]--
 
-    if unilib.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
+    if unilib.global.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
 
         for _, berry_name in ipairs(berry_list) do
 
@@ -86,13 +86,13 @@ function unilib.pkg.food_puree_blueberry.exec()
     else
 
         local stone_list = {}
-        if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
             table.insert(stone_list, "unilib:stone_ordinary")
             table.insert(stone_list, "unilib:stone_ordinary_cobble")
 
         end
-        if unilib.pkg_executed_table["stone_desert"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
             table.insert(stone_list, "unilib:stone_desert")
             table.insert(stone_list, "unilib:stone_desert_cobble")
@@ -121,7 +121,7 @@ function unilib.pkg.food_puree_blueberry.exec()
 
     end
 
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         for _, berry_name in ipairs(berry_list) do
 

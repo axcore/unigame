@@ -17,9 +17,9 @@
 unilib.pkg.stone_amphibolite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_amphibolite.exec()
         description = S("Amphibolite"),
 
         category = "metamorphic",
+        colour = "#787768",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 2)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_amphibolite.exec()
         wall_orig_name = "underch:amphibolite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:amphibolite. Creates unilib:stone_amphibolite_cobble_compressed
+        part_name = "amphibolite",
+        orig_name = "compressed:amphibolite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:amphibolite. Creates unilib:stone_amphibolite_cobble_compressed
-            part_name = "amphibolite",
-            orig_name = "compressed:amphibolite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Amphibolite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Amphibolite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:amphibolite. Creates unilib:stone_amphibolite_cobble_condensed
+        part_name = "amphibolite",
+        orig_name = "condensed:amphibolite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:amphibolite. Creates unilib:stone_amphibolite_cobble_condensed
-            part_name = "amphibolite",
-            orig_name = "condensed:amphibolite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Amphibolite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Amphibolite Cobble"),
+    })
 
 end

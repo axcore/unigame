@@ -9,7 +9,7 @@
 unilib.pkg.fern_horsetail = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,7 @@ function unilib.pkg.fern_horsetail.exec()
         if mini_list[1] == "young" then
 
             node_drop = "unilib:fern_horsetail_young"
-            node_on_use = unilib.cuisine_eat_on_use("unilib:fern_horsetail_young", 1)
+            node_on_use = unilib.cuisine.eat_on_use("unilib:fern_horsetail_young", 1)
             -- N.B. no food_fern in original code
             group_table.food_fern = 1
 
@@ -55,10 +55,10 @@ function unilib.pkg.fern_horsetail.exec()
 
         unilib.register_node(full_name, orig_name, mode, {
             -- From ferns:horsetail_01, etc
-            description = unilib.annotate(mini_list[2], "Equisetum arvense"),
+            description = unilib.utils.annotate(mini_list[2], "Equisetum arvense"),
             tiles = {node_img},
             groups = group_table,
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
@@ -79,7 +79,7 @@ function unilib.pkg.fern_horsetail.exec()
 
     end
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From ferns:horsetail_01, etc
@@ -92,11 +92,11 @@ function unilib.pkg.fern_horsetail.exec()
 
     end
 
-    unilib.register_decoration("ferns_fern_horsetail", {
+    unilib.register_decoration_generic("ferns_fern_horsetail", {
         deco_type = "simple",
         decoration = fern_list,
 
-        fill_ratio = unilib.biome_lib_fill_ratio,
+        fill_ratio = unilib.setting.biome_lib_fill_ratio,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_tree_acacia_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,39 +21,6 @@ function unilib.pkg.ore_farlands_tree_acacia_exotic.init()
         description = "Exotic acacia tree leaves with fruit, implemented as an ore",
         depends = {"fruit_orange_exotic", "tree_acacia_exotic"},
     }
-
-end
-
-function unilib.pkg.ore_farlands_tree_acacia_exotic.exec()
-
-    unilib.register_node(
-        -- From farlands, fruit:leaves_with_orange
-        "unilib:tree_acacia_exotic_leaves_with_orange",
-        "fruit:leaves_with_orange",
-        mode,
-        {
-            description = S("Exotic Acacia Leaves with Oranges"),
-            tiles = {"unilib_tree_acacia_exotic_leaves.png^unilib_fruit_orange_exotic_overlay.png"},
-            groups = {leaves = 1, not_in_creative_inventory = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
-
-            drawtype = "allfaces_optional",
-            drop = "unilib:tree_acacia_exotic_leaves",
-            paramtype = "light",
-            special_tiles = {
-                "unilib_tree_acacia_exotic_leaves_simple.png^unilib_fruit_orange_exotic_overlay.png"
-            },
-            waving = 1,
-
-            on_destruct = function(pos)
-                minetest.add_item(pos, "unilib:fruit_orange_exotic")
-            end,
-
-            on_rightclick = function(pos)
-                minetest.set_node(pos, {name = "unilib:tree_acacia_exotic_leaves"})
-            end,
-        }
-    )
 
 end
 
@@ -76,7 +43,7 @@ function unilib.pkg.ore_farlands_tree_acacia_exotic.post()
             seed = 766,
             spread = {x = 5, y = 5, z = 5},
         },
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 0,
     })
 

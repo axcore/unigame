@@ -9,7 +9,7 @@
 unilib.pkg.mineral_skutterudite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_skutterudite_rock.exec()
 
     local c_lump = "unilib:mineral_skutterudite_lump"
-    local hardness = unilib.mineral_table["skutterudite"]["hardness"]
+    local hardness = unilib.global.mineral_table["skutterudite"]["hardness"]
 
     unilib.register_mineral_rock("skutterudite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_skutterudite_rock.exec()
         description = S("Skutterudite Rock"),
         tiles = {"unilib_mineral_skutterudite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

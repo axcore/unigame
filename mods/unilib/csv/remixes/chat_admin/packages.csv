@@ -1,0 +1,59 @@
+# "chat_admin" remix - contains packages which define chat commands available only to players with
+#       the "unilib_admin" privilege
+# See the "chat" remix for a full of list chat command packages with expanded comments
+
+# node_name | original_mod
+
+chat_clear_food_history|unilib
+chat_cripple_health|unilib
+chat_cripple_hunger|unilib
+chat_cripple_me|unilib
+chat_cripple_thirst|unilib
+chat_dawn|unilib
+chat_day|unilib
+chat_daylight|ptime
+chat_dump|unilib
+chat_dump_abm|unilib
+chat_dump_biome|unilib
+chat_dump_compatible|unilib
+chat_dump_craftitem|unilib
+chat_dump_decoration|unilib
+chat_dump_expansion|unilib
+chat_dump_external|unilib
+chat_dump_item|unilib
+chat_dump_lbm|unilib
+chat_dump_mod|unilib
+chat_dump_node|unilib
+chat_dump_ore|unilib
+chat_dump_tool|unilib
+chat_dusk|unilib
+chat_find_biome|findbiomes unilib
+chat_find_node|unilib
+chat_list_expansion|unilib
+chat_list_external|unilib
+chat_list_mod|unilib
+chat_night|unilib
+chat_reset_health|unilib
+chat_reset_hunger|unilib
+chat_reset_me|unilib
+chat_reset_mod_attribute|unilib
+chat_reset_player_attribute|unilib
+chat_reset_thirst|unilib
+chat_set_mod_attribute|unilib
+chat_set_player_attribute|unilib
+chat_show_elements|unilib
+chat_show_food_history|unilib
+chat_show_mod_attributes|unilib
+chat_show_player_attributes|unilib
+chat_teleport|unilib
+chat_test|unilib
+
+# supporting packages (.depends)
+shared_chat_cuisine|unilib
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#shared_atomic|unilib
+
+# supporting packages (.suggested)

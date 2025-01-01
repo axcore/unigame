@@ -9,7 +9,7 @@
 unilib.pkg.decor_frame_timber_glass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fachwerk.add_mode
+local mode = unilib.global.imported_mod_table.fachwerk.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,9 +48,10 @@ function unilib.pkg.decor_frame_timber_glass.exec()
 
         replace_mode = mode,
         simple_flag = true,
+        transparent_flag = true,
     })
 
-    if unilib.fachwerk_extra_nodes_flag then
+    if unilib.setting.fachwerk_extra_nodes_flag then
 
         for _, part_name in pairs({
             "clean", "clean_rhombus", "clean_round", "clean_square", "coal", "dirty", "glow",
@@ -60,7 +61,7 @@ function unilib.pkg.decor_frame_timber_glass.exec()
             -- (To save a bit of time, we won't check the package is loaded; just check whether the
             --      glass node exists
             local ingredient = "unilib:glass_" .. part_name
-            local def_table = minetest.registered_nodes[ingredient]
+            local def_table = core.registered_nodes[ingredient]
 
             if def_table ~= nil then
 
@@ -70,6 +71,8 @@ function unilib.pkg.decor_frame_timber_glass.exec()
                     orig_name = nil,
 
                     replace_mode = mode,
+                    simple_flag = true,
+                    transparent_flag = true,
                 })
 
             end

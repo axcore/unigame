@@ -9,7 +9,7 @@
 unilib.pkg.food_honey_synthetic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,11 +30,13 @@ function unilib.pkg.food_honey_synthetic.exec()
         -- From xdecor:honey
         description = S("Synthetic Honey"),
         inventory_image = "unilib_food_honey_synthetic.png",
-        groups = {flammable = 2, food_honey = 1, food_sugar = 1, not_in_creative_inventory = 1},
+        -- N.B. removed not_in_creative_inventory = 1 from original code
+--      groups = {flammable = 2, food_honey = 1, food_sugar = 1, not_in_creative_inventory = 1},
+        groups = {flammable = 2, food_honey = 1, food_sugar = 1},
 
         wield_image = "unilib_food_honey_synthetic.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_honey_synthetic", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_honey_synthetic", 2),
     })
 
 end

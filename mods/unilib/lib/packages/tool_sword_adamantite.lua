@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_adamantite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,13 +43,13 @@ function unilib.pkg.tool_sword_adamantite.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From xtraores:sword_adamantite
         part_name = "adamantite",
         ingredient = "unilib:metal_adamantite_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_sword_adamantite", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_adamantite", "sword")
 
 end

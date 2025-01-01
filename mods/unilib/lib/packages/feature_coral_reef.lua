@@ -9,7 +9,7 @@
 unilib.pkg.feature_coral_reef = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,10 @@ end
 
 function unilib.pkg.feature_coral_reef.exec()
 
-    unilib.register_decoration("farlands_feature_coral_reef", {
+    unilib.register_decoration_generic("farlands_feature_coral_reef", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_feature_coral_reef.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_feature_coral_reef.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -53,7 +53,7 @@ end
 
 function unilib.pkg.feature_coral_reef.post()
 
-    unilib.register_decoration_now("farlands_feature_coral_reef", nil, {
+    unilib.register_decoration_complete("farlands_feature_coral_reef", nil, {
         -- From farlands, mapgen/mapgen.lua
         biomes = {
             "farlands_desert_ocean",

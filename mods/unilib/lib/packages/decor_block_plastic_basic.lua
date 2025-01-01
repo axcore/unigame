@@ -9,7 +9,7 @@
 unilib.pkg.decor_block_plastic_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plastic_block.add_mode
+local mode = unilib.global.imported_mod_table.plastic_block.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -83,12 +83,12 @@ function unilib.pkg.decor_block_plastic_basic.exec()
                 is_ground_content = false,
             }
         )
-        unilib.register_craft{
+        unilib.register_craft({
             -- From plastic_block:black, etc
             type = "shapeless",
             output = "unilib:decor_block_plastic_" .. part_name,
-            recipe = {"group:dye,color_" .. part_name, "group:plastic"},
-        }
+            recipe = {"group:dye,colour_" .. part_name, "group:plastic"},
+        })
         unilib.register_stairs("unilib:decor_block_plastic_" .. part_name)
 
     end

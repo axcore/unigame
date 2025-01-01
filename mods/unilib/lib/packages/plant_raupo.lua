@@ -9,7 +9,7 @@
 unilib.pkg.plant_raupo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.plant_raupo.exec()
 
     unilib.register_node("unilib:plant_raupo", "aotearoa:raupo", mode, {
         -- From aotearoa:raupo
-        description = unilib.annotate(S("Raupo"), "Typha orientalis"),
+        description = unilib.utils.annotate(S("Raupo"), "Typha orientalis"),
         tiles = {"unilib_plant_raupo.png"},
         -- N.B. flora = 1 not in original code
         groups = {dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +49,7 @@ function unilib.pkg.plant_raupo.exec()
 
         after_dig_node = function(pos, node, metadata, digger)
 
-            unilib.dig_up_multiple(
+            unilib.misc.dig_up_multiple(
                 pos,
                 {"unilib:plant_raupo", "unilib:plant_raupo_flower"},
                 digger
@@ -63,14 +63,14 @@ function unilib.pkg.plant_raupo.exec()
         recipe = "unilib:plant_raupo",
         burntime = 1,
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:raupo
             output = "unilib:item_paper_ordinary",
             recipe = {
                 {"unilib:plant_raupo", "unilib:plant_raupo", "unilib:plant_raupo"},
-            }
+            },
         })
 
     end
@@ -78,10 +78,10 @@ function unilib.pkg.plant_raupo.exec()
 
     unilib.register_node("unilib:plant_raupo_flower", "aotearoa:raupo_flower", mode, {
         -- From aotearoa:raupo_flower
-        description = unilib.annotate(S("Raupo with Flowers"), "Typha orientalis"),
+        description = unilib.utils.annotate(S("Raupo with Flowers"), "Typha orientalis"),
         tiles = {"unilib_plant_raupo_flower.png"},
         groups = {dry_grass = 1, flammable = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -106,10 +106,10 @@ function unilib.pkg.plant_raupo.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_plant_raupo_normal_" .. i, {
+        unilib.register_decoration_generic("aotearoa_plant_raupo_normal_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_plant_raupo_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_plant_raupo_" .. i .. ".mts",
 
             fill_ratio = 0.7,
             flags = "place_center_x, place_center_z",

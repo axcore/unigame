@@ -9,7 +9,7 @@
 unilib.pkg.plant_watermelon_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.plant_watermelon_wild.exec()
         {"cropocalypse:watermelon", "cropocalypse:watermelon_wild"},
         mode,
         {
-            description = unilib.annotate(S("Wild Watermelon Plant"), "Citrullus lanatus"),
+            description = unilib.utils.annotate(S("Wild Watermelon Plant"), "Citrullus lanatus"),
             tiles = {
                 "unilib_plant_watermelon_wild_top.png",
                 "unilib_plant_watermelon_wild_top.png",
@@ -47,7 +47,7 @@ function unilib.pkg.plant_watermelon_wild.exec()
             groups = {
                 choppy = 2, flammable = 1, flora = 1, oddly_breakable_by_hand = 2, watermelon = 1,
             },
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             node_box = {
@@ -61,7 +61,7 @@ function unilib.pkg.plant_watermelon_wild.exec()
     )
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cropocalypse_plant_watermelon_wild", {
+    unilib.register_decoration_generic("cropocalypse_plant_watermelon_wild", {
         -- From cropocalypse/plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_watermelon_wild",
@@ -90,7 +90,7 @@ function unilib.pkg.plant_watermelon_wild.exec()
             paramtype = "meshoptions",
             wield_image = "unilib_plant_watermelon_wild_slice.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_watermelon_wild_slice", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_watermelon_wild_slice", 1),
         }
     )
 

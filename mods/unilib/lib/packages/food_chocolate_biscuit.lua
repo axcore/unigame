@@ -9,7 +9,7 @@
 unilib.pkg.food_chocolate_biscuit = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_chocolate_biscuit.exec()
         -- N.B. No groups in original code
         groups = {food_chocolate = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chocolate_biscuit", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chocolate_biscuit", 2),
     })
     unilib.register_craft( {
         -- From farming:cookie

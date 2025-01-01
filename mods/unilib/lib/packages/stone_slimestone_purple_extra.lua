@@ -9,7 +9,7 @@
 unilib.pkg.stone_slimestone_purple_extra = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,7 +47,7 @@ function unilib.pkg.stone_slimestone_purple_extra.exec()
         replace_mode = mode,
     })
 
-    if unilib.underch_tweak_flag then
+    if unilib.setting.underch_tweak_flag then
 
         unilib.pkg.shared_underch_slime.register_brick_slimy({
             -- Original to unilib (textures from underch), creates

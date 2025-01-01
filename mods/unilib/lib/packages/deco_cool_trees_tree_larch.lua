@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_larch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.larch.add_mode
+local mode = unilib.global.imported_mod_table.larch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_larch.post()
 
-    unilib.register_decoration_now("cool_trees_tree_larch", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_larch", nil, {
         -- From larch/init.lua
         -- Completes decoration in package "tree_larch"
         biomes = "default_forest_coniferous",

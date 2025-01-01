@@ -9,7 +9,7 @@
 unilib.pkg.gateway_slot_extra = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_gates.add_mode
+local mode = unilib.global.imported_mod_table.castle_gates.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.gateway_slot_extra.init()
         notes = "The \"gateway_slot_basic\" package creates gateway slots for super stones and" ..
                 " super trees; this package creates gateway slots from a few other ingredients" ..
                 " (some of which were not used in the original code)",
-        depends = "shared_castle_gates",
+        depends = "shared_castle_gates_slots",
         optional = {
             "brick_ordinary",
             "decor_stone_castle_wall",
@@ -38,7 +38,7 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     local material_list = {}
 
-    if unilib.pkg_executed_table["brick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["brick_ordinary"] ~= nil then
 
         -- Creates unilib:brick_ordinary_block_slot, unilib:brick_ordinary_block_reverse
         table.insert(material_list, {
@@ -58,7 +58,7 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     end
 
-    if unilib.pkg_executed_table["decor_stone_castle_wall"] ~= nil then
+    if unilib.global.pkg_executed_table["decor_stone_castle_wall"] ~= nil then
 
         -- Creates unilib:decor_stone_castle_wall_slot, unilib:decor_stone_castle_wall_slot_reverse
         table.insert(material_list, {
@@ -75,7 +75,7 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     end
 
-    if unilib.pkg_executed_table["ice_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["ice_ordinary"] ~= nil then
 
         -- Creates unilib:ice_ordinary_slot, unilib:ice_ordinary_slot_reverse
         table.insert(material_list, {
@@ -92,7 +92,7 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     end
 
-    if unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
         -- Creates unilib:snow_ordinary_slot, unilib:snow_ordinary_slot_reverse
         table.insert(material_list, {
@@ -111,8 +111,8 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     -- (An extra check, because the "gateway_slot_basic" may already create an obsidian slot, if
     --      it's listed as a super stone)
-    if unilib.pkg_executed_table["stone_obsidian"] ~= nil and
-            unilib.super_stone_table["obsidian"] == nil then
+    if unilib.global.pkg_executed_table["stone_obsidian"] ~= nil and
+            unilib.global.super_stone_table["obsidian"] == nil then
 
         -- Creates unilib:stone_obsidian_brick_slot, unilib:stone_obsidian_brick_slot_reverse
         table.insert(material_list, {
@@ -131,12 +131,12 @@ function unilib.pkg.gateway_slot_extra.exec()
 
     for _, data_table in pairs(material_list) do
 
-        local def_table = minetest.registered_nodes[data_table]
+        local def_table = core.registered_nodes[data_table]
         if def_table ~= nil then
 
             data_table.description = def_table.description
             data_table.img_list = def_table.tiles
-            unilib.pkg.shared_castle_gates.register_gateway_slot(data_table)
+            unilib.pkg.shared_castle_gates_slots.register_gateway_slot(data_table)
 
         end
 

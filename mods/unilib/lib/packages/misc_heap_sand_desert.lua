@@ -9,7 +9,7 @@
 unilib.pkg.misc_heap_sand_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.forest.add_mode
+local mode = unilib.global.imported_mod_table.forest.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.misc_heap_sand_desert.exec()
         },
         -- N.B. way = 1 in original code, omitted here
         groups = {dig_immediate = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_gravel_footstep", gain = 0.5},
             dug = {name = "unilib_gravel_footstep", gain = 1.0},
         }),
@@ -63,7 +63,7 @@ function unilib.pkg.misc_heap_sand_desert.exec()
         output = "unilib:misc_heap_sand_desert 9",
         recipe = {
             {"unilib:sand_desert"},
-        }
+        },
     })
 
 end

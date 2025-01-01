@@ -1,5 +1,4 @@
 # "herbs" remix - contains everything from the herbs mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -64,3 +63,5 @@ dirt_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

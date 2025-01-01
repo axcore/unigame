@@ -9,7 +9,7 @@
 unilib.pkg.glass_framed_wood_connecting = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,9 +36,11 @@ function unilib.pkg.glass_framed_wood_connecting.exec()
             "unilib_glass_framed_wood_connecting_detail.png",
         },
         groups = {cracky = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed",
+        -- N.B. is_ground_content = false not in original code; added to match other glass items
+        is_ground_content = false,
         paramtype = "light",
         sunlight_propagates = true,
         use_texture_alpha = "clip",
@@ -49,8 +51,8 @@ function unilib.pkg.glass_framed_wood_connecting.exec()
         recipe = {
             {"group:stick", "group:stick", "group:stick"},
             {"group:stick", "unilib:glass_ordinary", "group:stick"},
-            {"group:stick", "group:stick", "group:stick"}
-        }
+            {"group:stick", "group:stick", "group:stick"},
+        },
     })
 
 end

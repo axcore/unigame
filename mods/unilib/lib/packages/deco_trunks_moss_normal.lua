@@ -9,7 +9,7 @@
 unilib.pkg.deco_trunks_moss_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.trunks.add_mode
+local mode = unilib.global.imported_mod_table.trunks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,9 +25,9 @@ function unilib.pkg.deco_trunks_moss_normal.init()
 
 end
 
-function unilib.pkg.deco_trunks_moss_normal.exec()
+function unilib.pkg.deco_trunks_moss_normal.post()
 
-    unilib.register_decoration_now("convert_moss_normal_on_ground", nil, {
+    unilib.register_decoration_complete("convert_moss_normal_on_ground", nil, {
         -- From trunks/generating.lua
         -- Completes decoration in package "moss_normal"
         place_on = "unilib:dirt_ordinary_with_turf",

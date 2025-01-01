@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_ordinary_with_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.ore_australia_stone_ordinary_with_coal.post()
 
-    if unilib.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_eastern_coasts.lua
@@ -53,7 +53,7 @@ function unilib.pkg.ore_australia_stone_ordinary_with_coal.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_great_dividing_range.lua
@@ -71,7 +71,7 @@ function unilib.pkg.ore_australia_stone_ordinary_with_coal.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_victorian_forests.lua

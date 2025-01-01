@@ -9,7 +9,7 @@
 unilib.pkg.material_wattle_whitewashed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.material_wattle_whitewashed.exec()
             description = S("Whitewashed Wattle and Daub"),
             tiles = {"unilib_dirt_whitewashed.png"},
             groups = {choppy = 2, cracky = 2, crumbly = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             connects_to = {
                 "group:crumbly",
@@ -48,6 +48,8 @@ function unilib.pkg.material_wattle_whitewashed.exec()
             drawtype = "nodebox",
             -- N.B. The item looks better when it is 3D-rendered in the inventory
 --          inventory_image = "unilib_dirt_whitewashed.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "connected",
                 fixed = {

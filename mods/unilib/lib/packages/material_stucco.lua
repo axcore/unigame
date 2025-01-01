@@ -9,7 +9,7 @@
 unilib.pkg.material_stucco = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,10 @@ function unilib.pkg.material_stucco.exec()
         description = S("Stucco Block"),
         tiles = {"unilib_material_stucco_block.png"},
         groups = {cracky = 3, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
     })
 
 end
@@ -54,7 +57,7 @@ function unilib.pkg.material_stucco.post()
             "group:sand",
             "group:sand",
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

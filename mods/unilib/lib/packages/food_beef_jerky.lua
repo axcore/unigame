@@ -9,7 +9,7 @@
 unilib.pkg.food_beef_jerky = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_beef_jerky.exec()
         description = S("Raw Beef Jerky"),
         inventory_image = "unilib_food_beef_jerky_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_jerky_raw", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_jerky_raw", 2),
     })
     unilib.register_craft({
         -- From bbq:beef_jerky_raw
@@ -49,7 +49,7 @@ function unilib.pkg.food_beef_jerky.exec()
         description = S("Beef Jerky"),
         inventory_image = "unilib_food_beef_jerky.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_jerky", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_jerky", 5),
     })
     unilib.register_craft({
         -- From bbq:beef_jerky

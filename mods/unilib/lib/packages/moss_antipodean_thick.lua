@@ -9,7 +9,7 @@
 unilib.pkg.moss_antipodean_thick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,12 @@ function unilib.pkg.moss_antipodean_thick.exec()
         tiles = {"unilib_moss_antipodean_thick.png"},
         -- N.B. moss = 1 not in original code
         groups = {attached_node = 1, crumbly = 3, flammable = 1, flora = 1, moss = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "nodebox",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mosses
+--      is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -47,7 +48,7 @@ function unilib.pkg.moss_antipodean_thick.exec()
         walkable = false,
     })
 
-    unilib.register_decoration("aotearoa_moss_antipodean_thick_dense", {
+    unilib.register_decoration_generic("aotearoa_moss_antipodean_thick_dense", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:moss_antipodean_thick",
@@ -55,7 +56,7 @@ function unilib.pkg.moss_antipodean_thick.exec()
         fill_ratio = 0.9,
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_moss_antipodean_thick_rare", {
+    unilib.register_decoration_generic("aotearoa_moss_antipodean_thick_rare", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:moss_antipodean_thick",

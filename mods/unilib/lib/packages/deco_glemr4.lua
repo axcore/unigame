@@ -9,7 +9,7 @@
 unilib.pkg.deco_glemr4 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 -- Environmental constants (from lib_ecology/init.lua; must match values in the "biome_glemr4"
 --      package)
@@ -38,10 +38,11 @@ local function check_biomes(biome_list)
     -- Check arguments
     for _, biome_name in pairs(biome_list) do
 
-        if minetest.registered_biomes[biome_name] == nil then
+        if core.registered_biomes[biome_name] == nil and
+                unilib.global.biome_name_check_table[biome_name] == nil then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr4 package: Unrecognised biome", biome_name)
+                unilib.utils.show_warning("deco_glemr4 package: Unrecognised biome", biome_name)
             end
 
             return false
@@ -57,11 +58,11 @@ end
 local function check_nodes(node_list)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr4" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, full_name in pairs(node_list) do
 
-            if minetest.registered_nodes[full_name] == nil and
+            if core.registered_nodes[full_name] == nil and
                     unilib.pkg.dirt_custom_glemr4.dirt_table[full_name] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr4.dirt_table[full_name]
@@ -89,19 +90,19 @@ local function check_nodes(node_list)
     -- Check arguments
     for _, full_name in pairs(node_list) do
 
-        if not unilib.is_registered_node_or_mtgame_alias(full_name) then
+        if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr4 package: Unrecognised node", full_name)
+                unilib.utils.show_warning("deco_glemr4 package: Unrecognised node", full_name)
             end
 
             return false
 
-        elseif unilib.get_mod_name(full_name) ~= "unilib" then
+        elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
             -- (Not a fatal error)
             if debug_warning_flag then
-                unilib.show_warning("deco_glemr4 package: Non-unilib node", full_name)
+                unilib.utils.show_warning("deco_glemr4 package: Non-unilib node", full_name)
             end
 
         end
@@ -143,7 +144,7 @@ local function add_schem(a, b, c, d, e, f, g, h)
 
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/" .. g .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/" .. g .. ".mts",
 
         place_on = a,
         sidelen = b,
@@ -165,7 +166,7 @@ local function add_schem_no_rotate(a, b, c, d, e, f, g, h)
 
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/" .. g .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/" .. g .. ".mts",
 
         place_on = a,
         sidelen = b,
@@ -812,7 +813,9 @@ local function add_decorations_warm_semihumid()
     add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_swamp_5"}, nil, nil, nil)
     -- plants
     add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_juncus_white"}, nil, nil, nil)
-    add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_juncus_white"}, nil, nil, nil)
+    -- N.B. Duplicate line in original code; replaced with brown juncus
+--  add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_juncus_white"}, nil, nil, nil)
+    add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_juncus_brown"}, nil, nil, nil)
     add_node({"unilib:dirt_coarse_with_turf_brown"}, 0.01, {"glemr4_warm_semihumid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_palmetto_saw"}, nil, nil, nil)
 
     -- glemr4_warm_semihumid_highland
@@ -863,7 +866,7 @@ local function add_decorations_warm_temperate()
 
     -- glemr4_warm_temperate_lowland
     -- trees
-    if unilib.pkg_executed_table["tree_apple_mature"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_apple_mature"] ~= nil then
         add_schem({"unilib:dirt_dark_with_turf_exotic_2"}, 80, 0.015, {"glemr4_warm_temperate_lowland"}, 35, 42, "unilib_glem_tree_banana_1")
     end
     add_schem({"unilib:dirt_dark_with_turf_exotic_2"}, 80, 0.015, {"glemr4_warm_temperate_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_apple_1")
@@ -1432,7 +1435,8 @@ local function add_decorations_cool_humid()
     -- plants
     add_node({"unilib:dirt_silt_coarse_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_silt_coarse_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:fern_lady"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_coarse_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:fern_broad_leaf"}, nil, nil, nil)
+    -- N.B. Duplicate line in original code
+--  add_node({"unilib:dirt_silt_coarse_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_silt_coarse_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:plant_shrub_hog_peanut"}, nil, nil, nil)
 
     -- glemr4_cool_humid_lowland
@@ -1446,7 +1450,8 @@ local function add_decorations_cool_humid()
     -- plants
     add_node({"unilib:dirt_silt_fine_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_silt_fine_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:fern_lady"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
+    -- N.B. Duplicate line in original code
+--  add_node({"unilib:dirt_silt_fine_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_silt_fine_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:plant_shrub_hog_peanut"}, nil, nil, nil)
 
     -- glemr4_cool_humid_shelf
@@ -1460,7 +1465,8 @@ local function add_decorations_cool_humid()
     -- plants
     add_node({"unilib:dirt_dark_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_dark_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:fern_lady"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:fern_broad_leaf"}, nil, nil, nil)
+    -- N.B. Duplicate line in original code
+--  add_node({"unilib:dirt_dark_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_dark_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:plant_shrub_hog_peanut"}, nil, nil, nil)
 
     -- glemr4_cool_humid_highland
@@ -1477,7 +1483,8 @@ local function add_decorations_cool_humid()
     -- plants
     add_node({"unilib:dirt_ordinary_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_ordinary_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:fern_lady"}, nil, nil, nil)
-    add_node({"unilib:dirt_ordinary_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
+    -- N.B. Duplicate line in original code
+--  add_node({"unilib:dirt_ordinary_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:fern_broad_leaf"}, nil, nil, nil)
     add_node({"unilib:dirt_ordinary_with_litter_coniferous"}, 0.01, {"glemr4_cool_humid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:plant_shrub_hog_peanut"}, nil, nil, nil)
 
     -- glemr4_cool_humid_mountain
@@ -1697,59 +1704,59 @@ local function add_decorations_cold_humid()
 
     -- glemr4_cold_humid_coastal
     -- trees
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_2")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_3")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_4")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_5")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_6")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_7")
-    add_schem({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_2")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_3")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_4")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_5")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_6")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_7")
+    add_schem({"unilib:dirt_silt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
     -- grasses
     -- N.B. unilib:grass_dry_1 etc in the original code, but that is surely a mistake
-    add_node({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_4"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_coarse_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_coarse_with_cover_snow"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_coarse_with_cover_snow"}, 0.001, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_coarse_with_cover_snow"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_coarse_with_cover_snow"}, 0.001, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_coarse_with_cover_snow"}, 0.01, {"glemr4_cold_humid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_5"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_humid_lowland
     -- trees
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_2")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_3")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_4")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_5")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_6")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_7")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_1")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_pine_1")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_2")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_3")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_4")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_5")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_6")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_7")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_pine_1")
     -- grasses
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_4"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.001, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.001, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr4_cold_humid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_5"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_humid_shelf
     -- trees
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_2")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_3")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_4")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_5")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_6")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_7")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_fir_1")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_pine_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_2")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_3")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_4")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_5")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_6")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_7")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_pine_1")
     -- grasses
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.001, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_4"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.001, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.001, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.01, {"glemr4_cold_humid_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_5"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_humid_highland
@@ -1790,26 +1797,26 @@ local function add_decorations_cold_semihumid()
 
     -- glemr4_cold_semihumid_coastal
     -- trees
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
-    add_schem({"unilib:dirt_silt_fine_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_douglas_coast_14")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_silt_fine_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_douglas_coast_14")
     -- grasses
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.001, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_silt_fine_with_snow_ordinary"}, 0.001, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.001, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_silt_fine_with_cover_snow"}, 0.001, {"glemr4_cold_semihumid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_4"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_semihumid_lowland
     -- trees
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_1")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_douglas_coast_14")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, "unilib_glem_tree_fir_douglas_coast_14")
     -- grasses
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.001, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.001, {"glemr4_cold_semihumid_lowland"}, 30, 45, {"unilib:grass_frozen_4"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.001, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_lowland"}, HEIGHT_COASTAL, HEIGHT_LOWLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.001, {"glemr4_cold_semihumid_lowland"}, 30, 45, {"unilib:grass_frozen_4"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_semihumid_shelf
@@ -1825,13 +1832,13 @@ local function add_decorations_cold_semihumid()
 
     -- glemr4_cold_semihumid_highland
     -- trees
-    add_schem({"unilib:dirt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_fir_1")
-    add_schem({"unilib:dirt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_fir_douglas_coast_14")
+    add_schem({"unilib:dirt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, "unilib_glem_tree_fir_douglas_coast_14")
     -- grasses
-    add_node({"unilib:dirt_coarse_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
-    add_node({"unilib:dirt_coarse_with_snow_ordinary"}, 0.001, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
-    add_node({"unilib:dirt_coarse_with_snow_ordinary"}, 0.01, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
+    add_node({"unilib:dirt_coarse_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_1"}, nil, nil, nil)
+    add_node({"unilib:dirt_coarse_with_cover_snow"}, 0.001, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_2"}, nil, nil, nil)
+    add_node({"unilib:dirt_coarse_with_cover_snow"}, 0.01, {"glemr4_cold_semihumid_highland"}, HEIGHT_SHELF, HEIGHT_HIGHLAND, {"unilib:grass_frozen_3"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_semihumid_mountain
@@ -1846,10 +1853,10 @@ local function add_decorations_cold_temperate()
 
     -- glemr4_cold_temperate_coastal
     -- trees
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_dark_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_dark_with_cover_snow"}, 80, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, "unilib_glem_tree_fir_1")
     -- grasses
-    add_node({"unilib:dirt_dark_with_snow_ordinary"}, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_dark_with_cover_snow"}, 0.005, {"glemr4_cold_temperate_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_temperate_lowland
@@ -1862,10 +1869,10 @@ local function add_decorations_cold_temperate()
 
     -- glemr4_cold_temperate_shelf
     -- trees
-    add_schem({"unilib:dirt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_1")
-    add_schem({"unilib:dirt_coarse_with_snow_ordinary"}, 80, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_fir_1")
+    add_schem({"unilib:dirt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_spruce_1")
+    add_schem({"unilib:dirt_coarse_with_cover_snow"}, 80, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, "unilib_glem_tree_fir_1")
     -- grasses
-    add_node({"unilib:dirt_coarse_with_snow_ordinary"}, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
+    add_node({"unilib:dirt_coarse_with_cover_snow"}, 0.005, {"glemr4_cold_temperate_shelf"}, HEIGHT_LOWLAND, HEIGHT_SHELF, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
     -- saplings
 
     -- glemr4_cold_temperate_highland
@@ -1881,7 +1888,7 @@ local function add_decorations_cold_semiarid()
     -- glemr4_cold_semiarid_beach
     add_node({"unilib:sand_ordinary"}, 0.005, {"glemr4_cold_semiarid_beach"}, 1, 4, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
 
-    -- glemr4_cold_semiarid_costal
+    -- glemr4_cold_semiarid_coastal
     add_node({"unilib:dirt_dark_with_turf_exotic_dry_8"}, 0.00125, {"glemr4_cold_semiarid_coastal"}, HEIGHT_BEACH, HEIGHT_COASTAL, {"unilib:grass_frozen_1", "unilib:grass_frozen_2", "unilib:grass_frozen_3", "unilib:grass_frozen_4", "unilib:grass_frozen_5"}, nil, nil, nil)
 
     -- glemr4_cold_semiarid_lowland
@@ -1928,7 +1935,7 @@ local function add_decorations_generic()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         -- glemr4_generic_volcanic
-        add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr4_generic_volcanic"}, 145, unilib.y_max, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
+        add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr4_generic_volcanic"}, 145, unilib.constant.y_max, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
 
         -- glemr4_generic_burned
         add_node({"unilib:dirt_ordinary_with_turf_grey"}, 0.006, {"glemr4_generic_burned"}, 130, 145, {"unilib:tree_scorched_trunk"}, 6, nil, nil)
@@ -1984,7 +1991,7 @@ local function add_decorations_ethereal()
     add_node({"unilib:sand_desert"}, 0.005, {"glemr4_ethereal_desert"}, 1, 100, {"unilib:plant_cactus_ordinary"}, 4, nil, nil)
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
         biomes = {"glemr4_ethereal_desert"},
         flags = "place_center_x",
@@ -1999,7 +2006,7 @@ local function add_decorations_ethereal()
         place_on = {"unilib:sand_desert"},
         rotation = "random",
         sidelen = 80,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
     })
 
@@ -2009,7 +2016,7 @@ local function add_decorations_ethereal()
 
     -- glemr4_ethereal_frost
     add_schem({"unilib:dirt_ordinary_with_turf_crystal"}, 80, 0.01, {"glemr4_ethereal_frost"}, 1, 100, "unilib_glem_tree_frost_1")
-    add_node({"unilib:dirt_ordinary_with_turf_crystal"}, 0.02, {"glemr4_ethereal_frost"}, 1, 100, {"unilib:mineral_crystallinum_spike",  "unilib:plant_shrub_crystal"}, nil, nil, nil)
+    add_node({"unilib:dirt_ordinary_with_turf_crystal"}, 0.02, {"glemr4_ethereal_frost"}, 1, 100, {"unilib:mineral_crystallite_spike",  "unilib:plant_shrub_crystal"}, nil, nil, nil)
 
     -- glemr4_ethereal_junglee
     add_schem({"unilib:dirt_ordinary_with_turf_rainforest"}, 80, 0.002, {"glemr4_ethereal_junglee"}, 1, 100, "unilib_glem_tree_jungle_6")
@@ -2094,7 +2101,7 @@ local function add_decorations_ethereal()
         add_node({"unilib:dirt_ordinary_with_turf"}, 0.025, {"glemr4_ethereal_grassytwo"}, 1, 100, {"unilib:produce_grape_wild"}, nil, nil, nil)
 
         -- glemr4_ethereal_grove
-        if unilib.pkg_executed_table["tree_apple_mature"] ~= nil then
+        if unilib.global.pkg_executed_table["tree_apple_mature"] ~= nil then
             add_schem({"unilib:dirt_ordinary_with_turf_grove"}, 80, 0.015, {"glemr4_ethereal_grove"}, 1, 100, "unilib_glem_tree_banana_1")
         end
         add_node({"unilib:dirt_ordinary_with_turf_grove"}, 0.35, {"glemr4_ethereal_grove"}, 1, 100, {"unilib:grass_ordinary_2", "unilib:grass_ordinary_3", "unilib:grass_ordinary_4", "unilib:grass_ordinary_5"}, nil, nil, nil)
@@ -2162,7 +2169,7 @@ local function add_decorations_mixed()
     -- Large cactus
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
         biomes = {"glemr4_warm_arid_lowland", "glem4_temperate_arid_lowland"},
         fill_ratio = 0.002,
@@ -2170,7 +2177,7 @@ local function add_decorations_mixed()
         place_on = {"unilib:dirt_parched_with_turf_dry", "unilib:sand_ordinary"},
         rotation = "random",
         sidelen = 16,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
     })
 
@@ -2193,14 +2200,14 @@ local function add_decorations_mixed()
             "unilib:sand_ordinary",
         },
         sidelen = 16,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
     })
 
     -- Papyrus
     unilib.register_decoration_simple({
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
 
         biomes = {
             "glemr4_hot_humid_coastal",
@@ -2245,11 +2252,11 @@ local function add_decorations_waterlily()
 
         -- (The "flower_waterlily_ordinary_alt" package removes the node
         --      "unilib:flower_waterlily_ordinary", making this schematic unusable)
-        if unilib.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
+        if unilib.global.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
 
             unilib.register_decoration_simple({
                 deco_type = "schematic",
-                schematic = unilib.path_mod .. "/mts/unilib_flower_waterlily_ordinary_ethereal.mts",
+                schematic = unilib.core.path_mod .. "/mts/unilib_flower_waterlily_ordinary_ethereal.mts",
 
                 biomes = {biome_name},
                 noise_params = {
@@ -2271,7 +2278,7 @@ local function add_decorations_waterlily()
 
         unilib.register_decoration_simple({
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_flower_waterlily_exotic_pink.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_flower_waterlily_exotic_pink.mts",
 
             biomes = {biome_name},
             noise_params = {
@@ -2291,7 +2298,7 @@ local function add_decorations_waterlily()
 
         unilib.register_decoration_simple({
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_flower_waterlily_exotic_yellow.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_flower_waterlily_exotic_yellow.mts",
 
             biomes = {biome_name},
             noise_params = {
@@ -2382,7 +2389,7 @@ local function add_decorations_bakedclay()
 
     unilib.register_decoration_simple({
         deco_type = "simple",
-        decoration = "unilib:flower_reed_mannagrasss",
+        decoration = "unilib:grass_reed_mannagrass",
 
         noise_params = {
             octaves = 3,

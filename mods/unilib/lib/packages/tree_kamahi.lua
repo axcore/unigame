@@ -9,7 +9,7 @@
 unilib.pkg.tree_kamahi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_kamahi.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Weinmannia racemosa"
 
     unilib.register_tree({
@@ -45,7 +45,7 @@ function unilib.pkg.tree_kamahi.exec()
         group_table = {choppy = 2, flammable = 2, tree = 1},
         sci_name = sci_name,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:kamahi_tree
@@ -121,7 +121,7 @@ function unilib.pkg.tree_kamahi.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_kamahi_wood. Creates unilib:gate_kamahi_closed
+        -- From aotearoa:gate_kamahi_wood_closed, etc. Creates unilib:gate_kamahi_closed, etc
         part_name = "kamahi",
         orig_name = {"aotearoa:gate_kamahi_wood_closed", "aotearoa:gate_kamahi_wood_open"},
 
@@ -132,20 +132,20 @@ function unilib.pkg.tree_kamahi.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_kamahi_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_kamahi_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_kamahi_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_kamahi_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",
             rotation = "random",
             sidelen = 8,
         })
-        unilib.register_decoration("aotearoa_tree_kamahi_dense_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_kamahi_dense_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_kamahi_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_kamahi_" .. i .. ".mts",
 
             fill_ratio = 0.0117,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.food_asparagus_hollandaise = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.food_asparagus_hollandaise.exec()
             description = S("Uncooked Asparagus Hollandaise"),
             tiles = {"unilib_food_asparagus_hollandaise_raw.png"},
             groups = {attached_node = 1, dig_immediate = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_food_asparagus_hollandaise_raw.png",
@@ -86,7 +86,7 @@ function unilib.pkg.food_asparagus_hollandaise.exec()
             description = S("Cooked Asparagus Hollandaise"),
             tiles = {"unilib_food_asparagus_hollandaise_cooked.png"},
             groups = {attached_node = 1, dig_immediate = 3, eatable = 1},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_food_asparagus_hollandaise_cooked.png",
@@ -99,7 +99,7 @@ function unilib.pkg.food_asparagus_hollandaise.exec()
             walkable = false,
             wield_image = "unilib_food_asparagus_hollandaise_cooked.png",
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:food_asparagus_hollandaise_cooked", 5, "unilib:utensil_plate_ceramic"
             ),
         }

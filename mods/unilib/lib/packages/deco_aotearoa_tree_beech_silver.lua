@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_beech_silver = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ function unilib.pkg.deco_aotearoa_tree_beech_silver.post()
 
     for i = 1, 2 do
 
-        if unilib.pkg_executed_table["biome_aotearoa_lowland"] ~= nil then
+        if unilib.global.pkg_executed_table["biome_aotearoa_lowland"] ~= nil then
 
-            unilib.register_decoration_now("aotearoa_tree_beech_silver_dense_" .. i, nil, {
+            unilib.register_decoration_complete("aotearoa_tree_beech_silver_dense_" .. i, nil, {
                 -- From aotearoa/spawn_trees.lua
                 -- Completes decoration in package "tree_beech_silver"
                 biomes = "aotearoa_lowland_fiordland_forest",
@@ -41,7 +41,7 @@ function unilib.pkg.deco_aotearoa_tree_beech_silver.post()
             })
 
         end
-        unilib.register_decoration_now("aotearoa_tree_beech_silver_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_beech_silver_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_beech_silver"
             biomes = {

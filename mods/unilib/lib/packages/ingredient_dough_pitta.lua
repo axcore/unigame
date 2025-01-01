@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_dough_pitta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bread.add_mode
+local mode = unilib.global.imported_mod_table.bread.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.ingredient_dough_pitta.init()
 
     return {
         description = "Pitta dough",
-        depends = {"ingredient_flour_ordinary", "vessel_glass_water"},
+        depends = {"ingredient_flour_ordinary", "vessel_glass_with_water"},
     }
 
 end
@@ -37,7 +37,7 @@ function unilib.pkg.ingredient_dough_pitta.exec()
         -- From bread:pita_dough
         output = "unilib:ingredient_dough_pitta",
         recipe = {
-            {c_flour, "unilib:vessel_glass_water", c_flour}
+            {c_flour, "unilib:vessel_glass_with_water", c_flour}
         },
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.shared_map = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.map.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -20,11 +20,11 @@ local function cyclic_update()
     -- Adapted from map/init.lua
     -- Cyclic update of HUD flags
 
-    for _, player in ipairs(minetest.get_connected_players()) do
+    for _, player in ipairs(core.get_connected_players()) do
         unilib.pkg.shared_map.update_hud_flags(player)
     end
 
-    minetest.after(5.3, cyclic_update)
+    core.after(5.3, cyclic_update)
 
 end
 
@@ -43,8 +43,8 @@ local function do_update(player)
             player:get_inventory():contains_item("main", "unilib:item_quadcorder_digital") or
             player:get_inventory():contains_item("main", "minimap_radar:radar")
 
-    local map_enabled_flag = unilib.is_creative(player) or have_map_flag or have_radar_flag
-    local radar_enabled_flag = unilib.is_creative(player) or have_radar_flag
+    local map_enabled_flag = unilib.utils.is_creative(player) or have_map_flag or have_radar_flag
+    local radar_enabled_flag = unilib.utils.is_creative(player) or have_radar_flag
 
     player:hud_set_flags({
         minimap = map_enabled_flag,
@@ -75,7 +75,7 @@ end
 
 function unilib.pkg.shared_map.exec()
 
-    if minetest.get_modpath("map") then
+    if core.get_modpath("map") then
 
         -- Override the minetest_game/map handling functions, so the function above can take over
         function map.update_hud_flags(player)
@@ -85,11 +85,11 @@ function unilib.pkg.shared_map.exec()
     else
 
         -- No minetest_game/map functions available, so set up our own HUD update code
-        minetest.register_on_joinplayer(function(player)
+        core.register_on_joinplayer(function(player)
             do_update(player)
         end)
 
-        minetest.after(5, cyclic_update)
+        core.after(5, cyclic_update)
 
     end
 

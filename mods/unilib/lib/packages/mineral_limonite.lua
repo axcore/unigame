@@ -9,7 +9,7 @@
 unilib.pkg.mineral_limonite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,8 +48,8 @@ end
 function unilib.pkg.mineral_limonite.post()
 
     -- If the pig iron package was not executed, smelt into wrought iron instead
-    if unilib.pkg_executed_table["metal_iron_pig"] == nil and
-            unilib.pkg_executed_table["metal_iron_wrought"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron_pig"] == nil and
+            unilib.global.pkg_executed_table["metal_iron_wrought"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -60,7 +60,7 @@ function unilib.pkg.mineral_limonite.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "limonite",
             metal_list = {"iron_wrought"},
         })

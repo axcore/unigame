@@ -9,7 +9,7 @@
 unilib.pkg.deco_farming_plant_cotton_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_farming_plant_cotton_wild.post()
 
-    unilib.register_decoration_now("farming_plant_cotton_wild", nil, {
+    unilib.register_decoration_complete("farming_plant_cotton_wild", nil, {
         -- From farming/init.lua
         -- Completes decoration in package "plant_cotton_wild"
         biomes = "default_savanna",
         place_on = "unilib:dirt_dry_with_turf_dry",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

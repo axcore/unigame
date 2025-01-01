@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.ore_xtraores_stone_ordinary_with_rarium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.ore_xtraores_stone_ordinary_with_rarium.post()
         clust_size              = 3,
         flags                   = "absheight",
         y_max                   = -10000,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

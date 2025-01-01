@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_matagouri = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.deco_aotearoa_tree_matagouri.init()
 
     return {
         description = "Matagouri tree as decoration",
-        depends = {"dirt_ordinary", "tree_matagouri"},
+        depends = {"dirt_custom_antipodean", "tree_matagouri"},
         at_least_one = {"biome_aotearoa_coastal", "biome_aotearoa_scrubland"},
     }
 
@@ -29,14 +29,17 @@ function unilib.pkg.deco_aotearoa_tree_matagouri.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_matagouri_clump_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_matagouri_clump_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_matagouri"
             biomes = {
                 "aotearoa_coastal_tussock",
                 "aotearoa_scrubland_matagouri",
             },
-            place_on = "unilib:dirt_ordinary_with_turf_dry",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf_coastal_tussock",
+                "unilib:dirt_ordinary_with_turf_scrubland_matagouri",
+            },
             y_max = 80,
             y_min = 3,
         })

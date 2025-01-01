@@ -9,7 +9,7 @@
 unilib.pkg.plant_fungus_honey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.plant_fungus_honey.exec()
 
     unilib.register_node("unilib:plant_fungus_honey", "nsspf:armillaria_mellea", mode, {
         -- From nsspf:armillaria_mellea
-        description = unilib.annotate(S("Honey Fungus"), "Armillaria mellea"),
+        description = unilib.utils.annotate(S("Honey Fungus"), "Armillaria mellea"),
         tiles = {"unilib_plant_fungus_honey.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -53,7 +53,7 @@ function unilib.pkg.plant_fungus_honey.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_honey", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_honey", 2),
     })
     -- (not compatible with flowerpots)
 
@@ -68,7 +68,7 @@ function unilib.pkg.plant_fungus_honey.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -88,7 +88,7 @@ function unilib.pkg.plant_fungus_honey.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_honey_cooked", 12),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_honey_cooked", 12),
         }
     )
     unilib.register_craft({

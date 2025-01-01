@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_tree_acacia_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_farlands_tree_acacia_exotic.post()
 
-    unilib.register_decoration_now("farlands_tree_acacia_exotic", nil, {
+    unilib.register_decoration_complete("farlands_tree_acacia_exotic", nil, {
         -- From farlands, mapgen/mapgen.lua, ../default/schematics/acacia_tree.mts
         -- Completes decoration in package "tree_acacia_exotic"
         biomes = "farlands_savanna",
         place_on = "unilib:dirt_ordinary_with_turf_dry",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

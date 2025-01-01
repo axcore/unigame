@@ -9,7 +9,7 @@
 unilib.pkg.misc_box_wood_reinforced = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.misc_box_wood_reinforced.exec()
             "unilib_tree_apple_wood.png^" .. side_img
         },
         groups = {choppy = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",

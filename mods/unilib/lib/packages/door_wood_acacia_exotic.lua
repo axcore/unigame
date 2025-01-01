@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_acacia_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,10 @@ function unilib.pkg.door_wood_acacia_exotic.exec()
     local burnlevel = 4
 
     unilib.register_door({
-        -- From farlands, doors:door_acacia_wood. Creates unilib:door_wood_acacia_exotic
+        -- From farlands, doors:door_acacia_wood. Creates
+        --      unilib:door_wood_acacia_exotic_closed_left, etc
         part_name = "wood_acacia_exotic",
-        orig_name = {nil, nil, nil, nil},
+        orig_name_list = {nil, nil, nil, nil},
         def_table = {
             description = S("Exotic Acacia Wood Door"),
             tiles = {{name = "unilib_door_wood_acacia_exotic.png", backface_culling = true}},
@@ -54,7 +55,7 @@ function unilib.pkg.door_wood_acacia_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:door_wood_acacia_exotic",
-        burntime = unilib.tree_burn_table.door[burnlevel]
+        burntime = unilib.global.tree_burn_table.door[burnlevel]
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.crop_flax_golden = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.crop_flax_golden.exec()
         table.insert(orig_name_list, "cucina_vegana:flax_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/flax_default.lua
         unilib.register_crop_mtgame({
@@ -52,7 +52,7 @@ function unilib.pkg.crop_flax_golden.exec()
             harvest_description = S("Raw Golden Flax"),
             -- N.B. crop_flax = 1 not in original code; added to match "crop_flax_brown" package
             harvest_group_table = {crop_flax = 1, flammable = 1, string = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 10,
             seed_description = S("Golden Flax Seed"),
             seed_group_table = {attached_node = 1, flammable = 4, seed_flax = 1},
@@ -113,7 +113,8 @@ function unilib.pkg.crop_flax_golden.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

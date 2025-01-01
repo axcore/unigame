@@ -9,7 +9,7 @@
 unilib.pkg.plant_cattail_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,15 +27,16 @@ function unilib.pkg.plant_cattail_normal.exec()
 
     unilib.register_node("unilib:plant_cattail_normal", "mapgen:cattail", mode, {
         -- From farlands, mapgen:cattail
-        description = unilib.annotate(S("Normal Cattail"), "Typha"),
+        description = unilib.utils.annotate(S("Normal Cattail"), "Typha"),
         tiles = {"unilib_plant_cattail_normal.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_cattail_normal.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -47,5 +48,7 @@ function unilib.pkg.plant_cattail_normal.exec()
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
     unilib.register_plant_in_pot("unilib:plant_cattail_normal", "mapgen:cattail")
+
+    unilib.register_decoration_spare("unilib:plant_cattail_normal")
 
 end

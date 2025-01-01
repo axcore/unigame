@@ -9,7 +9,7 @@
 unilib.pkg.misc_ornament_sheep = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.misc_ornament_sheep.exec()
             bouncy = 100, dig_immediate = 3, fall_damage_add_percent = -80,
             oddly_breakable_by_hand = 3,
         },
-        sounds = unilib.node_sound_leaves_defaults({
+        sounds = unilib.sound.generate_leaves({
             place = {name = "unilib_ornament_sheep", gain = 0.25},
             footstep = {name = "unilib_ornament_sheep_bounce", gain = 0.25},
             dig = {name = "unilib_ornament_sheep_bounce", gain = 0.25},

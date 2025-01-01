@@ -9,11 +9,15 @@
 unilib.pkg.biome_glemr11 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 -- Values specified by GLEMr11's init.lua
 local biome_altitude_range = 40
 local biome_vertical_blend = biome_altitude_range / 5
+
+-- For ecosystem (ore) seeds we use a base value which is increased, whenever an ecosystem is
+--      generated
+local base_seed = unilib.utils.get_mod_attribute("storage_random_seed_offset")
 
 -- Flag set to true, if we should check that specified nodes and biomes exist, showing a warning for
 --      any problems. This flag can be disabled once any changes to the remix and its packages have
@@ -44,19 +48,19 @@ end
 
 local function check_node(full_name)
 
-    if unilib.is_registered_node_or_mtgame_alias(full_name) == nil then
+    if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
         if debug_warning_flag then
-            unilib.show_warning("biome_glemr11 package: Unrecognised node", full_name)
+            unilib.utils.show_warning("biome_glemr11 package: Unrecognised node", full_name)
         end
 
         return false
 
-    elseif unilib.get_mod_name(full_name) ~= "unilib" then
+    elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
         -- (Not a fatal error)
         if debug_warning_flag then
-            unilib.show_warning("biome_glemr11 package: Non-unilib node", full_name)
+            unilib.utils.show_warning("biome_glemr11 package: Non-unilib node", full_name)
         end
 
     end
@@ -94,7 +98,7 @@ end
 function unilib.pkg.biome_glemr11.post()
 
     -- Biomes for this remix are provided by the file biomes.csv. When loaded, the data is stored
-    --      in unilib.biome_setup_list until unilib is ready to create the biomes
+    --      in unilib.global.biome_csv_setup_list until unilib is ready to create the biomes
 
     local biome_name_table = {}
     local key_list = {
@@ -102,7 +106,7 @@ function unilib.pkg.biome_glemr11.post()
         "cave_liquid", "dungeon", "dungeon_alt", "dungeon_stair",
     }
 
-    for i, data_table in ipairs(unilib.biome_setup_list) do
+    for i, data_table in ipairs(unilib.global.biome_csv_setup_list) do
 
         -- (Don't act on biomes provides by other remixes)
         if data_table.remix_name == "glemr11" then
@@ -121,8 +125,8 @@ function unilib.pkg.biome_glemr11.post()
 
                         -- Register dirt on demand (see comments in the "dirt_custom_glemr11"
                         --      package)
-                        if unilib.glem_dirt_on_demand_flag and
-                                minetest.registered_nodes[full_name] == nil and
+                        if unilib.setting.dirt_on_demand_flag and
+                                core.registered_nodes[full_name] == nil and
                                 unilib.pkg.dirt_custom_glemr11.dirt_table[full_name] ~= nil then
                             register_dirt_on_demand(full_name)
                         end
@@ -139,7 +143,7 @@ function unilib.pkg.biome_glemr11.post()
             -- Set the biome's vertical blend. It is possible for a remix's biomes.csv to specify
             --      the value directly, but in this case, we want to use the value specified above,
             --      so it can also be used in the ecosystems below
-            unilib.biome_setup_list[i]["blend"] = biome_vertical_blend
+            unilib.global.biome_csv_setup_list[i]["blend"] = biome_vertical_blend
 
         end
 
@@ -150,15 +154,16 @@ function unilib.pkg.biome_glemr11.post()
     -- The ecosystems are specified by an ecosystems.csv in the remix folder
 
     -- (This code is adapted from read_csv.lua)
-    local constants_path = unilib.path_mod .. "/csv/remixes/glemr11/constants.csv"
+    local remix_dir = unilib.utils.get_remix_dir("glemr11")
+    local constants_path = remix_dir .. "/constants.csv"
     local constant_flag = false
     local constant_table = {}
 
-    local ecosystems_path = unilib.path_mod .. "/csv/remixes/glemr11/ecosystems.csv"
+    local ecosystems_path = remix_dir .. "/ecosystems.csv"
 
-    if unilib.is_file(constants_path) then
+    if unilib.utils.is_file(constants_path) then
 
-        for i, csv_table in ipairs(unilib.read_csv(constants_path)) do
+        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
 
             -- "key" is expected to contain at least one letter, "value" at least one digit
             local key, value = unpack(csv_table)
@@ -166,19 +171,19 @@ function unilib.pkg.biome_glemr11.post()
 
                 if not string.find(key, "%a") then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "biome_glemr11 package: Invalid biome constant", constants_path, i
                     )
 
                 elseif not string.find(value, "[%d]") then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "biome_glemr11 package: Invalid biome constant value", constants_path, i
                     )
 
                 else
 
-                    constant_table[key] = value
+                    constant_table[key] = tonumber(value)
                     -- (Table is not empty)
                     constant_flag = true
 
@@ -190,22 +195,32 @@ function unilib.pkg.biome_glemr11.post()
 
     end
 
-    if unilib.is_file(ecosystems_path) then
+    if unilib.utils.is_file(ecosystems_path) then
 
-        for i, csv_table in ipairs(unilib.read_csv(ecosystems_path)) do
+        for i, csv_table in ipairs(unilib.utils.read_csv(ecosystems_path)) do
 
             local ore_type, biome_name, ore_name, wherein, threshold, y_max, y_min =
                     unpack(csv_table)
 
             if ore_type ~= nil and string.find(ore_type, "%a") then
 
-                if ore_type ~= "dirt" and ore_type ~= "fungi" then
+                if ore_type ~= "default" and ore_type ~= "fungi" then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "biome_glemr11 package: Invalid ore type", ecosystems_path, i
                     )
 
                 else
+
+                    -- Replace unspecified values. Also, when biome showcase mode is enabled, all
+                    --      ecosystems must spawn at all heights
+                    if y_max == nil or y_max == "" or unilib.setting.debug_biome_showcase_flag then
+                        y_max = unilib.constant.y_max
+                    end
+
+                    if y_min == nil or y_min == "" or unilib.setting.debug_biome_showcase_flag then
+                        y_min = unilib.constant.y_min
+                    end
 
                     -- Replace constant values
                     if constant_flag then
@@ -221,14 +236,14 @@ function unilib.pkg.biome_glemr11.post()
                     end
 
                     -- Register dirt on demand (see comments in the "dirt_custom_glemr11" package)
-                    if unilib.glem_dirt_on_demand_flag then
+                    if unilib.setting.dirt_on_demand_flag then
 
-                        if minetest.registered_nodes[ore_name] == nil and
+                        if core.registered_nodes[ore_name] == nil and
                                 unilib.pkg.dirt_custom_glemr11.dirt_table[ore_name] ~= nil then
                             register_dirt_on_demand(ore_name)
                         end
 
-                        if minetest.registered_nodes[wherein] == nil and
+                        if core.registered_nodes[wherein] == nil and
                                 unilib.pkg.dirt_custom_glemr11.dirt_table[wherein] ~= nil then
                             register_dirt_on_demand(wherein)
                         end
@@ -237,32 +252,33 @@ function unilib.pkg.biome_glemr11.post()
 
                     -- Check biome names
                     if biome_name_table[biome_name] == nil and
-                            minetest.registered_biomes[biome_name] == nil then
+                            core.registered_biomes[biome_name] == nil and
+                            unilib.global.biome_name_check_table[biome_name] == nil then
 
                         if debug_warning_flag then
 
-                            unilib.show_warning(
+                            unilib.utils.show_warning(
                                 "biome_glemr11 package: Unrecognised biome", biome_name
                             )
 
                         end
 
                     -- Check nodes
-                    elseif not unilib.is_registered_node_or_mtgame_alias(ore_name) then
+                    elseif not unilib.utils.is_registered_node_or_mtgame_alias(ore_name) then
 
                         if debug_warning_flag then
 
-                            unilib.show_warning(
+                            unilib.utils.show_warning(
                                 "biome_glemr11 package: Unrecognised node", ore_name
                             )
 
                         end
 
-                    elseif not unilib.is_registered_node_or_mtgame_alias(wherein) then
+                    elseif not unilib.utils.is_registered_node_or_mtgame_alias(wherein) then
 
                         if debug_warning_flag then
 
-                            unilib.show_warning(
+                            unilib.utils.show_warning(
                                 "biome_glemr11 package: Unrecognised node(s)", wherein
                             )
 
@@ -272,9 +288,9 @@ function unilib.pkg.biome_glemr11.post()
                     else
 
                         local spread_val = 2 ^ (tonumber(threshold) * 10)
-                        local ore_seed = math.random(1, spread_val)
+--                      local ore_seed = math.random(1, spread_val)
 
-                        if ore_type == "dirt" then
+                        if ore_type == "default" then
 
                             register_ore({
                                 ore_type = "sheet",
@@ -293,7 +309,8 @@ function unilib.pkg.biome_glemr11.post()
                                     offset = 0,
                                     persist = 0.60,
                                     scale = 1,
-                                    seed = ore_seed,
+--                                  seed = ore_seed,
+                                    seed = base_seed + spread_val,
                                     spread = {x = 128, y = 128, z = 128},
                                 },
                                 noise_threshold = tonumber(threshold),
@@ -320,7 +337,8 @@ function unilib.pkg.biome_glemr11.post()
                                     offset = 0,
                                     persist = 0.60,
                                     scale = 1,
-                                    seed = ore_seed,
+--                                  seed = ore_seed,
+                                    seed = base_seed + spread_val,
                                     spread = {x = spread_val, y = spread_val, z = spread_val},
                                 },
                                 noise_threshold = tonumber(threshold),
@@ -338,6 +356,12 @@ function unilib.pkg.biome_glemr11.post()
 
         end
 
+    end
+
+    -- Apply the upper limit for pseudo-biomes created by remixes like "hades", "hades_jit",
+    --      "underch" and "underch_jit"
+    if constant_table["OCEAN"] ~= nil then
+        unilib.global.pseudo_biome_limit = tonumber(constant_table["OCEAN"])
     end
 
 end

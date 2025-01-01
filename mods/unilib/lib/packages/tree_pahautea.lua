@@ -9,7 +9,7 @@
 unilib.pkg.tree_pahautea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_pahautea.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Libocedrus bidwillii"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_pahautea.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_pahautea_wood. Creates unilib:gate_pahautea_closed
+        -- From aotearoa:gate_pahautea_wood_closed, etc. Creates unilib:gate_pahautea_closed, etc
         part_name = "pahautea",
         orig_name = {"aotearoa:gate_pahautea_wood_closed", "aotearoa:gate_pahautea_wood_open"},
 
@@ -121,10 +121,10 @@ function unilib.pkg.tree_pahautea.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_pahautea_dense_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_pahautea_dense_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_pahautea_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_pahautea_" .. i .. ".mts",
 
             fill_ratio = 0.0117,
             flags = "place_center_x, place_center_z",

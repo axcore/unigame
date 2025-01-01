@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_mantle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,13 +34,13 @@ function unilib.pkg.biome_aotearoa_mantle.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "cold_mantle" biome
         name = "aotearoa_mantle_cold",
-        description = unilib.brackets(S("Cold mantle biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Cold mantle biome"), "aotearoa"),
         node_top = "unilib:sand_volcanic",
         depth_top = 10,
         node_filler = "unilib:gravel_ordinary",
         depth_filler = 3,
         y_max = -9000,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 50,
         humidity_point = 50,
     })
@@ -48,13 +48,13 @@ function unilib.pkg.biome_aotearoa_mantle.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "wet_mantle" biome
         name = "aotearoa_mantle_wet",
-        description = unilib.brackets(S("Wet mantle biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Wet mantle biome"), "aotearoa"),
         node_top = "unilib:liquid_mud_boiling_source",
         depth_top = 10,
         node_filler = "unilib:liquid_mud_boiling_source",
         depth_filler = 3,
         y_max = -12000,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 60,
         humidity_point = 60,
     })
@@ -62,13 +62,13 @@ function unilib.pkg.biome_aotearoa_mantle.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "mantle" biome
         name = "aotearoa_mantle",
-        description = unilib.brackets(S("Mantle biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Mantle biome"), "aotearoa"),
         node_top = "unilib:liquid_lava_ordinary_source",
         depth_top = 10,
         node_filler = "unilib:liquid_lava_ordinary_source",
         depth_filler = 3,
         y_max = -13500,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 70,
         humidity_point = 30,
     })

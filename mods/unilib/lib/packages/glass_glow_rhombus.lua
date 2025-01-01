@@ -9,7 +9,7 @@
 unilib.pkg.glass_glow_rhombus = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,13 @@ function unilib.pkg.glass_glow_rhombus.exec()
         description = S("Rhombus Glow Glass"),
         tiles = {"unilib_glass_glow_rhombus.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
-        inventory_image = minetest.inventorycube("unilib_glass_glow_rhombus.png"),
-        light_source = unilib.light_max - 3,
+        inventory_image = core.inventorycube("unilib_glass_glow_rhombus.png"),
+        -- N.B. is_ground_content = false not in original code; added to match other glass items
+        is_ground_content = false,
+        light_source = unilib.constant.light_max - 3,
         paramtype = "light",
         sunlight_propagates = true,
         use_texture_alpha = "clip",
@@ -47,8 +49,8 @@ function unilib.pkg.glass_glow_rhombus.exec()
         output = "unilib:glass_glow_rhombus",
         recipe = {
             {"unilib:glass_clean_rhombus"},
-            {"unilib:torch_ordinary"}
-        }
+            {"unilib:torch_ordinary"},
+        },
     })
     unilib.register_craft({
         -- From darkage:glow_glass

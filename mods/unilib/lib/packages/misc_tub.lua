@@ -9,7 +9,7 @@
 unilib.pkg.misc_tub = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_tub.exec()
         tiles = {"unilib_container_barrel_normal.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",

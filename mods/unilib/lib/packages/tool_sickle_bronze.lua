@@ -9,7 +9,7 @@
 unilib.pkg.tool_sickle_bronze = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.tool_sickle_bronze.exec()
         -- From sickles:sickle_bronze
         description = S("Bronze Sickle"),
         inventory_image = "unilib_tool_sickle_bronze.png",
-        groups = {sickle = 1, sickle_uses = 110},
+        groups = {sickle = 1, sickle_uses = 200},
         sound = {breaks = "unilib_tool_breaks"},
 
         range = 6,
@@ -38,10 +38,10 @@ function unilib.pkg.tool_sickle_bronze.exec()
             damage_groups = {fleshy = 3},
             full_punch_interval = 0.8,
             groupcaps = {
-                snappy = {times = {[1] = 2.75, [2] = 1.30, [3] = 0.375}, uses = 60, maxlevel = 2},
+                snappy = {times = {[1] = 2.75, [2] = 1.30, [3] = 0.375}, uses = 100, maxlevel = 2},
             },
             max_drop_level = 1,
-            punch_attack_uses = 110
+            punch_attack_uses = 100,
         },
     })
     unilib.register_craft_sickle({
@@ -49,5 +49,6 @@ function unilib.pkg.tool_sickle_bronze.exec()
         part_name = "bronze",
         ingredient = "unilib:metal_bronze_ingot",
     })
+    unilib.tools.apply_toolranks("unilib:tool_sickle_bronze", "sickle")
 
 end

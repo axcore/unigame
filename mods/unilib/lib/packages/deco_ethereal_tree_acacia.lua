@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_acacia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ end
 
 function unilib.pkg.deco_ethereal_tree_acacia.exec()
 
-    unilib.register_decoration("ethereal_tree_acacia", {
+    unilib.register_decoration_generic("ethereal_tree_acacia", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_acacia.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_acacia.mts",
 
         fill_ratio = 0.004,
         flags = "place_center_x, place_center_z",
@@ -41,7 +41,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_acacia.post()
 
-    unilib.register_decoration_now("ethereal_tree_acacia", nil, {
+    unilib.register_decoration_complete("ethereal_tree_acacia", nil, {
         -- From ethereal-ng/schems.lua
         biomes = "ethereal_savanna",
         place_on = {"unilib:dirt_dry_with_turf_dry", "unilib:dirt_ordinary_with_turf_dry"},

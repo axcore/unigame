@@ -9,7 +9,7 @@
 unilib.pkg.deco_beautiflowers_plant_shrub_bonsai = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,17 +28,21 @@ function unilib.pkg.deco_beautiflowers_plant_shrub_bonsai.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("beautiflowers_plant_shrub_bonsaid_" .. tostring(i), nil, {
+        unilib.register_decoration_complete(
             -- From beautiflowers/spawn.lua
             -- Completes decoration in package "plant_shrub_bonsai"
-            place_on = {
-                "unilib:stone_ordinary",
-                "unilib:stone_ordinary_cobble",
-                "unilib:stone_ordinary_cobble_mossy",
-            },
-            y_max = 30000,
-            y_min = 30,
-        })
+            "beautiflowers_plant_shrub_bonsaid_" .. tostring(i),
+            nil,
+            {
+                place_on = {
+                    "unilib:stone_ordinary",
+                    "unilib:stone_ordinary_cobble",
+                    "unilib:stone_ordinary_cobble_mossy",
+                },
+                y_max = 30000,
+                y_min = 30,
+            }
+        )
 
     end
 

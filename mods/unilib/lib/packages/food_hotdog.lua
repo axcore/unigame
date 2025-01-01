@@ -9,7 +9,7 @@
 unilib.pkg.food_hotdog = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_hotdog.exec()
         description = S("Raw Hot Dog"),
         inventory_image = "unilib_food_hotdog_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_hotdog_raw", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_hotdog_raw", 3),
     })
     unilib.register_craft({
         -- From bbq:hotdog_raw
@@ -49,7 +49,7 @@ function unilib.pkg.food_hotdog.exec()
         description = S("Cooked Hot Dog"),
         inventory_image = "unilib_food_hotdog_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_hotdog_cooked", 7),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_hotdog_cooked", 7),
     })
     unilib.register_craft({
         -- From bbq:hotdog_cooked
@@ -64,13 +64,13 @@ function unilib.pkg.food_hotdog.exec()
         description = S("Hot Dog"),
         inventory_image = "unilib_food_hotdog.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_hotdog", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_hotdog", 8),
     })
     unilib.register_craft({
         -- From bbq:hotdog
         type = "shapeless",
         output = "unilib:food_hotdog 2",
-        recipe = {"unilib:food_hotdog_cooked", "unilib:food_bread_ordinary"}
+        recipe = {"unilib:food_hotdog_cooked", "unilib:food_bread_ordinary"},
     })
 
 end

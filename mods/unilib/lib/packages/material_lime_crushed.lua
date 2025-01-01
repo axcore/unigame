@@ -13,7 +13,7 @@
 unilib.pkg.material_lime_crushed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,7 @@ function unilib.pkg.material_lime_crushed.exec()
             {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
         },
     })
-    if unilib.pkg_executed_table["coral_block_skeleton"] ~= nil then
+    if unilib.global.pkg_executed_table["coral_block_skeleton"] ~= nil then
 
         unilib.register_craft({
             -- From plaster:lime

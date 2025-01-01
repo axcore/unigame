@@ -9,7 +9,7 @@
 unilib.pkg.flower_anagallis_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_anagallis_yellow.exec()
 
     unilib.register_node("unilib:flower_anagallis_yellow", "herbs:anagallis_yellow", mode, {
         -- From herbs:anagallis_yellow
-        description = unilib.annotate(S("Yellow Anagallis"), "Anagallis"),
+        description = unilib.utils.annotate(S("Yellow Anagallis"), "Anagallis"),
         tiles = {"unilib_flower_anagallis_yellow.png"},
         groups = {
-            attached_node = 1, color_yellow = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_yellow = 1, colour_yellow = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_anagallis_yellow.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_anagallis_yellow", "herbs:anagallis_yellow")
 
-    unilib.register_decoration("herbs_flower_anagallis_yellow", {
+    unilib.register_decoration_generic("herbs_flower_anagallis_yellow", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_anagallis_yellow",

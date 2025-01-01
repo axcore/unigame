@@ -9,7 +9,7 @@
 unilib.pkg.food_pie_blueberry_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,9 +21,9 @@ function unilib.pkg.food_pie_blueberry_simple.init()
         description = "Simple blueberry pie",
         depends = "utensil_tray_baking",
         suggested = {
+            "fruit_blueberry_ordinary",         -- group:food_blueberries
             "ingredient_flour_ordinary",        -- group:food_flour
             "ingredient_sugar_normal",          -- group:food_sugar
-            "produce_blueberry_highbush",       -- group:food_blueberries
         },
     }
 
@@ -38,7 +38,7 @@ function unilib.pkg.food_pie_blueberry_simple.exec()
         -- N.B. No groups in original code
         groups = {food_blueberry_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pie_blueberry_simple", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pie_blueberry_simple", 6),
     })
     unilib.register_craft({
         -- From farming:blueberry_pie

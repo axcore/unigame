@@ -9,7 +9,7 @@
 unilib.pkg.mineral_sylvite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.mineral_sylvite.exec()
         description = S("Sylvite Lump"),
         inventory_image = "unilib_mineral_sylvite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_potassium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_potassium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

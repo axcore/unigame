@@ -9,7 +9,7 @@
 unilib.pkg.candle_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,12 @@ function unilib.pkg.candle_basic.init()
 
     return {
         description = "Basic candle set (15 colours)",
-        depends = {"dye_basic", "item_string_ordinary", "material_wax_palm"},
+        depends = {
+            "dye_basic",
+            "item_string_ordinary",
+            "material_wax_palm",
+            "shared_ethereal_candle",
+        },
     }
 
 end
@@ -58,7 +63,7 @@ function unilib.pkg.candle_basic.exec()
 
         local description = row_list[3]
 
-        unilib.register_candle({
+        unilib.pkg.shared_ethereal_candle.register_candle({
             -- From ethereal:candle_black, etc. Creates unilib:candle_black, etc
             part_name = part_name,
             orig_name = "ethereal:" .. orig_name,
@@ -76,8 +81,8 @@ function unilib.pkg.candle_basic.exec()
         recipe = {
             {"unilib:item_string_ordinary"},
             {"unilib:material_wax_palm"},
-            {"unilib:material_wax_palm"}
-        }
+            {"unilib:material_wax_palm"},
+        },
     })
 
 end

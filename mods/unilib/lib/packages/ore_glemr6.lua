@@ -9,9 +9,11 @@
 unilib.pkg.ore_glemr6 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr6.add_mode
+local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
-local mapgen_seed = tonumber(minetest.get_mapgen_setting("seed"))
+-- The original code used random seeds; in this package we use a base value which is incremented,
+--      whenever an ore distribution is generated
+local base_seed = unilib.utils.get_mod_attribute("storage_random_seed_offset")
 
 -- Flag set to true, if we should check that specified nodes and biomes exist, showing a warning for
 --      any problems. This flag can be disabled once any changes to the remix and its packages have
@@ -25,15 +27,27 @@ local debug_warning_flag = false
 -- N.B. Some of these functions are not actually called, but perhaps they can be re-used when
 --      importing later versions of GLEM
 
+local function get_seed()
+
+    -- Original to unilib
+    -- Called when each ore is generated to produce a unique seed for it, that is consistent across
+    --      sessions (because it is based on the "storage_random_seed_offset" attribute)
+
+    base_seed = base_seed + 1
+    return base_seed
+
+end
+
 local function check_biomes(biome_list)
 
     -- Check arguments
     for _, biome_name in pairs(biome_list) do
 
-        if minetest.registered_biomes[biome_name] == nil then
+        if core.registered_biomes[biome_name] == nil and
+                unilib.global.biome_name_check_table[biome_name] == nil then
 
             if debug_warning_flag then
-                unilib.show_warning("ore_glemr6 package: Unrecognised biome", biome_name)
+                unilib.utils.show_warning("ore_glemr6 package: Unrecognised biome", biome_name)
             end
 
             return false
@@ -49,11 +63,11 @@ end
 local function check_nodes(node_list)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr6" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, full_name in pairs(node_list) do
 
-            if minetest.registered_nodes[full_name] == nil and
+            if core.registered_nodes[full_name] == nil and
                     unilib.pkg.dirt_custom_glemr6.dirt_table[full_name] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr6.dirt_table[full_name]
@@ -81,19 +95,19 @@ local function check_nodes(node_list)
     -- Check arguments
     for _, full_name in pairs(node_list) do
 
-        if not unilib.is_registered_node_or_mtgame_alias(full_name) then
+        if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
             if debug_warning_flag then
-                unilib.show_warning("ore_glemr6 package: Unrecognised node", full_name)
+                unilib.utils.show_warning("ore_glemr6 package: Unrecognised node", full_name)
             end
 
             return false
 
-        elseif unilib.get_mod_name(full_name) ~= "unilib" then
+        elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
             -- (Not a fatal error)
             if debug_warning_flag then
-                unilib.show_warning("ore_glemr6 package: Non-unilib node", full_name)
+                unilib.utils.show_warning("ore_glemr6 package: Non-unilib node", full_name)
             end
 
         end
@@ -106,7 +120,8 @@ end
 
 local function add_ore_scatter(a, b, c, d, e, f, g)
 
-    if not check_nodes(unilib.convert_to_list(a)) or not check_nodes(unilib.convert_to_list(b)) then
+    if not check_nodes(unilib.utils.convert_to_list(a)) or
+            not check_nodes(unilib.utils.convert_to_list(b)) then
         return
     end
 
@@ -148,14 +163,11 @@ local function add_ore_sheet(full_name, wherein_list, density, biome_list)
             offset = 0,
             persist = 0.60,
             scale = 1,
-            -- N.B. The original code produces a fractional seed; replace it with an integer seed
-            --      throughout this package
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 128, y = 128, z = 128},
         },
         noise_threshold         = density,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
     })
 
@@ -185,12 +197,11 @@ local function add_ore_sheet_arid(full_name, wherein_list, density, biome_list)
             offset = 0,
             persist = 0.60,
             scale = 1,
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 512, y = 512, z = 512},
         },
         noise_threshold         = density,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
     })
 
@@ -220,12 +231,11 @@ local function add_ore_sheet_semiarid(full_name, wherein_list, density, biome_li
             offset = 0,
             persist = 0.60,
             scale = 1,
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = density,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
     })
 
@@ -255,12 +265,11 @@ local function add_ore_sheet_temperate(full_name, wherein_list, density, biome_l
             offset = 0,
             persist = 0.60,
             scale = 1,
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 128, y = 128, z = 128},
         },
         noise_threshold         = density,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
     })
 
@@ -290,11 +299,10 @@ local function add_ore_sheet_semihumid(full_name, wherein_list, density, biome_l
             offset = 0,
             persist = 0.60,
             scale = 1,
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 128, y = 128, z = 128},
         },
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
         noise_threshold         = density,
     })
@@ -325,12 +333,11 @@ local function add_ore_sheet_humid(full_name, wherein_list, density, biome_list)
             offset = 0,
             persist = 0.60,
             scale = 1,
---            seed = mapgen_seed + math.random(),
-            seed = mapgen_seed + unilib.get_random_seed(),
+            seed = get_seed(),
             spread = {x = 64, y = 64, z = 64},
         },
         noise_threshold         = density,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -1000,
     })
 
@@ -488,22 +495,22 @@ end
 local function add_metal_mineral_as_ore()
 
     -- Coal
-    add_ore_scatter("unilib:stone_ordinary_with_coal", "unilib:stone_desert", 24 * 24 * 24, 27, 6, unilib.y_min, -16)
+    add_ore_scatter("unilib:stone_ordinary_with_coal", "unilib:stone_desert", 24 * 24 * 24, 27, 6, unilib.constant.y_min, -16)
 
     -- Copper
-    add_ore_scatter("unilib:stone_ordinary_with_copper", "unilib:stone_desert", 9 * 9 * 9, 5, 3, unilib.y_min, -64)
+    add_ore_scatter("unilib:stone_ordinary_with_copper", "unilib:stone_desert", 9 * 9 * 9, 5, 3, unilib.constant.y_min, -64)
 
     -- Diamond
     add_ore_scatter("unilib:stone_ordinary_with_diamond", "unilib:stone_desert", 17 * 17 * 17, 4, 3, -255, -128)
-    add_ore_scatter("unilib:stone_ordinary_with_diamond", "unilib:stone_desert", 15 * 15 * 15, 4, 3, unilib.y_min, -256)
+    add_ore_scatter("unilib:stone_ordinary_with_diamond", "unilib:stone_desert", 15 * 15 * 15, 4, 3, unilib.constant.y_min, -256)
 
     -- Gold
     add_ore_scatter("unilib:stone_ordinary_with_gold", "unilib:stone_desert", 15 * 15 * 15, 3, 2, -255, -64)
-    add_ore_scatter("unilib:stone_ordinary_with_gold", "unilib:stone_desert", 13 * 13 * 13, 5, 3, unilib.y_min, -256)
+    add_ore_scatter("unilib:stone_ordinary_with_gold", "unilib:stone_desert", 13 * 13 * 13, 5, 3, unilib.constant.y_min, -256)
 
     -- Iron
     add_ore_scatter("unilib:stone_ordinary_with_iron", "unilib:stone_desert", 9 * 9 * 9, 5, 3, -63, -16)
-    add_ore_scatter("unilib:stone_ordinary_with_iron", "unilib:stone_desert", 24 * 24 * 24, 27, 6, unilib.y_min, -64)
+    add_ore_scatter("unilib:stone_ordinary_with_iron", "unilib:stone_desert", 24 * 24 * 24, 27, 6, unilib.constant.y_min, -64)
 
     -- Lead
     add_ore_scatter("unilib:stone_ordinary_with_lead", "unilib:stone_ordinary", 10 * 10 * 10, 24, 4, -100, -10)
@@ -511,7 +518,7 @@ local function add_metal_mineral_as_ore()
     add_ore_scatter("unilib:stone_ordinary_with_lead", "unilib:stone_brownstone_dark", 10 * 10 * 10, 24, 4, -100, -10)
 
     -- Mese
-    add_ore_scatter("unilib:stone_ordinary_with_mese", "unilib:stone_desert", 14 * 14 * 14, 5, 3, unilib.y_min, -256)
+    add_ore_scatter("unilib:stone_ordinary_with_mese", "unilib:stone_desert", 14 * 14 * 14, 5, 3, unilib.constant.y_min, -256)
 
     -- Silver
     add_ore_scatter("unilib:stone_ordinary_with_silver", "unilib:stone_ordinary", 10 * 10 * 10, 24, 4, -100, -10)
@@ -527,16 +534,16 @@ local function register_ore(def_table)
     --      packages), we can save a lot of trouble by checking for a node's existence, before
     --      using it in an ore
 
-    if not unilib.is_registered_node_or_mtgame_alias(def_table.ore) then
+    if not unilib.utils.is_registered_node_or_mtgame_alias(def_table.ore) then
 
         if debug_warning_flag then
-            unilib.show_warning("ore_glemr6 package: Unrecognised node", def_table.ore)
+            unilib.utils.show_warning("ore_glemr6 package: Unrecognised node", def_table.ore)
         end
 
-    elseif not unilib.is_registered_node_or_mtgame_alias(def_table.wherein) then
+    elseif not unilib.utils.is_registered_node_or_mtgame_alias(def_table.wherein) then
 
         if debug_warning_flag then
-            unilib.show_warning("ore_glemr6 package: Unrecognised node", full_name)
+            unilib.utils.show_warning("ore_glemr6 package: Unrecognised node", full_name)
         end
 
     else
@@ -584,7 +591,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         y_max                = -11,
@@ -605,7 +612,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 30,
@@ -625,7 +632,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 30,
@@ -646,7 +653,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -666,7 +673,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -686,7 +693,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -706,7 +713,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -613,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -726,7 +733,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -316,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -746,7 +753,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -613,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -766,7 +773,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.5,
             scale = 0.2,
-            seed = -613,
+            seed = get_seed(),
             spread = {x = 5, y = 5, z = 5},
         },
         y_max                   = 71,
@@ -860,8 +867,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.6,
             scale = 0.2,
-            -- N.B. No seed in original code
-            seed = mapgen_seed + 11,
+            seed = get_seed(),
             spread = {x = 30, y = 30, z = 30},
         },
         noise_threshold         = 0.45,
@@ -881,7 +887,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.6,
             scale = 0.19,
-            seed = mapgen_seed + 12,
+            seed = get_seed(),
             spread = {x = 45, y = 45, z = 45},
         },
         noise_threshold         = 0.5,
@@ -901,7 +907,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.35,
             persist = 0.6,
             scale = 0.2,
-            seed = mapgen_seed + 13,
+            seed = get_seed(),
             spread = {x = 100, y = 100, z = 100},
         },
         noise_threshold         = 0.53,
@@ -922,7 +928,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -943,7 +949,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -963,7 +969,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -983,7 +989,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -1003,7 +1009,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -1023,7 +1029,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -1043,7 +1049,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0.28,
             persist = 0.6,
             scale = 0.3,
-            seed = mapgen_seed + 4,
+            seed = get_seed(),
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,
@@ -1065,7 +1071,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = 0.333,
@@ -1084,8 +1090,8 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
-            seed = 163281090,
         },
         noise_threshold         = 0.333,
     })
@@ -1103,7 +1109,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = 0.38,
@@ -1122,7 +1128,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = 0.38,
@@ -1141,7 +1147,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = 0.3,
@@ -1160,7 +1166,7 @@ function unilib.pkg.ore_glemr6.post()
             offset = 0,
             persist = 0.6,
             scale = 1,
-            seed = 163281090,
+            seed = get_seed(),
             spread = {x = 256, y = 256, z = 256},
         },
         noise_threshold         = -0.1,

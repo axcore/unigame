@@ -2,7 +2,6 @@
 #       light blue dye and ABMs for spawning full-block pumpkins/watermelons
 # In the original mod, some items were only available when the "grave" mod was loaded. In this
 #       remix, those packages are commented out, and are instead available in the "grave" remix
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -11,7 +10,7 @@ abm_cropocalypse_firefly|cropocalypse
 #abm_cropocalypse_grave_plants|cropocalypse
 abm_cropocalypse_moth|cropocalypse
 abm_cropocalypse_murder_hornet|cropocalypse
-crop_beet_common|cropocalypse
+crop_beetroot_common|cropocalypse
 crop_carrot_danvers|cropocalypse
 crop_cocoa_trinitario|cropocalypse
 crop_corn_dent|cropocalypse
@@ -63,7 +62,7 @@ deco_cropocalypse_mushroom_shiitake_wild|cropocalypse
 deco_cropocalypse_mushroom_slimy|cropocalypse
 deco_cropocalypse_mushroom_veiled|cropocalypse
 deco_cropocalypse_plant_beach_pea|cropocalypse
-deco_cropocalypse_plant_beet_common_wild|cropocalypse
+deco_cropocalypse_plant_beetroot_common_wild|cropocalypse
 deco_cropocalypse_plant_bells_of_ireland|cropocalypse
 deco_cropocalypse_plant_bog_star|cropocalypse
 deco_cropocalypse_plant_carrot_danvers_wild|cropocalypse
@@ -138,8 +137,6 @@ ingredient_vinegar_apple_cider|cropocalypse
 item_linen_normal|cropocalypse
 light_lantern_jack_green|cropocalypse
 light_lantern_jack_red|cropocalypse
-misc_pumpkin_red_carved|cropocalypse
-misc_watermelon_carved|cropocalypse
 #mushroom_amanita_deadly|cropocalypse
 mushroom_button_wild|cropocalypse
 mushroom_king|cropocalypse
@@ -153,7 +150,7 @@ mushroom_shiitake_wild|cropocalypse
 mushroom_slimy|cropocalypse
 mushroom_veiled|cropocalypse
 plant_beach_pea|cropocalypse
-plant_beet_common_wild|cropocalypse
+plant_beetroot_common_wild|cropocalypse
 plant_bells_of_ireland|cropocalypse
 plant_bog_star|cropocalypse
 plant_carrot_danvers_wild|cropocalypse
@@ -211,14 +208,14 @@ biome_default_tundra|default
 
 # supporting packages (.optional)
 #crop_cotton|farming
-#dirt_permafrost|default
+#dirt_permafrost_ordinary|default
 #dye_basic|dye bakedclay
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #item_fertiliser_mulch|bonemeal
 #item_string_ordinary|farming
-#mineral_mese|default
+#mineral_mese|default glemr11
 #soil_ordinary|farming
 #stone_ordinary_with_coal|default
 #stone_ordinary_with_copper|default
@@ -229,3 +226,5 @@ biome_default_tundra|default
 #stone_ordinary_with_tin|default
 #utensil_mortar_pestle|farming
 #wool_basic|wool
+
+# supporting packages (.suggested)

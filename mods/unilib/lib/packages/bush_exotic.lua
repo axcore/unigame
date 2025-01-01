@@ -9,7 +9,7 @@
 unilib.pkg.bush_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,8 +19,19 @@ function unilib.pkg.bush_exotic.init()
 
     return {
         description = "Exotic bush",
-        -- (Allow crafting bush stem into exotic tree wood)
-        optional = "tree_exotic",
+        notes = "This package was created because the minetest_game and farlands versions of the" ..
+                " two basic bushes had similar (but not identical) textures; the farlands bushes" ..
+                " are therefore named \"exotic\"",
+        optional = {
+            -- If the "ore_farlands_bush_exotic" package is not loaded, then the shared package will
+            --      use an ABM to place leaves-with-fruit nodes instead
+            "abm_farlands_bushes_trees",
+            "fruit_berry_exotic",
+            -- Create fruit-as-node variants for use in schematics
+            "shared_farlands_fruit",
+            -- Also allow crafting bush stem into exotic tree wood
+            "tree_exotic",
+        },
     }
 
 end
@@ -41,14 +52,14 @@ function unilib.pkg.bush_exotic.exec()
         description = S("Exotic Bush Stem"),
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16},
     })
-    if unilib.pkg_executed_table["tree_exotic"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_exotic"] ~= nil then
 
         unilib.register_craft({
             -- From farlands, default:bush_stem
             output = "unilib:tree_exotic_wood",
             recipe = {
                 {"unilib:bush_exotic_stem"},
-            }
+            },
         })
 
     end
@@ -56,7 +67,7 @@ function unilib.pkg.bush_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_exotic_stem",
-        burntime = unilib.bush_burn_table.stem[burnlevel],
+        burntime = unilib.global.bush_burn_table.stem[burnlevel],
     })
 
     unilib.register_bush_leaves({
@@ -68,7 +79,47 @@ function unilib.pkg.bush_exotic.exec()
         description = S("Exotic Bush Leaves"),
         img_list = {"unilib_tree_exotic_leaves_simple.png"},
     })
-    unilib.register_quick_bush_leafdecay("exotic")
+    -- (unilib.register_leafdecay() occurs below)
+
+    unilib.register_node("unilib:bush_exotic_leaves_with_berry", "fruit:leaves_with_berry", mode, {
+        -- From farlands, fruit:leaves_with_berry
+        description = S("Exotic Bush Leaves with Berries"),
+        tiles = {"unilib_tree_exotic_leaves_simple.png^unilib_fruit_berry_exotic_overlay.png"},
+        groups = {leaves = 1, not_in_creative_inventory = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
+
+        drawtype = "allfaces_optional",
+        drop = "unilib:bush_exotic_leaves",
+        paramtype = "light",
+        special_tiles = {
+            "unilib_tree_exotic_leaves_simple.png^unilib_fruit_berry_exotic_overlay.png",
+        },
+
+        on_destruct = function(pos)
+            core.add_item(pos, "unilib:fruit_berry_exotic")
+        end,
+
+        on_rightclick = function(pos)
+            core.set_node(pos, {name = "unilib:bush_exotic_leaves"})
+        end,
+    })
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        -- Create the fruit-as-node variant for use in schematics, unilib:fruit_berry_exotic_node
+        unilib.pkg.shared_farlands_fruit.create_fruit_nodes("berry", "food_berry")
+
+    end
+
+    unilib.register_leafdecay({
+        -- From farlands, default:bush_leaves
+        trunk_type = "exotic",
+        trunks = {"unilib:bush_exotic_stem"},
+        leaves = {"unilib:bush_exotic_leaves", "unilib:bush_exotic_leaves_with_berry"},
+        -- N.B. required if the "shared_farlands_fruit" package is loaded
+        others = {"unilib:fruit_berry_exotic_node"},
+        radius = 2,
+    })
 
     unilib.register_bush_sapling({
         -- From farlands, default:bush_sapling. Creates unilib:bush_exotic_sapling
@@ -88,13 +139,13 @@ function unilib.pkg.bush_exotic.exec()
         -- Original to unilib
         type = "fuel",
         recipe = "unilib:bush_exotic_sapling",
-        burntime = unilib.bush_burn_table.sapling[burnlevel],
+        burntime = unilib.global.bush_burn_table.sapling[burnlevel],
     })
 
-    unilib.register_decoration("farlands_bush_exotic_1", {
+    unilib.register_decoration_generic("farlands_bush_exotic_1", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_exotic.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_exotic.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -108,10 +159,10 @@ function unilib.pkg.bush_exotic.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_bush_exotic_2", {
+    unilib.register_decoration_generic("farlands_bush_exotic_2", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_exotic.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_exotic.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -124,5 +175,21 @@ function unilib.pkg.bush_exotic.exec()
         },
         sidelen = 16,
     })
+
+end
+
+function unilib.pkg.bush_exotic.post()
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        unilib.register_regrowing_fruit({
+            fruit_name = "unilib:fruit_berry_exotic_node",
+
+            replace_mode = mode,
+            leaves_list = {"unilib:bush_exotic_leaves"},
+            pkg_list = {"bush_exotic"},
+        })
+
+    end
 
 end

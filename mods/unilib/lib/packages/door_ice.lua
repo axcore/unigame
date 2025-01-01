@@ -9,7 +9,7 @@
 unilib.pkg.door_ice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_ice.exec()
 
     unilib.register_door({
-        -- From mtg_plus mod, doors:door_ice. Creates unilib:door_ice
+        -- From mtg_plus mod, doors:door_ice. Creates unilib:door_ice_closed_left, etc
         part_name = "ice",
-        orig_name = {
+        orig_name_list = {
             "doors:door_ice_a",
             "doors:door_ice_b",
             "doors:door_ice_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_ice.exec()
             description = S("Ice Door"),
             tiles = {{name = "unilib_door_ice.png", backface_culling = true}},
             groups = {cracky = 3, slippery = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_door_ice_inv.png",
             recipe = {

@@ -9,7 +9,7 @@
 unilib.pkg.tree_lemon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -62,15 +62,15 @@ function unilib.pkg.tree_lemon.exec()
         description = S("Lemon Tree Wood Planks"),
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_lemon_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_lemon_leaves.png")
     unilib.register_node("unilib:tree_lemon_leaves", "ethereal:lemon_leaves", mode, {
         -- From ethereal:lemon_leaves
-        description = unilib.annotate(S("Lemon Tree Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Lemon Tree Leaves"), sci_name),
         tiles = {"unilib_tree_lemon_leaves.png"},
         groups = {flammable = 2, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
@@ -79,20 +79,25 @@ function unilib.pkg.tree_lemon.exec()
             },
         },
         inventory_image = inv_img,
+        -- N.B. is_ground_content = false not in original code; added to match other leaves
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
     })
     unilib.register_leafdecay({
         -- From ethereal:lemon_leaves
+        trunk_type = "lemon",
         trunks = {"unilib:tree_lemon_trunk"},
-        leaves = {"unilib:tree_lemon_leaves", "unilib:fruit_lemon"},
+        leaves = {"unilib:tree_lemon_leaves"},
+        others = {"unilib:fruit_lemon"},
         radius = 3,
     })
+    unilib.register_tree_leaves_compacted("unilib:tree_lemon_leaves", mode)
 
     unilib.register_tree_sapling({
         -- From ethereal:lemon_tree_sapling. Creates unilib:tree_lemon_sapling
@@ -123,12 +128,12 @@ function unilib.pkg.tree_lemon.exec()
         rail_description = S("Lemon Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("ethereal_tree_lemon", {
+    unilib.register_decoration_generic("ethereal_tree_lemon", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_lemon.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_lemon.mts",
 
-        fill_ratio = 0.002,
+        fill_ratio = 0.004,
         flags = "place_center_x, place_center_z",
         sidelen = 80,
     })

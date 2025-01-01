@@ -9,7 +9,7 @@
 unilib.pkg.misc_platform_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -42,7 +42,7 @@ local function do_register(data_table)
 
     unilib.register_node(full_name, orig_name, replace_mode, {
         -- From ropes:wood_bridge
-        description = unilib.hint(
+        description = unilib.utils.hint(
             description, S("right-click the end of a row to place another block")
         ),
         tiles = {
@@ -57,7 +57,7 @@ local function do_register(data_table)
             choppy = 2, fence = 1, flammable = 2, flow_through = 1, oddly_breakable_by_hand = 1,
             wall = 1
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         node_box = {
@@ -72,7 +72,7 @@ local function do_register(data_table)
                 {0.375, -0.5, 0.4375, 0.5, 0.375, 0.5},
                 {-0.5, -0.5, -0.5, -0.375, 0.375, -0.4375},
                 {-0.5, -0.5, 0.4375, -0.375, 0.375, 0.5},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
@@ -80,9 +80,9 @@ local function do_register(data_table)
         on_place = function(itemstack, placer, pointed_thing)
 
             -- Place the item and return the leftover itemstack. The placer may be any ObjectRef or
-            --      nil (default: minetest.item_place)
+            --      nil (default: core.item_place)
             if placer == nil then
-                return minetest.item_place(itemstack, placer, pointed_thing)
+                return core.item_place(itemstack, placer, pointed_thing)
             end
 
             local above = pointed_thing.above
@@ -117,7 +117,7 @@ local function do_register(data_table)
 
                 end
 
-                if minetest.registered_nodes[minetest.get_node(new_under).name].buildable_to then
+                if core.registered_nodes[core.get_node(new_under).name].buildable_to then
 
                     local new_pointed_thing = {
                         type = "node",
@@ -125,13 +125,13 @@ local function do_register(data_table)
                         above = {x = new_under.x, y = new_under.y + 1, z = new_under.z},
                     }
 
-                    return minetest.item_place(itemstack, placer, new_pointed_thing)
+                    return core.item_place(itemstack, placer, new_pointed_thing)
 
                 end
 
             end
 
-            return minetest.item_place(itemstack, placer, pointed_thing)
+            return core.item_place(itemstack, placer, pointed_thing)
 
         end,
     })
@@ -165,24 +165,24 @@ end
 
 function unilib.pkg.misc_platform_wood.post()
 
-    if not unilib.add_stairs_basic_flag then
+    if not unilib.setting.add_stairs_basic_flag then
         return
     end
 
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
-        local data_table = unilib.tree_table[tree_type]
+        local data_table = unilib.global.tree_table[tree_type]
         local ingredient = "unilib:tree_" .. tree_type .. "_wood_stair_slab"
 
-        if unilib.pkg_executed_table["tree_" .. tree_type] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. tree_type] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             do_register({
                 part_name = tree_type,
                 ingredient = ingredient,
 
                 replace_mode = mode,
-                description = unilib.brackets(S("Wooden Platform"), data_table.description),
+                description = unilib.utils.brackets(S("Wooden Platform"), data_table.description),
             })
 
         end

@@ -9,7 +9,7 @@
 unilib.pkg.tree_pine_rottnest_island = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_pine_rottnest_island.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Callitris preissii"
 
     unilib.register_tree({
@@ -40,14 +40,14 @@ function unilib.pkg.tree_pine_rottnest_island.exec()
         "australia:rottnest_island_pine_tree",
         mode,
         {
-            description = unilib.annotate(S("Rottnest Island Pine Tree Trunk"), sci_name),
+            description = unilib.utils.annotate(S("Rottnest Island Pine Tree Trunk"), sci_name),
             tiles = {
                 "unilib_tree_pine_rottnest_island_trunk_top.png",
                 "unilib_tree_pine_rottnest_island_trunk_top.png",
                 "unilib_tree_pine_rottnest_island_trunk.png",
             },
             groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -61,9 +61,19 @@ function unilib.pkg.tree_pine_rottnest_island.exec()
                 fixed = {-0.375, -0.5, -0.375, 0.375, 0.5, 0.375},
             },
 
-            on_place = minetest.rotate_node,
+            on_place = core.rotate_node,
         }
     )
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_pine_rottnest_island_trunk_stripped
+        part_name = "pine_rottnest_island",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Rottnest Island Pine Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+    })
 
     unilib.register_tree_wood({
         -- From australia:rottnest_island_pine_wood. Creates unilib:tree_pine_rottnest_island_wood
@@ -133,7 +143,7 @@ function unilib.pkg.tree_pine_rottnest_island.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_pine_rottnest_island_closed
+        -- Original to unilib. Creates unilib:gate_pine_rottnest_island_closed, etc
         part_name = "pine_rottnest_island",
         orig_name = {nil, nil},
 
@@ -144,10 +154,11 @@ function unilib.pkg.tree_pine_rottnest_island.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_pine_rottnest_island_in_forests_" .. i, {
+        unilib.register_decoration_generic("australia_tree_pine_rottnest_island_in_forests_" .. i, {
             -- From australia/biome_jarrah_karri_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_pine_rottnest_island_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_pine_rottnest_island_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 10000,
             flags = "place_center_x, place_center_z",

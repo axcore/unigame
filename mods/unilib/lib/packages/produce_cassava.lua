@@ -9,7 +9,7 @@
 unilib.pkg.produce_cassava = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,7 +48,7 @@ function unilib.pkg.produce_cassava.exec()
                     items = {
                         {items = {"unilib:produce_cassava_harvest"}, rarity = 1},
                         {items = {"unilib:produce_cassava_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
@@ -56,14 +56,15 @@ function unilib.pkg.produce_cassava.exec()
                     items = {
                         {items = {"unilib:produce_cassava_harvest"}, rarity = 1},
                         {items = {"unilib:produce_cassava_harvest 3"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_cassava = 1, seed = 2},
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -75,7 +76,16 @@ function unilib.pkg.produce_cassava.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_cassava", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_cassava_harvest",
+        juice_description = S("Cassava"),
+        juice_type = "cassava",
+        rgb = "#996e4e",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_produce_cassava", {
         -- From better_farming:cassava_3
         deco_type = "simple",
         decoration = "unilib:produce_cassava_grow_3",

@@ -1,10 +1,10 @@
 # "underch" remix - contains everything from underch, and everything from the following ucho mods:
 #       compressed, condensed, bakedeye, gemtools, gravelcraft
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # underch/uchu packages
+abm_standard_moss_grow|default underch
 clay_brown|underch
 dirt_mossy|underch
 food_slimestone_eye_baked|bakedeye
@@ -24,7 +24,6 @@ misc_granules_fiery|underch
 misc_granules_normal|underch
 misc_granules_ruby|underch
 misc_stone_burner|underch
-moss_mould_underground|underch
 moss_underground|underch
 moss_underground_dry|underch
 mushroom_black|underch
@@ -36,6 +35,7 @@ ore_underch_gravel_mossy|underch
 ore_underch_stone_ordinary_cobble|underch
 plant_bush_underground|underch
 plant_bush_underground_dead|underch
+plant_mould_underground|underch
 plant_torchberry|underch
 plant_tuber_dark|underch
 shared_underch_slime|underch
@@ -79,7 +79,7 @@ stone_shinestone|underch
 stone_sichamine|underch compressed condensed
 stone_sichamine_extra|underch
 stone_slate_red|underch compressed condensed
-stone_slate_red_extra|underch
+stone_slimestone_black_extra|underch
 stone_slimestone_green|underch compressed condensed
 stone_slimestone_green_extra|underch
 stone_slimestone_purple|underch compressed condensed
@@ -109,14 +109,17 @@ dirt_ordinary|default farming moreblocks
 fire_permanent|fire underch
 gravel_ordinary|default mtg_plus
 liquid_lava_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
+shared_standard|flowers fire
 stone_ordinary|default moreblocks technic
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #brick_ordinary|default
@@ -125,9 +128,13 @@ stone_ordinary|default moreblocks technic
 #grass_jungle|default
 #grass_ordinary|default
 #item_stick_ordinary|default
-#metal_steel|default technic
-#metal_tin|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_steel|default glemr11 technic
+#metal_tin|default glemr11 technic
 #moss_green|sickles
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
 #torch_ordinary|default
+
+# supporting packages (.suggested)

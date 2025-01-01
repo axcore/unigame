@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_flour_rice_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
         }
     )
     -- N.B. For unilib flours, mortar-and-pestle recipes are preferred, if available
-    if unilib.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
+    if unilib.global.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -61,7 +61,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
 
     else
 
-        if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
             unilib.register_craft({
                 -- From cucina_vegana:rice_flour
@@ -77,7 +77,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
                 },
             })
 
-            if unilib.pkg_executed_table["stone_desert"] ~= nil then
+            if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
                 unilib.register_craft({
                     -- From cucina_vegana:rice_flour
@@ -96,7 +96,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
             end
 
         end
-        if unilib.pkg_executed_table["stone_desert"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
             unilib.register_craft({
                 -- From cucina_vegana:rice_flour
@@ -112,7 +112,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
                 },
             })
 
-            if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+            if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
                 unilib.register_craft({
                     -- From cucina_vegana:rice_flour
@@ -133,7 +133,7 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
         end
 
     end
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_grinder_recipe({
             -- From cucina_vegana:rice_flour

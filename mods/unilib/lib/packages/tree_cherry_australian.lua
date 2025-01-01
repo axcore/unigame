@@ -9,7 +9,7 @@
 unilib.pkg.tree_cherry_australian = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,39 +27,51 @@ end
 
 function unilib.pkg.tree_cherry_australian.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Exocarpos cupressiformis"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "cherry_australian",
         description = S("Australian Cherry Tree Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_cherry_australian_trunk", "australia:cherry_tree", mode, {
         -- From australia:cherry_tree
-        description = unilib.annotate(S("Australian Cherry Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Australian Cherry Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_cherry_australian_trunk_top.png",
             "unilib_tree_cherry_australian_trunk_top.png",
             "unilib_tree_cherry_australian_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_cherry_australian_trunk_stripped
+        part_name = "cherry_australian",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Australian Cherry Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -85,8 +97,10 @@ function unilib.pkg.tree_cherry_australian.exec()
     })
     unilib.register_leafdecay({
         -- From australia:cherry_leaves
+        trunk_type = "cherry_australian",
         trunks = {"unilib:tree_cherry_australian_trunk"},
-        leaves = {"unilib:tree_cherry_australian_leaves", "unilib:fruit_cherry_australian"},
+        leaves = {"unilib:tree_cherry_australian_leaves"},
+        others = {"unilib:fruit_cherry_australian"},
         radius = 3,
     })
 
@@ -133,7 +147,7 @@ function unilib.pkg.tree_cherry_australian.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_cherry_australian_closed
+        -- Original to unilib. Creates unilib:gate_cherry_australian_closed, etc
         part_name = "cherry_australian",
         orig_name = {nil, nil},
 
@@ -144,10 +158,11 @@ function unilib.pkg.tree_cherry_australian.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_cherry_australian_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_cherry_australian_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -158,10 +173,11 @@ function unilib.pkg.tree_cherry_australian.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_cherry_australian_in_flinders_" .. i, {
+        unilib.register_decoration_generic("australia_tree_cherry_australian_in_flinders_" .. i, {
             -- From australia/biome_flinders_lofty.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -172,10 +188,11 @@ function unilib.pkg.tree_cherry_australian.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_cherry_australian_in_range_" .. i, {
+        unilib.register_decoration_generic("australia_tree_cherry_australian_in_range_" .. i, {
             -- From australia/biome_great_dividing_range.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_cherry_australian_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

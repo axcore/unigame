@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_stone_checker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.decor_tiled_stone_checker.exec()
             description = S("Decorative Checkered Stone Tile"),
             tiles = {"unilib_decor_tiled_stone_checker.png"},
             groups = {cracky = 3, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -45,7 +45,7 @@ function unilib.pkg.decor_tiled_stone_checker.exec()
         output = "unilib:decor_tiled_stone_checker",
         recipe = {
             {"unilib:decor_tiled_stone_split"},
-        }
+        },
     })
     -- Notes from moreblocks:
     -- When approaching the craft below, loop back to ordinary cobblestone, which can then be used
@@ -55,7 +55,7 @@ function unilib.pkg.decor_tiled_stone_checker.exec()
         output = "unilib:stone_ordinary_cobble",
         recipe = {
             {"unilib:decor_tiled_stone_checker"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_stone_checker")
 

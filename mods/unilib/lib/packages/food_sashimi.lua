@@ -9,7 +9,7 @@
 unilib.pkg.food_sashimi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,12 @@ function unilib.pkg.food_sashimi.exec()
         -- From ethereal:sashimi
         description = S("Sashimi"),
         inventory_image = "unilib_food_sashimi.png",
-        -- N.B. No groups in original code
-        groups = {food_sashimi = 1},
+        -- N.B. food_sashimi = 1 not in original code
+        groups = {flammable = 2, food_sashimi = 1},
 
         wield_image = "unilib_food_sashimi.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_sashimi", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_sashimi", 4),
     })
     unilib.register_craft({
         -- From ethereal:sashimi

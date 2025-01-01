@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_butter_vegetable = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -66,15 +66,15 @@ function unilib.pkg.ingredient_butter_vegetable.post()
 
     local vegan_milk_list = {}
 
-    if unilib.pkg_executed_table["food_milk_soy"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_soy"] ~= nil then
         table.insert(vegan_milk_list, "unilib:food_milk_soy")
     end
 
-    if unilib.pkg_executed_table["food_milk_soy_red"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_soy_red"] ~= nil then
         table.insert(vegan_milk_list, "unilib:food_milk_soy_red")
     end
 
-    if unilib.pkg_executed_table["food_milk_coconut"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_coconut"] ~= nil then
         table.insert(vegan_milk_list, "unilib:food_milk_coconut")
     end
 

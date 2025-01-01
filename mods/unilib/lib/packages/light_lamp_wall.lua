@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_wall = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,15 +29,17 @@ function unilib.pkg.light_lamp_wall.exec()
     unilib.register_node("unilib:light_lamp_wall", "morelights_modern:walllamp", mode, {
         -- From morelights_modern:walllamp
         description = S("Modern Wall Lamp"),
-        tiles = {"unilib_pole_metal_dark.png^unilib_light_lamp_wall_overlay.png"},
+        tiles = {"unilib_hardware_pole_metal_dark.png^unilib_light_lamp_wall_overlay.png"},
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         collision_box = {
             type = "fixed",
             fixed = {-1/8, -3/8, 1/8, 1/8, 1/4, 1/2},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 12,
         mesh = "unilib_light_lamp_wall.obj",
         paramtype = "light",
@@ -50,7 +52,7 @@ function unilib.pkg.light_lamp_wall.exec()
 
         on_place = function(itemstack, placer, pointed_thing)
 
-            return unilib.rotate_and_place(
+            return unilib.misc.rotate_and_place(
                 itemstack, placer, pointed_thing, {[0] = 6, 4, 1, 3, 0, 2}
             )
 

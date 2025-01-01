@@ -9,7 +9,7 @@
 unilib.pkg.stone_greywacke_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_greywacke_pale.exec()
         description = S("Pale Greywacke"),
 
         category = "sedimentary",
+        colour = "#7F8073",
         grinder_flag = true,
         hardness = 3,
     })
@@ -72,6 +73,24 @@ function unilib.pkg.stone_greywacke_pale.exec()
         replace_mode = mode,
         description = S("Pale Greywacke Cobble"),
         img_list = {"unilib_stone_greywacke_pale.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_greywacke_pale_cobble_compressed
+        part_name = "greywacke_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pale Greywacke Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_greywacke_pale_cobble_condensed
+        part_name = "greywacke_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pale Greywacke Cobble"),
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_shaggy_mane = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.mushroom_shaggy_mane.exec()
             oddly_breakable_by_hand = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -43,7 +43,8 @@ function unilib.pkg.mushroom_shaggy_mane.exec()
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_mushroom_shaggy_mane.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -58,5 +59,7 @@ function unilib.pkg.mushroom_shaggy_mane.exec()
     unilib.register_mushroom_in_pot(
         "unilib:mushroom_shaggy_mane", "lib_ecology:mushroom_shaggy_mane"
     )
+
+    unilib.register_decoration_spare("unilib:mushroom_shaggy_mane")
 
 end

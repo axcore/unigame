@@ -9,7 +9,7 @@
 unilib.pkg.stone_andesite_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_andesite_white.exec()
         description = S("White Andesite"),
 
         category = "extrusive",
+        colour = "#C4C4C2",
         grinder_flag = true,
         hardness = 3,
     })
@@ -75,6 +76,24 @@ function unilib.pkg.stone_andesite_white.exec()
 
         replace_mode = mode,
         description = S("White Andesite Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_andesite_white_cobble_compressed
+        part_name = "andesite_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed White Andesite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_andesite_white_cobble_condensed
+        part_name = "andesite_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed White Andesite Cobble"),
     })
 
 end

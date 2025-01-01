@@ -9,7 +9,7 @@
 unilib.pkg.stone_komatiite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_komatiite.exec()
         description = S("Komatiite"),
 
         category = "metamorphic",
+        colour = "#C4A46C",
         grinder_flag = true,
         hardness = 2,
     })
@@ -75,6 +76,24 @@ function unilib.pkg.stone_komatiite.exec()
 
         replace_mode = mode,
         description = S("Komatiite Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_komatiite_cobble_compressed
+        part_name = "komatiite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Komatiite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_komatiite_cobble_condensed
+        part_name = "komatiite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Komatiite Cobble"),
     })
 
 end

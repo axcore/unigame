@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_quadrotriticale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.grains.add_mode
+local mode = unilib.global.imported_mod_table.grains.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_bread_quadrotriticale.exec()
             inventory_image = "unilib_food_bread_quadrotriticale.png",
             groups = {flammable = 2, food_bread = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_bread_quadrotriticale", 6),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_bread_quadrotriticale", 6),
         }
     )
     unilib.register_craft({

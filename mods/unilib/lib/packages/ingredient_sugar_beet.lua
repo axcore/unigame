@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_sugar_beet = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.ingredient_sugar_beet.init()
 
     return {
         description = "Beet sugar",
-        depends = "crop_beet_common",
+        depends = "crop_beetroot_common",
     }
 
 end
 
 function unilib.pkg.ingredient_sugar_beet.exec()
 
-    local c_beet = "unilib:crop_beet_common_harvest"
+    local c_beet = "unilib:crop_beetroot_common_harvest"
 
     unilib.register_craftitem("unilib:ingredient_sugar_beet", "cropocalypse:sugar", mode, {
         -- From cropocalypse:sugar
@@ -34,7 +34,7 @@ function unilib.pkg.ingredient_sugar_beet.exec()
         inventory_image = "unilib_ingredient_sugar_beet.png",
         groups = {flammable = 1, food_sugar = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_sugar_beet", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_sugar_beet", 1),
     })
     unilib.register_craft({
         -- From cropocalypse:sugar

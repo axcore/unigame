@@ -9,7 +9,7 @@
 unilib.pkg.crop_sunflower_dwarf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_sunflower_dwarf.exec()
         table.insert(orig_name_list, "cucina_vegana:sunflower_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/sunflower_default.lua
         unilib.register_crop_mtgame({
@@ -50,7 +50,7 @@ function unilib.pkg.crop_sunflower_dwarf.exec()
             fertility_list = fertility_list,
             harvest_description = S("Dwarf Sunflower"),
             harvest_group_table = {flammable = 4},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 13,
             seed_description = S("Dwarf Sunflower Seed"),
             seed_group_table = {flammable = 4},
@@ -108,7 +108,8 @@ function unilib.pkg.crop_sunflower_dwarf.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

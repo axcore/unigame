@@ -9,7 +9,7 @@
 unilib.pkg.clay_gumland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,9 @@ function unilib.pkg.clay_gumland.exec()
         -- From aotearoa:gumland_hardpan
         description = S("Gumland Hardpan"),
         tiles = {"unilib_clay_gumland_hardpan.png"},
-        groups = {crumbly = 2},
-        sounds = unilib.node_sound_dirt_defaults({
+        -- N.B. clay = 1 not in original code
+        groups = {clay = 1, crumbly = 2},
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
@@ -57,7 +58,7 @@ function unilib.pkg.clay_gumland.exec()
             },
         },
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),

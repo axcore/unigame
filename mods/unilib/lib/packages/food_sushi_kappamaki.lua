@@ -9,7 +9,7 @@
 unilib.pkg.food_sushi_kappamaki = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,10 @@ function unilib.pkg.food_sushi_kappamaki.exec()
         -- From ethereal:sushi_kappamaki
         description = S("Kappa Maki Sushi"),
         inventory_image = "unilib_food_sushi_kappamaki.png",
-        -- N.B. No groups in original code
-        groups = {food_sushi = 1},
+        -- N.B. food_sushi = 1 not in original code
+        groups = {flammable = 2, food_sushi = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_sushi_kappamaki", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_sushi_kappamaki", 3),
     })
     unilib.register_craft({
         -- From ethereal:sushi_kappamaki

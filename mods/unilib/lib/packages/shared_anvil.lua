@@ -9,7 +9,7 @@
 unilib.pkg.shared_anvil = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.anvil.add_mode
+local mode = unilib.global.imported_mod_table.anvil.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -76,7 +76,7 @@ function unilib.pkg.shared_anvil.exec()
     }
 
     for k, v in pairs(tool_table) do
-        unilib.register_tool_no_repair(k, v)
+        unilib.tools.register_no_repair(k, v)
     end
 
 end

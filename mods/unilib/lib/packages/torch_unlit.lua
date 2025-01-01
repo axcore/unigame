@@ -9,7 +9,7 @@
 unilib.pkg.torch_unlit = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_torch.add_mode
+local mode = unilib.global.imported_mod_table.real_torch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,10 +17,10 @@ local mode = unilib.imported_mod_table.real_torch.add_mode
 
 local function on_flood(pos, oldnode, newnode)
 
-    minetest.add_item(pos, ItemStack("unilib:torch_unlit 1"))
+    core.add_item(pos, ItemStack("unilib:torch_unlit 1"))
 
     -- Play flame-extinguish sound if liquid is not an 'igniter'
-    local nodedef = minetest.registered_items[newnode.name]
+    local nodedef = core.registered_items[newnode.name]
 
     -- Return if torch is unlit already
     if oldnode.name == "unilib:torch_unlit" or
@@ -37,7 +37,7 @@ local function on_flood(pos, oldnode, newnode)
         nodedef.groups.igniter > 0
     ) then
 
-        minetest.sound_play(
+        core.sound_play(
             "unilib_cool_lava",
             {pos = pos, max_hear_distance = 16, gain = 0.1},
             true
@@ -83,7 +83,7 @@ function unilib.pkg.torch_unlit.exec()
             },
         },
         groups = {attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_unlit",
@@ -107,16 +107,16 @@ function unilib.pkg.torch_unlit.exec()
 
         on_ignite = function(pos, igniter)
 
-            local node = minetest.get_node(pos)
-            minetest.set_node(pos, {name = "unilib:torch_ordinary", param2 = node.param2})
+            local node = core.get_node(pos)
+            core.set_node(pos, {name = "unilib:torch_ordinary", param2 = node.param2})
 
         end,
 
         on_place = function(itemstack, placer, pointed_thing)
 
             local under = pointed_thing.under
-            local node = minetest.get_node(under)
-            local def_table = minetest.registered_nodes[node.name]
+            local node = core.get_node(under)
+            local def_table = core.registered_nodes[node.name]
 
             if def_table and
                     def_table.on_rightclick and
@@ -128,7 +128,7 @@ function unilib.pkg.torch_unlit.exec()
             end
 
             local above = pointed_thing.above
-            local wdir = minetest.dir_to_wallmounted(vector.subtract(under, above))
+            local wdir = core.dir_to_wallmounted(vector.subtract(under, above))
             local fakestack = itemstack
 
             if wdir == 0 then
@@ -139,7 +139,7 @@ function unilib.pkg.torch_unlit.exec()
                 fakestack:set_name("unilib:torch_unlit_wall")
             end
 
-            itemstack = minetest.item_place(fakestack, placer, pointed_thing, wdir)
+            itemstack = core.item_place(fakestack, placer, pointed_thing, wdir)
             itemstack:set_name("unilib:torch_unlit")
 
             return itemstack
@@ -152,7 +152,7 @@ function unilib.pkg.torch_unlit.exec()
         recipe = {
             {"unilib:torch_unlit", "unilib:torch_unlit"},
             {"unilib:torch_unlit", "unilib:torch_unlit"},
-        }
+        },
     })
 
     unilib.register_node("unilib:torch_unlit_wall", "real_torch:torch_wall", mode, {
@@ -173,7 +173,7 @@ function unilib.pkg.torch_unlit.exec()
             attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1,
             not_in_creative_inventory = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_unlit",
@@ -194,8 +194,8 @@ function unilib.pkg.torch_unlit.exec()
 
         on_ignite = function(pos, igniter)
 
-            local node = minetest.get_node(pos)
-            minetest.set_node(pos, {name = "unilib:torch_ordinary_wall", param2 = node.param2})
+            local node = core.get_node(pos)
+            core.set_node(pos, {name = "unilib:torch_ordinary_wall", param2 = node.param2})
 
         end,
     })
@@ -218,7 +218,7 @@ function unilib.pkg.torch_unlit.exec()
             attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1,
             not_in_creative_inventory = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_unlit",
@@ -239,8 +239,8 @@ function unilib.pkg.torch_unlit.exec()
 
         on_ignite = function(pos, igniter)
 
-            local node = minetest.get_node(pos)
-            minetest.set_node(pos, {name = "unilib:torch_ordinary_ceiling", param2 = node.param2})
+            local node = core.get_node(pos)
+            core.set_node(pos, {name = "unilib:torch_ordinary_ceiling", param2 = node.param2})
 
         end,
     })
@@ -257,10 +257,12 @@ function unilib.pkg.torch_unlit.exec()
 
         action = function(pos)
 
-            if not minetest.get_node_timer(pos):is_started() then
+            if not core.get_node_timer(pos):is_started() then
 
-                minetest.get_node_timer(pos):start(
-                    math.random(unilib.real_torch_min_time, unilib.real_torch_max_time)
+                core.get_node_timer(pos):start(
+                    math.random(
+                        unilib.setting.real_torch_min_time, unilib.setting.real_torch_max_time
+                    )
                 )
 
             end
@@ -272,8 +274,8 @@ function unilib.pkg.torch_unlit.exec()
 
         on_construct = function(pos)
 
-            minetest.get_node_timer(pos):start(
-                math.random(unilib.real_torch_min_time, unilib.real_torch_max_time)
+            core.get_node_timer(pos):start(
+                math.random(unilib.setting.real_torch_min_time, unilib.setting.real_torch_max_time)
             )
 
         end,
@@ -282,10 +284,10 @@ function unilib.pkg.torch_unlit.exec()
 
         on_timer = function(pos, elapsed)
 
-            local p2 = minetest.get_node(pos).param2
+            local p2 = core.get_node(pos).param2
 
-            minetest.set_node(pos, {name = "unilib:torch_unlit", param2 = p2})
-            minetest.sound_play(
+            core.set_node(pos, {name = "unilib:torch_unlit", param2 = p2})
+            core.sound_play(
                 "unilib_extinguish_torch",
                 {pos = pos, gain = 0.1, max_hear_distance = 10},
                 true
@@ -298,8 +300,8 @@ function unilib.pkg.torch_unlit.exec()
 
         on_construct = function(pos)
 
-            minetest.get_node_timer(pos):start(
-                math.random(unilib.real_torch_min_time, unilib.real_torch_max_time)
+            core.get_node_timer(pos):start(
+                math.random(unilib.setting.real_torch_min_time, unilib.setting.real_torch_max_time)
             )
 
         end,
@@ -308,10 +310,10 @@ function unilib.pkg.torch_unlit.exec()
 
         on_timer = function(pos, elapsed)
 
-            local p2 = minetest.get_node(pos).param2
+            local p2 = core.get_node(pos).param2
 
-            minetest.set_node(pos, {name = "unilib:torch_unlit_wall", param2 = p2})
-            minetest.sound_play(
+            core.set_node(pos, {name = "unilib:torch_unlit_wall", param2 = p2})
+            core.sound_play(
                 "unilib_extinguish_torch",
                 {pos = pos, gain = 0.1, max_hear_distance = 10},
                 true
@@ -324,8 +326,8 @@ function unilib.pkg.torch_unlit.exec()
 
         on_construct = function(pos)
 
-            minetest.get_node_timer(pos):start(
-                math.random(unilib.real_torch_min_time, unilib.real_torch_max_time)
+            core.get_node_timer(pos):start(
+                math.random(unilib.setting.real_torch_min_time, unilib.setting.real_torch_max_time)
             )
 
         end,
@@ -334,10 +336,10 @@ function unilib.pkg.torch_unlit.exec()
 
         on_timer = function(pos, elapsed)
 
-            local p2 = minetest.get_node(pos).param2
+            local p2 = core.get_node(pos).param2
 
-            minetest.set_node(pos, {name = "unilib:torch_unlit_ceiling", param2 = p2})
-            minetest.sound_play(
+            core.set_node(pos, {name = "unilib:torch_unlit_ceiling", param2 = p2})
+            core.sound_play(
                 "unilib_extinguish_torch",
                 {pos = pos, gain = 0.1, max_hear_distance = 10},
                 true

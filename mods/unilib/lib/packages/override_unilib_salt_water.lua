@@ -9,7 +9,7 @@
 unilib.pkg.override_unilib_salt_water = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 
 function unilib.pkg.override_unilib_salt_water.exec()
 
-    unilib.generic_liquid_table.water_ordinary.description = S("Salt Water")
-    unilib.generic_liquid_table.water_ordinary.group_table.potable_bucket = nil
-    unilib.generic_liquid_table.water_ordinary.potable_flag = false
+    unilib.global.generic_liquid_table.water_ordinary.description = S("Salt Water")
+    unilib.global.generic_liquid_table.water_ordinary.group_table.potable_bucket = nil
+    unilib.global.generic_liquid_table.water_ordinary.potable_flag = false
 
     unilib.override_item("unilib:liquid_water_ordinary_source", {
         description = S("Salt Water Source"),

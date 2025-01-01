@@ -9,7 +9,7 @@
 unilib.pkg.produce_bean_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -105,15 +105,15 @@ function unilib.pkg.produce_bean_green.exec()
                 return
             end
 
-            local under = minetest.get_node(pt.under)
+            local under = core.get_node(pt.under)
 
             -- Return if any of the nodes are not registered
-            if not minetest.registered_nodes[under.name] then
+            if not core.registered_nodes[under.name] then
                 return
             end
 
             -- Is the player right-clicking on something that has a custom on_place set?
-            local def = minetest.registered_nodes[under.name]
+            local def = core.registered_nodes[under.name]
             if placer and itemstack and def and def.on_rightclick then
                 return def.on_rightclick(pt.under, under, placer, itemstack, pt)
             end
@@ -122,7 +122,7 @@ function unilib.pkg.produce_bean_green.exec()
             local name = placer and placer:get_player_name() or ""
 
             -- Check for protection
-            if minetest.is_protected(pt.under, name) then
+            if core.is_protected(pt.under, name) then
                 return
             end
 
@@ -132,18 +132,18 @@ function unilib.pkg.produce_bean_green.exec()
             end
 
             -- Add the node and remove 1 item from the itemstack
-            minetest.set_node(pt.under, {name = "unilib:produce_bean_green_grow_1"})
+            core.set_node(pt.under, {name = "unilib:produce_bean_green_grow_1"})
 
-            minetest.sound_play("unilib_place_node", {pos = pt.under, gain = 1.0})
+            core.sound_play("unilib_place_node", {pos = pt.under, gain = 1.0})
 
-            if placer or not unilib.is_creative(placer:get_player_name()) then
+            if placer or not unilib.utils.is_creative(placer:get_player_name()) then
 
                 itemstack:take_item()
 
                 -- Check for refill
                 if itemstack:get_count() == 0 then
 
-                    minetest.after(
+                    core.after(
                         0.20,
                         unilib.refill_plant,
                         placer,
@@ -159,7 +159,8 @@ function unilib.pkg.produce_bean_green.exec()
 
         end,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From farming:beans
@@ -179,7 +180,7 @@ function unilib.pkg.produce_bean_green.exec()
         groups = {
             attached_node = 1, flammable = 2, not_in_creative_inventory = 1, plant = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -200,7 +201,7 @@ function unilib.pkg.produce_bean_green.exec()
         waving = 1,
     })
 
-    unilib.register_decoration("farming_redo_produce_bean_green", {
+    unilib.register_decoration_generic("farming_redo_produce_bean_green", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_bean_green_wild",
@@ -209,8 +210,8 @@ function unilib.pkg.produce_bean_green.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 345,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_shrub_hog_peanut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_farlands_plant_shrub_hog_peanut.post()
 
-    unilib.register_decoration_now("farlands_plant_shrub_hog_peanut", nil, {
+    unilib.register_decoration_complete("farlands_plant_shrub_hog_peanut", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "plant_shrub_hog_peanut"
         biomes = "farlands_forest_coniferous_tall",

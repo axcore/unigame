@@ -9,7 +9,7 @@
 unilib.pkg.mineral_graphite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,14 +21,29 @@ function unilib.pkg.mineral_graphite_rock.init()
         description = "Graphite rock (as mineral)",
         notes = "An alternative to the stone ores with graphite",
         depends = "mineral_graphite",
+        optional = "mineral_coal",
     }
 
 end
 
 function unilib.pkg.mineral_graphite_rock.exec()
 
-    local c_lump = "unilib:mineral_graphite_lump"
-    local hardness = unilib.mineral_table["graphite"]["hardness"]
+    local c_main_lump = "unilib:mineral_graphite_lump"
+    local c_other_lump = "unilib:mineral_coal_lump"
+    local hardness = unilib.global.mineral_table["graphite"]["hardness"]
+
+    local drop_table = {
+        max_items = 1,
+        items = {
+            {items = {"unilib:mineral_graphite_rock"}, rarity = (100 * hardness)},
+            {items = {c_main_lump .. " 2"}, rarity = (2 + hardness)},
+            {items = {c_main_lump}},
+        },
+    }
+
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
+        table.insert(drop_table.items, 3, {items = {c_other_lump}, rarity = (10 * hardness)})
+    end
 
     unilib.register_mineral_rock("graphite")
 
@@ -37,16 +52,9 @@ function unilib.pkg.mineral_graphite_rock.exec()
         description = S("Graphite Rock"),
         tiles = {"unilib_mineral_graphite_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
-        drop = {
-            max_items = 1,
-            items = {
-                {items = {"unilib:mineral_graphite_rock"}, rarity = (100 * hardness)},
-                {items = {c_lump .. " 2"}, rarity = (2 + hardness)},
-                {items = {c_lump}},
-            },
-        },
+        drop = drop_table,
     })
 
 end

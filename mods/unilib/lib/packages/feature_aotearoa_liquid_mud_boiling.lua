@@ -9,7 +9,7 @@
 unilib.pkg.feature_aotearoa_liquid_mud_boiling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,10 +30,10 @@ end
 
 function unilib.pkg.feature_aotearoa_liquid_mud_boiling.exec()
 
-    unilib.register_decoration("aotearoa_liquid_mud_boiling_pool_1", {
+    unilib.register_decoration_generic("aotearoa_liquid_mud_boiling_pool_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_feature_liquid_mud_boiling_pool_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_feature_liquid_mud_boiling_pool_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -47,10 +47,10 @@ function unilib.pkg.feature_aotearoa_liquid_mud_boiling.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_liquid_mud_boiling_pool_2", {
+    unilib.register_decoration_generic("aotearoa_liquid_mud_boiling_pool_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_feature_liquid_mud_boiling_pool_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_feature_liquid_mud_boiling_pool_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -71,7 +71,7 @@ function unilib.pkg.feature_aotearoa_liquid_mud_boiling.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_liquid_mud_boiling_pool_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_liquid_mud_boiling_pool_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             biomes = {
                 "aotearoa_scrubland_geothermal",

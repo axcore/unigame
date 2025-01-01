@@ -9,7 +9,7 @@
 unilib.pkg.bush_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,7 @@ function unilib.pkg.bush_ordinary.exec()
         output = "default:wood",
         recipe = {
             {"default:bush_stem"},
-        }
+        },
     })
     minetest.register_craft({
         -- From default:bush_stem
@@ -77,14 +77,14 @@ function unilib.pkg.bush_ordinary.exec()
         description = S("Ordinary Bush Stem"),
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16},
     })
-    if unilib.pkg_executed_table["tree_apple"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
 
         unilib.register_craft({
             -- From default:wood
             output = "unilib:tree_apple_wood",
             recipe = {
                 {"unilib:bush_ordinary_stem"},
-            }
+            },
         })
 
     end
@@ -92,7 +92,7 @@ function unilib.pkg.bush_ordinary.exec()
         -- From default:bush_stem
         type = "fuel",
         recipe = "unilib:bush_ordinary_stem",
-        burntime = unilib.bush_burn_table.stem[burnlevel],
+        burntime = unilib.global.bush_burn_table.stem[burnlevel],
     })
 
     --[[
@@ -108,8 +108,8 @@ function unilib.pkg.bush_ordinary.exec()
             max_items = 1,
             items = {
                 {items = {"default:bush_sapling"}, rarity = 5},
-                {items = {"default:bush_leaves"}}
-            }
+                {items = {"default:bush_leaves"}},
+            },
         },
         paramtype = "light",
 
@@ -138,7 +138,7 @@ function unilib.pkg.bush_ordinary.exec()
 
         -- Adapted from default/trees.lua
 
-        if not unilib.can_grow_sapling(pos) then
+        if not unilib.flora.can_grow_sapling(pos) then
 
             -- Try again 5 min later
             minetest.get_node_timer(pos):start(300)
@@ -153,7 +153,7 @@ function unilib.pkg.bush_ordinary.exec()
     --
         minetest.place_schematic(
             {x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
-            unilib.path_mod .. "/schematics/bush_ordinary.mts",
+            unilib.core.path_mod .. "/schematics/bush_ordinary.mts",
             "0",
             nil,
             false
@@ -223,7 +223,7 @@ function unilib.pkg.bush_ordinary.exec()
         -- From default:bush_sapling
         type = "fuel",
         recipe = "unilib:bush_ordinary_sapling",
-        burntime = unilib.bush_burn_table.sapling[burnlevel],
+        burntime = unilib.global.bush_burn_table.sapling[burnlevel],
     })
 
     --[[
@@ -250,10 +250,10 @@ function unilib.pkg.bush_ordinary.exec()
         y_min = 1,
     })
     ]]--
-    unilib.register_decoration("default_bush_ordinary", {
+    unilib.register_decoration_generic("default_bush_ordinary", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_ordinary.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_ordinary.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

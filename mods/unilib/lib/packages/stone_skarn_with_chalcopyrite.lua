@@ -9,7 +9,7 @@
 unilib.pkg.stone_skarn_with_chalcopyrite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.rocks.add_mode
+local mode = unilib.global.imported_mod_table.rocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,11 @@ function unilib.pkg.stone_skarn_with_chalcopyrite.exec()
         "mineral:skarn_chalcopyrite",
         mode,
         {
-            description = unilib.brackets(S("Chalcopyrite Ore"), S("Skarn")),
+            description = unilib.utils.brackets(S("Chalcopyrite Ore"), S("Skarn")),
             tiles = {"unilib_stone_skarn.png^unilib_mineral_chalcopyrite_alt.png"},
-            groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 3, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:mineral_chalcopyrite_lump",
         }

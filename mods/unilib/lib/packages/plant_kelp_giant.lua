@@ -9,7 +9,7 @@
 unilib.pkg.plant_kelp_giant = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,11 +30,11 @@ function unilib.pkg.plant_kelp_giant.exec()
 
     unilib.register_node("unilib:plant_kelp_giant", "australia:kelp_giant_brown", mode, {
         -- From australia:kelp_giant_brown
-        description = unilib.annotate(S("Giant Kelp"), "Macrocystis pyrifera"),
+        description = unilib.utils.annotate(S("Giant Kelp"), "Macrocystis pyrifera"),
         tiles = {"unilib_plant_kelp_giant.png"},
         -- N.B. no food_kelp in original code
         groups = {food_kelp = 1, sea = 1, seaplants = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "plantlike",
@@ -49,7 +49,17 @@ function unilib.pkg.plant_kelp_giant.exec()
         walkable = false,
         wield_image = "unilib_plant_kelp_giant.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:plant_kelp_giant", 1),
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "unilib:stone_ordinary_with_kelp_giant"}
+            )
+
+        end,
+
+        on_use = unilib.cuisine.eat_on_use("unilib:plant_kelp_giant", 1),
     })
     -- (not compatible with flowerpots)
 
@@ -59,11 +69,11 @@ function unilib.pkg.plant_kelp_giant.exec()
         "australia:kelp_giant_brown_middle",
         mode,
         {
-            description = unilib.annotate(S("Giant Kelp"), "Macrocystis pyrifera"),
+            description = unilib.utils.annotate(S("Giant Kelp"), "Macrocystis pyrifera"),
             tiles = {"unilib_plant_kelp_giant_middle.png"},
             -- N.B. "not_in_creative_inventory" not used in original code
             groups = {not_in_creative_inventory = 1, sea = 1, seaplants = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             climbable = true,
             drawtype = "plantlike",
@@ -94,10 +104,10 @@ function unilib.pkg.plant_kelp_giant.exec()
         action = function(pos)
 
             local yp = {x = pos.x, y = pos.y + 1, z = pos.z}
-            if minetest.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
+            if core.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
 
                 pos.y = pos.y + 1
-                minetest.add_node(pos, {name = "unilib:plant_kelp_giant"}) else
+                core.add_node(pos, {name = "unilib:plant_kelp_giant"}) else
                 return
 
             end
@@ -111,8 +121,12 @@ function unilib.pkg.plant_kelp_giant.exec()
         label = "Kelp growth [plant_kelp_giant]",
         nodenames = {"unilib:plant_kelp_giant"},
 
-        chance = 3,
-        interval = 6,
+        -- N.B. In original code, giant kelp grows much too quickly (for something that's a food
+        --      source). Tweaked the chance/interval to match the ABM just above
+--      chance = 3,
+--      interval = 6,
+        chance = 10,
+        interval = 12,
 
         action = function(pos)
 
@@ -120,15 +134,15 @@ function unilib.pkg.plant_kelp_giant.exec()
             local yyp = {x = pos.x, y = pos.y + 2, z = pos.z}
             local yyyp = {x = pos.x, y = pos.y + 3, z = pos.z}
 
-            if minetest.get_node(pos).name == "unilib:plant_kelp_giant" and
-                    minetest.get_node(yp).name == "unilib:liquid_water_ordinary_source" and
-                    minetest.get_node(yyp).name == "unilib:liquid_water_ordinary_source" then
+            if core.get_node(pos).name == "unilib:plant_kelp_giant" and
+                    core.get_node(yp).name == "unilib:liquid_water_ordinary_source" and
+                    core.get_node(yyp).name == "unilib:liquid_water_ordinary_source" then
 
-                if minetest.get_node(yyyp).name == "unilib:liquid_water_ordinary_source" then
+                if core.get_node(yyyp).name == "unilib:liquid_water_ordinary_source" then
 
-                    minetest.add_node(pos, {name = "unilib:plant_kelp_giant_middle"})
+                    core.add_node(pos, {name = "unilib:plant_kelp_giant_middle"})
                     pos.y = pos.y + 1
-                    minetest.add_node(pos, {name = "unilib:plant_kelp_giant"})
+                    core.add_node(pos, {name = "unilib:plant_kelp_giant"})
 
                 else
 

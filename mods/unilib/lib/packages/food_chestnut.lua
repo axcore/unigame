@@ -9,7 +9,7 @@
 unilib.pkg.food_chestnut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chestnuttree.add_mode
+local mode = unilib.global.imported_mod_table.chestnuttree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_chestnut.exec()
         -- N.B. no food_chestnut in original code
         groups = {flammable = 2, food = 2, food_chestnut = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chestnut", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chestnut", 2),
     })
     unilib.register_craft({
         -- From chestnuttree:fruit

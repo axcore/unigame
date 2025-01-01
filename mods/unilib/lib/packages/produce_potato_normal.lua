@@ -9,7 +9,7 @@
 unilib.pkg.produce_potato_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -67,21 +67,22 @@ function unilib.pkg.produce_potato_normal.exec()
         on_use = function(itemstack, user, pointed_thing)
 
             -- 1 in 3 chance of being poisoned
-            -- N.B. No call to unilib.cuisine_eat_on_use(); checking food history doesn't matter
+            -- N.B. No call to unilib.cuisine.eat_on_use(); checking food history doesn't matter
             --      when a food can be both nutritious and poisonous
             if user then
 
                 if math.random(3) == 1 then
-                    return minetest.do_item_eat(-1, nil, itemstack, user, pointed_thing)
+                    return core.do_item_eat(-1, nil, itemstack, user, pointed_thing)
                 else
-                    return minetest.do_item_eat(1, nil, itemstack, user, pointed_thing)
+                    return core.do_item_eat(1, nil, itemstack, user, pointed_thing)
                 end
 
             end
 
         end,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -93,7 +94,16 @@ function unilib.pkg.produce_potato_normal.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_potato_normal", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_potato_normal_harvest",
+        juice_description = S("Potato"),
+        juice_type = "potato",
+        rgb = "#d19d0b",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_produce_potato_normal", {
         -- From farming_redo/mapgen.lua
         -- N.B. The original code does not use the final growth stage for the decoration
         deco_type = "simple",
@@ -103,8 +113,8 @@ function unilib.pkg.produce_potato_normal.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 465,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

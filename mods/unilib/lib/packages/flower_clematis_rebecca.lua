@@ -9,7 +9,7 @@
 unilib.pkg.flower_clematis_rebecca = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,22 +28,23 @@ function unilib.pkg.flower_clematis_rebecca.exec()
 
     unilib.register_node("unilib:flower_clematis_rebecca", "moreplants:medflower", mode, {
         -- From moreplants:medflower
-        description = unilib.annotate(S("Clematis Rebecca"), "Clematis"),
+        description = unilib.utils.annotate(S("Clematis Rebecca"), "Clematis"),
         tiles = {"unilib_flower_clematis_rebecca.png"},
         -- N.B. Replaced original groups with standard flower groups. No food_flower in original
         --      code
 --      groups = {attached_node = 1, flammable = 1, flower = 1, food_flower = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_magenta = 1, flammable = 1, flora = 1, flower = 1,
-            food_flower = 1, snappy = 3,
+            attached_node = 1, color_magenta = 1, colour_magenta = 1, flammable = 1, flora = 1,
+            flower = 1, food_flower = 1, snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_flower_clematis_rebecca.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other flowers
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,11 +56,11 @@ function unilib.pkg.flower_clematis_rebecca.exec()
         waving = 1,
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:flower_clematis_rebecca", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:flower_clematis_rebecca", 1),
     })
     unilib.register_flower_in_pot("unilib:flower_clematis_rebecca", "moreplants:medflower")
 
-    unilib.register_decoration("moreplants_flower_clematis_rebecca", {
+    unilib.register_decoration_generic("moreplants_flower_clematis_rebecca", {
         -- From moreplants:medflower
         deco_type = "simple",
         decoration = "unilib:flower_clematis_rebecca",

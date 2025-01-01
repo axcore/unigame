@@ -9,7 +9,7 @@
 unilib.pkg.tool_hoe_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 function unilib.pkg.tool_hoe_mese.exec()
 
     -- (This tool is marked as deprecated in minetest_game/farming)
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_hoe({
             -- From farming:hoe_mese
@@ -44,7 +44,9 @@ function unilib.pkg.tool_hoe_mese.exec()
             },
 
             replace_mode = mode,
+            damage_group_table = {fleshy = 3},
         })
+        unilib.tools.apply_toolranks("unilib:tool_hoe_mese", "hoe")
 
     end
 

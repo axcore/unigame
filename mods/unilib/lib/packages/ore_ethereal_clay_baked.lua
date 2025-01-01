@@ -9,7 +9,7 @@
 unilib.pkg.ore_ethereal_clay_baked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -47,13 +47,14 @@ end
 
 function unilib.pkg.ore_ethereal_clay_baked.post()
 
-    -- N.B. The "ethereal_mesa" biome occurs between y = 71 and y = 1
+    -- N.B. The "ethereal_mesa" biome occurs between y = 71 and y = 20
 
-    register_ore(10, 5, "unilib:clay_baked_red")
-    register_ore(20, 15, "unilib:clay_baked_grey")
-    register_ore(30, 25, "unilib:clay_baked_red")
-    register_ore(40, 35, "unilib:clay_baked_grey")
-    register_ore(50, 45, "unilib:clay_baked_red")
-    register_ore(60, 55, "unilib:clay_baked_grey")
+    for n = 0, 5 do
+
+        register_ore(20 + (n * 9), 21 + (n * 9), "unilib:clay_baked_brown")
+        register_ore(22 + (n * 9), 23 + (n * 9), "unilib:clay_baked_grey")
+        register_ore(25 + (n * 9), 26 + (n * 9), "unilib:clay_baked_red")
+
+    end
 
 end

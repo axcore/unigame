@@ -9,7 +9,7 @@
 unilib.pkg.plant_pickle_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,10 +29,10 @@ function unilib.pkg.plant_pickle_sea.exec()
 
     unilib.register_node("unilib:plant_pickle_sea", "xocean:pickle", mode, {
         -- From xocean:pickle
-        description = unilib.annotate(S("Sea Pickle"), "Pyrosoma"),
+        description = unilib.utils.annotate(S("Sea Pickle"), "Pyrosoma"),
         tiles = {"unilib_sand_ordinary.png"},
         groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -43,6 +43,8 @@ function unilib.pkg.plant_pickle_sea.exec()
         node_dig_prediction = "unilib:sand_ordinary",
         node_placement_prediction = "",
         paramtype = "light",
+        -- N.B. No .paramtype2 in original code
+        paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
             fixed = {
@@ -56,9 +58,10 @@ function unilib.pkg.plant_pickle_sea.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:sand_ordinary"})
+            core.set_node(pos, {name = "unilib:sand_ordinary"})
         end,
 
+        --[[
         on_place = function(itemstack, placer, pointed_thing)
 
             if pointed_thing.type ~= "node" or not placer then
@@ -69,23 +72,23 @@ function unilib.pkg.plant_pickle_sea.exec()
             local pos_under = pointed_thing.under
             local pos_above = pointed_thing.above
 
-            if minetest.get_node(pos_under).name ~= "unilib:sand_ordinary" or
-                    minetest.get_node(pos_above).name ~= "unilib:liquid_water_ordinary_source" then
+            if core.get_node(pos_under).name ~= "unilib:sand_ordinary" or
+                    core.get_node(pos_above).name ~= "unilib:liquid_water_ordinary_source" then
 
                 return itemstack
 
             end
 
-            if minetest.is_protected(pos_under, player_name) or
-                    minetest.is_protected(pos_above, player_name) then
+            if core.is_protected(pos_under, player_name) or
+                    core.is_protected(pos_above, player_name) then
 
-                minetest.chat_send_player(player_name, S("Node is protected"))
-                minetest.record_protection_violation(pos_under, player_name)
+                core.chat_send_player(player_name, S("Node is protected"))
+                core.record_protection_violation(pos_under, player_name)
                 return itemstack
 
             end
 
-            minetest.set_node(pos_under, {name = "unilib:plant_pickle_sea"})
+            core.set_node(pos_under, {name = "unilib:plant_pickle_sea"})
             if not (creative and creative.is_enabled_for(player_name)) then
                 itemstack:take_item()
             end
@@ -93,10 +96,22 @@ function unilib.pkg.plant_pickle_sea.exec()
             return itemstack
 
         end,
+        ]]--
+
+        -- N.B. Original code specifies "unilib:sand_ordinary" and
+        --      "unilib:liquid_water_ordinary_source"
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
+        end,
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("xocean_plant_pickle_sea", {
+    unilib.register_decoration_generic("xocean_plant_pickle_sea", {
         -- From xocean/init.lua
         deco_type = "simple",
         decoration = "unilib:plant_pickle_sea",
@@ -110,8 +125,11 @@ function unilib.pkg.plant_pickle_sea.exec()
             seed = 87112,
             spread = {x = 200, y = 200, z = 200},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
+        param2 = 0,
+        param2_max = 3,
         place_offset_y = -1,
         sidelen = 16,
     })

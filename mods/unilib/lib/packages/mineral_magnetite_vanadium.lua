@@ -9,7 +9,7 @@
 unilib.pkg.mineral_magnetite_vanadium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.mineral_magnetite_vanadium.exec()
         description = S("Vanadium Magnetite Lump"),
         inventory_image = "unilib_mineral_magnetite_vanadium_lump.png",
     })
-    if unilib.pkg_executed_table["metal_iron_pig"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron_pig"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

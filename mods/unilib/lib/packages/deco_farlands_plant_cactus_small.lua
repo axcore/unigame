@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_cactus_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,12 +32,12 @@ function unilib.pkg.deco_farlands_plant_cactus_small.post()
 
     for _, part_name in pairs({"small", "small_flowering"}) do
 
-        unilib.register_decoration_now("farlands_plant_cactus_" .. part_name, nil, {
+        unilib.register_decoration_complete("farlands_plant_cactus_" .. part_name, nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "plant_cactus_small"
             biomes = {"farlands_desert", "farlands_desert_sandstone"},
             place_on = {"unilib:sand_desert", "unilib:sand_ordinary"},
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 2,
         })
 

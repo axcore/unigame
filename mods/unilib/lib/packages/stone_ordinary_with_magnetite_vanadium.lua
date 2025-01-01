@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_magnetite_vanadium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.stone_ordinary_with_magnetite_vanadium.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_magnetite_vanadium", nil, mode, {
         -- Texture from PFAA, strongOreRock_vanadiumMagnetite.png. Original code
-        description = unilib.brackets(S("Vanadium Magnetite Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Vanadium Magnetite Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_magnetite_vanadium.png"},
-        groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 1, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_magnetite_vanadium_lump",
     })

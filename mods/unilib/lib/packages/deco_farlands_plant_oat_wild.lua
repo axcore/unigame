@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_oat_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,10 @@ end
 
 function unilib.pkg.deco_farlands_plant_oat_wild.post()
 
-    if unilib.pkg_executed_table["biome_farlands_forest_deciduous"] ~= nil or
-            unilib.pkg_executed_table["biome_farlands_grassland"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_forest_deciduous"] ~= nil or
+            unilib.global.pkg_executed_table["biome_farlands_grassland"] ~= nil then
 
-        unilib.register_decoration_now("farlands_plant_oat_wild", nil, {
+        unilib.register_decoration_complete("farlands_plant_oat_wild", nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "plant_oat_wild"
             biomes = {
@@ -47,9 +47,9 @@ function unilib.pkg.deco_farlands_plant_oat_wild.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_farlands_savanna"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_savanna"] ~= nil then
 
-        unilib.register_decoration_now("farlands_plant_oat_wild_dry", nil, {
+        unilib.register_decoration_complete("farlands_plant_oat_wild_dry", nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "plant_oat_wild"
             biomes = "farlands_savanna",

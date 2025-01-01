@@ -9,7 +9,7 @@
 unilib.pkg.flower_rose_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_rose_red.exec()
         replace_mode = mode,
         deco_part_name = "flowers",
         description = S("Red Rose"),
-        group_table = {color_red = 1, flammable = 1},
+        group_table = {color_red = 1, colour_red = 1, flammable = 1},
         sci_name = "Rosa",
         seed = 436,
     })

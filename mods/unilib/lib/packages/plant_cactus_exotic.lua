@@ -9,7 +9,7 @@
 unilib.pkg.plant_cactus_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,41 +17,40 @@ local mode = unilib.imported_mod_table.farlands.add_mode
 
 local function grow_seed_func(pos)
 
-    local node_under = minetest.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
+    local node_under = core.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
     if not node_under then
 
         -- Node under not yet loaded, try later
-        minetest.get_node_timer(pos):start(unilib.sapling_grow_retry)
+        core.get_node_timer(pos):start(unilib.setting.sapling_grow_retry)
         return
 
     end
 
-    if minetest.get_item_group(node_under.name, "sand") == 0 then
+    if core.get_item_group(node_under.name, "sand") == 0 then
 
         -- Seedling dies
-        minetest.remove_node(pos)
+        core.remove_node(pos)
         return
 
     end
 
-    local light_level = minetest.get_node_light(pos)
-    if not light_level or light_level < unilib.light_min_grow_sapling then
+    local light_level = core.get_node_light(pos)
+    if not light_level or light_level < unilib.constant.light_min_grow_sapling then
 
         -- Too dark for growth, try later in case it's night
-        minetest.get_node_timer(pos):start(unilib.sapling_grow_retry)
+        core.get_node_timer(pos):start(unilib.setting.sapling_grow_retry)
         return
 
     end
 
-    unilib.log(
+    unilib.utils.log(
         "action",
-        "The exotic cactus seedling grows into an exotic cactus at " ..
-                minetest.pos_to_string(pos)
+        "The exotic cactus seedling grows into an exotic cactus at " .. core.pos_to_string(pos)
     )
 
-    minetest.place_schematic(
+    core.place_schematic(
         {x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
-        unilib.path_mod .. "/mts/unilib_plant_cactus_exotic_large.mts",
+        unilib.core.path_mod .. "/mts/unilib_plant_cactus_exotic_large.mts",
         "random",
         nil,
         false
@@ -83,7 +82,7 @@ function unilib.pkg.plant_cactus_exotic.exec()
         description = S("Exotic Cactus"),
         tiles = {"unilib_plant_cactus_exotic.png"},
         groups = {cactus_grow = 1, choppy = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
@@ -100,7 +99,7 @@ function unilib.pkg.plant_cactus_exotic.exec()
         use_texture_alpha = "clip",
         visual_scale = 0.5,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
     unilib.register_craft({
         -- Original to unilib
@@ -110,7 +109,7 @@ function unilib.pkg.plant_cactus_exotic.exec()
     })
     -- (not compatible with flowerpots)
 
-    if unilib.pkg_executed_table["fruit_cactus_exotic"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_cactus_exotic"] ~= nil then
 
         unilib.register_abm({
             -- From farlands, fruit/init.lua
@@ -122,9 +121,9 @@ function unilib.pkg.plant_cactus_exotic.exec()
 
             action = function(pos, node)
 
-                if minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name == "air" then
+                if core.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name == "air" then
 
-                    minetest.set_node(
+                    core.set_node(
                         {x = pos.x, y = pos.y + 1, z = pos.z},
                         {name = "unilib:fruit_cactus_exotic"}
                     )
@@ -141,7 +140,7 @@ function unilib.pkg.plant_cactus_exotic.exec()
         description = S("Exotic Cactus Seedling"),
         tiles = {"unilib_plant_cactus_exotic_seed.png"},
         groups = {attached_node = 1, choppy = 3, dig_immediate = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "plantlike",
         inventory_image = "unilib_plant_cactus_exotic_seed.png",
@@ -155,12 +154,12 @@ function unilib.pkg.plant_cactus_exotic.exec()
         wield_image = "unilib_plant_cactus_exotic_seed.png",
 
         on_construct = function(pos)
-            minetest.get_node_timer(pos):start(math.random(1859, 3719))
+            core.get_node_timer(pos):start(math.random(1859, 3719))
         end,
 
         on_place = function(itemstack, placer, pointed_thing)
 
-            itemstack = unilib.sapling_on_place(
+            itemstack = unilib.flora.sapling_on_place(
                 itemstack,
                 placer,
                 pointed_thing,
@@ -185,7 +184,7 @@ function unilib.pkg.plant_cactus_exotic.exec()
             {"", c_cactus, ""},
             {c_cactus, c_cactus, c_cactus},
             {"", c_cactus, ""},
-        }
+        },
     })
     unilib.register_craft({
         -- Original to unilib
@@ -195,12 +194,12 @@ function unilib.pkg.plant_cactus_exotic.exec()
     })
 
     -- Enable cactus growth with fertilisers
-    unilib.register_special_fertilise("unilib:plant_cactus_exotic", unilib.grow_cactus_callback)
-    unilib.register_special_fertilise("unilib:plant_cactus_exotic_seed", grow_seed_func)
+    unilib.fertiliser.register_special("unilib:plant_cactus_exotic", unilib.flora.grow_cactus)
+    unilib.fertiliser.register_special("unilib:plant_cactus_exotic_seed", grow_seed_func)
 
-    -- Cactus decoration placed as a single node; the ABM in ../shared/abms.lua causes it to grow
-    --      upwards
-    unilib.register_decoration("farlands_plant_cactus_exotic", {
+    -- Cactus decoration placed as a single node; the ABM in the "abm_standard_cactus_grow" package
+    --      causes it to grow upwards
+    unilib.register_decoration_generic("farlands_plant_cactus_exotic", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_cactus_exotic",
@@ -220,10 +219,10 @@ function unilib.pkg.plant_cactus_exotic.exec()
 
     -- N.B. This was commented out in original code, but we need it
     -- Cactus decoration placed as a multi-node plant
-    unilib.register_decoration("farlands_plant_cactus_exotic_large", {
+    unilib.register_decoration_generic("farlands_plant_cactus_exotic_large", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_cactus_exotic_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_exotic_large.mts",
 
         flags = "place_center_x",
         noise_params = {

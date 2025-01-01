@@ -9,7 +9,7 @@
 unilib.pkg.fern_ostrich = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,17 @@ function unilib.pkg.fern_ostrich.exec()
 
     unilib.register_node("unilib:fern_ostrich", "moreplants:fern", mode, {
         -- From moreplants:fern
-        description = unilib.annotate(S("Ostrich Fern"), "Matteuccia struthiopteris"),
+        description = unilib.utils.annotate(S("Ostrich Fern"), "Matteuccia struthiopteris"),
         tiles = {"unilib_fern_ostrich.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_fern_ostrich.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other ferns
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -50,7 +51,7 @@ function unilib.pkg.fern_ostrich.exec()
     })
     unilib.register_plant_in_pot("unilib:fern_ostrich", "moreplants:fern")
 
-    unilib.register_decoration("moreplants_fern_ostrich", {
+    unilib.register_decoration_generic("moreplants_fern_ostrich", {
         -- From moreplants:fern
         deco_type = "simple",
         decoration = "unilib:fern_ostrich",

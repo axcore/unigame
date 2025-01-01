@@ -9,7 +9,7 @@
 unilib.pkg.mineral_gersdorffite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_gersdorffite_rock.exec()
 
     local c_lump = "unilib:mineral_gersdorffite_lump"
-    local hardness = unilib.mineral_table["gersdorffite"]["hardness"]
+    local hardness = unilib.global.mineral_table["gersdorffite"]["hardness"]
 
     unilib.register_mineral_rock("gersdorffite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_gersdorffite_rock.exec()
         description = S("Gersdorffite Rock"),
         tiles = {"unilib_mineral_gersdorffite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

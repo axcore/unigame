@@ -9,7 +9,7 @@
 unilib.pkg.item_compass_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,9 @@ function unilib.pkg.item_compass_digital.exec()
 
     unilib.register_tool("unilib:item_compass_digital", "orienteering:compass", mode, {
         -- From orienteering:compass
-        description = S("Digital Compass"),
+        description = unilib.utils.hint(
+            S("Digital Compass"), S("shows yaw/horizontal viewing angle")
+        ),
         inventory_image = "unilib_item_compass_digital_inv.png",
         groups = {disable_repair = 1},
 

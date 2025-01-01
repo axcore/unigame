@@ -9,7 +9,8 @@
 unilib.pkg.machine_threshing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 -- N.B. The formspec provided by the cottages mod is untidy, so I have rearranged it
 --[[
@@ -29,16 +30,16 @@ local thresh_formspec = "size[8,8]" ..
         "list[current_player;main;0,4;8,4;]"
 ]]--
 local thresh_formspec = "size[8,8]" ..
-        "label[0,0;" .. S("Threshing Machine") .. "]" ..
-        "button_exit[0,0.7;1.5,0.5;public;" .. S("Public?") .. "]" ..
+        "label[0,0;" .. FS("Threshing Machine") .. "]" ..
+        "button_exit[0,0.7;1.5,0.5;public;" .. FS("Public?") .. "]" ..
         "image[0,2;1,1;unilib_crop_wheat_harvest.png]" ..
-        "label[1,1.5;" .. S("Harvested wheat:") .. "]" ..
+        "label[1,1.5;" .. FS("Harvested wheat") .. ":" .. "]" ..
         "list[current_name;harvest;1,2;2,1;]" ..
         "image[0,3;1,1;unilib_item_stick_ordinary.png]" ..
-        "label[1,3.2;" .. S("Punch machine with a stick") .. "]" ..
-        "label[5,0.0;" .. S("Straw:") .. "]" ..
+        "label[1,3.2;" .. FS("Punch machine with a stick") .. "]" ..
+        "label[5,0.0;" .. FS("Straw") .. ":" .. "]" ..
         "list[current_name;straw;6,0;2,2;]" ..
-        "label[5,2.0;" .. S("Seeds:") .. "]" ..
+        "label[5,2.0;" .. FS("Seeds") .. ":" .. "]" ..
         "list[current_name;seeds;6,2;2,2;]" ..
         "list[current_player;main;0,4;8,4;]"
 
@@ -76,7 +77,7 @@ function unilib.pkg.machine_threshing.exec()
         },
         groups = {choppy = 2, cracky = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -88,7 +89,7 @@ function unilib.pkg.machine_threshing.exec()
                 { 0.45, -0.4, -0.50, 0.50, -0.20, 0.50},
                 {-0.45, -0.4, -0.50, 0.45, -0.20, -0.45},
                 {-0.45, -0.4, 0.45, 0.45, -0.20, 0.50},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
@@ -96,12 +97,12 @@ function unilib.pkg.machine_threshing.exec()
             type = "fixed",
             fixed = {
                 {-0.50, -0.5,-0.50, 0.50, -0.20, 0.50},
-            }
+            },
         },
 
         after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("owner", placer:get_player_name() or "")
             meta:set_string(
                 "infotext",
@@ -110,7 +111,7 @@ function unilib.pkg.machine_threshing.exec()
             meta:set_string(
                 "formspec",
                 thresh_formspec .. "label[1.5,0.65;" ..
-                S("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
+                FS("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
             )
             meta:set_string("public", "private")
 
@@ -119,7 +120,7 @@ function unilib.pkg.machine_threshing.exec()
         allow_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(unilib.pkg.shared_cottages.player_can_use(meta, player)) then
                 return 0
             else
@@ -130,7 +131,7 @@ function unilib.pkg.machine_threshing.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if listname == "straw" or
                     listname == "seeds" or
                     (
@@ -151,7 +152,7 @@ function unilib.pkg.machine_threshing.exec()
 
         allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(unilib.pkg.shared_cottages.player_can_use(meta, player)) then
                 return 0
             else
@@ -162,7 +163,7 @@ function unilib.pkg.machine_threshing.exec()
 
         can_dig = function(pos, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local owner = meta:get_string("owner")
 
@@ -180,7 +181,7 @@ function unilib.pkg.machine_threshing.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("infotext", S("Public Threshing Machine"))
             local inv = meta:get_inventory()
             inv:set_size("harvest", 2)
@@ -201,14 +202,14 @@ function unilib.pkg.machine_threshing.exec()
             local wielded = puncher:get_wielded_item()
             if not(wielded) or
                     not(wielded:get_name()) or
-                    not(minetest.registered_items[wielded:get_name()]) or
-                    not(minetest.registered_items[wielded:get_name()].groups) or
-                    not(minetest.registered_items[wielded:get_name()].groups.stick) then
+                    not(core.registered_items[wielded:get_name()]) or
+                    not(core.registered_items[wielded:get_name()].groups) or
+                    not(core.registered_items[wielded:get_name()].groups.stick) then
                 return
             end
 
             local name = puncher:get_player_name()
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
 
             local input = inv:get_list("harvest")
@@ -224,7 +225,7 @@ function unilib.pkg.machine_threshing.exec()
                 meta:set_string(
                     "formspec",
                     thresh_formspec .. "label[1.5,0.65;" ..
-                    S("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
+                    FS("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
                 )
 
                 return
@@ -268,7 +269,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud0 = puncher:hud_add({
                 name = "threshing_0",
-                hud_elem_type = "image",
+                type = "image",
 
                 alignment = {x = 0, y = 0},
                 position = {x = 0.5, y = 0.5},
@@ -278,7 +279,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud1 = puncher:hud_add({
                 name = "threshing_1",
-                hud_elem_type = "image",
+                type = "image",
 
                 alignment = {x = 0, y = 0},
                 position = {x = 0.4, y = 0.5},
@@ -288,7 +289,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud2 = puncher:hud_add({
                 name = "threshing_2",
-                hud_elem_type = "image",
+                type = "image",
 
                 alignment = {x = 0, y = 0},
                 position = {x = 0.6, y = 0.35},
@@ -298,7 +299,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud3 = puncher:hud_add({
                 name = "threshing_3",
-                hud_elem_type = "image",
+                type = "image",
 
                 alignment = {x = 0, y = 0},
                 position = {x = 0.6, y = 0.65},
@@ -308,7 +309,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud4 = puncher:hud_add({
                 name = "threshing_4",
-                hud_elem_type = "text",
+                type = "text",
 
                 alignment = {x = 0, y = 0},
                 number = 0x00CC00,
@@ -328,7 +329,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud5 = puncher:hud_add({
                 name = "threshing_5",
-                hud_elem_type = "text",
+                type = "text",
 
                 alignment = {x = 0, y = 0},
                 number = 0x00CC00,
@@ -340,7 +341,7 @@ function unilib.pkg.machine_threshing.exec()
 
             local hud6 = puncher:hud_add({
                 name = "threshing_6",
-                hud_elem_type = "text",
+                type = "text",
 
                 alignment = {x = 0, y = 0},
                 number = 0x00CC00,
@@ -350,17 +351,17 @@ function unilib.pkg.machine_threshing.exec()
                 text = "+ " .. tostring(anz_seed) .. " seeds",
             })
 
-            minetest.after(2, function()
+            core.after(2, function()
 
-                if( puncher ) then
+                if puncher then
 
-                    if(hud1) then puncher:hud_remove(hud1) end
-                    if(hud2) then puncher:hud_remove(hud2) end
-                    if(hud3) then puncher:hud_remove(hud3) end
-                    if(hud4) then puncher:hud_remove(hud4) end
-                    if(hud5) then puncher:hud_remove(hud5) end
-                    if(hud6) then puncher:hud_remove(hud6) end
-                    if(hud0) then puncher:hud_remove(hud0) end
+                    if hud1 then puncher:hud_remove(hud1) end
+                    if hud2 then puncher:hud_remove(hud2) end
+                    if hud3 then puncher:hud_remove(hud3) end
+                    if hud4 then puncher:hud_remove(hud4) end
+                    if hud5 then puncher:hud_remove(hud5) end
+                    if hud6 then puncher:hud_remove(hud6) end
+                    if hud0 then puncher:hud_remove(hud0) end
 
                 end
 

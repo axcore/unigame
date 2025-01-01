@@ -13,7 +13,7 @@
 unilib.pkg.vessel_bottle_glass_empty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vessels.add_mode
+local mode = unilib.global.imported_mod_table.vessels.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.vessel_bottle_glass_empty.exec()
         description = S("Empty Glass Bottle"),
         tiles = {"unilib_vessel_bottle_glass_empty.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_vessel_bottle_glass_empty.png",
@@ -54,8 +54,8 @@ function unilib.pkg.vessel_bottle_glass_empty.exec()
         recipe = {
             {"unilib:glass_ordinary", "", "unilib:glass_ordinary"},
             {"unilib:glass_ordinary", "", "unilib:glass_ordinary"},
-            {"", "unilib:glass_ordinary", ""}
-        }
+            {"", "unilib:glass_ordinary", ""},
+        },
     })
     unilib.register_craft( {
         -- From vessels:glass_bottle
@@ -67,6 +67,6 @@ function unilib.pkg.vessel_bottle_glass_empty.exec()
         },
     })
     -- From "thirsty" mod
-    unilib.hydration_enable_drinking_from_container("unilib:vessel_bottle_glass_empty", 24)
+    unilib.hydration.enable_drinking_from_container("unilib:vessel_bottle_glass_empty", 24)
 
 end

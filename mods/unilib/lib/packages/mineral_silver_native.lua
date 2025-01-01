@@ -9,7 +9,7 @@
 unilib.pkg.mineral_silver_native = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ function unilib.pkg.mineral_silver_native.exec()
         description = S("Native Silver"),
 
         hardness = 3,
-        -- (Craft recipe provided by the "metal_silver_real" package)
-        metal_list = {"silver_real"},
+        -- (Craft recipe provided by the "metal_silver_rare" package)
+        metal_list = {"silver_rare"},
     })
 
     unilib.register_craftitem(
@@ -53,8 +53,8 @@ end
 function unilib.pkg.mineral_silver_native.post()
 
     -- If the real silver package was not executed, smelt into regular silver instead
-    if unilib.pkg_executed_table["metal_silver_real"] == nil and
-            unilib.pkg_executed_table["metal_silver"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_silver_rare"] == nil and
+            unilib.global.pkg_executed_table["metal_silver"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -65,7 +65,7 @@ function unilib.pkg.mineral_silver_native.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "silver_native",
             metal_list = {"silver"},
         })

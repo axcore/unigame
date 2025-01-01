@@ -9,7 +9,7 @@
 unilib.pkg.deco_bakedclay_flower_lazarus_bell = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,9 +24,9 @@ function unilib.pkg.deco_bakedclay_flower_lazarus_bell.init()
 
 end
 
-function unilib.pkg.deco_bakedclay_flower_lazarus_bell.exec()
+function unilib.pkg.deco_bakedclay_flower_lazarus_bell.post()
 
-    unilib.register_decoration_now("bakedclay_flower_lazarus_bell", nil, {
+    unilib.register_decoration_complete("bakedclay_flower_lazarus_bell", nil, {
         -- From bakedclay/init.lua
         -- Completes decoration in package "flower_lazarus_bell"
         num_spawn_by = 1,

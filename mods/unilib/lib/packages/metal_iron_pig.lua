@@ -9,7 +9,7 @@
 unilib.pkg.metal_iron_pig = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.metal_iron_pig.exec()
         -- N.B. alloy = 1 not in original code
         groups = {alloy = 1, metal_ingot = 1},
     })
-    if unilib.pkg_executed_table["mineral_haematite"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_haematite"] ~= nil then
 
         unilib.register_craft({
             -- From real_minerals:pig_iron_ingot
@@ -58,7 +58,7 @@ function unilib.pkg.metal_iron_pig.exec()
         table.insert(mineral_part_name_list, "haematite")
 
     end
-    if unilib.pkg_executed_table["mineral_limonite"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_limonite"] ~= nil then
 
         unilib.register_craft({
             -- From real_minerals:pig_iron_ingot
@@ -72,7 +72,7 @@ function unilib.pkg.metal_iron_pig.exec()
         table.insert(mineral_part_name_list, "limonite")
 
     end
-    if unilib.pkg_executed_table["mineral_magnetite"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_magnetite"] ~= nil then
 
         unilib.register_craft({
             -- From real_minerals:pig_iron_ingot
@@ -91,7 +91,7 @@ function unilib.pkg.metal_iron_pig.exec()
         output = "unilib:metal_iron_pig_ingot 9",
         recipe = {
             {"unilib:metal_iron_pig_block"},
-        }
+        },
     })
 
     unilib.register_metal_powder_from_mineral({
@@ -109,7 +109,7 @@ function unilib.pkg.metal_iron_pig.exec()
         description = S("Pig Iron Block"),
         tiles = {"unilib_metal_iron_pig_block.png"},
         groups = {bendy = 2, cracky = 2, level = 3, melty = 2, snappy = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         -- N.B. true in original code
         is_ground_content = false,
@@ -120,5 +120,24 @@ function unilib.pkg.metal_iron_pig.exec()
         ingredient = "unilib:metal_iron_pig_ingot",
     })
     unilib.register_stairs("unilib:metal_iron_pig_block")
+    unilib.register_carvings("unilib:metal_iron_pig_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_iron_pig_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Pig Iron Block"),
+            tiles = {"unilib_metal_iron_pig_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("iron_pig")
+
+    end
 
 end

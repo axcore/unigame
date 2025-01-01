@@ -9,14 +9,14 @@
 unilib.pkg.shared_hook = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 -- Shared table to handle throwing (see also code .post() function below)
 unilib.pkg.shared_hook.hook_table = {
     tmp_throw = {},
     tmp_throw_timer = 0,
-    tmp_time = tonumber(minetest.settings:get("item_entity_ttl")),
-    pvp = minetest.settings:get_bool("enable_pvp") == true,
+    tmp_time = tonumber(core.settings:get("item_entity_ttl")),
+    pvp = core.settings:get_bool("enable_pvp") == true,
 }
 
 if unilib.pkg.shared_hook.hook_table.tmp_time == "" or
@@ -38,9 +38,9 @@ end
 
 function unilib.pkg.shared_hook.is_hook(pos, name)
 
-    if not (name and minetest.is_protected(pos,name)) then
+    if not (name and core.is_protected(pos,name)) then
 
-        local def_table = minetest.registered_nodes[minetest.get_node(pos).name]
+        local def_table = core.registered_nodes[core.get_node(pos).name]
         if def_table and
                 (
                     def_table.name == "unilib:hook_generic_temp" or
@@ -52,7 +52,7 @@ function unilib.pkg.shared_hook.is_hook(pos, name)
 
             if not (
                 def_table.name == "unilib:hook_generic_temp" and
-                minetest.get_meta(pos):get_int("a") ~= 0
+                core.get_meta(pos):get_int("a") ~= 0
             ) then
                 return true
             end
@@ -70,8 +70,8 @@ function unilib.pkg.shared_hook.has_property(pos, n)
     -- Adapted from hook/init.lua, was hook.slingshot_def()
     -- Returns true if the node at the specified position has the property "n" (e.g. "walkable")
 
-    local nn = minetest.get_node(pos).name
-    return (minetest.registered_nodes[nn] and minetest.registered_nodes[nn][n])
+    local nn = core.get_node(pos).name
+    return (core.registered_nodes[nn] and core.registered_nodes[nn][n])
 
 end
 
@@ -101,6 +101,9 @@ function unilib.pkg.shared_hook.exec()
 
         drawtype = "mesh",
         drop = "",
+        -- N.B. is_ground_content = false not in original code; added to match the other temporary
+        ---     hook nodes in packages like "hook_grappling"
+        is_ground_content = false,
         mesh = "unilib_hook_generic.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -115,20 +118,18 @@ function unilib.pkg.shared_hook.exec()
 
         can_dig = function(pos, player)
 
-            return minetest.get_item_group(
-                minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name,
-                "rope"
+            return core.get_item_group(
+                core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name, "rope"
             ) == 0
 
         end,
 
         on_timer = function(pos, elapsed)
 
-            if minetest.get_item_group(
-                minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name,
-                "rope"
+            if core.get_item_group(
+                core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name, "rope"
             ) == 0 then
-                minetest.remove_node(pos)
+                core.remove_node(pos)
             else
                 return true
             end
@@ -138,19 +139,22 @@ function unilib.pkg.shared_hook.exec()
 
     unilib.register_entity("unilib:entity_hook_grappling", {
         -- From hooks/project.lua, hook:power
-        collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.2, 0.2},
+        initial_properties = {
+            collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.2, 0.2},
+            hp_max = 100,
+            is_visible = true,
+            makes_footstep_sound = false,
+            mesh = "unilib_hook_generic.obj",
+            physical = true,
+            textures = {"unilib_entity_hook_grappling.png"},
+            visual = "mesh",
+            visual_size = {x = 10, y = 10},
+        },
+
         d = 0,
-        hp_max = 100,
-        is_visible = true,
         locked = false,
-        makes_footstep_sound = false,
-        mesh = "unilib_hook_generic.obj",
-        physical = true,
-        textures = {"unilib_entity_hook_grappling.png"},
         timer2 = 0,
         uname = "",
-        visual = "mesh",
-        visual_size = {x = 10, y = 10},
 
         on_activate = function(self, staticdata)
 
@@ -162,7 +166,7 @@ function unilib.pkg.shared_hook.exec()
             end
 
             self.d = unilib.pkg.shared_hook.hook_table.user:get_look_dir()
-            self.fd = minetest.dir_to_facedir(self.d)
+            self.fd = core.dir_to_facedir(self.d)
             self.uname = unilib.pkg.shared_hook.hook_table.user:get_player_name()
             self.user = unilib.pkg.shared_hook.hook_table.user
             self.locked = unilib.pkg.shared_hook.hook_table.locked
@@ -212,11 +216,11 @@ function unilib.pkg.shared_hook.exec()
                         self.uname
                     ) then
 
-                        minetest.set_node(
+                        core.set_node(
                             {x = pos.x, y = pos.y + 1, z = pos.z},
                             {name = "unilib:hook_generic_temp", param2 = self.fd}
                         )
-                        minetest.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}):set_int("a", 1)
+                        core.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}):set_int("a", 1)
 
                     else
 
@@ -236,7 +240,7 @@ function unilib.pkg.shared_hook.exec()
                             self.uname
                         ) then
 
-                            minetest.set_node(
+                            core.set_node(
                                 {x = pos.x, y = pos.y - i, z = pos.z},
                                 {name = "unilib:hook_grappling_throw_locked_temp", param2 = self.fd}
                             )
@@ -247,7 +251,7 @@ function unilib.pkg.shared_hook.exec()
 
                         end
 
-                        minetest.get_meta(
+                        core.get_meta(
                             {x = pos.x, y = pos.y - i, z = pos.z}
                         ):set_string("owner", self.uname)
 
@@ -270,11 +274,12 @@ function unilib.pkg.shared_hook.exec()
                         self.uname
                     ) then
 
-                        minetest.set_node(
+                        core.set_node(
                             {x = pos.x, y = pos.y + 1, z = pos.z},
                             {name = "unilib:hook_generic_temp", param2 = self.fd}
                         )
-                        minetest.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}):set_int("a", 1)
+
+                        core.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}):set_int("a", 1)
 
                     else
 
@@ -290,7 +295,7 @@ function unilib.pkg.shared_hook.exec()
                             self.uname
                         ) then
 
-                            minetest.set_node(
+                            core.set_node(
                                 {x = pos.x, y = pos.y - i, z = pos.z},
                                 {name = "unilib:hook_grappling_throw_temp", param2 = self.fd}
                             )
@@ -321,7 +326,7 @@ end
 function unilib.pkg.shared_hook.post()
 
     -- Handle throwing of hooks
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
         unilib.pkg.shared_hook.hook_table.tmp_throw_timer
                 = unilib.pkg.shared_hook.hook_table.tmp_throw_timer + dtime
@@ -341,7 +346,7 @@ function unilib.pkg.shared_hook.post()
 
             end
 
-            for ii, ob in pairs(minetest.get_objects_inside_radius(t.ob:get_pos(), 1.5)) do
+            for ii, ob in pairs(core.get_objects_inside_radius(t.ob:get_pos(), 1.5)) do
 
                 if (not ob:get_luaentity()) or
                         (ob:get_luaentity() and (ob:get_luaentity().name ~= "__builtin:item")) then

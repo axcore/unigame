@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_steel_with_core = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 local rules_table = {
     {x = 0, y = 0, z = -1},
@@ -58,10 +58,10 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
                 },
                 backface_culling = false,
                 image = "unilib_misc_frame_steel_with_core_animated.png",
-            }
+            },
         },
         groups = {cracky = 3},
-        sounds = unilib.node_sound_metal_defaults({
+        sounds = unilib.sound.generate_metal({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),
@@ -109,7 +109,7 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
         },
     })
 
-    if minetest.get_modpath("mesecons") then
+    if core.get_modpath("mesecons") then
 
         unilib.override_item("unilib:misc_frame_steel_with_core", {
             groups = {cracky = 3, mesecon = 3, mesecon_effector_off = 1},
@@ -121,7 +121,7 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
 
                     action_on = function(pos, node)
 
-                        minetest.swap_node(
+                        core.swap_node(
                             pos,
                             {name = "unilib:misc_frame_steel_with_core_on", param2 = node.param2}
                         )
@@ -144,10 +144,10 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
                     },
                     backface_culling = false,
                     image = "unilib_misc_frame_steel_with_core_animated.png",
-                }
+                },
             },
             groups = {cracky = 3, mesecon = 2, not_in_creative_inventory = 1},
-            sounds = unilib.node_sound_metal_defaults({
+            sounds = unilib.sound.generate_metal({
                 footstep = {name = "unilib_glass_footstep", gain = 0.5},
                 dug = {name = "unilib_break_glass", gain = 1.0},
             }),
@@ -162,7 +162,7 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
 
                     action_off = function(pos, node)
 
-                        minetest.swap_node(
+                        core.swap_node(
                             pos,
                             {name = "unilib:misc_frame_steel_with_core", param2 = node.param2}
                         )
@@ -211,13 +211,11 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
 
             action = function(pos, node)
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 50,
                     time = 1,
+                    texture = "unilib_particle_misc_frame_core.png",
 
-                    collisiondetection = true,
-                    collision_removal = true,
-                    glow = 10,
                     maxacc = {x = 1.0, y = 1.0, z = 1.0},
                     minacc = {x = -0.1,  y = -0.1,  z = -0.1},
                     maxexptime = 0.15,
@@ -228,10 +226,13 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
                     minsize = 0.15,
                     maxvel = {x = 0.005, y = 0.005, z = 0.005},
                     minvel = {x = -0.01, y = -0.02, z = -0.01},
-                    texture = "unilib_misc_core_particle.png",
+
+                    collisiondetection = true,
+                    collision_removal = true,
+                    glow = 10,
                 })
 
-            end
+            end,
         })
 
     end

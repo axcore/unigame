@@ -9,7 +9,7 @@
 unilib.pkg.item_satnav_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,9 @@ function unilib.pkg.item_satnav_digital.exec()
 
     unilib.register_tool("unilib:item_satnav_digital", "orienteering:automapper", mode, {
         -- From orienteering:automapper
-        description = S("Digital Sat-Nav Device"),
+        description = unilib.utils.hint(
+            S("Digital Sat-Nav Device"), S("enables minimap and radar")
+        ),
         inventory_image = "unilib_item_satnav_digital_inv.png",
         groups = {disable_repair = 1},
 
@@ -47,7 +49,7 @@ function unilib.pkg.item_satnav_digital.exec()
             {c_gold, c_gold, c_gold},
             {c_mese, "unilib:stone_obsidian_shard", c_mese},
             {c_gold, c_gold, c_gold},
-        }
+        },
     })
 
 end

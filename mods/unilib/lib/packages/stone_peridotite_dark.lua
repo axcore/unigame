@@ -17,9 +17,9 @@
 unilib.pkg.stone_peridotite_dark = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_peridotite_dark.exec()
         description = S("Dark Peridotite"),
 
         category = "intrusive",
+        colour = "#6F737C",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 4)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_peridotite_dark.exec()
         wall_orig_name = "underch:peridotite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:peridotite. Creates unilib:stone_peridotite_dark_cobble_compressed
+        part_name = "peridotite_dark",
+        orig_name = "compressed:peridotite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:peridotite. Creates unilib:stone_peridotite_dark_cobble_compressed
-            part_name = "peridotite_dark",
-            orig_name = "compressed:peridotite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Dark Peridotite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Dark Peridotite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:peridotite. Creates unilib:stone_peridotite_dark_cobble_condensed
+        part_name = "peridotite_dark",
+        orig_name = "condensed:peridotite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:peridotite. Creates unilib:stone_peridotite_dark_cobble_condensed
-            part_name = "peridotite_dark",
-            orig_name = "condensed:peridotite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Dark Peridotite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Dark Peridotite Cobble"),
+    })
 
 end

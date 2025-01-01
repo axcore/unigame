@@ -9,7 +9,7 @@
 unilib.pkg.food_potato_spanish = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,12 +38,12 @@ function unilib.pkg.food_potato_spanish.exec()
 
     unilib.register_craftitem("unilib:food_potato_spanish", "farming:spanish_potatoes", mode, {
         -- From farming:spanish_potatoes
-        description = unilib.brackets(S("Patatas a la importancia"), S("Spanish Potatoes")),
+        description = unilib.utils.brackets(S("Patatas a la importancia"), S("Spanish Potatoes")),
         inventory_image = "unilib_food_potato_spanish.png",
         -- N.B. No groups in original code
         groups = {food_spanish_potato = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_potato_spanish", 8, "unilib:utensil_bowl_wooden"
         ),
     })

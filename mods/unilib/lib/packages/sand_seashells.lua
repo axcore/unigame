@@ -9,7 +9,7 @@
 unilib.pkg.sand_seashells = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.sand_seashells.exec()
         description = S("Seashells"),
         tiles = {"unilib_sand_seashells.png"},
         groups = {crumbly = 3, falling_node = 1},
-        sounds = unilib.sound_table.gravel,
+        sounds = unilib.global.sound_table.gravel,
     })
 
 end

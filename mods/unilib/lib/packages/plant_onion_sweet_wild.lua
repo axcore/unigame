@@ -9,7 +9,7 @@
 unilib.pkg.plant_onion_sweet_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,14 @@ function unilib.pkg.plant_onion_sweet_wild.exec()
 
     unilib.register_node("unilib:plant_onion_sweet_wild", "cucina_vegana:wild_onion", mode, {
         -- From cucina_vegana:wild_onion
-        description = unilib.annotate(S("Wild Sweet Onion Plant"), "Allium cepa"),
+        description = unilib.utils.annotate(S("Wild Sweet Onion Plant"), "Allium cepa"),
         tiles = {"unilib_crop_onion_sweet_grow_7.png"},
         -- N.B. flora = 1, not_in_creative_inventory = 1 not in original code
         groups = {
             attached_node = 1, dig_immediate = 1, flammable = 2, flora = 1,
             not_in_creative_inventory = 1, plant = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -44,8 +44,6 @@ function unilib.pkg.plant_onion_sweet_wild.exec()
                 {items = {"unilib:crop_onion_sweet_harvest 2"}},
             },
         },
-        -- N.B. Not in original code
-        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         selection_box = {
@@ -59,7 +57,7 @@ function unilib.pkg.plant_onion_sweet_wild.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cucina_vegana_plant_onion_sweet_wild", {
+    unilib.register_decoration_generic("cucina_vegana_plant_onion_sweet_wild", {
         -- From cucina_vegana, onion.lua
         deco_type = "simple",
         decoration = "unilib:plant_onion_sweet_wild",

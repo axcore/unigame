@@ -9,7 +9,7 @@
 unilib.pkg.flower_petunia_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.flower_petunia_pink.exec()
         deco_part_name = "farlands",
         description = S("Pink Petunia"),
         fill_ratio = 0.02,
-        group_table = {color_pink = 1, flammable = 1},
+        group_table = {color_pink = 1, colour_pink = 1, flammable = 1},
         sci_name = "Petunia",
     })
 

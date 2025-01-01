@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_bush_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ end
 
 function unilib.pkg.deco_farlands_bush_exotic.post()
 
-    unilib.register_decoration_now("farlands_bush_exotic_1", nil, {
+    unilib.register_decoration_complete("farlands_bush_exotic_1", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "bush_exotic"
         biomes = {
@@ -43,16 +43,16 @@ function unilib.pkg.deco_farlands_bush_exotic.post()
             "farlands_grassland_snowy",
         },
         place_on = {"unilib:dirt_ordinary_with_cover_snow", "unilib:dirt_ordinary_with_turf"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 
-    unilib.register_decoration_now("farlands_bush_exotic_2", nil, {
+    unilib.register_decoration_complete("farlands_bush_exotic_2", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "bush_exotic"
         biomes = "farlands_forest_bamboo",
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

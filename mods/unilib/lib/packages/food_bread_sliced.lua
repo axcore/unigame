@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_sliced = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_bread_sliced.exec()
         -- N.B. no food_bread in original code
         groups = {flammable = 2, food_bread = 1, food_bread_slice = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_sliced", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_sliced", 1),
     })
     unilib.register_craft({
         -- From farming:bread_slice

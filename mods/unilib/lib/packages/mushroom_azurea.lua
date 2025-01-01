@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_azurea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.mushroom_azurea.exec()
 
     unilib.register_node("unilib:mushroom_azurea", "nsspf:clitocybula_azurea", mode, {
         -- From nsspf:clitocybula_azurea
-        description = unilib.annotate(S("Azurea Mushroom"), "Clitocybula_azurea"),
+        description = unilib.utils.annotate(S("Azurea Mushroom"), "Clitocybula_azurea"),
         tiles = {"unilib_mushroom_azurea.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -53,7 +53,7 @@ function unilib.pkg.mushroom_azurea.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_azurea", -6),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_azurea", -6),
     })
     -- (not compatible with flowerpots)
 
@@ -64,7 +64,7 @@ function unilib.pkg.mushroom_azurea.exec()
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, food_mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -84,7 +84,7 @@ function unilib.pkg.mushroom_azurea.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_azurea_cooked", 10),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_azurea_cooked", 10),
     })
     unilib.register_craft({
         -- From nsspf:cooked_clitocybula_azurea

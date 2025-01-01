@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_shore = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "sandy_beach" biome
         name = "aotearoa_shore_sandy_beach",
-        description = unilib.brackets(S("Sandy shore biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Sandy shore biome"), "aotearoa"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -62,7 +62,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "shelly_beach" biome
         name = "aotearoa_shore_shelly_beach",
-        description = unilib.brackets(S("Shelly beach biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Shelly beach biome"), "aotearoa"),
         node_top = "unilib:sand_seashells",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -80,7 +80,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "gravel_beach" biome
         name = "aotearoa_shore_gravel_beach",
-        description = unilib.brackets(S("Gravel beach biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Gravel beach biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -98,7 +98,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "subantarctic_shore" biome
         name = "aotearoa_shore_subantarctic",
-        description = unilib.brackets(S("Subantarctic shore biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Subantarctic shore biome"), "aotearoa"),
         node_filler = "unilib:stone_andesite_antipodean",
         depth_filler = 4,
         node_stone = "unilib:stone_granite_antipodean",
@@ -114,7 +114,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "volcanic_isle_shore" biome
         name = "aotearoa_shore_volcanic_isle",
-        description = unilib.brackets(S("Volcanic isle biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Volcanic isle biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:gravel_ordinary",
@@ -132,7 +132,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "volcanic_field" biome
         name = "aotearoa_shore_volcanic_field",
-        description = unilib.brackets(S("Volcanic field biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Volcanic field biome"), "aotearoa"),
         node_top = "unilib:stone_scoria",
         depth_top = 1,
         node_filler = "unilib:stone_scoria",
@@ -150,7 +150,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "iron_sand_beach" biome
         name = "aotearoa_shore_ironsand_beach",
-        description = unilib.brackets(S("Iron sand beach biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Iron sand beach biome"), "aotearoa"),
         node_top = "unilib:sand_ironsand",
         depth_top = 3,
         node_filler = "unilib:sand_ironsand",
@@ -168,7 +168,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "northern_estuary" biome
         name = "aotearoa_shore_northern_estuary",
-        description = unilib.brackets(S("Northern estuary biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Northern estuary biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_wet",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -186,7 +186,7 @@ function unilib.pkg.biome_aotearoa_shore.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "southern_estuary" biome
         name = "aotearoa_shore_southern_estuary",
-        description = unilib.brackets(S("Southern estuary biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Southern estuary biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_dry",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",

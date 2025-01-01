@@ -9,7 +9,7 @@
 unilib.pkg.food_paella = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ function unilib.pkg.food_paella.init()
         },
         suggested = {
             "crop_rice_white",                  -- group:food_rice
-            "produce_pea",                      -- group:food_peas
+            "food_pea",                         -- group:food_peas
         },
     }
 
@@ -42,7 +42,7 @@ function unilib.pkg.food_paella.exec()
         -- N.B. No groups in original code
         groups = {food_paella = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_paella", 8, "unilib:utensil_bowl_wooden"),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_paella", 8, "unilib:utensil_bowl_wooden"),
     })
     unilib.register_craft({
         -- From farming:paella

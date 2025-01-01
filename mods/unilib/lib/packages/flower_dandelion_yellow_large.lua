@@ -9,7 +9,7 @@
 unilib.pkg.flower_dandelion_yellow_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_dandelion_yellow_large.exec()
         replace_mode = mode,
         deco_part_name = "cropocalypse",
         description = S("Large Yellow Dandelion"),
-        group_table = {color_yellow = 1, flammable = 1},
+        group_table = {color_yellow = 1, colour_yellow = 1, flammable = 1},
         sci_name = "Taraxacum",
         seed = 1223000,
     })

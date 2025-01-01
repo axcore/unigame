@@ -9,7 +9,7 @@
 unilib.pkg.crop_pepper_rocoto = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,7 +53,8 @@ function unilib.pkg.crop_pepper_rocoto.exec()
         seed_description = S("Rocoto Pepper Seed"),
         seed_group_table = {attached_node = 1, flammable = 2, seed = 1, snappy = 3},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,7 +66,16 @@ function unilib.pkg.crop_pepper_rocoto.exec()
 
     end
 
-    unilib.register_decoration("better_farming_crop_pepper_rocoto", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_pepper_rocoto_harvest",
+        juice_description = S("Pepper"),
+        juice_type = "pepper",
+        rgb = "#e53200",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_crop_pepper_rocoto", {
         -- From better_farming:pepper_5
         deco_type = "simple",
         decoration = "unilib:crop_pepper_rocoto_grow_5",

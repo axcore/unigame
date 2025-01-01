@@ -9,7 +9,7 @@
 unilib.pkg.misc_cavern_crystal_spike = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.misc_cavern_crystal_spike.exec()
             tiles = {"unilib_misc_cavern_crystal_spike.png"},
             groups = {cracky = 3, oddly_breakable_by_hand = 1},
             -- N.B. stone in original code
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             buildable_to = true,
             drawtype = "plantlike",

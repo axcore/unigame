@@ -9,7 +9,7 @@
 unilib.pkg.material_cement_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cement.add_mode
+local mode = unilib.global.imported_mod_table.cement.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.material_cement_normal.exec()
         description = S("Dry Normal Cement"),
         tiles = {dry_img},
         groups = {crumbly = 2, falling_node = 1},
-        sounds = unilib.sound_table.gravel,
+        sounds = unilib.global.sound_table.gravel,
 
         is_ground_content = false,
     })
@@ -54,7 +54,7 @@ function unilib.pkg.material_cement_normal.exec()
         description = S("Wet Normal Cement"),
         tiles = {wet_img},
         groups = {crumbly = 3, falling_node = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         is_ground_content = false,
     })
@@ -72,7 +72,7 @@ function unilib.pkg.material_cement_normal.exec()
         interval = 5,
 
         action = function(pos, node)
-            minetest.set_node(pos, {name = "unilib:material_cement_normal_wet"})
+            core.set_node(pos, {name = "unilib:material_cement_normal_wet"})
         end,
     })
 
@@ -85,7 +85,7 @@ function unilib.pkg.material_cement_normal.post()
         type = "shapeless",
         output = "unilib:material_cement_normal_wet 2",
         recipe = {"group:sand", "unilib:gravel_ordinary", "group:craftable_bucket"},
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

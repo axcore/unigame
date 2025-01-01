@@ -9,7 +9,7 @@
 unilib.pkg.deco_vallee_des_roses_flower_buttercup_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_vallee_des_roses_flower_buttercup_small.post()
 
-    unilib.register_decoration_now("vallee_des_roses_flower_buttercup_small", nil, {
+    unilib.register_decoration_complete("vallee_des_roses_flower_buttercup_small", nil, {
         -- From vallee_des_roses/init.lua
         -- Completes decoration in package "flower_buttercup_small"
         biomes = {"default_forest_coniferous", "default_forest_deciduous", "default_grassland"},

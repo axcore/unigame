@@ -9,7 +9,7 @@
 unilib.pkg.tree_box_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_box_white.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Eucalyptus albens"
 
     unilib.register_tree({
@@ -112,7 +112,7 @@ function unilib.pkg.tree_box_white.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_box_white_closed
+        -- Original to unilib. Creates unilib:gate_box_white_closed, etc
         part_name = "box_white",
         orig_name = {nil, nil},
 
@@ -123,10 +123,10 @@ function unilib.pkg.tree_box_white.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("australia_tree_box_white_in_victoria_" .. i, {
+        unilib.register_decoration_generic("australia_tree_box_white_in_victoria_" .. i, {
             -- From australia/biome_victorian_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_box_white_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_box_white_" .. i .. ".mts",
 
             fill_ratio = (3 - i + 1) / 10000,
             flags = "place_center_x, place_center_z",
@@ -136,10 +136,10 @@ function unilib.pkg.tree_box_white.exec()
 
     end
 
-    unilib.register_decoration("australia_tree_box_white_log", {
+    unilib.register_decoration_generic("australia_tree_box_white_log", {
         -- From australia/biome_victorian_forests.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_box_white_log.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_box_white_log.mts",
 
         flags = "place_center_x",
         noise_params = {

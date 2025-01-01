@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_blue_glowing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.mushroom_blue_glowing.exec()
         tiles = {"unilib_mushroom_blue_glowing.png"},
         -- N.B. mushroom = 1 not in original code
         groups = {attached_node = 1, flammable = 2, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.mushroom_blue_glowing.exec()
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_blue_glowing", "plants:glowshroom_wild")
 
-    unilib.register_decoration("plants_mushroom_blue_glowing", {
+    unilib.register_decoration_generic("plants_mushroom_blue_glowing", {
         -- Original to unilib, based on decoration in "mushroom_brown" package
         deco_type = "simple",
         decoration = "unilib:mushroom_blue_glowing",

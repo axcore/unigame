@@ -13,7 +13,7 @@
 unilib.pkg.material_quicklime = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.material_quicklime.exec()
             inventory_image = "unilib_material_quicklime.png",
         }
     )
-    if unilib.pkg_executed_table["material_lime_crushed"] ~= nil then
+    if unilib.global.pkg_executed_table["material_lime_crushed"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:quicklime
@@ -51,7 +51,7 @@ function unilib.pkg.material_quicklime.exec()
         })
 
     -- If other aotearoa packages are loaded, then don't use this easily-found ingredient...
-    elseif unilib.pkg_executed_table["gravel_ordinary"] ~= nil then
+    elseif unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:quicklime
@@ -64,7 +64,7 @@ function unilib.pkg.material_quicklime.exec()
     end
 
     -- ...but do use this one, if possible
-    if unilib.pkg_executed_table["coral_block_skeleton"] ~= nil then
+    if unilib.global.pkg_executed_table["coral_block_skeleton"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:quicklime

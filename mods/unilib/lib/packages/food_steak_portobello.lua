@@ -9,7 +9,7 @@
 unilib.pkg.food_steak_portobello = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.food_steak_portobello.exec()
             description = S("Raw Portebello Steak"),
             inventory_image = "unilib_food_steak_portobello_raw.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_steak_portobello_raw", 5),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_steak_portobello_raw", 5),
         }
     )
     unilib.register_craft({
@@ -57,7 +57,7 @@ function unilib.pkg.food_steak_portobello.exec()
         description = S("Portebello Steak"),
         inventory_image = "unilib_food_steak_portobello.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_steak_portobello", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_steak_portobello", 9),
     })
     unilib.register_craft({
         -- From bbq:portebello_steak

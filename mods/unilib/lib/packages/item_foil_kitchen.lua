@@ -9,7 +9,7 @@
 unilib.pkg.item_foil_kitchen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.item_foil_kitchen.exec()
         recipe = {
             {"", "", ""},
             {"", "", ""},
-            {"unilib:metal_tin_ingot", "unilib:metal_tin_ingot", "unilib:metal_tin_ingot"}
+            {"unilib:metal_tin_ingot", "unilib:metal_tin_ingot", "unilib:metal_tin_ingot"},
         },
     })
 

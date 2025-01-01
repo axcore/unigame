@@ -9,7 +9,7 @@
 unilib.pkg.misc_vase = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -56,19 +56,21 @@ function unilib.pkg.misc_vase.exec()
 
         local ingredient = "unilib:" .. item_name
 
-        if unilib.pkg_executed_table[item_name] ~= nil then
+        if unilib.global.pkg_executed_table[item_name] ~= nil then
 
             unilib.register_node("unilib:misc_vase_" .. part_name, orig_name, mode, {
                 description = description,
                 tiles = {"unilib_misc_vase_" .. part_name .. ".png"},
                 groups = {cracky = 2, stone = 1},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 collision_box = {
                     type = "fixed",
                     fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}
                 },
                 drawtype = "mesh",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 mesh = "unilib_misc_vase.obj",
                 paramtype = "light",
                 selection_box = {

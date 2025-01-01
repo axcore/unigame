@@ -1,7 +1,6 @@
 # "mtgame_ores" remix - all ore packages from the "mtgame" remix
 # N.B. Some of these packages specify biome packages as dependencies; so this remix should probably
 #       be used together with the "mtgame_biomes" remix
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -33,14 +32,13 @@ ore_default_stone_sandstone_silver|default
 #gravel_ordinary|default mtg_plus
 #liquid_lava_ordinary|default
 #liquid_water_ordinary|default
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
+#metal_copper|default glemr11 moreblocks technic
+#metal_gold|default glemr11 technic
 #metal_iron|default
-#metal_tin|default technic
+#metal_tin|default glemr11 technic
 #mineral_coal|default technic
 #mineral_diamond|default mtg_plus
-#mineral_flint|default fire mtg_plus
-#mineral_mese|default
+#mineral_mese|default glemr11
 #sand_desert|default farming
 #sand_ordinary|default
 #sand_silver|default
@@ -66,15 +64,17 @@ ore_default_stone_sandstone_silver|default
 #biome_default_taiga|default
 
 # supporting packages (.optional)
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
-#metal_steel|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#mineral_flint|default fire mtg_plus
 #moss_green|sickles
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

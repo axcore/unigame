@@ -9,7 +9,7 @@
 unilib.pkg.glass_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.glass_iron.exec()
             "unilib_glass_ordinary_detail.png^[colorize:#DEDEDE",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -49,7 +49,7 @@ function unilib.pkg.glass_iron.exec()
         output = "unilib:glass_iron",
         recipe = {"unilib:metal_steel_ingot", "unilib:glass_ordinary"},
     })
-    if unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         unilib.register_craft({
             -- From moreblocks:iron_glass
@@ -61,6 +61,9 @@ function unilib.pkg.glass_iron.exec()
     end
     unilib.register_stairs("unilib:glass_iron", {
         glass_flag = true,
+    })
+    unilib.register_carvings("unilib:glass_iron", {
+        millwork_flag = true,
     })
 
 end

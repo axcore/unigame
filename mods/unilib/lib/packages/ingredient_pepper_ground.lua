@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_pepper_ground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,10 +35,12 @@ function unilib.pkg.ingredient_pepper_ground.exec()
         description = S("Ground Pepper"),
         tiles = {"unilib_ingredient_pepper_ground.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_pepper_ground = 1, vessel = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_pepper_ground.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",

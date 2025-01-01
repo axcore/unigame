@@ -9,7 +9,7 @@
 unilib.pkg.flower_jungle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,15 +32,17 @@ function unilib.pkg.flower_jungle.exec()
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 1, flower = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_red = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_red = 1, colour_red = 1, flammable = 1, flora = 1, flower = 1,
+            snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_flower_jungle.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other flowers
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -54,7 +56,7 @@ function unilib.pkg.flower_jungle.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_jungle", "moreplants:jungleflower")
 
-    unilib.register_decoration("moreplants_flower_jungle", {
+    unilib.register_decoration_generic("moreplants_flower_jungle", {
         -- From moreplants:jungleflower
         deco_type = "simple",
         decoration = "unilib:flower_jungle",

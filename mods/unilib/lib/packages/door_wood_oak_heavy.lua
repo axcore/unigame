@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_oak_heavy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_gates.add_mode
+local mode = unilib.global.imported_mod_table.castle_gates.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,16 +31,16 @@ function unilib.pkg.door_wood_oak_heavy.exec()
     -- Use an oak tree trunk in the recipe, if it's available; otherwise continue using the apple
     --      tree
     local ingredient = "unilib:tree_apple_trunk"
-    if unilib.pkg_executed_table["tree_oak"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_oak"] ~= nil then
         ingredient = "unilib:tree_oak_trunk"
-    elseif unilib.pkg_executed_table["tree_oak_mature"] ~= nil then
+    elseif unilib.global.pkg_executed_table["tree_oak_mature"] ~= nil then
         ingredient = "unilib:tree_oak_mature_trunk"
     end
 
     unilib.register_door({
-        -- From castle_gates:oak_door. Creates unilib:door_wood_oak_heavy
+        -- From castle_gates:oak_door. Creates unilib:door_wood_oak_heavy_closed_left, etc
         part_name = "wood_oak_heavy",
-        orig_name = {
+        orig_name_list = {
             "castle_gates:oak_door_a",
             "castle_gates:oak_door_b",
             "castle_gates:oak_door_c",
@@ -50,7 +50,7 @@ function unilib.pkg.door_wood_oak_heavy.exec()
             description = S("Heavy Oak Door"),
             tiles = {{name = "unilib_door_wood_oak_heavy.png", backface_culling = true}},
             groups = {choppy = 2, door = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             inventory_image = "unilib_door_wood_oak_heavy_inv.png",
             protected_flag = true,

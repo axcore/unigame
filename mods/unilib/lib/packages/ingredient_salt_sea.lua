@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_salt_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,10 +30,12 @@ function unilib.pkg.ingredient_salt_sea.exec()
         description = S("Sea Salt"),
         tiles = {"unilib_ingredient_salt_sea.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_salt = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_salt_sea.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_salt_sea.png",
@@ -45,7 +47,7 @@ function unilib.pkg.ingredient_salt_sea.post()
 
     -- N.B. As this is salt, only use ordinary water as an ingredient
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"

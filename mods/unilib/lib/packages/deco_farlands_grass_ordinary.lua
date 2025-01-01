@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.deco_farlands_grass_ordinary.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now(
+        unilib.register_decoration_complete(
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "grass_ordinary"
             "default_grass_ordinary_" .. i,
@@ -55,7 +55,7 @@ function unilib.pkg.deco_farlands_grass_ordinary.post()
                     "unilib:dirt_ordinary_with_turf",
                     "unilib:sand_ordinary",
                 },
-                y_max = unilib.y_max,
+                y_max = unilib.constant.y_max,
                 y_min = 1,
             }
         )

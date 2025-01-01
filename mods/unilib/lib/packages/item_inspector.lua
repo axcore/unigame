@@ -9,7 +9,9 @@
 unilib.pkg.item_inspector = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.replacer.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.replacer.add_mode
 
 -- Some common groups, and nodes whose textures can be used to represent the groups. The table is
 --      populated by the code below
@@ -29,7 +31,7 @@ local function insert_dye(part_name, mini_list)
     -- The first item in "mini_list" is a dye type, e.g. "red"
 
     local colour = mini_list[1]
-    local def_table = minetest.registered_items[part_name .. colour]
+    local def_table = core.registered_items[part_name .. colour]
     if def_table and def_table.groups then
 
         for k, v in pairs(def_table.groups) do
@@ -40,7 +42,7 @@ local function insert_dye(part_name, mini_list)
 
         end
 
-        group_placeholder_table["group:flower,color_" .. colour] = "dye:" .. colour
+        group_placeholder_table["group:flower,colour_" .. colour] = "dye:" .. colour
 
     end
 
@@ -84,20 +86,20 @@ local function add_circular_saw_recipe(full_name, recipe_list)
         return
     end
 
-    local mod_name, item_name = unilib.split_name(full_name)
+    local mod_name, item_name = unilib.utils.split_name(full_name)
 
     if mod_name == "unilib" and
-            unilib.pkg_executed_table["machine_saw_circular"] ~= nil and
-            unilib.stair_deconvert_table[full_name] ~= nil then
+            unilib.global.pkg_executed_table["machine_saw_circular"] ~= nil and
+            unilib.global.stair_deconvert_table[full_name] ~= nil then
 
         -- "full_name" is a stair node, but not necessarily one that can be cut by a circular saw,
         --      so we'll have to check for all possibilities
-        for i, mini_list in ipairs(unilib.stair_ordered_table) do
+        for i, mini_list in ipairs(unilib.global.stair_ordered_table) do
 
             for _, suffix in ipairs(mini_list) do
 
                 local saw_def_table =
-                        minetest.registered_nodes["unilib:machine_saw_circular_mark" .. tostring(i)]
+                        core.registered_nodes["unilib:machine_saw_circular_mark" .. tostring(i)]
 
                 -- e.g. suffix = "_stair_simple"
                 if item_name:sub(-#suffix) == suffix and saw_def_table ~= nil then
@@ -106,7 +108,7 @@ local function add_circular_saw_recipe(full_name, recipe_list)
                     recipe_list[#recipe_list + 1] = {
                         method = "saw",
                         type = "mark" .. tostring(i),
-                        items = {unilib.stair_deconvert_table[full_name]},
+                        items = {unilib.global.stair_deconvert_table[full_name]},
                         output = full_name,
                     }
 
@@ -120,7 +122,7 @@ local function add_circular_saw_recipe(full_name, recipe_list)
 
     end
 
-    if not mod_name ~= "default " or not minetest.get_modpath("moreblocks") or not circular_saw or
+    if not mod_name ~= "default " or not core.get_modpath("moreblocks") or not circular_saw or
             not circular_saw.names or full_name == "moreblocks:circular_saw" then
         return
     end
@@ -159,7 +161,7 @@ local function add_colormachine_recipe(node_name, recipe_list)
 
     -- Was replacer.add_colormachine_receipe()
 
-    if not minetest.get_modpath("colormachine") or not colormachine then
+    if not core.get_modpath("colormachine") or not colormachine then
         return
     end
 
@@ -206,10 +208,10 @@ local function show_crafting(name, node_name, fields)
         for k, v in pairs(fields) do
 
             if v and v == "" and (
-                minetest.registered_items[k] or
-                minetest.registered_nodes[k] or
-                minetest.registered_craftitems[k] or
-                minetest.registered_tools[k]
+                core.registered_items[k] or
+                core.registered_nodes[k] or
+                core.registered_craftitems[k] or
+                core.registered_tools[k]
             ) then
                 node_name = k
                 recipe_nr = 1
@@ -219,7 +221,7 @@ local function show_crafting(name, node_name, fields)
 
     end
 
-    local result = minetest.get_all_craft_recipes(node_name)
+    local result = core.get_all_craft_recipes(node_name)
     if not result then
         result = {}
     end
@@ -236,24 +238,24 @@ local function show_crafting(name, node_name, fields)
     end
 
     local description = nil
-    if minetest.registered_nodes[node_name] then
+    if core.registered_nodes[node_name] then
 
-        if minetest.registered_nodes[node_name].description and
-                minetest.registered_nodes[node_name].description ~= "" then
-            description = "\"" .. minetest.registered_nodes[node_name].description .. "\" block"
-        elseif minetest.registered_nodes[node_name].name then
-            description = "\"" .. minetest.registered_nodes[node_name].name .. "\" block"
+        if core.registered_nodes[node_name].description and
+                core.registered_nodes[node_name].description ~= "" then
+            description = "\"" .. core.registered_nodes[node_name].description .. "\" block"
+        elseif core.registered_nodes[node_name].name then
+            description = "\"" .. core.registered_nodes[node_name].name .. "\" block"
         else
             description = " - no description provided - block"
         end
 
-    elseif minetest.registered_items[node_name] then
+    elseif core.registered_items[node_name] then
 
-        if minetest.registered_items[node_name].description and
-                minetest.registered_items[node_name].description~= "" then
-            description = "\"" .. minetest.registered_items[node_name].description .. "\" item"
-        elseif minetest.registered_items[node_name].name then
-            description = "\"" .. minetest.registered_items[node_name].name .. "\" item"
+        if core.registered_items[node_name].description and
+                core.registered_items[node_name].description~= "" then
+            description = "\"" .. core.registered_items[node_name].description .. "\" item"
+        elseif core.registered_items[node_name].name then
+            description = "\"" .. core.registered_items[node_name].name .. "\" item"
         else
             description = " - no description provided - item"
         end
@@ -270,7 +272,7 @@ local function show_crafting(name, node_name, fields)
 
     --[[
     local formspec = "size[6,6]" ..
-        "label[0,5.5;This is a " .. minetest.formspec_escape(description) .. ".]" ..
+        "label[0,5.5;This is a " .. F(description) .. ".]" ..
         "button_exit[5.0,4.3;1,0.5;quit;Exit]" ..
         "label[0,0;Name:]" ..
         -- Invisible field for passing on information
@@ -282,24 +284,24 @@ local function show_crafting(name, node_name, fields)
     ]]--
     local formspec = "size[8,6]" ..
         -- Name
-        "label[0,0;Name:]" ..
+        "label[0,0;" .. FS("Name") .. ":]" ..
         -- (Invisible field for passing on information)
-        "field[20,20;0.1,0.1;node_name;node_name;" .. node_name .. "]" ..
+        "field[20,20;0.1,0.1;node_name;node_name;" .. F(node_name) .. "]" ..
         -- (Another invisible field)
         "field[21,21;0.1,0.1;recipe_nr;recipe_nr;" .. tostring(recipe_nr) .. "]" ..
-        "label[1.2,0;" .. tostring(node_name) .. "]" ..
+        "label[1.5,0;" .. F(tostring(node_name)) .. "]" ..
         -- Description
-        "label[0,0.3;Description:]" ..
-        "label[1.2,0.3;" .. minetest.formspec_escape(description) .. "]" ..
+        "label[0,0.3;" .. FS("Description") .. ":]" ..
+        "label[1.5,0.3;" .. unilib.utils.get_first_line(F(description)) .. "]" ..
         -- Data/Protection
-        "label[0,0.6;Data:]" ..
-        "label[0,0.9;Protection:]" ..
+        "label[0,0.6;" .. FS("Data") .. ":]" ..
+        "label[0,0.9;" .. FS("Protection") .. ":]" ..
         -- Exit button
         "button_exit[" .. tostring(2 + offset_x) .. "," .. tostring(3.3 + offset_y) ..
-        ";1,0.5;quit;Exit]" ..
+        ";1,0.5;quit;" .. FS("Exit") .. "]" ..
         -- Output
         "image[" .. tostring(3 + offset_x) .. "," .. tostring(1 + offset_y) ..
-        ";1,1;unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
+                ";1,1;unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
         "item_image_button[" .. tostring(4 + offset_x) .. "," ..
         tostring(1 + offset_y) .. ";1.0,1.0;" .. tostring(node_name) .. ";normal;]"
 
@@ -307,8 +309,7 @@ local function show_crafting(name, node_name, fields)
     --[[
     if fields.pos then
 
-        formspec = formspec .. "label[0.0,0.3;Located at " ..
-            minetest.formspec_escape(minetest.pos_to_string(fields.pos))
+        formspec = formspec .. "label[0.0,0.3;Located at " .. F(core.pos_to_string(fields.pos))
 
         if fields.param2 then
             formspec = formspec .. " with param2=" .. tostring(fields.param2)
@@ -324,8 +325,7 @@ local function show_crafting(name, node_name, fields)
     ]]--
     if fields.pos then
 
-        formspec = formspec .. "label[1.2,0.6;Pos=" ..
-            minetest.formspec_escape(minetest.pos_to_string(fields.pos))
+        formspec = formspec .. "label[1.5,0.6;Pos=" .. F(core.pos_to_string(fields.pos))
 
         if fields.param2 then
             formspec = formspec .. ", param2=" .. tostring(fields.param2)
@@ -339,7 +339,7 @@ local function show_crafting(name, node_name, fields)
 
     else
 
-        formspec = formspec .. "label[1.2,0.6;n/a]"
+        formspec = formspec .. "label[1.5,0.6;" .. FS("n/a") .. "]"
 
     end
 
@@ -347,19 +347,17 @@ local function show_crafting(name, node_name, fields)
     --[[
     if fields.protected_info and fields.protected_info ~= "" then
 
-        formspec = formspec .. "label[0.0,4.5;" ..
-                minetest.formspec_escape(fields.protected_info) .. "]"
+        formspec = formspec .. "label[0.0,4.5;" .. F(fields.protected_info) .. "]"
 
     end
     ]]--
     if fields.protected_info and fields.protected_info ~= "" then
 
-        formspec = formspec .. "label[1.2,0.9;" ..
-                minetest.formspec_escape(fields.protected_info) .. "]"
+        formspec = formspec .. "label[1.5,0.9;" .. F(fields.protected_info) .. "]"
 
     else
 
-        formspec = formspec .. "label[1.2,0.9;n/a]"
+        formspec = formspec .. "label[1.5,0.9;" .. FS("n/a") .. "]"
 
     end
 
@@ -384,14 +382,14 @@ local function show_crafting(name, node_name, fields)
     if result and recipe_nr > 1 then
 
         formspec = formspec .. "button[" .. tostring(0 + offset_x) .. "," ..
-                tostring(3.3 + offset_y) .. ";1,0.5;prev_recipe;Prev]"
+                tostring(3.3 + offset_y) .. ";1,0.5;prev_recipe;" .. FS("Prev") .. "]"
 
     end
 
     if result and recipe_nr < #result then
 
         formspec = formspec .. "button[" .. tostring(1 + offset_x) .. "," ..
-                tostring(3.3 + offset_y) .. ";1,0.5;next_recipe;Next]"
+                tostring(3.3 + offset_y) .. ";1,0.5;next_recipe;" .. FS("Next") .. "]"
 
     end
 
@@ -399,11 +397,11 @@ local function show_crafting(name, node_name, fields)
 
 --      formspec = formspec .. "label[3,1;No recipes.]"
         formspec = formspec .. "label[" .. tostring(4 + offset_x) .. "," ..
-                    tostring(2.15 + offset_y) .. ";No recipes.]"
+                    tostring(2.15 + offset_y) .. ";" .. FS("No recipes") .. "]"
 
-        if minetest.registered_nodes[node_name] and minetest.registered_nodes[node_name].drop then
+        if core.registered_nodes[node_name] and core.registered_nodes[node_name].drop then
 
-            local drop = minetest.registered_nodes[node_name].drop
+            local drop = core.registered_nodes[node_name].drop
             if drop then
 
                 if type(drop) == "string" and drop ~= node_name then
@@ -411,7 +409,7 @@ local function show_crafting(name, node_name, fields)
 --                  formspec = formspec .. "label[2,1.6;Drops on dig:]" ..
 --                          "item_image_button[2,2;1.0,1.0;" .. get_image_button_link(drop) .. "]"
                     formspec = formspec .. "label[" .. offset_x .. "," .. offset_y ..
-                            ";Drops on dig:]item_image_button[" .. offset_x ..
+                            ";" .. FS("Drops on dig") .. ":]item_image_button[" .. offset_x ..
                             "," .. tostring(offset_y + 1) .. ";1.0,1.0;" ..
                             get_image_button_link(drop) .. "]"
 
@@ -434,7 +432,7 @@ local function show_crafting(name, node_name, fields)
                     -- Maximum two rows of buttons
                     local i = 4
                     formspec = formspec .. "label[" .. offset_x .. "," .. offset_y ..
-                            ";May drop on dig:]"
+                            ";" .. FS("May drop on dig") .. ":]"
 
                     for k, v in pairs(droplist) do
 
@@ -464,8 +462,8 @@ local function show_crafting(name, node_name, fields)
 --      formspec = formspec .. "label[1,5;Alternate " .. tostring(recipe_nr) .. "/" ..
 --              tostring(#result) .. "]"
         formspec = formspec .. "label[" .. tostring(4 + offset_x) .. "," ..
-                tostring(2.15 + offset_y) .. ";Recipe " .. tostring(recipe_nr) .. "/" ..
-                tostring(#result) .. "]"
+                tostring(2.15 + offset_y) .. ";" .. FS("Recipe") .. " " .. tostring(recipe_nr) ..
+                "/" .. tostring(#result) .. "]"
 
         -- Reverse order; default recipes (and thus the most relevant ones) are usually the oldest
         local recipe = result[#result + 1 - recipe_nr]
@@ -507,7 +505,7 @@ local function show_crafting(name, node_name, fields)
                     "item_image_button[" .. tostring(0.1 + offset_x) .. "," ..
                     tostring(0.1 + offset_y) .. ";1.25,1.25;" ..
                     get_image_button_link(recipe.items[1]) .. "]" ..
-                    "label[0,5.6;This can be used as a fuel.]"
+                    "label[0,5.6;" .. FS("This can be used as a fuel") .. "]"
 
         elseif recipe.type == "cooking" and recipe.items and #recipe.items == 1 then
 
@@ -564,8 +562,8 @@ local function show_crafting(name, node_name, fields)
         else
 
 --          formspec = formspec .. "label[3,1;Error: Unkown recipe.]"
-            formspec = formspec .. "label[" .. offset_x .. "," .. tostring(1.2 + offset_y) ..
-                    ";Error: Unknown recipe.]"
+            formspec = formspec .. "label[" .. offset_x .. "," .. tostring(1.5 + offset_y) ..
+                    ";" .. FS("Error: Unknown recipe") .. "]"
 
         end
 
@@ -586,7 +584,7 @@ local function show_crafting(name, node_name, fields)
 
     end
 
-    minetest.show_formspec(name, "unilib:formspec_item_inspector", formspec)
+    core.show_formspec(name, "unilib:formspec_item_inspector", formspec)
 
 end
 
@@ -640,7 +638,7 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
                 local sdata = luaob:get_staticdata()
                 if sdata then
 
-                    sdata = minetest.deserialize(sdata)
+                    sdata = core.deserialize(sdata)
                     if sdata.itemstring then
 
                         text = text .. " [" .. tostring(sdata.itemstring) .. "]"
@@ -675,13 +673,13 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
 
         end
 
-        text = text .. " at " .. minetest.pos_to_string(ref:get_pos())
-        minetest.chat_send_player(name, text)
+        text = text .. " at " .. core.pos_to_string(ref:get_pos())
+        core.chat_send_player(name, text)
         return nil
 
     elseif pointed_thing.type ~= "node" then
 
-        minetest.chat_send_player(
+        core.chat_send_player(
             name,
             S(
                 "Node inspection error: This is an unknown item of type '@1'." ..
@@ -694,12 +692,12 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
 
     end
 
-    local pos = minetest.get_pointed_thing_position(pointed_thing, mode)
-    local node = minetest.get_node_or_nil(pos)
+    local pos = core.get_pointed_thing_position(pointed_thing, mode)
+    local node = core.get_node_or_nil(pos)
 
     if node == nil then
 
-        minetest.chat_send_player(
+        core.chat_send_player(
             name,
             S(
                 "Node inspection error: Target node not yet loaded. Please wait a moment for the" ..
@@ -712,24 +710,24 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
     end
 
     local text = " [" .. tostring(node.name) .. "] with param2=" .. tostring(node.param2) ..
-            " at " .. minetest.pos_to_string(pos) .. "."
+            " at " .. core.pos_to_string(pos) .. "."
 
-    if not minetest.registered_nodes[node.name] then
+    if not core.registered_nodes[node.name] then
 
         text = "This node is an UNKOWN block" .. text
 
     else
 
         text = "This is a \"" .. tostring(
-            minetest.registered_nodes[node.name].description or " - no description provided -"
+            core.registered_nodes[node.name].description or " - no description provided -"
         ) .. "\" block" .. text
 
     end
 
     local protected_info = ""
-    if minetest.is_protected(pos, name) then
+    if core.is_protected(pos, name) then
         protected_info = "You can\'t dig this node. It is protected."
-    elseif minetest.is_protected(pos, "_THIS_NAME_DOES_NOT_EXIST_") then
+    elseif core.is_protected(pos, "_THIS_NAME_DOES_NOT_EXIST_") then
         protected_info = "You can dig this node, but others can\'t."
     end
 
@@ -738,9 +736,9 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
     if show_recipe_flag then
 
         -- Get node light
-        local light = minetest.get_node_light(pos, nil)
+        local light = core.get_node_light(pos, nil)
         if light == 0 then
-            light = minetest.get_node_light({x = pos.x, y = pos.y + 1, z = pos.z})
+            light = core.get_node_light({x = pos.x, y = pos.y + 1, z = pos.z})
         end
 
         -- The fields part is used here to provide additional information about the node
@@ -807,7 +805,7 @@ end
 function unilib.pkg.item_inspector.post()
 
     -- Populate the group placeholder table. Note that some of these entries were not in the
-    --      original mod code, but are nevertheless used by ../lib/system/inventory.lua
+    --      original mod code, but are nevertheless used by ../lib/system/final/final_compat_ui.lua
 
     --[[
     group_placeholder_table["group:wood"] = "default:wood"
@@ -821,18 +819,18 @@ function unilib.pkg.item_inspector.post()
     group_placeholder_table["group:wool"] = "wool:white"
     ]]--
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
         group_placeholder_table["group:stone"] = "unilib:stone_ordinary"
         group_placeholder_table["group:cobble"] = "unilib:stone_ordinary"
 
     end
 
-    if unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
         group_placeholder_table["group:sand"] = "unilib:sand_ordinary"
     end
 
-    if unilib.pkg_executed_table["tree_apple"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
 
         group_placeholder_table["group:tree"] = "unilib:tree_apple_trunk"
         group_placeholder_table["group:wood"] = "unilib:tree_apple_wood"
@@ -843,30 +841,30 @@ function unilib.pkg.item_inspector.post()
 
     end
 
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
         group_placeholder_table["group:stick"] = "unilib:item_stick_ordinary"
     end
 
-    if unilib.pkg_executed_table["wool_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["wool_basic"] ~= nil then
         group_placeholder_table["group:wool"] = "wool:white"
     end
 
-    if unilib.pkg_executed_table["item_book_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_book_ordinary"] ~= nil then
         group_placeholder_table["group:book"] = "unilib:item_book_ordinary"
     end
 
-    if unilib.pkg_executed_table["vessel_bottle_glass_empty"] ~= nil then
+    if unilib.global.pkg_executed_table["vessel_bottle_glass_empty"] ~= nil then
         group_placeholder_table["group:vessel"] = "unilib:vessel_bottle_glass_empty"
     end
 
     -- Update group placeholders to unilib dyes or, if none are available, the original
     --      minetest_game dyes
     --[[
-    if minetest.get_modpath("dye") and dye and dye.basecolors then
+    if core.get_modpath("dye") and dye and dye.basecolors then
 
         for i, colour in ipairs(dye.basecolors) do
 
-            local def_table = minetest.registered_items["dye:" .. colour]
+            local def_table = core.registered_items["dye:" .. colour]
             if def_table and def_table.groups then
 
                 for k, v in pairs(def_table.groups) do
@@ -885,13 +883,13 @@ function unilib.pkg.item_inspector.post()
 
     end
     ]]--
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         for i, mini_list in pairs(unilib.pkg.dye_basic.dye_list) do
             insert_dye("unilib:dye_", mini_list)
         end
 
-    elseif minetest.get_modpath("dye") and dye and dye.dyes then
+    elseif core.get_modpath("dye") and dye and dye.dyes then
 
         for i, mini_list in ipairs(dye.dyes) do
             insert_dye("dye:", mini_list)
@@ -900,6 +898,6 @@ function unilib.pkg.item_inspector.post()
     end
 
     -- Establish a callback so that input from the player-specific formspec gets handled
-    minetest.register_on_player_receive_fields(form_input_handler)
+    core.register_on_player_receive_fields(form_input_handler)
 
 end

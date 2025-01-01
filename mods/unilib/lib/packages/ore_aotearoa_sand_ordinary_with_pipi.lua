@@ -9,7 +9,7 @@
 unilib.pkg.ore_aotearoa_sand_ordinary_with_pipi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

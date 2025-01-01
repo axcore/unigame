@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_pink_bonnet = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.mushroom_pink_bonnet.exec()
 
     unilib.register_node("unilib:mushroom_pink_bonnet", "nsspf:marasmius_haematocephalus", mode, {
         -- From nsspf:marasmius_haematocephalus
-        description = unilib.annotate(S("Pink Bonnet Mushroom"), "Marasmius haematocephalus"),
+        description = unilib.utils.annotate(S("Pink Bonnet Mushroom"), "Marasmius haematocephalus"),
         tiles = {"unilib_mushroom_pink_bonnet.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -53,7 +53,7 @@ function unilib.pkg.mushroom_pink_bonnet.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_pink_bonnet", -1),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_pink_bonnet", -1),
     })
     -- (not compatible with flowerpots)
 
@@ -68,7 +68,7 @@ function unilib.pkg.mushroom_pink_bonnet.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, food_mushroom = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -88,7 +88,7 @@ function unilib.pkg.mushroom_pink_bonnet.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:mushroom_pink_bonnet_cooked", -19),
+            on_use = unilib.cuisine.eat_on_use("unilib:mushroom_pink_bonnet_cooked", -19),
         }
     )
     unilib.register_craft({

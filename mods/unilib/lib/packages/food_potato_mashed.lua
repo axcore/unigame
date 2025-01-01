@@ -9,7 +9,7 @@
 unilib.pkg.food_potato_mashed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_potato_mashed.exec()
         inventory_image = "unilib_food_potato_mashed.png",
         groups = {flammable = 1, food_mashed_potatoes = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_potato_mashed", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_potato_mashed", 4),
     })
     unilib.register_craft({
         -- From cropocalypse:mashed_potatoes

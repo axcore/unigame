@@ -9,7 +9,7 @@
 unilib.pkg.mineral_limonite_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.mineral_limonite_brown.exec()
         description = S("Brown Limonite Lump"),
         inventory_image = "unilib_mineral_limonite_brown_lump.png",
     })
-    if unilib.pkg_executed_table["metal_iron_pig"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron_pig"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -48,12 +48,12 @@ function unilib.pkg.mineral_limonite_brown.exec()
             recipe = "unilib:mineral_limonite_brown_lump",
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "limonite_brown",
             metal_list = {"iron_pig"},
         })
 
-    elseif unilib.pkg_executed_table["metal_iron_wrought"] ~= nil then
+    elseif unilib.global.pkg_executed_table["metal_iron_wrought"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -62,7 +62,7 @@ function unilib.pkg.mineral_limonite_brown.exec()
             recipe = "unilib:mineral_limonite_yellow_lump",
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "limonite_brown",
             metal_list = {"iron_wrought"},
         })

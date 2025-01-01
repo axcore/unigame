@@ -9,7 +9,7 @@
 unilib.pkg.brick_violet = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_violet.init()
 
     return {
         description = "Violet brick",
-        depends = {"clay_baked_basic", "brick_ordinary"},
+        depends = {"brick_ordinary", "clay_baked_basic", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_violet.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:violet and morebricks:violetvertical, creates unilib:brick_violet_block
         --      and unilib:brick_violet_block_vertical
         part_name = "violet",

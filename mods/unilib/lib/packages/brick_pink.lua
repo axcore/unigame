@@ -9,7 +9,7 @@
 unilib.pkg.brick_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_pink.init()
 
     return {
         description = "Pink brick",
-        depends = {"clay_baked_basic", "brick_ordinary"},
+        depends = {"brick_ordinary", "clay_baked_basic", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_pink.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:pink and morebricks:pinkvertical, creates unilib:brick_pink_block and
         --      unilib:brick_pink_block_vertical
         part_name = "pink",
@@ -39,7 +39,7 @@ function unilib.pkg.brick_pink.exec()
         description = S("Pink Brick Block"),
     })
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:pinkaged and morebricks:pinkagedvertical, creates
         --      unilib:brick_pink_old_block and unilib:brick_pink_old_block_vertical
         part_name = "pink_old",

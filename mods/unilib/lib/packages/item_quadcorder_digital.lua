@@ -9,7 +9,7 @@
 unilib.pkg.item_quadcorder_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,10 @@ function unilib.pkg.item_quadcorder_digital.exec()
 
     unilib.register_tool("unilib:item_quadcorder_digital", "orienteering:quadcorder", mode, {
         -- From orienteering:quadcorder
-        description = S("Digital Quadcorder"),
+        description = unilib.utils.hint(
+            S("Digital Quadcorder"),
+            S("shows coordinates, yaw, pitch, time and speed, and enables minimap")
+        ),
         inventory_image = "unilib_item_quadcorder_digital.png",
         groups = {disable_repair = 1},
 

@@ -17,9 +17,9 @@
 unilib.pkg.tree_pine = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local doors_add_mode = unilib.imported_mod_table.doors.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local doors_add_mode = unilib.global.imported_mod_table.doors.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -28,15 +28,15 @@ local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
 function unilib.pkg.tree_pine.grow_func(pos)
 
     -- Adapted from default/trees.lua
-    -- Special handling for this tree's sapling, called by unilib.grow_tree_sapling() (instead of
+    -- Special handling for this tree's sapling, called by unilib.trees.grow_sapling() (instead of
     --      executing that function's own code)
 
-    unilib.log(
+    unilib.utils.log(
         "action",
-        "The pine tree sapling grows into a tree at " .. minetest.pos_to_string(pos)
+        "The pine tree sapling grows into a tree at " .. core.pos_to_string(pos)
     )
 
-    local snow = unilib.is_snow_nearby(pos)
+    local snow = unilib.flora.is_snow_nearby(pos)
     if not snow then
 
         if math.random() > 0.5 then
@@ -45,9 +45,9 @@ function unilib.pkg.tree_pine.grow_func(pos)
             mts = "unilib_tree_pine_small_from_sapling.mts"
         end
 
-        minetest.place_schematic(
+        core.place_schematic(
             {x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
-            unilib.path_mod .. "/mts/" .. mts,
+            unilib.core.path_mod .. "/mts/" .. mts,
             "0",
             nil,
             false
@@ -56,14 +56,14 @@ function unilib.pkg.tree_pine.grow_func(pos)
     else
 
         if math.random() > 0.5 then
-            mts = "unilib_tree_pine_snowy_from_sapling.mts"
+            mts = "unilib_tree_pine_large_snowy_from_sapling.mts"
         else
             mts = "unilib_tree_pine_small_snowy_from_sapling.mts"
         end
 
-        minetest.place_schematic(
+        core.place_schematic(
             {x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
-            unilib.path_mod .. "/mts/" .. mts,
+            unilib.core.path_mod .. "/mts/" .. mts,
             "random",
             nil,
             false
@@ -110,7 +110,6 @@ function unilib.pkg.tree_pine.exec()
         common_group = 3,
         description = S("Pine Tree Trunk"),
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -153,7 +152,9 @@ function unilib.pkg.tree_pine.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and (
+            moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_tree_panel({
             -- From moreblocks:all_faces_pine_tree. Creates unilib:tree_pine_panel
@@ -190,25 +191,25 @@ function unilib.pkg.tree_pine.exec()
     group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    if doors_add_mode ~= "defer" then
+    if doors_add_mode ~= "defer" or not core.get_modpath("doors") then
 
         unilib.register_fence_gate_quick({
-            -- From doors:gate_pine_wood. Creates unilib:gate_pine_closed
+            -- From doors:gate_pine_wood_closed, etc. Creates unilib:gate_pine_closed, etc
             part_name = "pine",
             orig_name = {"doors:gate_pine_wood_closed", "doors:gate_pine_wood_open"},
 
             replace_mode = doors_add_mode,
             burnlevel = burnlevel,
             description = S("Pine Wood Fence Gate"),
-        group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
+            group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
         })
 
     end
 
-    unilib.register_decoration("default_tree_pine_large", {
+    unilib.register_decoration_generic("default_tree_pine_large", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_large.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -222,10 +223,10 @@ function unilib.pkg.tree_pine.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("default_tree_pine_small", {
+    unilib.register_decoration_generic("default_tree_pine_small", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_small.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_small.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -239,12 +240,12 @@ function unilib.pkg.tree_pine.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
-        unilib.register_decoration("default_tree_pine_log", {
+        unilib.register_decoration_generic("default_tree_pine_log", {
             -- From default/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_pine_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_log.mts",
 
             fill_ratio = 0.0018,
             flags = "place_center_x",

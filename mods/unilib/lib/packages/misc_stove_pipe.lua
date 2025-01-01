@@ -9,7 +9,7 @@
 unilib.pkg.misc_stove_pipe = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_stove_pipe.exec()
         tiles = {"unilib_metal_steel_block.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -56,7 +56,7 @@ function unilib.pkg.misc_stove_pipe.exec()
         output = "unilib:misc_stove_pipe 2",
         recipe = {
             {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

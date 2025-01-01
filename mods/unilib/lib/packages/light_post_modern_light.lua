@@ -9,7 +9,7 @@
 unilib.pkg.light_post_modern_light = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,15 +30,17 @@ function unilib.pkg.light_post_modern_light.exec()
         -- From morelights_modern:post_l
         description = S("Light-Coloured Modern Light Post"),
         tiles = {
-            "unilib_pole_metal_light.png",
-            "unilib_pole_metal_light.png",
-            "unilib_pole_metal_light.png^unilib_light_post_modern_overlay.png"
+            "unilib_hardware_pole_metal_light.png",
+            "unilib_hardware_pole_metal_light.png",
+            "unilib_hardware_pole_metal_light.png^unilib_light_post_modern_overlay.png",
         },
         groups = {cracky = 3, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         node_box = {
             type = "fixed",
             fixed = {-1/8, -1/2, -1/8, 1/8, 1/2, 1/8},
@@ -52,8 +54,8 @@ function unilib.pkg.light_post_modern_light.exec()
         recipe = {
             {"unilib:dye_white", "unilib:metal_steel_ingot", ""},
             {"", "unilib:light_bulb_normal", ""},
-            {"", "unilib:metal_steel_ingot", ""}
-        }
+            {"", "unilib:metal_steel_ingot", ""},
+        },
     })
 
 end

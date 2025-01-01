@@ -13,7 +13,7 @@
 unilib.pkg.utensil_bowl_wooden = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -67,6 +67,6 @@ function unilib.pkg.utensil_bowl_wooden.exec()
         burntime = 10,
     })
     -- From "thirsty" mod
-    unilib.hydration_enable_drinking_from_container("unilib:utensil_bowl_wooden", 25)
+    unilib.hydration.enable_drinking_from_container("unilib:utensil_bowl_wooden", 25)
 
 end

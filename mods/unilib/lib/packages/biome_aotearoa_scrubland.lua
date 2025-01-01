@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_scrubland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,6 +27,7 @@ function unilib.pkg.biome_aotearoa_scrubland.init()
             "stone_schist_antipodean",
             "stone_sandstone_pale",
         },
+        optional = "dirt_custom_antipodean",
     }
 
 end
@@ -36,7 +37,7 @@ function unilib.pkg.biome_aotearoa_scrubland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "broadleaf_scrub" biome
         name = "aotearoa_scrubland_broadleaf",
-        description = unilib.brackets(S("Broafleaf scrub biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Broafleaf scrub biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_rainforest",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -54,7 +55,7 @@ function unilib.pkg.biome_aotearoa_scrubland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "geothermal_scrub" biome
         name = "aotearoa_scrubland_geothermal",
-        description = unilib.brackets(S("Geothermal scrub biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Geothermal scrub biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_rainforest",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -72,7 +73,7 @@ function unilib.pkg.biome_aotearoa_scrubland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "manuka_scrub" biome
         name = "aotearoa_scrubland_manuka",
-        description = unilib.brackets(S("Manuka scrub biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Manuka scrub biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_rainforest",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -87,11 +88,25 @@ function unilib.pkg.biome_aotearoa_scrubland.post()
         humidity_point = 0,
     })
 
+    local node_top
+    if unilib.global.pkg_executed_table["dirt_custom_antipodean"] == nil then
+
+        node_top = "unilib:dirt_ordinary_with_turf_dry"
+
+    else
+
+        -- Produces unilib:dirt_ordinary_with_turf_scrubland_matagouri
+        node_top = unilib.pkg.dirt_custom_antipodean.generate_ordinary_dirt(
+            "scrubland_matagouri", S("Matagouri Scrub Turf"), "#FFC700:96"
+        )
+
+    end
+
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "matagouri_scrub" biome
         name = "aotearoa_scrubland_matagouri",
-        description = unilib.brackets(S("Matagouri scrub biome"), "aotearoa"),
-        node_top = "unilib:dirt_ordinary_with_turf_dry",
+        description = unilib.utils.brackets(S("Matagouri scrub biome"), "aotearoa"),
+        node_top = node_top,
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
         depth_filler = 2,

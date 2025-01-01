@@ -1,5 +1,4 @@
 # "vallee_des_roses" remix - contains only flowers from the Vallee des Roses mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -28,3 +27,5 @@ biome_default_taiga|default
 #grass_jungle|default
 #grass_ordinary|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

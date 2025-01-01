@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_illumishroom_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.mushroom_illumishroom_green.exec()
         tiles = {"unilib_mushroom_illumishroom_green.png"},
         -- N.B. mushroom = 1 not in original code
         groups = {attached_node = 1, dig_immediate = 3, flammable = 3, mushroom = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_mushroom_illumishroom_green.png",
@@ -46,5 +46,7 @@ function unilib.pkg.mushroom_illumishroom_green.exec()
         wield_image = "unilib_mushroom_illumishroom_green.png",
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_illumishroom_green", "ethereal:illumishroom2")
+
+    unilib.register_decoration_spare("unilib:mushroom_illumishroom_green")
 
 end

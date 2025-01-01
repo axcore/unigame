@@ -9,7 +9,7 @@
 unilib.pkg.mineral_coal_bituminous = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,7 +51,7 @@ function unilib.pkg.mineral_coal_bituminous.exec()
         recipe = "unilib:mineral_coal_bituminous_lump",
         burntime = 35,
     })
-    if unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         -- (Since ordinary coal is such an important craftitem, allow it to be crafted from this
         --      mineral)
@@ -60,7 +60,7 @@ function unilib.pkg.mineral_coal_bituminous.exec()
             output = "unilib:mineral_coal_lump",
             recipe = {
                 {"unilib:mineral_coal_bituminous_lump"},
-            }
+            },
         })
 
     end

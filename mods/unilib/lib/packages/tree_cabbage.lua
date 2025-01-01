@@ -9,7 +9,7 @@
 unilib.pkg.tree_cabbage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,13 @@ end
 
 function unilib.pkg.tree_cabbage.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Cordyline australis"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -35,56 +40,72 @@ function unilib.pkg.tree_cabbage.exec()
         description = S("Cabbage Tree Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_cabbage_trunk", "aotearoa:cabbage_tree_tree", mode, {
         -- From aotearoa:cabbage_tree_tree
-        description = unilib.annotate(S("Cabbage Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Cabbage Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_cabbage_trunk_top.png",
             "unilib_tree_cabbage_trunk_top.png",
             "unilib_tree_cabbage_trunk.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node=1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        node_box = node_box,
         paramtype = "light",
         paramtype2 = "facedir",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
+
+        -- N.B. No .after_destruct in original code
+        after_destruct = function(pos, oldnode)
+            unilib.flora.collapse_slim_tree(pos, oldnode, {"unilib:tree_cabbage_trunk"})
+        end,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:cabbage_tree_tree
             output = "unilib:item_stick_ordinary 2",
             recipe = {
                 {"unilib:tree_cabbage_trunk"},
-            }
+            },
         })
 
     end
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_cabbage_trunk_stripped
+        part_name = "cabbage",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Cabbage Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
+    })
 
     -- (no wood)
 
     unilib.register_node("unilib:tree_cabbage_crown", "aotearoa:cabbage_tree_crown", mode, {
         -- From aotearoa:cabbage_tree_crown
-        description = unilib.annotate(S("Cabbage Tree Crown"), sci_name),
+        description = unilib.utils.annotate(S("Cabbage Tree Crown"), sci_name),
         tiles = {"unilib_tree_cabbage_crown.png"},
         groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -131,10 +152,10 @@ function unilib.pkg.tree_cabbage.exec()
         },
     })
 
-    unilib.register_decoration("aotearoa_tree_cabbage_clump_1", {
+    unilib.register_decoration_generic("aotearoa_tree_cabbage_clump_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_cabbage_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_cabbage_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -148,10 +169,10 @@ function unilib.pkg.tree_cabbage.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_cabbage_clump_2", {
+    unilib.register_decoration_generic("aotearoa_tree_cabbage_clump_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_cabbage_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_cabbage_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -167,10 +188,10 @@ function unilib.pkg.tree_cabbage.exec()
     })
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_cabbage_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_cabbage_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_cabbage_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_cabbage_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",
@@ -179,7 +200,7 @@ function unilib.pkg.tree_cabbage.exec()
         })
 
     end
-    unilib.register_decoration("aotearoa_tree_cabbage_crown", {
+    unilib.register_decoration_generic("aotearoa_tree_cabbage_crown", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:tree_cabbage_crown",

@@ -9,7 +9,7 @@
 unilib.pkg.ore_darkage_stone_tuff = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.ore_darkage_stone_tuff.post()
             offset = 0.35,
             persistence = 0.6,
             scale = 0.19,
-            seed = minetest.get_mapgen_setting("seed") + 12,
+            seed = unilib.utils.get_mod_attribute("storage_random_seed_offset") + 12,
             spread = {x = 45, y = 45, z = 45},
         },
         noise_threshold         = 0.5,

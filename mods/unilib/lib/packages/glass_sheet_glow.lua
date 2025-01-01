@@ -9,7 +9,7 @@
 unilib.pkg.glass_sheet_glow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.glass_sheet_glow.exec()
         craft_output = 4,
         craft_table = {
             {"unilib:pane_glass_glow_flat", "unilib:pane_glass_glow_flat"},
-            {"unilib:pane_glass_glow_flat", "unilib:pane_glass_glow_flat"}
+            {"unilib:pane_glass_glow_flat", "unilib:pane_glass_glow_flat"},
         },
         edge_img = "unilib_pane_glass_ordinary_edge.png^[colorize:#E9CD61",
         front_img = "unilib_glass_ordinary.png^[colorize:#E9CD61",

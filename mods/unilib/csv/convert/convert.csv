@@ -116,9 +116,9 @@ default:large_cactus_seedling|unilib:plant_cactus_ordinary_seed
 default:lava_flowing|unilib:liquid_lava_ordinary_flowing
 default:lava_source|unilib:liquid_lava_ordinary_source
 default:leaves|unilib:tree_apple_leaves
-default:marram_grass_1|unilib:grass_marram_1
-default:marram_grass_2|unilib:grass_marram_2
-default:marram_grass_3|unilib:grass_marram_3
+default:marram_grass_1|unilib:grass_marram_ordinary_1
+default:marram_grass_2|unilib:grass_marram_ordinary_2
+default:marram_grass_3|unilib:grass_marram_ordinary_3
 default:mese|unilib:mineral_mese_block
 default:mese_post_light|unilib:light_post_mese_apple
 default:mese_post_light_acacia_wood|unilib:light_post_mese_acacia
@@ -132,9 +132,9 @@ default:obsidian_block|unilib:stone_obsidian_block
 default:obsidian_glass|unilib:glass_obsidian
 default:obsidianbrick|unilib:stone_obsidian_brick
 default:papyrus|unilib:plant_papyrus_ordinary
-default:permafrost|unilib:dirt_permafrost
-default:permafrost_with_moss|unilib:dirt_permafrost_with_moss
-default:permafrost_with_stones|unilib:dirt_permafrost_with_stonelet
+default:permafrost|unilib:dirt_permafrost_ordinary
+default:permafrost_with_moss|unilib:dirt_permafrost_ordinary_with_moss
+default:permafrost_with_stones|unilib:dirt_permafrost_ordinary_with_litter_stone
 default:pine_bush_needles|unilib:bush_pine_leaves
 default:pine_bush_sapling|unilib:bush_pine_sapling
 default:pine_bush_stem|unilib:bush_pine_stem

@@ -9,7 +9,7 @@
 unilib.pkg.tree_fir_douglas = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 local ltree_def_table = {
     trunk = "unilib:tree_fir_douglas_trunk",
@@ -62,11 +62,11 @@ local function do_grow(pos, iterations, random_level)
     adj_def_table.iterations = iterations
     adj_def_table.random_level = random_level
 
-    minetest.swap_node(pos, {name = "air"})
+    core.swap_node(pos, {name = "air"})
 
     -- N.B. This code exists in the original mod; its purpose seems to be, to replace any nearby
     --      apple tree leaves with air, leaving more room for the douglas fir tree to grow
-    local leaf_list = minetest.find_nodes_in_area(
+    local leaf_list = core.find_nodes_in_area(
 
         {x = pos.x, y = pos.y, z = pos.z},
         {x = pos.x, y = pos.y + 5, z = pos.z},
@@ -74,10 +74,10 @@ local function do_grow(pos, iterations, random_level)
     )
 
     for leaf_name in ipairs(leaf_list) do
-        minetest.swap_node(leaf_list[leaf_name], {name = "air"})
+        core.swap_node(leaf_list[leaf_name], {name = "air"})
     end
 
-    minetest.spawn_tree(pos, adj_def_table)
+    core.spawn_tree(pos, adj_def_table)
 
 end
 
@@ -109,7 +109,7 @@ end
 
 function unilib.pkg.tree_fir_douglas.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Pseudotsuga menziesii"
 
     unilib.register_tree({
@@ -129,7 +129,6 @@ function unilib.pkg.tree_fir_douglas.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -185,12 +184,10 @@ function unilib.pkg.tree_fir_douglas.exec()
 
     unilib.register_leafdecay({
         -- From moretrees:fir_leaves
+        trunk_type = "fir_douglas",
         trunks = {"unilib:tree_fir_douglas_trunk"},
-        leaves = {
-            "unilib:tree_fir_douglas_leaves_dark",
-            "unilib:tree_fir_douglas_leaves_pale",
-            "unilib:ingredient_cone_fir_douglas",
-        },
+        leaves = {"unilib:tree_fir_douglas_leaves_dark", "unilib:tree_fir_douglas_leaves_pale"},
+        others = {"unilib:ingredient_cone_fir_douglas"},
         radius = 5,
     })
 
@@ -234,7 +231,7 @@ function unilib.pkg.tree_fir_douglas.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:fir_gate. Creates unilib:gate_fir_douglas_closed
+        -- From moretrees:fir_gate_closed, etc. Creates unilib:gate_fir_douglas_closed, etc
         part_name = "fir_douglas",
         orig_name = {"moretrees:fir_gate_closed", "moretrees:fir_gate_open"},
 
@@ -249,11 +246,11 @@ function unilib.pkg.tree_fir_douglas.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(0.3),
-            temp_min = unilib.convert_biome_lib_temp(0.9),
+            temp_max = unilib.utils.convert_biome_lib_temp(0.3),
+            temp_min = unilib.utils.convert_biome_lib_temp(0.9),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 50,
             }),
         },
@@ -270,7 +267,7 @@ function unilib.pkg.tree_fir_douglas.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 50,
             }),
         },

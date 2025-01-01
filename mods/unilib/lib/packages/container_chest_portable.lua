@@ -9,7 +9,8 @@
 unilib.pkg.container_chest_portable = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hook.add_mode
+local F = core.formspec_escape
+local mode = unilib.global.imported_mod_table.hook.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,7 +18,7 @@ local mode = unilib.imported_mod_table.hook.add_mode
 
 local function set_pchest(pos, user, label)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     label = label or S("Portable Chest")
     meta:set_string("owner", user:get_player_name())
     meta:set_int("state", 0)
@@ -31,9 +32,9 @@ local function set_pchest(pos, user, label)
         "list[current_player;main;0,5.3;8,4;]" ..
         "listring[current_player;main]" ..
         "listring[current_name;main]" ..
-        "field[0.3,0.3;3,1;label;;" .. label .. "]"
+        "field[0.3,0.3;3,1;label;;" .. F(label) .. "]"
     )
-    meta:set_string("infotext", unilib.brackets(label, user:get_player_name()))
+    meta:set_string("infotext", unilib.utils.brackets(label, user:get_player_name()))
 
 end
 
@@ -63,23 +64,28 @@ function unilib.pkg.container_chest_portable.exec()
     unilib.register_tool("unilib:container_chest_portable", "hook:pchest", mode, {
         -- From hook:pchest
         description = S("Portable Locked Chest"),
-        inventory_image = "unilib_container_chest_portable_front.png",
+        -- N.B. following the example of the other chests, this chest must be displayed in 3D
+--      inventory_image = "unilib_container_chest_portable_front.png",
+        inventory_image = "[inventorycube{unilib_container_chest_portable_top.png" ..
+                "{unilib_container_chest_portable_front.png" ..
+                "{unilib_container_chest_portable_side.png",
 
         on_place = function(itemstack, user, pointed_thing)
 
-            if minetest.is_protected(pointed_thing.above, user:get_player_name()) or
+            if core.is_protected(pointed_thing.above, user:get_player_name()) or
                     unilib.pkg.shared_hook.has_property(pointed_thing.above, "walkable") then
                 return itemstack
             end
 
-            local p = minetest.dir_to_facedir(user:get_look_dir())
+            local p = core.dir_to_facedir(user:get_look_dir())
             local item = itemstack:to_table()
-            local m = minetest.get_meta(pointed_thing.above)
-            minetest.set_node(
+            local m = core.get_meta(pointed_thing.above)
+            core.set_node(
                 pointed_thing.above,
                 {name = "unilib:container_chest_portable_node", param1 = "", param2 = p}
             )
-            minetest.sound_play(
+
+            core.sound_play(
                 "unilib_place_node_hard",
                 {pos = pointed_thing.above, gain = 1.0, max_hear_distance = 5}
             )
@@ -97,7 +103,7 @@ function unilib.pkg.container_chest_portable.exec()
 
             if item.meta.items then
 
-                local its = minetest.deserialize(item.meta.items or "") or {}
+                local its = core.deserialize(item.meta.items or "") or {}
                 local items = {}
                 for i, it in pairs(its) do
                     table.insert(items, ItemStack(it))
@@ -108,11 +114,6 @@ function unilib.pkg.container_chest_portable.exec()
             end
 
             itemstack:take_item()
-
-            local p = pointed_thing.under
-            local ab = pointed_thing.above
-            local s = ItemStack("default:unknown")
-            local sinv = minetest.get_meta(pointed_thing.under):get_inventory()
             return itemstack
 
         end,
@@ -121,7 +122,7 @@ function unilib.pkg.container_chest_portable.exec()
 
             if pointed_thing.type == "node" then
 
-                minetest.registered_tools["unilib:container_chest_portable"].on_place(
+                core.registered_tools["unilib:container_chest_portable"].on_place(
                     itemstack, user, pointed_thing
                 )
 
@@ -138,12 +139,11 @@ function unilib.pkg.container_chest_portable.exec()
             {c_stick, c_stick, c_stick},
             {c_stick, "unilib:container_chest_ordinary", "unilib:mineral_diamond_block"},
             {c_stick, c_stick, c_stick},
-        }
+        },
     })
 
     -- (The portable chest, when placed in the world)
-    unilib.register_node("unilib:container_chest_portable_node", "hook:pchest_node", mode, {
-        -- From hook:pchest_node
+    local def_table = {
         description = S("Portable Locked Chest"),
         tiles = {
             "unilib_container_chest_portable_top.png",
@@ -160,6 +160,8 @@ function unilib.pkg.container_chest_portable.exec()
         -- (no sounds)
 
         drop = "unilib:container_chest_portable",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
         tube = {
             connect_sides = {left = 1, right = 1, front = 1, back = 1, top = 1, bottom = 1},
@@ -167,7 +169,7 @@ function unilib.pkg.container_chest_portable.exec()
 
             can_insert = function(pos, node, stack, direction)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
                 return inv:room_for_item("main", stack)
 
@@ -175,7 +177,7 @@ function unilib.pkg.container_chest_portable.exec()
 
             insert_object = function(pos, node, stack, direction)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
                 local added = inv:add_item("main", stack)
                 return added
@@ -186,7 +188,7 @@ function unilib.pkg.container_chest_portable.exec()
         allow_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            local owner = minetest.get_meta(pos):get_string("owner")
+            local owner = core.get_meta(pos):get_string("owner")
             if owner == player:get_player_name() or owner == "" then
                 return count
             end
@@ -197,7 +199,7 @@ function unilib.pkg.container_chest_portable.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local m = minetest.get_meta(pos)
+            local m = core.get_meta(pos)
             local owner = m:get_string("owner")
             local inv = m:get_inventory()
             local name = player:get_player_name()
@@ -205,12 +207,12 @@ function unilib.pkg.container_chest_portable.exec()
 
                 if stack:get_name() == "unilib:container_chest_portable" then
 
-                    minetest.chat_send_player(name, S("Cannot put anything in this chest"))
+                    core.chat_send_player(name, S("Cannot put anything in this chest"))
                     return 0
 
                 elseif not inv:room_for_item("main", stack) then
 
-                    minetest.chat_send_player(name, S("This chest is full"))
+                    core.chat_send_player(name, S("This chest is full"))
                     return 0
 
                 end
@@ -225,7 +227,7 @@ function unilib.pkg.container_chest_portable.exec()
 
         allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            local owner = minetest.get_meta(pos):get_string("owner")
+            local owner = core.get_meta(pos):get_string("owner")
             if owner == player:get_player_name() or owner == "" then
                 return stack:get_count()
             end
@@ -236,19 +238,23 @@ function unilib.pkg.container_chest_portable.exec()
 
         can_dig = function(pos, player)
 
-            local m = minetest.get_meta(pos)
+            local m = core.get_meta(pos)
             return m:get_string("owner") == "" and m:get_inventory():is_empty("main")
 
         end,
 
+        -- N.B. No .on_blast() in original code
+        on_blast = function() end,
+
+        --[[
         on_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff in portable chest at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items in portable chest at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -256,10 +262,10 @@ function unilib.pkg.container_chest_portable.exec()
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff to portable chest at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items to portable chest at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
@@ -267,20 +273,21 @@ function unilib.pkg.container_chest_portable.exec()
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
             -- N.B. This callback and its log message not in original code
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " takes stuff from portable chest at " ..
-                        minetest.pos_to_string(pos)
+                player:get_player_name() .. " takes items from portable chest at " ..
+                        core.pos_to_string(pos)
             )
 
         end,
+        ]]--
 
         on_punch = function(pos, node, player, pointed_thing)
 
-            local meta=minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local name = player:get_player_name()
             local pinv = player:get_inventory()
-            if minetest.is_protected(pos,name) or
+            if core.is_protected(pos,name) or
                     meta:get_string("owner") ~= name or
                     not pinv:room_for_item(
                         "main", ItemStack("unilib:container_chest_portable")
@@ -297,14 +304,14 @@ function unilib.pkg.container_chest_portable.exec()
             local item = ItemStack("unilib:container_chest_portable"):to_table()
             local label = meta:get_string("label")
             item.meta = {
-                items = minetest.serialize(items),
+                items = core.serialize(items),
                 label = label,
-                description = unilib.brackets(label, name),
+                description = unilib.utils.brackets(label, name),
             }
             pinv:add_item("main", ItemStack(item))
-            minetest.set_node(pos, {name = "air"})
-            minetest.sound_play(
-                "unilib_dig_dig_immediate",
+            core.set_node(pos, {name = "air"})
+            core.sound_play(
+                "unilib_dig_immediate",
                 {pos = pos, gain = 1.0, max_hear_distance = 5}
             )
 
@@ -314,7 +321,7 @@ function unilib.pkg.container_chest_portable.exec()
 
             if pressed.label then
 
-                local m = minetest.get_meta(pos)
+                local m = core.get_meta(pos)
                 local owner = m:get_string("owner")
                 if owner == sender:get_player_name() or owner == "" then
 
@@ -325,7 +332,13 @@ function unilib.pkg.container_chest_portable.exec()
 
             end
 
-        end
-    })
+        end,
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "portable chest")
+    unilib.register_node(
+        -- From hook:pchest_node
+        "unilib:container_chest_portable_node", "hook:pchest_node", mode, def_table
+    )
 
 end

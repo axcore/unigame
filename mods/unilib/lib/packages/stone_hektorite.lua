@@ -17,9 +17,9 @@
 unilib.pkg.stone_hektorite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_hektorite.exec()
         description = S("Hektorite"),
 
         category = "other",
+        colour = "#FF2B2B",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,26 +88,22 @@ function unilib.pkg.stone_hektorite.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:hektorite. Creates unilib:stone_hektorite_cobble_compressed
+        part_name = "hektorite",
+        orig_name = "compressed:hektorite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:hektorite. Creates unilib:stone_hektorite_cobble_compressed
-            part_name = "hektorite",
-            orig_name = "compressed:hektorite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Hektorite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Hektorite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:hektorite. Creates unilib:stone_hektorite_cobble_condensed
+        part_name = "hektorite",
+        orig_name = "condensed:hektorite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:hektorite. Creates unilib:stone_hektorite_cobble_condensed
-            part_name = "hektorite",
-            orig_name = "condensed:hektorite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Hektorite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Hektorite Cobble"),
+    })
 
 end

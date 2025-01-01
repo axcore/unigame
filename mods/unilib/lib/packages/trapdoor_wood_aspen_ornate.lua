@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wood_aspen_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ function unilib.pkg.trapdoor_wood_aspen_ornate.exec()
     local c_wood = "unilib:tree_aspen_wood"
 
     unilib.register_trapdoor({
-        -- From moretrapdoors:aspen_trapdoor. Creates unilib:trapdoor_wood_aspen_ornate
+        -- From moretrapdoors:aspen_trapdoor. Creates unilib:trapdoor_wood_aspen_ornate_closed, etc
         part_name = "wood_aspen_ornate",
-        orig_name = {"moretrapdoors:aspen_trapdoor", "moretrapdoors:aspen_trapdoor_open"},
+        orig_name_list = {"moretrapdoors:aspen_trapdoor", "moretrapdoors:aspen_trapdoor_open"},
         def_table = {
             description = S("Ornate Aspen Wood Trapdoor"),
             -- (no tiles)
@@ -55,7 +55,7 @@ function unilib.pkg.trapdoor_wood_aspen_ornate.exec()
         recipe = {
             {c_wood, c_wood, c_wood},
             {c_wood, "unilib:tree_aspen_trunk", c_wood},
-        }
+        },
     })
 
 end

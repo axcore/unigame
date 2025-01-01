@@ -9,7 +9,7 @@
 unilib.pkg.plant_reedmace = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dryplants.add_mode
+local mode = unilib.global.imported_mod_table.dryplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -25,23 +25,23 @@ local function land_place_func(pos)
     local pos_2 = {x = pos.x, y = pos.y + 2, z = pos.z}
     local pos_3 = {x = pos.x, y = pos.y + 3, z = pos.z}
 
-    if minetest.get_node(pos_1).name == "air" or
-            minetest.get_node(pos_1).name == "unilib:plant_reedmace_sapling" then
+    if core.get_node(pos_1).name == "air" or
+            core.get_node(pos_1).name == "unilib:plant_reedmace_sapling" then
 
-        if minetest.get_node(pos_2).name ~= "air" then
-            minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_small"})
-        elseif minetest.get_node(pos_3).name ~= "air" then
-            minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_medium"})
+        if core.get_node(pos_2).name ~= "air" then
+            core.swap_node(pos_1, {name = "unilib:plant_reedmace_small"})
+        elseif core.get_node(pos_3).name ~= "air" then
+            core.swap_node(pos_1, {name = "unilib:plant_reedmace_medium"})
         elseif size == 1 then
-            minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_small"})
+            core.swap_node(pos_1, {name = "unilib:plant_reedmace_small"})
         elseif size == 2 then
-            minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_medium"})
+            core.swap_node(pos_1, {name = "unilib:plant_reedmace_medium"})
         elseif size == 3 then
 
             if spikes == 1 then
-                minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_spiked"})
+                core.swap_node(pos_1, {name = "unilib:plant_reedmace_mature"})
             else
-                minetest.swap_node(pos_1, {name = "unilib:plant_reedmace_large"})
+                core.swap_node(pos_1, {name = "unilib:plant_reedmace_large"})
             end
 
         end
@@ -61,24 +61,24 @@ local function water_place_func(pos)
     local pos_3 = {x = pos.x, y = pos.y + 3, z = pos.z}
     local pos_4 = {x = pos.x, y = pos.y + 4, z = pos.z}
 
-    minetest.add_entity(pos_1, "unilib:entity_plant_reedmace_water")
+    core.add_entity(pos_1, "unilib:entity_plant_reedmace_water")
 
-    if minetest.get_node(pos_2).name == "air" then
+    if core.get_node(pos_2).name == "air" then
 
-        if minetest.get_node(pos_3).name ~= "air" then
-            minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_small"})
-        elseif minetest.get_node(pos_4).name ~= "air" then
-            minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_medium"})
+        if core.get_node(pos_3).name ~= "air" then
+            core.swap_node(pos_2, {name = "unilib:plant_reedmace_small"})
+        elseif core.get_node(pos_4).name ~= "air" then
+            core.swap_node(pos_2, {name = "unilib:plant_reedmace_medium"})
         elseif size == 1 then
-            minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_small"})
+            core.swap_node(pos_2, {name = "unilib:plant_reedmace_small"})
         elseif size == 2 then
-            minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_medium"})
+            core.swap_node(pos_2, {name = "unilib:plant_reedmace_medium"})
         elseif size == 3 then
 
             if spikes == 1 then
-                minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_spiked"})
+                core.swap_node(pos_2, {name = "unilib:plant_reedmace_mature"})
             else
-                minetest.swap_node(pos_2, {name = "unilib:plant_reedmace_large"})
+                core.swap_node(pos_2, {name = "unilib:plant_reedmace_large"})
             end
 
         end
@@ -105,15 +105,15 @@ end
 function unilib.pkg.plant_reedmace.exec()
 
     -- An ABM causes the "sapling" to grow into one of the four growth stages (without any
-    --      intemediate growth stages), when placed on land or one-block deep water
+    --      intermediate growth stages), when placed on land or one-block deep water
     -- When any growth stage is dug, the "sapling" is the item placed in the player's inventory
 
     unilib.register_node("unilib:plant_reedmace_sapling", "dryplants:reedmace_sapling", mode, {
         -- From dryplants:reedmace_sapling
-        description = unilib.annotate(S("Reedmace"), "Typha"),
+        description = unilib.utils.annotate(S("Reedmace"), "Typha"),
         tiles = {"unilib_plant_reedmace_sapling.png"},
         groups = {attached_node = 1, flammable = 2, sapling = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_plant_reedmace_sapling.png",
@@ -133,7 +133,7 @@ function unilib.pkg.plant_reedmace.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 101 - 40,
                 plantlife_limit = -0.9,
             }),
@@ -146,7 +146,7 @@ function unilib.pkg.plant_reedmace.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 101 - 65,
                 plantlife_limit = -0.9,
             }),
@@ -159,7 +159,7 @@ function unilib.pkg.plant_reedmace.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 101 - 90,
                 plantlife_limit = -0.9,
             }),
@@ -178,24 +178,20 @@ function unilib.pkg.plant_reedmace.exec()
             local c_water = "unilib:liquid_water_ordinary_"
 
             if string.find(
-                minetest.get_node({x = pos.x + 1, y = pos.y, z = pos.z}).name,
-                c_water
+                core.get_node({x = pos.x + 1, y = pos.y, z = pos.z}).name, c_water
             ) or string.find(
-                minetest.get_node({x = pos.x, y = pos.y, z = pos.z + 1}).name,
-                c_water
+                core.get_node({x = pos.x, y = pos.y, z = pos.z + 1}).name, c_water
             ) or string.find(
-                minetest.get_node({x = pos.x - 1, y = pos.y, z = pos.z}).name,
-                c_water
+                core.get_node({x = pos.x - 1, y = pos.y, z = pos.z}).name, c_water
             ) or string.find(
-                minetest.get_node({x = pos.x, y = pos.y, z = pos.z - 1}).name,
-                c_water
+                core.get_node({x = pos.x, y = pos.y, z = pos.z - 1}).name, c_water
             ) then
 
-                if minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name == "air" then
+                if core.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name == "air" then
                     water_place_func({x = pos.x, y = pos.y - 1, z = pos.z})
                 end
 
-                minetest.swap_node(
+                core.swap_node(
                     {x = pos.x, y = pos.y, z = pos.z},
                     {name = "unilib:liquid_water_ordinary_source"}
                 )
@@ -211,10 +207,12 @@ function unilib.pkg.plant_reedmace.exec()
 
     unilib.register_node("unilib:plant_reedmace_small", "dryplants:reedmace_top", mode, {
         -- From dryplants:reedmace_top
-        description = unilib.annotate(S("Reedmace"), "Typha"),
+        description = unilib.utils.annotate(S("Reedmace"), "Typha"),
         tiles = {"unilib_plant_reedmace_small.png"},
-        groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        -- N.B. attached_node = 1 not in original code; it's required for the GLEM schematics used
+        --      with the "plant_bulrush" package
+        groups = {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -229,11 +227,11 @@ function unilib.pkg.plant_reedmace.exec()
 
     unilib.register_node("unilib:plant_reedmace_medium", "dryplants:reedmace_height_2", mode, {
         -- From dryplants:reedmace_height_2
-        description = unilib.annotate(S("Reedmace"), "Typha"),
+        description = unilib.utils.annotate(S("Reedmace"), "Typha"),
         tiles = {"unilib_plant_reedmace_medium.png"},
         -- N.B not_in_create_inventory = 1 not in original code
         groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -249,11 +247,11 @@ function unilib.pkg.plant_reedmace.exec()
 
     unilib.register_node("unilib:plant_reedmace_large", "dryplants:reedmace_height_3", mode, {
         -- From dryplants:reedmace_height_3
-        description = unilib.annotate(S("Reedmace"), "Typha"),
+        description = unilib.utils.annotate(S("Reedmace"), "Typha"),
         tiles = {"unilib_plant_reedmace_large.png"},
         -- N.B not_in_create_inventory = 1 not in original code
         groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -269,15 +267,15 @@ function unilib.pkg.plant_reedmace.exec()
 
     unilib.register_node(
         -- From dryplants:reedmace_height_3_spikes
-        "unilib:plant_reedmace_spiked",
+        "unilib:plant_reedmace_mature",
         "dryplants:reedmace_height_3_spikes",
         mode,
         {
-            description = unilib.annotate(S("Reedmace"), "Typha"),
-            tiles = {"unilib_plant_reedmace_spiked.png"},
+            description = unilib.utils.annotate(S("Reedmace"), "Typha"),
+            tiles = {"unilib_plant_reedmace_mature.png"},
             -- N.B not_in_create_inventory = 1 not in original code
             groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "plantlike",
             drop = "unilib:plant_reedmace_sapling",
@@ -294,17 +292,19 @@ function unilib.pkg.plant_reedmace.exec()
 
     -- Growth on water is handled using an entity
     unilib.register_entity("unilib:entity_plant_reedmace_water", {
-        collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
-        mesh = "unilib_plant_reedmace.obj",
-        textures = {"unilib_plant_reedmace_water.png"},
-        visual = "mesh",
-        visual_size = {x = 10, y = 10},
+        initial_properties = {
+            collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
+            mesh = "unilib_plant_reedmace.obj",
+            textures = {"unilib_plant_reedmace_water.png"},
+            visual = "mesh",
+            visual_size = {x = 10, y = 10},
+        },
 
         on_punch = function(self, puncher)
 
             if puncher:is_player() and puncher:get_inventory() then
 
-                if not minetest.setting_getbool("creative_mode") then
+                if not core.setting_getbool("creative_mode") then
                     puncher:get_inventory():add_item("main", "unilib:plant_reedmace_sapling")
                 end
 
@@ -338,7 +338,7 @@ function unilib.pkg.plant_reedmace.exec()
         description = S("Reedmace"),
         tiles = {"unilib_plant_reedmace_spikes.png"},
         groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -356,7 +356,7 @@ function unilib.pkg.plant_reedmace.exec()
         description = S("Reedmace"),
         tiles = {"unilib_plant_reedmace_stem.png"},
         groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -370,12 +370,12 @@ function unilib.pkg.plant_reedmace.exec()
 
         after_destruct = function(pos, oldnode)
 
-            local node = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local node = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if node.name == "unilib:plant_reedmace_small" or
                     node.name == "unilib:plant_reedmace_spikes" then
 
-                minetest.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
-                minetest.add_item(pos, "unilib:plant_reedmace_sapling")
+                core.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.add_item(pos, "unilib:plant_reedmace_sapling")
 
             end
 
@@ -387,7 +387,7 @@ function unilib.pkg.plant_reedmace.exec()
         description = S("Reedmace"),
         tiles = {"unilib_plant_reedmace_bottom.png"},
         groups = {flammable = 2, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = "unilib:plant_reedmace_sapling",
@@ -401,13 +401,13 @@ function unilib.pkg.plant_reedmace.exec()
 
         after_destruct = function(pos, oldnode)
 
-            local node = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local node = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if node.name == "unilib:plant_reedmace_stem" or
                     node.name == "unilib:plant_reedmace_small" or
                     node.name == "unilib:plant_reedmace_spikes" then
 
-                minetest.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
-                minetest.add_item(pos, "unilib:plant_reedmace_sapling")
+                core.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.add_item(pos, "unilib:plant_reedmace_sapling")
 
             end
         end,

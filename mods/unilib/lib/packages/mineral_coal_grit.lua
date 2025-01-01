@@ -9,7 +9,7 @@
 unilib.pkg.mineral_coal_grit = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_coal_grit.exec()
         description = S("Gritty Coal"),
         tiles = {"unilib_mineral_coal_grit.png"},
         groups = {crumbly = 3, falling_node = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
     })
     unilib.register_craft_3x3({
         -- From caverealms:coal_dust

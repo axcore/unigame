@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_mangroves = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,12 +24,12 @@ function unilib.pkg.biome_australia_mangroves.init()
 
 end
 
-function unilib.pkg.biome_australia_mangroves.exec()
+function unilib.pkg.biome_australia_mangroves.post()
 
     unilib.register_biome({
         -- From australia/biome_mangroves.lua, "mangroves" biome
         name = "australia_mangroves",
-        description = unilib.brackets(S("Mangrove biome"), "australia"),
+        description = unilib.utils.brackets(S("Mangrove biome"), "australia"),
         node_top = "unilib:dirt_mud_mangrove",
         depth_top = 3,
         node_filler = "unilib:clay_ordinary",

@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_green_lime = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.mushroom_green_lime.exec()
             oddly_breakable_by_hand = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -43,7 +43,8 @@ function unilib.pkg.mushroom_green_lime.exec()
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_mushroom_green_lime.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -56,5 +57,7 @@ function unilib.pkg.mushroom_green_lime.exec()
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_green_lime", "lib_ecology:mushroom_glow")
+
+    unilib.register_decoration_spare("unilib:mushroom_green_lime")
 
 end

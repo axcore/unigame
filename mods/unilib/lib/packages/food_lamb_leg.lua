@@ -9,7 +9,7 @@
 unilib.pkg.food_lamb_leg = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_lamb_leg.exec()
         description = S("Raw Leg of Lamb"),
         inventory_image = "unilib_food_lamb_leg_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_lamb_leg_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_lamb_leg_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:leg_lamb_raw
@@ -50,7 +50,7 @@ function unilib.pkg.food_lamb_leg.exec()
         description = S("Leg of Lamb"),
         inventory_image = "unilib_food_lamb_leg.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_lamb_leg", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_lamb_leg", 9),
     })
     unilib.register_craft({
         -- From bbq:leg_lamb

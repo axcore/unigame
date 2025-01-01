@@ -9,7 +9,7 @@
 unilib.pkg.stone_desert_with_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,11 @@ function unilib.pkg.stone_desert_with_iron.exec()
         "darkage:desert_stone_with_iron",
         mode,
         {
-            description = unilib.brackets(S("Iron Ore"), S("Desert Stone")),
+            description = unilib.utils.brackets(S("Iron Ore"), S("Desert Stone")),
             tiles = {"unilib_stone_desert.png^unilib_metal_iron.png"},
-            groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 3, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:metal_iron_lump",
         }

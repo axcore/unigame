@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_chocolate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cacaotree.add_mode
+local mode = unilib.global.imported_mod_table.cacaotree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_cake_chocolate.exec()
         inventory_image = "unilib_food_cake_chocolate.png",
         groups = {flammable = 2, food = 2, food_chocolate = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cake_chocolate", 7),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cake_chocolate", 7),
     })
     unilib.register_craft({
         -- From cacaotree:choco_cake

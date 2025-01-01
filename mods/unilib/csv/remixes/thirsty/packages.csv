@@ -1,5 +1,4 @@
 # "thirsty" remix - contains everything from the thirsty mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -17,16 +16,22 @@ vessel_glass_empty|thirsty vessels
 
 # supporting packages (.depends)
 glass_ordinary|default moreblocks vessels
-metal_bronze|default technic
-metal_copper|default moreblocks technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 mineral_diamond|default mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 stone_ordinary|default moreblocks technic
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #grass_jungle|default
-#metal_gold|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_gold|default glemr11 technic
 #moss_green|sickles
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.stone_slate_black = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_slate_black.exec()
         description = S("Black Slate"),
 
         category = "metamorphic",
+        colour = "#3A3A3A",
         grinder_flag = true,
         hardness = 2,
     })
@@ -72,6 +73,24 @@ function unilib.pkg.stone_slate_black.exec()
         replace_mode = mode,
         description = S("Black Slate Cobble"),
         img_list = {"unilib_stone_slate_black.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_slate_black_cobble_compressed
+        part_name = "slate_black",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Black Slate Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_slate_black_cobble_condensed
+        part_name = "slate_black",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Black Slate Cobble"),
     })
 
 end

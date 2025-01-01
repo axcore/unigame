@@ -9,7 +9,7 @@
 unilib.pkg.food_doughnut_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_doughnut_normal.exec()
         -- N.B. No groups in original code
         groups = {food_doughnut = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_doughnut_normal", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_doughnut_normal", 4),
     })
     unilib.register_craft({
         -- From farming:donut

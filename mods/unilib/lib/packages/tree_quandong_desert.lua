@@ -9,7 +9,7 @@
 unilib.pkg.tree_quandong_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,39 +27,51 @@ end
 
 function unilib.pkg.tree_quandong_desert.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Santalum acuminatum"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "quandong_desert",
         description = S("Desert Quandong Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_quandong_desert_trunk", "australia:quandong_tree", mode, {
         -- From australia:quandong_tree
-        description = unilib.annotate(S("Desert Quandong Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Desert Quandong Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_quandong_desert_trunk_top.png",
             "unilib_tree_quandong_desert_trunk_top.png",
             "unilib_tree_quandong_desert_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_quandong_desert_trunk_stripped
+        part_name = "quandong_desert",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Desert Quandong Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -85,8 +97,10 @@ function unilib.pkg.tree_quandong_desert.exec()
     })
     unilib.register_leafdecay({
         -- From australia:quandong_leaves
+        trunk_type = "quandong_desert",
         trunks = {"unilib:tree_quandong_desert_trunk"},
-        leaves = {"unilib:tree_quandong_desert_leaves", "unilib:fruit_quandong_desert"},
+        leaves = {"unilib:tree_quandong_desert_leaves"},
+        others = {"unilib:fruit_quandong_desert"},
         radius = 3,
     })
 
@@ -132,7 +146,7 @@ function unilib.pkg.tree_quandong_desert.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_quandong_desert_closed
+        -- Original to unilib. Creates unilib:gate_quandong_desert_closed, etc
         part_name = "quandong_desert",
         orig_name = {nil, nil},
 
@@ -143,10 +157,10 @@ function unilib.pkg.tree_quandong_desert.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_quandong_desert_in_central_" .. i, {
+        unilib.register_decoration_generic("australia_tree_quandong_desert_in_central_" .. i, {
             -- From australia/biome_central_australia.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -157,10 +171,10 @@ function unilib.pkg.tree_quandong_desert.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_quandong_desert_in_goldfields_" .. i, {
+        unilib.register_decoration_generic("australia_tree_quandong_desert_in_goldfields_" .. i, {
             -- From australia/biome_goldfields_esperence.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -171,10 +185,10 @@ function unilib.pkg.tree_quandong_desert.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_quandong_desert_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic("australia_tree_quandong_desert_in_mulga_lands_" .. i, {
             -- From australia/biome_mulga_lands.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -185,10 +199,10 @@ function unilib.pkg.tree_quandong_desert.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_quandong_desert_in_murray_" .. i, {
+        unilib.register_decoration_generic("australia_tree_quandong_desert_in_murray_" .. i, {
             -- From australia/biome_murray_darling_basin.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -199,10 +213,10 @@ function unilib.pkg.tree_quandong_desert.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_quandong_desert_in_simpson_" .. i, {
+        unilib.register_decoration_generic("australia_tree_quandong_desert_in_simpson_" .. i, {
             -- From australia/biome_simpson_desert.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_quandong_desert_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

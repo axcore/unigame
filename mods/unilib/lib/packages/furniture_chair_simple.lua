@@ -9,7 +9,7 @@
 unilib.pkg.furniture_chair_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,6 @@ function unilib.pkg.furniture_chair_simple.init()
 
     return {
         description = "Simple chair",
-        depends = "shared_xdecor",
         optional = "shared_screwdriver",
     }
 
@@ -32,9 +31,11 @@ function unilib.pkg.furniture_chair_simple.exec()
         description = S("Simple Chair"),
         tiles = {"unilib_misc_wood_simple.png"},
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code; added to match other furniture
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -49,13 +50,12 @@ function unilib.pkg.furniture_chair_simple.exec()
         paramtype = "light",
         paramtype2 = "facedir",
 
-        can_dig = unilib.pkg.shared_xdecor.can_dig_chair,
+        can_dig = unilib.furniture.can_dig_chair,
 
         on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 
-            -- Sitting position
             pos.y = pos.y + 0
-            unilib.pkg.shared_xdecor.do_sit(pos, node, clicker, pointed_thing)
+            unilib.furniture.do_sit_chair(pos, node, clicker, pointed_thing)
             return itemstack
 
         end,
@@ -66,10 +66,10 @@ function unilib.pkg.furniture_chair_simple.exec()
         recipe = {
             {"group:stick", "", ""},
             {"group:stick", "group:stick", "group:stick"},
-            {"group:stick", "", "group:stick"}
-        }
+            {"group:stick", "", "group:stick"},
+        },
     })
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:furniture_chair_simple", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,

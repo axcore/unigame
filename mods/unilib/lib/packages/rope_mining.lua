@@ -9,7 +9,7 @@
 unilib.pkg.rope_mining = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,6 +54,8 @@ function unilib.pkg.rope_mining.exec()
         connects_to = {"group:mining_rope"},
         drawtype = "nodebox",
         drop = "",
+        -- N.B. is_ground_content = false not in original code; added to match other ropes
+        is_ground_content = false,
         node_box = {
             type = "connected",
             fixed = {-1/16, -1/2, -1/16, 1/16, 1/2, 1/16},
@@ -100,6 +102,8 @@ function unilib.pkg.rope_mining.exec()
         connect_sides = {"top"},
         drawtype = "nodebox",
         drop = "",
+        -- N.B. is_ground_content = false not in original code; added to match other ropes
+        is_ground_content = false,
         node_box = {
             type = "connected",
             fixed = {
@@ -127,7 +131,7 @@ function unilib.pkg.rope_mining.exec()
 
         on_construct = function(pos)
 
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(1)
 
         end,
@@ -153,7 +157,7 @@ function unilib.pkg.rope_mining.exec()
         },
     })
     ]]--
-    minetest.register_craft({
+    unilib.register_craft({
         -- From ropes:ropesegment
         output = "unilib:rope_mining_segment",
         recipe = {
@@ -162,7 +166,7 @@ function unilib.pkg.rope_mining.exec()
             {"group:thread", "group:thread"},
         },
     })
-    if unilib.pkg_executed_table["rope_sturdy"] then
+    if unilib.global.pkg_executed_table["rope_sturdy"] then
 
         unilib.register_craft({
             -- From ropes:ropesegment

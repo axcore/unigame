@@ -9,7 +9,7 @@
 unilib.pkg.door_papyrus_bar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_papyrus_bar.exec()
 
     unilib.register_door({
-        -- From mtg_plus mod, doors:door_papyrus. Creates unilib:door_papyrus_bar
+        -- From mtg_plus mod, doors:door_papyrus. Creates unilib:door_papyrus_bar_closed_left, etc
         part_name = "papyrus_bar",
-        orig_name = {
+        orig_name_list = {
             "doors:door_papyrus_bar_a",
             "doors:door_papyrus_bar_b",
             "doors:door_papyrus_bar_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_papyrus_bar.exec()
             description = S("Papyrus Bar Door"),
             tiles = {{name = "unilib_door_papyrus_bar.png", backface_culling = true}},
             groups = {choppy = 1, flammable = 2, snappy = 2},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             inventory_image = "unilib_door_papyrus_bar_inv.png",
             recipe = {

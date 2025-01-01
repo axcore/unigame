@@ -17,9 +17,9 @@
 unilib.pkg.stone_diorite_pale = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_diorite_pale.exec()
         description = S("Pale Diorite"),
 
         category = "intrusive",
+        colour = "#969CA4",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 4)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_diorite_pale.exec()
         wall_orig_name = "underch:diorite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:diorite. Creates unilib:stone_diorite_pale_cobble_compressed
+        part_name = "diorite_pale",
+        orig_name = "compressed:diorite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:diorite. Creates unilib:stone_diorite_pale_cobble_compressed
-            part_name = "diorite_pale",
-            orig_name = "compressed:diorite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Pale Diorite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Pale Diorite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:diorite. Creates unilib:stone_diorite_pale_cobble_condensed
+        part_name = "diorite_pale",
+        orig_name = "condensed:diorite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:diorite. Creates unilib:stone_diorite_pale_cobble_condensed
-            part_name = "diorite_pale",
-            orig_name = "condensed:diorite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Pale Diorite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Pale Diorite Cobble"),
+    })
 
 end

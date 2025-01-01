@@ -9,7 +9,7 @@
 unilib.pkg.tree_willow_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.willow.add_mode
+local mode = unilib.global.imported_mod_table.willow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -114,7 +114,7 @@ function unilib.pkg.tree_willow_mature.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From willow:gate. Creates unilib:gate_willow_mature_closed
+        -- From willow:gate_closed, etc. Creates unilib:gate_willow_mature_closed, etc
         part_name = "willow_mature",
         orig_name = {"willow:gate_closed", "willow:gate_open"},
 
@@ -124,10 +124,10 @@ function unilib.pkg.tree_willow_mature.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_willow_mature", {
+    unilib.register_decoration_generic("cool_trees_tree_willow_mature", {
         -- From willow/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_willow_mature.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_willow_mature.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         height = 2,

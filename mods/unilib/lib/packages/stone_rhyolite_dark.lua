@@ -9,7 +9,7 @@
 unilib.pkg.stone_rhyolite_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_rhyolite_dark.exec()
         description = S("Dark Rhyolite"),
 
         category = "extrusive",
+        colour = "#888B7C",
         grinder_flag = true,
         hardness = 3,
     })
@@ -75,6 +76,24 @@ function unilib.pkg.stone_rhyolite_dark.exec()
 
         replace_mode = mode,
         description = S("Dark Rhyolite Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_rhyolite_dark_cobble_compressed
+        part_name = "rhyolite_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Dark Rhyolite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_rhyolite_dark_cobble_condensed
+        part_name = "rhyolite_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Dark Rhyolite Cobble"),
     })
 
 end

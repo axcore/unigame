@@ -9,7 +9,7 @@
 unilib.pkg.brick_black = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_black.init()
 
     return {
         description = "Black brick",
-        depends = {"clay_baked_basic", "brick_ordinary"},
+        depends = {"brick_ordinary", "clay_baked_basic", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_black.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:black and morebricks:blackvertical, creates unilib:brick_black_block and
         --      unilib:brick_black_block_vertical
         part_name = "black",

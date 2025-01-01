@@ -9,7 +9,7 @@
 unilib.pkg.rope_mining_spool_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

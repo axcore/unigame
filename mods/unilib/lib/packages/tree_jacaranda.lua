@@ -9,7 +9,7 @@
 unilib.pkg.tree_jacaranda = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.jacaranda.add_mode
+local mode = unilib.global.imported_mod_table.jacaranda.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.tree_jacaranda.exec()
 
     unilib.register_tree({
         -- Original to unilib
-        part_name = "Jacaranda",
+        part_name = "jacaranda",
         description = S("Jacaranda Wood"),
 
         burnlevel = burnlevel,
@@ -112,7 +112,7 @@ function unilib.pkg.tree_jacaranda.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From jacaranda:gate. Creates unilib:gate_jacaranda_closed
+        -- From jacaranda:gate_closed, etc. Creates unilib:gate_jacaranda_closed, etc
         part_name = "jacaranda",
         orig_name = {"jacaranda:gate_closed", "jacaranda:gate_open"},
 
@@ -122,10 +122,10 @@ function unilib.pkg.tree_jacaranda.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_jacaranda", {
+    unilib.register_decoration_generic("cool_trees_tree_jacaranda", {
         -- From jacaranda/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_jacaranda.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_jacaranda.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

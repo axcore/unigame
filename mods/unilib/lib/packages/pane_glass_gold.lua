@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_gold = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ function unilib.pkg.pane_glass_gold.exec()
 
     local c_ingot = "unilib:metal_gold_ingot"
 
-    if unilib.pkg_executed_table["glass_gold"] ~= nil then
+    if unilib.global.pkg_executed_table["glass_gold"] ~= nil then
 
         unilib.register_pane({
             -- From xpanes:goldglass_flat. Creates unilib:pane_glass_gold_flat,
@@ -43,7 +43,7 @@ function unilib.pkg.pane_glass_gold.exec()
                     "unilib_pane_glass_gold_top.png",
                 },
                 groups = {cracky = 3, oddly_breakable_by_hand = 2},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 inventory_image = "unilib_glass_gold.png",
                 recipe = {
@@ -58,8 +58,8 @@ function unilib.pkg.pane_glass_gold.exec()
 
     end
 
-    if unilib.pkg_executed_table["glass_ordinary"] ~= nil and
-            unilib.pkg_executed_table["metal_gold"] ~= nil then
+    if unilib.global.pkg_executed_table["glass_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["metal_gold"] ~= nil then
 
         unilib.register_pane({
             -- From xpanes:goldglass2_flat. Creates unilib:pane_glass_gold_framed_flat,
@@ -74,7 +74,7 @@ function unilib.pkg.pane_glass_gold.exec()
                     "unilib_pane_glass_gold_top.png",
                 },
                 groups = {cracky = 3, oddly_breakable_by_hand = 3},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 inventory_image = "unilib_glass_gold_framed.png",
                 recipe = {

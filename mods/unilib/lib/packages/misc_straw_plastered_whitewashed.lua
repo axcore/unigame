@@ -9,7 +9,7 @@
 unilib.pkg.misc_straw_plastered_whitewashed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,9 +35,11 @@ function unilib.pkg.misc_straw_plastered_whitewashed.exec()
             description = S("Whitewashed Plastered Straw Bale"),
             tiles = {"unilib_dirt_whitewashed.png"},
             groups = {crumbly = 1, falling_node = 1, snappy = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
         }
     )

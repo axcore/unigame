@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wood_acacia_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,10 @@ function unilib.pkg.trapdoor_wood_acacia_ornate.exec()
     local c_wood = "unilib:tree_acacia_wood"
 
     unilib.register_trapdoor({
-        -- From moretrapdoors:acacia_trapdoor. Creates unilib:trapdoor_wood_acacia_ornate
+        -- From moretrapdoors:acacia_trapdoor. Creates unilib:trapdoor_wood_acacia_ornate_closed,
+        --      etc
         part_name = "wood_acacia_ornate",
-        orig_name = {"moretrapdoors:acacia_trapdoor", "moretrapdoors:acacia_trapdoor_open"},
+        orig_name_list = {"moretrapdoors:acacia_trapdoor", "moretrapdoors:acacia_trapdoor_open"},
         def_table = {
             description = S("Ornate Acacia Wood Trapdoor"),
             -- (no tiles)
@@ -54,7 +55,7 @@ function unilib.pkg.trapdoor_wood_acacia_ornate.exec()
         recipe = {
             {c_wood, c_wood, c_wood},
             {c_wood, "unilib:tree_acacia_trunk", c_wood},
-        }
+        },
     })
 
 end

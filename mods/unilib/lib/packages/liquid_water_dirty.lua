@@ -9,7 +9,7 @@
 unilib.pkg.liquid_water_dirty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -55,7 +55,7 @@ function unilib.pkg.liquid_water_dirty.exec()
             },
         },
         groups = {cools_lava = 1, liquid = 3, puts_out_fire = 1, water = 3},
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         diggable = false,
@@ -83,7 +83,7 @@ function unilib.pkg.liquid_water_dirty.exec()
         groups = {
             cools_lava = 1, liquid = 3, not_in_creative_inventory = 1, puts_out_fire = 1, water = 3,
         },
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         diggable = false,

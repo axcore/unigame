@@ -9,23 +9,20 @@
 unilib.pkg.tool_pitchfork = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
 local function is_protected(pos, name)
-
-    return minetest.is_protected(pos, name) and
-            not minetest.check_player_privs(name, "protection_bypass")
-
+    return core.is_protected(pos, name) and not core.check_player_privs(name, "protection_bypass")
 end
 
 local function modify_turf(turf_name, dirt_name)
 
     -- Handle digging turf with the pitchfork (incorporating Git #12 fix for duplicate dirts)
-    local old_on_dig = minetest.registered_items[turf_name].on_dig
+    local old_on_dig = core.registered_items[turf_name].on_dig
 
     unilib.override_item(turf_name, {
         -- Adapted from cottages/ndoes_hay.lua
@@ -44,7 +41,7 @@ local function modify_turf(turf_name, dirt_name)
             end
 
             local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-            local node_above = minetest.get_node_or_nil(pos_above)
+            local node_above = core.get_node_or_nil(pos_above)
             if not(node_above) or not(node_above.name) or node_above.name ~= "air" then
                 return old_on_dig(pos, node, digger)
             end
@@ -53,14 +50,14 @@ local function modify_turf(turf_name, dirt_name)
                 return old_on_dig(pos, node, digger)
             end
 
-            minetest.swap_node(pos, {name = dirt_name})
-            minetest.add_node(
+            core.swap_node(pos, {name = dirt_name})
+            core.add_node(
                 pos_above,
                 {name = "unilib:misc_hay_ordinary_pile", param2 = math.random(2, 25)}
             )
 
             -- Start a node timer so that the hay will decay after a while
-            local timer = minetest.get_node_timer(pos_above)
+            local timer = core.get_node_timer(pos_above)
             if not timer:is_started() then
                 timer:start(math.random(60, 300))
             end
@@ -93,7 +90,7 @@ function unilib.pkg.tool_pitchfork.exec()
 
     unilib.register_tool("unilib:tool_pitchfork", "cottages:pitchfork", mode, {
         -- From cottages:pitchfork
-        description = unilib.hint(
+        description = unilib.utils.hint(
             S("Pitchfork"), S("dig turf to get hay, place pitchfork with right click")
         ),
         inventory_image = "unilib_tool_pitchfork.png",
@@ -125,29 +122,29 @@ function unilib.pkg.tool_pitchfork.exec()
                 return nil
             end
 
-            local pos = minetest.get_pointed_thing_position(pointed_thing, 1)
-            local node = minetest.get_node_or_nil(pos)
+            local pos = core.get_pointed_thing_position(pointed_thing, 1)
+            local node = core.get_node_or_nil(pos)
             if node == nil or not(node.name) or node.name ~= "air" then
                 return nil
             end
 
-            if minetest.is_protected(pos, placer:get_player_name()) then
+            if core.is_protected(pos, placer:get_player_name()) then
                 return nil
             end
 
-            minetest.rotate_and_place(
+            core.rotate_and_place(
                 ItemStack("unilib:tool_pitchfork_placed"),
                 placer,
                 pointed_thing
             )
 
             -- Did the placing succeed?
-            local nnode = minetest.get_node(pos)
+            local nnode = core.get_node(pos)
             if not(nnode) or not(nnode.name) or nnode.name ~= "unilib:tool_pitchfork_placed" then
                 return nil
             end
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_int("wear", itemstack:get_wear())
             meta:set_string("infotext", S("Pitchfork (for hay and straw)"))
 
@@ -163,18 +160,18 @@ function unilib.pkg.tool_pitchfork.exec()
             {c_stick, c_stick, c_stick},
             {"", c_stick, ""},
             {"", c_stick, ""},
-        }
+        },
     })
 
     unilib.register_node("unilib:tool_pitchfork_placed", "cottages:pitchfork_placed", mode, {
         -- From cottages:pitchfork_placed
-        description = unilib.hint(S("Pitchfork"), S("for hay and straw")),
+        description = unilib.utils.hint(S("Pitchfork"), S("for hay and straw")),
         tiles = {"unilib_tree_apple_wood.png^[transformR90"},
         groups = {
             attached_node = 1, dig_immediate = 3, falling_node = 1, not_in_creative_inventory = 1,
             snappy = 2,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         drop = "unilib:tool_pitchfork",
@@ -207,7 +204,7 @@ function unilib.pkg.tool_pitchfork.exec()
     })
 
     -- Handle digging turf with the pitchfork
-    if not unilib.cottages_versatile_pitchfork_flag then
+    if not unilib.setting.cottages_versatile_pitchfork_flag then
 
         -- Only one type of dirt-with-turf can be used to make hay
         modify_turf("unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary")
@@ -215,9 +212,9 @@ function unilib.pkg.tool_pitchfork.exec()
     else
 
         -- Any "fertile" dirt-with-turf can be used to make hay
-        for turf_name, data_table in pairs(unilib.dirt_with_turf_table) do
+        for turf_name, data_table in pairs(unilib.global.dirt_with_turf_table) do
 
-            if unilib.fertile_dirt_table[data_table.dirt_part_name] ~= nil then
+            if unilib.global.fertile_dirt_table[data_table.dirt_part_name] ~= nil then
                 modify_turf(turf_name, "unilib:" .. data_table.dirt_part_name)
             end
 

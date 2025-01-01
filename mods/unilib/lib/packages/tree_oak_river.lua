@@ -9,7 +9,7 @@
 unilib.pkg.tree_oak_river = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_oak_river.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Casuarina cunninghamiana"
 
     unilib.register_tree({
@@ -113,7 +113,7 @@ function unilib.pkg.tree_oak_river.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_oak_river_closed
+        -- Original to unilib. Creates unilib:gate_oak_river_closed, etc
         part_name = "oak_river",
         orig_name = {nil, nil},
 
@@ -124,10 +124,10 @@ function unilib.pkg.tree_oak_river.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_oak_river_in_arnhem_" .. i, {
+        unilib.register_decoration_generic("australia_tree_oak_river_in_arnhem_" .. i, {
             -- From australia/biome_arnhem_land.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -138,10 +138,10 @@ function unilib.pkg.tree_oak_river.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_oak_river_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_oak_river_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -152,10 +152,10 @@ function unilib.pkg.tree_oak_river.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_oak_river_in_gulf_" .. i, {
+        unilib.register_decoration_generic("australia_tree_oak_river_in_gulf_" .. i, {
             -- From australia/biome_gulf_of_carpentaria.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -166,10 +166,10 @@ function unilib.pkg.tree_oak_river.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_oak_river_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic("australia_tree_oak_river_in_mulga_lands_" .. i, {
             -- From australia/biome_mulga_lands.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -180,10 +180,10 @@ function unilib.pkg.tree_oak_river.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_oak_river_in_queensland_" .. i, {
+        unilib.register_decoration_generic("australia_tree_oak_river_in_queensland_" .. i, {
             -- From australia/biome_far_north_queensland.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_river_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",

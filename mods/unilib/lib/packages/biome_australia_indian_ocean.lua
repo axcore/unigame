@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_indian_ocean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,18 +18,18 @@ local mode = unilib.imported_mod_table.australia.add_mode
 function unilib.pkg.biome_australia_indian_ocean.init()
 
     return {
-        description = "Indian ocean biome",
+        description = "Indian Ocean biome",
         depends = {"sand_ordinary", "stone_sandstone_ordinary"},
     }
 
 end
 
-function unilib.pkg.biome_australia_indian_ocean.exec()
+function unilib.pkg.biome_australia_indian_ocean.post()
 
     unilib.register_biome({
         -- From australia/biome_indian_ocean.lua, "indian_ocean" biome
         name = "australia_indian_ocean",
-        description = unilib.brackets(S("Indian ocean biome"), "australia"),
+        description = unilib.utils.brackets(S("Indian Ocean biome"), "australia"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:stone_sandstone_ordinary",

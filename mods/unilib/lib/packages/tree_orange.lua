@@ -9,7 +9,7 @@
 unilib.pkg.tree_orange = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -63,15 +63,15 @@ function unilib.pkg.tree_orange.exec()
         description = S("Orange Tree Wood Planks"),
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_orange_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_orange_leaves.png")
     unilib.register_node("unilib:tree_orange_leaves", "ethereal:orange_leaves", mode, {
         -- From ethereal:orange_leaves
-        description = unilib.annotate(S("Orange Tree Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Orange Tree Leaves"), sci_name),
         tiles = {"unilib_tree_orange_leaves.png"},
         groups = {flammable = 2, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
@@ -80,20 +80,25 @@ function unilib.pkg.tree_orange.exec()
             },
         },
         inventory_image = inv_img,
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
     })
     unilib.register_leafdecay({
         -- From ethereal:orange_leaves
+        trunk_type = "orange",
         trunks = {"unilib:tree_orange_trunk"},
-        leaves = {"unilib:tree_orange_leaves", "unilib:fruit_orange"},
+        leaves = {"unilib:tree_orange_leaves"},
+        others = {"unilib:fruit_orange"},
         radius = 3,
     })
+    unilib.register_tree_leaves_compacted("unilib:tree_orange_leaves", mode)
 
     unilib.register_tree_sapling({
         -- From ethereal:orange_tree_sapling. Creates unilib:tree_orange_sapling
@@ -124,10 +129,10 @@ function unilib.pkg.tree_orange.exec()
         rail_description = S("Orange Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("ethereal_tree_orange", {
+    unilib.register_decoration_generic("ethereal_tree_orange", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_orange.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_orange.mts",
 
         fill_ratio = 0.01,
         flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.door_glass_obsidian = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.doors.add_mode
+local mode = unilib.global.imported_mod_table.doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_glass_obsidian.exec()
 
     unilib.register_door({
-        -- From doors:door_obsidian_glass. Creates unilib:door_glass_obsidian
+        -- From doors:door_obsidian_glass. Creates unilib:door_glass_obsidian_closed_left, etc
         part_name = "glass_obsidian",
-        orig_name = {
+        orig_name_list = {
             "doors:door_obsidian_glass_a",
             "doors:door_obsidian_glass_b",
             "doors:door_obsidian_glass_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_glass_obsidian.exec()
             description = S("Obsidian Glass Door"),
             tiles = {"unilib_door_glass_obsidian.png"},
             groups = {cracky = 3, node = 1},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             gain_close = 0.25,
             gain_open = 0.3,

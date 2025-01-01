@@ -9,7 +9,7 @@
 unilib.pkg.ore_technic_stone_ordinary_with_zinc = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -68,7 +68,7 @@ function unilib.pkg.ore_technic_stone_ordinary_with_zinc.post()
         },
         noise_threshold         = 0.5,
         y_max                   = -32,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

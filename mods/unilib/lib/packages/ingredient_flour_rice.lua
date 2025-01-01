@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_flour_rice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ingredient_flour_rice.exec()
         groups = {flammable = 1, food_flour = 1, food_rice_flour = 1},
     })
     -- N.B. For unilib flours, mortar-and-pestle recipes are preferred, if available
-    if unilib.pkg_executed_table["utensil_mortar_pestle"] == nil then
+    if unilib.global.pkg_executed_table["utensil_mortar_pestle"] == nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -52,11 +52,11 @@ function unilib.pkg.ingredient_flour_rice.exec()
             output = "unilib:ingredient_flour_rice",
             recipe = {
                 {c_rice, c_rice, c_rice},
-                {c_rice, "unilib:utensil_mortar_pestle", ""}
+                {c_rice, "unilib:utensil_mortar_pestle", ""},
             },
             replacements = {
                 {"unilib:utensil_mortar_pestle", "unilib:utensil_mortar_pestle"},
-            }
+            },
         })
 
     end

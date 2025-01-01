@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_molasses = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 -- (The original main ingredient)
 local c_ingredient = "unilib:crop_kohlrabi_harvest"
@@ -36,9 +36,9 @@ end
 
 function unilib.pkg.ingredient_molasses.exec()
 
-    if unilib.pkg_executed_table["crop_beet_sugar"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_beet_sugar"] ~= nil then
         c_ingredient = "unilib:crop_beet_sugar_harvest"
-    elseif unilib.pkg_executed_table["ingredient_sugar_cane"] ~= nil then
+    elseif unilib.global.pkg_executed_table["ingredient_sugar_cane"] ~= nil then
         c_ingredient = "unilib:ingredient_sugar_cane"
     end
 
@@ -65,7 +65,7 @@ function unilib.pkg.ingredient_molasses.exec()
         recipe = "unilib:ingredient_molasses",
         burntime = 10,
     })
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_compressor_recipe({
             -- From cucina_vegana:molasses
@@ -73,7 +73,7 @@ function unilib.pkg.ingredient_molasses.exec()
             input = {c_ingredient .. " 6"},
         })
 
-        if unilib.pkg_executed_table["tree_apple"] ~= nil then
+        if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
 
             technic.register_separating_recipe({
                 -- From cucina_vegana:molasses
@@ -104,7 +104,7 @@ function unilib.pkg.ingredient_molasses.post()
 
     local c_stick = "unilib:item_stick_ordinary"
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {c_stick, c_stick})
 
     unilib.register_craft({

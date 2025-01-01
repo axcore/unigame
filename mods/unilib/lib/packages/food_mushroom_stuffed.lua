@@ -9,7 +9,7 @@
 unilib.pkg.food_mushroom_stuffed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,14 +35,14 @@ function unilib.pkg.food_mushroom_stuffed.exec()
             description = S("Raw Stuffed Mushroom"),
             inventory_image = "unilib_food_mushroom_stuffed_raw.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_mushroom_stuffed_raw", 5),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_mushroom_stuffed_raw", 5),
         }
     )
     unilib.register_craft({
         -- From bbq:stuffed_mushroom_raw
         type = "shapeless",
         output = "unilib:food_mushroom_stuffed_raw 2",
-        recipe = {"group:food_tomato", "unilib:food_bread_ordinary", "unilib:mushroom_brown"}
+        recipe = {"group:food_tomato", "unilib:food_bread_ordinary", "unilib:mushroom_brown"},
     })
 
     unilib.register_craftitem("unilib:food_mushroom_stuffed", "bbq:stuffed_mushroom", mode, {
@@ -50,7 +50,7 @@ function unilib.pkg.food_mushroom_stuffed.exec()
         description = S("Stuffed Mushroom"),
         inventory_image = "unilib_food_mushroom_stuffed.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_mushroom_stuffed", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_mushroom_stuffed", 9),
     })
     unilib.register_craft({
         -- From bbq:stuffed_mushroom

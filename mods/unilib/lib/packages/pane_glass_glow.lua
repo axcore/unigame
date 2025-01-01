@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_glow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.pane_glass_glow.exec()
             description = S("Glow Glass Pane"),
             textures = {glow_img, "", "unilib_pane_glass_ordinary_edge.png^[colorize:#E9CD61"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = glow_img,
             recipe = {
@@ -60,7 +60,7 @@ function unilib.pkg.pane_glass_glow.exec()
             description = S("Clean Glow Glass Pane"),
             textures = {clean_img, "", "unilib_pane_glass_ordinary_edge.png^[colorize:#E9CD61"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = clean_img,
             recipe = {

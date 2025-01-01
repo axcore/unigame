@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_banana_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,10 @@ function unilib.pkg.plant_shrub_banana_large.exec()
         "lib_ecology:plant_bananaplant2",
         mode,
         {
-            description = unilib.annotate(S("Large Banana Plant"), "Musa"),
+            description = unilib.utils.annotate(S("Large Banana Plant"), "Musa"),
             tiles = {"unilib_plant_shrub_banana.png"},
             groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "mesh",
@@ -44,9 +44,17 @@ function unilib.pkg.plant_shrub_banana_large.exec()
             mesh = "unilib_plant_shrub_banana_large.b3d",
             paramtype = "light",
             paramtype2 = "degrotate",
+            -- N.B. Adjusted selection box from original code, which was identical (and more suited
+            --      to) the plant in the "plant_shrub_banana" package
+            --[[
             selection_box = {
                 type = "fixed",
                 fixed = {-0.3, -0.5, -0.3, 0.3, 1, 0.3},
+            },
+            ]]--
+            selection_box = {
+                type = "fixed",
+                fixed = {-0.4, -0.5, -0.4, 0.4, 0.8, 0.4},
             },
             sunlight_propagates = true,
             use_texture_alpha = "clip",
@@ -57,7 +65,7 @@ function unilib.pkg.plant_shrub_banana_large.exec()
     )
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_plant_shrub_banana_large", {
+    unilib.register_decoration_generic("farlands_plant_shrub_banana_large", {
         -- Original to unilib
         deco_type = "simple",
         decoration = "unilib:plant_shrub_banana_large",

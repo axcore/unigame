@@ -9,7 +9,7 @@
 unilib.pkg.plant_nettle_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nettle.add_mode
+local mode = unilib.global.imported_mod_table.nettle.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,17 +28,17 @@ function unilib.pkg.plant_nettle_normal.exec()
 
     unilib.register_node("unilib:plant_nettle_normal", "nettle:nettle", mode, {
         -- From nettle:nettle
-        description = unilib.annotate(S("Normal Nettle"), "Urtica"),
+        description = unilib.utils.annotate(S("Normal Nettle"), "Urtica"),
         tiles = {"unilib_plant_nettle_normal.png"},
         -- N.B. removed flora = 1 to prevent additional spreading
         groups = {
             attached_node = 1, flammable = 1, nettle_weed = 1, oddly_breakable_by_hand = 2,
             snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
-        damage_per_second = 1 * unilib.nettle_damage_factor,
+        damage_per_second = 1 * unilib.setting.nettle_damage_factor,
         drawtype = "mesh",
         inventory_image = "unilib_plant_nettle_normal.png",
         mesh = "unilib_plant_nettle.obj",
@@ -61,13 +61,15 @@ function unilib.pkg.plant_nettle_normal.exec()
     })
     -- (not compatible with flowerpots)
 
+    unilib.register_decoration_spare("unilib:plant_nettle_normal")
+
 end
 
 function unilib.pkg.plant_nettle_normal.post()
 
     -- The shared package provides a spreading ABM; if it's not available, use the normal
     --      flora-spreading ABM
-    if unilib.pkg_executed_table["abm_nettle_plant_nettle_spread"] == nil then
+    if unilib.global.pkg_executed_table["abm_nettle_plant_nettle_spread"] == nil then
 
         unilib.override_item("unilib:plant_nettle_normal", {
             groups = {

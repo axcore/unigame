@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_flour_rye = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.grains.add_mode
+local mode = unilib.global.imported_mod_table.grains.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.ingredient_flour_rye.exec()
         groups = {flammable = 1, food_flour = 1},
     })
     -- N.B. For unilib flours, mortar-and-pestle recipes are preferred, if available
-    if unilib.pkg_executed_table["utensil_mortar_pestle"] == nil then
+    if unilib.global.pkg_executed_table["utensil_mortar_pestle"] == nil then
 
         unilib.register_craft({
             -- From grains:rye_flour

@@ -9,7 +9,8 @@
 unilib.pkg.machine_mill_hand = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 -- N.B. The formspec provided by the cottages mod is untidy, so I have rearranged it
 --[[
@@ -26,20 +27,20 @@ local mill_formspec = "size[8,8]" ..
         "list[current_player;main;0,4;8,4;]"
 ]]--
 local mill_formspec = "size[8,8]" ..
-        "label[0,0;" .. S("Hand Mill") .. "]" ..
-        "button_exit[0,0.7;1.5,0.5;public;" .. S("Public?") .. "]" ..
-        "label[0,1.5;" .. S("Wheat seeds:") .. "]" ..
+        "label[0,0;" .. FS("Hand Mill") .. "]" ..
+        "button_exit[0,0.7;1.5,0.5;public;" .. FS("Public?") .. "]" ..
+        "label[0,1.5;" .. FS("Wheat seeds") .. ":]" ..
         "image[0,2;1,1;unilib_crop_wheat_seed.png]" ..
         "list[current_name;seeds;1,2;1,1;]" ..
-        "label[6,1.5;" .. S("Flour:") .. "]" ..
+        "label[6,1.5;" .. FS("Flour") .. ":]" ..
         "list[current_name;flour;6,2;2,2;]" ..
 
         "image[0,3;1,1;unilib_ingredient_flour_ordinary.png]" ..
-        "label[1,3.2;" .. S("Punch mill to grind seeds") .. "]" ..
+        "label[1,3.2;" .. FS("Punch mill to grind seeds") .. "]" ..
         "list[current_player;main;0,4;8,4;]"
 
 -- In original code, all but the first ingredients were commented out
--- (If new ingredients are added, the formspect must be updated, but the code below should still be
+-- (If new ingredients are added, the formspec must be updated, but the code below should still be
 --      OK)
 local product_table = {}
 product_table["unilib:crop_wheat_seed"] = "unilib:ingredient_flour_ordinary"
@@ -85,13 +86,13 @@ function unilib.pkg.machine_mill_hand.exec()
         tiles = {"unilib_stone_ordinary.png"},
         groups = {cracky = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         collision_box = {
             type = "fixed",
             fixed = {
                 {-0.50, -0.5, -0.50, 0.50, 0.25, 0.50},
-            }
+            },
         },
         drawtype = "mesh",
         is_ground_content = false,
@@ -100,14 +101,14 @@ function unilib.pkg.machine_mill_hand.exec()
             type = "fixed",
             fixed = {
                 {-0.50, -0.5, -0.50, 0.50, 0.25, 0.50},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
 
         after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("owner", placer:get_player_name() or "")
             meta:set_string(
                 "infotext",
@@ -116,7 +117,7 @@ function unilib.pkg.machine_mill_hand.exec()
             meta:set_string(
                 "formspec",
                 mill_formspec .. "label[1.5,0.65;" ..
-                S("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
+                FS("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
             )
             meta:set_string("public", "private")
 
@@ -125,7 +126,7 @@ function unilib.pkg.machine_mill_hand.exec()
         allow_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(cottages.player_can_use(meta, player)) then
                 return 0
             else
@@ -136,7 +137,7 @@ function unilib.pkg.machine_mill_hand.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if listname == "flour" or
                     (
                         listname == "seeds" and
@@ -156,7 +157,7 @@ function unilib.pkg.machine_mill_hand.exec()
 
         allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(unilib.pkg.shared_cottages.player_can_use(meta, player)) then
                 return 0
             else
@@ -167,7 +168,7 @@ function unilib.pkg.machine_mill_hand.exec()
 
         can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local owner = meta:get_string("owner")
 
@@ -184,7 +185,7 @@ function unilib.pkg.machine_mill_hand.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("infotext", S("Hand Mill"))
             local inv = meta:get_inventory()
             inv:set_size("seeds", 1)
@@ -201,7 +202,7 @@ function unilib.pkg.machine_mill_hand.exec()
             end
 
             local name = puncher:get_player_name()
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local input = inv:get_list("seeds")
             local stack1 = inv:get_stack("seeds", 1)
@@ -213,14 +214,14 @@ function unilib.pkg.machine_mill_hand.exec()
                     ) then
 
                 if not(stack1:is_empty()) then
-                    minetest.chat_send_player(name, S("Nothing happens..."))
+                    core.chat_send_player(name, S("Nothing happens..."))
                 end
 
                 -- Update the formspec
                 meta:set_string(
                     "formspec",
                     mill_formspec .. "label[1.5,0.65;" ..
-                    S("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
+                    FS("Owner: %s"):format(meta:get_string("owner") or "") .. "]"
                 )
 
                 return
@@ -256,9 +257,9 @@ function unilib.pkg.machine_mill_hand.exec()
                 local anz_left = found - anz
                 if anz_left > 0 then
 
-                    minetest.chat_send_player(
+                    core.chat_send_player(
                         name,
-                        S("Grinding") .. ": " .. unilib.brackets(
+                        S("Grinding") .. ": " .. unilib.utils.brackets(
                             stack1:get_definition().description,
                             S("%s are left"):format(anz_left)
                         )
@@ -266,9 +267,9 @@ function unilib.pkg.machine_mill_hand.exec()
 
                 else
 
-                    minetest.chat_send_player(
+                    core.chat_send_player(
                         name,
-                        S("Grinding") .. ": " .. unilib.brackets(
+                        S("Grinding") .. ": " .. unilib.utils.brackets(
                             stack1:get_definition().description,
                             S("none left"):format(anz_left)
                         )
@@ -282,7 +283,7 @@ function unilib.pkg.machine_mill_hand.exec()
                     node.param2 = 0
                 end
 
-                minetest.swap_node(pos, node)
+                core.swap_node(pos, node)
 
             end
 

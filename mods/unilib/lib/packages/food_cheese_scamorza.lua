@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_scamorza = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_cheese_scamorza.exec()
         inventory_image = "unilib_food_cheese_scamorza.png",
         groups = {food = 4, food_cheese = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_scamorza", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_scamorza", 4),
     })
     unilib.register_craft({
         -- From cheese:scamorza
@@ -43,7 +43,7 @@ function unilib.pkg.food_cheese_scamorza.exec()
             {"", c_stretched, ""},
             {c_stretched, c_stretched, ""},
             {c_stretched, c_stretched, ""},
-        }
+        },
     })
 
     unilib.register_craftitem(
@@ -56,7 +56,7 @@ function unilib.pkg.food_cheese_scamorza.exec()
             inventory_image = "unilib_food_cheese_scamorza_smoked.png",
             groups = {food = 7, food_cheese = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_scamorza_smoked", 7),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_scamorza_smoked", 7),
         }
     )
     unilib.register_craft({

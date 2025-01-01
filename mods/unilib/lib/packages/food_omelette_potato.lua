@@ -9,7 +9,7 @@
 unilib.pkg.food_omelette_potato = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_omelette_potato.exec()
         -- N.B. No groups in original code
         groups = {food_potato_omelette = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_omelette_potato", 6, "unilib:utensil_bowl_wooden"
         ),
     })

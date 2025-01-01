@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_schist_green_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_schist_green_pale.exec()
         description = S("Pale Green Schist Sandstone"),
 
         category = "sedimentary",
+        colour = "#9B9F7E",
         grinder_flag = true,
         grinder_powder = "unilib:sand_schist_green_pale",
         grinder_gravel = "unilib:gravel_schist_green_pale",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_schist_green_pale.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_schist_green_pale_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, greenschist_sandstone_*.png. Original code. Creates
@@ -86,6 +87,25 @@ function unilib.pkg.stone_sandstone_schist_green_pale.exec()
             replace_mode = mode,
             description = S("Pale Green Schist Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_schist_green_pale_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates
+            --      unilib:stone_sandstone_schist_green_pale_cobble_compressed
+            part_name = "sandstone_schist_green_pale",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Pale Green Schist Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_schist_green_pale_cobble_condensed
+            part_name = "sandstone_schist_green_pale",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Pale Green Schist Sandstone Cobble"),
         })
 
     end

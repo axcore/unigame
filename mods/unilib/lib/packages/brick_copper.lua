@@ -9,7 +9,7 @@
 unilib.pkg.brick_copper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_copper.init()
 
     return {
         description = "Copper brick",
-        depends = "metal_copper",
+        depends = {"metal_copper", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_copper.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:copper and morebricks:coppervertical, creates unilib:brick_copper_block
         --      and unilib:brick_copper_block_vertical
         part_name = "copper",
@@ -43,7 +43,7 @@ function unilib.pkg.brick_copper.exec()
         quantity = 2,
     })
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:copperaged and morebricks:copperagedvertical, creates
         --      unilib:brick_copper_old_block and unilib:brick_copper_old_block_vertical
         part_name = "copper_old",

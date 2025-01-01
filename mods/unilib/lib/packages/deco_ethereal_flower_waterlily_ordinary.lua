@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_flower_waterlily_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,6 @@ function unilib.pkg.deco_ethereal_flower_waterlily_ordinary.init()
             "biome_ethereal_grove",
             "biome_ethereal_mesa",
             "biome_ethereal_plains",
-            "biome_ethereal_sand_clay",
             "biome_ethereal_swamp",
         },
     }
@@ -43,13 +42,15 @@ function unilib.pkg.deco_ethereal_flower_waterlily_ordinary.exec()
 
     -- (The "flower_waterlily_ordinary_alt" package can deregister
     --      "unilib:flower_waterlily_ordinary")
-    if unilib.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
+    if unilib.global.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
 
-        unilib.register_decoration("ethereal_flower_waterlily_ordinary", {
+        unilib.register_decoration_generic("ethereal_flower_waterlily_ordinary", {
             -- From ethereal-ng/schems.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_flower_waterlily_ordinary_ethereal.mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_flower_waterlily_ordinary_ethereal.mts",
 
+            flags = "place_center_x, place_center_z",
             noise_params = {
                 octaves = 3,
                 offset = -0.12,
@@ -68,9 +69,9 @@ end
 
 function unilib.pkg.deco_ethereal_flower_waterlily_ordinary.post()
 
-    if unilib.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
+    if unilib.global.pkg_executed_table["flower_waterlily_ordinary_alt"] == nil then
 
-        unilib.register_decoration_now("ethereal_flower_waterlily_ordinary", nil, {
+        unilib.register_decoration_complete("ethereal_flower_waterlily_ordinary", nil, {
             -- From ethereal-ng/decor.lua
             biomes = {
                 "ethereal_desert_ocean",
@@ -78,10 +79,9 @@ function unilib.pkg.deco_ethereal_flower_waterlily_ordinary.post()
                 "ethereal_grove_ocean",
                 "ethereal_mesa_ocean",
                 "ethereal_plains_ocean",
-                "ethereal_sand_clay",
                 "ethereal_swamp_ocean",
             },
-            place_on = {"unilib:sand_ordinary"},
+            place_on = "unilib:sand_ordinary",
             y_max = 0,
             y_min = 0,
         })

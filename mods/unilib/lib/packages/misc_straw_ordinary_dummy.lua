@@ -9,7 +9,7 @@
 unilib.pkg.misc_straw_ordinary_dummy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_farming.add_mode
+local mode = unilib.global.imported_mod_table.castle_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,9 +32,11 @@ function unilib.pkg.misc_straw_ordinary_dummy.exec()
         description = S("Straw Training Dummy"),
         tiles = {"unilib_misc_straw_ordinary_dummy.png"},
         groups = {choppy = 4, flammable = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -58,9 +60,9 @@ function unilib.pkg.misc_straw_ordinary_dummy.exec()
             {"group:stick", "", "group:stick"},
         },
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
-        local burn_time = minetest.get_craft_result(
+        local burn_time = core.get_craft_result(
             {method = "fuel", width = 1, items = {ItemStack("unilib:item_stick_ordinary")}}
         ).time
 

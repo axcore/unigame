@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_steel_with_core_sample = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 local rules_table = {
     {x = 0, y = 0, z = -1},
@@ -61,10 +61,10 @@ function unilib.pkg.misc_frame_steel_with_core_sample.exec()
                 },
                 backface_culling = false,
                 image = "unilib_misc_frame_steel_with_core_sample_animated.png",
-            }
+            },
         },
         groups = {cracky = 3},
-        sounds = unilib.node_sound_metal_defaults({
+        sounds = unilib.sound.generate_metal({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),
@@ -195,7 +195,7 @@ function unilib.pkg.misc_frame_steel_with_core_sample.exec()
         },
     })
 
-    if minetest.get_modpath("mesecons") then
+    if core.get_modpath("mesecons") then
 
         unilib.override_item("unilib:misc_frame_steel_with_core_sample", {
 
@@ -209,7 +209,7 @@ function unilib.pkg.misc_frame_steel_with_core_sample.exec()
 
                     action_off = function(pos, node)
 
-                        minetest.swap_node(
+                        core.swap_node(
                             pos,
                             {
                                 name = "unilib:misc_frame_steel_with_core_sample_off",
@@ -239,10 +239,10 @@ function unilib.pkg.misc_frame_steel_with_core_sample.exec()
                         },
                         backface_culling = false,
                         image = "unilib_misc_frame_steel_with_core_sample_off_animated.png",
-                    }
+                    },
                 },
                 groups = {cracky = 3, mesecon = 1, mesecon_effector_off = 1},
-                sounds = unilib.node_sound_metal_defaults({
+                sounds = unilib.sound.generate_metal({
                     footstep = {name = "unilib_glass_footstep", gain = 0.5},
                     dug = {name = "unilib_break_glass", gain = 1.0},
                 }),
@@ -258,7 +258,7 @@ function unilib.pkg.misc_frame_steel_with_core_sample.exec()
 
                         action_on = function(pos, node)
 
-                            minetest.swap_node(
+                            core.swap_node(
                                 pos,
                                 {
                                     name = "unilib:misc_frame_steel_with_core_sample",

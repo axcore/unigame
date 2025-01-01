@@ -9,7 +9,7 @@
 unilib.pkg.food_pizza_vegana = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -85,7 +85,7 @@ function unilib.pkg.food_pizza_vegana.exec()
         walkable = false,
         wield_image = "unilib_food_pizza_vegana_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_vegana_cooked", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_vegana_cooked", 6),
     })
     unilib.register_craft({
         -- From cucina_vegana:pizza_vegana

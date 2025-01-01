@@ -9,11 +9,11 @@
 unilib.pkg.misc_window_shutter = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 -- Change interval to 600 if your machine is too slow
 local update_interval = 20
-if unilib.cottages_slow_flag then
+if unilib.setting.cottages_slow_flag then
     update_interval = 600
 end
 
@@ -32,13 +32,13 @@ local function update_shutter(pos, old_node_state_name, new_node_state_name)
 
     for i, v in ipairs(offsets) do
 
-        local node = minetest.get_node_or_nil({x = pos.x, y = (pos.y + v), z = pos.z })
+        local node = core.get_node_or_nil({x = pos.x, y = (pos.y + v), z = pos.z })
         if node and
                 node.name and
                 node.name == old_node_state_name and
                 ((v > 0 and stop_up == 0) or (v < 0 and stop_down == 0)) then
 
-            minetest.swap_node(
+            core.swap_node(
                 {x = pos.x, y = (pos.y + v), z = pos.z},
                 {name = new_node_state_name, param2 = node.param2}
             )
@@ -75,13 +75,15 @@ function unilib.pkg.misc_window_shutter.exec()
 
     unilib.register_node("unilib:misc_window_shutter", "cottages:window_shutter_open", mode, {
         -- From cottages:window_shutter_open
-        description = unilib.brackets(S("Window Shutters"), S("Open")),
+        description = unilib.utils.brackets(S("Window Shutters"), S("Open")),
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
+        -- N.B. No .inventory_image in original code
+        inventory_image = "unilib_misc_window_shutter_inv.png",
         is_ground_content = false,
         -- Larger than one node but slightly smaller than a half node so that wallmounted torches
         --      pose no problem
@@ -100,14 +102,12 @@ function unilib.pkg.misc_window_shutter.exec()
                 {-0.9, -0.5, 0.4, 0.9, 0.5, 0.5},
             },
         },
+        -- N.B. No .wield_image in original code
+        wield_image = "unilib_misc_window_shutter_inv.png",
 
         on_rightclick = function(pos, node, puncher)
 
-            minetest.swap_node(
-                pos,
-                {name = "unilib:misc_window_shutter_closed", param2 = node.param2}
-            )
-
+            core.swap_node(pos, {name = "unilib:misc_window_shutter_closed", param2 = node.param2})
             update_shutter(
                 pos,
                 "unilib:misc_window_shutter",
@@ -121,7 +121,7 @@ function unilib.pkg.misc_window_shutter.exec()
         output = "unilib:misc_window_shutter",
         recipe = {
             {"group:wood", "", "group:wood"},
-        }
+        },
     })
     -- (For convenience, convert open/closed shutters)
     unilib.register_craft({
@@ -129,14 +129,14 @@ function unilib.pkg.misc_window_shutter.exec()
         output = "unilib:misc_window_shutter",
         recipe = {
             {"unilib:misc_window_shutter_closed"},
-        }
+        },
     })
     unilib.register_craft({
         -- From cottages:window_shutter_closed
         output = "cottages:window_shutter_closed",
         recipe = {
             {"unilib:misc_window_shutter_closed"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -145,16 +145,18 @@ function unilib.pkg.misc_window_shutter.exec()
         "cottages:window_shutter_closed",
         mode,
         {
-            description = unilib.brackets(S("Window Shutters"), S("Closed")),
+            description = unilib.utils.brackets(S("Window Shutters"), S("Closed")),
             tiles = {"unilib_misc_wood_rustic.png"},
             groups = {
                 choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, snappy = 2,
             },
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drop = "unilib:misc_window_shutter",
             drawtype = "nodebox",
+            -- N.B. No .inventory_image in original code
+            inventory_image = "unilib_misc_window_shutter_inv.png",
             is_ground_content = false,
             node_box = {
                 type = "fixed",
@@ -171,14 +173,12 @@ function unilib.pkg.misc_window_shutter.exec()
                     {-0.5, -0.5, 0.4, 0.5, 0.5, 0.5},
                 },
             },
+            -- N.B. No .wield_image in original code
+            wield_image = "unilib_misc_window_shutter_inv.png",
 
             on_rightclick = function(pos, node, puncher)
 
-                minetest.swap_node(
-                    pos,
-                    {name = "unilib:misc_window_shutter", param2 = node.param2}
-                )
-
+                core.swap_node(pos, {name = "unilib:misc_window_shutter", param2 = node.param2})
                 update_shutter(
                     pos,
                     "unilib:misc_window_shutter_closed",
@@ -202,14 +202,10 @@ function unilib.pkg.misc_window_shutter.exec()
         action = function(pos)
 
             -- At this time, sleeping in a bed is not possible
-            if not(minetest.get_timeofday() < 0.2 or minetest.get_timeofday() > 0.805) then
+            if not(core.get_timeofday() < 0.2 or core.get_timeofday() > 0.805) then
 
-                local old_node = minetest.get_node(pos)
-                minetest.swap_node(
-                    pos,
-                    {name = "unilib:misc_window_shutter", param2 = old_node.param2}
-                )
-
+                local old_node = core.get_node(pos)
+                core.swap_node(pos, {name = "unilib:misc_window_shutter", param2 = old_node.param2})
                 update_shutter(
                     pos,
                     "unilib:misc_window_shutter_closed",
@@ -233,10 +229,10 @@ function unilib.pkg.misc_window_shutter.exec()
         action = function(pos)
 
             -- The same time at which sleeping is allowed in beds
-            if minetest.get_timeofday() < 0.2 or minetest.get_timeofday() > 0.805 then
+            if core.get_timeofday() < 0.2 or core.get_timeofday() > 0.805 then
 
-                local old_node = minetest.get_node(pos)
-                minetest.swap_node(
+                local old_node = core.get_node(pos)
+                core.swap_node(
                     pos,
                     {name = "unilib:misc_window_shutter_closed", param2 = old_node.param2}
                 )
@@ -246,6 +242,7 @@ function unilib.pkg.misc_window_shutter.exec()
                     "unilib:misc_window_shutter",
                     "unilib:misc_window_shutter_closed"
                 )
+
             end
 
         end,

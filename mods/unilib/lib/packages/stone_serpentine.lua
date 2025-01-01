@@ -9,7 +9,7 @@
 unilib.pkg.stone_serpentine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.stone_serpentine.exec()
         description = S("Serpentine"),
 
         category = "metamorphic",
+        colour = "#CEE0B7",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 2)
         hardness = 1,
         hardness_real = 2,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("serpentine", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("serpentine", 3, nil)
 
     unilib.register_node("unilib:stone_serpentine", "darkage:serpentine", mode, {
         -- From darkage:serpentine
@@ -45,7 +46,7 @@ function unilib.pkg.stone_serpentine.exec()
         tiles = {"unilib_stone_serpentine.png"},
         -- N.B. stone = 1 not in original code
         groups = {cracky = smooth_cracky, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     --[[
     unilib.register_stairs("unilib:stone_serpentine", {
@@ -85,7 +86,13 @@ function unilib.pkg.stone_serpentine.exec()
         --      or unilib:stone_serpentine_rubble, or nothing
         part_name = "serpentine",
         cobble_description = S("Serpentine Cobble"),
+        cobble_compressed_description = S("Compressed Serpentine Cobble"),
+        cobble_condensed_description = S("Condensed Serpentine Cobble"),
         rubble_description = S("Serpentine Rubble"),
+        rubble_compressed_description = S("Compressed Serpentine Rubble"),
+        rubble_condensed_description = S("Condensed Serpentine Rubble"),
+        smooth_compressed_description = S("Compressed Serpentine"),
+        smooth_condensed_description = S("Condensed Serpentine"),
 
         replace_mode = mode,
         override_drop_flag = true,

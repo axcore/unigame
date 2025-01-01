@@ -9,7 +9,7 @@
 unilib.pkg.decor_block_compass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.compass.add_mode
+local mode = unilib.global.imported_mod_table.compass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,12 +42,14 @@ function unilib.pkg.decor_block_compass.exec()
         groups = {choppy = 3, oddly_breakable_by_hand = 3, snappy = 3},
         -- (no sounds)
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         light_source = 14,
 
         after_place_node = function(pos, placer)
 
             -- N.B. Output tweaked for aesthetic reasons
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local msg = S("Compass at:") .. " "
 
             msg = msg .. tostring(math.floor(pos.x))

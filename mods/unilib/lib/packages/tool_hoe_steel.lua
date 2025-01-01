@@ -9,7 +9,7 @@
 unilib.pkg.tool_hoe_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,10 +26,11 @@ end
 
 function unilib.pkg.tool_hoe_steel.exec()
 
-    -- In 2018, bronze/mese/diamond hoes were deprecated, and steel hoes were buffed to compensate
-    -- Since unilib provides hoes from a number of mods, reverse the buff if allowed
+    -- N.B. In 2018, bronze/mese/diamond hoes were deprecated, and steel hoes were buffed to
+    --      compensate. Since unilib provides hoes from a number of mods, reverse the buff if
+    --      allowed
     local max_uses = 500
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
         max_uses = 200
     end
 
@@ -48,6 +49,8 @@ function unilib.pkg.tool_hoe_steel.exec()
         },
 
         replace_mode = mode,
+        damage_group_table = {fleshy = 2},
     })
+    unilib.tools.apply_toolranks("unilib:tool_hoe_steel", "hoe")
 
 end

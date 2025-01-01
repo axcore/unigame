@@ -9,7 +9,7 @@
 unilib.pkg.tree_willow_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,10 @@ end
 
 function unilib.pkg.tree_willow_exotic.exec()
 
-    -- (no burnlevel)
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
+
+    local burnlevel = 2
     local sci_name = "Salix"
 
     unilib.register_tree({
@@ -98,10 +101,10 @@ function unilib.pkg.tree_willow_exotic.exec()
     })
 
     -- N.B. schematic #1 commented out in original code, but included here
-    unilib.register_decoration("farlands_tree_willow_exotic_1", {
+    unilib.register_decoration_generic("farlands_tree_willow_exotic_1", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_willow_exotic_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_willow_exotic_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -115,10 +118,10 @@ function unilib.pkg.tree_willow_exotic.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_tree_willow_exotic_2", {
+    unilib.register_decoration_generic("farlands_tree_willow_exotic_2", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_willow_exotic_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_willow_exotic_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

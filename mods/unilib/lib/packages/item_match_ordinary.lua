@@ -9,7 +9,7 @@
 unilib.pkg.item_match_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_torch.add_mode
+local mode = unilib.global.imported_mod_table.real_torch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.item_match_ordinary.exec()
             end
 
             local pos = pointed_thing.under
-            local node = minetest.get_node(pos)
+            local node = core.get_node(pos)
             local adj_flag = false
 
             if node.name == "unilib:torch_unlit" then
@@ -64,15 +64,15 @@ function unilib.pkg.item_match_ordinary.exec()
 
             if adj_flag then
 
-                minetest.set_node(pos, {name = node.name, param2 = node.param2})
+                core.set_node(pos, {name = node.name, param2 = node.param2})
 
-                if not unilib.is_creative(user:get_player_name()) then
+                if not unilib.utils.is_creative(user:get_player_name()) then
                     itemstack:take_item()
                 end
             end
 
             -- N.B. Sound file exists in original mod, but not code to use it
-            minetest.sound_play(
+            core.sound_play(
                 "unilib_ignite_torch",
                 {pos = pos, gain = 0.1, max_hear_distance = 10},
                 true

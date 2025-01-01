@@ -9,7 +9,7 @@
 unilib.pkg.clay_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,9 @@ function unilib.pkg.clay_ordinary.exec()
         -- From default:clay
         description = S("Ordinary Clay"),
         tiles = {"unilib_clay_ordinary.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        -- N.B. clay = 1 not in original code
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:clay_ordinary_lump 4",
     })
@@ -54,7 +55,7 @@ function unilib.pkg.clay_ordinary.exec()
         output = "unilib:clay_ordinary_lump 4",
         recipe = {
             {"unilib:clay_ordinary"},
-        }
+        },
     })
 
 end

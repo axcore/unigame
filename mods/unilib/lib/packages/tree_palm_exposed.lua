@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_exposed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -61,7 +61,7 @@ function unilib.pkg.tree_palm_exposed.exec()
     --      trunks that allow coconuts to regrow at the correct position in the tree
     -- So, a placeholder fruit trunk is spawned. An ABM will convert it to the final fruit trunk,
     --      and generate the actual coconuts
-    local original_table = minetest.registered_nodes["unilib:tree_palm_trunk"]
+    local original_table = core.registered_nodes["unilib:tree_palm_trunk"]
     -- Definition table for the placeholder node created by the l-system model
     local placeholder_table = {}
     -- Definition table for the replacement node, under which coconut is spawned
@@ -93,7 +93,7 @@ function unilib.pkg.tree_palm_exposed.exec()
     --[[
     placeholder_table.after_destruct = function(pos, oldnode)
 
-        local coconut_list = minetest.find_nodes_in_area(
+        local coconut_list = core.find_nodes_in_area(
             {x = pos.x - 1, y = pos.y, z = pos.z - 1},
             {x = pos.x + 1, y = pos.y, z = pos.z + 1},
             {"unilib:fruit_coconut"}
@@ -101,10 +101,10 @@ function unilib.pkg.tree_palm_exposed.exec()
 
         for _, coconut_pos in pairs(coconut_list) do
 
-            local item_str_list = minetest.get_node_drops(minetest.get_node(coconut_pos).name)
-            minetest.swap_node(coconut_pos, {name = "air"})
+            local item_str_list = core.get_node_drops(core.get_node(coconut_pos).name)
+            core.swap_node(coconut_pos, {name = "air"})
             for _, item_str_name in pairs(item_str_list) do
-                minetest.add_item(coconut_pos, item_str_name)
+                core.add_item(coconut_pos, item_str_name)
             end
 
         end
@@ -178,10 +178,10 @@ function unilib.pkg.tree_palm_exposed.exec()
         action = function(pos, node, active_object_count, active_object_count_wider)
 
             -- Replace the placeholder
-            minetest.swap_node(pos, {name = "unilib:tree_palm_exposed_trunk_fertile"})
+            core.swap_node(pos, {name = "unilib:tree_palm_exposed_trunk_fertile"})
 
             -- Spawn coconuts
-            local pos_list = minetest.find_nodes_in_area(
+            local pos_list = core.find_nodes_in_area(
                 {x = pos.x - 1, y = pos.y, z = pos.z - 1},
                 {x = pos.x + 1, y = pos.y, z = pos.z + 1},
                 "air"
@@ -197,7 +197,7 @@ function unilib.pkg.tree_palm_exposed.exec()
             local count = 0
             for _, gen in pairs(gen_list) do
 
-                minetest.swap_node(gen.pos, {name = "unilib:fruit_coconut"})
+                core.swap_node(gen.pos, {name = "unilib:fruit_coconut"})
                 count = count + 1
                 if count == 4 then
                     break
@@ -216,11 +216,11 @@ function unilib.pkg.tree_palm_exposed.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(0.25),
-            temp_min = unilib.convert_biome_lib_temp(-0.15),
+            temp_max = unilib.utils.convert_biome_lib_temp(0.25),
+            temp_min = unilib.utils.convert_biome_lib_temp(-0.15),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 50,
             }),
         },

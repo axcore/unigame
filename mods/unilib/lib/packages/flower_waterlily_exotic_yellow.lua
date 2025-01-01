@@ -13,7 +13,7 @@
 unilib.pkg.flower_waterlily_exotic_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -22,25 +22,24 @@ local mode = unilib.imported_mod_table.farlands.add_mode
 local function on_place(itemstack, placer, pointed_thing)
 
     local pos = pointed_thing.above
-    local node = minetest.get_node(pointed_thing.under).name
-    local def = minetest.registered_nodes[node]
+    local node = core.get_node(pointed_thing.under).name
+    local def = core.registered_nodes[node]
     local player_name = placer:get_player_name()
 
-    if def and def.liquidtype == "source" and
-            minetest.get_item_group(node, "water") > 0 then
+    if def and def.liquidtype == "source" and core.get_item_group(node, "water") > 0 then
 
-        if not minetest.is_protected(pos, player_name) then
+        if not core.is_protected(pos, player_name) then
 
             if math.random(1, 2) == 1 then
 
-                minetest.set_node(
+                core.set_node(
                     pos,
                     {name = "unilib:flower_waterlily_exotic_yellow", param2 = math.random(0, 3)}
                 )
 
             else
 
-                minetest.set_node(
+                core.set_node(
                     pos,
                     {
                         name = "unilib:flower_waterlily_exotic_yellow_flowering",
@@ -50,14 +49,14 @@ local function on_place(itemstack, placer, pointed_thing)
 
             end
 
-            if not minetest.settings:get_bool("creative_mode") then
+            if not core.settings:get_bool("creative_mode") then
                 itemstack:take_item()
             end
 
         else
 
-            minetest.chat_send_player(player_name, S("Node is protected"))
-            minetest.record_protection_violation(pos, player_name)
+            core.chat_send_player(player_name, S("Node is protected"))
+            core.record_protection_violation(pos, player_name)
 
         end
 
@@ -74,7 +73,7 @@ end
 function unilib.pkg.flower_waterlily_exotic_yellow.init()
 
     return {
-        description = "Exotic waterlily with yellow Flower",
+        description = "Exotic waterlily with yellow flower",
     }
 
 end
@@ -87,7 +86,7 @@ function unilib.pkg.flower_waterlily_exotic_yellow.exec()
         description = S("Exotic Waterlily"),
         tiles = {"unilib_flower_waterlily_exotic_yellow.png"},
         groups = {flammable = 1, flower = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "mesh",
@@ -105,7 +104,7 @@ function unilib.pkg.flower_waterlily_exotic_yellow.exec()
         sunlight_propagates = true,
         use_texture_alpha = "clip",
         visual_scale = 0.5,
-        walkable = unilib.walkable_waterlilies_flag,
+        walkable = unilib.setting.walkable_waterlilies_flag,
         wield_image = "unilib_flower_waterlily_exotic_inv.png",
 
         on_place = on_place,
@@ -119,7 +118,7 @@ function unilib.pkg.flower_waterlily_exotic_yellow.exec()
         tiles = {"unilib_flower_waterlily_exotic_yellow_flowering.png"},
         -- N.B. not_in_creative_inventory is not in original code
         groups = {flammable = 1, flower = 1, not_in_creative_inventory = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "mesh",
@@ -143,17 +142,17 @@ function unilib.pkg.flower_waterlily_exotic_yellow.exec()
         sunlight_propagates = true,
         use_texture_alpha = "clip",
         visual_scale = 0.5,
-        walkable = unilib.walkable_waterlilies_flag,
+        walkable = unilib.setting.walkable_waterlilies_flag,
         wield_image = "unilib_flower_waterlily_exotic_inv.png",
 
         on_place = on_place,
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_flower_waterlily_exotic_yellow", {
+    unilib.register_decoration_generic("farlands_flower_waterlily_exotic_yellow", {
         -- From farlands, flowers/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_flower_waterlily_exotic_yellow.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_flower_waterlily_exotic_yellow.mts",
 
         noise_params = {
             octaves = 3,

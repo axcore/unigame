@@ -9,7 +9,9 @@
 unilib.pkg.misc_box_letter = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions (general)
@@ -28,7 +30,7 @@ end
 
 local function img_col(stack)
 
-    local def_table = minetest.registered_items[stack]
+    local def_table = core.registered_items[stack]
     if def_table == nil then
         return ""
     end
@@ -64,7 +66,7 @@ end
 local function get_formspec(pos, owner, is_owner)
 
     local spos = pos.x .. "," .. pos.y .. "," .. pos.z
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local giver, img = "", ""
 
     if is_owner then
@@ -90,29 +92,29 @@ local function get_formspec(pos, owner, is_owner)
 
         -- N.B. Tweaked the layout to keep everything lined up
         return "size[9.5,9]" ..
-            "label[0,0;" .. S("Letter Box") .. "]" ..
-            "label[6,0;" .. S("Recent contributors") .. "]" ..
+            "label[0,0;" .. FS("Letter Box") .. "]" ..
+            "label[6,0;" .. FS("Recent contributors") .. "]" ..
 --            "box[6,0.72;3.3,3.5;#555555]" ..
             "box[6,0.72;3.3,3.9;#555555]" ..
             "listring[current_player;main]" ..
             "list[current_player;main;0.75,5.25;8,4;]" ..
             "tableoptions[background=#00000000;highlight=#00000000;border=false]" ..
             "tablecolumns[color;text;image," .. img .. "0;color;text]" ..
-            "table[6,0.75;3.3,4;givers;" .. giver .. "]" ..
+            "table[6,0.75;3.3,4;givers;" .. F(giver) .. "]" ..
             "list[nodemeta:" .. spos .. ";letterbox;0,0.75;6,4;]" ..
             "listring[nodemeta:" .. spos .. ";letterbox]" ..
-            unilib.get_hotbar_bg(0.75, 5.25)
+            unilib.misc.get_hotbar_bg(0.75, 5.25)
 
     end
 
     return "size[8,5]" ..
             "list[current_player;main;0,1.25;8,4;]" ..
-            "label[0,0;" .. S(
+            "label[0,0;" .. FS(
                 "Send your items to\n@1",
-                (unilib.emphasise(owner) or owner)
+                (unilib.utils.emphasise(owner) or owner)
             ) .. "]" ..
             "list[nodemeta:" .. spos .. ";drop;3.5,0;1,1;]" ..
-            unilib.get_hotbar_bg(0, 1.25)
+            unilib.misc.get_hotbar_bg(0, 1.25)
 
 end
 
@@ -122,7 +124,7 @@ end
 
 local function after_place_node(pos, placer)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local player_name = placer:get_player_name()
 
     meta:set_string("owner", player_name)
@@ -140,7 +142,7 @@ end
 
 local function allow_metadata_inventory_take(pos, listname, index, stack, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
 
     if player:get_player_name() ~= meta:get_string("owner") then
         return 0
@@ -154,11 +156,11 @@ local function allow_metadata_inventory_put(pos, listname, _, stack, player)
 
     if listname == "drop" then
 
-        local inv = minetest.get_meta(pos):get_inventory()
+        local inv = core.get_meta(pos):get_inventory()
         if inv:room_for_item("letterbox", stack) then
             return -1
         else
-            minetest.chat_send_player(player:get_player_name(), S("The letter box is full"))
+            core.chat_send_player(player:get_player_name(), S("The letter box is full"))
         end
 
     end
@@ -169,7 +171,7 @@ end
 
 local function can_dig(pos, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local owner = meta:get_string("owner")
     local player_name = player and player:get_player_name()
     local inv = meta:get_inventory()
@@ -180,7 +182,7 @@ end
 
 local function on_metadata_inventory_put(pos, listname, _, stack, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     if listname == "drop" and inv:room_for_item("letterbox", stack) then
@@ -204,11 +206,13 @@ end
 
 local function on_rightclick(pos, node, clicker, itemstack, pointed_thing)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local player = clicker:get_player_name()
     local owner = meta:get_string("owner")
 
-    minetest.show_formspec(player, "unilib:misc_box_letter",
+    core.show_formspec(
+        player,
+        "unilib:misc_box_letter",
         get_formspec(pos, owner, (player == owner))
     )
 
@@ -247,8 +251,10 @@ function unilib.pkg.misc_box_letter.exec()
             "unilib_misc_box_letter.png",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
 
         after_place_node = after_place_node,
@@ -265,10 +271,10 @@ function unilib.pkg.misc_box_letter.exec()
         recipe = {
             {c_ingot, c_ingot, c_ingot},
             {"unilib:dye_red", "unilib:item_paper_ordinary", "unilib:dye_red"},
-            {c_ingot, c_ingot, c_ingot}
-        }
+            {c_ingot, c_ingot, c_ingot},
+        },
     })
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:misc_box_letter", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,

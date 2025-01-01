@@ -9,7 +9,7 @@
 unilib.pkg.tree_mangrove_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,8 +25,8 @@ end
 
 function unilib.pkg.tree_mangrove_green.exec()
 
-    -- (no burnlevel)
-    -- (no sci_name)
+    local burnlevel = 2
+    local sci_name = "Conocarpus erectus"
 
     unilib.register_tree({
         -- Original to unilib
@@ -99,10 +99,11 @@ function unilib.pkg.tree_mangrove_green.exec()
 
     for i = 1, 6 do
 
-        unilib.register_decoration("glem_tree_mangrave_green_" .. i, {
+        unilib.register_decoration_generic("glem_tree_mangrave_green_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_mangrove_green_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_glem_tree_mangrove_green_" .. i .. ".mts",
 
             fill_ratio = 0.35,
             flags = "place_center_x, place_center_z",

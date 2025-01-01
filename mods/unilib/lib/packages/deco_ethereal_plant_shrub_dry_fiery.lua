@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_plant_shrub_dry_fiery = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_ethereal_plant_shrub_dry_fiery.post()
 
-    unilib.register_decoration_now("ethereal_plant_shrub_dry_fiery", nil, {
+    unilib.register_decoration_complete("ethereal_plant_shrub_dry_fiery", nil, {
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "plant_shrub_dry_fiery"
         biomes = "ethereal_fiery",

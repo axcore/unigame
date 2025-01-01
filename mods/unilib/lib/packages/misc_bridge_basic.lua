@@ -9,7 +9,7 @@
 unilib.pkg.misc_bridge_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bridges.add_mode
+local mode = unilib.global.imported_mod_table.bridges.add_mode
 
 local leg_front_left_list = {-0.5, -0.5, -0.5, -0.4, 0.5, -0.4}
 local leg_front_right_list = {0.4, -0.5, -0.5, 0.5, 0.5, -0.4}
@@ -57,7 +57,7 @@ function do_register(data_table)
     --      temporary container, storing any leftover parts
     --
     -- data_table compulsory fields:
-    --      part_name (str): e.g. "aspen" (a key in unilib.tree_table)
+    --      part_name (str): e.g. "aspen" (a key in unilib.global.tree_table)
     --
     -- data_table optional fields:
     --      replace_mode (str): e.g. "defer"
@@ -266,11 +266,11 @@ function do_register(data_table)
         end
 
         unilib.register_node(this_full_name, this_orig_name, replace_mode, {
-            description = unilib.brackets(this_description, description),
+            description = unilib.utils.brackets(this_description, description),
             tiles = {img},
             groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, snappy = 2},
             -- N.B. No sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "nodebox",
             node_box = {
@@ -300,11 +300,11 @@ function do_register(data_table)
     end
 
     unilib.register_node(large_full_name, large_orig_name, replace_mode, {
-        description = unilib.brackets(S("Large Bridge"), description),
+        description = unilib.utils.brackets(S("Large Bridge"), description),
         tiles = {img},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         node_box = large_node_box,
@@ -322,7 +322,7 @@ function do_register(data_table)
             {"", "unilib:misc_bridge_" .. part_name .. "_middle", ""},
             {"", "unilib:misc_bridge_" .. part_name .. "_small", ""},
             {"", "unilib:misc_bridge_" .. part_name .. "_middle", ""},
-        }
+        },
     })
 
     -- An automatic bridge-building machine. Once deployed, any leftover parts a placed inside the
@@ -334,7 +334,7 @@ function do_register(data_table)
     end
 
     unilib.register_node(machine_full_name, machine_orig_name, replace_mode, {
-        description = unilib.brackets(S("Self-Building Bridge Machine"), description),
+        description = unilib.utils.brackets(S("Self-Building Bridge Machine"), description),
         tiles = {
             img,
             img,
@@ -342,7 +342,7 @@ function do_register(data_table)
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "cube",
         -- Notes from bridges:
@@ -355,7 +355,7 @@ function do_register(data_table)
 
             -- The bridge ought to unfold in the direction the player is looking
             local dir = placer:get_look_dir()
-            local fdir = minetest.dir_to_facedir(dir)
+            local fdir = core.dir_to_facedir(dir)
 
             if math.abs(dir.x) > math.abs(dir.z) then
 
@@ -390,7 +390,7 @@ function do_register(data_table)
 
                 -- Is there space for a bridge?
                 this_pos = {x = pos.x + (x_dir * i), y = pos.y, z = pos.z + (z_dir * i)}
-                this_node = minetest.get_node(this_pos)
+                this_node = core.get_node(this_pos)
                 if this_node == nil or this_node.name ~= "air" then
 
                     i = max_length + 1
@@ -400,7 +400,7 @@ function do_register(data_table)
                     -- One small bridge is followed by two middle parts
                     if (i % 3) == 1 then
 
-                        minetest.add_node(
+                        core.add_node(
                             this_pos,
                             {
                                 name = "unilib:misc_bridge_" .. part_name .. "_small",
@@ -408,12 +408,13 @@ function do_register(data_table)
                                 param2 = fdir,
                             }
                         )
+
                         -- One small part used
                         rem_small = rem_small - 1
 
                     else
 
-                        minetest.add_node(
+                        core.add_node(
                             this_pos,
                             {
                                 name = "unilib:misc_bridge_" .. part_name .. "_middle",
@@ -421,6 +422,7 @@ function do_register(data_table)
                                 param2 = fdir,
                             }
                         )
+
                         -- One middle part used
                         rem_middle = rem_middle - 1
 
@@ -433,7 +435,7 @@ function do_register(data_table)
             end
 
             -- Do we need to return any leftover parts?
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
 
             if rem_small > 0 then
@@ -456,7 +458,7 @@ function do_register(data_table)
 
         can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             return inv:is_empty("main")
 
@@ -464,7 +466,7 @@ function do_register(data_table)
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string(
                 "formspec",
                 "invsize[8,9;]" ..
@@ -474,7 +476,7 @@ function do_register(data_table)
 
             meta:set_string(
                 "infotext",
-                unilib.brackets(S("Self-Building Bridge Machine"), S("Leftover parts"))
+                unilib.utils.brackets(S("Self-Building Bridge Machine"), S("Leftover parts"))
             )
 
             local inv = meta:get_inventory()
@@ -506,20 +508,20 @@ end
 
 function unilib.pkg.misc_bridge_basic.post()
 
-    if not unilib.add_stairs_basic_flag then
+    if not unilib.setting.add_stairs_basic_flag then
         return
     end
 
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
-        if unilib.tree_table[tree_type] ~= nil and
-                unilib.pkg_executed_table["tree_" .. tree_type] ~= nil then
+        if unilib.global.tree_table[tree_type] ~= nil and
+                unilib.global.pkg_executed_table["tree_" .. tree_type] ~= nil then
 
             do_register({
                 part_name = tree_type,
 
                 replace_mode = mode,
-                description = unilib.tree_table[tree_type]["description"],
+                description = unilib.global.tree_table[tree_type]["description"],
             })
 
         end

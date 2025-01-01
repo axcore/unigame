@@ -17,9 +17,9 @@
 unilib.pkg.stone_basalt_blue = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,6 +42,7 @@ function unilib.pkg.stone_basalt_blue.exec()
         description = S("Blue Basalt"),
 
         category = "extrusive",
+        colour = "#4C5566",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -98,40 +99,36 @@ function unilib.pkg.stone_basalt_blue.exec()
         wall_orig_name = "underch:basalt_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:basalt. Creates unilib:stone_basalt_blue_cobble_compressed
+        part_name = "basalt_blue",
+        orig_name = "compressed:basalt",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:basalt. Creates unilib:stone_basalt_blue_cobble_compressed
-            part_name = "basalt_blue",
-            orig_name = "compressed:basalt",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Blue Basalt Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Blue Basalt Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:basalt. Creates unilib:stone_basalt_blue_cobble_condensed
+        part_name = "basalt_blue",
+        orig_name = "condensed:basalt",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:basalt. Creates unilib:stone_basalt_blue_cobble_condensed
-            part_name = "basalt_blue",
-            orig_name = "condensed:basalt",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Blue Basalt Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Blue Basalt Cobble"),
+    })
 
 end
 
 function unilib.pkg.stone_basalt_blue.post()
 
-    if unilib.underch_override_abm_flag and
-            unilib.pkg_executed_table["liquid_lava_ordinary"] ~= nil then
+    if unilib.setting.underch_override_abm_flag and
+            unilib.global.pkg_executed_table["liquid_lava_ordinary"] ~= nil then
 
         -- Update the global variable, so that cooled flowing lava solidifies into blue basalt,
         --      rather than ordinary stone
         -- N.B. If the minetest_game ABM is still running, both blue basalt and ordinary stone will
         --      be produced. To avoid this problem, run unilib on top of unigame, instead
-        unilib.lava_cooling_table["unilib:liquid_lava_ordinary_flowing"] =
+        unilib.global.lava_cooling_table["unilib:liquid_lava_ordinary_flowing"] =
                 "unilib:stone_basalt_blue"
 
     end

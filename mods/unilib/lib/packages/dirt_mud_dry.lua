@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mud_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,21 +32,21 @@ function unilib.pkg.dirt_mud_dry.exec()
         tiles = {"unilib_dirt_mud_dry_top.png", "unilib_dirt_mud_dry.png"},
         -- N.B. dry_dirt = 1 not in original code
         groups = {crumbly = 3, dry_dirt = 1},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = "",
         }),
 
         drop = "unilib:dirt_mud_dry_lump 4",
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft_2x2({
         -- From darkage:mud
         output = "unilib:dirt_mud_dry",
         ingredient = "unilib:dirt_mud_dry_lump",
     })
-    if unilib.pkg_executed_table["clay_ordinary"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil and
-            unilib.pkg_executed_table["sand_silt"] ~= nil then
+    if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["sand_silt"] ~= nil then
 
         unilib.register_craft({
             -- From darkage:mud
@@ -54,7 +54,7 @@ function unilib.pkg.dirt_mud_dry.exec()
             recipe = {
                 {"unilib:dirt_ordinary", "unilib:dirt_ordinary"},
                 {"unilib:clay_ordinary_lump", "unilib:sand_silt_lump"},
-            }
+            },
         })
 
     end

@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_vintage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_vintage.add_mode
+local mode = unilib.global.imported_mod_table.morelights_vintage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,19 +33,21 @@ function unilib.pkg.light_lamp_vintage.exec()
 
     unilib.register_node("unilib:light_lamp_vintage_floor", "morelights_vintage:lantern_f", mode, {
         -- From morelights_vintage:lantern_f
-        description = unilib.hint(S("Vintage Lamp"), S("floor, wall or ceiling")),
+        description = unilib.utils.hint(S("Vintage Lamp"), S("floor, wall or ceiling")),
         tiles = {
             "unilib_light_lamp_vintage_overlay.png^unilib_light_lamp_vintage.png",
-            "unilib_pole_metal_dark.png"
+            "unilib_hardware_pole_metal_dark.png",
         },
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        unilib.sound_table.glass,
+        unilib.global.sound_table.glass,
 
         collision_box = {
             type = "fixed",
             fixed = {-3/16, -1/2, -3/16, 3/16, 1/16, 3/16},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 12,
         mesh = "unilib_light_lamp_vintage_floor.obj",
         paramtype = "light",
@@ -58,7 +60,7 @@ function unilib.pkg.light_lamp_vintage.exec()
 
         on_place = function(itemstack, placer, pointed_thing)
 
-            local wdir = minetest.dir_to_wallmounted(
+            local wdir = core.dir_to_wallmounted(
                 vector.subtract(pointed_thing.under, pointed_thing.above)
             )
             local fakestack = ItemStack(itemstack)
@@ -71,7 +73,7 @@ function unilib.pkg.light_lamp_vintage.exec()
                 fakestack:set_name("unilib:light_lamp_vintage_wall")
             end
 
-            minetest.item_place(fakestack, placer, pointed_thing, wdir)
+            core.item_place(fakestack, placer, pointed_thing, wdir)
             itemstack:set_count(fakestack:get_count())
 
             return itemstack
@@ -84,8 +86,8 @@ function unilib.pkg.light_lamp_vintage.exec()
         recipe = {
             {"", "unilib:metal_steel_ingot", ""},
             {c_pane, "unilib:light_bulb_normal", c_pane},
-            {c_stick, "unilib:metal_steel_ingot", c_stick}
-        }
+            {c_stick, "unilib:metal_steel_ingot", c_stick},
+        },
     })
 
     unilib.register_node(
@@ -97,12 +99,12 @@ function unilib.pkg.light_lamp_vintage.exec()
             -- (no description)
             tiles = {
                 "unilib_light_lamp_vintage_overlay.png^unilib_light_lamp_vintage.png",
-                "unilib_pole_metal_dark.png"
+                "unilib_hardware_pole_metal_dark.png"
             },
             groups = {
                 cracky = 2, handy = 1, not_in_creative_inventory = 1, oddly_breakable_by_hand = 3,
             },
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             collision_box = {
                 type = "fixed",
@@ -110,6 +112,8 @@ function unilib.pkg.light_lamp_vintage.exec()
             },
             drawtype = "mesh",
             drop = "unilib:light_lamp_vintage_floor",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             light_source = 12,
             mesh = "unilib_light_lamp_vintage_ceiling.obj",
             paramtype = "light",
@@ -127,12 +131,12 @@ function unilib.pkg.light_lamp_vintage.exec()
         -- (no description)
         tiles = {
             "unilib_light_lamp_vintage_overlay.png^unilib_light_lamp_vintage.png",
-            "unilib_pole_metal_dark.png"
+            "unilib_hardware_pole_metal_dark.png",
         },
         groups = {
             cracky = 2, handy = 1, not_in_creative_inventory = 1, oddly_breakable_by_hand = 3,
         },
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         collision_box = {
             type = "fixed",
@@ -140,13 +144,15 @@ function unilib.pkg.light_lamp_vintage.exec()
         },
         drawtype = "mesh",
         drop = "unilib:light_lamp_vintage_floor",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 12,
         mesh = "unilib_light_lamp_vintage_wall.obj",
         paramtype = "light",
         paramtype2 = "wallmounted",
         selection_box = {
             type = "fixed",
-            fixed = {-3/16, -1/4, -5/16, 3/16, 1/8, 3/16}
+            fixed = {-3/16, -1/4, -5/16, 3/16, 1/8, 3/16},
         },
         sunlight_propagates = true,
         use_texture_alpha = "clip",

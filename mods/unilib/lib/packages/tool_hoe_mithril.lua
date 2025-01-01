@@ -9,7 +9,7 @@
 unilib.pkg.tool_hoe_mithril = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreores.add_mode
+local mode = unilib.global.imported_mod_table.moreores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,6 +42,8 @@ function unilib.pkg.tool_hoe_mithril.exec()
         },
 
         replace_mode = mode,
+        damage_group_table = {fleshy = 3},
     })
+    unilib.tools.apply_toolranks("unilib:tool_hoe_mithril", "hoe")
 
 end

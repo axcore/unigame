@@ -9,7 +9,7 @@
 unilib.pkg.deco_cucina_vegana_plant_rice_brown_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ end
 
 function unilib.pkg.deco_cucina_vegana_plant_rice_brown_wild.post()
 
-    unilib.register_decoration_now("cucina_vegana_plant_rice_brown_wild", nil, {
+    unilib.register_decoration_complete("cucina_vegana_plant_rice_brown_wild", nil, {
         -- From cucina_vegana, rice.lua
         -- Completes decoration in package "plant_rice_brown_wild"
         place_on = {

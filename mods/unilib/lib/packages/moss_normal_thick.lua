@@ -9,7 +9,7 @@
 unilib.pkg.moss_normal_thick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.moss_normal_thick.exec()
         tiles = {"unilib_moss_normal_thick.png"},
         -- N.B. moss = 1 not in original code
         groups = {dig_immediate = 3, moss = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "nodebox",
@@ -44,7 +44,7 @@ function unilib.pkg.moss_normal_thick.exec()
         paramtype = "light",
     })
 
-    unilib.register_decoration("farlands_moss_normal_thick", {
+    unilib.register_decoration_generic("farlands_moss_normal_thick", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:moss_normal_thick",

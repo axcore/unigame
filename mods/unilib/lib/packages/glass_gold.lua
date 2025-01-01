@@ -9,7 +9,7 @@
 unilib.pkg.glass_gold = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.glass_gold.exec()
         description = S("Gold Glass"),
         tiles = {"unilib_glass_gold.png", "unilib_glass_gold_detail.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -45,7 +45,13 @@ function unilib.pkg.glass_gold.exec()
             {"unilib:metal_gold_ingot"},
             {"unilib:glass_ordinary"},
             {"unilib:metal_gold_ingot"},
-        }
+        },
+    })
+    unilib.register_stairs("unilib:glass_gold", {
+        glass_flag = true,
+    })
+    unilib.register_carvings("unilib:glass_gold", {
+        millwork_flag = true,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.deco_flowers_mushroom_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_flowers_mushroom_brown.post()
 
-    unilib.register_decoration_now("flowers_mushroom_brown", nil, {
+    unilib.register_decoration_complete("flowers_mushroom_brown", nil, {
         -- From flowers/mapgen.lua
         -- Completes decoration in package "mushroom_brown"
         biomes = {"default_forest_coniferous", "default_forest_deciduous"},
@@ -38,7 +38,7 @@ function unilib.pkg.deco_flowers_mushroom_brown.post()
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_turf",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

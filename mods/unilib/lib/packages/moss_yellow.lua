@@ -9,7 +9,7 @@
 unilib.pkg.moss_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

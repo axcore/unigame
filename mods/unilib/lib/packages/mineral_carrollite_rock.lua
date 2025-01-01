@@ -9,7 +9,7 @@
 unilib.pkg.mineral_carrollite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_carrollite_rock.exec()
 
     local c_lump = "unilib:mineral_carrollite_lump"
-    local hardness = unilib.mineral_table["carrollite"]["hardness"]
+    local hardness = unilib.global.mineral_table["carrollite"]["hardness"]
 
     unilib.register_mineral_rock("carrollite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_carrollite_rock.exec()
         description = S("Carrollite Rock"),
         tiles = {"unilib_mineral_carrollite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

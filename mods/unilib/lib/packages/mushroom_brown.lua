@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.mushroom_brown.exec()
         description = S("Brown Mushroom"),
         tiles = {"unilib_mushroom_brown.png"},
         groups = {attached_node = 1, flammable = 1, food_mushroom = 1, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -45,11 +45,11 @@ function unilib.pkg.mushroom_brown.exec()
         walkable = false,
         wield_image = "unilib_mushroom_brown.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_brown", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_brown", 1),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_brown", "flowers:mushroom_brown")
 
-    unilib.register_decoration("flowers_mushroom_brown", {
+    unilib.register_decoration_generic("flowers_mushroom_brown", {
         -- From flowers/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_brown",

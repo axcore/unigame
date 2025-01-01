@@ -9,7 +9,7 @@
 unilib.pkg.tree_willow_weeping = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,32 +39,37 @@ function unilib.pkg.tree_willow_weeping.exec()
 
     unilib.register_node("unilib:tree_willow_weeping_trunk", "ethereal:willow_trunk", mode, {
         -- From ethereal:willow_trunk
-        description = unilib.annotate(S("Weeping Willow Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Weeping Willow Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_willow_weeping_trunk_top.png",
             "unilib_tree_willow_weeping_trunk_top.png",
             "unilib_tree_willow_weeping_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
 
-    if unilib.super_tree_table["willow_weeping"] ~= nil then
+    unilib.register_tree_trunk_stripped({
+        -- From ethereal:willow_trunk. Creates unilib:tree_willow_weeping_trunk_stripped
+        part_name = "willow_weeping",
+        orig_name = "ethereal:willow_trunk",
 
-        unilib.register_tree_trunk_stripped({
-            -- From ethereal:willow_trunk. Creates unilib:tree_willow_weeping_trunk_stripped
-            part_name = "willow_weeping",
-            orig_name = "ethereal:willow_trunk",
+        replace_mode = mode,
+        description = S("Weeping Willow Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+    })
 
-            replace_mode = mode,
-            description = S("Weeping Willow Tree Trunk"),
-            group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        })
-
+    local on_place, place_param2
+    if not unilib.setting.auto_rotate_wood_flag then
+        on_place = core.rotate_node
+    else
+        place_param2 = 0
     end
 
     unilib.register_node("unilib:tree_willow_weeping_wood", "ethereal:willow_wood", mode, {
@@ -72,9 +77,15 @@ function unilib.pkg.tree_willow_weeping.exec()
         description = S("Weeping Willow Wood Planks"),
         tiles = {"unilib_tree_willow_weeping_wood.png"},
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 1, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         is_ground_content = false,
+        paramtype2 = "facedir",
+        -- N.B. no .place_param2 in original code
+        place_param2 = place_param2,
+
+        -- N.B. no .on_place in original code
+        on_place = on_place,
     })
     unilib.register_craft({
         -- From ethereal:willow_wood
@@ -84,34 +95,36 @@ function unilib.pkg.tree_willow_weeping.exec()
         },
     })
     unilib.register_tree_wood_cuttings("willow_weeping")
-    unilib.set_auto_rotate("unilib:tree_willow_weeping_wood", unilib.auto_rotate_wood_flag)
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_willow_weeping_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_willow_weeping_leaves.png")
     unilib.register_node("unilib:tree_willow_weeping_leaves", "ethereal:willow_twig", mode, {
         -- From ethereal:willow_twig
-        description = unilib.annotate(S("Weeping Willow Tree Twig"), sci_name),
+        description = unilib.utils.annotate(S("Weeping Willow Tree Twig"), sci_name),
         tiles = {"unilib_tree_willow_weeping_leaves.png"},
         groups = {flammable = 2, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:tree_willow_weeping_sapling"}, rarity = 50},
-                {items = {"unilib:tree_willow_weeping_leaves"}}
-            }
+                {items = {"unilib:tree_willow_weeping_leaves"}},
+            },
         },
         inventory_image = inv_img,
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
     })
     unilib.register_quick_tree_leafdecay("willow_weeping")
+    unilib.register_tree_leaves_compacted("unilib:tree_willow_weeping_leaves", mode)
 
     unilib.register_tree_sapling({
         -- From ethereal:willow_sapling. Creates unilib:tree_willow_weeping_sapling
@@ -154,7 +167,8 @@ function unilib.pkg.tree_willow_weeping.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From ethereal:fencegate_willow. Creates unilib:gate_willow_weeping_closed
+        -- From ethereal:fencegate_willow_closed, etc. Creates unilib:gate_willow_weeping_closed,
+        --      etc
         part_name = "willow_weeping",
         orig_name = {"ethereal:fencegate_willow_closed", "ethereal:fencegate_willow_open"},
 
@@ -163,10 +177,10 @@ function unilib.pkg.tree_willow_weeping.exec()
         description = S("Weeping Willow Wood Fence Gate"),
     })
 
-    unilib.register_decoration("ethereal_tree_willow_weeping", {
+    unilib.register_decoration_generic("ethereal_tree_willow_weeping", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_willow_weeping.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_willow_weeping.mts",
 
         fill_ratio = 0.02,
         flags = "place_center_x, place_center_z",

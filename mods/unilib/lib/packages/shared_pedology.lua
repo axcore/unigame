@@ -9,7 +9,7 @@
 unilib.pkg.shared_pedology = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 -- Descriptions for various states of permeable wetness
 local wet_name_list = {[0] = S("Dry"),  S("Wet"), S("Watery"), S("Sludgy"), S("Muddy"), S("Slurry")}
@@ -26,7 +26,7 @@ local function do_ooze(pos, node, active_object_count, active_object_wider)
     -- Adapted from pedology/init.lua, was pedology.ooze()
     -- Performs the spread of wetness from a wetter node to an adjacent drier node
 
-    local wet = minetest.get_item_group(node.name, "wet")
+    local wet = core.get_item_group(node.name, "wet")
     if wet == 0 then
         return
     end
@@ -78,11 +78,11 @@ local function do_ooze(pos, node, active_object_count, active_object_wider)
 
         for j = 1, #neighbour_list[i] do
 
-            local node = minetest.get_node(neighbour_list[i][j])
+            local node = core.get_node(neighbour_list[i][j])
             local name = node.name
-            local dest_wet = minetest.get_item_group(name, "wet")
+            local dest_wet = core.get_item_group(name, "wet")
             if dest_wet < wet and
-                    minetest.get_item_group(name, "sucky") >= 1 and
+                    core.get_item_group(name, "sucky") >= 1 and
                     neighbour_list[i].min_wet <= (wet - dest_wet) then
 
                 unilib.pkg.shared_pedology.do_wet(neighbour_list[i][j])
@@ -102,7 +102,7 @@ local function do_suck(pos, node, active_object_count, active_object_wider)
     -- Adapted from pedology/init.lua, was pedology.suck()
     -- Wettens the node if many water nodes are neighbours, or are touching it at an edge or corner
 
-    local wet = minetest.get_item_group(node.name, "wet")
+    local wet = core.get_item_group(node.name, "wet")
     local score = 0
 
     -- These three tables contain the positions of all nodes around node
@@ -152,9 +152,9 @@ local function do_suck(pos, node, active_object_count, active_object_wider)
 
         for j = 1, #neighbour_list[i] do
 
-            local neighbor = minetest.get_node(neighbour_list[i][j])
+            local neighbor = core.get_node(neighbour_list[i][j])
             local name = neighbor.name
-            local water = minetest.get_item_group(name, "water")
+            local water = core.get_item_group(name, "water")
             if water >= 1 then
                 score = score + neighbour_list[i].rating
             end
@@ -177,7 +177,7 @@ local function do_suck(pos, node, active_object_count, active_object_wider)
     elseif wet == 5 and score >= 11 then
 
         -- Erosion: turn node into water
-        minetest.set_node(pos, {name = "unilib:liquid_water_fresh_source"})
+        core.set_node(pos, {name = "unilib:liquid_water_fresh_source"})
         return
 
     end
@@ -193,13 +193,13 @@ local function do_sun_dry(pos, node, active_object_count, active_object_wider)
     -- Adapted from pedology/init.lua, was pedology.sun_dry()
     -- Dries out a node when it is in direct sunlight
 
-    if minetest.get_item_group(node.name, "wet") < 6 then
+    if core.get_item_group(node.name, "wet") < 6 then
 
         -- Don’t dry off the node, if there is water nearby
-        if not minetest.find_node_near(pos, 1, {"group:water"}) then
+        if not core.find_node_near(pos, 1, {"group:water"}) then
 
-            local light = minetest.get_node_light(pos, minetest.get_timeofday())
-            if light >= unilib.pedology_dry_light then
+            local light = core.get_node_light(pos, core.get_timeofday())
+            if light >= unilib.setting.pedology_dry_light then
                 unilib.pkg.shared_pedology.do_dry(pos)
             end
 
@@ -220,21 +220,23 @@ local function get_drip_particle(pos, wet)
     --      least two "air" nodes (and when the MT setting permits it)
     -- This function creates particle-based dripping water
 
-    if minetest.env:get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name == "air" and
-            minetest.env:get_node({x = pos.x, y = pos.y - 2, z = pos.z}).name == "air" then
+    if core.env:get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name == "air" and
+            core.env:get_node({x = pos.x, y = pos.y - 2, z = pos.z}).name == "air" then
 
-        return minetest.add_particlespawner({
+        return core.add_particlespawner({
             amount = wet,
             time = 0,
-            minpos = {pos.x - (45 / 100), pos.y - 0.5, pos.z - (45 / 100)},
-            maxpos = {pos.x + (45 / 100), pos.y - 0.5, pos.z + (45 / 100)},
-            minvel = {0, -9.81, 0},
-            maxvel = {0, 0, 0},
-            minexptime = 1,
+            texture = "unilib_liquid_water_fresh.png",
+
             maxexptime = 3,
+            minexptime = 1,
+            maxpos = {pos.x + (45 / 100), pos.y - 0.5, pos.z + (45 / 100)},
+            minpos = {pos.x - (45 / 100), pos.y - 0.5, pos.z - (45 / 100)},
+            maxvel = {0, 0, 0},
+            minvel = {0, (unilib.constant.gravity * -1), 0},
+
             collisiondetection = true,
             vertical = true,
-            texture = "unilib_liquid_water_fresh.png",
         })
 
     else
@@ -251,11 +253,11 @@ local function create_drip(pos)
     --      least two "air" nodes (and when the MT setting permits it)
     -- This function creates entity-based dripping water
 
-    if minetest.env:get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name == "air" and
-            minetest.env:get_node({x = pos.x, y = pos.y - 2, z = pos.z}).name == "air" then
+    if core.env:get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name == "air" and
+            core.env:get_node({x = pos.x, y = pos.y - 2, z = pos.z}).name == "air" then
 
         local i = math.random(-45, 45) / 100
-        minetest.env:add_entity(
+        core.env:add_entity(
             {x = pos.x + i, y = pos.y - 0.5, z = pos.z + i},
             "unilib:entity_water_drop"
         )
@@ -330,14 +332,14 @@ local function register_permeable_node(data_table)
 
     local on_construct, on_destruct
 
-    if unilib.pedology_drip_mode == "particle" then
+    if unilib.setting.pedology_drip_mode == "particle" then
 
         on_construct = function(pos)
 
             local dripper = get_drip_particle(pos, wetness)
             if dripper ~= nil then
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 meta:set_int("dripper", dripper)
 
             end
@@ -346,10 +348,10 @@ local function register_permeable_node(data_table)
 
         on_destruct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local dripper = meta:get_int("dripper")
             if dripper ~= nil then
-                minetest.delete_particlespawner(dripper)
+                core.delete_particlespawner(dripper)
             end
 
         end
@@ -367,7 +369,7 @@ local function register_permeable_node(data_table)
         sounds = sound_table,
 
         drop = drop,
-        inventory_image = minetest.inventorycube("unilib_" .. item_name .. ".png"),
+        inventory_image = core.inventorycube("unilib_" .. item_name .. ".png"),
         paramtype = "light",
 
         on_construct = on_construct,
@@ -469,7 +471,7 @@ function unilib.pkg.shared_pedology.register_permeable_set(data_table)
         end
 
         if lump_description ~= nil then
-            this_lump_description = unilib.brackets(lump_description, wet_name_list[wetness])
+            this_lump_description = unilib.utils.brackets(lump_description, wet_name_list[wetness])
         end
 
         if lump_max_wet == -1 then
@@ -515,7 +517,7 @@ function unilib.pkg.shared_pedology.register_permeable_set(data_table)
             orig_part_name = orig_part_name,
             replace_mode = replace_mode,
             additional_table = mod_additional_table,
-            description = unilib.brackets(node_description, wet_name_list[wetness]),
+            description = unilib.utils.brackets(node_description, wet_name_list[wetness]),
             drop = drop,
             melting_point = melting_point,
             oozing_group = oozing_group,
@@ -531,9 +533,9 @@ function unilib.pkg.shared_pedology.register_permeable_set(data_table)
 
     end
 
-    if unilib.pedology_drip_mode == "entity" then
+    if unilib.setting.pedology_drip_mode == "entity" then
 
-        minetest.register_abm({
+        unilib.register_abm({
             label = "Drip from permeable stone [shared_pedology]",
             nodenames = dripping_list,
             neighbors = {"air"},
@@ -548,7 +550,7 @@ function unilib.pkg.shared_pedology.register_permeable_set(data_table)
 
     if node_max_wet > 0 then
 
-        minetest.register_abm({
+        unilib.register_abm({
             label = "Wetness spreads to nearby permeable nodes [shared_pedology]",
             nodenames = {"group:" .. part_name},
             neighbors = {"group:sucky"},
@@ -585,7 +587,7 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
     --      damage_per_second (str): e.g. 0
     --      drowning (str): e.g. 2
     --      flowing_description (str): e.g. "Flowing Fresh Water"
-    --      post_effect_color_table (str): e.g. {r = 100, b = 200, g = 100, a = 60}
+    --      rgb_table (str): e.g. {r = 100, b = 200, g = 100, a = 60}
     --      sludge_flag (str): True for clays/silts. The nodes are not registered as unilib liquids
     --          (though they have the same properties as other Minetest liquids), and their node
     --          names do not contain a "liquid" component. False for other liquids (in the original
@@ -603,8 +605,7 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
     local damage_per_second = data_table.damage_per_second or 0
     local drowning = data_table.drowning or 2
     local flowing_description = data_table.flowing_description or S("Flowing Water")
-    local post_effect_color_table = data_table.post_effect_color_table or
-            {r = 100, b = 200, g = 100, a = 60}
+    local rgb_table = data_table.rgb_table or {r = 100, b = 200, g = 100, a = 60}
     local sludge_flag = data_table.sludge_flag or false
     local source_description = data_table.source_description or S("Water Source")
     local viscosity = data_table.viscosity or 1
@@ -641,7 +642,7 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
         tiles = {img},
         groups = source_group_table,
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         damage_per_second = damage_per_second,
@@ -649,14 +650,16 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
         drawtype = "liquid",
         drop = "",
         drowning = drowning,
-        inventory_image = minetest.inventorycube(img),
+        inventory_image = core.inventorycube(img),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = flowing_full_name,
         liquid_alternative_source = source_full_name,
         liquid_viscosity = viscosity,
         liquidtype = "source",
         paramtype = "light",
         pointable = false,
-        post_effect_color = post_effect_color_table,
+        post_effect_color = rgb_table,
         special_tiles = {
             {name = img, backface_culling = false},
         },
@@ -668,7 +671,7 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
         tiles = {img},
         groups = flowing_group_table,
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.water,
+        sounds = unilib.global.sound_table.water,
 
         buildable_to = true,
         damage_per_second = damage_per_second,
@@ -676,7 +679,9 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
         drawtype = "flowingliquid",
         drop = "",
         drowning = drowning,
-        inventory_image = minetest.inventorycube(img),
+        inventory_image = core.inventorycube(img),
+        -- N.B. is_ground_content = false not in original code; added to match other liquids
+        is_ground_content = false,
         liquid_alternative_flowing = flowing_full_name,
         liquid_alternative_source = source_full_name,
         liquid_viscosity = viscosity,
@@ -684,7 +689,7 @@ function unilib.pkg.shared_pedology.register_liquid(data_table)
         paramtype = "light",
         paramtype2 = "flowingliquid",
         pointable = false,
-        post_effect_color = post_effect_color_table,
+        post_effect_color = rgb_table,
         special_tiles = {
             {name = img, backface_culling = false},
             {name = img, backface_culling = true},
@@ -704,15 +709,15 @@ function unilib.pkg.shared_pedology.do_dry(pos)
     -- Replace the node with a drier version of it, if available
     -- This is an API function available to any packages that want it
 
-    local node = minetest.get_node(pos)
-    local wet = minetest.get_item_group(node.name, "wet")
+    local node = core.get_node(pos)
+    local wet = core.get_item_group(node.name, "wet")
     local dried = tostring(wet - 1)
     if wet <= 0 then
         return
     end
 
     local new_name = string.sub(node.name, 1, #node.name - 1) .. dried
-    minetest.set_node(pos, {name = new_name, param1 = 0, param2 = 0})
+    core.set_node(pos, {name = new_name, param1 = 0, param2 = 0})
 
 end
 
@@ -722,9 +727,9 @@ function unilib.pkg.shared_pedology.do_wet(pos)
     -- Replace the node with a wetter version of it, if available
     -- This is an API function available to any packages that want it
 
-    local node = minetest.get_node(pos)
-    local wet = minetest.get_item_group(node.name, "wet")
-    local item_name = unilib.get_item_name(node.name)
+    local node = core.get_node(pos)
+    local wet = core.get_item_group(node.name, "wet")
+    local item_name = unilib.utils.get_item_name(node.name)
     local part_name = string.sub(item_name, 1, #item_name - 2)
 
     if overall_max_wet_table[part_name] == nil then
@@ -734,7 +739,7 @@ function unilib.pkg.shared_pedology.do_wet(pos)
     end
 
     local newbasename = string.sub(node.name, 1, #node.name - 1) .. tostring(wet + 1)
-    minetest.set_node(pos, {name = newbasename, param1 = 0, param2 = 0})
+    core.set_node(pos, {name = newbasename, param1 = 0, param2 = 0})
 
 end
 
@@ -778,26 +783,28 @@ function unilib.pkg.shared_pedology.exec()
         action = do_suck,
     })
 
-    if unilib.pedology_drip_mode == "entity" then
+    if unilib.setting.pedology_drip_mode == "entity" then
 
         -- Entity-based water drips
         unilib.register_entity("unilib:entity_water_drop", {
-            collisionbox = {0, 0, 0,0,0,0},
-            hp_max = 2000,
-            initial_sprite_basepos = {x = 0, y = 0},
-            physical = true,
-            spritediv = {x = 1, y = 1},
-            -- (Texture from the "liquid_water_fresh" package)
-            textures = {
-                "unilib_liquid_water_fresh.png",
-                "unilib_liquid_water_fresh.png",
-                "unilib_liquid_water_fresh.png",
-                "unilib_liquid_water_fresh.png",
-                "unilib_liquid_water_fresh.png",
-                "unilib_liquid_water_fresh.png",
+            initial_properties = {
+                collisionbox = {0, 0, 0, 0, 0, 0},
+                hp_max = 2000,
+                initial_sprite_basepos = {x = 0, y = 0},
+                physical = true,
+                spritediv = {x = 1, y = 1},
+                -- (Texture from the "liquid_water_fresh" package)
+                textures = {
+                    "unilib_liquid_water_fresh.png",
+                    "unilib_liquid_water_fresh.png",
+                    "unilib_liquid_water_fresh.png",
+                    "unilib_liquid_water_fresh.png",
+                    "unilib_liquid_water_fresh.png",
+                    "unilib_liquid_water_fresh.png",
+                },
+                visual = "cube",
+                visual_size = {x = 0.05, y = 0.1},
             },
-            visual = "cube",
-            visual_size = {x = 0.05, y = 0.1},
 
             on_activate = function(self, staticdata)
 
@@ -810,21 +817,22 @@ function unilib.pkg.shared_pedology.exec()
                 local k = math.random(1, 222)
                 local ownpos = self.object:get_pos()
 
-                if k==1 then
+                if k == 1 then
                     self.object:setacceleration({x = 0, y = -5, z = 0})
                 end
 
-                if minetest.env:get_node(
+                if core.env:get_node(
                     {x = ownpos.x, y = ownpos.y + 0.5, z = ownpos.z}
                 ).name == "air" then
                     self.object:setacceleration({x = 0, y = -5, z = 0})
                 end
 
-                if minetest.env:get_node(
+                if core.env:get_node(
                     {x = ownpos.x, y = ownpos.y - 0.5, z = ownpos.z}
                 ).name ~= "air" then
+
                     self.object:remove()
-                    minetest.sound_play(
+                    core.sound_play(
                         {name = "unilib_wetness_drip"},
                         {pos = ownpos, gain = 0.5, max_hear_distance = 8}
                     )

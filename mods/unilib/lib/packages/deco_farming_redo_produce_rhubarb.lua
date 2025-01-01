@@ -9,7 +9,7 @@
 unilib.pkg.deco_farming_redo_produce_rhubarb = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,18 +19,19 @@ function unilib.pkg.deco_farming_redo_produce_rhubarb.init()
 
     return {
         description = "Rhubarb as decoration",
-        depends = {"dirt_ordinary", "produce_rhubarb"},
+        depends = "produce_rhubarb",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
     }
 
 end
 
-function unilib.pkg.deco_farming_redo_produce_rhubarb.exec()
+function unilib.pkg.deco_farming_redo_produce_rhubarb.post()
 
-    unilib.register_decoration_now("farming_redo_produce_rhubarb", nil, {
+    unilib.register_decoration_complete("farming_redo_produce_rhubarb", nil, {
         -- From farming_redo/mapgen.lua
         -- Completes decoration in package "produce_rhubarb"
-        place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = 15,
+        place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary_with_turf_prairie"},
+        y_max = 20,
         y_min = 3,
     })
 

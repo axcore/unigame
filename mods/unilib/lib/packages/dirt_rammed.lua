@@ -9,7 +9,7 @@
 unilib.pkg.dirt_rammed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,12 +38,14 @@ function unilib.pkg.dirt_rammed.exec()
             "unilib_dirt_rammed_side.png"
         },
         groups = {cracky = 3, crumbly = 1, falling_node = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code; added to match other dirts
+        is_ground_content = false,
         paramtype = "light",
     })
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:rammed_earth
@@ -56,7 +58,7 @@ function unilib.pkg.dirt_rammed.exec()
         })
 
     end
-    if unilib.pkg_executed_table["dirt_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_dry"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:rammed_earth

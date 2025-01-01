@@ -9,7 +9,7 @@
 unilib.pkg.moss_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,11 @@ function unilib.pkg.moss_blue.exec()
         block_orig_name = "sickles:moss_block_blue",
         description = S("Blue Moss"),
         block_description = S("Blue Moss Block"),
-        dye = "cyan",
+        -- N.B. cyan dye in the original code
+        dye = "blue",
 
         replace_mode = mode,
-        tint = "#6c7eb070",
+        tint = "#5f75b280",
     })
 
 end

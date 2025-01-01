@@ -17,9 +17,9 @@
 unilib.pkg.stone_emutite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_emutite.exec()
         description = S("Emutite"),
 
         category = "other",
+        colour = "#ED8786",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,26 +88,22 @@ function unilib.pkg.stone_emutite.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:emutite. Creates unilib:stone_emutite_cobble_compressed
+        part_name = "emutite",
+        orig_name = "compressed:emutite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:emutite. Creates unilib:stone_emutite_cobble_compressed
-            part_name = "emutite",
-            orig_name = "compressed:emutite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Emutite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Emutite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:emutite. Creates unilib:stone_emutite_cobble_condensed
+        part_name = "emutite",
+        orig_name = "condensed:emutite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:emutite. Creates unilib:stone_emutite_cobble_condensed
-            part_name = "emutite",
-            orig_name = "condensed:emutite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Emutite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Emutite Cobble"),
+    })
 
 end

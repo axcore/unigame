@@ -9,7 +9,7 @@
 unilib.pkg.tree_oak = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_oak.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Quercus robur"
 
     unilib.register_tree({
@@ -47,7 +47,6 @@ function unilib.pkg.tree_oak.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -75,8 +74,10 @@ function unilib.pkg.tree_oak.exec()
     })
     unilib.register_leafdecay({
         -- From moretrees:oak_leaves
+        trunk_type = "oak",
         trunks = {"unilib:tree_oak_trunk"},
-        leaves = {"unilib:tree_oak_leaves", "unilib:ingredient_acorn"},
+        leaves = {"unilib:tree_oak_leaves"},
+        others = {"unilib:ingredient_acorn"},
         radius = 5,
     })
     unilib.register_craft({
@@ -140,7 +141,7 @@ function unilib.pkg.tree_oak.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:oak_gate. Creates unilib:gate_oak_closed
+        -- From moretrees:oak_gate_closed, etc. Creates unilib:gate_oak_closed, etc
         part_name = "oak",
         orig_name = {"moretrees:oak_gate_closed", "moretrees:oak_gate_open"},
 
@@ -155,11 +156,11 @@ function unilib.pkg.tree_oak.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(0.2),
-            temp_min = unilib.convert_biome_lib_temp(0.4),
+            temp_max = unilib.utils.convert_biome_lib_temp(0.2),
+            temp_min = unilib.utils.convert_biome_lib_temp(0.4),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 50,
             }),
         },

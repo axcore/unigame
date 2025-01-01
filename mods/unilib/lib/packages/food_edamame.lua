@@ -9,7 +9,7 @@
 unilib.pkg.food_edamame = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_edamame.exec()
         description = S("Uncooked Edamame"),
         tiles = {"unilib_food_edamame_raw.png"},
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_edamame_raw.png",
@@ -62,7 +62,7 @@ function unilib.pkg.food_edamame.exec()
         description = S("Cooked Edamame"),
         tiles = {"unilib_food_edamame_cooked.png"},
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_edamame_cooked.png",
@@ -75,7 +75,7 @@ function unilib.pkg.food_edamame.exec()
         walkable = false,
         wield_image = "unilib_food_edamame_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_edamame_cooked", 4, "unilib:utensil_plate_ceramic"
         ),
     })

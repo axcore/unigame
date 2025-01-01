@@ -9,7 +9,7 @@
 unilib.pkg.mineral_selenite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_selenite_rock.exec()
 
     local c_lump = "unilib:mineral_selenite_lump"
-    local hardness = unilib.mineral_table["selenite"]["hardness"]
+    local hardness = unilib.global.mineral_table["selenite"]["hardness"]
 
     unilib.register_mineral_rock("selenite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_selenite_rock.exec()
         description = S("Selenite Rock"),
         tiles = {"unilib_mineral_selenite_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

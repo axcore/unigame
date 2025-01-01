@@ -9,7 +9,7 @@
 unilib.pkg.misc_spikes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,6 +40,8 @@ function unilib.pkg.misc_spikes.exec()
         damage_per_second = 3,
         drawtype = "firelike",
         inventory_image = "unilib_misc_spikes.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -54,7 +56,7 @@ function unilib.pkg.misc_spikes.exec()
         recipe = {
             {"", "unilib:metal_steel_ingot", ""},
             {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

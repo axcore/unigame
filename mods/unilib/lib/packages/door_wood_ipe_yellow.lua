@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_ipe_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,7 +18,7 @@ local mode = unilib.imported_mod_table.farlands.add_mode
 function unilib.pkg.door_wood_ipe_yellow.init()
 
     return {
-        description = "Yellow ipe wood door",
+        description = "Yellow Ipê wood door",
         depends = "tree_ipe_yellow",
     }
 
@@ -27,11 +27,12 @@ end
 function unilib.pkg.door_wood_ipe_yellow.exec()
 
     unilib.register_door({
-        -- From farlands, doors:door_yellow_ipewood. Creates unilib:door_wood_ipe_yellow
+        -- From farlands, doors:door_yellow_ipewood. Creates
+        --      unilib:door_wood_ipe_yellow_closed_left, etc
         part_name = "wood_ipe_yellow",
-        orig_name = {nil, nil, nil, nil},
+        orig_name_list = {nil, nil, nil, nil},
         def_table = {
-            description = S("Yellow Ipe Wood Door"),
+            description = S("Yellow Ipê Wood Door"),
             tiles = {{name = "unilib_door_wood_ipe_yellow.png", backface_culling = true}},
             -- N.B. switched door = 1 to node = 1 for consistency with other packages
             groups = {choppy = 2, flammable = 2, node = 1, oddly_breakable_by_hand = 2},
@@ -42,7 +43,7 @@ function unilib.pkg.door_wood_ipe_yellow.exec()
                 {"unilib:tree_ipe_yellow_wood", "unilib:tree_ipe_yellow_wood"},
                 {"unilib:tree_ipe_yellow_wood", "unilib:tree_ipe_yellow_wood"},
                 {"unilib:tree_ipe_yellow_wood", "unilib:tree_ipe_yellow_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

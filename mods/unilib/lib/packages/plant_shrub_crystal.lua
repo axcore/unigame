@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_crystal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.plant_shrub_crystal.exec()
         description = S("Crystal Grass Shrub"),
         tiles = {"unilib_plant_shrub_crystal.png"},
         groups = {attached_node = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -47,5 +47,7 @@ function unilib.pkg.plant_shrub_crystal.exec()
         wield_image = "unilib_plant_shrub_crystal.png",
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_crystal", "ethereal:crystalgrass")
+
+    unilib.register_decoration_spare("unilib:plant_shrub_crystal")
 
 end

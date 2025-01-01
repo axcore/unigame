@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_icecream.exec()
         inventory_image = "unilib_food_icecream.png",
         groups = {food = 5, food_icecream = 1, food_icecream_base = 1, milk_product = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream", 3),
     })
     unilib.register_craft({
         type = "shapeless",

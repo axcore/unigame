@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_date = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,9 +20,7 @@ function unilib.pkg.tree_palm_date.init()
     return {
         description = "Date palm tree",
         notes = "Whereas palm trees spawn on ordinary sand, date palm trees spawn on desert sand" ..
-                " (and both require water nearby). The moretrees code for pollination and " ..
-                " regrowing dates was not imported, so dates will not regrow even when the" ..
-                " Minetest setting is enabled. Produces dates",
+                " (and both require water nearby). Produces dates",
         depends = {"fruit_date", "shared_moretrees"},
         optional = "sand_desert",
     }
@@ -31,7 +29,7 @@ end
 
 function unilib.pkg.tree_palm_date.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Phoenix dactylifera"
 
     unilib.register_tree({
@@ -51,7 +49,6 @@ function unilib.pkg.tree_palm_date.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -79,8 +76,10 @@ function unilib.pkg.tree_palm_date.exec()
     })
     unilib.register_leafdecay({
         -- From moretrees:date_palm_leaves
+        trunk_type = "palm_date",
         trunks = {"unilib:tree_palm_date_trunk"},
-        leaves = {"unilib:tree_palm_date_leaves", "unilib:fruit_date_hanging"},
+        leaves = {"unilib:tree_palm_date_leaves"},
+        others = {"unilib:fruit_date_hanging"},
         -- N.B. A large radius is required, because the tree's "brances" are made out of leaves
         radius = 14,
     })
@@ -91,96 +90,40 @@ function unilib.pkg.tree_palm_date.exec()
         burntime = 1,
     })
 
-    -- Notes from moretrees:
-    -- Dates can't be generated as fruit, because there is no support for the special fruit trunks
-    --      that allow dates to regrow at the correct position in the tree
-    -- So, a placeholder fruit trunk is spawned. An ABM will convert it to the final fruit trunk,
-    --      and generate the actual dates
-    local original_table = minetest.registered_nodes["unilib:tree_palm_date_trunk"]
-    -- Definition table for the placeholder node created by the l-system model
-    local placeholder_table = {}
-    -- Definition table for the replacement node, under which coconut is spawned
-    local fertile_table = {}
-
-    for k,v in pairs(original_table) do
-
-        placeholder_table[k] = v
-        fertile_table[k] = v
-
-    end
-
-    placeholder_table.tiles = {}
-    fertile_table.tiles = {}
-
-    for k,v in pairs(original_table.tiles) do
-
-        placeholder_table.tiles[k] = v
-        fertile_table.tiles[k] = v
-
-    end
-
-    -- Notes from moretrees:
-    -- Make the different trunk types distinguishable (but barely)
-    placeholder_table.tiles[1] = "unilib_tree_palm_date_trunk_top.png^[transformR180"
-    placeholder_table.groups.not_in_creative_inventory = 1
-    placeholder_table.drop = "unilib:tree_palm_date_trunk"
-    -- N.B. Function commented out, as nothing seems to call it
-    --[[
-    placeholder_table.after_destruct = function(pos, oldnode)
-
-        local date_list = minetest.find_nodes_in_area(
-            {x = pos.x - 2, y = pos.y, z = pos.z - 2},
-            {x = pos.x + 2, y = pos.y, z = pos.z + 2},
-            {"unilib:fruit_date_hanging"}
-        )
-
-        for _, date_pos in pairs(date_list) do
-
-            local item_str_list = minetest.get_node_drops(minetest.get_node(date_pos).name)
-            minetest.swap_node(date_pos, {name = "air"})
-            for _, item_str_name in pairs(item_str_list) do
-                minetest.add_item(date_pos, item_str_name)
-            end
-
-        end
-
-    end
-    ]]--
-
-    unilib.register_node(
-        -- From moretrees:palm_date_trunk_gen
-        "unilib:tree_palm_date_trunk_placeholder",
-        "moretrees:palm_date_trunk_gen",
-        mode,
-        placeholder_table
-    )
-
-    fertile_table.tiles[1] = "unilib_tree_palm_trunk_top.png^[transformR90"
+    -- The original moretrees mod had some special code that allowed fruit to re-grow under certain
+    --      conditions (including the requirement for a male tree to be nearby)
+    -- Much of that special code has not been imported. Instead, the imported ABM has been
+    --      re-designed to occasionally regrow the fruit, if unilib.setting.regrow_fruit_flag
+    --      permits it. Otherwise, the fruit are "grown" just once, almost immediately after the
+    --      tree spawns
+    -- Comments in the original moretrees code describe why an ABM is necessary: "Dates can't be
+    --      generated as fruit, because there is no support for the special fruit trunks that allow
+    --      dates to regrow at the correct position in the tree"
+    local original_table = core.registered_nodes["unilib:tree_palm_date_trunk"]
+    -- N.B. Our "fertile" trunk looks the same as the normal trunk; we don't flip the textures as
+    --      the original code did
+    local fertile_table = unilib.utils.clone_simple_table(original_table)
     fertile_table.groups.not_in_creative_inventory = 1
-    fertile_table.drop = "unilib:tree_palm_trunk"
+    fertile_table.drop = "unilib:tree_palm_date_trunk"
 
     unilib.register_node(
-        -- From moretrees:date_palm_fruit_trunk, etc
+        -- From moretrees:palm_date_trunk_gen, moretrees:date_palm_fruit_trunk, etc
         "unilib:tree_palm_date_trunk_fertile",
-        {"moretrees:date_palm_fruit_trunk", "moretrees:date_palm_fruit_trunk"},
+        {"moretrees:palm_date_trunk_gen", "moretrees:date_palm_fruit_trunk"},
         mode,
         fertile_table
     )
 
-    if unilib.super_tree_table["palm_date"] ~= nil then
+    unilib.register_tree_trunk_stripped({
+        -- From moretrees:date_palm_trunk. Creates unilib:tree_palm_date_trunk_stripped
+        part_name = "palm_date",
+        orig_name = {"moretrees:date_palm_fruit_trunk", "moretrees:date_palm_fruit_trunk"},
 
-        unilib.register_tree_trunk_stripped({
-            -- From moretrees:date_palm_trunk. Creates unilib:tree_palm_date_trunk_stripped
-            part_name = "palm_date",
-            orig_name = {"moretrees:date_palm_fruit_trunk", "moretrees:date_palm_fruit_trunk"},
-
-            replace_mode = mode,
-            description = S("Date Palm Tree Trunk"),
-            group_table = fertile_table.groups,
-            variant_name = "fertile",
-        })
-
-    end
+        replace_mode = mode,
+        description = S("Date Palm Tree Trunk"),
+        group_table = fertile_table.groups,
+        variant_name = "fertile",
+    })
 
     unilib.register_tree_sapling({
         -- From moretrees:palm_date_sapling. Creates unilib:tree_palm_date_sapling
@@ -196,7 +139,7 @@ function unilib.pkg.tree_palm_date.exec()
         ltree_model = {
             trunk = "unilib:tree_palm_date_trunk",
             leaves = "unilib:tree_palm_date_leaves",
-            fruit = "unilib:tree_palm_date_trunk_placeholder",
+            fruit = "unilib:tree_palm_date_trunk_fertile",
 
             angle = 18,
             axiom = "TTTTddddddddddccccccccccRT[TTT]" ..
@@ -221,43 +164,63 @@ function unilib.pkg.tree_palm_date.exec()
         under_list = {"unilib:sand_desert", "default:desert_sand"},
     })
 
-    -- ABM to spawn initial coconuts
+    -- ABM to spawn initial fruits
+    local interval = 1
+    if unilib.setting.regrow_fruit_flag then
+        interval = math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max)
+    end
+
     unilib.register_abm({
-        label = "Spawn initial coconuts [tree_palm_date]",
-        nodenames = {"unilib:tree_palm_date_trunk_placeholder"},
+        label = "Spawn initial dates, and later regrow them [tree_palm_date]",
+        nodenames = {"unilib:tree_palm_date_trunk_fertile"},
 
         chance = 1,
-        interval = 1,
+        interval = interval,
 
         action = function(pos, node, active_object_count, active_object_count_wider)
 
-            -- Replace the placeholder
-            minetest.swap_node(pos, {name = "unilib:tree_palm_date_trunk_fertile"})
-
-            -- Spawn dates
-            local pos_list = minetest.find_nodes_in_area(
-                {x = pos.x - 2, y = pos.y, z = pos.z - 2},
-                {x = pos.x + 2, y = pos.y, z = pos.z + 2},
-                "air"
-            )
-
-            local gen_list = {}
-            for k,v in pairs(pos_list) do
-                gen_list[k] = {x = math.random(100), pos = v}
+            -- If regrowing fruit is disabled, replace the "fertile" trunk with a normal one
+            if not unilib.setting.regrow_fruit_flag then
+                core.swap_node(pos, {name = "unilib:tree_palm_date_trunk"})
             end
 
-            table.sort(gen_list, function(a, b) return a.x < b.x; end)
+            -- Count dates in the immediate vicinity; a maximum of four are allowed
+            local fruit_list = core.find_nodes_in_area(
+                {x = pos.x - 2, y = pos.y, z = pos.z - 2},
+                {x = pos.x + 2, y = pos.y, z = pos.z + 2},
+                "unilib:fruit_date_hanging"
+            )
 
-            local count = 0
-            for _, gen in pairs(gen_list) do
+            local count = #fruit_list
+            if count < 4 then
 
-                minetest.swap_node(gen.pos, {name = "unilib:fruit_date_hanging"})
-                count = count + 1
-                if count == 4 then
-                    break
+                -- Spawn (or regrow) dates
+                local pos_list = core.find_nodes_in_area(
+                    {x = pos.x - 2, y = pos.y, z = pos.z - 2},
+                    {x = pos.x + 2, y = pos.y, z = pos.z + 2},
+                    "air"
+                )
+
+                local gen_list = {}
+                for k, v in pairs(pos_list) do
+                    gen_list[k] = {x = math.random(100), pos = v}
+                end
+
+                table.sort(gen_list, function(a, b) return a.x < b.x; end)
+
+                local count = 0
+                for _, gen in pairs(gen_list) do
+
+                    core.swap_node(gen.pos, {name = "unilib:fruit_date_hanging"})
+                    count = count + 1
+                    if count == 4 then
+                        break
+                    end
+
                 end
 
             end
+
         end,
     })
 
@@ -282,7 +245,7 @@ function unilib.pkg.tree_palm_date.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:date_palm_gate. Creates unilib:gate_palm_date_closed
+        -- From moretrees:date_palm_gate_closed, etc. Creates unilib:gate_palm_date_closed, etc
         part_name = "palm_date",
         orig_name = {"moretrees:date_palm_gate_closed", "moretrees:date_palm_gate_open"},
 
@@ -298,11 +261,11 @@ function unilib.pkg.tree_palm_date.exec()
         replace_mode = mode,
 
         climate_table = {
-            humidity_max = unilib.convert_biome_lib_temp(0.20),
-            temp_min = unilib.convert_biome_lib_temp(-0.20),
+            humidity_max = unilib.utils.convert_biome_lib_temp(0.20),
+            temp_min = unilib.utils.convert_biome_lib_temp(-0.20),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 10,
             }),
         },

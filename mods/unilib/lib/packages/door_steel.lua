@@ -9,7 +9,7 @@
 unilib.pkg.door_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.doors.add_mode
+local mode = unilib.global.imported_mod_table.doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_steel.exec()
 
     unilib.register_door({
-        -- From doors:door_steel. Creates unilib:door_steel
+        -- From doors:door_steel. Creates unilib:door_steel_closed_left, etc
         part_name = "steel",
-        orig_name = {
+        orig_name_list = {
             "doors:door_steel_a",
             "doors:door_steel_b",
             "doors:door_steel_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_steel.exec()
             description = S("Steel Door"),
             tiles = {{ name = "unilib_door_steel.png", backface_culling = true }},
             groups = {cracky = 1, level = 2, node = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             gain_close = 0.2,
             gain_open = 0.2,

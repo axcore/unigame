@@ -9,7 +9,7 @@
 unilib.pkg.clay_baked_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.clay_baked_basic.init()
 
     return {
         description = "Basic baked clay set (16 clays), with matching glazed terracotta",
-        depends = "dye_basic",
+        depends = {"dye_basic", "shared_bakedclay"},
         optional = "brick_ordinary",
         at_least_one = {"clay_brown", "clay_ordinary"},
     }
@@ -61,7 +61,7 @@ function unilib.pkg.clay_baked_basic.exec()
         local translated_name = row_list[3]
         local description = row_list[4]
 
-        unilib.register_clay_baked({
+        unilib.pkg.shared_bakedclay.register_baked_clay({
             -- From bakedclay:black, etc. Creates unilib:clay_baked_black, etc
             part_name = part_name,
             orig_name = "bakedclay:" .. orig_name,
@@ -82,7 +82,7 @@ function unilib.pkg.clay_baked_basic.exec()
                 "bakedclay:terracotta_" .. part_name,
                 mode,
                 {
-                    description = unilib.brackets(S("Glazed Terracotta"), translated_name),
+                    description = unilib.utils.brackets(S("Glazed Terracotta"), translated_name),
                     tiles = {
                         img,
                         img,
@@ -92,11 +92,11 @@ function unilib.pkg.clay_baked_basic.exec()
                         img .. "^[transformR90",
                     },
                     groups = {cracky = 3, terracotta = 1},
-                    sounds = unilib.sound_table.stone,
+                    sounds = unilib.global.sound_table.stone,
 
                     paramtype2 = "facedir",
 
-                    on_place = minetest.rotate_node,
+                    on_place = core.rotate_node,
                 }
             )
             unilib.register_craft({
@@ -111,7 +111,7 @@ function unilib.pkg.clay_baked_basic.exec()
     end
 
     -- Cook clays to make the "natural" baked clay, from which coloured baked clays can be crafted
-    if unilib.pkg_executed_table["clay_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From bakedclay:natural
@@ -121,7 +121,7 @@ function unilib.pkg.clay_baked_basic.exec()
         })
 
         -- (Can also craft ordinary bricks)
-        if unilib.pkg_executed_table["brick_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["brick_ordinary"] ~= nil then
 
             unilib.register_craft({
                 -- From default:clay_brick
@@ -129,14 +129,14 @@ function unilib.pkg.clay_baked_basic.exec()
                 recipe = {
                     {"unilib:clay_baked_red", "unilib:clay_baked_red"},
                     {"unilib:clay_baked_red", "unilib:clay_baked_red"},
-                }
+                },
             })
 
         end
 
     end
 
-    if unilib.pkg_executed_table["clay_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["clay_brown"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

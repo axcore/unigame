@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_lowland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "kauri_forest" biome
         name = "aotearoa_lowland_kauri_forest",
-        description = unilib.brackets(S("Kauri forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Kauri forest biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_dry",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -58,7 +58,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "northern_podocarp_forest" biome
         name = "aotearoa_lowland_northern_podocarp_forest",
-        description = unilib.brackets(S("Northern podocarp forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Northern podocarp forest biome"), "aotearoa"),
         node_top = "unilib:dirt_antipodean_dark_with_litter_wet",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -76,7 +76,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "tawa_forest" biome
         name = "aotearoa_lowland_tawa_forest",
-        description = unilib.brackets(S("Tawa biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Tawa biome"), "aotearoa"),
         node_top = "unilib:dirt_antipodean_dark_with_litter_wet",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -94,7 +94,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "maire_forest" biome
         name = "aotearoa_lowland_maire_forest",
-        description = unilib.brackets(S("Maire biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Maire biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_dry",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -112,7 +112,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "southern_podocarp_forest" biome
         name = "aotearoa_lowland_southern_podocarp_forest",
-        description = unilib.brackets(S("Southern podocarp biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Southern podocarp biome"), "aotearoa"),
         node_top = "unilib:dirt_antipodean_dark_with_litter_wet",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -130,7 +130,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "hinau_forest" biome
         name = "aotearoa_lowland_hinau_forest",
-        description = unilib.brackets(S("Hinau biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Hinau biome"), "aotearoa"),
         node_top = "unilib:dirt_ordinary_with_litter_dry",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -148,7 +148,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "beech_forest" biome
         name = "aotearoa_lowland_beech_forest",
-        description = unilib.brackets(S("Beech biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Beech biome"), "aotearoa"),
         node_top = "unilib:dirt_antipodean_dark_with_litter_beech",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
@@ -166,7 +166,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "fiordland_forest" biome
         name = "aotearoa_lowland_fiordland_forest",
-        description = unilib.brackets(S("Fiordland forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Fiordland forest biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_antipodean_dark_with_litter_beech",
         depth_top = 1,
@@ -185,7 +185,7 @@ function unilib.pkg.biome_aotearoa_lowland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "kamahi_forest" biome
         name = "aotearoa_lowland_kamahi_forest",
-        description = unilib.brackets(S("Kamahi forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Kamahi forest biome"), "aotearoa"),
         node_top = "unilib:dirt_antipodean_with_moss",
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",

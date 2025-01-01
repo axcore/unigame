@@ -2,12 +2,14 @@
 #       ore packages, and custom dirt packages
 # ("new" means that the material was imported directly from GLEM, not from one of GLEM's source
 #       mods)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # glemr4 packages
-decor_rockwall_stone_ordinary|glemr4
+decor_rockwall_stone_ordinary|glemr4 glemr6
+decor_stone_cracked|glemr4
+decor_stone_dirty|glemr4
+decor_stone_sandy|glemr4
 dirt_black|glemr4
 dirt_brown|glemr4
 fern_broad_leaf_young|glemr4
@@ -28,9 +30,6 @@ sand_volcanic_dust|glemr4
 sand_white|glemr4
 stone_andesite_grey|glemr4
 stone_brownstone_dark|glemr4
-stone_desert_with_cracks|glemr4
-stone_desert_with_sand|glemr4
-stone_ordinary_with_dirt|glemr4
 stone_sandstone_brown|glemr4
 stone_sandstone_white|glemr4
 tree_ash|glemr4
@@ -62,8 +61,6 @@ vine_jungle_knotted|glemr4
 
 # glemr6 packages
 coral_pillar_orange|glemr6
-decor_rockwall_stone_desert_dark|glemr6
-decor_rockwall_stone_ordinary_dark|glemr6
 decor_paving_slate|glemr6
 dirt_mud_wet|glemr6
 dirt_permafrost_dark|glemr6
@@ -73,17 +70,16 @@ misc_frame_steel_thin|glemr6
 misc_frame_wood_rose|glemr6
 misc_frame_wood_screen|glemr6
 misc_frame_wood_thin|glemr6
-plant_kelp_yellow|glemr6
+plant_kelp_yellow|farlands
 sand_silica|glemr6
-stone_desert_with_dirt|glemr6
 stone_sandstone_ordinary_with_mural|farlands
 
 # glemr11 packages
 bucket_clay|earthbuild
 bush_hawthorn|glemr11
 bush_rhododendron|glemr11
+coral_block_sponge|glemr11
 coral_rooted_spider|glemr11
-coral_sponge|glemr11
 flower_dandelion_white_cluster|glemr11
 flower_dandelion_yellow_cluster|glemr11
 flower_dandelion_yellow_tall|glemr11
@@ -98,18 +94,6 @@ grass_swamp_dark|glemr11
 grass_wild|glemr11
 gravel_stone_desert|glemr11
 liquid_lava_cooling|glemr11
-liquid_molten_bronze|glemr11
-liquid_molten_chromium|glemr11
-liquid_molten_copper|glemr11
-liquid_molten_gold|glemr11
-liquid_molten_lead|glemr11
-liquid_molten_mercury|glemr11
-liquid_molten_mese|glemr11
-liquid_molten_mithril|glemr11
-liquid_molten_silver|glemr11
-liquid_molten_steel|glemr11
-liquid_molten_tin|glemr11
-liquid_molten_zinc|glemr11
 liquid_water_swamp|glemr11
 mushroom_green_lime|glemr11
 mushroom_milkcap|glemr11
@@ -153,50 +137,45 @@ tree_teak|glemr11
 # supporting packages (.depends)
 clay_ordinary|default
 coral_block_skeleton|default
+dirt_ordinary|default farming moreblocks
 dye_basic|dye bakedclay
 fruit_coconut|ethereal
 glass_ordinary|default moreblocks vessels
-gravel_ordinary|default mtg_plus
 ingredient_acorn|moretrees
 item_stick_ordinary|default
 liquid_water_ordinary|default
-metal_bronze|default technic
-metal_chromium|technic_worldgen technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
 metal_iron|default
-metal_lead|technic_worldgen technic
-metal_mercury|unilib
-metal_mithril|moreores technic
-metal_silver|moreores technic
-metal_steel|default technic
-metal_tin|default technic
-metal_zinc|technic_worldgen technic
-mineral_coal|default technic
-mineral_flint|default fire mtg_plus
-mineral_mese|default
+metal_steel|default glemr11 technic
 plant_shrub_banana|farlands
 roof_slate_normal|cottages
+sand_desert|default farming
 sand_ordinary|default
 shared_coral_pillar|glemr6
-shared_xocean|xocean
-stone_desert|default moreblocks
+shared_tsm_pyramids_engravings|tsm_pyramids
+soil_sand_desert|farming
 stone_ordinary|default moreblocks technic
-tree_fern_giant|ferns
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_ordinary_with_engraving|tsm_pyramids
 tree_jungle|default doors moreblocks
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
-#container_chest_ordinary|default
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #flower_dandelion_white|flowers
 #flower_dandelion_yellow|flowers
 #flower_geranium_blue|flowers
 #flower_rose_black|cropocalypse
 #flower_rose_red|flowers
+#grass_dry|default
 #grass_jungle|default
+#grass_ordinary|default
+#gravel_sandstone_ordinary|unilib
+#machine_furnace_induction|unilib
+#mineral_coal|default technic
+#mineral_mese|default glemr11
 #moss_green|sickles
+#moss_pink|unilib
 #mushroom_brown|flowers
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
@@ -204,3 +183,7 @@ tree_jungle|default doors moreblocks
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
 #utensil_board_cutting|farming
+
+# supporting packages (.suggested)
+#tool_pick_wood|default
+

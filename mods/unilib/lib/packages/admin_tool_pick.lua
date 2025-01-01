@@ -9,7 +9,7 @@
 unilib.pkg.admin_tool_pick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 local toolcaps_table = {
     damage_groups = {fleshy = 1000},
@@ -46,9 +46,9 @@ function unilib.pkg.admin_tool_pick.exec()
     -- Admin pickaxes for breaking maptools nodes
     unilib.register_tool("unilib:admin_tool_pick_without_drop", "maptools:pick_admin", mode, {
         -- From maptools:pick_admin
-        description = unilib.hint(S("Admin Pickaxe"), S("without drops")),
+        description = unilib.utils.hint(S("Admin Pickaxe"), S("without drops")),
         inventory_image = "unilib_admin_tool_pick_without_drop.png",
-        groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+        groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
         -- (no sounds)
 
         range = 20,
@@ -63,9 +63,9 @@ function unilib.pkg.admin_tool_pick.exec()
         "maptools:pick_admin_with_drops",
         mode,
         {
-            description = unilib.hint(S("Admin Pickaxe"), S("with drops")),
+            description = unilib.utils.hint(S("Admin Pickaxe"), S("with drops")),
             inventory_image = "unilib_admin_tool_pick_with_drop.png",
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             range = 20,
@@ -75,28 +75,38 @@ function unilib.pkg.admin_tool_pick.exec()
         }
     )
 
-    minetest.register_on_punchnode(function(pos, node, puncher)
+    core.register_on_punchnode(function(pos, node, puncher)
 
         if (
             puncher:get_wielded_item():get_name() == "unilib:admin_tool_pick_without_drop" or
             puncher:get_wielded_item():get_name() == "unilib:admin_tool_pick_with_drop"
-        ) and minetest.get_node(pos).name ~= "air" then
+        ) and core.get_node(pos).name ~= "air" then
 
-            unilib.log(
+            --[[
+            unilib.utils.log(
                 "action",
                 puncher:get_player_name() ..
                 " digs " ..
-                minetest.get_node(pos).name ..
+                core.get_node(pos).name ..
                 " at " ..
-                minetest.pos_to_string(pos) ..
+                core.pos_to_string(pos) ..
                 " using an Admin Pickaxe."
+            )
+            ]]--
+            unilib.utils.log_player_action(
+                puncher,
+                "digs",
+                core.get_node(pos).name,
+                "at",
+                core.pos_to_string(pos),
+                "using an Admin Pickaxe"
             )
 
             -- The node is removed directly, which means it even works on non-empty containers and
             --      group-less nodes
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             -- Run node update actions like falling nodes
-            minetest.check_for_falling(pos)
+            core.check_for_falling(pos)
 
         end
 

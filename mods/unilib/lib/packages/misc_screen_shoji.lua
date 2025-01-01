@@ -9,7 +9,7 @@
 unilib.pkg.misc_screen_shoji = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_screen_shoji.exec()
         description = S("Shoji Screen"),
         tiles = {"unilib_misc_screen_shoji.png"},
         groups = {snappy = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_screen_shoji.png",
@@ -40,14 +40,14 @@ function unilib.pkg.misc_screen_shoji.exec()
         node_box = {
             type = "fixed",
             fixed = {
-                {-0.5, -0.5, 5/11, 0.5, 0.5, 8/16}
-            }
+                {-0.5, -0.5, 5/11, 0.5, 0.5, 0.5},
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
-            fixed = {-0.5, -0.5, 5/11, 0.5, 0.5, 8/16}
+            fixed = {-0.5, -0.5, 5/11, 0.5, 0.5, 0.5},
         },
         sunlight_propagates = true,
         walkable = true,

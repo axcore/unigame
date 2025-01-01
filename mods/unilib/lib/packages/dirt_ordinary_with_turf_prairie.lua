@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_turf_prairie = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,15 +40,18 @@ function unilib.pkg.dirt_ordinary_with_turf_prairie.exec()
                 {
                     name = "unilib_dirt_ordinary.png^unilib_turf_prairie_side_overlay.png",
                     tileable_vertical = false
-                }
+                },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
@@ -56,9 +59,9 @@ function unilib.pkg.dirt_ordinary_with_turf_prairie.exec()
         wet_soil = "unilib:soil_ordinary_wet",
         turf_description = S("Prairie Turf"),
     })
-    if unilib.pkg_executed_table["misc_petals"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_petals"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_turf_prairie",
             "unilib:dirt_ordinary",
             "unilib:misc_petals"

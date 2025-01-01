@@ -9,7 +9,7 @@
 unilib.pkg.mineral_sodalite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

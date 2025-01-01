@@ -4,7 +4,6 @@
 #       added to minetest_game packages, rather than being added to a separate moreblocks package,
 #       as they ordinarily would be
 # moreblocks nodes marked as "deprecated" have not been imported
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -42,27 +41,28 @@ glass_ordinary|default moreblocks vessels
 grass_jungle|default
 item_stick_ordinary|default
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
-mineral_mese|default
+mineral_mese|default glemr11
 plant_cactus_ordinary|default
 stone_ordinary|default moreblocks technic
 torch_ordinary|default
 tree_pine|default doors moreblocks
 
 # supporting packages (.at_least_one)
-metal_bronze|default technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_gold|default glemr11 technic
 mineral_diamond|default mtg_plus
 
 # supporting packages (.optional)
 #crop_cotton|farming
 #crop_rice_white|farming
 #gravel_ordinary|default mtg_plus
+#machine_furnace_induction|unilib
 #moss_green|sickles
 #mushroom_red|flowers
 #plant_shrub_dry|default
 
 # supporting packages (.suggested)
-#item_book_ordinary|default
-#vessel_bottle_glass_empty|thirsty vessels
+item_book_ordinary|default
+vessel_bottle_glass_empty|thirsty vessels

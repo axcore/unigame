@@ -9,7 +9,7 @@
 unilib.pkg.brick_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.brick_ordinary.exec()
         output = "unilib:brick_ordinary 4",
         recipe = {
             {"unilib:brick_ordinary_block"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:clay_brick
@@ -53,7 +53,7 @@ function unilib.pkg.brick_ordinary.exec()
             "unilib_brick_ordinary_block.png",
         },
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -63,25 +63,26 @@ function unilib.pkg.brick_ordinary.exec()
         ingredient = "unilib:brick_ordinary",
     })
     unilib.register_stairs("unilib:brick_ordinary_block")
-    unilib.register_carvings("unilib:brick_ordinary_block", {
-        column_flag = true,
-        millwork_flag = true,
-    })
-    unilib.set_auto_rotate("unilib:brick_ordinary_block", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:brick_ordinary_block", unilib.setting.auto_rotate_brick_flag
+    )
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         -- A vertical brick block, because similar-looking items imported from the "morebricks"
         --      mod have one
         unilib.register_node("unilib:brick_ordinary_block_vertical", nil, mode, {
             -- Original to unilib
-            description = unilib.brackets(S("Ordinary Brick Block"), S("Vertical")),
+            description = unilib.utils.brackets(S("Ordinary Brick Block"), S("Vertical")),
             tiles = {"unilib_brick_ordinary_block_vertical.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         })
+        -- N.B. This craft recipe, which matches those used by bricks in the "morebricks" mod,
+        --      conflicts with the recipe above
+        --[[
         unilib.register_craft({
             -- Original to unilib
             output = "unilib:brick_ordinary_block_vertical",
@@ -89,10 +90,19 @@ function unilib.pkg.brick_ordinary.exec()
                 {"unilib:brick_ordinary_block"},
             },
         })
+        ]]--
+        unilib.register_craft({
+            -- Original to unilib
+            output = "unilib:brick_ordinary_block_vertical 4",
+            recipe = {
+                {"unilib:brick_ordinary_block", "unilib:brick_ordinary_block"},
+                {"unilib:brick_ordinary_block", "unilib:brick_ordinary_block"},
+            },
+        })
         unilib.register_stairs("unilib:brick_ordinary_block_vertical")
-        unilib.set_auto_rotate(
+        unilib.utils.set_auto_rotate(
             "unilib:brick_ordinary_block_vertical",
-            unilib.auto_rotate_brick_flag
+            unilib.setting.auto_rotate_brick_flag
         )
 
     end

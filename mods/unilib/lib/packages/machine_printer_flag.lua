@@ -9,7 +9,8 @@
 unilib.pkg.machine_printer_flag = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.offend_flags.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.offend_flags.add_mode
 
 local flag_data_list = {}
 
@@ -26,7 +27,7 @@ local function check_supplies(pos)
     -- Return values:
     --      Returns true if flags can be displayed, false if they can't be displayed
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local redcart = inv:get_stack("redcart", 1)
     local greencart = inv:get_stack("greencart", 1)
@@ -64,7 +65,7 @@ local function consume_ink(pos, amount)
     -- Args:
     --      amount (int): The amount of ink needed to print the flag
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local redcart = inv:get_stack("redcart", 1)
     local greencart = inv:get_stack("greencart", 1)
@@ -90,7 +91,7 @@ local function populate_output(pos)
 
     local typescount = unilib.pkg.shared_offend_flags.flag_count
     local pagesize = 8 * 5
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local page = meta:get_int("page")
     local maxpage = math.ceil(typescount / pagesize)
@@ -114,14 +115,14 @@ local function populate_output(pos)
 
     meta:set_string("formspec", "size[11,10]" ..
         -- Cartridges
-        "label[0,0;" .. S("Red\nCartrige") .. "]" ..
+        "label[0,0;" .. FS("Red\nCartrige") .. "]" ..
         "list[current_name;redcart;1.5,0;1,1;]" ..
-        "label[0,1;" .. S("Green\nCartridge") .. "]" ..
+        "label[0,1;" .. FS("Green\nCartridge") .. "]" ..
         "list[current_name;greencart;1.5,1;1,1;]" ..
-        "label[0,2;" .. S("Blue\nCartridge") .. "]" ..
+        "label[0,2;" .. FS("Blue\nCartridge") .. "]" ..
         "list[current_name;bluecart;1.5,2;1,1;]" ..
         -- Masts
-        "label[0,3;" .. S("Blank\nFlags") .. "]" ..
+        "label[0,3;" .. FS("Blank\nFlags") .. "]" ..
         "list[current_name;mast;1.5,3;1,1;]" ..
         -- List of flags
         "list[current_name;output;2.8,0;8,5;" .. tostring((page - 1) * pagesize) .. "]" ..
@@ -130,7 +131,7 @@ local function populate_output(pos)
         -- Page buttons
         "button[5.5,5;1,1;prevpage;<<<]" ..
         "button[8.5,5;1,1;nextpage;>>>]" ..
-        "label[6.75,5.25;Page " .. page .. " of " .. maxpage .. "]" ..
+        "label[6.75,5.25;" .. FS("Page @1 of @2", page, maxpage) .. "]" ..
         -- List rings
         "listring[current_player;main]" ..
         "listring[current_name;redcart]" ..
@@ -152,7 +153,7 @@ end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local stack_name = stack:get_name()
     local stack_count = stack:get_count()
@@ -283,7 +284,7 @@ end
 
 local function can_dig(pos)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     return (
@@ -297,7 +298,7 @@ end
 
 local function on_construct(pos)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     meta:set_int("page", 1)
@@ -320,7 +321,7 @@ end
 
 local function on_metadata_inventory_take(pos, listname, index, stack, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local input_stack = inv:get_stack(listname,  index)
 
@@ -340,7 +341,7 @@ local function on_metadata_inventory_take(pos, listname, index, stack, player)
             else
 
                 -- if there is no room, the item is dropped
-                minetest.item_drop(input_stack, player, pos)
+                core.item_drop(input_stack, player, pos)
 
             end
 
@@ -354,7 +355,7 @@ end
 
 local function on_receive_fields(pos, formname, fields, sender)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local page = meta:get_int("page")
     local maxpage = meta:get_int("maxpage")
 
@@ -446,8 +447,10 @@ function unilib.pkg.machine_printer_flag.exec()
             "unilib_machine_printer_flag_front.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         walkable = true,

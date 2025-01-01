@@ -9,7 +9,7 @@
 unilib.pkg.deco_herbs_flower_trifolium_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.deco_herbs_flower_trifolium_red.post()
 
-    unilib.register_decoration_now("herbs_flower_trifolium_red", nil, {
+    unilib.register_decoration_complete("herbs_flower_trifolium_red", nil, {
         -- From herbs/mapgen.lua
         -- Completes decoration in package "flower_trifolium_red"
         biomes = {
@@ -49,7 +49,7 @@ function unilib.pkg.deco_herbs_flower_trifolium_red.post()
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_turf",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

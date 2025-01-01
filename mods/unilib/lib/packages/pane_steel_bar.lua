@@ -9,7 +9,7 @@
 unilib.pkg.pane_steel_bar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xpanes.add_mode
+local mode = unilib.global.imported_mod_table.xpanes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.pane_steel_bar.exec()
             description = S("Steel Bars"),
             textures = {"unilib_pane_steel_bar.png", "", "unilib_pane_steel_bar_top.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = "unilib_pane_steel_bar.png",
             recipe = {

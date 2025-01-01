@@ -9,7 +9,7 @@
 unilib.pkg.mineral_trona = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_trona.exec()
 
     unilib.register_craftitem(c_lump, nil, mode, {
         -- Original to unilib
-        description = unilib.brackets(S("Trona Lump"), S("Soda Ash")),
+        description = unilib.utils.brackets(S("Trona Lump"), S("Soda Ash")),
         inventory_image = "unilib_mineral_trona_lump.png",
     })
 

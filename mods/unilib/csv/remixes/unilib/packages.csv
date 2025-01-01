@@ -1,11 +1,16 @@
-# "unilib" remix - contains almost all packages which are original to unilib, and which typically do
-#       not appear in other remixes. (A handful of original packages are listed, but commented out)
-# For a list of packages providing all 118 chemical elements, use the "elements" package
-# See the STANDARDS file for more information about what belongs in each category, and what does not
+# "unilib" remix - contains mostpackages which are original to unilib, and which typically do not
+#       appear in other remixes
+# Note that some packages are listed here but commented out, despite being original to unilib
+#       (usually because they belong to a different remix)
+#
+# For a list of packages providing chat commands, see the "chat" remix (those packages are NOT
+#       included in this remix)
+# For a list of packages providing all 118 chemical elements, use the "elements" remix (those
+#       packages ARE included in this remix)
 
 # node_name | original_mod
 
-# unilib metals and substances
+# unilib metals, minerals and substances
 metal_actinium|unilib
 metal_americium|unilib
 metal_antimony|unilib
@@ -21,7 +26,7 @@ metal_calcium|unilib
 metal_californium|unilib
 metal_cerium|unilib
 metal_cobalt|unilib
-metal_copernecium|unilib
+metal_copernicium|unilib
 metal_curium|unilib
 metal_darmstadtium|unilib
 metal_dubnium|unilib
@@ -49,7 +54,7 @@ metal_magnesium|unilib
 metal_manganese|unilib
 metal_meitnerium|unilib
 metal_mendelevium|unilib
-metal_mercury|unilib
+metal_mercury|glemr11 unilib
 metal_molybdenum|unilib
 metal_moscovium|unilib
 metal_neodymium|unilib
@@ -114,6 +119,8 @@ mineral_chrysotile_rock|unilib
 mineral_coke_natural|unilib
 mineral_coke_natural_rock|unilib
 mineral_cryolite_rock|unilib
+mineral_dilithium|unilib
+mineral_dilithium_rock|unilib
 mineral_fluorite|unilib
 mineral_fluorite_rock|unilib
 mineral_flux_rock|unilib
@@ -145,6 +152,8 @@ mineral_onyx_rock|unilib
 mineral_opal_rock|unilib
 mineral_pentlandite|unilib
 mineral_peridot_rock|unilib
+mineral_pietersite|unilib
+mineral_pietersite_rock|unilib
 mineral_pitchblende_rock|unilib
 mineral_platinum_native_rock|unilib
 mineral_pollucite|unilib
@@ -200,17 +209,135 @@ substance_selenium|unilib
 substance_tennessine|unilib
 substance_xenon|unilib
 
+# packages from other mods, completing the periodic table
+#metal_aluminium|real_minerals
+#metal_bismuth|real_minerals
+#metal_chromium|glemr11 technic_worldgen technic
+#metal_copper|default glemr11 moreblocks technic
+#metal_gold|default glemr11 technic
+#metal_iron|default
+#metal_lead|glemr11 technic_worldgen technic
+#metal_nickel|real_minerals
+#metal_silver|glemr11 moreores technic
+#metal_tin|default glemr11 technic
+#metal_uranium|technic_worldgen technic
+#metal_zinc|glemr11 technic_worldgen technic
+#mineral_sulphur|technic_worldgen technic
+
 # Other unilib packages
+#abm_farlands_bushes_trees|unilib
+admin_tool_tester_general|unilib
+admin_tool_tester_schematic|unilib
 admin_tool_vapouriser|unilib
+#base_default|unilib
+#base_gaia|unilib
+#base_glem|unilib
+#base_minimal|unilib
+#base_mtgame|unilib
+#biome_gaia|unilib
+#deco_gaia|unilib
+#deco_gaia_butterflies|unilib
+#deco_gaia_coral|unilib
+#deco_gaia_coral_decorations_sea|unilib
+#deco_gaia_coral_xocean|unilib
+#deco_gaia_fireflies|unilib
+#deco_gaia_ice_thin|unilib
+#deco_gaia_kelp|unilib
+#deco_gaia_misc_decorations_sea|unilib
+#deco_gaia_papyrus|unilib
+#deco_gaia_pebbles|unilib
+#deco_gaia_seagrass|unilib
+#deco_gaia_seagrass_decorations_sea|unilib
+#deco_gaia_seagrass_xocean|unilib
+#dirt_custom_antipodean|unilib
+#dirt_custom_gaia|unilib
+dirt_permafrost_blue|unilib
+dirt_permafrost_blue_dark|unilib
+dirt_permafrost_brown|unilib
+dirt_permafrost_brown_dark|unilib
+dirt_permafrost_green|unilib
+dirt_permafrost_green_dark|unilib
+dirt_permafrost_red|unilib
+dirt_permafrost_red_dark|unilib
+dirt_super_with_litter_forest|unilib
+food_burger_veggie|unilib
+food_burger_worm|unilib
+food_corn_cob_flint|unilib
+food_jam_blackberry|unilib
+food_jam_gooseberry|unilib
+food_jam_raspberry|unilib
+food_jam_strawberry|unilib
+food_pasta_surprise|unilib
+food_pie_potato_sweet|unilib
+food_pizza_chicken_barbecued|unilib
+food_pizza_diavola|unilib
+food_pizza_hawaiian|unilib
+food_pizza_meat_feast|unilib
+food_pizza_quattro_formaggi|unilib
+food_pizza_veggie_supreme|unilib
+food_puree_blackberry|unilib
+food_puree_gooseberry|unilib
+food_puree_raspberry|unilib
+food_puree_strawberry|unilib
+food_sandwich_cheese_cucumber|unilib
+food_sandwich_worm|unilib
+food_smoothie_blackberry|unilib
+food_smoothie_blueberry|unilib
+food_smoothie_gooseberry|unilib
+food_smoothie_strawberry|unilib
 glass_sheet_clean|unilib
 glass_sheet_glow|unilib
+grass_marram_african|unilib
+grass_marram_american|unilib
+grass_marram_baltic|unilib
+grass_marram_european|unilib
+gravel_sandstone_golden|unilib
 gravel_sandstone_ordinary|unilib
 gravel_sandstone_silver|unilib
+#ingredient_fish_gaia|unilib
+item_replacer_artisanal|unilib
+liquid_oil_crude|unilib
 liquid_water_dyed|unilib
-#mapgen_underch_jit_unilib|unilib
+machine_atomic_collector|unilib
+machine_atomic_vapouriser|unilib
+machine_furnace_induction|unilib
+machine_polishing|unilib
+machine_renovation|unilib
+machine_switch_day|unilib
+machine_switch_night|unilib
+machine_table_enlightening|unilib
+machine_turfing|unilib
+#mapgen_hades_jit|unilib
+#meta_atomic_optimise|unilib
+#meta_deco_optimise|unilib
+meta_skybox_sun_hexagonal|unilib
+meta_skybox_moon_hexagonal|unilib
+misc_atomic_tube|unilib
 misc_calendar_fancy|unilib
 misc_calendar_simple|unilib
 misc_frame_iron_rustic|unilib
+misc_line_sounding_reinforced|unilib
+#misc_matrix_gaia|unilib
+#misc_matrix_hades|unilib
+misc_shield_mounted_british|unilib
+misc_shield_mounted_extra|unilib
+moss_black|unilib
+moss_brown|unilib
+moss_cyan|unilib
+moss_green_dark|unilib
+moss_grey|unilib
+moss_grey_dark|unilib
+moss_magenta|unilib
+moss_orange|unilib
+moss_pink|unilib
+moss_red|unilib
+moss_white|unilib
+#opt_default|unilib
+#opt_mtgame|unilib
+#ore_gaia|badlands darkage default glemr4 moreores technic underch unilib
+#ore_gaia_hot_arid|unilib
+#ore_gaia_mild_arid|unilib
+#override_gaia|unilib
 override_unilib_salt_water|unilib
 pane_glass_artisanal_clear|unilib
 pane_glass_clean|unilib
@@ -233,40 +360,67 @@ pane_glass_ornamental_tiles_dark|unilib
 pane_glass_ornamental_tiles_pale|unilib
 pane_glass_ornamental_tiles_small|unilib
 pane_glass_ornamental_yellow|unilib
+sand_basalt_dark|unilib
 sand_beige|unilib
+sand_biogenic|unilib
 sand_brown|unilib
+sand_coral|unilib
+sand_feldspar|unilib
+sand_garnet_antipodean|unilib
+sand_glassy|unilib
+sand_golden|unilib
+sand_greensand_dark|unilib
+sand_greensand_pale|unilib
+sand_gypsum|unilib
+sand_haematite|unilib
+sand_immature|unilib
+sand_lithic|unilib
+sand_ooid|unilib
 sand_pink|unilib
 sand_red|unilib
+sand_serpentine|unilib
+sand_volcanic_fine|unilib
+sand_volcanic_glass|unilib
+shared_atomic|unilib
+shared_calendars|unilib
+#shared_farlands_fruit|unilib
 #stone_desert_with_coal|unilib
 #stone_desert_with_copper|unilib
 #stone_desert_with_diamond|unilib
 #stone_desert_with_gold|unilib
 #stone_desert_with_mese|unilib
 #stone_desert_with_tin|unilib
+stone_sandstone_golden|unilib
 #test_empty|unilib
 #test_node|unilib
 #test_stair|unilib
 
-# packages from other mods, completing the periodic table
-#metal_aluminium|real_minerals
-#metal_bismuth|real_minerals
-#metal_chromium|technic_worldgen technic
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
-#metal_iron|default
-#metal_lead|technic_worldgen technic
-#metal_nickel|real_minerals
-#metal_silver|moreores technic
-#metal_tin|default technic
-#metal_uranium|technic_worldgen technic
-#metal_zinc|technic_worldgen technic
-#mineral_sulphur|technic_worldgen technic
-
 # N.B. all supporting packages are commented out, as this remix is not intended for gameplay
 
 # supporting packages (.depends)
+#admin_node_colour|maptools
+#brick_ordinary|default
+#bush_ornamental_fruitless|bushes_classic
+#bush_ornamental_gooseberry|bushes_classic
+#clay_ordinary|default
+#container_chest_ordinary|default
 #crop_cotton|farming
+#crop_potato_sweet|cropocalypse
+#crop_soy_red|cucina_vegana
+#crop_tomato_cherry|better_farming
+#crop_wheat|farming
 #dye_basic|dye bakedclay
+#food_bread_ordinary|farming
+#food_cheese_gorgonzola|cheese
+#food_cheese_gouda|cheese
+#food_cheese_mozzarella|cheese
+#food_cheese_parmesan|cheese
+#food_cheese_ricotta|cheese
+#food_ham|bbq
+#food_meat_imitation|cucina_vegana
+#food_pasta|farming
+#food_tofu_red|cucina_vegana
+#fruit_olive|ethereal
 #glass_artisanal_basic|abriglass
 #glass_artisanal_clear|abriglass
 #glass_clean|moreblocks
@@ -282,6 +436,7 @@ sand_red|unilib
 #glass_glow_square|darkage
 #glass_glow_super|moreblocks
 #glass_iron|moreblocks
+#glass_obsidian|default moreblocks
 #glass_ordinary|default moreblocks vessels
 #glass_ornamental_blue|abriglass
 #glass_ornamental_cross|abriglass
@@ -291,14 +446,26 @@ sand_red|unilib
 #glass_ornamental_tiles_small|abriglass
 #glass_ornamental_yellow|abriglass
 #grass_jungle|default
+#ingredient_brine|bbq
+#ingredient_cheese_stretched|cheese
+#ingredient_curd|cheese
+#ingredient_dough_pizza|cucina_vegana
+#ingredient_flour_ordinary|farming
+#ingredient_oil_olive|ethereal
+#ingredient_sauce_tomato|bbq
+#ingredient_whey|cheese
 #item_paper_ordinary|default moreblocks
 #item_stick_iron|darkage
 #item_stick_ordinary|default
 #item_string_ordinary|farming
 #item_sweeper|moreblocks
+#item_worm_juicy|ethereal
+#light_block_mese|default
 #liquid_water_ordinary|default
+#metal_copper|default glemr11 moreblocks technic
 #metal_iron|default
-#metal_steel|default technic
+#metal_steel|default glemr11 technic
+#metal_tin|default glemr11 technic
 #mineral_agate|aato
 #mineral_almandine|aato
 #mineral_amazonite|aato
@@ -310,6 +477,7 @@ sand_red|unilib
 #mineral_chrysoprase|aato
 #mineral_coal|default technic
 #mineral_cryolite|real_minerals
+#mineral_diamond|default mtg_plus
 #mineral_flux|real_minerals
 #mineral_garnierite|real_minerals
 #mineral_gold_native|real_minerals
@@ -320,7 +488,7 @@ sand_red|unilib
 #mineral_jet_dark|aato
 #mineral_kaolinite|real_minerals
 #mineral_lazurite|real_minerals
-#mineral_mese|default
+#mineral_mese|default glemr11
 #mineral_moonstone|aato
 #mineral_olivine|real_minerals
 #mineral_onyx|aato
@@ -347,24 +515,84 @@ sand_red|unilib
 #mineral_unakite|aato
 #pane_glass_ordinary|xpanes
 #plant_papyrus_ordinary|default mtg_plus
+#produce_corn_flint|better_farming
+#produce_cucumber_normal|farming
+#produce_pineapple|farming
+#shared_bushes_classic|bushes_classic
+#shared_castle_shields|castle_shields
+#shared_default_chest|default pipeworks
 #shared_glass_stained|glass_stained
 #shared_maptools|maptools
+#shared_replacer|replacer
+#shared_sickles|sickles
+#shared_sounding_line|sounding_line
+#shared_woodsoils|woodsoils
+#snow_ordinary|default ethereal mtg_plus
+#stone_obsidian|default moreblocks
 #torch_ordinary|default
+#utensil_bowl_wooden|farming thirsty
+#utensil_mortar_pestle|farming
+#utensil_press_hand|farming
+#utensil_tray_baking|farming
+#vessel_bottle_glass_empty|thirsty vessels
+#vessel_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
+#bush_ornamental_blackberry|bushes_classic
+#bush_ornamental_raspberry|bushes_classic
+#bush_ornamental_strawberry|bushes_classic
+#crop_strawberry_gariguette|better_farming
+#crop_undersea_strawberry|aqua_farming
 #dirt_dry|default
 #dirt_ordinary|default farming moreblocks
+#produce_blackberry|farming
+#produce_raspberry|farming
+#produce_strawberry_normal|ethereal
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
-#clay_ordinary|default
 #crop_rice_white|farming
-#metal_chromium|technic_worldgen technic
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
+#food_cheese_toma|cheese
+#food_porridge|farming
+#grass_dry|default
+#grass_ordinary|default
+#gravel_ordinary|default mtg_plus
+#liquid_lava_cooling|glemr11
+#liquid_lava_ordinary|default
+#liquid_oil_normal|forest
+#metal_bronze|default glemr11 technic
+#metal_chromium|glemr11 technic_worldgen technic
+#metal_gold|default glemr11 technic
 #metal_iron_pig|real_minerals
 #metal_iron_wrought|technic_worldgen
 #metal_nickel|real_minerals
 #metal_uranium|technic_worldgen technic
+#misc_hay_ordinary|cottages
+#moss_blue|sickles
+#moss_violet|sickles
+#moss_yellow|sickles
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
+#shared_cheese_rack|cheese
+#shared_screwdriver|screwdriver
+#sign_wall_steel|default
+#sign_wall_wood|default
+#tool_pitchfork|cottages
+
+# supporting packages (.suggested)
+#bucket_steel|bucket
+#food_cheese_vegan|farming
+#food_honey_synthetic|xdecor
+#food_milk_soy_red|cucina_vegana
+#food_pepper|farming
+#fruit_blueberry_ordinary|default
+#ingredient_butter_normal|cheese
+#ingredient_oil_sunflower|farming
+#ingredient_salt_normal|farming
+#ingredient_sugar_normal|farming
+#mushroom_brown|flowers
+#produce_carrot_normal|farming
+#produce_chilli_normal|farming
+#produce_lettuce|farming
+#produce_onion_normal|farming
+#produce_tomato_salad|farming

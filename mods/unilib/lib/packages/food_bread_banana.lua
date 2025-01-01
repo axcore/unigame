@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_banana = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,11 +30,11 @@ function unilib.pkg.food_bread_banana.exec()
         -- From ethereal:banana_bread
         description = S("Banana Bread"),
         inventory_image = "unilib_food_bread_banana.png",
-        groups = {flammable = 3, food_bread = 1},
+        groups = {flammable = 2, food_bread = 1},
 
         wield_image = "unilib_food_bread_banana.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_banana", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_banana", 6),
     })
     unilib.register_craft({
         -- From ethereal:banana_dough

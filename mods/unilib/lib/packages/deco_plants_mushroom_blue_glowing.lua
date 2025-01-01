@@ -9,7 +9,7 @@
 unilib.pkg.deco_plants_mushroom_blue_glowing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_plants_mushroom_blue_glowing.post()
 
-    unilib.register_decoration_now("plants_mushroom_blue_glowing", nil, {
+    unilib.register_decoration_complete("plants_mushroom_blue_glowing", nil, {
         -- Original to unilib, replacing the calls to the habitat mod in the original code
         -- Completes decoration in package "mushroom_blue_glowing"
         place_on = "unilib:stone_ordinary",

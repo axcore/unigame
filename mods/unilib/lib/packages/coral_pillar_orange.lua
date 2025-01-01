@@ -9,7 +9,7 @@
 unilib.pkg.coral_pillar_orange = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr6.add_mode
+local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.coral_pillar_orange.init()
 
     return {
         description = "Orange coral pillar",
-        notes = "This node is processor-intensive, and should be used very sparingly",
+        notes = "This node is processor-intensive, and should be used sparingly",
         depends = {"coral_block_skeleton", "shared_coral_pillar"},
     }
 
@@ -31,8 +31,9 @@ function unilib.pkg.coral_pillar_orange.exec()
         -- From lib_ecology:plant_coral_pillar
         description = S("Orange Coral Pillar"),
         tiles = {"unilib_coral_pillar_orange.png"},
-        groups = {cracky = 3, stone = 1, sea = 1},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3, stone = 1, sea = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
         drop = "unilib:coral_block_skeleton",
@@ -46,6 +47,16 @@ function unilib.pkg.coral_pillar_orange.exec()
             type = "fixed",
             fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
         },
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
+        end,
     })
 
 end

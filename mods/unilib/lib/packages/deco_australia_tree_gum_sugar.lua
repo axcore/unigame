@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_gum_sugar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,12 +32,12 @@ end
 
 function unilib.pkg.deco_australia_tree_gum_sugar.post()
 
-    if unilib.pkg_executed_table["biome_australia_central_australia"] ~= nil and
-            unilib.pkg_executed_table["dirt_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_central_australia"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_red_antipodean"] ~= nil then
 
         for i = 1, 3 do
 
-            unilib.register_decoration_now("australia_tree_gum_sugar_in_central_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_gum_sugar_in_central_" .. i, nil, {
                 -- From australia/biome_central_australia.lua
                 biomes = "australia_central_australia",
                 place_on = "unilib:dirt_red_antipodean",
@@ -48,15 +48,20 @@ function unilib.pkg.deco_australia_tree_gum_sugar.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 3 do
 
-            unilib.register_decoration_now("australia_tree_gum_sugar_in_flinders_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_gum_sugar_in_flinders_" .. i, nil, {
                 -- From australia/biome_flinders_lofty.lua
                 biomes = "australia_flinders_lofty",
-                place_on = "unilib:dirt_ordinary_with_turf_dry",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf_dry",
+                    "unilib:dirt_ordinary_with_turf_flinders_lofty",
+                },
                 y_max = 150,
                 y_min = 36,
             })

@@ -17,8 +17,8 @@
 unilib.pkg.gravel_ordinary = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local mtg_plus_add_mode = unilib.imported_mod_table.mtg_plus.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local mtg_plus_add_mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,31 +28,43 @@ function unilib.pkg.gravel_ordinary.init()
 
     return {
         description = "Ordinary gravel",
-        depends = "mineral_flint",
+        optional = "mineral_flint",
     }
 
 end
 
 function unilib.pkg.gravel_ordinary.exec()
 
-    unilib.register_node("unilib:gravel_ordinary", "default:gravel", default_add_mode, {
-        -- From default:gravel
-        description = S("Ordinary Gravel"),
-        tiles = {"unilib_gravel_ordinary.png"},
-        groups = {crumbly = 2, falling_node = 1},
-        sounds = unilib.sound_table.gravel,
+    local drop = "unilib:gravel_ordinary"
+    if unilib.global.pkg_executed_table["mineral_flint"] ~= nil and
+            unilib.setting.gravel_sand_bonus_rate > 0 then
 
         drop = {
             max_items = 1,
             items = {
-                {items = {"unilib:mineral_flint_lump"}, rarity = 16},
+                {
+                    items = {"unilib:mineral_flint_lump"},
+                    rarity = unilib.setting.gravel_sand_bonus_rate,
+                },
                 {items = {"unilib:gravel_ordinary"}},
             },
-        },
-    })
-    if unilib.mtgame_tweak_flag then
+        }
 
-        if unilib.underch_tweak_flag then
+    end
+
+    unilib.register_node("unilib:gravel_ordinary", "default:gravel", default_add_mode, {
+        -- From default:gravel
+        description = S("Ordinary Gravel"),
+        tiles = {"unilib_gravel_ordinary.png"},
+        -- N.B. gravel = 1 not in original code
+        groups = {crumbly = 2, falling_node = 1, gravel = 1},
+        sounds = unilib.global.sound_table.gravel,
+
+        drop = drop,
+    })
+    if unilib.setting.mtgame_tweak_flag then
+
+        if unilib.setting.underch_tweak_flag then
 
             unilib.register_craft({
                 -- Adapted from gravelcraft/init.lua
@@ -75,7 +87,7 @@ function unilib.pkg.gravel_ordinary.exec()
                 description = S("Cobbled Ordinary Gravel"),
                 tiles = {"unilib_gravel_ordinary_cobble.png"},
                 groups = {cracky = 3, stone = 1},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
             }

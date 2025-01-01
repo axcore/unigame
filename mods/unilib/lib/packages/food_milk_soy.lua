@@ -9,7 +9,7 @@
 unilib.pkg.food_milk_soy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,13 +34,17 @@ function unilib.pkg.food_milk_soy.exec()
         -- From farming:soy_milk
         description = S("Soy Milk"),
         tiles = {"unilib_food_milk_soy.png"},
+        -- N.B. No food_soy_milk in original code
         groups = {
-            attached_node = 1, dig_immediate = 3, drink = 1, food_milk_glass = 1, vessel = 1,
+            attached_node = 1, dig_immediate = 3, drink = 1, food_milk_glass = 1, food_soy_milk = 1,
+            vessel = 1,
         },
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_milk_soy.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -49,7 +53,7 @@ function unilib.pkg.food_milk_soy.exec()
         walkable = false,
         wield_image = "unilib_food_milk_soy.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_milk_soy", 2, "unilib:vessel_glass_empty"
         ),
     })
@@ -58,7 +62,7 @@ end
 
 function unilib.pkg.food_milk_soy.post()
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(
         replace_list,
         {"unilib:ingredient_extract_vanilla", "unilib:vessel_bottle_glass_empty"}
@@ -77,7 +81,7 @@ function unilib.pkg.food_milk_soy.post()
                 "unilib:ingredient_extract_vanilla",
                 "group:potable_bucket",
                 "unilib:vessel_glass_empty",
-            }
+            },
         },
         replacements = replace_list,
     })

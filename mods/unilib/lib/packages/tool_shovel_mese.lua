@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,13 +43,13 @@ function unilib.pkg.tool_shovel_mese.exec()
         },
         wield_image = "unilib_tool_shovel_mese.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From default:shovel_mese
         part_name = "mese",
         ingredient = "unilib:mineral_mese_crystal",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_mese", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_mese", "shovel")
 
 end

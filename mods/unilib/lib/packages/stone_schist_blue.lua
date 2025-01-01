@@ -9,7 +9,7 @@
 unilib.pkg.stone_schist_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_schist_blue.exec()
         description = S("Blue Schist"),
 
         category = "metamorphic",
+        colour = "#84A0B4",
         grinder_flag = true,
         hardness = 2,
     })
@@ -75,6 +76,24 @@ function unilib.pkg.stone_schist_blue.exec()
 
         replace_mode = mode,
         description = S("Blue Schist Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_schist_blue_cobble_compressed
+        part_name = "schist_blue",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Blue Schist Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_schist_blue_cobble_condensed
+        part_name = "schist_blue",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Blue Schist Cobble"),
     })
 
 end

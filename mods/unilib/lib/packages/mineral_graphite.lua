@@ -13,8 +13,8 @@
 unilib.pkg.mineral_graphite = {}
 
 local S = unilib.intllib
-local pfaa_add_mode = unilib.imported_mod_table.pfaa.add_mode
-local real_minerals_add_mode = unilib.imported_mod_table.real_minerals.add_mode
+local pfaa_add_mode = unilib.global.imported_mod_table.pfaa.add_mode
+local real_minerals_add_mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

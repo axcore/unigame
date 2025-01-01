@@ -9,7 +9,7 @@
 unilib.pkg.misc_skeleton_human = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,14 +34,18 @@ function unilib.pkg.misc_skeleton_human.exec()
         description = S("Decorative Human Skeleton"),
         tiles = {"unilib_misc_skeleton_human.png"},
         groups = {choppy = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
             fixed = {-0.3, -0.5, -0.3, 0.3, 0.0, 0.3}
         },
         drawtype = "mesh",
---      inventory_image = "unilib_misc_skeleton_skull_human_inv.png",
+        -- N.B. Don't use the skull texture, as the original code does; the inventorycube looks fine
+        --      anyway
+--      inventory_image = "unilib_misc_skeleton_human_skull_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_misc_skeleton_human.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -51,8 +55,10 @@ function unilib.pkg.misc_skeleton_human.exec()
         },
         use_texture_alpha = "clip",
         visual_scale = 0.5,
---      wield_image = "unilib_misc_skeleton_skull_human_inv.png",
-        wield_scale = {x = 1.0, y = 1.0, z = 1.0},
+        -- N.B. Use an original texture here, because the inventorycube only partly visible
+--      wield_image = "unilib_misc_skeleton_human_skull_inv.png",
+--      wield_scale = {x = 1.0, y = 1.0, z = 1.0},
+        wield_image = "unilib_misc_skeleton_human_inv.png",
     })
     -- N.B. No craft recipe in the original code. The use of diamonds here is intended to make
     --      crafting the skull expensive (because rendering the model is processor-intensive)
@@ -71,14 +77,18 @@ function unilib.pkg.misc_skeleton_human.exec()
         description = S("Decorative Old Human Skeleton"),
         tiles = {"unilib_misc_skeleton_human.png"},
         groups = {choppy = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
             fixed = {-0.3, -0.5, -0.3, 0.3, 0.0, 0.3}
         },
         drawtype = "mesh",
---      inventory_image = "unilib_misc_skeleton_skull_human_inv.png",
+        -- N.B. Don't use the skull texture, as the original code does; the inventorycube looks fine
+        --      anyway
+--      inventory_image = "unilib_misc_skeleton_human_skull_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_misc_skeleton_human_old.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -88,8 +98,10 @@ function unilib.pkg.misc_skeleton_human.exec()
         },
         use_texture_alpha = "clip",
         visual_scale = 0.5,
---      wield_image = "unilib_misc_skeleton_skull_human_inv.png",
-        wield_scale = {x = 1.0, y = 1.0, z = 1.0},
+        -- N.B. Use an original texture here, because the inventorycube only partly visible
+--      wield_image = "unilib_misc_skeleton_human_skull_inv.png",
+--      wield_scale = {x = 1.0, y = 1.0, z = 1.0},
+        wield_image = "unilib_misc_skeleton_human_inv.png",
     })
     unilib.register_craft({
         -- Original to unilib

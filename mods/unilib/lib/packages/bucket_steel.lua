@@ -9,7 +9,7 @@
 unilib.pkg.bucket_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bucket.add_mode
+local mode = unilib.global.imported_mod_table.bucket.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,12 @@ function unilib.pkg.bucket_steel.init()
         description = "Steel bucket",
         depends = "metal_steel",
         -- Unregister water/lava buckets from default, but only if unilib replacements are loaded
-        optional = {"liquid_lava_ordinary", "liquid_water_ordinary", "liquid_water_river"},
+        optional = {
+            "liquid_lava_ordinary",
+            "liquid_water_ordinary",
+            "liquid_water_river",
+            "material_scrap_steel",
+        },
     }
 
 end
@@ -45,5 +50,16 @@ function unilib.pkg.bucket_steel.exec()
         ingredient = "unilib:metal_steel_ingot",
         stack_max = 99,
     })
+    if unilib.global.pkg_executed_table["material_scrap_steel"] ~= nil then
+
+        unilib.register_craft({
+            -- Original to unilib
+            output = "unilib:material_scrap_steel",
+            recipe = {
+                {"unilib:bucket_steel_empty"},
+            },
+        })
+
+    end
 
 end

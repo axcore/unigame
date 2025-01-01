@@ -9,7 +9,7 @@
 unilib.pkg.stone_marble_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,13 +33,14 @@ function unilib.pkg.stone_marble_red.exec()
         description = S("Red Marble"),
 
         category = "metamorphic",
+        colour = "#F6DEE1",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 3)
         hardness = 1,
         hardness_real = 3,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("marble_red", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("marble_red", 3, nil)
 
     unilib.register_node("unilib:stone_marble_red", "default:white_marble", mode, {
         -- From decoblocks, default:white_marble
@@ -47,7 +48,7 @@ function unilib.pkg.stone_marble_red.exec()
         tiles = {"unilib_stone_marble_red.png"},
         -- N.B. marble = 1, smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, marble = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_stone_smooth_cuttings({
         part_name = "marble_red",
@@ -78,7 +79,13 @@ function unilib.pkg.stone_marble_red.exec()
         --      or unilib:stone_marble_red_rubble, or nothing
         part_name = "marble_red",
         cobble_description = S("Red Marble Cobble"),
+        cobble_compressed_description = S("Compressed Red Marble Cobble"),
+        cobble_condensed_description = S("Condensed Red Marble Cobble"),
         rubble_description = S("Red Marble Rubble"),
+        rubble_compressed_description = S("Compressed Red Marble Rubble"),
+        rubble_condensed_description = S("Condensed Red Marble Rubble"),
+        smooth_compressed_description = S("Compressed Red Marble"),
+        smooth_condensed_description = S("Condensed Red Marble"),
 
         replace_mode = mode,
         override_drop_flag = true,

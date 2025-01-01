@@ -9,7 +9,7 @@
 unilib.pkg.tree_lemon_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.lemontree.add_mode
+local mode = unilib.global.imported_mod_table.lemontree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -73,9 +73,11 @@ function unilib.pkg.tree_lemon_mature.exec()
     })
     unilib.register_leafdecay({
         -- From lemontree:leaves
+        trunk_type = "lemon_mature",
         trunks = {"unilib:tree_lemon_mature_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_lemon_mature_leaves", "unilib:fruit_lemon_mature"},
+        leaves = {"unilib:tree_lemon_mature_leaves"},
+        others = {"unilib:fruit_lemon_mature"},
         radius = 3,
     })
 
@@ -121,7 +123,7 @@ function unilib.pkg.tree_lemon_mature.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From lemontree:gate. Creates unilib:gate_lemon_mature_closed
+        -- From lemontree:gate_closed, etc. Creates unilib:gate_lemon_mature_closed, etc
         part_name = "lemon_mature",
         orig_name = {"lemontree:gate_closed", "lemontree:gate_open"},
 
@@ -131,10 +133,10 @@ function unilib.pkg.tree_lemon_mature.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_lemon_mature", {
+    unilib.register_decoration_generic("cool_trees_tree_lemon_mature", {
         -- From lemontree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_lemon_mature.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_lemon_mature.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_liquid_smoke = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,12 @@ function unilib.pkg.ingredient_liquid_smoke.exec()
         description = S("Liquid Smoke"),
         tiles = {"unilib_ingredient_liquid_smoke.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_liquid_smoke.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_liquid_smoke.png",
@@ -44,7 +46,7 @@ function unilib.pkg.ingredient_liquid_smoke.exec()
         -- From bbq:liquid_smoke
         type = "shapeless",
         output = "unilib:ingredient_liquid_smoke",
-        recipe = {"unilib:vessel_bottle_glass_empty", "unilib:torch_ordinary"}
+        recipe = {"unilib:vessel_bottle_glass_empty", "unilib:torch_ordinary"},
     })
 
 end

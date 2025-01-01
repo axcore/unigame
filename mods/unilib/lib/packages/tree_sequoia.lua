@@ -9,7 +9,7 @@
 unilib.pkg.tree_sequoia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_sequoia.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Sequoiadendron giganteum"
 
     unilib.register_tree({
@@ -46,7 +46,6 @@ function unilib.pkg.tree_sequoia.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -138,7 +137,7 @@ function unilib.pkg.tree_sequoia.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:sequoia_gate. Creates unilib:gate_sequoia_closed
+        -- From moretrees:sequoia_gate_closed, etc. Creates unilib:gate_sequoia_closed, etc
         part_name = "sequoia",
         orig_name = {"moretrees:sequoia_gate_closed", "moretrees:sequoia_gate_open"},
 
@@ -153,11 +152,11 @@ function unilib.pkg.tree_sequoia.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(-0.4),
-            temp_min = unilib.convert_biome_lib_temp(1),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.4),
+            temp_min = unilib.utils.convert_biome_lib_temp(1),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 90,
             }),
         },

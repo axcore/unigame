@@ -9,7 +9,7 @@
 unilib.pkg.flower_plantago = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_plantago.exec()
 
     unilib.register_node("unilib:flower_plantago", "herbs:plantago", mode, {
         -- From herbs:plantago
-        description = unilib.annotate(S("Plantago"), "Plantago"),
+        description = unilib.utils.annotate(S("Plantago"), "Plantago"),
         tiles = {"unilib_flower_plantago.png"},
         groups = {
-            attached_node = 1, color_brown = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_brown = 1, colour_brown = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_plantago.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_plantago", "herbs:plantago")
 
-    unilib.register_decoration("herbs_flower_plantago", {
+    unilib.register_decoration_generic("herbs_flower_plantago", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_plantago",

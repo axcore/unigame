@@ -9,7 +9,7 @@
 unilib.pkg.liquid_lava_cooling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -78,6 +78,8 @@ function unilib.pkg.liquid_lava_cooling.exec()
             damage_per_second = 6,
             diggable = false,
             drawtype = "liquid",
+            -- N.B. is_ground_content = false not in original code; added to match other liquids
+            is_ground_content = false,
             light_source = 8,
             liquid_alternative_flowing = "unilib:liquid_lava_cooling_flowing",
             liquid_alternative_source = "unilib:liquid_lava_cooling_source",
@@ -96,7 +98,7 @@ function unilib.pkg.liquid_lava_cooling.exec()
         recipe = "unilib:liquid_lava_cooling_source",
         burntime = 30,
     })
-    if unilib.pkg_executed_table["stone_obsidian"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_obsidian"] ~= nil then
 
         unilib.register_lava({
             cooled_name = "unilib:stone_obsidian",
@@ -125,6 +127,8 @@ function unilib.pkg.liquid_lava_cooling.exec()
             damage_per_second = 6,
             diggable = false,
             drawtype = "flowingliquid",
+            -- N.B. is_ground_content = false not in original code; added to match other liquids
+            is_ground_content = false,
             light_source = 8,
             liquid_alternative_flowing = "unilib:liquid_lava_cooling_flowing",
             liquid_alternative_source = "unilib:liquid_lava_cooling_source",

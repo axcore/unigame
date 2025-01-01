@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_stone_ordinary_with_fossil_ammonite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,8 +35,11 @@ function unilib.pkg.ore_farlands_stone_ordinary_with_fossil_ammonite.post()
         clust_num_ores          = 1,
         clust_scarcity          = 24 * 24 * 24,
         clust_size              = 1,
-        y_max                   = unilib.y_max,
-        y_min                   = 625,
+        -- N.B. Original y_max/y_min makes no sense, so changed them
+--      y_max                   = unilib.constant.y_max,
+--      y_min                   = 625,
+        y_max                   = -625,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

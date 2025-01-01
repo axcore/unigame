@@ -9,7 +9,7 @@
 unilib.pkg.plant_wiwi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_wiwi.exec()
 
     unilib.register_node("unilib:plant_wiwi", "aotearoa:wiwi", mode, {
         -- From aotearoa:wiwi
-        description = unilib.annotate(S("Wiwi"), "Ficinia nodosa"),
+        description = unilib.utils.annotate(S("Wiwi"), "Ficinia nodosa"),
         tiles = {"unilib_plant_wiwi.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, grass = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_wiwi.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("aotearoa_plant_wiwi", {
+    unilib.register_decoration_generic("aotearoa_plant_wiwi", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_wiwi",

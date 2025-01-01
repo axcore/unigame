@@ -9,7 +9,7 @@
 unilib.pkg.glass_sheet_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glass_stained.add_mode
+local mode = unilib.global.imported_mod_table.glass_stained.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.glass_sheet_ordinary.exec()
         craft_output = 4,
         craft_table = {
             {"unilib:pane_glass_ordinary_flat", "unilib:pane_glass_ordinary_flat"},
-            {"unilib:pane_glass_ordinary_flat", "unilib:pane_glass_ordinary_flat"}
+            {"unilib:pane_glass_ordinary_flat", "unilib:pane_glass_ordinary_flat"},
         },
         edge_img = "unilib_pane_glass_ordinary_edge.png",
         front_img = "unilib_glass_ordinary.png",

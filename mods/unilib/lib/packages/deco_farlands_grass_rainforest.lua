@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_rainforest = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.deco_farlands_grass_rainforest.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("farlands_grass_rainforest_" .. i, nil, {
+        unilib.register_decoration_complete("farlands_grass_rainforest_" .. i, nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "grass_rainforest"
             biomes = {
@@ -38,7 +38,7 @@ function unilib.pkg.deco_farlands_grass_rainforest.post()
                 "farlands_rainforest_swamp",
             },
             place_on = {"unilib:dirt_ordinary", "unilib:dirt_ordinary_with_turf_forest"},
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 1,
         })
 

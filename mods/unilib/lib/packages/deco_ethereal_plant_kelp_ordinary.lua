@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_plant_kelp_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -23,7 +23,8 @@ function unilib.pkg.deco_ethereal_plant_kelp_ordinary.init()
         at_least_one = {
             "biome_ethereal_forest_deciduous",
             "biome_ethereal_frost",
-            "biome_ethereal_sandstone",
+            "biome_ethereal_grassland_snowy",
+            "biome_ethereal_sandstone_desert",
             "biome_ethereal_swamp",
         },
     }
@@ -32,7 +33,7 @@ end
 
 function unilib.pkg.deco_ethereal_plant_kelp_ordinary.post()
 
-    unilib.register_decoration_now(
+    unilib.register_decoration_complete(
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "plant_kelp_ordinary"
         "default_plant_kelp_ordinary",
@@ -41,7 +42,8 @@ function unilib.pkg.deco_ethereal_plant_kelp_ordinary.post()
             biomes = {
                 "ethereal_forest_deciduous_ocean",
                 "ethereal_frost_ocean",
-                "ethereal_sandstone_ocean",
+                "ethereal_grassland_snowy_ocean",
+                "ethereal_sandstone_desert_ocean",
                 "ethereal_swamp_ocean",
             },
             place_on = "unilib:sand_ordinary",
@@ -51,4 +53,3 @@ function unilib.pkg.deco_ethereal_plant_kelp_ordinary.post()
     )
 
 end
-

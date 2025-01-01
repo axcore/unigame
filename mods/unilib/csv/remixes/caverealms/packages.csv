@@ -1,10 +1,9 @@
 # "caverealms" remix - contains most individual items from the caverealms mod, but not the fort/
 #       fountain structures, nor the crystal/mushroom structures
 # The code to dig enormous caves below the ground is also not included
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
-ice_thin|caverealms
+ice_blue|caverealms
 mineral_salt|caverealms
 misc_cavern_amethyst|caverealms
 misc_cavern_emerald|caverealms
@@ -30,9 +29,13 @@ liquid_water_ordinary|default
 mineral_coal|default technic
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #grass_jungle|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
-#moss_purple|sickles
+#moss_violet|sickles
 #moss_yellow|sickles
+
+# supporting packages (.suggested)

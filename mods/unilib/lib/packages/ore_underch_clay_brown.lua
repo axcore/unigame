@@ -9,7 +9,7 @@
 unilib.pkg.ore_underch_clay_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,7 +24,7 @@ function unilib.pkg.ore_underch_clay_brown.init()
 
 end
 
-function unilib.pkg.ore_underch_clay_brown.exec()
+function unilib.pkg.ore_underch_clay_brown.post()
 
     unilib.register_ore({
         -- From underch/init.lua
@@ -43,7 +43,7 @@ function unilib.pkg.ore_underch_clay_brown.exec()
             spread = {x = 5, y = 5, z = 5},
         },
         noise_threshold         = 0.0,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = -93,
     })
 

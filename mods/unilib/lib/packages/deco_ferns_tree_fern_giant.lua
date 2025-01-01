@@ -9,7 +9,7 @@
 unilib.pkg.deco_ferns_tree_fern_giant = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ end
 
 function unilib.pkg.deco_ferns_tree_fern_giant.post()
 
-    unilib.register_decoration_now("convert_tree_fern_giant_in_jungle", nil, {
+    unilib.register_decoration_complete("convert_tree_fern_giant_in_jungle", nil, {
         -- From ferns/gianttreefern.lua
         -- Completes decoration in package "tree_fern_giant"
         place_on = {
@@ -43,10 +43,10 @@ function unilib.pkg.deco_ferns_tree_fern_giant.post()
             "unilib:sand_ordinary",
         },
         spawn_by = "unilib:tree_jungle_trunk",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
-    unilib.register_decoration_now("convert_tree_fern_giant_on_sand", nil, {
+    unilib.register_decoration_complete("convert_tree_fern_giant_on_sand", nil, {
         -- From ferns/gianttreefern.lua
         -- Completes decoration in package "tree_fern_giant"
         place_on = {
@@ -57,7 +57,7 @@ function unilib.pkg.deco_ferns_tree_fern_giant.post()
             "unilib:liquid_water_river_source",
             "unilib:sand_desert",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

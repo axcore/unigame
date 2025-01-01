@@ -9,7 +9,7 @@
 unilib.pkg.food_chicken_teriyaki = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,17 +36,17 @@ function unilib.pkg.food_chicken_teriyaki.exec()
         -- From ethereal:teriyaki_chicken
         description = S("Teriyaki Chicken"),
         inventory_image = "unilib_food_chicken_teriyaki.png",
-        -- N.B. No groups in original code
-        groups = {food_chicken_teriyaki = 1},
+        -- N.B. food_chicken_teriyaki = 1 not in original code
+        groups = {flammable = 2, food_chicken_teriyaki = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chicken_teriyaki", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chicken_teriyaki", 4),
     })
     unilib.register_craft({
         -- From ethereal:teriyaki_chicken
         output = "unilib:food_chicken_teriyaki 2",
         recipe = {
             {"group:food_chicken_raw", "group:food_sugar", "group:food_soy_sauce"},
-            {"group:food_garlic_clove", "group:food_saucepan", "group:food_gelatin"}
+            {"group:food_garlic_clove", "group:food_saucepan", "group:food_gelatin"},
         },
         replacements = {
             {"group:food_soy_sauce", "unilib:vessel_bottle_glass_empty"},

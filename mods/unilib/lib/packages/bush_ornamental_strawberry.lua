@@ -9,7 +9,7 @@
 unilib.pkg.bush_ornamental_strawberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,6 +46,7 @@ function unilib.pkg.bush_ornamental_strawberry.exec()
         juice_description = S("Strawberry"),
         juice_type = "strawberry",
         rgb = "#ff3636",
+
         orig_flag = true,
     })
 

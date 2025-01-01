@@ -9,7 +9,7 @@
 unilib.pkg.item_bone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bonemeal.add_mode
+local mode = unilib.global.imported_mod_table.bonemeal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.item_bone.post()
 
     -- Add bones to dirt. In the original code, only default:dirt was updated; here, we update all
     --      dirts on which turf can grow
-    for _, full_name in pairs(unilib.fertile_dirt_table) do
+    for _, full_name in pairs(unilib.global.fertile_dirt_table) do
 
         unilib.override_item(full_name, {
             drop = {

@@ -13,8 +13,8 @@
 unilib.pkg.metal_brass = {}
 
 local S = unilib.intllib
-local basic_materials_add_mode = unilib.imported_mod_table.basic_materials.add_mode
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
+local basic_materials_add_mode = unilib.global.imported_mod_table.basic_materials.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,7 @@ function unilib.pkg.metal_brass.exec()
     unilib.register_craftitem(
         -- From basic_materials:brass_ingot
         "unilib:metal_brass_ingot",
-        "basic_materials:brass_ingot",
+        {"basic_materials:brass_ingot", "homedecor:brass_ingot", "technic:brass_ingot"},
         basic_materials_add_mode,
         {
             description = S("Brass Ingot"),
@@ -73,11 +73,11 @@ function unilib.pkg.metal_brass.exec()
             "unilib:metal_silver_ingot",
         },
     })
-    if unilib.pkg_executed_table["metal_gold"] ~= nil and
-            unilib.pkg_executed_table["metal_tin"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_gold"] ~= nil and
+            unilib.global.pkg_executed_table["metal_tin"] ~= nil then
 
         -- (Recipe used in case moreores was not loaded; unilib preserves it)
-        unilib.register_craft( {
+        unilib.register_craft({
             -- From basic_materials:brass_ingot
             output = "unilib:metal_brass_ingot 9",
             recipe = {
@@ -89,6 +89,8 @@ function unilib.pkg.metal_brass.exec()
                 {
                     "unilib:metal_gold_ingot",
                     "unilib:metal_copper_ingot",
+                    -- N.B. gold ingot becomes a tin ingot in more recent versions of
+                    --      basic_materials
                     "unilib:metal_gold_ingot",
                 },
                 {
@@ -105,19 +107,19 @@ function unilib.pkg.metal_brass.exec()
         output = "unilib:metal_brass_ingot 9",
         recipe = {
             {"unilib:metal_brass_block"},
-        }
+        },
     })
 
     unilib.register_node(
         -- From basic_materials:brass_block
         "unilib:metal_brass_block",
-        "basic_materials:brass_block",
+        {"basic_materials:brass_block", "technic:brass_block"},
         basic_materials_add_mode,
         {
             description = S("Brass Block"),
             tiles = {"unilib_metal_brass_block.png"},
             groups = {cracky = 1, level = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.metal,
 
             is_ground_content = false,
         }
@@ -127,5 +129,25 @@ function unilib.pkg.metal_brass.exec()
         output = "unilib:metal_brass_block",
         ingredient = "unilib:metal_brass_ingot",
     })
+    unilib.register_stairs("unilib:metal_brass_block")
+    unilib.register_carvings("unilib:metal_brass_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_brass_block_compressed", nil, basic_materials_add_mode, {
+            -- Original to unilib
+            description = S("Compressed Brass Block"),
+            tiles = {"unilib_metal_brass_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("brass")
+
+    end
 
 end

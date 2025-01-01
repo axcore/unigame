@@ -9,7 +9,7 @@
 unilib.pkg.machine_grill_kettle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 local empty_msg = S("Kettle grill is empty")
 local active_msg = S("Kettle grill active")
@@ -44,7 +44,7 @@ function unilib.pkg.machine_grill_kettle.exec()
             "unilib_machine_grill_kettle_ext.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         inventory_image = "unilib_machine_grill_kettle_inv.png",
@@ -62,27 +62,28 @@ function unilib.pkg.machine_grill_kettle.exec()
 
         after_destruct = function(pos, oldnode)
 
-            if minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ==
+            if core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ==
                     "unilib:machine_grill_kettle_base" then
-                minetest.set_node({x = pos.x, y = pos.y - 1, z = pos.z},{name = "air"})
+                core.set_node({x = pos.x, y = pos.y - 1, z = pos.z},{name = "air"})
             end
 
         end,
 
         after_place_node = function(pos, placer)
 
-            minetest.set_node(
+            core.set_node(
                 {x = pos.x, y = pos.y, z = pos.z},
                 {
                     name = "unilib:machine_grill_kettle_base",
-                    param2 = minetest.dir_to_facedir(placer:get_look_dir())
+                    param2 = core.dir_to_facedir(placer:get_look_dir())
                 }
             )
-            minetest.set_node(
+
+            core.set_node(
                 {x = pos.x, y = pos.y + 1, z = pos.z},
                 {
                     name = "unilib:machine_grill_kettle",
-                    param2 = minetest.dir_to_facedir(placer:get_look_dir())
+                    param2 = core.dir_to_facedir(placer:get_look_dir())
                 }
             )
 
@@ -116,14 +117,14 @@ function unilib.pkg.machine_grill_kettle.exec()
             default.get_inventory_drops(pos, "fuel", drops)
             default.get_inventory_drops(pos, "dst", drops)
             drops[#drops + 1] = "unilib:machine_grill_kettle"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", unilib.pkg.shared_bbq_grill.get_inactive_formspec())
             local inv = meta:get_inventory()
             inv:set_size("src", 1)
@@ -134,14 +135,14 @@ function unilib.pkg.machine_grill_kettle.exec()
 
         on_metadata_inventory_move = function(pos)
 
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Start timer function, it decides whether the grill can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -159,7 +160,7 @@ function unilib.pkg.machine_grill_kettle.exec()
     })
     unilib.register_craft({
         -- From bbq:kettle_grill
-        output = "bbq:kettle_grill",
+        output = "unilib:machine_grill_kettle",
         recipe = {
             {"unilib:metal_steel_ingot", c_charcoal, "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", c_charcoal, "unilib:metal_steel_ingot"},
@@ -215,7 +216,7 @@ function unilib.pkg.machine_grill_kettle.exec()
             },
         },
         groups = {cracky = 2, not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         drop = "unilib:machine_grill_kettle",
@@ -236,27 +237,28 @@ function unilib.pkg.machine_grill_kettle.exec()
 
         after_destruct = function(pos, oldnode)
 
-            if minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ==
+            if core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ==
                     "unilib:machine_grill_kettle_base" then
-                minetest.set_node({x = pos.x, y = pos.y - 1, z = pos.z},{name = "air"})
+                core.set_node({x = pos.x, y = pos.y - 1, z = pos.z},{name = "air"})
             end
 
         end,
 
         after_place_node = function(pos, placer)
 
-            minetest.set_node(
+            core.set_node(
                 {x = pos.x, y = pos.y, z = pos.z},
                 {
                     name = "unilib:machine_grill_kettle_base",
-                    param2 = minetest.dir_to_facedir(placer:get_look_dir())
+                    param2 = core.dir_to_facedir(placer:get_look_dir())
                 }
             )
-            minetest.set_node(
+
+            core.set_node(
                 {x = pos.x, y = pos.y + 1, z = pos.z},
                 {
                     name = "unilib:machine_grill_kettle",
-                    param2 = minetest.dir_to_facedir(placer:get_look_dir())
+                    param2 = core.dir_to_facedir(placer:get_look_dir())
                 }
             )
 
@@ -312,6 +314,8 @@ function unilib.pkg.machine_grill_kettle.exec()
 
         drawtype = "nodebox",
         drop = "unilib:machine_grill_kettle",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -350,17 +354,17 @@ function unilib.pkg.machine_grill_kettle.exec()
 
         after_destruct = function(pos, oldnode)
 
-            minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z}, {name = "air"})
+            core.set_node({x = pos.x, y = pos.y + 1, z = pos.z}, {name = "air"})
 
         end,
 
         after_place_node = function(pos, placer)
 
-            minetest.set_node(
+            core.set_node(
                 {x = pos.x, y = pos.y + 1, z = pos.z},
                 {
                     name = "unilib:machine_grill_kettle",
-                    param2 = minetest.dir_to_facedir(placer:get_look_dir())
+                    param2 = core.dir_to_facedir(placer:get_look_dir())
                 }
             )
 

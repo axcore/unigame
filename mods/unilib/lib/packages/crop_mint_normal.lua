@@ -9,7 +9,7 @@
 unilib.pkg.crop_mint_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -65,7 +65,8 @@ function unilib.pkg.crop_mint_normal.exec()
         seed_description = S("Normal mint Seed"),
         seed_group_table = {seed = 2, flammable = 2},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -77,7 +78,7 @@ function unilib.pkg.crop_mint_normal.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_crop_mint_normal", {
+    unilib.register_decoration_generic("farming_redo_crop_mint_normal", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:crop_mint_normal_grow_4",
@@ -87,7 +88,7 @@ function unilib.pkg.crop_mint_normal.exec()
             offset = 0,
             persist = 0.6,
             scale = 0.005,
-            seed = 329,
+            seed = 801,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

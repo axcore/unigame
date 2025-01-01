@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_common_daisy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.deco_aotearoa_tree_common_daisy.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_common_daisy_clump_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_common_daisy_clump_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_common_daisy"
             biomes = "aotearoa_coastal_muttonbird_scrub",
@@ -40,7 +40,7 @@ function unilib.pkg.deco_aotearoa_tree_common_daisy.post()
             y_max = 14,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_tree_common_daisy_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_common_daisy_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_common_daisy"
             biomes = "aotearoa_highland_pahautea_forest",

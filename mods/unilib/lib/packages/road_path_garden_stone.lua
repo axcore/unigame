@@ -9,7 +9,7 @@
 unilib.pkg.road_path_garden_stone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,11 @@ function unilib.pkg.road_path_garden_stone.exec()
         description = S("Stone Garden Path"),
         tiles = {"unilib_stone_ordinary.png"},
         groups = {snappy = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -60,7 +62,7 @@ function unilib.pkg.road_path_garden_stone.exec()
             {"group:cobble_stair_slab", "", "group:cobble_stair_slab"},
         },
     })
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:road_path_garden_stone", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,

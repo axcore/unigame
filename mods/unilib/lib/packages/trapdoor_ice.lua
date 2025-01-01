@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_ice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ end
 function unilib.pkg.trapdoor_ice.exec()
 
     unilib.register_trapdoor({
-        -- From mtg_plus:trapdoor_ice. Creates unilib:trapdoor_ice
+        -- From mtg_plus:trapdoor_ice. Creates unilib:trapdoor_ice_closed, etc
         part_name = "ice",
-        orig_name = {"mtg_plus:trapdoor_ice", "mtg_plus:trapdoor_ice_open"},
+        orig_name_list = {"mtg_plus:trapdoor_ice", "mtg_plus:trapdoor_ice_open"},
         def_table = {
             description = S("Ice Trapdoor"),
             -- (no tiles)
             groups = {cracky = 3, door = 1, slippery = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_trapdoor_ice.png",
             sound_close = "unilib_ice_door_close",

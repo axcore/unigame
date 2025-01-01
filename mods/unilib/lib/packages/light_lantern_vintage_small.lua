@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_vintage_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_vintage.add_mode
+local mode = unilib.global.imported_mod_table.morelights_vintage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,9 +43,11 @@ function unilib.pkg.light_lantern_vintage_small.exec()
                     "(unilib_light_lantern_vintage.png^unilib_light_lantern_vintage_overlay.png)",
             },
             groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "nodebox",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             light_source = 12,
             node_box = {
                 type = "fixed",
@@ -57,7 +59,7 @@ function unilib.pkg.light_lantern_vintage_small.exec()
             use_texture_alpha = "opaque",
 
             on_place = function(itemstack, placer, pointed_thing)
-                return unilib.rotate_and_place(itemstack, placer, pointed_thing)
+                return unilib.misc.rotate_and_place(itemstack, placer, pointed_thing)
             end
         }
     )
@@ -67,7 +69,7 @@ function unilib.pkg.light_lantern_vintage_small.exec()
         recipe = {
             {"", c_pane, ""},
             {c_wood, "unilib:light_bulb_normal", c_wood}
-        }
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.hook_grappling_throw_locked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hook.add_mode
+local mode = unilib.global.imported_mod_table.hook.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
 
     unilib.register_tool("unilib:hook_grappling_throw_locked", "hook:climb_rope_locked", mode, {
         -- From hook:climb_rope_locked
-        description = unilib.brackets(S("Throwable Grappling Hook"), S("Locked")),
+        description = unilib.utils.brackets(S("Throwable Grappling Hook"), S("Locked")),
         inventory_image = "unilib_hook_grappling_throw_locked.png",
 
         range = 2,
@@ -45,14 +45,14 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
                 unilib.pkg.shared_hook.hook_table.locked = true
                 local pos = user:get_pos()
                 local d = user:get_look_dir()
-                local m = minetest.add_entity(
+                local m = core.add_entity(
                     {x = pos.x, y = pos.y + 1.5, z = pos.z},
                     "unilib:entity_hook_grappling"
                 )
 
                 m:set_velocity({x = d.x * 15, y = d.y * 15, z = d.z * 15})
                 m:set_acceleration({x = 0, y = -5, z = 0})
-                minetest.sound_play(
+                core.sound_play(
                     "unilib_hook_grappling_throw",
                     {pos = pos, gain = 1.0, max_hear_distance = 5}
                 )
@@ -62,7 +62,7 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
             else
 
                 local pos = pointed_thing.under
-                local d = minetest.dir_to_facedir(user:get_look_dir())
+                local d = core.dir_to_facedir(user:get_look_dir())
                 local z = 0
                 local x = 0
                 local name = user:get_player_name()
@@ -86,11 +86,12 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
                         name
                     ) then
 
-                        minetest.set_node(
+                        core.set_node(
                             {x = pos.x + x, y = pos.y + 1, z = pos.z + z},
                             {name = "unilib:hook_generic_temp", param2 = d}
                         )
-                        minetest.get_meta(
+
+                        core.get_meta(
                             {x = pos.x + x, y = pos.y + 1, z = pos.z + z}
                         ):set_int("a", 1)
 
@@ -108,12 +109,12 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
                             name
                         ) then
 
-                            minetest.set_node(
+                            core.set_node(
                                 {x = pos.x + x, y = pos.y - i, z = pos.z + z},
                                 {name = "unilib:hook_grappling_throw_locked_temp", param2 = d}
                             )
 
-                            minetest.get_meta(
+                            core.get_meta(
                                 {x = pos.x + x, y = pos.y - i, z = pos.z + z}
                             ):set_string("owner", user:get_player_name())
 
@@ -138,7 +139,7 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
         output = "unilib:hook_grappling_throw_locked",
         recipe = {
             {"unilib:hook_grappling_throw", c_ingot, ""},
-        }
+        },
     })
 
     unilib.register_node("unilib:hook_grappling_throw_locked_temp", "hook:rope3", mode, {
@@ -172,11 +173,11 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
 
         can_dig = function(pos, player)
 
-            if minetest.get_meta(pos):get_string("owner") ~= player:get_player_name() then
+            if core.get_meta(pos):get_string("owner") ~= player:get_player_name() then
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     player:get_player_name(),
-                    S("This rope is owned by @1"), minetest.get_meta(pos):get_string("owner")
+                    S("This rope is owned by @1"), core.get_meta(pos):get_string("owner")
                 )
 
                 return false
@@ -189,11 +190,12 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
 
         on_punch = function(pos, node, puncher, pointed_thing)
 
-            if minetest.get_meta(pos):get_string("owner") ~= puncher:get_player_name() then
+            if core.get_meta(pos):get_string("owner") ~= puncher:get_player_name() then
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     puncher:get_player_name(),
-                    S("This rope is owned by %s"), minetest.get_meta(pos):get_string("owner")
+                    S("This rope is owned by %s"),
+                    core.get_meta(pos):get_string("owner")
                 )
 
                 return false
@@ -213,8 +215,8 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
             for i = 0 , 21 do
 
                 local p = {x = pos.x, y = pos.y + i, z = pos.z}
-                if n2d[minetest.get_node(p).name] then
-                    minetest.remove_node(p)
+                if n2d[core.get_node(p).name] then
+                    core.remove_node(p)
                 else
                     break
                 end
@@ -224,8 +226,8 @@ function unilib.pkg.hook_grappling_throw_locked.exec()
             for i = 1, 21 do
 
                 local p = {x = pos.x, y = pos.y - i, z = pos.z}
-                if n2d[minetest.get_node(p).name] then
-                    minetest.remove_node(p)
+                if n2d[core.get_node(p).name] then
+                    core.remove_node(p)
                 else
                     break
                 end

@@ -9,7 +9,7 @@
 unilib.pkg.tree_chestnut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chestnuttree.add_mode
+local mode = unilib.global.imported_mod_table.chestnuttree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.tree_chestnut.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_chestnut = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_tree_chestnut_bur.png",
@@ -60,10 +60,10 @@ function unilib.pkg.tree_chestnut.exec()
         walkable = false,
 
         after_place_node = function(pos, placer, itemstack)
-            minetest.set_node(pos, {name = "unilib:tree_chestnut_bur", param2 = 1})
+            core.set_node(pos, {name = "unilib:tree_chestnut_bur", param2 = 1})
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:tree_chestnut_bur", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:tree_chestnut_bur", 2),
     })
 
     unilib.register_tree_trunk({
@@ -100,10 +100,14 @@ function unilib.pkg.tree_chestnut.exec()
     })
     unilib.register_leafdecay({
         -- From chestnuttree:leaves
+        trunk_type = "chestnut",
         trunks = {"unilib:tree_chestnut_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_chestnut_leaves", "unilib:tree_chestnut_bur"},
-        radius = 3,
+        leaves = {"unilib:tree_chestnut_leaves"},
+        others = {"unilib:tree_chestnut_bur"},
+        -- N.B. Increased radius because of non-decaying leaves at tree's extremities
+--      radius = 3,
+        radius = 4,
     })
 
     unilib.register_tree_sapling({
@@ -148,7 +152,7 @@ function unilib.pkg.tree_chestnut.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From chestnuttree:gate. Creates unilib:gate_chestnut_closed
+        -- From chestnuttree:gate_closed, etc. Creates unilib:gate_chestnut_closed, etc
         part_name = "chestnut",
         orig_name = {"chestnuttree:gate_closed", "chestnuttree:gate_open"},
 
@@ -158,10 +162,10 @@ function unilib.pkg.tree_chestnut.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_chestnut", {
+    unilib.register_decoration_generic("cool_trees_tree_chestnut", {
         -- From chestnuttree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_chestnut.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_chestnut.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

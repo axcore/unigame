@@ -9,7 +9,7 @@
 unilib.pkg.fruit_coconut_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,11 +38,11 @@ function unilib.pkg.fruit_coconut_exotic.exec()
                 return
             end
 
-            local item = minetest.get_node(pointed_thing.under).name
-            if minetest.get_item_group(item, "cracky") ~= 0 then
+            local item = core.get_node(pointed_thing.under).name
+            if core.get_item_group(item, "cracky") ~= 0 then
 
                 itemstack:take_item()
-                minetest.add_item(pointed_thing.above, "unilib:fruit_coconut_exotic_open")
+                core.add_item(pointed_thing.above, "unilib:fruit_coconut_exotic_open")
 
             end
 
@@ -57,7 +57,7 @@ function unilib.pkg.fruit_coconut_exotic.exec()
         output = "unilib:fruit_coconut_exotic_open 2",
         recipe = {
             {"unilib:fruit_coconut_exotic"},
-        }
+        },
     })
 
     unilib.register_craftitem("unilib:fruit_coconut_exotic_open", "fruit:coconut_open", mode, {
@@ -67,9 +67,10 @@ function unilib.pkg.fruit_coconut_exotic.exec()
         -- N.B. No groups in original code
         groups = {food_coconut = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_coconut_exotic_open", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_coconut_exotic_open", 2),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -81,6 +82,16 @@ function unilib.pkg.fruit_coconut_exotic.exec()
 
     end
 
-    -- N.B. No call to unilib.setup_regrowing_fruit(), as this fruit is implemented as an ore
+    unilib.register_juice({
+        ingredient = "unilib:fruit_coconut_exotic",
+        juice_description = S("Coconut"),
+        juice_type = "coconut",
+        rgb = "#e8dadb",
+
+        orig_flag = false,
+    })
+    unilib.juice.register_duplicate("coconut", "unilib:fruit_coconut_exotic_open")
+
+    -- N.B. No call to unilib.register_regrowing_fruit(), as this fruit is implemented as an ore
 
 end

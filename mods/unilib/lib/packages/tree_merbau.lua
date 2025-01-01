@@ -9,7 +9,7 @@
 unilib.pkg.tree_merbau = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_merbau.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 4
     local sci_name = "Intsia bijuga"
 
     unilib.register_tree({
@@ -113,7 +113,7 @@ function unilib.pkg.tree_merbau.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_merbau_closed
+        -- Original to unilib. Creates unilib:gate_merbau_closed, etc
         part_name = "merbau",
         orig_name = {nil, nil},
 
@@ -124,10 +124,10 @@ function unilib.pkg.tree_merbau.exec()
 
     for i = 1, 5 do
 
-        unilib.register_decoration("australia_tree_merbau_in_queensland_" .. i, {
+        unilib.register_decoration_generic("australia_tree_merbau_in_queensland_" .. i, {
             -- From australia/biome_far_north_queensland.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_merbau_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_merbau_" .. i .. ".mts",
 
             fill_ratio = (5 - i + 1) / 6000,
             flags = "place_center_x, place_center_z",

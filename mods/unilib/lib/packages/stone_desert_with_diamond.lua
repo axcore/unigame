@@ -9,7 +9,7 @@
 unilib.pkg.stone_desert_with_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.stone_desert_with_diamond.exec()
 
     unilib.register_node("unilib:stone_desert_with_diamond", nil, mode, {
         -- Original to unilib
-        description = unilib.brackets(S("Diamond Ore"), S("Desert Stone")),
+        description = unilib.utils.brackets(S("Diamond Ore"), S("Desert Stone")),
         tiles = {"unilib_stone_desert.png^unilib_mineral_diamond.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_diamond_lump",
     })

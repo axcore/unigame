@@ -9,7 +9,7 @@
 unilib.pkg.deco_moreplants_plant_clover = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_moreplants_plant_clover.post()
 
-    unilib.register_decoration_now("moreplants_plant_clover", nil, {
+    unilib.register_decoration_complete("moreplants_plant_clover", nil, {
         -- From moreplants/init.lua
         -- Completes decoration in package "plant_clover"
         biomes = {"default_forest_deciduous", "default_grassland"},

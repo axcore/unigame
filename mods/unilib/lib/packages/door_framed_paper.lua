@@ -9,7 +9,7 @@
 unilib.pkg.door_framed_paper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_framed_paper.exec()
 
     unilib.register_door({
-        -- From xdecor, doors:slide_door. Creates unilib:door_framed_paper
+        -- From xdecor, doors:slide_door. Creates unilib:door_framed_paper_closed_left, etc
         part_name = "framed_paper",
-        orig_name = {
+        orig_name_list = {
             "doors:slide_door_a",
             "doors:slide_door_b",
             "doors:slide_door_c",
@@ -38,7 +38,8 @@ function unilib.pkg.door_framed_paper.exec()
         def_table = {
             description = S("Wood-Framed Paper Door"),
             tiles = {{name = "unilib_door_framed_paper.png", backface_culling = true}},
-            groups = {choppy = 2, cracky = 2, door = 1, oddly_breakable_by_hand = 1},
+            -- N.B. node = 1 missing from original code
+            groups = {choppy = 2, cracky = 2, door = 1, node = 1, oddly_breakable_by_hand = 1},
             -- (no sounds)
 
             inventory_image = "unilib_door_framed_paper_inv.png",
@@ -46,7 +47,7 @@ function unilib.pkg.door_framed_paper.exec()
             recipe = {
                 {"unilib:item_paper_ordinary", "unilib:item_paper_ordinary"},
                 {"unilib:item_paper_ordinary", "unilib:item_paper_ordinary"},
-                {"group:wood", "group:wood"}
+                {"group:wood", "group:wood"},
             },
         },
 

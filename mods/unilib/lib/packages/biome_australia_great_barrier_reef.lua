@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_great_barrier_reef = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,18 +18,18 @@ local mode = unilib.imported_mod_table.australia.add_mode
 function unilib.pkg.biome_australia_great_barrier_reef.init()
 
     return {
-        description = "Great barrier reef biome",
+        description = "Great Barrier Reef biome",
         depends = "sand_ordinary",
     }
 
 end
 
-function unilib.pkg.biome_australia_great_barrier_reef.exec()
+function unilib.pkg.biome_australia_great_barrier_reef.post()
 
     unilib.register_biome({
         -- From australia/biome_great_barrier_reef.lua, "great_barrier_reef" biome
         name = "australia_great_barrier_reef",
-        description = unilib.brackets(S("Great barrier reef biome"), "australia"),
+        description = unilib.utils.brackets(S("Great Barrier Reef biome"), "australia"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

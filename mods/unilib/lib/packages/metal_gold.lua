@@ -5,6 +5,10 @@
 -- Code:    LGPL 2.1
 -- Media:   CC BY-SA 3.0
 --
+-- From:    GLEMr11
+-- Code:    LGPL 2.1
+-- Media:   unknown
+--
 -- From:    technic
 -- Code:    LGPL 2.0
 -- Media:   unknown
@@ -13,8 +17,9 @@
 unilib.pkg.metal_gold = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local glemr11_add_mode = unilib.global.imported_mod_table.glemr11.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,6 +29,7 @@ function unilib.pkg.metal_gold.init()
 
     return {
         description = "Gold",
+        optional = "machine_furnace_induction",
     }
 
 end
@@ -71,15 +77,16 @@ function unilib.pkg.metal_gold.exec()
         output = "unilib:metal_gold_ingot 9",
         recipe = {
             {"unilib:metal_gold_block"},
-        }
+        },
     })
 
     unilib.register_node("unilib:metal_gold_block", "default:goldblock", default_add_mode, {
         -- From default:goldblock
         description = S("Gold Block"),
         tiles = {"unilib_metal_gold_block.png"},
-        groups = {cracky = 1},
-        sounds = unilib.sound_table.metal,
+        -- N.B. no level = 2 in original code; added to match other gold blocks
+        groups = {cracky = 1, level = 2},
+        sounds = unilib.global.sound_table.metal,
 
         is_ground_content = false,
     })
@@ -92,5 +99,49 @@ function unilib.pkg.metal_gold.exec()
     unilib.register_carvings("unilib:metal_gold_block", {
         millwork_flag = true,
     })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_gold_block_compressed", nil, default_add_mode, {
+            -- Original to unilib
+            description = S("Compressed Gold Block"),
+            tiles = {"unilib_metal_gold_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("gold")
+
+    end
+
+    if unilib.global.pkg_executed_table["machine_furnace_induction"] ~= nil then
+
+        -- (Creates unilib:bucket_steel_with_lava_cooling, etc)
+        unilib.register_liquid({
+            part_name = "molten_gold",
+            source_name = "unilib:liquid_molten_gold_source",
+            flowing_name = "unilib:liquid_molten_gold_flowing",
+
+            burntime = 15,
+            description = S("Molten Gold"),
+            force_renew_flag = false,
+            group_table = {molten_liquid = 1},
+        })
+
+        unilib.register_metal_molten({
+            -- From GLEMr11, lib_materials:liquid_molten_gold_source, etc. Creates
+            --      unilib:liquid_molten_gold_source, etc
+            part_name = "gold",
+            source_orig_name = "lib_materials:liquid_molten_gold_source",
+            flowing_orig_name = "lib_materials:liquid_molten_gold_flowing",
+
+            replace_mode = glemr11_add_mode,
+            source_description = S("Molten Gold Source"),
+            flowing_description = S("Flowing Molten Gold"),
+        })
+
+    end
 
 end

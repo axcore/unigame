@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_steel_bar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xpanes.add_mode
+local mode = unilib.global.imported_mod_table.xpanes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ end
 function unilib.pkg.trapdoor_steel_bar.exec()
 
     unilib.register_trapdoor({
-        -- From xpanes:trapdoor_steel_bar. Creates unilib:trapdoor_steel_bar
+        -- From xpanes:trapdoor_steel_bar. Creates unilib:trapdoor_steel_bar_closed, etc
         part_name = "steel_bar",
-        orig_name = {"xpanes:trapdoor_steel_bar", "xpanes:trapdoor_steel_bar_open"},
+        orig_name_list = {"xpanes:trapdoor_steel_bar", "xpanes:trapdoor_steel_bar_open"},
         def_table = {
             description = S("Steel Bar Trapdoor"),
             -- (no tiles)
             groups = {cracky = 1, door = 1, level = 2, node = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             gain_close = 0.13,
             gain_open = 0.15,

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_dough_gingerbread = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -23,7 +23,7 @@ function unilib.pkg.ingredient_dough_gingerbread.init()
             "ingredient_flour_ordinary",
             "ingredient_sugar_cane",
             "produce_ginger",
-            "vessel_bottle_glass_water",
+            "vessel_bottle_glass_with_water",
         },
     }
 
@@ -41,7 +41,7 @@ function unilib.pkg.ingredient_dough_gingerbread.exec()
             inventory_image = "unilib_ingredient_dough_gingerbread.png",
             groups = {flammable = 2, food_cotton_candy = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:ingredient_dough_gingerbread", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:ingredient_dough_gingerbread", 1),
         }
     )
     unilib.register_craft({
@@ -49,7 +49,7 @@ function unilib.pkg.ingredient_dough_gingerbread.exec()
         output = "unilib:ingredient_dough_gingerbread 3",
         recipe = {
             {
-                "unilib:vessel_bottle_glass_water",
+                "unilib:vessel_bottle_glass_with_water",
                 "unilib:ingredient_flour_ordinary",
                 "unilib:produce_ginger_harvest",
             },
@@ -58,7 +58,7 @@ function unilib.pkg.ingredient_dough_gingerbread.exec()
                 "unilib:ingredient_sugar_cane",
                 "",
             },
-        }
+        },
     })
     -- N.B. Original recipe removed, because it makes the recipe above pointless
     --[[

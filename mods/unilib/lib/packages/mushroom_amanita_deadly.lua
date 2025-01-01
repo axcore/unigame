@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_amanita_deadly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.mushroom_amanita_deadly.exec()
         tiles = {"unilib_mushroom_amanita_deadly.png"},
         -- N.B. mushroom = 1 not in original code
         groups = {attached_node = 1, flammable = 1, grave_plants = 1, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.mushroom_amanita_deadly.exec()
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_amanita_deadly", "cropocalypse:deadly_amanita")
 
-    unilib.register_decoration("cropocalypse_mushroom_amanita_deadly", {
+    unilib.register_decoration_generic("cropocalypse_mushroom_amanita_deadly", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_amanita_deadly",

@@ -9,7 +9,7 @@
 unilib.pkg.deco_xocean_plant_seagrass_sickle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.deco_xocean_plant_seagrass_sickle.post()
 
-    unilib.register_decoration_now("xocean_plant_seagrass_sickle", nil, {
+    unilib.register_decoration_complete("xocean_plant_seagrass_sickle", nil, {
         -- From xocean/init.lua
         -- Completes decoration in package "plant_seagrass_sickle"
         biomes = {

@@ -9,7 +9,7 @@
 unilib.pkg.stone_quartz_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_quartz_antipodean.exec()
         description = S("Antipodean Quartz"),
 
         category = "metamorphic",
+        colour = "#8B6848",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 4)
         hardness = 2,
@@ -48,7 +49,7 @@ function unilib.pkg.stone_quartz_antipodean.exec()
         tiles = {"unilib_stone_quartz_antipodean.png"},
         -- N.B. smoothstone = 1, stone = 1 not in original code
         groups = {cracky = 2, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_gold_lump",
     })

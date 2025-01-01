@@ -9,7 +9,7 @@
 unilib.pkg.mineral_wollastonite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_wollastonite.exec()
         description = S("Wollastonite Lump"),
         inventory_image = "unilib_mineral_wollastonite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_calcium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_calcium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

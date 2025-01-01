@@ -9,7 +9,7 @@
 unilib.pkg.flower_antirrhinum = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_antirrhinum.exec()
 
     unilib.register_node("unilib:flower_antirrhinum", "herbs:antirrhinum", mode, {
         -- From herbs:antirrhinum
-        description = unilib.annotate(S("Antirrhinum"), "Antirrhinum"),
+        description = unilib.utils.annotate(S("Antirrhinum"), "Antirrhinum"),
         tiles = {"unilib_flower_antirrhinum.png"},
         groups = {
-            attached_node = 1, color_pink = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_pink = 1, colour_pink = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_antirrhinum.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_antirrhinum", "herbs:antirrhinum")
 
-    unilib.register_decoration("herbs_flower_antirrhinum", {
+    unilib.register_decoration_generic("herbs_flower_antirrhinum", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_antirrhinum",

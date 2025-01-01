@@ -9,7 +9,7 @@
 unilib.pkg.carpet_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.carpet.add_mode
+local mode = unilib.global.imported_mod_table.carpet.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.carpet_basic.init()
 
     return {
         description = "Basic carpet set (based on the basic 15 dye set)",
-        depends = "wool_basic",
+        depends = {"shared_carpet", "wool_basic"},
     }
 
 end
@@ -56,7 +56,7 @@ function unilib.pkg.carpet_basic.exec()
 
         local description = row_list[3]
 
-        unilib.register_carpet({
+        unilib.pkg.shared_carpet.register_carpet({
             -- From carpet:wool_black, etc. Creates unilib:carpet_black, etc
             part_name = part_name,
             orig_name = "carpet:wool_" .. orig_name,

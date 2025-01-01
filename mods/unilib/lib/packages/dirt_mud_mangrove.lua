@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mud_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,12 +30,12 @@ function unilib.pkg.dirt_mud_mangrove.exec()
         description = S("Mangrove Mud"),
         tiles = {"unilib_dirt_mud_mangrove.png"},
         groups = {crumbly = 2, soil = 1},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_mangrove", gain = 0.4},
             dug = {name = "unilib_dirt_mud_mangrove", gain = 0.4},
         }),
 
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
 
 end

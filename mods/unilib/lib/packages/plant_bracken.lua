@@ -9,7 +9,7 @@
 unilib.pkg.plant_bracken = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_bracken.exec()
 
     unilib.register_node("unilib:plant_bracken", "aotearoa:bracken", mode, {
         -- From aotearoa:bracken
-        description = unilib.annotate(S("Bracken"), "Pteridium esculentum"),
+        description = unilib.utils.annotate(S("Bracken"), "Pteridium esculentum"),
         tiles = {"unilib_plant_bracken.png"},
         groups = {attached_node = 1, dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_bracken.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("aotearoa_plant_bracken_sparse", {
+    unilib.register_decoration_generic("aotearoa_plant_bracken_sparse", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_bracken",
@@ -62,7 +62,7 @@ function unilib.pkg.plant_bracken.exec()
         fill_ratio = 0.002,
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_plant_bracken_clumped", {
+    unilib.register_decoration_generic("aotearoa_plant_bracken_clumped", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_bracken",
@@ -77,7 +77,7 @@ function unilib.pkg.plant_bracken.exec()
         },
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_plant_bracken_dense", {
+    unilib.register_decoration_generic("aotearoa_plant_bracken_dense", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_bracken",

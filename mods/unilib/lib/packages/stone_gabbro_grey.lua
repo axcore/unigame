@@ -9,7 +9,7 @@
 unilib.pkg.stone_gabbro_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_gabbro_grey.exec()
         description = S("Grey Gabbro"),
 
         category = "intrusive",
+        colour = "#7A7174",
         grinder_flag = true,
         hardness = 4,
     })
@@ -76,6 +77,24 @@ function unilib.pkg.stone_gabbro_grey.exec()
 
         replace_mode = mode,
         description = S("Grey Gabbro Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_gabbro_grey_cobble_compressed
+        part_name = "gabbro_grey",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Grey Gabbro Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_gabbro_grey_cobble_condensed
+        part_name = "gabbro_grey",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Grey Gabbro Cobble"),
     })
 
 end

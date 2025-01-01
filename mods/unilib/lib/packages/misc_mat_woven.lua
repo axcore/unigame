@@ -9,7 +9,7 @@
 unilib.pkg.misc_mat_woven = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,9 +30,11 @@ function unilib.pkg.misc_mat_woven.exec()
         description = S("Woven Mat"),
         tiles = {"unilib_misc_mat_woven.png"},
         groups = {flammable = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -55,7 +57,7 @@ function unilib.pkg.misc_mat_woven.exec()
             {"", "", ""},
             {"", "", ""},
             {"group:leaves", "group:leaves", "group:leaves"},
-        }
+        },
     })
 
     unilib.register_craft({
@@ -65,7 +67,7 @@ function unilib.pkg.misc_mat_woven.exec()
             {"", "", ""},
             {"", "", ""},
             {"group:grass", "group:grass", "group:grass"},
-        }
+        },
     })
     unilib.register_craft({
         -- From earthbuild:woven_mat
@@ -74,7 +76,7 @@ function unilib.pkg.misc_mat_woven.exec()
             {"", "", ""},
             {"", "", ""},
             {"group:dry_grass", "group:dry_grass", "group:dry_grass"},
-        }
+        },
     })
     unilib.register_craft({
         -- From earthbuild:woven_mat
@@ -83,7 +85,7 @@ function unilib.pkg.misc_mat_woven.exec()
             {"", "", ""},
             {"", "", ""},
             {"group:junglegrass", "group:junglegrass", "group:junglegrass"},
-        }
+        },
     })
     unilib.register_craft({
         -- From earthbuild:woven_mat

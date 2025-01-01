@@ -9,7 +9,7 @@
 unilib.pkg.plant_weed_umbrella = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,17 @@ function unilib.pkg.plant_weed_umbrella.exec()
 
     unilib.register_node("unilib:plant_weed_umbrella", "moreplants:umbrella", mode, {
         -- From moreplants:umbrella
-        description = unilib.annotate(S("Umbrella Weed"), "Cyperus alternifolius"),
+        description = unilib.utils.annotate(S("Umbrella Weed"), "Cyperus alternifolius"),
         tiles = {"unilib_plant_weed_umbrella.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_weed_umbrella.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -50,7 +51,7 @@ function unilib.pkg.plant_weed_umbrella.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_weed_umbrella", "moreplants:umbrella")
 
-    unilib.register_decoration("moreplants_plant_weed_umbrella", {
+    unilib.register_decoration_generic("moreplants_plant_weed_umbrella", {
         -- From moreplants:umbrella
         deco_type = "simple",
         decoration = "unilib:plant_weed_umbrella",

@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_uranium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,11 @@ function unilib.pkg.stone_ordinary_with_uranium.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_uranium", "technic:mineral_uranium", mode, {
         -- From technic:mineral_uranium
-        description = unilib.brackets(S("Uranium Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Uranium Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_metal_uranium.png"},
-        groups = {cracky = 3, radioactive = 1},
-        sounds = unilib.sound_table.stone,
+        -- N.B. ore = 1 not in original code
+        groups = {cracky = 3, ore = 1, radioactive = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_uranium_lump",
     })

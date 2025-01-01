@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_plant_garlic_porcelain_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,12 +30,12 @@ end
 
 function unilib.pkg.deco_cropocalypse_plant_garlic_porcelain_wild.post()
 
-    unilib.register_decoration_now("cropocalypse_plant_garlic_porcelain_wild", nil, {
+    unilib.register_decoration_complete("cropocalypse_plant_garlic_porcelain_wild", nil, {
         -- From cropocalypse/plants.lua
         -- Completes decoration in package "plant_garlic_porcelain_wild"
         biomes = "default_forest_deciduous",
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

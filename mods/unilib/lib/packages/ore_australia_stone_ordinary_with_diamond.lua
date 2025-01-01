@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_ordinary_with_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

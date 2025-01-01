@@ -9,7 +9,7 @@
 unilib.pkg.admin_machine_caretaker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chunkkeeper.add_mode
+local mode = unilib.global.imported_mod_table.chunkkeeper.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,7 +26,7 @@ end
 
 local function on_construct(pos, node)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_int("super_user", 1)
     meta:set_int("time_left", 0)
     meta:set_int("running", 0)
@@ -56,7 +56,7 @@ function unilib.pkg.admin_machine_caretaker.exec()
 
     unilib.register_node("unilib:admin_machine_caretaker_off", "chunkkeeper:keeper_inf_off", mode, {
         -- From chunkkeeper:keeper_inf_off
-        description = unilib.brackets(S("Admin Caretaker Machine"), S("Off")),
+        description = unilib.utils.brackets(S("Admin Caretaker Machine"), S("Off")),
         -- N.B. Unlike original code, using tweaked textures, so admin/non-admin machines look
         --      different
         tiles = {
@@ -66,7 +66,8 @@ function unilib.pkg.admin_machine_caretaker.exec()
         -- N.B. Original code included handy = 1
         -- N.B. not_in_creative_inventory not in original code
         groups = {
-            not_in_creative_inventory = unilib.show_admin_item_group, oddly_breakable_by_hand = 3,
+            not_in_creative_inventory = unilib.globalshow_admin_item_group,
+            oddly_breakable_by_hand = 3,
         },
         -- (no sounds)
 
@@ -91,7 +92,7 @@ function unilib.pkg.admin_machine_caretaker.exec()
 
     unilib.register_node("unilib:admin_machine_caretaker_on", "chunkkeeper:keeper_inf_on", mode, {
         -- From chunkkeeper:keeper_inf_on
-        description = unilib.brackets(S("Admin Caretaker Machine"), S("On")),
+        description = unilib.utils.brackets(S("Admin Caretaker Machine"), S("On")),
         tiles = {
             {
                 name = "unilib_admin_machine_caretaker_animated.png",
@@ -99,8 +100,8 @@ function unilib.pkg.admin_machine_caretaker.exec()
                     type = "vertical_frames",
                     aspect_w = 32,
                     aspect_h = 32,
-                    length = 2.0
-                }
+                    length = 2.0,
+                },
             },
             "unilib_admin_machine_caretaker_bottom.png",
         },

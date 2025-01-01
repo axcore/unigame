@@ -9,7 +9,7 @@
 unilib.pkg.shared_moretrees = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -25,7 +25,7 @@ function unilib.pkg.shared_moretrees.grow_ltree(pos, part_name)
     --      part_name (str): e.g. "tree_beech_common", matching the generic decoration name
     --          "convert_tree_beech_common"
 
-    unilib.grow_tree_sapling(pos, "unilib:" .. part_name .. "_sapling")
+    unilib.trees.grow_sapling(pos, "unilib:" .. part_name .. "_sapling")
 
 end
 

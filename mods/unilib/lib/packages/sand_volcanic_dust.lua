@@ -9,7 +9,7 @@
 unilib.pkg.sand_volcanic_dust = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.sand_volcanic_dust.exec()
         description = S("Volcanic Dust Sand"),
         tiles = {"unilib_sand_volcanic_dust.png"},
         groups = {crumbly = 3, falling_node = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
     })
 
 end

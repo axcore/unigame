@@ -9,7 +9,7 @@
 unilib.pkg.door_steel_dungeon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_gates.add_mode
+local mode = unilib.global.imported_mod_table.castle_gates.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_steel_dungeon.exec()
 
     unilib.register_door({
-        -- From castle_gates:jail_door. Creates unilib:door_steel_dungeon
+        -- From castle_gates:jail_door. Creates unilib:door_steel_dungeon_closed_left, etc
         part_name = "steel_dungeon",
-        orig_name = {
+        orig_name_list = {
             "castle_gates:jail_door_a",
             "castle_gates:jail_door_b",
             "castle_gates:jail_door_c",
@@ -40,7 +40,7 @@ function unilib.pkg.door_steel_dungeon.exec()
             tiles = {{name = "unilib_door_steel_dungeon.png", backface_culling = true}},
             groups = {cracky = 2, door = 1, flow_through = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = "unilib_door_steel_dungeon_inv.png",
             protected_flag = true,

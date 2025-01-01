@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_bloodwood_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,13 +28,17 @@ function unilib.pkg.deco_australia_tree_bloodwood_swamp.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("australia_tree_bloodwood_swamp_in_kimberley_" .. i, nil, {
+        unilib.register_decoration_complete(
             -- From australia/biome_kimberley.lua
-            biomes = "australia_kimberley",
-            place_on = "unilib:dirt_red_antipodean",
-            y_max = 35,
-            y_min = 7,
-        })
+            "australia_tree_bloodwood_swamp_in_kimberley_" .. i,
+            nil,
+            {
+                biomes = "australia_kimberley",
+                place_on = "unilib:dirt_red_antipodean",
+                y_max = 35,
+                y_min = 7,
+            }
+        )
 
     end
 

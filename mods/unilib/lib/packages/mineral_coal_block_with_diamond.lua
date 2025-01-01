@@ -9,7 +9,7 @@
 unilib.pkg.mineral_coal_block_with_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,15 +31,15 @@ function unilib.pkg.mineral_coal_block_with_diamond.exec()
 
     unilib.register_node("unilib:mineral_coal_block_with_diamond", "underch:coal_diamond", mode, {
         -- From underch:coal_diamond
-        description = unilib.brackets(S("Diamond Ore"), S("Coal Block")),
+        description = unilib.utils.brackets(S("Diamond Ore"), S("Coal Block")),
         tiles = {"unilib_mineral_coal_block.png^unilib_mineral_diamond.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             items = {
-                {items = {c_coal_lump .. " 8", c_diamond}}
-            }
+                {items = {c_coal_lump .. " 8", c_diamond}},
+            },
         },
         is_ground_content = false,
 
@@ -53,7 +53,7 @@ function unilib.pkg.mineral_coal_block_with_diamond.exec()
             {c_coal_lump, c_coal_lump, c_coal_lump},
             {c_coal_lump, c_diamond, c_coal_lump},
             {c_coal_lump, c_coal_lump, c_coal_lump},
-        }
+        },
     })
 
 end

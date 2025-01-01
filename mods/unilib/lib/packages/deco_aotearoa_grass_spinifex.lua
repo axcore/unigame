@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_grass_spinifex = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_aotearoa_grass_spinifex.post()
 
-    unilib.register_decoration_now("aotearoa_grass_spinifex", nil, {
+    unilib.register_decoration_complete("aotearoa_grass_spinifex", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "grass_spinifex"
         biomes = {

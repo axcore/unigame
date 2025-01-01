@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_sunflower_dwarf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.food_bread_sunflower_dwarf.exec()
             inventory_image = "unilib_food_bread_sunflower_dwarf.png",
             groups = {eatable = 1, food = 1, food_bread = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_bread_sunflower_dwarf", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_bread_sunflower_dwarf", 4),
         }
     )
     unilib.register_craft({
@@ -52,10 +52,10 @@ function unilib.pkg.food_bread_sunflower_dwarf.exec()
         recipe = "unilib:ingredient_dough_sunflower_seed",
         cooktime = 15,
     })
-    if unilib.technic_extra_flag and
-            unilib.pkg_executed_table["food_seed_sunflower_dwarf"] ~= nil then
+    if unilib.setting.technic_extra_flag and
+            unilib.global.pkg_executed_table["food_seed_sunflower_dwarf"] ~= nil then
 
-        if unilib.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
 
             technic.register_alloy_recipe({
                 -- From cucina_vegana:sunflower_seeds_bread
@@ -66,7 +66,7 @@ function unilib.pkg.food_bread_sunflower_dwarf.exec()
 
         end
 
-        if unilib.pkg_executed_table["ingredient_flour_sunflower_seed"] ~= nil then
+        if unilib.global.pkg_executed_table["ingredient_flour_sunflower_seed"] ~= nil then
 
             technic.register_alloy_recipe({
                 -- From cucina_vegana:sunflower_seeds_bread
@@ -80,7 +80,7 @@ function unilib.pkg.food_bread_sunflower_dwarf.exec()
 
         end
 
-        if unilib.pkg_executed_table["ingredient_flour_rice_brown"] ~= nil then
+        if unilib.global.pkg_executed_table["ingredient_flour_rice_brown"] ~= nil then
 
             technic.register_alloy_recipe({
                 -- From cucina_vegana:sunflower_seeds_bread

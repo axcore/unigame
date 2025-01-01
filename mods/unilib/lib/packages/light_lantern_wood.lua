@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,8 +31,10 @@ function unilib.pkg.light_lantern_wood.exec()
         description = S("Cross-Framed Wooden Lantern"),
         tiles = {"unilib_light_lantern_wood_cross.png"},
         groups = {choppy = 3, cracky = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 13,
         paramtype = "light",
         paramtype2 = "facedir",
@@ -43,8 +45,8 @@ function unilib.pkg.light_lantern_wood.exec()
         recipe = {
             {"group:stick", "unilib:torch_ordinary", "group:stick"},
             {"group:stick", "unilib:glass_ordinary", "group:stick"},
-            {"group:stick", "unilib:torch_ordinary", "group:stick"}
-        }
+            {"group:stick", "unilib:torch_ordinary", "group:stick"},
+        },
     })
 
     unilib.register_node("unilib:light_lantern_wood_square", "xdecor:wooden2_lightbox", mode, {
@@ -52,8 +54,10 @@ function unilib.pkg.light_lantern_wood.exec()
         description = S("Square-Framed Wooden Lantern"),
         tiles = {"unilib_light_lantern_wood_square.png"},
         groups = {choppy = 3, cracky = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 13,
         paramtype = "light",
         paramtype2 = "facedir",

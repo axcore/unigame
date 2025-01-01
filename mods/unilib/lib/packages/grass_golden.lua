@@ -9,7 +9,7 @@
 unilib.pkg.grass_golden = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,7 +17,7 @@ local mode = unilib.imported_mod_table.glemr11.add_mode
 
 local function do_decoration(offset, scale, length)
 
-    unilib.register_decoration("glemr11_grass_golden_" .. length, {
+    unilib.register_decoration_generic("glem_grass_golden_" .. length, {
         -- Code adapted from "grass_ordinary" package
         deco_type = "simple",
         decoration = "unilib:grass_golden_" .. length,
@@ -49,8 +49,14 @@ end
 
 function unilib.pkg.grass_golden.exec()
 
+    local full_name = "unilib:grass_golden_1"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
     -- First variant
-    unilib.register_node("unilib:grass_golden_1", "lib_ecology:grass_golden_1", mode, {
+    unilib.register_node(full_name, "lib_ecology:grass_golden_1", mode, {
         -- Textures from GLEMr11, lib_ecology:lib_ecology_grass_golden_1 etc. For consistency, code
         --      adapted from "grass_ordinary" package
         description = S("Golden Grass"),
@@ -59,11 +65,13 @@ function unilib.pkg.grass_golden.exec()
         groups = {
             attached_node = 1, flammable = 1, flora = 1, golden_grass = 1, grass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
-        -- (As in the "grass_ordinary" package, we use a different variant for the inventory image)
+        drop = drop,
+        -- N.B. As in the "grass_ordinary" package, we use a different variant for the inventory
+        --      image
         inventory_image = "unilib_grass_golden_2.png",
         paramtype = "light",
         selection_box = {
@@ -79,19 +87,18 @@ function unilib.pkg.grass_golden.exec()
 
             -- Place a random grass variant
             local stack = ItemStack("unilib:grass_golden_" .. math.random(1, 5))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
-            return ItemStack("unilib:grass_golden_1 " ..
-                    itemstack:get_count() - (1 - ret:get_count()))
+            local ret = core.item_place(stack, placer, pointed_thing)
+            return ItemStack(full_name .. " " .. itemstack:get_count() - (1 - ret:get_count()))
 
         end,
     })
     unilib.register_craft({
         -- Original to unilib
         type = "fuel",
-        recipe = "unilib:grass_golden_1",
+        recipe = full_name,
         burntime = 2,
     })
-    unilib.register_plant_in_pot("unilib:grass_golden_1", "lib_ecology:grass_golden_1")
+    unilib.register_plant_in_pot(full_name, "lib_ecology:grass_golden_1")
 
     for i = 2, 5 do
 
@@ -105,11 +112,11 @@ function unilib.pkg.grass_golden.exec()
                 attached_node = 1, flammable = 1, flora = 1, golden_grass = 1, grass = 1,
                 not_in_creative_inventory = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
-            drop = "unilib:grass_golden_1",
+            drop = drop,
             inventory_image = "unilib_grass_golden_" .. i .. ".png",
             paramtype = "light",
             selection_box = {
@@ -132,7 +139,7 @@ function unilib.pkg.grass_golden.exec()
     do_decoration(0.03, 0.03, 1)
 
     -- Update global variables
-    unilib.register_growing({
+    unilib.flora.register_growth_stages({
         base_name = "unilib:grass_golden",
         mode = "other",
         stage_max = 5,

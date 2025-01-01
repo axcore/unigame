@@ -9,7 +9,7 @@
 unilib.pkg.plant_fungus_ground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.plant_fungus_ground.exec()
         },
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -53,7 +53,7 @@ function unilib.pkg.plant_fungus_ground.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("moreplants_plant_fungus_ground", {
+    unilib.register_decoration_generic("moreplants_plant_fungus_ground", {
         -- From moreplants:groundfung
         deco_type = "simple",
         decoration = "unilib:plant_fungus_ground",

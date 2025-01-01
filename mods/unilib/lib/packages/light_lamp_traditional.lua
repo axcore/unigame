@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_traditional = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,13 +39,16 @@ function unilib.pkg.light_lamp_traditional.exec()
             },
         },
         groups = {attached_node = 1, snappy = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_light_lamp_traditional_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 13,
         paramtype = "light",
-        paramtype2 = "wallmounted",
+        -- N.B. removed "wallmounted", because the lantern looks weird on walls/ceilings
+--      paramtype2 = "wallmounted",
         selection_box = {
             type = "fixed",
             fixed = {

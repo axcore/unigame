@@ -9,7 +9,7 @@
 unilib.pkg.tree_banana_exposed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_banana_exposed.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Musa"
 
     unilib.register_tree({
@@ -90,15 +90,15 @@ function unilib.pkg.tree_banana_exposed.exec()
         replace_func = function(pos)
 
             local replace_table = {
-                {"unilib:tree_banana_trunk", "unilib:tree_banana_exposed_trunk"},
-                {"unilib:tree_banana_leaves", "unilib:tree_banana_exposed_leaves"},
+                ["unilib:tree_banana_trunk"] = "unilib:tree_banana_exposed_trunk",
+                ["unilib:tree_banana_leaves"] = "unilib:tree_banana_exposed_leaves",
             }
 
             if math.random(3) == 1 and
-                    minetest.find_node_near(pos, 1, {"unilib:soil_ordinary_wet"}) then
+                    core.find_node_near(pos, 1, {"unilib:soil_ordinary_wet"}) then
 
                 -- When growing near water, the tree has bunches, rather than single bananas
-                table.insert(replace_table, {"unilib:fruit_banana", "unilib:fruit_banana_bunch"})
+                replace_table["unilib:fruit_banana"] = "unilib:fruit_banana_bunch"
 
             end
 
@@ -118,10 +118,10 @@ function unilib.pkg.tree_banana_exposed.exec()
     })
 
     -- N.B. GLEMr4 does not provide a schematic, so hijack the one from ethereal again
-    unilib.register_decoration("glem_tree_banana_exposed", {
+    unilib.register_decoration_generic("glem_tree_banana_exposed", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_banana.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_banana.mts",
 
         fill_ratio = 0.015,
         flags = "place_center_x, place_center_z",

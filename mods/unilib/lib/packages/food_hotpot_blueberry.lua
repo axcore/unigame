@@ -9,7 +9,7 @@
 unilib.pkg.food_hotpot_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -72,7 +72,7 @@ function unilib.pkg.food_hotpot_blueberry.post()
     local c_stick = "unilib:item_stick_ordinary"
     local c_molasses = "unilib:ingredient_molasses"
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {c_stick, c_stick})
 
     unilib.register_craft({
@@ -81,15 +81,15 @@ function unilib.pkg.food_hotpot_blueberry.post()
         recipe = {
             {"group:food_sugar", c_stick, "group:food_sugar"},
             {c_puree, c_puree, c_puree},
-            {"", "group:potable_bucket", ""}
+            {"", "group:potable_bucket", ""},
         },
         replacements = replace_list,
     })
 
-    if unilib.pkg_executed_table["ingredient_molasses"] ~= nil and
-            unilib.pkg_executed_table["vessel_glass_empty"] ~= nil then
+    if unilib.global.pkg_executed_table["ingredient_molasses"] ~= nil and
+            unilib.global.pkg_executed_table["vessel_glass_empty"] ~= nil then
 
-        replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+        replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
         table.insert(replace_list, {c_stick, c_stick})
         table.insert(replace_list, {c_molasses, "unilib:vessel_glass_empty 2"})
 
@@ -99,7 +99,7 @@ function unilib.pkg.food_hotpot_blueberry.post()
             recipe = {
                 {c_molasses, c_stick, c_molasses},
                 {c_puree, c_puree, c_puree},
-                {"", "group:potable_bucket", ""}
+                {"", "group:potable_bucket", ""},
             },
             replacements = replace_list,
         })

@@ -9,7 +9,7 @@
 unilib.pkg.tree_coolabah = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_coolabah.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Eucalyptus coolabah"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_coolabah.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_coolabah_closed
+        -- Original to unilib. Creates unilib:gate_coolabah_closed, etc
         part_name = "coolabah",
         orig_name = {nil, nil},
 
@@ -121,10 +121,10 @@ function unilib.pkg.tree_coolabah.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_central_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_central_" .. i, {
             -- From australia/biome_central_australia.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -135,10 +135,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -149,10 +149,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_flinders_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_flinders_" .. i, {
             -- From australia/biome_flinders_lofty.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -163,10 +163,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_forests_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_forests_" .. i, {
             -- From australia/biome_jarrah_karri_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -177,10 +177,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_mulga_lands_" .. i, {
             -- From australia/biome_mulga_lands.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -191,10 +191,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_murray_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_murray_" .. i, {
             -- From australia/biome_murray_darling_basin.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -205,10 +205,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_simpson_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_simpson_" .. i, {
             -- From australia/biome_simpson_desert.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -219,10 +219,10 @@ function unilib.pkg.tree_coolabah.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_coolabah_in_victoria_" .. i, {
+        unilib.register_decoration_generic("australia_tree_coolabah_in_victoria_" .. i, {
             -- From australia/biome_victorian_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_coolabah_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",

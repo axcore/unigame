@@ -9,7 +9,7 @@
 unilib.pkg.misc_blueprint_grill_smoker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,10 +38,12 @@ function unilib.pkg.misc_blueprint_grill_smoker.exec()
             "unilib_misc_blueprint_grill_smoker.png",
         },
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_blueprint_grill_smoker.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {

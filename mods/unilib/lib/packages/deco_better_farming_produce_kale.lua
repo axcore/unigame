@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_produce_kale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_better_farming_produce_kale.post()
 
-    unilib.register_decoration_now("better_farming_produce_kale", nil, {
+    unilib.register_decoration_complete("better_farming_produce_kale", nil, {
         -- From better_farming, kale.lua
         -- Completes decoration in package "produce_kale"
         biomes = "default_forest_coniferous",
         place_on = "unilib:dirt_ordinary_with_litter_coniferous",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

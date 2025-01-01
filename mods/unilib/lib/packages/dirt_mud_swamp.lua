@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mud_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table["30biomes"].add_mode
+local mode = unilib.global.imported_mod_table["30biomes"].add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,10 @@ function unilib.pkg.dirt_mud_swamp.exec()
         description = S("Swamp Mud"),
         tiles = {"unilib_dirt_mud_swamp.png"},
         groups = {crumbly = 2},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drowning = 1,
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
         liquid_alternative_flowing = "unilib:dirt_mud_swamp",
         liquid_alternative_source = "unilib:dirt_mud_swamp",
         liquid_renewable = false,

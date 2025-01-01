@@ -5,7 +5,6 @@
 #       spreadable). Other mushrooms/fungi tend to grow on trees, and are not spreadable or
 #       placeable. Truffles can be found growing at the base of some trees, just below the surface.
 #       Spores have not been imported at all
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -70,6 +69,8 @@ tree_aspen|default doors moreblocks
 tree_jungle|default doors moreblocks
 tree_pine|default doors moreblocks
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
 #grass_dry|default
@@ -84,3 +85,5 @@ tree_pine|default doors moreblocks
 #soil_ordinary|farming
 #tnt_ordinary|tnt
 #vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.suggested)

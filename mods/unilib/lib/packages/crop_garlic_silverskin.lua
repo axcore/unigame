@@ -9,7 +9,7 @@
 unilib.pkg.crop_garlic_silverskin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_garlic_silverskin.exec()
         table.insert(orig_name_list, "cucina_vegana:garlic_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/garlic_default.lua
         unilib.register_crop_mtgame({
@@ -50,7 +50,7 @@ function unilib.pkg.crop_garlic_silverskin.exec()
             fertility_list = fertility_list,
             harvest_description = S("Silverskin Garlic"),
             harvest_group_table = {flammable = 1, food = 1, food_garlic = 1, food_vegan = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 12,
             seed_description = S("Silverskin Garlic Seed"),
             seed_group_table = {attached_node = 1, flammable = 4, seed_garlic = 1},
@@ -110,7 +110,8 @@ function unilib.pkg.crop_garlic_silverskin.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -121,5 +122,14 @@ function unilib.pkg.crop_garlic_silverskin.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_garlic_silverskin_harvest",
+        juice_description = S("Garlic"),
+        juice_type = "garlic",
+        rgb = "#eab9a3",
+
+        orig_flag = false,
+    })
 
 end

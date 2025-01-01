@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_vine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_vine.post()
 
-    unilib.register_decoration_now("ethereal_tree_vine", nil, {
+    unilib.register_decoration_complete("ethereal_tree_vine", nil, {
         -- From ethereal-ng/decor.lua
         biomes = "ethereal_swamp",
         place_on = "unilib:dirt_ordinary_with_turf",

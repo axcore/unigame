@@ -9,7 +9,7 @@
 unilib.pkg.torch_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,17 +29,17 @@ function unilib.pkg.torch_ordinary.exec()
     local function on_flood(pos, oldnode, newnode)
 
         -- When flooded, any kind of ordinary torch becomes a dropped item
-        minetest.add_item(pos, ItemStack("unilib:torch_ordinary 1"))
+        core.add_item(pos, ItemStack("unilib:torch_ordinary 1"))
 
         -- Play flame-extinguish sound if the flooding liquid is not an 'igniter'
-        local nodedef = minetest.registered_items[newnode.name]
+        local nodedef = core.registered_items[newnode.name]
         if not (
             nodedef and nodedef.groups and nodedef.groups.igniter and nodedef.groups.igniter > 0
         ) then
 
-            minetest.sound_play(
+            core.sound_play(
                 "unilib_cool_lava",
-                {pos = pos, max_hear_distance = 16, gain = 0.1},
+                {pos = pos, max_hear_distance = 16, gain = 0.07},
                 true
             )
 
@@ -58,7 +58,7 @@ function unilib.pkg.torch_ordinary.exec()
             animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
         }},
         groups = {attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1, torch = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_ordinary",
@@ -83,8 +83,8 @@ function unilib.pkg.torch_ordinary.exec()
         on_place = function(itemstack, placer, pointed_thing)
 
             local under = pointed_thing.under
-            local node = minetest.get_node(under)
-            local def = minetest.registered_nodes[node.name]
+            local node = core.get_node(under)
+            local def = core.registered_nodes[node.name]
 
             if def and def.on_rightclick and not (
                 placer and placer:is_player() and placer:get_player_control().sneak
@@ -93,7 +93,7 @@ function unilib.pkg.torch_ordinary.exec()
             end
 
             local above = pointed_thing.above
-            local wdir = minetest.dir_to_wallmounted(vector.subtract(under, above))
+            local wdir = core.dir_to_wallmounted(vector.subtract(under, above))
             local fakestack = itemstack
 
             if wdir == 0 then
@@ -104,7 +104,7 @@ function unilib.pkg.torch_ordinary.exec()
                 fakestack:set_name("unilib:torch_ordinary_wall")
             end
 
-            itemstack = minetest.item_place(fakestack, placer, pointed_thing, wdir)
+            itemstack = core.item_place(fakestack, placer, pointed_thing, wdir)
             itemstack:set_name("unilib:torch_ordinary")
 
             return itemstack
@@ -119,7 +119,7 @@ function unilib.pkg.torch_ordinary.exec()
         recipe = {
             {"unilib:mineral_coal_lump"},
             {"group:stick"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:torch
@@ -139,7 +139,7 @@ function unilib.pkg.torch_ordinary.exec()
             attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1,
             not_in_creative_inventory = 1, torch = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_ordinary",
@@ -172,7 +172,7 @@ function unilib.pkg.torch_ordinary.exec()
             attached_node = 1, choppy = 2, dig_immediate = 3, flammable = 1,
             not_in_creative_inventory = 1, torch = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:torch_ordinary",
@@ -202,29 +202,18 @@ function unilib.pkg.torch_ordinary.exec()
         action = function(pos, node)
 
             if node.param2 == 0 then
-
-                minetest.set_node(
-                    pos,
-                    {name = "unilib:torch_ordinary_ceiling", param2 = node.param2}
-                )
-
+                core.set_node(pos, {name = "unilib:torch_ordinary_ceiling", param2 = node.param2})
             elseif node.param2 == 1 then
-
-                minetest.set_node(
-                    pos,
-                    {name = "unilib:torch_ordinary", param2 = node.param2}
-                )
-
+                core.set_node(pos, {name = "unilib:torch_ordinary", param2 = node.param2})
             else
-                minetest.set_node(
-
-                    pos,
-                    {name = "unilib:torch_ordinary_wall", param2 = node.param2}
-                )
-
+                core.set_node(pos,{name = "unilib:torch_ordinary_wall", param2 = node.param2})
             end
 
         end
+    })
+    unilib.register_obsolete_lbm({
+        mod_origin = "default",
+        name = "default:3dtorch",
     })
 
 end

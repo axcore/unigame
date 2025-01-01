@@ -9,7 +9,7 @@
 unilib.pkg.sand_ironsand = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,9 @@ function unilib.pkg.sand_ironsand.exec()
         description = S("Ironsand"),
         tiles = {"unilib_sand_ironsand.png"},
         groups = {crumbly = 3, falling_node = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
     })
-    if unilib.pkg_executed_table["metal_iron"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:iron_sand

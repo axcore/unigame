@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_pohutukawa = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.deco_aotearoa_tree_pohutukawa.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_pohutukawa_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_pohutukawa_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_pohutukawa"
             biomes = "aotearoa_dunes_pohutukawa",
@@ -40,7 +40,7 @@ function unilib.pkg.deco_aotearoa_tree_pohutukawa.post()
             y_max = 5,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_tree_pohutukawa_normal_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_pohutukawa_normal_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_pohutukawa"
             biomes = "aotearoa_coastal_pohutukawa_forest",

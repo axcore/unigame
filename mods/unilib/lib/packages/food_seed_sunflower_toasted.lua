@@ -9,7 +9,7 @@
 unilib.pkg.food_seed_sunflower_toasted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_seed_sunflower_toasted.exec()
             inventory_image = "unilib_food_seed_sunflower_toasted.png",
             groups = {flammable = 2, food_sunflower_seeds_toasted = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_seed_sunflower_toasted", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_seed_sunflower_toasted", 1),
         }
     )
     unilib.register_craft({

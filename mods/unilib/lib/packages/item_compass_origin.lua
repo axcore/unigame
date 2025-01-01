@@ -9,7 +9,7 @@
 unilib.pkg.item_compass_origin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nextgen_compass.add_mode
+local mode = unilib.global.imported_mod_table.nextgen_compass.add_mode
 
 -- Number of textures, one for each compass needle direction
 local frame_count = 32
@@ -46,7 +46,7 @@ local function has_compass(player)
 
     for _,stack in pairs(player:get_inventory():get_list("main")) do
 
-        if minetest.get_item_group(stack:get_name(), "origin_compass") ~= 0 then
+        if core.get_item_group(stack:get_name(), "origin_compass") ~= 0 then
             return true
         end
 
@@ -71,7 +71,7 @@ end
 
 function unilib.pkg.item_compass_origin.exec()
 
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
         random_timer = random_timer + dtime
 
@@ -82,7 +82,7 @@ function unilib.pkg.item_compass_origin.exec()
 
         end
 
-        for i, player in pairs(minetest.get_connected_players()) do
+        for i, player in pairs(core.get_connected_players()) do
 
             if has_compass(player) then
 
@@ -91,8 +91,8 @@ function unilib.pkg.item_compass_origin.exec()
 
                 for j, stack in pairs(player:get_inventory():get_list("main")) do
 
-                    if minetest.get_item_group(stack:get_name(), "origin_compass") ~= 0 and
-                            minetest.get_item_group(stack:get_name(), "origin_compass") - 1 ~=
+                    if core.get_item_group(stack:get_name(), "origin_compass") ~= 0 and
+                            core.get_item_group(stack:get_name(), "origin_compass") - 1 ~=
                                     compass_img then
 
                         local itemname = "unilib:item_compass_origin_" .. compass_img
@@ -150,8 +150,8 @@ function unilib.pkg.item_compass_origin.exec()
         recipe = {
             {"", "unilib:metal_steel_ingot", ""},
             {"unilib:metal_steel_ingot", "unilib:mineral_mese_crystal", "unilib:metal_steel_ingot"},
-            {"", "unilib:metal_steel_ingot", ""}
-        }
+            {"", "unilib:metal_steel_ingot", ""},
+        },
     })
 
 end

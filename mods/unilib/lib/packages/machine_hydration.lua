@@ -9,7 +9,7 @@
 unilib.pkg.machine_hydration = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.thirsty.add_mode
+local mode = unilib.global.imported_mod_table.thirsty.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,6 +47,8 @@ function unilib.pkg.machine_hydration.exec()
         groups = {cracky = 2},
         -- (no sounds)
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
 
@@ -64,6 +66,8 @@ function unilib.pkg.machine_hydration.exec()
         groups = {cracky = 2},
         -- (no sounds)
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
 
@@ -73,7 +77,7 @@ function unilib.pkg.machine_hydration.exec()
         interval = 2,
         chance = 5,
 
-        action = unilib.hydration_fountain_abm,
+        action = unilib.hydration.fountain_abm,
     })
 
 end

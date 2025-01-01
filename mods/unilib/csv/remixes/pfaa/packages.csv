@@ -1,7 +1,6 @@
 # "pfaa" remix - contains all suitable textures from the PFAA mod, with original code and (where
 #       necessary) original textures. Only natural materials were imported; no machinery was
 #       imported
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -214,40 +213,50 @@ clay_ordinary|default
 metal_boron|unilib
 metal_iron|default
 sand_ordinary|default
-stone_basalt_brown|material mineral
-stone_granite_salmon|underch compressed condensed
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
+#bucket_steel|bucket
 #grass_jungle|default
+#liquid_oil_crude|unilib
+#liquid_water_ordinary|default
+#liquid_water_river|default
+#machine_polishing|unilib
 #metal_aluminium|real_minerals
 #metal_antimony|unilib
 #metal_arsenic|unilib
 #metal_barium|unilib
 #metal_caesium|unilib
 #metal_calcium|unilib
-#metal_chromium|technic_worldgen technic
-#metal_copper|default moreblocks technic
+#metal_chromium|glemr11 technic_worldgen technic
+#metal_copper|default glemr11 moreblocks technic
 #metal_iron_pig|real_minerals
 #metal_iron_wrought|technic_worldgen
-#metal_lead|technic_worldgen technic
+#metal_lead|glemr11 technic_worldgen technic
 #metal_lithium|unilib
 #metal_magnesium|unilib
 #metal_manganese|unilib
-#metal_mercury|unilib
+#metal_mercury|glemr11 unilib
 #metal_molybdenum|unilib
 #metal_nickel|real_minerals
 #metal_rhenium|unilib
 #metal_sodium|unilib
 #metal_strontium|unilib
 #metal_tantalum|unilib
-#metal_tin|default technic
+#metal_tin|default glemr11 technic
 #metal_titanium|unilib
 #metal_tungsten|unilib
 #metal_uranium|technic_worldgen technic
-#metal_zinc|technic_worldgen technic
+#metal_zinc|glemr11 technic_worldgen technic
 #mineral_coal|default technic
-#mineral_mese|default
+#mineral_mese|default glemr11
+#mineral_sulphur|technic_worldgen technic
 #moss_green|sickles
 #sand_pink|unilib
 #sand_red|unilib
+#stone_basalt_brown|material mineral
+#stone_granite_salmon|underch compressed condensed
+
+# supporting packages (.suggested)

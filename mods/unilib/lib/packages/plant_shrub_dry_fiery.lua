@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_dry_fiery = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.plant_shrub_dry_fiery.exec()
         description = S("Fiery Dry Shrub"),
         tiles = {"unilib_plant_shrub_dry_fiery.png"},
         groups = {attached_node = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.plant_shrub_dry_fiery.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_dry_fiery", "ethereal:dry_shrub")
 
-    unilib.register_decoration("ethereal_plant_shrub_dry_fiery", {
+    unilib.register_decoration_generic("ethereal_plant_shrub_dry_fiery", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_dry_fiery",

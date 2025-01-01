@@ -8,8 +8,6 @@
 #       those, caciovallo must be hanged on a string (in a dark place) before it becomes eatable
 # 4. Right-click a cream centrigue with either whey or milk to produce cream
 # 5. Right-click a churn with either cream or milk to produce butter
-#
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -65,9 +63,9 @@ ingredient_salt_normal|farming
 item_stick_ordinary|default
 item_string_ordinary|farming
 liquid_water_ordinary|default
-metal_copper|default moreblocks technic
+metal_copper|default glemr11 moreblocks technic
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 plant_seaweed_undersea|ethereal
 produce_vanilla|farming
 snow_ordinary|default ethereal mtg_plus
@@ -75,7 +73,7 @@ stone_ordinary|default moreblocks technic
 tree_apple|default doors moreblocks
 utensil_mortar_pestle|farming
 vessel_bottle_glass_empty|thirsty vessels
-vessel_bottle_glass_ethanol|farming
+vessel_bottle_glass_with_ethanol|farming
 vessel_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
@@ -94,7 +92,9 @@ liquid_water_river|default
 #ingredient_agar_powder|ethereal
 #ingredient_gelatin_powder|bonemeal
 #liquid_lava_ordinary|default
-#mineral_mese|default
+#machine_furnace_induction|unilib
+#material_scrap_steel|steel
+#mineral_mese|default glemr11
 #moss_green|sickles
 #mushroom_brown|flowers
 #plant_shrub_dry|default

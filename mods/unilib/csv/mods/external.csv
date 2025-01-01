@@ -1,4 +1,6 @@
 # mod_name | optional_modpack_name | download_url | Notes
+chains||unknown|Other mods called "chains" do not provide all of the items mentioned as aliases
 gloopblocks||https://gitlab.com/VanessaE/gloopblocks|
 glooptest|glooptest|https://github.com/GloopMaster/glooptest|
+homedecor||https://github.com/mt-mods/homedecor_modpack|
 mesecons_materials|mesecons|https://github.com/minetest-mods/mesecons|

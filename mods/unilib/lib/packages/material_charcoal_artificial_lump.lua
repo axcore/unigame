@@ -9,7 +9,7 @@
 unilib.pkg.material_charcoal_artificial_lump = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,7 +51,7 @@ function unilib.pkg.material_charcoal_artificial_lump.exec()
         recipe = "unilib:material_charcoal_artificial_lump",
         burntime = 10,
     })
-    if unilib.pkg_executed_table["tree_scorched"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_scorched"] ~= nil then
 
         -- N.B. Original craft recipe conflicts with recipe in "tree_scorched" package
         --[[
@@ -72,8 +72,8 @@ function unilib.pkg.material_charcoal_artificial_lump.exec()
         })
 
     end
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil and
-            unilib.pkg_executed_table["torch_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
 
         unilib.register_craft({
             output = "unilib:torch_ordinary 4",

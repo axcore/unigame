@@ -9,7 +9,7 @@
 unilib.pkg.crop_soy_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,12 +49,12 @@ function unilib.pkg.crop_soy_yellow.exec()
         harvest_description = S("Yellow Soy"),
         -- N.B. food = 1, food_soy = 1 not in original code
         harvest_group_table = {flammable = 4, food = 1, food_soy = 1, food_soybean = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         seed_description = S("Yellow Soy Seed"),
     })
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         -- N.B. Green dye in original code
         unilib.register_craft({

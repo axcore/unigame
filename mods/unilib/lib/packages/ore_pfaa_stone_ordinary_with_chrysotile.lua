@@ -9,7 +9,7 @@
 unilib.pkg.ore_pfaa_stone_ordinary_with_chrysotile = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

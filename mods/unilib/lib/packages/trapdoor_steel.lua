@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.doors.add_mode
+local mode = unilib.global.imported_mod_table.doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ end
 function unilib.pkg.trapdoor_steel.exec()
 
     unilib.register_trapdoor({
-        -- From doors:trapdoor_steel. Creates unilib:trapdoor_steel
+        -- From doors:trapdoor_steel. Creates unilib:trapdoor_steel_closed, etc
         part_name = "steel",
-        orig_name = {"doors:trapdoor_steel", "doors:trapdoor_steel_open"},
+        orig_name_list = {"doors:trapdoor_steel", "doors:trapdoor_steel_open"},
         def_table = {
             description = S("Steel Trapdoor"),
             -- (no tiles)
             groups = {cracky = 1, door = 1, level = 2},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             gain_close = 0.2,
             gain_open = 0.2,

@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.metal_tritonium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -80,7 +80,7 @@ function unilib.pkg.metal_tritonium.exec()
         description = S("Tritonium Block"),
         tiles = {"unilib_metal_tritonium_block.png"},
         groups = {extrahard = 0},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         -- N.B. true in original code
         is_ground_content = false,
@@ -91,26 +91,34 @@ function unilib.pkg.metal_tritonium.exec()
         ingredient = "unilib:metal_tritonium_ingot",
     })
     unilib.register_stairs("unilib:metal_tritonium_block")
+    unilib.register_carvings("unilib:metal_tritonium_block", {
+        millwork_flag = true,
+    })
 
-    unilib.register_node(
-        -- From xtraores:titanium_block_compressed
-        "unilib:metal_tritonium_block_compressed",
-        "xtraores:titanium_block_compressed",
-        mode,
-        {
-            description = S("Compressed Tritonium Block"),
-            tiles = {"unilib_metal_tritonium_block_compressed.png"},
-            groups = {extrahard = 0},
-            sounds = unilib.sound_table.metal,
+    if unilib.setting.squeezed_metal_flag then
 
-            -- N.B. true in original code
-            is_ground_content = false,
-        }
-    )
-    unilib.set_compressed_metal_recipes("tritonium")
-    unilib.register_stairs("unilib:metal_tritonium_block_compressed")
+        unilib.register_node(
+            -- From xtraores:titanium_block_compressed
+            "unilib:metal_tritonium_block_compressed",
+            "xtraores:titanium_block_compressed",
+            mode,
+            {
+                description = S("Compressed Tritonium Block"),
+                tiles = {"unilib_metal_tritonium_block_compressed.png"},
+                groups = {extrahard = 0},
+                sounds = unilib.global.sound_table.metal,
 
-    if unilib.pkg_executed_table["item_screwdriver_ordinary"] ~= nil then
+                -- N.B. true in original code
+                is_ground_content = false,
+                -- N.B. no .stack_max in original code
+                stack_max = unilib.global.squeezed_stack_max,
+            }
+        )
+        unilib.misc.set_compressed_metal_recipes("tritonium")
+
+    end
+
+    if unilib.global.pkg_executed_table["item_screwdriver_ordinary"] ~= nil then
 
         unilib.register_node(
             -- From xtraores:titanium_block_chiseled
@@ -121,7 +129,7 @@ function unilib.pkg.metal_tritonium.exec()
                 description = S("Chiselled Tritonium Block"),
                 tiles = {"unilib_metal_tritonium_block_chiselled.png"},
                 groups = {extrahard = 0},
-                sounds = unilib.sound_table.metal,
+                sounds = unilib.global.sound_table.metal,
 
                 -- N.B. true in original code
                 is_ground_content = false,
@@ -148,7 +156,7 @@ function unilib.pkg.metal_tritonium.exec()
         description = S("Tritonium Bricks"),
         tiles = {"unilib_metal_tritonium_brick.png"},
         groups = {extrahard = 0},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         -- N.B. true in original code
         is_ground_content = false,
@@ -168,6 +176,8 @@ function unilib.pkg.metal_tritonium.exec()
     unilib.register_stairs("unilib:metal_tritonium_brick", {
         img_rotate_flag = true,
     })
-    unilib.set_auto_rotate("unilib:metal_tritonium_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:metal_tritonium_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
 end

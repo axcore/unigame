@@ -9,7 +9,7 @@
 unilib.pkg.tree_apple_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,8 +28,6 @@ end
 
 function unilib.pkg.tree_apple_frozen.exec()
 
-    -- (Schematic uses trunk and wood nodes from the default apple tree)
-
     -- (no burnlevel)
     local sci_name = "Malus sieversii"
 
@@ -42,15 +40,17 @@ function unilib.pkg.tree_apple_frozen.exec()
         not_super_flag = true,
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_apple_leaves_frozen.png")
+    -- (Schematic uses trunk and wood nodes from the default apple tree)
+
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_apple_leaves_frozen.png")
     unilib.register_node("unilib:tree_apple_frozen_leaves", "snow:leaves", mode, {
         -- From snow:leaves
-        description = unilib.annotate(S("Frozen Apple Tree Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Frozen Apple Tree Leaves"), sci_name),
         tiles = {"unilib_tree_apple_leaves_frozen.png"},
         groups = {flammable = 1, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
@@ -60,8 +60,10 @@ function unilib.pkg.tree_apple_frozen.exec()
             },
         },
         inventory_image = inv_img,
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
+        visual_scale = unilib.global.leaves_visual_scale,
         -- N.B. walkable not in original code
         walkable = true,
         waving = 1,
@@ -69,15 +71,13 @@ function unilib.pkg.tree_apple_frozen.exec()
     })
     unilib.register_leafdecay({
         -- From snow:leaves
+        trunk_type = "apple",
         trunks = {"unilib:tree_apple_trunk"},
-        leaves = {
-            "unilib:fruit_apple",
-            "unilib:fruit_apple_frozen",
-            "unilib:tree_apple_leaves",
-            "unilib:tree_apple_frozen_leaves",
-        },
+        leaves = {"unilib:tree_apple_leaves", "unilib:tree_apple_frozen_leaves"},
+        others = {"unilib:fruit_apple", "unilib:fruit_apple_frozen"},
         radius = 3,
     })
+    unilib.register_tree_leaves_compacted("unilib:tree_apple_frozen_leaves", mode)
 
     unilib.register_tree_sapling({
         -- Original to unilib, adapted from minetest_game's default tree
@@ -95,10 +95,10 @@ function unilib.pkg.tree_apple_frozen.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    unilib.register_decoration("snow_tree_apple_frozen", {
+    unilib.register_decoration_generic("snow_tree_apple_frozen", {
         -- Original to unilib, adapted from minetest_game's default tree
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_apple_frozen.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_apple_frozen.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

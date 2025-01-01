@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_slate_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.ore_australia_stone_slate_antipodean.post()
 
-    if unilib.pkg_executed_table["biome_australia_australian_alps"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_australian_alps"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_australian_alps.lua
@@ -55,13 +55,13 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
                 spread = {x = 5, y = 5, z = 5},
             },
             noise_threshold     = 0.0,
-            y_max               = unilib.y_max,
+            y_max               = unilib.constant.y_max,
             y_min               = 150,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_eastern_coasts.lua
@@ -88,7 +88,7 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_great_dividing_range.lua
@@ -108,14 +108,14 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
                 spread = {x = 5, y = 5, z = 5},
             },
             noise_threshold     = 0.0,
-            y_max               = unilib.y_max,
+            y_max               = unilib.constant.y_max,
             y_min               = 36,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_jarrah_karri_forests"] ~= nil and
-            unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_jarrah_karri_forests"] ~= nil and
+            unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_jarrah_karri_forests.lua
@@ -141,7 +141,7 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_underground"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_underground"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_underground.lua
@@ -162,12 +162,12 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
             },
             noise_threshold     = 0.0,
             y_max               = -65,
-            y_min               = unilib.y_min,
+            y_min               = unilib.constant.y_min,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_victorian_forests.lua
@@ -187,7 +187,7 @@ function unilib.pkg.ore_australia_stone_slate_antipodean.post()
                 spread = {x = 5, y = 5, z = 5},
             },
             noise_threshold     = 0.0,
-            y_max               = unilib.y_max,
+            y_max               = unilib.constant.y_max,
             y_min               = 36,
         })
 

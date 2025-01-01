@@ -1,5 +1,4 @@
 # "earthbuild" remix - contains everything from the earthbuild mod, except the bottlegourd cup
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -44,6 +43,7 @@ dirt_ordinary|default farming moreblocks
 fire_ordinary|fire
 item_stick_ordinary|default
 material_quicklime|aotearoa earthbuild
+shared_beds|beds
 shared_default_furnace|default
 tool_shovel_wood|default
 
@@ -63,3 +63,5 @@ misc_straw_ordinary|farming darkage
 #plant_papyrus_ordinary|default mtg_plus
 #plant_shrub_dry|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

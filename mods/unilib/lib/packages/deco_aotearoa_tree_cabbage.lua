@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_cabbage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,6 +30,7 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.init()
             },
             {
                 "dirt_antipodean",
+                "dirt_custom_antipodean",
                 "dirt_ordinary",
                 "dirt_peat_forest",
                 "gravel_ordinary",
@@ -45,7 +46,7 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_cabbage_clump_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_cabbage_clump_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_cabbage"
             biomes = {
@@ -59,8 +60,8 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.post()
                 "aotearoa_wetland_kahikatea_swamp",
             },
             place_on = {
+                "unilib:dirt_antipodean_with_turf_coastal_scrub",
                 "unilib:dirt_ordinary_with_litter_rainforest",
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_peat_forest",
                 "unilib:sand_ironsand",
                 "unilib:sand_ordinary",
@@ -68,7 +69,7 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.post()
             y_max = 80,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_tree_cabbage_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_cabbage_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_cabbage"
             biomes = {
@@ -82,15 +83,15 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.post()
             },
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_wet",
+                "unilib:dirt_ordinary_with_turf_coastal_tussock",
                 "unilib:dirt_ordinary_with_litter_dry",
-                "unilib:dirt_ordinary_with_turf_dry",
             },
             y_max = 80,
             y_min = 3,
         })
 
     end
-    unilib.register_decoration_now("aotearoa_tree_cabbage_crown", nil, {
+    unilib.register_decoration_complete("aotearoa_tree_cabbage_crown", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "tree_cabbage"
         biomes = {

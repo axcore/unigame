@@ -9,7 +9,7 @@
 unilib.pkg.clay_attapulgite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.clay_attapulgite.exec()
 
     unilib.register_node("unilib:clay_attapulgite", nil, mode, {
         -- Texture from PFAA, weakOreClay_attapulgite.png. Original code
-        description = unilib.brackets(S("Attapulgite Clay"), S("Fuller's earth")),
+        description = unilib.utils.brackets(S("Attapulgite Clay"), S("Fuller's earth")),
         tiles = {"unilib_clay_attapulgite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:clay_attapulgite_lump 4",
     })
@@ -38,6 +38,10 @@ function unilib.pkg.clay_attapulgite.exec()
         -- Texture from PFAA, weakOreClay_attapulgite.png. Original code
         output = "unilib:clay_attapulgite",
         ingredient = "unilib:clay_attapulgite_lump",
+    })
+    unilib.register_carvings("unilib:clay_attapulgite", {
+        facade_flag = true,
+        millwork_flag = true,
     })
 
     unilib.register_craftitem("unilib:clay_attapulgite_lump", nil, mode, {

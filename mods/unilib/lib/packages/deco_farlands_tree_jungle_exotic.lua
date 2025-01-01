@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_tree_jungle_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,34 +28,34 @@ end
 
 function unilib.pkg.deco_farlands_tree_jungle_exotic.post()
 
-    if unilib.pkg_executed_table["vine_jungle"] ~= nil then
+    if unilib.global.pkg_executed_table["vine_jungle"] ~= nil then
 
-        unilib.register_decoration_now("farlands_tree_jungle_exotic_1", nil, {
+        unilib.register_decoration_complete("farlands_tree_jungle_exotic_1", nil, {
             -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/jungletree.mts
             -- Completes decoration in package "tree_jungle_exotic"
             biomes = "farlands_rainforest",
             place_on = {"unilib:dirt_ordinary", "unilib:dirt_ordinary_with_turf_forest"},
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = -1,
         })
 
     end
 
-    unilib.register_decoration_now("farlands_tree_jungle_exotic_2", nil, {
+    unilib.register_decoration_complete("farlands_tree_jungle_exotic_2", nil, {
         -- From farlands, mapgen/mapgen.lua, ../default/schematics/jungle_tree.mts
         -- Completes decoration in package "tree_jungle_exotic"
         biomes = "farlands_rainforest_swamp",
         place_on = {"unilib:dirt_ordinary", "unilib:dirt_ordinary_with_turf_forest"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = -1,
     })
 
-    unilib.register_decoration_now("farlands_tree_jungle_exotic_3", nil, {
+    unilib.register_decoration_complete("farlands_tree_jungle_exotic_3", nil, {
         -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/junglepalm.mts
         -- Completes decoration in package "tree_jungle_exotic"
         biomes = "farlands_rainforest",
         place_on = {"unilib:dirt_ordinary", "unilib:dirt_ordinary_with_turf_forest"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = -1,
     })
 

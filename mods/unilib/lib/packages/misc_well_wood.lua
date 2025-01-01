@@ -9,7 +9,9 @@
 unilib.pkg.misc_well_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 -- How many seconds it takes to fill a bucket
 local fill_time = 10
@@ -27,10 +29,11 @@ local function is_empty_bucket(full_name)
     -- Original to unilib
     -- "full_name" is something like "unilib:bucket_steel_empty"
     -- We check that against unilib's list of registered buckets and, if a match is found, return
-    --      the bucket type (a key in unilib.generic_bucket_table, in this case "bucket_steel")
+    --      the bucket type (a key in unilib.global.generic_bucket_table, in this case
+    --      "bucket_steel")
     -- If no match is found, we return nil
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         if "unilib:" .. bucket_type .. "_empty" == full_name then
             return bucket_type
@@ -51,7 +54,7 @@ local function is_water_bucket(full_name)
     --      either ordinary or river water (but not any other liquid, at the moment)
     -- Returns true or false
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         if "unilib:" .. bucket_type .. "_water_ordinary" == full_name or
                 "unilib:" .. bucket_type .. "_water_river" == full_name then
@@ -72,7 +75,7 @@ local function fill_bucket(pos)
         return
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local bucket = meta:get_string("bucket")
     if not(bucket) then
         return
@@ -85,8 +88,8 @@ local function fill_bucket(pos)
 
     -- Abort if the water has not been running long enough (the player may have removed a bucket
     --      before it was full)
-    start = meta:get_string("fillstarttime")
-    if ((minetest.get_us_time() / 1000000) - tonumber(start)) < (fill_time - 2) then
+    local start = meta:get_string("fillstarttime")
+    if ((core.get_us_time() / 1000000) - tonumber(start)) < (fill_time - 2) then
         return
     end
 
@@ -95,8 +98,7 @@ local function fill_bucket(pos)
     meta:set_string("bucket", filled_name)
 
     -- Change the texture of the bucket entity to that of one filled with river water
-    local objs = nil
-    objs = minetest.get_objects_inside_radius(pos, 0.5)
+    local objs = core.get_objects_inside_radius(pos, 0.5)
     if objs then
 
         for _, obj in ipairs(objs) do
@@ -139,12 +141,14 @@ function unilib.pkg.misc_well_wood.exec()
 
     unilib.register_entity("unilib:entity_misc_well_wood", {
         -- From cottages:bucket_entity
-        collisionbox = {0, 0, 0, 0, 0, 0},
-        hp_max = 1,
-        physical = false,
-        textures = {"air"},
-        visual = "wielditem",
-        visual_size = {x = 0.33, y = 0.33},
+        initial_properties = {
+            collisionbox = {0, 0, 0, 0, 0, 0},
+            hp_max = 1,
+            physical = false,
+            textures = {"air"},
+            visual = "wielditem",
+            visual_size = {x = 0.33, y = 0.33},
+        },
 
         on_activate = function(self, staticdata)
 
@@ -178,7 +182,7 @@ function unilib.pkg.misc_well_wood.exec()
             if self.texture ~= nil and self.nodename ~= nil then
 
                 local entity_pos = vector.round(self.object:get_pos())
-                local objs = minetest.get_objects_inside_radius(entity_pos, 0.5)
+                local objs = core.get_objects_inside_radius(entity_pos, 0.5)
 
                 for _, obj in ipairs(objs) do
 
@@ -190,11 +194,11 @@ function unilib.pkg.misc_well_wood.exec()
                             obj:get_properties().textures and
                             obj:get_properties().textures[1] == self.texture then
 
-                        -- (Removed, as it looks like a debug message)
+                        -- (Removed, as it seems to be a debug message)
                         --[[
-                        unilib.log("action","[cottages] Removing extra " ..
+                        unilib.utils.log("action","[cottages] Removing extra " ..
                             self.texture .. " found in " .. self.nodename .. " at " ..
-                            minetest.pos_to_string(entity_pos))
+                            core.pos_to_string(entity_pos))
                         ]]--
                         self.object:remove()
                         break
@@ -227,7 +231,7 @@ function unilib.pkg.misc_well_wood.exec()
             "unilib_tree_apple_trunk.png^[transformR90",
         },
         groups = {choppy = 2, cracky = 1, flammable = 2, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -261,11 +265,11 @@ function unilib.pkg.misc_well_wood.exec()
 
         after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("owner", placer:get_player_name() or "")
             meta:set_string(
                 "infotext",
-                unilib.brackets(
+                unilib.utils.brackets(
                     S("Wooden Well"),
                     S("public, owned by %s"):format(meta:get_string("owner"))
                 )
@@ -286,7 +290,7 @@ function unilib.pkg.misc_well_wood.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(stack) or not unilib.pkg.shared_cottages.player_can_use(meta, player) then
                 return 0
             end
@@ -304,7 +308,7 @@ function unilib.pkg.misc_well_wood.exec()
 
         allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if not(unilib.pkg.shared_cottages.player_can_use(meta, player)) then
                 return 0
             end
@@ -315,18 +319,18 @@ function unilib.pkg.misc_well_wood.exec()
 
         can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local bucket = meta:get_string("bucket")
             local start = meta:get_string("fillstarttime")
             return inv:is_empty("main") and
-                    unilib.can_interact_with_node(player, pos) and
+                    unilib.misc.can_interact_with_node(player, pos) and
                     (not(bucket) or bucket == "") and
                     (
                         (
                             not(start) or
                             start == "" or
-                            (minetest.get_us_time() / 1000000) - tonumber(start) >= (fill_time - 2)
+                            (core.get_us_time() / 1000000) - tonumber(start) >= (fill_time - 2)
                         )
                     )
 
@@ -336,7 +340,7 @@ function unilib.pkg.misc_well_wood.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local spos = pos.x .. "," .. pos.y .. "," .. pos.z
             -- N.B. The formspec provided by the cottages mod is untidy, so I have rearranged it
             --[[
@@ -362,15 +366,15 @@ function unilib.pkg.misc_well_wood.exec()
             meta:set_string(
                 "formspec",
                 "size[8,9]" ..
-                "label[3.0,0.0;Wooden well]" ..
-                "button_exit[6.0,0.0;2,0.5;public;" .. S("Public?") .. "]" ..
-                "item_image[0.2,0.7;1.0,1.0;" .. empty_bucket_name .. "]" ..
-                "label[1.5,0.7;" .. S("Punch the well with an empty bucket") .. "]" ..
-                "label[1.5,1.0;" .. S("Your bucket will slowly fill with river water") .. "]" ..
-                "label[1.5,1.3;" .. S("Punch again to get back a full bucket") .. "]" ..
-                "item_image[0.2,1.7;1.0,1.0;" .. full_bucket_name .. "]" ..
-                "label[1.5,1.9;" .. S("Fill the well by punching it with a water bucket") .. "]" ..
-                "label[1.0,2.7;" .. S("Spare buckets can be stored here") .. ":]" ..
+                "label[3.0,0.0;" .. FS("Wooden well") .. "]" ..
+                "button_exit[6.0,0.0;2,0.5;public;" .. FS("Public?") .. "]" ..
+                "item_image[0.2,0.7;1.0,1.0;" .. F(empty_bucket_name) .. "]" ..
+                "label[1.5,0.7;" .. FS("Punch the well with an empty bucket") .. "]" ..
+                "label[1.5,1.0;" .. FS("Your bucket will slowly fill with river water") .. "]" ..
+                "label[1.5,1.3;" .. FS("Punch again to get back a full bucket") .. "]" ..
+                "item_image[0.2,1.7;1.0,1.0;" .. F(full_bucket_name) .. "]" ..
+                "label[1.5,1.9;" .. FS("Fill the well by punching it with a water bucket") .. "]" ..
+                "label[1.0,2.7;" .. FS("Spare buckets can be stored here") .. ":]" ..
                 "list[nodemeta:" .. spos .. ";main;1,3.3;8,1;]" ..
                 "list[current_player;main;0,4.85;8,1;]" ..
                 "list[current_player;main;0,6.08;8,3;8]" ..
@@ -379,7 +383,7 @@ function unilib.pkg.misc_well_wood.exec()
             )
             local inv = meta:get_inventory()
             inv:set_size("main", 6)
-            meta:set_string("infotext", unilib.brackets(S("Wooden Well"), S("public")))
+            meta:set_string("infotext", unilib.utils.brackets(S("Wooden Well"), S("public")))
 
         end,
 
@@ -392,12 +396,12 @@ function unilib.pkg.misc_well_wood.exec()
 
             -- Only the owner can use the well
             local name = puncher:get_player_name()
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local owner = meta:get_string("owner")
             local public = meta:get_string("public")
             if name ~= owner and public ~= "public" then
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     name,
                     S("This well is owned by %s. You can't use it!"):format(owner)
                 )
@@ -417,7 +421,7 @@ function unilib.pkg.misc_well_wood.exec()
 
                 if not(pinv:room_for_item("main", bucket)) then
 
-                    minetest.chat_send_player(
+                    core.chat_send_player(
                         puncher:get_player_name(),
                         S("Sorry, there is no room for the bucket because your inventory is full")
                     )
@@ -428,7 +432,7 @@ function unilib.pkg.misc_well_wood.exec()
 
             elseif bucket and is_empty_bucket(bucket) then
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     puncher:get_player_name(),
                     S("Please wait until your bucket has been filled")
                 )
@@ -439,8 +443,7 @@ function unilib.pkg.misc_well_wood.exec()
             end
 
             -- Remove the old entity (either a bucket will be placed now or a bucket taken)
-            local objs = nil
-            objs = minetest.get_objects_inside_radius(pos, 0.5)
+            local objs = core.get_objects_inside_radius(pos, 0.5)
             if objs then
 
                 for _, obj in ipairs(objs) do
@@ -479,15 +482,15 @@ function unilib.pkg.misc_well_wood.exec()
                     -- Create the entity
                     tmp_def_table.nodename = bucket_name
                     tmp_def_table.texture = bucket_name
-                    local e = minetest.add_entity(
+                    local e = core.add_entity(
                         {x = pos.x, y = pos.y + (4/16), z = pos.z},
                         "unilib:entity_misc_well_wood"
                     )
 
                     -- Fill the bucket with water
-                    minetest.after(fill_time, fill_bucket, pos)
+                    core.after(fill_time, fill_bucket, pos)
                     -- The bucket will only be filled if the water has been running for long enough
-                    meta:set_string("fillstarttime", tostring(minetest.get_us_time() / 1000000))
+                    meta:set_string("fillstarttime", tostring(core.get_us_time() / 1000000))
                     -- Remove the bucket from the player's inventory
                     pinv:remove_item("main", bucket_name)
 
@@ -525,7 +528,7 @@ function unilib.pkg.misc_well_wood.exec()
 
         end,
     })
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local bucket_name = "unilib:" .. bucket_type .. "_empty"
 
@@ -536,7 +539,7 @@ function unilib.pkg.misc_well_wood.exec()
                 {"unilib:item_stick_ordinary", "", ""},
                 {"unilib:tree_apple_trunk", bucket_name, bucket_name},
                 {"unilib:tree_apple_trunk", "unilib:tree_apple_trunk", "unilib:tree_apple_trunk"},
-            }
+            },
         })
 
     end
@@ -546,7 +549,7 @@ end
 function unilib.pkg.misc_well_wood.post()
 
     -- Set the images used in the formspec
-    if unilib.pkg_executed_table["bucket_steel"] then
+    if unilib.global.pkg_executed_table["bucket_steel"] then
 
         -- Prefer the minetest_game bucket textures, if available
         empty_bucket_name = "unilib:bucket_steel_empty"
@@ -555,7 +558,7 @@ function unilib.pkg.misc_well_wood.post()
     else
 
         -- Use any available textures
-        for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+        for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
             empty_bucket_name = "unilib:" .. bucket_type .. "_empty"
             full_bucket_name = "unilib:" .. bucket_type .. "_with_water_river"

@@ -9,7 +9,7 @@
 unilib.pkg.shared_pie = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pie.add_mode
+local mode = unilib.global.imported_mod_table.pie.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared variables
@@ -28,10 +28,10 @@ unilib.pkg.shared_pie.replace_table = {
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function replace_pie(node, puncher, pos)
+local function replace_pie(pos, node, puncher)
 
     -- Is this my pie?
-    if minetest.is_protected(pos, puncher:get_player_name()) then
+    if core.is_protected(pos, puncher:get_player_name()) then
         return
     end
 
@@ -41,10 +41,10 @@ local function replace_pie(node, puncher, pos)
 
     -- Are we using a crystal shovel to pick up full pie using soft touch?
     local tool = puncher:get_wielded_item():get_name()
-    if pie_num == 1 and tool == "unilib:tool_shovel_crystallinum" then
+    if pie_num == 1 and tool == "unilib:tool_shovel_crystallite" then
 
         local inv = puncher:get_inventory()
-        minetest.remove_node(pos)
+        core.remove_node(pos)
 
         if inv:room_for_item("main", {name = pie_name .. "_1"}) then
 
@@ -53,7 +53,7 @@ local function replace_pie(node, puncher, pos)
         else
 
             pos.y = pos.y + 0.5
-            minetest.add_item(pos, {name = pie_name .. "_1"})
+            core.add_item(pos, {name = pie_name .. "_1"})
 
         end
 
@@ -68,10 +68,12 @@ local function replace_pie(node, puncher, pos)
         node.name = pie_name .. "_" .. (pie_num + 1)
     end
 
-    minetest.swap_node(pos, node)
+    core.swap_node(pos, node)
 
-    -- Update health
-    return unilib.cuisine_eat_on_use(pie_name .. "_" .. pie_num, 4)
+    -- Update health. The call to unilib.cuisine.eat_on_use() is normally an item's .on_use()
+    --      function, so we have to obtain that function, then call it
+    local return_func = unilib.cuisine.eat_on_use(pie_name .. "_" .. pie_num, 4)
+    return_func(ItemStack(pie_name .. "_" .. pie_num), puncher, node)
 
 end
 
@@ -98,7 +100,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
     local description = data_table.description or S("Pie")
 
     local screwdriver_flag = false
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
         screwdriver_flag = true
     end
 
@@ -118,10 +120,12 @@ function unilib.pkg.shared_pie.register_baking(data_table)
                 "unilib_" .. part_name .. "_side.png",
             },
             -- (no groups)
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             inventory_image = "unilib_" .. part_name .. "_inv.png",
+            -- N.B. is_ground_content = false not in original code; added to match other food items
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.45, -0.5, -0.45, 0.45, 0, 0.45},
@@ -133,7 +137,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
             wield_image = "unilib_" .. part_name .. "_inv.png",
 
             on_punch = function(pos, node, puncher, pointed_thing)
-                replace_pie(node, puncher, pos)
+                replace_pie(pos, node, puncher)
             end,
 
             on_rotate = screwdriver_flag and unilib.pkg.shared_screwdriver.rotate_simple,
@@ -146,7 +150,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
         "pie:" .. orig_part_name .. "_1",
         replace_mode,
         {
-            description = unilib.brackets(description, S("Three-Quarter Size")),
+            description = unilib.utils.brackets(description, S("Three-Quarter Size")),
             tiles = {
                 "unilib_" .. part_name .. "_top.png",
                 "unilib_" .. part_name .. "_bottom.png",
@@ -156,11 +160,12 @@ function unilib.pkg.shared_pie.register_baking(data_table)
                 "unilib_" .. part_name .. "_inside.png",
             },
             groups = {not_in_creative_inventory = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             drop = "",
-            groups = {not_in_creative_inventory = 1},
+            -- N.B. is_ground_content = false not in original code; added to match other food items
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.45, -0.5, -0.25, 0.45, 0, 0.45},
@@ -171,7 +176,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
             use_texture_alpha = "clip",
 
             on_punch = function(pos, node, puncher, pointed_thing)
-                replace_pie(node, puncher, pos)
+                replace_pie(pos, node, puncher)
             end,
 
             on_rotate = screwdriver_flag and unilib.pkg.shared_screwdriver.rotate_simple,
@@ -184,7 +189,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
         "pie:" .. orig_part_name .. "_2",
         replace_mode,
         {
-            description = unilib.brackets(description, S("Half Size")),
+            description = unilib.utils.brackets(description, S("Half Size")),
             tiles = {
                 "unilib_" .. part_name .. "_top.png",
                 "unilib_" .. part_name .. "_bottom.png",
@@ -194,11 +199,12 @@ function unilib.pkg.shared_pie.register_baking(data_table)
                 "unilib_" .. part_name .. "_inside.png",
             },
             groups = {not_in_creative_inventory = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             drop = "",
-            groups = {not_in_creative_inventory = 1},
+            -- N.B. is_ground_content = false not in original code; added to match other food items
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.45, -0.5, 0.0, 0.45, 0, 0.45},
@@ -209,7 +215,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
             use_texture_alpha = "clip",
 
             on_punch = function(pos, node, puncher, pointed_thing)
-                replace_pie(node, puncher, pos)
+                replace_pie(pos, node, puncher)
             end,
 
             on_rotate = screwdriver_flag and unilib.pkg.shared_screwdriver.rotate_simple,
@@ -222,7 +228,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
         "pie:" .. orig_part_name .. "_3",
         replace_mode,
         {
-            description = unilib.brackets(description, S("Quarter Size")),
+            description = unilib.utils.brackets(description, S("Quarter Size")),
             tiles = {
                 "unilib_" .. part_name .. "_top.png",
                 "unilib_" .. part_name .. "_bottom.png",
@@ -232,10 +238,12 @@ function unilib.pkg.shared_pie.register_baking(data_table)
                 "unilib_" .. part_name .. "_inside.png",
             },
             groups = {not_in_creative_inventory = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             drop = "",
+            -- N.B. is_ground_content = false not in original code; added to match other food items
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.45, -0.5, 0.25, 0.45, 0, 0.45},
@@ -246,7 +254,7 @@ function unilib.pkg.shared_pie.register_baking(data_table)
             use_texture_alpha = "clip",
 
             on_punch = function(pos, node, puncher, pointed_thing)
-                replace_pie(node, puncher, pos)
+                replace_pie(pos, node, puncher)
             end,
 
             on_rotate = screwdriver_flag and unilib.pkg.shared_screwdriver.rotate_simple,

@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_fan = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_palm_fan.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Licuala ramsayi"
 
     unilib.register_tree({
@@ -107,7 +107,7 @@ function unilib.pkg.tree_palm_fan.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_palm_fan_closed
+        -- Original to unilib. Creates unilib:gate_palm_fan_closed, etc
         part_name = "palm_fan",
         orig_name = {nil, nil},
 
@@ -116,10 +116,10 @@ function unilib.pkg.tree_palm_fan.exec()
         group_table = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("australia_tree_palm_fan_in_queensland", {
+    unilib.register_decoration_generic("australia_tree_palm_fan_in_queensland", {
         -- From australia/biome_far_north_queensland.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_palm_fan.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_palm_fan.mts",
 
         fill_ratio = 1 / 300,
         flags = "place_center_x, place_center_z",

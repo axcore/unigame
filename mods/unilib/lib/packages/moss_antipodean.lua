@@ -9,7 +9,7 @@
 unilib.pkg.moss_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.moss_antipodean.exec()
         tiles = {"unilib_moss_antipodean.png"},
         -- N.B. moss = 1 not in original code
         groups = {flammable = 3, moss = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "nodebox",
@@ -52,7 +52,7 @@ function unilib.pkg.moss_antipodean.exec()
         wield_image = "unilib_moss_antipodean.png",
     })
 
-    unilib.register_decoration("australia_moss_antipodean_in_range", {
+    unilib.register_decoration_generic("australia_moss_antipodean_in_range", {
         -- From australia:moss
         deco_type = "simple",
         decoration = "unilib:moss_antipodean",
@@ -60,7 +60,7 @@ function unilib.pkg.moss_antipodean.exec()
         fill_ratio = 0.06,
         sidelen = 80,
     })
-    unilib.register_decoration("australia_moss_antipodean_in_tasmania", {
+    unilib.register_decoration_generic("australia_moss_antipodean_in_tasmania", {
         -- From australia:moss
         deco_type = "simple",
         decoration = "unilib:moss_antipodean",
@@ -68,7 +68,7 @@ function unilib.pkg.moss_antipodean.exec()
         fill_ratio = 0.9,
         sidelen = 80,
     })
-    unilib.register_decoration("australia_moss_antipodean_in_victoria", {
+    unilib.register_decoration_generic("australia_moss_antipodean_in_victoria", {
         -- From australia:moss
         deco_type = "simple",
         decoration = "unilib:moss_antipodean",
@@ -82,7 +82,7 @@ function unilib.pkg.moss_antipodean.exec()
         description = S("Antipodean Moss with Fungus"),
         tiles = {"unilib_moss_antipodean_with_fungus.png"},
         groups = {flammable = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "nodebox",
@@ -103,7 +103,7 @@ function unilib.pkg.moss_antipodean.exec()
         wield_image = "unilib_moss_antipodean_with_fungus.png",
     })
 
-    unilib.register_decoration("australia_moss_antipodean_with_fungus", {
+    unilib.register_decoration_generic("australia_moss_antipodean_with_fungus", {
         -- From australia:moss_with_fungus
         deco_type = "simple",
         decoration = "unilib:moss_antipodean_with_fungus",

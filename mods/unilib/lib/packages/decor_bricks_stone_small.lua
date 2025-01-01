@@ -9,7 +9,7 @@
 unilib.pkg.decor_bricks_stone_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.decor_bricks_stone_small.exec()
         description = S("Decorative Small Stone Bricks"),
         tiles = {"unilib_decor_bricks_stone_small.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -40,7 +40,7 @@ function unilib.pkg.decor_bricks_stone_small.exec()
         output = "unilib:decor_bricks_stone_small",
         recipe = {
             {"unilib:stone_ordinary_block"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_bricks_stone_small", {
         img_rotate_flag = true,
@@ -55,6 +55,8 @@ function unilib.pkg.decor_bricks_stone_small.exec()
         sound_name = "stone",
         img_list = {"unilib_decor_bricks_stone_small.png"},
     })
-    unilib.set_auto_rotate("unilib:decor_bricks_stone_small", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:decor_bricks_stone_small", unilib.setting.auto_rotate_brick_flag
+    )
 
 end

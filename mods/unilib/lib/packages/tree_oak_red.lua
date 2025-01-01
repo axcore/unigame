@@ -9,7 +9,7 @@
 unilib.pkg.tree_oak_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_oak_red.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Quercus rubra"
 
     unilib.register_tree({
@@ -68,8 +68,10 @@ function unilib.pkg.tree_oak_red.exec()
     })
     unilib.register_leafdecay({
         -- From lib_ecology:tree_oak_red_leaves
+        trunk_type = "oak_red",
         trunks = {"unilib:tree_oak_red_trunk"},
-        leaves = {"unilib:tree_oak_red_leaves", "unilib:ingredient_acorn"},
+        leaves = {"unilib:tree_oak_red_leaves"},
+        others = {"unilib:ingredient_acorn"},
         radius = 3,
     })
 
@@ -105,10 +107,10 @@ function unilib.pkg.tree_oak_red.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("glem_tree_oak_red_" .. i, {
+        unilib.register_decoration_generic("glem_tree_oak_red_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_oak_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_oak_red_" .. i .. ".mts",
 
             fill_ratio = 0.005,
             flags = "place_center_x, place_center_z",

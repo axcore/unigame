@@ -9,7 +9,7 @@
 unilib.pkg.drink_lemonade = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,11 +35,16 @@ function unilib.pkg.drink_lemonade.exec()
         description = S("Lemonade"),
         tiles = {"unilib_drink_lemonade.png"},
         -- N.B. food_lemonade = 1 not in original code
-        groups = {attached_node = 1, dig_immediate = 3, drink = 1, food_lemonade = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        groups = {
+            attached_node = 1, dig_immediate = 3, drink = 1, flammable = 2, food_lemonade = 1,
+            vessel = 1,
+        },
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_drink_lemonade.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -48,7 +53,7 @@ function unilib.pkg.drink_lemonade.exec()
         walkable = false,
         wield_image = "unilib_drink_lemonade.png",
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_lemonade", 5, "unilib:vessel_glass_empty"
         ),
     })
@@ -64,7 +69,7 @@ function unilib.pkg.drink_lemonade.post()
             {"unilib:fruit_lemon", "group:food_sugar", "group:food_sugar"},
             {"unilib:vessel_glass_empty", "group:potable_bucket", ""},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

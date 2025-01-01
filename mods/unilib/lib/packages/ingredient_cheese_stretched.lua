@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_cheese_stretched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,7 +53,7 @@ function unilib.pkg.ingredient_cheese_stretched.post()
         type = "shapeless",
         output = "unilib:ingredient_cheese_stretched 4",
         recipe = {c_curd, c_curd, c_curd, "group:potable_bucket", "group:food_salt"},
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

@@ -1,0 +1,32 @@
+# mod_name | optional_modpack_name | download_date | update_date | notes
+
+# From minetest_game
+default|minetest_game|20241116|Updated all code and media, both unigame and unilib
+beds|minetest_game|20241116|Updated all code and media, both unigame and unilib
+binoculars|minetest_game|20241116|Updated all code and media, both unigame and unilib
+boats|minetest_game|20241116|Updated all code and media, both unigame and unilib
+bucket|minetest_game|20241116|Updated all code and media, both unigame and unilib
+butterflies|minetest_game|20241116|Updated all code and media, both unigame and unilib
+carts|minetest_game|20241116|Updated all code and media, both unigame and unilib
+doors|minetest_game|20241116|Updated all code and media, both unigame and unilib
+dye|minetest_game|20241116|Updated all code and media, both unigame and unilib
+env_sounds|minetest_game|20241116|Updated all code and media, both unigame and unilib
+farming|minetest_game|20241116|Updated all code and media, both unigame and unilib
+fire|minetest_game|20241116|Updated all code and media, both unigame and unilib
+fireflies|minetest_game|20241116|Updated all code and media, both unigame and unilib
+flowers|minetest_game|20241116|Updated all code and media, both unigame and unilib
+map|minetest_game|20241116|Updated all code and media, both unigame and unilib
+player_api|minetest_game|20241116|Updated all code and media, both unigame and unilib
+screwdriver|minetest_game|20241116|Updated all code and media, both unigame and unilib
+stairs|minetest_game|20241116|Updated all code and media, both unigame and unilib
+tnt|minetest_game|20241116|Updated all code and media, both unigame and unilib
+vessels|minetest_game|20241116|Updated all code and media, both unigame and unilib
+walls|minetest_game|20241116|Updated all code and media, both unigame and unilib
+wool|minetest_game|20241116|Updated all code and media, both unigame and unilib
+xpanes|minetest_game|20241116|Updated all code and media, both unigame and unilib
+
+# All other mods
+basic_materials||20241117|Updated all code and media
+ethereal||20241119|Updated all code and media
+#farming||20241118|Added a few new items (but did not update code generally), replaced most old textures, updated all crop/produce decorations, and added damge to suitable hoes
+sickles||20241115|Applied changes to tool capabilities in the most recent code

@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_wetland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.biome_aotearoa_wetland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "kahikatea_swamp" biome
         name = "aotearoa_wetland_kahikatea_swamp",
-        description = unilib.brackets(S("Wetland biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Wetland biome"), "aotearoa"),
         node_top = "unilib:dirt_peat_forest",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -58,7 +58,7 @@ function unilib.pkg.biome_aotearoa_wetland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "raupo_swamp" biome
         name = "aotearoa_wetland_raupo_swamp",
-        description = unilib.brackets(S("Raupo swamp biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Raupo swamp biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_wet",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -76,7 +76,7 @@ function unilib.pkg.biome_aotearoa_wetland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "gumland" biome
         name = "aotearoa_wetland_gumland",
-        description = unilib.brackets(S("Gumland biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Gumland biome"), "aotearoa"),
         node_top = "unilib:clay_gumland_topsoil",
         depth_top = 1,
         node_filler = "unilib:clay_gumland_hardpan",
@@ -94,7 +94,7 @@ function unilib.pkg.biome_aotearoa_wetland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "fen" biome
         name = "aotearoa_wetland_fen",
-        description = unilib.brackets(S("Fen biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Fen biome"), "aotearoa"),
         node_top = "unilib:dirt_peat_restiad",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -112,7 +112,7 @@ function unilib.pkg.biome_aotearoa_wetland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "peat_bog" biome
         name = "aotearoa_wetland_peat_bog",
-        description = unilib.brackets(S("Peat bog biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Peat bog biome"), "aotearoa"),
         node_top = "unilib:dirt_peat_restiad",
         depth_top = 1,
         node_filler = "unilib:dirt_peat_antipodean",

@@ -9,7 +9,7 @@
 unilib.pkg.misc_hide_animal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_farming.add_mode
+local mode = unilib.global.imported_mod_table.castle_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,6 +36,8 @@ function unilib.pkg.misc_hide_animal.exec()
         climbable = true,
         drawtype = "nodebox",
         inventory_image = "unilib_misc_hide_animal.png",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         node_box = {
             type = "wallmounted",
             wall_top    = {-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5},
@@ -56,7 +58,7 @@ function unilib.pkg.misc_hide_animal.post()
         type = "shapeless",
         output = "unilib:misc_hide_animal 6",
         recipe = {"unilib:wool_white", "group:craftable_bucket"},
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

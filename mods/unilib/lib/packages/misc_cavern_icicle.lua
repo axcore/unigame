@@ -9,7 +9,7 @@
 unilib.pkg.misc_cavern_icicle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_cavern_icicle.exec()
         description = S("Cavern Icicle"),
         tiles = {"unilib_misc_cavern_icicle.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -52,7 +52,7 @@ function unilib.pkg.misc_cavern_icicle.exec()
         description = S("Hanging Cavern Icicle"),
         tiles = {"unilib_misc_cavern_icicle_hanging.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         buildable_to = true,
         drawtype = "plantlike",

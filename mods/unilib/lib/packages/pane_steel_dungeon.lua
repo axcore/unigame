@@ -9,7 +9,7 @@
 unilib.pkg.pane_steel_dungeon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_gates.add_mode
+local mode = unilib.global.imported_mod_table.castle_gates.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.pane_steel_dungeon.exec()
             },
             -- N.B. pane = 1 omitted from original code
             groups = {cracky = 1, flow_through = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = "unilib_pane_steel_dungeon.png",
             -- N.B. drawtype, paramtype omitted from original code

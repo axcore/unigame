@@ -9,7 +9,7 @@
 unilib.pkg.deco_aqua_farming_crop_undersea_strawberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,9 +40,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_strawberry.post()
         "default_savanna_ocean",
     }
 
-    if unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_strawberry_1", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_strawberry_1", nil, {
             -- From aqua_farming/mapgen_sea_strawberry.lua
             -- Completes decoration in package "crop_undersea_strawberry"
             biomes = biome_list,
@@ -53,9 +53,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_strawberry.post()
 
     end
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_strawberry_2", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_strawberry_2", nil, {
             -- From aqua_farming/mapgen_sea_strawberry.lua
             -- Completes decoration in package "crop_undersea_strawberry"
             biomes = biome_list,
@@ -66,9 +66,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_strawberry.post()
 
     end
 
-    if unilib.pkg_executed_table["sand_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_strawberry_3", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_strawberry_3", nil, {
             -- From aqua_farming/mapgen_sea_strawberry.lua
             -- Completes decoration in package "crop_undersea_strawberry"
             biomes = biome_list,

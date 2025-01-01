@@ -9,7 +9,7 @@
 unilib.pkg.fruit_berry_lilly_pilly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.fruit_berry_lilly_pilly.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_lilly_pilly = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_fruit_berry_lilly_pilly.png",
@@ -53,14 +53,15 @@ function unilib.pkg.fruit_berry_lilly_pilly.exec()
         after_place_node = function(pos, placer, itemstack)
 
             if placer:is_player() then
-                minetest.set_node(pos, {name = "unilib:fruit_berry_lilly_pilly", param2 = 1})
+                core.set_node(pos, {name = "unilib:fruit_berry_lilly_pilly", param2 = 1})
             end
 
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_berry_lilly_pilly", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_berry_lilly_pilly", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,11 +73,20 @@ function unilib.pkg.fruit_berry_lilly_pilly.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_berry_lilly_pilly",
+        juice_description = S("Lilly Pilly Berry"),
+        juice_type = "lilly_pilly",
+        rgb = "#be3aa6",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_berry_lilly_pilly.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_berry_lilly_pilly",
 
         replace_mode = mode,

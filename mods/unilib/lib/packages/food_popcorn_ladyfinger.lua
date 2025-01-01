@@ -9,7 +9,7 @@
 unilib.pkg.food_popcorn_ladyfinger = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_popcorn_ladyfinger.exec()
         description = S("Ladyfinger Popcorn"),
         inventory_image = "unilib_food_popcorn_ladyfinger.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_popcorn_ladyfinger", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_popcorn_ladyfinger", 1),
     })
     unilib.register_craft({
         -- From better_farming:pop_corn

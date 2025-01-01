@@ -9,7 +9,7 @@
 unilib.pkg.soil_undersea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.soil_undersea.exec()
         --      here we distinguish them with two separate textures
         tiles = {"unilib_soil_undersea.png"},
         groups = {crumbly = 3, falling_node = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         drop = "unilib:sand_silver",
     })
@@ -43,7 +43,7 @@ function unilib.pkg.soil_undersea.exec()
         -- From aqua_farming:water_soil
         output = "unilib:soil_undersea 2",
         recipe = {
-            {"unilib:gravel_ordinary", "group:seafood", "group:sand"}
+            {"unilib:gravel_ordinary", "group:seafood", "group:sand"},
         },
     })
 

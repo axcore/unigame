@@ -9,7 +9,7 @@
 unilib.pkg.plant_torchberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.plant_torchberry.exec()
         description = S("Torchberry Plant"),
         tiles = {img},
         groups = {flammable = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = img,
@@ -49,28 +49,37 @@ function unilib.pkg.plant_torchberry.exec()
         sunlight_propagates = true,
         walkable = false,
         wield_image = img,
-    })
-    if unilib.pkg_executed_table["torch_ordinary"] ~= nil then
 
-        if unilib.underch_tweak_flag then
+        -- N.B. Not in original code. Orientate the torchberry the right way, when placed manually
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.rotate_and_place(
+                itemstack, placer, pointed_thing, {[0] = 1, 0, 3, 2, 5, 4}
+            )
+
+        end,
+    })
+    if unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
+
+        if unilib.setting.underch_tweak_flag then
 
             unilib.register_craft({
                 -- Original to unilib
                 output = "unilib:torch_ordinary 4",
                 recipe = {
                     {"unilib:plant_torchberry"},
-                    {"group:stick"}
+                    {"group:stick"},
                 },
             })
 
-        elseif unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+        elseif unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
             unilib.register_craft({
                 -- From underch:torchberries
                 output = "unilib:torch_ordinary 4",
                 recipe = {
                     {"unilib:plant_torchberry"},
-                    {"unilib:item_stick_ordinary"}
+                    {"unilib:item_stick_ordinary"},
                 },
             })
 
@@ -78,5 +87,7 @@ function unilib.pkg.plant_torchberry.exec()
 
     end
     -- (not compatible with flowerpots)
+
+    unilib.register_decoration_spare("unilib:plant_torchberry")
 
 end

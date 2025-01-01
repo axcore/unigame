@@ -9,7 +9,7 @@
 unilib.pkg.mineral_franklinite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_franklinite_rock.exec()
 
     local c_lump = "unilib:mineral_franklinite_lump"
-    local hardness = unilib.mineral_table["franklinite"]["hardness"]
+    local hardness = unilib.global.mineral_table["franklinite"]["hardness"]
 
     unilib.register_mineral_rock("franklinite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_franklinite_rock.exec()
         description = S("Franklinite Rock"),
         tiles = {"unilib_mineral_franklinite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

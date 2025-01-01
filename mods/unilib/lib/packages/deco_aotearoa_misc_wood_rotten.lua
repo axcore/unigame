@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_misc_wood_rotten = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.deco_aotearoa_misc_wood_rotten.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_misc_wood_rotten_stump_normal_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_misc_wood_rotten_stump_normal_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "misc_wood_rotten"
             biomes = {
@@ -70,7 +70,7 @@ function unilib.pkg.deco_aotearoa_misc_wood_rotten.post()
             y_max = 80,
             y_min = 5,
         })
-        unilib.register_decoration_now("aotearoa_misc_wood_rotten_stump_dense_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_misc_wood_rotten_stump_dense_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "misc_wood_rotten"
             biomes = {
@@ -90,7 +90,7 @@ function unilib.pkg.deco_aotearoa_misc_wood_rotten.post()
         })
 
     end
-    unilib.register_decoration_now("aotearoa_misc_wood_rotten_stump", nil, {
+    unilib.register_decoration_complete("aotearoa_misc_wood_rotten_stump", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "misc_wood_rotten"
         biomes = {

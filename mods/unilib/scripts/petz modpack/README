@@ -1,0 +1,18 @@
+This folder contains files to patch the petz modpack to work with unilib.
+
+user_mtgame.conf
+Updates to the original petz configuration file, with all minetest_game items switched for their
+    unilib equivalents
+This file can be used with the "mtgame" remix. Copy it to the .../petz/petz folder, and rename it to
+    "user.conf"
+
+user_gaia.conf
+Updates to the original petz configuration file, with all minetest_game items switched for suitable
+    unilib items
+This file can be used with the "gaia" remix. Copy it to the .../petz/petz folder, and rename it to
+    "user.conf"
+
+You must also make sure that unilib is loaded first, probably by adding unilib to the
+    ../petz/petz/mod.conf file, for example:
+
+    optional_depends = bonemeal, 3d_armor, crops, playerphysics, player_monoids, unilib

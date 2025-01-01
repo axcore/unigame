@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_crop_bokchoy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_better_farming_crop_bokchoy.post()
 
-    unilib.register_decoration_now("better_farming_crop_bokchoy", nil, {
+    unilib.register_decoration_complete("better_farming_crop_bokchoy", nil, {
         -- From better_farming, bokchoy.lua
         -- Completes decoration in package "crop_bokchoy"
         biomes = {"default_forest_deciduous", "default_rainforest"},
@@ -35,7 +35,7 @@ function unilib.pkg.deco_better_farming_crop_bokchoy.post()
             "unilib:dirt_ordinary_with_litter_rainforest",
             "unilib:dirt_ordinary_with_turf",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

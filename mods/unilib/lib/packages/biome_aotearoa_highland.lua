@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_highland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,6 +35,7 @@ function unilib.pkg.biome_aotearoa_highland.init()
             "stone_greywacke_dark",
             "stone_schist_antipodean",
         },
+        optional = "dirt_custom_antipodean",
     }
 
 end
@@ -44,7 +45,7 @@ function unilib.pkg.biome_aotearoa_highland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "pahautea_forest" biome
         name = "aotearoa_highland_pahautea_forest",
-        description = unilib.brackets(S("Pahautea forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Pahautea forest biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_antipodean_with_moss",
         depth_top = 1,
@@ -63,7 +64,7 @@ function unilib.pkg.biome_aotearoa_highland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "rangipo_desert" biome
         name = "aotearoa_highland_rangipo_desert",
-        description = unilib.brackets(S("Rangipo desert biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Rangipo desert biome"), "aotearoa"),
         node_top = "unilib:sand_volcanic",
         depth_top = 6,
         node_filler = "unilib:clay_ordinary",
@@ -81,7 +82,7 @@ function unilib.pkg.biome_aotearoa_highland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "mountain_beech_forest" biome
         name = "aotearoa_highland_mountain_beech_forest",
-        description = unilib.brackets(S("Mountain beech forest biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Mountain beech forest biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_antipodean_with_moss",
         depth_top = 1,
@@ -97,12 +98,26 @@ function unilib.pkg.biome_aotearoa_highland.post()
         humidity_point = 70,
     })
 
+    local node_top
+    if unilib.global.pkg_executed_table["dirt_custom_antipodean"] == nil then
+
+        node_top = "unilib:dirt_ordinary_with_turf_dry"
+
+    else
+
+        -- Produces unilib:dirt_ordinary_with_turf_highland_mountain_tussock
+        node_top = unilib.pkg.dirt_custom_antipodean.generate_ordinary_dirt(
+            "highland_mountain_tussock", S("Mountain Tussock Turf"), "#FF9500:96"
+        )
+
+    end
+
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "mountain_tussock" biome
         name = "aotearoa_highland_mountain_tussock",
-        description = unilib.brackets(S("Mountain tussock biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Mountain tussock biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
-        node_top = "unilib:dirt_ordinary_with_turf_dry",
+        node_top = node_top,
         depth_top = 1,
         node_filler = "unilib:clay_ordinary",
         depth_filler = 2,
@@ -119,7 +134,7 @@ function unilib.pkg.biome_aotearoa_highland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "alpine_peat_bog" biome
         name = "aotearoa_highland_peat_bog",
-        description = unilib.brackets(S("Alpine peat biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Alpine peat biome"), "aotearoa"),
         node_top = "unilib:dirt_peat_restiad",
         depth_top = 1,
         node_filler = "unilib:dirt_peat_antipodean",
@@ -137,7 +152,7 @@ function unilib.pkg.biome_aotearoa_highland.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "scree" biome
         name = "aotearoa_highland_scree",
-        description = unilib.brackets(S("Scree biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Scree biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_silt_antipodean",

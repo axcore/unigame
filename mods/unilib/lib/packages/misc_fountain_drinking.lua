@@ -9,7 +9,7 @@
 unilib.pkg.misc_fountain_drinking = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.thirsty.add_mode
+local mode = unilib.global.imported_mod_table.thirsty.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,6 +46,8 @@ function unilib.pkg.misc_fountain_drinking.exec()
             type = "regular",
         },
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -62,7 +64,7 @@ function unilib.pkg.misc_fountain_drinking.exec()
             type = "regular",
         },
     })
-    unilib.hydration_enable_static_drinking("unilib:misc_fountain_drinking", 30)
+    unilib.hydration.enable_static_drinking("unilib:misc_fountain_drinking", 30)
 
 end
 

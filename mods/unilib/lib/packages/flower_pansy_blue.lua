@@ -9,7 +9,7 @@
 unilib.pkg.flower_pansy_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.flower_pansy_blue.exec()
         deco_part_name = "farlands",
         description = S("Blue Pansy"),
         fill_ratio = 0.02,
-        group_table = {color_blue = 1, flammable = 1},
+        group_table = {color_blue = 1, colour_blue = 1, flammable = 1},
         sci_name = "Viola × wittrockiana",
     })
 

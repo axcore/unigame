@@ -13,10 +13,10 @@
 unilib.pkg.stone_desert = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
-local unilib_add_mode = unilib.imported_mod_table.unilib.add_mode
-local walls_add_mode = unilib.imported_mod_table.walls.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
+local unilib_add_mode = unilib.global.imported_mod_table.unilib.add_mode
+local walls_add_mode = unilib.global.imported_mod_table.walls.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,6 +40,7 @@ function unilib.pkg.stone_desert.exec()
 
         basic_platform_flag = true,
         category = "other",
+        colour = "#814F3C",
         fictional_flag = true,
         grinder_flag = true,
         grinder_powder = "unilib:stone_desert_powder",
@@ -52,7 +53,7 @@ function unilib.pkg.stone_desert.exec()
         description = S("Desert Stone"),
         tiles = {"unilib_stone_desert.png"},
         groups = {cracky = 3, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_desert_cobble",
     })
@@ -70,9 +71,9 @@ function unilib.pkg.stone_desert.exec()
 
         drop_name = "unilib:stone_desert_cobble",
     })
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil and
-            moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil and
+            (moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")) then
 
         unilib.register_stone_trap({
             -- From moreblocks:trap_desert_stone. Creates unilib:stone_desert_trap
@@ -93,7 +94,7 @@ function unilib.pkg.stone_desert.exec()
             description = S("Desert Stone Block"),
             tiles = {"unilib_stone_desert_block.png"},
             groups = {cracky = 2, stone = 1, stoneblock = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -122,7 +123,7 @@ function unilib.pkg.stone_desert.exec()
             description = S("Desert Stone Bricks"),
             tiles = {"unilib_stone_desert_brick.png"},
             groups = {cracky = 2, stone = 1, stonebrick = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -145,7 +146,7 @@ function unilib.pkg.stone_desert.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "desert",
     })
-    unilib.set_auto_rotate("unilib:stone_desert_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate("unilib:stone_desert_brick", unilib.setting.auto_rotate_brick_flag)
 
     unilib.register_node(
         -- From default:desert_cobble
@@ -156,7 +157,7 @@ function unilib.pkg.stone_desert.exec()
             description = S("Desert Cobblestone"),
             tiles = {"unilib_stone_desert_cobble.png"},
             groups = {cobble = 1, cracky = 3, stone = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -194,10 +195,11 @@ function unilib.pkg.stone_desert.exec()
         wall_orig_name = "walls:desertcobble",
     })
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.squeezed_stone_flag and (
+        moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         -- N.B. moreblocks code tweaked to match compressed cobbles in underch
-
         unilib.register_node(
             -- From moreblocks:desert_cobble_compressed
             "unilib:stone_desert_cobble_compressed",
@@ -208,23 +210,17 @@ function unilib.pkg.stone_desert.exec()
                 tiles = {"unilib_stone_desert_cobble_compressed.png"},
 --              groups = {compressedstone = 1, cracky = 1},
                 groups = {compressedstone = 1, cracky = 3},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
+                stack_max = unilib.global.squeezed_stack_max,
             }
         )
-        unilib.register_craft_3x3({
+        unilib.misc.set_squeezed_recipes(
             -- From moreblocks:desert_cobble_compressed
-            output = "unilib:stone_desert_cobble_compressed",
-            ingredient = "unilib:stone_desert_cobble",
-        })
-        unilib.register_craft({
-            -- From moreblocks:desert_cobble_compressed
-            output = "unilib:stone_desert_cobble 9",
-            recipe = {
-                {"unilib:stone_desert_cobble_compressed"},
-            },
-        })
+            "unilib:stone_desert_cobble",
+            "unilib:stone_desert_cobble_compressed"
+        )
         unilib.register_craft({
             -- Original to unilib
             type = "cooking",
@@ -235,10 +231,9 @@ function unilib.pkg.stone_desert.exec()
 
     end
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.squeezed_stone_flag then
 
         -- N.B. Condensed cobble does not appear in moreblocks
-
         unilib.register_stone_cobble_condensed({
             -- Original to unilib. Creates unilib:stone_desert_cobble_condensed
             part_name = "desert",
@@ -250,10 +245,10 @@ function unilib.pkg.stone_desert.exec()
 
     end
 
-    if unilib.technic_update_flag then
+    if unilib.setting.technic_update_flag then
 
-        -- N.B. The technic grinding recipe is provided in ../lib/system/import_pkg.lua
-
+        -- N.B. The technic grinding recipe is provided in
+        --      ../lib/system/load/load_consolidate_technic.lua
         unilib.register_craftitem("unilib:stone_desert_powder", nil, unilib_add_mode, {
             -- Original to unilib
             description = S("Desert Stone Powder"),

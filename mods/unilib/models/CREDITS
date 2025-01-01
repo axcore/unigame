@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+-- From:    3d_armor/3d_armor
+-- Media:   CC-BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_armour_character.b3d
+
+---------------------------------------------------------------------------------------------------
+-- From:    3d_armor/3d_armor_stand
+-- Media:   CC-BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_misc_stand_armour.obj
+unilib_misc_stand_armour_entity.obj
+
+---------------------------------------------------------------------------------------------------
 -- From:    abritorch
 -- Media:   CC-BY 3.0/CC0
 ---------------------------------------------------------------------------------------------------
@@ -65,7 +80,7 @@ unilib_machine_press_juice.obj
 unilib_misc_scarecrow.obj
 unilib_misc_skeleton_human.obj
 unilib_misc_skeleton_human_old.obj
-unilib_misc_skeleton_skull_human.obj
+unilib_misc_skeleton_human_skull.obj
 unilib_misc_vase.obj
 
 ---------------------------------------------------------------------------------------------------
@@ -145,10 +160,8 @@ unilib_torch_floor.obj
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
 
-unilib_door_a.obj
-unilib_door_a2.obj
-unilib_door_b.obj
-unilib_door_b2.obj
+unilib_door_a.b3d
+unilib_door_b.b3d
 unilib_gate_closed.obj
 unilib_gate_open.obj
 
@@ -184,7 +197,7 @@ unilib_slope_outer_half.obj
 unilib_slope_outer_half_raised.obj
 
 ---------------------------------------------------------------------------------------------------
--- From:    morelights
+-- From:    morelights/morelights
 -- Media:   CC BY-SA 4.0
 ---------------------------------------------------------------------------------------------------
 
@@ -192,7 +205,7 @@ unilib_chain_metal.obj
 unilib_chain_metal_ceiling.obj
 
 ---------------------------------------------------------------------------------------------------
--- From:    morelights_modern
+-- From:    morelights/morelights_modern
 -- Media:   CC BY-SA 4.0
 ---------------------------------------------------------------------------------------------------
 
@@ -201,7 +214,7 @@ unilib_light_lamp_table.obj
 unilib_light_lamp_wall.obj
 
 ---------------------------------------------------------------------------------------------------
--- From:    morelights_vintage
+-- From:    morelights/morelights_vintage
 -- Media:   CC BY-SA 4.0
 ---------------------------------------------------------------------------------------------------
 
@@ -356,7 +369,7 @@ unilib_item_sledge.x
 -- Media:   CC-BY-SA-4.0
 ---------------------------------------------------------------------------------------------------
 
-unilib_metal_steel_strut.obj
+unilib_misc_strut_steel.obj
 
 ---------------------------------------------------------------------------------------------------
 -- From:    underch
@@ -365,4 +378,3 @@ unilib_metal_steel_strut.obj
 
 unilib_mineral_crystal_large.obj
 unilib_plant_tuber_dark.obj
-

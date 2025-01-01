@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_galerina = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.mushroom_galerina.exec()
 
     unilib.register_node("unilib:mushroom_galerina", "herbs:mushroom_galerina", mode, {
         -- From herbs:mushroom_galerina
-        description = unilib.annotate(S("Galerina Mushroom"), "Galerina"),
+        description = unilib.utils.annotate(S("Galerina Mushroom"), "Galerina"),
         tiles = {"unilib_mushroom_galerina.png"},
         groups = {attached_node = 1, flammable = 1, food_mushroom = 1, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -44,11 +44,11 @@ function unilib.pkg.mushroom_galerina.exec()
         walkable = false,
         wield_image = "unilib_mushroom_galerina.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_galerina", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_galerina", 1),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_galerina", "herbs:mushroom_galerina")
 
-    unilib.register_decoration("herbs_mushroom_galerina", {
+    unilib.register_decoration_generic("herbs_mushroom_galerina", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_galerina",

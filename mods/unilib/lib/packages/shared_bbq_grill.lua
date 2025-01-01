@@ -9,7 +9,7 @@
 unilib.pkg.shared_bbq_grill = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,13 +17,13 @@ local mode = unilib.imported_mod_table.bbq.add_mode
 
 local function swap_node(pos, name)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name == name then
         return
     end
 
     node.name = name
-    minetest.swap_node(pos, node)
+    core.swap_node(pos, node)
 
 end
 
@@ -51,7 +51,7 @@ function unilib.pkg.shared_bbq_grill.get_active_formspec(fuel_percent, item_perc
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25)
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
@@ -73,7 +73,7 @@ function unilib.pkg.shared_bbq_grill.get_inactive_formspec()
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25)
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
@@ -84,7 +84,7 @@ end
 function unilib.pkg.shared_bbq_grill.allow_metadata_inventory_move(
     pos, from_list, from_index, to_list, to_index, count, player, empty_msg
 )
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local stack = inv:get_stack(from_list, from_index)
     return unilib.pkg.shared_bbq_grill.allow_metadata_inventory_put(
@@ -96,15 +96,15 @@ end
 function unilib.pkg.shared_bbq_grill.allow_metadata_inventory_put(
     pos, listname, index, stack, player, empty_msg
 )
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     if listname == "fuel" then
 
-        if minetest.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
+        if core.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
 
             if inv:is_empty("src") then
                 meta:set_string("infotext", empty_msg)
@@ -133,7 +133,7 @@ end
 function unilib.pkg.shared_bbq_grill.allow_metadata_inventory_take(
     pos, listname, index, stack, player
 )
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
@@ -143,7 +143,7 @@ end
 
 function unilib.pkg.shared_bbq_grill.can_dig(pos, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src")
 
@@ -156,7 +156,7 @@ function unilib.pkg.shared_bbq_grill.grill_node_timer(
     -- Was smoker_node_timer()
 
     -- Inizialise metadata
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fuel_time = meta:get_float("fuel_time") or 0
     local src_time = meta:get_float("src_time") or 0
     local fuel_totaltime = meta:get_float("fuel_totaltime") or 0
@@ -175,7 +175,7 @@ function unilib.pkg.shared_bbq_grill.grill_node_timer(
 
         -- Check if we have cookable content
         local after_cook_table
-        cook_table, after_cook_table = minetest.get_craft_result(
+        cook_table, after_cook_table = core.get_craft_result(
             {method = "cooking", width = 1, items = src_list}
         )
 
@@ -224,7 +224,7 @@ function unilib.pkg.shared_bbq_grill.grill_node_timer(
 
                 -- We need to get new fuel
                 local after_fuel_table
-                fuel_table, after_fuel_table = minetest.get_craft_result(
+                fuel_table, after_fuel_table = core.get_craft_result(
                     {method = "fuel", width = 1, items = fuel_list}
                 )
 
@@ -313,7 +313,7 @@ function unilib.pkg.shared_bbq_grill.grill_node_timer(
         formspec = inactive_formspec_func()
         swap_node(pos, inactive_name)
         -- Stop timer on the inactive grill
-        minetest.get_node_timer(pos):stop()
+        core.get_node_timer(pos):stop()
 
     end
 

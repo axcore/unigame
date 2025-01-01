@@ -9,9 +9,9 @@
 unilib.pkg.override_snow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
-local creative_mode = minetest.settings:get_bool("creative_mode")
+local creative_mode = core.settings:get_bool("creative_mode")
 
 local snowball_velocity, entity_attack_delay, someone_throwing, just_activated
 
@@ -20,9 +20,12 @@ local snowball_velocity = 19
 local snowball_gravity = 0.91
 
 local entity_table = {
-    physical = false,
+    initial_properties = {
+        collisionbox = {-5/16, -5/16, -5/16, 5/16, 5/16, 5/16},
+        physical = false,
+    },
+
     timer = 0,
-    collisionbox = {-5/16, -5/16, -5/16, 5/16, 5/16, 5/16},
 }
 
 ---------------------------------------------------------------------------------------------------
@@ -32,14 +35,14 @@ local entity_table = {
 local function update_snowball_vel(v)
 
     snowball_velocity = v
-    local walkspeed = tonumber(minetest.settings:get("movement_speed_walk")) or 4
+    local walkspeed = tonumber(core.settings:get("movement_speed_walk")) or 4
     entity_attack_delay = (walkspeed + 1) / v
 
 end
 
 local function get_gravity()
 
-    local grav = tonumber(minetest.settings:get("movement_gravity")) or 9.81
+    local grav = tonumber(core.settings:get("movement_gravity")) or unilib.constant.gravity
     return grav * snowball_gravity
 
 end
@@ -55,7 +58,7 @@ local function shoot_snowball(item, player)
     addp.z = -dir.x/dif
 
     local pos = vector.add(player:get_pos(), addp)
-    local obj = minetest.add_entity(pos, "unilib:entity_snow_ordinary_ball")
+    local obj = core.add_entity(pos, "unilib:entity_snow_ordinary_ball")
     obj:set_velocity(vector.multiply(dir, snowball_velocity))
     obj:set_acceleration({x = dir.x * -3, y = -get_gravity(), z = dir.z * -3})
     obj:get_luaentity().thrower = player:get_player_name()
@@ -80,7 +83,7 @@ end
 local function update_step()
 
     local active
-    for _, player in pairs(minetest.get_connected_players()) do
+    for _, player in pairs(core.get_connected_players()) do
 
         if player:get_player_control().LMB then
 
@@ -107,7 +110,7 @@ end
 
 local function do_step()
 
-    -- Throw snowballs automatically after a call from minetest.after()
+    -- Throw snowballs automatically after a call from core.after()
 
     local timer
     -- Only if the player holds down the left mouse button
@@ -123,7 +126,7 @@ local function do_step()
 
     end
 
-    minetest.after(timer, do_step)
+    core.after(timer, do_step)
 
 end
 
@@ -140,7 +143,7 @@ function entity_table.on_activate(self)
     )
     self.object:set_acceleration({x = 0, y = -get_gravity(), z = 0})
     self.lastpos = self.object:get_pos()
-    minetest.after(0.1, function(obj)
+    core.after(0.1, function(obj)
 
         if not obj then
             return
@@ -151,7 +154,7 @@ function entity_table.on_activate(self)
             return
         end
 
-        minetest.after(0, function(object)
+        core.after(0, function(object)
 
             if not object then
                 return
@@ -206,10 +209,10 @@ function entity_table.on_step(self, dtime)
         end
 
         local pos = vector.round(self.object:get_pos())
-        if minetest.get_node(pos).name == "air" then
+        if core.get_node(pos).name == "air" then
 
             pos.y = pos.y-1
-            if minetest.get_node(pos).name == "air" then
+            if core.get_node(pos).name == "air" then
 
                 if vel.x == 0 and vel.z == 0 then
                     self.probably_stuck = true
@@ -232,12 +235,12 @@ function entity_table.on_step(self, dtime)
         return
     end
 
-    if minetest.get_node(pos).name ~= "air" then
+    if core.get_node(pos).name ~= "air" then
 
         self.object:set_acceleration({x = 0, y = -get_gravity(), z = 0})
         pos = self.lastpos
-        self.object:setpos(pos)
-        minetest.sound_play(
+        self.object:set_pos(pos)
+        core.sound_play(
             "unilib_snow_footstep",
             {pos = pos, gain = vector.length(self.object:get_velocity()) / 30}
         )
@@ -253,7 +256,7 @@ function entity_table.on_step(self, dtime)
         return
     end
 
-    for _,v in pairs(minetest.get_objects_inside_radius(pos, 1.73)) do
+    for _,v in pairs(core.get_objects_inside_radius(pos, 1.73)) do
 
         local entity = v:get_luaentity()
         if v ~= self.object and entity then
@@ -272,16 +275,20 @@ function entity_table.on_step(self, dtime)
 
                 local gain = vector.length(veldif) / 20
                 v:punch(
-                    (self.thrower and minetest.get_player_by_name(self.thrower)) or self.object,
+                    (self.thrower and core.get_player_by_name(self.thrower)) or self.object,
                     1,
                     {full_punch_interval = 1, damage_groups = {fleshy = math.ceil(gain)}}
                 )
-                minetest.sound_play("unilib_snow_footstep", {pos = pos, gain = gain})
+                core.sound_play("unilib_snow_footstep", {pos = pos, gain = gain})
 
                 -- spawn_falling_node
-                local obj = minetest.add_entity(pos, "__builtin:falling_node")
+                local obj = core.add_entity(pos, "__builtin:falling_node")
                 if obj then
-                    obj:get_luaentity():set_node{name = "unilib:snow_ordinary"}
+
+                    -- N.B. This line from the original code looks like an error, so fixed it
+--                  obj:get_luaentity():set_node{name = "unilib:snow_ordinary"}
+                    obj:get_luaentity():set_node({name = "unilib:snow_ordinary"})
+
                 end
 
                 self.object:remove()
@@ -316,9 +323,9 @@ end
 function unilib.pkg.override_snow.exec()
 
     -- Make ordinary ice freeze over
-    if unilib.pkg_executed_table["ice_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["ice_ordinary"] ~= nil then
 
-        local group_table = minetest.registered_nodes["unilib:ice_ordinary"].groups
+        local group_table = core.registered_nodes["unilib:ice_ordinary"].groups
         group_table["melt"] = 1
 
         unilib.override_item("unilib:ice_ordinary", {
@@ -333,9 +340,7 @@ function unilib.pkg.override_snow.exec()
             use_texture_alpha = "blend",
 
             after_place_node = function(pos)
-
-                minetest.set_node(pos, {name = "unilib:ice_ordinary", param2 = math.random(0, 10)})
-
+                core.set_node(pos, {name = "unilib:ice_ordinary", param2 = math.random(0, 10)})
             end,
 
             on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
@@ -344,9 +349,9 @@ function unilib.pkg.override_snow.exec()
     end
 
     -- Update ordinary snow to support new code from the "snow" mod
-    if unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
-        local group_table = minetest.registered_nodes["unilib:snow_ordinary_block"].groups
+        local group_table = core.registered_nodes["unilib:snow_ordinary_block"].groups
         for k, v in pairs({cooks_into_ice = 1, falling_node = 1, icemaker = 1, melts = 1}) do
             group_table[k] = v
         end
@@ -361,7 +366,7 @@ function unilib.pkg.override_snow.exec()
             on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
         })
 
-        if unilib.pkg_executed_table["moss_snow"] ~= nil then
+        if unilib.global.pkg_executed_table["moss_snow"] ~= nil then
 
             unilib.override_item("unilib:snow_ordinary", {
                 groups = {
@@ -397,12 +402,12 @@ function unilib.pkg.override_snow.exec()
                 on_construct = function(pos)
 
                     pos.y = pos.y - 1
-                    local node = minetest.get_node(pos)
+                    local node = core.get_node(pos)
                     if node.name == "unilib:dirt_ordinary_with_turf" or
                             node.name == "unilib:dirt_ordinary" then
 
                         node.name = "unilib:dirt_ordinary_with_cover_snow"
-                        minetest.set_node(pos, node)
+                        core.set_node(pos, node)
 
                     end
 
@@ -410,10 +415,10 @@ function unilib.pkg.override_snow.exec()
 
                 on_dig = function(pos, node, digger)
 
-                    --Handle node drops due to node level
-                    local level = minetest.get_node_level(pos)
-                    minetest.node_dig(pos, node, digger)
-                    if minetest.get_node(pos).name ~= node.name then
+                    -- Handle node drops due to node level
+                    local level = core.get_node_level(pos)
+                    core.node_dig(pos, node, digger)
+                    if core.get_node(pos).name ~= node.name then
 
                         local inv = digger:get_inventory()
                         if not inv then
@@ -427,7 +432,7 @@ function unilib.pkg.override_snow.exec()
 
                         if not left:is_empty() then
 
-                            minetest.add_item(
+                            core.add_item(
                                 {
                                     x = pos.x + math.random() / 2 - 0.25,
                                     y = pos.y + math.random() / 2 - 0.25,
@@ -445,12 +450,12 @@ function unilib.pkg.override_snow.exec()
                 on_place = function(itemstack, player, pt)
 
                     -- Manage snow levels
-                    local oldnode_under = minetest.get_node_or_nil(pt.under)
+                    local oldnode_under = core.get_node_or_nil(pt.under)
                     if not oldnode_under then
                         return itemstack, false
                     end
 
-                    local olddef_under = minetest.registered_nodes[oldnode_under.name]
+                    local olddef_under = core.registered_nodes[oldnode_under.name]
                     if not olddef_under then
                         return itemstack, false
                     end
@@ -465,8 +470,8 @@ function unilib.pkg.override_snow.exec()
                     else
 
                         pos = pt.above
-                        node = minetest.get_node(pos)
-                        local def = minetest.registered_nodes[node.name]
+                        node = core.get_node(pos)
+                        local def = core.registered_nodes[node.name]
                         if not def or not def.buildable_to then
                             return itemstack, false
                         end
@@ -474,13 +479,13 @@ function unilib.pkg.override_snow.exec()
                     end
 
                     -- nil player can place (for snowballs)
-                    if player and minetest.is_protected(pos, player:get_player_name()) then
+                    if player and core.is_protected(pos, player:get_player_name()) then
                         return itemstack, false
                     end
 
                     if node.name ~= "unilib:snow_ordinary" then
 
-                        if minetest.get_node{x=pos.x, y=pos.y-1, z=pos.z}.name ==
+                        if core.get_node{x = pos.x, y=pos.y - 1, z = pos.z}.name ==
                                 "unilib:snow_ordinary" then
 
                             -- Grow the snow below (fixes "leveled" problem)
@@ -489,32 +494,32 @@ function unilib.pkg.override_snow.exec()
                         else
 
                             -- Place snow
-                            return minetest.item_place_node(itemstack, player, pt)
+                            return core.item_place_node(itemstack, player, pt)
 
                         end
 
                     end
 
-                    -- Grow the snow
-                    local level = minetest.get_node_level(pos)
+                    -- "Grow" the snow
+                    local level = core.get_node_level(pos)
                     level = level + 7
                     if level < 64 then
 
-                        minetest.set_node_level(pos, level)
+                        core.set_node_level(pos, level)
 
                     else
 
                         -- Place a snowblock and snow onto it if possible
                         local p = {x = pos.x, y = pos.y + 1, z = pos.z}
-                        local def_table = minetest.registered_nodes[minetest.get_node(p).name]
+                        local def_table = core.registered_nodes[core.get_node(p).name]
                         if def_table == nil or not def_table.buildable_to then
                             return itemstack, false
                         end
 
-                        minetest.set_node(pos, {name = "unilib:snow_ordinary_block"})
-                        minetest.set_node(p, {name = "unilib:snow_ordinary"})
+                        core.set_node(pos, {name = "unilib:snow_ordinary_block"})
+                        core.set_node(p, {name = "unilib:snow_ordinary"})
                         level = math.max(level - 64, 7)
-                        minetest.set_node_level(p, level)
+                        core.set_node_level(p, level)
 
                     end
 
@@ -523,7 +528,7 @@ function unilib.pkg.override_snow.exec()
 
                 end,
 
-                on_use = shoot_snowball
+                on_use = shoot_snowball,
             })
 
         end
@@ -532,7 +537,7 @@ function unilib.pkg.override_snow.exec()
 
     -- Handle Snowballs
     update_snowball_vel(snowball_velocity)
-    minetest.after(3, do_step)
-    minetest.register_entity("unilib:entity_snow_ordinary_ball", entity_table)
+    core.after(3, do_step)
+    unilib.register_entity("unilib:entity_snow_ordinary_ball", entity_table)
 
 end

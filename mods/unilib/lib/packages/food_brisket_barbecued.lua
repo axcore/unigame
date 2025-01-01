@@ -9,7 +9,7 @@
 unilib.pkg.food_brisket_barbecued = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_brisket_barbecued.exec()
         description = S("Raw Barbecued Brisket"),
         inventory_image = "unilib_food_brisket_barbecued_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_brisket_barbecued_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_brisket_barbecued_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:brisket_raw
@@ -45,7 +45,7 @@ function unilib.pkg.food_brisket_barbecued.exec()
             "unilib:ingredient_molasses",
             "unilib:food_beef_normal_raw",
             "group:food_garlic_clove",
-        }
+        },
     })
 
     unilib.register_craftitem("unilib:food_brisket_barbecued", "bbq:brisket", mode, {
@@ -53,7 +53,7 @@ function unilib.pkg.food_brisket_barbecued.exec()
         description = S("Barbecued Brisket"),
         inventory_image = "unilib_food_brisket_barbecued.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_brisket_barbecued", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_brisket_barbecued", 9),
     })
     unilib.register_craft({
         -- From bbq:brisket

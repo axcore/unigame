@@ -9,7 +9,7 @@
 unilib.pkg.mineral_moonstone_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_moonstone_rock.exec()
 
     local c_lump = "unilib:mineral_moonstone_lump"
-    local hardness = unilib.mineral_table["moonstone"]["hardness"]
+    local hardness = unilib.global.mineral_table["moonstone"]["hardness"]
 
     unilib.register_mineral_rock("moonstone")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_moonstone_rock.exec()
         description = S("Moonstone Rock"),
         tiles = {"unilib_mineral_moonstone_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

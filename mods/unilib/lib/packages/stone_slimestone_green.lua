@@ -17,9 +17,9 @@
 unilib.pkg.stone_slimestone_green = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_slimestone_green.exec()
         description = S("Green Slimestone"),
 
         category = "other",
+        colour = "#469F36",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,28 +88,24 @@ function unilib.pkg.stone_slimestone_green.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:green_slimestone. Creates
+        --      unilib:stone_slimestone_green_cobble_compressed
+        part_name = "slimestone_green",
+        orig_name = "compressed:green_slimestone",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:green_slimestone. Creates
-            --      unilib:stone_slimestone_green_cobble_compressed
-            part_name = "slimestone_green",
-            orig_name = "compressed:green_slimestone",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Green Slimestone Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Green Slimestone Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:green_slimestone. Creates
+        --      unilib:stone_slimestone_green_cobble_condensed
+        part_name = "slimestone_green",
+        orig_name = "condensed:green_slimestone",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:green_slimestone. Creates
-            --      unilib:stone_slimestone_green_cobble_condensed
-            part_name = "slimestone_green",
-            orig_name = "condensed:green_slimestone",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Green Slimestone Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Green Slimestone Cobble"),
+    })
 
 end

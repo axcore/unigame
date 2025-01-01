@@ -9,7 +9,7 @@
 unilib.pkg.rope_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.rope_normal.exec()
         tiles = {"unilib_rope_normal.png"},
         -- (no tiles)
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "signlike",
@@ -52,7 +52,7 @@ function unilib.pkg.rope_normal.exec()
             {"unilib:grass_jungle"},
             {"unilib:grass_jungle"},
             {"unilib:grass_jungle"},
-        }
+        },
     })
 
 end

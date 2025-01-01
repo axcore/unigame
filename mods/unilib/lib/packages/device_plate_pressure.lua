@@ -9,7 +9,7 @@
 unilib.pkg.device_plate_pressure = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,21 +17,21 @@ local mode = unilib.imported_mod_table.xdecor.add_mode
 
 local function on_construct(pos)
 
-    local timer = minetest.get_node_timer(pos)
+    local timer = core.get_node_timer(pos)
     timer:start(0.1)
 
 end
 
 local function on_timer(pos)
 
-    local objs = minetest.get_objects_inside_radius(pos, 0.8)
+    local objs = core.get_objects_inside_radius(pos, 0.8)
     if not next(objs) or not doors.get then
         return true
     end
 
     local minp = {x = pos.x - 2, y = pos.y, z = pos.z - 2}
     local maxp = {x = pos.x + 2, y = pos.y, z = pos.z + 2}
-    local doors = minetest.find_nodes_in_area(minp, maxp, "group:door")
+    local doors = core.find_nodes_in_area(minp, maxp, "group:door")
 
     for _, player in pairs(objs) do
 
@@ -58,7 +58,7 @@ local function do_register(data_table)
 
     local description = data_table.description or S("Pressure Plate")
     local group_table = data_table.group_table or {cracky = 3, oddly_breakable_by_hand = 2}
-    local sound_table = data_table.sound_table or unilib.sound_table.node
+    local sound_table = data_table.sound_table or unilib.global.sound_table.node
 
     unilib.register_node(
         "unilib:device_plate_pressure_" .. part_name .. "_off",
@@ -71,6 +71,8 @@ local function do_register(data_table)
             sounds = sound_table,
 
             drawtype = "nodebox",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -86,7 +88,7 @@ local function do_register(data_table)
             on_timer = on_timer,
         }
     )
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:device_plate_pressure_" .. part_name .. "_off", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,
@@ -106,6 +108,8 @@ local function do_register(data_table)
 
             drawtype = "nodebox",
             drop = "unilib:device_plate_pressure_" .. part_name .. "_off",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -118,7 +122,7 @@ local function do_register(data_table)
             use_texture_alpha = "opaque",
         }
     )
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:device_plate_pressure_" .. part_name .. "_on", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,
@@ -154,7 +158,7 @@ function unilib.pkg.device_plate_pressure.exec()
 
         description = S("Stone Pressure Plate"),
         group_table = {cracky = 3, oddly_breakable_by_hand = 2},
-        sound_table = unilib.sound_table.stone,
+        sound_table = unilib.global.sound_table.stone,
     })
     unilib.register_craft({
         -- From xdecor:pressure_stone_off
@@ -171,7 +175,7 @@ function unilib.pkg.device_plate_pressure.exec()
 
         description = S("Wooden Pressure Plate"),
         group_table = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
-        sound_table = unilib.sound_table.wood,
+        sound_table = unilib.global.sound_table.wood,
     })
     unilib.register_craft({
         -- From xdecor:pressure_wood_off

@@ -9,7 +9,7 @@
 unilib.pkg.stone_andesite_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_andesite_pale.exec()
         description = S("Pale Andesite"),
 
         category = "extrusive",
+        colour = "#A7A49A",
         grinder_flag = true,
         hardness = 3,
     })
@@ -73,6 +74,24 @@ function unilib.pkg.stone_andesite_pale.exec()
         replace_mode = mode,
         description = S("Pale Andesite Cobble"),
         img_list = {"unilib_stone_andesite_pale.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_andesite_pale_cobble_compressed
+        part_name = "andesite_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pale Andesite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_andesite_pale_cobble_condensed
+        part_name = "andesite_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pale Andesite Cobble"),
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.flower_thistle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.flower_thistle.exec()
         deco_part_name = "bakedclay",
         description = S("Thistle"),
         -- N.B. No flammable = 1 in original code
-        group_table = {color_magenta = 1, flammable = 1},
+        group_table = {color_magenta = 1, colour_magenta = 1, flammable = 1},
         no_deco_flag = true,
         sci_name = "Silybum marianum",
     })
 
-    unilib.register_decoration("bakedclay_flower_thistle", {
+    unilib.register_decoration_generic("bakedclay_flower_thistle", {
         -- From bakedclay:thistle
         deco_type = "simple",
         decoration = "unilib:flower_thistle",

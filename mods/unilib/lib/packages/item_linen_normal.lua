@@ -9,7 +9,7 @@
 unilib.pkg.item_linen_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.item_linen_normal.exec()
         inventory_image = "unilib_item_linen_normal.png",
         groups = {flammable = 1, linen = 1, thread = 1},
     })
-    if unilib.pkg_executed_table["item_string_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_string_ordinary"] ~= nil then
 
         unilib.register_craft_2x2({
             -- From cropocalypse:linen
@@ -42,7 +42,7 @@ function unilib.pkg.item_linen_normal.exec()
         })
 
     end
-    if unilib.pkg_executed_table["wool_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["wool_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:linen

@@ -9,7 +9,7 @@
 unilib.pkg.flower_fire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,10 @@ function unilib.pkg.flower_fire.exec()
         -- N.B. Added standard flower groups, but retained igniter = 2
 --      groups = {igniter = 2, oddly_breakable_by_hand = 3, snappy = 1},
         groups = {
-            attached_node = 1, color_red = 1, flammable = 1, flora = 1, flower = 1, igniter = 2,
-            snappy = 3,
+            attached_node = 1, color_red = 1, colour_red = 1, flammable = 1, flora = 1, flower = 1,
+            igniter = 2, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         damage_per_second = 2,
@@ -86,7 +86,7 @@ function unilib.pkg.flower_fire.exec()
         output = "unilib:flower_fire_dust 2",
         recipe = {
             {"unilib:flower_fire"},
-        }
+        },
     })
     unilib.register_craft({
         -- From ethereal:fire_dust
@@ -94,5 +94,7 @@ function unilib.pkg.flower_fire.exec()
         recipe = "unilib:flower_fire_dust",
         burntime = 10,
     })
+
+    unilib.register_decoration_spare("unilib:flower_fire")
 
 end

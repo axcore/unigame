@@ -9,7 +9,7 @@
 unilib.pkg.deco_herbs_flower_achillea_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ end
 
 function unilib.pkg.deco_herbs_flower_achillea_white.post()
 
-    unilib.register_decoration_now("herbs_flower_achillea_white", nil, {
+    unilib.register_decoration_complete("herbs_flower_achillea_white", nil, {
         -- From herbs/mapgen.lua
         -- Completes decoration in package "flower_achillea_white"
         biomes = {"default_forest_deciduous", "default_grassland", "ethereal_mountain"},
@@ -38,7 +38,7 @@ function unilib.pkg.deco_herbs_flower_achillea_white.post()
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_turf",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 30,
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.item_fibre_hemp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.item_fibre_hemp.exec()
         description = S("Hemp Fibre"),
         inventory_image = "unilib_item_fibre_hemp.png"
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From farming:hemp_fibre
@@ -44,7 +44,7 @@ function unilib.pkg.item_fibre_hemp.exec()
         })
 
     end
-    if unilib.pkg_executed_table["item_string_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_string_ordinary"] ~= nil then
 
         -- N.B. In original code, this code block is labelled "string", which is a much more
         --      sensible output than cotton (especially considering the paper recipe above)
@@ -77,6 +77,8 @@ function unilib.pkg.item_fibre_hemp.exec()
         tiles = {"unilib_item_fibre_hemp_block.png"},
         groups = {flammable = 2, oddly_breakable_by_hand = 1, snappy = 1},
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
     unilib.register_craft_3x3({
@@ -92,7 +94,7 @@ function unilib.pkg.item_fibre_hemp.post()
 
     local c_leaf = "unilib:crop_hemp_harvest"
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_ordinary_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_river_bucket = "unilib:" .. bucket_type .. "_with_water_river"
@@ -111,7 +113,7 @@ function unilib.pkg.item_fibre_hemp.post()
             },
         })
 
-        if unilib.pkg_executed_table["liquid_water_river"] ~= nil then
+        if unilib.global.pkg_executed_table["liquid_water_river"] ~= nil then
 
             -- (Filter ordinary water into river water)
             unilib.register_craft({
@@ -121,7 +123,7 @@ function unilib.pkg.item_fibre_hemp.post()
                     {"unilib:item_fibre_hemp"},
                     {"unilib:item_fibre_hemp"},
                     {c_ordinary_bucket},
-                }
+                },
             })
 
         end

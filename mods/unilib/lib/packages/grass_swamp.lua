@@ -9,7 +9,7 @@
 unilib.pkg.grass_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,7 +17,7 @@ local mode = unilib.imported_mod_table.farlands.add_mode
 
 local function do_decoration(offset, scale, length)
 
-    unilib.register_decoration("farlands_grass_swamp_" .. length, {
+    unilib.register_decoration_generic("farlands_grass_swamp_" .. length, {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:grass_swamp_" .. length,
@@ -49,8 +49,14 @@ end
 
 function unilib.pkg.grass_swamp.exec()
 
+    local full_name = "unilib:grass_swamp_1"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
     -- First variant
-    unilib.register_node("unilib:grass_swamp_1", nil, mode, {
+    unilib.register_node(full_name, nil, mode, {
         -- Textures from farlands, mapgen:swamp_grass_1 etc. For consistency, code adapted from
         --      "grass_ordinary" package
         description = S("Swamp Grass"),
@@ -59,11 +65,13 @@ function unilib.pkg.grass_swamp.exec()
         groups = {
             attached_node = 1, flammable = 1, flora = 1, grass = 1, snappy = 3, swamp_grass = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
-        -- (As in the "grass_ordinary" package, we use a different variant for the inventory image)
+        drop = drop,
+        -- N.B. As in the "grass_ordinary" package, we use a different variant for the inventory
+        --      image
         inventory_image = "unilib_grass_swamp_2.png",
         paramtype = "light",
         selection_box = {
@@ -79,19 +87,18 @@ function unilib.pkg.grass_swamp.exec()
 
             -- Place a random grass variant
             local stack = ItemStack("unilib:grass_swamp_" .. math.random(1, 5))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
-            return ItemStack("unilib:grass_swamp_1 " ..
-                    itemstack:get_count() - (1 - ret:get_count()))
+            local ret = core.item_place(stack, placer, pointed_thing)
+            return ItemStack(full_name .. " " .. itemstack:get_count() - (1 - ret:get_count()))
 
         end,
     })
     unilib.register_craft({
         -- Original to unilib
         type = "fuel",
-        recipe = "unilib:grass_swamp_1",
+        recipe = full_name,
         burntime = 2,
     })
-    unilib.register_plant_in_pot("unilib:grass_swamp_1", nil)
+    unilib.register_plant_in_pot(full_name, nil)
 
     for i = 2, 5 do
 
@@ -105,11 +112,11 @@ function unilib.pkg.grass_swamp.exec()
                 attached_node = 1, flammable = 1, flora = 1, grass = 1,
                 not_in_creative_inventory = 1, snappy = 3, swamp_grass = 1,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
-            drop = "unilib:grass_swamp_1",
+            drop = drop,
             inventory_image = "unilib_grass_swamp_" .. i .. ".png",
             paramtype = "light",
             selection_box = {
@@ -132,7 +139,7 @@ function unilib.pkg.grass_swamp.exec()
     do_decoration(0.03, 0.03, 1)
 
     -- Update global variables
-    unilib.register_growing({
+    unilib.flora.register_growth_stages({
         base_name = "unilib:grass_swamp",
         mode = "other",
         stage_max = 5,

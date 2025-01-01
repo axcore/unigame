@@ -9,7 +9,7 @@
 unilib.pkg.pane_bars_wooden = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,10 +39,11 @@ function unilib.pkg.pane_bars_wooden.exec()
                 "unilib_pane_bars_wooden_top.png",
             },
             groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             inventory_image = "unilib_pane_bars_wooden.png",
-            -- N.B. Original craft recipe conflicts with recipe in "shared_castle_gates" package
+            -- N.B. Original craft recipe conflicts with recipe in "shared_castle_gates_slots"
+            --      package
             --[[
             recipe = {
                 {"group:wood", "", "group:wood"},

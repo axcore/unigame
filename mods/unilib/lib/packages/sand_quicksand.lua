@@ -9,7 +9,7 @@
 unilib.pkg.sand_quicksand = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.sand_quicksand.exec()
         description = S("Quicksand"),
         tiles = {"unilib_sand_ordinary.png^[colorize:#00004F10"},
         groups = {crumbly = 3, disable_jump = 1, liquid = 3, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         climbable = false,
         drawtype = "glasslike",
@@ -58,9 +58,9 @@ function unilib.pkg.sand_quicksand.post()
         recipe = {
             {"group:sand", "group:sand", "group:sand"},
             {"group:sand", "group:water_bucket", "group:sand"},
-            {"group:sand", "group:sand", "group:sand"}
+            {"group:sand", "group:sand", "group:sand"},
         },
-        replacements = unilib.water_bucket_list,
+        replacements = unilib.global.water_bucket_list,
     })
 
 end

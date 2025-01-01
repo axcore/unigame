@@ -1,8 +1,14 @@
 # "aotearoa_mini" remix - the "aotearoa" remix without biomes, decorations or ores (or the base
-#       package)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
+#       package; there are no ABM/LBM packages to omit)
+# unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
+#   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
+#   enable them by uncommenting the optional package below
 
 # node_name | original_mod
+
+# Optional package. Uncomment this package to replace minetest_game dirt-with-turf nodes with
+#       custom Aotearoa-themed ones
+#dirt_custom_antipodean|unilib
 
 # aotearoa packages
 #base_aotearoa|aotearoa
@@ -82,7 +88,7 @@ dirt_mud_antipodean_with_cockles|aotearoa
 dirt_peat_antipodean|aotearoa
 dirt_peat_forest|aotearoa
 dirt_peat_restiad|aotearoa
-feature_aotearoa_liquid_mud_boiling|aotearoa
+#feature_aotearoa_liquid_mud_boiling|aotearoa
 fern_crown_antipodean|aotearoa
 food_cake_pungapunga|aotearoa
 food_cake_seed|aotearoa
@@ -215,34 +221,29 @@ clay_ordinary|default
 dirt_ordinary|default farming moreblocks
 dye_basic|dye bakedclay
 gravel_ordinary|default mtg_plus
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
-mineral_flint|default fire mtg_plus
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 sand_ordinary|default
 
 # supporting packages (.at_least_one)
-biome_aotearoa_dunes|aotearoa
-biome_aotearoa_scrubland|aotearoa
 coral_block_skeleton|default
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #coral_block_brown|default
 #coral_block_orange|default
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #food_fiddlehead|ferns
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #item_paper_ordinary|default moreblocks
 #item_stick_ordinary|default
-#mineral_coal|default technic
-#mineral_mese|default
-#override_ethereal_coral|ethereal
+#machine_furnace_induction|unilib
+#mineral_flint|default fire mtg_plus
+#mineral_mese|default glemr11
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #soil_ordinary|farming
@@ -251,3 +252,5 @@ coral_block_skeleton|default
 #stone_sandstone_ordinary|default moreblocks mtg_plus
 #stone_sandstone_silver|default mtg_plus
 #torch_ordinary|default
+
+# supporting packages (.suggested)

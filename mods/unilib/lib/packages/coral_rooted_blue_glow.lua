@@ -9,7 +9,7 @@
 unilib.pkg.coral_rooted_blue_glow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,6 +19,8 @@ function unilib.pkg.coral_rooted_blue_glow.init()
 
     return {
         description = "Blue glowing coral",
+        notes = "Because of code in the \"sand_undersea\" package, grows spontaneuously on" ..
+                " undersea sand (but can be placed on any type of sand)",
         optional = "dye_basic",
     }
 
@@ -30,8 +32,9 @@ function unilib.pkg.coral_rooted_blue_glow.exec()
         -- From ethereal:coral2
         description = S("Blue Glowing Coral"),
         tiles = {"unilib_coral_rooted_blue_glow.png"},
-        groups = {snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_coral_rooted_blue_glow.png",
@@ -42,8 +45,18 @@ function unilib.pkg.coral_rooted_blue_glow.exec()
             fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 1 / 4, 6 / 16}
         },
         wield_image = "unilib_coral_rooted_blue_glow.png",
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
+        end,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:coral2

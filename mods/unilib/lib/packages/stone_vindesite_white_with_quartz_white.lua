@@ -9,7 +9,7 @@
 unilib.pkg.stone_vindesite_white_with_quartz_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,11 @@ function unilib.pkg.stone_vindesite_white_with_quartz_white.exec()
         "underch:vindesite_quartz_ore",
         mode,
         {
-            description = unilib.brackets(S("White Quartz Ore"), S("White Vindesite")),
+            description = unilib.utils.brackets(S("White Quartz Ore"), S("White Vindesite")),
             tiles = {"unilib_stone_vindesite_white.png^unilib_mineral_quartz_white.png"},
-            groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 2, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:mineral_quartz_white_crystal",
         }

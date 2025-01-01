@@ -9,7 +9,7 @@
 unilib.pkg.food_beef_ribs_barbecued = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.food_beef_ribs_barbecued.exec()
             description = S("Raw Barbecued Beef Ribs"),
             inventory_image = "unilib_food_beef_ribs_barbecued_raw.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_beef_ribs_barbecued_raw", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_beef_ribs_barbecued_raw", 4),
         }
     )
     unilib.register_craft({
@@ -57,7 +57,7 @@ function unilib.pkg.food_beef_ribs_barbecued.exec()
         description = S("Barbecued Beef Ribs"),
         inventory_image = "unilib_food_beef_ribs_barbecued.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_ribs_barbecued", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_ribs_barbecued", 9),
     })
     unilib.register_craft({
         -- From bbq:bbq_beef_ribs

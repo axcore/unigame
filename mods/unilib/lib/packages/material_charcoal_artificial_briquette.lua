@@ -9,7 +9,7 @@
 unilib.pkg.material_charcoal_artificial_briquette = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,8 +46,8 @@ function unilib.pkg.material_charcoal_artificial_briquette.exec()
         recipe = {
             {"", c_sawdust, ""},
             {c_sawdust, "unilib:material_charcoal_artificial_lump", c_sawdust},
-            {"", c_sawdust, ""}
-        }
+            {"", c_sawdust, ""},
+        },
     })
     unilib.register_craft({
         -- From bbq:charcoal_briquette

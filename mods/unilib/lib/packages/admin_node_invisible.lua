@@ -9,7 +9,7 @@
 unilib.pkg.admin_node_invisible = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,14 +33,18 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:playerclip",
         mode,
         {
-            description = unilib.hint(S("Invisible Barrier"), S("blocks players and entities")),
+            description = unilib.utils.hint(
+                S("Invisible Barrier"), S("blocks players and entities")
+            ),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_green.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,
@@ -54,16 +58,18 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:fullclip",
         mode,
         {
-            description = unilib.hint(
+            description = unilib.utils.hint(
                 S("Invisible Wall"), S("blocks players and entities, pointable")
             ),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_blue.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             sunlight_propagates = true,
         }
@@ -76,19 +82,21 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:fullclip_face",
         mode,
         {
-            description = unilib.hint(
+            description = unilib.utils.hint(
                 S("Invisible Wall"), S("blocks players and entities, pointable on one face")
             ),
             tiles = {"unilib_admin_invisible.png"},
             -- N.B. not_in_creative_inventory not in original code
             groups = {
                 fall_damage_add_percent = -100,
-                not_in_creative_inventory = unilib.show_admin_item_group,
+                not_in_creative_inventory = unilib.globalshow_admin_item_group,
             },
             -- (no sounds)
 
             drawtype = "nodebox",
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_white.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.5, -0.5, -0.5, 0.5, -0.4999, 0.5},
@@ -107,15 +115,17 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:fake_walkable",
         mode,
         {
-            description = unilib.hint(S("Invisible Space"), S("prevents building")),
+            description = unilib.utils.hint(S("Invisible Space"), S("prevents building")),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             -- N.B. switched duplicate dye texture in original code
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_green_dark.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -135,15 +145,18 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:fake_walkable_pointable",
         mode,
         {
-            description = unilib.hint(S("Invisible Space"), S("prevents building, pointable")),
+            description =
+                    unilib.utils.hint(S("Invisible Space"), S("prevents building, pointable")),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             -- N.B. switched duplicate dye texture in original code
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_grey.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -162,14 +175,16 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:nobuild",
         mode,
         {
-            description = unilib.hint(S("Invisible Cube"), S("inhibits building")),
+            description = unilib.utils.hint(S("Invisible Cube"), S("inhibits building")),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             inventory_image = "unilib_metal_steel_block.png^unilib_mineral_flint_lump.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,
@@ -184,14 +199,16 @@ function unilib.pkg.admin_node_invisible.exec()
         "maptools:nointeract",
         mode,
         {
-            description = unilib.hint(S("Invisible Cube"), S("inhibits interact")),
+            description = unilib.utils.hint(S("Invisible Cube"), S("inhibits interact")),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             inventory_image = "unilib_metal_steel_block.png^unilib_bush_ordinary_stem.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             sunlight_propagates = true,
             walkable = false,

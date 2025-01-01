@@ -9,7 +9,7 @@
 unilib.pkg.misc_box_steel_with_core = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_box_steel_with_core.exec()
         description = S("Steel Box with Glowing Core"),
         tiles = {"unilib_misc_box_steel_with_core.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         is_ground_content = false,

@@ -9,7 +9,7 @@
 unilib.pkg.food_clam_pipi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,16 @@ function unilib.pkg.food_clam_pipi.exec()
 
     unilib.register_node("unilib:food_clam_pipi", "aotearoa:pipi", mode, {
         -- From aotearoa:pipi
-        description = unilib.annotate(S("Pipi"), "Paphies australis"),
+        description = unilib.utils.annotate(S("Pipi"), "Paphies australis"),
         tiles = {"unilib_food_clam_pipi.png"},
         -- N.B. no food_clam in original code
         groups = {dig_immediate = 3, fleshy = 3, food_clam = 1},
-        sounds = unilib.sound_table.gravel,
+        sounds = unilib.global.sound_table.gravel,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_clam_pipi.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -46,7 +48,7 @@ function unilib.pkg.food_clam_pipi.exec()
         walkable = false,
 
         on_construct = function(pos)
-            minetest.get_node_timer(pos):start(math.random(3, 5))
+            core.get_node_timer(pos):start(math.random(3, 5))
         end,
 
         on_timer = function(pos)
@@ -54,21 +56,21 @@ function unilib.pkg.food_clam_pipi.exec()
             -- Re-bury pipi
             local below = {x = pos.x, y = pos.y - 1, z = pos.z}
 
-            if minetest.get_node(below).name == "unilib:sand_ordinary" then
+            if core.get_node(below).name == "unilib:sand_ordinary" then
 
-                minetest.set_node(pos, {name = "air"})
-                minetest.set_node(below, {name = "unilib:sand_ordinary_with_pipi"})
+                core.set_node(pos, {name = "air"})
+                core.set_node(below, {name = "unilib:sand_ordinary_with_pipi"})
 
-            elseif minetest.get_node(below).name == "unilib:sand_ironsand" then
+            elseif core.get_node(below).name == "unilib:sand_ironsand" then
 
-                minetest.set_node(pos, {name = "air"})
-                minetest.set_node(below, {name = "unilib:sand_ironsand_with_pipi"})
+                core.set_node(pos, {name = "air"})
+                core.set_node(below, {name = "unilib:sand_ironsand_with_pipi"})
 
             end
 
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_clam_pipi", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_clam_pipi", 1),
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.plant_tuber_truffle_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

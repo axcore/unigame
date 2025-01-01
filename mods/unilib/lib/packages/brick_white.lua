@@ -9,7 +9,7 @@
 unilib.pkg.brick_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_white.init()
 
     return {
         description = "White brick",
-        depends = {"clay_baked_basic", "brick_ordinary"},
+        depends = {"brick_ordinary", "clay_baked_basic", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_white.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:white and morebricks:whitevertical, creates unilib:brick_white_block and
         --      unilib:brick_white_block_vertical
         part_name = "white",
@@ -39,7 +39,7 @@ function unilib.pkg.brick_white.exec()
         description = S("White Brick Block"),
     })
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:whiteaged and morebricks:whiteagedvertical, creates
         --      unilib:brick_white_old_block and unilib:brick_white_old_block_vertical
         part_name = "white_old",

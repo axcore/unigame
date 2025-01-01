@@ -9,7 +9,7 @@
 unilib.pkg.produce_carrot_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -67,7 +67,8 @@ function unilib.pkg.produce_carrot_normal.exec()
         },
         harvest_group_table = {flammable = 2, food_carrot = 1, seed = 2},
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -84,20 +85,21 @@ function unilib.pkg.produce_carrot_normal.exec()
         juice_description = S("Carrot"),
         juice_type = "carrot",
         rgb = "#ed9121",
+
         orig_flag = true,
     })
 
-    unilib.register_decoration("farming_redo_produce_carrot_normal", {
+    unilib.register_decoration_generic("farming_redo_produce_carrot_normal", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
-        decoration = "unilib:produce_carrot_normal_grow_8",
+        decoration = "unilib:produce_carrot_normal_grow_7",
 
         noise_params = {
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 890,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

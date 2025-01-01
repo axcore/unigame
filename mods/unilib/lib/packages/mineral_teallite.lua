@@ -9,7 +9,7 @@
 unilib.pkg.mineral_teallite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_teallite.exec()
         description = S("Teallite Lump"),
         inventory_image = "unilib_mineral_teallite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_tin"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_tin"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

@@ -9,7 +9,7 @@
 unilib.pkg.food_chilli_bowl = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.food_chilli_bowl.exec()
         -- N.B. No groups in original code
         groups = {food_bowl_chilli = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_chilli_bowl", 8, "unilib:utensil_bowl_wooden"
         ),
     })

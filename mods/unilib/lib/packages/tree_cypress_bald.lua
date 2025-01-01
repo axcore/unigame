@@ -9,7 +9,7 @@
 unilib.pkg.tree_cypress_bald = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.baldcypress.add_mode
+local mode = unilib.global.imported_mod_table.baldcypress.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.tree_cypress_bald.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_cypress_bald_branches.png",
@@ -68,7 +68,7 @@ function unilib.pkg.tree_cypress_bald.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_cypress_bald_liana.png",
@@ -118,13 +118,11 @@ function unilib.pkg.tree_cypress_bald.exec()
     })
     unilib.register_leafdecay({
         -- From baldcypress:leaves
+        trunk_type = "cypress_bald",
         trunks = {"unilib:tree_cypress_bald_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {
-            "unilib:tree_cypress_bald_leaves",
-            "unilib:tree_cypress_bald_branches",
-            "unilib:tree_cypress_bald_liana",
-        },
+        leaves = {"unilib:tree_cypress_bald_leaves"},
+        others = {"unilib:tree_cypress_bald_branches", "unilib:tree_cypress_bald_liana"},
         radius = 3,
     })
 
@@ -174,7 +172,7 @@ function unilib.pkg.tree_cypress_bald.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From baldcypress:gate. Creates unilib:gate_cypress_bald_closed
+        -- From baldcypress:gate_closed, etc. Creates unilib:gate_cypress_bald_closed, etc
         part_name = "cypress_bald",
         orig_name = {"baldcypress:gate_closed", "baldcypress:gate_open"},
 
@@ -184,10 +182,10 @@ function unilib.pkg.tree_cypress_bald.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_cypress_bald", {
+    unilib.register_decoration_generic("cool_trees_tree_cypress_bald", {
         -- From baldcypress/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_cypress_bald.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_cypress_bald.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         height = 2,

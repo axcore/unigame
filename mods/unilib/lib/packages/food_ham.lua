@@ -9,7 +9,7 @@
 unilib.pkg.food_ham = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,13 +34,13 @@ function unilib.pkg.food_ham.exec()
         description = S("Raw Ham"),
         inventory_image = "unilib_food_ham_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_ham_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_ham_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:ham_raw
         type = "shapeless",
         output = "unilib:food_ham_raw 2",
-        recipe = {"unilib:ingredient_brine", "group:food_pork_raw", "group:food_honey"}
+        recipe = {"unilib:ingredient_brine", "group:food_pork_raw", "group:food_honey"},
     })
     unilib.register_external_ingredient("unilib:food_ham_raw", {
         "group:food_pork_raw",                  -- Originally mobs:pork_raw
@@ -51,7 +51,7 @@ function unilib.pkg.food_ham.exec()
         description = S("Ham"),
         inventory_image = "unilib_food_ham.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_ham", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_ham", 9),
     })
     unilib.register_craft({
         -- From bbq:ham

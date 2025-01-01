@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_basement = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.biome_aotearoa_basement.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "greywacke_basement" biome
         name = "aotearoa_basement_greywacke",
-        description = unilib.brackets(S("Greywacke basement biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Greywacke basement biome"), "aotearoa"),
         node_top = "unilib:stone_greywacke_dark",
         depth_top = 5,
         node_filler = "unilib:stone_greywacke_dark",
@@ -49,7 +49,7 @@ function unilib.pkg.biome_aotearoa_basement.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "schist_basement" biome
         name = "aotearoa_basement_schist",
-        description = unilib.brackets(S("Schist basement biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Schist basement biome"), "aotearoa"),
         node_top = "unilib:stone_schist_antipodean",
         depth_top = 5,
         node_filler = "unilib:stone_schist_antipodean",
@@ -64,7 +64,7 @@ function unilib.pkg.biome_aotearoa_basement.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "gneiss_basement" biome
         name = "aotearoa_basement_gneiss",
-        description = unilib.brackets(S("Gneiss basement biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Gneiss basement biome"), "aotearoa"),
         node_top = "unilib:stone_gneiss_antipodean",
         depth_top = 5,
         node_filler = "unilib:stone_gneiss_antipodean",
@@ -79,7 +79,7 @@ function unilib.pkg.biome_aotearoa_basement.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "granite_basement" biome
         name = "aotearoa_basement_granite",
-        description = unilib.brackets(S("Granite basement biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Granite basement biome"), "aotearoa"),
         node_top = "unilib:stone_granite_antipodean",
         depth_top = 5,
         node_filler = "unilib:stone_granite_antipodean",

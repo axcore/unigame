@@ -9,7 +9,7 @@
 unilib.pkg.mineral_iron_telluric = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_iron_telluric.exec()
         description = S("Telluric Iron Lump"),
         inventory_image = "unilib_mineral_iron_telluric_lump.png",
     })
-    if unilib.pkg_executed_table["metal_iron_pig"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron_pig"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

@@ -9,7 +9,7 @@
 unilib.pkg.deco_decorations_sea_coral_block_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decorations_sea.add_mode
+local mode = unilib.global.imported_mod_table.decorations_sea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.deco_decorations_sea_coral_block_pink.post()
 
     for i = 1, 3 do
 
-        unilib.register_decoration_now("decoration_sea_coral_block_pink_" .. i, nil, {
+        unilib.register_decoration_complete("decoration_sea_coral_block_pink_" .. i, nil, {
             -- From decorations_sea/mapgen.lua
             -- Completes decoration in package "coral_block_pink"
             biomes = unilib.pkg.shared_decorations_sea.warm_biome_list,

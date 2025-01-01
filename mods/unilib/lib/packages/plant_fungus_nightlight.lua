@@ -9,7 +9,7 @@
 unilib.pkg.plant_fungus_nightlight = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.plant_fungus_nightlight.exec()
 
     unilib.register_node("unilib:plant_fungus_nightlight", "nsspf:mycena_chlorophos", mode, {
         -- From nsspf:mycena_chlorophos
-        description = unilib.annotate(S("Nightlight Fungus"), "Mycena chlorophos"),
+        description = unilib.utils.annotate(S("Nightlight Fungus"), "Mycena chlorophos"),
         tiles = {"unilib_plant_fungus_nightlight.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -53,7 +53,7 @@ function unilib.pkg.plant_fungus_nightlight.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_nightlight", -2),
+        on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_nightlight", -2),
     })
     -- (not compatible with flowerpots)
 
@@ -68,7 +68,7 @@ function unilib.pkg.plant_fungus_nightlight.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -88,7 +88,7 @@ function unilib.pkg.plant_fungus_nightlight.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_nightlight_cooked", -4),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_nightlight_cooked", -4),
         }
     )
     unilib.register_craft({
@@ -105,7 +105,9 @@ function unilib.pkg.plant_fungus_nightlight.exec()
         "nsspf:mycena_chlorophos_light",
         mode,
         {
-            description = unilib.annotate(S("Glowing Nightlight Fungus"), "Mycena chlorophos"),
+            description = unilib.utils.annotate(
+                S("Glowing Nightlight Fungus"), "Mycena chlorophos"
+            ),
             tiles = {"unilib_plant_fungus_nightlight_glowing.png"},
             -- N.B. In original code, only not_in_creative_inventory = 1, snappy = 3
             groups = {
@@ -113,7 +115,7 @@ function unilib.pkg.plant_fungus_nightlight.exec()
                 snappy = 3,
             },
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -135,7 +137,7 @@ function unilib.pkg.plant_fungus_nightlight.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_nightlight_glowing", -2),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_nightlight_glowing", -2),
         }
     )
 

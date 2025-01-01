@@ -9,7 +9,7 @@
 unilib.pkg.dirt_antipodean_with_moss = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,18 +37,19 @@ function unilib.pkg.dirt_antipodean_with_moss.exec()
                 "unilib_dirt_antipodean_with_moss_top.png",
                 "unilib_dirt_antipodean.png",
                 {
-                    name = "unilib_dirt_antipodean.png^unilib_dirt_antipodean_with_moss_side.png",
+                    name = "unilib_dirt_antipodean.png" ..
+                            "^unilib_dirt_antipodean_with_moss_side_overlay.png",
                     tileable_vertical = false,
                 },
             },
             groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             -- N.B. default:dirt in original code
             drop = "unilib:dirt_antipodean",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
 

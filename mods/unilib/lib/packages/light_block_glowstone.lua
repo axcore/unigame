@@ -9,7 +9,7 @@
 unilib.pkg.light_block_glowstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,8 @@ function unilib.pkg.light_block_glowstone.exec()
         description = S("Glowstone Lamp"),
         tiles = {"unilib_light_block_glowstone.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
-        drop = "unilib:light_block_glowstone",
         light_source = 13,
     })
     unilib.register_craft({
@@ -43,8 +42,8 @@ function unilib.pkg.light_block_glowstone.exec()
         recipe = {
             {"", "unilib:torch_ordinary", ""},
             {"unilib:torch_ordinary", "group:stone", "unilib:torch_ordinary"},
-            {"", "unilib:dye_yellow", ""}
-        }
+            {"", "unilib:dye_yellow", ""},
+        },
     })
 
 end

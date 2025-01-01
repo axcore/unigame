@@ -9,7 +9,7 @@
 unilib.pkg.food_seed_sunflower_dwarf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
             inventory_image = "unilib_food_seed_sunflower_dwarf.png",
             groups = {eatable = 1, food = 1, food_sunflower = 1, seed = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_seed_sunflower_dwarf", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_seed_sunflower_dwarf", 1),
         }
     )
     unilib.register_craft({
@@ -46,7 +46,7 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
         output = "unilib:food_seed_sunflower_dwarf 4",
         recipe = {"unilib:crop_sunflower_dwarf_harvest"},
         replacements = {
-            {"unilib:crop_sunflower_dwarf_harvest", "unilib:dye_yellow"}
+            {"unilib:crop_sunflower_dwarf_harvest", "unilib:dye_yellow"},
         },
     })
     unilib.register_craft({
@@ -66,7 +66,7 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
             inventory_image = "unilib_food_seed_sunflower_dwarf_roasted.png",
             groups = {eatable = 1, food = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_seed_sunflower_dwarf_roasted", 2),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_seed_sunflower_dwarf_roasted", 2),
         }
     )
     unilib.register_craft({
@@ -83,7 +83,7 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
         recipe = "unilib:food_seed_sunflower_dwarf_roasted",
         burntime = 2,
     })
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_separating_recipe({
             -- From cucina_vegana:sunflower_seeds
@@ -91,7 +91,7 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
             input = {"unilib:crop_sunflower_dwarf_harvest"},
         })
 
-        if unilib.pkg_executed_table["flower_helianthus"] ~= nil then
+        if unilib.global.pkg_executed_table["flower_helianthus"] ~= nil then
 
             technic.register_separating_recipe({
                 -- From cucina_vegana:sunflower_seeds

@@ -9,7 +9,7 @@
 unilib.pkg.food_pepper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,9 +33,10 @@ function unilib.pkg.food_pepper.exec()
         inventory_image = "unilib_food_pepper_green.png",
         groups = {flammable = 3, food_pepper = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_green", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_green", 2),
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -53,9 +54,10 @@ function unilib.pkg.food_pepper.exec()
         inventory_image = "unilib_food_pepper_yellow.png",
         groups = {flammable = 3, food_pepper = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_yellow", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_yellow", 3),
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -73,9 +75,10 @@ function unilib.pkg.food_pepper.exec()
         inventory_image = "unilib_food_pepper_red.png",
         groups = {flammable = 3, food_pepper = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_red", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_red", 4),
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -86,5 +89,16 @@ function unilib.pkg.food_pepper.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:food_pepper_green",
+        juice_description = S("Pepper"),
+        juice_type = "pepper",
+        rgb = "#e53200",
+
+        orig_flag = false,
+    })
+    unilib.juice.register_duplicate("pepper", "unilib:food_pepper_yellow")
+    unilib.juice.register_duplicate("pepper", "unilib:food_pepper_red")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.food_fish_cooked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,20 +31,17 @@ function unilib.pkg.food_fish_cooked.exec()
         -- From ethereal:fish_cooked
         description = S("Cooked Fish"),
         inventory_image = "unilib_food_fish_cooked.png",
-        groups = {flammable = 3, food_fish = 1},
+        groups = {flammable = 2, food_fish = 1},
 
         wield_image = "unilib_food_fish_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_fish_cooked", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_fish_cooked", 5),
     })
     unilib.register_craft({
         -- From ethereal:fish_cooked
         type = "cooking",
         output = "unilib:food_fish_cooked",
-        -- N.B. As in the original code, we continue using group:ethereal_fish, rather than the
-        --      inclusive group:food_fish_raw, so that in the future, we can create more fish that
-        --      have their own cooked variants
-        recipe = "group:ethereal_fish",
+        recipe = "group:food_fish_cookable",
         cooktime = 8,
     })
 

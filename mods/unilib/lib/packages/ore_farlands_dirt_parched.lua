@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_dirt_parched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,8 +43,8 @@ function unilib.pkg.ore_farlands_dirt_parched.post()
             spread = {x = 5, y = 5, z = 5},
         },
         noise_threshold         = 0.0,
-        y_max                   = unilib.y_max,
-        y_min                   = unilib.y_min,
+        y_max                   = unilib.constant.y_max,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

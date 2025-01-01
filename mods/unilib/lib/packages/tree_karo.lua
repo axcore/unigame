@@ -9,7 +9,7 @@
 unilib.pkg.tree_karo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,13 @@ end
 
 function unilib.pkg.tree_karo.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Pittosporum crassifolium"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -35,35 +40,33 @@ function unilib.pkg.tree_karo.exec()
         description = S("Karo Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_karo_trunk", "aotearoa:karo_tree", mode, {
         -- From aotearoa:karo_tree
-        description = unilib.annotate(S("Karo Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Karo Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_karo_trunk_top.png",
             "unilib_tree_karo_trunk_top.png",
             "unilib_tree_karo_trunk.png",
         },
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        node_box = node_box,
         paramtype = "light",
         paramtype2 = "facedir",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:karo_tree
@@ -74,6 +77,17 @@ function unilib.pkg.tree_karo.exec()
         })
 
     end
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_karo_trunk_stripped
+        part_name = "karo",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Karo Tree Trunk"),
+        group_table = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
+    })
 
     -- (no wood; instead, trunks can be crafted into sticks)
 
@@ -100,18 +114,19 @@ function unilib.pkg.tree_karo.exec()
         max_volume = 4,
         maxp_table = {x = 2, y = 6, z = 2},
         minp_table = {x = -2, y = 1, z = -2},
+        -- N.B. Original code's {2, 1, 2} must be adjusted for our schematics
         schem_list = {
-            {"unilib_tree_karo_1", 2, 1, 2},
-            {"unilib_tree_karo_2", 2, 1, 2},
+            {"unilib_tree_karo_1", 2, 0, 2},
+            {"unilib_tree_karo_2", 2, 0, 2},
         },
         sci_name = sci_name,
         select_table = {-0.3, -0.5, -0.3, 0.3, 0.35, 0.3},
     })
 
-    unilib.register_decoration("aotearoa_tree_karo_clump_1", {
+    unilib.register_decoration_generic("aotearoa_tree_karo_clump_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_karo_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_karo_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -125,10 +140,10 @@ function unilib.pkg.tree_karo.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_karo_clump_2", {
+    unilib.register_decoration_generic("aotearoa_tree_karo_clump_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_karo_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_karo_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -144,10 +159,10 @@ function unilib.pkg.tree_karo.exec()
     })
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_karo_normal_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_karo_normal_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_karo_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_karo_" .. i .. ".mts",
 
             fill_ratio = 0.01,
             flags = "place_center_x, place_center_z",

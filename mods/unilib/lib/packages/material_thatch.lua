@@ -9,7 +9,7 @@
 unilib.pkg.material_thatch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.material_thatch.exec()
         description = S("Reed Thatch"),
         tiles = {"unilib_material_thatch.png"},
         groups = {choppy = 3, flammable = 3, hay = 3, oddly_breakable_by_hand = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         is_ground_content = false,
     })

@@ -9,7 +9,7 @@
 unilib.pkg.gadget_television = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,8 +45,10 @@ function unilib.pkg.gadget_television.exec()
                 animation = {type = "vertical_frames", length = 80.0}
             },
         },
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 11,
         paramtype = "light",
         paramtype2 = "facedir",
@@ -58,9 +60,9 @@ function unilib.pkg.gadget_television.exec()
             {c_steel, c_copper, c_steel},
             {c_steel, "unilib:glass_ordinary", c_steel},
             {c_steel, c_copper, c_steel},
-        }
+        },
     })
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:gadget_television", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,

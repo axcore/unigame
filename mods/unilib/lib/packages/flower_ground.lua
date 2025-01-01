@@ -9,7 +9,7 @@
 unilib.pkg.flower_ground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -20,6 +20,7 @@ local function do_flower(part_name, orig_name, description)
     -- N.B. Replaced original groups with standard flower groups
 --  local group_table = {dig_immediate = 1, flammable = 1, flower = 1, snappy = 3}
     local group_table = {attached_node = 1, flammable = 1, flora = 1, flower = 1, snappy = 3}
+    group_table["colour_" .. part_name] = 1
     group_table["color_" .. part_name] = 1
 
     unilib.register_node("unilib:flower_ground_" .. part_name, orig_name, mode, {
@@ -27,7 +28,7 @@ local function do_flower(part_name, orig_name, description)
         description = description,
         tiles = {"unilib_flower_ground_" .. part_name .. ".png"},
         groups = group_table,
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "nodebox",
@@ -43,7 +44,7 @@ local function do_flower(part_name, orig_name, description)
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_flower_ground_" .. part_name, {
+    unilib.register_decoration_generic("farlands_flower_ground_" .. part_name, {
         -- Original to unilib
         deco_type = "simple",
         decoration = "unilib:flower_ground_" .. part_name,

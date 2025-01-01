@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_sakura = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_sakura.exec()
 
     unilib.register_door({
-        -- From etheral:door_sakura. Creates unilib:door_wood_sakura
+        -- From etheral:door_sakura. Creates unilib:door_wood_sakura_closed_left, etc
         part_name = "wood_sakura",
-        orig_name = {
+        orig_name_list = {
             "ethereal:door_sakura_a",
             "ethereal:door_sakura_b",
             "ethereal:door_sakura_c",

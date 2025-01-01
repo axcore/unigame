@@ -9,7 +9,7 @@
 unilib.pkg.gadget_beacon_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beacons.add_mode
+local mode = unilib.global.imported_mod_table.beacons.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -18,13 +18,14 @@ local mode = unilib.imported_mod_table.beacons.add_mode
 local function get_node_under_light(pos)
 
     pos = table.copy(pos)
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     local y_dist = 0
 
-    while minetest.get_item_group(node.name, "beacon_light") ~= 0 and
-            (unilib.beacons_height_max == 0 or y_dist <= unilib.beacons_height_max) do
+    while core.get_item_group(node.name, "beacon_light") ~= 0 and (
+        unilib.setting.beacons_height_max == 0 or y_dist <= unilib.setting.beacons_height_max
+    ) do
 
-        node = minetest.get_node(vector.subtract(pos, {x = 0, y = y_dist, z = 0}))
+        node = core.get_node(vector.subtract(pos, {x = 0, y = y_dist, z = 0}))
         y_dist = y_dist + 1
 
     end
@@ -37,8 +38,8 @@ local function beacon_on_construct(pos, colour)
 
     local above = vector.add(pos, {x = 0, y = 1, z = 0})
     if get_node_under_light(pos).name == ("unilib:gadget_beacon_base_" .. colour) and
-            minetest.get_node(above).name == "air" then
-        minetest.set_node(above, {name = "unilib:gadget_beacon_beam_" .. colour})
+            core.get_node(above).name == "air" then
+        core.set_node(above, {name = "unilib:gadget_beacon_beam_" .. colour})
     end
 
 end
@@ -46,8 +47,8 @@ end
 local function beacon_on_destruct(pos, colour)
 
     local above = vector.add(pos, {x = 0, y = 1, z = 0})
-    if minetest.get_node(above).name == ("unilib:gadget_beacon_beam_" .. colour) then
-        minetest.remove_node(above)
+    if core.get_node(above).name == ("unilib:gadget_beacon_beam_" .. colour) then
+        core.remove_node(above)
     end
 
 end
@@ -56,7 +57,7 @@ local function beacon_on_timer(pos, colour)
 
     beacon_on_construct(pos, colour)
     if get_node_under_light(pos).name ~= ("unilib:gadget_beacon_base_" .. colour) then
-        minetest.remove_node(pos)
+        core.remove_node(pos)
     end
 
     return true
@@ -67,7 +68,7 @@ local function prepare_on_construct(colour)
 
     return function(pos)
 
-        minetest.get_node_timer(pos):start(1)
+        core.get_node_timer(pos):start(1)
         return beacon_on_construct(pos, colour)
 
     end
@@ -176,7 +177,7 @@ function unilib.pkg.gadget_beacon_basic.exec()
 
         local part_name = row_list[1]
         local orig_name = row_list[2]
-        -- (Minetest color_str. Where "#xxxxxx" is specified, the original code did not provide
+        -- (Minetest colour_str. Where "#xxxxxx" is specified, the original code did not provide
         --      the beacon; RGBs from the "glass_artisanal_basic" package are used)
         local colour_str = row_list[3]
         local base_description = row_list[4]
@@ -202,7 +203,7 @@ function unilib.pkg.gadget_beacon_basic.exec()
                 "unilib_gadget_beacon_base_side.png",
             },
             groups = {beacon_base = 1, cracky = 2},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             color = colour_str,
             is_ground_content = false,
@@ -246,7 +247,7 @@ function unilib.pkg.gadget_beacon_basic.exec()
             drawtype = "plantlike",
             drop = "",
             floodable = false,
-            light_source = unilib.light_max,
+            light_source = unilib.constant.light_max,
             paramtype = "light",
             pointable = false,
             post_effect_color = part_name,

@@ -9,7 +9,7 @@
 unilib.pkg.tree_karaka = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_karaka.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Corynocarpus laevigatus"
 
     unilib.register_tree({
@@ -70,8 +70,10 @@ function unilib.pkg.tree_karaka.exec()
     })
     unilib.register_leafdecay({
         -- From aotearoa:karaka_leaves
+        trunk_type = "karaka",
         trunks = {"unilib:tree_karaka_trunk"},
-        leaves = {"unilib:tree_karaka_leaves", "unilib:fruit_karaka"},
+        leaves = {"unilib:tree_karaka_leaves"},
+        others = {"unilib:fruit_karaka"},
         radius = 3,
     })
 
@@ -117,7 +119,7 @@ function unilib.pkg.tree_karaka.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_karaka_wood. Creates unilib:gate_karaka_closed
+        -- From aotearoa:gate_karaka_wood_closed, etc. Creates unilib:gate_karaka_closed, etc
         part_name = "karaka",
         orig_name = {"aotearoa:gate_karaka_wood_closed", "aotearoa:gate_karaka_wood_open"},
 
@@ -128,10 +130,10 @@ function unilib.pkg.tree_karaka.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_karaka_dense_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_karaka_dense_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_karaka_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_karaka_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",
@@ -140,10 +142,10 @@ function unilib.pkg.tree_karaka.exec()
         })
 
     end
-    unilib.register_decoration("aotearoa_tree_karaka_grove_1", {
+    unilib.register_decoration_generic("aotearoa_tree_karaka_grove_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_karaka_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_karaka_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -157,10 +159,10 @@ function unilib.pkg.tree_karaka.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_karaka_grove_2", {
+    unilib.register_decoration_generic("aotearoa_tree_karaka_grove_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_karaka_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_karaka_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

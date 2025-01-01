@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_silver = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreores.add_mode
+local mode = unilib.global.imported_mod_table.moreores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,13 +45,13 @@ function unilib.pkg.tool_sword_silver.exec()
             max_drop_level = 3,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From moreores:sword_silver
         part_name = "silver",
         ingredient = "unilib:metal_silver_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_sword_silver", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_silver", "sword")
 
 end

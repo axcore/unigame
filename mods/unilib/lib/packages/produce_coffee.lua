@@ -9,7 +9,7 @@
 unilib.pkg.produce_coffee = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -60,7 +60,8 @@ function unilib.pkg.produce_coffee.exec()
     unilib.override_item("unilib:produce_coffee_harvest", {
         description = S("Coffee Beans"),
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,7 +73,7 @@ function unilib.pkg.produce_coffee.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_coffee", {
+    unilib.register_decoration_generic("farming_redo_produce_coffee", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_coffee_grow_5",
@@ -81,8 +82,8 @@ function unilib.pkg.produce_coffee.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 12,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

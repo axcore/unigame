@@ -9,7 +9,7 @@
 unilib.pkg.mineral_halite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,10 +39,10 @@ function unilib.pkg.mineral_halite.exec()
 
     unilib.register_craftitem(c_lump, nil, mode, {
         -- Original to unilib
-        description = unilib.brackets(S("Halite Lump"), S("Rock Salt")),
+        description = unilib.utils.brackets(S("Halite Lump"), S("Rock Salt")),
         inventory_image = "unilib_mineral_halite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_sodium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_sodium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

@@ -16,6 +16,7 @@ farming|detect|replace|
 fire|detect|replace|
 fireflies|detect|replace|
 flowers|detect|replace|
+keys|detect|replace|
 map|detect|replace|
 player_api|ignore|defer|There is nothing to "replace"
 screwdriver|detect|replace|
@@ -25,6 +26,29 @@ vessels|detect|replace|
 walls|detect|replace|When "hide" or "replace" is specified, original wall nodes are removed. However, unilib equivalents are only added when the Minetest setting is set
 wool|detect|replace|
 xpanes|detect|replace|
+
+# From 3d_armor
+3d_armor|detect|defer|
+3d_armor_ip|detect|defer|
+3d_armor_sfinv|detect|defer|
+3d_armor_stand|detect|defer|
+3d_armor_ui|detect|defer|
+armor_admin|detect|defer|
+armor_bronze|detect|defer|
+armor_cactus|detect|defer|
+armor_crystal|detect|defer|
+armor_diamond|detect|defer|
+armor_gold|detect|defer|
+armor_mithril|detect|defer|
+armor_nether|detect|defer|
+armor_steel|detect|defer|
+armor_wood|detect|defer|
+shields|detect|defer|
+wieldview|detect|defer|
+
+# From armor_expanded
+armor_leather|detect|defer|
+armor_woven|detect|defer|
 
 # From castle modpack
 castle_farming|detect|defer|
@@ -94,7 +118,7 @@ youngtrees|detect|defer|
 
 # From technic
 technic|detect|defer|
-technic_worldgen|detect|defer|
+technic_worldgen|detect|replace|Various remixes, such as gaia, produce "unrecognised node" errors if "defer" is used instead of "replace"
 
 # From underch/uchu
 underch|detect|defer|
@@ -106,10 +130,13 @@ gravelcraft|detect|defer|There is nothing to "replace"
 
 # From xtraores
 xtraores|detect|defer|
+xtraores_armor|detect|defer|
+xtraores_rainbow|detect|defer|
 
 # All other mods
 24hr_clock|detect|defer|
 30biomes|detect|defer|
+3d_armor_gloves|detect|defer|
 aato|detect|defer|
 abriflame|detect|defer|
 abriglass|detect|defer|
@@ -120,12 +147,15 @@ anvil|detect|defer|
 aotearoa|detect|defer|
 aqua_farming|detect|defer|
 australia|detect|defer|
+badlands|detect|defer|
 bakedclay|detect|defer|
 basic_materials|detect|defer|
 bbq|detect|defer|
 beacons|detect|defer|
 beautiflowers|detect|defer|
+better_basic_materials|detect|defer|
 better_farming|detect|defer|
+bluetangs_ethereal_fishes|detect|defer|
 bonemeal|detect|defer|
 bread|detect|defer|
 bridges|detect|defer|
@@ -184,6 +214,7 @@ moretrees|detect|defer|
 mtg_plus|detect|defer|
 mymillwork|detect|defer|unilib cannot "hide" or "replace" carving nodes from this mod, due to arbitrary naming conventions
 nbea|detect|defer|
+nether|detect|replace|unilib does not define any new items, just a new portal definition; that definition is not used if the replace mode is "defer"
 nettle|detect|defer|
 nextgen_compass|detect|defer|
 nsspf|detect|defer|
@@ -219,6 +250,7 @@ steel|detect|defer|
 stripped_tree|detect|defer|
 sounding_line|detect|defer|
 tea|detect|defer|
+technic_armor|detect|defer|
 thirsty|detect|defer|
 toolranks|detect|defer|
 towercrane|detect|defer|

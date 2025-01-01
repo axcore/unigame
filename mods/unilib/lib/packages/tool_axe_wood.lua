@@ -9,7 +9,7 @@
 unilib.pkg.tool_axe_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.tool_axe_wood.exec()
             max_drop_level = 0,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_axe({
         -- From default:axe_wood
@@ -54,6 +54,6 @@ function unilib.pkg.tool_axe_wood.exec()
         recipe = "unilib:tool_axe_wood",
         burntime = 6,
     })
-    unilib.apply_toolranks("unilib:tool_axe_wood", "axe")
+    unilib.tools.apply_toolranks("unilib:tool_axe_wood", "axe")
 
 end

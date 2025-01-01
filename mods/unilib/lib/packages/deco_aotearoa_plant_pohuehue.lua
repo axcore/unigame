@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_pohuehue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_pohuehue.post()
 
-    unilib.register_decoration_now("aotearoa_plant_pohuehue", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_pohuehue", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_pohuehue"
         biomes = {

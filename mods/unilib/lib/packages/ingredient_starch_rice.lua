@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_starch_rice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.ingredient_starch_rice.post()
     local c_rice = "unilib:crop_rice_brown_harvest"
     local c_wool = "unilib:wool_white"
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {c_wool, "unilib:crop_cotton_harvest 2"})
 
     unilib.register_craft({

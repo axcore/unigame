@@ -9,7 +9,7 @@
 unilib.pkg.bush_leatherwood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.bush_leatherwood.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Olearia colensoi"
 
     unilib.register_bush_stem({
@@ -40,14 +40,14 @@ function unilib.pkg.bush_leatherwood.exec()
         sci_name = sci_name,
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16}
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:leatherwood_stem
             output = "unilib:item_stick_ordinary",
             recipe = {
                 {"unilib:bush_leatherwood_stem"},
-            }
+            },
         })
 
     end
@@ -58,13 +58,13 @@ function unilib.pkg.bush_leatherwood.exec()
         burntime = 2,
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_bush_leatherwood_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_bush_leatherwood_leaves.png")
     unilib.register_node("unilib:bush_leatherwood_leaves", "aotearoa:leatherwood", mode, {
         -- From aotearoa:leatherwood
-        description = unilib.annotate(S("Leatherwood Bush Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Leatherwood Bush Leaves"), sci_name),
         tiles = {"unilib_bush_leatherwood_leaves.png"},
         groups = {flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         drop = {
@@ -75,7 +75,8 @@ function unilib.pkg.bush_leatherwood.exec()
             },
         },
         inventory_image = inv_img,
-        is_ground_content = false,
+        -- N.B. removed .is_ground_content = false to match other bush leaves
+--      is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -111,20 +112,20 @@ function unilib.pkg.bush_leatherwood.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_bush_leatherwood_dense_" .. i, {
+        unilib.register_decoration_generic("aotearoa_bush_leatherwood_dense_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_bush_leatherwood_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_bush_leatherwood_" .. i .. ".mts",
 
             fill_ratio = 0.1,
             flags = "place_center_x, place_center_z",
             rotation = "random",
             sidelen = 8,
         })
-        unilib.register_decoration("aotearoa_bush_leatherwood_normal_" .. i, {
+        unilib.register_decoration_generic("aotearoa_bush_leatherwood_normal_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_bush_leatherwood_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_bush_leatherwood_" .. i .. ".mts",
 
             fill_ratio = 0.02,
             flags = "place_center_x, place_center_z",

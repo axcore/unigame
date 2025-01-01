@@ -9,11 +9,15 @@
 unilib.pkg.shared_default_furnace = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.default.add_mode
+
+-- Table containing lists of sound handles for each active furnace
+local furnace_fire_sound_table = {}
 
 -- Pipeworks compatibility
 local pipeworks_flag = false
-if minetest.get_modpath("pipeworks") then
+if core.get_modpath("pipeworks") then
     pipeworks_flag = true
 end
 
@@ -30,14 +34,14 @@ local function get_pipeworks_switch(pos)
     else
 
         local formspec = pipeworks.fs_helpers.cycling_button(
-            minetest.get_meta(pos),
+            core.get_meta(pos),
             "image_button[0,3.5;1,0.6",
             "split_material_stacks",
             {pipeworks.button_off, pipeworks.button_on}
         )
 
         formspec = formspec .. "label[0.9,3.51;" ..
-                S("Allow splitting incoming stacks (not fuel) from tubes") .. "]"
+                FS("Allow splitting incoming stacks (not fuel) from tubes") .. "]"
 
         return formspec
 
@@ -63,7 +67,7 @@ local function get_furnace_active_formspec(fuel_percent, item_percent, pos)
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25) ..
+        unilib.misc.get_hotbar_bg(0, 4.25) ..
         get_pipeworks_switch(pos)
 
 end
@@ -84,20 +88,20 @@ local function get_furnace_inactive_formspec(pos)
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25) ..
+        unilib.misc.get_hotbar_bg(0, 4.25) ..
         get_pipeworks_switch(pos)
 
 end
 
 local function swap_node(pos, name)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name == name then
         return
     end
 
     node.name = name
-    minetest.swap_node(pos, node)
+    core.swap_node(pos, node)
 
 end
 
@@ -112,7 +116,7 @@ function unilib.pkg.shared_default_furnace.active_on_receive_fields(pos, formnam
     end
 
     pipeworks.fs_helpers.on_receive_fields(pos, fields)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local formspec = get_furnace_active_formspec(0, 0, pos)
     meta:set_string("formspec", formspec)
 
@@ -126,7 +130,7 @@ function unilib.pkg.shared_default_furnace.get_tube_table()
 
         can_insert = function(pos, node, stack, direction)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             if direction.y == 1 then
 
@@ -146,9 +150,9 @@ function unilib.pkg.shared_default_furnace.get_tube_table()
 
         insert_object = function(pos, node, stack, direction)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             if not timer:is_started() then
                 timer:start(1.0)
             end
@@ -171,7 +175,7 @@ function unilib.pkg.shared_default_furnace.inactive_on_receive_fields(pos, formn
     end
 
     pipeworks.fs_helpers.on_receive_fields(pos, fields)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local formspec = get_furnace_inactive_formspec(pos)
     meta:set_string("formspec", formspec)
 
@@ -184,18 +188,16 @@ end
 function unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
     pos, listname, index, stack, player
 )
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     if listname == "fuel" then
 
-        if minetest.get_craft_result(
-            {method = "fuel", width = 1, items = {stack}}
-        ).time ~= 0 then
+        if core.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
 
             if inv:is_empty("src") then
                 meta:set_string("infotext", S("Furnace is empty"))
@@ -224,7 +226,7 @@ end
 function unilib.pkg.shared_default_furnace.allow_metadata_inventory_move(
     pos, from_list, from_index, to_list, to_index, count, player
 )
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local stack = inv:get_stack(from_list, from_index)
     return unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
@@ -236,7 +238,7 @@ end
 function unilib.pkg.shared_default_furnace.allow_metadata_inventory_take(
     pos, listname, index, stack, player
 )
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
@@ -246,7 +248,7 @@ end
 
 function unilib.pkg.shared_default_furnace.can_dig(pos, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src")
 
@@ -257,7 +259,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 )
     -- Initialise metadata
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fuel_time = meta:get_float("fuel_time") or 0
     local src_time = meta:get_float("src_time") or 0
     local fuel_totaltime = meta:get_float("fuel_totaltime") or 0
@@ -271,6 +273,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 
     local cookable, cooked, fuel
     local update = true
+    local items_smelt = 0
 
     while elapsed > 0 and update do
 
@@ -283,7 +286,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 
         -- Check if we have cookable content
         local aftercooked
-        cooked, aftercooked = minetest.get_craft_result(
+        cooked, aftercooked = core.get_craft_result(
             {method = "cooking", width = 1, items = srclist}
         )
 
@@ -323,12 +326,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 
                     end
 
-                    -- Play cooling sound
-                    minetest.sound_play(
-                        "unilib_cool_lava",
-                        {pos = pos, max_hear_distance = 16, gain = 0.1},
-                        true
-                    )
+                    items_smelt = items_smelt + 1
 
                 else
 
@@ -346,7 +344,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 
                 -- We need to get new fuel
                 local afterfuel
-                fuel, afterfuel = minetest.get_craft_result(
+                fuel, afterfuel = core.get_craft_result(
                     {method = "fuel", width = 1, items = fuellist}
                 )
 
@@ -358,8 +356,22 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
 
                 else
 
-                    -- Take fuel from fuel list
-                    inv:set_stack("fuel", 1, afterfuel.items[1])
+                    -- Prevent blocking of fuel inventory (for automatization mods)
+                    local is_fuel = core.get_craft_result(
+                        {method = "fuel", width = 1, items = {afterfuel.items[1]:to_string()}}
+                    )
+
+                    if is_fuel.time == 0 then
+
+                        table.insert(fuel.replacements, afterfuel.items[1])
+                        inv:set_stack("fuel", 1, "")
+
+                    else
+
+                        -- Take fuel from fuel list
+                        inv:set_stack("fuel", 1, afterfuel.items[1])
+
+                    end
 
                     -- Put replacements in dst list or drop them on the furnace
                     local replacements = fuel.replacements
@@ -369,8 +381,8 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
                         if not leftover:is_empty() then
 
                             local above = vector.new(pos.x, pos.y + 1, pos.z)
-                            local drop_pos = minetest.find_node_near(above, 1, {"air"}) or above
-                            minetest.item_drop(replacements[1], nil, drop_pos)
+                            local drop_pos = core.find_node_near(above, 1, {"air"}) or above
+                            core.item_drop(replacements[1], nil, drop_pos)
 
                         end
 
@@ -394,6 +406,17 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
         end
 
         elapsed = elapsed - el
+
+    end
+
+    if items_smelt > 0 then
+
+        -- Play cooling sound
+        core.sound_play(
+            "unilib_cool_lava",
+            {pos = pos, max_hear_distance = 16, gain = 0.07 * math.min(items_smelt, 7)},
+            true
+        )
 
     end
 
@@ -446,11 +469,40 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
         -- Play sound every 5 seconds while the furnace is active
         if timer_elapsed == 0 or (timer_elapsed + 1) % 5 == 0 then
 
-            minetest.sound_play(
+            local sound_id = core.sound_play(
                 "unilib_furnace_active",
-                {pos = pos, max_hear_distance = 16, gain = 0.5},
-                true
+                {pos = pos, max_hear_distance = 16, gain = 0.25}
             )
+
+            local hash = core.hash_node_position(pos)
+            furnace_fire_sound_table[hash] = furnace_fire_sound_table[hash] or {}
+            table.insert(furnace_fire_sound_table[hash], sound_id)
+
+            -- Only remember the 3 last sound handles
+            if #furnace_fire_sound_table[hash] > 3 then
+                table.remove(furnace_fire_sound_table[hash], 1)
+            end
+
+            -- Remove the sound ID automatically from table after 11 seconds
+            core.after(11, function()
+
+                if not furnace_fire_sound_table[hash] then
+                    return
+                end
+
+                for f = #furnace_fire_sound_table[hash], 1, -1 do
+
+                    if furnace_fire_sound_table[hash][f] == sound_id then
+                        table.remove(furnace_fire_sound_table[hash], f)
+                    end
+
+                end
+
+                if #furnace_fire_sound_table[hash] == 0 then
+                    furnace_fire_sound_table[hash] = nil
+                end
+
+            end)
 
         end
 
@@ -463,8 +515,10 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
         formspec = get_furnace_inactive_formspec(pos)
         swap_node(pos, inactive_name)
         -- Stop timer on the inactive furnace
-        minetest.get_node_timer(pos):stop()
+        core.get_node_timer(pos):stop()
         meta:set_int("timer_elapsed", 0)
+
+        unilib.pkg.shared_default_furnace.stop_furnace_sound(pos)
 
     end
 
@@ -485,6 +539,22 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
     meta:set_string("infotext", infotext)
 
     return result
+
+end
+
+function unilib.pkg.shared_default_furnace.stop_furnace_sound(pos, fadeout_step)
+
+    local hash = core.hash_node_position(pos)
+    local sound_ids = furnace_fire_sound_table[hash]
+    if sound_ids then
+
+        for _, sound_id in ipairs(sound_ids) do
+            core.sound_fade(sound_id, -1, 0)
+        end
+
+        furnace_fire_sound_table[hash] = nil
+
+    end
 
 end
 

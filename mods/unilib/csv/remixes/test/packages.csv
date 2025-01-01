@@ -1,5 +1,4 @@
 # "test" remix - adds minimal packages, and a single test node
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -16,8 +15,14 @@ stone_ordinary|default moreblocks technic
 test_node|unilib
 test_stair|unilib
 
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #grass_jungle|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_redwood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,15 +26,19 @@ end
 
 function unilib.pkg.deco_ethereal_tree_redwood.post()
 
-    unilib.register_decoration_now("ethereal_tree_redwood_normal", nil, {
-        -- From ethereal-ng/schems.lua
-        -- Completes decoration in package "tree_redwood"
-        biomes = "ethereal_mesa",
-        num_spawn_by = 8,
-        place_on = "unilib:dirt_ordinary_with_turf_dry",
-        spawn_by = "unilib:dirt_ordinary_with_turf_dry",
-        y_max = 100,
-        y_min = 1,
-    })
+    for _, size in pairs({"normal", "giant"}) do
+
+        unilib.register_decoration_complete("ethereal_tree_redwood_" .. size, nil, {
+            -- From ethereal-ng/schems.lua
+            -- Completes decoration in package "tree_redwood"
+            biomes = "ethereal_mesa_redwood",
+            num_spawn_by = 8,
+            place_on = "unilib:dirt_ordinary_with_turf_dry",
+            spawn_by = "unilib:dirt_ordinary_with_turf_dry",
+            y_max = 100,
+            y_min = 1,
+        })
+
+    end
 
 end

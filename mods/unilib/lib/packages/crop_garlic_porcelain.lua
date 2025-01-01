@@ -9,7 +9,7 @@
 unilib.pkg.crop_garlic_porcelain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,14 +49,14 @@ function unilib.pkg.crop_garlic_porcelain.exec()
         harvest_description = S("Porcelain Garlic"),
         -- N.B. food = 1 not in original code
         harvest_group_table = {flammable = 4, food = 1, food_garlic = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         paramtype2 = "meshoptions",
         place_param2 = 3,
         seed_description = S("Porcelain Garlic Seed"),
     })
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:garlic
@@ -67,5 +67,14 @@ function unilib.pkg.crop_garlic_porcelain.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_garlic_porcelain_harvest",
+        juice_description = S("Garlic"),
+        juice_type = "garlic",
+        rgb = "#eab9a3",
+
+        orig_flag = false,
+    })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.override_pigiron_tools = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pigiron.add_mode
+local mode = unilib.global.imported_mod_table.pigiron.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,8 +36,8 @@ end
 
 function unilib.pkg.override_pigiron_tools.exec()
 
-    if unilib.pkg_executed_table["tool_axe_bronze"] ~= nil and
-            unilib.pkg_executed_table["tool_axe_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["tool_axe_bronze"] ~= nil and
+            unilib.global.pkg_executed_table["tool_axe_steel"] ~= nil then
 
         unilib.override_item("unilib:tool_axe_bronze", {
             tool_capabilities = {
@@ -69,8 +69,8 @@ function unilib.pkg.override_pigiron_tools.exec()
 
     end
 
-    if unilib.pkg_executed_table["tool_pick_bronze"] ~= nil and
-            unilib.pkg_executed_table["tool_pick_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["tool_pick_bronze"] ~= nil and
+            unilib.global.pkg_executed_table["tool_pick_steel"] ~= nil then
 
         unilib.override_item("unilib:tool_pick_bronze", {
             tool_capabilities = {
@@ -102,8 +102,8 @@ function unilib.pkg.override_pigiron_tools.exec()
 
     end
 
-    if unilib.pkg_executed_table["tool_shovel_bronze"] ~= nil and
-            unilib.pkg_executed_table["tool_shovel_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["tool_shovel_bronze"] ~= nil and
+            unilib.global.pkg_executed_table["tool_shovel_steel"] ~= nil then
 
         unilib.override_item("unilib:tool_shovel_bronze", {
             tool_capabilities = {
@@ -135,8 +135,8 @@ function unilib.pkg.override_pigiron_tools.exec()
 
     end
 
-    if unilib.pkg_executed_table["tool_sword_bronze"] ~= nil and
-            unilib.pkg_executed_table["tool_sword_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["tool_sword_bronze"] ~= nil and
+            unilib.global.pkg_executed_table["tool_sword_steel"] ~= nil then
 
         unilib.override_item("unilib:tool_sword_bronze", {
             tool_capabilities = {

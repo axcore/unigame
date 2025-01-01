@@ -9,7 +9,7 @@
 unilib.pkg.misc_reed_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dryplants.add_mode
+local mode = unilib.global.imported_mod_table.dryplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,8 +32,10 @@ function unilib.pkg.misc_reed_normal.exec()
         tiles = {"unilib_misc_reed_normal.png"},
         -- ("hay" group from the cottages mod)
         groups = {flammable = 2, hay = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
+        -- N.B. is_ground_content = false not in original code; added to match ordinary straw
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -42,7 +44,7 @@ function unilib.pkg.misc_reed_normal.exec()
     unilib.register_stairs("unilib:misc_reed_normal", {
         basic_flag = true,
     })
-    if unilib.pkg_executed_table["misc_patch_grass"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_patch_grass"] ~= nil then
 
         unilib.register_craft({
             -- From dryplants:reed
@@ -50,7 +52,7 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:misc_patch_grass_dead", "unilib:misc_patch_grass_dead"},
                 {"unilib:misc_patch_grass_dead", "unilib:misc_patch_grass_dead"},
-            }
+            },
         })
 
     end
@@ -73,15 +75,17 @@ function unilib.pkg.misc_reed_normal.exec()
         description = S("Pile of Wet Reed"),
         tiles = {"unilib_misc_reed_normal_wet.png"},
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
+        -- N.B. is_ground_content = false not in original code; added to match ordinary straw
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
     })
     unilib.register_stairs("unilib:misc_reed_normal_wet", {
         basic_flag = true,
     })
-    if unilib.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From dryplants:wetreed
@@ -89,11 +93,11 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:plant_papyrus_ordinary", "unilib:plant_papyrus_ordinary"},
                 {"unilib:plant_papyrus_ordinary", "unilib:plant_papyrus_ordinary"},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["plant_reedmace"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_reedmace"] ~= nil then
 
         unilib.register_craft({
             -- From dryplants:reedmace_sapling
@@ -101,7 +105,7 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:plant_reedmace_sapling", "unilib:plant_reedmace_sapling"},
                 {"unilib:plant_reedmace_sapling", "unilib:plant_reedmace_sapling"},
-            }
+            },
         })
         unilib.register_craft({
             -- From dryplants:reedmace_top
@@ -109,7 +113,7 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:plant_reedmace_small", "unilib:plant_reedmace_small"},
                 {"unilib:plant_reedmace_small", "unilib:plant_reedmace_small"},
-            }
+            },
         })
 
         unilib.register_craft({
@@ -118,7 +122,7 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:plant_bulrush_stem", "unilib:plant_bulrush_stem"},
                 {"unilib:plant_bulrush_stem", "unilib:plant_bulrush_stem"},
-            }
+            },
         })
         unilib.register_craft({
             -- From dryplants:reedmace_bottom
@@ -126,13 +130,13 @@ function unilib.pkg.misc_reed_normal.exec()
             recipe = {
                 {"unilib:plant_bulrush_bottom", "unilib:plant_bulrush_bottom"},
                 {"unilib:plant_bulrush_bottom", "unilib:plant_bulrush_bottom"},
-            }
+            },
         })
 
     end
 
     -- Wet weed becomes dry over time
-    local wet_list = unilib.stair_convert_table["unilib:misc_reed_normal_wet"]
+    local wet_list = unilib.global.stair_convert_table["unilib:misc_reed_normal_wet"]
     if wet_list == nil then
         wet_list = {"unilib:misc_reed_normal_wet"}
     else
@@ -149,11 +153,11 @@ function unilib.pkg.misc_reed_normal.exec()
 
         action = function(pos)
 
-            local node = minetest.get_node(pos)
+            local node = core.get_node(pos)
             local full_name = string.gsub(node.name, "misc_reed_normal_wet", "misc_reed_normal")
             local direction = node.param2
 
-            minetest.swap_node(pos, {name=full_name, param2=direction})
+            core.swap_node(pos, {name=full_name, param2=direction})
 
         end,
     })

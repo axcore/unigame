@@ -9,7 +9,7 @@
 unilib.pkg.mineral_kyanite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_kyanite_rock.exec()
 
     local c_lump = "unilib:mineral_kyanite_lump"
-    local hardness = unilib.mineral_table["kyanite"]["hardness"]
+    local hardness = unilib.global.mineral_table["kyanite"]["hardness"]
 
     unilib.register_mineral_rock("kyanite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_kyanite_rock.exec()
         description = S("Kyanite Rock"),
         tiles = {"unilib_mineral_kyanite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

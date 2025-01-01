@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_merbau = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,8 @@ function unilib.pkg.deco_australia_tree_merbau.init()
 
     return {
         description = "Merbau tree as decoration",
-        depends = {"biome_australia_far_north_queensland", "dirt_ordinary", "tree_merbau"},
+        depends = {"biome_australia_far_north_queensland", "tree_merbau"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
     }
 
 end
@@ -28,10 +29,13 @@ function unilib.pkg.deco_australia_tree_merbau.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("australia_tree_merbau_in_queensland_" .. i, nil, {
+        unilib.register_decoration_complete("australia_tree_merbau_in_queensland_" .. i, nil, {
             -- From australia/biome_far_north_queensland.lua
             biomes = "australia_far_north_queensland",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = {
+                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_with_turf_far_north_queensland",
+            },
             y_max = 25,
             y_min = 6,
         })

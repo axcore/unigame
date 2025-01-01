@@ -9,7 +9,7 @@
 unilib.pkg.mineral_pyrope_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_pyrope_rock.exec()
 
     local c_lump = "unilib:mineral_pyrope_lump"
-    local hardness = unilib.mineral_table["pyrope"]["hardness"]
+    local hardness = unilib.global.mineral_table["pyrope"]["hardness"]
 
     unilib.register_mineral_rock("pyrope")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_pyrope_rock.exec()
         description = S("Pyrope Rock"),
         tiles = {"unilib_mineral_pyrope_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

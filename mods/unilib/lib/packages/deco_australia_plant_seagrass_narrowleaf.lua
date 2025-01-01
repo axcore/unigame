@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_plant_seagrass_narrowleaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,11 +29,11 @@ function unilib.pkg.deco_australia_plant_seagrass_narrowleaf.init()
 
 end
 
-function unilib.pkg.deco_australia_plant_seagrass_narrowleaf.exec()
+function unilib.pkg.deco_australia_plant_seagrass_narrowleaf.post()
 
-    if unilib.pkg_executed_table["biome_australia_great_barrier_reef"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_great_barrier_reef"] ~= nil then
 
-        unilib.register_decoration_now("australia_plant_seagrass_narrowleaf_1", nil, {
+        unilib.register_decoration_complete("australia_plant_seagrass_narrowleaf_1", nil, {
             -- From australia:sea_grass
             biomes = "australia_great_barrier_reef",
             place_on = "unilib:sand_ordinary",
@@ -43,9 +43,9 @@ function unilib.pkg.deco_australia_plant_seagrass_narrowleaf.exec()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_indian_ocean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_indian_ocean"] ~= nil then
 
-        unilib.register_decoration_now("australia_plant_seagrass_narrowleaf_2", nil, {
+        unilib.register_decoration_complete("australia_plant_seagrass_narrowleaf_2", nil, {
             -- From australia:sea_grass
             biomes = "australia_indian_ocean",
             place_on = "unilib:sand_ordinary",
@@ -55,9 +55,9 @@ function unilib.pkg.deco_australia_plant_seagrass_narrowleaf.exec()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_timor_sea"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_timor_sea"] ~= nil then
 
-        unilib.register_decoration_now("australia_plant_seagrass_narrowleaf_3", nil, {
+        unilib.register_decoration_complete("australia_plant_seagrass_narrowleaf_3", nil, {
             -- From australia:sea_grass
             biomes = "australia_timor_sea",
             place_on = "unilib:sand_ordinary",

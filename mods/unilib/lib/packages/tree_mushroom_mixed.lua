@@ -13,8 +13,8 @@
 unilib.pkg.tree_mushroom_mixed = {}
 
 local S = unilib.intllib
-local farlands_add_mode = unilib.imported_mod_table.farlands.add_mode
-local glem_add_mode = unilib.imported_mod_table.glemr11.add_mode
+local farlands_add_mode = unilib.global.imported_mod_table.farlands.add_mode
+local glem_add_mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,11 @@ end
 
 function unilib.pkg.tree_mushroom_mixed.exec()
 
+    -- (no burnlevel)
+    -- (no sci_name)
+
+    -- N.B. No call to unilib.register_tree() necessary
+
     unilib.register_node(
         -- From farlands, mapgen:big_mushroom_stem
         "unilib:tree_mushroom_mixed_trunk",
@@ -46,11 +51,11 @@ function unilib.pkg.tree_mushroom_mixed.exec()
                 "unilib_tree_mushroom_mixed_trunk.png",
             },
             groups = {choppy = 1, flammable = 1, oddly_breakable_by_hand = 1, wood = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             paramtype2 = "facedir",
 
-            on_place = minetest.rotate_node,
+            on_place = core.rotate_node,
         }
     )
 
@@ -64,7 +69,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_blue.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -86,7 +91,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
                 "unilib_tree_mushroom_mixed_cap_brown.png",
             },
             groups = {choppy = 1, flammable = 1, oddly_breakable_by_hand = 1, wood = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
         }
     )
 
@@ -100,7 +105,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_brown_pale.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -119,7 +124,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_green_dark.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -138,7 +143,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_green_light.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -157,7 +162,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_green_spotted.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -176,7 +181,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_mottled.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -195,7 +200,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_purple.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -217,7 +222,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
                 "unilib_tree_mushroom_mixed_cap_red.png",
             },
             groups = {choppy = 1, flammable = 1, oddly_breakable_by_hand = 1, wood = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
         }
     )
 
@@ -231,7 +236,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_red_dark.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -250,7 +255,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_cap_tan.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -269,7 +274,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_pore.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -288,7 +293,7 @@ function unilib.pkg.tree_mushroom_mixed.exec()
             tiles = {"unilib_tree_mushroom_mixed_pore_pale.png"},
             groups = {choppy = 1, flammable = 2, tree = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             paramtype2 = "facedir",

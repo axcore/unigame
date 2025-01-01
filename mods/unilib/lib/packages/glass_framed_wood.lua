@@ -9,7 +9,7 @@
 unilib.pkg.glass_framed_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.glass_framed_wood.exec()
         description = S("Glass with Wooden Frame"),
         tiles = {"unilib_glass_framed_wood.png", "unilib_glass_framed_wood_detail.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -56,7 +56,7 @@ function unilib.pkg.glass_framed_wood.exec()
             "unilib_glass_framed_wood_broken_detail.png",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
@@ -71,7 +71,7 @@ function unilib.pkg.glass_framed_wood.exec()
             "unilib:glass_framed_wood",
             "unilib:glass_ordinary_fragments",
             "unilib:item_stick_ordinary",
-        }
+        },
     })
 
 end

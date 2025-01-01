@@ -9,7 +9,7 @@
 unilib.pkg.coral_block_rose = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,9 @@ function unilib.pkg.coral_block_rose.exec()
         -- From xocean:brain_block
         description = S("Rose Coral Block"),
         tiles = {"unilib_coral_block_rose.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:coral_block_rose_skeleton",
     })
@@ -39,8 +40,9 @@ function unilib.pkg.coral_block_rose.exec()
         -- From xocean:brain_skeleton
         description = S("Rose Coral Block Skeleton"),
         tiles = {"unilib_coral_block_rose_skeleton.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3},
+        sounds = unilib.global.sound_table.stone,
     })
 
 end

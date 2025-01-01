@@ -13,7 +13,7 @@
 unilib.pkg.ore_farlands_stone_ordinary_with_tin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

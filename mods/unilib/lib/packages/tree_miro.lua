@@ -9,7 +9,7 @@
 unilib.pkg.tree_miro = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 
 function unilib.pkg.tree_miro.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Prumnopitys ferruginea"
 
     unilib.register_tree({
@@ -47,8 +47,8 @@ function unilib.pkg.tree_miro.exec()
         group_table = {choppy = 2, flammable = 2, tree = 1},
         sci_name = sci_name,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil and
-            unilib.pkg_executed_table["torch_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil and
+            unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
 
         -- Brown dye from Miro soot
         unilib.register_craft({
@@ -88,8 +88,10 @@ function unilib.pkg.tree_miro.exec()
     })
     unilib.register_leafdecay({
         -- From aotearoa:miro_leaves
+        trunk_type = "miro",
         trunks = {"unilib:tree_miro_trunk"},
-        leaves = {"unilib:tree_miro_leaves", "unilib:fruit_miro"},
+        leaves = {"unilib:tree_miro_leaves"},
+        others = {"unilib:fruit_miro"},
         radius = 2,
     })
 
@@ -135,7 +137,7 @@ function unilib.pkg.tree_miro.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_miro_wood. Creates unilib:gate_miro_closed
+        -- From aotearoa:gate_miro_wood_closed, etc. Creates unilib:gate_miro_closed, etc
         part_name = "miro",
         orig_name = {"aotearoa:gate_miro_wood_closed", "aotearoa:gate_miro_wood_open"},
 
@@ -146,10 +148,10 @@ function unilib.pkg.tree_miro.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_miro_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_miro_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_miro_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_miro_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",

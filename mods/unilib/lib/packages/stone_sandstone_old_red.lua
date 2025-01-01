@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_old_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         description = S("Old Red Sandstone"),
 
         category = "sedimentary",
+        colour = "#AD7155",
         grinder_flag = true,
         grinder_powder = "unilib:sand_red",
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 4)
@@ -47,7 +48,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         description = S("Old Red Sandstone"),
         tiles = {"unilib_stone_sandstone_old_red.png"},
         groups = {cracky = 2, smoothstone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_sandstone_old_red_rubble",
     })
@@ -57,8 +58,8 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         output = "unilib:stone_sandstone_old_red",
         recipe = "unilib:stone_sandstone_old_red_rubble",
     })
-    if unilib.pkg_executed_table["metal_iron"] ~= nil and
-            unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron"] ~= nil and
+            unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From darkage:ors
@@ -66,12 +67,12 @@ function unilib.pkg.stone_sandstone_old_red.exec()
             recipe = {
                 {"unilib:stone_sandstone_ordinary", "unilib:stone_sandstone_ordinary"},
                 {"unilib:metal_iron_lump", "unilib:stone_sandstone_ordinary"},
-            }
+            },
         })
 
     end
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_old_red", {
             drop_name = "unilib:stone_sandstone_old_red_rubble",
@@ -100,7 +101,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         description = S("Old Red Sandstone Block"),
         tiles = {"unilib_stone_sandstone_old_red_block.png"},
         groups = {cracky = 3, stone = 2, stoneblock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -118,7 +119,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         description = S("Old Red Sandstone Brick"),
         tiles = {"unilib_stone_sandstone_old_red_brick.png"},
         groups = {cracky = 3, stone = 2, stonebrick = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -127,7 +128,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         output = "unilib:stone_sandstone_old_red_brick",
         ingredient = "unilib:stone_sandstone_old_red",
     })
-    if unilib.pkg_executed_table["stone_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
         unilib.register_craft({
             -- From darkage:ors_brick
@@ -145,14 +146,19 @@ function unilib.pkg.stone_sandstone_old_red.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_old_red",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_old_red_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_old_red_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_node("unilib:stone_sandstone_old_red_rubble", "darkage:ors_rubble", mode, {
         -- From darkage:ors_rubble
         description = S("Old Red Sandstone Rubble"),
         tiles = {"unilib_stone_sandstone_old_red_rubble.png"},
         groups = {cracky = 3, crumbly = 2, rubble = 1, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     --[[
     unilib.register_stairs("unilib:stone_sandstone_old_red_rubble", {
@@ -163,7 +169,7 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         part_name = "sandstone_old_red",
     })
     -- N.B. Special exception for darkage stones: allow rubble walls
-    if unilib.super_stone_table["sandstone_old_red"] ~= nil then
+    if unilib.global.super_stone_table["sandstone_old_red"] ~= nil then
 
         unilib.register_wall({
             -- From darkage:ors_rubble
@@ -177,5 +183,23 @@ function unilib.pkg.stone_sandstone_old_red.exec()
         })
 
     end
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_sandstone_old_red_rubble_compressed
+        part_name = "sandstone_old_red",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Old Red Sandstone Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_sandstone_old_red_rubble_condensed
+        part_name = "sandstone_old_red",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Old Red Sandstone Rubble"),
+    })
 
 end

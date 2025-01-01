@@ -9,7 +9,7 @@
 unilib.pkg.bush_branching_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes.add_mode
+local mode = unilib.global.imported_mod_table.bushes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -61,7 +61,7 @@ function unilib.pkg.bush_branching_green.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 99.9,
                 rarity_fertility = 1.5,
                 plantlife_limit = -1,

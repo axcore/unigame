@@ -9,7 +9,7 @@
 unilib.pkg.misc_cavern_sapphire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_cavern_sapphire.exec()
         description = S("Cavern Sapphire Block"),
         tiles = {"unilib_misc_cavern_sapphire_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         light_source = 13,
@@ -47,7 +47,7 @@ function unilib.pkg.misc_cavern_sapphire.exec()
         description = S("Embedded Cavern Sapphire"),
         tiles = {"unilib_misc_cavern_sapphire_embedded.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         light_source = 10,
         paramtype = "light",

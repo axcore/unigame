@@ -9,7 +9,7 @@
 unilib.pkg.admin_node_void = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,10 +36,12 @@ function unilib.pkg.admin_node_void.exec()
             description = S("Void Node"),
             tiles = {"unilib_admin_invisible.png"},
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_pink.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             sunlight_propagates = true,
         }
@@ -52,13 +54,15 @@ function unilib.pkg.admin_node_void.exec()
         "maptools:ignore_like_no_clip",
         mode,
         {
-            description = unilib.hint(S("Void Node"), S("with no-clip")),
+            description = unilib.utils.hint(S("Void Node"), S("with no-clip")),
             tiles = {"unilib_admin_invisible.png"},
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_violet.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             sunlight_propagates = true,
             walkable = false,
@@ -72,14 +76,16 @@ function unilib.pkg.admin_node_void.exec()
         "maptools:ignore_like_no_point",
         mode,
         {
-            description = unilib.hint(S("Void Node"), S("with no-point")),
+            description = unilib.utils.hint(S("Void Node"), S("with no-point")),
             tiles = {"unilib_admin_invisible.png"},
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             -- N.B. switched duplicate dye texture in original code
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_cyan.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,
@@ -93,14 +99,16 @@ function unilib.pkg.admin_node_void.exec()
         "maptools:ignore_like_no_clip_no_point",
         mode,
         {
-            description = unilib.hint(S("Void Node"), S("with no-clip and no-point")),
+            description = unilib.utils.hint(S("Void Node"), S("with no-clip and no-point")),
             tiles = {"unilib_admin_invisible.png"},
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             -- N.B. switched duplicate dye texture in original code
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_orange.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,

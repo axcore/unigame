@@ -9,7 +9,7 @@
 unilib.pkg.sign_wall_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,13 +19,14 @@ function unilib.pkg.sign_wall_wood.init()
 
     return {
         description = "Wooden wall sign",
+        depends = "shared_default_sign",
     }
 
 end
 
 function unilib.pkg.sign_wall_wood.exec()
 
-    unilib.register_wall_sign({
+    unilib.pkg.shared_default_sign.register_wall_sign({
         -- From default:sign_wall_wood. Creates unilib:sign_wall_wood
         part_name = "wood",
         orig_name = "default:sign_wall_wood",
@@ -35,7 +36,7 @@ function unilib.pkg.sign_wall_wood.exec()
         group_table = {attached_node = 1, choppy = 2, flammable = 2, oddly_breakable_by_hand = 3},
         sound_name = "wood",
     })
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         unilib.register_craft({
             -- From default:sign_wall_wood

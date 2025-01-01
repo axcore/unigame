@@ -9,7 +9,7 @@
 unilib.pkg.plant_flax_brown_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,13 +28,13 @@ function unilib.pkg.plant_flax_brown_wild.exec()
 
     unilib.register_node("unilib:plant_flax_brown_wild", "cropocalypse:flax_wild", mode, {
         -- From cropocalypse:flax_wild
-        description = unilib.annotate(S("Wild Brown Flax Plant"), "Linum usitatissimum"),
+        description = unilib.utils.annotate(S("Wild Brown Flax Plant"), "Linum usitatissimum"),
         tiles = {"unilib_plant_flax_brown_wild.png"},
         -- N.B. flora = 1, not_in_creative_inventory = 1 not in original code
         groups = {
             attached_node = 1, flammable = 4, flora = 1, not_in_creative_inventory = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -52,7 +52,7 @@ function unilib.pkg.plant_flax_brown_wild.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cropocalypse_plant_flax_brown_wild", {
+    unilib.register_decoration_generic("cropocalypse_plant_flax_brown_wild", {
         -- From cropocalypse/plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_flax_brown_wild",

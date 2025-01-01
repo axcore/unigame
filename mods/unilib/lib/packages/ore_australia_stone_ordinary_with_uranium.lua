@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_ordinary_with_uranium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.ore_australia_stone_ordinary_with_uranium.post()
 
-    if unilib.pkg_executed_table["biome_australia_arnhem_land"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_arnhem_land"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_arnhem_land.lua
@@ -54,7 +54,7 @@ function unilib.pkg.ore_australia_stone_ordinary_with_uranium.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_central_australia"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_central_australia"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_central_australia.lua

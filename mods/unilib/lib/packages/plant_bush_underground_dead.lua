@@ -9,7 +9,7 @@
 unilib.pkg.plant_bush_underground_dead = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.plant_bush_underground_dead.exec()
         description = S("Underground Dead Bush"),
         tiles = {img},
         groups = {attached_node = 1, flammable = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = img,
@@ -52,7 +52,7 @@ function unilib.pkg.plant_bush_underground_dead.exec()
         recipe = "unilib:plant_bush_underground_dead",
         burntime = 5,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] then
 
         unilib.register_craft({
             -- From underch:dead_bush
@@ -63,5 +63,7 @@ function unilib.pkg.plant_bush_underground_dead.exec()
 
     end
     unilib.register_plant_in_pot("unilib:plant_bush_underground_dead", "underch:dead_bush")
+
+    unilib.register_decoration_spare("unilib:plant_bush_underground_dead")
 
 end

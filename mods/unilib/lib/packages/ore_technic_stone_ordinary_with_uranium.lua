@@ -9,7 +9,7 @@
 unilib.pkg.ore_technic_stone_ordinary_with_uranium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

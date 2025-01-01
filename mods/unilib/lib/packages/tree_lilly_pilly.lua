@@ -9,7 +9,7 @@
 unilib.pkg.tree_lilly_pilly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,39 +27,51 @@ end
 
 function unilib.pkg.tree_lilly_pilly.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Syzygium smithii"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.165, -0.5, -0.165, 0.165, 0.5, 0.165},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "lilly_pilly",
         description = S("Lilly Pilly Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_lilly_pilly_trunk", "australia:lilly_pilly_tree", mode, {
         -- From australia:lilly_pilly_tree
-        description = unilib.annotate(S("Lilly Pilly Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Lilly Pilly Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_lilly_pilly_trunk_top.png",
             "unilib_tree_lilly_pilly_trunk_top.png",
             "unilib_tree_lilly_pilly_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.165, -0.5, -0.165, 0.165, 0.5, 0.165},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.165, -0.5, -0.165, 0.165, 0.5, 0.165},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_lilly_pilly_trunk_stripped
+        part_name = "lilly_pilly",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Lilly Pilly Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -85,8 +97,10 @@ function unilib.pkg.tree_lilly_pilly.exec()
     })
     unilib.register_leafdecay({
         -- From australia:lilly_pilly_leaves
+        trunk_type = "lilly_pilly",
         trunks = {"unilib:tree_lilly_pilly_trunk"},
-        leaves = {"unilib:tree_lilly_pilly_leaves", "unilib:fruit_berry_lilly_pilly"},
+        leaves = {"unilib:tree_lilly_pilly_leaves"},
+        others = {"unilib:fruit_berry_lilly_pilly"},
         radius = 3,
     })
 
@@ -132,7 +146,7 @@ function unilib.pkg.tree_lilly_pilly.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_lilly_pilly_closed
+        -- Original to unilib. Creates unilib:gate_lilly_pilly_closed, etc
         part_name = "lilly_pilly",
         orig_name = {nil, nil},
 
@@ -143,10 +157,10 @@ function unilib.pkg.tree_lilly_pilly.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_lilly_pilly_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_lilly_pilly_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -157,10 +171,10 @@ function unilib.pkg.tree_lilly_pilly.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_lilly_pilly_in_queensland_" .. i, {
+        unilib.register_decoration_generic("australia_tree_lilly_pilly_in_queensland_" .. i, {
             -- From australia/biome_far_north_queensland.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -171,10 +185,10 @@ function unilib.pkg.tree_lilly_pilly.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_lilly_pilly_in_range_" .. i, {
+        unilib.register_decoration_generic("australia_tree_lilly_pilly_in_range_" .. i, {
             -- From australia/biome_great_dividing_range.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",
@@ -185,10 +199,10 @@ function unilib.pkg.tree_lilly_pilly.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_lilly_pilly_in_victoria_" .. i, {
+        unilib.register_decoration_generic("australia_tree_lilly_pilly_in_victoria_" .. i, {
             -- From australia/biome_victorian_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_lilly_pilly_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",

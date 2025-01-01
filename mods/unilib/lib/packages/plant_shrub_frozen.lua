@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
         description = S("Frozen Shrub"),
         tiles = {"unilib_plant_shrub_frozen.png"},
         groups = {attached_node = 1, flammable = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -53,7 +53,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
         description = S("Covered Frozen Shrub"),
         tiles = {"unilib_plant_shrub_frozen.png^unilib_plant_shrub_frozen_overlay.png"},
         groups = {attached_node = 1, flammable = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -75,7 +75,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
 
     -- N.B. Original code placed dry shrubs as decorations, rather than frozen shrubs, for no
     --      obvious reason
-    unilib.register_decoration("snow_plant_shrub_frozen", {
+    unilib.register_decoration_generic("snow_plant_shrub_frozen", {
         -- From snow/mapgen_v7.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_frozen",
@@ -84,7 +84,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("snow_plant_shrub_frozen_covered", {
+    unilib.register_decoration_generic("snow_plant_shrub_frozen_covered", {
         -- From snow/mapgen_v7.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_frozen_covered",

@@ -9,7 +9,7 @@
 unilib.pkg.tree_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_dry.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 4
     -- (no sci_name)
 
     unilib.register_tree({

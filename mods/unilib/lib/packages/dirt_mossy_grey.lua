@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mossy_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,7 @@ function unilib.pkg.dirt_mossy_grey.init()
         description = "Grey Mossy Dirt",
         notes = "This item does not spawn in the world, as ethereal biomes do not specify it" ..
                 " (but it can crafted, and is itself used as a crafting ingredient)",
-        depends = {"dirt_ordinary", "plant_shrub_snowy"}
+        depends = {"dirt_ordinary", "plant_shrub_snowy"},
     }
 
 end
@@ -33,17 +33,18 @@ function unilib.pkg.dirt_mossy_grey.exec()
         description = S("Grey Mossy Dirt"),
         tiles = {"unilib_turf_grey_top.png"},
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
 
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft({
         -- From ethereal:gray_moss
-        type = "shapeless",
         output = "unilib:dirt_mossy_grey",
-        recipe = {"unilib:dirt_ordinary", "unilib:plant_shrub_snowy"},
+        recipe = {
+            {"unilib:dirt_ordinary", "unilib:plant_shrub_snowy"},
+        },
     })
 
 end

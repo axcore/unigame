@@ -9,7 +9,7 @@
 unilib.pkg.plant_bells_of_ireland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.plant_bells_of_ireland.exec()
 
     unilib.register_node("unilib:plant_bells_of_ireland", "cropocalypse:bells_of_ireland", mode, {
         -- From cropocalypse:bells_of_ireland
-        description = unilib.annotate(S("Bells of Ireland"), "Moluccella laevis"),
+        description = unilib.utils.annotate(S("Bells of Ireland"), "Moluccella laevis"),
         tiles = {"unilib_plant_bells_of_ireland.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, decorative_plants = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -47,7 +47,7 @@ function unilib.pkg.plant_bells_of_ireland.exec()
         waving = 1,
         wield_image = "unilib_plant_bells_of_ireland.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:bells_of_ireland
@@ -60,7 +60,7 @@ function unilib.pkg.plant_bells_of_ireland.exec()
     end
     unilib.register_plant_in_pot("unilib:plant_bells_of_ireland", "cropocalypse:bells_of_ireland")
 
-    unilib.register_decoration("cropocalypse_plant_bells_of_ireland", {
+    unilib.register_decoration_generic("cropocalypse_plant_bells_of_ireland", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_bells_of_ireland",

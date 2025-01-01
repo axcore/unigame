@@ -9,7 +9,7 @@
 unilib.pkg.clay_ordinary_with_bauxite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.clay_ordinary_with_bauxite.exec()
 
     unilib.register_node("unilib:clay_ordinary_with_bauxite", nil, mode, {
         -- Texture from real_minerals. Original code
-        description = unilib.brackets(S("Bauxite Ore"), S("Ordinary Clay")),
+        description = unilib.utils.brackets(S("Bauxite Ore"), S("Ordinary Clay")),
         tiles = {"unilib_clay_ordinary.png^unilib_mineral_bauxite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {clay = 1, crumbly = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_bauxite_lump",
     })

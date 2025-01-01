@@ -9,7 +9,7 @@
 unilib.pkg.candle_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,13 +41,15 @@ function unilib.pkg.candle_normal.exec()
             {
                 name = "unilib_candle_normal_wall.png",
                 animation = {type="vertical_frames", length = 1.5}
-            }
+            },
         },
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "torchlike",
         inventory_image = "unilib_candle_normal_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 12,
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -65,8 +67,8 @@ function unilib.pkg.candle_normal.exec()
         -- From xdecor:candle
         output = "unilib:candle_normal",
         recipe = {
-            {"unilib:torch_ordinary"}
-        }
+            {"unilib:torch_ordinary"},
+        },
     })
 
 end

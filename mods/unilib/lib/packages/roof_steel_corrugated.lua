@@ -9,7 +9,7 @@
 unilib.pkg.roof_steel_corrugated = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.steel.add_mode
+local mode = unilib.global.imported_mod_table.steel.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,7 @@ function unilib.pkg.roof_steel_corrugated.init()
     return {
         description = "Corrugated steel roofing",
         depends = "metal_steel",
-        optional = "metal_steel_scrap",
+        optional = "material_scrap_steel",
     }
 
 end
@@ -35,10 +35,12 @@ function unilib.pkg.roof_steel_corrugated.exec()
         tiles = {"unilib_roof_steel_corrugated.png"},
         groups = {bendy = 2, dig_generic = 1, dig_immediate = 2, snappy = 1},
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "raillike",
         inventory_image = "unilib_roof_steel_corrugated.png",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -47,7 +49,7 @@ function unilib.pkg.roof_steel_corrugated.exec()
         walkable = true,
         wield_image = "unilib_roof_steel_corrugated.png",
     })
-    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway" package
+    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway_steel" package
     --[[
     unilib.register_craft({
         -- From steel:roofing
@@ -65,11 +67,11 @@ function unilib.pkg.roof_steel_corrugated.exec()
             {c_ingot, c_ingot, c_ingot},
         },
     })
-    if unilib.pkg_executed_table["metal_steel_scrap"] ~= nil then
+    if unilib.global.pkg_executed_table["material_scrap_steel"] ~= nil then
 
         unilib.register_craft({
             -- From steel:strut
-            output = "unilib:metal_steel_scrap",
+            output = "unilib:material_scrap_steel",
             recipe = {
                 {"unilib:roof_steel_corrugated"},
             },

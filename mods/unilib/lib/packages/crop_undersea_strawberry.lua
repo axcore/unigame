@@ -9,7 +9,7 @@
 unilib.pkg.crop_undersea_strawberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.crop_undersea_strawberry.exec()
             inventory_image = "unilib_crop_undersea_strawberry_harvest.png",
             groups = {food = 1, food_strawberry = 1, food_vegan = 1, seafood = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:crop_undersea_strawberry_harvest", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:crop_undersea_strawberry_harvest", 3),
         }
     )
 
@@ -61,8 +61,8 @@ function unilib.pkg.crop_undersea_strawberry.exec()
 
         replace_mode = mode,
         base_node = "unilib:dirt_ordinary",
-        chance = 15,
-        delay = 10,
+        -- N.B. 15 in original code
+        chance = 12,
         drop_table = {
             items = {
                 {items = {"unilib:crop_undersea_strawberry_seed 2"}},
@@ -70,11 +70,14 @@ function unilib.pkg.crop_undersea_strawberry.exec()
                 {items = {"unilib:crop_undersea_strawberry_seed 3"}, rarity = 15},
             },
         },
+        -- N.B. 10 in original code
+        interval = 15,
         min_light = 8,
         seed_description = S("Sea Strawberry Seed"),
         wild_description = S("Wild Sea Strawberry"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -87,9 +90,18 @@ function unilib.pkg.crop_undersea_strawberry.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:crop_undersea_strawberry_harvest",
+        juice_description = S("Strawberry"),
+        juice_type = "strawberry",
+        rgb = "#ff3636",
+
+        orig_flag = false,
+    })
+
     for i = 1, 3 do
 
-        unilib.register_decoration("aqua_farming_crop_sea_strawberry_" .. i, {
+        unilib.register_decoration_generic("aqua_farming_crop_sea_strawberry_" .. i, {
             -- From aqua_farming/mapgen_sea_strawberry.lua
             deco_type = "simple",
             decoration = "unilib:crop_undersea_strawberry_wild",
@@ -103,6 +115,9 @@ function unilib.pkg.crop_undersea_strawberry.exec()
                 seed = 7013,
                 spread = {x = 50, y = 50, z = 50},
             },
+            -- N.B. No .param2/.param2_max in original code
+            param2 = 0,
+            param2_max = 3,
             place_offset_y = -1,
             sidelen = 4,
         })

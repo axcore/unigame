@@ -9,7 +9,7 @@
 unilib.pkg.snow_hard = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,8 +35,10 @@ function unilib.pkg.snow_hard.exec()
             choppy = 2, cooks_into_ice = 1, cools_lava = 1, cracky = 2, crumbly = 2, icemaker = 1,
             melts = 1, oddly_breakable_by_hand = 2, snowy = 1,
         },
-        sounds = unilib.sound_table.snow,
+        sounds = unilib.global.sound_table.snow,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         liquidtype = "none",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -44,7 +46,7 @@ function unilib.pkg.snow_hard.exec()
 
         on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
     })
-    if unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
         -- N.B. The reverse recipe appears in the .post() function below
         unilib.register_craft({
@@ -57,7 +59,7 @@ function unilib.pkg.snow_hard.exec()
 
     end
     unilib.register_stairs("unilib:snow_hard_brick")
-    unilib.set_auto_rotate("unilib:snow_hard_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate("unilib:snow_hard_brick", unilib.setting.auto_rotate_brick_flag)
 
     unilib.register_node("unilib:snow_hard_cobble", "snow:snow_cobble", mode, {
         -- From snow:snow_cobble
@@ -67,8 +69,10 @@ function unilib.pkg.snow_hard.exec()
             choppy = 2, cooks_into_ice = 1, cools_lava = 1, cracky = 2, crumbly = 2, icemaker = 1,
             melts = 1, oddly_breakable_by_hand = 2, snowy = 1,
         },
-        sounds = unilib.sound_table.snow,
+        sounds = unilib.global.sound_table.snow,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         liquidtype = "none",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -76,7 +80,7 @@ function unilib.pkg.snow_hard.exec()
 
         on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
     })
-    if unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From snow:snow_cobble
@@ -88,7 +92,7 @@ function unilib.pkg.snow_hard.exec()
             },
         })
 
-        if unilib.pkg_executed_table["ce_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["ce_ordinary"] ~= nil then
 
             unilib.register_craft({
                 -- From snow:snow_cobble
@@ -142,7 +146,7 @@ function unilib.pkg.snow_hard.exec()
         end
 
     end
-    if unilib.pkg_executed_table["ice_hard"] ~= nil then
+    if unilib.global.pkg_executed_table["ice_hard"] ~= nil then
 
         unilib.register_craft({
             -- From snow:ice_brick
@@ -159,7 +163,7 @@ end
 
 function unilib.pkg.snow_hard.post()
 
-    if unilib.pkg_executed_table["snow_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
         -- N.B. The original craft recipes clash with ones in the "ice_ordinary" package
         --[[
@@ -180,7 +184,7 @@ function unilib.pkg.snow_hard.post()
                 {"", "group:craftable_bucket", ""},
                 {"unilib:snow_ordinary_block", "", "unilib:snow_ordinary_block"},
             },
-            replacements = unilib.craftable_bucket_list,
+            replacements = unilib.global.craftable_bucket_list,
         })
 
     end

@@ -9,24 +9,23 @@
 unilib.pkg.pebble_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cavestuff.add_mode
+local mode = unilib.global.imported_mod_table.cavestuff.add_mode
 
 ---------------------------------------------------------------------------------------------------
--- Local functions
+-- Shared functions
 ---------------------------------------------------------------------------------------------------
 
-local function do_register(data_table)
+function unilib.pkg.pebble_large.register_pebble(data_table)
 
     -- Adapted from plantlife/cavestuff/nodes.lua
     -- Creates a large pebble based on a stone type
     --
     -- data_table compulsory fields:
-    --      part_name (str): e.g. "ordinary", a key in unilib.stone_table
+    --      part_name (str): e.g. "ordinary", a key in unilib.global.stone_table
     --      orig_name (str or list): e.g. "cavestuff:pebble_1"
     --
     -- data_table optional fields:
     --      replace_mode (str): e.g. "defer"
-    --      description (str): e.g. "Ordinary stone"
     --
     -- Return values:
     --      The full_name of the new node
@@ -35,37 +34,50 @@ local function do_register(data_table)
     local orig_name = data_table.orig_name
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
-    local description = data_table.base_img or "unilib_stone_" .. part_name
+
+    local def_table = core.registered_nodes["unilib:stone_" .. part_name]
+    if def_table == nil then
+        return
+    end
 
     local cbox = {
         type = "fixed",
         fixed = {-5/16, -8/16, -6/16, 5/16, -1/32, 5/16},
     }
 
-    local img = "unilib_stone_" .. part_name .. ".png"
+    local img = def_table.tiles[1]
     if part_name == "desert" then
         img = "unilib_pebble_large_stone_desert.png"
     elseif part_name == "ordinary" then
         img = "unilib_pebble_large_stone_ordinary.png"
     end
 
+    local inv_img = img .. "^[mask:unilib_mask_pebble_large.png"
+
     unilib.register_node("unilib:pebble_large_stone_" .. part_name, orig_name, replace_mode, {
-        description = S("Large Desert Stone Pebble"),
+        description = unilib.utils.brackets(S("Large Stone Pebble"), def_table.description),
         tiles = {img},
-        groups = {attached_node = 1, cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        -- N.B. replaced attached_node = 1 in the original code with falling_node = 1, for
+        --      consistency with small pebbles
+--      groups = {attached_node = 1, cracky = 3, stone = 1},
+        groups = {cracky = 3, falling_node = 1, stone = 1},
+        sounds = unilib.global.sound_table.stone,
 
         collision_box = cbox,
         drawtype = "mesh",
+        -- N.B. No .inventory_image in original code
+        inventory_image = inv_img,
         mesh = "unilib_pebble_large.obj",
         paramtype = "light",
         paramtype2 = "facedir",
         selection_box = cbox,
+        -- N.B. No .wield_image in original code
+        wield_image = inv_img,
     })
 
     -- N.B. There are only two decoration packages completing this decoration; one for ordinary
     --      stone, and one for desert stone (as in the original code)
-    unilib.register_decoration("cavestuff_pebble_large_stone_" .. part_name, {
+    unilib.register_decoration_generic("cavestuff_pebble_large_stone_" .. part_name, {
         deco_type = "simple",
         decoration = "unilib:pebble_large_stone_" .. part_name,
 
@@ -84,7 +96,7 @@ end
 function unilib.pkg.pebble_large.init()
 
     return {
-        description = "Large desert stone pebble",
+        description = "Large stone pebbles",
         notes = "This package creates large pebbles from the full range of super stones",
     }
 
@@ -108,7 +120,7 @@ function unilib.pkg.pebble_large.post()
     }
 
     local pebble_table = {}
-    for stone_type, _ in pairs(unilib.super_stone_table) do
+    for stone_type, _ in pairs(unilib.global.super_stone_table) do
 
         pebble_table[stone_type] = {
             part_name = stone_type,
@@ -127,16 +139,15 @@ function unilib.pkg.pebble_large.post()
 
     for stone_type, mini_table in pairs(pebble_table) do
 
-        local data_table = unilib.stone_table[mini_table.part_name]
+        local data_table = unilib.global.stone_table[mini_table.part_name]
 
-        if unilib.pkg_executed_table["stone_" .. stone_type] ~= nil then
+        if unilib.global.pkg_executed_table["stone_" .. stone_type] ~= nil then
 
-            do_register({
+            unilib.pkg.pebble_large.register_pebble({
                 part_name = mini_table.part_name,
                 orig_name = mini_table.orig_name,
 
                 replace_mode = mode,
-                description = data_table.description,
             })
 
         end

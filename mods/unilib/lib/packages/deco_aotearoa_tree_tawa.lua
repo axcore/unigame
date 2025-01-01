@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_tawa = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ function unilib.pkg.deco_aotearoa_tree_tawa.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_tawa_normal_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_tawa_normal_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_tawa"
             biomes = "aotearoa_lowland_kauri_forest",
@@ -36,7 +36,7 @@ function unilib.pkg.deco_aotearoa_tree_tawa.post()
             y_max = 80,
             y_min = 12,
         })
-        unilib.register_decoration_now("aotearoa_tree_tawa_dense_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_tawa_dense_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_tawa"
             biomes = "aotearoa_lowland_tawa_forest",
@@ -44,7 +44,7 @@ function unilib.pkg.deco_aotearoa_tree_tawa.post()
             y_max = 80,
             y_min = 12,
         })
-        unilib.register_decoration_now("aotearoa_tree_tawa_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_tawa_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_tawa"
             biomes = "aotearoa_lowland_maire_forest",

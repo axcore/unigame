@@ -9,7 +9,7 @@
 unilib.pkg.deco_bushes_classic_bush_ornamental = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,16 +25,16 @@ function unilib.pkg.deco_bushes_classic_bush_ornamental.init()
 
 end
 
-function unilib.pkg.deco_bushes_classic_bush_ornamental.exec()
+function unilib.pkg.deco_bushes_classic_bush_ornamental.post()
 
-    unilib.register_decoration_now("bushes_classic_bush_ornamental", nil, {
+    unilib.register_decoration_complete("bushes_classic_bush_ornamental", nil, {
         -- From bushes_classic/init.lua
         -- Completes decoration in package "shared_bushes_classic"
         place_on = {
             "unilib:dirt_ordinary_with_turf",
-            "unilib:dirt_ordinary_with_litter_forest_1",
-            "unilib:dirt_ordinary_with_litter_forest_3",
-            "unilib:dirt_ordinary_with_litter_forest_4",
+            "unilib:dirt_ordinary_with_litter_forest_medium",
+            "unilib:dirt_ordinary_with_turf_with_litter_forest_medium",
+            "unilib:dirt_ordinary_with_turf_with_litter_forest_light",
             "unilib:soil_ordinary",
             "unilib:soil_ordinary_wet",
         },

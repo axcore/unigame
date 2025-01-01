@@ -9,7 +9,7 @@
 unilib.pkg.shared_cartridges = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.offend_flags.add_mode
+local mode = unilib.global.imported_mod_table.offend_flags.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -39,7 +39,7 @@ function unilib.pkg.shared_cartridges.register_cartridge(data_table)
     local c_paper = "unilib:item_paper_ordinary"
 
     -- Don't create duplicates
-    if minetest.registered_tools[c_cartridge] == nil then
+    if core.registered_tools[c_cartridge] == nil then
 
         unilib.register_tool(c_cartridge, orig_name, replace_mode, {
             description = description,
@@ -59,7 +59,7 @@ function unilib.pkg.shared_cartridges.register_cartridge(data_table)
             output = c_cartridge,
             recipe = {c_cartridge, c_dye},
         })
-        unilib.register_tool_no_repair(
+        unilib.tools.register_no_repair(
             c_cartridge, S("This cartridge can't be repaired, but you can refill it with dye")
         )
 

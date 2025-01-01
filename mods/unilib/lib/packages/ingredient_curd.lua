@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_curd = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.ingredient_curd.post()
     -- Create cheese directly from curd (takes longer than the "correct" method using a cauldron)
     -- The recipes are grouped here for convenience, rather than (for example) placing the toma
     --      recipe in the "food_cheese_toma" package
-    if unilib.pkg_executed_table["food_cheese_toma"] ~= nil then
+    if unilib.global.pkg_executed_table["food_cheese_toma"] ~= nil then
 
         unilib.register_craft({
             -- From cheese:curd
@@ -52,7 +52,7 @@ function unilib.pkg.ingredient_curd.post()
 
     end
 
-    if minetest.get_modpath("mobs_animal") then
+    if core.get_modpath("mobs_animal") then
 
         unilib.register_craft({
             -- From cheese:curd
@@ -64,7 +64,7 @@ function unilib.pkg.ingredient_curd.post()
 
     end
 
-    if minetest.get_modpath("petz") then
+    if core.get_modpath("petz") then
 
         unilib.register_craft({
             -- From cheese:curd

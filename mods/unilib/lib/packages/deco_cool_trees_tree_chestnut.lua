@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_chestnut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chestnuttree.add_mode
+local mode = unilib.global.imported_mod_table.chestnuttree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_chestnut.post()
 
-    unilib.register_decoration_now("cool_trees_tree_chestnut", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_chestnut", nil, {
         -- From chestnuttree/init.lua
         -- Completes decoration in package "tree_chestnut"
         biomes = "default_grassland",

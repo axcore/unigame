@@ -9,7 +9,7 @@
 unilib.pkg.tree_baobab = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_baobab.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Adansonia"
 
     unilib.register_tree({
@@ -80,7 +80,11 @@ function unilib.pkg.tree_baobab.exec()
         max_volume = 4,
         maxp_table = {x = 2, y = 15, z = 2},
         minp_table = {x = -2, y = 1, z = -2},
-        offset_list = {8, 1, 8},
+        schem_list = {
+            {"unilib_tree_baobab_1", 7, 0, 6},
+            {"unilib_tree_baobab_2", 4, 0, 4},
+            {"unilib_tree_baobab_3", 3, 0, 3},
+        },
         sci_name = sci_name,
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
@@ -109,7 +113,7 @@ function unilib.pkg.tree_baobab.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_baobab_closed
+        -- Original to unilib. Creates unilib:gate_baobab_closed, etc
         part_name = "baobab",
         orig_name = {nil, nil},
 
@@ -118,10 +122,10 @@ function unilib.pkg.tree_baobab.exec()
         group_table = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("farlands_tree_baobab_1", {
+    unilib.register_decoration_generic("farlands_tree_baobab_1", {
         -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/baobab.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_baobab_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_baobab_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -136,10 +140,10 @@ function unilib.pkg.tree_baobab.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_tree_baobab_2", {
+    unilib.register_decoration_generic("farlands_tree_baobab_2", {
         -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/baobab1.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_baobab_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_baobab_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -154,10 +158,10 @@ function unilib.pkg.tree_baobab.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_tree_baobab_3", {
+    unilib.register_decoration_generic("farlands_tree_baobab_3", {
         -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/baobab2.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_baobab_3.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_baobab_3.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

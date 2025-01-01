@@ -17,9 +17,9 @@
 unilib.pkg.tree_jungle = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local doors_add_mode = unilib.imported_mod_table.doors.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local doors_add_mode = unilib.global.imported_mod_table.doors.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -28,17 +28,17 @@ local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
 function unilib.pkg.tree_jungle.grow_func(pos)
 
     -- Adapted from default/trees.lua
-    -- Special handling for the emergent sapling (only), called by unilib.grow_tree_sapling()
+    -- Special handling for the emergent sapling (only), called by unilib.trees.grow_sapling()
     --      (instead of executing that function's own code)
 
-    unilib.log(
+    unilib.utils.log(
         "action",
-        "The emergent jungle tree sapling grows into a tree at " .. minetest.pos_to_string(pos)
+        "The emergent jungle tree sapling grows into a tree at " .. core.pos_to_string(pos)
     )
 
-    minetest.place_schematic(
+    core.place_schematic(
         {x = pos.x - 3, y = pos.y - 5, z = pos.z - 3},
-        unilib.path_mod .. "/mts/unilib_tree_jungle_emergent_from_sapling.mts",
+        unilib.core.path_mod .. "/mts/unilib_tree_jungle_emergent_from_sapling.mts",
         "random",
         nil,
         false
@@ -86,7 +86,7 @@ function unilib.pkg.tree_jungle.exec()
             description = S("Emergent Jungle Tree Sapling"),
             tiles = {"unilib_tree_jungle_sapling_emergent.png"},
             groups = {attached_node = 1, dig_immediate = 3, flammable = 2, sapling = 1, snappy = 2},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "plantlike",
             inventory_image = "unilib_tree_jungle_sapling_emergent.png",
@@ -101,15 +101,15 @@ function unilib.pkg.tree_jungle.exec()
 
             on_construct = function(pos)
 
-                minetest.get_node_timer(pos):start(
-                    math.random(unilib.sapling_grow_min, unilib.sapling_grow_max)
+                core.get_node_timer(pos):start(
+                    math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max)
                 )
 
             end,
 
             on_place = function(itemstack, placer, pointed_thing)
 
-                itemstack = unilib.sapling_on_place(
+                itemstack = unilib.flora.sapling_on_place(
                     itemstack,
                     placer,
                     pointed_thing,
@@ -127,15 +127,17 @@ function unilib.pkg.tree_jungle.exec()
 
             on_timer = function(pos)
 
-                if not unilib.can_grow_sapling(pos, "unilib:tree_jungle_sapling_emergent") then
+                if not unilib.flora.can_grow_sapling(
+                    pos, "unilib:tree_jungle_sapling_emergent"
+                ) then
 
                     -- Try again 5 minutes later
-                    minetest.get_node_timer(pos):start(unilib.sapling_grow_min)
+                    core.get_node_timer(pos):start(unilib.setting.sapling_grow_min)
                     return
 
                 else
 
-                    unilib.grow_tree_sapling(pos, "unilib:tree_jungle_sapling_emergent")
+                    unilib.trees.grow_sapling(pos, "unilib:tree_jungle_sapling_emergent")
 
                 end
 
@@ -154,7 +156,7 @@ function unilib.pkg.tree_jungle.exec()
         burntime = 7,
     })
     -- Set up growth for this sapling (e.g. from fertilisers)
-    unilib.sapling_table["unilib:tree_jungle_sapling_emergent"] = {
+    unilib.global.sapling_table["unilib:tree_jungle_sapling_emergent"] = {
         part_name = "jungle",
         sapling_type = "tree",
         min_height = 31,
@@ -169,8 +171,8 @@ function unilib.pkg.tree_jungle.exec()
 
         action = function(pos)
 
-            minetest.get_node_timer(pos):start(
-                math.random(unilib.sapling_grow_min, unilib.sapling_grow_max)
+            core.get_node_timer(pos):start(
+                math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max)
             )
 
         end
@@ -185,7 +187,6 @@ function unilib.pkg.tree_jungle.exec()
         burnlevel = burnlevel,
         common_group = 2,
         description = S("Jungle Tree Trunk"),
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -226,7 +227,9 @@ function unilib.pkg.tree_jungle.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and (
+        moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_tree_panel({
             -- From moreblocks:all_faces_jungle_tree. Creates unilib:tree_jungle_panel
@@ -261,10 +264,10 @@ function unilib.pkg.tree_jungle.exec()
         description = S("Jungle Tree Wood Fence Rail"),
     })
 
-    if doors_add_mode ~= "defer" then
+    if doors_add_mode ~= "defer" or not core.get_modpath("doors") then
 
         unilib.register_fence_gate_quick({
-            -- From doors:gate_junglewood. Creates unilib:gate_jungle_closed
+            -- From doors:gate_junglewood_closed, etc. Creates unilib:gate_jungle_closed, etc
             part_name = "jungle",
             orig_name = {"doors:gate_junglewood_closed", "doors:gate_junglewood_open"},
 
@@ -275,10 +278,10 @@ function unilib.pkg.tree_jungle.exec()
 
     end
 
-    unilib.register_decoration("default_tree_jungle", {
+    unilib.register_decoration_generic("default_tree_jungle", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_jungle.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_jungle.mts",
 
         fill_ratio = 0.1,
         flags = "place_center_x, place_center_z",
@@ -287,13 +290,13 @@ function unilib.pkg.tree_jungle.exec()
     })
 
     -- Due to 32 node height, altitude is limited and presence depends on chunksize
-    local chunksize = tonumber(minetest.get_mapgen_setting("chunksize"))
+    local chunksize = tonumber(core.get_mapgen_setting("chunksize"))
     if chunksize >= 5 then
 
-        unilib.register_decoration("default_tree_jungle_emergent", {
+        unilib.register_decoration_generic("default_tree_jungle_emergent", {
             -- From default/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_jungle_emergent.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_jungle_emergent.mts",
 
             flags = "place_center_x, place_center_z",
             noise_params = {
@@ -311,10 +314,10 @@ function unilib.pkg.tree_jungle.exec()
 
     end
 
-    unilib.register_decoration("default_tree_jungle_swamp", {
+    unilib.register_decoration_generic("default_tree_jungle_swamp", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_jungle.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_jungle.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -330,12 +333,12 @@ function unilib.pkg.tree_jungle.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil then
 
-        unilib.register_decoration("default_tree_jungle_log", {
+        unilib.register_decoration_generic("default_tree_jungle_log", {
             -- From default/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_jungle_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_jungle_log.mts",
 
             fill_ratio = 0.005,
             flags = "place_center_x",

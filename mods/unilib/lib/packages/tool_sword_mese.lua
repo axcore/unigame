@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_sword_mese.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From default:sword_mese
         part_name = "mese",
         ingredient = "unilib:mineral_mese_crystal",
     })
-    unilib.apply_toolranks("unilib:tool_sword_mese", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_mese", "sword")
 
 end

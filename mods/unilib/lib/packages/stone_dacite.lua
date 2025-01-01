@@ -9,7 +9,7 @@
 unilib.pkg.stone_dacite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_dacite.exec()
         description = S("Dacite"),
 
         category = "extrusive",
+        colour = "#7C7C7C",
         grinder_flag = true,
         hardness = 2,
     })
@@ -72,6 +73,24 @@ function unilib.pkg.stone_dacite.exec()
 
         replace_mode = mode,
         description = S("Dacite Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_dacite_cobble_compressed
+        part_name = "dacite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Dacite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_dacite_cobble_condensed
+        part_name = "dacite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Dacite Cobble"),
     })
 
 end

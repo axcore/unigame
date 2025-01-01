@@ -9,7 +9,7 @@
 unilib.pkg.clay_eclogite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_eclogite.exec()
         -- Texture from UGBC, eclogite_clay.png. Original code
         description = S("Eclogite Clay"),
         tiles = {"unilib_clay_eclogite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
     })
 
 end

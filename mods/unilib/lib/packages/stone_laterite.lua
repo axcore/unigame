@@ -9,7 +9,7 @@
 unilib.pkg.stone_laterite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_laterite.exec()
         description = S("Laterite"),
 
         category = "clay_dirt",
+        colour = "#966A46",
         grinder_flag = true,
         hardness = 1,
     })
@@ -73,6 +74,24 @@ function unilib.pkg.stone_laterite.exec()
         replace_mode = mode,
         description = S("Laterite Rubble"),
         img_list = {"unilib_stone_laterite.png^unilib_stone_rubble_overlay.png"},
+    })
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_laterite_rubble_compressed
+        part_name = "laterite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Laterite Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_laterite_rubble_condensed
+        part_name = "laterite",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Laterite Rubble"),
     })
 
 end

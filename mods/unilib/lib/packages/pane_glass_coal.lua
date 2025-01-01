@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.pane_glass_coal.exec()
             description = S("Coal Glass Pane"),
             textures = {img, "", "unilib_pane_glass_ordinary_edge.png^[colorize:#828282"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = img,
             recipe = {

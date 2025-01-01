@@ -17,9 +17,9 @@
 unilib.pkg.stone_phyllite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_phyllite.exec()
         description = S("Phyllite"),
 
         category = "metamorphic",
+        colour = "#A9AEB3",
         grinder_flag = true,
         hardness = 1,
         moss_flag = true,
@@ -95,26 +96,22 @@ function unilib.pkg.stone_phyllite.exec()
         wall_orig_name = "underch:phylite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:phylite. Creates unilib:stone_phyllite_cobble_compressed
+        part_name = "phyllite",
+        orig_name = "compressed:phylite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:phylite. Creates unilib:stone_phyllite_cobble_compressed
-            part_name = "phyllite",
-            orig_name = "compressed:phylite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Phyllite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Phyllite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:phylite. Creates unilib:stone_phyllite_cobble_condensed
+        part_name = "phyllite",
+        orig_name = "condensed:phylite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:phylite. Creates unilib:stone_phyllite_cobble_condensed
-            part_name = "phyllite",
-            orig_name = "condensed:phylite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Phyllite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Phyllite Cobble"),
+    })
 
 end

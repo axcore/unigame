@@ -9,7 +9,7 @@
 unilib.pkg.vine_fiery = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,10 @@ function unilib.pkg.vine_fiery.exec()
         description = S("Fiery Vine"),
         tiles = {img},
         groups = {choppy = 3, oddly_breakable_by_hand = 1, hot = 1},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
-        damage_per_second = 1 * unilib.underch_damage_scaling_factor,
+        damage_per_second = 1 * unilib.constant.underch_damage_scaling_factor,
         drawtype = "signlike",
         inventory_image = img,
         is_ground_content = false,

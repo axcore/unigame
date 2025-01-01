@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_steel_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.misc_frame_steel_ornate.exec()
 --      tiles = {"unilib_misc_frame_steel_ornate_overlay.png"},
         tiles = {"unilib_glass_ordinary.png^unilib_misc_frame_steel_ornate_overlay.png"},
         groups = {cracky = 3},
-        sounds = unilib.node_sound_metal_defaults({
+        sounds = unilib.sound.generate_metal({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),

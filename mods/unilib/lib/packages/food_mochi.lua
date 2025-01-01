@@ -9,7 +9,7 @@
 unilib.pkg.food_mochi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.food_mochi.init()
         depends = {
             "utensil_mortar_pestle",
             "vessel_glass_empty",
-            "vessel_glass_water",
+            "vessel_glass_with_water",
         },
         suggested = {
             "crop_rice_white",                  -- group:food_rice
@@ -41,7 +41,7 @@ function unilib.pkg.food_mochi.exec()
         -- N.B. no food_rice in original code
         groups = {flammable = 2, food_mochi = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_mochi", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_mochi", 3),
     })
     unilib.register_craft({
         -- From farming:mochi
@@ -49,11 +49,11 @@ function unilib.pkg.food_mochi.exec()
         recipe = {
             {"group:food_rice", "group:food_sugar", "group:food_rice"},
             {"", "unilib:utensil_mortar_pestle", ""},
-            {"", "unilib:vessel_glass_water", ""},
+            {"", "unilib:vessel_glass_with_water", ""},
         },
         replacements = {
             {"unilib:utensil_mortar_pestle", "unilib:utensil_mortar_pestle"},
-            {"unilib:vessel_glass_water", "unilib:vessel_glass_empty"},
+            {"unilib:vessel_glass_with_water", "unilib:vessel_glass_empty"},
         },
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_sauce_hollandaise = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.ingredient_sauce_hollandaise.exec()
                 attached_node = 1, dig_immediate = 3, eatable = 1, food = 1, food_sauce = 1,
                 food_vegan = 1, vessel = 1,
             },
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_ingredient_sauce_hollandaise.png",
@@ -62,7 +62,7 @@ function unilib.pkg.ingredient_sauce_hollandaise.exec()
             walkable = false,
             wield_image = "unilib_ingredient_sauce_hollandaise.png",
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:ingredient_sauce_hollandaise", 3, "unilib:vessel_bottle_glass_empty"
             ),
         }
@@ -73,7 +73,7 @@ function unilib.pkg.ingredient_sauce_hollandaise.exec()
         recipe = {
             {c_parsley, "group:food_butter", c_rosemary},
             {"", "unilib:food_milk_soy_red", ""},
-            {"", "unilib:vessel_bottle_glass_empty", ""}
+            {"", "unilib:vessel_bottle_glass_empty", ""},
         },
         replacements = {
             {"unilib:food_milk_soy_red", "unilib:vessel_bottle_glass_empty"},

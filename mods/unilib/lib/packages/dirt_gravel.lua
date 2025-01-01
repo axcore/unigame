@@ -9,7 +9,7 @@
 unilib.pkg.dirt_gravel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,15 +32,15 @@ function unilib.pkg.dirt_gravel.exec()
         description = S("Gravel Dirt"),
         tiles = {"unilib_dirt_gravel.png"},
         groups = {crumbly = 2, level = 1, soil = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = {
             items = {
                 {items = {"unilib:gravel_ordinary"}},
                 {items = {"unilib:dirt_ordinary"}},
-            }
+            },
         },
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft({
         -- From mtg_plus:graveldirt

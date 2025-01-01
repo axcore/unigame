@@ -9,7 +9,7 @@
 unilib.pkg.item_bark_tree = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.stripped_tree.add_mode
+local mode = unilib.global.imported_mod_table.stripped_tree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.item_bark_tree.exec()
         recipe = c_bark,
         burntime = 15,
     })
-    if unilib.pkg_executed_table["item_string_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_string_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From stripped_tree, default:tree_bark
@@ -50,11 +50,11 @@ function unilib.pkg.item_bark_tree.exec()
                 {c_bark, c_bark, c_bark},
                 {c_bark, c_bark, c_bark},
                 {c_bark, c_bark, c_bark},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["item_fertiliser_mulch"] ~= nil then
+    if unilib.global.pkg_executed_table["item_fertiliser_mulch"] ~= nil then
 
         unilib.register_craft({
             -- From stripped_tree, default:tree_bark
@@ -74,7 +74,7 @@ function unilib.pkg.item_bark_tree.post()
 
     local c_bark = "unilib:item_bark_tree"
 
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil  then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil  then
 
         unilib.register_craft({
             -- From stripped_tree, default:tree_bark
@@ -84,7 +84,7 @@ function unilib.pkg.item_bark_tree.post()
                 {c_bark, "group:craftable_bucket", c_bark},
                 {c_bark, c_bark, c_bark},
             },
-            replacements = unilib.craftable_bucket_list,
+            replacements = unilib.global.craftable_bucket_list,
         })
 
     end

@@ -9,7 +9,7 @@
 unilib.pkg.food_pepper_stuffed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,13 +35,13 @@ function unilib.pkg.food_pepper_stuffed.exec()
         description = S("Raw Stuffed Pepper"),
         inventory_image = "unilib_food_pepper_stuffed_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_stuffed_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_stuffed_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:stuffed_pepper_raw
         type = "shapeless",
         output = "unilib:food_pepper_stuffed_raw 3",
-        recipe = {"group:food_cheese", "unilib:food_bread_ordinary", "group:food_pepper"}
+        recipe = {"group:food_cheese", "unilib:food_bread_ordinary", "group:food_pepper"},
     })
 
     unilib.register_craftitem("unilib:food_pepper_stuffed", "bbq:stuffed_pepper", mode, {
@@ -49,7 +49,7 @@ function unilib.pkg.food_pepper_stuffed.exec()
         description = S("Stuffed Pepper"),
         inventory_image = "unilib_food_pepper_stuffed.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_stuffed", 9),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_stuffed", 9),
     })
     unilib.register_craft({
         -- From bbq:stuffed_pepper

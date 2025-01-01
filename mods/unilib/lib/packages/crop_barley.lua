@@ -9,7 +9,7 @@
 unilib.pkg.crop_barley = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,12 @@ function unilib.pkg.crop_barley.init()
     return {
         description = "Barley",
         notes = "Barley seeds are dropped randomly by dry grass",
-        optional = {"dye_basic", "ingredient_flour_ordinary", "utensil_mortar_pestle"},
+        optional = {
+            "dye_basic",
+            "ingredient_flour_barley",
+            "ingredient_flour_ordinary",
+            "utensil_mortar_pestle",
+        },
     }
 
 end
@@ -30,7 +35,7 @@ function unilib.pkg.crop_barley.exec()
     local fertility_list = {"arid_soil"}
 
     local orig_name_list = {}
-    for i = 1, 7 do
+    for i = 1, 8 do
         table.insert(orig_name_list, "farming:barley_" .. i)
     end
 
@@ -42,11 +47,12 @@ function unilib.pkg.crop_barley.exec()
         grow_orig_name = orig_name_list,
         harvest_orig_name = "farming:barley",
         seed_orig_name = "farming:seed_barley",
-        steps = 7,
+        steps = 8,
 
         replace_mode = mode,
         fertility_list = fertility_list,
         grow_list = {
+            {},
             {},
             {},
             {},
@@ -84,8 +90,11 @@ function unilib.pkg.crop_barley.exec()
         place_param2 = 3,
         seed_description = S("Barley Seed"),
     })
-    if unilib.pkg_executed_table["ingredient_flour_ordinary"] ~= nil and
-            unilib.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
+    -- N.B. The "ingredient_flour_barley" package, if loaded, uses an identical recipe to craft
+    --      barley flour
+    if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["utensil_mortar_pestle"] ~= nil and
+            unilib.global.pkg_executed_table["ingredient_flour_barley"] == nil then
 
         unilib.register_craft({
             -- From farming:barley
@@ -100,7 +109,7 @@ function unilib.pkg.crop_barley.exec()
                     "unilib:crop_barley_harvest",
                     "unilib:utensil_mortar_pestle",
                     "",
-                }
+                },
             },
             replacements = {
                 {"group:food_mortar_pestle", "unilib:utensil_mortar_pestle"},
@@ -108,7 +117,8 @@ function unilib.pkg.crop_barley.exec()
         })
 
     end
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

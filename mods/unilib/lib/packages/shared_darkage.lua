@@ -9,7 +9,7 @@
 unilib.pkg.shared_darkage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 local hint_text = S("use the screwdriver to rotate")
 
@@ -29,14 +29,14 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
     -- data_table optional fields:
     --      replace_mode (str): e.g. "defer"
     --      group_table (table): Normal group table, used in the .groups field of the
-    --          minetest.register_node() call. if not specified, the .groups field for "ingredient"
-    --          is used
+    --          core.register_node() call. if not specified, the .groups field for "ingredient" is
+    --          used
     --      sound_table (table): Normal group table, used in the .sound field of the
-    --          minetest.register_node() call. if not specified, the .sound field for "ingredient"
-    --          is used
+    --          core.register_node() call. if not specified, the .sound field for "ingredient" is
+    --          used
     --      tile_table (table): Normal tile table, used in the .tiles field of the
-    --          minetest.register_node() call. If not specified, the .tiles field for "ingredient"
-    --          is used
+    --          core.register_node() call. If not specified, the .tiles field for "ingredient" is
+    --          used
 
     local orig_name = data_table.orig_name
     local ingredient = data_table.ingredient
@@ -48,15 +48,15 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
 
     local orig_mod_name, orig_item_name
     if orig_name ~= nil then
-        orig_mod_name, orig_item_name = unilib.split_name(orig_name)
+        orig_mod_name, orig_item_name = unilib.utils.split_name(orig_name)
     end
 
     -- (Use the groups/sounds/tiles from "ingredient", if necessary)
     local def_table = nil
-    if minetest.registered_nodes[ingredient] ~= nil then
-        def_table = table.copy(minetest.registered_nodes[ingredient])
-    elseif minetest.registered_craftitems[ingredient] ~= nil then
-        def_table = table.copy(minetest.registered_craftitems[ingredient])
+    if core.registered_nodes[ingredient] ~= nil then
+        def_table = table.copy(core.registered_nodes[ingredient])
+    elseif core.registered_craftitems[ingredient] ~= nil then
+        def_table = table.copy(core.registered_craftitems[ingredient])
     else
         return
     end
@@ -66,7 +66,7 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
     end
 
     if sound_table == nil then
-        sound_table = def_table.sounds or unilib.sound_table.node
+        sound_table = def_table.sounds or unilib.global.sound_table.node
     end
 
     if tile_table == nil then
@@ -86,10 +86,13 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
 
     unilib.register_node(ingredient .. "_with_frame_reinforced", this_orig_name, replace_mode, {
         -- From <modname>:reinforced_<name>
-        description = unilib.brackets(def_table.description, S("Reinforced Frame")),
+        description = unilib.utils.brackets(def_table.description, S("Reinforced Frame")),
         tiles = x_tile_table,
         groups = group_table,
         sounds = sound_table,
+
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
     })
     unilib.register_craft({
         output = ingredient .. "_with_frame_reinforced",
@@ -97,13 +100,13 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
             {"group:stick",    ingredient, "group:stick"},
             {ingredient, "group:stick", ingredient},
             {"group:stick",    ingredient, "group:stick"},
-        }
+        },
     })
-    minetest.register_craft({
+    unilib.register_craft({
         output = ingredient,
         recipe = {
             {ingredient .. "_with_frame_reinforced"},
-        }
+        },
     })
 
     -- Reinforced slope
@@ -135,13 +138,16 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
         this_orig_name,
         replace_mode,
         {
-            description = unilib.hint(
-                unilib.brackets(def_table.description, S("Reinforced Frame with Slope")), hint_text
+            description = unilib.utils.hint(
+                unilib.utils.brackets(def_table.description, S("Reinforced Frame with Slope")),
+                hint_text
             ),
             tiles = slope_tile_table,
             groups = group_table,
             sounds = sound_table,
 
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype2 = "facedir",
         }
     )
@@ -151,7 +157,7 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
             {ingredient, ingredient, "group:stick"},
             {ingredient, "group:stick", ingredient},
             {"group:stick", ingredient, ingredient},
-        }
+        },
     })
     unilib.register_craft({
         output = ingredient .. "_with_frame_reinforced_slope",
@@ -159,13 +165,13 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
             {"group:stick", ingredient, ingredient},
             {ingredient, "group:stick", ingredient},
             {ingredient, ingredient, "group:stick"},
-        }
+        },
     })
     unilib.register_craft({
         output = ingredient,
         recipe = {
             {ingredient .. "_with_frame_reinforced_slope"},
-        }
+        },
     })
 
     -- Reinforced arrow bar
@@ -197,13 +203,16 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
         this_orig_name,
         replace_mode,
         {
-            description = unilib.hint(
-                unilib.brackets(def_table.description, S("Reinforced Frame with Arrow")), hint_text
+            description = unilib.utils.hint(
+                unilib.utils.brackets(def_table.description, S("Reinforced Frame with Arrow")),
+                hint_text
             ),
             tiles = arrow_tile_table,
             groups = group_table,
             sounds = sound_table,
 
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype2 = "facedir",
         }
     )
@@ -238,12 +247,16 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
         this_orig_name,
         replace_mode,
         {
-            description = unilib.hint(
-                unilib.brackets(def_table.description, S("Reinforced Frame with Bars")), hint_text
+            description = unilib.utils.hint(
+                unilib.utils.brackets(def_table.description, S("Reinforced Frame with Bars")),
+                hint_text
             ),
             tiles = bar_tile_table,
             groups = group_table,
             sounds = sound_table,
+
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
         }
     )
     unilib.register_craft({
@@ -254,7 +267,7 @@ function unilib.pkg.shared_darkage.register_reinforced_frame(data_table)
             {"group:stick",    ingredient, "group:stick"},
         }
     })
-    minetest.register_craft({
+    unilib.register_craft({
         output = ingredient,
         recipe = {
             {ingredient .. "_with_frame_reinforced_bars"},

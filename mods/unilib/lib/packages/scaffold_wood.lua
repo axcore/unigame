@@ -9,7 +9,7 @@
 unilib.pkg.scaffold_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.scaffolding.add_mode
+local mode = unilib.global.imported_mod_table.scaffolding.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,10 +19,15 @@ function unilib.pkg.scaffold_wood.init()
 
     return {
         description = "Wooden scaffolding",
-        notes = "Place tower nodes one on top of the other. They are climbable like a ladder. At" ..
-                " the top, create a surrounding platform by right-clicking the tower with a." ..
-                " platform. Dig the tower node at the bottom to collapse the structure. Use a" ..
-                " wrench to reinforce tower/platform nodes so they don't collapse when punched",
+        notes = "Place a tower node on the ground, then right-click it with more tower nodes" ..
+                " (while standing at the bottom) to increase the height of the tower. Once" ..
+                " placed, tower nodes are climbed like a ladder. At the top, create a" ..
+                " surrounding platform by right-clicking the tower with platform nodes. When" ..
+                " it's time to remove the structure, dig one platform node to remove the" ..
+                " adjoining platform nodes; then dig the tower node at the bottom to remove" ..
+                " the whole tower. Use a wrench to reinforce tower/platform nodes so they don't" ..
+                " collapse when nodes below are dug. These nodes must be dug by hand, whereas" ..
+                " iron scaffolding must be dug with a tool",
         depends = {"item_stick_ordinary", "shared_scaffolding"},
         optional = "tree_apple"
     }
@@ -44,10 +49,12 @@ function unilib.pkg.scaffold_wood.exec()
             "unilib_scaffold_wood.png",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -66,7 +73,16 @@ function unilib.pkg.scaffold_wood.exec()
         walkable = false,
 
         after_dig_node = function(pos, node, metadata, digger)
-            unilib.dig_up(pos, node, digger)
+
+            unilib.misc.dig_up(pos, node, digger)
+            if unilib.setting.scaffolding_quick_remove_flag then
+
+                unilib.pkg.shared_scaffolding.dig_platform(
+                    pos, "unilib:scaffold_platform_wood", digger
+                )
+
+            end
+
         end,
 
         on_punch = function(pos, node, puncher)
@@ -75,7 +91,7 @@ function unilib.pkg.scaffold_wood.exec()
             if tool and tool == "unilib:item_wrench_scaffold" then
 
                 node.name = "unilib:scaffold_tower_wood_reinforced"
-                minetest.set_node(pos, node)
+                core.set_node(pos, node)
                 -- N.B. Removed as it produces infinite scaffolding
 --              puncher:get_inventory():add_item("main", ItemStack("unilib:scaffold_tower_wood"))
 
@@ -85,24 +101,28 @@ function unilib.pkg.scaffold_wood.exec()
 
         on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 
-            -- Punch with wooden platform
-            if itemstack:get_name() == "unilib:scaffold_platform_wood" then
+            local wielded_name = itemstack:get_name()
 
-                node = "unilib:scaffold_platform_wood"
-                unilib.pkg.shared_scaffolding.build_platform(node, pos, itemstack)
+            -- Punch with wooden platform
+            if wielded_name == "unilib:scaffold_platform_wood" then
+
+                unilib.pkg.shared_scaffolding.build_platform(
+                    "unilib:scaffold_platform_wood", pos, itemstack
+                )
 
             -- Punch with iron platform
-            elseif itemstack:get_name() == "unilib:scaffold_platform_iron" then
+            elseif wielded_name == "unilib:scaffold_platform_iron" then
 
-                node = "unilib:scaffold_platform_iron"
-                unilib.pkg.shared_scaffolding.build_platform(node, pos, itemstack)
+                unilib.pkg.shared_scaffolding.build_platform(
+                    "unilib:scaffold_platform_iron", pos, itemstack
+                )
 
             -- Punch with wooden tower
-            elseif itemstack:get_name() == "unilib:scaffold_tower_wood" then
+            elseif wielded_name == "unilib:scaffold_tower_wood" then
 
-                node = "unilib:scaffold_tower_wood"
-                local name = minetest.get_node(pos).name
-                unilib.pkg.shared_scaffolding.build_tower(node, pos, itemstack, player)
+                unilib.pkg.shared_scaffolding.build_tower(
+                    "unilib:scaffold_tower_wood", pos, itemstack, player
+                )
 
             end
 
@@ -115,7 +135,7 @@ function unilib.pkg.scaffold_wood.exec()
             {c_wood, c_wood, c_wood},
             {c_stick, "", c_stick},
             {c_wood, c_wood, c_wood},
-        }
+        },
     })
     unilib.register_craft({
         -- From scaffolding:scaffolding
@@ -124,7 +144,7 @@ function unilib.pkg.scaffold_wood.exec()
             {c_wood},
             {c_stick},
             {c_wood},
-        }
+        },
     })
     unilib.register_craft({
         -- From scaffolding:scaffolding
@@ -132,9 +152,9 @@ function unilib.pkg.scaffold_wood.exec()
         recipe = {
             {"unilib:scaffold_platform_wood"},
             {"unilib:scaffold_platform_wood"},
-        }
+        },
     })
-    if unilib.pkg_executed_table["tree_apple"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
 
         -- N.B. this is the only recipe that follows the original code, in that it uses a specific
         --      type of wood, rather than group:wood
@@ -143,7 +163,7 @@ function unilib.pkg.scaffold_wood.exec()
             output = "unilib:tree_apple_wood",
             recipe = {
                 {"unilib:scaffold_tower_wood", "unilib:scaffold_tower_wood"},
-            }
+            },
         })
 
     end
@@ -160,11 +180,13 @@ function unilib.pkg.scaffold_wood.exec()
             groups = {
                 cracky = 3, not_in_creative_inventory = 1, oddly_breakable_by_hand = 3, snappy = 2,
             },
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             climbable = true,
             drawtype = "nodebox",
             drop = "unilib:scaffold_tower_wood",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             light_source = unilib.pkg.shared_scaffolding.light_source,
             node_box = {
                 type = "fixed",
@@ -189,7 +211,7 @@ function unilib.pkg.scaffold_wood.exec()
                 if tool and tool == "unilib:item_wrench_scaffold" then
 
                     node.name = "unilib:scaffold_tower_wood"
-                    minetest.set_node(pos, node)
+                    core.set_node(pos, node)
                     -- N.B. Removed as it produces infinite scaffolding
                     --[[
                     puncher:get_inventory():add_item(
@@ -203,17 +225,21 @@ function unilib.pkg.scaffold_wood.exec()
 
             on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 
-                -- Punch with wooden platform
-                if itemstack:get_name() == "unilib:scaffold_platform_wood" then
+                local wielded_name = itemstack:get_name()
 
-                    node = "unilib:scaffold_platform_wood"
-                    unilib.pkg.shared_scaffolding.build_platform(node, pos, itemstack)
+                -- Punch with wooden platform
+                if wielded_name == "unilib:scaffold_platform_wood" then
+
+                    unilib.pkg.shared_scaffolding.build_platform(
+                        "unilib:scaffold_platform_wood", pos, itemstack
+                    )
 
                 -- Punch with iron platform
-                elseif itemstack:get_name() == "unilib:scaffold_platform_iron" then
+                elseif wielded_name == "unilib:scaffold_platform_iron" then
 
-                    node = "unilib:scaffold_platform_iron"
-                    unilib.pkg.shared_scaffolding.build_platform(node, pos, itemstack)
+                    unilib.pkg.shared_scaffolding.build_platform(
+                        "unilib:scaffold_platform_iron", pos, itemstack
+                    )
 
                 end
 
@@ -230,10 +256,12 @@ function unilib.pkg.scaffold_wood.exec()
             "unilib_scaffold_wood.png^unilib_scaffold_platform_overlay.png",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = false,
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -252,12 +280,7 @@ function unilib.pkg.scaffold_wood.exec()
         walkable = true,
 
         after_dig_node = function(pos, node, metadata, digger)
-
-            unilib.pkg.shared_scaffolding.dig_horizontal_x(pos, node, digger)
-            unilib.pkg.shared_scaffolding.dig_horizontal_x2(pos, node, digger)
-            unilib.pkg.shared_scaffolding.dig_horizontal_z(pos, node, digger)
-            unilib.pkg.shared_scaffolding.dig_horizontal_z2(pos, node, digger)
-
+            unilib.pkg.shared_scaffolding.dig_platform(pos, "unilib:scaffold_platform_wood", digger)
         end,
 
         on_punch = function(pos, node, puncher)
@@ -266,7 +289,7 @@ function unilib.pkg.scaffold_wood.exec()
             if tool and tool == "unilib:item_wrench_scaffold" then
 
                 node.name = "unilib:scaffold_platform_wood_reinforced"
-                minetest.set_node(pos, node)
+                core.set_node(pos, node)
 
             end
 
@@ -307,11 +330,13 @@ function unilib.pkg.scaffold_wood.exec()
             groups = {
                 cracky = 3, not_in_creative_inventory = 1, oddly_breakable_by_hand = 3, snappy = 2,
             },
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             climbable = false,
             drawtype = "nodebox",
             drop = "unilib:scaffold_platform_wood",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             light_source = unilib.pkg.shared_scaffolding.light_source,
             node_box = {
                 type = "fixed",
@@ -336,7 +361,7 @@ function unilib.pkg.scaffold_wood.exec()
                 if tool and tool == "unilib:item_wrench_scaffold" then
 
                     node.name = "unilib:scaffold_platform_wood"
-                    minetest.set_node(pos, node)
+                    core.set_node(pos, node)
 
                 end
 

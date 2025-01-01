@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_liberty_cap = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,8 +28,8 @@ function unilib.pkg.mushroom_liberty_cap.exec()
 
     -- Add a special mushroom-spreading ABM, and a particle-spawning ABM. To avoid creating these
     --      additional ABMs, just omit the "shared_cropocalypse_mushroom" package from your remixes
-    if unilib.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
-            unilib.pkg_executed_table["stone_ordinary_with_mese"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
+            unilib.global.pkg_executed_table["stone_ordinary_with_mese"] ~= nil then
 
         unilib.pkg.shared_cropocalypse_mushroom.register_abms(
             "liberty_cap", "group:liberty_cap_mushroom", "unilib:stone_ordinary_with_mese"
@@ -46,7 +46,7 @@ function unilib.pkg.mushroom_liberty_cap.exec()
             attached_node = 1, flammable = 1, food_liberty_cap_mushroom = 1,
             liberty_cap_mushroom = 1, mushroom = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -61,11 +61,11 @@ function unilib.pkg.mushroom_liberty_cap.exec()
         walkable = false,
         wield_image = "unilib_mushroom_liberty_cap.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_liberty_cap", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_liberty_cap", 4),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_liberty_cap", "cropocalypse:magic_mushroom")
 
-    unilib.register_decoration("cropocalypse_mushroom_liberty_cap", {
+    unilib.register_decoration_generic("cropocalypse_mushroom_liberty_cap", {
         -- From cropocalypse/glowing_mushrooms.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_liberty_cap",

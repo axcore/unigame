@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_quartzite_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_quartzite_red.exec()
         description = S("Red Quartzite Sandstone"),
 
         category = "sedimentary",
+        colour = "#B6A484",
         grinder_flag = true,
         grinder_powder = "unilib:sand_quartzite_red",
         grinder_gravel = "unilib:gravel_quartzite_red",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_quartzite_red.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_quartzite_red_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, quartzite_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_quartzite_red.exec()
             replace_mode = mode,
             description = S("Red Quartzite Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_quartzite_red_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_quartzite_red_cobble_compressed
+            part_name = "sandstone_quartzite_red",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Red Quartzite Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_quartzite_red_cobble_condensed
+            part_name = "sandstone_quartzite_red",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Red Quartzite Sandstone Cobble"),
         })
 
     end

@@ -9,7 +9,7 @@
 unilib.pkg.tree_ginkgo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_ginkgo.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Ginkgo biloba"
 
     unilib.register_tree({
@@ -94,10 +94,10 @@ function unilib.pkg.tree_ginkgo.exec()
         rail_description = S("Ginkgo Wood Fence Gate"),
     })
 
-    unilib.register_decoration("glem_tree_ginkgo_1", {
+    unilib.register_decoration_generic("glem_tree_ginkgo_1", {
         -- Original to unilib
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_tree_ginkgo_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_ginkgo_1.mts",
 
         fill_ratio = 0.005,
         flags = "place_center_x, place_center_z",

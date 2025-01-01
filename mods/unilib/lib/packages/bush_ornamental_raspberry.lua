@@ -9,7 +9,7 @@
 unilib.pkg.bush_ornamental_raspberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,6 +46,7 @@ function unilib.pkg.bush_ornamental_raspberry.exec()
         juice_description = S("Raspberry"),
         juice_type = "raspberry",
         rgb = "#c70039",
+
         orig_flag = true,
     })
 

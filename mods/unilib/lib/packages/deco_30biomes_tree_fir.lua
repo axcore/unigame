@@ -9,7 +9,7 @@
 unilib.pkg.deco_30biomes_tree_fir = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table["30biomes"].add_mode
+local mode = unilib.global.imported_mod_table["30biomes"].add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ end
 
 function unilib.pkg.deco_30biomes_tree_fir.post()
 
-    unilib.register_decoration_now("30biomes_tree_fir", nil, {
+    unilib.register_decoration_complete("30biomes_tree_fir", nil, {
         -- Original to unilib
         biomes = {"default_forest_coniferous", "default_taiga"},
         num_spawn_by = 8,
@@ -41,7 +41,7 @@ function unilib.pkg.deco_30biomes_tree_fir.post()
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 4,
     })
 

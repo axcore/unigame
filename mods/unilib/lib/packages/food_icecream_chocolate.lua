@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream_chocolate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.icecream.add_mode
+local mode = unilib.global.imported_mod_table.icecream.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.food_icecream_chocolate.exec()
         inventory_image = "unilib_food_icecream_chocolate.png",
         groups = {food_icecream = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_chocolate", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_chocolate", 8),
     })
     unilib.register_craft({
         -- From icecream:chocolate
@@ -59,7 +59,7 @@ function unilib.pkg.food_icecream_chocolate.exec()
             {"", "unilib:food_cone_icecream", ""},
         },
     })
-    if unilib.pkg_executed_table["food_chocolate_biscuit"] ~= nil then
+    if unilib.global.pkg_executed_table["food_chocolate_biscuit"] ~= nil then
 
         unilib.register_craftitem(
             -- From icecream:chocolate_with_cookies
@@ -71,7 +71,7 @@ function unilib.pkg.food_icecream_chocolate.exec()
                 inventory_image = "unilib_food_icecream_chocolate_chip.png",
                 groups = {food_icecream = 1},
 
-                on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_chocolate_chip", 12),
+                on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_chocolate_chip", 12),
             }
         )
         unilib.register_craft({

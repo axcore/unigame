@@ -9,7 +9,7 @@
 unilib.pkg.tree_wheki = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,13 @@ end
 
 function unilib.pkg.tree_wheki.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Dicksonia squarrosa"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -35,60 +40,85 @@ function unilib.pkg.tree_wheki.exec()
         description = S("Wheki Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_wheki_trunk", "aotearoa:wheki_tree", mode, {
         -- From aotearoa:wheki_tree
-        description = unilib.annotate(S("Wheki Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Wheki Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_wheki_trunk_top.png",
             "unilib_tree_wheki_trunk_top.png",
             "unilib_tree_wheki_trunk.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node=1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        node_box = node_box,
         paramtype = "light",
         paramtype2 = "facedir",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
+
+        -- N.B. Unlike in the original code, the tree collapses when either the trunk or skirt is
+        --      dug
+        after_destruct = function(pos, oldnode)
+
+            unilib.flora.collapse_slim_tree(
+                pos,
+                oldnode,
+                {"unilib:tree_wheki_trunk", "unilib:tree_wheki_trunk_skirt"}
+            )
+
+        end,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:wheki_tree
             output = "unilib:item_stick_ordinary 2",
             recipe = {
                 {"unilib:tree_wheki_trunk"},
-            }
+            },
         })
 
     end
 
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_wheki_trunk_stripped
+        part_name = "wheki",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Wheki Tree Trunk"),
+        group_table = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
+    })
+
     unilib.register_node("unilib:tree_wheki_trunk_skirt", "aotearoa:wheki_skirt", mode, {
         -- From aotearoa:wheki_skirt
-        description = unilib.annotate(S("Wheki Tree Trunk Skirt"), sci_name),
+        description = unilib.utils.annotate(S("Wheki Tree Trunk Skirt"), sci_name),
         tiles = {
             "unilib_tree_wheki_trunk_skirt_top.png",
             "unilib_tree_wheki_trunk_skirt_top.png",
             "unilib_tree_wheki_trunk_skirt.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         -- N.B. Drop the trunk, not the skirt
@@ -105,13 +135,25 @@ function unilib.pkg.tree_wheki.exec()
             fixed = {-1/3, -1/2, -1/3, 1/3, 1/2, 1/3},
         },
 
-        -- Collapse whole tree when cut
+        -- N.B. Unlike in the original code, the tree collapses when either the trunk or skirt is
+        --      dug
+        --[[
         after_destruct = function(pos, oldnode)
 
-            local node = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local node = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if node.name == "unilib:tree_wheki_trunk" then
-                minetest.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
             end
+
+        end,
+        ]]--
+        after_destruct = function(pos, oldnode)
+
+            unilib.flora.collapse_slim_tree(
+                pos,
+                oldnode,
+                {"unilib:tree_wheki_trunk", "unilib:tree_wheki_trunk_skirt"}
+            )
 
         end,
     })
@@ -120,10 +162,10 @@ function unilib.pkg.tree_wheki.exec()
 
     unilib.register_node("unilib:tree_wheki_crown", "aotearoa:wheki_crown", mode, {
         -- From aotearoa:wheki_crown
-        description = unilib.annotate(S("Wheki Tree Crown"), sci_name),
+        description = unilib.utils.annotate(S("Wheki Tree Crown"), sci_name),
         tiles = {"unilib_tree_wheki_crown.png"},
         groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -171,10 +213,10 @@ function unilib.pkg.tree_wheki.exec()
         use_texture_alpha = "clip",
     })
 
-    unilib.register_decoration("aotearoa_tree_wheki_clump_1", {
+    unilib.register_decoration_generic("aotearoa_tree_wheki_clump_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_wheki_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_wheki_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -188,10 +230,10 @@ function unilib.pkg.tree_wheki.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_wheki_clump_2", {
+    unilib.register_decoration_generic("aotearoa_tree_wheki_clump_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_wheki_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_wheki_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -205,27 +247,27 @@ function unilib.pkg.tree_wheki.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_wheki_dense_1", {
+    unilib.register_decoration_generic("aotearoa_tree_wheki_dense_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_wheki_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_wheki_1.mts",
 
         fill_ratio = 0.1,
         flags = "place_center_x, place_center_z",
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_wheki_dense_2", {
+    unilib.register_decoration_generic("aotearoa_tree_wheki_dense_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_wheki_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_wheki_2.mts",
 
         fill_ratio = 0.02,
         flags = "place_center_x, place_center_z",
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_wheki_crown", {
+    unilib.register_decoration_generic("aotearoa_tree_wheki_crown", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:tree_wheki_crown",

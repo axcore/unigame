@@ -9,7 +9,7 @@
 unilib.pkg.decor_frame_timber_glass_tinted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fachwerk.add_mode
+local mode = unilib.global.imported_mod_table.fachwerk.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.decor_frame_timber_glass_tinted.init()
 
     return {
         description = "Timber frame with glass",
-        depends = {"glass_tinted", "shared_fachwerk"},
+        depends = {"glass_tinted_basic", "shared_fachwerk"},
     }
 
 end
 
 function unilib.pkg.decor_frame_timber_glass_tinted.exec()
 
-    if not unilib.fachwerk_extra_nodes_flag then
+    if not unilib.setting.fachwerk_extra_nodes_flag then
         return
     end
 
@@ -38,7 +38,7 @@ function unilib.pkg.decor_frame_timber_glass_tinted.exec()
     for _, part_name in pairs(glass_list) do
 
         local ingredient = "unilib:glas_tinted_" .. part_name
-        local def_table = minetest.registered_nodes[ingredient]
+        local def_table = core.registered_nodes[ingredient]
 
         if def_table ~= nil then
 
@@ -48,6 +48,8 @@ function unilib.pkg.decor_frame_timber_glass_tinted.exec()
                 orig_name = nil,
 
                 replace_mode = mode,
+                simple_flag = true,
+                transparent_flag = true,
             })
 
         end

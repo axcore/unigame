@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_half = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.door_wood_half.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -56,7 +56,7 @@ function unilib.pkg.door_wood_half.exec()
 
         on_rightclick = function(pos, node, puncher)
 
-            local node2 = minetest.get_node({x = pos.x, y = (pos.y + 1), z = pos.z})
+            local node2 = core.get_node({x = pos.x, y = (pos.y + 1), z = pos.z})
 
             local param2 = node.param2
             if param2 % 4 == 1 then
@@ -69,14 +69,14 @@ function unilib.pkg.door_wood_half.exec()
                 param2 = param2 + 3     --3
             end
 
-            minetest.swap_node(pos, {name = "unilib:door_wood_half", param2 = param2})
+            core.swap_node(pos, {name = "unilib:door_wood_half", param2 = param2})
 
             -- If the node above consists of a door of the same type, open it as well
             -- But don't do that for doors beneath this one, so that the combined door can be
             --      partly opened
             if node2 ~= nil and node2.name == node.name and node2.param2 == node.param2 then
 
-                minetest.swap_node(
+                core.swap_node(
                     {x = pos.x, y = (pos.y + 1), z = pos.z},
                     {name = "unilib:door_wood_half", param2 = param2}
                 )
@@ -91,7 +91,7 @@ function unilib.pkg.door_wood_half.exec()
         recipe = {
             {"", "group:wood", ""},
             {"", "unilib:door_wood_ordinary", ""},
-        }
+        },
     })
     -- (For convenience, convert open/closed half-doors)
     unilib.register_craft({
@@ -99,14 +99,14 @@ function unilib.pkg.door_wood_half.exec()
         output = "unilib:door_wood_half",
         recipe = {
             {"unilib:door_wood_half_inverted"},
-        }
+        },
     })
     unilib.register_craft({
         -- From cottages:half_door_inverted
         output = "unilib:door_wood_half_inverted",
         recipe = {
             {"unilib:door_wood_half"},
-        }
+        },
     })
 
     unilib.register_node("unilib:door_wood_half_inverted", "cottages:half_door_inverted", mode, {
@@ -135,7 +135,7 @@ function unilib.pkg.door_wood_half.exec()
 
         on_rightclick = function(pos, node, puncher)
 
-            local node2 = minetest.get_node({x = pos.x, y = (pos.y + 1), z = pos.z})
+            local node2 = core.get_node({x = pos.x, y = (pos.y + 1), z = pos.z})
 
             local param2 = node.param2
             if param2 % 4 == 1 then
@@ -148,12 +148,12 @@ function unilib.pkg.door_wood_half.exec()
                 param2 = param2 - 1     -- 2
             end
 
-            minetest.swap_node(pos, {name = "unilib:door_wood_half_inverted", param2 = param2})
+            core.swap_node(pos, {name = "unilib:door_wood_half_inverted", param2 = param2})
 
             -- If the node above consists of a door of the same type, open it as well
             if node2 ~= nil and node2.name == node.name and node2.param2 == node.param2 then
 
-                minetest.swap_node(
+                core.swap_node(
                     {x = pos.x, y = (pos.y + 1), z = pos.z},
                     {name = "unilib:door_wood_half_inverted", param2 = param2}
                 )

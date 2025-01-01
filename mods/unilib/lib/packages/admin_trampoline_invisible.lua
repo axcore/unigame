@@ -9,7 +9,7 @@
 unilib.pkg.admin_trampoline_invisible = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,14 +35,14 @@ function unilib.pkg.admin_trampoline_invisible.exec()
             "maptools:pusher_" .. i,
             mode,
             {
-                description = unilib.brackets(
+                description = unilib.utils.brackets(
                     S("Invisible Trampoline"), S("Strength %s"):format(i)
                 ),
                 tiles = {"unilib_admin_invisible.png"},
                 -- N.B. not_in_creative_inventory not in original code
                 groups = {
                     bouncy = i * 100, fall_damage_add_percent = -100,
-                    not_in_creative_inventory = unilib.show_admin_item_group,
+                    not_in_creative_inventory = unilib.globalshow_admin_item_group,
                 },
                 -- (no sounds)
 
@@ -51,6 +51,8 @@ function unilib.pkg.admin_trampoline_invisible.exec()
                 inventory_image = "unilib_metal_steel_block.png" ..
                         "^unilib_admin_trampoline_invisible.png" ..
                         "^unilib_numeric_overlay_" .. i .. ".png",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 node_box = {
                     type = "fixed",
                     fixed = {-0.5, -0.5, -0.5, 0.5, -0.4999, 0.5},

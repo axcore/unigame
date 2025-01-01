@@ -9,7 +9,7 @@
 unilib.pkg.liquid_water_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -69,7 +69,7 @@ function unilib.pkg.liquid_water_ordinary.exec()
                 },
             },
             groups = {cools_lava = 1, liquid = 3, water = 3},
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,
@@ -99,7 +99,7 @@ function unilib.pkg.liquid_water_ordinary.exec()
             description = S("Flowing Ordinary Water"),
             tiles = {"unilib_liquid_water_ordinary.png"},
             groups = {cools_lava = 1, liquid = 3, not_in_creative_inventory = 1, water = 3},
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,

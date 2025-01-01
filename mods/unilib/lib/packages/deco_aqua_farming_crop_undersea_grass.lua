@@ -9,7 +9,7 @@
 unilib.pkg.deco_aqua_farming_crop_undersea_grass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,9 +48,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_grass.post()
         "default_taiga_ocean",
     }
 
-    if unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_grass_1", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_grass_1", nil, {
             -- From aqua_farming/mapgen_sea_grass.lua
             -- Completes decoration in package "crop_undersea_grass"
             biomes = biome_list,
@@ -61,9 +61,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_grass.post()
 
     end
 
-    if unilib.pkg_executed_table["sand_silver"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_silver"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_grass_2", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_grass_2", nil, {
             -- From aqua_farming/mapgen_sea_grass.lua
             -- Completes decoration in package "crop_undersea_grass"
             biomes = biome_list,
@@ -74,9 +74,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_grass.post()
 
     end
 
-    if unilib.pkg_executed_table["sand_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_grass_3", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_grass_3", nil, {
             -- From aqua_farming/mapgen_sea_grass.lua
             -- Completes decoration in package "crop_undersea_grass"
             biomes = biome_list,
@@ -87,9 +87,9 @@ function unilib.pkg.deco_aqua_farming_crop_undersea_grass.post()
 
     end
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("aqua_farming_crop_sea_grass_4", nil, {
+        unilib.register_decoration_complete("aqua_farming_crop_sea_grass_4", nil, {
             -- From aqua_farming/mapgen_sea_grass.lua
             -- Completes decoration in package "crop_undersea_grass"
             biomes = biome_list,

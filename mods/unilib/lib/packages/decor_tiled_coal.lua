@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,8 +31,10 @@ function unilib.pkg.decor_tiled_coal.exec()
         description = S("Decorative Coal Tile"),
         tiles = {"unilib_decor_tiled_coal.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
     unilib.register_craft({
@@ -40,7 +42,7 @@ function unilib.pkg.decor_tiled_coal.exec()
         output = "unilib:decor_tiled_coal 4",
         recipe = {
             {"unilib:mineral_coal_block", "unilib:stone_ordinary"},
-            {"unilib:stone_ordinary", "unilib:mineral_coal_block"}
+            {"unilib:stone_ordinary", "unilib:mineral_coal_block"},
         },
     })
 

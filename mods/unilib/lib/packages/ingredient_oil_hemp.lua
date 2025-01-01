@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_oil_hemp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.ingredient_oil_hemp.exec()
         description = S("Bottle of Hemp Oil"),
         tiles = {"unilib_ingredient_oil_hemp.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_oil = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_oil_hemp.png",
@@ -50,8 +50,8 @@ function unilib.pkg.ingredient_oil_hemp.exec()
         recipe = {
             {"unilib:crop_hemp_harvest", "unilib:crop_hemp_harvest", "unilib:crop_hemp_harvest"},
             {"unilib:crop_hemp_harvest", "unilib:crop_hemp_harvest", "unilib:crop_hemp_harvest"},
-            {"", "unilib:vessel_bottle_glass_empty", ""}
-        }
+            {"", "unilib:vessel_bottle_glass_empty", ""},
+        },
     })
     unilib.register_craft({
         -- From farming:hemp_oil
@@ -59,8 +59,8 @@ function unilib.pkg.ingredient_oil_hemp.exec()
         recipe = {
             {"unilib:crop_hemp_seed", "unilib:crop_hemp_seed", "unilib:crop_hemp_seed"},
             {"unilib:crop_hemp_seed", "unilib:crop_hemp_seed", "unilib:crop_hemp_seed"},
-            {"unilib:crop_hemp_seed", "unilib:vessel_bottle_glass_empty", "unilib:crop_hemp_seed"}
-        }
+            {"unilib:crop_hemp_seed", "unilib:vessel_bottle_glass_empty", "unilib:crop_hemp_seed"},
+        },
     })
     unilib.register_craft({
         -- From farming:hemp_oil

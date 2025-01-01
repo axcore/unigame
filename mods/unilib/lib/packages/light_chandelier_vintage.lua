@@ -9,7 +9,7 @@
 unilib.pkg.light_chandelier_vintage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_vintage.add_mode
+local mode = unilib.global.imported_mod_table.morelights_vintage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,16 +34,18 @@ function unilib.pkg.light_chandelier_vintage.exec()
         description = S("Vintage Chandelier"),
         tiles = {
             "unilib_light_chandelier_vintage.png",
-            "unilib_chain_brass_vintage.png^[multiply:#DFDFDF"
+            "unilib_hardware_chain_brass_vintage.png^[multiply:#DFDFDF",
         },
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         collision_box = {
             type = "fixed",
             fixed = {-3/8, -1/2, -3/8, 3/8, 1/2, 3/8},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 10,
         mesh = "unilib_light_chandelier_vintage.obj",
         paramtype = "light",
@@ -60,8 +62,8 @@ function unilib.pkg.light_chandelier_vintage.exec()
         recipe = {
             {"", c_brass, ""},
             {"unilib:light_bulb_normal", c_brass, "unilib:light_bulb_normal"},
-            {c_steel, c_brass, c_steel}
-        }
+            {c_steel, c_brass, c_steel},
+        },
     })
 
 end

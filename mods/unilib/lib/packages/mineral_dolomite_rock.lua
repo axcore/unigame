@@ -9,7 +9,7 @@
 unilib.pkg.mineral_dolomite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_dolomite_rock.exec()
 
     local c_lump = "unilib:mineral_dolomite_lump"
-    local hardness = unilib.mineral_table["dolomite"]["hardness"]
+    local hardness = unilib.global.mineral_table["dolomite"]["hardness"]
 
     unilib.register_mineral_rock("dolomite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_dolomite_rock.exec()
         description = S("Dolomite Rock"),
         tiles = {"unilib_mineral_dolomite_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

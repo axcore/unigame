@@ -9,7 +9,7 @@
 unilib.pkg.tree_myrtle_lemon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,39 +25,51 @@ end
 
 function unilib.pkg.tree_myrtle_lemon.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Backhousia citriodora"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "myrtle_lemon",
         description = S("Lemon Myrtle Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_myrtle_lemon_trunk", "australia:lemon_myrtle_tree", mode, {
         -- From australia:lemon_myrtle_tree
-        description = unilib.annotate(S("Lemon Myrtle Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Lemon Myrtle Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_myrtle_lemon_trunk_top.png",
             "unilib_tree_myrtle_lemon_trunk_top.png",
             "unilib_tree_myrtle_lemon_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_myrtle_lemon_trunk_stripped
+        part_name = "myrtle_lemon",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Lemon Myrtle Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -125,7 +137,7 @@ function unilib.pkg.tree_myrtle_lemon.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_myrtle_lemon_closed
+        -- Original to unilib. Creates unilib:gate_myrtle_lemon_closed, etc
         part_name = "myrtle_lemon",
         orig_name = {nil, nil},
 
@@ -136,10 +148,10 @@ function unilib.pkg.tree_myrtle_lemon.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_myrtle_lemon_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_myrtle_lemon_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_myrtle_lemon_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_myrtle_lemon_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

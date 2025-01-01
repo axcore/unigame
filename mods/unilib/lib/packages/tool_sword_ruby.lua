@@ -9,7 +9,7 @@
 unilib.pkg.tool_sword_ruby = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.gemtools.add_mode
+local mode = unilib.global.imported_mod_table.gemtools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,13 +44,13 @@ function unilib.pkg.tool_sword_ruby.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_sword({
         -- From gemtools:sword_ruby
         part_name = "ruby",
         ingredient = "unilib:mineral_ruby_gem",
     })
-    unilib.apply_toolranks("unilib:tool_sword_ruby", "sword")
+    unilib.tools.apply_toolranks("unilib:tool_sword_ruby", "sword")
 
 end

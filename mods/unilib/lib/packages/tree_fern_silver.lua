@@ -9,7 +9,7 @@
 unilib.pkg.tree_fern_silver = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_fern_silver.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Cyathea dealbata"
 
     unilib.register_tree({
@@ -35,20 +35,23 @@ function unilib.pkg.tree_fern_silver.exec()
         description = S("Silver Fern Tree Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_fern_silver_trunk", "aotearoa:silver_fern_tree", mode, {
         -- From aotearoa:silver_fern_tree
-        description = unilib.annotate(S("Silver Fern Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Silver Fern Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_fern_silver_trunk_top.png",
             "unilib_tree_fern_silver_trunk_top.png",
             "unilib_tree_fern_silver_trunk.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node=1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
@@ -64,15 +67,23 @@ function unilib.pkg.tree_fern_silver.exec()
             fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
         },
         use_texture_alpha = "clip",
+
+        -- N.B. No .after_destruct in original code
+        after_destruct = function(pos, oldnode)
+            unilib.flora.collapse_slim_tree(pos, oldnode, {"unilib:tree_fern_silver_trunk"})
+        end,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:silver_fern_tree
             output = "unilib:item_stick_ordinary 2",
             recipe = {
                 {"unilib:tree_fern_silver_trunk"},
-            }
+            },
         })
 
     end
@@ -81,10 +92,10 @@ function unilib.pkg.tree_fern_silver.exec()
 
     unilib.register_node("unilib:tree_fern_silver_crown", "aotearoa:silver_fern_crown", mode, {
         -- From aotearoa:silver_fern_crown
-        description = unilib.annotate(S("Silver Fern Tree Crown"), sci_name),
+        description = unilib.utils.annotate(S("Silver Fern Tree Crown"), sci_name),
         tiles = {"unilib_tree_fern_silver_crown.png"},
         groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -132,10 +143,10 @@ function unilib.pkg.tree_fern_silver.exec()
         use_texture_alpha = "clip",
     })
 
-    unilib.register_decoration("aotearoa_tree_fern_silver_clump_1", {
+    unilib.register_decoration_generic("aotearoa_tree_fern_silver_clump_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_fern_silver_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_fern_silver_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -149,10 +160,10 @@ function unilib.pkg.tree_fern_silver.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_fern_silver_clump_2", {
+    unilib.register_decoration_generic("aotearoa_tree_fern_silver_clump_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_fern_silver_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_fern_silver_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -166,7 +177,7 @@ function unilib.pkg.tree_fern_silver.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_fern_silver_crown", {
+    unilib.register_decoration_generic("aotearoa_tree_fern_silver_crown", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:tree_fern_silver_crown",

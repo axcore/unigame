@@ -17,9 +17,9 @@
 unilib.pkg.tree_aspen = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local doors_add_mode = unilib.imported_mod_table.doors.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local doors_add_mode = unilib.global.imported_mod_table.doors.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -85,7 +85,6 @@ function unilib.pkg.tree_aspen.exec()
         common_group = 3,
         description = S("Aspen Tree Trunk"),
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     --[[
@@ -105,7 +104,7 @@ function unilib.pkg.tree_aspen.exec()
         output = "default:aspen_wood 4",
         recipe = {
             {"default:aspen_tree"},
-        }
+        },
     })
     minetest.register_craft({
         -- From default:aspen_wood
@@ -149,8 +148,8 @@ function unilib.pkg.tree_aspen.exec()
             max_items = 1,
             items = {
                 {items = {"default:aspen_sapling"}, rarity = 20},
-                {items = {"default:aspen_leaves"}}
-            }
+                {items = {"default:aspen_leaves"}},
+            },
         },
         is_ground_content = false,
         paramtype = "light",
@@ -289,10 +288,12 @@ function unilib.pkg.tree_aspen.exec()
             {"default:aspen_tree", "default:aspen_tree", "default:aspen_tree"},
             {"default:aspen_tree", "", "default:aspen_tree"},
             {"default:aspen_tree", "default:aspen_tree", "default:aspen_tree"},
-        }
+        },
     })
     ]]--
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and (
+            moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_tree_panel({
             -- From moreblocks:all_faces_aspen_tree. Creates unilib:tree_aspen_panel
@@ -380,10 +381,10 @@ function unilib.pkg.tree_aspen.exec()
         burntime = 5,
     })
     ]]--
-    if doors_add_mode ~= "defer" then
+    if doors_add_mode ~= "defer" or not core.get_modpath("doors") then
 
         unilib.register_fence_gate_quick({
-            -- From doors:gate_aspen_wood. Creates unilib:gate_aspen_closed
+            -- From doors:gate_aspen_wood_closed, etc. Creates unilib:gate_aspen_closed, etc
             part_name = "aspen",
             orig_name = {"doors:gate_aspen_wood_closed", "doors:gate_aspen_wood_open"},
 
@@ -419,10 +420,10 @@ function unilib.pkg.tree_aspen.exec()
         y_min = 1,
     })
     ]]--
-    unilib.register_decoration("default_tree_aspen", {
+    unilib.register_decoration_generic("default_tree_aspen", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_aspen.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_aspen.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -465,13 +466,13 @@ function unilib.pkg.tree_aspen.exec()
     })
     ]]--
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil and
-            unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil and
+            unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
-        unilib.register_decoration("default_tree_aspen_log", {
+        unilib.register_decoration_generic("default_tree_aspen_log", {
             -- From default/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_aspen_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_aspen_log.mts",
 
             flags = "place_center_x",
             noise_params = {

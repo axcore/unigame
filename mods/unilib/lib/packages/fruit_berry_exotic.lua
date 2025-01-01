@@ -9,7 +9,7 @@
 unilib.pkg.fruit_berry_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,9 +33,10 @@ function unilib.pkg.fruit_berry_exotic.exec()
         -- N.B. No groups in original code
         groups = {food_berry = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_berry_exotic", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_berry_exotic", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -47,6 +48,15 @@ function unilib.pkg.fruit_berry_exotic.exec()
 
     end
 
-    -- N.B. No call to unilib.setup_regrowing_fruit(), as this fruit grows on a bush
+    unilib.register_juice({
+        ingredient = "unilib:fruit_berry_exotic",
+        juice_description = S("Exotic Berry"),
+        juice_type = "berry_exotic",
+        rgb = "#ca0e24",
+
+        orig_flag = false,
+    })
+
+    -- N.B. No call to unilib.register_regrowing_fruit(), as this fruit grows on a bush
 
 end

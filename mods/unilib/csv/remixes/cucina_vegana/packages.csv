@@ -1,7 +1,6 @@
 # "cucina_vegana" remix - contains everything from the cucina_vegana mod, except for support for
 #       various technology/mob mods, and for some food mods that are not currently imported into
 #       unilib (but might be in the future)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -122,6 +121,7 @@ item_paper_ordinary|default moreblocks
 item_stick_ordinary|default
 mineral_coal|default technic
 mushroom_brown|flowers
+shared_wool|wool
 torch_ordinary|default
 vessel_bottle_glass_empty|thirsty vessels
 vessel_glass_empty|thirsty vessels
@@ -157,7 +157,7 @@ utensil_mortar_pestle|farming
 #grass_ordinary|default
 #ingredient_flour_ordinary|farming
 #ingredient_sugar_cane|better_farming
-#mineral_mese|default
+#mineral_mese|default glemr11
 #plant_cactus_ordinary|default
 #plant_kelp_ordinary|default
 #plant_shrub_dry|default

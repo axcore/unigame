@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_mangrove_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_mangrove_grey.init()
     return {
         description = "Grey mangrove tree as decoration",
         depends = {"biome_australia_mangroves", "tree_mangrove_grey"},
-        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary", "sand_ordinary"}
+        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary", "sand_ordinary"},
     }
 
 end
@@ -29,13 +29,21 @@ function unilib.pkg.deco_australia_tree_mangrove_grey.post()
 
     for i = 1, 3 do
 
-        unilib.register_decoration_now("australia_tree_mangrove_grey_in_mangroves_" .. i, nil, {
+        unilib.register_decoration_complete(
             -- From australia/biome_mangroves.lua
-            biomes = "australia_mangroves",
-            place_on = {"unilib:dirt_mud_mangrove", "unilib:dirt_ordinary", "unilib:sand_ordinary"},
-            y_max = 3,
-            y_min = -2,
-        })
+            "australia_tree_mangrove_grey_in_mangroves_" .. i,
+            nil,
+            {
+                biomes = "australia_mangroves",
+                place_on = {
+                    "unilib:dirt_mud_mangrove",
+                    "unilib:dirt_ordinary",
+                    "unilib:sand_ordinary",
+                },
+                y_max = 3,
+                y_min = -2,
+            }
+        )
 
     end
 

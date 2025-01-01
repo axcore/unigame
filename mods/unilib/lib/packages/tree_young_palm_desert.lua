@@ -9,7 +9,7 @@
 unilib.pkg.tree_young_palm_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,14 +29,15 @@ function unilib.pkg.tree_young_palm_desert.exec()
         -- From GLEMr4, lib_ecology:tree_desert_palm
         description = S("Young Desert Palm Tree"),
         tiles = {"unilib_tree_young_palm_desert.png"},
-        groups = {attatched_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         -- N.B. floodable no longer required, because of unilib's flooding effects
---        floodable = true,
-        is_ground_content = false,
+--      floodable = true,
+        -- N.B. removed .is_ground_content to match other young tree packages
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",

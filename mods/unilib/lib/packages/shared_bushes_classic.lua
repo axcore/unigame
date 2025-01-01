@@ -9,7 +9,7 @@
 unilib.pkg.shared_bushes_classic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes_classic.add_mode
+local mode = unilib.global.imported_mod_table.bushes_classic.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -33,7 +33,7 @@ local function after_dig_node(pos, oldnode, oldmetadata, digger)
 
     else
 
-        bush_name = unilib.get_last_component(oldnode.name)
+        bush_name = unilib.utils.get_last_component(oldnode.name)
         -- This bush really carries fruits
         can_harvest = true
 
@@ -56,8 +56,8 @@ local function after_dig_node(pos, oldnode, oldmetadata, digger)
     elseif groupcaps.snappy then
 
         -- Plant a new bush without fruits
-        minetest.swap_node(pos, {type = "node", name = "unilib:bush_ornamental_fruitless"})
-        local meta = minetest.get_meta(pos)
+        core.swap_node(pos, {type = "node", name = "unilib:bush_ornamental_fruitless"})
+        local meta = core.get_meta(pos)
         meta:set_string('bush_type', bush_name)
 
         -- Construct the stack of fruits the player will get
@@ -105,7 +105,7 @@ local function after_dig_node(pos, oldnode, oldmetadata, digger)
         if inventory:room_for_item("main", itemstack) then
             inventory:add_item("main", itemstack)
         else
-            minetest.item_drop(itemstack, digger, pos)
+            core.item_drop(itemstack, digger, pos)
         end
 
     end
@@ -118,10 +118,10 @@ local function after_place_node(pos, placer, itemstack)
         return
     end
 
-    minetest.swap_node(pos, {name = "unilib:bush_ornamental_fruitless"})
+    core.swap_node(pos, {name = "unilib:bush_ornamental_fruitless"})
 
-    local meta = minetest.get_meta(pos)
-    local bush_name = unilib.get_last_component(itemstack:get_name())
+    local meta = core.get_meta(pos)
+    local bush_name = unilib.utils.get_last_component(itemstack:get_name())
     meta:set_string("bush_type", bush_name)
 
 end
@@ -155,7 +155,7 @@ function unilib.pkg.shared_bushes_classic.register_bush(data_table)
         description = description,
         tiles = {"unilib_bush_ornamental_" .. part_name .. ".png"},
         groups = group_table,
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "mesh",
         drop = "",
@@ -200,7 +200,7 @@ function unilib.pkg.shared_bushes_classic.register_berry(data_table)
         inventory_image = "unilib_fruit_" .. part_name .. "_picked.png",
         groups = group_table,
 
-        on_use = unilib.cuisine_eat_on_use(full_name, 1),
+        on_use = unilib.cuisine.eat_on_use(full_name, 1),
     })
 
 end
@@ -246,7 +246,7 @@ function unilib.pkg.shared_bushes_classic.register_pie(data_table)
         -- N.B. No groups in original code
         groups = {food_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use(raw_full_name, 4),
+        on_use = unilib.cuisine.eat_on_use(raw_full_name, 4),
     })
     if part_name ~= "mixed" then
 
@@ -280,7 +280,7 @@ function unilib.pkg.shared_bushes_classic.register_pie(data_table)
         -- N.B. No groups in original code
         groups = {food_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use(cooked_full_name, 6),
+        on_use = unilib.cuisine.eat_on_use(cooked_full_name, 6),
     })
     unilib.register_craft({
         type = "cooking",
@@ -296,7 +296,7 @@ function unilib.pkg.shared_bushes_classic.register_pie(data_table)
         -- N.B. No groups in original code
         groups = {food_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use(slice_full_name, 1),
+        on_use = unilib.cuisine.eat_on_use(slice_full_name, 1),
     })
     unilib.register_craft({
         output = slice_full_name .. " 6",
@@ -314,11 +314,13 @@ function unilib.pkg.shared_bushes_classic.register_pie(data_table)
         -- (no sounds)
 
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_item_basket_full.obj",
         paramtype = "light",
         paramtype2 = "facedir",
 
-        on_use = unilib.cuisine_eat_on_use(basket_full_name, 18),
+        on_use = unilib.cuisine.eat_on_use(basket_full_name, 18),
     })
     unilib.register_craft({
         output = basket_full_name,
@@ -366,7 +368,7 @@ function unilib.pkg.shared_bushes_classic.exec()
     --      ignored by Minetest)
     -- N.B. Original decoration code required specific light/humidity/temperature. This has been
     --      omitted for simplicity
-    unilib.register_decoration("bushes_classic_bush_ornamental", {
+    unilib.register_decoration_generic("bushes_classic_bush_ornamental", {
         deco_type = "simple",
         decoration = {
             "unilib:bush_ornamental_blackberry",
@@ -376,7 +378,7 @@ function unilib.pkg.shared_bushes_classic.exec()
             "unilib:bush_ornamental_strawberry",
         },
 
-        fill_ratio = unilib.biome_lib_fill_ratio,
+        fill_ratio = unilib.setting.biome_lib_fill_ratio,
     })
 
 end

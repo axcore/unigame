@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_liquid_water_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_ethereal_liquid_water_ordinary.exec()
 
-    unilib.register_decoration("ethereal_liquid_water_ordinary_1", {
+    unilib.register_decoration_generic("ethereal_liquid_water_ordinary_1", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:liquid_water_ordinary_source",
@@ -34,10 +34,10 @@ function unilib.pkg.deco_ethereal_liquid_water_ordinary.exec()
         fill_ratio = 0.01,
         flags = "force_placement",
         place_offset_y = -1,
-        sidelen = 16,
+        sidelen = 4,
     })
 
-    unilib.register_decoration("ethereal_liquid_water_ordinary_2", {
+    unilib.register_decoration_generic("ethereal_liquid_water_ordinary_2", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:liquid_water_ordinary_source",
@@ -45,14 +45,14 @@ function unilib.pkg.deco_ethereal_liquid_water_ordinary.exec()
         fill_ratio = 0.1,
         flags = "force_placement",
         place_offset_y = -1,
-        sidelen = 16,
+        sidelen = 4,
     })
 
 end
 
 function unilib.pkg.deco_ethereal_liquid_water_ordinary.post()
 
-    unilib.register_decoration_now("ethereal_liquid_water_ordinary_1", nil, {
+    unilib.register_decoration_complete("ethereal_liquid_water_ordinary_1", nil, {
         -- From ethereal-ng/decor.lua
         biomes = "ethereal_swamp",
         num_spawn_by = 8,
@@ -62,7 +62,7 @@ function unilib.pkg.deco_ethereal_liquid_water_ordinary.post()
         y_min = 1,
     })
 
-    unilib.register_decoration_now("ethereal_liquid_water_ordinary_2", nil, {
+    unilib.register_decoration_complete("ethereal_liquid_water_ordinary_2", nil, {
         -- From ethereal-ng/decor.lua
         biomes = "ethereal_swamp",
         num_spawn_by = 8,

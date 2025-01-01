@@ -9,7 +9,7 @@
 unilib.pkg.stone_chalk_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_chalk_pink.exec()
         description = S("Pink Chalk"),
 
         category = "sedimentary",
+        colour = "#DCD1CD",
         grinder_flag = true,
         grinder_powder = "unilib:sand_chalk_pink",
         hardness = 2,
@@ -73,6 +74,24 @@ function unilib.pkg.stone_chalk_pink.exec()
         replace_mode = mode,
         description = S("Pink Chalk Cobble"),
         img_list = {"unilib_stone_chalk_pink.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_chalk_pink_cobble_compressed
+        part_name = "chalk_pink",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pink Chalk Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_chalk_pink_cobble_condensed
+        part_name = "chalk_pink",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pink Chalk Cobble"),
     })
 
 end

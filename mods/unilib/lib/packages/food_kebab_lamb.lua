@@ -9,7 +9,7 @@
 unilib.pkg.food_kebab_lamb = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.food_kebab_lamb.exec()
         description = S("Raw Lamb Kebab"),
         inventory_image = "unilib_food_kebab_lamb_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_kebab_lamb_raw", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_kebab_lamb_raw", 2),
     })
     unilib.register_craft({
         -- From bbq:lamb_kebab_raw
@@ -58,7 +58,7 @@ function unilib.pkg.food_kebab_lamb.exec()
         description = S("Lamb Kebab"),
         inventory_image = "unilib_food_kebab_lamb.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_kebab_lamb", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_kebab_lamb", 4),
     })
     unilib.register_craft({
         -- From bbq:lamb_kebab_raw

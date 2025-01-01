@@ -9,7 +9,7 @@
 unilib.pkg.door_steel_bar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xpanes.add_mode
+local mode = unilib.global.imported_mod_table.xpanes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_steel_bar.exec()
 
     unilib.register_door({
-        -- From xpanes:door_steel_bar. Creates unilib:door_steel_bar
+        -- From xpanes:door_steel_bar. Creates unilib:door_steel_bar_closed_left, etc
         part_name = "steel_bar",
-        orig_name = {
+        orig_name_list = {
             "xpanes:door_steel_bar_a",
             "xpanes:door_steel_bar_b",
             "xpanes:door_steel_bar_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_steel_bar.exec()
             description = S("Steel Bar Door"),
             tiles = {{name = "unilib_door_steel_bar.png", backface_culling = true}},
             groups = {cracky = 1, level = 2, node = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             gain_close = 0.13,
             gain_open = 0.15,

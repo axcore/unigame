@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_turf_short = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dryplants.add_mode
+local mode = unilib.global.imported_mod_table.dryplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,16 +39,19 @@ function unilib.pkg.dirt_ordinary_with_turf_short.exec()
                     "^unilib_dirt_ordinary_with_turf_short_side_overlay.png",
         },
         groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
+
+        -- N.B. is_ground_content = false not in original code; added to match other dirts
+        is_ground_content = false,
     })
     unilib.register_craft({
         -- From dryplants:grass_short
         output = "unilib:dirt_ordinary",
         recipe = {
             {"unilib:dirt_ordinary_with_turf_short"},
-        }
+        },
     })
     -- (not compatible with flowerpots)
 
@@ -62,10 +65,10 @@ function unilib.pkg.dirt_ordinary_with_turf_short.exec()
         action = function(pos)
 
             -- Only become dirt with turf if no cut turf lies on top
-            local above = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local above = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if above.name ~= "unilib:misc_patch_grass" and
                     above.name ~= "unilib:misc_patch_grass_dead" then
-                minetest.swap_node(pos, {name = "unilib:dirt_ordinary_with_turf"})
+                core.swap_node(pos, {name = "unilib:dirt_ordinary_with_turf"})
             end
 
         end,

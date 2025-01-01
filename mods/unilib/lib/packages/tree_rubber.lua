@@ -17,8 +17,8 @@
 unilib.pkg.tree_rubber = {}
 
 local S = unilib.intllib
-local moretrees_mode = unilib.imported_mod_table.moretrees.add_mode
-local technic_mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local moretrees_mode = unilib.global.imported_mod_table.moretrees.add_mode
+local technic_mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ end
 
 function unilib.pkg.tree_rubber.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Hevea brasiliensis"
 
     unilib.register_tree({
@@ -57,7 +57,6 @@ function unilib.pkg.tree_rubber.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -143,7 +142,7 @@ function unilib.pkg.tree_rubber.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:rubber_tree_gate. Creates unilib:gate_rubber_closed
+        -- From moretrees:rubber_tree_gate_closed, etc. Creates unilib:gate_rubber_closed, etc
         part_name = "rubber",
         orig_name = {"moretrees:rubber_tree_gate_closed", "moretrees:rubber_tree_gate_open"},
 
@@ -158,10 +157,10 @@ function unilib.pkg.tree_rubber.exec()
         replace_mode = moretrees_mode,
 
         climate_table = {
-            temp_min = unilib.convert_biome_lib_temp(-0.15),
+            temp_min = unilib.utils.convert_biome_lib_temp(-0.15),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 75,
             }),
         },
@@ -174,7 +173,7 @@ function unilib.pkg.tree_rubber.exec()
 
     -- Override the tree tap from technic/technic, so that it can tap latex from both the original
     --      and unilib versions of the rubber tree
-    if unilib.technic_update_flag then
+    if unilib.setting.technic_update_flag then
 
         unilib.register_node(
             -- From moretrees:rubber_tree_trunk_empty
@@ -192,27 +191,23 @@ function unilib.pkg.tree_rubber.exec()
                     choppy = 2, flammable = 2, not_in_creative_inventory = 1,
                     oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
                 },
-                sounds = unilib.sound_table.wood,
+                sounds = unilib.global.sound_table.wood,
             }
         )
 
-        if unilib.super_tree_table["rubber"] ~= nil then
+        unilib.register_tree_trunk_stripped({
+            -- From moretrees:rubber_tree_trunk. Creates unilib:tree_rubber_trunk_stripped
+            part_name = "rubber",
+            orig_name = "moretrees:rubber_tree_trunk_empty",
 
-            unilib.register_tree_trunk_stripped({
-                -- From moretrees:rubber_tree_trunk. Creates unilib:tree_rubber_trunk_stripped
-                part_name = "rubber",
-                orig_name = "moretrees:rubber_tree_trunk_empty",
-
-                replace_mode = technic_mode,
-                description = S("Tapped Rubber Tree Trunk"),
-                group_table = {
-                    choppy = 2, flammable = 2, not_in_creative_inventory = 1,
-                    oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
-                },
-                variant_name = "tapped",
-            })
-
-        end
+            replace_mode = technic_mode,
+            description = S("Tapped Rubber Tree Trunk"),
+            group_table = {
+                choppy = 2, flammable = 2, not_in_creative_inventory = 1,
+                oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
+            },
+            variant_name = "tapped",
+        })
 
         unilib.register_craft({
             -- From moretrees:rubber_tree_trunk_empty
@@ -220,7 +215,7 @@ function unilib.pkg.tree_rubber.exec()
             output = "unilib:tree_rubber_wood 4",
             recipe = {
                 "unilib:tree_rubber_trunk_tapped",
-            }
+            },
         })
 
         unilib.override_item("technic:treetap", {
@@ -231,14 +226,14 @@ function unilib.pkg.tree_rubber.exec()
                 end
 
                 local pos = pointed_thing.under
-                if minetest.is_protected(pos, user:get_player_name()) then
+                if core.is_protected(pos, user:get_player_name()) then
 
-                    minetest.record_protection_violation(pos, user:get_player_name())
+                    core.record_protection_violation(pos, user:get_player_name())
                     return
 
                 end
 
-                local node = minetest.get_node(pos)
+                local node = core.get_node(pos)
                 local node_name = node.name
                 if node_name == "moretrees:rubber_tree_trunk" then
                     node.name = "moretrees:rubber_tree_trunk_empty"
@@ -248,15 +243,16 @@ function unilib.pkg.tree_rubber.exec()
                     return
                 end
 
-                minetest.swap_node(pos, node)
-                minetest.handle_node_drops(pointed_thing.above, {"technic:raw_latex"}, user)
+                core.swap_node(pos, node)
+                core.handle_node_drops(pointed_thing.above, {"technic:raw_latex"}, user)
 
 --              if not technic.creative_mode then
-                if not unilib.is_creative(user:get_player_name()) then
+                if not unilib.utils.is_creative(user:get_player_name()) then
 
                     local item_wear = tonumber(itemstack:get_wear())
-                    item_wear = item_wear + 819
-                    if item_wear > 65535 then
+--                  item_wear = item_wear + 819
+                    item_wear = item_wear + math.floor(unilib.constant.max_tool_wear / 80)
+                    if item_wear > unilib.constant.max_tool_wear then
 
                         itemstack:clear()
                         return itemstack
@@ -272,7 +268,7 @@ function unilib.pkg.tree_rubber.exec()
             end,
         })
 
-        minetest.register_abm({
+        unilib.register_abm({
             label = "Rubber tree tap [tree_rubber]",
             nodenames = {
                 "unilib:tree_rubber_trunk_tapped",
@@ -284,10 +280,10 @@ function unilib.pkg.tree_rubber.exec()
 
             action = function(pos, node)
 
-                if minetest.find_node_near(pos, 5, {"unilib:tree_rubber_leaves"}) then
+                if core.find_node_near(pos, 5, {"unilib:tree_rubber_leaves"}) then
 
                     node.name = "unilib:tree_rubber_trunk"
-                    minetest.swap_node(pos, node)
+                    core.swap_node(pos, node)
 
                 end
 

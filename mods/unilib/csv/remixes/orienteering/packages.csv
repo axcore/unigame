@@ -1,5 +1,4 @@
 # "orienteering" remix - contains everything from the orienteering mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -20,14 +19,14 @@ shared_orienteering|orienteering
 dye_basic|dye bakedclay
 glass_ordinary|default moreblocks vessels
 item_paper_ordinary|default moreblocks
-metal_bronze|default technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 mineral_diamond|default mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 plant_papyrus_ordinary|default mtg_plus
 stone_obsidian|default moreblocks
 
@@ -37,6 +36,10 @@ dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
-#shared_map|unilib
+#shared_map|map
+
+# supporting packages (.suggested)

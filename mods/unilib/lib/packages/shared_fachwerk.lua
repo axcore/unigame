@@ -9,7 +9,7 @@
 unilib.pkg.shared_fachwerk = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fachwerk.add_mode
+local mode = unilib.global.imported_mod_table.fachwerk.add_mode
 
 local hint_text = S("use the screwdriver to rotate")
 
@@ -20,9 +20,9 @@ local hint_text = S("use the screwdriver to rotate")
 local function get_description(orig_description, extra)
 
     if orig_description ~= nil then
-        return unilib.hint(unilib.brackets(orig_description, extra), hint_text)
+        return unilib.utils.hint(unilib.utils.brackets(orig_description, extra), hint_text)
     else
-        return unilib.hint(extra, hint_text)
+        return unilib.utils.hint(extra, hint_text)
     end
 
 end
@@ -44,14 +44,16 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
     --      simple_flag (bool): If true, only variants using timber frames from the fachwerk mod
     --          are created. If false (or not specified), variants with timber from the plaster mod
     --          are also created. Use true for clays, plasters and woods, false for glass and stones
+    --      transparent_flag (bool): If true, the "ingredient" is something transparent, like glass
 
     local ingredient = data_table.ingredient
     local orig_name = data_table.orig_name
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
     local simple_flag = data_table.simple_flag or false
+    local transparent_flag = data_table.transparent_flag or false
 
-    local ingredient_def_table = minetest.registered_nodes[ingredient]
+    local ingredient_def_table = core.registered_nodes[ingredient]
     if ingredient_def_table == nil then
         return
     end
@@ -59,7 +61,7 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
     -- e.g. "default:desert_stone" produces "fachwerk:desert_stone", "fachwerk:desert_stone_1" etc
     local orig_item_name
     if orig_name ~= nil then
-        orig_item_name = unilib.get_item_name(orig_name)
+        orig_item_name = unilib.utils.get_item_name(orig_name)
     end
 
     local orig_description = ingredient_def_table.description
@@ -68,19 +70,29 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
     local group_table = {choppy = 2, cracky = 3, oddly_breakable_by_hand = 2}
 
     -- Timber frames from fachwerk
-
     local square_orig_name
     if orig_item_name ~= nil then
         square_orig_name = "fachwerk:" .. orig_item_name
+    end
+
+    -- For glass and other transparent nodes, we use the drawtype "glasslike_framed"; the inner part
+    --      of the two-pixel wide frame is invisible on the side facing away, but that's better than
+    --      having a non-transparent node
+    local drawtype = "normal"
+    if transparent_flag then
+        drawtype = "glasslike_framed"
     end
 
     unilib.register_node(ingredient .. "_with_frame_square", square_orig_name, replace_mode, {
         description = get_description(orig_description, S("Square Timber Frame")),
         tiles = {orig_img .. "^unilib_frame_timber_square_overlay.png"},
         groups = group_table,
-        -- N.B. Equivalent of unilib.sound_table.stone in original code
+        -- N.B. Equivalent of unilib.global.sound_table.stone in original code
         sounds = ingredient_def_table.sounds,
 
+        drawtype = drawtype,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -109,9 +121,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
             orig_img .. "^unilib_frame_timber_beam_oblique_up_overlay.png",
         },
         groups = group_table,
-        -- N.B. Equivalent of unilib.sound_table.stone in original code
+        -- N.B. Equivalent of unilib.global.sound_table.stone in original code
         sounds = ingredient_def_table.sounds,
 
+        drawtype = drawtype,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -140,9 +155,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
             orig_img .. "^unilib_frame_timber_beam_oblique_down_overlay.png",
         },
         groups = group_table,
-        -- N.B. Equivalent of unilib.sound_table.stone in original code
+        -- N.B. Equivalent of unilib.global.sound_table.stone in original code
         sounds = ingredient_def_table.sounds,
 
+        drawtype = drawtype,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
     })
@@ -164,8 +182,15 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
         description = get_description(orig_description, S("Timber Frame with Cross")),
         tiles = {orig_img .. "^unilib_frame_timber_cross_overlay.png"},
         groups = group_table,
-        -- N.B. Equivalent of unilib.sound_table.stone in original code
+        -- N.B. Equivalent of unilib.global.sound_table.stone in original code
         sounds = ingredient_def_table.sounds,
+
+        drawtype = drawtype,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        -- N.B. .paramtype and .paramtype2 missing in original code
+        paramtype = "light",
+        paramtype2 = "facedir",
     })
     unilib.register_craft({
         output = ingredient .. "_with_cross_timber 8",
@@ -190,9 +215,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                 orig_img .. "^unilib_frame_timber_beam_diagonal_up_overlay.png",
             },
             groups = group_table,
-            -- N.B. Equivalent of unilib.sound_table.stone in original code
+            -- N.B. Equivalent of unilib.global.sound_table.stone in original code
             sounds = ingredient_def_table.sounds,
 
+            drawtype = drawtype,
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "facedir",
         })
@@ -205,7 +233,7 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
             },
         })
 
-        if unilib.fachwerk_all_frames_flag then
+        if unilib.setting.fachwerk_all_frames_flag then
 
             unilib.register_node(ingredient .. "_with_beam_diagonal_down", nil, replace_mode, {
                 description =
@@ -219,9 +247,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                     orig_img .. "^unilib_frame_timber_beam_diagonal_down_overlay.png",
                 },
                 groups = group_table,
-                -- N.B. Equivalent of unilib.sound_table.stone in original code
+                -- N.B. Equivalent of unilib.global.sound_table.stone in original code
                 sounds = ingredient_def_table.sounds,
 
+                drawtype = drawtype,
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 paramtype = "light",
                 paramtype2 = "facedir",
             })
@@ -249,9 +280,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                 orig_img .. "^unilib_frame_timber_beam_triangle_up_overlay.png",
             },
             groups = group_table,
-            -- N.B. Equivalent of unilib.sound_table.stone in original code
+            -- N.B. Equivalent of unilib.global.sound_table.stone in original code
             sounds = ingredient_def_table.sounds,
 
+            drawtype = drawtype,
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "facedir",
         })
@@ -264,7 +298,7 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
             },
         })
 
-        if unilib.fachwerk_all_frames_flag then
+        if unilib.setting.fachwerk_all_frames_flag then
 
             unilib.register_node(ingredient .. "_with_beam_triangle_down", nil, replace_mode, {
                 description = get_description(
@@ -279,9 +313,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                     orig_img .. "^unilib_frame_timber_beam_triangle_down_overlay.png",
                 },
                 groups = group_table,
-                -- N.B. Equivalent of unilib.sound_table.stone in original code
+                -- N.B. Equivalent of unilib.global.sound_table.stone in original code
                 sounds = ingredient_def_table.sounds,
 
+                drawtype = drawtype,
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 paramtype = "light",
                 paramtype2 = "facedir",
             })
@@ -308,9 +345,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                 orig_img .. "^unilib_frame_timber_horizontal_overlay.png^[transformFX",
             },
             groups = group_table,
-            -- N.B. Equivalent of unilib.sound_table.stone in original code
+            -- N.B. Equivalent of unilib.global.sound_table.stone in original code
             sounds = ingredient_def_table.sounds,
 
+            drawtype = drawtype,
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "facedir",
         })
@@ -323,7 +363,7 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
             },
         })
 
-        if unilib.fachwerk_all_frames_flag then
+        if unilib.setting.fachwerk_all_frames_flag then
 
             unilib.register_node(ingredient .. "_with_frame_vertical", nil, replace_mode, {
                 description = get_description(orig_description, S("Vertical Timber Frame")),
@@ -336,9 +376,12 @@ function unilib.pkg.shared_fachwerk.register_timber_frame(data_table)
                     orig_img .. "^unilib_frame_timber_vertical_overlay.png",
                 },
                 groups = group_table,
-                -- N.B. Equivalent of unilib.sound_table.stone in original code
+                -- N.B. Equivalent of unilib.global.sound_table.stone in original code
                 sounds = ingredient_def_table.sounds,
 
+                drawtype = drawtype,
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 paramtype = "light",
                 paramtype2 = "facedir",
             })

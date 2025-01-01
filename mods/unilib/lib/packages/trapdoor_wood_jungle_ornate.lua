@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wood_jungle_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,10 @@ function unilib.pkg.trapdoor_wood_jungle_ornate.exec()
     local c_wood = "unilib:tree_jungle_wood"
 
     unilib.register_trapdoor({
-        -- From moretrapdoors:jungle_trapdoor. Creates unilib:trapdoor_wood_jungle_ornate
+        -- From moretrapdoors:jungle_trapdoor. Creates unilib:trapdoor_wood_jungle_ornate_closed,
+        --      etc
         part_name = "wood_jungle_ornate",
-        orig_name = {"moretrapdoors:jungle_trapdoor", "moretrapdoors:jungle_trapdoor_open"},
+        orig_name_list = {"moretrapdoors:jungle_trapdoor", "moretrapdoors:jungle_trapdoor_open"},
         def_table = {
             description = S("Ornate Jungle Tree Wood Trapdoor"),
             -- (no tiles)
@@ -54,7 +55,7 @@ function unilib.pkg.trapdoor_wood_jungle_ornate.exec()
         recipe = {
             {c_wood, c_wood, c_wood},
             {c_wood, "unilib:tree_jungle_trunk", c_wood},
-        }
+        },
     })
 
 end

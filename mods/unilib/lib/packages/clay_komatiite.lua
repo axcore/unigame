@@ -9,7 +9,7 @@
 unilib.pkg.clay_komatiite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_komatiite.exec()
         -- Texture from UGBC, komatiite_clay.png. Original code
         description = S("Komatiite Clay"),
         tiles = {"unilib_clay_komatiite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
     })
 
 end

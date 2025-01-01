@@ -9,7 +9,7 @@
 unilib.pkg.plant_kiokio = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_kiokio.exec()
 
     unilib.register_node("unilib:plant_kiokio", "aotearoa:kiokio", mode, {
         -- From aotearoa:kiokio
-        description = unilib.annotate(S("Kiokio"), "Parablechnum novae-zelandiae"),
+        description = unilib.utils.annotate(S("Kiokio"), "Parablechnum novae-zelandiae"),
         tiles = {"unilib_plant_kiokio.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_kiokio.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("aotearoa_plant_kiokio_rare", {
+    unilib.register_decoration_generic("aotearoa_plant_kiokio_rare", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_kiokio",
@@ -62,7 +62,7 @@ function unilib.pkg.plant_kiokio.exec()
         fill_ratio = 0.002,
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_plant_kiokio_normal", {
+    unilib.register_decoration_generic("aotearoa_plant_kiokio_normal", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_kiokio",

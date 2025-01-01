@@ -9,7 +9,7 @@
 unilib.pkg.stone_omphyrite_extra = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.stone_omphyrite_extra.init()
 
     return {
         description = "Extra omphyrite items",
-        depends = {"liquid_lava_ordinary", "stone_omphyrite"}
+        depends = {"liquid_lava_ordinary", "stone_omphyrite"},
     }
 
 end
@@ -31,13 +31,13 @@ function unilib.pkg.stone_omphyrite_extra.exec()
         description = S("Omphyrite Lava Crack"),
         tiles = {"unilib_stone_omphyrite.png^unilib_crack_lava_overlay.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_omphyrite_cobble",
         light_source = 12,
 
         after_dig_node = function(pos, oldnode, oldmetadata, digger)
-            minetest.place_node(pos, {name = "unilib:liquid_lava_ordinary_source"}, digger)
+            core.place_node(pos, {name = "unilib:liquid_lava_ordinary_source"}, digger)
         end
     })
 

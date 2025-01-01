@@ -9,7 +9,7 @@
 unilib.pkg.food_chicken_imitation = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.food_chicken_imitation.exec()
         recipe = {
             {"unilib:food_tofu_red_raw", "", "unilib:dye_yellow"},
             {"", "unilib:food_tofu_red_raw", ""},
-            {"unilib:food_tofu_red_raw", "unilib:food_tofu_red_raw", "unilib:food_tofu_red_raw"}
+            {"unilib:food_tofu_red_raw", "unilib:food_tofu_red_raw", "unilib:food_tofu_red_raw"},
         },
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.stone_shale_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_shale_brown.exec()
         description = S("Brown Shale"),
 
         category = "sedimentary",
+        colour = "#7D6542",
         grinder_flag = false,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 1)
         hardness = 2,
@@ -39,7 +40,7 @@ function unilib.pkg.stone_shale_brown.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("shale_brown", 2, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("shale_brown", 2, nil)
 
     unilib.register_node("unilib:stone_shale_brown", "darkage:shale", mode, {
         -- From darkage:shale
@@ -51,9 +52,9 @@ function unilib.pkg.stone_shale_brown.exec()
         },
         -- N.B. stone = 1 not in original code
         groups = {cracky = smooth_cracky, crumbly = 2, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
-    if unilib.pkg_executed_table["dirt_mud_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_mud_dry"] ~= nil then
 
         unilib.register_craft({
             -- From darkage:shale

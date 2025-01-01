@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_copper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,11 @@ function unilib.pkg.stone_ordinary_with_copper.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_copper", "default:stone_with_copper", mode, {
         -- From default:stone_with_copper
-        description = unilib.brackets(S("Copper Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Copper Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_metal_copper.png"},
-        groups = {cracky = 2},
-        sounds = unilib.sound_table.stone,
+        -- N.B. ore = 1 not in original code
+        groups = {cracky = 2, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_copper_lump",
     })

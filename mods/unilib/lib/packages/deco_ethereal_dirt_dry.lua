@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_dirt_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_ethereal_dirt_dry.post()
 
-    unilib.register_decoration_now("default_dirt_dry", "ethereal_dirt_dry", {
+    unilib.register_decoration_complete("default_dirt_dry", "ethereal_dirt_dry", {
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "dirt_dry"
         biomes = "ethereal_savanna",
         place_on = "unilib:dirt_dry_with_turf_dry",
-        y_max = unilib.y_max,
+        y_max = 100,
         y_min = 1,
     })
 

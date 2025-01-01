@@ -9,7 +9,7 @@
 unilib.pkg.tree_chestnut_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_chestnut_exotic.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 24
     local sci_name = "Castanea"
 
     unilib.register_tree({
@@ -98,10 +98,11 @@ function unilib.pkg.tree_chestnut_exotic.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("glem_tree_chestnut_exotic_" .. i, {
+        unilib.register_decoration_generic("glem_tree_chestnut_exotic_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_chestnut_exotic_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_glem_tree_chestnut_exotic_" .. i .. ".mts",
 
             fill_ratio = 0.001,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.tree_jarrah = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_jarrah.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 4
     local sci_name = "Eucalyptus marginata"
 
     unilib.register_tree({
@@ -111,7 +111,7 @@ function unilib.pkg.tree_jarrah.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_jarrah_closed
+        -- Original to unilib. Creates unilib:gate_jarrah_closed, etc
         part_name = "jarrah",
         orig_name = {nil, nil},
 
@@ -123,10 +123,10 @@ function unilib.pkg.tree_jarrah.exec()
     -- N.B. Tweaked these schematics to remove a rogue tree trunk node at the top
     for i = 1, 3 do
 
-        unilib.register_decoration("australia_tree_jarrah_in_forests_" .. i, {
+        unilib.register_decoration_generic("australia_tree_jarrah_in_forests_" .. i, {
             -- From australia/biome_jarrah_karri_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_jarrah_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_jarrah_" .. i .. ".mts",
 
             fill_ratio = (3 - i + 1) / 8000,
             flags = "place_center_x, place_center_z",

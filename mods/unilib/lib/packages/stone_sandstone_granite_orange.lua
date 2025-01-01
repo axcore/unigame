@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_granite_orange = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_granite_orange.exec()
         description = S("Orange Granite Sandstone"),
 
         category = "sedimentary",
+        colour = "#CAAC84",
         grinder_flag = true,
         grinder_powder = "unilib:sand_granite_orange",
         grinder_gravel = "unilib:gravel_granite_orange",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_granite_orange.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_granite_orange_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, red_granite_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_granite_orange.exec()
             replace_mode = mode,
             description = S("Orange Granite Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_granite_orange_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_granite_orange_cobble_compressed
+            part_name = "sandstone_granite_orange",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Orange Granite Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_granite_orange_cobble_condensed
+            part_name = "sandstone_granite_orange",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Orange Granite Sandstone Cobble"),
         })
 
     end

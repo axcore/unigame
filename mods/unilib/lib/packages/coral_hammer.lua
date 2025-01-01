@@ -9,7 +9,7 @@
 unilib.pkg.coral_hammer = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.coral_hammer.exec()
     unilib.register_node("unilib:coral_hammer", "australia:hammer_coral", mode, {
         -- From australia:hammer_coral
         -- (Re-classified in 2017, according to Wikipedia)
---      description = unilib.annotate(S("Hammer Coral"), "Euphyllia ancora"),
-        description = unilib.annotate(S("Hammer Coral"), "Fimbriaphyllia ancora"),
+--      description = unilib.utils.annotate(S("Hammer Coral"), "Euphyllia ancora"),
+        description = unilib.utils.annotate(S("Hammer Coral"), "Fimbriaphyllia ancora"),
         tiles = {"unilib_coral_hammer.png"},
         groups = {attached_node = 1, coral = 1, sea = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         climbable = true,
@@ -49,6 +49,16 @@ function unilib.pkg.coral_hammer.exec()
         walkable = false,
         waving = 0,
         wield_image = "unilib_coral_hammer.png",
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
+        end,
     })
 
 end

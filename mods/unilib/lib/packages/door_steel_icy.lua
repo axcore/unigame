@@ -9,7 +9,7 @@
 unilib.pkg.door_steel_icy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_steel_icy.exec()
 
     unilib.register_door({
-        -- From mtg_plus mod, doors:door_icesteel. Creates unilib:door_steel_icy
+        -- From mtg_plus mod, doors:door_icesteel. Creates unilib:door_steel_icy_closed_left, etc
         part_name = "steel_icy",
-        orig_name = {
+        orig_name_list = {
             "doors:door_icesteel_a",
             "doors:door_icesteel_b",
             "doors:door_icesteel_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_steel_icy.exec()
             description = S("Icy Steel Door"),
             tiles = {{name = "unilib_door_steel_icy.png", backface_culling = true}},
             groups = {bendy = 2, cracky = 3, level = 2, melty = 3, slippery = 1, snappy = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = "unilib_door_steel_icy_inv.png",
             protected_flag = true,

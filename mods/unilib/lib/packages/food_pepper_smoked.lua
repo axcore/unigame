@@ -9,7 +9,7 @@
 unilib.pkg.food_pepper_smoked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_pepper_smoked.exec()
         description = S("Smoked Pepper"),
         inventory_image = "unilib_food_pepper_smoked.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_smoked", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_smoked", 5),
     })
     unilib.register_craft({
         -- From bbq:smoked_pepper

@@ -9,7 +9,7 @@
 unilib.pkg.dirt_peat_with_shale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,11 @@ function unilib.pkg.dirt_peat_with_shale.exec()
         description = S("Peat with Shale"),
         tiles = {"unilib_dirt_peat_with_shale.png"},
         groups = {crumbly = 3, falling_node = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
-    minetest.register_craft({
+    unilib.register_craft({
         -- Texture from PFAA, crudeRock_oilShale.png. Original code
         type = "fuel",
         recipe = "unilib:dirt_peat_with_shale",

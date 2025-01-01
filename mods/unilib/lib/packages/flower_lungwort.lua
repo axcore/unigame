@@ -9,7 +9,7 @@
 unilib.pkg.flower_lungwort = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,20 +27,22 @@ function unilib.pkg.flower_lungwort.exec()
 
     unilib.register_node("unilib:flower_lungwort", "moreplants:blueflower", mode, {
         -- From moreplants:blueflower
-        description = unilib.annotate(S("Lungwort"), "Pulmonaria"),
+        description = unilib.utils.annotate(S("Lungwort"), "Pulmonaria"),
         tiles = {"unilib_flower_lungwort.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 1, flower = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_blue = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_blue = 1, colour_blue = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_flower_lungwort.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other flowers
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -54,7 +56,7 @@ function unilib.pkg.flower_lungwort.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_lungwort", "moreplants:blueflower")
 
-    unilib.register_decoration("moreplants_flower_lungwort", {
+    unilib.register_decoration_generic("moreplants_flower_lungwort", {
         -- From moreplants:blueflower
         deco_type = "simple",
         decoration = "unilib:flower_lungwort",

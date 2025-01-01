@@ -9,7 +9,7 @@
 unilib.pkg.flower_cave_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,15 +32,17 @@ function unilib.pkg.flower_cave_pink.exec()
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 1, flower = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_pink = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_pink = 1, colour_pink = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_flower_cave_pink.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other flowers
+--      is_ground_content = false,
         light_source = 5,
         paramtype = "light",
         selection_box = {
@@ -54,7 +56,7 @@ function unilib.pkg.flower_cave_pink.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_cave_pink", "moreplants:caveflower")
 
-    unilib.register_decoration("moreplants_flower_cave_pink", {
+    unilib.register_decoration_generic("moreplants_flower_cave_pink", {
         -- Original to unilib (but the "meta_moreplants_underground" package also spanws this item)
         deco_type = "simple",
         decoration = "unilib:flower_cave_pink",

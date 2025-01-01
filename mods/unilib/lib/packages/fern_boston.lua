@@ -9,7 +9,7 @@
 unilib.pkg.fern_boston = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.fern_boston.exec()
 
     unilib.register_node("unilib:fern_boston", "ethereal:fern", mode, {
         -- From ethereal:fern
-        description = unilib.annotate(S("Boston Fern"), "Nephrolepis exaltata"),
+        description = unilib.utils.annotate(S("Boston Fern"), "Nephrolepis exaltata"),
         tiles = {"unilib_fern_boston.png"},
         groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -39,8 +39,8 @@ function unilib.pkg.fern_boston.exec()
             max_items = 1,
             items = {
                 {items = {"unilib:fern_boston_tuber"}, rarity = 6},
-                {items = {"unilib:fern_boston"}}
-            }
+                {items = {"unilib:fern_boston"}},
+            },
         },
         inventory_image = "unilib_fern_boston.png",
         paramtype = "light",
@@ -60,8 +60,10 @@ function unilib.pkg.fern_boston.exec()
         inventory_image = "unilib_fern_boston_tuber.png",
         groups = {flammable = 2, food_tuber = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fern_boston_tuber", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:fern_boston_tuber", 1),
     })
     -- (not compatible with flowerpots)
+
+    unilib.register_decoration_spare("unilib:fern_boston")
 
 end

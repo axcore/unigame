@@ -9,7 +9,7 @@
 unilib.pkg.food_sliced_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_sliced_apple.exec()
         inventory_image = "unilib_food_sliced_apple.png",
         groups = {flammable = 1, food_sliced_apples = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_sliced_apple", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_sliced_apple", 2),
     })
     unilib.register_craft({
         -- From cropocalypse:sliced_apples

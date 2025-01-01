@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_stone_scoria = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_aotearoa_stone_scoria.post()
 
-    unilib.register_decoration_now("aotearoa_stone_scoria", nil, {
+    unilib.register_decoration_complete("aotearoa_stone_scoria", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "stone_scoria"
         biomes = "aotearoa_shore_volcanic_field",

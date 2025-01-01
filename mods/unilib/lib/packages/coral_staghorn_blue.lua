@@ -9,7 +9,7 @@
 unilib.pkg.coral_staghorn_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.coral_staghorn_blue.exec()
 
     unilib.register_node("unilib:coral_staghorn_blue", "australia:staghorn_coral_blue", mode, {
         -- From australia:staghorn_coral_blue
-        description = unilib.annotate(S("Blue Staghorn Coral"), "Acropora cervicornis"),
+        description = unilib.utils.annotate(S("Blue Staghorn Coral"), "Acropora cervicornis"),
         tiles = {"unilib_coral_staghorn_blue.png"},
         groups = {attached_node = 1, coral = 1, cracky = 3, sea = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         climbable = true,
         drawtype = "plantlike",
@@ -43,6 +43,16 @@ function unilib.pkg.coral_staghorn_blue.exec()
         },
         walkable = false,
         wield_image = "unilib_coral_staghorn_blue.png",
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
+        end,
     })
 
 end

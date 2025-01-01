@@ -9,7 +9,7 @@
 unilib.pkg.door_glass_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.doors.add_mode
+local mode = unilib.global.imported_mod_table.doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_glass_ordinary.exec()
 
     unilib.register_door({
-        -- From doors:door_glass. Creates unilib:door_glass_ordinary
+        -- From doors:door_glass. Creates unilib:door_glass_ordinary_closed_left, etc
         part_name = "glass_ordinary",
-        orig_name = {
+        orig_name_list = {
             "doors:door_glass_a",
             "doors:door_glass_b",
             "doors:door_glass_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_glass_ordinary.exec()
             description = S("Ordinary glass Door"),
             tiles = {"unilib_door_glass.png"},
             groups = {cracky = 3, node = 1, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             gain_close = 0.25,
             gain_open = 0.3,

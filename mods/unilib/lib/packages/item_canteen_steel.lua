@@ -9,7 +9,7 @@
 unilib.pkg.item_canteen_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.thirsty.add_mode
+local mode = unilib.global.imported_mod_table.thirsty.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.item_canteen_steel.exec()
             {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
         },
     })
-    unilib.hydration_enable_drinking_from_container("unilib:item_canteen_steel", 25)
-    unilib.hydration_enable_water_storage("unilib:item_canteen_steel", 40)
+    unilib.hydration.enable_drinking_from_container("unilib:item_canteen_steel", 25)
+    unilib.hydration.enable_water_storage("unilib:item_canteen_steel", 40)
 
 end

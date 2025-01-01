@@ -9,7 +9,7 @@
 unilib.pkg.coral_block_bubble = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,9 @@ function unilib.pkg.coral_block_bubble.exec()
         -- From xocean:bubble_block
         description = S("Bubble Coral Block"),
         tiles = {"unilib_coral_block_bubble.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:coral_block_bubble_skeleton",
     })
@@ -39,8 +40,9 @@ function unilib.pkg.coral_block_bubble.exec()
         -- From xocean:bubble_skeleton
         description = S("Bubble Coral Block Skeleton"),
         tiles = {"unilib_coral_block_bubble_skeleton.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3},
+        sounds = unilib.global.sound_table.stone,
     })
 
 end

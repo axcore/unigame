@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_obsidian = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xpanes.add_mode
+local mode = unilib.global.imported_mod_table.xpanes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.pane_glass_obsidian.exec()
             description = S("Obsidian Glass Pane"),
             textures = {"unilib_glass_obsidian.png", "", "unilib_pane_glass_obsidian_edge.png"},
             groups = {cracky = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_glass_obsidian.png",
             recipe = {

@@ -9,7 +9,7 @@
 unilib.pkg.metal_bronze_bismuth = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.metal_bronze_bismuth.init()
 
     return {
         description = "Bismuth bronze",
-        depends = {"metal_bismuth", "metal_copper_real", "metal_tin_real"},
+        depends = {"metal_bismuth", "metal_copper_rare", "metal_tin_rare"},
     }
 
 end
@@ -62,10 +62,10 @@ function unilib.pkg.metal_bronze_bismuth.exec()
         type = "shapeless",
         output = "unilib:metal_bronze_bismuth_ingot 4",
         recipe = {
-            "unilib:metal_copper_real_ingot",
-            "unilib:metal_copper_real_ingot",
+            "unilib:metal_copper_rare_ingot",
+            "unilib:metal_copper_rare_ingot",
             "unilib:metal_bismuth_ingot",
-            "unilib:metal_tin_real_ingot",
+            "unilib:metal_tin_rare_ingot",
         },
     })
     unilib.register_craft({
@@ -73,7 +73,7 @@ function unilib.pkg.metal_bronze_bismuth.exec()
         output = "unilib:metal_bronze_bismuth_ingot 9",
         recipe = {
             {"unilib:metal_bronze_bismuth_block"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -85,7 +85,7 @@ function unilib.pkg.metal_bronze_bismuth.exec()
             description = S("Bismuth Bronze Block"),
             tiles = {"unilib_metal_bronze_bismuth_block.png"},
             groups = {bendy = 2, cracky = 2, level = 2, melty = 2, snappy = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             -- N.B. true in original code
             is_ground_content = false,
@@ -97,5 +97,24 @@ function unilib.pkg.metal_bronze_bismuth.exec()
         ingredient = "unilib:metal_bronze_bismuth_ingot",
     })
     unilib.register_stairs("unilib:metal_bronze_bismuth_block")
+    unilib.register_carvings("unilib:metal_bronze_bismuth_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_bronze_bismuth_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Bismuth Bronze Block"),
+            tiles = {"unilib_metal_bronze_bismuth_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("bronze_bismuth")
+
+    end
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.crop_mushroom_morel_common = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,13 +50,14 @@ function unilib.pkg.crop_mushroom_morel_common.exec()
         harvest_description = S("Common Morel Mushroom"),
         -- N.B. food = 1 not in original code
         harvest_group_table = {flammable = 4, food = 1, food_morel_mushroom = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 0,
         paramtype2 = "meshoptions",
         place_param2 = 3,
         seed_description = S("Common Morel Mushroom Spore"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_pounamu = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,8 +19,9 @@ function unilib.pkg.tool_shovel_pounamu.init()
 
     return {
         description = "Pounamu shovel",
-        notes = "For any node in the \"crumbly\" group, digs the original node; for example," ..
-                " digs the original dirt with grass node, rather than a pure dirt node",
+        notes = "For any node in the \"crumbly\" or \"coral\" groups, digs the original node;" ..
+                " for example, digs the original dirt with grass node rather than a pure dirt" ..
+                " node, and digs the original coral rather than its corresponding coral skeleton",
         depends = {
             "dye_basic",
             "food_pith_mamaku",
@@ -31,7 +32,6 @@ function unilib.pkg.tool_shovel_pounamu.init()
             "tree_kawakawa",
             "tree_maire_black",
         },
-        optional = "override_ethereal_coral",
     }
 
 end
@@ -52,12 +52,22 @@ function unilib.pkg.tool_shovel_pounamu.exec()
             full_punch_interval = 1.0,
             max_drop_level = 1,
             groupcaps = {
-                crumbly = {times = {[1] = 1.10, [2] = 0.50, [3] = 0.30}, uses = 30, maxlevel = 3},
+                crumbly = {
+                    times = {[1] = 1.10, [2] = 0.50, [3] = 0.30},
+                    uses = 30,
+                    maxlevel = 3,
+                },
+                -- Not in original code: treat corals like things in the "crumbly" group
+                coral = {
+                    times = {[1] = 1.10, [2] = 0.50, [3] = 0.30},
+                    uses = 30,
+                    maxlevel = 3,
+                },
             },
         },
         wield_image = "unilib_tool_shovel_pounamu.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft({
         -- From aotearoa:shovel_green
@@ -80,7 +90,7 @@ function unilib.pkg.tool_shovel_pounamu.exec()
             },
         },
     })
-    unilib.apply_toolranks("unilib:tool_shovel_pounamu", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_pounamu", "shovel")
 
     -- (Dig the original node, e.g. dirt with grass instead of dirt)
     unilib.register_special_shovel("unilib:tool_shovel_pounamu")

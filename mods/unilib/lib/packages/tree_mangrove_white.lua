@@ -9,7 +9,7 @@
 unilib.pkg.tree_mangrove_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,13 @@ end
 
 function unilib.pkg.tree_mangrove_white.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Avicennia marina"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -35,34 +40,32 @@ function unilib.pkg.tree_mangrove_white.exec()
         description = S("White Mangrove Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_mangrove_white_trunk", "aotearoa:mangrove_white_tree", mode, {
         -- From aotearoa:mangrove_white_tree
-        description = unilib.annotate(S("White Mangrove Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("White Mangrove Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_mangrove_white_trunk_top.png",
             "unilib_tree_mangrove_white_trunk_top.png",
             "unilib_tree_mangrove_white_trunk.png",
         },
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        node_box = node_box,
         paramtype = "light",
         paramtype2 = "facedir",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        selection_box = node_box,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:mangrove_white_tree
@@ -73,6 +76,17 @@ function unilib.pkg.tree_mangrove_white.exec()
         })
 
     end
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_mangrove_white_trunk_stripped
+        part_name = "mangrove_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("White Mangrove Tree Trunk"),
+        group_table = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
+    })
 
     -- (no wood; instead, trunks can be crafted into sticks)
 
@@ -108,10 +122,10 @@ function unilib.pkg.tree_mangrove_white.exec()
         select_table = {-0.3, -0.5, -0.3, 0.3, 0.35, 0.3},
     })
 
-    unilib.register_decoration("aotearoa_tree_mangrove_white_normal_1", {
+    unilib.register_decoration_generic("aotearoa_tree_mangrove_white_normal_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_mangrove_white_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_mangrove_white_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -125,10 +139,10 @@ function unilib.pkg.tree_mangrove_white.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_mangrove_white_normal_2", {
+    unilib.register_decoration_generic("aotearoa_tree_mangrove_white_normal_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_mangrove_white_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_mangrove_white_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

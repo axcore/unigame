@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_stone_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,10 @@ function unilib.pkg.decor_tiled_stone_desert.exec()
         description = S("Decorative Desert Stone Tile"),
         tiles = {"unilib_decor_tiled_stone_desert.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
     unilib.register_craft({
@@ -45,7 +47,7 @@ function unilib.pkg.decor_tiled_stone_desert.exec()
             {c_cobble, c_cobble, c_cobble},
             {c_cobble, "unilib:stone_desert", c_cobble},
             {c_cobble, c_cobble, c_cobble},
-        }
+        },
     })
 
 end

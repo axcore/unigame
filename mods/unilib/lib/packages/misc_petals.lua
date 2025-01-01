@@ -9,7 +9,7 @@
 unilib.pkg.misc_petals = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,7 @@ function unilib.pkg.misc_petals.init()
         description = "Petals",
         notes = "Harvested from certain nodes by using a sickle",
         depends = "shared_sickles",
-        optional = "flower_dandelion_white",
+        optional = {"flower_dandelion_white", "flower_dandelion_yellow"},
     }
 
 end
@@ -40,7 +40,7 @@ function unilib.pkg.misc_petals.exec()
         description = S("Flower Petals"),
         tiles = {"unilib_misc_petals.png"},
         groups = {attached_node = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "signlike",
@@ -56,11 +56,25 @@ function unilib.pkg.misc_petals.exec()
         walkable = false,
         wield_image = "unilib_misc_petals.png",
     })
-    if unilib.pkg_executed_table["flower_dandelion_white"] ~= nil then
+    if unilib.global.pkg_executed_table["flower_dandelion_white"] ~= nil and
+            unilib.global.pkg_executed_table["flower_dandelion_white"] ~= nil then
 
+        -- N.B. Original craft recipe conflicts with recipe in "flower_dandelion_white_cluster"
+        --      package
+        --[[
         unilib.register_craft_2x2({
+            -- From sickles:petals
             output = "unilib:misc_petals",
             ingredient = "unilib:flower_dandelion_white",
+        })
+        ]]--
+        unilib.register_craft({
+            -- Original to unilib
+            output = "unilib:misc_petals",
+            recipe = {
+                {"unilib:flower_dandelion_white", "unilib:flower_dandelion_yellow"},
+                {"unilib:flower_dandelion_yellow", "unilib:flower_dandelion_white"},
+            },
         })
 
     end

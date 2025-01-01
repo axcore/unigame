@@ -9,7 +9,7 @@
 unilib.pkg.furniture_trough_clay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 local potable_water_table = {}
 
@@ -36,7 +36,7 @@ function unilib.pkg.furniture_trough_clay.exec()
         tiles = {"unilib_clay_ordinary.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -61,7 +61,7 @@ function unilib.pkg.furniture_trough_clay.exec()
 
         on_rightclick = function(pos, node, player)
 
-            local node_under = minetest.get_node({x = pos.x, y = (pos.y - 1), z = pos.z})
+            local node_under = core.get_node({x = pos.x, y = (pos.y - 1), z = pos.z})
             --[[
             if not(node_under) or
                     node_under.name == "ignore" or
@@ -74,14 +74,14 @@ function unilib.pkg.furniture_trough_clay.exec()
                     node_under.name == "ignore" or
                     potable_water_table[node_under.name] == nil then
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     player:get_player_name(),
                     S("Sorry, this trough is out of water. Please place it above water!")
                 )
 
            else
 
-                minetest.chat_send_player(
+                core.chat_send_player(
                     player:get_player_name(),
                     S("You feel much cleaner after washing yourself!")
                 )
@@ -96,7 +96,7 @@ function unilib.pkg.furniture_trough_clay.exec()
         recipe = {
             {"group:stick"},
             {"unilib:clay_ordinary"},
-        }
+        },
     })
 
 end
@@ -105,7 +105,7 @@ function unilib.pkg.furniture_trough_clay.post()
 
     -- Original code only works with ordinary water; unilib code works with all potable waters
 
-    for part_name, data_table in pairs(unilib.generic_liquid_table) do
+    for part_name, data_table in pairs(unilib.global.generic_liquid_table) do
 
         if data_table.potable_flag and data_table.water_flag then
 

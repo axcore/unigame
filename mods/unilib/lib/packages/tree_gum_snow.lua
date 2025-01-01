@@ -9,7 +9,7 @@
 unilib.pkg.tree_gum_snow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_gum_snow.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Eucalyptus pauciflora"
 
     unilib.register_tree({
@@ -111,7 +111,7 @@ function unilib.pkg.tree_gum_snow.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_gum_snow_closed
+        -- Original to unilib. Creates unilib:gate_gum_snow_closed, etc
         part_name = "gum_snow",
         orig_name = {nil, nil},
 
@@ -122,10 +122,10 @@ function unilib.pkg.tree_gum_snow.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_gum_snow_in_alps_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_snow_in_alps_" .. i, {
             -- From australia/biome_australian_alps.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_snow_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_snow_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 2500,
             flags = "place_center_x, place_center_z",
@@ -135,12 +135,12 @@ function unilib.pkg.tree_gum_snow.exec()
 
     end
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil then
 
-        unilib.register_decoration("australia_tree_gum_snow_log", {
+        unilib.register_decoration_generic("australia_tree_gum_snow_log", {
             -- From australia/biome_australian_alps.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_snow_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_snow_log.mts",
 
             flags = "place_center_x",
             noise_params = {

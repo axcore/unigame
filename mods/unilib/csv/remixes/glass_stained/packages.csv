@@ -1,5 +1,4 @@
 # "glass_stained" remix - contains everything from the fancy stained glass mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -49,16 +48,21 @@ grass_jungle|default
 item_stick_ordinary|default
 item_sweeper|moreblocks
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
-mineral_mese|default
+mineral_mese|default glemr11
 pane_steel_bar|xpanes
 stone_obsidian|default moreblocks
 torch_ordinary|default
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #crop_cotton|farming
 #crop_rice_white|farming
+#machine_furnace_induction|unilib
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
+
+# supporting packages (.suggested)

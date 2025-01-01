@@ -9,7 +9,7 @@
 unilib.pkg.flowerpot_clay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,12 +39,12 @@ function unilib.pkg.flowerpot_clay.post()
 
     for part_name, orig_name in pairs(flower_table) do
 
-        if unilib.pkg_executed_table["flower_" .. part_name] ~= nil then
+        if unilib.global.pkg_executed_table["flower_" .. part_name] ~= nil then
 
             local pot_name = "unilib:flowerpot_clay_" .. part_name
             local flower_name = "unilib:flower_" .. part_name
             local img = "unilib_flowerpot_clay_" .. part_name .. ".png"
-            local def_table = minetest.registered_nodes[flower_name]
+            local def_table = core.registered_nodes[flower_name]
 
             if def_table then
 
@@ -54,10 +54,12 @@ function unilib.pkg.flowerpot_clay.post()
                     description = S("Clay Flowerpot with @1", def_table.description),
                     tiles = {img},
                     groups = {flammable = 3, flower = 1, plant = 1, snappy = 3},
-                    sounds = unilib.sound_table.leaves,
+                    sounds = unilib.global.sound_table.leaves,
 
                     drawtype = "plantlike",
                     inventory_image = img,
+                    -- N.B. is_ground_content = false not in original code
+                    is_ground_content = false,
                     paramtype = "light",
                     selection_box = {
                         type = "fixed",
@@ -71,7 +73,7 @@ function unilib.pkg.flowerpot_clay.post()
                     output = pot_name,
                     recipe = {
                         {"unilib:brick_ordinary", flower_name, "unilib:brick_ordinary"},
-                        {"", "unilib:brick_ordinary", ""}
+                        {"", "unilib:brick_ordinary", ""},
                     },
                 })
 

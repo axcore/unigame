@@ -9,7 +9,7 @@
 unilib.pkg.tree_fig_moreton_bay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_fig_moreton_bay.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Ficus macrophylla"
 
     unilib.register_tree({
@@ -70,8 +70,10 @@ function unilib.pkg.tree_fig_moreton_bay.exec()
     })
     unilib.register_leafdecay({
         -- From australia:moreton_bay_fig_leaves
+        trunk_type = "fig_moreton_bay",
         trunks = {"unilib:tree_fig_moreton_bay_trunk"},
-        leaves = {"unilib:tree_fig_moreton_bay_leaves", "unilib:fruit_fig_moreton_bay"},
+        leaves = {"unilib:tree_fig_moreton_bay_leaves"},
+        others = {"unilib:fruit_fig_moreton_bay"},
         radius = 3,
     })
 
@@ -118,7 +120,7 @@ function unilib.pkg.tree_fig_moreton_bay.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_fig_moreton_bay_closed
+        -- Original to unilib. Creates unilib:gate_fig_moreton_bay_closed, etc
         part_name = "fig_moreton_bay",
         orig_name = {nil, nil},
 
@@ -130,10 +132,10 @@ function unilib.pkg.tree_fig_moreton_bay.exec()
     -- N.B. Tweaked these schematics to remove a rogue tree trunk node at the top
     for i = 1, 3 do
 
-        unilib.register_decoration("australia_tree_fig_moreton_bay_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_fig_moreton_bay_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_fig_moreton_bay_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_fig_moreton_bay_" .. i .. ".mts",
 
             fill_ratio = (3 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

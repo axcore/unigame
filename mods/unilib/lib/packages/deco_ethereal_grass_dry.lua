@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_grass_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,11 +36,11 @@ end
 
 function unilib.pkg.deco_ethereal_grass_dry.exec()
 
-    if unilib.pkg_executed_table["biome_ethereal_savanna"] ~= nil and
-            unilib.pkg_executed_table["dirt_dry"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_savanna"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_dry"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration("ethereal_grass_dry_1", {
+        unilib.register_decoration_generic("ethereal_grass_dry_1", {
             -- From ethereal-ng/decor.lua
             deco_type = "simple",
             decoration = {
@@ -56,10 +56,10 @@ function unilib.pkg.deco_ethereal_grass_dry.exec()
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_mesa"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_mesa"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration("ethereal_grass_dry_2", {
+        unilib.register_decoration_generic("ethereal_grass_dry_2", {
             -- From ethereal-ng/decor.lua
             deco_type = "simple",
             decoration = {
@@ -75,11 +75,11 @@ function unilib.pkg.deco_ethereal_grass_dry.exec()
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_caves"] ~= nil and
-            unilib.pkg_executed_table["plant_shrub_dry"] ~= nil and
-            unilib.pkg_executed_table["stone_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_caves"] ~= nil and
+            unilib.global.pkg_executed_table["plant_shrub_dry"] ~= nil and
+            unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
-        unilib.register_decoration("ethereal_grass_dry_3", {
+        unilib.register_decoration_generic("ethereal_grass_dry_3", {
             -- From ethereal-ng/decor.lua
             deco_type = "simple",
             decoration = {
@@ -98,11 +98,11 @@ end
 
 function unilib.pkg.deco_ethereal_grass_dry.post()
 
-    if unilib.pkg_executed_table["biome_ethereal_savanna"] ~= nil and
-            unilib.pkg_executed_table["dirt_dry"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_savanna"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_dry"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("ethereal_grass_dry_1", nil, {
+        unilib.register_decoration_complete("ethereal_grass_dry_1", nil, {
             -- From ethereal-ng/decor.lua
             biomes = "ethereal_savanna",
             place_on = {"unilib:dirt_dry_with_turf_dry", "unilib:dirt_ordinary_with_turf_dry"},
@@ -112,28 +112,28 @@ function unilib.pkg.deco_ethereal_grass_dry.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_mesa"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_mesa"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("ethereal_grass_dry_2", nil, {
+        unilib.register_decoration_complete("ethereal_grass_dry_2", nil, {
             -- From ethereal-ng/decor.lua
-            biomes = "ethereal_mesa",
-            place_on = {"unilib:dirt_ordinary_with_turf_dry"},
+            biomes = "ethereal_mesa_redwood",
+            place_on = "unilib:dirt_ordinary_with_turf_dry",
             y_max = 100,
             y_min = 1,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_caves"] ~= nil and
-            unilib.pkg_executed_table["plant_shrub_dry"] ~= nil and
-            unilib.pkg_executed_table["stone_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_caves"] ~= nil and
+            unilib.global.pkg_executed_table["plant_shrub_dry"] ~= nil and
+            unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
-        unilib.register_decoration_now("ethereal_grass_dry_3", nil, {
+        unilib.register_decoration_complete("ethereal_grass_dry_3", nil, {
             -- From ethereal-ng/decor.lua
             biomes = "ethereal_caves",
-            place_on = {"unilib:stone_desert"},
-            y_max = 40,
+            place_on = "unilib:stone_desert",
+            y_max = 42,
             y_min = 5,
         })
 

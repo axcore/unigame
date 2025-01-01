@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_schist_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_schist_blue.exec()
         description = S("Blue Schist Sandstone"),
 
         category = "sedimentary",
+        colour = "#A6B3AD",
         grinder_flag = true,
         grinder_powder = "unilib:sand_schist_blue",
         grinder_gravel = "unilib:gravel_schist_blue",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_schist_blue.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_schist_blue_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, blueschist_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_schist_blue.exec()
             replace_mode = mode,
             description = S("Blue Schist Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_schist_blue_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_schist_blue_cobble_compressed
+            part_name = "sandstone_schist_blue",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Blue Schist Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_schist_blue_cobble_condensed
+            part_name = "sandstone_schist_blue",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Blue Schist Sandstone Cobble"),
         })
 
     end

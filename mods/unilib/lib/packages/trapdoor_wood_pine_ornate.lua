@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wood_pine_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ function unilib.pkg.trapdoor_wood_pine_ornate.exec()
     local c_wood = "unilib:tree_pine_wood"
 
     unilib.register_trapdoor({
-        -- From moretrapdoors:pine_trapdoor. Creates unilib:trapdoor_wood_pine_ornate
+        -- From moretrapdoors:pine_trapdoor. Creates unilib:trapdoor_wood_pine_ornate_closed, etc
         part_name = "wood_pine_ornate",
-        orig_name = {"moretrapdoors:pine_trapdoor", "moretrapdoors:pine_trapdoor_open"},
+        orig_name_list = {"moretrapdoors:pine_trapdoor", "moretrapdoors:pine_trapdoor_open"},
         def_table = {
             description = S("Ornate Pine Wood Trapdoor"),
             -- (no tiles)
@@ -55,7 +55,7 @@ function unilib.pkg.trapdoor_wood_pine_ornate.exec()
         recipe = {
             {c_wood, c_wood, c_wood},
             {c_wood, "unilib:tree_pine_trunk", c_wood},
-        }
+        },
     })
 
 end

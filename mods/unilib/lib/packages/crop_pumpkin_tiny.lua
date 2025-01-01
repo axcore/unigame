@@ -9,7 +9,7 @@
 unilib.pkg.crop_pumpkin_tiny = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.crop_pumpkin_tiny.exec()
         harvest_group_table = {crop_pumpkin = 1, flammable = 4},
         -- N.B. The harvestable item is the node defined below, not a craftitem as usual
         harvest_override = "unilib:crop_pumpkin_tiny_harvest",
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         place_param2 = 3,
         seed_description = S("Tiny Pumpkin Seed"),
@@ -71,7 +71,7 @@ function unilib.pkg.crop_pumpkin_tiny.exec()
         -- N.B. plant = 1 not in original code; added for compatibility with other harvested
         --      pumpkin nodes
         groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 2, plant = 1, pumpkin = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -80,14 +80,15 @@ function unilib.pkg.crop_pumpkin_tiny.exec()
             fixed = {
                 {-0.25, -0.5, -0.25, 0.25, 0, 0.25},
                 {-0.0625, 0, -0.0625, 0.0625, 0.0625, 0.0625},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
         sunlight_propagates = true,
         use_texture_alpha = "clip",
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -99,7 +100,7 @@ function unilib.pkg.crop_pumpkin_tiny.exec()
 
     end
 
-    if unilib.pkg_executed_table["item_fertiliser_mulch"] ~= nil then
+    if unilib.global.pkg_executed_table["item_fertiliser_mulch"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:pumpkin_plant
@@ -109,5 +110,14 @@ function unilib.pkg.crop_pumpkin_tiny.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_pumpkin_tiny_harvest",
+        juice_description = S("Pumpkin"),
+        juice_type = "pumpkin",
+        rgb = "#ffc04c",
+
+        orig_flag = false,
+    })
 
 end

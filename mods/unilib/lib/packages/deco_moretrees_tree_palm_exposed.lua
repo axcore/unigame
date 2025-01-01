@@ -9,7 +9,7 @@
 unilib.pkg.deco_moretrees_tree_palm_exposed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_moretrees_tree_palm_exposed.post()
 
-    unilib.register_decoration_now("convert_tree_palm_exposed", nil, {
+    unilib.register_decoration_complete("convert_tree_palm_exposed", nil, {
         -- From moretrees/init.lua
         -- Completes decoration in package "tree_palm_exposed"
         place_on = "unilib:sand_ordinary",

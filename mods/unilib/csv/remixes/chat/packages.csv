@@ -1,0 +1,381 @@
+# "chat" remix - contains packages which define chat commands that aren't tied to a specific
+#       package (or packages)
+# This remix contains all such packages; the following remixes contain a smaller selection of
+#       packages:
+#
+#       "chat_admin" - commands available to players with the "unilib_admin" privilege
+#       "chat_danger" - commands available to players with the "unilib_danger" privilege
+#       "chat_tools" - commands available to players with the "unilib_tools" privilege
+#       "chat_normal" - commands available to players without special privileges
+
+# node_name | original_mod
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for player ALARMS
+
+# Shared functions for chat command packages for player alarms
+shared_chat_alarm|unilib
+
+# /set_alarm: Sets a daily alarm which rings at HH:MM (24-hour clock)
+chat_set_alarm|unilib
+# /cancel_alarm: Cancels the daily alarm
+chat_cancel_alarm|unilib
+# /show_alarm: Shows the current daily alarm (if any)
+chat_show_alarm|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for CHECKING things
+
+# /check_ingredients: Checks whether ingredients provided by external mods are actually available
+chat_check_ingredients|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for checking recipe CONFLICTS
+
+# Shared functions for chat commands for checking recipe conflicts
+shared_chat_conflicts|unilib
+
+# /count_recipe_conflicts: Checks for recipe conflicts, displaying the total number found
+chat_count_recipe_conflicts|unilib
+# /check_recipe_conflicts: Checks for recipe conflicts, displaying detailed output
+chat_check_recipe_conflicts|unilib
+# /count_group_conflicts: Checks for recipe conflicts (taking groups into account), and displays
+#      the total number found
+chat_count_group_conflicts|unilib
+# /check_group_conflicts: Checks for recipe conflicts (taking groups into account), and displays
+#      the total number found
+chat_check_group_conflicts|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for CONVERTing original items into unilib items, and vice-versa
+
+# /convert: Shows the unilib equivalent of a node/craftitems/tools from an original mod
+chat_convert|unilib
+# /deconvert: Shows the original mod equivalent or a node/craftitems/tools from unilib
+chat_deconvert|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for health, stamina, hydration and advanced CUISINE
+
+# Shared functions for chat commands for health, stamina, hydration and advanced cuisine
+shared_chat_cuisine|unilib
+
+# /reset_health: Resets player health
+chat_reset_health|unilib
+# /reset_hunger: Resets player hunger (if player hunger is enabled)
+chat_reset_hunger|unilib
+# /reset_thirst: Resets player thirst (if hydration is enabled)
+chat_reset_thirst|unilib
+# /reset_me: Resets player health, hunger and thirst
+chat_reset_me|unilib
+
+# /cripple_health: Reduces player health; the opposite command is /reset_health
+chat_cripple_health|unilib
+# /cripple_hunger: Reduces player hunger (if player hunger is enabled); the opposite command is
+#       /reset_hunger
+chat_cripple_hunger|unilib
+# /cripple_thirst: Reduces player thirst (if hydration is enabled); the opposite command is
+#       /reset_thirst
+chat_cripple_thirst|unilib
+# /cripple_me: Reduces player health, hunger and thirst; the opposite command is /reset_me
+chat_cripple_me|unilib
+
+# /clear_food_history: Clears the player's food history  (if advanced cuisine is enabled)
+chat_clear_food_history|unilib
+# /show_food_history: Shows the player's food history (if advanced cuisine is enabled)
+chat_show_food_history|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for DUMPING definitions (of nodes, etc) to the chat window
+
+# /dump: Dumps definition of the node, craftitem or tool with the (exact) specified name
+chat_dump|unilib
+# /dump_item: Dumps definitions of nodes, craftitems and tools with a matching name
+chat_dump_item|unilib
+
+# /dump_abm: Dumps definitions of ABMs with a matching label
+chat_dump_abm|unilib
+# /dump_biome: Dumps definitions of biomes with a matching name
+chat_dump_biome|unilib
+# /dump_craftitem: Dumps definitions of craftitems with a matching name
+chat_dump_craftitem|unilib
+# /dump_decoration: Dumps definitions of decorations with a matching name
+chat_dump_decoration|unilib
+# /dump_lbm: Dumps definitions of LBMs with a matching name or label
+chat_dump_lbm|unilib
+# /dump_node: Dumps definitions of nodes with a matching name
+chat_dump_node|unilib
+# /dump_ore: Dumps definitions of ores with a matching type, ore node or wherein node
+chat_dump_ore|unilib
+# /dump_tool: Dumps definitions of tools with a matching name
+chat_dump_tool|unilib
+
+# /dump_mods: Dumps details about all source mods, or just the specified source mod
+# /dump_mod
+chat_dump_mod|unilib
+# /dump_compatible: Dumps details about all compatible mods, or just the specified compatible mod
+chat_dump_compatible|unilib
+# /dump_external: Dumps details about all external mods, or just the specified external mod
+chat_dump_external|unilib
+# /dump_expansion: Dumps details about all known expansion packs, or just the specified expansion
+#   `   pack
+chat_dump_expansion|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for player EFFECTS
+
+# /toggle_autoget: Toggles auto-get for the player (if it's enabled on this server)
+# /autoget
+chat_toggle_autoget|unilib
+# /toggle_autodrop: Toggles auto-drop for the player (if it's enabled on this server)
+# /autodrop
+chat_toggle_autodrop|unilib
+
+# /set_hotbar: Sets the size of the player's hotbar
+# /reset_hotbar: Resets the size of the player's hotbar
+chat_set_hotbar|unilib
+
+# /toggle_identify: Toggles the HUD for identifying the node at which the mouse is pointed
+# /identify
+# /what
+chat_toggle_identify|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for FINDING things
+
+# /show_biome: Toggles showing the current biome
+chat_show_biome|display_biome
+# /find_biome: Finds and teleports to the first matching biome found (or the previous biome found
+#       with this command, if no pattern is specified
+# /switch_biome: Teleports to biomes in a repeating cycle
+chat_find_biome|findbiomes unilib
+
+# /find_node: Finds the closest node matching the specified name, pattern or group (e.g.
+#       "unilib:flower_rose_red", "flower", "group:flower") within 100 blocks of the player's
+#       position (or within the specified width and height)
+# /find_nodes
+# /find_all_nodes: Finds all nodes matching the specified name, pattern or group (e.g.
+#       "unilib:flower_rose_red", "flower", "group:flower") within 100 blocks of the player's
+#       position (or within the specified width and height)
+# /teleport_to_node: Teleports to the location of the nearest node found during the most recent
+#       search (using /find_node, etc). May teleport you into solid rock, so use with caution!
+chat_find_node|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for LISTING registered things
+
+# Shared functions for chat commands for listing registered things
+shared_chat_list|unilib
+
+# /list_all: Lists counts of everything
+chat_list_all|unilib
+
+# /list_remixes: Lists all loaded remixes
+# /list_remix
+chat_list_remixes|unilib
+# /list_packages: Lists all loaded packages, or details for the specified package
+# /list_package
+chat_list_packages|unilib
+# /list_other_packages: Lists all non-loaded packages which are mentioned by loaded packages
+chat_list_other_packages|unilib
+
+# /list_abms: Lists all registered ABMS, or just ABMs from the specified mod
+# /list_abm
+chat_list_abms|unilib
+# /list_biomes: Lists all registered biomes
+# /list_biome
+chat_list_biomes|unilib
+# /list_craftitems: Lists all registered craftitems, or just craftitems from the specified mod
+# /list_craftitem
+chat_list_craftitems|unilib
+# /list_decorations: Lists all registered decorations, or just decorations from the specified mod
+# /list_decoration
+chat_list_decorations|unilib
+# /list_entities: Lists all registered entities, or just entities from the specified mod
+# /list_entity
+chat_list_entities|unilib
+# /list_items: Lists all registered nodes/craftitems/tools, or just items from the specified mod
+# /list_item
+chat_list_items|unilib
+# /list_lbms: Lists all registered LBMs, or just LBMs from the specified mod
+# /list_lbm
+chat_list_lbms|unilib
+# /list_nodes: Lists all registered nodes, or just nodes from the specified mod
+# /list_node
+chat_list_nodes|unilib
+# /list_ores: "Lists all registered ores, or just ores of the specified type/mod/node/biome
+# /list_ore
+chat_list_ores|unilib
+# /list_tools: Lists all registered tools, or just tools from the specified mod
+# /list_tool
+chat_list_tools|unilib
+
+# /list_hidden: Lists all hidden (because they can't be unregistered) nodes, craftitems and tools
+chat_list_hidden|unilib
+
+# /list_stones: Lists stone types, or details for the specified stone type
+# /list_stone
+chat_list_stones|unilib
+# /list_trees: Lists tree types, or details for the specified tree type
+# /list_tree
+chat_list_trees|unilib
+# /list_buckets: Lists bucket types, or a list of buckets of the specified type
+# /list_bucket
+chat_list_buckets|unilib
+# /list_liquids: Lists all liquid types, or details for the specified liquid type
+# /list_liquid
+chat_list_liquids|unilib
+
+# /list_metals: Lists all registered metal types
+# /list_metal
+chat_list_metals|unilib
+# /list_metal_sources: Lists all metals provided by mineral sources
+# /list_metal_source
+chat_list_metal_sources|unilib
+# /list_nonmetals: Lists all registered elemental non-metal types
+# /list_nonmetal
+chat_list_nonmetals|unilib
+# /list_nonmetal_sources: Lists all elemental non-metals provided by mineral sources
+# /list_nonmetal_source
+chat_list_nonmetal_sources|unilib
+# /list_minerals: Lists all registered mineral types
+# /list_mineral
+chat_list_minerals|unilib
+# /list_mineral_products: Lists all metals/elemental non-metals produced by minerals
+# /list_mineral_product
+chat_list_mineral_products|unilib
+
+# /list_mods: Lists all source mods, or just the specified source mod
+# /list_mod
+chat_list_mod|unilib
+# /list_compatible: Lists all compatible mods, or just the specified compatible mod
+chat_list_compatible|unilib
+# /list_external: Lists all external mods, or just the specified external mod
+chat_list_external|unilib
+# /list_expansion: Lists all known expansion packs, or just the specified expansion pack
+chat_list_expansion|unilib
+
+# -------------------------------------------------------------------------------------------------
+# MISCELLANEOUS chat commands
+
+# /cut_trench: Cuts deep trenches in newly-generated terrain
+chat_cut_trench|rocks
+
+# /start1: Teleports to a start position in v7 map, seed "test"
+# /start2: Teleports to a start position in v7 map, seed "test"
+# /start3: Teleports to a start position in v7 map, seed "test"
+# /bay: Teleports to a location with many trees in v7 map, seed "test"
+# /coral: Teleports to a location with coral in v7 map, seed "test"
+# /dale: Teleports to a location with valleys in v7 map, seed "test"
+# /jungle: Teleports to a location with a jungle in v7 map, seed "test"
+# /meadow: Teleports to a location with flat land in v7 map, seed "test"
+chat_teleport|unilib
+
+# /test: Runs some arbitrary code
+chat_test|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for checking recipes with MISSING items
+
+# Shared functions for chat commands for checking recipes with missing items
+shared_chat_missing|unilib
+
+# /count_broken_recipes: Checks for missing recipe ingredients, displaying the total number found
+chat_count_broken_recipes|unilib
+# /check_broken_recipes: Checks for missing recipe ingredients, displaying detailed output
+chat_check_broken_recipes|unilib
+
+# /list_groups: List groups, and the items that provide them
+chat_list_groups|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for SHOWING various data
+
+# /show_mod_attributes: Shows table of mod attributes (i.e. mod storage)
+# /show_mod_attribute
+chat_show_mod_attributes|unilib
+# /set_mod_attribute: Sets the value of a mod attribute
+chat_set_mod_attribute|unilib
+# /reset_mod_attribute: Resets the value of a mod attribute
+chat_reset_mod_attribute|unilib
+
+# /show_player_attributes: Shows table of player attributes (i.e. player metadata)
+# /show_player_attribute
+chat_show_player_attributes|unilib
+# /set_player_attribute: Sets the value of a player attribute
+chat_set_player_attribute|unilib
+# /reset_player_attribute: Resets the value of a player attribute
+chat_reset_player_attribute|unilib
+
+# /show_ingredients: Displays full list of ingredients for crafting the specified item
+chat_show_ingredients|unilib
+# /show_inventory: Displays the player's current inventory
+# /inventory
+# /inv
+chat_show_inventory|unilib
+# /show_light: Displays light at the player's location
+chat_show_light|unilib
+# /show_package: Show the unilib package that created a node, craftitem or tool
+chat_show_package|unilib
+
+# /show_element: Shows the periodic table (from the "atomic" remix)
+# /show_elements
+# /show_rare_element: Shows elements not directly available from vapourisation (from the "atomic"
+#       remix)
+# /show_rare_elements
+chat_show_elements|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for showing player STATISTICS
+
+# Shared functions for chat commands for showing player statistics
+shared_chat_statistics|unilib
+
+# /show_statistics: Shows general player stats
+# /show_stats
+chat_show_statistics|unilib
+
+# /show_death: Shows full list of player deaths
+chat_show_death|unilib
+# /show_dig: Shows full list of nodes dug by player
+chat_show_dig|unilib
+# /show_place: Shows full list of nodes placed by player
+chat_show_place|unilib
+# /show_craft: Shows full list of items crafted by player
+chat_show_craft|unilib
+# /show_eat: Shows full list of items eaten/drunk by player
+chat_show_eat|unilib
+
+# /add_event: Adds a calendar event, e.g. "You ate a nice sandwich"
+chat_add_event|unilib
+# /delete_event: Deletes calendar events from the specified game day (e.g. 1 for the first game
+#      day, or a string in the form "YYYYMMDD"). N.B. Only events of the type "default" can be
+#      removed with this command (such as those created with the /add_event command)
+chat_delete_event|unilib
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands to change the TIME
+
+# /day: Changes time to midday
+chat_day|unilib
+# /night: Changes time to midnight
+chat_night|unilib
+# /dawn: Changes time to dawn
+chat_dawn|unilib
+# /dusk: Changes time to dusk
+chat_dusk|unilib
+
+# /daylight: Enables permanent daylight without changing the game time
+# /darkness: Enables permanent darkness without changing the game time
+chat_daylight|ptime
+
+# -------------------------------------------------------------------------------------------------
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#shared_atomic|unilib
+
+# supporting packages (.suggested)

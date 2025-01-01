@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_black = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.mushroom_black.exec()
         tiles = {img},
         -- N.B. food_mushroom = 1, mushroom = 1 not in original code
         groups = {attached_node = 1, flammable = 1, food_mushroom = 1, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,8 +48,10 @@ function unilib.pkg.mushroom_black.exec()
         wield_image = img,
 
         -- N.B. Not poisonous, and not nutritious
-        on_use = minetest.item_eat(0),
+        on_use = core.item_eat(0),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_black")
+
+    unilib.register_decoration_spare("unilib:mushroom_black")
 
 end

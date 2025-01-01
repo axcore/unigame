@@ -9,7 +9,7 @@
 unilib.pkg.metal_silver_sterling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.metal_silver_sterling.init()
 
     return {
         description = "Sterling silver",
-        depends = {"metal_copper_real", "metal_silver_real"},
+        depends = {"metal_copper_rare", "metal_silver_rare"},
     }
 
 end
@@ -62,10 +62,10 @@ function unilib.pkg.metal_silver_sterling.exec()
         type = "shapeless",
         output = "unilib:metal_silver_sterling_ingot 4",
         recipe = {
-            "unilib:metal_silver_real_ingot",
-            "unilib:metal_silver_real_ingot",
-            "unilib:metal_silver_real_ingot",
-            "unilib:metal_copper_real_ingot",
+            "unilib:metal_silver_rare_ingot",
+            "unilib:metal_silver_rare_ingot",
+            "unilib:metal_silver_rare_ingot",
+            "unilib:metal_copper_rare_ingot",
         },
     })
     unilib.register_craft({
@@ -73,7 +73,7 @@ function unilib.pkg.metal_silver_sterling.exec()
         output = "unilib:metal_silver_sterling_ingot 9",
         recipe = {
             {"unilib:metal_silver_sterling_block"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -85,7 +85,7 @@ function unilib.pkg.metal_silver_sterling.exec()
             description = S("Sterling Silver Block"),
             tiles = {"unilib_metal_silver_sterling_block.png"},
             groups = {bendy = 2, cracky = 2, level = 2, melty = 2, snappy = 1},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             -- N.B. true in original code
             is_ground_content = false,
@@ -97,5 +97,24 @@ function unilib.pkg.metal_silver_sterling.exec()
         ingredient = "unilib:metal_silver_sterling_ingot",
     })
     unilib.register_stairs("unilib:metal_silver_sterling_block")
+    unilib.register_carvings("unilib:metal_silver_sterling_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_silver_sterling_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Sterling Silver Block"),
+            tiles = {"unilib_metal_silver_sterling_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("silver_sterling")
+
+    end
 
 end

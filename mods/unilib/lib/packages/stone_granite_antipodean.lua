@@ -9,7 +9,7 @@
 unilib.pkg.stone_granite_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_granite_antipodean.exec()
         description = S("Antipodean Granite"),
 
         category = "intrusive",
+        colour = "#C19B7D",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 3/4)
         hardness = 3,
@@ -43,7 +44,7 @@ function unilib.pkg.stone_granite_antipodean.exec()
         tiles = {"unilib_stone_granite_antipodean.png"},
         -- N.B. granite = 1, smoothstone = 1 not in original code
         groups = {cracky = 1, granite = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drops smoothstone in original code
         drop = "unilib:stone_granite_antipodean_cobble",
@@ -67,7 +68,10 @@ function unilib.pkg.stone_granite_antipodean.exec()
         tiles = {"unilib_stone_granite_antipodean_block.png"},
         -- N.B. stoneblock = 1 not in original code
         groups = {cracky = 1, stone = 1, stoneblock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_3x3x9({
         -- From aotearoa:granite_block
@@ -89,7 +93,10 @@ function unilib.pkg.stone_granite_antipodean.exec()
         tiles = {"unilib_stone_granite_antipodean_brick.png"},
         -- N.B. stonebrick = 1 not in original code
         groups = {cracky = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_2x2x4({
         -- From aotearoa:granitebrick
@@ -104,7 +111,9 @@ function unilib.pkg.stone_granite_antipodean.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "granite_antipodean",
     })
-    unilib.set_auto_rotate("unilib:stone_granite_antipodean_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_granite_antipodean_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_stone_cobble({
         -- Original to unilib. Creates unilib:stone_granite_antipodean_cobble
@@ -114,6 +123,24 @@ function unilib.pkg.stone_granite_antipodean.exec()
         replace_mode = mode,
         description = S("Antipodean Granite Cobble"),
         img_list = {"unilib_stone_granite_antipodean.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_granite_antipodean_cobble_compressed
+        part_name = "granite_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Antipodean Granite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_granite_antipodean_cobble_condensed
+        part_name = "granite_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Antipodean Granite Cobble"),
     })
 
 end

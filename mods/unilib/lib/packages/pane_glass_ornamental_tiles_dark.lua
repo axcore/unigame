@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_ornamental_tiles_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,10 +35,10 @@ function unilib.pkg.pane_glass_ornamental_tiles_dark.exec()
         part_name = "glass_ornamental_tiles_dark",
         orig_name = {},
         def_table = {
-            description = unilib.brackets(S("Ornamental Glass Pane"), S("Dark Tiles")),
+            description = unilib.utils.brackets(S("Ornamental Glass Pane"), S("Dark Tiles")),
             textures = {img, "", "unilib_pane_glass_obsidian_edge.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = img,
             light_source = 5,

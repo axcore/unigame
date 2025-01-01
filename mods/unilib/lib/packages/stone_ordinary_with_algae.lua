@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_algae = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,16 +40,16 @@ function unilib.pkg.stone_ordinary_with_algae.exec()
                 "unilib_stone_ordinary_cobble.png^unilib_algae_overlay_side.png",
             },
             groups = {crumbly = 3},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:stone_ordinary_cobble",
         }
     )
-    if unilib.pkg_executed_table["moss_yellow"] ~= nil then
+    if unilib.global.pkg_executed_table["moss_yellow"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:stone_ordinary_cobble_with_algae",
             "unilib:stone_ordinary_cobble",
             "unilib:moss_yellow"

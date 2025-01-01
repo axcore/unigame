@@ -9,7 +9,7 @@
 unilib.pkg.misc_matrix = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,9 +25,9 @@ end
 
 function unilib.pkg.misc_matrix.exec()
 
-    unilib.register_node("unilib:misc_matrix_bulk", "underch:bulk", mode, {
+    unilib.register_matrix_stone("unilib:misc_matrix_bulk", "underch:bulk", mode, {
         -- From underch:bulk
-        description = "Very Mysterious Stone",
+        description = S("Very Mysterious Stone"),
         tiles = {"unilib_misc_matrix_bulk.png"},
         -- N.B. not_in_creative_inventory not in original code
         groups = {jit_shadow = 1, not_in_creative_inventory = 1},
@@ -36,16 +36,16 @@ function unilib.pkg.misc_matrix.exec()
         drop = {},
         diggable = false,
 
-        after_dig_node = unilib.jbiome_dig_shadow,
+        after_dig_node = unilib.jbiomes.dig_shadow,
 
         on_punch = function(pos, node, puncher, pointed_thing)
-            unilib.jbiome_reveal(pos, true, false)
+            unilib.jbiomes.reveal(pos, true, false)
         end,
     })
 
-    unilib.register_node("unilib:misc_matrix_crust", "underch:crust", mode, {
+    unilib.register_matrix_stone("unilib:misc_matrix_crust", "underch:crust", mode, {
         -- From underch:crust
-        description = "Mysterious Stone",
+        description = S("Mysterious Stone"),
         tiles = {"unilib_misc_matrix_crust.png"},
         -- N.B. not_in_creative_inventory not in original code
         groups = {jit_shadow = 1, not_in_creative_inventory = 1},
@@ -54,10 +54,10 @@ function unilib.pkg.misc_matrix.exec()
         drop = {},
         diggable = false,
 
-        after_dig_node = unilib.jbiome_dig_shadow,
+        after_dig_node = unilib.jbiomes.dig_shadow,
 
         on_punch = function(pos, node, puncher, pointed_thing)
-            unilib.jbiome_reveal(pos, true, false)
+            unilib.jbiomes.reveal(pos, true, false)
         end,
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,13 +43,13 @@ function unilib.pkg.tool_shovel_steel.exec()
         },
         wield_image = "unilib_tool_shovel_steel.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From default:shovel_steel
         part_name = "steel",
         ingredient = "unilib:metal_steel_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_steel", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_steel", "shovel")
 
 end

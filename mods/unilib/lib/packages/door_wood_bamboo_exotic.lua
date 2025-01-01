@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_bamboo_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_bamboo_exotic.exec()
 
     unilib.register_door({
-        -- From farlands, doors:door_bamboo. Creates unilib:door_wood_bamboo_exotic
+        -- From farlands, doors:door_bamboo. Creates unilib:door_wood_bamboo_exotic_closed_left, etc
         part_name = "wood_bamboo_exotic",
-        orig_name = {nil, nil, nil, nil},
+        orig_name_list = {nil, nil, nil, nil},
         def_table = {
             description = S("Exotic Bamboo Wood Door"),
             tiles = {{name = "unilib_door_wood_bamboo_exotic.png", backface_culling = true}},

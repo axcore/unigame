@@ -17,9 +17,9 @@
 unilib.pkg.tree_acacia = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local doors_add_mode = unilib.imported_mod_table.doors.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local doors_add_mode = unilib.global.imported_mod_table.doors.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -56,7 +56,6 @@ function unilib.pkg.tree_acacia.exec()
         burnlevel = burnlevel,
         common_group = 2,
         description = S("Acacia Tree Trunk"),
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -97,7 +96,9 @@ function unilib.pkg.tree_acacia.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and (
+            moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_tree_panel({
             -- From moreblocks:all_faces_acacia_tree. Creates unilib:tree_acacia_panel
@@ -132,10 +133,10 @@ function unilib.pkg.tree_acacia.exec()
         description = S("Acacia Wood Fence Rail"),
     })
 
-    if doors_add_mode ~= "defer" then
+    if doors_add_mode ~= "defer" or not core.get_modpath("doors") then
 
         unilib.register_fence_gate_quick({
-            -- From doors:gate_acacia_wood. unilib:gate_acacia_closed
+            -- From doors:gate_acacia_wood_closed, etc. unilib:gate_acacia_closed, etc
             part_name = "acacia",
             orig_name = {"doors:gate_acacia_wood_closed", "doors:gate_acacia_wood_open"},
 
@@ -146,10 +147,10 @@ function unilib.pkg.tree_acacia.exec()
 
     end
 
-    unilib.register_decoration("default_tree_acacia", {
+    unilib.register_decoration_generic("default_tree_acacia", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_acacia.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_acacia.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -164,10 +165,10 @@ function unilib.pkg.tree_acacia.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("default_tree_acacia_log", {
+    unilib.register_decoration_generic("default_tree_acacia_log", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_acacia_log.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_acacia_log.mts",
 
         flags = "place_center_x",
         noise_params = {

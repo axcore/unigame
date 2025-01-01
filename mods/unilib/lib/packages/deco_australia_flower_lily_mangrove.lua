@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_flower_lily_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,9 +25,9 @@ function unilib.pkg.deco_australia_flower_lily_mangrove.init()
 
 end
 
-function unilib.pkg.deco_australia_flower_lily_mangrove.exec()
+function unilib.pkg.deco_australia_flower_lily_mangrove.post()
 
-    unilib.register_decoration_now("australia_flower_lily_mangrove", nil, {
+    unilib.register_decoration_complete("australia_flower_lily_mangrove", nil, {
         -- From australia:mangrove_lily
         biomes = "australia_mangroves",
         place_on = {

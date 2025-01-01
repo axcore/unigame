@@ -9,7 +9,7 @@
 unilib.pkg.item_wrench_scaffold = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.scaffolding.add_mode
+local mode = unilib.global.imported_mod_table.scaffolding.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.item_wrench_scaffold.exec()
             inventory_image = "unilib_item_wrench_scaffold.png",
         }
     )
-    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway" package
+    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway_steel" package
     --[[
     unilib.register_craft({
         -- From scaffolding:scaffolding_wrench

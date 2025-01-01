@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_gelatin_powder = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bonemeal.add_mode
+local mode = unilib.global.imported_mod_table.bonemeal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ end
 function unilib.pkg.ingredient_gelatin_powder.post()
 
     local replace_list = {}
-    for _, mini_list in pairs(unilib.potable_bucket_list) do
+    for _, mini_list in pairs(unilib.global.potable_bucket_list) do
         table.insert(replace_list, {mini_list[1], mini_list[2] .. " 5"})
     end
 

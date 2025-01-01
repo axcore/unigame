@@ -9,7 +9,7 @@
 unilib.pkg.tree_beech_black = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_beech_black.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 4
     local sci_name = "Fuscospora solandri"
 
     unilib.register_tree({
@@ -110,7 +110,8 @@ function unilib.pkg.tree_beech_black.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_black_beech_wood. Creates unilib:gate_beech_black_closed
+        -- From aotearoa:gate_black_beech_wood_closed, etc. Creates unilib:gate_beech_black_closed,
+        --      etc
         part_name = "beech_black",
         orig_name = {
             "aotearoa:gate_black_beech_wood_closed",
@@ -122,20 +123,20 @@ function unilib.pkg.tree_beech_black.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2, snappy = 1},
     })
 
-    unilib.register_decoration("aotearoa_tree_beech_black_dense_1", {
+    unilib.register_decoration_generic("aotearoa_tree_beech_black_dense_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_beech_black_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_beech_black_1.mts",
 
         fill_ratio = 0.0078,
         flags = "place_center_x, place_center_z",
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_beech_black_dense_2", {
+    unilib.register_decoration_generic("aotearoa_tree_beech_black_dense_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_beech_black_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_beech_black_2.mts",
 
         fill_ratio = 0.0039,
         flags = "place_center_x, place_center_z",
@@ -144,10 +145,10 @@ function unilib.pkg.tree_beech_black.exec()
     })
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_beech_black_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_beech_black_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_beech_black_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_beech_black_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.deco_moreplants_grass_long = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_moreplants_grass_long.post()
 
-    unilib.register_decoration_now("moreplants_grass_long", nil, {
+    unilib.register_decoration_complete("moreplants_grass_long", nil, {
         -- From moreplants/init.lua
         -- Completes decoration in package "grass_long"
         biomes = {

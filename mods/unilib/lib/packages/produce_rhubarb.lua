@@ -9,7 +9,7 @@
 unilib.pkg.produce_rhubarb = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.produce_rhubarb.exec()
 
     local orig_name_list = {}
-    for i = 1, 3 do
+    for i = 1, 4 do
         table.insert(orig_name_list, "farming:rhubarb_" .. i)
     end
 
@@ -45,6 +45,7 @@ function unilib.pkg.produce_rhubarb.exec()
         grow_list = {
             {},
             {},
+            {},
             {
                 drop = {
                     items = {
@@ -59,7 +60,8 @@ function unilib.pkg.produce_rhubarb.exec()
         max_light = 12,
         min_light = 10,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -76,10 +78,11 @@ function unilib.pkg.produce_rhubarb.exec()
         juice_description = S("Rhubarb"),
         juice_type = "rhubarb",
         rgb = "#fb8461",
+
         orig_flag = true,
     })
 
-    unilib.register_decoration("farming_redo_produce_rhubarb", {
+    unilib.register_decoration_generic("farming_redo_produce_rhubarb", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_rhubarb_grow_3",
@@ -88,8 +91,8 @@ function unilib.pkg.produce_rhubarb.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 798,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

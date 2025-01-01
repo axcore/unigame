@@ -9,7 +9,7 @@
 unilib.pkg.ladder_chain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -52,7 +52,7 @@ function unilib.pkg.ladder_chain.exec()
             {"unilib:item_stick_iron"},
             {"unilib:item_stick_iron"},
             {"unilib:item_stick_iron"},
-        }
+        },
     })
 
 end

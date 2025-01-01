@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_healing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,22 +19,23 @@ function unilib.pkg.deco_ethereal_tree_healing.init()
 
     return {
         description = "healing tree as decoration",
-        depends = {"biome_ethereal_taiga", "dirt_ordinary", "tree_healing"},
+        depends = {"dirt_ordinary", "tree_healing"},
+        at_least_one = {"biome_ethereal_glacier", "biome_ethereal_mountain"},
     }
 
 end
 
 function unilib.pkg.deco_ethereal_tree_healing.post()
 
-    unilib.register_decoration_now("ethereal_tree_healing", nil, {
+    unilib.register_decoration_complete("ethereal_tree_healing", nil, {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "tree_healing"
-        biomes = "ethereal_taiga",
+        biomes = {"ethereal_glacier", "ethereal_mountain"},
         num_spawn_by = 8,
-        place_on = "unilib:dirt_ordinary_with_cover_snow",
+        place_on = {"unilib:dirt_ordinary_with_cover_snow", "unilib:snow_ordinary_block"},
         spawn_by = "unilib:dirt_ordinary_with_cover_snow",
-        y_max = 140,
-        y_min = 120,
+        y_max = 160,
+        y_min = 150,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.stone_slate_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.stone_slate_antipodean.exec()
         description = S("Antipodean Slate"),
 
         category = "extrusive",
+        colour = "#3A3A3A",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 3)
         hardness = 2,
         hardness_real = 3,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("slate_antipodean", 2, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("slate_antipodean", 2, nil)
 
     unilib.register_node("unilib:stone_slate_antipodean", "australia:bluestone", mode, {
         -- From australia:bluestone
@@ -45,7 +46,7 @@ function unilib.pkg.stone_slate_antipodean.exec()
         tiles = {"unilib_stone_slate_antipodean.png"},
         -- N.B. smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_slate_antipodean_cobble",
     })
@@ -75,7 +76,7 @@ function unilib.pkg.stone_slate_antipodean.exec()
             tiles = {"unilib_stone_slate_antipodean_brick.png"},
             -- N.B. stonebrick = 1 not in original code
             groups = {cracky = 1, stone = 1, stonebrick = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -88,7 +89,9 @@ function unilib.pkg.stone_slate_antipodean.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "slate_antipodean",
     })
-    unilib.set_auto_rotate("unilib:stone_slate_antipodean_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_slate_antipodean_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_node(
         -- From australia:bluestone_cobble
@@ -100,7 +103,7 @@ function unilib.pkg.stone_slate_antipodean.exec()
             tiles = {"unilib_stone_slate_antipodean_cobble.png"},
             -- N.B. cobble = 1 not in original code
             groups = {cobble = 1, cracky = 2, stone = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -115,6 +118,24 @@ function unilib.pkg.stone_slate_antipodean.exec()
         part_name = "slate_antipodean",
 
         replace_mode = mode,
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_slate_antipodean_cobble_compressed
+        part_name = "slate_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Antipodean Slate Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_slate_antipodean_cobble_condensed
+        part_name = "slate_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Antipodean Slate Cobble"),
     })
 
 end

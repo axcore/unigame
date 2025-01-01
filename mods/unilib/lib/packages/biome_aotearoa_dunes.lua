@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_dunes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "pohutukawa_dunes" biome
         name = "aotearoa_dunes_pohutukawa",
-        description = unilib.brackets(S("Pohutukawa dunes biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Pohutukawa dunes biome"), "aotearoa"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -62,7 +62,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "sand_dunes" biome
         name = "aotearoa_dunes_sand",
-        description = unilib.brackets(S("Sand dunes biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Sand dunes biome"), "aotearoa"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -80,7 +80,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "iron_sand_dunes" biome
         name = "aotearoa_dunes_ironsand",
-        description = unilib.brackets(S("Iron sand dunes biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Iron sand dunes biome"), "aotearoa"),
         node_top = "unilib:sand_ironsand",
         depth_top = 3,
         node_filler = "unilib:sand_ironsand",
@@ -98,7 +98,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "salt_marsh" biome
         name = "aotearoa_dunes_salt_marsh",
-        description = unilib.brackets(S("Salt marsh biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Salt marsh biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_dry",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -116,7 +116,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "gravel_dunes" biome
         name = "aotearoa_dunes_gravel",
-        description = unilib.brackets(S("Gravel dunes biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Gravel dunes biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:gravel_ordinary",
@@ -134,7 +134,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "subantarctic_coast" biome
         name = "aotearoa_dunes_subantarctic_coast",
-        description = unilib.brackets(S("Subantarctic coast biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Subantarctic coast biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_antipodean_with_moss",
         depth_top = 1,
@@ -153,7 +153,7 @@ function unilib.pkg.biome_aotearoa_dunes.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "white_island" biome
         name = "aotearoa_dunes_white_island",
-        description = unilib.brackets(S("White island biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("White island biome"), "aotearoa"),
         node_top = "unilib:sand_volcanic",
         depth_top = 1,
         node_filler = "unilib:sand_volcanic",

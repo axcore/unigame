@@ -9,7 +9,7 @@
 unilib.pkg.biome_snow_lush = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 local min_height = 3
 
@@ -31,7 +31,7 @@ function unilib.pkg.biome_snow_lush.post()
     unilib.register_biome({
         -- From snow/mapgen_v7.lua, "snow_biome_lush" biome
         name = "snow_lush",
-        description = unilib.brackets(S("Lush snow biome"), "snow"),
+        description = unilib.utils.brackets(S("Lush snow biome"), "snow"),
         node_top = "unilib:dirt_ordinary_with_cover_snow",
         depth_top = 1,
         node_filler = "unilib:dirt_ordinary",

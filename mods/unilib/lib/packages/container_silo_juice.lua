@@ -9,7 +9,8 @@
 unilib.pkg.container_silo_juice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.drinks.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.drinks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -19,7 +20,7 @@ local function update_silo(pos, inputstack, inputcount)
 
     -- Adapted from drinks/drink_machines.lua, was drinks.drinks_silo()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local empty_vessel = unilib.pkg.shared_drinks.empty_convert_table[inputstack]
 
     unilib.pkg.shared_drinks.add_available(
@@ -62,6 +63,8 @@ function unilib.pkg.container_silo_juice.exec()
             fixed = {-0.5, -0.5, -0.5, 0.5, 1.5, 0.5},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_container_silo_juice.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -72,7 +75,7 @@ function unilib.pkg.container_silo_juice.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
 
             -- Adding juice
             if listname == "src" then
@@ -114,7 +117,7 @@ function unilib.pkg.container_silo_juice.exec()
 
         can_dig = function(pos)
 
-            local meta = minetest.get_meta(pos);
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             if inv:is_empty("src") and
                     inv:is_empty("dst") and
@@ -126,25 +129,28 @@ function unilib.pkg.container_silo_juice.exec()
 
         end,
 
+        -- N.B. No .on_blast() in original code
+        on_blast = function() end,
+
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size("main", 8*4)
             inv:set_size("src", 1)
             inv:set_size("dst", 1)
             meta:set_string("fullness", 0)
             meta:set_string("fruit", "empty")
-            meta:set_string("infotext", "Empty Juice Silo")
+            meta:set_string("infotext", S("Empty Juice Silo"))
             meta:set_string("formspec",
                 "size[8,8]" ..
-                "label[0,0;" .. S("Fill with the juice of your choice.") .. "]" ..
-                "label[0,0.4;" .. S("Only one type of juice can be stored.") .. "]" ..
-                "label[1,1.2;" .. S("Add juice here") .. "]" ..
-                "label[4,1.2;" .. S("The silo is empty") .. "]" ..
-                "label[1,2.2;" .. S("Retrieve juice here") .. "]" ..
-                "button[0,3;3,1;purge;" .. S("Discard juice") .. "]" ..
-                "label[3,3.2;" .. S("(This button completely empties the silo)") .. "]" ..
+                "label[0,0;" .. FS("Fill with the juice of your choice") .. "]" ..
+                "label[0,0.4;" .. FS("Only one type of juice can be stored") .. "]" ..
+                "label[1,1.2;" .. FS("Add juice here") .. "]" ..
+                "label[4,1.2;" .. FS("The silo is empty") .. "]" ..
+                "label[1,2.2;" .. FS("Retrieve juice here") .. "]" ..
+                "button[0,3;3,1;purge;" .. FS("Discard juice") .. "]" ..
+                "label[3,3.2;" .. FS("(This button completely empties the silo)") .. "]" ..
                 "list[current_name;src;0,1;1,1;]" ..
                 "list[current_name;dst;0,2;1,1;]" ..
                 "list[current_player;main;0,4;8,5;]"
@@ -154,7 +160,7 @@ function unilib.pkg.container_silo_juice.exec()
 
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local instack = inv:get_stack("src", 1)
             local outstack = inv:get_stack("dst", 1)
@@ -168,9 +174,9 @@ function unilib.pkg.container_silo_juice.exec()
             if fruit_in == "empty" then
 
                 meta:set_string("fruit", fruit)
-                local fruit_name = minetest.registered_nodes[instack:get_name()]
+                local fruit_name = core.registered_nodes[instack:get_name()]
                 if fruit_name == nil then
-                    fruit_name = minetest.registered_craftitems[instack:get_name()]
+                    fruit_name = core.registered_craftitems[instack:get_name()]
                 end
 
                 meta:set_string("fruit_name", string.lower(fruit_name.juice_description))
@@ -204,7 +210,7 @@ function unilib.pkg.container_silo_juice.exec()
 
             if fields["purge"] then
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local fullness = 0
                 local fruit_name = "no"
                 meta:set_string("fullness", 0)

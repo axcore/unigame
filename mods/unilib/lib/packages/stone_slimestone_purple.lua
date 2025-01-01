@@ -17,9 +17,9 @@
 unilib.pkg.stone_slimestone_purple = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_slimestone_purple.exec()
         description = S("Purple Slimestone"),
 
         category = "other",
+        colour = "#E03FD3",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,28 +88,24 @@ function unilib.pkg.stone_slimestone_purple.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:purple_slimestone. Creates
+        --      unilib:stone_slimestone_purple_cobble_compressed
+        part_name = "slimestone_purple",
+        orig_name = "compressed:purple_slimestone",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:purple_slimestone. Creates
-            --      unilib:stone_slimestone_purple_cobble_compressed
-            part_name = "slimestone_purple",
-            orig_name = "compressed:purple_slimestone",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Purple Slimestone Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Purple Slimestone Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:purple_slimestone. Creates
+        --      unilib:stone_slimestone_purple_cobble_condensed
+        part_name = "slimestone_purple",
+        orig_name = "condensed:purple_slimestone",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:purple_slimestone. Creates
-            --      unilib:stone_slimestone_purple_cobble_condensed
-            part_name = "slimestone_purple",
-            orig_name = "condensed:purple_slimestone",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Purple Slimestone Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Purple Slimestone Cobble"),
+    })
 
 end

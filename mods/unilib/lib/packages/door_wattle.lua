@@ -9,7 +9,7 @@
 unilib.pkg.door_wattle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wattle.exec()
 
     unilib.register_door({
-        -- From doors:door_wattle. Creates unilib:door_wattle
+        -- From doors:door_wattle. Creates unilib:door_wattle_closed_left, etc
         part_name = "wattle",
-        orig_name = {
+        orig_name_list = {
             "doors:door_wattle_a",
             "doors:door_wattle_b",
             "doors:door_wattle_c",

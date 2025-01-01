@@ -9,7 +9,7 @@
 unilib.pkg.item_watch_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.item_watch_digital.exec()
 
     unilib.register_tool("unilib:item_watch_digital", "orienteering:watch", mode, {
         -- From orienteering:watch
-        description = S("Digital Watch"),
+        description = unilib.utils.hint(S("Digital Watch"), S("punch to toggle 24-hour display")),
         inventory_image = "unilib_item_watch_digital.png",
         groups = {disable_repair = 1},
 

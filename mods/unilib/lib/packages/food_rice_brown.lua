@@ -9,7 +9,7 @@
 unilib.pkg.food_rice_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_rice_brown.exec()
         description = S("Bowl of Uncooked Brown Rice"),
         tiles = {"unilib_food_rice_brown_raw.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_rice = 1, food_vegan = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_rice_brown_raw.png",
@@ -53,7 +53,7 @@ function unilib.pkg.food_rice_brown.exec()
         description = S("Bowl of Cooked Brown Rice"),
         tiles = {"unilib_food_rice_brown_cooked.png"},
         groups = {attached_node = 1, dig_immediate = 3, eatable = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_rice_brown_cooked.png",
@@ -66,7 +66,7 @@ function unilib.pkg.food_rice_brown.exec()
         walkable = false,
         wield_image = "unilib_food_rice_brown_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_rice_brown_cooked", 4, "unilib:utensil_bowl_glass"
         ),
     })
@@ -90,7 +90,7 @@ function unilib.pkg.food_rice_brown.post()
             {"group:potable_bucket"},
             {"unilib:utensil_plate_ceramic"},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

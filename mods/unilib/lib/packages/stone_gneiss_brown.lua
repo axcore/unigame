@@ -9,7 +9,7 @@
 unilib.pkg.stone_gneiss_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_gneiss_brown.exec()
         description = S("Brown Gneiss"),
 
         category = "metamorphic",
+        colour = "#605544",
         grinder_flag = true,
         hardness = 3,
     })
@@ -73,6 +74,24 @@ function unilib.pkg.stone_gneiss_brown.exec()
         replace_mode = mode,
         description = S("Brown Gneiss Cobble"),
         img_list = {"unilib_stone_gneiss_brown.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_gneiss_brown_cobble_compressed
+        part_name = "gneiss_brown",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Brown Gneiss Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_gneiss_brown_cobble_condensed
+        part_name = "gneiss_brown",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Brown Gneiss Cobble"),
     })
 
 end

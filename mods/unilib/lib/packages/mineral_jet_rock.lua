@@ -9,7 +9,7 @@
 unilib.pkg.mineral_jet_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_jet_rock.exec()
 
     local c_lump = "unilib:mineral_jet_lump"
-    local hardness = unilib.mineral_table["jet"]["hardness"]
+    local hardness = unilib.global.mineral_table["jet"]["hardness"]
 
     unilib.register_mineral_rock("jet")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_jet_rock.exec()
         description = S("Jet Rock"),
         tiles = {"unilib_mineral_jet_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

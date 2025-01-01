@@ -9,7 +9,7 @@
 unilib.pkg.component_gear_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,8 @@ function unilib.pkg.component_gear_steel.init()
 
     return {
         description = "Steel gear",
-        depends = {"metal_steel", "chain_steel"},
+        depends = {"metal_steel", "hardware_chainlink_steel"},
+        optional = "material_scrap_steel",
     }
 
 end
@@ -28,19 +29,35 @@ function unilib.pkg.component_gear_steel.exec()
 
     local c_ingot = "unilib:metal_steel_ingot"
 
-    unilib.register_craftitem("unilib:component_gear_steel", "basic_materials:gear_steel", mode, {
+    unilib.register_craftitem(
         -- From basic_materials:gear_steel
-        description = S("Steel gear"),
-        inventory_image = "unilib_component_gear_steel.png"
-    })
+        "unilib:component_gear_steel",
+        {"basic_materials:gear_steel", "pipeworks:gear"},
+        mode,
+        {
+            description = S("Steel Gear"),
+            inventory_image = "unilib_component_gear_steel.png"
+        }
+    )
     unilib.register_craft( {
         -- From basic_materials:gear_steel
         output = "unilib:component_gear_steel 6",
         recipe = {
             {"", c_ingot, ""},
-            {c_ingot, "unilib:chain_steel_link", c_ingot},
-            {"", c_ingot, ""}
+            {c_ingot, "unilib:hardware_chainlink_steel", c_ingot},
+            {"", c_ingot, ""},
         },
     })
+    if unilib.global.pkg_executed_table["material_scrap_steel"] ~= nil then
+
+        unilib.register_craft({
+            -- Original to unilib
+            output = "unilib:material_scrap_steel",
+            recipe = {
+                {"unilib:component_gear_steel"},
+            },
+        })
+
+    end
 
 end

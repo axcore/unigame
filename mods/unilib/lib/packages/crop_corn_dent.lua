@@ -9,7 +9,7 @@
 unilib.pkg.crop_corn_dent = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.crop_corn_dent.exec()
         harvest_description = S("Dent Corn"),
         -- N.B. food = 1 not in original code
         harvest_group_table = {flammable = 4, food = 1, food_corn = 1},
-        max_light = unilib.light_max,
+        max_light = unilib.constant.light_max,
         min_light = 13,
         paramtype2 = "meshoptions",
         place_param2 = 3,
@@ -72,7 +72,7 @@ function unilib.pkg.crop_corn_dent.exec()
 
     end
 
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:corn
@@ -83,5 +83,14 @@ function unilib.pkg.crop_corn_dent.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_corn_dent_harvest",
+        juice_description = S("Corn"),
+        juice_type = "corn",
+        rgb = "#e6b727",
+
+        orig_flag = false,
+    })
 
 end

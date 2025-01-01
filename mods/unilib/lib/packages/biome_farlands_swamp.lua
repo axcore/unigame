@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.biome_farlands_swamp.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "swamp" biome
         name = "farlands_swamp",
-        description = unilib.brackets(S("Swamp biome"), "farlands"),
+        description = unilib.utils.brackets(S("Swamp biome"), "farlands"),
         node_top = "unilib:dirt_ordinary_with_turf_swamp",
         depth_top = 1,
         node_filler = "unilib:dirt_ordinary",

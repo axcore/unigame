@@ -9,7 +9,7 @@
 unilib.pkg.mineral_cinnabar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.mineral_cinnabar.exec()
             inventory_image = "unilib_mineral_cinnabar_lump.png",
         }
     )
-    if unilib.pkg_executed_table["metal_mercury"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_mercury"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

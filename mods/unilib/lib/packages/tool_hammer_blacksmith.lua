@@ -13,7 +13,7 @@
 unilib.pkg.tool_hammer_blacksmith = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.tool_hammer_blacksmith.exec()
         {"cottages:hammer", "anvil:hammer"},
         mode,
         {
-            description = unilib.hint(S("Blacksmith's Hammer"), S("repairs tools on anvils")),
+            description = unilib.utils.hint(S("Blacksmith's Hammer"), S("repairs tools on anvils")),
             inventory_image = "unilib_tool_hammer_blacksmith.png",
             -- (no groups)
             -- (no sound)
@@ -55,7 +55,7 @@ function unilib.pkg.tool_hammer_blacksmith.exec()
             },
         }
     )
-    if unilib.pkg_executed_table["machine_anvil_simple"] ~= nil then
+    if unilib.global.pkg_executed_table["machine_anvil_simple"] ~= nil then
 
         unilib.register_craft({
             -- From cottages:hammer
@@ -68,7 +68,7 @@ function unilib.pkg.tool_hammer_blacksmith.exec()
         })
 
     end
-    if unilib.pkg_executed_table["machine_anvil_fancy"] ~= nil then
+    if unilib.global.pkg_executed_table["machine_anvil_fancy"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

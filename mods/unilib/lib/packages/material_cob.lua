@@ -9,7 +9,7 @@
 unilib.pkg.material_cob = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,9 +32,11 @@ function unilib.pkg.material_cob.exec()
         description = S("Cob"),
         tiles = {"unilib_material_cob.png"},
         groups = {cracky = 3, crumbly = 2, falling_node = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
     unilib.register_craft({
@@ -73,7 +75,7 @@ function unilib.pkg.material_cob.exec()
             {"", "", ""},
         },
     })
-    if unilib.pkg_executed_table["plant_shrub_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_shrub_dry"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:cob
@@ -86,7 +88,7 @@ function unilib.pkg.material_cob.exec()
         })
 
     end
-    if unilib.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:cob
@@ -99,7 +101,7 @@ function unilib.pkg.material_cob.exec()
         })
 
     end
-    if unilib.pkg_executed_table["crop_wheat"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:cob
@@ -128,9 +130,11 @@ function unilib.pkg.material_cob.exec()
         description = S("Mud Brick"),
         tiles = {"unilib_material_cob_brick.png"},
         groups = {cracky = 3, crumbly = 2},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
     unilib.register_craft({
@@ -143,6 +147,6 @@ function unilib.pkg.material_cob.exec()
     unilib.register_stairs("unilib:material_cob_brick", {
         basic_flag = true,
     })
-    unilib.set_auto_rotate("unilib:material_cob_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate("unilib:material_cob_brick", unilib.setting.auto_rotate_brick_flag)
 
 end

@@ -13,11 +13,11 @@
 unilib.pkg.machine_furnace_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 -- Pipeworks compatibility
 local pipeworks_flag = false
-if minetest.get_modpath("pipeworks") then
+if core.get_modpath("pipeworks") then
     pipeworks_flag = true
 end
 
@@ -61,7 +61,7 @@ function unilib.pkg.machine_furnace_ordinary.exec()
                 aspect_h = 16,
                 length = 1.5,
             },
-        }
+        },
     }
 
     local inactive_group_table = {cracky = 2}
@@ -104,12 +104,11 @@ function unilib.pkg.machine_furnace_ordinary.exec()
 
     end
 
-    unilib.register_node("unilib:machine_furnace_ordinary", "default:furnace", mode, {
-        -- From default:furnace
+    local inactive_def_table = {
         description = S("Ordinary Furnace"),
         tiles = inactive_img_list,
         groups = inactive_group_table,
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -133,18 +132,18 @@ function unilib.pkg.machine_furnace_ordinary.exec()
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "src", drops)
-            unilib.get_inventory_drops(pos, "fuel", drops)
-            unilib.get_inventory_drops(pos, "dst", drops)
+            unilib.misc.get_inventory_drops(pos, "src", drops)
+            unilib.misc.get_inventory_drops(pos, "fuel", drops)
+            unilib.misc.get_inventory_drops(pos, "dst", drops)
             drops[#drops + 1] = "unilib:machine_furnace_ordinary"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size('src', 1)
             inv:set_size('fuel', 1)
@@ -160,20 +159,20 @@ function unilib.pkg.machine_furnace_ordinary.exec()
         end,
 
         on_metadata_inventory_move = function(pos)
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Start timer function, it will sort out whether furnace can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_take = function(pos)
 
             -- Check whether the furnace is empty or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -191,7 +190,14 @@ function unilib.pkg.machine_furnace_ordinary.exec()
             )
 
         end,
-    })
+    }
+
+    unilib.utils.set_inventory_action_loggers(inactive_def_table, "furnace")
+    unilib.register_node(
+        -- From default:furnace
+        "unilib:machine_furnace_ordinary", "default:furnace", mode, inactive_def_table
+    )
+
     unilib.register_craft({
         -- From default:furnace
         output = "unilib:machine_furnace_ordinary",
@@ -199,9 +205,9 @@ function unilib.pkg.machine_furnace_ordinary.exec()
             {"group:stone", "group:stone", "group:stone"},
             {"group:stone", "", "group:stone"},
             {"group:stone", "group:stone", "group:stone"},
-        }
+        },
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_craft({
             -- From aotearoa/crafting.lua
@@ -210,17 +216,16 @@ function unilib.pkg.machine_furnace_ordinary.exec()
                 {"group:soft_stone", "group:soft_stone", "group:soft_stone"},
                 {"group:soft_stone", "", "group:soft_stone"},
                 {"group:soft_stone", "group:soft_stone", "group:soft_stone"},
-            }
+            },
         })
 
     end
 
-    unilib.register_node("unilib:machine_furnace_ordinary_active", "default:furnace_active", mode, {
-        -- From default:furnace_active
+    local active_def_table = {
         description = S("Ordinary Furnace"),
         tiles = active_img_list,
         groups = active_group_table,
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:machine_furnace_ordinary",
         is_ground_content = false,
@@ -243,6 +248,8 @@ function unilib.pkg.machine_furnace_ordinary.exec()
 
         can_dig = unilib.pkg.shared_default_furnace.can_dig,
 
+        on_destruct = unilib.pkg.shared_default_furnace.stop_furnace_sound,
+
         on_receive_fields = active_on_receive_fields,
 
         on_rotate = on_rotate,
@@ -257,6 +264,12 @@ function unilib.pkg.machine_furnace_ordinary.exec()
             )
 
         end,
-    })
+    }
+
+    unilib.utils.set_inventory_action_loggers(active_def_table, "furnace")
+    unilib.register_node(
+        -- From default:furnace_active
+        "unilib:machine_furnace_ordinary_active", "default:furnace_active", mode, active_def_table
+    )
 
 end

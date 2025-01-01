@@ -1,0 +1,31 @@
+# "chat_normal" remix - contains packages which define chat commands available only to players
+#       without the "unilib_admin", "unilib_tools" and "unilib_danger" privileges
+# See the "chat" remix for a full of list chat command packages with expanded comments
+
+# node_name | original_mod
+
+chat_add_event|unilib
+chat_cancel_alarm|unilib
+chat_delete_event|unilib
+chat_set_alarm|unilib
+chat_set_hotbar|unilib
+chat_show_alarm|unilib
+chat_show_craft|unilib
+chat_show_death|unilib
+chat_show_dig|unilib
+chat_show_eat|unilib
+chat_show_place|unilib
+chat_show_statistics|unilib
+chat_toggle_autodrop|unilib
+chat_toggle_autoget|unilib
+chat_toggle_identify|unilib
+
+# supporting packages (.depends)
+shared_chat_alarm|unilib
+shared_chat_statistics|unilib
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

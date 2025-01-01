@@ -9,7 +9,7 @@
 unilib.pkg.tree_gum_scribbly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_gum_scribbly.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Eucalyptus haemastoma"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_gum_scribbly.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_gum_scribbly_closed
+        -- Original to unilib. Creates unilib:gate_gum_scribbly_closed, etc
         part_name = "gum_scribbly",
         orig_name = {nil, nil},
 
@@ -121,10 +121,10 @@ function unilib.pkg.tree_gum_scribbly.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_gum_scribbly_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_scribbly_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_scribbly_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_scribbly_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 12000,
             flags = "place_center_x, place_center_z",

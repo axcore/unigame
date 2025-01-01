@@ -9,15 +9,23 @@
 unilib.pkg.item_compass_death = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.death_compass.add_mode
+local mode = unilib.global.imported_mod_table.death_compass.add_mode
 
 local range_to_inactivate = 5
 -- N.B. In original code, y was 0.9, but this interferes with over visible messages
 local hud_posn_table = {x = 0.5, y = 0.8}
-local hud_colour = 0xFFFF00
+-- Green text; the original code used yellow, 0xFFFF00
+local hud_colour = 0x00FF00
 local player_ticking_table = {}
 local player_hud_table = {}
 local player_death_location_table = {}
+
+-- Number of textures, one for each compass needle direction. There are fewer "spooky" textures
+--      available
+local frame_count = 32
+if unilib.setting.death_compass_spooky_flag then
+    frame_count = 16
+end
 
 -- (Messages set below)
 local inv_msg, time_msg
@@ -83,9 +91,9 @@ local function set_target(stack, pos, name)
     -- Set a position to the compass stack
 
     local meta = stack:get_meta()
-    meta:set_string("target_pos", minetest.pos_to_string(pos))
+    meta:set_string("target_pos", core.pos_to_string(pos))
     meta:set_string("target_corpse", name)
-    meta:set_int("time_of_death", minetest.get_gametime())
+    meta:set_int("time_of_death", core.get_gametime())
 
 end
 
@@ -94,7 +102,7 @@ local function get_destination(player, stack)
     -- Get compass target
     local pos_str = stack:get_meta():get_string("target_pos")
     if pos_str ~= "" then
-        return minetest.string_to_pos(pos_str)
+        return core.string_to_pos(pos_str)
     end
 
 end
@@ -105,7 +113,7 @@ local function start_ticking(player_name)
 
     if not player_ticking_table[player_name] then
 
-        player_ticking_table[player_name] = minetest.sound_play(
+        player_ticking_table[player_name] = core.sound_play(
             "unilib_item_compass_death_tick",
             {to_player = player_name, gain = 0.125, loop = true}
         )
@@ -119,7 +127,7 @@ local function stop_ticking(player_name)
     local tick_tock_handle = player_ticking_table[player_name]
     if tick_tock_handle then
 
-        minetest.sound_stop(tick_tock_handle)
+        core.sound_stop(tick_tock_handle)
         player_ticking_table[player_name] = nil
 
     end
@@ -128,10 +136,18 @@ end
 
 local function hide_hud(player, player_name)
 
+    --[[
     local id = player_hud_table[player_name]
     if id then
 
         player:hud_remove(id)
+        player_hud_table[player_name] = nil
+
+    end
+    ]]--
+    if player_hud_table[player_name] then
+
+        unilib.hud.remove_section(player, "item_compass_death")
         player_hud_table[player_name] = nil
 
     end
@@ -144,14 +160,14 @@ local function update_hud(player, player_name, compass)
 
     -- N.B. Seems to be an error in the original code, fixed below
     --[[
-    local target_pos = minetest.string_to_pos(metadata:get_string("target_pos"))
+    local target_pos = core.string_to_pos(metadata:get_string("target_pos"))
     local player_pos = player:get_pos()
     local distance = vector.distance(player_pos, target_pos)
     if not target_pos then
         return
     end
     ]]--
-    local target_pos = minetest.string_to_pos(metadata:get_string("target_pos"))
+    local target_pos = core.string_to_pos(metadata:get_string("target_pos"))
     if not target_pos then
         return
     end
@@ -162,9 +178,10 @@ local function update_hud(player, player_name, compass)
     local target_name = metadata:get_string("target_corpse")
 
     local description
-    if unilib.death_compass_duration > 0 then
+    if unilib.setting.death_compass_duration > 0 then
 
-        local remaining = time_of_death + unilib.death_compass_duration - minetest.get_gametime()
+        local remaining =
+                time_of_death + unilib.setting.death_compass_duration - core.get_gametime()
         if remaining < 0 then
             return
         end
@@ -182,17 +199,18 @@ local function update_hud(player, player_name, compass)
             "@1m to @2's corpse, died @3 ago",
             math.floor(distance),
             target_name,
-            clock_string(minetest.get_gametime() - time_of_death, true)
+            clock_string(core.get_gametime() - time_of_death, true)
         )
 
     end
 
+    --[[
     local id = player_hud_table[player_name]
     if not id then
 
         id = player:hud_add({
             name = "death_compass",
-            hud_elem_type = "text",
+            type = "text",
 
             position = hud_posn_table,
             text = description,
@@ -207,6 +225,15 @@ local function update_hud(player, player_name, compass)
         player:hud_change(id, "text", description)
 
     end
+    ]]--
+    if not player_hud_table[player_name] then
+
+        unilib.hud.add_section(player, "item_compass_death", 1)
+        player_hud_table[player_name] = true
+
+    end
+
+    unilib.hud.update_line(player, "item_compass_death", 1, description, hud_colour)
 
 end
 
@@ -217,7 +244,7 @@ local function get_compass_stack(player, stack)
     local target = get_destination(player, stack)
     local inactive_return
 
-    if unilib.death_compass_auto_flag then
+    if unilib.setting.death_compass_auto_flag then
         inactive_return = ItemStack("")
     else
         inactive_return = ItemStack("unilib:item_compass_death_off")
@@ -234,7 +261,7 @@ local function get_compass_stack(player, stack)
     if distance < range_to_inactivate then
 
         stop_ticking(player_name)
-        minetest.sound_play(
+        core.sound_play(
             "unilib_item_compass_death_crunch",
             {to_player = player_name, gain = 1.0}
         )
@@ -253,20 +280,26 @@ local function get_compass_stack(player, stack)
 
     local angle_dir = math.deg(dir)
     local angle_relative = (angle_north + angle_dir) % 360
-    local compass_image = math.floor((angle_relative / 22.5) + 0.5) % 16
+    local compass_image
+    if not unilib.death_compass_spooky_flag then
+        compass_image = math.floor((angle_relative / 11.25) + 0.5) % 32
+    else
+        compass_image = math.floor((angle_relative / 22.5) + 0.5) % 16
+    end
 
     -- Create new stack with metadata copied
     local metadata = stack:get_meta():to_table()
     local meta_fields = metadata.fields
     local time_of_death = tonumber(meta_fields.time_of_death)
 
-    if unilib.death_compass_duration > 0 then
+    if unilib.setting.death_compass_duration > 0 then
 
-        local remaining = time_of_death + unilib.death_compass_duration - minetest.get_gametime()
+        local remaining =
+                time_of_death + unilib.setting.death_compass_duration - core.get_gametime()
         if remaining < 0 then
 
             stop_ticking(player_name)
-            minetest.sound_play(
+            core.sound_play(
                 "unilib_item_compass_death_crunch",
                 {to_player = player_name, gain = 1.0}
             )
@@ -294,7 +327,7 @@ end
 local function display_doc(itemstack, user)
 
     local player_name = user:get_player_name()
-    minetest.chat_send_player(player_name, inv_msg .. "\n" .. time_msg)
+    core.chat_send_player(player_name, inv_msg .. "\n" .. time_msg)
 
 end
 
@@ -324,11 +357,11 @@ function unilib.pkg.item_compass_death.exec()
         " the location of your previous life's end."
     )
 
-    if unilib.death_compass_duration > 0 then
+    if unilib.setting.death_compass_duration > 0 then
 
         time_msg = S(
             "The Death Compass' guidance will only last for @1 after death.",
-            clock_string(unilib.death_compass_duration, false)
+            clock_string(unilib.setting.death_compass_duration, false)
         )
 
     else
@@ -337,10 +370,10 @@ function unilib.pkg.item_compass_death.exec()
 
     end
 
-    -- Update inventory and hud
-    minetest.register_globalstep(function(dtime)
+    -- Update inventory and HUD
+    core.register_globalstep(function(dtime)
 
-        for i, player in ipairs(minetest.get_connected_players()) do
+        for i, player in ipairs(core.get_connected_players()) do
 
             local player_name = player:get_player_name()
             local compass_in_quickbar
@@ -350,7 +383,7 @@ function unilib.pkg.item_compass_death.exec()
 
                 for i, stack in ipairs(inv:get_list("main")) do
 
-                    if i > unilib.hotbar_size then
+                    if i > unilib.setting.hotbar_size then
                         break
                     end
 
@@ -390,31 +423,45 @@ function unilib.pkg.item_compass_death.exec()
     end)
 
     -- Register craftitems
-    for i = 0, 15 do
+    for i = 0, (frame_count - 1) do
 
         local img = "unilib_item_compass_death_" .. i .. ".png"
-        unilib.register_craftitem("unilib:item_compass_death_" .. i, "death_compass:dir"..i, mode, {
-            -- From death_compass:dir0, etc
-            description = S("Death Compass"),
-            inventory_image = img,
-            groups = {death_compass = 1, not_in_creative_inventory = 1},
+        if unilib.death_compass_spooky_flag then
+            img = "unilib_item_compass_death_alt_" .. i .. ".png"
+        end
 
-            stack_max = 1,
-            wield_image = img,
-        })
+        unilib.register_craftitem(
+            -- From death_compass:dir0, etc
+            "unilib:item_compass_death_" .. i,
+            "death_compass:dir" .. i,
+            mode,
+            {
+                description = S("Death Compass"),
+                inventory_image = img,
+                groups = {death_compass = 1, not_in_creative_inventory = 1},
+
+                stack_max = 1,
+                wield_image = img,
+            }
+        )
 
     end
 
-    if not unilib.death_compass_auto_flag then
+    if not unilib.setting.death_compass_auto_flag then
+
+        local img = "unilib_item_compass_death_off.png"
+        if unilib.death_compass_spooky_flag then
+            img = "unilib_item_compass_death_alt_off.png"
+        end
 
         unilib.register_craftitem("unilib:item_compass_death_off", "death_compass:inactive", mode, {
             -- From death_compass:inactive
             description = S("Death Compass"),
-            inventory_image = "unilib_item_compass_death_off.png",
+            inventory_image = img,
             -- (no groups)
 
             stack_max = 1,
-            wield_image = "unilib_item_compass_death_off.png",
+            wield_image = img,
 
             on_place = display_doc,
 
@@ -431,8 +478,8 @@ function unilib.pkg.item_compass_death.exec()
             recipe = {
                 {"", "bones:bones", ""},
                 {"bones:bones", "unilib:mineral_mese_crystal_fragment", "bones:bones"},
-                {"", "bones:bones", ""}
-            }
+                {"", "bones:bones", ""},
+            },
         })
         -- Notes from death_compass:
         -- Allow a player to deliberately deactivate a death compass
@@ -448,17 +495,17 @@ function unilib.pkg.item_compass_death.exec()
     end
 
     -- Code to call when a player dies
-    minetest.register_on_dieplayer(function(player, reason)
+    core.register_on_dieplayer(function(player, reason)
 
         -- Notes from death_compass:
         -- "reason": a PlayerHPChangeReason table, see register_on_player_hpchange
 
         local player_name = player:get_player_name()
-        local inv = minetest.get_inventory({type = "player", name = player:get_player_name()})
+        local inv = core.get_inventory({type = "player", name = player:get_player_name()})
         local list = inv:get_list("main")
         local count = 0
 
-        if unilib.death_compass_auto_flag then
+        if unilib.setting.death_compass_auto_flag then
 
             count = 1
 
@@ -487,25 +534,25 @@ function unilib.pkg.item_compass_death.exec()
     end)
 
     -- Notes from death_compass:
-    -- Using the regular minetest.register_on_dieplayer() causes the new callback to be inserted
-    --      *after* the on_dieplayer() used by the bones mod, which means the bones mod clears the
-    --      player inventory before, so we can't tell if there was a death compass in it
+    -- Using the regular core.register_on_dieplayer() causes the new callback to be inserted *after*
+    --      the on_dieplayer() used by the bones mod, which means the bones mod clears the player
+    --      inventory before, so we can't tell if there was a death compass in it
     -- We must therefore rearrange the callback table to move this mod's callback to the front to
     --      ensure it always goes first
-    local dieplayer_callback = table.remove(minetest.registered_on_dieplayers)
-    table.insert(minetest.registered_on_dieplayers, 1, dieplayer_callback)
+    local dieplayer_callback = table.remove(core.registered_on_dieplayers)
+    table.insert(core.registered_on_dieplayers, 1, dieplayer_callback)
 
     -- Notes from death_compass:
     -- Code to call when the player is to be respawned, before repositioning of the player occurs
     -- This function should return true to disable regular player placement
-    minetest.register_on_respawnplayer(function(player)
+    core.register_on_respawnplayer(function(player)
 
         local player_name = player:get_player_name()
         local compasses = player_death_location_table[player_name]
 
         if compasses then
 
-            local inv = minetest.get_inventory({type = "player", name = player_name})
+            local inv = core.get_inventory({type = "player", name = player_name})
 
             -- Remove any death compasses the player might still have for some reason
             local current = inv:get_list("main")
@@ -535,7 +582,7 @@ function unilib.pkg.item_compass_death.exec()
     end)
 
     -- Tidy up
-    minetest.register_on_leaveplayer(function(player, timed_out)
+    core.register_on_leaveplayer(function(player, timed_out)
         hide_hud(player, player:get_player_name())
     end)
 

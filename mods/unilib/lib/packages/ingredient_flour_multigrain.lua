@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_flour_multigrain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -56,7 +56,7 @@ function unilib.pkg.ingredient_flour_multigrain.exec()
         },
         replacements = {
             {"unilib:utensil_mortar_pestle", "unilib:utensil_mortar_pestle"},
-        }
+        },
     })
 
 end

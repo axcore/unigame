@@ -9,7 +9,7 @@
 unilib.pkg.ore_ethereal_stone_desert_with_aetherium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.ore_ethereal_stone_desert_with_aetherium.post()
         ore                     = "unilib:stone_desert_with_aetherium",
         wherein                 = "unilib:stone_desert",
 
-        biomes                  = {"ethereal_caves"},
+        biomes                  = "ethereal_caves",
         clust_num_ores          = 1,
         clust_scarcity          = 10 * 10 * 10,
         clust_size              = 1,

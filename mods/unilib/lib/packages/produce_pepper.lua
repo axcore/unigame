@@ -9,7 +9,7 @@
 unilib.pkg.produce_pepper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -109,7 +109,7 @@ function unilib.pkg.produce_pepper.exec()
         waving = 1,
     })
 
-    unilib.register_decoration("farming_redo_produce_pepper", {
+    unilib.register_decoration_generic("farming_redo_produce_pepper", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = {
@@ -123,7 +123,7 @@ function unilib.pkg.produce_pepper.exec()
             offset = 0,
             persist = 0.6,
             scale = 0.002,
-            seed = 933,
+            seed = 243,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

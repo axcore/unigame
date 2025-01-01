@@ -1,38 +1,4 @@
 ---------------------------------------------------------------------------------------------------
--- From:    minetest_game/default
--- Media:   CC BY-SA 3.0
----------------------------------------------------------------------------------------------------
-
-unilib_bush_acacia.mts
-unilib_bush_blueberry_ordinary.mts
-unilib_bush_ordinary.mts
-unilib_bush_pine.mts
-unilib_plant_cactus_ordinary_large.mts
-unilib_plant_papyrus_ordinary_on_dirt_dry.mts
-unilib_plant_papyrus_ordinary_on_dirt_ordinary.mts
-unilib_tree_acacia.mts
-unilib_tree_acacia_from_sapling.mts
-unilib_tree_acacia_log.mts
-unilib_tree_apple.mts
-unilib_tree_apple_from_sapling.mts
-unilib_tree_apple_log.mts
-unilib_tree_aspen.mts
-unilib_tree_aspen_from_sapling.mts
-unilib_tree_aspen_log.mts
-unilib_tree_jungle.mts
-unilib_tree_jungle_emergent.mts
-unilib_tree_jungle_emergent_from_sapling.mts
-unilib_tree_jungle_from_sapling.mts
-unilib_tree_jungle_log.mts
-unilib_tree_pine_large.mts
-unilib_tree_pine_large_from_sapling.mts
-unilib_tree_pine_log.mts
-unilib_tree_pine_small.mts
-unilib_tree_pine_small_from_sapling.mts
-unilib_tree_pine_small_snowy_from_sapling.mts
-unilib_tree_pine_snowy_from_sapling.mts
-
----------------------------------------------------------------------------------------------------
 -- From:    30biomes
 -- Code:    WTFPL
 ---------------------------------------------------------------------------------------------------
@@ -301,6 +267,7 @@ unilib_coral_block_yellow_3.mts
 -- Media:   MIT/CC0
 ---------------------------------------------------------------------------------------------------
 
+unilib_bush_basandra.mts
 unilib_bush_oriental.mts
 unilib_coral_mixed.mts
 unilib_feature_crater_lava_large.mts
@@ -313,6 +280,7 @@ unilib_tree_birch.mts
 unilib_tree_frost.mts
 unilib_tree_healing.mts
 unilib_tree_lemon.mts
+unilib_tree_mushroom_brown.mts
 unilib_tree_mushroom_red.mts
 unilib_tree_normal.mts
 unilib_tree_olive.mts
@@ -399,7 +367,7 @@ unilib_tree_willow_exotic_1.mts
 unilib_tree_willow_exotic_2.mts
 
 ---------------------------------------------------------------------------------------------------
--- From:    GLEMr4 lib_ecology
+-- From:    GLEMr4 (lib_ecology)
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
 
@@ -638,14 +606,14 @@ unilib_glem_tree_willow_weeping_2.mts
 unilib_glem_tree_willow_weeping_3.mts
 
 ---------------------------------------------------------------------------------------------------
--- From:    GLEMr6 lib_ecology
+-- From:    GLEMr6 (lib_ecology)
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
 
 unilib_glem_tree_fern_big.mts
 
 ---------------------------------------------------------------------------------------------------
--- From:    GLEMr11 lib_ecology
+-- From:    GLEMr11 (lib_ecology)
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
 
@@ -659,7 +627,6 @@ unilib_glem_tree_apple_big_1.mts
 unilib_glem_tree_apple_big_2.mts
 unilib_glem_tree_apple_big_3.mts
 unilib_glem_tree_apple_big_4.mts
-unilib_glem_tree_apple_vine_1.mts
 unilib_glem_tree_ash_2.mts
 unilib_glem_tree_ash_3.mts
 unilib_glem_tree_aspen_large_1.mts
@@ -745,6 +712,7 @@ unilib_glem_tree_teak_1.mts
 unilib_glem_tree_teak_2.mts
 unilib_glem_tree_teak_3.mts
 unilib_glem_tree_teak_4.mts
+unilib_glem_tree_vine_1.mts
 
 ---------------------------------------------------------------------------------------------------
 -- From:    grave
@@ -754,6 +722,40 @@ unilib_glem_tree_teak_4.mts
 unilib_tree_oak_graveyard.mts
 
 ---------------------------------------------------------------------------------------------------
+-- From:    minetest_game/default
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_bush_acacia.mts
+unilib_bush_blueberry_ordinary.mts
+unilib_bush_ordinary.mts
+unilib_bush_pine.mts
+unilib_plant_cactus_ordinary_large.mts
+unilib_plant_papyrus_ordinary_on_dirt_dry.mts
+unilib_plant_papyrus_ordinary_on_dirt_ordinary.mts
+unilib_tree_acacia.mts
+unilib_tree_acacia_from_sapling.mts
+unilib_tree_acacia_log.mts
+unilib_tree_apple.mts
+unilib_tree_apple_from_sapling.mts
+unilib_tree_apple_log.mts
+unilib_tree_aspen.mts
+unilib_tree_aspen_from_sapling.mts
+unilib_tree_aspen_log.mts
+unilib_tree_jungle.mts
+unilib_tree_jungle_emergent.mts
+unilib_tree_jungle_emergent_from_sapling.mts
+unilib_tree_jungle_from_sapling.mts
+unilib_tree_jungle_log.mts
+unilib_tree_pine_large.mts
+unilib_tree_pine_large_from_sapling.mts
+unilib_tree_pine_large_snowy_from_sapling.mts
+unilib_tree_pine_log.mts
+unilib_tree_pine_small.mts
+unilib_tree_pine_small_from_sapling.mts
+unilib_tree_pine_small_snowy_from_sapling.mts
+
+---------------------------------------------------------------------------------------------------
 -- From:    unilib
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
@@ -761,6 +763,9 @@ unilib_tree_oak_graveyard.mts
 unilib_tree_dry.mts
     Adapted from 30biomes, fir_tree.mts
     Media: WTFPL
+unilib_tree_generic_log.mts
+    Original to unilib
+    Media: CC BY-SA 3.0
     
 ---------------------------------------------------------------------------------------------------
 -- From:    xocean

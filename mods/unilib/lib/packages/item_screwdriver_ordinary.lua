@@ -9,7 +9,7 @@
 unilib.pkg.item_screwdriver_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.screwdriver.add_mode
+local mode = unilib.global.imported_mod_table.screwdriver.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.item_screwdriver_ordinary.exec()
     -- Register the screwdriver
     unilib.register_tool("unilib:item_screwdriver_ordinary", "screwdriver:screwdriver", mode, {
         -- From screwdriver:screwdriver
-        description = unilib.hint(
+        description = unilib.utils.hint(
             S("Ordinary Screwdriver"), S("left-click rotates face, right-click rotates axis")
         ),
         inventory_image = "unilib_item_screwdriver_ordinary.png",
@@ -61,8 +61,8 @@ function unilib.pkg.item_screwdriver_ordinary.exec()
         output = "unilib:item_screwdriver_ordinary",
         recipe = {
             {"unilib:metal_steel_ingot"},
-            {"group:stick"}
-        }
+            {"group:stick"},
+        },
     })
 
 end

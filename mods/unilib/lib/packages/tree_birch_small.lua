@@ -9,7 +9,7 @@
 unilib.pkg.tree_birch_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,13 +25,22 @@ end
 
 function unilib.pkg.tree_birch_small.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Betula"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
+        },
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "birch_small",
         description = S("Small Birch Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_tree_trunk({
@@ -46,18 +55,15 @@ function unilib.pkg.tree_birch_small.exec()
     })
     unilib.override_item("unilib:tree_birch_small_trunk", {
         drawtype = "nodebox",
-        node_box = {
-            type = "fixed",
-            fixed = {
-                {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-            },
-        },
-        selection_box = {
-            type = "fixed",
-            fixed = {
-                {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
-            },
-        },
+        node_box = node_box,
+        paramtype = "light",
+        selection_box = node_box,
+    })
+    unilib.override_item("unilib:tree_birch_small_trunk_stripped", {
+        drawtype = "nodebox",
+        node_box = node_box,
+        paramtype = "light",
+        selection_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -113,10 +119,10 @@ function unilib.pkg.tree_birch_small.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("glem_tree_birch_small_" .. i, {
+        unilib.register_decoration_generic("glem_tree_birch_small_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_birch_small_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_birch_small_" .. i .. ".mts",
 
             fill_ratio = 0.002,
             flags = "place_center_x, place_center_z",

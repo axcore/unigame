@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_jaffa = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.food_cake_jaffa.exec()
         -- N.B. No groups in original code
         groups = {food_jaffa_cake = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cake_jaffa", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cake_jaffa", 6),
     })
     unilib.register_craft({
         -- From farming:jaffa_cake

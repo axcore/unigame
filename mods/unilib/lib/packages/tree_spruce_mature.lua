@@ -9,7 +9,7 @@
 unilib.pkg.tree_spruce_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_spruce_mature.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Picea abies"
 
     unilib.register_tree({
@@ -68,8 +68,10 @@ function unilib.pkg.tree_spruce_mature.exec()
     })
     unilib.register_leafdecay({
         -- From GLEMr4, lib_ecology:tree_spruce_leaves
+        trunk_type = "spruce_mature",
         trunks = {"unilib:tree_spruce_mature_trunk"},
-        leaves = {"unilib:tree_spruce_mature_leaves", "unilib:ingredient_cone_spruce_mature"},
+        leaves = {"unilib:tree_spruce_mature_leaves"},
+        others = {"unilib:ingredient_cone_spruce_mature"},
         radius = 3,
     })
 
@@ -105,10 +107,11 @@ function unilib.pkg.tree_spruce_mature.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("glem_tree_spruce_mature_" .. i, {
+        unilib.register_decoration_generic("glem_tree_spruce_mature_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_spruce_mature_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_glem_tree_spruce_mature_" .. i .. ".mts",
 
             fill_ratio = 0.001,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_vanadinite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_vanadinite_rock.exec()
 
     local c_lump = "unilib:mineral_vanadinite_lump"
-    local hardness = unilib.mineral_table["vanadinite"]["hardness"]
+    local hardness = unilib.global.mineral_table["vanadinite"]["hardness"]
 
     unilib.register_mineral_rock("vanadinite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_vanadinite_rock.exec()
         description = S("Vanadinite Rock"),
         tiles = {"unilib_mineral_vanadinite_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_wiwi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,13 @@ function unilib.pkg.deco_aotearoa_plant_wiwi.init()
         depends = "plant_wiwi",
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_dunes"},
-            {"dirt_ordinary", "gravel_ordinary", "sand_ironsand", "sand_ordinary"},
+            {
+                "dirt_custom_antipodean",
+                "dirt_ordinary",
+                "gravel_ordinary",
+                "sand_ironsand",
+                "sand_ordinary",
+            },
         },
     }
 
@@ -30,7 +36,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_wiwi.post()
 
-    unilib.register_decoration_now("aotearoa_plant_wiwi", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_wiwi", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_wiwi"
         biomes = {
@@ -42,8 +48,8 @@ function unilib.pkg.deco_aotearoa_plant_wiwi.post()
             "aotearoa_dunes_sand",
         },
         place_on = {
+            "unilib:dirt_antipodean_with_turf_coastal_scrub",
             "unilib:dirt_ordinary_with_litter_rainforest",
-            "unilib:dirt_ordinary_with_turf",
             "unilib:gravel_ordinary",
             "unilib:sand_ironsand",
             "unilib:sand_ordinary",

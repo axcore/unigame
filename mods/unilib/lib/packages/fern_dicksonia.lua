@@ -9,7 +9,7 @@
 unilib.pkg.fern_dicksonia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,11 +27,11 @@ function unilib.pkg.fern_dicksonia.exec()
 
     unilib.register_node("unilib:fern_dicksonia", "mapgen:dicksonia", mode, {
         -- From farlands, mapgen:dicksonia
-        description = unilib.annotate(S("Dicksonia"), "Dicksonia"),
+        description = unilib.utils.annotate(S("Dicksonia"), "Dicksonia"),
         tiles = {"unilib_fern_dicksonia.png"},
         -- N.B. attached_node = 1, flora = 1 not in original code
         groups = {attached_node = 1, choppy = 1, flora = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
@@ -48,7 +48,7 @@ function unilib.pkg.fern_dicksonia.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_fern_dicksonia", {
+    unilib.register_decoration_generic("farlands_fern_dicksonia", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:fern_dicksonia",

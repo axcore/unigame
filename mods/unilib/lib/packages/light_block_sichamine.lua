@@ -9,7 +9,7 @@
 unilib.pkg.light_block_sichamine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,9 +33,9 @@ function unilib.pkg.light_block_sichamine.exec()
         description = S("Sichamine Lamp"),
         tiles = {"unilib_light_block_sichamine.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
         sunlight_propagates = true,
     })
@@ -45,7 +45,7 @@ function unilib.pkg.light_block_sichamine.exec()
         recipe = {
             {"", c_mese_crystal, ""},
             {c_mese_crystal, "unilib:stone_sichamine", c_mese_crystal},
-        }
+        },
     })
 
 end

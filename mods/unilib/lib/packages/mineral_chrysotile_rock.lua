@@ -9,7 +9,7 @@
 unilib.pkg.mineral_chrysotile_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_chrysotile_rock.exec()
 
     local c_lump = "unilib:mineral_chrysotile_lump"
-    local hardness = unilib.mineral_table["chrysotile"]["hardness"]
+    local hardness = unilib.global.mineral_table["chrysotile"]["hardness"]
 
     unilib.register_mineral_rock("chrysotile")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_chrysotile_rock.exec()
         description = S("Chrysotile Rock"),
         tiles = {"unilib_mineral_chrysotile_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_pyrolusite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.stone_ordinary_with_pyrolusite.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_pyrolusite", nil, mode, {
         -- Texture from PFAA, weakOreRock_pyrolusite.png. Original code
-        description = unilib.brackets(S("Pyrolusite Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Pyrolusite Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_pyrolusite.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_pyrolusite_lump",
     })

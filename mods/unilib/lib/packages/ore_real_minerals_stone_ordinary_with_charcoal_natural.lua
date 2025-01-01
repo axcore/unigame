@@ -9,7 +9,7 @@
 unilib.pkg.ore_real_minerals_stone_ordinary_with_charcoal_natural = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,8 +44,8 @@ function unilib.pkg.ore_real_minerals_stone_ordinary_with_charcoal_natural.post(
             spread = {x = 100, y = 100, z = 100},
         },
         noise_threshold         = 1.2,
-        y_max                   = unilib.y_max,
-        y_min                   = unilib.y_min,
+        y_max                   = unilib.constant.y_max,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

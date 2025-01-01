@@ -9,7 +9,7 @@
 unilib.pkg.tool_hoe_iron_pig = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pigiron.add_mode
+local mode = unilib.global.imported_mod_table.pigiron.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,6 +42,8 @@ function unilib.pkg.tool_hoe_iron_pig.exec()
         },
 
         replace_mode = mode,
+        damage_group_table = {fleshy = 2},
     })
+    unilib.tools.apply_toolranks("unilib:tool_hoe_iron_pig", "hoe")
 
 end

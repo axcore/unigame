@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_fern_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,9 +25,9 @@ function unilib.pkg.deco_australia_fern_mangrove.init()
 
 end
 
-function unilib.pkg.deco_australia_fern_mangrove.exec()
+function unilib.pkg.deco_australia_fern_mangrove.post()
 
-    unilib.register_decoration_now("australia_fern_mangrove", nil, {
+    unilib.register_decoration_complete("australia_fern_mangrove", nil, {
         -- From australia:mangrove_fern
         biomes = "australia_mangroves",
         place_on = {

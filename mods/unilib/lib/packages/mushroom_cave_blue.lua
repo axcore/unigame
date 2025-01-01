@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_cave_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,13 @@ function unilib.pkg.mushroom_cave_blue.exec()
             snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_mushroom_cave_blue.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -51,11 +52,11 @@ function unilib.pkg.mushroom_cave_blue.exec()
         walkable = false,
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_cave_blue", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_cave_blue", 1),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_cave_blue", "moreplants:bluemush")
 
-    unilib.register_decoration("moreplants_mushroom_cave_blue", {
+    unilib.register_decoration_generic("moreplants_mushroom_cave_blue", {
         -- Original to unilib (but the "meta_moreplants_underground" package also spanws this item)
         deco_type = "simple",
         decoration = "unilib:mushroom_cave_blue",

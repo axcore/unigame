@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_produce_onion_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,10 @@ function unilib.pkg.deco_ethereal_produce_onion_wild.init()
                 "biome_ethereal_jumble",
                 "biome_ethereal_prairie",
             },
-            {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_turf_prairie",
+            },
         },
     }
 
@@ -35,7 +38,7 @@ end
 
 function unilib.pkg.deco_ethereal_produce_onion_wild.post()
 
-    unilib.register_decoration_now("ethereal_produce_onion_wild", nil, {
+    unilib.register_decoration_complete("ethereal_produce_onion_wild", nil, {
         -- From ethereal-ng/decor.lua
         -- Completes decoration in package "produce_onion_wild"
         biomes = {
@@ -44,7 +47,7 @@ function unilib.pkg.deco_ethereal_produce_onion_wild.post()
             "ethereal_jumble",
             "ethereal_prairie",
         },
-        place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_prairire"},
+        place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary_with_turf_prairie"},
         y_max = 100,
         y_min = 1,
     })

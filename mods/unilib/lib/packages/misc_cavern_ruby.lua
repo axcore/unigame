@@ -9,7 +9,7 @@
 unilib.pkg.misc_cavern_ruby = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_cavern_ruby.exec()
         description = S("Cavern Ruby Block"),
         tiles = {"unilib_misc_cavern_ruby_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         light_source = 13,
@@ -47,7 +47,7 @@ function unilib.pkg.misc_cavern_ruby.exec()
         description = S("Embedded Cavern Ruby"),
         tiles = {"unilib_misc_cavern_ruby_embedded.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         is_ground_content = true,
         light_source = 10,

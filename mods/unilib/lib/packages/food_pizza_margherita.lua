@@ -9,7 +9,7 @@
 unilib.pkg.food_pizza_margherita = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pizza.add_mode
+local mode = unilib.global.imported_mod_table.pizza.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,6 +29,9 @@ end
 
 function unilib.pkg.food_pizza_margherita.exec()
 
+    local c_dough = "unilib:ingredient_dough_pizza"
+    local c_sauce = "unilib:ingredient_sauce_tomato"
+
     unilib.register_craftitem(
         -- From pizza:uncooked_margherita
         "unilib:food_pizza_margherita_raw",
@@ -46,8 +49,8 @@ function unilib.pkg.food_pizza_margherita.exec()
         output = "unilib:food_pizza_margherita_raw",
         recipe = {
             {"group:food_cheese"},
-            {"unilib:ingredient_sauce_tomato"},
-            {"unilib:ingredient_dough_pizza"},
+            {c_sauce},
+            {c_dough},
         },
     })
 
@@ -58,7 +61,9 @@ function unilib.pkg.food_pizza_margherita.exec()
 
         stack_max = 8,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_margherita_slice", 10),
+        -- N.B. 10 in original code; reduced to 5 because other pizzas using this design have 9
+        --      ingredients
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_margherita_slice", 5),
     })
     unilib.register_craft({
         -- From pizza:margherita

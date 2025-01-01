@@ -9,7 +9,7 @@
 unilib.pkg.food_stew_hearty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.food_stew_hearty.exec()
         -- From ethereal:hearty_stew
         description = S("Hearty Stew"),
         inventory_image = "unilib_food_stew_hearty.png",
-        -- N.B. No groups in original code
-        groups = {food_stew = 1},
+        -- N.B. food_stew = 1 not in original code
+        groups = {flammable = 2, food_stew = 1},
 
         wield_image = "unilib_food_stew_hearty.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_stew_hearty", 10, "unilib:utensil_bowl_wooden"
         ),
     })

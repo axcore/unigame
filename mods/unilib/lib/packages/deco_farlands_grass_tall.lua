@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_tall = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ end
 
 function unilib.pkg.deco_farlands_grass_tall.post()
 
-    unilib.register_decoration_now("farlands_grass_tall", nil, {
+    unilib.register_decoration_complete("farlands_grass_tall", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "grass_tall"
         biomes = {

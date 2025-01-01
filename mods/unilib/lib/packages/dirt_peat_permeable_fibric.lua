@@ -9,7 +9,7 @@
 unilib.pkg.dirt_peat_permeable_fibric = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

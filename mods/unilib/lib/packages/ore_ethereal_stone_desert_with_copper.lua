@@ -9,7 +9,7 @@
 unilib.pkg.ore_ethereal_stone_desert_with_copper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.ore_ethereal_stone_desert_with_copper.post()
         clust_scarcity          = 9 * 9 * 9,
         clust_size              = 3,
         y_max                   = -64,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

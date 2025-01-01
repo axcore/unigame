@@ -9,7 +9,7 @@
 unilib.pkg.produce_chilli_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -62,12 +62,13 @@ function unilib.pkg.produce_chilli_normal.exec()
                 },
             },
         },
-        -- (Standard and American spellings, just in case)
+        -- N.B. food_chilli_pepper = 1 not in original code
         harvest_group_table = {
             flammable = 4, food_chili_pepper = 1, food_chilli_pepper = 1, seed = 2,
         },
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From farming:chili
@@ -75,12 +76,12 @@ function unilib.pkg.produce_chilli_normal.exec()
             -- N.B. group:food_chilli_pepper in original code
             recipe = {
                 {"unilib:produce_chilli_normal_harvest"},
-            }
+            },
         })
 
     end
 
-    unilib.register_decoration("farming_redo_produce_chilli_normal", {
+    unilib.register_decoration_generic("farming_redo_produce_chilli_normal", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_chilli_normal_grow_8",
@@ -90,7 +91,7 @@ function unilib.pkg.produce_chilli_normal.exec()
             offset = 0,
             persist = 0.6,
             scale = 0.003,
-            seed = 760,
+            seed = 901,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

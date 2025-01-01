@@ -9,7 +9,7 @@
 unilib.pkg.produce_potato_maris_piper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.produce_potato_maris_piper.exec()
                     items = {
                         {items = {"unilib:produce_potato_maris_piper_harvest"}, rarity = 1},
                         {items = {"unilib:produce_potato_maris_piper_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
@@ -57,7 +57,7 @@ function unilib.pkg.produce_potato_maris_piper.exec()
                     items = {
                         {items = {"unilib:produce_potato_maris_piper_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_potato_maris_piper_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
@@ -65,7 +65,8 @@ function unilib.pkg.produce_potato_maris_piper.exec()
         harvest_group_table = {flammable = 2, food_potato = 1, food_potatoes = 1, seed = 2},
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -77,7 +78,16 @@ function unilib.pkg.produce_potato_maris_piper.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_potato_maris_piper", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_potato_maris_piper_harvest",
+        juice_description = S("Potato"),
+        juice_type = "potato",
+        rgb = "#d19d0b",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_produce_potato_maris_piper", {
         -- From better_farming:potatoes_4
         deco_type = "simple",
         decoration = "unilib:produce_potato_maris_piper_grow_4",

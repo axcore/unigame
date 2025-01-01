@@ -9,7 +9,7 @@
 unilib.pkg.mineral_anthracite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,13 +40,13 @@ function unilib.pkg.mineral_anthracite.exec()
         description = S("Anthracite Lump"),
         inventory_image = "unilib_mineral_anthracite_lump.png",
     })
-    minetest.register_craft({
+    unilib.register_craft({
         -- From real_minerals:anthracite
         type = "fuel",
         recipe = "unilib:mineral_anthracite_lump",
         burntime = 50,
     })
-    if unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         -- (Since ordinary coal is such an important craftitem, allow it to be crafted from this
         --      mineral)

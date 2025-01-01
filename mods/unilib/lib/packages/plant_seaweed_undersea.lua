@@ -9,7 +9,7 @@
 unilib.pkg.plant_seaweed_undersea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,9 @@ function unilib.pkg.plant_seaweed_undersea.init()
 
     return {
         description = "Undersea seaweed",
-        notes = "Grows on undersea sand, and is edible",
+        notes = "Grows to a height of several blocks on undersea sand (because of code in the" ..
+                " \"sand_undersea\" mod), and is edible. Can be placed on other types of sand," ..
+                " but will not grow on them",
         optional = "dye_basic",
     }
 
@@ -31,15 +33,14 @@ function unilib.pkg.plant_seaweed_undersea.exec()
         -- From ethereal:seaweed
         description = S("Undersea Seaweed"),
         tiles = {"unilib_plant_seaweed_undersea.png"},
-        groups = {flammable = 3, food_seaweed = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        groups = {flammable = 2, food_seaweed = 1, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "plantlike",
         drowning = 1,
         inventory_image = "unilib_plant_seaweed_undersea.png",
         paramtype = "light",
-        post_effect_color = {r = 100, g = 100, b = 200, a = 64},
         selection_box = {
             type = "fixed",
             fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
@@ -47,19 +48,30 @@ function unilib.pkg.plant_seaweed_undersea.exec()
         walkable = false,
         wield_image = "unilib_plant_seaweed_undersea.png",
 
-        after_dig_node = function(pos, node, metadata, digger)
-            unilib.dig_up(pos, node, digger)
+        -- N.B. Continue to use our standard unilib.misc.place_in_medium(), rather than using code
+        --      from ethereal-ng's 2024 update
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "group:sand"}
+            )
+
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:plant_seaweed_undersea", 1),
+        after_dig_node = function(pos, node, metadata, digger)
+            unilib.misc.dig_up(pos, node, digger)
+        end,
+
+        on_use = unilib.cuisine.eat_on_use("unilib:plant_seaweed_undersea", 1),
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:seaweed
             type = "shapeless",
             output = "unilib:dye_green_dark 3",
-            recipe = {"unilib:plant_seaweed_undersea"}
+            recipe = {"unilib:plant_seaweed_undersea"},
         })
 
     end

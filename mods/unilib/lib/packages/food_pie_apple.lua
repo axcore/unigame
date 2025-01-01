@@ -9,7 +9,7 @@
 unilib.pkg.food_pie_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,14 +38,14 @@ function unilib.pkg.food_pie_apple.exec()
         -- N.B. No groups in original code
         groups = {food_apple_pie = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pie_apple", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pie_apple", 6),
     })
     unilib.register_craft({
         -- From farming:apple_pie
         output = "unilib:food_pie_apple",
         recipe = {
             {"group:food_flour", "group:food_sugar", "group:food_apple"},
-            {"", "unilib:utensil_tray_baking", ""}
+            {"", "unilib:utensil_tray_baking", ""},
         },
         replacements = {
             {"unilib:utensil_tray_baking", "unilib:utensil_tray_baking"},

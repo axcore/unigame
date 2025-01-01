@@ -9,7 +9,7 @@
 unilib.pkg.furniture_shelf_vessel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vessels.add_mode
+local mode = unilib.global.imported_mod_table.vessels.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.furniture_shelf_vessel.post()
     local shelf_table = {}
 
     -- Super trees
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
         shelf_table[tree_type] = {
             part_name = tree_type,
@@ -60,12 +60,12 @@ function unilib.pkg.furniture_shelf_vessel.post()
 
     for _, mini_table in pairs(shelf_table) do
 
-        local data_table = unilib.tree_table[mini_table.part_name]
+        local data_table = unilib.global.tree_table[mini_table.part_name]
         local ingredient = mini_table.ingredient or
                 "unilib:tree_" .. mini_table.part_name .. "_wood"
 
-        if unilib.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             unilib.register_vessels_shelf({
                 part_name = mini_table.part_name,
@@ -73,7 +73,7 @@ function unilib.pkg.furniture_shelf_vessel.post()
 
                 replace_mode = mode,
                 burnlevel = data_table.burnlevel,
-                description = unilib.brackets(S("Vessels Shelf"), data_table.description),
+                description = unilib.utils.brackets(S("Vessels Shelf"), data_table.description),
             })
 
         end

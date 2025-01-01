@@ -9,7 +9,7 @@
 unilib.pkg.clay_baked_ethereal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,16 @@ end
 
 function unilib.pkg.clay_baked_ethereal.exec()
 
-    if unilib.pkg_executed_table["clay_baked_basic"] == nil then
+    if unilib.global.pkg_executed_table["clay_baked_basic"] == nil then
 
         unilib.register_node("unilib:clay_baked_red", "bakedclay:red", mode, {
             -- From ethereal-ng, bakedclay:red
             description = S("Red Baked Clay"),
             tiles = {"unilib_clay_baked_red.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         })
 
         unilib.register_node("unilib:clay_baked_orange", "bakedclay:orange", mode, {
@@ -44,9 +44,9 @@ function unilib.pkg.clay_baked_ethereal.exec()
             description = S("Orange Baked Clay"),
             tiles = {"unilib_clay_baked_orange.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         })
 
         unilib.register_node("unilib:clay_baked_grey", "bakedclay:grey", mode, {
@@ -54,9 +54,19 @@ function unilib.pkg.clay_baked_ethereal.exec()
             description = S("Grey Baked Clay"),
             tiles = {"unilib_clay_baked_grey.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+        })
+
+        unilib.register_node("unilib:clay_baked_brown", "bakedclay:brown", mode, {
+            -- From ethereal-ng, bakedclay:brown
+            description = S("Brown Baked Clay"),
+            tiles = {"unilib_clay_baked_brown.png"},
+            groups = {cracky = 3},
+            sounds = unilib.global.sound_table.stone,
+
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         })
 
     end

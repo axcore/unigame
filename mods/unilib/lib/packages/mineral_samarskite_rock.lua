@@ -9,7 +9,7 @@
 unilib.pkg.mineral_samarskite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,8 @@ end
 function unilib.pkg.mineral_samarskite_rock.exec()
 
     local c_lump = "unilib:mineral_samarskite_lump"
-    local hardness = unilib.mineral_table["samarskite"]["hardness"]
+    local c_rare_lump = "unilib:mineral_samarskite_rare_lump"
+    local hardness = unilib.global.mineral_table["samarskite"]["hardness"]
 
     unilib.register_mineral_rock("samarskite")
 
@@ -37,13 +38,14 @@ function unilib.pkg.mineral_samarskite_rock.exec()
         description = S("Samarskite Rock"),
         tiles = {"unilib_mineral_samarskite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:mineral_samarskite_rock"}, rarity = (100 * hardness)},
                 {items = {c_lump .. " 2"}, rarity = (2 + hardness)},
+                {items = {c_rare_lump}, rarity = (2 + hardness)},
                 {items = {c_lump}},
             },
         },

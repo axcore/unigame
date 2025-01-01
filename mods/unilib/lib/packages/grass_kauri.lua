@@ -9,7 +9,7 @@
 unilib.pkg.grass_kauri = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,13 +28,13 @@ function unilib.pkg.grass_kauri.exec()
 
     unilib.register_node("unilib:grass_kauri", "aotearoa:kauri_grass", mode, {
         -- From aotearoa:kauri_grass
-        description = unilib.annotate(S("Kauri Grass"), "Astelia trinervia"),
+        description = unilib.utils.annotate(S("Kauri Grass"), "Astelia trinervia"),
         tiles = {"unilib_grass_kauri.png"},
         -- N.B. grass = 1, kauri_grass = 1 not in original code
         groups = {
             attached_node = 1, flammable = 1, flora = 1, grass = 1, kauri_grass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -56,7 +56,7 @@ function unilib.pkg.grass_kauri.exec()
         recipe = "unilib:grass_kauri",
         burntime = 1,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:kauri_grass
@@ -66,20 +66,20 @@ function unilib.pkg.grass_kauri.exec()
         })
 
     end
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:kauri_grass
             output = "unilib:item_paper_ordinary",
             recipe = {
                 {"unilib:grass_kauri", "unilib:grass_kauri", "unilib:grass_kauri"},
-            }
+            },
         })
 
     end
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("aotearoa_grass_kauri", {
+    unilib.register_decoration_generic("aotearoa_grass_kauri", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:grass_kauri",

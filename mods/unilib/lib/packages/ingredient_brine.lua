@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_brine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,6 +38,8 @@ function unilib.pkg.ingredient_brine.exec()
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_brine.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_brine.png",
@@ -49,7 +51,7 @@ function unilib.pkg.ingredient_brine.post()
 
     -- N.B. As this is salt, use ordinary water rather than potable waters
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"

@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_glow_square = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,10 +38,10 @@ function unilib.pkg.pane_glass_glow_square.exec()
             description = S("Square Glow Glass Pane"),
             textures = {img, "", "unilib_pane_glass_obsidian_edge.png"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = img,
-            light_source = unilib.light_max - 3,
+            light_source = unilib.constant.light_max - 3,
             recipe = {
                 {c_glass, c_glass, c_glass},
                 {c_glass, c_glass, c_glass},

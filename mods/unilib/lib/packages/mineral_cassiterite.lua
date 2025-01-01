@@ -9,7 +9,7 @@
 unilib.pkg.mineral_cassiterite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ function unilib.pkg.mineral_cassiterite.exec()
         description = S("Cassiterite"),
 
         hardness = 3,
-        -- (Craft recipe provided by the "metal_tin_real" package)
-        metal_list = {"tin_real"},
+        -- (Craft recipe provided by the "metal_tin_rare" package)
+        metal_list = {"tin_rare"},
     })
 
     unilib.register_craftitem(
@@ -53,8 +53,8 @@ end
 function unilib.pkg.mineral_cassiterite.post()
 
     -- If the real tin package was not executed, smelt into regular tin instead
-    if unilib.pkg_executed_table["metal_tin_real"] == nil and
-            unilib.pkg_executed_table["metal_tin"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_tin_rare"] == nil and
+            unilib.global.pkg_executed_table["metal_tin"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -65,7 +65,7 @@ function unilib.pkg.mineral_cassiterite.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "cassiterite",
             metal_list = {"tin"},
         })

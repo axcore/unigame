@@ -9,7 +9,7 @@
 unilib.pkg.dirt_coarse = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,14 @@ function unilib.pkg.dirt_coarse.exec()
             description = S("Coarse Dirt"),
             tiles = {"unilib_dirt_coarse.png"},
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
+        compressed_description = S("Compressed Coarse Dirt"),
+        compressed_group_table = {crumbly = 2},
     })
 
 end

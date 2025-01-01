@@ -1,8 +1,14 @@
 # "playme" remix
 # A collection of remixes and packages, ready for use in a typical Minetest game
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
+
+# ================================================================================================
+# OVERRIDES
+
+# This package, present in @gaia, clashes with "plant_kelp_ordinary" in @mtgame_mini. Make sure the
+#       gaia version is the one loaded
+plant_kelp_ordinary_gaia|farlands
 
 # ================================================================================================
 # CORE STUFF
@@ -10,29 +16,23 @@
 # Everything from minetest_game except biomes, decorations and ores (and the base package)
 
 @mtgame_mini
+@standard
+@chat_normal
 
 # Above-ground biomes
-# The GLEM packages (based on lib_materials/lib_ecology/GAL) provide a large selection of
-#       naturalistic biomes and decorations, and additional ores
-# Choose only one of these three, commenting out the other two
+# The "gaia" remix provides a large selection of naturalistic biomes and decorations, and additional
+#       ores
 
-# @glemr4
-# @glemr6
-@glemr11
+@gaia
 
 # Below-ground biomes
-# Choose only one of these four, commenting out the other three
+# For a non-standard experience below ground, comment out only one of these five
 
 # @mtgame_ores
 # @underch
 # @underch_jit
-@underch_jit_unilib
-
-# Underwater "biomes". Note that @xoceans creates minetest_game biomes, so it has been commented
-#       out for the moment; uncomment it, if you like
-
-@decorations_sea
-# @xocean
+@hades
+# @hades_jit
 
 # If minetest_game biomes are enabled, then we can add most of the farming remixes
 # If you like, uncomment @mtgame_biomes, and then any of the others in this list
@@ -45,19 +45,27 @@
 # @farming_redo
 
 # ================================================================================================
-# CRAFTING STUFF
+# OTHER STUFF
+
+@highlights
 
 @abristuff
-@bakedclay
+@armour
+@atomic
 @basic_materials
+@bbq
 @bonemeal
 @carvings
 @castle
+@cheese
 @cottages
-@darkage
+@darkage_mini
+@drinks
 @earthbuild
+@elements
 @glass_stained
 @hook
+@icecream
 @moreblocks
 @morebricks
 @morelights
@@ -65,24 +73,18 @@
 @mtg_plus
 @offend_flags
 @orienteering
+@pie
 @pkarcs
 @ropes
-@towercrane
-@xdecor
-
-# ================================================================================================
-# EATING/DRINKING STUFF
-
-@bbq
-@drinks
 @sickles
 @tea
+@thirsty
+@xdecor
 
 # ================================================================================================
 # MISC PACKAGES (from the "misc" remix)
 
 # agriculture packages
-crop_beet_sugar|agriculture
 misc_scarecrow_straw|agriculture
 
 # anvil packages
@@ -99,16 +101,29 @@ food_bread_wholegrain_carrot|bread
 ingredient_dough_pitta|bread
 ingredient_dough_wholegrain_carrot|bread
 
+# bridges packages
+misc_bridge_basic|bridges
+
 # bucket_wooden packages
 bucket_wood|bucket_wooden
 override_bucket_wooden|bucket_wooden
 
 # carpet packages
 carpet_basic|carpet
+shared_carpet|carpet
+
+# cement packages
+item_sander_normal|cement
+material_cement_normal|cement
+material_concrete_normal|cement
+
+# chocolate packages
+food_chocolate_white|chocolate
 
 # colored_beds packages
 bed_ordinary_quilt|colored_beds
 bed_fancy_quilt|colored_beds
+shared_beds|beds
 
 # clock/compass packages (various mods)
 decor_block_compass|compass
@@ -129,16 +144,23 @@ decor_frame_timber_wool|fachwerk
 material_lime_crushed|aotearoa plaster
 shared_fachwerk|fachwerk
 
+# factory_bridges packages
+misc_walkway_steel|factory_bridges
+
+# flowerpot packages
+flowerpot_normal|flowerpot
+
 # hangglider packages
 item_hangglider|hangglider
+shared_hangglider|hangglider
 
 # labels/roads packages
 item_cartridge_ink_extra|offend_flags labels
 
 # ldm32 packages
-machine_meter_distance_short|ldm32
 machine_meter_distance_long|ldm32
 machine_meter_distance_medium|ldm32
+machine_meter_distance_short|ldm32
 machine_meter_surveyor_long|ldm32
 machine_meter_surveyor_medium|ldm32
 machine_meter_surveyor_short|ldm32
@@ -154,25 +176,62 @@ light_block_mithril|default morelamps
 # nyancat packages
 misc_nyancat|nyancat
 
+# pizza packages
+food_pizza_diavola|unilib
+food_pizza_hawaiian|unilib
+food_pizza_margherita|pizza
+food_pizza_meat_feast|unilib
+food_pizza_mushroom_brown|pizza
+food_pizza_mushroom_red|pizza
+food_pizza_quattro_formaggi|unilib
+food_pizza_veggie_supreme|unilib
+
+# plastic_block packages
+decor_block_plastic_basic|plastic_block
+
 # real_torch packages
 item_match_ordinary|real_torch
 torch_unlit|real_torch
 
 # replacer packages
 item_inspector|replacer
-item_replacer|replacer
+item_replacer_artisanal|unilib
+item_replacer_normal|replacer
+shared_replacer|replacer
+
+# scaffolding packages
+item_wrench_scaffold|scaffolding
+scaffold_iron|scaffolding
+scaffold_wood|scaffolding
+shared_scaffolding|scaffolding
 
 # simple_furniture packages
 furniture_basic|simple_furniture
 
 # sounding_line packages
-item_line_sounding|sounding_line
+misc_line_sounding_normal|sounding_line
+misc_line_sounding_reinforced|unilib
+shared_sounding_line|sounding_line
 
 # stripped_tree packages
 item_bark_tree|stripped_tree
 item_chisel_tree|stripped_tree
 machine_chiselling|stripped_tree
 
+# towercrane packages
+crane_diamond|towercrane
+crane_mese|towercrane
+crane_steel|towercrane
+shared_towercrane|towercrane
+
+# trash_can packages
+misc_bin_skip|trash_can
+misc_bin_wooden|trash_can
+
 # twchests packages
 container_chest_bottomless|twchests
 container_chest_compact|twchests
+
+# unilib packages
+meta_skybox_sun_hexagonal|unilib
+meta_skybox_moon_hexagonal|unilib

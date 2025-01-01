@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_tree_jungle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,20 +26,20 @@ end
 
 function unilib.pkg.deco_default_tree_jungle.post()
 
-    unilib.register_decoration_now("default_tree_jungle", nil, {
+    unilib.register_decoration_complete("default_tree_jungle", nil, {
         -- From default/mapgen.lua
         -- Completes decoration in package "tree_jungle"
         biomes = "default_rainforest",
         place_on = "unilib:dirt_ordinary_with_litter_rainforest",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 
     -- Due to 32 node height, altitude is limited and presence depends on chunksize
-    local chunksize = tonumber(minetest.get_mapgen_setting("chunksize"))
+    local chunksize = tonumber(core.get_mapgen_setting("chunksize"))
     if chunksize >= 5 then
 
-        unilib.register_decoration_now("default_tree_jungle_emergent", nil, {
+        unilib.register_decoration_complete("default_tree_jungle_emergent", nil, {
             -- From default/mapgen.lua
             -- Completes decoration in package "tree_jungle"
             biomes = "default_rainforest",
@@ -50,7 +50,7 @@ function unilib.pkg.deco_default_tree_jungle.post()
 
     end
 
-    unilib.register_decoration_now("default_tree_jungle_swamp", nil, {
+    unilib.register_decoration_complete("default_tree_jungle_swamp", nil, {
         -- From default/mapgen.lua
         -- Completes decoration in package "tree_jungle"
         biomes = "default_rainforest_swamp",

@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_pilbara = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.biome_australia_pilbara.init()
 
 end
 
-function unilib.pkg.biome_australia_pilbara.exec()
+function unilib.pkg.biome_australia_pilbara.post()
 
     unilib.register_biome({
         -- From australia/biome_pilbara.lua, "pilbara" biome
         name = "australia_pilbara",
-        description = unilib.brackets(S("Pilbara biome"), "australia"),
+        description = unilib.utils.brackets(S("Pilbara biome"), "australia"),
         node_top = "unilib:gravel_red_antipodean",
         depth_top = 2,
         node_filler = "unilib:stone_sandstone_antipodean",

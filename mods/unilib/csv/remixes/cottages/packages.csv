@@ -1,5 +1,4 @@
 # "cottages" remix - contains everything except the rope-rail item
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -8,9 +7,9 @@ bed_decorative|cottages
 bed_mat_sleeping|cottages
 bed_mat_straw|cottages
 container_barrel_normal|cottages
-container_shelf_simple|cottages
 door_wood_half|cottages
 furniture_bench_simple|cottages
+furniture_shelf_rustic|cottages
 furniture_table_rustic|cottages
 furniture_trough_clay|cottages
 machine_anvil_simple|cottages
@@ -52,10 +51,11 @@ ingredient_flour_ordinary|farming
 item_stick_ordinary|default
 item_string_ordinary|farming
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 plant_papyrus_ordinary|default mtg_plus
 sand_ordinary|default
-shared_default_chest|unilib
+shared_default_chest|default pipeworks
+shared_wool|wool
 stone_ordinary|default moreblocks technic
 tree_apple|default doors moreblocks
 tree_jungle|default doors moreblocks
@@ -70,12 +70,13 @@ machine_anvil_fancy|anvil
 #brick_ordinary|default
 #bush_blueberry_ordinary|default
 #grass_jungle|default
+#machine_furnace_induction|unilib
 #material_terracotta|basic_materials
-#metal_bronze|default technic
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
+#metal_bronze|default glemr11 technic
+#metal_copper|default glemr11 moreblocks technic
+#metal_gold|default glemr11 technic
 #mineral_coal|default technic
-#mineral_mese|default
+#mineral_mese|default glemr11
 #misc_straw_ordinary|farming darkage
 #moss_green|sickles
 #mushroom_brown|flowers
@@ -83,3 +84,5 @@ machine_anvil_fancy|anvil
 #plant_shrub_dry|default
 #shared_anvil|anvil
 #utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)

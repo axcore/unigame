@@ -13,8 +13,8 @@
 unilib.pkg.door_arched_metal_steel = {}
 
 local S = unilib.intllib
-local mode_1 = unilib.imported_mod_table.pkarcs_doors.add_mode
-local mode_3 = unilib.imported_mod_table.pkarcs_doors3.add_mode
+local mode_1 = unilib.global.imported_mod_table.pkarcs_doors.add_mode
+local mode_3 = unilib.global.imported_mod_table.pkarcs_doors3.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

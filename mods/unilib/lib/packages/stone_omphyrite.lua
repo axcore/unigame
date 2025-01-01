@@ -17,9 +17,9 @@
 unilib.pkg.stone_omphyrite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_omphyrite.exec()
         description = S("Omphyrite"),
 
         category = "other",
+        colour = "#E6BE63",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,26 +88,22 @@ function unilib.pkg.stone_omphyrite.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:omphyrite. Creates unilib:stone_omphyrite_cobble_compressed
+        part_name = "omphyrite",
+        orig_name = "compressed:omphyrite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:omphyrite. Creates unilib:stone_omphyrite_cobble_compressed
-            part_name = "omphyrite",
-            orig_name = "compressed:omphyrite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Omphyrite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Omphyrite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:omphyrite. Creates unilib:stone_omphyrite_cobble_condensed
+        part_name = "omphyrite",
+        orig_name = "condensed:omphyrite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:omphyrite. Creates unilib:stone_omphyrite_cobble_condensed
-            part_name = "omphyrite",
-            orig_name = "condensed:omphyrite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Omphyrite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Omphyrite Cobble"),
+    })
 
 end

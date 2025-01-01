@@ -9,7 +9,7 @@
 unilib.pkg.stone_leafstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_leafstone.exec()
         description = S("Leafstone"),
 
         category = "other",
+        colour = "#32B105",
         fictional_flag = true,
         grinder_flag = false,
         hardness = 1,
@@ -44,7 +45,7 @@ function unilib.pkg.stone_leafstone.exec()
         description = S("Leafstone"),
         tiles = {"unilib_stone_leafstone.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -65,7 +66,7 @@ function unilib.pkg.stone_leafstone.exec()
         drop_name = "unilib:stone_leafstone",
     })
 
-    if unilib.pkg_executed_table["metal_tin"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_tin"] ~= nil then
 
         local c_ingot = "unilib:metal_tin_ingot"
         local c_leafstone = "unilib:stone_leafstone"
@@ -75,7 +76,7 @@ function unilib.pkg.stone_leafstone.exec()
             description = S("Light Leafstone"),
             tiles = {"unilib_stone_leafstone_light.png"},
             groups = {cracky = 3, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         })
@@ -87,7 +88,7 @@ function unilib.pkg.stone_leafstone.exec()
                 c_leafstone, c_leafstone, c_leafstone, c_leafstone,
             },
         })
-        if unilib.super_stone_table["leafstone"] ~= nil then
+        if unilib.global.super_stone_table["leafstone"] ~= nil then
             unilib.register_stairs("unilib:stone_leafstone_light")
         end
 

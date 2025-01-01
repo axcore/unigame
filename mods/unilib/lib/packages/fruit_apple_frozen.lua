@@ -9,7 +9,7 @@
 unilib.pkg.fruit_apple_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.fruit_apple_frozen.exec()
             dig_immediate = 3, flammable = 1, fleshy = 3, food_apple = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         -- N.B. Unlike original code, frozen apples are now pickable and eatable
@@ -53,12 +53,17 @@ function unilib.pkg.fruit_apple_frozen.exec()
         sunlight_propagates = true,
         walkable = false,
 
-        -- N.B. No .after_place_node() or .on_use() in original code
-        after_place_node = function(pos, placer, itemstack)
-            minetest.set_node(pos, {name = "unilib:fruit_apple_frozen", param2 = 1})
+        -- N.B. No .after_place_node in original code
+        after_place_node = function(pos, placer)
+
+            if placer:is_player() then
+                core.set_node(pos, {name = "unilib:fruit_apple_frozen", param2 = 1})
+            end
+
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_apple_frozen", 1),
+        -- N.B. No .on_use() in original code
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_apple_frozen", 1),
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.fern_broad_leaf_young = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.fern_broad_leaf_young.exec()
         description = S("Young Broad Leaf Fern"),
         tiles = {"unilib_fern_broad_leaf.png"},
         groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,5 +50,7 @@ function unilib.pkg.fern_broad_leaf_young.exec()
         waving = 1,
     })
     unilib.register_plant_in_pot("unilib:fern_broad_leaf_young", "lib_ecology:fern_broadleaf_fern2")
+
+    unilib.register_decoration_spare("unilib:fern_broad_leaf_young")
 
 end

@@ -4,16 +4,12 @@
 -- From:    wool
 -- Code:    MIT
 -- Media:   CC BY-SA 3.0
---
--- From:    farming
--- Code:    MIT
--- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
 
 unilib.pkg.wool_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.wool.add_mode
+local mode = unilib.global.imported_mod_table.wool.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -23,7 +19,7 @@ function unilib.pkg.wool_basic.init()
 
     return {
         description = "Basic wool set (based on the basic 15 dye set)",
-        depends = {"crop_cotton", "dye_basic"},
+        depends = {"crop_cotton", "dye_basic", "shared_wool"},
     }
 
 end
@@ -60,7 +56,7 @@ function unilib.pkg.wool_basic.exec()
 
         local description = row_list[3]
 
-        unilib.register_wool({
+        unilib.pkg.shared_wool.register_wool({
             -- From wool:black, etc. Creates unilib:wool_black, etc
             part_name = part_name,
             orig_name = "wool:" .. orig_name,

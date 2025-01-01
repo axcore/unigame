@@ -9,7 +9,7 @@
 unilib.pkg.crop_sunflower_giant = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -77,9 +77,10 @@ function unilib.pkg.crop_sunflower_giant.exec()
         output = "unilib:crop_sunflower_giant_seed 5",
         recipe = {
             {"unilib:crop_sunflower_giant_harvest"},
-        }
+        },
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -91,7 +92,7 @@ function unilib.pkg.crop_sunflower_giant.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_crop_sunflower_giant", {
+    unilib.register_decoration_generic("farming_redo_crop_sunflower_giant", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:crop_sunflower_giant_grow_8",
@@ -100,8 +101,8 @@ function unilib.pkg.crop_sunflower_giant.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 254,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

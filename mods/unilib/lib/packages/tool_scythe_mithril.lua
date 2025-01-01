@@ -9,7 +9,7 @@
 unilib.pkg.tool_scythe_mithril = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,12 +43,13 @@ function unilib.pkg.tool_scythe_mithril.exec()
             punch_attack_uses = 300,
         },
 
-        on_use = unilib.use_scythe,
+        on_use = unilib.tools.use_scythe,
     })
     unilib.register_craft_scythe({
         -- From farming:scythe_mithril
         part_name = "mithril",
         ingredient = "unilib:metal_mithril_ingot",
     })
+    unilib.tools.apply_toolranks("unilib:tool_scythe_mithril", "scythe")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.ice_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,6 +37,10 @@ function unilib.pkg.ice_white.exec()
         sounds = {footstep = {name = "unilib_ice_white_footstep", gain = 0.8}},
 
         drop = "unilib:ice_white_lump 4",
+    })
+    unilib.register_stairs("unilib:ice_white")
+    unilib.register_carvings("unilib:ice_white", {
+        millwork_flag = true,
     })
 
     local data_table = {

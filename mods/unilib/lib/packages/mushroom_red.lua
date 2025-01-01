@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.mushroom_red.exec()
         tiles = {"unilib_mushroom_red.png"},
         -- N.B. food_mushroom = 1 not in original code
         groups = {attached_node = 1, flammable = 1, food_mushroom = 1, mushroom = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -46,13 +46,13 @@ function unilib.pkg.mushroom_red.exec()
         walkable = false,
         wield_image = "unilib_mushroom_red.png",
 
-        -- N.B. No call to unilib.cuisine_eat_on_use(); checking food history doesn't matter for
+        -- N.B. No call to unilib.cuisine.eat_on_use(); checking food history doesn't matter for
         --      poisonous foods
-        on_use = minetest.item_eat(-5),
+        on_use = core.item_eat(-5),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_red", "flowers:mushroom_red")
 
-    unilib.register_decoration("flowers_mushroom_red", {
+    unilib.register_decoration_generic("flowers_mushroom_red", {
         -- From flowers/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_red",

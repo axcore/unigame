@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_misc_firefly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.deco_ethereal_misc_firefly.init()
             },
             {
                 "dirt_ordinary",
-                "dirt_ordinary_with_turf_cold",
+                "dirt_ordinary_with_turf_prairie",
             },
         },
     }
@@ -39,48 +39,43 @@ end
 
 function unilib.pkg.deco_ethereal_misc_firefly.exec()
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil or
-            unilib.pkg_executed_table["dirt_ordinary_with_turf_cold"] ~= nil then
+    unilib.register_decoration_generic("ethereal_misc_firefly", {
+        -- From ethereal-ng/decor.lua
+        deco_type = "simple",
+        decoration = "unilib:misc_firefly_hidden",
 
-        unilib.register_decoration("ethereal_misc_firefly", {
-            -- From ethereal-ng/decor.lua
-            deco_type = "simple",
-            decoration = "unilib:misc_firefly_hidden",
-
-            fill_ratio = 0.0005,
-            place_offset_y = 2,
-            sidelen = 80,
-        })
-
-    end
+        fill_ratio = 0.0005,
+        place_offset_y = 2,
+        sidelen = 80,
+    })
 
 end
 
 function unilib.pkg.deco_ethereal_misc_firefly.post()
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil or
-            unilib.pkg_executed_table["dirt_ordinary_with_turf_cold"] ~= nil then
+    unilib.register_decoration_complete("ethereal_misc_firefly", nil, {
+        -- From ethereal-ng/decor.lua
+        biomes = {
+            "ethereal_forest_coniferous",
+            "ethereal_forest_deciduous",
+            "ethereal_grassy",
+            "ethereal_rainforest",
+            "ethereal_swamp",
+        },
+        place_on = {
+            "unilib:dirt_ordinary",
+            "unilib:dirt_ordinary_with_litter_coniferous",
+            "unilib:dirt_ordinary_with_litter_rainforest",
+            "unilib:dirt_ordinary_with_turf",
+            "unilib:dirt_ordinary_with_turf_prairie",
+        },
+        y_max = 200,
+        y_min = -1,
+    })
 
-        unilib.register_decoration_now("ethereal_misc_firefly", nil, {
-            -- From ethereal-ng/decor.lua
-            biomes = {
-                "ethereal_forest_coniferous",
-                "ethereal_forest_deciduous",
-                "ethereal_grassy",
-                "ethereal_rainforest",
-                "ethereal_swamp",
-            },
-            place_on = {
-                "unilib:dirt_ordinary",
-                "unilib:dirt_ordinary_with_litter_coniferous",
-                "unilib:dirt_ordinary_with_litter_rainforest",
-                "unilib:dirt_ordinary_with_turf",
-                "unilib:dirt_ordinary_with_turf_cold",
-            },
-            y_max = unilib.y_max,
-            y_min = -1,
-        })
-
-    end
+    -- Set up the nodetimers
+    core.register_on_mods_loaded(function()
+        unilib.pkg.misc_firefly.setup_node_timers("unilib:ethereal_misc_firefly")
+    end)
 
 end

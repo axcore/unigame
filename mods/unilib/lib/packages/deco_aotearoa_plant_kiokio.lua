@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_kiokio = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_kiokio.post()
 
-    unilib.register_decoration_now("aotearoa_plant_kiokio_rare", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_kiokio_rare", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_kiokio"
         biomes = {
@@ -46,7 +46,7 @@ function unilib.pkg.deco_aotearoa_plant_kiokio.post()
         y_max = 80,
         y_min = 12,
     })
-    unilib.register_decoration_now("aotearoa_plant_kiokio_normal", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_kiokio_normal", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_kiokio"
         biomes = {

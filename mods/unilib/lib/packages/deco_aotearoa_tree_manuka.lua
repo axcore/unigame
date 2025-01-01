@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_manuka = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.deco_aotearoa_tree_manuka.init()
         depends = "tree_manuka",
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_scrubland", "biome_aotearoa_wetland"},
-            {"clay_gumland", "dirt_ordinary", "dirt_peat_restiad"},
+            {"clay_gumland", "dirt_custom_antipodean", "dirt_ordinary", "dirt_peat_restiad"},
         },
     }
 
@@ -32,7 +32,7 @@ function unilib.pkg.deco_aotearoa_tree_manuka.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_manuka_clump_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_manuka_clump_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_manuka"
             biomes = {
@@ -40,13 +40,13 @@ function unilib.pkg.deco_aotearoa_tree_manuka.post()
                 "aotearoa_coastal_tussock",
             },
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
-                "unilib:dirt_ordinary_with_turf_dry",
+                "unilib:dirt_antipodean_with_turf_coastal_scrub",
+                "unilib:dirt_ordinary_with_turf_coastal_tussock",
             },
             y_max = 80,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_tree_manuka_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_manuka_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_manuka"
             biomes = {
@@ -62,7 +62,7 @@ function unilib.pkg.deco_aotearoa_tree_manuka.post()
             y_max = 80,
             y_min = 12,
         })
-        unilib.register_decoration_now("aotearoa_tree_manuka_dense_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_manuka_dense_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_manuka"
             biomes = "aotearoa_scrubland_manuka",
@@ -72,7 +72,7 @@ function unilib.pkg.deco_aotearoa_tree_manuka.post()
         })
 
     end
-    unilib.register_decoration_now("aotearoa_tree_manuka_leaves", nil, {
+    unilib.register_decoration_complete("aotearoa_tree_manuka_leaves", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "tree_manuka"
         biomes = "aotearoa_wetland_gumland",

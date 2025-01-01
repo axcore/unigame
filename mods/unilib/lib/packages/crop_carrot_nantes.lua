@@ -9,7 +9,7 @@
 unilib.pkg.crop_carrot_nantes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_carrot_nantes.exec()
         table.insert(orig_name_list, "cucina_vegana:carrot_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/carrot_default.lua
         unilib.register_crop_mtgame({
@@ -53,7 +53,7 @@ function unilib.pkg.crop_carrot_nantes.exec()
             harvest_group_table = {
                 eatable = 1, flammable = 1, food = 1, food_carrot = 1, food_vegan = 1,
             },
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 11,
             seed_description = S("Nantes Carrot Seed"),
             seed_group_table = {attached_node = 1, flammable = 4, seed_carrot = 1},
@@ -118,7 +118,8 @@ function unilib.pkg.crop_carrot_nantes.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -129,5 +130,14 @@ function unilib.pkg.crop_carrot_nantes.exec()
         })
 
     end
+
+    unilib.register_juice({
+        ingredient = "unilib:crop_carrot_nantes_harvest",
+        juice_description = S("Carrot"),
+        juice_type = "carrot",
+        rgb = "#ed9121",
+
+        orig_flag = false,
+    })
 
 end

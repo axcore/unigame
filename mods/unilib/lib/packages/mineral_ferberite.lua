@@ -9,7 +9,7 @@
 unilib.pkg.mineral_ferberite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_ferberite.exec()
         description = S("Ferberite Lump"),
         inventory_image = "unilib_mineral_ferberite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_tungsten"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_tungsten"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

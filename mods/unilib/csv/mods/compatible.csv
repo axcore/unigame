@@ -2,16 +2,29 @@
 advtrains|advtrains|https://git.bananach.space/advtrains.git|Train platforms are created from suitable unilib stone nodes
 animalia||https://github.com/ElCeejo/animalia|Some food items are used in unilib craft recipes
 areas||https://github.com/minetest-mods/areas/|Hangglider no-fly zones are compatible with areas
+armor_monoid||https://github.com/minetest-mods/armor_monoid|Compatible with unilib's implementation of armour
 biome_lib||https://github.com/mt-mods/biome_lib|No direct compatibility. Calls to the biome_lib API are simulated crudely as unilib decorations
 bones|minetest_game|https://github.com/minetest/minetest_game|Compatible withe bonemeal and the death compass, if loaded
 colormachine||https://github.com/Sokomine/colormachine|Mod by Sokomine. Compatible with the node inspection tool, if loaded
 i3||https://github.com/minetest-mods/i3|Adds some custom craft types
-mesecons||https://github.com/minetest-mods/mesecons|Some items are compatible with mesecon circuits. Door and trapdoor comptability can be enabled/disabled in MT settings
+inventory_plus|inventory_plus|https://github.com/Zeg9/minetest-inventory_plus|Compatible with unilib's implementation of armour
+mesecons||https://github.com/minetest-mods/mesecons|Some items are compatible with mesecon circuits. Door and trapdoor compatibility can be enabled/disabled in MT settings
 mobs_animal||https://notabug.org/tenplus1/mobs_animal|Some food items are used in unilib craft recipes
 node_ownership||https://forum.minetest.net/viewtopic.php?f=13&t=846|Mod by randomproof. Compatible with the node replacement tool, if loaded
-petz|petz|https://content.minetest.net/packages/runs/petz/|Some food items are used in unilib craft recipes
+petz|petz|https://content.minetest.net/packages/runs/petz/|Some food items are used in unilib craft recipes. The "scripts/petz modpack" folder contains files that will make petz compatible with various unilib remixes; see the README in that folder
+player_monoids||https://github.com/minetest-mods/player_monoids|Compatible with unilib's implementation of armour, stamina, and with hanggliders
+pova||https://codeberg.org/tenplus1/pova|Compatible with unilib's implementation of armour
 protector||https://forum.minetest.net/viewtopic.php?f=13&t=846|Mod by glomie. Compatible with the node replacement tool, if loaded
 protector_redo||https://notabug.org/tenplus1/protector|Mod by TenPlus1. Compatible with the node replacement tool, if loaded
+sfinv|minetest_game|https://github.com/minetest/minetest_game|Compatible with unilib's implementation of armour
+simple_skins||https://codeberg.org/tenplus1/simple_skins|Compatible with unilib's implementation of armour. simple_skins does not provide skin previews, so they are not visible in the inventory formspec
+skins|skins|https://github.com/Zeg9/minetest-skins/|Compatible with unilib's implementation of armour
+skinsdb||https://github.com/minetest-mods/skinsdb|Compatible with unilib's implementation of armour
+spawnpoint||https://github.com/octacian/spawnpoint|Mod by octation. Compatible with unilib's spawn compass, if the mod is loaded and if it specifies a spawnpoint
 technic_addons||https://content.minetest.net/packages/Mineminer/technic_addons/|Unsuitable tools are not repairable in unilib anvils if the "shared_anvil" package is loaded
 ta4_jetpack|techage|https://github.com/joe7575/techage_modpack|Unsuitable tools are not repairable in unilib anvils if the "shared_anvil" package is loaded
-unified_inventory||https://github.com/minetest-mods/unified_inventory|Given unilib textures to use for groups in its craft recipes, and adds some custom craft types
+unified_inventory||https://github.com/minetest-mods/unified_inventory|Given unilib textures to use for groups in its craft recipes, and adds some custom craft types. Compatible with unilib's implementation of armour
+unifieddyes||https://github.com/mt-mods/unifieddyes|Some items (such as tapestries) can be dyed with this mod's airbrush, if loaded
+u_skins|u_skinsdb|https://github.com/dmonty2/minetest-u_skinsdb|Compatible with unilib's implementation of armour
+wardrobe_ad||https://github.com/AntumMT/mod-wardrobe|AntumDeluge's fork of the original "wardrobe" mod. The original is NOT compatible with unilib, the fork IS compatible with unilib's implementation of armour
+wardrobe_outfits||https://github.com/AntumMT/mod-wardrobe_outfits|Compatible with unilib's implementation of armour

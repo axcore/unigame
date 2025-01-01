@@ -9,7 +9,7 @@
 unilib.pkg.mineral_saltpetre_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_saltpetre_rock.exec()
 
     local c_lump = "unilib:mineral_saltpetre_lump"
-    local hardness = unilib.mineral_table["saltpetre"]["hardness"]
+    local hardness = unilib.global.mineral_table["saltpetre"]["hardness"]
 
     unilib.register_mineral_rock("saltpetre")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_saltpetre_rock.exec()
         description = S("Saltpetre Rock"),
         tiles = {"unilib_mineral_saltpetre_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

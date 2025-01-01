@@ -9,7 +9,7 @@
 unilib.pkg.decor_bricks_stone_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.decor_bricks_stone_grey.exec()
         description = S("Decorative Grey Stone Bricks"),
         tiles = {"unilib_decor_bricks_stone_grey.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -50,6 +50,8 @@ function unilib.pkg.decor_bricks_stone_grey.exec()
     unilib.register_stairs("unilib:decor_bricks_stone_grey", {
         img_rotate_flag = true,
     })
-    unilib.set_auto_rotate("unilib:decor_bricks_stone_grey", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:decor_bricks_stone_grey", unilib.setting.auto_rotate_brick_flag
+    )
 
 end

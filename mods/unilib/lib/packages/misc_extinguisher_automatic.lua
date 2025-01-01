@@ -9,7 +9,7 @@
 unilib.pkg.misc_extinguisher_automatic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fireextinguisher.add_mode
+local mode = unilib.global.imported_mod_table.fireextinguisher.add_mode
 
 local retardant_strength = 5
 local retardant_purity = 10
@@ -36,14 +36,12 @@ local function do_propagate(pos, node, replacementnodename, life)
 
     if target.name == "unilib:fire_ordinary" then
 
-        minetest.remove_node(pos)
-        minetest.sound_play(
-            "unilib_extinguish_flame", {pos = pos, max_hear_distance = 16, gain = 0.15}
-        )
+        core.remove_node(pos)
+        core.sound_play("unilib_extinguish_flame", {pos = pos, max_hear_distance = 16, gain = 0.15})
 
     end
 
-    minetest.set_node(pos, {name = replacementnodename, param1 = 14, param2 = life - 1})
+    core.set_node(pos, {name = replacementnodename, param1 = 14, param2 = life - 1})
 
 end
 
@@ -51,14 +49,9 @@ local function do_replace(pos, node, repl)
 
     -- Was fireextinguisher.replace()
 
-    minetest.set_node(pos, {name = repl.node, param1 = 0, param2 = repl.param2})
+    core.set_node(pos, {name = repl.node, param1 = 0, param2 = repl.param2})
     if node ~= nil and node.name == "unilib:fire_ordinary" then
-
-        minetest.sound_play(
-            "unilib_extinguish_flame",
-            {pos = pos, max_hear_distance = 16, gain = 0.15}
-        )
-
+        core.sound_play("unilib_extinguish_flame", {pos = pos, max_hear_distance = 16, gain = 0.15})
     end
 
 end
@@ -77,7 +70,7 @@ local function do_run(pos, node, targettypes, replacement, lifespan, poisontypes
 
     local poisoned_flag = false
     if poisontypes ~= nil then
-        poisoned_flag = minetest.find_node_near(pos, 1, poisontypes) ~= nil
+        poisoned_flag = core.find_node_near(pos, 1, poisontypes) ~= nil
     end
 
     local ignore_adjacent_node_found_flag = false
@@ -85,7 +78,7 @@ local function do_run(pos, node, targettypes, replacement, lifespan, poisontypes
 
     if not poisoned_flag then
 
-        local target_list = minetest.find_nodes_in_area(
+        local target_list = core.find_nodes_in_area(
             {x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
             {x = pos.x + 1, y = pos.y + 1, z = pos.z + 1},
             targettypes
@@ -93,7 +86,7 @@ local function do_run(pos, node, targettypes, replacement, lifespan, poisontypes
 
         for i = 1, #target_list do
 
-            target = minetest.get_node(target_list[i])
+            target = core.get_node(target_list[i])
             if target.name ~= "ignore" then
 
                 do_propagate(target_list[i], target, node.name, life)
@@ -114,7 +107,7 @@ local function do_run(pos, node, targettypes, replacement, lifespan, poisontypes
         if propagated_flag or life ~= lifespan then
             do_replace(pos, nil, replacement)
         else
-            minetest.set_node(pos, {name = "air", param1 = 0, param2 = 0})
+            core.set_node(pos, {name = "air", param1 = 0, param2 = 0})
         end
 
     end
@@ -159,7 +152,7 @@ local function extinguisher_callback(pos, node, active_object_count, active_obje
 
     -- Was fireextinguisher.fireextinguisher_abm()
 
-    minetest.sound_play(
+    core.sound_play(
         "unilib_misc_foam_fire_retardant",
         {pos = pos, gain = 1.3, max_hear_distance = spray_lifespan * 3}
     )
@@ -170,7 +163,7 @@ local function extinguisher_callback(pos, node, active_object_count, active_obje
         param2 = spray_lifespan,
     }
 
-    minetest.set_node(pos, node)
+    core.set_node(pos, node)
     spray_callback(pos, node, nil, nil)
 
 end
@@ -179,7 +172,7 @@ local function retardant_callback(pos, node, active_object_count, active_object_
 
     -- Was fireextinguisher.retardant_abm
 
-    flame_list = minetest.find_nodes_in_area(
+    flame_list = core.find_nodes_in_area(
         {x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
         {x = pos.x + 1, y = pos.y + 1, z = pos.z + 1},
         {"unilib:fire_ordinary"}
@@ -188,26 +181,15 @@ local function retardant_callback(pos, node, active_object_count, active_object_
     for i = 1, #flame_list do
 
         if node.param2 > 0 then
-
-            minetest.set_node(
-                flame_list[i], {name = node.name, param1 = 14, param2 = node.param2 - 1}
-            )
-
+            core.set_node(flame_list[i], {name = node.name, param1 = 14, param2 = node.param2 - 1})
         else
-
-            minetest.remove_node(flame_list[i])
-
+            core.remove_node(flame_list[i])
         end
 
     end
 
     for i = 1, #flame_list do
-
-        minetest.sound_play(
-            "unilib_extinguish_flame",
-            {pos = pos, max_hear_distance = 16, gain = 0.15}
-        )
-
+        core.sound_play("unilib_extinguish_flame", {pos = pos, max_hear_distance = 16, gain = 0.15})
     end
 
 end
@@ -217,7 +199,7 @@ local function retardant_evaporate_callback(
 )
     -- Was fireextinguisher.retardant_evaporate_abm()
 
-    local retardant_or_air_list = minetest.find_nodes_in_area(
+    local retardant_or_air_list = core.find_nodes_in_area(
         {x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
         {x = pos.x + 1, y = pos.y + 1, z = pos.z + 1},
         {
@@ -231,15 +213,11 @@ local function retardant_evaporate_callback(
     if #retardant_or_air_list == 27 then
 
         local below = {x = pos.x, y = pos.y - 1, z = pos.z}
-        if minetest.get_node(below).name == "air" and node.param2 > 0 then
-
-            minetest.set_node(
-                below, {name = node.name, param1 = node.param1, param2 = node.param2 - 1}
-            )
-
+        if core.get_node(below).name == "air" and node.param2 > 0 then
+            core.set_node(below, {name = node.name, param1 = node.param1, param2 = node.param2 - 1})
         end
 
-        minetest.set_node(pos, {name = "air", param1 = 0, param2 = 0})
+        core.set_node(pos, {name = "air", param1 = 0, param2 = 0})
 
     end
 
@@ -277,6 +255,8 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
             damage_per_second = 0,
             diggable = true,
             drawtype = "plantlike",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "none",
             pointable = true,
@@ -302,6 +282,8 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
             damage_per_second = 0,
             diggable = true,
             drawtype = "plantlike",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "none",
             pointable = true,
@@ -310,7 +292,7 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
 
             after_place_node = function(pos, placer)
 
-                minetest.set_node(
+                core.set_node(
                     pos,
                     {
                         name = "unilib:misc_foam_fire_retardant",
@@ -337,6 +319,8 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
             damage_per_second = 0,
             diggable = false,
             drawtype = "glasslike",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "none",
             pointable = false,
@@ -359,6 +343,8 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
             damage_per_second = 0,
             diggable = false,
             drawtype = "glasslike",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             paramtype2 = "none",
             pointable = false,
@@ -367,7 +353,7 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
 
             after_place_node = function(pos, node, active_object_count, active_object_count_wider)
 
-                minetest.set_node(
+                core.set_node(
                     pos,
                     {
                         name = "unilib:misc_foam_fire_retardant_cleaner",
@@ -394,7 +380,7 @@ function unilib.pkg.misc_extinguisher_automatic.exec()
                 "unilib:torch_ordinary",
             },
             {"", "", ""},
-        }
+        },
     })
 
     unilib.register_abm({
@@ -466,7 +452,7 @@ function unilib.pkg.misc_extinguisher_automatic.post()
             {"", "unilib:metal_steel_ingot", ""},
             {"", "", ""},
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

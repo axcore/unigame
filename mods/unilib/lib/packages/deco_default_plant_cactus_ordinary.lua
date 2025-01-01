@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_plant_cactus_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,12 @@ function unilib.pkg.deco_default_plant_cactus_ordinary.post()
         "default_plant_cactus_ordinary_large",
     }) do
 
-        unilib.register_decoration_now(deco_name, nil, {
+        unilib.register_decoration_complete(deco_name, nil, {
             -- From default/mapgen.lua
             -- Completes decoration in package "plant_cactus_ordinary"
             biomes = "default_desert",
             place_on = "unilib:sand_desert",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 4,
         })
 

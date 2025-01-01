@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_plant_bells_of_ireland = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_cropocalypse_plant_bells_of_ireland.post()
 
-    unilib.register_decoration_now("cropocalypse_plant_bells_of_ireland", nil, {
+    unilib.register_decoration_complete("cropocalypse_plant_bells_of_ireland", nil, {
         -- From cropocalypse/decorative_plants.lua
         -- Completes decoration in package "plant_bells_of_ireland"
         biomes = "default_forest_deciduous",
         place_on = {"group:sand", "group:soil"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

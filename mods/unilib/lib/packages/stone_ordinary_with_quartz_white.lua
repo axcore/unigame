@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_quartz_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,11 @@ function unilib.pkg.stone_ordinary_with_quartz_white.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_quartz_white", "underch:quartz_ore", mode, {
         -- From underch:quartz_ore
-        description = unilib.brackets(S("White Quartz Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("White Quartz Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_quartz_white.png"},
-        groups = {cracky = 2},
-        sounds = unilib.sound_table.stone,
+        -- N.B. ore = 1 not in original code
+        groups = {cracky = 2, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_quartz_white_crystal",
     })

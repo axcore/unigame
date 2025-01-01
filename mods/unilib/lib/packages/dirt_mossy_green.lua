@@ -9,7 +9,7 @@
 unilib.pkg.dirt_mossy_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,17 +33,18 @@ function unilib.pkg.dirt_mossy_green.exec()
         description = S("Green Mossy Dirt"),
         tiles = {"unilib_turf_ordinary_top.png"},
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
 
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft({
         -- From ethereal:green_moss
-        type = "shapeless",
         output = "unilib:dirt_mossy_green",
-        recipe = {"unilib:dirt_ordinary", "unilib:tree_jungle_leaves"},
+        recipe = {
+            {"unilib:dirt_ordinary", "unilib:tree_jungle_leaves"},
+        },
     })
 
 end

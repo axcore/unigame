@@ -9,7 +9,7 @@
 unilib.pkg.item_stick_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.item_stick_iron.exec()
         output = "unilib:item_stick_iron 4",
         recipe = {
             {"unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

@@ -13,7 +13,7 @@
 unilib.pkg.tree_scorched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,6 +40,8 @@ function unilib.pkg.tree_scorched.exec()
         description = S("Scorched Tree Wood"),
 
         burnlevel = burnlevel,
+        -- This tree does not have its own sapling
+        incomplete_flag = true,
     })
 
     unilib.register_node("unilib:tree_scorched_trunk", "ethereal:scorched_tree", mode, {
@@ -51,13 +53,20 @@ function unilib.pkg.tree_scorched.exec()
             "unilib_tree_scorched_trunk.png",
         },
         groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = minetest.rotate_node,
+        -- N.B. No .after_destruct in original code
+        after_destruct = function(pos, oldnode)
+            unilib.flora.collapse_slim_tree(pos, oldnode, {"unilib:tree_scorched_trunk"})
+        end,
+
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["torch_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:scorched_tree
@@ -65,25 +74,21 @@ function unilib.pkg.tree_scorched.exec()
             recipe = {
                 {"group:tree", "group:tree", "group:tree"},
                 {"group:tree", "unilib:torch_ordinary", "group:tree"},
-                {"group:tree", "group:tree", "group:tree"}
-            }
+                {"group:tree", "group:tree", "group:tree"},
+            },
         })
 
     end
 
-    if unilib.super_tree_table["scorched"] ~= nil then
+    unilib.register_tree_trunk_stripped({
+        -- From ethereal:scorched_tree. Creates unilib:tree_scorched_trunk_stripped
+        part_name = "scorched",
+        orig_name = "ethereal:scorched_tree",
 
-        unilib.register_tree_trunk_stripped({
-            -- From ethereal:scorched_tree. Creates unilib:tree_scorched_trunk_stripped
-            part_name = "scorched",
-            orig_name = "ethereal:scorched_tree",
-
-            replace_mode = mode,
-            description = S("Scorched Tree Trunk"),
-            group_table = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 1, tree = 1},
-        })
-
-    end
+        replace_mode = mode,
+        description = S("Scorched Tree Trunk"),
+        group_table = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 1, tree = 1},
+    })
 
     unilib.register_tree_wood({
         -- Texture from GLEMr4, lib_ecology_tree_scorched_wood.png. Original code
@@ -120,7 +125,7 @@ function unilib.pkg.tree_scorched.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From ethereal:fencegate_scorched. Creates unilib:gate_scorched_closed
+        -- From ethereal:fencegate_scorched_closed, etc. Creates unilib:gate_scorched_closed, etc
         part_name = "scorched",
         orig_name = {"ethereal:fencegate_scorched_closed", "ethereal:fencegate_scorched_open"},
 
@@ -130,7 +135,7 @@ function unilib.pkg.tree_scorched.exec()
         description = S("Scorched Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("ethereal_tree_scorched", {
+    unilib.register_decoration_generic("ethereal_tree_scorched", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:tree_scorched_trunk",
@@ -141,8 +146,8 @@ function unilib.pkg.tree_scorched.exec()
     })
 
     -- This package provides deliberate craft recipe conflicts
-    unilib.register_craft_conflicts(
-        {"unilib:item_stick_ordinary 4", "unilib:material_charcoal_artificial_lump 8"}
-    )
+    unilib.register_craft_conflicts({
+        {"unilib:item_stick_ordinary 4", "unilib:material_charcoal_artificial_lump 8"},
+    })
 
 end

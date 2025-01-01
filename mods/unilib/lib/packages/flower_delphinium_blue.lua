@@ -9,7 +9,7 @@
 unilib.pkg.flower_delphinium_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.flower_delphinium_blue.exec()
         deco_part_name = "bakedclay",
         description = S("Blue Delphinium"),
         -- N.B. No flammable = 1 in original code
-        group_table = {color_cyan = 1, flammable = 1},
+        group_table = {color_cyan = 1, colour_cyan = 1, flammable = 1},
         no_deco_flag = true,
         sci_name = "Delphinium",
     })
 
-    unilib.register_decoration("bakedclay_flower_delphinium_blue", {
+    unilib.register_decoration_generic("bakedclay_flower_delphinium_blue", {
         -- From bakedclay:delphinium
         deco_type = "simple",
         decoration = "unilib:flower_delphinium_blue",

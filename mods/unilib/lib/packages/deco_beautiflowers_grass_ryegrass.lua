@@ -9,7 +9,7 @@
 unilib.pkg.deco_beautiflowers_grass_ryegrass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ function unilib.pkg.deco_beautiflowers_grass_ryegrass.post()
 
     for i = 1, 10 do
 
-        unilib.register_decoration_now("beautiflowers_grass_ryegrass_" .. tostring(i), nil, {
+        unilib.register_decoration_complete("beautiflowers_grass_ryegrass_" .. tostring(i), nil, {
             -- From beautiflowers/spawn.lua
             -- Completes decoration in package "grass_ryegrass"
             place_on = {"unilib:dirt_ordinary", "unilib:dirt_ordinary_with_turf"},

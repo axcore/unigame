@@ -9,7 +9,7 @@
 unilib.pkg.glass_clean_square = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,9 +34,11 @@ function unilib.pkg.glass_clean_square.exec()
         description = S("Clean Square Glass"),
         tiles = {"unilib_glass_clean_square.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
+        -- N.B. is_ground_content = false not in original code; added to match other glass items
+        is_ground_content = false,
         paramtype = "light",
         sunlight_propagates = true,
         use_texture_alpha = "clip",
@@ -48,7 +50,7 @@ function unilib.pkg.glass_clean_square.exec()
             {c_glass, c_ingot, c_glass},
             {c_ingot, c_ingot, c_ingot},
             {c_glass, c_ingot, c_glass},
-        }
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.deco_beautiflowers_mixed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,9 +40,9 @@ function unilib.pkg.deco_beautiflowers_mixed.post()
         "yvette", "zaida",
     }) do
 
-        if unilib.pkg_executed_table["flower_" .. part_name] ~= nil then
+        if unilib.global.pkg_executed_table["flower_" .. part_name] ~= nil then
 
-            unilib.register_decoration_now("beautiflowers_flower_" .. part_name, nil, {
+            unilib.register_decoration_complete("beautiflowers_flower_" .. part_name, nil, {
                 -- From beautiflowers/spawn.lua
                 -- Completes decoration in shared function unilib.register_beautiflower()
                 place_on = "unilib:dirt_ordinary_with_turf",

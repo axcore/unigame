@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_snowy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.plant_shrub_snowy.exec()
         description = S("Snowy Grass Shrub"),
         tiles = {"unilib_plant_shrub_snowy.png"},
         groups = {attached_node = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.plant_shrub_snowy.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_snowy", "ethereal:snowygrass")
 
-    unilib.register_decoration("ethereal_plant_shrub_snowy", {
+    unilib.register_decoration_generic("ethereal_plant_shrub_snowy", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_snowy",

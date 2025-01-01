@@ -9,7 +9,7 @@
 unilib.pkg.food_salad_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.food_salad_green.exec()
         description = S("Green Salad"),
         tiles = {"unilib_food_salad_green.png"},
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_salad_green.png",
@@ -57,7 +57,7 @@ function unilib.pkg.food_salad_green.exec()
         walkable = false,
         wield_image = "unilib_food_salad_green.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_salad_green", 4, "unilib:utensil_bowl_glass"
         ),
     })
@@ -67,7 +67,7 @@ function unilib.pkg.food_salad_green.exec()
         recipe = {
             {c_parsley, c_radicchio, c_chives},
             {"", "group:food_oil", ""},
-            {"", "unilib:utensil_bowl_glass", ""}
+            {"", "unilib:utensil_bowl_glass", ""},
         },
         replacements = {
             {"group:food_oil", "unilib:vessel_bottle_glass_empty"},

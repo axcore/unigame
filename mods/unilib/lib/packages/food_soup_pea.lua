@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_pea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_soup_pea.exec()
         -- N.B. no food_pea_soup in original code
         groups = {flammable = 2, food_pea_soup = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_soup_pea", 4, "unilib:utensil_bowl_wooden"),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_soup_pea", 4, "unilib:utensil_bowl_wooden"),
     })
     unilib.register_craft({
         -- From farming:pea_soup

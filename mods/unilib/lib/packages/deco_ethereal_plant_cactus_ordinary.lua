@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_plant_cactus_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.init()
         depends = "plant_cactus_ordinary",
         optional = {
             "biome_ethereal_desert",
-            "biome_ethereal_sandstone",
+            "biome_ethereal_sandstone_desert",
             "sand_desert",
             "stone_sandstone_ordinary",
         },
@@ -32,27 +32,27 @@ end
 
 function unilib.pkg.deco_ethereal_plant_cactus_ordinary.exec()
 
-    if unilib.pkg_executed_table["biome_ethereal_sandstone"] ~= nil and
-            unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_sandstone_desert"] ~= nil and
+            unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         -- Cactus decoration placed as a single node; the ABM causes it to grow upwards
-        unilib.register_decoration("ethereal_plant_cactus_ordinary_1", {
+        unilib.register_decoration_generic("ethereal_plant_cactus_ordinary_1", {
             -- From ethereal-ng/decor.lua
             deco_type = "simple",
             decoration = "unilib:plant_cactus_ordinary",
 
-            fill_ratio = 0.0025,
-            height_max = 3,
+            fill_ratio = 0.002,
+            height_max = 2,
             sidelen = 80,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_desert"] ~= nil and
-            unilib.pkg_executed_table["sand_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_desert"] ~= nil and
+            unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
         -- Cactus decoration placed as a single node; the ABM causes it to grow upwards
-        unilib.register_decoration("ethereal_plant_cactus_ordinary_2", {
+        unilib.register_decoration_generic("ethereal_plant_cactus_ordinary_2", {
             -- From ethereal-ng/decor.lua
             deco_type = "simple",
             decoration = "unilib:plant_cactus_ordinary",
@@ -63,10 +63,10 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.exec()
         })
 
         -- Cactus decoration placed as a multi-node plant
-        unilib.register_decoration("ethereal_plant_cactus_ordinary_3", {
+        unilib.register_decoration_generic("ethereal_plant_cactus_ordinary_3", {
             -- From ethereal-ng/schems.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
             flags = "place_center_x",
             rotation = "random",
@@ -78,6 +78,7 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.exec()
                 seed = 230,
                 spread = {x = 200, y = 200, z = 200},
             },
+            rotation = "random",
             sidelen = 80,
         })
 
@@ -87,12 +88,12 @@ end
 
 function unilib.pkg.deco_ethereal_plant_cactus_ordinary.post()
 
-    if unilib.pkg_executed_table["biome_ethereal_sandstone"] ~= nil and
-            unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_sandstone_desert"] ~= nil and
+            unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("ethereal_plant_cactus_ordinary_1", nil, {
+        unilib.register_decoration_complete("ethereal_plant_cactus_ordinary_1", nil, {
             -- From ethereal-ng/decor.lua
-            biomes = "ethereal_sandstone",
+            biomes = "ethereal_sandstone_desert",
             place_on = "unilib:stone_sandstone_ordinary",
             y_max = 100,
             y_min = 1,
@@ -100,10 +101,10 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_ethereal_desert"] ~= nil and
-            unilib.pkg_executed_table["sand_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_desert"] ~= nil and
+            unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
-        unilib.register_decoration_now("ethereal_plant_cactus_ordinary_2", nil, {
+        unilib.register_decoration_complete("ethereal_plant_cactus_ordinary_2", nil, {
             -- From ethereal-ng/decor.lua
             biomes = "ethereal_desert",
             place_on = "unilib:sand_desert",
@@ -111,11 +112,11 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.post()
             y_min = 1,
         })
 
-        unilib.register_decoration_now("ethereal_plant_cactus_ordinary_3", nil, {
+        unilib.register_decoration_complete("ethereal_plant_cactus_ordinary_3", nil, {
             -- From ethereal-ng/schems.lua
             biomes = "ethereal_desert",
             place_on = "unilib:sand_desert",
-            y_max = unilib.y_max,
+            y_max = 100,
             y_min = 5,
         })
 

@@ -9,7 +9,7 @@
 unilib.pkg.ore_moreores_stone_ordinary_with_silver = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreores.add_mode
+local mode = unilib.global.imported_mod_table.moreores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ore_moreores_stone_ordinary_with_silver.post()
         clust_scarcity          = 1331,
         clust_size              = 11,
         y_max                   = -2,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

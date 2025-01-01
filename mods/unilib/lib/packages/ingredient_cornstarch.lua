@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_cornstarch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ function unilib.pkg.ingredient_cornstarch.init()
             "utensil_tray_baking",
         },
         suggested = {
-            "food_corn_cob",                    -- group:food_corn_cooked
+            "food_corn_cob_normal",             -- group:food_corn_cooked
         },
     }
 

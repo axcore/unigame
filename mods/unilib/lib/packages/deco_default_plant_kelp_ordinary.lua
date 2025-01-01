@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_plant_kelp_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.deco_default_plant_kelp_ordinary.post()
 
-    unilib.register_decoration_now("default_plant_kelp_ordinary", nil, {
+    unilib.register_decoration_complete("default_plant_kelp_ordinary", nil, {
         -- From default/mapgen.lua
         -- Completes decoration in package "plant_kelp_ordinary"
         biomes = {

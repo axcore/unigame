@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_cactus_checker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.decor_tiled_cactus_checker.exec()
             stone_img .. "^" .. overlay_img .. "^[transformR90",
         },
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -51,7 +51,7 @@ function unilib.pkg.decor_tiled_cactus_checker.exec()
         recipe = {
             {"unilib:plant_cactus_ordinary", "unilib:stone_ordinary"},
             {"unilib:stone_ordinary", "unilib:plant_cactus_ordinary"},
-        }
+        },
     })
     unilib.register_craft({
         -- From moreblocks:cactus_checker
@@ -59,7 +59,7 @@ function unilib.pkg.decor_tiled_cactus_checker.exec()
         recipe = {
             {"unilib:stone_ordinary", "unilib:plant_cactus_ordinary"},
             {"unilib:plant_cactus_ordinary", "unilib:stone_ordinary"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_cactus_checker", {
         img_rotate_flag = true,

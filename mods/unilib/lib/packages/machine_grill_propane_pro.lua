@@ -9,7 +9,7 @@
 unilib.pkg.machine_grill_propane_pro = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 local empty_msg = S("Propane Grill Pro is empty")
 local active_msg = S("Propane Grill Pro active")
@@ -27,9 +27,9 @@ function get_grill_active_formspec(fuel_percent, item_percent)
         "list[context;src;2.75,0.5;1,1;]" ..
         "list[context;fuel;2.75,2.5;1,1;]" ..
         "image[2.75,1.5;1,1;unilib_machine_grill_fire_bg.png^[lowpart:" ..
-        (100 - fuel_percent) .. ":unilib_machine_grill_fire_fg.png]" ..
+            (100 - fuel_percent) .. ":unilib_machine_grill_fire_fg.png]" ..
         "image[3.75,1.5;1,1;unilib_gui_grill_arrow_bg.png^[lowpart:" ..
-        item_percent .. ":unilib_gui_grill_arrow_fg.png^[transformR270]" ..
+            item_percent .. ":unilib_gui_grill_arrow_fg.png^[transformR270]" ..
         "list[context;dst;4.8,0.5;3,3;]" ..
         "list[current_player;main;0,4.25;8,1;]" ..
         "list[current_player;main;0,5.5;8,3;8]" ..
@@ -39,7 +39,7 @@ function get_grill_active_formspec(fuel_percent, item_percent)
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25)
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
@@ -61,7 +61,7 @@ function get_grill_inactive_formspec()
         "listring[current_player;main]" ..
         "listring[context;fuel]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 4.25)
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
@@ -93,7 +93,7 @@ function unilib.pkg.machine_grill_propane_pro.exec()
         },
         groups = {cracky = 2},
         -- N.B. "stone" in original code
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -133,18 +133,18 @@ function unilib.pkg.machine_grill_propane_pro.exec()
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "src", drops)
-            unilib.get_inventory_drops(pos, "fuel", drops)
-            unilib.get_inventory_drops(pos, "dst", drops)
+            unilib.misc.get_inventory_drops(pos, "src", drops)
+            unilib.misc.get_inventory_drops(pos, "fuel", drops)
+            unilib.misc.get_inventory_drops(pos, "dst", drops)
             drops[#drops + 1] = "unilib:machine_grill_propane_pro"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_grill_inactive_formspec())
             local inv = meta:get_inventory()
             inv:set_size("src", 1)
@@ -155,14 +155,14 @@ function unilib.pkg.machine_grill_propane_pro.exec()
 
         on_metadata_inventory_move = function(pos)
 
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Start timer function, it decides whether the grill can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -183,8 +183,8 @@ function unilib.pkg.machine_grill_propane_pro.exec()
         recipe = {
             {"unilib:metal_steel_ingot", "unilib:glass_ordinary", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "unilib:misc_propane", "unilib:metal_steel_ingot"},
-            {"", "unilib:metal_steel_ingot", ""}
-        }
+            {"", "unilib:metal_steel_ingot", ""},
+        },
     })
 
     unilib.register_node(
@@ -231,7 +231,7 @@ function unilib.pkg.machine_grill_propane_pro.exec()
             },
             groups = {cracky = 2, not_in_creative_inventory = 1},
             -- N.B. "stone" in original code
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             drawtype = "nodebox",
             drop = "unilib:machine_grill_propane_pro",

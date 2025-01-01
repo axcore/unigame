@@ -9,7 +9,7 @@
 unilib.pkg.tool_cutter_turf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,16 +26,16 @@ local function do_cut(itemstack, user, pointed_thing)
     end
 
     local pos = pointed_thing.under
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
 
-    if unilib.dirt_with_turf_table[node.name] ~= nil then
+    if unilib.global.dirt_with_turf_table[node.name] ~= nil then
 
-        local data_table = unilib.dirt_with_turf_table[node.name]
+        local data_table = unilib.global.dirt_with_turf_table[node.name]
         local construction_name = "unilib:dirt_construction_with_" .. data_table.turf_part_name
         local dirt_name = "unilib:" .. data_table.dirt_part_name
 
         -- Take the turf
-        minetest.sound_play(
+        core.sound_play(
             "unilib_tool_dirt",
             {pos = pos, max_hear_distance = 5, loop = false, gain = 0.5}
         )
@@ -47,12 +47,12 @@ local function do_cut(itemstack, user, pointed_thing)
         -- N.B. In original code, was a 1 in 2 chance
         local chance = math.random(1,2)
         if chance == 1 then
-            minetest.set_node(pos, {name = "air"})
+            core.set_node(pos, {name = "air"})
         else
-            minetest.set_node(pos, {name = dirt_name})
+            core.set_node(pos, {name = dirt_name})
         end
 
-        if unilib.is_creative(player_name) then
+        if unilib.utils.is_creative(player_name) then
 
             -- Wear the tool
             local def_table = itemstack:get_definition()
@@ -60,7 +60,7 @@ local function do_cut(itemstack, user, pointed_thing)
 
             -- Tool break sound
             if itemstack:get_count() == 0 and def_table.sound and def_table.sound.breaks then
-                minetest.sound_play(def_table.sound.breaks, {pos = sound_pos, gain = 0.5})
+                core.sound_play(def_table.sound.breaks, {pos = sound_pos, gain = 0.5})
             end
 
             return itemstack
@@ -103,7 +103,7 @@ function unilib.pkg.tool_cutter_turf.exec()
         output = "unilib:tool_cutter_turf",
         recipe = {
             {"group:stick", "unilib:tool_shovel_wood", ""},
-        }
+        },
     })
 
 end

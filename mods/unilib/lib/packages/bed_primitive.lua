@@ -9,7 +9,7 @@
 unilib.pkg.bed_primitive = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,17 +19,17 @@ function unilib.pkg.bed_primitive.init()
 
     return {
         description = "Primitive bed",
-        depends = "roof_thatch",
+        depends = {"roof_thatch", "shared_beds"},
     }
 
 end
 
 function unilib.pkg.bed_primitive.exec()
 
-    unilib.register_bed({
+    unilib.pkg.shared_beds.register_bed({
         -- From earthbuild:primitive_bed. Creates unilib:bed_primitive
         part_name = "primitive",
-        orig_name = {"earthbuild:primitive_bed_bottom", "earthbuild:primitive_bed_top"},
+        orig_name_list = {"earthbuild:primitive_bed_bottom", "earthbuild:primitive_bed_top"},
         recipe_table = {
             {"unilib:roof_thatch", "unilib:roof_thatch", "unilib:roof_thatch"},
             {"group:wood", "group:wood", "group:wood"},

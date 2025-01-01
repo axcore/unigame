@@ -9,7 +9,7 @@
 unilib.pkg.stone_pegmatite_white_with_cassiterite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.rocks.add_mode
+local mode = unilib.global.imported_mod_table.rocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,11 @@ function unilib.pkg.stone_pegmatite_white_with_cassiterite.exec()
         "mineral:pegmatite_cassiterite",
         mode,
         {
-            description = unilib.brackets(S("Cassiterite Ore"), S("White Pegmatite")),
+            description = unilib.utils.brackets(S("Cassiterite Ore"), S("White Pegmatite")),
             tiles = {"unilib_stone_pegmatite_white.png^unilib_mineral_cassiterite_alt.png"},
-            groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 3, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:mineral_cassiterite_lump",
         }

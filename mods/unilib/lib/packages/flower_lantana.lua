@@ -9,7 +9,7 @@
 unilib.pkg.flower_lantana = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.flower_lantana.exec()
         deco_part_name = "farlands",
         description = S("Lantana"),
         fill_ratio = 0.04,
-        group_table = {color_purple = 1, flammable = 1},
+        group_table = {color_purple = 1, colour_purple = 1, flammable = 1},
         sci_name = "Lantana",
     })
 

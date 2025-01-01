@@ -9,29 +9,24 @@
 unilib.pkg.item_sledge = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 local timer = 0
 
 local entity_table = {
-    collisionbox = {-0.6, -0.25, -0.6, 0.6, 0.3, 0.6},
-    mesh = "unilib_item_sledge.x",
-    physical = true,
-    textures = {"unilib_item_sledge.png"},
-    visual = "mesh",
+    initial_properties = {
+        collisionbox = {-0.6, -0.25, -0.6, 0.6, 0.3, 0.6},
+        mesh = "unilib_item_sledge.x",
+        physical = true,
+        textures = {"unilib_item_sledge.png"},
+        visual = "mesh",
+    },
 }
 
 local mounted_player_table = {}
---[[
-local driveable_list = {
-    "unilib:snow_ordinary",
-    "unilib:snow_ordinary_block",
-    "unilib:ice_ordinary",
-    "unilib:dirt_ordinary_with_cover_snow",
-    "group:icemaker",
-}
-]]--
-local driveable_list = {"group:icemaker", "group:slippery", "group:snowy"}
+
+-- Red text; the original code used uncoloured white
+local hud_colour = 0xFF0000
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -53,7 +48,7 @@ end
 
 local function is_water(pos)
 
-    return minetest.get_item_group(minetest.get_node(pos).name, "water") ~= 0
+    return core.get_item_group(core.get_node(pos).name, "water") ~= 0
 
 end
 
@@ -62,15 +57,20 @@ local function mount_sledge(self, player)
     -- Was join_sled()
 
     local pos = self.object:get_pos()
-    player:setpos(pos)
+--    player:setpos(pos)
+    player:set_pos(pos)
     local name = player:get_player_name()
     mounted_player_table[name] = true
 
     unilib.player_api.set_player_attached(name, true)
     unilib.player_api.set_animation(player, "sit" , 30)
     self.driver = name
-    self.object:set_attach(player, "", {x = 0, y = -9, z = 0}, {x = 0, y = 90, z = 0})
-    self.object:set_yaw(player:get_look_yaw())
+    -- N.B. Partial fix to original code, which places the sledge under the surface (but the
+    --      position of the player is still not quite right)
+--  self.object:set_attach(player, "", {x = 0, y = -9, z = 0}, {x = 0, y = 90, z = 0})
+    self.object:set_attach(player, "", {x = 0, y = 1, z = 0}, {x = 0, y = 90, z = 0})
+--  self.object:set_yaw(player:get_look_yaw())
+    self.object:set_yaw(player:get_look_horizontal())
 
 end
 
@@ -87,7 +87,8 @@ local function dismount_sledge(self, player)
     unilib.player_api.set_animation(player, "stand" , 30)
 
     player:set_physics_override({jump = 1, speed = 1})
-    player:hud_remove(self.hud)
+--  player:hud_remove(self.hud)
+    unilib.hud.remove_section(player, "item_sledge")
     self.object:remove()
 
     -- Return the sledge back to the player
@@ -95,7 +96,7 @@ local function dismount_sledge(self, player)
 
 end
 
-local function sledge_on_rightclick(self, player)
+local function sledge_on_click(self, player)
 
     -- Was sled_rightclick(), on_sled_click(), sled:on_rightclick()
 
@@ -105,13 +106,14 @@ local function sledge_on_rightclick(self, player)
 
     mount_sledge(self, player)
     player:set_physics_override({
-        speed = 2,  -- multiplier to default value
         jump = 0,   -- multiplier to default value
+        speed = 2,  -- multiplier to default value
     })
 
+    --[[
     self.hud = player:hud_add({
         name = "sledge",
-        hud_elem_type = "text",
+        type = "text",
 
         direction = 0,
         -- N.B. Tweaked y position to avoid conlicts with other HUDs, was originally 0.89
@@ -119,6 +121,15 @@ local function sledge_on_rightclick(self, player)
         scale = {x = 2, y = 2},
         text = S("You are on the sledge! Hold the sneak key to get off."),
     })
+    ]]--
+    unilib.hud.add_section(player, "item_sledge", 1)
+    unilib.hud.update_line(
+        player,
+        "item_sledge",
+        1,
+        S("You are on the sledge (hold the sneak key to get off)"),
+        hud_colour
+    )
 
 end
 
@@ -129,11 +140,15 @@ local function can_accelerate(pos)
     if is_water(pos) then
         return false
     end
-    if table_find(driveable_list, minetest.get_node({x = pos.x, y = pos.y-1, z = pos.z}).name) then
-        return true
-    end
 
-    return false
+    local under = core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name
+    if core.get_item_group(under, "icemaker") > 0 or
+            core.get_item_group(under, "slippery") > 0 or
+            core.get_item_group(under, "snowy") > 0 then
+        return true
+    else
+        return false
+    end
 
 end
 
@@ -143,7 +158,7 @@ end
 
 function entity_table:on_rightclick(player)
 
-    sledge_on_rightclick(self, player)
+    sledge_on_click(self, player)
 
 end
 
@@ -166,8 +181,7 @@ end
 function entity_table:on_punch(puncher)
 
     self.object:remove()
-    if puncher
-    and puncher:is_player() then
+    if puncher and puncher:is_player() then
         puncher:get_inventory():add_item("main", "unilib:item_sledge")
     end
 
@@ -185,13 +199,36 @@ function entity_table:on_step(dtime)
     end
 
     timer = 0
-    local player = minetest.get_player_by_name(self.driver)
+    local player = core.get_player_by_name(self.driver)
     if not player then
         return
     end
 
     if player:get_player_control().sneak or
             not can_accelerate(vector.round(self.object:get_pos())) then
+        dismount_sledge(self, player)
+    end
+
+end
+
+function entity_table:on_deactivate(removal)
+
+    -- Original to unilib
+    -- This new method is a workaround for a bug in the original "snow" mod's code, in which a
+    --      player can get stuck in the mounted position, particularly in 3rd-person view
+    -- Clicking on the ground causes the player to mount the sledge, but if the clicked position is
+    --      where the sledge will be, that same click also punches the sledge, causing a botched
+    --      dismount
+    -- Specifically, the sequence of calls after a single left-click is:
+    --      :on_activate, :get_staticdata, :on_rightclick, :on_step, :on_punch, on_deactivate
+    -- The code here does not attempt to delay the punch, but it does fix the botched dismount
+
+    if not self.driver then
+        return
+    end
+
+    local player = core.get_player_by_name(self.driver)
+    if player and unilib.player_api.get_player_attached(self.driver) then
         dismount_sledge(self, player)
     end
 
@@ -205,16 +242,14 @@ function unilib.pkg.item_sledge.init()
 
     return {
         description = "Sledge",
-        notes = "When mounted, allows the player to walk quickly on snow and ice. Mounted" ..
-                " players see a message, not an animation",
+        notes = "When mounted, allows the player to walk quickly on snow and ice" ..
+                " (specificially, on nodes in the \"icemaker\", \"slipper\" or \"snowy\"" ..
+                " groups). Hold down the sneak key to dismount",
     }
 
 end
 
 function unilib.pkg.item_sledge.exec()
-
-    -- Sledges require code imported from minetest_game/player_api, if not already loaded
-    unilib.load_player_api()
 
     unilib.register_entity("unilib:entity_item_sledge", entity_table)
 
@@ -240,7 +275,7 @@ function unilib.pkg.item_sledge.exec()
                 pos.y = pos.y + 0.5
 
                 -- Get on the sledge and remove it from inventory
-                minetest.add_entity(pos, "unilib:entity_item_sledge"):right_click(placer)
+                core.add_entity(pos, "unilib:entity_item_sledge"):right_click(placer)
                 itemstack:take_item()
                 return itemstack
 

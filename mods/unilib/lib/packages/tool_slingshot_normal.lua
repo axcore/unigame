@@ -9,7 +9,7 @@
 unilib.pkg.tool_slingshot_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hook.add_mode
+local mode = unilib.global.imported_mod_table.hook.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -23,7 +23,7 @@ local function on_use_slingshot(itemstack, user)
     local dir = user:get_look_dir()
     local item = itemstack:to_table()
 
-    local mode = minetest.deserialize(item["metadata"])
+    local mode = core.deserialize(item["metadata"])
     if mode == nil then
         mode = 1
     else
@@ -35,7 +35,7 @@ local function on_use_slingshot(itemstack, user)
         return itemstack
     end
 
-    local e = minetest.add_item({x = pos.x, y = pos.y + 2, z = pos.z}, item)
+    local e = core.add_item({x = pos.x, y = pos.y + 2, z = pos.z}, item)
     e:set_velocity({x = dir.x * veloc, y = dir.y * veloc, z = dir.z * veloc})
     e:set_acceleration({x = dir.x * -3, y = -5, z = dir.z * -3})
     e:get_luaentity().age = unilib.pkg.shared_hook.hook_table.tmp_time
@@ -49,7 +49,11 @@ local function on_use_slingshot(itemstack, user)
     end
 
     user:get_inventory():remove_item("main", item)
-    minetest.sound_play("hook_throw", {pos = pos, gain = 1.0, max_hear_distance = 5})
+    core.sound_play(
+        "unilib_hook_grappling_throw",
+        {pos = pos, gain = 1.0, max_hear_distance = 5}
+    )
+
     return itemstack
 
 end
@@ -83,7 +87,7 @@ function unilib.pkg.tool_slingshot_normal.exec()
         on_place = function(itemstack, user, pointed_thing)
 
             local item = itemstack:to_table()
-            local meta = minetest.deserialize(item["metadata"])
+            local meta = core.deserialize(item["metadata"])
             local mode = 0
             if meta == nil then
 
@@ -100,18 +104,18 @@ function unilib.pkg.tool_slingshot_normal.exec()
             if mode == 1 then
 
                 mode = -1
-                minetest.chat_send_player(user:get_player_name(), S("Using stack on the left"))
+                core.chat_send_player(user:get_player_name(), S("Using stack on the left"))
 
             else
 
                 mode = 1
-                minetest.chat_send_player(user:get_player_name(), S("Using stack on the right"))
+                core.chat_send_player(user:get_player_name(), S("Using stack on the right"))
 
             end
 
             meta.mode = mode
-            item.metadata = minetest.serialize(meta)
-            item.meta = minetest.serialize(meta)
+            item.metadata = core.serialize(meta)
+            item.meta = core.serialize(meta)
             itemstack:replace(item)
 
             return itemstack
@@ -142,7 +146,7 @@ function unilib.pkg.tool_slingshot_normal.exec()
             {c_ingot, "", c_ingot},
             {"", "unilib:metal_steel_block", ""},
             {"", c_ingot, ""},
-        }
+        },
     })
 
 end

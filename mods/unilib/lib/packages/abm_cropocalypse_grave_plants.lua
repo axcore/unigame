@@ -9,7 +9,7 @@
 unilib.pkg.abm_cropocalypse_grave_plants = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,15 +18,15 @@ local mode = unilib.imported_mod_table.cropocalypse.add_mode
 function unilib.pkg.abm_cropocalypse_grave_plants.init()
 
     return {
-        description = "ABM to add particle effect to certain decorative plants (all of" ..
-                " which derive from the cropocalypse mod)",
+        description = "ABMs to add particle effect to certain decorative plants (from" ..
+                " cropocalypse)",
     }
 
 end
 
-function unilib.pkg.abm_cropocalypse_grave_plants.exec()
+function unilib.pkg.abm_cropocalypse_grave_plants.post()
 
-    if minetest.features.particlespawner_tweenable then
+    if core.features.particlespawner_tweenable then
 
         -- Wisp particle effect
         unilib.register_abm({
@@ -40,7 +40,7 @@ function unilib.pkg.abm_cropocalypse_grave_plants.exec()
 
             action = function(pos, node)
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 1,
                     time = 1,
 
@@ -86,7 +86,7 @@ function unilib.pkg.abm_cropocalypse_grave_plants.exec()
 
             action = function(pos, node)
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 1,
                     time = 1,
 
@@ -132,7 +132,7 @@ function unilib.pkg.abm_cropocalypse_grave_plants.exec()
 
             action = function(pos, node)
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 1,
                     time = 1,
 

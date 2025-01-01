@@ -9,7 +9,7 @@
 unilib.pkg.tool_compactor_dirt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,24 +26,24 @@ local function do_compact(itemstack, user, pointed_thing)
     end
 
     local pos = pointed_thing.under
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
 
-    if minetest.get_item_group(node.name, "soil") == 1 then
+    if core.get_item_group(node.name, "soil") == 1 then
 
-        minetest.sound_play(
+        core.sound_play(
             "unilib_tool_dirt",
             {pos = pos, max_hear_distance = 5, loop = false, gain = 0.5}
         )
 
-        minetest.set_node(pos, {name = "unilib:dirt_compacted"})
+        core.set_node(pos, {name = "unilib:dirt_compacted"})
 
-        if unilib.is_creative(player_name) then
+        if unilib.utils.is_creative(player_name) then
 
             -- Wear the tool
             local def_table = itemstack:get_definition()
             itemstack:add_wear(700)
             if itemstack:get_count() == 0 then
-                minetest.sound_play("unilib_tool_breaks", {pos = sound_pos, gain = 0.5})
+                core.sound_play("unilib_tool_breaks", {pos = sound_pos, gain = 0.5})
             end
 
             return itemstack

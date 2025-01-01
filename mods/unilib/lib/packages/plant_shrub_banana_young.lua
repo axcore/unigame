@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_banana_young = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,12 +29,12 @@ function unilib.pkg.plant_shrub_banana_young.exec()
 
     unilib.register_node("unilib:plant_shrub_banana_young", "lib_ecology:plant_banana_1", mode, {
         -- From GLEMr11, lib_ecology:plant_banana_1
-        description = unilib.annotate(S("Young Banana Plant"), "Musa"),
+        description = unilib.utils.annotate(S("Young Banana Plant"), "Musa"),
         tiles = {"unilib_plant_shrub_banana.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, flammable = 2, flora = 1, growing = 1, plant = 1, snappy = 3},
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -42,7 +42,8 @@ function unilib.pkg.plant_shrub_banana_young.exec()
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_plant_shrub_banana.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,16 +56,18 @@ function unilib.pkg.plant_shrub_banana_young.exec()
         on_construct = function(pos)
 
             -- N.B. In original code, 60-120
-            minetest.get_node_timer(pos):start(
-                math.random(unilib.sapling_grow_min, unilib.sapling_grow_max)
+            core.get_node_timer(pos):start(
+                math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max)
             )
 
         end,
 
         on_timer = function(pos)
-            minetest.set_node(pos, {name = "unilib:plant_shrub_banana"})
+            core.set_node(pos, {name = "unilib:plant_shrub_banana"})
         end,
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_banana_young", "lib_ecology:plant_banana_1")
+
+    unilib.register_decoration_spare("unilib:plant_shrub_banana_young")
 
 end

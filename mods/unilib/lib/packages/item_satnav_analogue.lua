@@ -9,7 +9,7 @@
 unilib.pkg.item_satnav_analogue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.item_satnav_analogue.exec()
 
     unilib.register_tool("unilib:item_satnav_analogue", "orienteering:map", mode, {
         -- From orienteering:map
-        description = S("Analogue Sat-Nav Device"),
+        description = unilib.utils.hint(S("Analogue Sat-Nav Device"), S("enables minimap")),
         inventory_image = "unilib_item_satnav_analogue.png",
         groups = {disable_repair = 1},
 

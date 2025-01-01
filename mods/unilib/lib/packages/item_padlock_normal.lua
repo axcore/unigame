@@ -9,7 +9,7 @@
 unilib.pkg.item_padlock_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.item_padlock_normal.init()
 
     return {
         description = "Normal padlock",
-        depends = {"metal_steel", "metal_steel_bar"},
+        depends = {"hardware_bar_steel", "metal_steel"},
     }
 
 end
@@ -35,7 +35,7 @@ function unilib.pkg.item_padlock_normal.exec()
         -- From basic_materials:padlock
         output = "unilib:item_padlock_normal 2",
         recipe = {
-            {"unilib:metal_steel_bar"},
+            {"unilib:hardware_bar_steel"},
             {"unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot"},
         },

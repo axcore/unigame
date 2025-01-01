@@ -9,7 +9,7 @@
 unilib.pkg.decor_sheet_steel_spiked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glass_stained.add_mode
+local mode = unilib.global.imported_mod_table.glass_stained.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,10 +37,10 @@ function unilib.pkg.decor_sheet_steel_spiked.exec()
         "glass_stained:pane_bar_top_pane_single",
         mode,
         {
-            description = unilib.brackets(S("Spiked Steel Railing Sheet"), S("Single")),
+            description = unilib.utils.brackets(S("Spiked Steel Railing Sheet"), S("Single")),
             tiles = {"blank.png", "blank.png", "unilib_pane_steel_spiked.png"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -67,14 +67,14 @@ function unilib.pkg.decor_sheet_steel_spiked.exec()
         -- From glass_stained:pane_bar_top_pane_single
         output = "unilib:decor_sheet_steel_spiked_single",
         recipe = {
-            {"unilib:pane_steel_spiked_flat"}
+            {"unilib:pane_steel_spiked_flat"},
         },
     })
     unilib.register_craft({
         -- From glass_stained:pane_bar_top_pane_single
         output = "unilib:decor_sheet_steel_spiked_single",
         recipe = {
-            {"unilib:decor_sheet_steel_spiked_offset"}
+            {"unilib:decor_sheet_steel_spiked_offset"},
         },
     })
 
@@ -84,10 +84,10 @@ function unilib.pkg.decor_sheet_steel_spiked.exec()
         "glass_stained:pane_bar_top_pane_offset",
         mode,
         {
-            description = unilib.brackets(S("Spiked Steel Railing Sheet"), S("Offset")),
+            description = unilib.utils.brackets(S("Spiked Steel Railing Sheet"), S("Offset")),
             tiles = {"blank.png", "blank.png", "unilib_pane_steel_spiked.png"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -114,7 +114,7 @@ function unilib.pkg.decor_sheet_steel_spiked.exec()
         -- From glass_stained:pane_bar_top_pane_offset
         output = "unilib:decor_sheet_steel_spiked_offset",
         recipe = {
-            {"unilib:decor_sheet_steel_spiked_single"}
+            {"unilib:decor_sheet_steel_spiked_single"},
         },
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_slimy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.mushroom_slimy.exec()
 
     -- Add a special mushroom-spreading ABM, and a particle-spawning ABM. To avoid creating these
     --      additional ABMs, just omit the "shared_cropocalypse_mushroom" package from your remixes
-    if unilib.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
-            unilib.pkg_executed_table["stone_ordinary_with_copper"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_cropocalypse_mushroom"] ~= nil and
+            unilib.global.pkg_executed_table["stone_ordinary_with_copper"] ~= nil then
 
         unilib.pkg.shared_cropocalypse_mushroom.register_abms(
-            "slimiy", "group:slimy_mushroom", "unilib:stone_ordinary_with_copper"
+            "slimy", "group:slimy_mushroom", "unilib:stone_ordinary_with_copper"
         )
 
     end
@@ -46,7 +46,7 @@ function unilib.pkg.mushroom_slimy.exec()
             attached_node = 1, flammable = 1, food_slimy_mushroom = 1, mushroom = 1,
             slimy_mushroom = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -61,11 +61,11 @@ function unilib.pkg.mushroom_slimy.exec()
         walkable = false,
         wield_image = "unilib_mushroom_slimy.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_slimy", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_slimy", 4),
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_slimy", "cropocalypse:slimy_mushroom")
 
-    unilib.register_decoration("cropocalypse_mushroom_slimy", {
+    unilib.register_decoration_generic("cropocalypse_mushroom_slimy", {
         -- From cropocalypse/glowing_mushrooms.lua
         deco_type = "simple",
         decoration = "unilib:mushroom_slimy",

@@ -9,7 +9,7 @@
 unilib.pkg.tree_young_bamboo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.youngtrees.add_mode
+local mode = unilib.global.imported_mod_table.youngtrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -21,17 +21,15 @@ function unilib.pkg.tree_young_bamboo.grow_func(pos)
 
     local height = math.random(1, 3)
     local rotate = math.random(0, 3)
+
     local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
+    if core.get_node(right_here).name == "air" then
 
-    -- N.B. Original code checks for both air and jungle grass. This seems to be a copy-paste error,
-    --      because the original code doesn't spawn this tree and jungle grass in the same biomes
-    if minetest.get_node(right_here).name == "air" then
-
-        minetest.swap_node(right_here, {name = "unilib:tree_young_bamboo_top", param2 = rotate})
+        core.swap_node(right_here, {name = "unilib:tree_young_bamboo_top", param2 = rotate})
         if height > 1 then
 
             local above_right_here = {x = pos.x, y = pos.y + 2, z = pos.z}
-            minetest.swap_node(
+            core.swap_node(
                 above_right_here,
                 {name = "unilib:tree_young_bamboo_top", param2 = rotate}
             )
@@ -39,7 +37,7 @@ function unilib.pkg.tree_young_bamboo.grow_func(pos)
             if height > 2 then
 
                 local two_above_right_here = {x = pos.x, y = pos.y + 3, z = pos.z}
-                minetest.swap_node(
+                core.swap_node(
                     two_above_right_here,
                     {name = "unilib:tree_young_bamboo_top", param2 = rotate}
                 )
@@ -60,10 +58,10 @@ function unilib.pkg.tree_young_bamboo.init()
 
     return {
         description = "Young bamboo tree",
-        notes = "The original code had a single node that didn't spawn area. This package adds" ..
-                " a decoration and growth function, that grows the \"tree\" up to three nodes" ..
-                " in height",
-        depends = "item_twig_normal",
+        notes = "The original code had a single node that didn't spawn anywhere. This package" ..
+                " adds a decoration and growth function, that grows the \"tree\" up to three" ..
+                " nodes in height",
+        depends = "misc_twig_normal",
     }
 
 end
@@ -75,10 +73,10 @@ function unilib.pkg.tree_young_bamboo.exec()
         description = S("Young Bamboo Tree"),
         tiles = {"unilib_tree_young_bamboo.png"},
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
-        drop = "unilib:item_twig_normal_1",
+        drop = "unilib:misc_twig_normal_1",
         node_box = {
             type = "fixed",
             fixed = {
@@ -88,6 +86,9 @@ function unilib.pkg.tree_young_bamboo.exec()
             },
         },
         paramtype = "light",
+        -- N.B. paramtype2 = "facedir" not in original code, it's required to make the function
+        --      above work
+        paramtype2 = "facedir",
         walkable = false,
     })
 
@@ -98,7 +99,7 @@ function unilib.pkg.tree_young_bamboo.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 100,
                 rarity_fertility = 0.5,
                 plantlife_limit = -0.3,

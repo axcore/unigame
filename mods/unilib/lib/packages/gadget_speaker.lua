@@ -9,7 +9,7 @@
 unilib.pkg.gadget_speaker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,8 +43,10 @@ function unilib.pkg.gadget_speaker.exec()
             "unilib_gadget_speaker_front.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
     unilib.register_craft({
@@ -56,7 +58,7 @@ function unilib.pkg.gadget_speaker.exec()
             {c_gold, c_copper, c_gold}
         },
     })
-    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil then
 
         unilib.override_item("unilib:gadget_speaker", {
             on_rotate = unilib.pkg.shared_screwdriver.rotate_simple,

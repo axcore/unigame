@@ -9,7 +9,7 @@
 unilib.pkg.food_chocolate_piece = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_chocolate_piece.exec()
         inventory_image = "unilib_food_chocolate_piece.png",
         groups = {flammable = 1, food_chocolate = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chocolate_piece", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chocolate_piece", 4),
     })
     unilib.register_craft({
         -- From cropocalypse:chocolate

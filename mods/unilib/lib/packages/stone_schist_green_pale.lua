@@ -9,7 +9,7 @@
 unilib.pkg.stone_schist_green_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_schist_green_pale.exec()
         description = S("Pale Green Schist"),
 
         category = "metamorphic",
+        colour = "#85907A",
         grinder_flag = true,
         hardness = 2,
     })
@@ -75,6 +76,24 @@ function unilib.pkg.stone_schist_green_pale.exec()
 
         replace_mode = mode,
         description = S("Pale Green Schist Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_schist_green_pale_cobble_compressed
+        part_name = "schist_green_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pale Green Schist Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_schist_green_pale_cobble_condensed
+        part_name = "schist_green_pale",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pale Green Schist Cobble"),
     })
 
 end

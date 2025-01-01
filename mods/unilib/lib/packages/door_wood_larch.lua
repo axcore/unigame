@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_larch = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.larch.add_mode
+local mode = unilib.global.imported_mod_table.larch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,10 @@ end
 function unilib.pkg.door_wood_larch.exec()
 
     unilib.register_door({
-        -- From cool_trees/larch, doors:door_larch_wood. Creates unilib:door_wood_larch
+        -- From cool_trees/larch, doors:door_larch_wood. Creates unilib:door_wood_larch_closed_left,
+        --      etc
         part_name = "wood_larch",
-        orig_name = {
+        orig_name_list = {
             "doors:door_larch_wood_a",
             "doors:door_larch_wood_b",
             "doors:door_larch_wood_c",
@@ -46,7 +47,7 @@ function unilib.pkg.door_wood_larch.exec()
                 {"unilib:tree_larch_wood", "unilib:tree_larch_wood"},
                 {"unilib:tree_larch_wood", "unilib:tree_larch_wood"},
                 {"unilib:tree_larch_wood", "unilib:tree_larch_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

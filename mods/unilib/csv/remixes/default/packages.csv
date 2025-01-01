@@ -1,8 +1,14 @@
 # "default" remix - contains almost everything from minetest_game/default
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
+# ABM packages
+abm_standard_cactus_grow|default
+abm_standard_lava_cool|default
+abm_standard_moss_grow|default underch
+abm_standard_papyrus_grow|default
+abm_standard_turf_kill|default
+abm_standard_turf_spread|default
 # Base packages
 base_default|unilib
 # Biomes
@@ -47,11 +53,11 @@ deco_default_bush_blueberry_ordinary|default
 deco_default_bush_acacia|default
 deco_default_bush_pine|default
 deco_default_coral_mixed|default
-deco_default_dirt_permafrost_with_moss|default
+deco_default_dirt_permafrost_ordinary_with_moss|default
 deco_default_fern_ordinary|default
 deco_default_grass_dry|default
 deco_default_grass_jungle|default
-deco_default_grass_marram|default
+deco_default_grass_marram_ordinary|default
 deco_default_grass_ordinary|default
 deco_default_plant_cactus_ordinary|default
 deco_default_plant_kelp_ordinary|default
@@ -71,7 +77,7 @@ deco_default_tree_pine_log|default
 # Dirt
 dirt_dry|default
 dirt_ordinary|default farming moreblocks
-dirt_permafrost|default
+dirt_permafrost_ordinary|default
 # Ferns
 fern_ordinary|default
 # Fruit
@@ -86,7 +92,7 @@ glass_ordinary|default moreblocks vessels
 # Grass
 grass_dry|default
 grass_jungle|default
-grass_marram|default
+grass_marram_ordinary|default
 grass_ordinary|default
 # Gravel
 gravel_ordinary|default mtg_plus
@@ -94,8 +100,8 @@ gravel_ordinary|default mtg_plus
 ice_ordinary|default ethereal mtg_plus
 # Items
 item_book_ordinary|default
-item_key_ordinary|default
-item_key_skeleton|default
+item_key_ordinary|keys
+item_key_skeleton|keys
 item_paper_ordinary|default moreblocks
 item_stick_ordinary|default
 # Ladders
@@ -113,17 +119,17 @@ loot_default|default
 # Machines
 machine_furnace_ordinary|default aotearoa
 # Metals
-metal_bronze|default technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 # Minerals
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 # Misc
 misc_cloud_ordinary|default
 # Optional packages for remixes
@@ -153,9 +159,11 @@ plant_shrub_dry|default
 sand_desert_nosoil|default
 sand_ordinary|default
 sand_silver|default
-# Shared functions
-shared_default_chest|unilib
+# Shared packages
+shared_boats|boats
+shared_default_chest|default pipeworks
 shared_default_furnace|default
+shared_default_sign|default
 # Signs
 sign_wall_wood|default
 sign_wall_steel|default
@@ -213,7 +221,10 @@ tree_pine|default doors moreblocks
 mushroom_brown|flowers
 mushroom_red|flowers
 sand_desert|default farming
+shared_standard|flowers fire
 soil_sand_desert|farming
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #crop_barley|farming
@@ -229,6 +240,8 @@ soil_sand_desert|farming
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
 #item_sweeper|moreblocks
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
 #moss_green|sickles
 #soil_arid|farming
 #soil_ordinary|farming

@@ -9,7 +9,7 @@
 unilib.pkg.tree_oak_graveyard = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.grave.add_mode
+local mode = unilib.global.imported_mod_table.grave.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_oak_graveyard.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     -- (no sci_name)
 
     unilib.register_tree({
@@ -100,7 +100,7 @@ function unilib.pkg.tree_oak_graveyard.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_oak_graveyard_closed
+        -- Original to unilib. Creates unilib:gate_oak_graveyard_closed, etc
         part_name = "oak_graveyard",
         orig_name = nil,
 
@@ -109,10 +109,10 @@ function unilib.pkg.tree_oak_graveyard.exec()
         group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("grave_tree_oak_graveyard", {
+    unilib.register_decoration_generic("grave_tree_oak_graveyard", {
         -- From grave/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_oak_graveyard.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_oak_graveyard.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

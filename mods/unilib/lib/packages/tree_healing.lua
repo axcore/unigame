@@ -9,7 +9,7 @@
 unilib.pkg.tree_healing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,25 +48,30 @@ function unilib.pkg.tree_healing.exec()
             "unilib_tree_healing_trunk.png",
         },
         groups = {choppy = 2, oddly_breakable_by_hand = 1, puts_out_fire = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
 
-    if unilib.super_tree_table["healing"] ~= nil then
+    unilib.register_tree_trunk_stripped({
+        -- From ethereal:yellow_trunk. Creates unilib:tree_healing_trunk_stripped
+        part_name = "healing",
+        orig_name = "ethereal:yellow_trunk",
 
-        unilib.register_tree_trunk_stripped({
-            -- From ethereal:yellow_trunk. Creates unilib:tree_healing_trunk_stripped
-            part_name = "healing",
-            orig_name = "ethereal:yellow_trunk",
+        replace_mode = mode,
+        description = S("Healing Tree Trunk"),
+        group_table = {choppy = 2, oddly_breakable_by_hand = 1, puts_out_fire = 1, tree = 1},
+    })
 
-            replace_mode = mode,
-            description = S("Healing Tree Trunk"),
-            group_table = {choppy = 2, oddly_breakable_by_hand = 1, puts_out_fire = 1, tree = 1},
-        })
-
+    local on_place, place_param2
+    if not unilib.setting.auto_rotate_wood_flag then
+        on_place = core.rotate_node
+    else
+        place_param2 = 0
     end
 
     unilib.register_node("unilib:tree_healing_wood", "ethereal:yellow_wood", mode, {
@@ -74,9 +79,15 @@ function unilib.pkg.tree_healing.exec()
         description = S("Healing Tree Wood Planks"),
         tiles = {"unilib_tree_healing_wood.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 1, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         is_ground_content = false,
+        paramtype2 = "facedir",
+        -- N.B. no .place_param2 in original code
+        place_param2 = place_param2,
+
+        -- N.B. no .on_place in original code
+        on_place = on_place,
     })
     unilib.register_craft({
         -- From ethereal:yellow_wood
@@ -86,43 +97,47 @@ function unilib.pkg.tree_healing.exec()
         },
     })
     unilib.register_tree_wood_cuttings("healing")
-    unilib.set_auto_rotate("unilib:tree_healing_wood", unilib.auto_rotate_wood_flag)
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_healing_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_healing_leaves.png")
     unilib.register_node("unilib:tree_healing_leaves", "ethereal:yellowleaves", mode, {
         -- From ethereal:yellowleaves
         description = S("Healing Tree Leaves"),
         tiles = {"unilib_tree_healing_leaves.png"},
         -- N.B. no food_shoots in original code
         groups = {food_shoots = 1, leafdecay = 3, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
-        drawtype = unilib.leaves_drawtype,
+        drawtype = unilib.global.leaves_drawtype,
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:tree_healing_sapling"}, rarity = 50},
-                {items = {"unilib:tree_healing_leaves"}}
-            }
+                {items = {"unilib:tree_healing_leaves"}},
+            },
         },
         inventory_image = inv_img,
+        -- N.B. no .is_ground_content in original code
+        is_ground_content = false,
         light_source = 9,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
-        walkable = unilib.walkable_leaves_flag,
+        visual_scale = unilib.global.leaves_visual_scale,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
 
-        after_place_node = unilib.after_place_leaves,
+        after_place_node = unilib.flora.after_place_leaves,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:tree_healing_leaves", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:tree_healing_leaves", 1),
     })
     unilib.register_leafdecay({
         -- From ethereal:yellowleaves
+        trunk_type = "healing",
         trunks = {"unilib:tree_healing_trunk"},
-        leaves = {"unilib:tree_healing_leaves", "unilib:fruit_apple_golden"},
+        leaves = {"unilib:tree_healing_leaves"},
+        others = {"unilib:fruit_apple_golden"},
         radius = 3,
     })
+    unilib.register_tree_leaves_compacted("unilib:tree_healing_leaves", mode)
 
     unilib.register_tree_sapling({
         -- From ethereal:yellow_tree_sapling. Creates unilib:tree_healing_sapling
@@ -164,7 +179,7 @@ function unilib.pkg.tree_healing.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From ethereal:fencegate_yellowwood. Creates unilib:gate_healing_closed
+        -- From ethereal:fencegate_yellowwood_closed, etc. Creates unilib:gate_healing_closed, etc
         part_name = "healing",
         orig_name = {"ethereal:fencegate_yellowwood_closed", "ethereal:fencegate_yellowwood_open"},
 
@@ -173,13 +188,13 @@ function unilib.pkg.tree_healing.exec()
         description = S("Healing Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("ethereal_tree_healing", {
+    unilib.register_decoration_generic("ethereal_tree_healing", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_healing.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_healing.mts",
 
         fill_ratio = 0.01,
-        flags = "place_center_x, place_center_z",
+        flags = "place_center_x, place_center_z, force_placement",
         sidelen = 80,
     })
 

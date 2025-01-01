@@ -9,7 +9,7 @@
 unilib.pkg.grass_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,7 +17,7 @@ local mode = unilib.imported_mod_table.default.add_mode
 
 local function do_decoration(offset, scale, length)
 
-    unilib.register_decoration("default_grass_dry_" .. length, {
+    unilib.register_decoration_generic("default_grass_dry_" .. length, {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:grass_dry_" .. length,
@@ -54,18 +54,25 @@ end
 
 function unilib.pkg.grass_dry.exec()
 
+    local full_name = "unilib:grass_dry_1"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
     -- First variant
-    unilib.register_node("unilib:grass_dry_1", "default:dry_grass_1", mode, {
+    unilib.register_node(full_name, "default:dry_grass_1", mode, {
         -- From default:dry_grass_1
         description = S("Savanna Grass"),
         tiles = {"unilib_grass_dry_1.png"},
         groups = {
             attached_node = 1, dry_grass = 1, flammable = 3, flora = 1, grass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         -- Notes from default:
         -- Use texture of a taller grass variant in inventory
         inventory_image = "unilib_grass_dry_3.png",
@@ -83,19 +90,18 @@ function unilib.pkg.grass_dry.exec()
 
             -- Place a random grass variant
             local stack = ItemStack("unilib:grass_dry_" .. math.random(1,5))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
-            return ItemStack("unilib:grass_dry_1 " ..
-                    itemstack:get_count() - (1 - ret:get_count()))
+            local ret = core.item_place(stack, placer, pointed_thing)
+            return ItemStack(full_name .. " " .. itemstack:get_count() - (1 - ret:get_count()))
 
         end,
     })
     unilib.register_craft({
         -- From default:dry_grass_1
         type = "fuel",
-        recipe = "unilib:grass_dry_1",
+        recipe = full_name,
         burntime = 2,
     })
-    unilib.register_plant_in_pot("unilib:grass_dry_1", "default:dry_grass_1")
+    unilib.register_plant_in_pot(full_name, "default:dry_grass_1")
 
     for i = 2, 5 do
 
@@ -107,11 +113,11 @@ function unilib.pkg.grass_dry.exec()
                 attached_node = 1, dry_grass = 1, flammable = 3, flora = 1, grass = 1,
                 not_in_creative_inventory = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
-            drop = "unilib:grass_dry_1",
+            drop = drop,
             inventory_image = "unilib_grass_dry_" .. i .. ".png",
             paramtype = "light",
             selection_box = {
@@ -134,7 +140,7 @@ function unilib.pkg.grass_dry.exec()
     do_decoration(0.09, -0.03, 1)
 
     -- Update global variables
-    unilib.register_growing({
+    unilib.flora.register_growth_stages({
         base_name = "unilib:grass_dry",
         mode = "other",
         stage_max = 5,
@@ -145,22 +151,49 @@ end
 function unilib.pkg.grass_dry.post()
 
     -- Occasionally drop barley and rye seeds
-    if unilib.pkg_executed_table["crop_barley"] ~= nil and
-            unilib.pkg_executed_table["crop_rye"] ~= nil then
+    if not unilib.setting.disable_grass_drop_flag then
 
-        -- Adapted from farming_redo
-        for i = 1, 5 do
+        if unilib.global.pkg_executed_table["crop_barley"] ~= nil and
+                unilib.global.pkg_executed_table["crop_rye"] ~= nil then
 
-            unilib.override_item("unilib:grass_dry_" .. i, {
-                drop = {
-                    max_items = 1,
-                    items = {
-                        {items = {"unilib:crop_barley_seed"}, rarity = 5},
-                        {items = {"unilib:crop_rye_seed"}, rarity = 5},
-                        {items = {"unilib:grass_dry_1"}},
-                    }
-                }
-            })
+            -- Adapted from farming_redo
+            for i = 1, 5 do
+
+                unilib.override_item("unilib:grass_dry_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_barley_seed"}, rarity = 5},
+                            {items = {"unilib:crop_rye_seed"}, rarity = 5},
+                            {items = {"unilib:grass_dry_1"}},
+                        },
+                    },
+                })
+
+            end
+
+        end
+
+    else
+
+        if unilib.global.pkg_executed_table["crop_barley"] ~= nil and
+                unilib.global.pkg_executed_table["crop_rye"] ~= nil then
+
+            -- Adapted from farming_redo
+            for i = 1, 5 do
+
+                unilib.override_item("unilib:grass_dry_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_barley_seed"}, rarity = 5},
+                            {items = {"unilib:crop_rye_seed"}, rarity = 5},
+--                          {items = {"unilib:grass_dry_1"}},
+                        },
+                    },
+                })
+
+            end
 
         end
 

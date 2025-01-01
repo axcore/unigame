@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_rustic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.pane_glass_rustic.exec()
 
     unilib.register_node("unilib:pane_glass_rustic", "cottages:glass_pane", mode, {
         -- From cottages:glass_pane
-        description = unilib.brackets(S("Rustic Glass Pane"), S("Centred")),
+        description = unilib.utils.brackets(S("Rustic Glass Pane"), S("Centred")),
         tiles = {"unilib_pane_glass_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -60,7 +60,7 @@ function unilib.pkg.pane_glass_rustic.exec()
         recipe = {
             {"group:stick", "group:stick", "group:stick"},
             {"group:stick", "unilib:glass_ordinary", "group:stick"},
-            {"group:stick", "group:stick", "group:stick"}
+            {"group:stick", "group:stick", "group:stick"},
         },
     })
     ]]--
@@ -83,11 +83,11 @@ function unilib.pkg.pane_glass_rustic.exec()
 
     unilib.register_node("unilib:pane_glass_rustic_side", "cottages:glass_pane_side", mode, {
         -- From cottages:glass_pane_side
-        description = unilib.brackets(S("Rustic Glass Pane"), S("Off-Centre")),
+        description = unilib.utils.brackets(S("Rustic Glass Pane"), S("Off-Centre")),
         tiles = {"unilib_pane_glass_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         is_ground_content = false,

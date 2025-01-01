@@ -1,0 +1,42 @@
+# "badlands" remix - contains everything from the badlands mod
+
+# node_name | original_mod
+
+# badlands packages
+biome_badlands|badlands
+deco_badlands_plant_cactus_ordinary|badlands
+deco_badlands_plant_shrub_dry|badlands
+ore_badlands_clay_baked|badlands
+ore_badlands_stone_ordinary_with_gold|badlands
+sand_barren|badlands
+stone_sandstone_barren|badlands
+
+# supporting packages (.depends)
+clay_baked_basic|bakedclay
+dye_basic|dye bakedclay
+metal_gold|default glemr11 technic
+plant_cactus_ordinary|default
+plant_shrub_dry|default
+sand_ordinary|default
+shared_bakedclay|bakedclay
+stone_ordinary|default moreblocks technic
+stone_ordinary_with_gold|default
+
+# supporting packages (.at_least_one)
+clay_brown|underch
+clay_ordinary|default
+dirt_ordinary|default farming moreblocks
+gravel_ordinary|default mtg_plus
+sand_silver|default
+stone_ordinary_with_coal|default
+stone_sandstone_silver|default mtg_plus
+
+# supporting packages (.optional)
+#brick_ordinary|default
+#bush_blueberry_ordinary|default
+#grass_jungle|default
+#machine_furnace_induction|unilib
+#mineral_mese|default glemr11
+#moss_green|sickles
+
+# supporting packages (.suggested)

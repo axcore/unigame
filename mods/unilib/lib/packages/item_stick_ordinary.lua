@@ -9,7 +9,7 @@
 unilib.pkg.item_stick_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.item_stick_ordinary.exec()
         output = "unilib:item_stick_ordinary 4",
         recipe = {
             {"group:wood"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:stick
@@ -45,26 +45,26 @@ function unilib.pkg.item_stick_ordinary.exec()
         recipe = "unilib:item_stick_ordinary",
         burntime = 1,
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
-        if unilib.pkg_executed_table["plant_shrub_dry"] ~= nil then
+        if unilib.global.pkg_executed_table["plant_shrub_dry"] ~= nil then
 
-            minetest.register_craft({
+            unilib.register_craft({
                 -- From moreblocks
                 output = "unilib:item_stick_ordinary",
                 recipe = {
                     {"unilib:plant_shrub_dry"},
-                }
+                },
             })
 
         end
 
-        minetest.register_craft({
+        unilib.register_craft({
             -- From moreblocks
             output = "unilib:item_stick_ordinary",
             recipe = {
                 {"group:sapling"},
-            }
+            },
         })
 
     end

@@ -9,7 +9,7 @@
 unilib.pkg.tree_macadamia_prickly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.tree_macadamia_prickly.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Macadamia tetraphylla"
 
     unilib.register_tree({
@@ -38,14 +38,14 @@ function unilib.pkg.tree_macadamia_prickly.exec()
 
     unilib.register_node("unilib:tree_macadamia_prickly_trunk", "australia:macadamia_tree", mode, {
         -- From australia:macadamia_tree
-        description = unilib.annotate(S("Prickly Macadamia Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Prickly Macadamia Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_macadamia_prickly_trunk_top.png",
             "unilib_tree_macadamia_prickly_trunk_top.png",
             "unilib_tree_macadamia_prickly_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -59,7 +59,17 @@ function unilib.pkg.tree_macadamia_prickly.exec()
             fixed = {-0.375, -0.5, -0.375, 0.375, 0.5, 0.375},
         },
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_macadamia_prickly_trunk_stripped
+        part_name = "macadamia_prickly",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Prickly Macadamia Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
     })
 
     unilib.register_tree_wood({
@@ -85,8 +95,10 @@ function unilib.pkg.tree_macadamia_prickly.exec()
     })
     unilib.register_leafdecay({
         -- From australia:macadamia_leaves
+        trunk_type = "macadamia_prickly",
         trunks = {"unilib:tree_macadamia_prickly_trunk"},
-        leaves = {"unilib:tree_macadamia_prickly_leaves", "unilib:food_nuts_macadamia"},
+        leaves = {"unilib:tree_macadamia_prickly_leaves"},
+        others = {"unilib:food_nuts_macadamia"},
         radius = 3,
     })
 
@@ -134,7 +146,7 @@ function unilib.pkg.tree_macadamia_prickly.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_macadamia_prickly_closed
+        -- Original to unilib. Creates unilib:gate_macadamia_prickly_closed, etc
         part_name = "macadamia_prickly",
         orig_name = {nil, nil},
 
@@ -145,10 +157,11 @@ function unilib.pkg.tree_macadamia_prickly.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("australia_tree_macadamia_prickly_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_macadamia_prickly_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_macadamia_prickly_" .. i .. ".mts",
+            schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_macadamia_prickly_" .. i .. ".mts",
 
             fill_ratio = (3 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",

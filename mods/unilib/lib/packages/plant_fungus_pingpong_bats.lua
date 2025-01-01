@@ -9,7 +9,7 @@
 unilib.pkg.plant_fungus_pingpong_bats = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
 
     unilib.register_node("unilib:plant_fungus_pingpong_bats", "nsspf:panellus_pusillus", mode, {
         -- From nsspf:panellus_pusillus
-        description = unilib.annotate(S("Little Ping-Pong Bats Fungus"), "Panellus pusillus"),
+        description = unilib.utils.annotate(S("Little Ping-Pong Bats Fungus"), "Panellus pusillus"),
         tiles = {"unilib_plant_fungus_pingpong_bats.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -53,7 +53,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_pingpong_bats", -2),
+        on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_pingpong_bats", -2),
     })
     -- (not compatible with flowerpots)
 
@@ -68,7 +68,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -88,7 +88,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_pingpong_bats_cooked", -4),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_pingpong_bats_cooked", -4),
         }
     )
     unilib.register_craft({
@@ -105,7 +105,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
         "nsspf:panellus_pusillus_light",
         mode,
         {
-            description = unilib.annotate(
+            description = unilib.utils.annotate(
                 S("Glowing Little Ping-Pong Bats Fungus"), "Panellus pusillus"
             ),
             tiles = {"unilib_plant_fungus_pingpong_bats_glowing.png"},
@@ -115,7 +115,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
                 snappy = 3,
             },
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -137,7 +137,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
                 return
             end,
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_fungus_pingpong_bats_glowing", -2),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_pingpong_bats_glowing", -2),
         }
     )
 

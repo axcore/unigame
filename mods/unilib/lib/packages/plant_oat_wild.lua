@@ -9,7 +9,7 @@
 unilib.pkg.plant_oat_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,15 +28,16 @@ function unilib.pkg.plant_oat_wild.exec()
 
     unilib.register_node("unilib:plant_oat_wild", "mapgen:wild_oat", mode, {
         -- From farlands, mapgen:wild_oat
-        description = unilib.annotate(S("Wild Oat Plant"), "Avena sativa"),
+        description = unilib.utils.annotate(S("Wild Oat Plant"), "Avena sativa"),
         tiles = {"unilib_plant_oat_wild.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_oat_wild.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -52,12 +53,13 @@ function unilib.pkg.plant_oat_wild.exec()
         description = S("Dry Wild Oat Plant"),
         tiles = {"unilib_plant_oat_wild_dry.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_oat_wild_dry.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -68,7 +70,7 @@ function unilib.pkg.plant_oat_wild.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_oat_wild_dry", "mapgen:wild_oat_dry")
 
-    unilib.register_decoration("farlands_plant_oat_wild", {
+    unilib.register_decoration_generic("farlands_plant_oat_wild", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_oat_wild",
@@ -78,7 +80,7 @@ function unilib.pkg.plant_oat_wild.exec()
         sidelen = 6,
     })
 
-    unilib.register_decoration("farlands_plant_oat_wild_dry", {
+    unilib.register_decoration_generic("farlands_plant_oat_wild_dry", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_oat_wild_dry",

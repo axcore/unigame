@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_palm_desert.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     -- (no sci_name)
 
     unilib.register_tree({
@@ -97,10 +97,10 @@ function unilib.pkg.tree_palm_desert.exec()
 
     for i = 1, 5 do
 
-        unilib.register_decoration("glem_tree_palm_desert_" .. i, {
+        unilib.register_decoration_generic("glem_tree_palm_desert_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_palm_desert_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_palm_desert_" .. i .. ".mts",
 
             fill_ratio = 0.005,
             flags = "place_center_x, place_center_z",

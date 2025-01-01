@@ -9,7 +9,7 @@
 unilib.pkg.plant_carrot_danvers_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,13 +28,13 @@ function unilib.pkg.plant_carrot_danvers_wild.exec()
 
     unilib.register_node("unilib:plant_carrot_danvers_wild", "cropocalypse:carrot_wild", mode, {
         -- From cropocalypse:carrot_wild
-        description = unilib.annotate(S("Wild Danvers Carrot Plant"), "Daucus carota"),
+        description = unilib.utils.annotate(S("Wild Danvers Carrot Plant"), "Daucus carota"),
         tiles = {"unilib_plant_carrot_danvers_wild.png"},
         -- N.B. flora = 1, not_in_creative_inventory = 1 not in original code
         groups = {
             attached_node = 1, flammable = 4, flora = 1, not_in_creative_inventory = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -52,7 +52,7 @@ function unilib.pkg.plant_carrot_danvers_wild.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cropocalypse_plant_carrot_danvers_wild", {
+    unilib.register_decoration_generic("cropocalypse_plant_carrot_danvers_wild", {
         -- From cropocalypse/plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_carrot_danvers_wild",

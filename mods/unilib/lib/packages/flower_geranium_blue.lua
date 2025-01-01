@@ -9,7 +9,7 @@
 unilib.pkg.flower_geranium_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_geranium_blue.exec()
         replace_mode = mode,
         deco_part_name = "flowers",
         description = S("Blue Geranium"),
-        group_table = {color_blue = 1, flammable = 1},
+        group_table = {color_blue = 1, colour_blue = 1, flammable = 1},
         sci_name = "Geranium",
         seed = 36662,
     })

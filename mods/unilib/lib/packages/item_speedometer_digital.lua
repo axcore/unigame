@@ -9,7 +9,7 @@
 unilib.pkg.item_speedometer_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.item_speedometer_digital.exec()
 
     unilib.register_tool("unilib:item_speedometer_digital", "orienteering:speedometer", mode, {
         -- From orienteering:speedometer
-        description = S("Digital Speedometer"),
+        description = unilib.utils.hint(S("Digital Speedometer"), S("shows speed")),
         inventory_image = "unilib_item_speedometer_digital_inv.png",
         groups = {disable_repair = 1},
 

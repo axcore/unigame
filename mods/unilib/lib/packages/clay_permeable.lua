@@ -9,7 +9,7 @@
 unilib.pkg.clay_permeable = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,7 @@ function unilib.pkg.clay_permeable.exec()
         damage_per_second = 0,
         drowning = 5,
         flowing_description = S("Flowing Muddy Clay"),
-        post_effect_color_table = {r = 123, g = 57, b = 6, a = 240},
+        rgb_table = {r = 123, g = 57, b = 6, a = 240},
         sludge_flag = true,
         source_description = S("Muddy Clay Source"),
         viscosity = 6,
@@ -76,7 +76,7 @@ function unilib.pkg.clay_permeable.exec()
         damage_per_second = 0,
         drowning = 5,
         flowing_description = S("Flowing Clay Slurry"),
-        post_effect_color_table = {r = 123, g = 85, b = 73, a = 176},
+        rgb_table = {r = 123, g = 85, b = 73, a = 176},
         sludge_flag = true,
         source_description = S("Clay Slurry Source"),
         viscosity = 4,

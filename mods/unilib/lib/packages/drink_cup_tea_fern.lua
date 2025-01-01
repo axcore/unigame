@@ -9,7 +9,7 @@
 unilib.pkg.drink_cup_tea_fern = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.tea.add_mode
+local mode = unilib.global.imported_mod_table.tea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.drink_cup_tea_fern.exec()
         inventory_image = "unilib_drink_cup_tea_fern.png",
         groups = {drink = 1, flammable = 4, food_tea = 1},
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_cup_tea_fern", 2, "unilib:vessel_glass_empty"
         ),
     })
@@ -46,7 +46,7 @@ function unilib.pkg.drink_cup_tea_fern.post()
 
     local c_fern = "unilib:fern_ordinary_1"
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {"unilib:torch_ordinary", "unilib:torch_ordinary"})
 
     unilib.register_craft({

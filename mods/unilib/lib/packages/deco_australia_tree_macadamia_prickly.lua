@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_macadamia_prickly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,8 @@ function unilib.pkg.deco_australia_tree_macadamia_prickly.init()
 
     return {
         description = "Prickly macadamia tree as decoration",
-        depends = {"biome_australia_eastern_coasts", "dirt_ordinary", "tree_macadamia_prickly"},
+        depends = {"biome_australia_eastern_coasts", "tree_macadamia_prickly"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
     }
 
 end
@@ -28,13 +29,20 @@ function unilib.pkg.deco_australia_tree_macadamia_prickly.post()
 
     for i = 1, 3 do
 
-        unilib.register_decoration_now("australia_tree_macadamia_prickly_in_eastern_" .. i, nil, {
+        unilib.register_decoration_complete(
             -- From australia/biome_eastern_coasts.lua
-            biomes = "australia_eastern_coasts",
-            place_on = "unilib:dirt_ordinary_with_turf",
-            y_max = 35,
-            y_min = 8,
-        })
+            "australia_tree_macadamia_prickly_in_eastern_" .. i,
+            nil,
+            {
+                biomes = "australia_eastern_coasts",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_with_turf_eastern_coasts",
+                },
+                y_max = 35,
+                y_min = 8,
+            }
+        )
 
     end
 

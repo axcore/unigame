@@ -9,7 +9,7 @@
 unilib.pkg.food_jelly_firethorn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,12 +38,12 @@ function unilib.pkg.food_jelly_firethorn.exec()
         -- From ethereal:firethorn_jelly
         description = S("Firethorn Jelly"),
         inventory_image = "unilib_food_jelly_firethorn.png",
-        -- N.B. no food_jelly in original code
-        groups = {food_jelly = 1, vessel = 1},
+        -- N.B. food_jelly = 1 not in original code
+        groups = {flammable = 2, food_jelly = 1, vessel = 1},
 
         wield_image = "unilib_food_jelly_firethorn.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_jelly_firethorn", 2, "unilib:vessel_bottle_glass_empty"
         ),
     })
@@ -55,14 +55,14 @@ function unilib.pkg.food_jelly_firethorn.post()
     local c_plant = "unilib:plant_shrub_firethorn"
 
     local replace_list = {}
-    for _, mini_list in pairs(unilib.potable_bucket_list) do
+    for _, mini_list in pairs(unilib.global.potable_bucket_list) do
         table.insert(replace_list, {mini_list[1], mini_list[2] .. " 3"})
     end
 
     table.insert(replace_list, {"unilib:utensil_mortar_pestle", "unilib:utensil_mortar_pestle"})
 
-    if unilib.pkg_executed_table["utensil_bowl_wooden"] ~= nil and
-            unilib.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
+    if unilib.global.pkg_executed_table["utensil_bowl_wooden"] ~= nil and
+            unilib.global.pkg_executed_table["utensil_mortar_pestle"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:firethorn_jelly
@@ -70,7 +70,7 @@ function unilib.pkg.food_jelly_firethorn.post()
             recipe = {
                 {"unilib:utensil_mortar_pestle", "unilib:vessel_bottle_glass_empty", ""},
                 {c_plant, c_plant, c_plant},
-                {"group:potable_bucket", "group:potable_bucket", "group:potable_bucket"}
+                {"group:potable_bucket", "group:potable_bucket", "group:potable_bucket"},
             },
             replacements = replace_list,
         })

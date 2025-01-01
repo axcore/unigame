@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_dirt_coarse = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ end
 
 function unilib.pkg.ore_farlands_dirt_coarse.post()
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
         unilib.register_ore({
             -- From farlands, mapgen/mapgen.lua
@@ -67,12 +67,12 @@ function unilib.pkg.ore_farlands_dirt_coarse.post()
             },
             noise_threshold     = 0.0,
             y_max               = -31,
-            y_min               = unilib.y_min,
+            y_min               = unilib.constant.y_min,
         })
 
     end
 
-    if unilib.pkg_executed_table["dirt_ordinary_with_turf_forest"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_turf_forest"] ~= nil then
 
         unilib.register_ore({
             -- From farlands, mapgen/mapgen.lua
@@ -91,14 +91,14 @@ function unilib.pkg.ore_farlands_dirt_coarse.post()
                 spread = {x = 5, y = 5, z = 5},
             },
             noise_threshold     = 0.0,
-            y_max               = unilib.y_max,
-            y_min               = unilib.y_min,
+            y_max               = unilib.constant.y_max,
+            y_min               = unilib.constant.y_min,
         })
 
     end
 
-    if unilib.pkg_executed_table["biome_farlands_forest_coniferous"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_forest_coniferous"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
 
         unilib.register_ore({
             -- From farlands, mapgen/mapgen.lua
@@ -118,8 +118,8 @@ function unilib.pkg.ore_farlands_dirt_coarse.post()
                 spread = {x = 5, y = 5, z = 5},
             },
             noise_threshold     = 0.0,
-            y_max               = unilib.y_max,
-            y_min               = unilib.y_min,
+            y_max               = unilib.constant.y_max,
+            y_min               = unilib.constant.y_min,
         })
 
     end

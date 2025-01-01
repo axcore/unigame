@@ -9,7 +9,7 @@
 unilib.pkg.flower_campanula_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_campanula_blue.exec()
 
     unilib.register_node("unilib:flower_campanula_blue", "herbs:campanula_blue", mode, {
         -- From herbs:campanula_blue
-        description = unilib.annotate(S("Blue Campanula"), "Campanula"),
+        description = unilib.utils.annotate(S("Blue Campanula"), "Campanula"),
         tiles = {"unilib_flower_campanula_blue.png"},
         groups = {
-            attached_node = 1, color_blue = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_blue = 1, colour_blue = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_campanula_blue.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_campanula_blue", "herbs:campanula_blue")
 
-    unilib.register_decoration("herbs_flower_campanula_blue", {
+    unilib.register_decoration_generic("herbs_flower_campanula_blue", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_campanula_blue",

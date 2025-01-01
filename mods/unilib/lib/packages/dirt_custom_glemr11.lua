@@ -9,7 +9,7 @@
 unilib.pkg.dirt_custom_glemr11 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 -- If false, produces a set of biome-dependent turfs using a greyscale base, which results in turfs
 --      in many (unrealistic) colours. This is similar to the behaviour in GLEMr4 and GLEMr6
@@ -37,39 +37,39 @@ local biome_list = {
 }
 
 local texture_table = {}
-if use_realistic_turf_flag then
+if not use_realistic_turf_flag then
 
     texture_table = {
         coastal = {
-            "unilib_turf_custom_rainforest_top.png",
-            "unilib_turf_custom_rainforest_side_overlay.png"
+            "unilib_turf_custom_coastal_top.png", "unilib_turf_custom_coastal_side_overlay.png",
         },
         lowland = {
-            "unilib_turf_custom_ordinary_top.png", "unilib_turf_custom_ordinary_side_overlay.png"
+            "unilib_turf_custom_lowland_top.png", "unilib_turf_custom_lowland_side_overlay.png",
         },
         shelf = {
-            "unilib_turf_dry_top.png", "unilib_turf_dry_side_overlay.png"
+            "unilib_turf_custom_shelf_top.png", "unilib_turf_custom_shelf_side_overlay.png",
         },
         highland = {
-            "unilib_turf_custom_brown_top.png", "unilib_turf_custom_brown_side_overlay.png"
-        }
+            "unilib_turf_custom_highland_top.png", "unilib_turf_custom_highland_side_overlay.png",
+        },
     }
 
 else
 
     texture_table = {
         coastal = {
-            "unilib_turf_custom_coastal_top.png", "unilib_turf_custom_coastal_side_overlay.png"
+            "unilib_turf_custom_rainforest_top.png",
+            "unilib_turf_custom_rainforest_side_overlay.png",
         },
         lowland = {
-            "unilib_turf_custom_lowland_top.png", "unilib_turf_custom_lowland_side_overlay.png"
+            "unilib_turf_custom_ordinary_top.png", "unilib_turf_custom_ordinary_side_overlay.png",
         },
         shelf = {
-            "unilib_turf_custom_shelf_top.png", "unilib_turf_custom_shelf_side_overlay.png"
+            "unilib_turf_dry_top.png", "unilib_turf_dry_side_overlay.png",
         },
         highland = {
-            "unilib_turf_custom_highland_top.png", "unilib_turf_custom_highland_side_overlay.png"
-        }
+            "unilib_turf_custom_brown_top.png", "unilib_turf_custom_brown_side_overlay.png",
+        },
     }
 
 end
@@ -139,31 +139,35 @@ local basic_list_no_turf = {
         "unilib_litter_rainforest.png", "unilib_litter_rainforest_side_overlay.png",
     },
     {
-        "snow_ordinary", "snow", S("Snow"), "unilib_snow_ordinary.png",
+        "cover_snow", "snow", S("Snow Litter"), "unilib_snow_ordinary.png",
         "unilib_snow_ordinary_side_overlay.png",
     },
 }
 
 local advanced_list_no_turf = {
     {
-        "litter_fungi", "litter_fungi", S("Fungal Litter"),
-        "unilib_litter_vine_overlay.png", "unilib_cover_fungi_alt_side_overlay.png",
+        "cover_fungi", "litter_fungi", S("Fungal Cover"),
+        -- N.B. Original GLEMr11 uses the wrong textures
+--      "unilib_litter_vine_overlay.png", "unilib_cover_fungi_side_overlay.png",
+        "unilib_cover_fungi.png", "unilib_cover_fungi_side_overlay.png",
     },
     {
-        "litter_leaf", "litter_leaf_01", S("Leaf Litter"),
-        "unilib_litter_forest_leaf_overlay.png", "unilib_litter_coniferous_side_alt_overlay.png",
+        "cover_vine", "litter_vine", S("Vines"),
+        "unilib_cover_vine_overlay.png", "unilib_cover_vine_side_overlay.png",
     },
     {
-        "litter_light", "litter_leaf_02", S("Light Litter"),
-        "unilib_litter_forest_light_overlay.png", "unilib_litter_coniferous_side_alt_overlay.png",
+        "litter_forest_leafy", "litter_leaf_01", S("Leafy Forest Litter"),
+--      "unilib_litter_forest_leafy_overlay.png", "unilib_litter_coniferous_side_alt_overlay.png",
+        "unilib_litter_forest_leafy_overlay.png", "unilib_litter_forest_leafy_side_overlay.png",
     },
     {
-        "litter_stone", "litter_stones", S("Stones"),
-        "unilib_litter_forest_stone_overlay.png", "unilib_litter_forest_stone_side_overlay.png",
+        "litter_forest_light", "litter_leaf_02", S("Light Forest Litter"),
+--      "unilib_litter_forest_light_overlay.png", "unilib_litter_coniferous_side_alt_overlay.png",
+        "unilib_litter_forest_light_overlay.png", "unilib_litter_forest_light_side_overlay.png",
     },
     {
-        "litter_vine", "litter_vine", S("Vines"),
-        "unilib_litter_vine_overlay.png", "unilib_litter_coniferous_side_alt_overlay.png",
+        "litter_stone", "litter_stones", S("Stone Cover"),
+        "unilib_litter_stone_overlay.png", "unilib_litter_stone_side_overlay.png",
     },
 }
 
@@ -173,11 +177,11 @@ local advanced_list_no_turf = {
 
 -- (Also used by the "biome_glemr11" and "deco_glemr11" packages)
 
--- Custom dirts on demand. If unilib.glem_dirt_on_demand_flag is true, the code below stores dirt
+-- Custom dirts on demand. If unilib.setting.dirt_on_demand_flag is true, the code below stores dirt
 --      definitions here, instead of creating the nodes directly. Then, the corresponding biome
 --      package can retrieve the definitions to create any custom dirts that it needs. This prevents
 --      dirts that never appear in the world from clogging up the user's inventory
--- (If unilib.glem_dirt_on_demand_flag is false, the table remains empty)
+-- (If unilib.setting.dirt_on_demand_flag is false, the table remains empty)
 --
 -- Table in the form
 --      table[full_name] = data_table
@@ -196,7 +200,7 @@ local function do_description(dirt_name, turf_description)
     -- Original to unilib
     -- Creates a dirt/turf description in a standard format, e.g. "Ordinary Dirt with Green Turf"
 
-    local def_table = minetest.registered_nodes[dirt_name]
+    local def_table = core.registered_nodes[dirt_name]
     return S("@1 with @2", def_table.description, turf_description)
 
 end
@@ -205,20 +209,33 @@ local function do_reverse_description(dirt_name, other_description)
 
     -- Modified version of do_description(), in which the dirt description comes last
 
-    local def_table = minetest.registered_nodes[dirt_name]
+    local def_table = core.registered_nodes[dirt_name]
     return S("@1 with @2", other_description, def_table.description)
 
 end
 
-local function add_soil(full_name, dry_dirt_flag)
+local function add_soil_to_basic_dirt(full_name, dry_dirt_flag)
 
     -- Original to unilib
-    -- Makes a dirt node farmable, using one of two varieties of soil
-    -- Only suitable dirts should call this function. Dirts with turf should not call this function
-    --      at all
+    -- Makes a basic dirt node farmable, using one of two varieties of soil
+    -- Only basic dirts should call this function (as there is no guarantee that the original dirt
+    --      node, created by some other package, is farmable, even when the related nodes created by
+    --      this package are farmable)
+
+    local def_table = core.registered_nodes[full_name]
+    if def_table == nil or def_table.groups == nil then
+        return
+    end
+
+    local group_table = def_table.groups
+    if group_table.soil ~= nil then
+        return
+    else
+        group_table.soil = 1
+    end
 
     local soil_table
-    if not dry_dirt_flag and unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if not dry_dirt_flag and unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         soil_table = {
             base = full_name,
@@ -226,7 +243,7 @@ local function add_soil(full_name, dry_dirt_flag)
             wet = "unilib:soil_ordinary_wet",
         }
 
-    elseif dry_dirt_flag and unilib.pkg_executed_table["soil_arid"] ~= nil then
+    elseif dry_dirt_flag and unilib.global.pkg_executed_table["soil_arid"] ~= nil then
 
         soil_table = {
             base = full_name,
@@ -236,7 +253,40 @@ local function add_soil(full_name, dry_dirt_flag)
 
     end
 
-    if not unilib.glem_dirt_on_demand_flag then
+    unilib.override_item(full_name, {
+        groups = group_table,
+        soil = soil_table,
+    })
+
+end
+
+local function add_soil_to_other_dirt(full_name, dry_dirt_flag)
+
+    -- Original to unilib
+    -- Makes a dirt node (other than the basic dirt) farmable, using one of two varieties of soil
+    -- Only suitable nodes should call this function. Dirts with turf should not call this function
+    --      at all
+
+    local soil_table
+    if not dry_dirt_flag and unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
+
+        soil_table = {
+            base = full_name,
+            dry = "unilib:soil_ordinary",
+            wet = "unilib:soil_ordinary_wet",
+        }
+
+    elseif dry_dirt_flag and unilib.global.pkg_executed_table["soil_arid"] ~= nil then
+
+        soil_table = {
+            base = full_name,
+            dry = "unilib:soil_arid",
+            wet = "unilib:soil_arid_wet",
+        }
+
+    end
+
+    if not unilib.setting.dirt_on_demand_flag then
 
         unilib.override_item(full_name, {
             soil = soil_table,
@@ -258,9 +308,9 @@ local function register_dirt(full_name, orig_name, def_table)
     -- Only dirts without turf should call this function
 
     -- (Don't replace a dirt node that already exists)
-    if minetest.registered_nodes[full_name] == nil then
+    if core.registered_nodes[full_name] == nil then
 
-        if not unilib.glem_dirt_on_demand_flag then
+        if not unilib.setting.dirt_on_demand_flag then
 
             -- Register the node now
             unilib.register_node(full_name, orig_name, mode, def_table)
@@ -288,7 +338,7 @@ local function register_dirt_with_turf(
 
     -- (Don't replace a dirt node that already exists)
     local full_name = "unilib:" .. dirt_part_name .. "_with_" .. turf_part_name
-    if minetest.registered_nodes[full_name] == nil then
+    if core.registered_nodes[full_name] == nil then
 
         local data_table = {
             dirt_part_name = dirt_part_name,
@@ -302,12 +352,12 @@ local function register_dirt_with_turf(
 
         if soil_flag then
 
-            if not dry_dirt_flag and unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+            if not dry_dirt_flag and unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
                 data_table.dry_soil = "unilib:soil_ordinary"
                 data_table.wet_soil = "unilib:soil_ordinary_wet"
 
-            elseif dry_dirt_flag and unilib.pkg_executed_table["soil_arid"] ~= nil then
+            elseif dry_dirt_flag and unilib.global.pkg_executed_table["soil_arid"] ~= nil then
 
                 data_table.dry_soil = "unilib:soil_arid"
                 data_table.wet_soil = "unilib:soil_arid_wet"
@@ -316,7 +366,7 @@ local function register_dirt_with_turf(
 
         end
 
-        if not unilib.glem_dirt_on_demand_flag then
+        if not unilib.setting.dirt_on_demand_flag then
 
             -- Register the node now
             unilib.register_dirt_with_turf(data_table)
@@ -340,7 +390,7 @@ local function register_biome_dirt(
     -- This function is called with a biome indication (e.g. "hot_humid") and a palette
     --      (e.g. "#93fc54:80") to create four dirt/turf nodes
 
-    local item_name = unilib.get_item_name(dirt_name)
+    local item_name = unilib.utils.get_item_name(dirt_name)
 
     local part_name = "_with_turf_" .. part_biome_name .. "_coastal"
     register_dirt_with_turf(
@@ -355,12 +405,12 @@ local function register_biome_dirt(
                 dirt_img .. "^(" .. texture_table["coastal"][2] .. "^[colorize:" .. palette .. ")",
             },
             groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = dirt_name,
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
         soil_flag,
         dry_dirt_flag,
@@ -380,12 +430,12 @@ local function register_biome_dirt(
                 dirt_img .. "^(" .. texture_table["lowland"][2] .. "^[colorize:" .. palette .. ")",
             },
             groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = dirt_name,
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
         soil_flag,
         dry_dirt_flag,
@@ -405,12 +455,12 @@ local function register_biome_dirt(
                 dirt_img .. "^(" .. texture_table["shelf"][2] .. "^[colorize:" .. palette .. ")",
             },
             groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = dirt_name,
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
         soil_flag,
         dry_dirt_flag,
@@ -429,12 +479,12 @@ local function register_biome_dirt(
                 dirt_img .. "^(" .. texture_table["highland"][2] .. "^[colorize:" .. palette .. ")",
             },
             groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = dirt_name,
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
         soil_flag,
         dry_dirt_flag,
@@ -466,7 +516,7 @@ local function register_dirt_set(data_table)
 
     local dry_dirt_flag = data_table.dry_dirt_flag or false
 
-    if unilib.pkg_executed_table[item_name] == nil then
+    if unilib.global.pkg_executed_table[item_name] == nil then
         return
     end
 
@@ -482,10 +532,19 @@ local function register_dirt_set(data_table)
 
     local soil = nil
     if soil_flag == true then
+
         soil = 1
+        add_soil_to_basic_dirt(dirt_name, dry_dirt_flag)
+
     end
 
-    local group_table = {crumbly = 3, dry_dirt = dry_dirt, soil = soil, spreading_dirt_type = 1}
+    local group_table = {
+        crumbly = 3,
+        dry_dirt = dry_dirt,
+        not_in_creative_inventory = unilib.hide_covered_dirt_group,
+        soil = soil,
+        spreading_dirt_type = 1,
+    }
 
     -- Basic dirt with turf
     for _, mini_list in pairs(basic_list_with_turf) do
@@ -502,12 +561,12 @@ local function register_dirt_set(data_table)
                     dirt_img .. "^" .. mini_list[5],
                 },
                 groups = group_table,
-                sounds = unilib.node_sound_dirt_defaults({
+                sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
 
                 drop = dirt_name,
-                is_ground_content = unilib.caves_chop_dirt_flag,
+                is_ground_content = unilib.setting.caves_chop_dirt_flag,
             },
             soil_flag,
             dry_dirt_flag,
@@ -530,15 +589,18 @@ local function register_dirt_set(data_table)
                     dirt_img .. "^" .. mini_list[5],
                 },
                 groups = group_table,
-                sounds = unilib.node_sound_dirt_defaults({
+                sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
 
                 drop = dirt_name,
-                is_ground_content = unilib.caves_chop_dirt_flag,
+                is_ground_content = unilib.setting.caves_chop_dirt_flag,
             }
         )
-        add_soil(dirt_name .. "_with_" .. mini_list[1], dry_dirt_flag)
+
+        if soil_flag then
+            add_soil_to_other_dirt(dirt_name .. "_with_" .. mini_list[1], dry_dirt_flag)
+        end
 
     end
 
@@ -555,15 +617,18 @@ local function register_dirt_set(data_table)
                     dirt_img .. "^" .. mini_list[5],
                 },
                 groups = group_table,
-                sounds = unilib.node_sound_dirt_defaults({
+                sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
 
                 drop = dirt_name,
-                is_ground_content = unilib.caves_chop_dirt_flag,
+                is_ground_content = unilib.setting.caves_chop_dirt_flag,
             }
         )
-        add_soil(dirt_name .. "_with_" .. mini_list[1], dry_dirt_flag)
+
+        if soil_flag then
+            add_soil_to_other_dirt(dirt_name .. "_with_" .. mini_list[1], dry_dirt_flag)
+        end
 
     end
 
@@ -578,7 +643,8 @@ local function register_dirt_set(data_table)
 
     end
 
-    -- Dirt-stone mixes
+    -- Dirt-stone mixes (corresponding to nodes produced by the "decor_stone_dirty" and
+    --      "decor_stone_sandy" packages)
     register_dirt(
         "unilib:stone_ordinary_with_" .. item_name,
         orig_name .. "_with_stone",
@@ -587,12 +653,12 @@ local function register_dirt_set(data_table)
             tiles = {
                 "unilib_stone_ordinary.png^(" .. dirt_img .. "^[mask:unilib_mask_stone.png)",
             },
-            groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {cracky = 3, stone = 2},
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
 
@@ -605,12 +671,30 @@ local function register_dirt_set(data_table)
                 "unilib_stone_ordinary_cobble.png^(" .. dirt_img ..
                         "^[mask:unilib_mask_stone_cobble.png)",
             },
-            groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {cracky = 3, stone = 2},
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+        }
+    )
+
+    -- (Desert stone with dirt not in GLEMr11, but added to match the "decor_stone_dirty" package)
+    register_dirt(
+        "unilib:stone_desert_with_" .. item_name,
+        nil,
+        {
+            description = do_reverse_description(dirt_name, S("Desert Stone")),
+            tiles = {
+                "unilib_stone_desert.png^(" .. dirt_img .. "^[mask:unilib_mask_stone.png)",
+            },
+            groups = {cracky = 3, stone = 2},
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
+
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
 
@@ -623,14 +707,20 @@ local function register_dirt_set(data_table)
                 "unilib_stone_desert_cobble.png^(" .. dirt_img ..
                         "^[mask:unilib_mask_stone_cobble.png)",
             },
-            groups = group_table,
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {cracky = 3, stone = 2},
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
+
+    -- Any non-dirt nodes given turfs/litters/covers by this package, should be registered as
+    --      super-dirts
+    if string.sub(item_name, 1, 5) ~= "dirt_" then
+        unilib.register_other_dirt(item_name)
+    end
 
 end
 
@@ -723,7 +813,7 @@ function unilib.pkg.dirt_custom_glemr11.exec()
     register_dirt_set({
         item_name = "dirt_dark",
         orig_name = "lib_materials:dirt_dark",
-        soil_flag = false,
+        soil_flag = true,
     })
 
     register_dirt_set({

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_agate_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_agate_rock.exec()
 
     local c_lump = "unilib:mineral_agate_lump"
-    local hardness = unilib.mineral_table["agate"]["hardness"]
+    local hardness = unilib.global.mineral_table["agate"]["hardness"]
 
     unilib.register_mineral_rock("agate")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_agate_rock.exec()
         description = S("Agate Rock"),
         tiles = {"unilib_mineral_agate_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

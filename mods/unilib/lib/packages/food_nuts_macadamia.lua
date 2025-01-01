@@ -9,7 +9,7 @@
 unilib.pkg.food_nuts_macadamia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_nuts_macadamia.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_macadamia_nuts = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_nuts_macadamia.png",
@@ -52,19 +52,19 @@ function unilib.pkg.food_nuts_macadamia.exec()
         after_place_node = function(pos, placer, itemstack)
 
             if placer:is_player() then
-                minetest.set_node(pos, {name = "unilib:food_nuts_macadamia", param2 = 1})
+                core.set_node(pos, {name = "unilib:food_nuts_macadamia", param2 = 1})
             end
 
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_nuts_macadamia", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_nuts_macadamia", 1),
     })
 
 end
 
 function unilib.pkg.food_nuts_macadamia.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:food_nuts_macadamia",
 
         replace_mode = mode,

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_agar_kelp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.ingredient_agar_kelp.exec()
         inventory_image = "unilib_ingredient_agar_kelp.png",
         groups = {flammable = 1, food_kelp_agar = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_agar_kelp", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_agar_kelp", 1),
     })
     unilib.register_craft({
         -- From cropocalypse:kelp_agar

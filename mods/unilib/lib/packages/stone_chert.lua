@@ -9,7 +9,7 @@
 unilib.pkg.stone_chert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_chert.exec()
         description = S("Chert"),
 
         category = "sedimentary",
+        colour = "#8A786E",
         grinder_flag = true,
         hardness = 3,
     })
@@ -72,6 +73,24 @@ function unilib.pkg.stone_chert.exec()
         replace_mode = mode,
         description = S("Chert Cobble"),
         img_list = {"unilib_stone_chert.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_chert_cobble_compressed
+        part_name = "chert",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Chert Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_chert_cobble_condensed
+        part_name = "chert",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Chert Cobble"),
     })
 
 end

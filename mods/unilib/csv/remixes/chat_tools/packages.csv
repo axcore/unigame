@@ -1,0 +1,58 @@
+# "chat_tools" remix - contains packages which define chat commands available only to players with
+#       the "unilib_tools" privilege
+# See the "chat" remix for a full of list chat command packages with expanded comments
+
+# node_name | original_mod
+
+chat_check_broken_recipes|unilib
+chat_check_group_conflicts|unilib
+chat_check_ingredients|unilib
+chat_check_recipe_conflicts|unilib
+chat_convert|unilib
+chat_count_broken_recipes|unilib
+chat_count_group_conflicts|unilib
+chat_count_recipe_conflicts|unilib
+chat_deconvert|unilib
+chat_list_abms|unilib
+chat_list_all|unilib
+chat_list_biomes|unilib
+chat_list_buckets|unilib
+chat_list_compatible|unilib
+chat_list_craftitems|unilib
+chat_list_decorations|unilib
+chat_list_entities|unilib
+chat_list_groups|unilib
+chat_list_hidden|unilib
+chat_list_items|unilib
+chat_list_lbms|unilib
+chat_list_liquids|unilib
+chat_list_metals|unilib
+chat_list_metal_sources|unilib
+chat_list_mineral_products|unilib
+chat_list_minerals|unilib
+chat_list_nodes|unilib
+chat_list_nonmetals|unilib
+chat_list_nonmetal_sources|unilib
+chat_list_ores|unilib
+chat_list_other_packages|unilib
+chat_list_packages|unilib
+chat_list_remixes|unilib
+chat_list_stones|unilib
+chat_list_tools|unilib
+chat_list_trees|unilib
+chat_show_biome|display_biome
+chat_show_ingredients|unilib
+chat_show_inventory|unilib
+chat_show_light|unilib
+chat_show_package|unilib
+
+# supporting packages (.depends)
+shared_chat_conflicts|unilib
+shared_chat_list|unilib
+shared_chat_missing|unilib
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

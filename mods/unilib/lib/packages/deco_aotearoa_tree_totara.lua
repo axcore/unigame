@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_totara = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.deco_aotearoa_tree_totara.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_totara_rare_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_totara_rare_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_totara"
             biomes = {
@@ -49,9 +49,9 @@ function unilib.pkg.deco_aotearoa_tree_totara.post()
             y_max = 80,
             y_min = 12,
         })
-        if unilib.pkg_executed_table["biome_aotearoa_lowland"] ~= nil then
+        if unilib.global.pkg_executed_table["biome_aotearoa_lowland"] ~= nil then
 
-            unilib.register_decoration_now("aotearoa_tree_totara_dense_" .. i, nil, {
+            unilib.register_decoration_complete("aotearoa_tree_totara_dense_" .. i, nil, {
                 -- From aotearoa/spawn_trees.lua
                 -- Completes decoration in package "tree_totara"
                 biomes = "aotearoa_lowland_northern_podocarp_forest",

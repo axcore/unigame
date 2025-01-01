@@ -9,7 +9,7 @@
 unilib.pkg.food_nuts_spruce = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_nuts_spruce.exec()
         -- N.B. No groups in original code
         groups = {food = 1, food_nut = 1, food_spruce_nuts = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_nuts_spruce", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_nuts_spruce", 1),
     })
     unilib.register_craft({
         -- From moretrees:spruce_nuts

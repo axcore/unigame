@@ -9,7 +9,7 @@
 unilib.pkg.material_lime_slaked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.material_lime_slaked.exec()
 
     unilib.register_craftitem("unilib:material_lime_slaked", "earthbuild:whitewash", mode, {
         -- From earthbuild:whitewash
-        description = unilib.brackets(S("Whitewash"), S("Slaked Lime")),
+        description = unilib.utils.brackets(S("Whitewash"), S("Slaked Lime")),
         inventory_image = "unilib_material_lime_slaked.png",
     })
 
@@ -47,7 +47,7 @@ function unilib.pkg.material_lime_slaked.post()
             {c_quicklime, c_quicklime, c_quicklime},
             {"", "group:craftable_bucket", ""},
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

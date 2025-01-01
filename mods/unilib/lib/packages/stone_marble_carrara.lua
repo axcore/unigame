@@ -17,9 +17,9 @@
 unilib.pkg.stone_marble_carrara = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_marble_carrara.exec()
         description = S("Carrara Marble"),
 
         category = "metamorphic",
+        colour = "#DEDEE0",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -99,26 +100,22 @@ function unilib.pkg.stone_marble_carrara.exec()
         wall_orig_name = "underch:marble_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:marble. Creates unilib:stone_marble_carrara_cobble_compressed
+        part_name = "marble_carrara",
+        orig_name = "compressed:marble",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:marble. Creates unilib:stone_marble_carrara_cobble_compressed
-            part_name = "marble_carrara",
-            orig_name = "compressed:marble",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Carrara Marble Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Carrara Marble Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:marble. Creates unilib:stone_marble_carrara_cobble_condensed
+        part_name = "marble_carrara",
+        orig_name = "condensed:marble",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:marble. Creates unilib:stone_marble_carrara_cobble_condensed
-            part_name = "marble_carrara",
-            orig_name = "condensed:marble",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Carrara Marble Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Carrara Marble Cobble"),
+    })
 
 end

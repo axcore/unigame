@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_agar_powder = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ end
 function unilib.pkg.ingredient_agar_powder.post()
 
     local replace_list = {}
-    for _, mini_list in pairs(unilib.potable_bucket_list) do
+    for _, mini_list in pairs(unilib.global.potable_bucket_list) do
         table.insert(replace_list, {mini_list[1], mini_list[2] .. " 4"})
     end
 
@@ -53,7 +53,7 @@ function unilib.pkg.ingredient_agar_powder.post()
         recipe = {
             {"group:food_seaweed", "group:food_seaweed", "group:food_seaweed"},
             {"group:potable_bucket", "group:potable_bucket", "unilib:torch_ordinary"},
-            {"group:potable_bucket", "group:potable_bucket", "unilib:torch_ordinary"}
+            {"group:potable_bucket", "group:potable_bucket", "unilib:torch_ordinary"},
         },
         replacements = replace_list,
     })

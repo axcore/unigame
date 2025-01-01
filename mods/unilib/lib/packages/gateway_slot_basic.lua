@@ -9,7 +9,7 @@
 unilib.pkg.gateway_slot_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_gates.add_mode
+local mode = unilib.global.imported_mod_table.castle_gates.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.gateway_slot_basic.init()
         notes = "This package creates gateway slots for super stones and super trees. See also" ..
                 " the \"gateway_slot_extra\" package, which creates gateway slots using some" ..
                 " other ingredients",
-        depends = "shared_castle_gates",
+        depends = "shared_castle_gates_slots",
     }
 
 end
@@ -35,8 +35,8 @@ function unilib.pkg.gateway_slot_basic.post()
     --      list or table, would be too complicated in this case)
     local material_list = {}
 
-    if unilib.pkg_executed_table["stone_desert"] ~= nil and
-            unilib.super_stone_table["desert"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_desert"] ~= nil and
+            unilib.global.super_stone_table["desert"] ~= nil then
 
         -- Creates unilib:stone_desert_slot, unilib:stone_desert_slot_reverse
         table.insert(material_list, {
@@ -66,8 +66,8 @@ function unilib.pkg.gateway_slot_basic.post()
 
     end
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil and
-            unilib.super_stone_table["ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil and
+            unilib.global.super_stone_table["ordinary"] ~= nil then
 
         -- Creates unilib:stone_ordinary_slot, unilib:stone_ordinary_slot_reverse
         table.insert(material_list, {
@@ -110,8 +110,8 @@ function unilib.pkg.gateway_slot_basic.post()
 
     end
 
-    if unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil and
-            unilib.super_stone_table["sandstone_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil and
+            unilib.global.super_stone_table["sandstone_ordinary"] ~= nil then
 
         -- Creates unilib:stone_sandstone_slot, unilib:stone_sandstone_slot_reverse
         table.insert(material_list, {
@@ -143,12 +143,12 @@ function unilib.pkg.gateway_slot_basic.post()
 
     for _, data_table in pairs(material_list) do
 
-        local def_table = minetest.registered_nodes[data_table]
+        local def_table = core.registered_nodes[data_table]
         if def_table ~= nil then
 
             data_table.description = def_table.description
             data_table.img_list = def_table.tiles
-            unilib.pkg.shared_castle_gates.register_gateway_slot(data_table)
+            unilib.pkg.shared_castle_gates_slots.register_gateway_slot(data_table)
 
         end
 
@@ -156,17 +156,17 @@ function unilib.pkg.gateway_slot_basic.post()
 
     -- Now create gateway slots for super stones and super trees, being careful not to re-create
     --      anything already handled above
-    for stone_type, _ in pairs(unilib.super_stone_table) do
+    for stone_type, _ in pairs(unilib.global.super_stone_table) do
 
-        if unilib.pkg_executed_table["stone_" .. stone_type] ~= nil then
+        if unilib.global.pkg_executed_table["stone_" .. stone_type] ~= nil then
 
             local smooth_ingredient = "unilib:stone_" .. stone_type
-            local smooth_def_table = minetest.registered_nodes[smooth_ingredient]
+            local smooth_def_table = core.registered_nodes[smooth_ingredient]
             local smooth_output = "unilib:stone_" .. stone_type .. "_slot"
 
-            if smooth_def_table ~= nil and minetest.registered_nodes[smooth_output] == nil then
+            if smooth_def_table ~= nil and core.registered_nodes[smooth_output] == nil then
 
-                unilib.pkg.shared_castle_gates.register_gateway_slot({
+                unilib.pkg.shared_castle_gates_slots.register_gateway_slot({
                     part_name = "stone_" .. stone_type,
                     orig_slot_name = nil,
                     orig_reverse_slot_name = nil,
@@ -181,12 +181,12 @@ function unilib.pkg.gateway_slot_basic.post()
             end
 
             local brick_ingredient = "unilib:stone_" .. stone_type .. "_brick"
-            local brick_def_table = minetest.registered_nodes[brick_ingredient]
+            local brick_def_table = core.registered_nodes[brick_ingredient]
             local brick_output = "unilib:stone_" .. stone_type .. "_brick_slot"
 
-            if brick_def_table ~= nil and minetest.registered_nodes[brick_output] == nil then
+            if brick_def_table ~= nil and core.registered_nodes[brick_output] == nil then
 
-                unilib.pkg.shared_castle_gates.register_gateway_slot({
+                unilib.pkg.shared_castle_gates_slots.register_gateway_slot({
                     part_name = "stone_" .. stone_type .. "_brick",
                     orig_slot_name = nil,
                     orig_reverse_slot_name = nil,
@@ -201,12 +201,12 @@ function unilib.pkg.gateway_slot_basic.post()
             end
 
             local cobble_ingredient = "unilib:stone_" .. stone_type .. "_cobble"
-            local cobble_def_table = minetest.registered_nodes[cobble_ingredient]
+            local cobble_def_table = core.registered_nodes[cobble_ingredient]
             local cobble_output = "unilib:stone_" .. stone_type .. "_cobble_slot"
 
-            if cobble_def_table ~= nil and minetest.registered_nodes[cobble_output] == nil then
+            if cobble_def_table ~= nil and core.registered_nodes[cobble_output] == nil then
 
-                unilib.pkg.shared_castle_gates.register_gateway_slot({
+                unilib.pkg.shared_castle_gates_slots.register_gateway_slot({
                     part_name = "stone_" .. stone_type .. "_cobble",
                     orig_slot_name = nil,
                     orig_reverse_slot_name = nil,
@@ -225,16 +225,16 @@ function unilib.pkg.gateway_slot_basic.post()
     end
 
     -- (Fewer checks required for super trees)
-    for tree_type, _ in pairs(unilib.super_tree_table) do
+    for tree_type, _ in pairs(unilib.global.super_tree_table) do
 
-        if unilib.pkg_executed_table["tree_" .. tree_type] ~= nil then
+        if unilib.global.pkg_executed_table["tree_" .. tree_type] ~= nil then
 
             local ingredient = "unilib:tree_" .. tree_type .. "_wood"
-            local def_table = minetest.registered_nodes[ingredient]
+            local def_table = core.registered_nodes[ingredient]
 
             if def_table ~= nil then
 
-                unilib.pkg.shared_castle_gates.register_gateway_slot({
+                unilib.pkg.shared_castle_gates_slots.register_gateway_slot({
                     part_name = "tree_" .. tree_type .. "_wood",
                     orig_slot_name = nil,
                     orig_reverse_slot_name = nil,

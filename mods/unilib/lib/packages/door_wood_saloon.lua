@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_saloon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_saloon.exec()
 
     unilib.register_door({
-        -- From moretrapdoors:western_door. Creates unilib:door_wood_saloon
+        -- From moretrapdoors:western_door. Creates unilib:door_wood_saloon_closed_left, etc
         part_name = "wood_saloon",
-        orig_name = {
+        orig_name_list = {
             "doors:western_door_a",
             "doors:western_door_b",
             "doors:western_door_c",
@@ -47,7 +47,7 @@ function unilib.pkg.door_wood_saloon.exec()
             recipe = {
                 {"unilib:tree_apple_wood", "unilib:tree_apple_wood"},
                 {"unilib:tree_apple_wood", "unilib:tree_apple_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

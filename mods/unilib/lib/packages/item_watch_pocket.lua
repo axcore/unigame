@@ -9,7 +9,7 @@
 unilib.pkg.item_watch_pocket = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table["24hr_clock"].add_mode
+local mode = unilib.global.imported_mod_table["24hr_clock"].add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,9 +26,9 @@ end
 
 function unilib.pkg.item_watch_pocket.exec()
 
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
-        local players = minetest.get_connected_players()
+        local players = core.get_connected_players()
         for i,player in ipairs(players) do
 
             local got_clock = false
@@ -68,7 +68,7 @@ function unilib.pkg.item_watch_pocket.exec()
 
             if got_clock then
 
-                local clock_img = math.floor(24 * minetest.get_timeofday())
+                local clock_img = math.floor(24 * core.get_timeofday())
 
                 if wielded then
 
@@ -98,7 +98,7 @@ function unilib.pkg.item_watch_pocket.exec()
             inv = 0
         end
 
-        -- N.B. In original code, minetest.register_tool() was used
+        -- N.B. In original code, core.register_tool() was used
         unilib.register_craftitem("unilib:item_watch_pocket_" .. i, "24hr_clock:clock" .. i, mode, {
             -- From 24hr_clock:clock0, etc
             description = S("Pocket Watch"),
@@ -116,7 +116,7 @@ function unilib.pkg.item_watch_pocket.exec()
         recipe = {
             {"", "unilib:metal_tin_ingot", ""},
             {"unilib:metal_copper_ingot", "unilib:glass_ordinary", "unilib:metal_copper_ingot"},
-            {"", "unilib:metal_copper_ingot", ""}
+            {"", "unilib:metal_copper_ingot", ""},
         },
     })
 

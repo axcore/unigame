@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_papyrus_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,10 +26,10 @@ end
 
 function unilib.pkg.deco_farlands_plant_papyrus_ordinary.exec()
 
-    unilib.register_decoration("farlands_plant_papyrus_ordinary", {
+    unilib.register_decoration_generic("farlands_plant_papyrus_ordinary", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_plant_papyrus_ordinary_farlands.mts",
 
         noise_params = {
             octaves = 3,
@@ -46,7 +46,7 @@ end
 
 function unilib.pkg.deco_farlands_plant_papyrus_ordinary.post()
 
-    unilib.register_decoration_now("farlands_plant_papyrus_ordinary", nil, {
+    unilib.register_decoration_complete("farlands_plant_papyrus_ordinary", nil, {
         -- From farlands, mapgen/mapgen.lua
         biomes = "farlands_savanna_shore",
         place_on = "unilib:dirt_ordinary",

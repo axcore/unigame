@@ -9,7 +9,7 @@
 unilib.pkg.liquid_water_dyed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 -- Basic dyed water set
 local water_list = {
@@ -187,7 +187,7 @@ function unilib.pkg.liquid_water_dyed.exec()
                 },
             },
             groups = {cools_lava = 1, liquid = 3, water = 3},
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,
@@ -212,7 +212,7 @@ function unilib.pkg.liquid_water_dyed.exec()
              description = flowing_description,
              tiles = {"unilib_liquid_water_dyed.png^[multiply:" .. rgb .. ":100"},
              groups = {cools_lava = 1, liquid = 3, not_in_creative_inventory = 1, water = 3},
-             sounds = unilib.sound_table.water,
+             sounds = unilib.global.sound_table.water,
 
              buildable_to = true,
              diggable = false,
@@ -267,7 +267,7 @@ function unilib.pkg.liquid_water_dyed.post()
 
         local part_name = row_list[1]
 
-        for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+        for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
             local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
             local c_dyed_bucket = "unilib:" .. bucket_type .. "_with_water_dyed_" .. part_name

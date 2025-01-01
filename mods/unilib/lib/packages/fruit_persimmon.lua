@@ -9,7 +9,7 @@
 unilib.pkg.fruit_persimmon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ebony.add_mode
+local mode = unilib.global.imported_mod_table.ebony.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.fruit_persimmon.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_persimmon = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_fruit_persimmon.png",
@@ -49,13 +49,19 @@ function unilib.pkg.fruit_persimmon.exec()
         sunlight_propagates = true,
         walkable = false,
 
-        after_place_node = function(pos, placer, itemstack)
-            minetest.set_node(pos, {name = "unilib:fruit_persimmon", param2 = 1})
+        -- N.B. No placer:is_player() check in original code
+        after_place_node = function(pos, placer)
+
+            if placer:is_player() then
+                core.set_node(pos, {name = "unilib:fruit_persimmon", param2 = 1})
+            end
+
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_persimmon", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_persimmon", 4),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -67,11 +73,20 @@ function unilib.pkg.fruit_persimmon.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_persimmon",
+        juice_description = S("Persimmon"),
+        juice_type = "persimmon",
+        rgb = "#f77c01",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_persimmon.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_persimmon",
 
         replace_mode = mode,

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_butter_imitation = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,14 +36,14 @@ function unilib.pkg.ingredient_butter_imitation.exec()
             inventory_image = "unilib_ingredient_butter_imitation.png",
             groups = {eatable = 1, food = 1, food_butter = 1, food_vegan = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:ingredient_butter_imitation", 2),
+            on_use = unilib.cuisine.eat_on_use("unilib:ingredient_butter_imitation", 2),
         }
     )
     unilib.register_craft({
         -- From cucina_vegana:imitation_butter
         output = "unilib:ingredient_butter_imitation",
         recipe = {
-            {"unilib:dye_yellow", "unilib:food_milk_soy_red", "unilib:food_milk_soy_red"}
+            {"unilib:dye_yellow", "unilib:food_milk_soy_red", "unilib:food_milk_soy_red"},
         },
         -- N.B. Original code returned only one drinking glass
         replacements = {

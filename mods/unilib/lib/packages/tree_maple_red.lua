@@ -9,7 +9,7 @@
 unilib.pkg.tree_maple_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maple.add_mode
+local mode = unilib.global.imported_mod_table.maple.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -112,7 +112,7 @@ function unilib.pkg.tree_maple_red.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From maple:gate. Creates unilib:gate_maple_closed
+        -- From maple:gate_closed, etc. Creates unilib:gate_maple_closed, etc
         part_name = "maple_red",
         orig_name = {"maple:gate_closed", "maple:gate_open"},
 
@@ -122,10 +122,10 @@ function unilib.pkg.tree_maple_red.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_maple_red", {
+    unilib.register_decoration_generic("cool_trees_tree_maple_red", {
         -- From maple/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_maple_red.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_maple_red.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

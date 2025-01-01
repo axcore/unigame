@@ -9,7 +9,7 @@
 unilib.pkg.decor_pillar_bone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.decor_pillar_bone.exec()
             "unilib_decor_pillar_bone.png",
         },
         groups = {cracky = 3, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
     unilib.register_craft({
         -- From farlands, decoblocks:bone_pillar
@@ -48,7 +48,7 @@ function unilib.pkg.decor_pillar_bone.exec()
         recipe = {
             {"unilib:item_bone", "unilib:item_bone"},
             {"unilib:item_bone", "unilib:item_bone"},
-        }
+        },
     })
     unilib.register_craft({
         -- Original to unilib, but marked as TODO in the original code

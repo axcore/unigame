@@ -9,7 +9,7 @@
 unilib.pkg.food_beef_london_broil = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,13 +34,13 @@ function unilib.pkg.food_beef_london_broil.exec()
         description = S("Raw London Broil"),
         inventory_image = "unilib_food_beef_london_broil_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_london_broil_raw", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_london_broil_raw", 3),
     })
     unilib.register_craft({
         -- From bbq:london_broil_raw
         type = "shapeless",
         output = "unilib:food_beef_london_broil_raw 2",
-        recipe = {"unilib:food_bacon", "group:food_garlic_clove", "unilib:food_beef_normal_raw"}
+        recipe = {"unilib:food_bacon", "group:food_garlic_clove", "unilib:food_beef_normal_raw"},
     })
 
     unilib.register_craftitem("unilib:food_beef_london_broil", "bbq:london_broil", mode, {
@@ -48,7 +48,7 @@ function unilib.pkg.food_beef_london_broil.exec()
         description = S("London Broil"),
         inventory_image = "unilib_food_beef_london_broil.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_london_broil", 7),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_london_broil", 7),
     })
     unilib.register_craft({
         -- From bbq:london_broil

@@ -9,7 +9,7 @@
 unilib.pkg.tree_ebony = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ebony.add_mode
+local mode = unilib.global.imported_mod_table.ebony.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.tree_ebony.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_ebony_creeper.png",
@@ -69,7 +69,7 @@ function unilib.pkg.tree_ebony.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_ebony_creeper_leaves.png",
@@ -92,7 +92,7 @@ function unilib.pkg.tree_ebony.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_ebony_liana.png",
@@ -141,16 +141,19 @@ function unilib.pkg.tree_ebony.exec()
     })
     unilib.register_leafdecay({
         -- From ebony:leaves
+        trunk_type = "ebony",
         trunks = {"unilib:tree_ebony_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {
+        leaves = {"unilib:tree_ebony_leaves"},
+        others = {
             "unilib:fruit_persimmon",
-            "unilib:tree_ebony_leaves",
             "unilib:tree_ebony_creeper",
             "unilib:tree_ebony_creeper_leaves",
             "unilib:tree_ebony_liana",
         },
-        radius = 3,
+        -- N.B. Increased radius because of non-decaying liana at tree's extremities
+--      radius = 3,
+        radius = 4,
     })
 
     unilib.register_tree_sapling({
@@ -198,7 +201,7 @@ function unilib.pkg.tree_ebony.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From ebony:gate. Creates unilib:gate_ebony_closed
+        -- From ebony:gate_closed, etc. Creates unilib:gate_ebony_closed, etc
         part_name = "ebony",
         orig_name = {"ebony:gate_closed", "ebony:gate_open"},
 
@@ -208,10 +211,10 @@ function unilib.pkg.tree_ebony.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_ebony", {
+    unilib.register_decoration_generic("cool_trees_tree_ebony", {
         -- From ebony/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_ebony.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_ebony.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         height = 2,
@@ -223,7 +226,6 @@ function unilib.pkg.tree_ebony.exec()
             seed = 1007,
             spread = {x = 250, y = 250, z = 250},
         },
-        place_offset_y = 0,
         rotation = "random",
         sidelen = 16,
     })

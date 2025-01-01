@@ -9,7 +9,7 @@
 unilib.pkg.food_onigiri = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_onigiri.exec()
         -- N.B. no food_rice in original code
         groups = {flammable = 2, food_onigiri = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_onigiri", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_onigiri", 2),
     })
     unilib.register_craft({
         -- From farming:onigiri

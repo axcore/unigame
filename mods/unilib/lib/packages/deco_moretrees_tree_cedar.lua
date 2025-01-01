@@ -9,7 +9,7 @@
 unilib.pkg.deco_moretrees_tree_cedar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_moretrees_tree_cedar.post()
 
-    unilib.register_decoration_now("convert_tree_cedar", nil, {
+    unilib.register_decoration_complete("convert_tree_cedar", nil, {
         -- From moretrees/init.lua
         -- Completes decoration in package "tree_cedar"
         place_on = "unilib:dirt_ordinary_with_turf",
         spawn_by = "unilib:liquid_water_ordinary_source",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 0,
     })
 

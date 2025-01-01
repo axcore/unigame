@@ -9,7 +9,7 @@
 unilib.pkg.ore_darkage_stone_sandstone_old_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.ore_darkage_stone_sandstone_old_red.post()
             offset = 0.28,
             persistence = 0.6,
             scale = 0.3,
-            seed = minetest.get_mapgen_setting("seed") + 4,
+            seed = unilib.utils.get_mod_attribute("storage_random_seed_offset") + 4,
             spread = {x = 10, y = 10, z = 10},
         },
         noise_threshold         = 0.49,

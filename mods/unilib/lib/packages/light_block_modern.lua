@@ -9,7 +9,7 @@
 unilib.pkg.light_block_modern = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,9 +33,11 @@ function unilib.pkg.light_block_modern.exec()
         description = S("Modern Light Block"),
         tiles = {"unilib_light_block_modern_frame.png^unilib_light_block_modern_overlay.png"},
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
     })
     unilib.register_craft({
@@ -56,15 +58,17 @@ function unilib.pkg.light_block_modern.exec()
         {
             description = S("Small Modern Light Block"),
             tiles = {
-                "unilib_pole_metal_dark.png^unilib_light_block_modern_small_overlay.png",
-                "unilib_pole_metal_dark.png^unilib_light_block_modern_small_overlay.png",
-                "[combine:16x16:0,0=unilib_pole_metal_dark.png" ..
+                "unilib_hardware_pole_metal_dark.png^unilib_light_block_modern_small_overlay.png",
+                "unilib_hardware_pole_metal_dark.png^unilib_light_block_modern_small_overlay.png",
+                "[combine:16x16:0,0=unilib_hardware_pole_metal_dark.png" ..
                         ":0,4=unilib_light_block_modern_small_overlay.png",
             },
             groups = {cracky = 3, handy = 1, oddly_breakable_by_hand = 3},
-            unilib.sound_table.glass,
+            unilib.global.sound_table.glass,
 
             drawtype = "nodebox",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             light_source = 12,
             node_box = {
                 type = "fixed",
@@ -75,7 +79,7 @@ function unilib.pkg.light_block_modern.exec()
             sunlight_propagates = true,
 
             on_place = function(itemstack, placer, pointed_thing)
-                return unilib.rotate_and_place(itemstack, placer, pointed_thing)
+                return unilib.misc.rotate_and_place(itemstack, placer, pointed_thing)
             end,
         }
     )
@@ -84,8 +88,8 @@ function unilib.pkg.light_block_modern.exec()
         output = "unilib:light_block_modern_small",
         recipe = {
             {"", c_pane, ""},
-            {"unilib:metal_steel_ingot", "morelights:bulb", "unilib:metal_steel_ingot"}
-        }
+            {"unilib:metal_steel_ingot", "morelights:bulb", "unilib:metal_steel_ingot"},
+        },
     })
 
 end

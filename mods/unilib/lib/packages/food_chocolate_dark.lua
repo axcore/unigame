@@ -9,7 +9,7 @@
 unilib.pkg.food_chocolate_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,16 +38,16 @@ function unilib.pkg.food_chocolate_dark.exec()
         -- N.B. No groups in original code
         groups = {food_chocolate = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chocolate_dark_bar", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chocolate_dark_bar", 3),
     })
     unilib.register_craft( {
         -- From farming:chocolate_dark
         output = "unilib:food_chocolate_dark_bar",
         recipe = {
-            {"group:food_cocoa", "group:food_cocoa", "group:food_cocoa"}
-        }
+            {"group:food_cocoa", "group:food_cocoa", "group:food_cocoa"},
+        },
     })
-    if unilib.pkg_executed_table["ingredient_cocoa_normal"] ~= nil then
+    if unilib.global.pkg_executed_table["ingredient_cocoa_normal"] ~= nil then
 
         unilib.register_craft( {
             -- Original to unilib
@@ -63,7 +63,7 @@ function unilib.pkg.food_chocolate_dark.exec()
         output = "unilib:food_chocolate_dark_bar 9",
         recipe = {
             {"unilib:food_chocolate_dark_block"},
-        }
+        },
     })
 
     unilib.register_node("unilib:food_chocolate_dark_block", "farming:chocolate_block", mode, {
@@ -71,7 +71,7 @@ function unilib.pkg.food_chocolate_dark.exec()
         description = S("Block of Dark Chocolate"),
         tiles = {"unilib_food_chocolate_dark_block.png"},
         groups = {cracky = 2, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })

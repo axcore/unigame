@@ -1,24 +1,24 @@
 # "morelights" remix - contains everything from the morelights modpack
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # morelights/morelights packages
-chain_metal_dark|morelights
-chain_metal_light|morelights
+hardware_chain_metal_dark|morelights
+hardware_chain_metal_light|morelights
+hardware_pole_metal_dark|morelights
+hardware_pole_metal_light|morelights
 light_bulb_normal|morelights
-pole_metal_dark|morelights
-pole_metal_light|morelights
 shared_morelights|morelights
 
 # morelights/morelights_extras packages
-light_block_dirt|morelights_extras
+dirt_super_with_spotlight|morelights_extras
 light_block_futuristic|morelights_extras
-light_block_sandstone|morelights_extras
-light_block_stone|morelights_extras
 light_lamp_staircase|morelights_extras
+stone_super_with_spotlight|morelights_extras
 
 # morelights/morelights_modern packages
+hardware_lamppost_metal_dark|morelights_modern
+hardware_lamppost_metal_light|morelights_modern
 light_block_modern|morelights_modern
 light_lamp_can_dark|morelights_modern
 light_lamp_can_light|morelights_modern
@@ -32,11 +32,9 @@ light_lamp_table_light|morelights_modern
 light_lamp_wall|morelights_modern
 light_post_modern_dark|morelights_modern
 light_post_modern_light|morelights_modern
-pole_metal_dark_street|morelights_modern
-pole_metal_light_street|morelights_modern
 
 # morelights/morelights_vintage packages
-chain_brass_vintage|morelights_vintage
+hardware_chain_brass_vintage|morelights_vintage
 light_chandelier_vintage|morelights_vintage
 light_lamp_vintage|morelights_vintage
 light_lamp_vintage_bulb|morelights_vintage
@@ -46,38 +44,32 @@ light_lantern_vintage_small|morelights_vintage
 
 # supporting packages (.depends)
 crop_cotton|farming
-dirt_ordinary|default farming moreblocks
 dye_basic|dye bakedclay
 glass_ordinary|default moreblocks vessels
-grass_ordinary|default
 item_stick_ordinary|default
 item_string_ordinary|farming
 metal_brass|basic_materials technic
-metal_copper|default moreblocks technic
+metal_copper|default glemr11 moreblocks technic
 metal_iron|default
-metal_silver|moreores technic
-metal_steel|default technic
-mineral_mese|default
+metal_silver|glemr11 moreores technic
+metal_steel|default glemr11 technic
+mineral_mese|default glemr11
 pane_glass_ordinary|xpanes
-stone_ordinary|default moreblocks technic
-stone_sandstone_ordinary|default moreblocks mtg_plus
+shared_wool|wool
 tree_jungle|default doors moreblocks
 wool_basic|wool
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #container_chest_ordinary|default
-#crop_oat|farming
-#crop_wheat|farming
-#grass_dry|default
-#grass_jungle|default
-#gravel_sandstone_ordinary|unilib
-#metal_gold|default technic
-#metal_tin|default technic
-#moss_green|sickles
+#machine_furnace_induction|unilib
+#metal_gold|default glemr11 technic
+#metal_tin|default glemr11 technic
 #mushroom_brown|flowers
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
-#sand_ordinary|default
 #shared_screwdriver|screwdriver
-#soil_ordinary|farming
+
+# supporting packages (.suggested)

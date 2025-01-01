@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_bracken = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,17 +19,20 @@ function unilib.pkg.deco_aotearoa_plant_bracken.init()
 
     return {
         description = "Bracken as decoration",
-        depends = {"dirt_ordinary", "plant_bracken"},
-        at_least_one = {"biome_aotearoa_coastal", "biome_aotearoa_scrubland"},
+        depends = "plant_bracken",
+        at_least_one = {
+            {"biome_aotearoa_coastal", "biome_aotearoa_scrubland"},
+            {"dirt_custom_antipodean", "dirt_ordinary"},
+        },
     }
 
 end
 
 function unilib.pkg.deco_aotearoa_plant_bracken.post()
 
-    if unilib.pkg_executed_table["biome_aotearoa_coastal"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_aotearoa_coastal"] ~= nil then
 
-        unilib.register_decoration_now("aotearoa_plant_bracken_sparse", nil, {
+        unilib.register_decoration_complete("aotearoa_plant_bracken_sparse", nil, {
             -- From aotearoa/spawn_plants.lua
             -- Completes decoration in package "plant_bracken"
             biomes = "aotearoa_coastal_pohutukawa_forest",
@@ -37,19 +40,19 @@ function unilib.pkg.deco_aotearoa_plant_bracken.post()
             y_max = 14,
             y_min = 5,
         })
-        unilib.register_decoration_now("aotearoa_plant_bracken_clumped", nil, {
+        unilib.register_decoration_complete("aotearoa_plant_bracken_clumped", nil, {
             -- From aotearoa/spawn_plants.lua
             -- Completes decoration in package "plant_bracken"
             biomes = "aotearoa_coastal_scrub",
-            place_on = "unilib:dirt_ordinary_with_turf",
+            place_on = "unilib:dirt_antipodean_with_turf_coastal_scrub",
             y_max = 80,
             y_min = 5,
         })
 
     end
-    if unilib.pkg_executed_table["biome_aotearoa_scrubland"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_aotearoa_scrubland"] ~= nil then
 
-        unilib.register_decoration_now("aotearoa_plant_bracken_dense", nil, {
+        unilib.register_decoration_complete("aotearoa_plant_bracken_dense", nil, {
             -- From aotearoa/spawn_plants.lua
             -- Completes decoration in package "plant_bracken"
             biomes = {

@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_stone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.decor_tiled_stone.exec()
         description = S("Decorative Stone Tile"),
         tiles = {"unilib_decor_tiled_stone.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -44,7 +44,7 @@ function unilib.pkg.decor_tiled_stone.exec()
             {c_cobble, c_cobble, c_cobble},
             {c_cobble, "unilib:stone_ordinary", c_cobble},
             {c_cobble, c_cobble, c_cobble},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_stone")
 

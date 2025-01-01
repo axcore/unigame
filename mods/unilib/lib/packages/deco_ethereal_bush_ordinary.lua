@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_bush_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_ethereal_bush_ordinary.post()
 
-    unilib.register_decoration_now("default_bush_ordinary", "ethereal_bush_ordinary", {
+    unilib.register_decoration_complete("default_bush_ordinary", "ethereal_bush_ordinary", {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "bush_ordinary"
         biomes = {
@@ -40,7 +40,7 @@ function unilib.pkg.deco_ethereal_bush_ordinary.post()
             "ethereal_jumble",
         },
         place_on = {"unilib:dirt_ordinary_with_cover_snow", "unilib:dirt_ordinary_with_turf"},
-        y_max = unilib.y_max,
+        y_max = 100,
         y_min = 1,
     })
 

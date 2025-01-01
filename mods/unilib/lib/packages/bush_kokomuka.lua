@@ -9,7 +9,7 @@
 unilib.pkg.bush_kokomuka = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.bush_kokomuka.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Veronica elliptica"
 
     unilib.register_bush_stem({
@@ -40,14 +40,14 @@ function unilib.pkg.bush_kokomuka.exec()
         sci_name = sci_name,
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16}
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:kokomuka_stem
             output = "unilib:item_stick_ordinary",
             recipe = {
                 {"unilib:bush_kokomuka_stem"},
-            }
+            },
         })
 
     end
@@ -58,24 +58,25 @@ function unilib.pkg.bush_kokomuka.exec()
         burntime = 2,
     })
 
-    local inv_img = unilib.filter_leaves_img("unilib_bush_kokomuka_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_bush_kokomuka_leaves.png")
     unilib.register_node("unilib:bush_kokomuka_leaves", "aotearoa:kokomuka", mode, {
         -- From aotearoa:kokomuka
-        description = unilib.annotate(S("Kokomuka Bush Leaves"), sci_name),
+        description = unilib.utils.annotate(S("Kokomuka Bush Leaves"), sci_name),
         tiles = {"unilib_bush_kokomuka_leaves.png"},
         groups = {flammable = 2, flower = 1, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:bush_kokomuka_sapling"}, rarity = 5},
-                {items = {"unilib:bush_kokomuka_leaves"}}
-            }
+                {items = {"unilib:bush_kokomuka_leaves"}},
+            },
         },
         inventory_image = inv_img,
-        is_ground_content = false,
+        -- N.B. removed .is_ground_content = false to match other bush leaves
+--      is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -111,10 +112,10 @@ function unilib.pkg.bush_kokomuka.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_bush_kokomuka_normal_" .. i, {
+        unilib.register_decoration_generic("aotearoa_bush_kokomuka_normal_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_bush_kokomuka_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_bush_kokomuka_" .. i .. ".mts",
 
             fill_ratio = 0.0025,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.pane_lattice_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.pane_lattice_wood.exec()
             textures = {"unilib_pane_lattice_wood.png", "", "unilib_pane_lattice_wood.png"},
             -- N.B. pane = 1 in original code, omitted here
             groups = {choppy = 2, flammable = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "airlike",
             inventory_image = "unilib_pane_lattice_wood.png",

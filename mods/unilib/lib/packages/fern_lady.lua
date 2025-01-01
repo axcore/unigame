@@ -9,7 +9,7 @@
 unilib.pkg.fern_lady = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.fern_lady.exec()
 
     unilib.register_node("unilib:fern_lady", "mapgen:fern", mode, {
         -- From farlands, mapgen:fern
-        description = unilib.annotate(S("Lady Fern"), "Athyrium filix-femina"),
+        description = unilib.utils.annotate(S("Lady Fern"), "Athyrium filix-femina"),
         tiles = {"unilib_fern_lady.png"},
         groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "mesh",
@@ -48,7 +48,7 @@ function unilib.pkg.fern_lady.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("farlands_fern_lady_" .. i, {
+        unilib.register_decoration_generic("farlands_fern_lady_" .. i, {
             -- From farlands, mapgen/mapgen.lua
             deco_type = "simple",
             decoration = "unilib:fern_lady",

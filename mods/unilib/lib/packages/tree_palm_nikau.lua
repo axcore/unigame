@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_nikau = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,13 @@ end
 
 function unilib.pkg.tree_palm_nikau.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Rhopalostylis sapida"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
+    }
 
     unilib.register_tree({
         -- Original to unilib
@@ -35,60 +40,85 @@ function unilib.pkg.tree_palm_nikau.exec()
         description = S("Nikau Palm Tree Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_palm_nikau_trunk", "aotearoa:nikau_palm_tree", mode, {
         -- From aotearoa:nikau_palm_tree
-        description = unilib.annotate(S("Nikau Palm Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Nikau Palm Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_palm_nikau_trunk_top.png",
             "unilib_tree_palm_nikau_trunk_top.png",
             "unilib_tree_palm_nikau_trunk.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node=1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        node_box = node_box,
         paramtype = "light",
         paramtype2 = "facedir",
-        selection_box = {
-            type = "fixed",
-            fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
-        },
+        selection_box = node_box,
         use_texture_alpha = "clip",
+
+        -- N.B. Unlike in the original code, the tree collapses when either the trunk or skirt is
+        --      dug
+        after_destruct = function(pos, oldnode)
+
+            unilib.flora.collapse_slim_tree(
+                pos,
+                oldnode,
+                {"unilib:tree_palm_nikau_trunk", "unilib:tree_palm_nikau_trunk_skirt"}
+            )
+
+        end,
+
+        -- N.B. no .on_place in original code
+        on_place = core.rotate_node,
     })
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:nikau_palm_tree
             output = "unilib:item_stick_ordinary 2",
             recipe = {
                 {"unilib:tree_palm_nikau_trunk"},
-            }
+            },
         })
 
     end
 
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_palm_nikau_trunk_stripped
+        part_name = "palm_nikau",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Nikau Palm Tree Trunk"),
+        group_table = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
+    })
+
     unilib.register_node("unilib:tree_palm_nikau_trunk_skirt", "aotearoa:nikau_palm_skirt", mode, {
         -- From aotearoa:nikau_palm_skirt
-        description = unilib.annotate(S("Nikau Palm Tree Trunk Skirt"), sci_name),
+        description = unilib.utils.annotate(S("Nikau Palm Tree Trunk Skirt"), sci_name),
         tiles = {
             "unilib_tree_palm_nikau_trunk_skirt_top.png",
             "unilib_tree_palm_nikau_trunk_skirt_top.png",
             "unilib_tree_palm_nikau_trunk_skirt.png",
         },
+        -- N.B. Removed attached_node = 1, so that the trunk collapse function works as intended
         groups = {
-            attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+--          attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
+            choppy = 3, flammable = 2, oddly_breakable_by_hand = 1, tree = 1,
         },
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         drop = "unilib:tree_palm_nikau_trunk_skirt",
@@ -104,13 +134,25 @@ function unilib.pkg.tree_palm_nikau.exec()
             fixed = {-1/3, -1/2, -1/3, 1/3, 1/2, 1/3},
         },
 
-        -- Collapse whole tree when cut
+        -- N.B. Unlike in the original code, the tree collapses when either the trunk or skirt is
+        --      dug
+        --[[
         after_destruct = function(pos, oldnode)
 
-            local node = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+            local node = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
             if node.name == "unilib:tree_palm_nikau_trunk" then
-                minetest.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.dig_node({x = pos.x, y = pos.y + 1, z = pos.z})
             end
+
+        end,
+        ]]--
+        after_destruct = function(pos, oldnode)
+
+            unilib.flora.collapse_slim_tree(
+                pos,
+                oldnode,
+                {"unilib:tree_palm_nikau_trunk", "unilib:tree_palm_nikau_trunk_skirt"}
+            )
 
         end,
     })
@@ -119,10 +161,10 @@ function unilib.pkg.tree_palm_nikau.exec()
 
     unilib.register_node("unilib:tree_palm_nikau_crown", "aotearoa:nikau_palm_crown", mode, {
         -- From aotearoa:nikau_palm_crown
-        description = unilib.annotate(S("Nikau Palm Tree Crown"), sci_name),
+        description = unilib.utils.annotate(S("Nikau Palm Tree Crown"), sci_name),
         tiles = {"unilib_tree_palm_nikau_crown.png"},
         groups = {attached_node = 1, flammable = 2, leaves = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         drop = {
@@ -169,10 +211,10 @@ function unilib.pkg.tree_palm_nikau.exec()
         },
     })
 
-    unilib.register_decoration("aotearoa_tree_palm_nikau_clump_1", {
+    unilib.register_decoration_generic("aotearoa_tree_palm_nikau_clump_1", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_palm_nikau_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_palm_nikau_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -186,10 +228,10 @@ function unilib.pkg.tree_palm_nikau.exec()
         rotation = "random",
         sidelen = 8,
     })
-    unilib.register_decoration("aotearoa_tree_palm_nikau_clump_2", {
+    unilib.register_decoration_generic("aotearoa_tree_palm_nikau_clump_2", {
         -- From aotearoa/spawn_trees.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_palm_nikau_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_palm_nikau_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -205,10 +247,10 @@ function unilib.pkg.tree_palm_nikau.exec()
     })
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_palm_nikau_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_palm_nikau_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_palm_nikau_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_palm_nikau_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",
@@ -217,7 +259,7 @@ function unilib.pkg.tree_palm_nikau.exec()
         })
 
     end
-    unilib.register_decoration("aotearoa_tree_palm_nikau_crown", {
+    unilib.register_decoration_generic("aotearoa_tree_palm_nikau_crown", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:tree_palm_nikau_crown",

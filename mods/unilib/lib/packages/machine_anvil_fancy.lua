@@ -9,7 +9,7 @@
 unilib.pkg.machine_anvil_fancy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.anvil.add_mode
+local mode = unilib.global.imported_mod_table.anvil.add_mode
 
 local item_displacement = 2 / 16
 local hud_timeout = 2
@@ -22,7 +22,7 @@ local hud_info_by_puncher_name_table = {}
 
 local function remove_item(pos, node)
 
-    local obj_table = minetest.get_objects_inside_radius(
+    local obj_table = core.get_objects_inside_radius(
         {x = pos.x, y = pos.y + item_displacement, z = pos.z},
         0.5
     )
@@ -45,14 +45,14 @@ end
 
 local function update_item(pos, node)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     if not inv:is_empty("input") then
 
         pos.y = pos.y + item_displacement
         temp_table.nodename = node.name
         temp_table.texture = inv:get_stack("input", 1):get_name()
-        local e = minetest.add_entity(pos, "unilib:entity_machine_anvil_fancy")
+        local e = core.add_entity(pos, "unilib:entity_machine_anvil_fancy")
         local yaw = math.pi * 2 - node.param2 * math.pi / 2
         --[[
         if e.set_rotation == nil then
@@ -98,12 +98,14 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
     unilib.register_entity("unilib:entity_machine_anvil_fancy", {
         -- From anvil:item
-        collisionbox = {0, 0, 0, 0, 0, 0},
-        hp_max = 1,
-        physical = false,
-        textures = {"air"},
-        visual = "wielditem",
-        visual_size = {x = 0.33, y = 0.33},
+        initial_properties = {
+            collisionbox = {0, 0, 0, 0, 0, 0},
+            hp_max = 1,
+            physical = false,
+            textures = {"air"},
+            visual = "wielditem",
+            visual_size = {x = 0.33, y = 0.33},
+        },
 
         get_staticdata = function(self)
 
@@ -147,7 +149,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
         end,
     })
 
-    minetest.register_globalstep(function()
+    core.register_globalstep(function()
 
         local now = os.time()
 
@@ -156,7 +158,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
             local hud2, hud3, hud_expire_time = unpack(hud_info)
             if now > hud_expire_time then
 
-                local puncher = minetest.get_player_by_name(puncher_name)
+                local puncher = core.get_player_by_name(puncher_name)
                 if puncher then
 
                     local hud2_def = puncher:hud_get(hud2)
@@ -189,7 +191,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
             "unilib_metal_steel_block.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -216,7 +218,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
         after_place_node = function(pos, placer, itemstack)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local stackmeta = itemstack:get_meta()
             if stackmeta:get_int("shared") == 1 then
 
@@ -234,7 +236,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             if listname ~= "input" then
                 return 0
             end
@@ -242,15 +244,15 @@ function unilib.pkg.machine_anvil_fancy.exec()
             local player_name = player:get_player_name()
             if stack:get_wear() == 0 then
 
-                minetest.chat_send_player(player_name, S("This anvil is only for damaged tools"))
+                core.chat_send_player(player_name, S("This anvil is only for damaged tools"))
                 return 0
 
             end
 
             local stack_name = stack:get_name()
-            if unilib.tool_no_repair_table[stack_name] ~= nil then
+            if unilib.global.tool_no_repair_table[stack_name] ~= nil then
 
-                minetest.chat_send_player(player_name, unilib.tool_no_repair_table[stack_name])
+                core.chat_send_player(player_name, unilib.global.tool_no_repair_table[stack_name])
                 return 0
 
             end
@@ -275,7 +277,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
         can_dig = function(pos, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
 
             if not inv:is_empty("input") then
@@ -288,7 +290,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size("input", 1)
 
@@ -301,7 +303,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
             end
 
             local wielded = puncher:get_wielded_item()
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local owner = meta:get_string("owner")
             local shared = meta:get_int("shared") == 1
@@ -343,11 +345,27 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 return
             end
 
-            -- 65535 is max damage
-            local damage_state = 40 - math.floor(input:get_wear() / 1638)
+            -- Minetest max damage is 65535
+            -- N.B. Because 65536 / 40 is slightly higher than 1638, this unilib calculation may
+            --      produce a slightly higher value (e.g. 21 rather than 20)
+--          local damage_state = 40 - math.floor(input:get_wear() / 1638)
+            local damage_state =
+                    40 - math.floor(input:get_wear() / (unilib.constant.max_tool_wear / 40))
 
-            local tool_name = input:get_name()
+            -- Limit tool repairability, if enabled
+            local input_meta = input:get_meta()
+            local max_repair = input_meta:get_string("max_repair")
+            if max_repair == "" then
 
+                -- This tool has never been repaired by unilib anvils
+                max_repair = "0"
+                input_meta:set_string("max_repair", max_repair)
+
+            end
+
+            max_repair = tonumber(max_repair)
+
+            -- Update the HUD
             if input:get_wear() > 0 then
 
                 local hud2, hud3, hud3_def, _
@@ -367,7 +385,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
                     hud2 = puncher:hud_add({
                         name = "anvil_background",
-                        hud_elem_type = "statbar",
+                        type = "statbar",
 
                         alignment = {x = 0, y = 0},
                         direction = 0,
@@ -380,7 +398,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
                     hud3 = puncher:hud_add({
                         name = "anvil_foreground",
-                        hud_elem_type = "statbar",
+                        type = "statbar",
 
                         alignment = {x = 0, y = 0},
                         direction = 0,
@@ -398,7 +416,8 @@ function unilib.pkg.machine_anvil_fancy.exec()
             end
 
             -- Tell the player when the job is done
-            if input:get_wear() == 0 then
+            local tool_name = input:get_name()
+            if input:get_wear() <= max_repair then
 
                 -- ...but only once
                 if 0 < meta:get_int("informed") then
@@ -410,51 +429,107 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 local meta_description = input:get_meta():get_string("description")
                 if "" ~= meta_description then
                     tool_desc = meta_description
-                elseif minetest.registered_items[tool_name] and
-                        minetest.registered_items[tool_name].description then
-                    tool_desc = minetest.registered_items[tool_name].description
+                elseif core.registered_items[tool_name] and
+                        core.registered_items[tool_name].description then
+                    tool_desc = core.registered_items[tool_name].description
                 else
                     tool_desc = tool_name
                 end
 
-                minetest.chat_send_player(
-                    puncher_name,
-                    S("Your @1 has been repaired successfully", unilib.get_first_line(tool_desc))
-                )
+                if input:get_wear() == 0 then
+
+                    core.chat_send_player(
+                        puncher_name,
+                        S(
+                            "Your @1 has been repaired successfully",
+                            unilib.utils.get_first_line(tool_desc)
+                        )
+                    )
+
+                else
+
+                    core.chat_send_player(
+                        puncher_name,
+                        S(
+                            "Your @1 has reached its repair limit",
+                            unilib.utils.get_first_line(tool_desc)
+                        )
+                    )
+
+                end
+
+                core.sound_play({name = "unilib_machine_anvil_fancy_dull"}, {pos = pos})
 
                 return
 
             else
 
                 pos.y = pos.y + item_displacement
-                minetest.sound_play({name = "unilib_machine_anvil_fancy_clang"}, {pos = pos})
-                minetest.add_particlespawner({
+                core.sound_play({name = "unilib_machine_anvil_fancy_clang"}, {pos = pos})
+                core.add_particlespawner({
                     amount = 10,
                     time = 0.1,
+                    texture = "unilib_machine_anvil_fancy_spark.png",
+
+                    maxacc = {x = 0, y = -10, z = 0},
+                    minacc = {x = 0, y = -10, z = 0},
+                    maxexptime = 1,
+                    minexptime = 0.5,
+                    maxpos = pos,
+                    minpos = pos,
+                    maxsize = 1,
+                    minsize = 1,
+                    maxvel = {x = -2, y = 1, z = -2},
+                    minvel = {x = 2, y = 3, z = 2},
 
                     collisiondetection = true,
-                    minacc = {x = 0, y = -10, z = 0},
-                    maxacc = {x = 0, y = -10, z = 0},
-                    minexptime = 0.5,
-                    maxexptime = 1,
-                    minpos = pos,
-                    maxpos = pos,
-                    minsize = 1,
-                    maxsize = 1,
-                    minvel = {x = 2, y = 3, z = 2},
-                    maxvel = {x = -2, y = 1, z = -2},
-                    texture = "unilib_machine_anvil_fancy_spark.png",
                     vertical = false,
                 })
+
+            end
+
+            -- Adjust tool repairability limit, if enabled
+            if unilib.setting.tool_limit_repair_factor > 0 then
+
+                max_repair = max_repair + math.floor(
+                    unilib.constant.max_tool_wear * unilib.setting.tool_limit_repair_factor
+                )
+
+                input_meta:set_string("max_repair", max_repair)
+
             end
 
             -- Do the actual repair. -5000 equals what technic toolshop does in 5 seconds
-            input:add_wear(-5000)
-            inv:set_stack("input", 1, input)
+            local this_repair =
+                    math.floor(unilib.constant.max_tool_wear * unilib.setting.tool_repair_factor)
+            if (input:get_wear() - this_repair) < max_repair then
+                input:set_wear(max_repair)
+            else
+                input:add_wear(this_repair * -1)
+            end
 
             -- Damage the hammer slightly
             wielded:add_wear(100)
             puncher:set_wielded_item(wielded)
+
+            -- Update the tool's description (if toolranks-style tooltips are visible)
+            if unilib.setting.toolranks_enable_flag then
+
+                local def_table = input:get_definition()
+                local description = def_table.original_description or ""
+                local dug = tonumber(input_meta:get_string("dug")) or 0
+
+                input_meta:set_string(
+                    "description",
+                    unilib.tools.prepare_toolranks_description(
+                        description, def_table.tool_type, dug, max_repair
+                    )
+                )
+
+            end
+
+            -- Return the tool to its inventory
+            inv:set_stack("input", 1, input)
 
         end,
 
@@ -464,7 +539,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 return
             end
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local name = clicker:get_player_name()
             local owner = meta:get_string("owner")
             local shared = meta:get_int("shared") == 1
@@ -495,13 +570,13 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 end
             end
 
-            local this_def = minetest.registered_nodes[node.name]
+            local this_def = core.registered_nodes[node.name]
             if this_def.allow_metadata_inventory_put(
                 pos, "input", 1, itemstack:peek_item(), clicker
             ) > 0 then
 
                 local s = itemstack:take_item()
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
                 inv:add_item("input", s)
                 local meta_description = s:get_meta():get_string("description")
@@ -515,7 +590,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
 
                         meta:set_string(
                             "infotext", S("@1's Fancy Anvil", owner) .. "\n" ..
-                                    unilib.get_first_line(meta_description)
+                                    unilib.utils.get_first_line(meta_description)
                         )
 
                     end
@@ -551,10 +626,10 @@ function unilib.pkg.machine_anvil_fancy.exec()
         recipe = {
             {"unilib:metal_bronze_ingot", "unilib:metal_bronze_ingot", "unilib:metal_bronze_ingot"},
             {"", "unilib:metal_steel_ingot", ""},
-            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"}
-        }
+            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
+        },
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         -- When placed in the crafting grid with paper, generate a "shared" anvil
         local anvil_stack = ItemStack("unilib:machine_anvil_fancy")
@@ -563,7 +638,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
         unilib.register_craft({
             output = anvil_stack:to_string(),
             type = "shapeless",
-            recipe = {"unilib:machine_anvil_fancy", "unilib:item_paper_ordinary"}
+            recipe = {"unilib:machine_anvil_fancy", "unilib:item_paper_ordinary"},
         })
 
     end
@@ -579,7 +654,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
         action = function(pos, node, active_object_count, active_object_count_wider)
 
             local test_pos = {x = pos.x, y = pos.y + item_displacement, z = pos.z}
-            if #minetest.get_objects_inside_radius(test_pos, 0.5) > 0 then
+            if #core.get_objects_inside_radius(test_pos, 0.5) > 0 then
                 return
             end
 

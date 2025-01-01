@@ -9,7 +9,7 @@
 unilib.pkg.tree_teak = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_teak.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Tectona grandis"
 
     unilib.register_tree({
@@ -99,10 +99,10 @@ function unilib.pkg.tree_teak.exec()
 
     for i = 1, 4 do
 
-        unilib.register_decoration("glem_tree_teak_" .. i, {
+        unilib.register_decoration_generic("glem_tree_teak_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_teak_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_teak_" .. i .. ".mts",
 
             fill_ratio = 0.005,
             flags = "place_center_x, place_center_z",

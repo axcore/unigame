@@ -9,7 +9,7 @@
 unilib.pkg.plant_weed_eye = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.plant_weed_eye.exec()
         tiles = {"unilib_plant_weed_eye.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         drop = "unilib:plant_weed_eye_ball",
         inventory_image = "unilib_plant_weed_eye.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -57,7 +58,7 @@ function unilib.pkg.plant_weed_eye.exec()
         inventory_image = "unilib_plant_weed_eye_ball.png"
     })
 
-    unilib.register_decoration("moreplants_plant_weed_eye", {
+    unilib.register_decoration_generic("moreplants_plant_weed_eye", {
         -- From moreplants:eyeweed
         deco_type = "simple",
         decoration = "unilib:plant_weed_eye",

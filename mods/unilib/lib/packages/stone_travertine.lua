@@ -9,7 +9,7 @@
 unilib.pkg.stone_travertine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_travertine.exec()
         description = S("Travertine"),
 
         category = "sedimentary",
+        colour = "#D5C1A4",
         grinder_flag = true,
         hardness = 1,
     })
@@ -41,7 +42,7 @@ function unilib.pkg.stone_travertine.exec()
         tiles = {"unilib_stone_travertine.png"},
         -- N.B. smoothstone = 1 not in original code
         groups = {cracky = 3, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drop not in original code
         drop = "unilib:stone_travertine_rubble",
@@ -80,6 +81,24 @@ function unilib.pkg.stone_travertine.exec()
         replace_mode = mode,
         description = S("Travertine Rubble"),
         img_list = {"unilib_stone_travertine.png^unilib_stone_rubble_overlay.png"},
+    })
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_travertine_rubble_compressed
+        part_name = "travertine",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Travertine Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_travertine_rubble_condensed
+        part_name = "travertine",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Travertine Rubble"),
     })
 
 end

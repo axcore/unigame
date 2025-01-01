@@ -9,7 +9,7 @@
 unilib.pkg.misc_flooring_tatami = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,11 @@ function unilib.pkg.misc_flooring_tatami.exec()
         description = S("Tatami Mat"),
         tiles = {"unilib_misc_flooring_tatami.png"},
         groups = {flammable = 3, snappy = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
@@ -48,7 +50,7 @@ function unilib.pkg.misc_flooring_tatami.exec()
         output = "unilib:misc_flooring_tatami",
         recipe = {
             {"unilib:crop_wheat_harvest", "unilib:crop_wheat_harvest", "unilib:crop_wheat_harvest"},
-        }
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_acorn_oak_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.oak.add_mode
+local mode = unilib.global.imported_mod_table.oak.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.ingredient_acorn_oak_mature.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_acorn = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_acorn_oak_mature.png",
@@ -49,17 +49,17 @@ function unilib.pkg.ingredient_acorn_oak_mature.exec()
         walkable = false,
 
         after_place_node = function(pos, placer, itemstack)
-            minetest.set_node(pos, {name = "unilib:ingredient_acorn_oak_mature", param2 = 1})
+            core.set_node(pos, {name = "unilib:ingredient_acorn_oak_mature", param2 = 1})
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_acorn_oak_mature", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_acorn_oak_mature", 2),
     })
 
 end
 
 function unilib.pkg.ingredient_acorn_oak_mature.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:ingredient_acorn_oak_mature",
 
         replace_mode = mode,

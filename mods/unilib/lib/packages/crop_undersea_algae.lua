@@ -9,7 +9,7 @@
 unilib.pkg.crop_undersea_algae = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.crop_undersea_algae.exec()
             inventory_image = "unilib_crop_undersea_algae_harvest.png",
             groups = {food = 1, food_vegan = 1, seafood = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:crop_undersea_algae_harvest", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:crop_undersea_algae_harvest", 1),
         }
     )
 
@@ -60,8 +60,8 @@ function unilib.pkg.crop_undersea_algae.exec()
 
         replace_mode = mode,
         base_node = "unilib:sand_ordinary",
-        chance = 10,
-        delay = 10,
+        -- N.B. 10 in original code
+        chance = 15,
         drop_table = {
             items = {
                 {items = {"unilib:crop_undersea_algae_harvest"}},
@@ -69,11 +69,13 @@ function unilib.pkg.crop_undersea_algae.exec()
                 {items = {"unilib:crop_undersea_algae_harvest 2"}, rarity = 10},
             },
         },
+        interval = 10,
         min_light = 10,
         seed_description = S("Green Algae Seed"),
         wild_description = S("Wild Green Algae"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -88,7 +90,7 @@ function unilib.pkg.crop_undersea_algae.exec()
 
     for i = 1, 4 do
 
-        unilib.register_decoration("aqua_farming_crop_sea_algae_" .. i, {
+        unilib.register_decoration_generic("aqua_farming_crop_sea_algae_" .. i, {
             -- From aqua_farming/mapgen_sea_alga.lua
             deco_type = "simple",
             decoration = "unilib:crop_undersea_algae_wild",
@@ -102,6 +104,9 @@ function unilib.pkg.crop_undersea_algae.exec()
                 seed = 7013,
                 spread = {x = 50, y = 50, z = 50},
             },
+            -- N.B. No .param2/.param2_max in original code
+            param2 = 0,
+            param2_max = 3,
             place_offset_y = -1,
             sidelen = 4,
         })

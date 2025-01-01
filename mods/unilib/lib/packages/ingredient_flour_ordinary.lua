@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_flour_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,8 +35,8 @@ function unilib.pkg.ingredient_flour_ordinary.exec()
         inventory_image = "unilib_ingredient_flour_ordinary.png",
         groups = {flammable = 1, food_flour = 1},
     })
-    if not unilib.mtgame_tweak_flag
-            or unilib.pkg_executed_table["utensil_mortar_pestle"] == nil then
+    if not unilib.setting.mtgame_tweak_flag
+            or unilib.global.pkg_executed_table["utensil_mortar_pestle"] == nil then
 
         unilib.register_craft({
             -- From minetest_game/farming, farming:flour

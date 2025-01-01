@@ -9,7 +9,7 @@
 unilib.pkg.biome_default_grassland_snowy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.biome_default_grassland_snowy.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "snowy_grassland" biome
         name = "default_grassland_snowy",
-        description = unilib.brackets(S("Snowy grassland biome"), "default"),
+        description = unilib.utils.brackets(S("Snowy grassland biome"), "default"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_ordinary_with_cover_snow",
         depth_top = 1,
@@ -46,8 +46,8 @@ function unilib.pkg.biome_default_grassland_snowy.post()
         depth_riverbed = 2,
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
-        y_max = unilib.y_max,
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
+        y_max = unilib.constant.y_max,
         y_min = 4,
         heat_point = 20,
         humidity_point = 35,
@@ -56,7 +56,7 @@ function unilib.pkg.biome_default_grassland_snowy.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "snowy_grassland_ocean" biome
         name = "default_grassland_snowy_ocean",
-        description = unilib.brackets(S("Snowy grassland ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Snowy grassland ocean biome"), "default"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
@@ -67,7 +67,7 @@ function unilib.pkg.biome_default_grassland_snowy.post()
         node_cave_liquid = "unilib:liquid_water_ordinary_source",
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         vertical_blend = 1,
         y_max = 3,
         y_min = -255,
@@ -78,16 +78,16 @@ function unilib.pkg.biome_default_grassland_snowy.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "snowy_grassland_under" biome
         name = "default_grassland_snowy_under",
-        description = unilib.brackets(S("Snowy grassland deep ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Snowy grassland deep ocean biome"), "default"),
         node_cave_liquid = {
             "unilib:liquid_water_ordinary_source",
             "unilib:liquid_lava_ordinary_source",
         },
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = -256,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 20,
         humidity_point = 35,
     })

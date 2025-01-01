@@ -9,7 +9,7 @@
 unilib.pkg.food_porridge = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,14 +38,14 @@ function unilib.pkg.food_porridge.exec()
         -- N.B. No groups in original code
         groups = {food_porridge = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_porridge", 6, "unilib:utensil_bowl_wooden"),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_porridge", 6, "unilib:utensil_bowl_wooden"),
     })
     unilib.register_craft({
         -- From farming:porridge
         output = "unilib:food_porridge",
         recipe = {
             {"group:food_oats", "group:food_oats", "group:food_oats"},
-            {"group:food_oats", "group:food_bowl", "group:food_milk_glass"}
+            {"group:food_oats", "group:food_bowl", "group:food_milk_glass"},
         },
         replacements = {
             {"group:food_milk_glass", "unilib:vessel_glass_empty"},

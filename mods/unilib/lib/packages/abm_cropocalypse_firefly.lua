@@ -9,7 +9,7 @@
 unilib.pkg.abm_cropocalypse_firefly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,15 +18,14 @@ local mode = unilib.imported_mod_table.cropocalypse.add_mode
 function unilib.pkg.abm_cropocalypse_firefly.init()
 
     return {
-        description = "ABM to add firefly effect to certain decorative plants (all of which" ..
-                " derive from the cropocalypse mod)",
+        description = "ABM to add firefly effect to certain decorative plants (from cropocalypse)",
     }
 
 end
 
-function unilib.pkg.abm_cropocalypse_firefly.exec()
+function unilib.pkg.abm_cropocalypse_firefly.post()
 
-    if minetest.features.particlespawner_tweenable then
+    if core.features.particlespawner_tweenable then
 
         unilib.register_abm({
             -- From cropocalypse/decorative_plants.lua
@@ -39,7 +38,7 @@ function unilib.pkg.abm_cropocalypse_firefly.exec()
 
             action = function(pos, node)
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 1,
                     time = 1,
 

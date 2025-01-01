@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_butter_soy_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.ingredient_butter_soy_yellow.exec()
             -- N.B. food_butter = 1 not in original code
             groups = {flammable = 1, food_butter = 1, food_soy_butter = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:ingredient_butter_soy_yellow", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:ingredient_butter_soy_yellow", 4),
         }
     )
     unilib.register_craft({

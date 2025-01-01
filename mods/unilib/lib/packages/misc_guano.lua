@@ -9,7 +9,7 @@
 unilib.pkg.misc_guano = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_guano.exec()
         description = S("Guano"),
         tiles = {"unilib_misc_guano.png"},
         groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         is_ground_content = false,
     })

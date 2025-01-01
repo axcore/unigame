@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_bar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_bar.exec()
 
     unilib.register_door({
-        -- From mtg_plus mod, doors:door_wood_bar. Creates unilib:door_wood_bar
+        -- From mtg_plus mod, doors:door_wood_bar. Creates unilib:door_wood_bar_closed_left, etc
         part_name = "wood_bar",
-        orig_name = {
+        orig_name_list = {
             "doors:door_wood_bar_a",
             "doors:door_wood_bar_b",
             "doors:door_wood_bar_c",
@@ -39,7 +39,7 @@ function unilib.pkg.door_wood_bar.exec()
             description = S("Wooden Bar Door"),
             tiles = {{name = "unilib_door_wood_bar.png", backface_culling = true}},
             groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2, snappy = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             inventory_image = "unilib_door_wood_bar_inv.png",
             recipe = {

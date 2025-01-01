@@ -9,7 +9,7 @@
 unilib.pkg.mineral_mese_crystal_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.mineral_mese_crystal_large.exec()
         description = S("Large Mese Crystal"),
         tiles = {"unilib_mineral_mese_crystal_large.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "mesh",
         is_ground_content = false,
@@ -43,7 +43,7 @@ function unilib.pkg.mineral_mese_crystal_large.exec()
         -- From underch:mese_crystal
         type = "shapeless",
         output = "unilib:mineral_mese_crystal 2",
-        recipe = {"unilib:mineral_mese_crystal_large"}
+        recipe = {"unilib:mineral_mese_crystal_large"},
     })
 
 end

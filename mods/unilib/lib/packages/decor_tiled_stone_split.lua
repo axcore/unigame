@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_stone_split = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.decor_tiled_stone_split.exec()
                 "unilib_decor_tiled_stone_split.png",
             },
             groups = {cracky = 3, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
             paramtype2 = "facedir",
@@ -50,7 +50,7 @@ function unilib.pkg.decor_tiled_stone_split.exec()
         output = "unilib:decor_tiled_stone_split",
         recipe = {
             {"unilib:decor_tiled_stone"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_stone_split")
 

@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_tussock_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.deco_aotearoa_plant_tussock_red.init()
 
     return {
         description = "Red tussock as decoration",
-        depends = {"dirt_ordinary", "plant_tussock_red"},
+        depends = {"dirt_custom_antipodean", "plant_tussock_red"},
         at_least_one = {
             "biome_aotearoa_coastal",
             "biome_aotearoa_highland",
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_tussock_red.post()
 
-    unilib.register_decoration_now("aotearoa_plant_tussock_red", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_tussock_red", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_tussock_red"
         biomes = {
@@ -39,7 +39,11 @@ function unilib.pkg.deco_aotearoa_plant_tussock_red.post()
             "aotearoa_highland_mountain_tussock",
             "aotearoa_scrubland_matagouri",
         },
-        place_on = "unilib:dirt_ordinary_with_turf_dry",
+        place_on = {
+            "unilib:dirt_ordinary_with_turf_coastal_tussock",
+            "unilib:dirt_ordinary_with_turf_highland_mountain_tussock",
+            "unilib:dirt_ordinary_with_turf_scrubland_matagouri",
+        },
         y_max = 145,
         y_min = 3,
     })

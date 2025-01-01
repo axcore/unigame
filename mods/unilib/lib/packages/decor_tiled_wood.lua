@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,7 +43,7 @@ function unilib.pkg.decor_tiled_wood.exec()
             wood_img .. "^" .. tile_img .. "^[transformR90",
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -52,23 +52,23 @@ function unilib.pkg.decor_tiled_wood.exec()
     -- N.B. Original craft recipe conflicts with recipe in "shared_fachwerk" package
     --[[
     unilib.register_craft({
-        output = "unilib:decor_tiled_wood 9",
         -- From moreblocks:wood_tile
+        output = "unilib:decor_tiled_wood 9",
         recipe = {
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     ]]--
     unilib.register_craft({
-        output = "unilib:decor_tiled_wood 8",
         -- From moreblocks:wood_tile
+        output = "unilib:decor_tiled_wood 8",
         recipe = {
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "unilib:item_stick_ordinary", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_wood")
 
@@ -81,7 +81,7 @@ function unilib.pkg.decor_tiled_wood.exec()
             description = S("Decorative Centred Wood Tile"),
             tiles = {wood_img .. "^unilib_decor_tiled_wood_centre_overlay.png"},
             groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, wood = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
         }
@@ -97,7 +97,7 @@ function unilib.pkg.decor_tiled_wood.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "unilib:decor_tiled_wood", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_wood_centre")
 
@@ -113,7 +113,7 @@ function unilib.pkg.decor_tiled_wood.exec()
             wood_img .. "^" .. full_img .. "^[transformR90",
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         is_ground_content = false,
     })
@@ -123,11 +123,11 @@ function unilib.pkg.decor_tiled_wood.exec()
         recipe = {
             {"unilib:decor_tiled_wood", "unilib:decor_tiled_wood"},
             {"unilib:decor_tiled_wood", "unilib:decor_tiled_wood"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_wood_full")
 
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_node(
             "unilib:decor_tiled_wood_offset",
@@ -138,7 +138,7 @@ function unilib.pkg.decor_tiled_wood.exec()
                 description = S("Decorative Offset Wood Tile"),
                 tiles = {wood_img .. "^unilib_decor_tiled_wood_offset_overlay.png"},
                 groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, wood = 1},
-                sounds = unilib.sound_table.wood,
+                sounds = unilib.global.sound_table.wood,
 
                 is_ground_content = false,
                 paramtype2 = "facedir",
@@ -151,7 +151,7 @@ function unilib.pkg.decor_tiled_wood.exec()
             recipe = {
                 {"unilib:item_stick_ordinary"},
                 {"unilib:decor_tiled_wood_centre"},
-            }
+            },
         })
 
     end

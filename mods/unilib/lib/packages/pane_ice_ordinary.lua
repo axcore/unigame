@@ -9,7 +9,7 @@
 unilib.pkg.pane_ice_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.pane_ice_ordinary.exec()
             },
             -- N.B. No slippery in original code
             groups = {cracky = 3, oddly_breakable_by_hand = 3, slippery = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_pane_ice_ordinary.png",
             recipe = {

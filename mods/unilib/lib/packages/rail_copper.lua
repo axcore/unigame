@@ -9,7 +9,7 @@
 unilib.pkg.rail_copper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreores.add_mode
+local mode = unilib.global.imported_mod_table.moreores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -49,7 +49,7 @@ function unilib.pkg.rail_copper.exec()
             {"unilib:metal_copper_ingot", "group:wood", "unilib:metal_copper_ingot"},
             {"unilib:metal_copper_ingot", "", "unilib:metal_copper_ingot"},
             {"unilib:metal_copper_ingot", "group:wood", "unilib:metal_copper_ingot"},
-        }
+        },
     })
 
 end

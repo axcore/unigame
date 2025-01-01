@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_whey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.ingredient_whey.exec()
         groups = {milk_product = 1},
     })
 
-    if unilib.pkg_executed_table["food_porridge"] ~= nil then
+    if unilib.global.pkg_executed_table["food_porridge"] ~= nil then
 
         -- Alternative craft recipe for porridge, using whey instead of milk
         unilib.register_craft({
@@ -41,7 +41,7 @@ function unilib.pkg.ingredient_whey.exec()
             output = "unilib:food_porridge",
             recipe = {
                 {"group:food_oats", "group:food_oats", "group:food_oats"},
-                {"group:food_oats", "group:food_bowl", "unilib:ingredient_whey"}
+                {"group:food_oats", "group:food_bowl", "unilib:ingredient_whey"},
             },
         })
 

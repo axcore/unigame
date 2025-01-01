@@ -9,7 +9,7 @@
 unilib.pkg.misc_barricade = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.misc_barricade.exec()
         description = S("Barricade"),
         tiles = {"unilib_misc_barricade.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         collision_box = {
             type = "fixed",
@@ -42,6 +42,8 @@ function unilib.pkg.misc_barricade.exec()
         damage_per_second = 4,
         drawtype = "plantlike",
         inventory_image = "unilib_misc_barricade.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         selection_box = {
@@ -56,8 +58,8 @@ function unilib.pkg.misc_barricade.exec()
         recipe = {
             {"group:stick", "", "group:stick"},
             {"", "unilib:metal_steel_ingot", ""},
-            {"group:stick", "", "group:stick"}
-        }
+            {"group:stick", "", "group:stick"},
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.plant_saxifrage_purple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,14 +31,14 @@ function unilib.pkg.plant_saxifrage_purple.exec()
         "lib_ecology:plant_heath_saxifrage_purple",
         mode,
         {
-            description = unilib.annotate(S("Purple Saxifrage"), "Saxifraga"),
+            description = unilib.utils.annotate(S("Purple Saxifrage"), "Saxifraga"),
             tiles = {"unilib_plant_saxifrage_purple.png"},
             groups = {
                 attached_node = 1, flammable = 1, flora = 1, leaves = 1,
                 oddly_breakable_by_hand = 1, snappy = 3,
             },
             -- N.B. No sounds in original code
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = false,
             drawtype = "plantlike",
@@ -46,7 +46,8 @@ function unilib.pkg.plant_saxifrage_purple.exec()
 --          floodable = true,
             -- N.B. inventory_image not in original code
             inventory_image = "unilib_plant_saxifrage_purple.png",
-            is_ground_content = false,
+            -- N.B. removed is_ground_content = false to match other plants
+--          is_ground_content = false,
             paramtype = "light",
             selection_box = {
                 type = "fixed",
@@ -61,5 +62,7 @@ function unilib.pkg.plant_saxifrage_purple.exec()
     unilib.register_plant_in_pot(
         "unilib:plant_saxifrage_purple", "lib_ecology:plant_heath_saxifrage_purple"
     )
+
+    unilib.register_decoration_spare("unilib:plant_saxifrage_purple")
 
 end

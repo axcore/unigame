@@ -9,7 +9,7 @@
 unilib.pkg.deco_decorations_sea_coral_seawhip_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decorations_sea.add_mode
+local mode = unilib.global.imported_mod_table.decorations_sea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_decorations_sea_coral_seawhip_yellow.post()
 
-    unilib.register_decoration_now("decoration_sea_coral_seawhip_yellow_1", nil, {
+    unilib.register_decoration_complete("decoration_sea_coral_seawhip_yellow_1", nil, {
         -- From decorations_sea/mapgen.lua
         -- Completes decoration in package "coral_seawhip_yellow"
         biomes = unilib.pkg.shared_decorations_sea.warm_biome_list,

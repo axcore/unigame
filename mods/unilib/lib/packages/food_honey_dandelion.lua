@@ -9,7 +9,7 @@
 unilib.pkg.food_honey_dandelion = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,13 +41,23 @@ function unilib.pkg.food_honey_dandelion.exec()
             inventory_image = "unilib_food_honey_dandelion.png",
             groups = {eatable = 1, flammable = 1, food = 1, food_honey = 1, food_sugar = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_honey_dandelion", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_honey_dandelion", 3),
         }
     )
 
 end
 
 function unilib.pkg.food_honey_dandelion.post()
+
+    local replace_table = { {"group:wool", "unilib:crop_cotton_harvest 2"} }
+    if unilib.global.fallback_empty_bucket ~= nil then
+
+        table.insert(
+            replace_table,
+            {"unilib:food_hotpot_dandelion_cooked", unilib.global.fallback_empty_bucket}
+        )
+
+    end
 
     unilib.register_craft({
         -- From cucina_vegana:dandelion_honey
@@ -57,10 +67,11 @@ function unilib.pkg.food_honey_dandelion.post()
             {"group:wool", "", ""},
             {"unilib:vessel_bottle_glass_empty", "", ""},
         },
-        replacements = {
-            {"unilib:food_hotpot_dandelion_cooked", unilib.fallback_empty_bucket},
-            {"group:wool", "unilib:crop_cotton_harvest 2"},
-        },
+--      replacements = {
+--          {"unilib:food_hotpot_dandelion_cooked", unilib.global.fallback_empty_bucket},
+--          {"group:wool", "unilib:crop_cotton_harvest 2"},
+--      },
+        replacements = replace_table,
     })
 
 end

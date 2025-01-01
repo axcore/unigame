@@ -9,7 +9,7 @@
 unilib.pkg.mineral_gypsum_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_gypsum_rock.exec()
 
     local c_lump = "unilib:mineral_gypsum_lump"
-    local hardness = unilib.mineral_table["gypsum"]["hardness"]
+    local hardness = unilib.global.mineral_table["gypsum"]["hardness"]
 
     unilib.register_mineral_rock("gypsum")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_gypsum_rock.exec()
         description = S("Gypsum Rock"),
         tiles = {"unilib_mineral_gypsum_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

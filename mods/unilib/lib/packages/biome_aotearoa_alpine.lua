@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_alpine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "fellfield" biome
         name = "aotearoa_alpine_fellfield",
-        description = unilib.brackets(S("Fellfield biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Fellfield biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_filler = "unilib:stone_schist_antipodean",
         depth_filler = 4,
@@ -55,7 +55,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "alpine_snow" biome
         name = "aotearoa_alpine_snow",
-        description = unilib.brackets(S("Alpine snow biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Alpine snow biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:snow_ordinary_block",
         depth_top = 5,
@@ -65,7 +65,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
         node_river_water = "unilib:liquid_water_river_source",
         node_riverbed = "unilib:gravel_ordinary_with_algae",
         depth_riverbed = 1,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 138,
         heat_point = 50,
         humidity_point = 50,
@@ -74,7 +74,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "glacier" biome
         name = "aotearoa_alpine_glacier",
-        description = unilib.brackets(S("Glacier biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Glacier biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:ice_ordinary",
         depth_top = 10,
@@ -84,7 +84,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
         node_river_water = "unilib:liquid_water_river_source",
         node_riverbed = "unilib:ice_ordinary",
         depth_riverbed = 1,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 122,
         heat_point = 0,
         humidity_point = 100,
@@ -93,7 +93,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "volcano" biome
         name = "aotearoa_alpine_volcano",
-        description = unilib.brackets(S("Volcano biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Volcano biome"), "aotearoa"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:sand_volcanic",
         depth_top = 2,
@@ -103,7 +103,7 @@ function unilib.pkg.biome_aotearoa_alpine.post()
         node_river_water = "unilib:liquid_water_river_source",
         node_riverbed = "unilib:sand_volcanic",
         depth_riverbed = 3,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 118,
         heat_point = 100,
         humidity_point = 0,

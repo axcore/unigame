@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_cypress_bald = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.baldcypress.add_mode
+local mode = unilib.global.imported_mod_table.baldcypress.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_cypress_bald.post()
 
-    unilib.register_decoration_now("cool_trees_tree_cypress_bald", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_cypress_bald", nil, {
         -- From baldcypress/init.lua
         -- Completes decoration in package "tree_cypress_bald"
         biomes = "default_forest_coniferous_ocean",

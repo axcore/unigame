@@ -1,6 +1,5 @@
 # "decoblocks" remix - contains a small selection of natural materials from the decoblocks game
 #       (because they are required by GLEM)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -22,11 +21,12 @@ stone_serpentinite_pale|decoblocks
 stone_travertine|decoblocks
 
 # supporting packages (.depends)
-mineral_flint|default fire mtg_plus
+gravel_ordinary|default mtg_plus
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
-#fire_ordinary|fire
-#fire_permanent|fire underch
-#metal_steel|default technic
-#mineral_coal|default technic
+#mineral_flint|default fire mtg_plus
 #sand_beige|unilib
+
+# supporting packages (.suggested)

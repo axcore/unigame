@@ -9,7 +9,7 @@
 unilib.pkg.decor_block_ice_packed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,13 @@ function unilib.pkg.decor_block_ice_packed.exec()
         description = S("Decorative Packed Ice"),
         tiles = {"unilib_decor_block_ice_packed.png"},
         groups = {cracky = 1, puts_out_fire = 1, slippery = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
-    -- N.B. Original craft recipe conflicts with recipe in "misc_walkway" package
+    -- N.B. Original craft recipe conflicts with recipe in "ice_ordinary" package
     --[[
     unilib.register_craft({
         -- From xdecor:packed_ice
@@ -43,7 +45,7 @@ function unilib.pkg.decor_block_ice_packed.exec()
         recipe = {
             {"unilib:ice_ordinary", "unilib:ice_ordinary"},
             {"unilib:ice_ordinary", "unilib:ice_ordinary"},
-        }
+        },
     })
     ]]--
     unilib.register_craft({
@@ -53,7 +55,7 @@ function unilib.pkg.decor_block_ice_packed.exec()
             {"unilib:ice_ordinary", "unilib:ice_ordinary", "unilib:ice_ordinary"},
             {"unilib:ice_ordinary", "", "unilib:ice_ordinary"},
             {"unilib:ice_ordinary", "unilib:ice_ordinary", "unilib:ice_ordinary"},
-        }
+        },
     })
 
 end

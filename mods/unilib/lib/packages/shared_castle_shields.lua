@@ -9,7 +9,67 @@
 unilib.pkg.shared_castle_shields = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_shields.add_mode
+local mode = unilib.global.imported_mod_table.castle_shields.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- Local functions
+---------------------------------------------------------------------------------------------------
+
+local recipe_table = {
+    barry = { {"bg", "bg", ""}, {"", "", ""}, {"fg", "fg", ""} },
+    bend = { {"bg", "", ""}, {"", "fg", ""}, {"", "", "bg"} },
+    bend_sinister = { {"", "", "bg"}, {"", "fg", ""}, {"bg", "", ""} },
+    checkly = { {"bg", "", "fg"}, {"", "", ""}, {"fg", "", "bg"} },
+    chevron = { {"bg", "", "bg"}, {"", "fg", ""}, {"", "", ""} },
+    chevron_sinister = { {"", "", ""}, {"", "fg", ""}, {"bg", "", "bg"} },
+    cross = { {"", "bg", ""}, {"fg", "", "fg"}, {"", "bg", ""} },
+    fess = { {"", "", ""}, {"bg", "fg", "bg"}, {"", "", ""} },
+    pale = { {"", "bg", ""}, {"", "fg", ""}, {"", "bg", ""} },
+    paly = { {"bg", "", "fg"}, {"bg", "", "fg"}, {"", "", ""} },
+    per_bend = { {"", "bg", "fg"}, {"", "", "bg"}, {"", "", ""} },
+    per_fess = { {"bg", "fg", "bg"}, {"", "", ""}, {"", "", ""} },
+    per_pale = { {"", "", "bg"}, {"", "", "fg"}, {"", "", "bg"} },
+    per_saltire = { {"bg", "", ""}, {"", "fg", ""}, {"bg", "", ""} },
+    quarterly = { {"bg", "bg", ""}, {"", "", ""}, {"", "fg", "fg"} },
+    saltire = { {"bg", "", "bg"}, {"", "fg", ""}, {"bg", "", "bg"} },
+}
+
+local function compile_recipe(style, bg_colour, fg_colour)
+
+    if recipe_table[style] == nil then
+
+        -- Unrecognised style; use the craft recipe from the original mod's code as a failsafe
+        return {
+            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
+            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
+            {"unilib:dye_" .. bg_colour, "unilib:metal_steel_ingot", "unilib:dye_" .. fg_colour},
+        }
+
+    else
+
+        local return_list = { {}, {}, {} }
+
+        for a = 1, 3 do
+
+            for b = 1, 3 do
+
+                if recipe_table[style][a][b] == "bg" then
+                    return_list[a][b] = "unilib:dye_" .. bg_colour
+                elseif recipe_table[style][a][b] == "fg" then
+                    return_list[a][b] = "unilib:dye_" .. fg_colour
+                else
+                    return_list[a][b] = "unilib:metal_steel_ingot"
+                end
+
+            end
+
+        end
+
+        return return_list
+
+    end
+
+end
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -31,7 +91,10 @@ function unilib.pkg.shared_castle_shields.register_mounted_shield(data_table)
     --          "pink", "red", "violet", "white", "yellow"
     --      description (str): e.g. "Red and Blue Slash"
     --      fg_colour (str) (str): any colour from unilib's basic dye set
-    --      style (str): The shield style, "slash", "chevron" or "cross"
+    --      style (str): The shield style matching a mask texture: "bend_sinister", "chevron",
+    --          "cross" (from the original code), or "barry", "bend", "checkly", "chevron_sinister",
+    --          "fess", "pale", "paly", "per_bend", "per_fess", "per_pale", "per_saltire",
+    --          "quarterly" (original to unilib)
 
     local part_name = data_table.part_name
     local orig_name = data_table.orig_name
@@ -44,11 +107,11 @@ function unilib.pkg.shared_castle_shields.register_mounted_shield(data_table)
 
     local side_img = "unilib_misc_shield_mounted_" .. bg_colour .. ".png"
     local front_img = "unilib_misc_shield_mounted_" .. bg_colour .. ".png" ..
-            "^(unilib_misc_shield_mounted_"..fg_colour..".png" ..
-            "^[mask:unilib_mask_misc_shield_mounted_"..style..".png)"
+            "^(unilib_misc_shield_mounted_" .. fg_colour .. ".png" ..
+            "^[mask:unilib_mask_misc_shield_mounted_" .. style .. ".png)"
 
     unilib.register_node("unilib:misc_shield_mounted_" .. part_name, orig_name, replace_mode, {
-        description = unilib.brackets(S("Mounted Shield"), description),
+        description = unilib.utils.brackets(S("Mounted Shield"), description),
         tiles = {
             side_img,
             side_img,
@@ -58,9 +121,13 @@ function unilib.pkg.shared_castle_shields.register_mounted_shield(data_table)
             front_img,
         },
         groups = {cracky = 3},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
+        -- N.B. display_offset added for compatibility with display frames
+        display_offset = -3.5,
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -80,12 +147,9 @@ function unilib.pkg.shared_castle_shields.register_mounted_shield(data_table)
         },
     })
     unilib.register_craft({
+        -- Original to unilib
         output = "unilib:misc_shield_mounted_" .. part_name,
-        recipe = {
-            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
-            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
-            {"unilib:dye_" .. bg_colour, "unilib:metal_steel_ingot", "unilib:dye_"..fg_colour},
-        }
+        recipe = compile_recipe(style, bg_colour, fg_colour),
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.dirt_sandy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.valleys_c.add_mode
+local mode = unilib.global.imported_mod_table.valleys_c.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,14 @@ function unilib.pkg.dirt_sandy.exec()
             description = S("Sandy Dirt"),
             tiles = {"unilib_dirt_sandy.png"},
             groups = {crumbly = 3, soil = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
+        compressed_description = S("Compressed Sandy Dirt"),
+        compressed_group_table = {crumbly = 2},
     })
 
 end

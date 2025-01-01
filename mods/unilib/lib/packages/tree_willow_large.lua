@@ -9,7 +9,7 @@
 unilib.pkg.tree_willow_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_willow_large.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Salix"
 
     unilib.register_tree({
@@ -46,7 +46,6 @@ function unilib.pkg.tree_willow_large.exec()
             choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
         },
         sci_name = sci_name,
-        strip_flag = true,
     })
 
     unilib.register_tree_wood({
@@ -135,7 +134,7 @@ function unilib.pkg.tree_willow_large.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From moretrees:willow_gate. Creates unilib:gate_willow_closed
+        -- From moretrees:willow_gate_closed, etc. Creates unilib:gate_willow_closed, etc
         part_name = "willow_large",
         orig_name = {"moretrees:willow_gate_closed", "moretrees:willow_gate_open"},
 
@@ -150,7 +149,7 @@ function unilib.pkg.tree_willow_large.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 75,
             }),
         },

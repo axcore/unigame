@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_pale.exec()
         description = S("Pale Sandstone"),
 
         category = "sedimentary",
+        colour = "#C2BD8B",
         grinder_flag = true,
         grinder_powder = "unilib:sand_ordinary",
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 4)
@@ -40,18 +41,18 @@ function unilib.pkg.stone_sandstone_pale.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_pale", 3, 2)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_pale", 3, 2)
 
     unilib.register_node("unilib:stone_sandstone_pale", "aotearoa:pale_sandstone", mode, {
         -- From aotearoa:pale_sandstone
         description = S("Pale Sandstone"),
         tiles = {"unilib_stone_sandstone_pale.png"},
         groups = {cracky = smooth_cracky, crumbly = 1, soft_stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drops smoothstone in original code
     })
-    if unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
         --[[
         unilib.register_craft_2x2({
@@ -78,7 +79,7 @@ function unilib.pkg.stone_sandstone_pale.exec()
 
     end
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_pale", {
             basic_flag = true,
@@ -110,7 +111,10 @@ function unilib.pkg.stone_sandstone_pale.exec()
             description = S("Pale Sandstone Block"),
             tiles = {"unilib_stone_sandstone_pale_block.png"},
             groups = {cracky = block_cracky, soft_stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_3x3x9({
@@ -136,7 +140,10 @@ function unilib.pkg.stone_sandstone_pale.exec()
             description = S("Pale Sandstone Bricks"),
             tiles = {"unilib_stone_sandstone_pale_brick.png"},
             groups = {cracky = 2, soft_stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_2x2x4({
@@ -152,9 +159,11 @@ function unilib.pkg.stone_sandstone_pale.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_pale",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_pale_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_pale_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble_or_rubble_or_nothing({
             -- Original to unilib. Depending on real hardness, creates
@@ -162,7 +171,13 @@ function unilib.pkg.stone_sandstone_pale.exec()
             --      nothing
             part_name = "sandstone_pale",
             cobble_description = S("Pale Sandstone Cobble"),
+            cobble_compressed_description = S("Compressed Pale Sandstone Cobble"),
+            cobble_condensed_description = S("Condensed Pale Sandstone Cobble"),
             rubble_description = S("Pale Sandstone Rubble"),
+            rubble_compressed_description = S("Compressed Pale Sandstone Rubble"),
+            rubble_condensed_description = S("Condensed Pale Sandstone Rubble"),
+            smooth_compressed_description = S("Compressed Pale Sandstone"),
+            smooth_condensed_description = S("Condensed Pale Sandstone"),
 
             replace_mode = mode,
             override_drop_flag = true,

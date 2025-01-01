@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_produce_agave = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_better_farming_produce_agave.post()
 
-    unilib.register_decoration_now("better_farming_produce_agave", nil, {
+    unilib.register_decoration_complete("better_farming_produce_agave", nil, {
         -- From better_farming, agave.lua
         -- Completes decoration in package "produce_agave"
         biomes = "default_desert",
         place_on = "unilib:sand_desert",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

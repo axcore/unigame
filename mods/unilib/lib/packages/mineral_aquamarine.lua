@@ -9,7 +9,7 @@
 unilib.pkg.mineral_aquamarine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,13 +43,13 @@ function unilib.pkg.mineral_aquamarine.exec()
         -- From underch:aquamarine
         type = "shapeless",
         output = "unilib:mineral_aquamarine_crystal 9",
-        recipe = {"unilib:mineral_aquamarine_block"}
+        recipe = {"unilib:mineral_aquamarine_block"},
     })
     unilib.register_craft({
         -- From underch:aquamarine
         type = "shapeless",
         output = "unilib:mineral_aquamarine_crystal 2",
-        recipe = {"unilib:mineral_aquamarine_crystal_large"}
+        recipe = {"unilib:mineral_aquamarine_crystal_large"},
     })
 
     unilib.register_node("unilib:mineral_aquamarine_block", "underch:aquamarine_block", mode, {
@@ -57,7 +57,7 @@ function unilib.pkg.mineral_aquamarine.exec()
         description = S("Aquamarine Block"),
         tiles = {"unilib_mineral_aquamarine_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         is_ground_content = false,
     })
@@ -67,6 +67,9 @@ function unilib.pkg.mineral_aquamarine.exec()
         ingredient = "unilib:mineral_aquamarine_crystal",
     })
     unilib.register_stairs("unilib:mineral_aquamarine_block")
+    unilib.register_carvings("unilib:mineral_aquamarine_block", {
+        millwork_flag = true,
+    })
 
     unilib.register_node(
         -- From underch:aquamarine_crystal
@@ -77,7 +80,7 @@ function unilib.pkg.mineral_aquamarine.exec()
             description = S("Large Aquamarine Crystal"),
             tiles = {"unilib_mineral_aquamarine_crystal_large.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "mesh",
             is_ground_content = false,

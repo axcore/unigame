@@ -9,7 +9,7 @@
 unilib.pkg.mineral_wolframite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.mineral_wolframite.exec()
         description = S("Wolframite Lump"),
         inventory_image = "unilib_mineral_wolframite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_tungsten"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_tungsten"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

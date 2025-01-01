@@ -9,7 +9,7 @@
 unilib.pkg.stone_claystone_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_claystone_white.exec()
         description = S("White Claystone"),
 
         category = "sedimentary",
+        colour = "#BFAE8E",
         grinder_flag = true,
         hardness = 1,
     })
@@ -42,12 +43,12 @@ function unilib.pkg.stone_claystone_white.exec()
         tiles = {"unilib_stone_claystone_white.png"},
         -- N.B.  smoothstone = 1, stone = 1 not in original code
         groups = {cracky = 3, crumbly = 1, smoothstone = 1, soft_stone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drops smoothstone in original code
         drop = "unilib:stone_claystone_white_rubble",
     })
-    if unilib.pkg_executed_table["clay_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil then
 
         unilib.register_craft_2x2({
             -- From aotearoa:claystone
@@ -82,7 +83,10 @@ function unilib.pkg.stone_claystone_white.exec()
         tiles = {"unilib_stone_claystone_white_block.png"},
         -- N.B. stone = 1, stoneblock = 1 not in original code
         groups = {cracky = 2, soft_stone = 1, stone = 1, stoneblock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_3x3x9({
         -- From aotearoa:claystone_block
@@ -104,7 +108,10 @@ function unilib.pkg.stone_claystone_white.exec()
         tiles = {"unilib_stone_claystone_white_brick.png"},
         -- N.B. stone = 1, stonebrick = 1 not in original code
         groups = {cracky = 2, soft_stone = 1, stone = 1, stonebrick = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_2x2x4({
         -- From aotearoa:claystonebrick
@@ -119,7 +126,9 @@ function unilib.pkg.stone_claystone_white.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "claystone_white",
     })
-    unilib.set_auto_rotate("unilib:stone_claystone_white_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_claystone_white_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_stone_rubble({
         -- Original to unilib. Creates unilib:stone_claystone_white_rubble
@@ -131,5 +140,22 @@ function unilib.pkg.stone_claystone_white.exec()
         img_list = {"unilib_stone_claystone_white.png^unilib_stone_rubble_overlay.png"},
     })
 
-end
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_claystone_white_rubble_compressed
+        part_name = "claystone_white",
+        orig_name = nil,
 
+        replace_mode = mode,
+        description = S("Compressed White Claystone Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_claystone_white_rubble_condensed
+        part_name = "claystone_white",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed White Claystone Rubble"),
+    })
+
+end

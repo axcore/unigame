@@ -9,7 +9,7 @@
 unilib.pkg.tree_deciduous_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_deciduous_normal.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     -- (no sci_name)
 
     unilib.register_tree({
@@ -82,6 +82,7 @@ function unilib.pkg.tree_deciduous_normal.exec()
 
         replace_mode = mode,
         base_img = "unilib_tree_deciduous_normal_leaves.png^[colorize:#FF0000:10",
+        compacted_img = "unilib_tree_deciduous_normal_leaves_compacted.png^[colorize:#FF0000:10",
         description = S("Normal Deciduous Tree Leaves"),
         variant_name = "dark",
     })
@@ -93,6 +94,7 @@ function unilib.pkg.tree_deciduous_normal.exec()
 
         replace_mode = mode,
         base_img = "unilib_tree_deciduous_normal_leaves.png^[colorize:#FFFF00:30",
+        compacted_img = "unilib_tree_deciduous_normal_leaves_compacted.png^[colorize:#FFFF00:30",
         description = S("Normal Deciduous Tree Leaves"),
         variant_name = "light",
     })
@@ -108,6 +110,7 @@ function unilib.pkg.tree_deciduous_normal.exec()
     })
     unilib.register_leafdecay({
         -- From GLEMr4, lib_ecology:tree_leaves_dk_green, etc
+        trunk_type = "deciduous_normal",
         trunks = {"unilib:tree_deciduous_normal_trunk"},
         leaves = {
             "unilib:tree_deciduous_normal_leaves",
@@ -151,10 +154,11 @@ function unilib.pkg.tree_deciduous_normal.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("glem_tree_deciduous_normal_" .. i, {
+        unilib.register_decoration_generic("glem_tree_deciduous_normal_" .. i, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_deciduous_normal_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_deciduous_normal_" ..
+                    i .. ".mts",
 
             fill_ratio = 0.005,
             flags = "place_center_x, place_center_z",
@@ -164,10 +168,10 @@ function unilib.pkg.tree_deciduous_normal.exec()
 
     end
 
-    unilib.register_decoration("glem_tree_deciduous_normal_tall_1", {
+    unilib.register_decoration_generic("glem_tree_deciduous_normal_tall_1", {
         -- Original to unilib
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_tree_deciduous_normal_tall_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_deciduous_normal_tall_1.mts",
 
         fill_ratio = 0.002,
         flags = "place_center_x, place_center_z",

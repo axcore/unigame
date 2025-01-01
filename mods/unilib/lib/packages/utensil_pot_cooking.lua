@@ -9,7 +9,7 @@
 unilib.pkg.utensil_pot_cooking = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,8 +37,8 @@ function unilib.pkg.utensil_pot_cooking.exec()
         output = "unilib:utensil_pot_cooking",
         recipe = {
             {"group:stick", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
-            {"", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"}
-        }
+            {"", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
+        },
     })
 
 end

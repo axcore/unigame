@@ -9,7 +9,7 @@
 unilib.pkg.tree_mushroom_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,8 +18,9 @@ local mode = unilib.imported_mod_table.ethereal.add_mode
 function unilib.pkg.tree_mushroom_red.init()
 
     return {
-        description = "Red ushroom tree",
+        description = "Red mushroom tree",
         notes = "Red mushroom pores can be used to break falls",
+        depends = "tree_mushroom_generic",
         optional = {"dirt_ordinary_with_turf_mushroom", "mushroom_red"},
     }
 
@@ -39,24 +40,7 @@ function unilib.pkg.tree_mushroom_red.exec()
         not_super_flag = true,
     })
 
-    unilib.register_node("unilib:tree_mushroom_red_trunk", "ethereal:mushroom_trunk", mode, {
-        -- From ethereal:mushroom_trunk
-        description = S("Red Mushroom Trunk"),
-        tiles = {
-            "unilib_tree_mushroom_red_trunk_top.png",
-            "unilib_tree_mushroom_red_trunk_top.png",
-            "unilib_tree_mushroom_red_trunk.png",
-        },
-        groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
-
-        paramtype2 = "facedir",
-
-        on_place = minetest.rotate_node,
-    })
-    unilib.register_stairs("unilib:tree_mushroom_red_trunk", {
-        basic_flag = true,
-    })
+    -- (No trunk node, use "unilib:tree_mushroom_generic_trunk" instead)
 
     -- (No wood node)
 
@@ -67,7 +51,7 @@ function unilib.pkg.tree_mushroom_red.exec()
         description = S("Red Mushroom Cap"),
         tiles = {"unilib_tree_mushroom_red_cap.png"},
         groups = {choppy = 2, flammable = 2, leafdecay = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drop = {
             max_items = 1,
@@ -83,7 +67,7 @@ function unilib.pkg.tree_mushroom_red.exec()
         recipe = "unilib:tree_mushroom_red_cap",
         burntime = 10,
     })
-    if unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
         unilib.register_craft({
             -- From ethereal:mushroom
@@ -91,7 +75,7 @@ function unilib.pkg.tree_mushroom_red.exec()
             recipe = {
                 {"unilib:mushroom_red", "unilib:mushroom_red"},
                 {"unilib:mushroom_red", "unilib:mushroom_red"},
-            }
+            },
         })
 
     end
@@ -99,30 +83,9 @@ function unilib.pkg.tree_mushroom_red.exec()
         basic_flag = true,
     })
 
-    unilib.register_node("unilib:tree_mushroom_red_pore", "ethereal:mushroom_pore", mode, {
-        -- From ethereal:mushroom_pore
-        description = S("Red Mushroom Pore"),
-        tiles = {"unilib_tree_mushroom_red_pore.png"},
-        groups = {
-            choppy = 3, cracky = 3, disable_jump = 1, fall_damage_add_percent = -100,
-            flammable = 2, leafdecay = 3, oddly_breakable_by_hand = 3, snappy = 3,
-        },
-        sounds = unilib.sound_table.dirt,
-    })
-    unilib.register_craft({
-        -- From ethereal:mushroom_pore
-        type = "fuel",
-        recipe = "unilib:tree_mushroom_red_pore",
-        burntime = 3,
-    })
+    -- N.B. Code in the "tree_mushroom_generic" package provides a pore node
 
-    -- (In recent version of ethereal-ng, leafdecay works on mushroom caps/pores)
-    unilib.register_leafdecay({
-        -- From ethereal:mushroom_pore
-        trunks = {"unilib:tree_mushroom_red_trunk"},
-        leaves = {"unilib:tree_mushroom_red_cap", "unilib:tree_mushroom_red_pore"},
-        radius = 3,
-    })
+    -- N.B. Code in the "tree_mushroom_generic" package handles leaf decay for this package
 
     unilib.register_tree_sapling({
         -- From ethereal:mushroom_sapling. Creates unilib:tree_mushroom_red_sapling
@@ -141,50 +104,17 @@ function unilib.pkg.tree_mushroom_red.exec()
         under_list = {"unilib:dirt_ordinary_with_turf_mushroom", "ethereal:mushroom_dirt"},
     })
 
-    unilib.register_fence_quick({
-        -- From ethereal:fence_mushroom. Creates unilib:tree_mushroom_red_wood_fence
-        part_name = "mushroom_red",
-        orig_name = "ethereal:fence_mushroom",
+    -- N.B. Code in the "tree_mushroom_generic" package provides fences
 
-        replace_mode = mode,
-        base_img = "unilib_tree_mushroom_red_trunk.png",
-        burnlevel = burnlevel,
-        description = S("Red Mushroom Tree Wood Fence"),
-        ingredient = "unilib:tree_mushroom_red_trunk",
-    })
-
-    unilib.register_fence_rail_quick({
-        -- From ethereal:fence_rail_mushroom. Creates unilib:tree_mushroom_red_wood_fence_rail
-        part_name = "mushroom_red",
-        orig_name = "ethereal:fence_rail_mushroom",
-
-        replace_mode = mode,
-        burnlevel = burnlevel,
-        base_img = "unilib_tree_mushroom_red_trunk.png",
-        description = S("Red Mushroom Tree Wood Fence Rail"),
-        ingredient = "unilib:tree_mushroom_red_trunk",
-    })
-
-    unilib.register_fence_gate_quick({
-        -- From ethereal:fencegate_mushroom. Creates unilib:gate_mushroom_closed
-        part_name = "mushroom_red",
-        orig_name = {"ethereal:fencegate_mushroom_closed", "ethereal:fencegate_mushroom_open"},
-
-        replace_mode = mode,
-        base_img = "unilib_tree_mushroom_red_trunk.png",
-        burnlevel = burnlevel,
-        description = S("Red Mushroom Tree Wood Fence Gate"),
-        ingredient = "unilib:tree_mushroom_red_trunk",
-    })
-
-    unilib.register_decoration("ethereal_tree_mushroom_red", {
+    unilib.register_decoration_generic("ethereal_tree_mushroom_red", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_mushroom_red.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_mushroom_red.mts",
 
-        fill_ratio = 0.02,
+        fill_ratio = 0.018,
         flags = "place_center_x, place_center_z",
-        sidelen = 80,
+        -- N.B. Confirmed with original mod author, this is not a typo
+        sidelen = 8,
     })
 
 end

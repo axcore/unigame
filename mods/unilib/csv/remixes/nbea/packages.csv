@@ -1,6 +1,5 @@
 # "nbea" remix - contains decorative items and mesecons compatibility, but no furniture
 # Warning - some of these items are processor-intensive, and should not be used on a server
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -28,13 +27,13 @@ fruit_apple|default
 glass_ordinary|default moreblocks vessels
 grass_ordinary|default
 item_stick_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_mithril|moreores technic
-metal_steel|default technic
+metal_mithril|glemr11 moreores technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
-mineral_mese|default
+mineral_mese|default glemr11
 misc_firefly|fireflies
 plant_cactus_ordinary|default
 sand_ordinary|default
@@ -45,13 +44,18 @@ tree_jungle|default doors moreblocks
 vessel_bottle_glass_empty|thirsty vessels
 vessel_bottle_glass_with_firefly|fireflies
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #crop_oat|farming
 #crop_wheat|farming
 #grass_dry|default
 #grass_jungle|default
+#machine_furnace_induction|unilib
 #moss_green|sickles
 #mushroom_brown|flowers
 #plant_shrub_dry|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

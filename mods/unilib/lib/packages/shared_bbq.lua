@@ -9,7 +9,7 @@
 unilib.pkg.shared_bbq = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 local cold_grill_table = {
     ["unilib:machine_grill_kettle"] = true,
@@ -40,13 +40,13 @@ function unilib.pkg.shared_bbq.on_use_play_sound(sound, use_on_cold_flag)
         end
 
         local under_pos = pointed_thing.under
-        local under_node_name = minetest.get_node(under_pos).name
+        local under_node_name = core.get_node(under_pos).name
 
         if hot_grill_table[under_node_name] ~= nil or (
             use_on_cold_flag and cold_grill_table[under_node_name] ~= nil
         ) then
 
-            minetest.sound_play(sound, {pos = under_pos, max_hear_distance = 10})
+            core.sound_play(sound, {pos = under_pos, max_hear_distance = 10})
             return
 
         end

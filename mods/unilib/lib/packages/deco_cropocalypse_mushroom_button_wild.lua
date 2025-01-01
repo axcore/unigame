@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_mushroom_button_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_cropocalypse_mushroom_button_wild.post()
 
-    unilib.register_decoration_now("cropocalypse_mushroom_button_wild", nil, {
+    unilib.register_decoration_complete("cropocalypse_mushroom_button_wild", nil, {
         -- From cropocalypse/plants.lua
         -- Completes decoration in package "mushroom_button_wild"
         biomes = "default_forest_coniferous",
         place_on = "unilib:dirt_ordinary_with_litter_coniferous",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

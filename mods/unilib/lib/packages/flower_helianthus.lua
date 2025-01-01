@@ -9,7 +9,7 @@
 unilib.pkg.flower_helianthus = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pl_sunflowers.add_mode
+local mode = unilib.global.imported_mod_table.pl_sunflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -18,7 +18,7 @@ local mode = unilib.imported_mod_table.pl_sunflowers.add_mode
 local function place_func(pos)
 
     local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
-    minetest.swap_node(right_here, {name = "unilib:flower_helianthus", param2 = math.random(0, 3)})
+    core.swap_node(right_here, {name = "unilib:flower_helianthus", param2 = math.random(0, 3)})
 
 end
 
@@ -41,14 +41,15 @@ function unilib.pkg.flower_helianthus.exec()
 
     unilib.register_node("unilib:flower_helianthus", "flowers:sunflower", mode, {
         -- From pl_sunflowers, flowers:sunflower
-        description = unilib.annotate(S("Helianthus"), "Helianthus"),
+        description = unilib.utils.annotate(S("Helianthus"), "Helianthus"),
         tiles = {"unilib_flower_helianthus.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, dig_immediate = 3, flammable = 3, flora = 1},
         groups = {
-            attached_node = 1, color_yellow = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_yellow = 1, colour_yellow = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         collision_box = {
@@ -88,10 +89,10 @@ function unilib.pkg.flower_helianthus.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(-0.1),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.1),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 25,
                 plantlife_limit = -0.9,
             }),

@@ -9,7 +9,7 @@
 unilib.pkg.bed_mat_sleeping = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.bed_mat_sleeping.exec()
         description = S("Decorative sleeping Mat"),
         tiles = {"unilib_bed_mat_sleeping.png"},
         groups = {snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         -- N.B. Removed ,so that this item and "unilib:bed_mat_straw" are rotated the same way in
@@ -69,8 +69,8 @@ function unilib.pkg.bed_mat_sleeping.exec()
         -- From cottages:sleeping_mat
         output = "unilib:bed_mat_sleeping 3",
         recipe = {
-            {"unilib:misc_flooring_wool", "unilib:bed_mat_straw", "unilib:bed_mat_straw"}
-        }
+            {"unilib:misc_flooring_wool", "unilib:bed_mat_straw", "unilib:bed_mat_straw"},
+        },
     })
 
     -- Notes from cottages:
@@ -81,7 +81,7 @@ function unilib.pkg.bed_mat_sleeping.exec()
         description = S("Decorative Sleeping Mat with Pillow"),
         tiles = {"unilib_bed_mat_sleeping.png"},
         groups = {snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         -- N.B. Removed ,so that this item and "unilib:bed_mat_straw" are rotated the same way in
@@ -103,7 +103,7 @@ function unilib.pkg.bed_mat_sleeping.exec()
             type = "fixed",
             fixed = {
                 {-0.48, -0.5,-0.48, 0.48, -0.5+2/16, 0.48},
-            }
+            },
         },
         sunlight_propagates = true,
         wield_image = "unilib_bed_mat_sleeping.png",
@@ -120,8 +120,8 @@ function unilib.pkg.bed_mat_sleeping.exec()
         -- From cottages:sleeping_mat_head
         output = "unilib:bed_mat_sleeping_head",
         recipe = {
-            {"unilib:bed_mat_sleeping", "unilib:bed_mat_straw"}
-        }
+            {"unilib:bed_mat_sleeping", "unilib:bed_mat_straw"},
+        },
     })
 
 end

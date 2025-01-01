@@ -9,7 +9,7 @@
 unilib.pkg.mineral_zeolite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_zeolite_rock.exec()
 
     local c_lump = "unilib:mineral_zeolite_lump"
-    local hardness = unilib.mineral_table["zeolite"]["hardness"]
+    local hardness = unilib.global.mineral_table["zeolite"]["hardness"]
 
     unilib.register_mineral_rock("zeolite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_zeolite_rock.exec()
         description = S("Zeolite Rock"),
         tiles = {"unilib_mineral_zeolite_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

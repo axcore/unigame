@@ -9,7 +9,7 @@
 unilib.pkg.flower_rose_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.flower_rose_frozen.exec()
         deco_part_name = "farlands",
         description = S("Frozen Rose"),
         fill_ratio = 0.03,
-        group_table = {color_blue = 1, flammable = 0},
+        group_table = {color_blue = 1, colour_blue = 1, flammable = 0},
         sci_name = "Rosa",
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_clean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.pane_glass_clean.exec()
             description = S("Clean Glass Pane"),
             textures = {"unilib_glass_clean.png", "", "unilib_pane_glass_ordinary_edge.png"},
             groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_glass_clean.png",
             recipe = {

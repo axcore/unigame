@@ -1,5 +1,4 @@
 # "icecream" remix - contains everything from the icecream mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -33,7 +32,7 @@ ingredient_flour_ordinary|farming
 item_stick_ordinary|default
 liquid_water_ordinary|default
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 misc_trellis|farming
 produce_carrot_normal|farming
 produce_garlic_normal|farming
@@ -56,6 +55,7 @@ produce_blueberry_highbush|farming
 #dye_basic|dye bakedclay
 #food_chocolate_biscuit|farming
 #ingredient_cocoa_normal|cacaotree
+#machine_furnace_induction|unilib
 #plant_shrub_dry|default
 #utensil_mortar_pestle|farming
 

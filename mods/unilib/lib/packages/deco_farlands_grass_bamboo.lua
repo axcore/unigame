@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_bamboo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_farlands_grass_bamboo.post()
 
-    unilib.register_decoration_now("farlands_grass_bamboo", nil, {
+    unilib.register_decoration_complete("farlands_grass_bamboo", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "grass_bamboo"
         biomes = "farlands_forest_bamboo",

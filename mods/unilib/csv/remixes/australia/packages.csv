@@ -2,10 +2,16 @@
 # Did not import the sunken ship, submarine and their chests
 # Used existing packages for metal ores and fern trees, rather than creating almost identical items
 #       from the australia mod. Add a tin ore for consistency (see the comments below)
+# unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
+#   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
+#   enable them by uncommenting the optional package below
 # It is recommended that this remix is used together with the "mtgame_mini" remix
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
+
+# Optional package. Uncomment this package to replace minetest_game dirt-with-turf nodes with
+#       custom Australia-themed ones
+#dirt_custom_antipodean|unilib
 
 # australia packages
 base_australia|australia
@@ -126,10 +132,10 @@ flower_daisy_silver|australia
 flower_lily_darling|australia
 flower_lily_mangrove|australia
 food_nuts_macadamia|australia
+fruit_apple_mangrove|australia
 fruit_berry_lilly_pilly|australia
 fruit_cherry_australian|australia
 fruit_fig_moreton_bay|australia
-fruit_mangrove_apple|australia
 fruit_quandong_desert|australia
 grass_mitchell|australia
 gravel_red_antipodean|australia
@@ -233,20 +239,18 @@ tree_fern_giant|ferns
 
 # supporting packages (.depends)
 clay_ordinary|default
-dirt_ordinary|default farming moreblocks
 grass_dry|default
 grass_ordinary|default
 gravel_ordinary|default mtg_plus
 liquid_water_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_tin|default technic
+metal_tin|default glemr11 technic
 metal_uranium|technic_worldgen technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 mushroom_brown|flowers
 mushroom_red|flowers
 sand_desert|default farming
@@ -258,11 +262,13 @@ stone_ordinary_with_uranium|technic_worldgen
 stone_sandstone_ordinary|default moreblocks mtg_plus
 
 # supporting packages (.at_least_one)
-#biome_default_forest_coniferous|default
-#biome_default_forest_deciduous|default
-#biome_default_grassland|default
-#biome_default_rainforest|default
-#biome_default_taiga|default
+biome_default_forest_coniferous|default
+biome_default_forest_deciduous|default
+biome_default_grassland|default
+biome_default_rainforest|default
+biome_default_taiga|default
+dirt_custom_antipodean|unilib
+dirt_ordinary|default farming moreblocks
 fern_ordinary|default
 fern_ordinary_tuber|ferns
 
@@ -272,12 +278,11 @@ fern_ordinary_tuber|ferns
 #crop_rye|farming
 #crop_wheat|farming
 #dye_basic|dye bakedclay
-#fire_ordinary|fire
-#fire_permanent|fire underch
 #grass_jungle|default
 #gravel_sandstone_ordinary|unilib
-#liquid_lava_ordinary|default
-#liquid_water_river|default
-#metal_steel|default technic
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#mineral_flint|default fire mtg_plus
 #moss_green|sickles
-#soil_ordinary|farming
+
+# supporting packages (.suggested)

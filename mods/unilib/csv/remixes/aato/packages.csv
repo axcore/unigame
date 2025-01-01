@@ -1,7 +1,6 @@
 # "aato" remix - contains all suitable textures from the AATO mod, with original code and (where
 #       necessary) original textures. Only natural materials were imported; no machinery was
 #       imported
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -265,8 +264,8 @@ mineral_sphalerite|real_minerals
 mineral_sphalerite_rock|aato
 mineral_stibnite|unilib
 mineral_stibnite_rock|aato
-mineral_sulphur_real|real_minerals
-mineral_sulphur_real_rock|aato
+mineral_sulphur_rare|real_minerals
+mineral_sulphur_rare_rock|aato
 mineral_sylvite|real_minerals
 mineral_sylvite_rock|aato
 mineral_tantalite|unilib
@@ -274,7 +273,12 @@ mineral_tantalite_rock|aato
 mineral_tetrahedrite|real_minerals
 mineral_tetrahedrite_rock|aato
 
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
+#machine_polishing|unilib
 #metal_aluminium|real_minerals
 #metal_antimony|unilib
 #metal_arsenic|unilib
@@ -282,36 +286,40 @@ mineral_tetrahedrite_rock|aato
 #metal_cadmium|unilib
 #metal_calcium|unilib
 #metal_cerium|unilib
-#metal_chromium|technic_worldgen technic
+#metal_chromium|glemr11 technic_worldgen technic
 #metal_cobalt|unilib
-#metal_copper|default moreblocks technic
+#metal_copper|default glemr11 moreblocks technic
 #metal_germanium|unilib
 #metal_iron_pig|real_minerals
 #metal_iron_wrought|technic_worldgen
-#metal_lead|technic_worldgen technic
+#metal_lead|glemr11 technic_worldgen technic
 #metal_lithium|unilib
 #metal_magnesium|unilib
 #metal_manganese|unilib
-#metal_mercury|unilib
+#metal_mercury|glemr11 unilib
 #metal_molybdenum|unilib
 #metal_nickel|real_minerals
 #metal_niobium|unilib
 #metal_potassium|unilib
 #metal_rhenium|unilib
 #metal_scandium|unilib
-#metal_silver|moreores technic
+#metal_silver|glemr11 moreores technic
 #metal_sodium|unilib
 #metal_strontium|unilib
 #metal_tantalum|unilib
 #metal_thorium|unilib
-#metal_tin|default technic
+#metal_tin|default glemr11 technic
 #metal_titanium|unilib
 #metal_tungsten|unilib
 #metal_uranium|technic_worldgen technic
 #metal_vanadium|unilib
+#metal_ytterbium|unilib
 #metal_yttrium|unilib
-#metal_zinc|technic_worldgen technic
+#metal_zinc|glemr11 technic_worldgen technic
 #metal_zirconium|unilib
 #mineral_coal|default technic
+#mineral_diamond|default mtg_plus
 #substance_phosphorus|unilib
 #substance_selenium|unilib
+
+# supporting packages (.suggested)

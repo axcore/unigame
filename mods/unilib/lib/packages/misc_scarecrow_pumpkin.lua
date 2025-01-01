@@ -9,7 +9,7 @@
 unilib.pkg.misc_scarecrow_pumpkin = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_scarecrow_pumpkin.exec()
         description = S("Pumpkin Scarecrow"),
         tiles = {"unilib_misc_scarecrow_pumpkin.png"},
         groups = {choppy = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
@@ -41,6 +41,8 @@ function unilib.pkg.misc_scarecrow_pumpkin.exec()
         },
         drawtype = "mesh",
         inventory_image = "unilib_misc_scarecrow_pumpkin_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_misc_scarecrow_pumpkin.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -60,7 +62,7 @@ function unilib.pkg.misc_scarecrow_pumpkin.exec()
             {"", "unilib:produce_pumpkin_yellow_harvest", ""},
             {c_stick, "unilib:misc_straw_ordinary", c_stick},
             {"", 'group:wood', ""},
-        }
+        },
     })
 
 end

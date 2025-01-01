@@ -9,7 +9,7 @@
 unilib.pkg.ice_pure = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pedology.add_mode
+local mode = unilib.global.imported_mod_table.pedology.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.ice_pure.exec()
 
         drawtype = "glasslike",
         drop = "unilib:ice_pure_lump 4",
-        inventory_image = minetest.inventorycube("unilib_ice_pure.png"),
+        inventory_image = core.inventorycube("unilib_ice_pure.png"),
         paramtype = "light",
     })
 

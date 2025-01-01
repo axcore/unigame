@@ -9,7 +9,7 @@
 unilib.pkg.food_muffin_acorn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_muffin_acorn.exec()
         -- N.B. No groups in original code
         groups = {food_acorn_muffin = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_muffin_acorn", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_muffin_acorn", 4),
     })
     unilib.register_craft({
         -- From moretrees:acorn_muffin

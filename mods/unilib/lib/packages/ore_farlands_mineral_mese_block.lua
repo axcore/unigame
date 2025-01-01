@@ -9,7 +9,7 @@
 unilib.pkg.ore_farlands_mineral_mese_block = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.ore_farlands_mineral_mese_block.post()
         clust_num_ores          = 3,
         clust_scarcity          = 36 * 36 * 36,
         clust_size              = 2,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -51,7 +51,7 @@ function unilib.pkg.ore_farlands_mineral_mese_block.post()
         clust_scarcity          = 36 * 36 * 36,
         clust_size              = 2,
         y_max                   = -1024,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.material_gum_kauri = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.material_gum_kauri.exec()
         recipe = "unilib:material_gum_kauri",
         burntime = 3,
     })
-    if unilib.pkg_executed_table["torch_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:kauri_gum
@@ -45,10 +45,10 @@ function unilib.pkg.material_gum_kauri.exec()
             recipe = {
                 {"unilib:material_gum_kauri"},
                 {"group:stick"},
-            }
+            },
         })
 
-        if unilib.pkg_executed_table["dye_basic"] ~= nil then
+        if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
             -- Black dye from Kauri gum soot
             unilib.register_craft({

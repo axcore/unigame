@@ -9,7 +9,7 @@
 unilib.pkg.bush_blueberry_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,9 +29,9 @@ end
 function unilib.pkg.bush_blueberry_ordinary.exec()
 
     -- (no burnlevel)
-    -- (no sci_name)
+    local sci_name = "Vaccinium corymbosum"
 
-    local inv_img = unilib.filter_leaves_img("unilib_bush_blueberry_ordinary_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_bush_blueberry_ordinary_leaves.png")
     unilib.register_node(
         -- From default:blueberry_bush_leaves
         "unilib:bush_blueberry_ordinary_leaves",
@@ -41,32 +41,34 @@ function unilib.pkg.bush_blueberry_ordinary.exec()
             description = S("Ordinary Blueberry Bush Leaves"),
             tiles = {"unilib_bush_blueberry_ordinary_leaves.png"},
             groups = {flammable = 2, leaves = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "allfaces_optional",
             drop = {
                 max_items = 1,
                 items = {
                     {items = {"unilib:bush_blueberry_ordinary_sapling"}, rarity = 5},
-                    {items = {"unilib:bush_blueberry_ordinary_leaves"}}
-                }
+                    {items = {"unilib:bush_blueberry_ordinary_leaves"}},
+                },
             },
             inventory_image = inv_img,
             paramtype = "light",
             wield_img = inv_img,
 
-            after_place_node = unilib.after_place_leaves,
+            after_place_node = unilib.flora.after_place_leaves,
 
             on_timer = function(pos, elapsed)
 
-                if minetest.get_node_light(pos) < 11 then
+                if core.get_node_light(pos) < 11 then
 
---                  minetest.get_node_timer(pos):start(200)
-                    minetest.get_node_timer(pos):start(int(unilib.sapling_grow_min * 0.66))
+--                  core.get_node_timer(pos):start(200)
+                    core.get_node_timer(pos):start(
+                        math.floor(unilib.setting.sapling_grow_min * 0.66)
+                    )
 
                 else
 
-                    minetest.set_node(
+                    core.set_node(
                         pos, {name = "unilib:bush_blueberry_ordinary_leaves_with_berries"}
                     )
 
@@ -78,7 +80,7 @@ function unilib.pkg.bush_blueberry_ordinary.exec()
 
     local main_img = "unilib_bush_blueberry_ordinary_leaves.png" ..
             "^unilib_bush_blueberry_ordinary_overlay.png"
-    inv_img = unilib.filter_leaves_img(main_img)
+    inv_img = unilib.flora.filter_leaves_img(main_img)
     unilib.register_node(
         "unilib:bush_blueberry_ordinary_leaves_with_berries",
         "default:blueberry_bush_leaves_with_berries",
@@ -92,7 +94,7 @@ function unilib.pkg.bush_blueberry_ordinary.exec()
                 dig_immediate = 3, flammable = 2, leaves = 1, not_in_creative_inventory = 1,
                 snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "allfaces_optional",
             drop = "unilib:fruit_blueberry_ordinary",
@@ -103,9 +105,9 @@ function unilib.pkg.bush_blueberry_ordinary.exec()
 
             after_dig_node = function(pos, oldnode, oldmetadata, digger)
 
-                minetest.set_node(pos, {name = "unilib:bush_blueberry_ordinary_leaves"})
-                minetest.get_node_timer(pos):start(
-                    math.random(unilib.sapling_grow_min, unilib.sapling_grow_max)
+                core.set_node(pos, {name = "unilib:bush_blueberry_ordinary_leaves"})
+                core.get_node_timer(pos):start(
+                    math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max)
                 )
 
             end,
@@ -127,10 +129,10 @@ function unilib.pkg.bush_blueberry_ordinary.exec()
         select_Table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 2 / 16, 4 / 16},
     })
 
-    unilib.register_decoration("default_bush_blueberry_ordinary", {
+    unilib.register_decoration_generic("default_bush_blueberry_ordinary", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_blueberry_ordinary.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_blueberry_ordinary.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

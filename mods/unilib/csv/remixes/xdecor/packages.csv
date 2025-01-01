@@ -1,13 +1,10 @@
-# "xdecor" remix - contains everything except the cauldron/soup, enchanting table, workbench and
-#       chess set
-# See the STANDARDS file for more information about what belongs in each category, and what does not
+# "xdecor" remix - contains everything except the chess set
 
 # node_name | original_mod
 
 # xdecor packages
 candle_normal|xdecor
 clay_ordinary_hardened|xdecor
-container_cabinet|xdecor
 container_chest_obsidian|xdecor
 decor_block_ice_packed|xdecor
 decor_bricks_cactus_old|xdecor
@@ -26,9 +23,11 @@ door_steel_prison|xdecor
 door_steel_rusty_prison|xdecor
 flowerpot_clay|xdecor
 food_honey_synthetic|xdecor
+food_soup_mixed|xdecor
+furniture_cabinet_simple|xdecor
 furniture_chair_simple|xdecor
 furniture_curtain_basic|xdecor
-furniture_cushion_simple|xdecor
+furniture_cushion_simple_basic|xdecor
 furniture_shelf_utility|moreblocks xdecor
 furniture_table_simple|xdecor
 gadget_radio|xdecor
@@ -38,6 +37,9 @@ glass_framed_wood_connecting|xdecor
 light_lamp_traditional|xdecor
 light_lantern_iron|xdecor
 light_lantern_wood|xdecor
+machine_cauldron_soup|xdecor
+machine_table_enchanting_simple|xdecor
+machine_workbench|xdecor
 misc_barricade|xdecor
 misc_box_barrel|xdecor
 misc_box_letter|xdecor
@@ -45,6 +47,8 @@ misc_cobweb|xdecor
 misc_flooring_tatami|xdecor
 misc_frame_wood_display|xdecor
 misc_hive_artificial|xdecor
+misc_painting_landscape|xdecor
+misc_painting_portrait|xdecor
 misc_painting_small|xdecor
 misc_trampoline|xdecor
 misc_weathervane_rooster|xdecor
@@ -72,34 +76,44 @@ ice_ordinary|default ethereal mtg_plus
 item_paper_ordinary|default moreblocks
 item_string_ordinary|farming
 liquid_water_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_mese|default glemr11
 pane_steel_bar|xpanes
 plant_cactus_ordinary|default
 plant_papyrus_ordinary|default mtg_plus
-shared_default_chest|unilib
+shared_default_chest|default pipeworks
+shared_default_sign|default
+shared_wool|wool
 sign_wall_wood|default
 stone_desert|default moreblocks
 stone_obsidian|default moreblocks
 stone_ordinary|default moreblocks technic
+tool_hammer_blacksmith|anvil cottages
 torch_ordinary|default
 trapdoor_wood_ordinary|doors
+utensil_bowl_wooden|farming thirsty
 wool_basic|wool
 
 # supporting packages (.at_least_one)
 dirt_dry|default
 dirt_ordinary|default farming moreblocks
+machine_anvil_fancy|anvil
+machine_anvil_simple|cottages
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
+#furniture_shelf_bookshelf|default
 #grass_jungle|default
 #gravel_stone_desert|glemr11
 #item_sweeper|moreblocks
-#metal_bronze|default technic
-#mineral_mese|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_bronze|default glemr11 technic
 #moss_green|sickles
 #plant_shrub_dry|default
 #shared_screwdriver|screwdriver

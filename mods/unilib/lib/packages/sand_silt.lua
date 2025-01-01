@@ -9,7 +9,7 @@
 unilib.pkg.sand_silt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,9 @@ function unilib.pkg.sand_silt.exec()
         -- From darkage:silt
         description = S("Silty Sand"),
         tiles = {"unilib_sand_silt.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        -- N.B. sand = 1 not in original code
+        groups = {crumbly = 3, sand = 1},
+        sounds = unilib.sound.generate_dirt({
             footstep = "",
         }),
 
@@ -42,8 +43,8 @@ function unilib.pkg.sand_silt.exec()
         output = "unilib:sand_silt",
         ingredient = "unilib:sand_silt_lump",
     })
-    if unilib.pkg_executed_table["clay_ordinary"] ~= nil and
-            unilib.pkg_executed_table["sand_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From darkage:silt
@@ -51,7 +52,7 @@ function unilib.pkg.sand_silt.exec()
             recipe = {
                 {"unilib:sand_ordinary", "unilib:sand_ordinary"},
                 {"unilib:clay_ordinary_lump", "unilib:clay_ordinary_lump"},
-            }
+            },
         })
 
     end

@@ -17,9 +17,9 @@
 unilib.pkg.stone_limestone_grey = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_limestone_grey.exec()
         description = S("Grey Limestone"),
 
         category = "sedimentary",
+        colour = "#AEA5A3",
         grinder_flag = true,
         hardness = 1,
         moss_flag = true,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_limestone_grey.exec()
         wall_orig_name = "underch:limestone_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:limestone. Creates unilib:stone_limestone_grey_cobble_compressed
+        part_name = "limestone_grey",
+        orig_name = "compressed:limestone",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:limestone. Creates unilib:stone_limestone_grey_cobble_compressed
-            part_name = "limestone_grey",
-            orig_name = "compressed:limestone",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Grey Limestone Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Grey Limestone Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:limestone. Creates unilib:stone_limestone_grey_cobble_condensed
+        part_name = "limestone_grey",
+        orig_name = "condensed:limestone",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:limestone. Creates unilib:stone_limestone_grey_cobble_condensed
-            part_name = "limestone_grey",
-            orig_name = "condensed:limestone",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Grey Limestone Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Grey Limestone Cobble"),
+    })
 
 end

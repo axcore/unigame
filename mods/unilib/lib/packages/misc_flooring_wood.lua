@@ -9,7 +9,7 @@
 unilib.pkg.misc_flooring_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_flooring_wood.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2,oddly_breakable_by_hand = 2,snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -51,7 +51,7 @@ function unilib.pkg.misc_flooring_wood.exec()
             },
         },
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     })
     unilib.register_craft({
         -- From cottages:wood_flat
@@ -59,7 +59,7 @@ function unilib.pkg.misc_flooring_wood.exec()
         recipe = {
             {"group:stick", "unilib:item_string_ordinary", "group:stick"},
             {"group:stick", "", "group:stick"},
-        }
+        },
     })
 
 end

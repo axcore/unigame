@@ -9,7 +9,7 @@
 unilib.pkg.item_kit_radar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.minimap_radar.add_mode
+local mode = unilib.global.imported_mod_table.minimap_radar.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.item_kit_radar.exec()
 
     unilib.register_craftitem("unilib:item_kit_radar", "minimap_radar:radar", mode, {
         -- From minimap_radar:radar
-        description = S("Radar Kit") .. "\n" .. S("Use with 'Minimap' key"),
+        description = unilib.utils.hint(S("Radar Kit"), S("Use with 'Minimap' key")),
         inventory_image = "unilib_item_kit_radar.png",
         -- N.B. No groups in original code, added .tool to match unilib:item_kit_mapping
         groups = {tool = 1},
@@ -44,7 +44,7 @@ function unilib.pkg.item_kit_radar.exec()
             unilib.pkg.shared_map.update_hud_flags(user)
         end,
     })
-    if minetest.get_modpath("technic") then
+    if core.get_modpath("technic") then
 
         local c_ingot = "technic:stainless_steel_ingot"
 
@@ -55,11 +55,11 @@ function unilib.pkg.item_kit_radar.exec()
                 {c_ingot, c_diamond, c_ingot},
                 {"unilib:dye_green", "technic:prospector", "unilib:dye_black"},
                 {c_ingot, c_diamond, c_ingot},
-            }
+            },
         })
 
-    elseif unilib.pkg_executed_table["metal_mithril"] ~= nil and
-            unilib.pkg_executed_table["metal_silver"] ~= nil then
+    elseif unilib.global.pkg_executed_table["metal_mithril"] ~= nil and
+            unilib.global.pkg_executed_table["metal_silver"] ~= nil then
 
         local c_ingot = "unilib:metal_silver_ingot"
 
@@ -70,11 +70,11 @@ function unilib.pkg.item_kit_radar.exec()
                 {c_ingot, c_diamond, c_ingot},
                 {"unilib:dye_green", "unilib:metal_mithril_block", "unilib:dye_black"},
                 {c_ingot, c_diamond, c_ingot},
-            }
+            },
         })
 
-    elseif unilib.pkg_executed_table["metal_steel"] ~= nil and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil then
+    elseif unilib.global.pkg_executed_table["metal_steel"] ~= nil and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil then
 
         local c_ingot = "unilib:metal_steel_ingot"
 
@@ -85,7 +85,7 @@ function unilib.pkg.item_kit_radar.exec()
                 {c_ingot, c_diamond, c_ingot},
                 {"unilib:dye_green", "unilib:mineral_mese_block", "unilib:dye_black"},
                 {c_ingot, c_diamond, c_ingot},
-            }
+            },
         })
 
     end

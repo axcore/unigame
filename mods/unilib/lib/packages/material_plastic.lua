@@ -9,7 +9,7 @@
 unilib.pkg.material_plastic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.material_plastic.exec()
     unilib.register_craftitem(
         -- From basic_materials:plastic_sheet
         "unilib:material_plastic_sheet",
-        "basic_materials:plastic_sheet",
+        {"basic_materials:plastic_sheet", "homedecor:plastic_sheeting"},
         mode,
         {
             description = S("Plastic Sheet"),
@@ -53,7 +53,7 @@ function unilib.pkg.material_plastic.exec()
     unilib.register_craftitem(
         -- From basic_materials:plastic_strip
         "unilib:material_plastic_strip",
-        "basic_materials:plastic_strip",
+        {"basic_materials:plastic_strip", "homedecor:plastic_strips"},
         mode,
         {
             description = S("Plastic Strips"),
@@ -69,7 +69,7 @@ function unilib.pkg.material_plastic.exec()
                 "unilib:material_plastic_sheet",
                 "unilib:material_plastic_sheet",
                 "unilib:material_plastic_sheet",
-            }
+            },
         },
     })
 

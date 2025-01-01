@@ -17,9 +17,9 @@
 unilib.pkg.stone_granite_salmon = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_granite_salmon.exec()
         description = S("Salmon Granite"),
 
         category = "intrusive",
+        colour = "#987468",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3/4)
         hardness = 1,
@@ -99,26 +100,22 @@ function unilib.pkg.stone_granite_salmon.exec()
         wall_orig_name = "underch:granite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:granite. Creates unilib:stone_granite_salmon_cobble_compressed
+        part_name = "granite_salmon",
+        orig_name = "compressed:granite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:granite. Creates unilib:stone_granite_salmon_cobble_compressed
-            part_name = "granite_salmon",
-            orig_name = "compressed:granite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Salmon Granite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Salmon Granite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:granite. Creates unilib:stone_granite_salmon_cobble_condensed
+        part_name = "granite_salmon",
+        orig_name = "condensed:granite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:granite. Creates unilib:stone_granite_salmon_cobble_condensed
-            part_name = "granite_salmon",
-            orig_name = "condensed:granite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Salmon Granite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Salmon Granite Cobble"),
+    })
 
 end

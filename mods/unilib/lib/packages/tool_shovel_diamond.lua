@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,13 +43,13 @@ function unilib.pkg.tool_shovel_diamond.exec()
         },
         wield_image = "unilib_tool_shovel_diamond.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From default:shovel_diamond
         part_name = "diamond",
         ingredient = "unilib:mineral_diamond_gem",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_diamond", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_diamond", "shovel")
 
 end

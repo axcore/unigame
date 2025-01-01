@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_palm = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.palm.add_mode
+local mode = unilib.global.imported_mod_table.palm.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,10 @@ end
 function unilib.pkg.door_wood_palm.exec()
 
     unilib.register_door({
-        -- From cool_trees/palm, doors:door_palm_wood. Creates unilib:door_wood_palm
+        -- From cool_trees/palm, doors:door_palm_wood. Creates unilib:door_wood_palm_closed_left,
+        --      etc
         part_name = "wood_palm",
-        orig_name = {
+        orig_name_list = {
             "doors:door_palm_wood_a",
             "doors:door_palm_wood_b",
             "doors:door_palm_wood_c",
@@ -47,7 +48,7 @@ function unilib.pkg.door_wood_palm.exec()
                 {"unilib:tree_palm_wood", "unilib:tree_palm_wood"},
                 {"unilib:tree_palm_leaves", "unilib:tree_palm_leaves"},
                 {"unilib:tree_palm_wood", "unilib:tree_palm_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

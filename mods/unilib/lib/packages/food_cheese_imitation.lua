@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_imitation = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,7 @@ function unilib.pkg.food_cheese_imitation.init()
         description = "Imitation cheese",
         depends = "dye_basic",
         suggested = {
-            "ingredient_butter_imitation",      -- group:food_butter
+            "ingredient_butter_normal",         -- group:food_butter
         },
     }
 
@@ -39,7 +39,7 @@ function unilib.pkg.food_cheese_imitation.exec()
             inventory_image = "unilib_food_cheese_imitation.png",
             groups = {eatable = 1, food = 1, food_cheese = 1, food_vegan = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_imitation", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_imitation", 3),
         }
     )
     unilib.register_craft({

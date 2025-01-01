@@ -17,9 +17,9 @@
 unilib.pkg.glass_ordinary = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
-local vessels_add_mode = unilib.imported_mod_table.vessels.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
+local vessels_add_mode = unilib.global.imported_mod_table.vessels.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,12 +42,11 @@ function unilib.pkg.glass_ordinary.exec()
         description = S("Ordinary Glass"),
         tiles = {"unilib_glass_ordinary.png", "unilib_glass_ordinary_detail.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
         paramtype = "light",
-        paramtype2 = "glasslikeliquidlevel",
         sunlight_propagates = true,
         -- Notes from default:
         -- Only needed for stairs API
@@ -59,7 +58,7 @@ function unilib.pkg.glass_ordinary.exec()
         output = "unilib:glass_ordinary",
         recipe = "group:sand",
     })
-    if vessels_add_mode ~= "defer" then
+    if vessels_add_mode ~= "defer" or not core.get_modpath("vessels") then
 
         unilib.register_craft({
             -- From vessels:glass_fragments
@@ -69,9 +68,9 @@ function unilib.pkg.glass_ordinary.exec()
         })
 
     end
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil and
-            moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil and
+            (moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")) then
 
         unilib.register_glass_trap({
             -- From moreblocks:trap_glass. Creates unilib:glass_ordinary_trap
@@ -89,8 +88,8 @@ function unilib.pkg.glass_ordinary.exec()
         basic_flag = true,          -- Create only stairs from minetest_game/stairs
         img_rotate_flag = true,
     })
-    -- (The stairs were not created if unilib.add_stairs_basic_flag is false)
-    if minetest.registered_nodes["unilib:glass_ordinary_stair_simple"] ~= nil then
+    -- (The stairs were not created if unilib.setting.add_stairs_basic_flag is false)
+    if core.registered_nodes["unilib:glass_ordinary_stair_simple"] ~= nil then
 
         unilib.override_item("unilib:glass_ordinary_stair_simple", {
             tiles = {
@@ -136,7 +135,7 @@ function unilib.pkg.glass_ordinary.exec()
     })
 
     -- Glass recycling: glass fragments are used with various vessels
-    if vessels_add_mode ~= "defer" then
+    if vessels_add_mode ~= "defer" or not core.get_modpath("vessels") then
 
         unilib.register_craftitem(
             -- From vessels:glass_fragments
@@ -152,8 +151,8 @@ function unilib.pkg.glass_ordinary.exec()
     end
 
     -- This package provides deliberate craft recipe conflicts
-    unilib.register_craft_conflicts(
-        {"unilib:glass_ordinary", "unilib:stone_obsidian"}
-    )
+    unilib.register_craft_conflicts({
+        {"unilib:glass_ordinary", "unilib:stone_obsidian"},
+    })
 
 end

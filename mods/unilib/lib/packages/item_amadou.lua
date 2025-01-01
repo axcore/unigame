@@ -9,7 +9,7 @@
 unilib.pkg.item_amadou = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.item_amadou.exec()
         burntime = 120,
     })
 
-    if unilib.pkg_executed_table["tnt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["tnt_ordinary"] ~= nil then
 
         unilib.register_craftitem("unilib:item_amadou_lasting", "nsspf:lasting_amadou", mode, {
             -- From nsspf:lasting_amadou

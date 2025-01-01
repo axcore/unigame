@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,8 +31,10 @@ function unilib.pkg.light_lantern_iron.exec()
         description = S("Iron Lantern"),
         tiles = {"unilib_light_lantern_iron.png"},
         groups = {choppy = 3, cracky = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 13,
         paramtype = "light",
         paramtype2 = "facedir",

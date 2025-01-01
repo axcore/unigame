@@ -9,12 +9,13 @@
 unilib.pkg.coral_rooted_fire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+--[[
 local function on_place_coral(itemstack, placer, pointed_thing)
     return unilib.pkg.shared_xocean.on_place(itemstack, placer, pointed_thing, "fire")
 end
@@ -22,6 +23,7 @@ end
 local function on_place_skeleton(itemstack, placer, pointed_thing)
     return unilib.pkg.shared_xocean.on_place(itemstack, placer, pointed_thing, "fire_skeleton")
 end
+]]--
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +33,7 @@ function unilib.pkg.coral_rooted_fire.init()
 
     return {
         description = "Rooted fire coral",
-        depends = {"coral_block_fire", "liquid_water_ordinary", "shared_xocean"},
+        depends = {"coral_block_fire", "liquid_water_ordinary"},
     }
 
 end
@@ -42,8 +44,9 @@ function unilib.pkg.coral_rooted_fire.exec()
         -- From xocean:fire
         description = S("Rooted Fire Coral"),
         tiles = {"unilib_coral_block_fire.png"},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -54,6 +57,8 @@ function unilib.pkg.coral_rooted_fire.exec()
         node_dig_prediction = "unilib:coral_block_fire",
         node_placement_prediction = "",
         paramtype = "light",
+        -- N.B. No .paramtype2 in original code
+        paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
             fixed = {
@@ -67,18 +72,31 @@ function unilib.pkg.coral_rooted_fire.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_fire"})
+            core.set_node(pos, {name = "unilib:coral_block_fire"})
         end,
 
-        on_place = on_place_coral,
+--      on_place = on_place_coral,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_fire",
+                    need_above = "unilib:liquid_water_ordinary_source",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
     unilib.register_node("unilib:coral_rooted_fire_skeleton", "xocean:skeleton_fire", mode, {
         -- From xocean:skeleton_fire
         description = S("Rooted Fire Coral Skeleton"),
         tiles = {"unilib_coral_block_fire_skeleton.png"},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -88,6 +106,8 @@ function unilib.pkg.coral_rooted_fire.exec()
         node_dig_prediction = "unilib:coral_block_fire_skeleton",
         node_placement_prediction = "",
         paramtype = "light",
+        -- N.B. No .paramtype2 in original code
+        paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
             fixed = {
@@ -101,13 +121,25 @@ function unilib.pkg.coral_rooted_fire.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_fire_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_fire_skeleton"})
         end,
 
-        on_place = on_place_skeleton,
+--      on_place = on_place_skeleton,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_fire_skeleton",
+                    need_above = "unilib:liquid_water_ordinary_source",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
-    unilib.register_decoration("xocean_coral_rooted_fire", {
+    unilib.register_decoration_generic("xocean_coral_rooted_fire", {
         -- From xocean/init.lua
         deco_type = "simple",
         decoration = "unilib:coral_rooted_fire",
@@ -121,13 +153,16 @@ function unilib.pkg.coral_rooted_fire.exec()
             seed = 87112,
             spread = {x = 20, y = 20, z = 20},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
+        param2 = 0,
+        param2_max = 3,
         place_offset_y = -1,
         sidelen = 16,
     })
 
-    unilib.register_decoration("xocean_coral_rooted_fire_skeleton", {
+    unilib.register_decoration_generic("xocean_coral_rooted_fire_skeleton", {
         -- From xocean/init.lua
         deco_type = "simple",
         decoration = "unilib:coral_rooted_fire_skeleton",
@@ -141,8 +176,11 @@ function unilib.pkg.coral_rooted_fire.exec()
             seed = 87112,
             spread = {x = 20, y = 20, z = 20},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
+        param2 = 0,
+        param2_max = 3,
         place_offset_y = -1,
         sidelen = 16,
     })

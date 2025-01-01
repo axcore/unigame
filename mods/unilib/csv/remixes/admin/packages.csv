@@ -1,0 +1,33 @@
+# "admin" remix - contains all "admin" packages (but see also the "maptools" remix)
+
+# node_name | original_mod
+
+# admin packages
+admin_fruit_apple|maptools
+admin_fuel_infinite|maptools
+admin_ladder_invisible|maptools
+admin_light_invisible|maptools
+admin_machine_caretaker|chunkkeeper
+admin_node_colour|maptools
+admin_node_danger|maptools
+admin_node_igniter|maptools
+admin_node_invisible|maptools
+admin_node_void|maptools
+admin_tool_hoe|farming
+admin_tool_pick|maptools
+admin_tool_tester_general|unilib
+admin_tool_tester_schematic|unilib
+admin_tool_vapouriser|unilib
+admin_trampoline_invisible|maptools
+
+# supporting packages (.depends)
+shared_chunkkeeper|chunkkeeper
+shared_maptools|maptools
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#sign_wall_steel|default
+#sign_wall_wood|default
+
+# supporting packages (.suggested)

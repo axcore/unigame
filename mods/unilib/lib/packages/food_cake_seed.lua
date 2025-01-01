@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_seed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_cake_seed.exec()
         -- N.B. No groups in original code
         groups = {food_seed_cake = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cake_seed", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cake_seed", 5),
     })
     unilib.register_craft({
         -- From aotearoa:seed_cake

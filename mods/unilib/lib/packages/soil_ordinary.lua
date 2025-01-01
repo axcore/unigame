@@ -9,7 +9,7 @@
 unilib.pkg.soil_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,14 +39,14 @@ function unilib.pkg.soil_ordinary.exec()
             crumbly = 3, field = 1, grassland = 1, not_in_creative_inventory = 1,
             ordinary_soil = 1, soil = 2,
         },
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_ordinary",
         soil = {
             base = "unilib:dirt_ordinary",
             dry = "unilib:soil_ordinary",
-            wet = "unilib:soil_ordinary_wet"
-        }
+            wet = "unilib:soil_ordinary_wet",
+        },
     })
 
     unilib.register_node("unilib:soil_ordinary_wet", "farming:soil_wet", mode, {
@@ -62,14 +62,14 @@ function unilib.pkg.soil_ordinary.exec()
             crumbly = 3, field = 1, grassland = 1, not_in_creative_inventory = 1,
             ordinary_soil = 1, soil = 3, wet = 1,
         },
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_ordinary",
         soil = {
             base = "unilib:dirt_ordinary",
             dry = "unilib:soil_ordinary",
-            wet = "unilib:soil_ordinary_wet"
-        }
+            wet = "unilib:soil_ordinary_wet",
+        },
     })
 
 end

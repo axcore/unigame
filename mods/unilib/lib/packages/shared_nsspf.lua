@@ -9,7 +9,7 @@
 unilib.pkg.shared_nsspf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 -- According to the MT forum, mushrooms should grow on the north side of a tree trunk, but (some)
 --      fungus grows on the south side. Here, mushrooms and fungi always grow just above the
@@ -29,7 +29,7 @@ local mode = unilib.imported_mod_table.nsspf.add_mode
 --      just immediately above the surface)
 local plant_table = {}
 -- 1 in 100 suitable tree trunk nodes spawn a mushroom/fungus
-local plant_scarcity = math.floor(100 * unilib.nsspf_scarcity_factor)
+local plant_scarcity = math.floor(100 * unilib.setting.nsspf_scarcity_factor)
 local plant_min_light = 10
 
 -- Corresponding table for truffles. The surface node (which must be a dirt), which is next to a
@@ -43,7 +43,7 @@ local plant_min_light = 10
 --      "unilib:dirt_ordinary_with_mycelium_white"
 local truffle_table = {}
 -- Truffles are much rarer than mushroom/fungi, but can grow in very dim light
--- N.B. unilib.nsspf_scarcity_factor does not apply to truffles
+-- N.B. unilib.setting.nsspf_scarcity_factor does not apply to truffles
 local truffle_scarcity = 1000
 local truffle_min_light = 3
 -- Table of positions, relative to the wall node, at which the truffle can occur; one position is
@@ -62,7 +62,7 @@ local random_list = {
 local special_table = {}
 -- 1 in 500 suitable tree trunk nodes spawn a special mushroom/fungus; this approximates to the
 --      same spawn rate as "plant_scarcity" above
-local special_scarcity = math.floor(500 * unilib.nsspf_scarcity_factor)
+local special_scarcity = math.floor(500 * unilib.setting.nsspf_scarcity_factor)
 local special_min_light = 10
 
 -- List of glowing mushrooms and fungi. An ABM switches the non-glowing node for the glowing node
@@ -219,10 +219,10 @@ function unilib.pkg.shared_nsspf.register_truffle(data_table)
     -- Create the truffle itself
     local truffle_name = "unilib:plant_tuber_truffle_" .. part_name
     unilib.register_craftitem(truffle_name, orig_name, replace_mode, {
-        description = unilib.annotate(description, sci_name),
+        description = unilib.utils.annotate(description, sci_name),
         image = "unilib_plant_tuber_truffle_" .. part_name .. ".png",
 
-        on_use = unilib.cuisine_eat_on_use(truffle_name, eat),
+        on_use = unilib.cuisine.eat_on_use(truffle_name, eat),
     })
 
     -- Create a mycelium dirt node which drop the truffle when dug
@@ -238,6 +238,8 @@ function unilib.pkg.shared_nsspf.register_truffle(data_table)
         -- (no sounds)
 
         drop = truffle_name,
+        -- N.B. is_ground_content = false not in original code; added to match other dirts
+        is_ground_content = false,
     })
 
 end
@@ -276,14 +278,14 @@ function unilib.pkg.shared_nsspf.post()
 
     for wall_name, main_list in pairs(plant_table) do
 
-        minetest.register_on_generated(function(minp, maxp)
+        core.register_on_generated(function(minp, maxp)
 
             -- The mapgen is not likely to generate trees below sea level
             if maxp.y < 1 then
                 return
             end
 
-            local pos_list = minetest.find_nodes_in_area(minp, maxp, wall_name)
+            local pos_list = core.find_nodes_in_area(minp, maxp, wall_name)
             for n = 1, #pos_list do
 
                 local pos = pos_list[n]
@@ -297,16 +299,16 @@ function unilib.pkg.shared_nsspf.post()
                     -- "target_name" is the name of the node currently occupying the place, where
                     --      the mushroom/fungus will spawn. We require that place to be occupied by
                     --      air, or one of the dusts specified by "plant_table" (such as snow)
-                    local target_name = minetest.get_node(target_pos).name
+                    local target_name = core.get_node(target_pos).name
                     if (target_name == "air" or mini_list[4][target_name] ~= nil) and
-                            minetest.get_node_light(target_pos) > plant_min_light then
+                            core.get_node_light(target_pos) > plant_min_light then
 
                         -- If no surface is specified, then the mushroom/fungus can grow above any
                         --      surface
                         local surface_pos = {x = pos.x, y = pos.y - 1, z = pos.z + mini_list[1]}
-                        local surface_name = minetest.get_node(surface_pos).name
+                        local surface_name = core.get_node(surface_pos).name
                         if mini_list[3][surface_name] ~= nil then
-                            minetest.set_node(target_pos, {name = mini_list[2]})
+                            core.set_node(target_pos, {name = mini_list[2]})
                         end
 
                     end
@@ -321,14 +323,14 @@ function unilib.pkg.shared_nsspf.post()
 
     for wall_name, main_list in pairs(special_table) do
 
-        minetest.register_on_generated(function(minp, maxp)
+        core.register_on_generated(function(minp, maxp)
 
             -- The mapgen is not likely to generate trees below sea level
             if maxp.y < 1 then
                 return
             end
 
-            local pos_list = minetest.find_nodes_in_area(minp, maxp, wall_name)
+            local pos_list = core.find_nodes_in_area(minp, maxp, wall_name)
             for n = 1, #pos_list do
 
                 local pos = pos_list[n]
@@ -340,9 +342,9 @@ function unilib.pkg.shared_nsspf.post()
                     local plant_name = main_list[math.random(#main_list)]
 
                     local target_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
-                    if minetest.get_node(target_pos).name == "air" and
-                            minetest.get_node_light(target_pos) > special_min_light then
-                        minetest.set_node(target_pos, {name = plant_name})
+                    if core.get_node(target_pos).name == "air" and
+                            core.get_node_light(target_pos) > special_min_light then
+                        core.set_node(target_pos, {name = plant_name})
                     end
 
                 end
@@ -355,14 +357,14 @@ function unilib.pkg.shared_nsspf.post()
 
     for wall_name, main_list in pairs(truffle_table) do
 
-        minetest.register_on_generated(function(minp, maxp)
+        core.register_on_generated(function(minp, maxp)
 
             -- The mapgen is not likely to generate trees below sea level
             if maxp.y < 1 then
                 return
             end
 
-            local pos_list = minetest.find_nodes_in_area(minp, maxp, wall_name)
+            local pos_list = core.find_nodes_in_area(minp, maxp, wall_name)
             for n = 1, #pos_list do
 
                 local pos = pos_list[n]
@@ -380,13 +382,14 @@ function unilib.pkg.shared_nsspf.post()
                         y = pos.y + random_pos.y,
                         z = pos.z + random_pos.z,
                     }
-                    if mini_list[2][minetest.get_node(surface_pos).name] ~= nil then
 
-                        if not unilib.nsspf_exposed_truffle_flag then
+                    if mini_list[2][core.get_node(surface_pos).name] ~= nil then
+
+                        if not unilib.setting.nsspf_exposed_truffle_flag then
                             surface_pos.y = surface_pos.y - 1
                         end
 
-                        minetest.set_node(
+                        core.set_node(
                             surface_pos,
                             {name = "unilib:dirt_ordinary_with_mycelium_" .. mini_list[1]}
                         )
@@ -425,12 +428,12 @@ function unilib.pkg.shared_nsspf.post()
                 local full_name = string.gsub(node.name, "_glowing$", "")
 
                 -- Place the glowing or non-glowing node, depending on the time of day
-                if (minetest.get_node_light(pos, nil) < 10) and (
-                    (minetest.get_timeofday() < 19500) or (minetest.get_timeofday() > 5000)
+                if core.get_node_light(pos, nil) < 10 and (
+                    (core.get_timeofday() < 19500) or (core.get_timeofday() > 5000)
                 ) then
-                    minetest.set_node(pos, {name = full_name .. "_glowing"})
+                    core.set_node(pos, {name = full_name .. "_glowing"})
                 else
-                    minetest.set_node(pos, {name = full_name})
+                    core.set_node(pos, {name = full_name})
                 end
 
             end

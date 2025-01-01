@@ -9,7 +9,7 @@
 unilib.pkg.tree_aspen_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,6 +28,9 @@ function unilib.pkg.tree_aspen_exotic.init()
 end
 
 function unilib.pkg.tree_aspen_exotic.exec()
+
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
 
     -- (Using same level as the equivalent tree in default)
     local burnlevel = 1
@@ -129,10 +132,10 @@ function unilib.pkg.tree_aspen_exotic.exec()
         group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("farlands_tree_aspen_exotic", {
+    unilib.register_decoration_generic("farlands_tree_aspen_exotic", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_aspen_exotic.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_aspen_exotic.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -146,13 +149,13 @@ function unilib.pkg.tree_aspen_exotic.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil and
-            unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil and
+            unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
-        unilib.register_decoration("farlands_tree_aspen_exotic_log", {
+        unilib.register_decoration_generic("farlands_tree_aspen_exotic_log", {
             -- From farlands, mapgen/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_aspen_exotic_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_aspen_exotic_log.mts",
 
             flags = "place_center_x",
             noise_params = {

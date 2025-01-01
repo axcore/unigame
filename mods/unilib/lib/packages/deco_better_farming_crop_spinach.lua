@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_crop_spinach = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_better_farming_crop_spinach.post()
 
-    unilib.register_decoration_now("better_farming_crop_spinach", nil, {
+    unilib.register_decoration_complete("better_farming_crop_spinach", nil, {
         -- From better_farming, spinach.lua
         -- Completes decoration in package "crop_spinach"
         biomes = "default_forest_deciduous",
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

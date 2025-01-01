@@ -1,6 +1,5 @@
 # "better_farming" remix - contains everything from the better_farming mod except the onigiri, which
 #       is already provided by another package, and crates shaped as stairs
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -64,8 +63,6 @@ deco_better_farming_produce_rice_arborio|better_farming
 deco_better_farming_produce_sisal|better_farming
 deco_better_farming_produce_spiceleaf|better_farming
 deco_better_farming_produce_yucca|better_farming
-drink_juice_beetroot|better_farming
-drink_juice_tomato|better_farming
 food_bread_gingerbread|better_farming
 food_bun_adzuki|better_farming
 food_cake_strawberry|better_farming
@@ -96,7 +93,10 @@ produce_rice_arborio|better_farming
 produce_sisal|better_farming
 produce_spiceleaf|better_farming
 produce_yucca|better_farming
-vessel_bottle_glass_water|better_farming
+utensil_press_hand|farming
+vessel_bottle_glass_with_squeezed_beetroot|better_farming
+vessel_bottle_glass_with_squeezed_tomato|better_farming
+vessel_bottle_glass_with_water|better_farming
 
 # supporting packages (.depends)
 biome_default_desert|default
@@ -133,7 +133,7 @@ produce_chilli_normal|farming
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_stone_desert|glemr11
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks

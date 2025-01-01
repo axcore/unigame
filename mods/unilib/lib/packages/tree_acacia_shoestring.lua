@@ -9,7 +9,7 @@
 unilib.pkg.tree_acacia_shoestring = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_acacia_shoestring.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Acacia stenophylla"
 
     unilib.register_tree({
@@ -111,7 +111,7 @@ function unilib.pkg.tree_acacia_shoestring.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_acacia_shoestring_closed
+        -- Original to unilib. Creates unilib:gate_acacia_shoestring_closed, etc
         part_name = "acacia_shoestring",
         orig_name = {nil, nil},
 
@@ -122,16 +122,20 @@ function unilib.pkg.tree_acacia_shoestring.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_acacia_shoestring_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic(
             -- From australia/biome_mulga_lands.lua
-            deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_acacia_shoestring_" .. i .. ".mts",
+            "australia_tree_acacia_shoestring_in_mulga_lands_" .. i,
+            {
+                deco_type = "schematic",
+                schematic =
+                    unilib.core.path_mod .. "/mts/unilib_tree_acacia_shoestring_" .. i .. ".mts",
 
-            fill_ratio = (2 - i + 1) / 12000,
-            flags = "place_center_x, place_center_z",
-            rotation = "random",
-            sidelen = 80,
-        })
+                fill_ratio = (2 - i + 1) / 12000,
+                flags = "place_center_x, place_center_z",
+                rotation = "random",
+                sidelen = 80,
+            }
+        )
 
     end
 

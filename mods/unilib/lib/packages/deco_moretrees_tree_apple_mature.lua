@@ -9,7 +9,7 @@
 unilib.pkg.deco_moretrees_tree_apple_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_moretrees_tree_apple_mature.post()
 
-    unilib.register_decoration_now("convert_tree_apple_mature", nil, {
+    unilib.register_decoration_complete("convert_tree_apple_mature", nil, {
         -- From moretrees/init.lua
         -- Completes decoration in package "tree_apple_mature"
         place_on = "unilib:dirt_ordinary_with_turf",

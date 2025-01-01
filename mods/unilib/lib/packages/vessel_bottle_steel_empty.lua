@@ -13,7 +13,7 @@
 unilib.pkg.vessel_bottle_steel_empty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vessels.add_mode
+local mode = unilib.global.imported_mod_table.vessels.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.vessel_bottle_steel_empty.exec()
         description = S("Empty Heavy Steel Bottle"),
         tiles = {"unilib_vessel_bottle_steel_empty.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_vessel_bottle_steel_empty.png",
@@ -54,8 +54,8 @@ function unilib.pkg.vessel_bottle_steel_empty.exec()
         recipe = {
             {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
-            {"", "unilib:metal_steel_ingot", ""}
-        }
+            {"", "unilib:metal_steel_ingot", ""},
+        },
     })
     unilib.register_craft( {
         -- From vessels:steel_bottle
@@ -64,6 +64,6 @@ function unilib.pkg.vessel_bottle_steel_empty.exec()
         recipe = "unilib:vessel_bottle_steel_empty",
     })
     -- From "thirsty" mod
-    unilib.hydration_enable_drinking_from_container("unilib:vessel_bottle_steel_empty", 26)
+    unilib.hydration.enable_drinking_from_container("unilib:vessel_bottle_steel_empty", 26)
 
 end

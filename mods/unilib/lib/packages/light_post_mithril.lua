@@ -13,7 +13,7 @@
 unilib.pkg.light_post_mithril = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelamps.add_mode
+local mode = unilib.global.imported_mod_table.morelamps.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,7 +26,7 @@ local function do_register(data_table)
     --      unilib.register_tree()
     --
     -- data_table compulsory fields:
-    --      part_name (str): e.g. "aspen", a key in unilib.tree_table
+    --      part_name (str): e.g. "aspen", a key in unilib.global.tree_table
     --      full_name (str): e.g. "unilib:light_post_mithril_aspen"
     --      orig_name (str): e.g. "morelamps:mithril_post_light_aspen"
     --
@@ -47,16 +47,16 @@ local function do_register(data_table)
     local dark_img = base_img .. "^unilib_light_post_mithril_side_dark.png^[makealpha:0,0,0"
 
     unilib.register_node(full_name, orig_name, replace_mode, {
-        description = unilib.brackets(
-            S("Mithril Light Post"), unilib.tree_table[part_name]["description"]
+        description = unilib.utils.brackets(
+            S("Mithril Light Post"), unilib.global.tree_table[part_name]["description"]
         ),
         tiles = {base_img, base_img, dark_img, dark_img, light_img, light_img},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
         node_box = {
             type = "fixed",
             fixed = {
@@ -79,7 +79,7 @@ local function do_register(data_table)
                 "unilib:metal_mithril_crystal",
             },
             {"", ingredient, ""},
-        }
+        },
     })
 
 end
@@ -150,11 +150,11 @@ function unilib.pkg.light_post_mithril.post()
             base_img = "unilib_tree_healing_wood.png",
         },
         {
-            part_name = "mushroom_red",
+            part_name = "mushroom_generic",
             orig_name = nil,
-            base_img = "unilib_tree_mushroom_red_trunk.png",
+            base_img = "unilib_tree_mushroom_generic_trunk.png",
 
-            ingredient = "unilib:tree_mushroom_red_trunk",
+            ingredient = "unilib:tree_mushroom_generic_trunk",
         },
         {
             part_name = "palm",
@@ -191,9 +191,9 @@ function unilib.pkg.light_post_mithril.post()
         local ingredient = mini_table.ingredient or
                 "unilib:tree_" .. mini_table.part_name .. "_wood"
 
-        if unilib.super_tree_table[mini_table.part_name] ~= nil and
-                unilib.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.super_tree_table[mini_table.part_name] ~= nil and
+                unilib.global.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             do_register({
                 part_name = mini_table.part_name,

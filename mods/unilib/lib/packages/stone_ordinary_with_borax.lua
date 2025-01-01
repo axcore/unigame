@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_borax = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,17 +28,17 @@ function unilib.pkg.stone_ordinary_with_borax.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_borax", nil, mode, {
         -- Original to unilib, since real_minerals doesn't register an ore for borax
-        description = unilib.brackets(S("Borax Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Borax Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_borax.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,
             items = {
                 {items = {"unilib:mineral_borax_lump 3"}, rarity = 15},
-                {items = {"unilib:mineral_borax_lump 2"}}
-            }
+                {items = {"unilib:mineral_borax_lump 2"}},
+            },
         },
         paramtype = "light",
     })

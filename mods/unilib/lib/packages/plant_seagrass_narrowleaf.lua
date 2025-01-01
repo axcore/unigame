@@ -9,7 +9,7 @@
 unilib.pkg.plant_seagrass_narrowleaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_seagrass_narrowleaf.exec()
 
     unilib.register_node("unilib:plant_seagrass_narrowleaf", "australia:sea_grass", mode, {
         -- From australia:sea_grass
-        description = unilib.annotate(S("Narrowleaf Seagrass"), "Halodule uninervis"),
+        description = unilib.utils.annotate(S("Narrowleaf Seagrass"), "Halodule uninervis"),
         tiles = {"unilib_plant_seagrass_narrowleaf.png"},
         groups = {attached_node = 1, sea = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         climbable = true,
@@ -46,11 +46,21 @@ function unilib.pkg.plant_seagrass_narrowleaf.exec()
         visual_scale = 1.0,
         walkable = false,
         waving = 1,
-        wield_image = "aus_sea_grass.png",
+        wield_image = "unilib_plant_seagrass_narrowleaf.png",
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "unilib:sand_ordinary"}
+            )
+
+        end,
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("australia_plant_seagrass_narrowleaf_1", {
+    unilib.register_decoration_generic("australia_plant_seagrass_narrowleaf_1", {
         -- From australia:spinifex
         deco_type = "simple",
         decoration = "unilib:plant_seagrass_narrowleaf",
@@ -59,7 +69,7 @@ function unilib.pkg.plant_seagrass_narrowleaf.exec()
         flags = "force_placement",
         sidelen = 80,
     })
-    unilib.register_decoration("australia_plant_seagrass_narrowleaf_2", {
+    unilib.register_decoration_generic("australia_plant_seagrass_narrowleaf_2", {
         -- From australia:spinifex
         deco_type = "simple",
         decoration = "unilib:plant_seagrass_narrowleaf",
@@ -68,7 +78,7 @@ function unilib.pkg.plant_seagrass_narrowleaf.exec()
         flags = "force_placement",
         sidelen = 80,
     })
-    unilib.register_decoration("australia_plant_seagrass_narrowleaf_3", {
+    unilib.register_decoration_generic("australia_plant_seagrass_narrowleaf_3", {
         -- From australia:spinifex
         deco_type = "simple",
         decoration = "unilib:plant_seagrass_narrowleaf",

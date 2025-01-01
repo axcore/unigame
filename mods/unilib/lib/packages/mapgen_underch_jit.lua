@@ -9,7 +9,7 @@
 unilib.pkg.mapgen_underch_jit = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 -- The VoxelManip object works by switching nodes, comparing their Minetest IDs
 local id_table = {}
@@ -35,13 +35,13 @@ local function add_jit_property(full_name)
 
     -- (The if-condition is simpler than checking the parent package has been executed. It also
     --      catches the some underch stones, like afualite, which don't have a mossy cobble variant)
-    if minetest.registered_nodes[full_name] ~= nil then
+    if core.registered_nodes[full_name] ~= nil then
 
-        local g = minetest.registered_nodes[full_name].groups
+        local g = core.registered_nodes[full_name].groups
         g.jit_shadow = 1
         unilib.override_item(full_name, {
             groups = g,
-            after_dig_node = unilib.jbiome_dig_shadow,
+            after_dig_node = unilib.jbiomes.dig_shadow,
         })
 
     end
@@ -91,8 +91,8 @@ local function override_nodes()
 
         after_dig_node = function(pos, oldnode, oldmetadata, digger)
 
-            minetest.place_node(pos, {name = "unilib:liquid_lava_ordinary_source"}, digger)
-            unilib.jbiome_dig_shadow(pos, oldnode, oldmetadata, digger)
+            core.place_node(pos, {name = "unilib:liquid_lava_ordinary_source"}, digger)
+            unilib.jbiomes.dig_shadow(pos, oldnode, oldmetadata, digger)
 
         end,
     })
@@ -164,7 +164,7 @@ local function override_nodes()
         "unilib:stone_ordinary_with_adamantite",
         "unilib:stone_ordinary_with_geminitium",
         "unilib:stone_ordinary_with_ozymandium",
-        "unilib:stone_ordinary_with_palatinium",
+        "unilib:stone_ordinary_with_planexium",
         "unilib:stone_ordinary_with_rarium",
         "unilib:stone_ordinary_with_sybilline",
         "unilib:stone_ordinary_with_tritonium",
@@ -183,7 +183,7 @@ local function create_dynamic_nodes()
     --      below, are commented out
 
     -- Extenders
-    unilib.register_extender({
+    unilib.dynamic.register_extender({
         label = "plant_bush_underground",
         orig_name = "underch:dynamic_underground_bush",
         wherein = "air",
@@ -202,7 +202,7 @@ local function create_dynamic_nodes()
         chance = 1 / 10,
     })
 
-    unilib.register_extender({
+    unilib.dynamic.register_extender({
         label = "stone_basalt_blue",
         orig_name = "underch:dynamic_basalt",
         wherein = "air",
@@ -233,7 +233,7 @@ local function create_dynamic_nodes()
         chance = 1 / 17,
     })
 
-    unilib.register_extender({
+    unilib.dynamic.register_extender({
         label = "stone_obsidian",
         orig_name = "underch:dynamic_obsidian",
         wherein = "unilib:stone_afualite",
@@ -249,7 +249,7 @@ local function create_dynamic_nodes()
     })
 
     --[[
-    unilib.register_extender({
+    unilib.dynamic.register_extender({
         label = "stone_omphyrite_crack_lava",
         orig_name = "underch:dynamic_lava_crack",
         wherein = "unilib:stone_omphyrite",
@@ -260,7 +260,7 @@ local function create_dynamic_nodes()
     })
     ]]--
 
-    unilib.register_extender({
+    unilib.dynamic.register_extender({
         label = "stone_shinestone",
         orig_name = "underch:dynamic_shinestone",
         wherein = "air",
@@ -277,7 +277,7 @@ local function create_dynamic_nodes()
     })
 
     -- Flooders
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "dirt_ordinary_in_andesite_dark",
         orig_name = "underch:dynamic_jungle",
         wherein = "unilib:stone_andesite_dark",
@@ -294,7 +294,7 @@ local function create_dynamic_nodes()
         jit_flag = true,
     })
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "dirt_ordinary_in_basalt_blue",
         orig_name = "underch:dynamic_sticks",
         wherein = "unilib:stone_basalt_blue",
@@ -312,7 +312,7 @@ local function create_dynamic_nodes()
     })
 
     --[[
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "dirt_ordinary_in_gabbro_brown",
         orig_name = "underch:dynamic_jungleg",
         wherein = "unilib:stone_gabbro_brown",
@@ -331,7 +331,7 @@ local function create_dynamic_nodes()
     ]]--
 
     --[[
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "dirt_ordinary_in_granite_salmon",
         orig_name = "underch:dynamic_mossy_dirt",
         wherein = "unilib:stone_granite_salmon",
@@ -346,7 +346,7 @@ local function create_dynamic_nodes()
     })
     ]]--
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "misc_granules_fiery_in_andesite_dark",
         orig_name = "underch:dynamic_fa",
         wherein = "unilib:stone_andesite_dark",
@@ -357,7 +357,7 @@ local function create_dynamic_nodes()
         jit_flag = true,
     })
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "misc_granules_fiery_in_omphyrite",
         orig_name = "underch:dynamic_fo",
         wherein = "unilib:stone_omphyrite",
@@ -368,7 +368,7 @@ local function create_dynamic_nodes()
         jit_flag = true,
     })
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "misc_granules_fiery_in_pegmatite_red",
         orig_name = "underch:dynamic_fp",
         wherein = "unilib:stone_pegmatite_red",
@@ -379,7 +379,7 @@ local function create_dynamic_nodes()
         jit_flag = true,
     })
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "misc_granules_fiery_in_phonolite",
         orig_name = "underch:dynamic_fire",
         wherein = "unilib:stone_phonolite",
@@ -393,7 +393,7 @@ local function create_dynamic_nodes()
         jit_flag = true,
     })
 
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "misc_granules_fiery_in_schist_red",
         orig_name = "underch:dynamic_fs",
         wherein = "unilib:stone_schist_red",
@@ -405,7 +405,7 @@ local function create_dynamic_nodes()
     })
 
     --[[
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "stone_malachite",
         orig_name = "underch:dynamic_malachite",
         wherein = "unilib:stone_peridotite_dark",
@@ -418,7 +418,7 @@ local function create_dynamic_nodes()
     ]]--
 
     --[[
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "stone_vindesite_white",
         orig_name = "underch:dynamic_vindesite",
         wherein = "unilib:stone_afualite",
@@ -431,7 +431,7 @@ local function create_dynamic_nodes()
     ]]--
 
     --[[
-    unilib.register_flooder_jit({
+    unilib.dynamic.register_flooder_jit({
         label = "stone_vindesite_blue",
         orig_name = "underch:dynamic_dark_vindesite",
         wherein = "unilib:stone_afualite",
@@ -454,7 +454,7 @@ local function create_dynamic_nodes()
 
     for part_name, wherein in pairs(slime_table) do
 
-        unilib.register_flooder_jit({
+        unilib.dynamic.register_flooder_jit({
             label = "liquid_slime_" .. part_name .. "_source",
             orig_name = "underch:dynamic_" .. part_name .. "_slime",
             wherein = wherein,
@@ -466,7 +466,7 @@ local function create_dynamic_nodes()
         })
 
         --[[
-        unilib.register_flooder_jit({
+        unilib.dynamic.register_flooder_jit({
             label = "stone_slimestone_" .. part_name .. "_block_slimy",
             orig_name = "underch:dynamic_" .. part_name .. "_slimy_block",
             wherein = wherein,
@@ -508,8 +508,8 @@ local function populate_id_table()
 
             local full_name = "unilib:stone_" .. part_name .. ending
 
-            if minetest.registered_nodes[full_name] ~= nil then
-                id_table["stone_" .. part_name .. ending] = minetest.get_content_id(full_name)
+            if core.registered_nodes[full_name] ~= nil then
+                id_table["stone_" .. part_name .. ending] = core.get_content_id(full_name)
             end
 
         end
@@ -543,7 +543,6 @@ local function populate_id_table()
 --      "misc_granules_normal_block",       -- c_dust / misc_granules_normal
 --      "misc_granules_fiery_block",        -- c_fiery_dust / misc_granules_fiery
 --      "misc_stone_burner",                -- c_burner / misc_stone_burner
-        "moss_mould_underground",           -- c_mould / moss_mould_underground
         "moss_underground",                 -- c_moss / moss_underground
         "moss_underground_dry",             -- c_dry_moss / moss_underground_dry
         "mushroom_black",                   -- c_black_mushroom / mushroom_black
@@ -554,6 +553,7 @@ local function populate_id_table()
         "mushroom_red",                     -- c_red_mushroom / mushroom_red
 --      "plant_bush_underground",           -- c_underground_bush / plant_bush_underground
 --      "plant_bush_underground_dead",      -- c_dead_bush / plant_bush_underground_dead
+        "plant_mould_underground",          -- c_mould / plant_mould_underground
         "plant_torchberry",                 -- c_torchberries / plant_torchberry
         "plant_tuber_dark",                 -- c_dark_tuber / plant_tuber_dark
 --      "stone_malachite",                  -- c_malachite / stone_malachite
@@ -608,7 +608,7 @@ local function populate_id_table()
         "dynamic_liquid_slime_purple_source",               -- c_purple_slime
 --      "dynamic_stone_slimestone_purple_block_slimy",      -- c_purple_slimy_block
     }) do
-        id_table[item_name] = minetest.get_content_id("unilib:" .. item_name)
+        id_table[item_name] = core.get_content_id("unilib:" .. item_name)
     end
 
 end
@@ -617,11 +617,11 @@ local function switch_stone(pos, stone_type)
 
     -- Adapted from underch/jit.lua, underch.jit.use_stone()
 
-    local name = minetest.get_node(pos).name
+    local name = core.get_node(pos).name
     if name == "unilib:misc_matrix_bulk" or name == "unilib:misc_matrix_crust" then
-        minetest.set_node(pos, {name = "unilib:stone_" .. stone_type})
+        core.set_node(pos, {name = "unilib:stone_" .. stone_type})
     elseif name == "unilib:stone_ordinary_cobble" then
-        minetest.set_node(pos, {name = "unilib:stone_" .. stone_type .. "_cobble"})
+        core.set_node(pos, {name = "unilib:stone_" .. stone_type .. "_cobble"})
     end
 
 end
@@ -630,7 +630,7 @@ local function setup_lbm()
 
     -- Adapted from underch/jit.lua
 
-    minetest.register_lbm{
+    unilib.register_lbm{
         label = "Replace crust with bulk [mapgen_underch_jit]",
         name = "unilib:lbm_mapgen_underch_jit",
         nodenames = {"unilib:misc_matrix_crust"},
@@ -639,8 +639,8 @@ local function setup_lbm()
 
         action = function(pos, node)
 
-            if not unilib.jbiome_reveal(pos, false, true) then
-                minetest.set_node(pos, {name = "unilib:misc_matrix_bulk"})
+            if not unilib.jbiomes.reveal(pos, false, true) then
+                core.set_node(pos, {name = "unilib:misc_matrix_bulk"})
             end
 
         end,
@@ -658,7 +658,7 @@ function unilib.pkg.mapgen_underch_jit.init()
         description = "Pseudo-biomes for the \"underch_jit\" remix",
         notes = "This package assumes that all packages listed in the \"underch_jit\" remix" ..
                 " have been executed (rather than listing them all here as dependencies)",
-        excludes = {"mapgen_underch", "mapgen_underch_jit_unilib"},
+        excludes = {"mapgen_hades", "mapgen_hades_jit", "mapgen_underch"},
         depends = "stone_ordinary",
     }
 
@@ -666,10 +666,15 @@ end
 
 function unilib.pkg.mapgen_underch_jit.post()
 
+    -- Load files in ../lib/shared/
+    unilib.pbiomes.load()
+    unilib.jbiomes.load()
+    unilib.dynamic.load()
+
     -- Override various nodes to make them compatible with JIT
     override_nodes()
 
-    -- Create pseudo-nodes (see the comments in ../lib/shared/dynamic.lua)
+    -- Create pseudo-nodes (see the comments in ../lib/shared/dynamic/dynamic_base.lua)
     create_dynamic_nodes()
 
     -- The VoxelManip object works by switching nodes, comparing their Minetest IDs
@@ -679,17 +684,17 @@ function unilib.pkg.mapgen_underch_jit.post()
     setup_lbm()
 
     -- Some quick lookups
-    local c_air = minetest.get_content_id("air")
+    local c_air = core.get_content_id("air")
     local c_stone = id_table["stone_ordinary"]
     local c_water = id_table["liquid_water_ordinary_source"]
     local c_lava = id_table["liquid_lava_ordinary_source"]
 
     -- There are two biome generation tables
     -- The first is adapted from underch/worldgen.lua,originally called "underch.biomegen"
-    -- It is used in the call to minetest.register_on_generated(). During map generation, ordinary
-    --      stone nodes (unilib:stone_ordinary) are converted to matrix nodes. Some other items,
-    --      such as mushrooms, can be placed at this stage. Those other items are specified by this
-    --      table, and are placed in an appropriate pseudo-biome
+    -- It is used in the call to core.register_on_generated(). During map generation, ordinary stone
+    --      nodes (unilib:stone_ordinary) are converted to matrix nodes. Some other items, such as
+    --      mushrooms, can be placed at this stage. Those other items are specified by this table,
+    --      and are placed in an appropriate pseudo-biome
     local matrix_table = {
         -- 1. Basic pale dolostone. When these functions are empty, there are no items like
         --      mushrooms to be placed
@@ -748,109 +753,109 @@ function unilib.pkg.mapgen_underch_jit.post()
         end,
         -- 19. Amphibolite with coal and dust
         [19] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["misc_granules_coal_block"], 1 / 9
             )
         end,
         -- 20. White vindesite with quartz ore and black mushrooms
         [20] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 id_table["stone_vindesite_white"], c_air, id_table["mushroom_black"], 1 / 18
             )
         end,
         -- 21. Phyllite with red/brown mushrooms and moss
         [21] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_brown"], 1 / 18
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_red"], 1 / 18
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
-                c_stone, c_air, id_table["moss_mould_underground"], 1 / 9, lastlayer
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
+                c_stone, c_air, id_table["plant_mould_underground"], 1 / 9, lastlayer
             )
         end,
         -- 22. Phonolite with torchberries and brown mushrooms
         [22] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_roof(x, y, z, vi, area, data,
+            unilib.pbiomes.on_roof(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["plant_torchberry"], 1 / 30, lastlayer
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_brown"], 1 / 18
             )
         end,
         -- 23. Red schist with tubers and black mushrooms
         [23] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_black"], 1 / 18
             )
-            unilib.pbiome_on_floor_rr(x, y, z, vi, area, data, p2data,
+            unilib.pbiomes.on_floor_rr(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["plant_tuber_dark"], 1 / 50
             )
         end,
         -- 24. Red slate with black slime
         [24] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_liquid_slime_black_source"], 1 / 300
             )
         end,
         -- 25. Pale diorite with white quartz crystals
         [25] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_quartz_white_crystal_large"], 1 / 50, lastlayer
             )
         end,
         -- 26. Phonolite with emerald crystals
         [26] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_emerald_crystal_large"], 1 / 201, lastlayer
             )
         end,
         -- 27. Blue basalt with moss and brown mushrooms
         [27] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["moss_underground"], 1 / 3, lastlayer
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 id_table["dirt_ordinary"], c_air, id_table["moss_underground"], 1 / 3, lastlayer
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_brown"], 1 / 18
             )
         end,
         -- 28. Green slimestone
         [28] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_liquid_slime_green_source"], 1 / 300
             )
         end,
         -- 29. Sichamine with light blocks
         [29] = function(x, y, z, vi, data, p2data, area, lastlayer)
             if y < 0 then
-                unilib.jbiome_replace_in_matrix(vi, data, c_air, c_water)
+                unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_water)
             end
         end,
         -- 30. Sichamine with dark stones
         [30] = function(x, y, z, vi, data, p2data, area, lastlayer)
             if y < 0 then
-                unilib.jbiome_replace_in_matrix(vi, data, c_air, c_water)
+                unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_water)
             end
         end,
         -- 31. Salmon granite with torchberries
         [31] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_roof(x, y, z, vi, area, data,
+            unilib.pbiomes.on_roof(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["plant_torchberry"], 1 / 30, lastlayer
             )
         end,
         -- 32. Dark andesite with dirt, mould and vines
         [32] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_dirt_ordinary_in_andesite_dark"], 1 / 50
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
-                c_stone, c_air, id_table["moss_mould_underground"], 1 / 9, lastlayer
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
+                c_stone, c_air, id_table["plant_mould_underground"], 1 / 9, lastlayer
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_underground"], 1 / 15, lastlayer
             )
         end,
@@ -859,175 +864,175 @@ function unilib.pkg.mapgen_underch_jit.post()
         end,
         -- 34. Phonolite with fiery dust
         [34] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_misc_granules_fiery_in_phonolite"],
                 1 / 300
             )
         end,
         -- 35. Red schist with fiery dust and fiery vines
         [35] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_misc_granules_fiery_in_schist_red"],
                 1 / 300
             )
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["misc_granules_coal_block"], 1 / 9
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_fiery"], 1 / 15, lastlayer
             )
         end,
         -- 36. Blue vindesite with burner stones
         [36] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 id_table["stone_vindesite_blue"], c_air, id_table["mushroom_black"], 1 / 18
             )
         end,
         -- 37. Phyllite with mushrooms and mould
         [37] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_brown"], 1 / 40
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_red"], 1 / 40
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_black"], 1 / 20
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_green"], 1 / 20
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
-                c_stone, c_air, id_table["moss_mould_underground"], 1 / 9, lastlayer
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
+                c_stone, c_air, id_table["plant_mould_underground"], 1 / 9, lastlayer
             )
         end,
         -- 38. Omphyrite with fiery dust and burning mushrooms
         [38] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_misc_granules_fiery_in_omphyrite"],
                 1 / 300
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_burning"], 1 / 18
             )
         end,
         -- 39. Red pegmatite with fiery dust/vines and burning/orange mushrooms
         [39] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_misc_granules_fiery_in_pegmatite_red"],
                 1 / 300
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_fiery"], 1 / 15, lastlayer
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_burning"], 1 / 18
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_orange"], 1 / 18
             )
         end,
         -- 40. Purple slimestone
         [40] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_liquid_slime_purple_source"], 1 / 300
             )
         end,
         -- 41. Black gneiss with mese and sapphire crystals
         [41] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_green"], 1 / 18
             )
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_sapphire_crystal_large"], 1 / 201, lastlayer
             )
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_mese_crystal_large"], 1 / 201, lastlayer
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_underground"], 1 / 15, lastlayer
             )
         end,
         -- 42. Salmon granite with ruby crystals
         [42] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_orange"], 1 / 18
             )
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_air, c_stone, id_table["misc_granules_ruby_block"], 1 / 450
             )
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_ruby_crystal_large"], 1 / 201, lastlayer
             )
         end,
         -- 43. Blue basalt with moss
         [43] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["moss_underground_dry"], 1 / 3, lastlayer
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 id_table["dirt_ordinary"], c_air, id_table["moss_underground_dry"], 1 / 3, lastlayer
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_orange"], 1 / 18
             )
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_dirt_ordinary_in_basalt_blue"], 1 / 100
             )
         end,
         -- 44. Red slimestone
         [44] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_liquid_slime_red_source"], 1 / 300
             )
         end,
         -- 45. Sichamine with lava
         [45] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_replace_in_matrix(vi, data, c_air, c_water)
+            unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_water)
         end,
         -- 46. Pale diorite with aquamarine and amethyst
         [46] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_aquamarine_crystal_large"], 1 / 50, lastlayer
             )
-            unilib.jbiome_on_wall_f(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_f(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["mineral_amethyst_crystal_large"], 1 / 50, lastlayer
             )
         end,
         -- 47. Dark andesite with vines and mushrooms
         [47] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_dirt_ordinary_in_andesite_dark"], 1 / 50
             )
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_misc_granules_fiery_in_andesite_dark"],
                 1 / 300
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_fiery"], 1 / 15, lastlayer
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_red"], 1 / 27
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_brown"], 1 / 27
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_orange"], 1 / 27
             )
         end,
         -- 48. Brown gabbro with vines and mushrooms
         [48] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_dirt_ordinary_in_andesite_dark"], 1 / 50
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_burning"], 1 / 18
             )
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_orange"], 1 / 18
             )
-            unilib.jbiome_on_wall_w(x, y, z, vi, area, data, p2data,
+            unilib.jbiomes.on_wall_w(x, y, z, vi, area, data, p2data,
                 c_stone, c_air, id_table["vine_underground"], 1 / 15, lastlayer
             )
         end,
@@ -1051,48 +1056,48 @@ function unilib.pkg.mapgen_underch_jit.post()
         end,
         -- 55. Sichamine with amethyst/aquamarine blocks
         [55] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_replace_in_matrix(vi, data, c_air, c_water)
+            unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_water)
         end,
         -- 56. Salmon granite with iron
         [56] = function(x, y, z, vi, data, p2data, area, lastlayer)
         end,
         -- 57. Dark peridotite with malachite and burning mushrooms
         [57] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.on_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["mushroom_burning"], 1 / 18
             )
         end,
         -- 58. Hektorite with shinestone
         [58] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_on_roof(x, y, z, vi, area, data,
+            unilib.pbiomes.on_roof(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_stone_shinestone"], 1 / 50, lastlayer
             )
         end,
         -- 59. Afualite with obsidian
         [59] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_stone_obsidian"], 1 / 20
             )
         end,
         -- 60. Emutite with lava
         [60] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_replace_in_matrix(vi, data, c_air, c_lava)
+            unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_lava)
         end,
         -- 61. Dark peridotite with blue basalt
         [61] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.pbiome_in_floor(x, y, z, vi, area, data,
+            unilib.pbiomes.in_floor(x, y, z, vi, area, data,
                 c_stone, c_air, id_table["dynamic_stone_basalt_blue"], 1 / 200
             )
         end,
         -- 62. Obscurite
         [62] = function(x, y, z, vi, data, p2data, area, lastlayer)
-            unilib.jbiome_replace_in_matrix(vi, data, c_air, c_lava)
+            unilib.jbiomes.replace_in_matrix(vi, data, c_air, c_lava)
         end,
     }
 
     -- The second is adapted from underch/jit.lua, originally called "underch.jit.biomegen"
-    -- It is used in calls to unilib.jbiome_reveal(). When matrix nodes are exposed to air, they are
-    --      converted to pseudo-biome appropriate items, using this table
+    -- It is used in calls to unilib.jbiomes.reveal(). When matrix nodes are exposed to air, they
+    --      are converted to pseudo-biome appropriate items, using this table
     local converted_table = {
         -- 1. Basic pale dolostone
         [1] = function(pos)
@@ -1161,7 +1166,7 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 17. Pale dolostone cave
         [17] = function(pos)
             switch_stone(pos, "dolostone_pale")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_dolostone_pale", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
@@ -1172,14 +1177,14 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 19. Amphibolite with coal and dust
         [19] = function(pos)
             switch_stone(pos, "amphibolite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_amphibolite", "unilib:stone_ordinary_with_coal_dense", 1 / 201
             )
         end,
         -- 20. White vindesite with quartz ore and black mushrooms
         [20] = function(pos)
             switch_stone(pos, "vindesite_white")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_vindesite_white", "unilib:stone_vindesite_white_with_quartz_white",
                 1 / 50
             )
@@ -1187,35 +1192,35 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 21. Phyllite with red/brown mushrooms and moss
         [21] = function(pos)
             switch_stone(pos, "phyllite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_phyllite", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 22. Phonolite with torchberries and brown mushrooms
         [22] = function(pos)
             switch_stone(pos, "phonolite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_phonolite", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 23. Red schist with tubers and black mushrooms
         [23] = function(pos)
             switch_stone(pos, "schist_red")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_schist_red", "unilib:stone_ordinary_with_coal_dense", 1 / 201
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_schist_red", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 24. Red slate with black slime
         [24] = function(pos)
             switch_stone(pos, "slate_red")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_slate_red",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_slate_red",
                 "unilib:stone_slimestone_black_block_slimy", 0.7, 17, 18, 19
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_slimestone_black_block_slimy",
                 "unilib:stone_slimestone_black_with_eye", 1 / 10
             )
@@ -1223,38 +1228,38 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 25. Pale diorite with quartz crystals
         [25] = function(pos)
             switch_stone(pos, "diorite_pale")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_diorite_pale", "unilib:stone_ordinary_with_quartz_white", 1 / 50
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_diorite_pale", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 26. Phonolite with emerald crystals
         [26] = function(pos)
             switch_stone(pos, "phonolite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_phonolite", "unilib:stone_ordinary_with_emerald", 1 / 201
             )
         end,
         -- 27. Blue basalt with moss and brown mushrooms
         [27] = function(pos)
             switch_stone(pos, "basalt_blue")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_basalt_blue_cobble", "unilib:stone_basalt_blue_cobble_mossy", 3 / 4
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_basalt_blue", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 28. Green slimestone
         [28] = function(pos)
             switch_stone(pos, "slimestone_green")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_slimestone_green",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_slimestone_green",
                 "unilib:stone_slimestone_green_block_slimy", 0.7, 17, 18, 19
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_slimestone_green_block_slimy",
                 "unilib:stone_slimestone_green_with_eye", 1 / 10
             )
@@ -1262,36 +1267,37 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 29. Sichamine with light blocks
         [29] = function(pos)
             switch_stone(pos, "sichamine")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_sichamine", "unilib:light_block_sichamine", 1 / 25
             )
         end,
         -- 30. Sichamine with dark stones
         [30] = function(pos)
             switch_stone(pos, "sichamine")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_sichamine", "unilib:stone_sichamine_dark", 1 / 9
             )
         end,
         -- 31. Salmon granite with torchberries
         [31] = function(pos)
             switch_stone(pos, "granite_salmon")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_granite_salmon", "unilib:dirt_mossy",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_granite_salmon",
+                "unilib:dirt_mossy",
                 0.5, 17, 18, 19
             )
         end,
         -- 32. Dark andesite with dirt, mould and vines
         [32] = function(pos)
             switch_stone(pos, "andesite_dark")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_andesite_dark", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 33. Marble with lava springs
         [33] = function(pos)
             switch_stone(pos, "marble_carrara")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_marble_carrara", "unilib:liquid_lava_ordinary_source", 1 / 2000
             )
         end,
@@ -1306,14 +1312,14 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 36. Blue vindesite with burner stones
         [36] = function(pos)
             switch_stone(pos, "vindesite_blue")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_vindesite_blue", "unilib:misc_stone_burner", 1 / 15
             )
         end,
         -- 37. Phyllite with mushrooms and mould
         [37] = function(pos)
             switch_stone(pos, "phyllite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_phyllite", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
@@ -1328,11 +1334,11 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 40. Purple slimestone
         [40] = function(pos)
             switch_stone(pos, "slimestone_purple")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_slimestone_purple",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_slimestone_purple",
                 "unilib:stone_slimestone_purple_block_slimy", 0.7, 17, 18, 19
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_slimestone_purple_block_slimy",
                 "unilib:stone_slimestone_purple_with_eye", 1 / 10
             )
@@ -1340,20 +1346,20 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 41. Black gneiss with mese and sapphire crystals
         [41] = function(pos)
             switch_stone(pos, "gneiss_black")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_gneiss_black", "unilib:stone_ordinary_with_sapphire", 1 / 201
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_gneiss_black", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
         -- 42. Salmon granite with ruby crystals
         [42] = function(pos)
             switch_stone(pos, "granite_salmon")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_granite_salmon", "unilib:stone_ordinary_with_ruby", 1 / 201
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_granite_salmon", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
@@ -1364,11 +1370,11 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 44. Red slimestone
         [44] = function(pos)
             switch_stone(pos, "slimestone_red")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_slimestone_red",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_slimestone_red",
                 "unilib:stone_slimestone_red_block_slimy", 0.7, 17, 18, 19
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_slimestone_red_block_slimy", "unilib:stone_slimestone_red_with_eye",
                 1 / 10
             )
@@ -1376,26 +1382,26 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 45. Sichamine with lava
         [45] = function(pos)
             switch_stone(pos, "sichamine")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_sichamine", "unilib:light_block_sichamine", 1 / 25
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_sichamine", "unilib:stone_hektorite", 1 / 50
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_sichamine", "unilib:stone_omphyrite_crack_lava", 1 / 50
             )
         end,
         -- 46. Pale diorite with aquamarine and amethyst
         [46] = function(pos)
             switch_stone(pos, "diorite_pale")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_diorite_pale", "unilib:stone_ordinary_with_aquamarine", 1 / 50
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_diorite_pale", "unilib:stone_ordinary_with_amethyst", 1 / 50
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_diorite_pale", "unilib:liquid_water_ordinary_source", 1 / 2000
             )
         end,
@@ -1406,87 +1412,89 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 48. Brown gabbro with vines and mushrooms
         [48] = function(pos)
             switch_stone(pos, "gabbro_brown")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_gabbro_brown", "unilib:liquid_lava_ordinary_source", 1 / 5000
             )
         end,
         -- 49. Omphyrite with lava
         [49] = function(pos)
             switch_stone(pos, "omphyrite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_omphyrite", "unilib:stone_omphyrite_crack_lava", 1 / 18
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_omphyrite", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 50. Afualite with coal and diamonds
         [50] = function(pos)
             switch_stone(pos, "afualite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_afualite", "unilib:mineral_coal_block", 1 / 18
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:mineral_coal_block", "unilib:mineral_coal_block_with_diamond", 1 / 72
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_afualite", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 51. Afualite with vindesites and lava
         [51] = function(pos)
             switch_stone(pos, "afualite")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_afualite", "unilib:stone_vindesite_white",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_afualite",
+                "unilib:stone_vindesite_white",
                 0.5, 17, 18, 19
             )
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_afualite", "unilib:stone_vindesite_blue",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_afualite",
+                "unilib:stone_vindesite_blue",
                 0.5, 19, 17, 18
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_afualite", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 52. Black gneiss with copper
         [52] = function(pos)
             switch_stone(pos, "gneiss_black")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_gneiss_black", "unilib:stone_ordinary_with_copper_dense", 1 / 201
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_gneiss_black", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 53. Hektorite with lava
         [53] = function(pos)
             switch_stone(pos, "hektorite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_hektorite", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 54. Blue basalt with gold
         [54] = function(pos)
             switch_stone(pos, "basalt_blue")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_basalt_blue", "unilib:stone_ordinary_with_gold_dense", 1 / 407
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_basalt_blue", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 55. Sichamine with amethyst/aquamarine blocks
         [55] = function(pos)
-            unilib.jbiome_replace_in_converted(pos,
+            unilib.jbiomes.replace_in_converted(pos,
                 "unilib:stone_ordinary", "unilib:mineral_quartz_white_block"
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:mineral_quartz_white_block", "unilib:mineral_aquamarine_block", 1 / 4
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:mineral_quartz_white_block", "unilib:mineral_amethyst_block", 1 / 3
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:mineral_quartz_white_block", "unilib:light_block_sichamine", 1 / 25
             )
             switch_stone(pos, "sichamine")
@@ -1494,35 +1502,35 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 56. Salmon granite with iron
         [56] = function(pos)
             switch_stone(pos, "granite_salmon")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_granite_salmon", "unilib:stone_ordinary_with_iron_dense", 1 / 207
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_granite_salmon", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 57. Dark peridotite with malachite and burning mushrooms
         [57] = function(pos)
             switch_stone(pos, "peridotite_dark")
-            unilib.jbiome_blob(pos,
-                unilib.y_min, unilib.y_max, "unilib:stone_peridotite_dark",
+            unilib.jbiomes.blob(pos,
+                unilib.constant.y_min, unilib.constant.y_max, "unilib:stone_peridotite_dark",
                 "unilib:stone_malachite", 0.2, 17, 18, 19
             )
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_peridotite_dark", "unilib:liquid_lava_ordinary_source", 1 / 1000
             )
         end,
         -- 58. Hektorite with shinestone
         [58] = function(pos)
             switch_stone(pos, "hektorite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_hektorite", "unilib:liquid_lava_ordinary_source", 1 / 300
             )
         end,
         -- 59. Afualite with obsidian
         [59] = function(pos)
             switch_stone(pos, "afualite")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_afualite", "unilib:liquid_lava_ordinary_source", 1 / 300
             )
         end,
@@ -1533,70 +1541,70 @@ function unilib.pkg.mapgen_underch_jit.post()
         -- 61. Dark peridotite with blue basalt
         [61] = function(pos)
             switch_stone(pos, "peridotite_dark")
-            unilib.jbiome_ore(pos,
+            unilib.jbiomes.ore(pos,
                 "unilib:stone_peridotite_dark", "unilib:liquid_lava_ordinary_source", 1 / 300
             )
         end,
         -- 62. Obscurite
         [62] = function(pos)
-            minetest.set_node(pos, {name = "unilib:stone_obscurite"})
+            core.set_node(pos, {name = "unilib:stone_obscurite"})
         end,
     }
 
-    -- There are also two ore generation tables, used by unilib.jbiome_reveal()
-    -- The first one specifies calls to unilib.jbiome_blob()
+    -- There are also two ore generation tables, used by unilib.jbiomes.reveal()
+    -- The first one specifies calls to unilib.jbiomes.blob()
     local blob_table = {
-        {unilib.y_min, unilib.y_max, nil, "unilib:sand_silver", 0.09, 21, 22, 23},
-        {-31, unilib.y_max, nil, "unilib:dirt_ordinary", 0.09, 19, 22, 23},
-        {unilib.y_min, unilib.y_max, nil, "unilib:gravel_ordinary", 0.09, 21, 19, 24},
-        {-93, unilib.y_max, nil, "unilib:clay_brown", 0.09, 19, 24, 25},
-        {-1301, unilib.y_max, nil, "unilib:gravel_mossy", 0.09, 18, 19, 23},
-        {unilib.y_min, unilib.y_max, nil, "unilib:stone_ordinary_cobble", 0.09, 20, 21, 19},
+        {unilib.constant.y_min, unilib.constant.y_max, nil, "unilib:sand_silver", 0.09, 21, 22, 23},
+        {-31, unilib.constant.y_max, nil, "unilib:dirt_ordinary", 0.09, 19, 22, 23},
+        {unilib.constant.y_min, unilib.constant.y_max, nil, "unilib:gravel_ordinary", 0.09, 21, 19, 24},
+        {-93, unilib.constant.y_max, nil, "unilib:clay_brown", 0.09, 19, 24, 25},
+        {-1301, unilib.constant.y_max, nil, "unilib:gravel_mossy", 0.09, 18, 19, 23},
+        {unilib.constant.y_min, unilib.constant.y_max, nil, "unilib:stone_ordinary_cobble", 0.09, 20, 21, 19},
     }
 
-    -- The second one specifies calls to unilib.jbiome_scatter()
+    -- The second one specifies calls to unilib.jbiomes.scatter()
     local scatter_table = {
-        {unilib.y_min, 64, nil, "unilib:stone_ordinary_with_coal", 150, 29, 32, 33},
-        {unilib.y_min, -20, nil, "unilib:stone_ordinary_with_tin", 165, 30, 29, 31},
-        {unilib.y_min, -20, nil, "unilib:stone_ordinary_with_copper", 163, 27, 28, 31},
-        {unilib.y_min, -40, nil, "unilib:stone_ordinary_with_iron", 170, 29, 27, 31},
-        {unilib.y_min, -250, nil, "unilib:stone_ordinary_with_gold", 173, 32, 29, 27},
-        {unilib.y_min, -500, nil, "unilib:stone_ordinary_with_mese", 175, 29, 31, 28},
-        {unilib.y_min, -500, nil, "unilib:stone_ordinary_with_diamond", 180, 32, 31, 29},
-        {unilib.y_min, -1000, nil, "unilib:mineral_mese_block", 200, 29, 32, 35},
+        {unilib.constant.y_min, 64, nil, "unilib:stone_ordinary_with_coal", 150, 29, 32, 33},
+        {unilib.constant.y_min, -20, nil, "unilib:stone_ordinary_with_tin", 165, 30, 29, 31},
+        {unilib.constant.y_min, -20, nil, "unilib:stone_ordinary_with_copper", 163, 27, 28, 31},
+        {unilib.constant.y_min, -40, nil, "unilib:stone_ordinary_with_iron", 170, 29, 27, 31},
+        {unilib.constant.y_min, -250, nil, "unilib:stone_ordinary_with_gold", 173, 32, 29, 27},
+        {unilib.constant.y_min, -500, nil, "unilib:stone_ordinary_with_mese", 175, 29, 31, 28},
+        {unilib.constant.y_min, -500, nil, "unilib:stone_ordinary_with_diamond", 180, 32, 31, 29},
+        {unilib.constant.y_min, -1000, nil, "unilib:mineral_mese_block", 200, 29, 32, 35},
         -- (From moreores)
-        {unilib.y_min, -2, nil, "unilib:stone_ordinary_with_silver", 173, 30, 31, 37},
-        {unilib.y_min, -512, nil, "unilib:stone_ordinary_with_mithril", 185, 33, 28, 29},
+        {unilib.constant.y_min, -2, nil, "unilib:stone_ordinary_with_silver", 173, 30, 31, 37},
+        {unilib.constant.y_min, -512, nil, "unilib:stone_ordinary_with_mithril", 185, 33, 28, 29},
         -- (From technic)
-        {unilib.y_min, -80, nil, "unilib:stone_ordinary_with_chromium", 170, 28, 31, 33},
-        {unilib.y_min, -80, nil, "unilib:stone_ordinary_with_lead", 170, 28, 35, 33},
+        {unilib.constant.y_min, -80, nil, "unilib:stone_ordinary_with_chromium", 170, 28, 31, 33},
+        {unilib.constant.y_min, -80, nil, "unilib:stone_ordinary_with_lead", 170, 28, 35, 33},
         {-300, -80, nil, "unilib:stone_ordinary_with_uranium", 170, 30, 31, 28},
-        {unilib.y_min, -80, nil, "unilib:stone_ordinary_with_zinc", 170, 28, 37, 30},
+        {unilib.constant.y_min, -80, nil, "unilib:stone_ordinary_with_zinc", 170, 28, 37, 30},
         -- (From xtraores)
         -- N.B. In the original underch code, osmium a.k.a. ozymandium is missing from this list,
         --      and the .y_max values (the second item in each mini-list) doesn't match the values
         --      in the original xtraores code. Both problems are corrected here
         --[[
-        {unilib.y_min, -100, nil, "unilib:stone_ordinary_with_palatinium", 180, 35, 29, 28},
-        {unilib.y_min, -1000, nil, "unilib:stone_ordinary_with_sybilline", 190, 29, 33, 34},
-        {unilib.y_min, -2000, nil, "unilib:stone_ordinary_with_adamantite", 200, 31, 32, 33},
-        {unilib.y_min, -5000, nil, "unilib:stone_ordinary_with_rarium", 205, 30, 34, 37},
-        {unilib.y_min, -10000, nil, "unilib:stone_ordinary_with_unobtainium", 210, 29, 37, 34},
-        {unilib.y_min, -15000, nil, "unilib:stone_ordinary_with_tritonium", 215, 32, 29, 37},
-        {unilib.y_min, -28000, nil, "unilib:stone_ordinary_with_geminitinum", 220, 32, 33, 35},
+        {unilib.constant.y_min, -100, nil, "unilib:stone_ordinary_with_planexium", 180, 35, 29, 28},
+        {unilib.constant.y_min, -1000, nil, "unilib:stone_ordinary_with_sybilline", 190, 29, 33, 34},
+        {unilib.constant.y_min, -2000, nil, "unilib:stone_ordinary_with_adamantite", 200, 31, 32, 33},
+        {unilib.constant.y_min, -5000, nil, "unilib:stone_ordinary_with_rarium", 205, 30, 34, 37},
+        {unilib.constant.y_min, -10000, nil, "unilib:stone_ordinary_with_unobtainium", 210, 29, 37, 34},
+        {unilib.constant.y_min, -15000, nil, "unilib:stone_ordinary_with_tritonium", 215, 32, 29, 37},
+        {unilib.constant.y_min, -28000, nil, "unilib:stone_ordinary_with_geminitium", 220, 32, 33, 35},
         ]]--
-        {unilib.y_min, -100, nil, "unilib:stone_ordinary_with_palatinium", 180, 35, 29, 28},
-        {unilib.y_min, -1000, nil, "unilib:stone_ordinary_with_sybilline", 190, 29, 33, 34},
-        {unilib.y_min, -2000, nil, "unilib:stone_ordinary_with_ozymandium", 200, 31, 32, 33},
-        {unilib.y_min, -5000, nil, "unilib:stone_ordinary_with_adamantite", 205, 30, 34, 37},
-        {unilib.y_min, -10000, nil, "unilib:stone_ordinary_with_rarium", 210, 29, 37, 34},
-        {unilib.y_min, -15000, nil, "unilib:stone_ordinary_with_unobtainium", 215, 32, 29, 37},
-        {unilib.y_min, -25000, nil, "unilib:stone_ordinary_with_tritonium", 220, 32, 33, 35},
-        {unilib.y_min, -30000, nil, "unilib:stone_ordinary_with_geminitinum", 220, 35, 33, 32},
+        {unilib.constant.y_min, -100, nil, "unilib:stone_ordinary_with_planexium", 180, 35, 29, 28},
+        {unilib.constant.y_min, -1000, nil, "unilib:stone_ordinary_with_sybilline", 190, 29, 33, 34},
+        {unilib.constant.y_min, -2000, nil, "unilib:stone_ordinary_with_ozymandium", 200, 31, 32, 33},
+        {unilib.constant.y_min, -5000, nil, "unilib:stone_ordinary_with_adamantite", 205, 30, 34, 37},
+        {unilib.constant.y_min, -10000, nil, "unilib:stone_ordinary_with_rarium", 210, 29, 37, 34},
+        {unilib.constant.y_min, -15000, nil, "unilib:stone_ordinary_with_unobtainium", 215, 32, 29, 37},
+        {unilib.constant.y_min, -25000, nil, "unilib:stone_ordinary_with_tritonium", 220, 32, 33, 35},
+        {unilib.constant.y_min, -30000, nil, "unilib:stone_ordinary_with_geminitium", 220, 35, 33, 32},
     }
 
-    -- Pass those tables to the code in ../lib/shared/jbiomes.lua
-    unilib.jbiome_setup_matrix(matrix_table)
-    unilib.jbiome_setup_converted(converted_table, blob_table, scatter_table)
+    -- Pass those tables to the code in ../lib/shared/jbiomes/
+    unilib.jbiomes.setup_matrix(matrix_table)
+    unilib.jbiomes.setup_converted(converted_table, blob_table, scatter_table)
 
 end

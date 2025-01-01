@@ -9,7 +9,7 @@
 unilib.pkg.mineral_zincite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_zincite.exec()
         description = S("Zincite Lump"),
         inventory_image = "unilib_mineral_zincite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_zinc"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_zinc"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

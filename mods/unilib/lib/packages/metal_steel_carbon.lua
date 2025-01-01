@@ -13,8 +13,8 @@
 unilib.pkg.metal_steel_carbon = {}
 
 local S = unilib.intllib
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
-local worldgen_add_mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
+local worldgen_add_mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -66,7 +66,7 @@ function unilib.pkg.metal_steel_carbon.exec()
         output = "unilib:metal_steel_carbon_ingot 9",
         recipe = {
             {"unilib:metal_steel_carbon_block"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -78,7 +78,10 @@ function unilib.pkg.metal_steel_carbon.exec()
             description = S("Carbon Steel Block"),
             tiles = {"unilib_metal_steel_carbon_block.png"},
             groups = {cracky = 1, level = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content not in original code
+            is_ground_content = false,
         }
     )
     unilib.register_craft_3x3({
@@ -86,5 +89,25 @@ function unilib.pkg.metal_steel_carbon.exec()
         output = "unilib:metal_steel_carbon_block",
         ingredient = "unilib:metal_steel_carbon_ingot",
     })
+    unilib.register_stairs("unilib:metal_steel_carbon_block")
+    unilib.register_carvings("unilib:metal_steel_carbon_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_steel_carbon_block_compressed", nil, worldgen_add_mode, {
+            -- Original to unilib
+            description = S("Compressed Carbon Steel Block"),
+            tiles = {"unilib_metal_steel_carbon_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("steel_carbon")
+
+    end
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_plankstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.decor_tiled_plankstone.exec()
             wood_img .. "^" .. tile_img .. "^[transformR90",
         },
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -54,7 +54,7 @@ function unilib.pkg.decor_tiled_plankstone.exec()
         recipe = {
             {"group:stone", "group:wood"},
             {"group:wood", "group:stone"},
-        }
+        },
     })
     unilib.register_craft({
         -- From moreblocks:plankstone
@@ -62,7 +62,7 @@ function unilib.pkg.decor_tiled_plankstone.exec()
         recipe = {
             {"group:wood", "group:stone"},
             {"group:stone", "group:wood"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_plankstone", {
         img_rotate_flag = true,
@@ -73,7 +73,7 @@ function unilib.pkg.decor_tiled_plankstone.exec()
         description = S("Decorative Centred Plankstone Tile"),
         tiles = {wood_img .. "^unilib_decor_tiled_plankstone_centre_overlay.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -84,18 +84,18 @@ function unilib.pkg.decor_tiled_plankstone.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "unilib:decor_tiled_plankstone", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_stairs("unilib:decor_tiled_plankstone_centre")
 
-    if unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_node("unilib:decor_tiled_plankstone_offset", nil, mode, {
             -- Original to unilib
             description = S("Decorative Offset Plankstone Tile"),
             tiles = {wood_img .. "^unilib_decor_tiled_plankstone_offset_overlay.png"},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         })
@@ -105,7 +105,7 @@ function unilib.pkg.decor_tiled_plankstone.exec()
             recipe = {
                 {"unilib:item_stick_ordinary"},
                 {"unilib:decor_tiled_plankstone_centre"},
-            }
+            },
         })
 
     end

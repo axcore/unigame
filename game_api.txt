@@ -1,3 +1,0 @@
-Unigame API
-===========
-WIP, full documentation to follow

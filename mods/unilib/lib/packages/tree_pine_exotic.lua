@@ -9,7 +9,7 @@
 unilib.pkg.tree_pine_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,6 +28,9 @@ function unilib.pkg.tree_pine_exotic.init()
 end
 
 function unilib.pkg.tree_pine_exotic.exec()
+
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
 
     -- (Using same level as the equivalent tree in default)
     local burnlevel = 2
@@ -145,7 +148,7 @@ function unilib.pkg.tree_pine_exotic.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From farlands, doors:gate_pine_wood. Creates unilib:gate_pine_exotic_closed
+        -- From farlands, doors:gate_pine_wood_closed. Creates unilib:gate_pine_exotic_closed, etc
         part_name = "pine_exotic",
         orig_name = {nil, nil},
 
@@ -156,10 +159,10 @@ function unilib.pkg.tree_pine_exotic.exec()
         group_table = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("farlands_tree_pine_exotic_1", {
+    unilib.register_decoration_generic("farlands_tree_pine_exotic_1", {
         -- From farlands, mapgen/mapgen.lua, ../default/schematics/pine_tree.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_exotic_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_exotic_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -173,10 +176,10 @@ function unilib.pkg.tree_pine_exotic.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_tree_pine_exotic_2", {
+    unilib.register_decoration_generic("farlands_tree_pine_exotic_2", {
         -- From farlands, mapgen/mapgen.lua, ../default/schematics/pine_tree.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_exotic_1.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_exotic_1.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -191,10 +194,10 @@ function unilib.pkg.tree_pine_exotic.exec()
     })
 
     -- N.B. During schematic conversion, removed condensed meat
-    unilib.register_decoration("farlands_tree_pine_exotic_3", {
+    unilib.register_decoration_generic("farlands_tree_pine_exotic_3", {
         -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/pine.mts
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_exotic_2.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_exotic_2.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -208,12 +211,12 @@ function unilib.pkg.tree_pine_exotic.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
-        unilib.register_decoration("farlands_tree_pine_exotic_log", {
+        unilib.register_decoration_generic("farlands_tree_pine_exotic_log", {
             -- From farlands, mapgen/mapgen.lua (schematic in code)
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_pine_exotic_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_exotic_log.mts",
 
             flags = "place_center_x",
             noise_params = {

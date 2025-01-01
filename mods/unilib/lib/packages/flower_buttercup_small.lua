@@ -9,7 +9,7 @@
 unilib.pkg.flower_buttercup_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,15 @@ function unilib.pkg.flower_buttercup_small.exec()
 
     unilib.register_node("unilib:flower_buttercup_small", "vallee_des_roses:buttercup", mode, {
         -- From vallee_des_roses:buttercup
-        description = unilib.annotate(S("Small Buttercup"), "Ranunculus"),
+        description = unilib.utils.annotate(S("Small Buttercup"), "Ranunculus"),
         tiles = {"unilib_flower_buttercup_small.png"},
         -- N.B. Replaced original groups with standard flower groups
         groups = {
-            attached_node = 1, color_yellow = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_yellow = 1, colour_yellow = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +49,7 @@ function unilib.pkg.flower_buttercup_small.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_buttercup_small", "vallee_des_roses:buttercup")
 
-    unilib.register_decoration("vallee_des_roses_flower_buttercup_small", {
+    unilib.register_decoration_generic("vallee_des_roses_flower_buttercup_small", {
         -- From vallee_des_roses:buttercup
         deco_type = "simple",
         decoration = "unilib:flower_buttercup_small",

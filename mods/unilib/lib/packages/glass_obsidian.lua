@@ -13,8 +13,8 @@
 unilib.pkg.glass_obsidian = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,12 +37,11 @@ function unilib.pkg.glass_obsidian.exec()
         description = S("Obsidian Glass"),
         tiles = {"unilib_glass_obsidian.png", "unilib_glass_obsidian_detail.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
         paramtype = "light",
-        paramtype2 = "glasslikeliquidlevel",
         sunlight_propagates = true,
         -- Notes from default:
         -- Only needed for stairs API
@@ -54,9 +53,9 @@ function unilib.pkg.glass_obsidian.exec()
         output = "unilib:glass_obsidian",
         recipe = "unilib:stone_obsidian_shard",
     })
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["mineral_mese"] ~= nil and
-            moreblocks_add_mode ~= "defer" then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["mineral_mese"] ~= nil and
+            (moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")) then
 
         unilib.register_glass_trap({
             -- From moreblocks:trap_obsidian_glass. Creates unilib:glass_obsidian_trap
@@ -73,8 +72,8 @@ function unilib.pkg.glass_obsidian.exec()
     unilib.register_stairs("unilib:glass_obsidian", {
         basic_flag = true,          -- Create only stairs from minetest_game/stairs
     })
-    -- (The stairs were not created if unilib.add_stairs_basic_flag is false)
-    if minetest.registered_nodes["unilib:glass_obsidian_stair_simple"] ~= nil then
+    -- (The stairs were not created if unilib.setting.add_stairs_basic_flag is false)
+    if core.registered_nodes["unilib:glass_obsidian_stair_simple"] ~= nil then
 
         unilib.override_item("unilib:glass_obsidian_stair_simple", {
             tiles = {

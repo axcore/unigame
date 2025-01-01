@@ -9,7 +9,7 @@
 unilib.pkg.flower_marigold_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,16 @@ function unilib.pkg.flower_marigold_small.exec()
 
     unilib.register_node("unilib:flower_marigold_small", "vallee_des_roses:marigold", mode, {
         -- From vallee_des_roses:marigold
-        description = unilib.annotate(S("Small Marigold"), "Tagetes"),
+        description = unilib.utils.annotate(S("Small Marigold"), "Tagetes"),
         tiles = {"unilib_flower_marigold_small.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {oddly_breakable_by_hand = 3, snappy = 3},
         groups = {
-            attached_node = 1, color_orange = 1, flammable = 1, flora = 1, flower = 1,
-            snappy = 3,
+            attached_node = 1, color_orange = 1, colour_orange = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -52,7 +52,7 @@ function unilib.pkg.flower_marigold_small.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_marigold_small", "vallee_des_roses:marigold")
 
-    unilib.register_decoration("vallee_des_roses_flower_marigold_small", {
+    unilib.register_decoration_generic("vallee_des_roses_flower_marigold_small", {
         -- From vallee_des_roses:marigold
         deco_type = "simple",
         decoration = "unilib:flower_marigold_small",

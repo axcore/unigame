@@ -9,7 +9,7 @@
 unilib.pkg.shared_underch_slime = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions
@@ -49,10 +49,10 @@ function unilib.pkg.shared_underch_slime.register_slime_eye(data_table)
             inventory_image = part_img .. "_eye.png",
         }
     )
-    minetest.register_craft({
+    unilib.register_craft({
         type = "shapeless",
         output = full_name .. "_eye 9",
-        recipe = {full_name .. "_eye_block"}
+        recipe = {full_name .. "_eye_block"},
     })
 
     unilib.register_node(
@@ -63,7 +63,7 @@ function unilib.pkg.shared_underch_slime.register_slime_eye(data_table)
             description = block_desc,
             tiles = {part_img .. "_eye_block.png"},
             groups = {oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = false,
         }
@@ -81,7 +81,7 @@ function unilib.pkg.shared_underch_slime.register_slime_eye(data_table)
             description = ore_desc,
             tiles = {part_img .. "_with_eye.png"},
             groups = {cracky = 2, crumbly = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drop = full_name .. "_eye",
         }
@@ -119,10 +119,10 @@ function unilib.pkg.shared_underch_slime.register_block_slimy(data_table)
             description = block_desc,
             tiles = {part_img .. "_block_slimy.png"},
             groups = {cracky = 2, crumbly = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
         }
     )
-    minetest.register_craft({
+    unilib.register_craft({
         type = "cooking",
         output = full_name,
         recipe = ingredient,
@@ -156,7 +156,7 @@ function unilib.pkg.shared_underch_slime.register_brick_slimy(data_table)
         description = brick_desc,
         tiles = {"unilib_stone_slimestone_" .. part_name .. "_brick_slimy.png"},
         groups = {cracky = 2, crumbly = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         is_ground_content = false,
     })
@@ -165,7 +165,7 @@ function unilib.pkg.shared_underch_slime.register_brick_slimy(data_table)
         ingredient = ingredient,
     })
     unilib.register_stairs(full_name)
-    unilib.set_auto_rotate(full_name, unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(full_name, unilib.setting.auto_rotate_brick_flag)
 
 end
 
@@ -217,7 +217,7 @@ function unilib.pkg.shared_underch_slime.register_liquid_slime(data_table)
         groups = {
             cools_lava = 1, liquid = 3, not_in_creative_inventory = 1, puts_out_fire = 1, water = 3,
         },
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         buildable_to = true,
         diggable = false,

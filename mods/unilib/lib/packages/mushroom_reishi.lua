@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_reishi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.mushroom_reishi.exec()
 
     unilib.register_node("unilib:mushroom_reishi", "nsspf:ganoderma_lucidum", mode, {
         -- From nsspf:ganoderma_lucidum
-        description = unilib.annotate(S("Reishi Mushroom"), "Ganoderma lucidum"),
+        description = unilib.utils.annotate(S("Reishi Mushroom"), "Ganoderma lucidum"),
         tiles = {"unilib_mushroom_reishi.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -56,7 +56,7 @@ function unilib.pkg.mushroom_reishi.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_reishi", 14),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_reishi", 14),
     })
     -- (not compatible with flowerpots)
 
@@ -67,7 +67,7 @@ function unilib.pkg.mushroom_reishi.exec()
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, food_mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -89,7 +89,7 @@ function unilib.pkg.mushroom_reishi.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_reishi_cooked", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_reishi_cooked", 4),
     })
     unilib.register_craft({
         -- From nsspf:cooked_ganoderma_lucidum

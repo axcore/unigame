@@ -9,7 +9,7 @@
 unilib.pkg.flower_waterlily_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,6 @@ function unilib.pkg.flower_waterlily_ordinary.init()
 
     return {
         description = "Ordinary waterlily",
-        notes = "Waterlilies, when placed on water, are given a random waving [param2] value,"
     }
 
 end
@@ -37,7 +36,7 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
             "unilib_flower_waterlily_ordinary_bottom.png",
         },
         groups = {flammable = 1, flower = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "nodebox",
@@ -56,14 +55,14 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
             fixed = {-7 / 16, -0.5, -7 / 16, 7 / 16, -15 / 32, 7 / 16}
         },
         use_texture_alpha = "clip",
-        walkable = unilib.walkable_waterlilies_flag,
+        walkable = unilib.setting.walkable_waterlilies_flag,
         wield_image = "flowers_waterlily.png",
 
         on_place = function(itemstack, placer, pointed_thing)
 
             local pos = pointed_thing.above
-            local node = minetest.get_node(pointed_thing.under)
-            local def = minetest.registered_nodes[node.name]
+            local node = core.get_node(pointed_thing.under)
+            local def = core.registered_nodes[node.name]
 
             if def and def.on_rightclick then
 
@@ -74,12 +73,12 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
             end
 
             if def and def.liquidtype == "source" and
-                    minetest.get_item_group(node.name, "water") > 0 then
+                    core.get_item_group(node.name, "water") > 0 then
 
                 local player_name = placer and placer:get_player_name() or ""
-                if not minetest.is_protected(pos, player_name) then
+                if not core.is_protected(pos, player_name) then
 
-                    minetest.set_node(
+                    core.set_node(
                         pos,
                         {
                             name = "unilib:flower_waterlily_ordinary" ..
@@ -88,14 +87,14 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
                         }
                     )
 
-                    if not unilib.is_creative(player_name) then
+                    if not unilib.utils.is_creative(player_name) then
                         itemstack:take_item()
                     end
 
                 else
 
-                    minetest.chat_send_player(player_name, S("Node is protected"))
-                    minetest.record_protection_violation(pos, player_name)
+                    core.chat_send_player(player_name, S("Node is protected"))
+                    core.record_protection_violation(pos, player_name)
 
                 end
 
@@ -127,7 +126,7 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
     )
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("flowers_flower_waterlily_ordinary", {
+    unilib.register_decoration_generic("flowers_flower_waterlily_ordinary", {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_waterlily_ordinary_waving",

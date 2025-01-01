@@ -13,8 +13,8 @@
 unilib.pkg.stone_sandstone_desert = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local mtg_plus_add_mode = unilib.imported_mod_table.mtg_plus.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local mtg_plus_add_mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,6 +38,7 @@ function unilib.pkg.stone_sandstone_desert.exec()
 
         basic_platform_flag = true,
         category = "sedimentary",
+        colour = "#BC955E",
         grinder_flag = true,
         grinder_powder = "unilib:sand_desert",
         grinder_gravel = "unilib:gravel_sandstone_desert",
@@ -47,7 +48,7 @@ function unilib.pkg.stone_sandstone_desert.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_desert", 3, 2)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_desert", 3, 2)
 
     unilib.register_node(
         -- From default:desert_sandstone
@@ -58,23 +59,27 @@ function unilib.pkg.stone_sandstone_desert.exec()
             description = S("Desert Sandstone"),
             tiles = {"unilib_stone_sandstone_desert.png"},
             groups = {cracky = smooth_cracky, crumbly = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
         }
     )
-    unilib.register_craft_2x2({
-        -- From default:desert_sandstone
-        output = "unilib:stone_sandstone_desert",
-        ingredient = "unilib:sand_desert",
-    })
-    unilib.register_craft({
-        -- From default:desert_sandstone
-        output = "unilib:sand_desert 4",
-        recipe = {
-            {"unilib:stone_sandstone_desert"},
-        }
-    })
+    if unilib.global.pkg_executed_table["sand_desert"] ~= nil then
+
+        unilib.register_craft_2x2({
+            -- From default:desert_sandstone
+            output = "unilib:stone_sandstone_desert",
+            ingredient = "unilib:sand_desert",
+        })
+        unilib.register_craft({
+            -- From default:desert_sandstone
+            output = "unilib:sand_desert 4",
+            recipe = {
+                {"unilib:stone_sandstone_desert"},
+            },
+        })
+
+    end
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_desert", {
             drop_name = "unilib:stone_sandstone_desert_rubble",
@@ -108,7 +113,7 @@ function unilib.pkg.stone_sandstone_desert.exec()
             description = S("Desert Sandstone Block"),
             tiles = {"unilib_stone_sandstone_desert_block.png"},
             groups = {cracky = block_cracky},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -137,7 +142,7 @@ function unilib.pkg.stone_sandstone_desert.exec()
             description = S("Desert Sandstone Bricks"),
             tiles = {"unilib_stone_sandstone_desert_brick.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -159,9 +164,11 @@ function unilib.pkg.stone_sandstone_desert.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_desert",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_desert_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_desert_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_node(
             -- From mtg_plus:desert_sandstone_cobble
@@ -172,7 +179,7 @@ function unilib.pkg.stone_sandstone_desert.exec()
                 description = S("Cobbled Desert Sandstone"),
                 tiles = {"unilib_stone_sandstone_desert_cobble.png"},
                 groups = {cracky = 3},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
             }
@@ -216,9 +223,9 @@ function unilib.pkg.stone_sandstone_desert.exec()
 
     -- N.B. The cobble above is a decorative item, not produced when digging smoothstone; so this
     --      package also includes a rubble
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
-        if unilib.get_stone_actual_hardness("sandstone_desert") == 1 then
+        if unilib.stone.get_actual_hardness("sandstone_desert") == 1 then
 
             unilib.register_stone_rubble({
                 -- Original to unilib. Creates unilib:stone_sandstone_desert_rubble
@@ -229,11 +236,26 @@ function unilib.pkg.stone_sandstone_desert.exec()
                 description = S("Desert Sandstone Rubble"),
                 img_list = {"unilib_stone_sandstone_desert.png^unilib_stone_rubble_overlay.png"},
             })
-            minetest.override("unilib:stone_sandstone_desert", {
+            unilib.override_item("unilib:stone_sandstone_desert", {
                 drop = "unilib:stone_sandstone_desert_rubble",
             })
-            unilib.register_stone_rubble_cuttings({
+
+            unilib.register_stone_rubble_compressed({
+                -- Original to unilib. Creates unilib:stone_sandstone_desert_rubble_compressed
                 part_name = "sandstone_desert",
+                orig_name = nil,
+
+                replace_mode = default_add_mode,
+                description = S("Compressed Desert Sandstone Rubble"),
+            })
+
+            unilib.register_stone_rubble_condensed({
+                -- Original to unilib. Creates unilib:stone_sandstone_desert_rubble_condensed
+                part_name = "sandstone_desert",
+                orig_name = nil,
+
+                replace_mode = default_add_mode,
+                description = S("Condensed Desert Sandstone Rubble"),
             })
 
         end

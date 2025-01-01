@@ -9,7 +9,7 @@
 unilib.pkg.misc_patch_grass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.dryplants.add_mode
+local mode = unilib.global.imported_mod_table.dryplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.misc_patch_grass.exec()
         description = S("Patch of Grass"),
         tiles = {"unilib_misc_patch_grass.png"},
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_patch_grass.png",
@@ -45,25 +45,25 @@ function unilib.pkg.misc_patch_grass.exec()
         use_texture_alpha = "clip",
         wield_image = "unilib_misc_patch_grass.png",
     })
-    if unilib.pkg_executed_table["grass_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From dryplants:grass
             output = "unilib:misc_patch_grass",
             recipe = {
                 {"unilib:grass_ordinary_1"},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["grass_jungle"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_jungle"] ~= nil then
 
         unilib.register_craft({
             -- From dryplants:grass
             output = "unilib:misc_patch_grass",
             recipe = {
                 {"unilib:grass_jungle"},
-            }
+            },
         })
 
     end
@@ -74,7 +74,7 @@ function unilib.pkg.misc_patch_grass.exec()
         description = S("Patch of Dead Grass"),
         tiles = {"unilib_misc_patch_grass_dead.png"},
         groups = {flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_patch_grass_dead.png",
@@ -112,7 +112,7 @@ function unilib.pkg.misc_patch_grass.exec()
         interval = 3600,
 
         action = function(pos)
-            minetest.swap_node(pos, {name = "unilib:misc_patch_grass_dead"})
+            core.swap_node(pos, {name = "unilib:misc_patch_grass_dead"})
         end,
     })
 

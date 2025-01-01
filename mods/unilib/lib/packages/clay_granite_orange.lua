@@ -9,7 +9,7 @@
 unilib.pkg.clay_granite_orange = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_granite_orange.exec()
         -- Texture from UGBC, red_granite_clay.png. Original code
         description = S("Orange Granite Clay"),
         tiles = {"unilib_clay_granite_orange.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
     })
 
 end

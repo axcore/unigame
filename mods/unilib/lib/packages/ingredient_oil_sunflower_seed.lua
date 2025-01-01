@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_oil_sunflower_seed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.ingredient_oil_sunflower_seed.exec()
                 attached_node = 1, dig_immediate = 3, eatable = 1, food = 1, food_oil = 1,
                 food_vegan = 1, vessel = 1,
             },
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_ingredient_oil_sunflower_seed.png",
@@ -53,7 +53,7 @@ function unilib.pkg.ingredient_oil_sunflower_seed.exec()
             walkable = false,
             wield_image = "unilib_ingredient_oil_sunflower_seed.png",
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:ingredient_oil_sunflower_seed", 2, "unilib:vessel_bottle_glass_empty"
             ),
         }
@@ -64,7 +64,7 @@ function unilib.pkg.ingredient_oil_sunflower_seed.exec()
         recipe = {
             {c_seeds, c_seeds, c_seeds},
             {c_seeds, c_seeds, c_seeds},
-            {"", "unilib:vessel_bottle_glass_empty", ""}
+            {"", "unilib:vessel_bottle_glass_empty", ""},
         },
     })
     unilib.register_craft({
@@ -76,7 +76,7 @@ function unilib.pkg.ingredient_oil_sunflower_seed.exec()
         },
         burntime = 30,
     })
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_compressor_recipe({
             -- From cucina_vegana:sunflower_seeds_oil

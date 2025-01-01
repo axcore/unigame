@@ -9,7 +9,7 @@
 unilib.pkg.abm_snow_freezing = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,13 +18,13 @@ local mode = unilib.imported_mod_table.snow.add_mode
 function unilib.pkg.abm_snow_freezing.init()
 
     return {
-        description = "Freezes water",
+        description = "ABMs to handle water freezing (from snow)",
         depends = {"ice_ordinary", "liquid_water_ordinary"},
     }
 
 end
 
-function unilib.pkg.abm_snow_freezing.exec()
+function unilib.pkg.abm_snow_freezing.post()
 
     -- Water freezes when in contact with snow
     unilib.register_abm({
@@ -41,7 +41,7 @@ function unilib.pkg.abm_snow_freezing.exec()
         interval = 20,
 
         action = function(pos)
-            minetest.add_node(pos, {name = "unilib:ice_ordinary"})
+            core.add_node(pos, {name = "unilib:ice_ordinary"})
         end,
     })
 
@@ -71,10 +71,9 @@ function unilib.pkg.abm_snow_freezing.exec()
                         if math.random(2) == 2 then
 
                             p.y = pos.y
-                            if minetest.get_node(p).name ==
-                                    "unilib:liquid_water_ordinary_source" then
+                            if core.get_node(p).name == "unilib:liquid_water_ordinary_source" then
 
-                                minetest.add_node(p, {
+                                core.add_node(p, {
                                     name = "unilib:ice_ordinary",
                                     param2 = math.random(0, node.param2 - 1)
                                 })
@@ -91,12 +90,12 @@ function unilib.pkg.abm_snow_freezing.exec()
 
             if math.random(8) == 8 then
 
-                minetest.add_node(pos, {name = "unilib:liquid_water_ordinary_source"})
+                core.add_node(pos, {name = "unilib:liquid_water_ordinary_source"})
 
             else
 
                 node.param2 = 0
-                minetest.add_node(pos, node)
+                core.add_node(pos, node)
 
             end
 

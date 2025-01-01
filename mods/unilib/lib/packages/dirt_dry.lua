@@ -13,7 +13,7 @@
 unilib.pkg.dirt_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,12 +39,14 @@ function unilib.pkg.dirt_dry.exec()
             tiles = {"unilib_dirt_dry.png"},
             -- N.B. dry_dirt = 1 not in original code
             groups = {crumbly = 3, dry_dirt = 1, soil = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
+        compressed_description = S("Compressed Savanna Dirt"),
+        compressed_group_table = {crumbly = 2},
         dry_soil = "unilib:soil_arid",
         wet_soil = "unilib:soil_arid_wet",
     })
@@ -54,7 +56,7 @@ function unilib.pkg.dirt_dry.exec()
     -- Must come before all savanna decorations that are placed on dry grass
     -- Noise is similar to long dry grass noise, but scale inverted, to appear where long dry grass
     --      is least dense and shortest
-    unilib.register_decoration("default_dirt_dry", {
+    unilib.register_decoration_generic("default_dirt_dry", {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:dirt_dry",
@@ -88,13 +90,16 @@ function unilib.pkg.dirt_dry.exec()
                 },
             },
             -- N.B. dry_dirt = 1 not in original code
-            groups = {crumbly = 3, dry_dirt = 1, soil = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, dry_dirt = 1,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             drop = "unilib:dirt_dry",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
@@ -102,9 +107,9 @@ function unilib.pkg.dirt_dry.exec()
         wet_soil = "unilib:soil_arid_wet",
         turf_description = S("Savanna Turf"),
     })
-    if unilib.pkg_executed_table["grass_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_dry"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_dry_with_turf_dry",
             "unilib:dirt_dry",
             "unilib:grass_dry_1"

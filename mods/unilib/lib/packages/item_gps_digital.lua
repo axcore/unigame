@@ -9,7 +9,7 @@
 unilib.pkg.item_gps_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,9 @@ function unilib.pkg.item_gps_digital.exec()
 
     unilib.register_tool("unilib:item_gps_digital", "orienteering:gps", mode, {
         -- From orienteering:gps
-        description = S("Digital GPS Device"),
+        description = unilib.utils.hint(
+            S("Digital GPS Device"), S("shows coordinates, yaw and time")
+        ),
         inventory_image = "unilib_item_gps_digital_inv.png",
         groups = {disable_repair = 1},
 

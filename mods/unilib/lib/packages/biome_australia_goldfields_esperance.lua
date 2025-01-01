@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_goldfields_esperance = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,12 +24,12 @@ function unilib.pkg.biome_australia_goldfields_esperance.init()
 
 end
 
-function unilib.pkg.biome_australia_goldfields_esperance.exec()
+function unilib.pkg.biome_australia_goldfields_esperance.post()
 
     unilib.register_biome({
         -- From australia/biome_goldfields_esperance.lua, "goldfields_esperance" biome
         name = "australia_goldfields_esperance",
-        description = unilib.brackets(S("Goldfields-Esperance biome"), "australia"),
+        description = unilib.utils.brackets(S("Goldfields-Esperance biome"), "australia"),
         node_top = "unilib:sand_desert",
         depth_top = 2,
         node_filler = "unilib:stone_sandstone_ordinary",

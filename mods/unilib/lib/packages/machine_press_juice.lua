@@ -9,18 +9,17 @@
 unilib.pkg.machine_press_juice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.drinks.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.drinks.add_mode
 
-local barrel_full_msg = S("The barrel is full of juice.")
-local collect_msg = S("Collect your juice.")
+local barrel_full_msg = S("The barrel is full of juice")
+local collect_msg = S("Collect your juice")
 local juicing_msg = S("Juicing...")
 local more_fruit_msg = S("You need more fruit!")
 local no_mix_msg = S("You can't mix juices!")
-local ready_msg = S("Ready for juicing.")
-local silo_full_msg = S("The silo is full of juice.")
-
--- (Table compiled in the .post() function below)
-local empty_bucket_table = {}
+local ready_msg = S("Ready for juicing")
+local silo_full_msg = S("The silo is full of juice")
 
 -- Formspecs
 local put_fruit_msg = S("Put fruit here")
@@ -31,29 +30,29 @@ local ratio3_msg = S("16 fruits to a bucket")
 local button_msg = S("Squeeze Juice")
 
 local base_formspec =
-    "label[1,1;" .. put_fruit_msg .. "]" ..
-    "label[1,2;" .. put_container_msg .. "]" ..
-    "label[5,0;" .. ratio1_msg .. "]" ..
-    "label[5,0.5;" .. ratio2_msg .. "]" ..
-    "label[5,1.0;" .. ratio3_msg .. "]" ..
-    "button[5,1.9;3,1;press;" .. button_msg .. "]" ..
+    "label[1,1;" .. F(put_fruit_msg) .. "]" ..
+    "label[1,2;" .. F(put_container_msg) .. "]" ..
+    "label[5,0;" .. F(ratio1_msg) .. "]" ..
+    "label[5,0.5;" .. F(ratio2_msg) .. "]" ..
+    "label[5,1.0;" .. F(ratio3_msg) .. "]" ..
+    "button[5,1.9;3,1;press;" .. F(button_msg) .. "]" ..
     "list[current_name;src;0,0.8;1,1;]" ..
     "list[current_name;dst;0,1.8;1,1;]" ..
     "list[current_player;main;0,3;8,4;]"
 
 local press_idle_formspec =
     "size[8,7]" ..
-    "label[0,0;" .. S("Organic juice is just a squish away!") .. "]" ..
+    "label[0,0;" .. FS("Fresh juice is just a squish away!") .. "]" ..
     base_formspec
 
 local press_running_formspec =
     "size[8,7]" ..
-    "label[0,0;" .. S("Organic juice coming right up...") .. "]" ..
+    "label[0,0;" .. FS("Fresh juice coming right up...") .. "]" ..
     base_formspec
 
 local press_error_formspec =
     "size[8,7]" ..
-    "label[0,0;" .. S("You need to add more fruit!") .. "]" ..
+    "label[0,0;" .. FS("You need to add more fruit!") .. "]" ..
     base_formspec
 
 ---------------------------------------------------------------------------------------------------
@@ -102,6 +101,8 @@ function unilib.pkg.machine_press_juice.exec()
             fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_machine_press_juice.obj",
         paramtype = "light",
         paramtype2 = "facedir",
@@ -115,15 +116,11 @@ function unilib.pkg.machine_press_juice.exec()
 
             if listname == "dst" then
 
-                if empty_bucket_table[stack:get_name()] ~= nil then
-                    return 1
-                elseif stack:get_name() == ("unilib:vessel_glass_empty") then
-                    return 1
-                elseif stack:get_name() == ("unilib:vessel_bottle_glass_empty") then
-                    return 1
-                elseif stack:get_name() == ("unilib:vessel_bottle_steel_empty") then
-                    return 1
-                elseif stack:get_name() == ("unilib:plant_papyrus_ordinary") then
+                if unilib.global.empty_bucket_table[stack:get_name()] ~= nil or
+                        stack:get_name() == "unilib:vessel_glass_empty" or
+                        stack:get_name() == "unilib:vessel_bottle_glass_empty" or
+                        stack:get_name() == "unilib:vessel_bottle_steel_empty" or
+                        stack:get_name() == "unilib:plant_papyrus_ordinary" then
                     return 1
                 else
                     return 0
@@ -139,36 +136,31 @@ function unilib.pkg.machine_press_juice.exec()
 
         can_dig = function(pos)
 
-            local meta = minetest.get_meta(pos);
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
-            if inv:is_empty("src") and
-
-                inv:is_empty("dst") then
+            if inv:is_empty("src") and inv:is_empty("dst") then
                 return true
-
             else
-
                 return false
-
             end
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size("main", 8 * 4)
             inv:set_size("src", 1)
             inv:set_size("dst", 1)
-            meta:set_string("infotext", "Empty Juice Press")
+            meta:set_string("infotext", S("Empty Juice Press"))
             meta:set_string("formspec", press_idle_formspec)
 
         end,
 
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             meta:set_string("infotext", ready_msg)
 
@@ -176,8 +168,8 @@ function unilib.pkg.machine_press_juice.exec()
 
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            local timer = minetest.get_node_timer(pos)
-            local meta = minetest.get_meta(pos)
+            local timer = core.get_node_timer(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             timer:stop()
             meta:set_string("infotext", ready_msg)
@@ -189,13 +181,13 @@ function unilib.pkg.machine_press_juice.exec()
 
             if fields["press"] then
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 local instack = inv:get_stack("src", 1)
 
                 local fruitstack = instack:get_name()
-                local item_name = unilib.get_item_name(fruitstack)
+                local item_name = unilib.utils.get_item_name(fruitstack)
                 local fruit = unilib.pkg.shared_drinks.ingredient_convert_table[item_name]
 
                 if unilib.pkg.shared_drinks.juiceable_table[fruit] then
@@ -254,12 +246,12 @@ function unilib.pkg.machine_press_juice.exec()
 
                         end
 
-                    elseif empty_bucket_table[vessel] ~= nil then
+                    elseif unilib.global.empty_bucket_table[vessel] ~= nil then
 
                         if instack:get_count() >= 16 then
 
                             -- e.g. unilib:bucket_steel_with_juice_apple
-                            meta:set_string("container", empty_bucket_table[vessel] .. "_with")
+                            meta:set_string("container", unilib.global.empty_bucket_table[vessel])
                             meta:set_string("fruitnumber", 16)
                             meta:set_string("infotext", juicing_msg)
                             meta:set_string("formspec", press_running_formspec)
@@ -277,13 +269,13 @@ function unilib.pkg.machine_press_juice.exec()
                         if instack:get_count() >= 2 then
 
                             local under_node = {x = pos.x, y = pos.y - 1, z = pos.z}
-                            local under_node_name = minetest.get_node_or_nil(under_node)
+                            local under_node_name = core.get_node_or_nil(under_node)
                             local under_node_2 = {x = pos.x, y = pos.y - 2, z = pos.z}
-                            local under_node_name_2 = minetest.get_node_or_nil(under_node_2)
+                            local under_node_name_2 = core.get_node_or_nil(under_node_2)
 
                             if under_node_name.name == "unilib:container_barrel_juice" then
 
-                                local meta_u = minetest.get_meta(under_node)
+                                local meta_u = core.get_meta(under_node)
                                 local stored_fruit = meta_u:get_string("fruit")
                                 if fruit == stored_fruit or stored_fruit == "empty" then
 
@@ -303,7 +295,7 @@ function unilib.pkg.machine_press_juice.exec()
 
                             elseif under_node_name_2.name == "unilib:container_silo_juice" then
 
-                                local meta_u = minetest.get_meta(under_node_2)
+                                local meta_u = core.get_meta(under_node_2)
                                 local stored_fruit = meta_u:get_string("fruit")
                                 if fruit == stored_fruit or stored_fruit == "empty" then
 
@@ -340,7 +332,7 @@ function unilib.pkg.machine_press_juice.exec()
 
         on_timer = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local container = meta:get_string("container")
             local instack = inv:get_stack("src", 1)
@@ -350,15 +342,15 @@ function unilib.pkg.machine_press_juice.exec()
 
             if container == "tube" then
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 local under_node = {x = pos.x, y = pos.y - 1, z = pos.z}
-                local under_node_name = minetest.get_node_or_nil(under_node)
+                local under_node_name = core.get_node_or_nil(under_node)
                 local under_node_2 = {x = pos.x, y = pos.y - 2, z = pos.z}
-                local under_node_name_2 = minetest.get_node_or_nil(under_node_2)
+                local under_node_name_2 = core.get_node_or_nil(under_node_2)
 
                 if under_node_name.name == "unilib:container_barrel_juice" then
 
-                    local meta_u = minetest.get_meta(under_node)
+                    local meta_u = core.get_meta(under_node)
                     local fullness = tonumber(meta_u:get_string("fullness"))
                     instack:take_item(tonumber(fruitnumber))
                     inv:set_stack("src", 1, instack)
@@ -392,7 +384,7 @@ function unilib.pkg.machine_press_juice.exec()
 
                 elseif under_node_name_2.name == "unilib:container_silo_juice" then
 
-                    local meta_u = minetest.get_meta(under_node_2)
+                    local meta_u = core.get_meta(under_node_2)
                     local fullness = tonumber(meta_u:get_string("fullness"))
                     instack:take_item(tonumber(fruitnumber))
                     inv:set_stack("src", 1, instack)
@@ -432,9 +424,9 @@ function unilib.pkg.machine_press_juice.exec()
                 meta:set_string("formspec", press_idle_formspec)
                 instack:take_item(tonumber(fruitnumber))
                 inv:set_stack("src", 1, instack)
-                -- e.g. unilib:vessel_glass_juice_apple
+                -- e.g. unilib:vessel_glass_with_juice_apple
                 -- e.g. unilib:bucket_steel_with_juice_apple
-                inv:set_stack("dst", 1 , "unilib:" .. container .. "_juice_" .. fruit)
+                inv:set_stack("dst", 1 , "unilib:" .. container .. "_with_juice_" .. fruit)
 
             end
 
@@ -452,13 +444,5 @@ function unilib.pkg.machine_press_juice.exec()
             {"group:wood_stair_slab", "group:wood_stair_slab", "unilib:vessel_glass_empty"},
         },
     })
-
-end
-
-function unilib.pkg.machine_press_juice.post()
-
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
-        empty_bucket_table["unilib:" .. bucket_type .. "_empty"] = bucket_type
-    end
 
 end

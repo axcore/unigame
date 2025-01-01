@@ -9,7 +9,7 @@
 unilib.pkg.abm_nettle_plant_nettle_spread = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nettle.add_mode
+local mode = unilib.global.imported_mod_table.nettle.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,7 +26,7 @@ local function count_nodes(pos, name)
 
             for z_ = pos.z - 1, pos.z + 1 do
 
-                if minetest.get_node({x = x_, y = y_, z = z_}).name == name then
+                if core.get_node({x = x_, y = y_, z = z_}).name == name then
                     result = result + 1
                 end
 
@@ -49,7 +49,7 @@ local function has_neighbour(pos, name)
 
             for z_ = pos.z - 1, pos.z + 1 do
 
-                if minetest.get_node({x = x_, y = y_, z = z_}).name == name then
+                if core.get_node({x = x_, y = y_, z = z_}).name == name then
                     return true
                 end
 
@@ -70,9 +70,10 @@ end
 function unilib.pkg.abm_nettle_plant_nettle_spread.init()
 
     return {
-        description = "ABM to handle spread of nettles. To prevent that behaviour, don't include" ..
-                " this package in your remix (packages like \"plant_nettle_carduus\" will" ..
-                " instead spread using the normal flora mechanism)",
+        description = "ABM to handle spread of nettles (from nettle)",
+        notes = "To prevent spreading nettles, don't include this package in your remix;" ..
+                " packages like \"plant_nettle_carduus\" will then spread using the normal" ..
+                " method for flora",
         depends = {
             "plant_nettle_carduus",
             "plant_nettle_cleavers",
@@ -85,7 +86,7 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.init()
 
 end
 
-function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
+function unilib.pkg.abm_nettle_plant_nettle_spread.post()
 
     unilib.register_abm({
         label = "Nettle spread [abm_nettle_plant_nettle_spread]",
@@ -100,21 +101,21 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
 
                 if count_nodes(pos, "unilib:plant_nettle_normal") >= 4 then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_carduus"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_carduus"})
                     return
 
                 end
 
                 if has_neighbour(pos, "unilib:plant_nettle_impatiens") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_impatiens"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_impatiens"})
                     return
 
                 end
 
                 if has_neighbour(pos, "unilib:plant_nettle_scotch_broom") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_cleavers"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_cleavers"})
                     return
 
                 end
@@ -123,7 +124,7 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
 
                 if count_nodes(pos, "unilib:plant_nettle_carduus") >= 2 then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_scotch_broom"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_scotch_broom"})
                     return
 
                 end
@@ -132,21 +133,21 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
 
                 if count_nodes(pos, "unilib:plant_nettle_cleavers") >= 4 then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_giant_hogweed"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_giant_hogweed"})
                     return
 
                 end
 
                 if has_neighbour(pos, "unilib:plant_nettle_normal") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_normal"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_normal"})
                     return
 
                 end
 
                 if has_neighbour(pos, "unilib:plant_nettle_giant_hogweed") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_impatiens"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_impatiens"})
                     return
 
                 end
@@ -155,14 +156,14 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
 
                 if has_neighbour(pos, "unilib:plant_nettle_cleavers") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_cleavers"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_cleavers"})
                     return
 
                 end
 
                 if has_neighbour(pos, "unilib:plant_nettle_carduus") then
 
-                    minetest.set_node(pos, {name = "unilib:plant_nettle_normal"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_normal"})
                     return
 
                 end
@@ -170,7 +171,7 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
             elseif node.name == "unilib:plant_nettle_scotch_broom" then
 
                 local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-                if minetest.get_node(above).name ~= "air" then
+                if core.get_node(above).name ~= "air" then
                     return
                 end
 
@@ -178,14 +179,14 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.exec()
 
                     for z_ = pos.z - 1, pos.z + 1 do
 
-                        if minetest.get_node({x = x_, y = pos.y, z = z_}).name == "air" then
+                        if core.get_node({x = x_, y = pos.y, z = z_}).name == "air" then
                             return
                         end
                     end
 
                 end
 
-                minetest.set_node(above, {name = "unilib:plant_nettle_scotch_broom"})
+                core.set_node(above, {name = "unilib:plant_nettle_scotch_broom"})
 
             end
 

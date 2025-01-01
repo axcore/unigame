@@ -9,7 +9,7 @@
 unilib.pkg.flower_tulip_orange_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_tulip_orange_large.exec()
         replace_mode = mode,
         deco_part_name = "cropocalypse",
         description = S("Large Orange Tulip"),
-        group_table = {color_orange = 1, flammable = 1},
+        group_table = {color_orange = 1, colour_orange = 1, flammable = 1},
         sci_name = "Tulipa",
         seed = 19823,
     })

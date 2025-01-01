@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_bonsai = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -20,11 +20,14 @@ local function do_register(i, dye, select_box)
     local full_name = "unilib:plant_shrub_bonsai_" .. tostring(i)
     local img = "unilib_plant_shrub_bonsai_" .. tostring(i) .. ".png"
 
-    -- N.B. In original code, beautiflowers = 1 replaces the color-XXX group
+    -- N.B. In original code, beautiflowers = 1 replaces the colour-XXX group
     -- N.B. removed flora = 1, flower = 1 to prevent additional spreading
     local group_table = {attached_node = 1, flammable = 1, snappy = 3}
     if dye ~= nil then
+
+        group_table["colour_" .. dye] = 1
         group_table["color_" .. dye] = 1
+
     end
 
     unilib.register_node(full_name, "beautiflowers:bonsai_" .. tostring(i), mode, {
@@ -32,7 +35,7 @@ local function do_register(i, dye, select_box)
         description = S("Bonsai Tree"),
         tiles = {img},
         groups = group_table,
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +51,7 @@ local function do_register(i, dye, select_box)
         waving = 1,
         wield_image = img,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From beautiflowers:bonsai_1, etc
@@ -61,7 +64,7 @@ local function do_register(i, dye, select_box)
     end
     unilib.register_plant_in_pot(full_name, "beautiflowers:bonsai_" .. tostring(i))
 
-    unilib.register_decoration("beautiflowers_plant_shrub_bonsaid_" .. tostring(i), {
+    unilib.register_decoration_generic("beautiflowers_plant_shrub_bonsaid_" .. tostring(i), {
         -- From beautiflowers:bonsai_1, etc
         deco_type = "simple",
         decoration = full_name,
@@ -81,17 +84,17 @@ end
 
 local function do_spread(pos, node)
 
-    if minetest.get_node_light(pos, 0.5) > 3 then
+    if core.get_node_light(pos, 0.5) > 3 then
 
-        if minetest.get_node_light(pos, nil) == 15 then
-            minetest.remove_node(pos)
+        if core.get_node_light(pos, nil) == 15 then
+            core.remove_node(pos)
         end
 
         return
 
     end
 
-    local positions = minetest.find_nodes_in_area_under_air(
+    local positions = core.find_nodes_in_area_under_air(
         {x = pos.x - 1, y = pos.y - 2, z = pos.z - 1},
         {x = pos.x + 1, y = pos.y + 1, z = pos.z + 1},
         {"group:stone"}
@@ -103,8 +106,8 @@ local function do_spread(pos, node)
 
     local pos2 = positions[math.random(#positions)]
     pos2.y = pos2.y + 1
-    if minetest.get_node_light(pos2, 0.5) <= 3 then
-        minetest.set_node(pos2, {name = node.name})
+    if core.get_node_light(pos2, 0.5) <= 3 then
+        core.set_node(pos2, {name = node.name})
     end
 
 end

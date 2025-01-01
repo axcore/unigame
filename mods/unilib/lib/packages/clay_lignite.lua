@@ -9,7 +9,7 @@
 unilib.pkg.clay_lignite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,9 @@ end
 function unilib.pkg.clay_lignite.exec()
 
     local drop = nil
-    if unilib.pkg_executed_table["mineral_lignite"] ~= nil then
+    local group_table = {clay = 1, crumbly = 3}
+
+    if unilib.global.pkg_executed_table["mineral_lignite"] ~= nil then
 
         drop = {
             max_items = 1,
@@ -37,6 +39,8 @@ function unilib.pkg.clay_lignite.exec()
             },
         }
 
+        group_table.ore = 1
+
     end
 
 
@@ -44,8 +48,8 @@ function unilib.pkg.clay_lignite.exec()
         -- Texture from UGBC, lignite_clay.png. Original code
         description = S("Lignite Clay"),
         tiles = {"unilib_clay_lignite.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = group_table,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = drop,
     })

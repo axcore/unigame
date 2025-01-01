@@ -9,7 +9,7 @@
 unilib.pkg.dirt_peat_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.dirt_peat_antipodean.exec()
         description = S("Antipodean Peat"),
         tiles = {"unilib_dirt_peat_antipodean.png"},
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
@@ -44,7 +44,7 @@ function unilib.pkg.dirt_peat_antipodean.exec()
                 {items = {"unilib:dirt_peat_antipodean"}},
             },
         },
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
     unilib.register_craft({
         -- From aotearoa:peat

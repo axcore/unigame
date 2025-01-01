@@ -5,3 +5,11 @@
 
 # node_name | original_mod
 #stone_ordinary|default
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

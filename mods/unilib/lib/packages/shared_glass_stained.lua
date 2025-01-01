@@ -9,7 +9,7 @@
 unilib.pkg.shared_glass_stained = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glass_stained.add_mode
+local mode = unilib.global.imported_mod_table.glass_stained.add_mode
 
 local glass_type_list = {"single", "double", "triple", "quadruple", "noncuple", "offset"}
 
@@ -78,7 +78,7 @@ local function register_crafts(item_name, main_craft_table, main_output)
     unilib.register_craft({
         output = single_name .. " 2",
         recipe = {
-            {basic_name .. "_double"}
+            {basic_name .. "_double"},
         },
     })
 
@@ -93,7 +93,7 @@ local function register_crafts(item_name, main_craft_table, main_output)
     unilib.register_craft({
         output = single_name .. " 3",
         recipe = {
-            {basic_name .. "_triple"}
+            {basic_name .. "_triple"},
         },
     })
 
@@ -108,7 +108,7 @@ local function register_crafts(item_name, main_craft_table, main_output)
     unilib.register_craft({
         output = single_name .. " 4",
         recipe = {
-            {basic_name .. "_quadruple"}
+            {basic_name .. "_quadruple"},
         },
     })
 
@@ -124,7 +124,7 @@ local function register_crafts(item_name, main_craft_table, main_output)
     unilib.register_craft({
         output = single_name .. " 9",
         recipe = {
-            {basic_name .. "_noncuple"}
+            {basic_name .. "_noncuple"},
         },
     })
 
@@ -138,7 +138,7 @@ local function register_crafts(item_name, main_craft_table, main_output)
     unilib.register_craft({
         output = single_name,
         recipe = {
-            {basic_name .. "_offset"}
+            {basic_name .. "_offset"},
         },
     })
 
@@ -182,10 +182,10 @@ function unilib.pkg.shared_glass_stained.register_stained_glass(data_table)
         local img = "unilib_glass_stained_" .. part_name .. ".png"
 
         unilib.register_node(full_name, orig_name, replace_mode, {
-            description = unilib.brackets(description, desc_table[glass_type]),
+            description = unilib.utils.brackets(description, desc_table[glass_type]),
             tiles = {img},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -213,7 +213,7 @@ function unilib.pkg.shared_glass_stained.register_stained_glass(data_table)
             {
                 {"unilib:dye_" .. craft_list[1], "unilib:pane_glass_ordinary_flat"},
                 {"unilib:dye_" .. craft_list[2], "unilib:pane_glass_ordinary_flat"},
-                {"unilib:dye_" .. craft_list[3], "unilib:pane_glass_ordinary_flat"}
+                {"unilib:dye_" .. craft_list[3], "unilib:pane_glass_ordinary_flat"},
             },
             3
         )
@@ -263,10 +263,10 @@ function unilib.pkg.shared_glass_stained.register_sheet(data_table)
         end
 
         unilib.register_node(full_name, this_orig_name, replace_mode, {
-            description = unilib.brackets(description, desc_table[glass_type]),
+            description = unilib.utils.brackets(description, desc_table[glass_type]),
             tiles = {edge_img, edge_img, front_img},
             groups = {cracky = 3, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table[sound_type],
+            sounds = unilib.global.sound_table[sound_type],
 
             drawtype = "nodebox",
             is_ground_content = false,

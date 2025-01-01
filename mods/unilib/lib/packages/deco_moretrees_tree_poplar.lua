@@ -9,7 +9,7 @@
 unilib.pkg.deco_moretrees_tree_poplar = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 function unilib.pkg.deco_moretrees_tree_poplar.post()
 
     -- N.B. Here, we use only the first of several similar biome_lib decorations
-    unilib.register_decoration_now("convert_tree_poplar", nil, {
+    unilib.register_decoration_complete("convert_tree_poplar", nil, {
         -- From moretrees/init.lua
         -- Completes decoration in package "tree_poplar"
         place_on = "unilib:dirt_ordinary_with_turf",

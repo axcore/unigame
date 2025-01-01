@@ -9,7 +9,9 @@
 unilib.pkg.shared_ldm32 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ldm32.add_mode
+local F = core.formspec_escape
+local FS = function(...) return F(S(...)) end
+local mode = unilib.global.imported_mod_table.ldm32.add_mode
 
 local default_max_range = 32
 
@@ -26,16 +28,16 @@ local function beam_off(pos, facedir_param2, beam_name, range)
 
     local block_pos = vector.new(pos)
     local beam_pos = vector.new(pos)
-    local beam_direction = minetest.facedir_to_dir(facedir_param2)
+    local beam_direction = core.facedir_to_dir(facedir_param2)
 
     for i = range, 0, -1 do
 
         beam_pos = vector.add(block_pos, vector.multiply(beam_direction, i))
-        local node = minetest.get_node(beam_pos)
+        local node = core.get_node(beam_pos)
 
         if (node.name == beam_name or node.name == midpoint_beam or node.name == section_beam) and
                 node.param2 == facedir_param2 then
-            minetest.set_node(beam_pos, {name = "air"})
+            core.set_node(beam_pos, {name = "air"})
         end
 
     end
@@ -46,19 +48,19 @@ local function beam_check(pos, facedir_param2, range)
 
     -- Was laser_check()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local beam_name = meta:get_string("beam_name")
     local max_range = meta:get_int("max_range")
 
     local block_pos = vector.new(pos)
     local beam_pos = vector.new(pos)
-    local beam_direction = minetest.facedir_to_dir(facedir_param2)
+    local beam_direction = core.facedir_to_dir(facedir_param2)
     local is_not_beam = false
 
     for i = 1, range + 1, 1 do
 
         beam_pos = vector.add(block_pos, vector.multiply(beam_direction, i))
-        local node = minetest.get_node(beam_pos)
+        local node = core.get_node(beam_pos)
 
         if node.name ~= beam_name and
                 node.name ~= midpoint_beam and
@@ -79,7 +81,7 @@ local function set_infotext(meta, msg)
 
     -- Original to unilib
 
-    meta:set_string("infotext", unilib.brackets(meta:get_string("description"), msg))
+    meta:set_string("infotext", unilib.utils.brackets(meta:get_string("description"), msg))
 
 end
 
@@ -91,18 +93,18 @@ local function distance_beam_on(pos, facedir_param2, range)
 
     -- Was laser_on()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local beam_name = meta:get_string("beam_name")
     local max_range = meta:get_int("max_range")
 
     local block_pos = vector.new(pos)
     local beam_pos = vector.new(pos)
-    local beam_direction = minetest.facedir_to_dir(facedir_param2)
+    local beam_direction = core.facedir_to_dir(facedir_param2)
 
     for i = 1, range + 1, 1 do
 
         beam_pos = vector.add(block_pos, vector.multiply(beam_direction, i))
-        local node = minetest.get_node(beam_pos)
+        local node = core.get_node(beam_pos)
         -- (Distance meters can't produce midpoint/section beams, but check for them anyway, in
         --      case rogue beams have been left behind by a surveyor's meter)
         if node.name == "air" or
@@ -112,7 +114,7 @@ local function distance_beam_on(pos, facedir_param2, range)
 
             if i <= range then
 
-                minetest.set_node(beam_pos, {name = beam_name, param2 = facedir_param2})
+                core.set_node(beam_pos, {name = beam_name, param2 = facedir_param2})
                 set_infotext(meta, S("Distance: @1m", tostring(i)))
                 meta:set_int("range", i)
 
@@ -141,20 +143,20 @@ local function surveyor_beam_on(pos, facedir_param2, range)
 
     -- Was laser_on()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local beam_name = meta:get_string("beam_name")
     local max_range = meta:get_int("max_range")
     local section_len = meta:get_int("section_len")
 
     local block_pos = vector.new(pos)
     local beam_pos = vector.new(pos)
-    local beam_direction = minetest.facedir_to_dir(facedir_param2)
+    local beam_direction = core.facedir_to_dir(facedir_param2)
 
     -- (N.B. When "range" is 0, for example because an adjacent node exists, no beam is produced)
     for i = 1, range + 1, 1 do
 
         beam_pos = vector.add(block_pos, vector.multiply(beam_direction, i))
-        local node = minetest.get_node(beam_pos)
+        local node = core.get_node(beam_pos)
         if node.name == "air" or
                 node.name == beam_name or
                 node.name == midpoint_beam or
@@ -167,7 +169,7 @@ local function surveyor_beam_on(pos, facedir_param2, range)
                     this_name = section_beam
                 end
 
-                minetest.set_node(beam_pos, {name = this_name, param2 = facedir_param2})
+                core.set_node(beam_pos, {name = this_name, param2 = facedir_param2})
                 set_infotext(meta, S("Distance: @1m", tostring(i)))
                 meta:set_int("range", i)
 
@@ -194,7 +196,7 @@ local function surveyor_beam_on(pos, facedir_param2, range)
         if midpoint > 1 then
 
             beam_pos = vector.add(block_pos, vector.multiply(beam_direction, midpoint))
-            minetest.set_node(beam_pos, {name = this_name, param2 = facedir_param2})
+            core.set_node(beam_pos, {name = this_name, param2 = facedir_param2})
 
         end
 
@@ -204,9 +206,9 @@ end
 
 local function surveyor_populate_output(pos)
 
-    local meta = minetest.get_meta(pos)
-    local node = minetest.get_node(pos)
-    local def_table = minetest.registered_nodes[node.name]
+    local meta = core.get_meta(pos)
+    local node = core.get_node(pos)
+    local def_table = core.registered_nodes[node.name]
 
     local dropdown_text, section_len
     local max_range = meta:get_int("max_range")
@@ -234,12 +236,12 @@ local function surveyor_populate_output(pos)
 
     meta:set_string("formspec", "size[4.5,3]" ..
         "image[0,0;1,1;" .. def_table.inventory_image .. "]" ..
-        "label[1,0.2;" .. def_table.description .. "]" ..
-        "checkbox[0,0.9;beam_on;" .. S("Laser beam turned on") .. ";" ..
+        "label[1,0.2;" .. F(def_table.description) .. "]" ..
+        "checkbox[0,0.9;beam_on;" .. FS("Laser beam turned on") .. ";" ..
                 meta:get_string("is_on") .. "]" ..
-        "checkbox[0,1.4;midpoint;" .. S("Show mid-point") .. ";" ..
+        "checkbox[0,1.4;midpoint;" .. FS("Show mid-point") .. ";" ..
                 meta:get_string("midpoint_on") .. "]" ..
-        "label[0,2.2;" .. S("Show sections of length") .. "]" ..
+        "label[0,2.2;" .. FS("Show sections of length") .. "]" ..
         "dropdown[2.8,2.1;1.2,1;section;" .. dropdown_text .. ";" .. tostring(section_len) .. "]"
     )
 
@@ -296,7 +298,8 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
         },
         drawtype = "mesh",
         inventory_image = inv_img,
-        is_ground_content = true,
+        -- N.B. true in original code
+        is_ground_content = false,
         mesh = "unilib_machine_meter.obj",
         -- N.B. paramtype = "light" not in original code
         paramtype = "light",
@@ -312,7 +315,7 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
 
         after_destruct = function(pos, oldnode, oldmetadata)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             -- (beam_off() call moved to the preserve_metadata() callback)
             set_infotext(meta, S("Off"))
             meta:set_string("is_on", "false")
@@ -321,7 +324,7 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
 
         after_dig_node = function(pos, oldnode)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             -- (beam_off() call moved to the preserve_metadata() callback)
             set_infotext(meta, S("Off"))
             meta:set_string("is_on", "false")
@@ -330,8 +333,8 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
 
             meta:set_string("is_on", "false")
             meta:set_int("facedir", node.param2)
@@ -344,13 +347,13 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
 
         end,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
 
         on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
-            local timer = minetest.get_node_timer(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
+            local timer = core.get_node_timer(pos)
 
             if meta:get_string("is_on") == "false" then
 
@@ -371,9 +374,9 @@ function unilib.pkg.shared_ldm32.register_meter_distance(data_table)
 
         on_timer = function(pos)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
-            local timer = minetest.get_node_timer(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
+            local timer = core.get_node_timer(pos)
             local is_not_beam = false
             local is_air = false
 
@@ -471,7 +474,8 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
         },
         drawtype = "mesh",
         inventory_image = inv_img,
-        is_ground_content = true,
+        -- N.B. true in original code
+        is_ground_content = false,
         mesh = "unilib_machine_meter.obj",
         -- N.B. paramtype = "light" not in original code
         paramtype = "light",
@@ -487,7 +491,7 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
 
         after_destruct = function(pos, oldnode, oldmetadata)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             -- (beam_off() call moved to the preserve_metadata() callback)
             set_infotext(meta, S("Off"))
             meta:set_string("is_on", "false")
@@ -496,7 +500,7 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
 
         after_dig_node = function(pos, oldnode)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             -- (beam_off() call moved to the preserve_metadata() callback)
             set_infotext(meta, S("Off"))
             meta:set_string("is_on", "false")
@@ -505,8 +509,8 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
 
             meta:set_string("is_on", "false")
             meta:set_int("facedir", node.param2)
@@ -519,15 +523,17 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
 
             set_infotext(meta, S("Off"))
 
+            surveyor_populate_output(pos)
+
         end,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
 
         on_receive_fields = function(pos, formname, fields, sender)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
-            local timer = minetest.get_node_timer(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
+            local timer = core.get_node_timer(pos)
 
             if not fields.quit then
 
@@ -582,16 +588,14 @@ function unilib.pkg.shared_ldm32.register_meter_surveyor(data_table)
         end,
 
         on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-
             surveyor_populate_output(pos)
-
         end,
 
         on_timer = function(pos)
 
-            local meta = minetest.get_meta(pos)
-            local node = minetest.get_node(pos)
-            local timer = minetest.get_node_timer(pos)
+            local meta = core.get_meta(pos)
+            local node = core.get_node(pos)
+            local timer = core.get_node_timer(pos)
             local is_not_beam = false
             local is_air = false
 
@@ -697,6 +701,7 @@ function unilib.pkg.shared_ldm32.exec()
             buildable_to = true,
             diggable = false,
             drawtype = "mesh",
+            is_ground_content = false,
             light_source = 4,
             mesh = "unilib_machine_meter_beam.obj",
             paramtype = "light",

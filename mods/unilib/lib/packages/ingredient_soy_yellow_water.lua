@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_soy_yellow_water = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ingredient_soy_yellow_water.exec()
             inventory_image = "unilib_ingredient_soy_yellow_water.png",
             groups = {flammable = 1, food_soybean_water = 1},
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:ingredient_soy_yellow_water", 1, "unilib:vessel_bottle_glass_empty"
             ),
         }

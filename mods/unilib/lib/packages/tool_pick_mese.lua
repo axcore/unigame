@@ -9,7 +9,7 @@
 unilib.pkg.tool_pick_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,16 +39,16 @@ function unilib.pkg.tool_pick_mese.exec()
             groupcaps = {
                 cracky = {times = {[1] = 2.4, [2] = 1.2, [3] = 0.60}, uses = 20, maxlevel = 3},
             },
-            max_drop_level=3,
+            max_drop_level = 3,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_pick({
         -- From default:pick_mese
         part_name = "mese",
         ingredient = "unilib:mineral_mese_crystal",
     })
-    unilib.apply_toolranks("unilib:tool_pick_mese", "pickaxe")
+    unilib.tools.apply_toolranks("unilib:tool_pick_mese", "pickaxe")
 
 end

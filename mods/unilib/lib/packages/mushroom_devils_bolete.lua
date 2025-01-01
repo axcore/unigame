@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_devils_bolete = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.mushroom_devils_bolete.exec()
     unilib.register_node("unilib:mushroom_devils_bolete", "nsspf:boletus_satanas", mode, {
         -- From nsspf:boletus_satanas
         -- N.B. According to Wikipedia, scientifica name updated in 2014
-        description = unilib.annotate(S("Devil's Bolete Mushroom"), "Rubroboletus satanas"),
+        description = unilib.utils.annotate(S("Devil's Bolete Mushroom"), "Rubroboletus satanas"),
         tiles = {"unilib_mushroom_devils_bolete.png"},
         -- N.B. In original code, only snappy = 3
         groups = {attached_node = 1, flammable = 1, mushroom = 1, snappy = 3},
         -- N.B. In original code, no sounds
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         collision_box = {
             type = "fixed",
@@ -52,7 +52,7 @@ function unilib.pkg.mushroom_devils_bolete.exec()
             return
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:mushroom_devils_bolete", -20),
+        on_use = unilib.cuisine.eat_on_use("unilib:mushroom_devils_bolete", -20),
     })
     -- (not compatible with flowerpots)
 
@@ -67,7 +67,7 @@ function unilib.pkg.mushroom_devils_bolete.exec()
             -- N.B. In original code, only snappy = 3
             groups = {attached_node = 1, food_mushroom = 1, snappy = 3},
             -- N.B. In original code, no sounds
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             collision_box = {
                 type = "fixed",
@@ -82,7 +82,7 @@ function unilib.pkg.mushroom_devils_bolete.exec()
                 fixed = {-0.28, -0.49, -0.28, 0.28, 0.06, 0.28},
             },
 
-            on_use = unilib.cuisine_eat_on_use("unilib:mushroom_devils_bolete_cooked", -16),
+            on_use = unilib.cuisine.eat_on_use("unilib:mushroom_devils_bolete_cooked", -16),
         }
     )
     unilib.register_craft({
@@ -93,7 +93,7 @@ function unilib.pkg.mushroom_devils_bolete.exec()
         cooktime = 10,
     })
 
-    unilib.register_decoration("nsspf_mushroom_devils_bolete", {
+    unilib.register_decoration_generic("nsspf_mushroom_devils_bolete", {
         -- Adapted from flowers:mushroom_brown, replacing the collection of ABMs in the original
         --      nsspf code
         deco_type = "simple",
@@ -103,7 +103,7 @@ function unilib.pkg.mushroom_devils_bolete.exec()
             octaves = 3,
             offset = 0,
             persist = 0.66,
-            scale = 0.006 / unilib.nsspf_scarcity_factor,
+            scale = 0.006 / unilib.setting.nsspf_scarcity_factor,
             seed = 52166,      -- New random seed, generated for unilib
             spread = {x = 250, y = 250, z = 250},
         },

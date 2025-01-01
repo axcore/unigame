@@ -9,7 +9,7 @@
 unilib.pkg.produce_garlic_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.produce_garlic_normal.exec()
         inventory_image = "unilib_produce_garlic_normal_harvest.png",
         groups = {flammable = 3, food_garlic = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:produce_garlic_normal_harvest", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:produce_garlic_normal_harvest", 1),
     })
     unilib.register_craft({
         -- From farming:garlic
@@ -46,9 +46,10 @@ function unilib.pkg.produce_garlic_normal.exec()
             {c_clove, c_clove, c_clove},
             {c_clove, "", c_clove},
             {c_clove, c_clove, c_clove},
-        }
+        },
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,7 +73,7 @@ function unilib.pkg.produce_garlic_normal.exec()
         -- From farming:garlic_clove
         type = "shapeless",
         output = c_clove .. " 8",
-        recipe = {"unilib:produce_garlic_normal_harvest"}
+        recipe = {"unilib:produce_garlic_normal_harvest"},
     })
 
     local orig_name_list = {}
@@ -117,7 +118,17 @@ function unilib.pkg.produce_garlic_normal.exec()
         waving = 1,
     })
 
-    unilib.register_decoration("farming_redo_produce_garlic_normal", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_garlic_normal_harvest",
+        juice_description = S("Garlic"),
+        juice_type = "garlic",
+        rgb = "#eab9a3",
+
+        orig_flag = false,
+    })
+    unilib.juice.register_duplicate("garlic", c_clove)
+
+    unilib.register_decoration_generic("farming_redo_produce_garlic_normal", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_garlic_normal_grow_5",
@@ -126,8 +137,8 @@ function unilib.pkg.produce_garlic_normal.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 467,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

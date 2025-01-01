@@ -9,7 +9,7 @@
 unilib.pkg.misc_bars_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,8 @@ function unilib.pkg.misc_bars_wood.exec()
         description = S("Wooden Bars"),
         tiles = {"unilib_misc_bars_wood.png"},
         groups = {choppy = 2, snappy = 1},
-        -- (In original code, unilib.sound_table.stone)
-        sounds = unilib.sound_table.wood,
+        -- (In original code, unilib.global.sound_table.stone)
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "glasslike",
         inventory_image = "unilib_misc_bars_wood.png",
@@ -47,7 +47,7 @@ function unilib.pkg.misc_bars_wood.exec()
             {"group:stick", "", "group:stick"},
             {"group:stick", "", "group:stick"},
             {"group:stick", "", "group:stick"},
-        }
+        },
     })
 
 end

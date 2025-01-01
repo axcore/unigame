@@ -9,7 +9,7 @@
 unilib.pkg.plant_tussock_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_tussock_red.exec()
 
     unilib.register_node("unilib:plant_tussock_red", "aotearoa:red_tussock", mode, {
         -- From aotearoa:red_tussock
-        description = unilib.annotate(S("Red Tussock"), "Chionochloa rubra"),
+        description = unilib.utils.annotate(S("Red Tussock"), "Chionochloa rubra"),
         tiles = {"unilib_plant_tussock_red.png"},
         groups = {attached_node = 1, dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_tussock_red.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("aotearoa_plant_tussock_red", {
+    unilib.register_decoration_generic("aotearoa_plant_tussock_red", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_tussock_red",

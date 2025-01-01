@@ -9,7 +9,7 @@
 unilib.pkg.plant_cactus_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,12 +30,13 @@ function unilib.pkg.plant_cactus_small.exec()
         description = S("Small Cactus"),
         tiles = {"unilib_plant_cactus_small.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_cactus_small.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -51,12 +52,13 @@ function unilib.pkg.plant_cactus_small.exec()
         description = S("Small Flowering Cactus"),
         tiles = {"unilib_plant_cactus_small_flowering.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_plant_cactus_small_flowering.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -66,7 +68,7 @@ function unilib.pkg.plant_cactus_small.exec()
         walkable = false,
     })
 
-    unilib.register_decoration("farlands_plant_cactus_small", {
+    unilib.register_decoration_generic("farlands_plant_cactus_small", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_cactus_small",
@@ -82,7 +84,7 @@ function unilib.pkg.plant_cactus_small.exec()
         sidelen = 16,
     })
 
-    unilib.register_decoration("farlands_plant_cactus_small_flowering", {
+    unilib.register_decoration_generic("farlands_plant_cactus_small_flowering", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_cactus_small_flowering",

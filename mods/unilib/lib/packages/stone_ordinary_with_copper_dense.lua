@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_copper_dense = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,11 @@ function unilib.pkg.stone_ordinary_with_copper_dense.exec()
         "underch:copper_dense_ore",
         mode,
         {
-            description = unilib.brackets(S("Dense Copper Ore"), S("Ordinary Stone")),
+            description = unilib.utils.brackets(S("Dense Copper Ore"), S("Ordinary Stone")),
             tiles = {"unilib_stone_ordinary.png^" .. img .. "^(" .. img .. "^[transform7)"},
-            groups = {cracky = 1},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 1, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = {
                 items = {

@@ -13,8 +13,8 @@
 unilib.pkg.metal_iron_cast = {}
 
 local S = unilib.intllib
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
-local worldgen_add_mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
+local worldgen_add_mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -67,7 +67,7 @@ function unilib.pkg.metal_iron_cast.exec()
         output = "unilib:metal_iron_cast_ingot 9",
         recipe = {
             {"unilib:metal_iron_cast_block"},
-        }
+        },
     })
 
     unilib.register_node(
@@ -79,7 +79,10 @@ function unilib.pkg.metal_iron_cast.exec()
             description = S("Cast Iron Block"),
             tiles = {"unilib_metal_iron_cast_block.png"},
             groups = {cracky = 1, level = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content not in original code
+            is_ground_content = false,
         }
     )
     unilib.register_craft_3x3({
@@ -87,5 +90,25 @@ function unilib.pkg.metal_iron_cast.exec()
         output = "unilib:metal_iron_cast_block",
         ingredient = "unilib:metal_iron_cast_ingot",
     })
+    unilib.register_stairs("unilib:metal_iron_cast_block")
+    unilib.register_carvings("unilib:metal_iron_cast_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_iron_cast_block_compressed", nil, worldgen_add_mode, {
+            -- Original to unilib
+            description = S("Compressed Cast Iron Block"),
+            tiles = {"unilib_metal_iron_cast_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("iron_cast")
+
+    end
 
 end

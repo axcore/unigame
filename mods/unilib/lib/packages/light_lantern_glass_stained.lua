@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_glass_stained = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.light_lantern_glass_stained.exec()
         description = S("Stained-Glass Lantern"),
         tiles = {"unilib_light_lantern_glass_stained.png"},
         groups = {choppy = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         climbable = true,
         drawtype = "nodebox",

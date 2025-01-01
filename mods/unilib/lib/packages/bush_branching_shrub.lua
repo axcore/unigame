@@ -9,7 +9,7 @@
 unilib.pkg.bush_branching_shrub = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bushes.add_mode
+local mode = unilib.global.imported_mod_table.bushes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,9 @@ function unilib.pkg.bush_branching_shrub.exec()
         -- From bushes:youngtree2_bottom
         description = S("Branching Bush Shrub"),
         tiles = {"unilib_bush_branching_trunk.png"},
-        groups = {attached_node = 1, flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        -- N.B. no bush = 1 in original code
+        groups = {attached_node = 1, bush = 1, flammable = 2, snappy = 3},
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         drop = "unilib:item_stick_ordinary",
@@ -54,7 +55,7 @@ function unilib.pkg.bush_branching_shrub.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 100,
                 rarity_fertility = 0.6,
                 plantlife_limit = -0.5,

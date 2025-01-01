@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_fern_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,25 +25,29 @@ function unilib.pkg.deco_ethereal_fern_ordinary.init()
 
 end
 
+function unilib.pkg.deco_ethereal_fern_ordinary.exec()
+
+    unilib.register_decoration_generic("ethereal_fern_ordinary", {
+        -- From ethereal-ng/decor.lua
+        deco_type = "simple",
+        decoration = {"unilib:fern_ordinary_1", "unilib:fern_ordinary_2", "unilib:fern_ordinary_3"},
+
+        fill_ratio = 0.2,
+        sidelen = 16,
+    })
+
+end
+
 function unilib.pkg.deco_ethereal_fern_ordinary.post()
 
-    for i = 1, 3 do
-
-        unilib.register_decoration_now(
-            -- From ethereal-ng/decor.lua
-            -- Completes decoration in package "fern_ordinary"
-            "default_fern_ordinary_" .. tostring(i),
-            "ethereal_fern_ordinary_" .. tostring(i),
-            {
-                place_on = {
-                    "unilib:dirt_ordinary_with_litter_coniferous",
-                    "unilib:dirt_ordinary_with_turf_cold",
-                },
-                y_max = unilib.y_max,
-                y_min = 6,
-            }
-        )
-
-    end
+    unilib.register_decoration_complete("ethereal_fern_ordinary", nil, {
+        -- From ethereal-ng/decor.lua
+        place_on = {
+            "unilib:dirt_ordinary_with_litter_coniferous",
+            "unilib:dirt_ordinary_with_turf_cold",
+        },
+        y_max = 100,
+        y_min = 3,
+    })
 
 end

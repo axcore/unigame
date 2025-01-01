@@ -9,7 +9,7 @@
 unilib.pkg.misc_platform_stick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,9 +43,11 @@ function unilib.pkg.misc_platform_stick.exec()
             "unilib_misc_platform_stick_side.png",
         },
         groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -72,7 +74,7 @@ function unilib.pkg.misc_platform_stick.exec()
             {c_stick, "", c_stick},
             {"", c_stick, ""},
             {c_stick, "", c_stick},
-        }
+        },
     })
     ]]--
     unilib.register_craft({
@@ -98,7 +100,7 @@ function unilib.pkg.misc_platform_stick.exec()
         burntime = 1.5,
     })
 
-    if unilib.pkg_executed_table["roof_thatch"] ~= nil then
+    if unilib.global.pkg_executed_table["roof_thatch"] ~= nil then
 
         unilib.register_node(
             -- From earthbuild:stick_platform_with_brush
@@ -116,9 +118,11 @@ function unilib.pkg.misc_platform_stick.exec()
                     "unilib_misc_platform_stick_with_brush_side.png",
                 },
                 groups = {choppy = 2, flammable = 1, oddly_breakable_by_hand = 2},
-                sounds = unilib.sound_table.wood,
+                sounds = unilib.global.sound_table.wood,
 
                 drawtype = "nodebox",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 node_box = {
                     type = "fixed",
                     fixed = {
@@ -148,7 +152,7 @@ function unilib.pkg.misc_platform_stick.exec()
             -- From earthbuild:stick_platform_with_brush
             output = c_platform,
             recipe = {
-                {"unilib:misc_platform_stick_with_brush"}
+                {"unilib:misc_platform_stick_with_brush"},
             },
         })
         unilib.register_craft({

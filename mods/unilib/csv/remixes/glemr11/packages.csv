@@ -4,7 +4,6 @@
 # The original mods were not suitable for use in survival mode, and the same applies to this remix.
 #       Instead, this remix should be used as the basis for your own remixes. The section containing
 #       ore packages can also be removed, as it is again not very useful in survival mode
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -46,43 +45,43 @@ metal_albata|real_minerals
 metal_aluminium|real_minerals
 metal_bismuth|real_minerals
 metal_brass|basic_materials technic
-metal_brass_real|real_minerals
-metal_bronze|default technic
+metal_brass_rare|real_minerals
+metal_bronze|default glemr11 technic
 metal_bronze_bismuth|real_minerals
 metal_bronze_black|real_minerals
-metal_bronze_real|real_minerals
-metal_chromium|technic_worldgen technic
-metal_copper|default moreblocks technic
-metal_copper_real|real_minerals
-metal_gold|default technic
-metal_gold_real|real_minerals
+metal_bronze_rare|real_minerals
+metal_chromium|glemr11 technic_worldgen technic
+metal_copper|default glemr11 moreblocks technic
+metal_copper_rare|real_minerals
+metal_gold|default glemr11 technic
+metal_gold_rare|real_minerals
 metal_gold_rose|real_minerals
 metal_iron|default
 metal_iron_cast|technic_worldgen technic
 metal_iron_pig|real_minerals
 metal_iron_wrought|technic_worldgen
-metal_iron_wrought_real|real_minerals
-metal_lead|technic_worldgen technic
-metal_lead_real|real_minerals
+metal_iron_wrought_rare|real_minerals
+metal_lead|glemr11 technic_worldgen technic
+metal_lead_rare|real_minerals
 metal_monel|real_minerals
 metal_nickel|real_minerals
 metal_oroide|real_minerals
-metal_platinum_real|real_minerals
-metal_silver|moreores technic
+metal_platinum_rare|real_minerals
+metal_silver|glemr11 moreores technic
 metal_silver_german|real_minerals
-metal_silver_real|real_minerals
+metal_silver_rare|real_minerals
 metal_silver_sterling|real_minerals
-metal_steel|default technic
+metal_steel|default glemr11 technic
 metal_steel_black|real_minerals
 metal_steel_carbon|technic_worldgen technic
-metal_steel_real|real_minerals
+metal_steel_rare|real_minerals
 metal_steel_stainless|technic_worldgen technic
-metal_tin|default technic
-metal_tin_real|real_minerals
+metal_tin|default glemr11 technic
+metal_tin_rare|real_minerals
 metal_tumbaga|real_minerals
 metal_uranium|technic_worldgen technic
-metal_zinc|technic_worldgen technic
-metal_zinc_real|real_minerals
+metal_zinc|glemr11 technic_worldgen technic
+metal_zinc_rare|real_minerals
 mineral_copper_native|real_minerals
 mineral_gold_native|real_minerals
 mineral_platinum_native|real_minerals
@@ -90,7 +89,7 @@ mineral_silver_native|real_minerals
 
 # (from craftitems.csv - mineral lump/powder/crystal/gem items)
 #metal_brass|basic_materials technic
-#metal_lead|technic_worldgen technic
+#metal_lead|glemr11 technic_worldgen technic
 mineral_anthracite|real_minerals
 mineral_bauxite|real_minerals
 mineral_bismuthinite|real_minerals
@@ -117,7 +116,7 @@ mineral_lignite|real_minerals
 mineral_limonite|real_minerals
 mineral_magnetite|real_minerals
 mineral_malachite|real_minerals
-mineral_mese|default
+mineral_mese|default glemr11
 mineral_olivine|real_minerals
 mineral_pitchblende|real_minerals
 mineral_quartz_white|underch
@@ -127,7 +126,7 @@ mineral_selenite|real_minerals
 mineral_serpentinite|real_minerals
 mineral_sphalerite|real_minerals
 mineral_sulphur|technic_worldgen technic
-mineral_sulphur_real|real_minerals
+mineral_sulphur_rare|real_minerals
 mineral_sylvite|real_minerals
 mineral_tenorite|real_minerals
 mineral_tetrahedrite|real_minerals
@@ -138,22 +137,21 @@ stone_obsidian|default moreblocks
 # nodes.csv #######################################################################################
 
 # (from nodes.csv - stone, brick, block nodes)
+abm_farlands_disintegrate|farlands
 clay_vermiculite|pfaa
 decor_bricks_runestone|xdecor
 decor_bricks_stone_circle|moreblocks
 decor_bricks_stone_coal|moreblocks
 decor_bricks_stone_grey|moreblocks
-decor_rockwall_stone_desert|unilib
-decor_rockwall_stone_desert_dark|glemr6
-decor_rockwall_stone_ordinary|glemr4
-decor_rockwall_stone_ordinary_dark|glemr6
+decor_disintegrating_stone_ordinary|farlands
+decor_rockwall_stone_desert|glemr4 glemr6
+decor_rockwall_stone_ordinary|glemr4 glemr6
 decor_stone_castle_dungeon|castle_masonry
 decor_paving_normal|castle_masonry
 decor_stone_castle_rubble|castle_masonry
 decor_paving_slate|glemr6
 decor_stone_castle_wall|castle_masonry
 decor_stone_coal|moreblocks
-decor_stone_disintegrating|farlands
 decor_stone_iron|moreblocks
 decor_stone_plaster|darkage
 decor_stone_tiles|farlands
@@ -167,9 +165,9 @@ gravel_ordinary|default mtg_plus
 gravel_red_antipodean|australia
 gravel_sandstone_desert|glemr4
 gravel_stone_desert|glemr11
+material_adobe|darkage
 material_concrete_antipodean|aotearoa
 material_stucco|farlands
-misc_adobe|darkage
 sand_white|glemr4
 stone_andesite_grey|glemr4
 stone_basalt_brown|material mineral
@@ -217,8 +215,9 @@ stone_sandstone_brown|glemr4
 stone_sandstone_desert|default mtg_plus
 stone_sandstone_old_red|darkage
 stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_ordinary_pillar|farlands
+stone_sandstone_ordinary_tile_painted|farlands
 stone_sandstone_ordinary_with_mural|farlands
-stone_sandstone_ornate|farlands
 stone_sandstone_silver|default mtg_plus
 stone_sandstone_white|glemr4
 stone_savanna|farlands
@@ -253,6 +252,7 @@ sand_silica|glemr6
 sand_silver|default
 sand_volcanic|aotearoa
 sand_volcanic_dust|glemr4
+shared_bakedclay|bakedclay
 
 # (from nodes.csv - glass nodes)
 glass_clean|moreblocks
@@ -272,8 +272,8 @@ misc_frame_wood_thin|glemr6
 
 # (from nodes.csv - snow, ice nodes)
 decor_block_ice_packed|xdecor
+ice_blue|caverealms
 ice_ordinary|default ethereal mtg_plus
-ice_thin|caverealms
 snow_ordinary|default ethereal mtg_plus
 
 # (from nodes.csv - metal, mineral nodes)
@@ -282,45 +282,45 @@ decor_block_metal_rusty|columnia
 #metal_aluminium|real_minerals
 #metal_bismuth|real_minerals
 #metal_brass|basic_materials technic
-#metal_brass_real|real_minerals
-#metal_bronze|default technic
+#metal_brass_rare|real_minerals
+#metal_bronze|default glemr11 technic
 #metal_bronze_bismuth|real_minerals
 #metal_bronze_black|real_minerals
-#metal_bronze_real|real_minerals
-#metal_chromium|technic_worldgen technic
-#metal_copper|default moreblocks technic
-#metal_copper_real|real_minerals
-#metal_gold|default technic
-#metal_gold_real|real_minerals
+#metal_bronze_rare|real_minerals
+#metal_chromium|glemr11 technic_worldgen technic
+#metal_copper|default glemr11 moreblocks technic
+#metal_copper_rare|real_minerals
+#metal_gold|default glemr11 technic
+#metal_gold_rare|real_minerals
 #metal_gold_rose|real_minerals
 #metal_iron_cast|technic_worldgen technic
 #metal_iron_pig|real_minerals
 #metal_iron_wrought|technic_worldgen
-#metal_iron_wrought_real|real_minerals
-#metal_lead|technic_worldgen technic
-#metal_lead_real|real_minerals
+#metal_iron_wrought_rare|real_minerals
+#metal_lead|glemr11 technic_worldgen technic
+#metal_lead_rare|real_minerals
 #metal_monel|real_minerals
 #metal_nickel|real_minerals
 #metal_oroide|real_minerals
-#metal_platinum_real|real_minerals
-#metal_silver|moreores technic
+#metal_platinum_rare|real_minerals
+#metal_silver|glemr11 moreores technic
 #metal_silver_german|real_minerals
-#metal_silver_real|real_minerals
+#metal_silver_rare|real_minerals
 #metal_silver_sterling|real_minerals
-#metal_steel|default technic
+#metal_steel|default glemr11 technic
 #metal_steel_black|real_minerals
 #metal_steel_carbon|technic_worldgen technic
-#metal_steel_real|real_minerals
+#metal_steel_rare|real_minerals
 #metal_steel_stainless|technic_worldgen technic
-#metal_tin|default technic
-#metal_tin_real|real_minerals
+#metal_tin|default glemr11 technic
+#metal_tin_rare|real_minerals
 #metal_tumbaga|real_minerals
 #metal_uranium|technic_worldgen technic
-#metal_zinc|technic_worldgen technic
-#metal_zinc_real|real_minerals
+#metal_zinc|glemr11 technic_worldgen technic
+#metal_zinc_rare|real_minerals
 #mineral_coal|default technic
 #mineral_diamond|default mtg_plus
-#mineral_mese|default
+#mineral_mese|default glemr11
 mineral_salt|caverealms
 
 # (from nodes.csv - ore nodes)
@@ -367,7 +367,7 @@ stone_ordinary_with_silver|moreores
 stone_ordinary_with_silver_native|real_minerals
 stone_ordinary_with_sphalerite|real_minerals
 stone_ordinary_with_sulphur|technic_worldgen
-stone_ordinary_with_sulphur_real|real_minerals
+stone_ordinary_with_sulphur_rare|real_minerals
 stone_ordinary_with_sylvite|real_minerals
 stone_ordinary_with_tenorite|real_minerals
 stone_ordinary_with_tetrahedrite|real_minerals
@@ -394,18 +394,6 @@ sand_quicksand|ethereal
 liquid_grease_normal|steampunk
 liquid_lava_cooling|glemr11
 #liquid_lava_ordinary|default
-liquid_molten_bronze|glemr11
-liquid_molten_chromium|glemr11
-liquid_molten_copper|glemr11
-liquid_molten_gold|glemr11
-liquid_molten_lead|glemr11
-liquid_molten_mercury|glemr11
-liquid_molten_mese|glemr11
-liquid_molten_mithril|glemr11
-liquid_molten_silver|glemr11
-liquid_molten_steel|glemr11
-liquid_molten_tin|glemr11
-liquid_molten_zinc|glemr11
 liquid_mud_boiling|aotearoa
 #liquid_mud_boiling|aotearoa
 liquid_mud_normal|forest
@@ -431,7 +419,7 @@ dirt_dried|ethereal
 #dirt_mud_dry|darkage
 dirt_mud_swamp|30biomes
 dirt_ordinary|default farming moreblocks
-dirt_ordinary_with_cover_fungi|farlands
+#dirt_ordinary_with_cover_fungi|farlands
 dirt_ordinary_with_litter_leafy|farlands
 dirt_ordinary_with_turf_forest|farlands
 dirt_ordinary_with_turf_swamp|farlands
@@ -510,6 +498,7 @@ plant_enigma|moreplants
 coral_block_brown|default
 coral_block_orange|default
 coral_block_skeleton|default
+coral_block_sponge|glemr11
 coral_brain|australia
 coral_rooted_blue|farlands
 coral_rooted_blue_glow|ethereal
@@ -523,7 +512,6 @@ coral_rooted_pink_big|farlands
 coral_rooted_pink_glow|ethereal
 coral_rooted_red|farlands
 coral_rooted_spider|glemr11
-coral_sponge|glemr11
 
 # (from nodes.csv - ferns)
 fern_big|moreplants
@@ -625,7 +613,7 @@ grass_frozen|farlands
 grass_giant|farlands
 grass_golden|glemr11
 grass_jungle|default
-grass_marram|default
+grass_marram_ordinary|default
 grass_ordinary|default
 grass_rainforest|farlands
 grass_seagrass|farlands
@@ -649,6 +637,7 @@ mushroom_sulphur_tuft|glemr11
 mushroom_white_glowing|farlands
 plant_fungus_ground|moreplants
 plant_weed_stone|moreplants
+tree_mushroom_generic|ethereal
 tree_mushroom_mixed|farlands glemr11
 tree_mushroom_red|ethereal
 
@@ -657,14 +646,14 @@ crop_cotton|farming
 #crop_wheat|farming
 fern_mangrove|australia
 flower_curly|moreplants
-flower_reed_mannagrass|bakedclay
 flower_waterlily_exotic_pink|farlands
 flower_waterlily_exotic_yellow|farlands
+grass_reed_mannagrass|bakedclay
 plant_aloe_vera|farlands
-plant_anemone|farlands
+plant_anemone_normal|farlands
 plant_arrow_arum|valleys_c
 plant_bulrush|dryplants
-plant_bulrush_mature|moreplants
+plant_bulrush_small|moreplants
 plant_cattail_large|glemr11
 plant_cattail_normal|farlands
 plant_cattail_parched|glemr11
@@ -674,7 +663,7 @@ plant_heath_purple|glemr11
 plant_heath_red|glemr11
 plant_juncus|dryplants
 plant_kelp_green|farlands
-plant_kelp_yellow|glemr6
+plant_kelp_yellow|farlands
 plant_nettle_carduus|nettle
 plant_nettle_cleavers|nettle
 plant_nettle_hogweed_giant|nettle
@@ -719,6 +708,9 @@ plant_shrub_hog_peanut|farlands
 plant_shrub_scorched|glemr4
 plant_shrub_snowy|ethereal
 plant_shrub_taiga|moreplants
+
+# (from nodes.csv - small rocks)
+pebble_small|valleys_c
 
 # (from nodes.csv - trees)
 misc_leaves_autumn|glemr4
@@ -824,6 +816,7 @@ ladder_stone|ethereal
 material_charcoal_artificial_lump|ethereal
 material_wax_palm|ethereal
 misc_pile_logs|glemr4
+shared_ethereal_candle|ethereal
 
 # (from decorations.csv; items missing from other .csv files)
 
@@ -833,6 +826,7 @@ fern_dicksonia|farlands
 fern_lady|farlands
 misc_patch_grass|dryplants
 plant_shrub_banana_large|glemr4
+shared_farlands_fruit|unilib
 tree_fern|ferns
 tree_fern_yellow|glemr4
 tree_palm_exotic|farlands
@@ -845,23 +839,24 @@ brick_ordinary|default
 decor_bricks_stone_chalked|darkage
 dirt_dry|default
 dye_basic|dye bakedclay
+fruit_coconut_exotic|farlands
 fruit_curly|moreplants
+fruit_mango_exotic|farlands
 fruit_persimmon|ebony
 glass_ordinary|default moreblocks vessels
 ingredient_cone_spruce|moretrees
 item_sweeper|moreblocks
 material_quicklime|aotearoa earthbuild
 metal_boron|unilib
-metal_mercury|unilib
-metal_mithril|moreores technic
 mineral_chalcopyrite|unilib
 mineral_magnesite|unilib
 mineral_sodalite|decoblocks
 misc_straw_ordinary|farming darkage
 roof_slate_normal|cottages
 shared_moretrees|moretrees
-shared_xocean|xocean
+shared_tsm_pyramids_engravings|tsm_pyramids
 soil_sand_desert|farming
+stone_sandstone_ordinary_with_engraving|tsm_pyramids
 tree_palm|ethereal
 utensil_board_cutting|farming
 vessel_glass_empty|thirsty vessels
@@ -873,6 +868,7 @@ material_lime_crushed|aotearoa plaster
 mineral_tin_native|aato
 
 # supporting packages (.optional)
+#abm_farlands_bushes_trees|unilib
 #bush_blueberry_ordinary|default
 #container_chest_ordinary|default
 #crop_barley|farming
@@ -889,13 +885,18 @@ mineral_tin_native|aato
 #gravel_sandstone_ordinary|unilib
 #item_book_ordinary|default
 #item_paper_ordinary|default moreblocks
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
 #metal_magnesium|unilib
+#metal_mercury|glemr11 unilib
 #metal_platinum|unilib
 #metal_potassium|unilib
 #misc_blueprint_column|columnia
 #misc_wood_rotten|aotearoa
 #moss_green|sickles
-#moss_purple|sickles
+#moss_pink|unilib
+#moss_violet|sickles
 #moss_yellow|sickles
 #sand_brown|unilib
 #sand_red|unilib

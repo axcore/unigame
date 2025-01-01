@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_salt_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,12 @@ function unilib.pkg.ingredient_salt_normal.exec()
         description = S("Normal Salt"),
         tiles = {"unilib_ingredient_salt_normal.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_salt = 1, vessel = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_salt_normal.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -103,11 +105,11 @@ function unilib.pkg.ingredient_salt_normal.exec()
         -- From farming:salt
         output = "unilib:ingredient_salt_normal 9",
         recipe = {
-            {"unilib:ingredient_salt_crystal", "unilib:utensil_mortar_pestle"}
+            {"unilib:ingredient_salt_crystal", "unilib:utensil_mortar_pestle"},
         },
         replacements = {
             {"unilib:utensil_mortar_pestle", "unilib:utensil_mortar_pestle"},
-        }
+        },
     })
 
     unilib.register_node("unilib:ingredient_salt_crystal", "farming:salt_crystal", mode, {
@@ -115,7 +117,7 @@ function unilib.pkg.ingredient_salt_normal.exec()
         description = S("Salt Crystal"),
         tiles = {"unilib_ingredient_salt_crystal.png"},
         groups = {attached_node = 1, dig_immediate = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_salt_crystal.png",
@@ -140,7 +142,7 @@ function unilib.pkg.ingredient_salt_normal.post()
 
     -- N.B. As this is salt, only use ordinary water as an ingredient
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"

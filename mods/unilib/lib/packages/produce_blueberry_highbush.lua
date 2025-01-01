@@ -9,7 +9,7 @@
 unilib.pkg.produce_blueberry_highbush = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,8 @@ function unilib.pkg.produce_blueberry_highbush.exec()
             flammable = 2, food_berry = 1, food_blueberries = 1, food_blueberry = 1, seed = 2,
         },
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -73,14 +74,15 @@ function unilib.pkg.produce_blueberry_highbush.exec()
 
     unilib.register_juice({
         ingredient = "unilib:produce_blueberry_highbush_harvest",
-        juice_description = S("Highbush Blueberry"),
+        juice_description = S("Blueberry"),
         -- N.B. Original "drinks" mod used the juice type "blueberries"
-        juice_type = "blueberry_highbush",
+        juice_type = "blueberry",
         rgb = "#521dcb",
+
         orig_flag = false,
     })
 
-    unilib.register_decoration("farming_redo_produce_blueberry_highbush", {
+    unilib.register_decoration_generic("farming_redo_produce_blueberry_highbush", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_blueberry_highbush_grow_4",
@@ -89,8 +91,8 @@ function unilib.pkg.produce_blueberry_highbush.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 678,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

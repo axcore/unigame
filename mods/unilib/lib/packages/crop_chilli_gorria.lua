@@ -9,7 +9,7 @@
 unilib.pkg.crop_chilli_gorria = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_chilli_gorria.exec()
         table.insert(orig_name_list, "cucina_vegana:chili_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/chili_default.lua
         unilib.register_crop_mtgame({
@@ -55,7 +55,7 @@ function unilib.pkg.crop_chilli_gorria.exec()
                 flammable = 1, food = 1, food_chili_pepper = 1, food_chilli_pepper = 1,
                 food_vegan = 1,
             },
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 13,
             seed_description = S("Gorria Chilli Seed"),
             -- N.B. updated the food groups to match groups above
@@ -123,7 +123,8 @@ function unilib.pkg.crop_chilli_gorria.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

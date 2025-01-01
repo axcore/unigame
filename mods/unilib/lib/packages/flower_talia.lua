@@ -9,7 +9,7 @@
 unilib.pkg.flower_talia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

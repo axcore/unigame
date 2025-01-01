@@ -9,7 +9,7 @@
 unilib.pkg.food_kohlrabi_roasted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_kohlrabi_roasted.exec()
             inventory_image = "unilib_food_kohlrabi_roasted.png",
             groups = {eatable = 1, food = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_kohlrabi_roasted", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_kohlrabi_roasted", 4),
         }
     )
     unilib.register_craft({

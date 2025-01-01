@@ -9,7 +9,7 @@
 unilib.pkg.plant_sunflower_dwarf_sturdy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,13 +32,13 @@ function unilib.pkg.plant_sunflower_dwarf_sturdy.exec()
         "cropocalypse:dwarf_sunflower",
         mode,
         {
-            description = unilib.annotate(S("Sturdy Dwarf Sunflower"), "Helianthus"),
+            description = unilib.utils.annotate(S("Sturdy Dwarf Sunflower"), "Helianthus"),
             tiles = {"unilib_plant_sunflower_dwarf_sturdy.png"},
             -- N.B. flora = 1 not in original code
             groups = {
                 attached_node = 1, decorative_plants = 1, flammable = 1, flora = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
@@ -54,7 +54,7 @@ function unilib.pkg.plant_sunflower_dwarf_sturdy.exec()
             wield_image = "unilib_plant_sunflower_dwarf_sturdy.png",
         }
     )
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:dwarf_sunflower
@@ -69,7 +69,7 @@ function unilib.pkg.plant_sunflower_dwarf_sturdy.exec()
         "unilib:plant_sunflower_dwarf_sturdy", "cropocalypse:dwarf_sunflower"
     )
 
-    unilib.register_decoration("cropocalypse_plant_sunflower_dwarf_sturdy", {
+    unilib.register_decoration_generic("cropocalypse_plant_sunflower_dwarf_sturdy", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_sunflower_dwarf_sturdy",

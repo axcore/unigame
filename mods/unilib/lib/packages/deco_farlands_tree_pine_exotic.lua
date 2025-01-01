@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_tree_pine_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,10 +33,10 @@ end
 
 function unilib.pkg.deco_farlands_tree_pine_exotic.post()
 
-    if unilib.pkg_executed_table["biome_farlands_taiga"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_taiga"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
-        unilib.register_decoration_now("farlands_tree_pine_exotic_1", nil, {
+        unilib.register_decoration_complete("farlands_tree_pine_exotic_1", nil, {
             -- From farlands, mapgen/mapgen.lua, ../default/schematics/pine_tree.mts
             -- Completes decoration in package "tree_pine_exotic"
             biomes = {"farlands_forest_coniferous", "farlands_taiga"},
@@ -44,41 +44,41 @@ function unilib.pkg.deco_farlands_tree_pine_exotic.post()
                 "unilib:dirt_ordinary_with_cover_snow",
                 "unilib:dirt_ordinary_with_turf",
             },
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 2,
         })
 
     end
 
-    if unilib.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
 
-        unilib.register_decoration_now("farlands_tree_pine_exotic_2", nil, {
+        unilib.register_decoration_complete("farlands_tree_pine_exotic_2", nil, {
             -- From farlands, mapgen/mapgen.lua, ../default/schematics/pine_tree.mts
             -- Completes decoration in package "tree_pine_exotic"
             biomes = "farlands_forest_coniferous_tall",
             place_on = "unilib:dirt_ordinary_with_litter_leafy",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 2,
         })
 
-        if unilib.pkg_executed_table["dirt_coarse"] ~= nil then
+        if unilib.global.pkg_executed_table["dirt_coarse"] ~= nil then
 
-            unilib.register_decoration_now("farlands_tree_pine_exotic_3", nil, {
+            unilib.register_decoration_complete("farlands_tree_pine_exotic_3", nil, {
                 -- From farlands, mapgen/mapgen.lua, ../mapgen/schematics/pine.mts
                 -- Completes decoration in package "tree_pine_exotic"
                 biomes = "farlands_forest_coniferous_tall",
                 place_on = {"unilib:dirt_coarse", "unilib:dirt_ordinary_with_litter_leafy"},
-                y_max = unilib.y_max,
+                y_max = unilib.constant.y_max,
                 y_min = -50,
             })
 
         end
 
-        if unilib.pkg_executed_table["biome_farlands_taiga"] ~= nil and
-                unilib.pkg_executed_table["dirt_ordinary"] ~= nil and
-                unilib.pkg_executed_table["mushroom_red"] ~= nil
+        if unilib.global.pkg_executed_table["biome_farlands_taiga"] ~= nil and
+                unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+                unilib.global.pkg_executed_table["mushroom_red"] ~= nil
 
-            unilib.register_decoration_now("farlands_tree_pine_exotic_log", nil, {
+            unilib.register_decoration_complete("farlands_tree_pine_exotic_log", nil, {
                 -- From farlands, mapgen/mapgen.lua (schematic in code)
                 -- Completes decoration in package "tree_pine_exotic"
                 biomes = {
@@ -91,7 +91,7 @@ function unilib.pkg.deco_farlands_tree_pine_exotic.post()
                     "unilib:dirt_ordinary_with_cover_snow",
                     "unilib:dirt_ordinary_with_turf",
                 },
-                y_max = unilib.y_max,
+                y_max = unilib.constant.y_max,
                 y_min = 1,
             })
 

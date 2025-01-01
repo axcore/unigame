@@ -9,7 +9,7 @@
 unilib.pkg.tree_fir = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table["30biomes"].add_mode
+local mode = unilib.global.imported_mod_table["30biomes"].add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -97,10 +97,10 @@ function unilib.pkg.tree_fir.exec()
         rail_description = S("Fir Tree Wood Fence Gate"),
     })
 
-    unilib.register_decoration("30biomes_tree_fir", {
+    unilib.register_decoration_generic("30biomes_tree_fir", {
         -- From 30biomes/decorations.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_fir.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_fir.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {
@@ -114,9 +114,9 @@ function unilib.pkg.tree_fir.exec()
         sidelen = 16,
     })
 
-    if unilib.pkg_executed_table["mushroom_red"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_red"] ~= nil then
 
-        unilib.register_decoration("30biomes_tree_fir_log", {
+        unilib.register_decoration_generic("30biomes_tree_fir_log", {
             -- From 30biomes/decorations.lua
             deco_type = "schematic",
             --[[
@@ -135,7 +135,7 @@ function unilib.pkg.tree_fir.exec()
                 size = {x = 3, y = 3, z = 1},
             },
             ]]--
-            schematic = unilib.path_mod .. "/mts/unilib_tree_fir_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_fir_log.mts",
 
             flags = "place_center_x",
             noise_params = {

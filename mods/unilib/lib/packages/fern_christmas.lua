@@ -9,7 +9,7 @@
 unilib.pkg.fern_christmas = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,16 +27,17 @@ function unilib.pkg.fern_christmas.exec()
 
     unilib.register_node("unilib:fern_christmas", "moreplants:bush", mode, {
         -- From moreplants:bush
-        description = unilib.annotate(S("Christmas Fern"), "Polystichum acrostichoides"),
+        description = unilib.utils.annotate(S("Christmas Fern"), "Polystichum acrostichoides"),
         tiles = {"unilib_fern_christmas.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_fern_christmas.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other ferns
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -50,7 +51,7 @@ function unilib.pkg.fern_christmas.exec()
     })
     unilib.register_plant_in_pot("unilib:fern_christmas", "moreplants:bush")
 
-    unilib.register_decoration("moreplants_fern_christmas", {
+    unilib.register_decoration_generic("moreplants_fern_christmas", {
         -- From moreplants:bush
         deco_type = "simple",
         decoration = "unilib:fern_christmas",

@@ -9,7 +9,7 @@
 unilib.pkg.grass_bamboo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,13 @@ end
 
 function unilib.pkg.grass_bamboo.exec()
 
-    unilib.register_node("unilib:grass_bamboo", "mapgen:bamboo_grass", mode, {
+    local full_name = "unilib:grass_bamboo"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "mapgen:bamboo_grass", mode, {
         -- From farlands, mapgen:bamboo_grass
         description = S("Bamboo Grass"),
         tiles = {"unilib_grass_bamboo.png"},
@@ -34,12 +40,14 @@ function unilib.pkg.grass_bamboo.exec()
             bamboo_grass = 1, flammable = 1, flora = 1, grass = 1, oddly_breakable_by_hand = 1,
             snappy = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         inventory_image = "unilib_grass_bamboo.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other grasses
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -48,12 +56,12 @@ function unilib.pkg.grass_bamboo.exec()
         sunlight_propagates = true,
         walkable = false,
     })
-    unilib.register_plant_in_pot("unilib:grass_bamboo", "mapgen:bamboo_grass")
+    unilib.register_plant_in_pot(full_name, "mapgen:bamboo_grass")
 
-    unilib.register_decoration("farlands_grass_bamboo", {
+    unilib.register_decoration_generic("farlands_grass_bamboo", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
-        decoration = "unilib:grass_bamboo",
+        decoration = full_name,
 
         height = 1,
         noise_params = {

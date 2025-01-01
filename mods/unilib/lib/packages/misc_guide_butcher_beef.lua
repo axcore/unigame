@@ -9,7 +9,7 @@
 unilib.pkg.misc_guide_butcher_beef = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,10 +37,12 @@ function unilib.pkg.misc_guide_butcher_beef.exec()
             "unilib_misc_guide_butcher_beef.png",
         },
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_guide_butcher_beef.png",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -57,7 +59,7 @@ function unilib.pkg.misc_guide_butcher_beef.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "group:leather", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_external_ingredient("unilib:misc_guide_butcher_beef", {
         "group:leather",                        -- Originally mobs:leather

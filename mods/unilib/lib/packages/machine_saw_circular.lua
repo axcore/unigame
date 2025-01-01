@@ -9,9 +9,8 @@
 unilib.pkg.machine_saw_circular = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
-
-local F = minetest.formspec_escape
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Object prototype
@@ -26,10 +25,10 @@ local prototype_saw = {}
 function prototype_saw:extract_stair_type(adj_full_name)
 
     -- Original to unilib
-    -- Returns the stair type (a key in unilib.stair_cost_table)
+    -- Returns the stair type (a key in unilib.global.stair_cost_table)
     -- e.g. converts "unilib:stone_ordinary_stair_simple" to "_stair_simple"
 
-    full_name = unilib.stair_deconvert_table[adj_full_name]
+    full_name = unilib.global.stair_deconvert_table[adj_full_name]
     return string.sub(adj_full_name, (#full_name + 1), -1)
 
 end
@@ -38,11 +37,11 @@ function prototype_saw:get_cost(inv, stackname)
 
     -- Gets the cost in microblocks for the node's stair type
 
-    local name = minetest.registered_aliases[stackname] or stackname
+    local name = core.registered_aliases[stackname] or stackname
 
     for i, item in pairs(inv:get_list("output")) do
         if item:get_name() == name then
-            return unilib.stair_cost_table[unilib.extract_stair_type(name)]
+            return unilib.global.stair_cost_table[unilib.stairs.extract_stair_type(name)]
         end
     end
 
@@ -72,13 +71,13 @@ function prototype_saw:get_output_inv(full_name, amount, max_output)
     -- Add each stair type to the output inventory, in the appropriate quantities
     for _, stair_type in pairs(self.stair_type_list) do
 
-        if unilib.stair_cost_table[stair_type] ~= nil then
+        if unilib.global.stair_cost_table[stair_type] ~= nil then
 
-            local cost = unilib.stair_cost_table[stair_type]
+            local cost = unilib.global.stair_cost_table[stair_type]
             local balance = math.min(math.floor(amount/cost), max_output)
             local adj_full_name = full_name .. stair_type
 
-            if minetest.registered_nodes[adj_full_name] then
+            if core.registered_nodes[adj_full_name] then
 
                 pos = pos + 1
                 list[pos] = adj_full_name .. " " .. balance
@@ -99,7 +98,7 @@ function prototype_saw:reset(pos)
     --      removed from the "input" slot
     -- The "max_offered" setting is not reset
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local owner = meta:get_string("owner")
 
@@ -116,7 +115,7 @@ function prototype_saw:update_inventory(pos, amount)
 
     -- Updates the inventories when the player adds or removes something from the "input" slot
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     -- "amount" is the microblock equivalent of the node(s) added to the "input" slot
@@ -196,7 +195,7 @@ function prototype_saw.allow_metadata_inventory_put(pos, listname, index, stack,
         return 0
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local stackname = stack:get_name()
     local count = stack:get_count()
@@ -250,7 +249,8 @@ function prototype_saw.allow_metadata_inventory_put(pos, listname, index, stack,
         end
 
         -- Return the number of nodes for which there is room in the "input" slot
-        if unilib.stair_convert_table[stackname] ~= nil and inv:room_for_item("input", stack) then
+        if unilib.global.stair_convert_table[stackname] ~= nil and
+                inv:room_for_item("input", stack) then
             return count
         end
 
@@ -263,7 +263,7 @@ end
 
 function prototype_saw.allow_metadata_inventory_take(pos, listname, index, stack, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local input_stack = inv:get_stack(listname,  index)
     local player_inv = player:get_inventory()
@@ -278,7 +278,7 @@ end
 
 function prototype_saw.can_dig(pos,player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     if not inv:is_empty("input") or
             not inv:is_empty("micro") or
@@ -322,7 +322,7 @@ local function register_saw(version, description, empty_description, work_descri
         description = description,                  -- Already translated
         empty_description = empty_description,      -- Already translated
         work_description = work_description,        -- NOT already translated
-        stair_type_list = unilib.stair_ordered_table[version],
+        stair_type_list = unilib.global.stair_ordered_table[version],
     }
 
     setmetatable(self, {__index = prototype_saw})
@@ -343,7 +343,7 @@ local function register_saw(version, description, empty_description, work_descri
             "unilib_machine_saw_circular_side.png",
         },
         groups = {choppy = 2,oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         node_box = {
@@ -366,7 +366,7 @@ local function register_saw(version, description, empty_description, work_descri
         -- Set the owner of this circular saw
         after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local owner = placer and placer:get_player_name() or ""
 
             meta:set_string("owner",  owner)
@@ -383,19 +383,19 @@ local function register_saw(version, description, empty_description, work_descri
         -- Set up the formspec for the saw
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
 
             meta:set_string(
                 "formspec",
                 "size[11,10]"..
-                "label[0,0;" .. F(S("Input\nmaterial")) .. "]" ..
+                "label[0,0;" .. FS("Input\nmaterial") .. "]" ..
                 "list[current_name;input;1.5,0;1,1;]" ..
-                "label[0,1;" .. F(S("Leftover\nmaterial")) .. "]" ..
+                "label[0,1;" .. FS("Leftover\nmaterial") .. "]" ..
                 "list[current_name;micro;1.5,1;1,1;]" ..
-                "label[0,2;" .. F(S("Recycle\noutput")).. "]" ..
+                "label[0,2;" .. FS("Recycle\noutput").. "]" ..
                 "list[current_name;recycle;1.5,2;1,1;]" ..
-                "field[0.3,4;2.5,1;max_offered;" .. F(S("Max output")) .. ":;${max_offered}]" ..
-                "button[1.5,4.5;1,1;Set;" .. F(S("Set")).. "]" ..
+                "field[0.3,4;2.5,1;max_offered;" .. FS("Max output") .. ":;${max_offered}]" ..
+                "button[1.5,4.5;1,1;Set;" .. FS("Set") .. "]" ..
                 "list[current_name;output;2.8,0;8,6;]" ..
                 "list[current_player;main;1.5,6.25;8,4;]" ..
                 "listring[current_name;output]" ..
@@ -430,7 +430,7 @@ local function register_saw(version, description, empty_description, work_descri
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
             -- We need to find out if the saw is already set to a specific material or not
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local stackname = stack:get_name()
             local count = stack:get_count()
@@ -466,7 +466,7 @@ local function register_saw(version, description, empty_description, work_descri
 
             -- Prevent (inbuilt) swapping between inventories with different blocks corrupting
             --      player inventory or the saw with "unknown" items
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local input_stack = inv:get_stack(listname, index)
 
@@ -490,8 +490,8 @@ local function register_saw(version, description, empty_description, work_descri
             --      subtracted
             if listname == "output" then
 
-                local stair_type = unilib.extract_stair_type(stack:get_name())
-                local cost = unilib.stair_cost_table[stair_type] * stack:get_count()
+                local stair_type = unilib.stairs.extract_stair_type(stack:get_name())
+                local cost = unilib.global.stair_cost_table[stair_type] * stack:get_count()
                 self:update_inventory(pos, -cost)
 
             elseif listname == "micro" then
@@ -511,7 +511,7 @@ local function register_saw(version, description, empty_description, work_descri
         -- The amount of items offered per shape can be configured
         on_receive_fields = function(pos, formname, fields, sender)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local this_max = tonumber(fields.max_offered)
 
             if this_max and this_max > 0 then
@@ -535,7 +535,7 @@ local function register_saw(version, description, empty_description, work_descri
             {"", ingredient, "" },
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "", "group:wood"},
-        }
+        },
     })
 
     return self
@@ -560,7 +560,8 @@ end
 function unilib.pkg.machine_saw_circular.exec()
 
     -- Create a circular saw for each group of stair nodes that have been enabled
-    if unilib.add_stairs_basic_flag and unilib.pkg_executed_table["metal_steel"] ~= nil then
+    if unilib.setting.add_stairs_basic_flag and
+            unilib.global.pkg_executed_table["metal_steel"] ~= nil then
 
         register_saw(
             -- Version
@@ -575,7 +576,8 @@ function unilib.pkg.machine_saw_circular.exec()
 
     end
 
-    if unilib.add_stairs_stairs_redo_flag and unilib.pkg_executed_table["metal_bronze"] ~= nil then
+    if unilib.setting.add_stairs_stairs_redo_flag and
+            unilib.global.pkg_executed_table["metal_bronze"] ~= nil then
 
         register_saw(
             2,
@@ -587,7 +589,8 @@ function unilib.pkg.machine_saw_circular.exec()
 
     end
 
-    if unilib.add_stairs_stairsplus_flag and unilib.pkg_executed_table["metal_gold"] ~= nil then
+    if unilib.setting.add_stairs_stairsplus_flag and
+            unilib.global.pkg_executed_table["metal_gold"] ~= nil then
 
         register_saw(
             3,
@@ -599,8 +602,8 @@ function unilib.pkg.machine_saw_circular.exec()
 
     end
 
-    if unilib.add_stairs_moreblocks_flag and
-            unilib.pkg_executed_table["mineral_diamond"] ~= nil then
+    if unilib.setting.add_stairs_moreblocks_flag and
+            unilib.global.pkg_executed_table["mineral_diamond"] ~= nil then
 
         register_saw(
             4,

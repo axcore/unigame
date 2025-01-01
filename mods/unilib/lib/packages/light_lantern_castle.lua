@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_castle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_lighting.add_mode
+local mode = unilib.global.imported_mod_table.castle_lighting.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,11 @@ function unilib.pkg.light_lantern_castle.exec()
         description = S("Castle Lantern"),
         tiles = {"unilib_light_lantern_castle.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 14,
         paramtype = "light",
         sunlight_propagates = true,
@@ -45,7 +47,7 @@ function unilib.pkg.light_lantern_castle.exec()
             {"unilib:item_stick_ordinary", "unilib:glass_ordinary", "unilib:item_stick_ordinary"},
             {"unilib:glass_ordinary", "unilib:torch_ordinary", "unilib:glass_ordinary"},
             {"unilib:item_stick_ordinary", "unilib:glass_ordinary", "unilib:item_stick_ordinary"},
-        }
+        },
     })
 
 end

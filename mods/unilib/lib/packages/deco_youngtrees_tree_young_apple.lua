@@ -9,7 +9,7 @@
 unilib.pkg.deco_youngtrees_tree_young_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.youngtrees.add_mode
+local mode = unilib.global.imported_mod_table.youngtrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -24,13 +24,13 @@ function unilib.pkg.deco_youngtrees_tree_young_apple.init()
 
 end
 
-function unilib.pkg.deco_youngtrees_tree_young_apple.exec()
+function unilib.pkg.deco_youngtrees_tree_young_apple.post()
 
-    unilib.register_decoration_now("convert_tree_young_apple", nil, {
+    unilib.register_decoration_complete("convert_tree_young_apple", nil, {
         -- From bushes/init.lua
         -- Completes decoration in package "tree_young_apple"
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

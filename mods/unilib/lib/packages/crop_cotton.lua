@@ -9,7 +9,7 @@
 unilib.pkg.crop_cotton = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.crop_cotton.exec()
         table.insert(orig_name_list, "farming:cotton_" .. i)
     end
 
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         -- Adapted from minetest_game/farming
         unilib.register_crop_mtgame({
@@ -53,7 +53,7 @@ function unilib.pkg.crop_cotton.exec()
             harvest_description = S("Cotton"),
             -- N.B. The thread group is added by the sounding_line mod
             harvest_group_table = {flammable = 4, thread = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 13,
             seed_description = S("Cotton Seed"),
         })
@@ -129,7 +129,8 @@ function unilib.pkg.crop_cotton.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

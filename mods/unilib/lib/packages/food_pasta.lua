@@ -9,7 +9,7 @@
 unilib.pkg.food_pasta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ function unilib.pkg.food_pasta.init()
         suggested = {
             "ingredient_butter_normal",         -- group:food_butter
             "ingredient_flour_ordinary",        -- group:food_flour
-            "ingredient_oil_hemp",              -- group:food_oil
+            "ingredient_oil_sunflower",         -- group:food_oil
 
         },
     }
@@ -42,7 +42,7 @@ function unilib.pkg.food_pasta.exec()
         groups = {food_pasta = 1},
 
         -- N.B. No .on_use() in original code. Same satiation value as spaghetti
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pasta", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pasta", 8),
     })
     unilib.register_craft({
         -- From farming:pasta
@@ -63,7 +63,7 @@ function unilib.pkg.food_pasta.exec()
         replacements = {
             {"unilib:utensil_bowl_wooden", "unilib:utensil_bowl_wooden"},
             {"group:food_oil", "unilib:vessel_bottle_glass_empty"},
-        }
+        },
     })
 
 end

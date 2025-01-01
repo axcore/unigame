@@ -9,7 +9,7 @@
 unilib.pkg.decor_stone_tiles = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,10 @@ function unilib.pkg.decor_stone_tiles.exec()
         description = S("Old Stone Tiles"),
         tiles = {"unilib_decor_stone_tiles.png"},
         groups = {cracky = 3, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
     })
     unilib.register_craft({
         -- From farlands, decoblocks:old_stone_tiles
@@ -46,7 +49,7 @@ function unilib.pkg.decor_stone_tiles.exec()
         },
     })
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         unilib.register_node(
             -- From farlands, decoblocks:old_stone_tiles_with_dirt
@@ -57,7 +60,11 @@ function unilib.pkg.decor_stone_tiles.exec()
                 description = S("Old Stone Tiles With Dirt"),
                 tiles = {"unilib_decor_stone_tiles_with_dirt.png"},
                 groups = {cracky = 3, stone = 2},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
+
+                -- N.B. is_ground_content = false not in original code; added to match other decor
+                --      items
+                is_ground_content = false,
             }
         )
         unilib.register_craft({
@@ -82,7 +89,10 @@ function unilib.pkg.decor_stone_tiles.exec()
             description = S("Mossy Old Stone Tiles"),
             tiles = {"unilib_decor_stone_tiles_with_moss.png"},
             groups = {cracky = 3, stone = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other decor items
+            is_ground_content = false,
         }
     )
     unilib.register_craft({

@@ -13,7 +13,7 @@
 unilib.pkg.grass_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -21,7 +21,7 @@ local mode = unilib.imported_mod_table.default.add_mode
 
 local function do_decoration(offset, scale, length)
 
-    unilib.register_decoration("default_grass_ordinary_" .. length, {
+    unilib.register_decoration_generic("default_grass_ordinary_" .. length, {
         -- From default/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:grass_ordinary_" .. length,
@@ -60,15 +60,21 @@ end
 function unilib.pkg.grass_ordinary.exec()
 
     local insert = ""
-    if unilib.mtgame_tweak_flag and unilib.plantlife_long_grass_flag then
+    if unilib.setting.mtgame_tweak_flag and unilib.setting.plantlife_long_grass_flag then
 
         -- Textures from plantlife/dryplants, e.g. unilib_grass_ordinary_1_alt.png
         insert = "_alt"
 
     end
 
+    local full_name = "unilib:grass_ordinary_1"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
     -- First variant
-    unilib.register_node("unilib:grass_ordinary_1", "default:grass_1", mode, {
+    unilib.register_node(full_name, "default:grass_1", mode, {
         -- From default:grass_1
         description = S("Ordinary Grass"),
         tiles = {"unilib_grass_ordinary_1" .. insert .. ".png"},
@@ -78,10 +84,11 @@ function unilib.pkg.grass_ordinary.exec()
             attached_node = 1, flammable = 1, flora = 1, grass = 1, normal_grass = 1,
             ordinary_grass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         -- Notes from default:
         -- Use texture of a taller grass variant in inventory
         inventory_image = "unilib_grass_ordinary_3" .. insert .. ".png",
@@ -99,19 +106,18 @@ function unilib.pkg.grass_ordinary.exec()
 
             -- Place a random grass variant
             local stack = ItemStack("unilib:grass_ordinary_" .. math.random(1, 5))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
-            return ItemStack("unilib:grass_ordinary_1 " ..
-                    itemstack:get_count() - (1 - ret:get_count()))
+            local ret = core.item_place(stack, placer, pointed_thing)
+            return ItemStack(full_name .. " " .. itemstack:get_count() - (1 - ret:get_count()))
 
         end,
     })
     unilib.register_craft({
         -- From default:grass_1
         type = "fuel",
-        recipe = "unilib:grass_ordinary_1",
+        recipe = full_name,
         burntime = 2,
     })
-    unilib.register_plant_in_pot("unilib:grass_ordinary_1", "default:grass_1")
+    unilib.register_plant_in_pot(full_name, "default:grass_1")
 
     for i = 2, 5 do
 
@@ -125,11 +131,11 @@ function unilib.pkg.grass_ordinary.exec()
                 attached_node = 1, flammable = 1, flora = 1, grass = 1, normal_grass = 1,
                 not_in_creative_inventory = 1, ordinary_grass = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
-            drop = "unilib:grass_ordinary_1",
+            drop = drop,
             inventory_image = "unilib_grass_ordinary_" .. i .. insert .. ".png",
             paramtype = "light",
             selection_box = {
@@ -152,7 +158,7 @@ function unilib.pkg.grass_ordinary.exec()
     do_decoration(0.03, 0.03, 1)
 
     -- Update global variables
-    unilib.register_growing({
+    unilib.flora.register_growth_stages({
         base_name = "unilib:grass_ordinary",
         mode = "other",
         stage_max = 5,
@@ -163,70 +169,145 @@ end
 function unilib.pkg.grass_ordinary.post()
 
     -- Occasionally drop oat and/or wheat seeds
-    if unilib.pkg_executed_table["crop_oat"] ~= nil and
-            unilib.pkg_executed_table["crop_wheat"] ~= nil then
+    if not unilib.setting.disable_grass_drop_flag then
 
-        -- Adapted from farming_redo
-        for i = 1, 3 do
+        if unilib.global.pkg_executed_table["crop_oat"] ~= nil and
+                unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
 
-            unilib.override_item("unilib:grass_ordinary_" .. i, {
-                drop = {
-                    max_items = 1,
-                    items = {
-                        {items = {"unilib:crop_wheat_seed"}, rarity = 5},
-                        {items = {"unilib:grass_ordinary_1"}},
-                    }
-                }
-            })
+            -- Adapted from farming_redo
+            for i = 1, 3 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+                            {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
+
+            for i = 4, 5 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_oat_seed"}, rarity = 5},
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+                            {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
+
+        elseif unilib.global.pkg_executed_table["crop_oat"] ~= nil then
+
+            -- Original to unilib
+            for i = 4, 5 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_oat_seed"}, rarity = 5},
+                            {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
+
+        elseif unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
+
+            -- Adapted from minetest_game/farming
+            for i = 1, 5 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+                            {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
 
         end
 
-        for i = 4, 5 do
+    else
 
-            unilib.override_item("unilib:grass_ordinary_" .. i, {
-                drop = {
-                    max_items = 1,
-                    items = {
-                        {items = {"unilib:crop_oat_seed"}, rarity = 5},
-                        {items = {"unilib:crop_wheat_seed"}, rarity = 5},
-                        {items = {"unilib:grass_ordinary_1"}},
-                    }
-                }
-            })
+        if unilib.global.pkg_executed_table["crop_oat"] ~= nil and
+                unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
 
-        end
+            -- Adapted from farming_redo
+            for i = 1, 3 do
 
-    elseif unilib.pkg_executed_table["crop_oat"] ~= nil then
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+--                          {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
 
-        -- Original to unilib
-        for i = 4, 5 do
+            end
 
-            unilib.override_item("unilib:grass_ordinary_" .. i, {
-                drop = {
-                    max_items = 1,
-                    items = {
-                        {items = {"unilib:crop_oat_seed"}, rarity = 5},
-                        {items = {"unilib:grass_ordinary_1"}},
-                    }
-                }
-            })
+            for i = 4, 5 do
 
-        end
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_oat_seed"}, rarity = 5},
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+--                          {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
 
-    elseif unilib.pkg_executed_table["crop_wheat"] ~= nil then
+            end
 
-        -- Adapted from minetest_game/farming
-        for i = 1, 5 do
+        elseif unilib.global.pkg_executed_table["crop_oat"] ~= nil then
 
-            unilib.override_item("unilib:grass_ordinary_" .. i, {
-                drop = {
-                    max_items = 1,
-                    items = {
-                        {items = {"unilib:crop_wheat_seed"}, rarity = 5},
-                        {items = {"unilib:grass_ordinary_1"}},
-                    }
-                }
-            })
+            -- Original to unilib
+            for i = 4, 5 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_oat_seed"}, rarity = 5},
+--                          {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
+
+        elseif unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
+
+            -- Adapted from minetest_game/farming
+            for i = 1, 5 do
+
+                unilib.override_item("unilib:grass_ordinary_" .. i, {
+                    drop = {
+                        max_items = 1,
+                        items = {
+                            {items = {"unilib:crop_wheat_seed"}, rarity = 5},
+--                          {items = {"unilib:grass_ordinary_1"}},
+                        },
+                    },
+                })
+
+            end
 
         end
 

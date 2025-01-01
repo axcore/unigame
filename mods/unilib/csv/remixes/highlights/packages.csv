@@ -1,0 +1,153 @@
+# "highlights" remix - contains a selection of packages that provide new functionality:
+#   - highlights of packages that are completely original to unilib
+#   - packages derived from mods by the same author
+#   - packages from other mods, which have been heavily modified and/or given new functionality
+#
+# This remix omits packages from the "gaia" and "hades" remixes, which are mostly original to unilib
+# This remix also omits chat command packages, which are appear in the "chat" remix
+# For a more complete list of packages original to unilib, see the "unilib" remix
+
+# node_name | original_mod
+
+# @gaia
+# @hades
+@offend_flags
+
+admin_tool_tester_general|unilib
+admin_tool_tester_schematic|unilib
+admin_tool_vapouriser|unilib
+container_chest_bottomless|twchests
+container_chest_compact|twchests
+food_burger_veggie|unilib
+food_burger_worm|unilib
+food_pasta_surprise|unilib
+food_pie_potato_sweet|unilib
+food_sandwich_cheese_cucumber|unilib
+food_sandwich_worm|unilib
+glass_sheet_clean|unilib
+glass_sheet_glow|unilib
+item_replacer_artisanal|unilib
+item_replacer_normal|replacer
+liquid_water_dyed|unilib
+machine_atomic_collector|unilib
+machine_atomic_vapouriser|unilib
+machine_furnace_induction|unilib
+machine_meter_distance_short|ldm32
+machine_meter_distance_long|ldm32
+machine_meter_distance_medium|ldm32
+machine_meter_surveyor_long|ldm32
+machine_meter_surveyor_medium|ldm32
+machine_meter_surveyor_short|ldm32
+machine_polishing|unilib
+machine_renovation|unilib
+machine_saw_circular|moreblocks
+machine_switch_day|unilib
+machine_switch_night|unilib
+machine_table_enlightening|unilib
+machine_turfing|unilib
+meta_skybox_sun_hexagonal|unilib
+meta_skybox_moon_hexagonal|unilib
+misc_atomic_tube|unilib
+misc_calendar_fancy|unilib
+misc_calendar_simple|unilib
+misc_line_sounding_normal|sounding_line
+misc_line_sounding_reinforced|unilib
+misc_painting_landscape|xdecor
+misc_painting_portrait|xdecor
+misc_painting_small|xdecor
+misc_shield_mounted_basic|castle_shields
+misc_shield_mounted_british|unilib
+misc_shield_mounted_extra|unilib
+shared_atomic|unilib
+shared_calendars|unilib
+shared_castle_shields|castle_shields
+shared_ldm32|ldm32
+shared_replacer|replacer
+shared_sounding_line|sounding_line
+
+# supporting packages (.depends)
+admin_node_colour|maptools
+brick_ordinary|default
+clay_ordinary|default
+container_chest_ordinary|default
+crop_cotton|farming
+crop_potato_sweet|cropocalypse
+crop_soy_red|cucina_vegana
+crop_wheat|farming
+dirt_ordinary|default farming moreblocks
+dye_basic|dye bakedclay
+food_bread_ordinary|farming
+food_cheese_parmesan|cheese
+food_meat_imitation|cucina_vegana
+food_pasta|farming
+food_tofu_red|cucina_vegana
+fruit_olive|ethereal
+glass_clean|moreblocks
+glass_glow|moreblocks
+glass_obsidian|default moreblocks
+glass_ordinary|default moreblocks vessels
+grass_jungle|default
+ingredient_flour_ordinary|farming
+ingredient_oil_olive|ethereal
+item_paper_ordinary|default moreblocks
+item_stick_iron|darkage
+item_stick_ordinary|default
+item_string_ordinary|farming
+item_sweeper|moreblocks
+item_worm_juicy|ethereal
+light_block_mese|default
+liquid_water_ordinary|default
+metal_copper|default glemr11 moreblocks technic
+metal_iron|default
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_mese|default glemr11
+pane_glass_clean|unilib
+pane_glass_glow|unilib
+pane_glass_ordinary|xpanes
+plant_papyrus_ordinary|default mtg_plus
+produce_cucumber_normal|farming
+shared_default_chest|default pipeworks
+shared_default_sign|default
+shared_glass_stained|glass_stained
+shared_maptools|maptools
+sign_wall_wood|default
+stone_obsidian|default moreblocks
+torch_ordinary|default
+utensil_bowl_wooden|farming thirsty
+utensil_press_hand|farming
+utensil_tray_baking|farming
+vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+dirt_dry|default
+metal_bronze|default glemr11 technic
+metal_gold|default glemr11 technic
+
+# supporting packages (.optional)
+#bush_blueberry_ordinary|default
+#crop_rice_white|farming
+#grass_dry|default
+#grass_ordinary|default
+#liquid_lava_cooling|glemr11
+#liquid_lava_ordinary|default
+#plant_cactus_ordinary|default
+#plant_shrub_dry|default
+#shared_cheese_rack|cheese
+#shared_screwdriver|screwdriver
+#sign_wall_steel|default
+#soil_ordinary|farming
+#utensil_mortar_pestle|farming
+
+# supporting packages (.suggested)
+#food_cheese_vegan|farming
+#ingredient_butter_normal|cheese
+#ingredient_oil_sunflower|farming
+#ingredient_sugar_normal|farming
+#produce_chilli_normal|farming
+#produce_lettuce|farming
+#produce_onion_normal|farming
+#produce_tomato_salad|farming
+#rope_mining|ropes

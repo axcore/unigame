@@ -9,7 +9,7 @@
 unilib.pkg.crop_wheat = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.crop_wheat.exec()
         table.insert(orig_name_list, "farming:wheat_" .. i)
     end
 
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         -- Adapted from minetest_game/farming
 
@@ -52,7 +52,7 @@ function unilib.pkg.crop_wheat.exec()
             fertility_list = fertility_list,
             harvest_description = S("Wheat"),
             harvest_group_table = {flammable = 4, food_wheat = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 13,
             paramtype2 = "meshoptions",
             place_param2 = 3,
@@ -130,7 +130,8 @@ function unilib.pkg.crop_wheat.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

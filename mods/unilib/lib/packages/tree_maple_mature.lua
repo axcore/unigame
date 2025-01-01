@@ -9,7 +9,7 @@
 unilib.pkg.tree_maple_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_maple_mature.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Acer"
 
     unilib.register_tree({
@@ -97,10 +97,10 @@ function unilib.pkg.tree_maple_mature.exec()
 
     for _, part_name in pairs({"maple_mature_1", "maple_mature_large_1"}) do
 
-        unilib.register_decoration("glem_tree_" .. part_name, {
+        unilib.register_decoration_generic("glem_tree_" .. part_name, {
             -- Original to unilib
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_glem_tree_" .. part_name .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_glem_tree_" .. part_name .. ".mts",
 
             fill_ratio = 0.002,
             flags = "place_center_x, place_center_z",

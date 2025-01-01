@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,9 +31,11 @@ function unilib.pkg.light_lantern_sea.exec()
         description = S("Sea Lantern"),
         tiles = {"unilib_light_lantern_sea.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 14,
         paramtype = "light",
         sunlight_propagates = true,
@@ -45,7 +47,7 @@ function unilib.pkg.light_lantern_sea.post()
 
     -- N.B. This is a sea lantern, so only use ordinary water in the craft recipe
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"

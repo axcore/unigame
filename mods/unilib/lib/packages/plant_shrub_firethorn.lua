@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_firethorn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.plant_shrub_firethorn.exec()
 
     unilib.register_node("unilib:plant_shrub_firethorn", "ethereal:firethorn", mode, {
         -- From ethereal:firethorn
-        description = unilib.annotate(S("Firethorn Shrub"), "Pyracantha"),
+        description = unilib.utils.annotate(S("Firethorn Shrub"), "Pyracantha"),
         tiles = {"unilib_plant_shrub_firethorn.png"},
         groups = {attached_node = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -47,7 +47,7 @@ function unilib.pkg.plant_shrub_firethorn.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_firethorn", "ethereal:firethorn")
 
-    unilib.register_decoration("ethereal_plant_shrub_firethorn", {
+    unilib.register_decoration_generic("ethereal_plant_shrub_firethorn", {
         -- From ethereal-ng/decor.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_firethorn",

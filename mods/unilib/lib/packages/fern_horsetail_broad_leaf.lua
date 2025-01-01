@@ -9,7 +9,7 @@
 unilib.pkg.fern_horsetail_broad_leaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,12 @@ function unilib.pkg.fern_horsetail_broad_leaf.exec()
         "lib_ecology:fern_horsetail_02",
         mode,
         {
-            description = unilib.annotate(S("Broad Leaf Horsetail Fern"), "Equisetum arvense"),
+            description = unilib.utils.annotate(
+                S("Broad Leaf Horsetail Fern"), "Equisetum arvense"
+            ),
             tiles = {"unilib_fern_horsetail_large.png"},
             groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "mesh",
@@ -53,5 +55,7 @@ function unilib.pkg.fern_horsetail_broad_leaf.exec()
         }
     )
     -- (not compatible with flowerpots)
+
+    unilib.register_decoration_spare("unilib:fern_horsetail_broad_leaf")
 
 end

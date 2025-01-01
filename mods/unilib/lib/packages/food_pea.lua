@@ -9,7 +9,7 @@
 unilib.pkg.food_pea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_pea.exec()
         inventory_image = "unilib_food_pea.png",
         groups = {flammable = 2, food_peas = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pea", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pea", 1),
     })
     unilib.register_craft({
         -- From farming:peas

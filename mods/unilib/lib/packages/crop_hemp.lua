@@ -9,7 +9,7 @@
 unilib.pkg.crop_hemp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -83,7 +83,8 @@ function unilib.pkg.crop_hemp.exec()
         harvest_group_table = {},
         seed_description = S("Hemp Seed"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -95,7 +96,16 @@ function unilib.pkg.crop_hemp.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_crop_hemp", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_hemp_harvest",
+        juice_description = S("Hemp"),
+        juice_type = "hemp",
+        rgb = "#a9b17d",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_crop_hemp", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:crop_hemp_grow_7",

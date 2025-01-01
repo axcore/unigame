@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_pitta = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bread.add_mode
+local mode = unilib.global.imported_mod_table.bread.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_bread_pitta.exec()
         inventory_image = "unilib_food_bread_pitta.png",
         groups = {flammable = 2, food_bread = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_pitta", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_pitta", 4),
     })
     unilib.register_craft({
         -- From bread:pita

@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_clementine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.clementinetree.add_mode
+local mode = unilib.global.imported_mod_table.clementinetree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_clementine.post()
 
-    unilib.register_decoration_now("cool_trees_tree_clementine", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_clementine", nil, {
         -- From clementinetree/init.lua
         -- Completes decoration in package "tree_clementine"
         biomes = "default_forest_deciduous",

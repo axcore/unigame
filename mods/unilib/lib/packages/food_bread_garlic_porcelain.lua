@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_garlic_porcelain = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_bread_garlic_porcelain.exec()
             inventory_image = "unilib_food_bread_garlic_porcelain_uncooked.png",
             groups = {flammable = 1, food_uncooked_garlic_bread = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_bread_garlic_porcelain_uncooked", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_bread_garlic_porcelain_uncooked", 3),
         }
     )
     unilib.register_craft({
@@ -60,7 +60,7 @@ function unilib.pkg.food_bread_garlic_porcelain.exec()
             inventory_image = "unilib_food_bread_garlic_porcelain.png",
             groups = {food_cooked_garlic_bread = 1, flammable = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_bread_garlic_porcelain", 8),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_bread_garlic_porcelain", 8),
         }
     )
     unilib.register_craft({

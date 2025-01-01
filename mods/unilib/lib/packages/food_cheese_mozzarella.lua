@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_mozzarella = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_cheese_mozzarella.exec()
         inventory_image = "unilib_food_cheese_mozzarella.png",
         groups = {food = 4, food_cheese = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_mozzarella", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_mozzarella", 4),
     })
     unilib.register_craft({
         -- From cheese:mozzarella
@@ -43,7 +43,7 @@ function unilib.pkg.food_cheese_mozzarella.exec()
             {"", c_stretched, ""},
             {c_stretched, c_stretched, c_stretched},
             {"", c_stretched, ""},
-        }
+        },
     })
 
 end

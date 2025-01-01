@@ -9,7 +9,7 @@
 unilib.pkg.clay_bentonite_calcium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,8 +29,8 @@ function unilib.pkg.clay_bentonite_calcium.exec()
         -- Texture from PFAA, weakOreClay_calciumBentonite.png. Original code
         description = S("Calcium Bentonite Clay"),
         tiles = {"unilib_clay_bentonite_calcium.png"},
-        groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        groups = {clay = 1, crumbly = 3},
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:clay_bentonite_calcium_lump 4",
     })
@@ -38,6 +38,10 @@ function unilib.pkg.clay_bentonite_calcium.exec()
         -- Texture from PFAA, weakOreClay_calciumBentonite.png. Original code
         output = "unilib:clay_bentonite_calcium",
         ingredient = "unilib:clay_bentonite_calcium_lump",
+    })
+    unilib.register_carvings("unilib:clay_bentonite_calcium", {
+        facade_flag = true,
+        millwork_flag = true,
     })
 
     unilib.register_craftitem("unilib:clay_bentonite_calcium_lump", nil, mode, {

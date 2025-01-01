@@ -9,7 +9,7 @@
 unilib.pkg.flower_lazarus_bell = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedclay.add_mode
+local mode = unilib.global.imported_mod_table.bakedclay.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,12 +35,12 @@ function unilib.pkg.flower_lazarus_bell.exec()
         deco_part_name = "bakedclay",
         description = S("Lazarus Bell"),
         -- N.B. flammable = 1 not in original code
-        group_table = {color_pink = 1, flammable = 1},
+        group_table = {color_pink = 1, colour_pink = 1, flammable = 1},
         no_deco_flag = true,
         sci_name = "Fritillaria meleagris",
     })
 
-    unilib.register_decoration("bakedclay_flower_lazarus_bell", {
+    unilib.register_decoration_generic("bakedclay_flower_lazarus_bell", {
         -- From bakedclay:lazarus
         deco_type = "simple",
         decoration = "unilib:flower_lazarus_bell",

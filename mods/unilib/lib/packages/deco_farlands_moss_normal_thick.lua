@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_moss_normal_thick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_farlands_moss_normal_thick.post()
 
-    unilib.register_decoration_now("farlands_moss_normal_thick", nil, {
+    unilib.register_decoration_complete("farlands_moss_normal_thick", nil, {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "moss_normal_thick"
         biomes = "farlands_rainforest",

@@ -9,7 +9,7 @@
 unilib.pkg.torch_tinted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abritorch.add_mode
+local mode = unilib.global.imported_mod_table.abritorch.add_mode
 
 local enable_ceiling_flag = true
 
@@ -85,7 +85,7 @@ function unilib.pkg.torch_tinted.exec()
 
                 local above = pointed_thing.above
                 local under = pointed_thing.under
-                local wdir = minetest.dir_to_wallmounted(
+                local wdir = core.dir_to_wallmounted(
                     {x = under.x - above.x, y = under.y - above.y, z = under.z - above.z}
                 )
 
@@ -105,7 +105,7 @@ function unilib.pkg.torch_tinted.exec()
                     return itemstack
                 end
 
-                itemstack = minetest.item_place(fakestack, placer, pointed_thing)
+                itemstack = core.item_place(fakestack, placer, pointed_thing)
                 itemstack:set_name("unilib:torch_tinted_" .. part_name)
 
                 return itemstack
@@ -137,7 +137,7 @@ function unilib.pkg.torch_tinted.exec()
                             aspect_w = 16,
                             aspect_h = 16,
                             length = 3.3,
-                        }
+                        },
                     },
                 },
                 groups = {
@@ -222,7 +222,7 @@ function unilib.pkg.torch_tinted.exec()
 
             if node.param2 == 0 and not enable_ceiling_flag then
 
-                minetest.remove_node(pos)
+                core.remove_node(pos)
                 return
 
             elseif node.param2 == 1 then
@@ -231,16 +231,16 @@ function unilib.pkg.torch_tinted.exec()
 
             end
 
-            minetest.set_node(pos, {name = wall_name, param2 = node.param2})
+            core.set_node(pos, {name = wall_name, param2 = node.param2})
 
         end
     })
 
-    if minetest.features.particlespawner_tweenable then
+    if core.features.particlespawner_tweenable then
 
         local spark_img = "unilib_torch_tinted_spark.png"
 
-        minetest.register_abm({
+        unilib.register_abm({
             label = "Add torch particles [torch_tinted]",
             nodenames = {"group:tinted_torch"},
 
@@ -252,7 +252,7 @@ function unilib.pkg.torch_tinted.exec()
 
                 local colour = node.name:match("unilib:torch_tinted_(%w+)")
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 2,
                     time = 1,
 

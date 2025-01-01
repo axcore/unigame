@@ -9,7 +9,7 @@
 unilib.pkg.mineral_platinum_native = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ function unilib.pkg.mineral_platinum_native.exec()
         description = S("Native Platinum"),
 
         hardness = 3,
-        -- (Craft recipe provided by the "metal_platinum_real" package)
-        metal_list = {"platinum_real"},
+        -- (Craft recipe provided by the "metal_platinum_rare" package)
+        metal_list = {"platinum_rare"},
     })
 
     unilib.register_craftitem(
@@ -53,8 +53,8 @@ end
 function unilib.pkg.mineral_platinum_native.post()
 
     -- If the real platinum package was not executed, smelt into regular platinum instead
-    if unilib.pkg_executed_table["metal_platinum_real"] == nil and
-            unilib.pkg_executed_table["metal_platinum"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_platinum_rare"] == nil and
+            unilib.global.pkg_executed_table["metal_platinum"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -65,7 +65,7 @@ function unilib.pkg.mineral_platinum_native.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "platinum_native",
             metal_list = {"platinum"},
         })

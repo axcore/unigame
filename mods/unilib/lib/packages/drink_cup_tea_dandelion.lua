@@ -9,7 +9,7 @@
 unilib.pkg.drink_cup_tea_dandelion = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.tea.add_mode
+local mode = unilib.global.imported_mod_table.tea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.drink_cup_tea_dandelion.exec()
         inventory_image = "unilib_drink_cup_tea_dandelion.png",
         groups = {drink = 1, flammable = 4, food_tea = 1},
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_cup_tea_dandelion", 2, "unilib:vessel_glass_empty"
         ),
     })
@@ -45,7 +45,7 @@ end
 
 function unilib.pkg.drink_cup_tea_dandelion.post()
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {"unilib:torch_ordinary", "unilib:torch_ordinary"})
 
     for _, part_name in pairs({"white", "yellow"}) do

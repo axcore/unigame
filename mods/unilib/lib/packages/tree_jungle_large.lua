@@ -9,7 +9,7 @@
 unilib.pkg.tree_jungle_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 local ltree_def_table = {
     trunk = "unilib:tree_jungle_trunk",
@@ -19,7 +19,7 @@ local ltree_def_table = {
 --  axiom = nil,
     -- N.B. Commented out fruit, as vines isn't a supported mod at the moment
 --  fruit_chance = 15,
---  fruit="vines:vine"
+--  fruit = "vines:vine"
 --  iterations = nil,
 --  leaves2 = nil,
 --  leaves2_chance = nil,
@@ -91,21 +91,21 @@ function unilib.pkg.tree_jungle_large.grow_func(pos)
 
     end
 
-    minetest.swap_node(pos, {name = "air"})
+    core.swap_node(pos, {name = "air"})
 
     -- N.B. This code exists in the original mod; its purpose seems to be, to replace any nearby
     --      apple tree leaves with air, leaving more room for the jungle tree to grow
-    local leaf_list = minetest.find_nodes_in_area(
+    local leaf_list = core.find_nodes_in_area(
         {x = pos.x - 1, y = pos.y, z = pos.z - 1},
         {x = pos.x + 1, y = pos.y + 10, z = pos.z + 1},
         "unilib:tree_apple_leaves"
     )
 
     for leaf_name in ipairs(leaf_list) do
-        minetest.swap_node(leaf_list[leaf_name], {name = "air"})
+        core.swap_node(leaf_list[leaf_name], {name = "air"})
     end
 
-    minetest.spawn_tree(pos, adj_def_table)
+    core.spawn_tree(pos, adj_def_table)
 
 end
 
@@ -119,7 +119,7 @@ function unilib.pkg.tree_jungle_large.init()
         description = "Large jungle tree",
         notes = "A little larger than an emergent jungle tree. Has red/yellow leaf variants" ..
                 " which drop saplings for large trees",
-        depends = {"shared_moretrees", "tree_jungle"}
+        depends = {"shared_moretrees", "tree_jungle"},
     }
 
 end
@@ -142,17 +142,17 @@ function unilib.pkg.tree_jungle_large.exec()
 
     -- The large tree has a few red/yellow leaves (not original to unilib); they are the ones that
     --      drop the "large" sapling (original to unilib)
-    local inv_img = unilib.filter_leaves_img("unilib_tree_jungle_leaves_red.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_jungle_leaves_red.png")
     unilib.register_node(
         -- From moretrees:jungletree_leaves_red
         "unilib:tree_jungle_leaves_red",
         "moretrees:jungletree_leaves_red",
         mode,
         {
-            description = unilib.brackets(S("Jungle Tree Leaves"), S("Reddening")),
+            description = unilib.utils.brackets(S("Jungle Tree Leaves"), S("Reddening")),
             tiles = {"unilib_tree_jungle_leaves_red.png"},
                groups = {flammable = 2, leaves = 1, leafdecay = 3, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
 --          drawtype = "allfaces_optional",
             drop = {
@@ -169,21 +169,22 @@ function unilib.pkg.tree_jungle_large.exec()
             waving = 1,
             wield_img = inv_img,
 
-            after_place_node = unilib.after_place_leaves,
+            after_place_node = unilib.flora.after_place_leaves,
         }
     )
+    unilib.register_tree_leaves_compacted("unilib:tree_jungle_leaves_red", mode)
 
-    inv_img = unilib.filter_leaves_img("unilib_tree_jungle_leaves_yellow.png")
+    inv_img = unilib.flora.filter_leaves_img("unilib_tree_jungle_leaves_yellow.png")
     unilib.register_node(
         -- From moretrees:jungletree_leaves_yellow
         "unilib:tree_jungle_leaves_yellow",
         "moretrees:jungletree_leaves_yellow",
         mode,
         {
-            description = unilib.brackets(S("Jungle Tree Leaves"), S("Yellowing")),
+            description = unilib.utils.brackets(S("Jungle Tree Leaves"), S("Yellowing")),
             tiles = {"unilib_tree_jungle_leaves_yellow.png"},
                groups = {flammable = 2, leaves = 1, leafdecay = 3, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
 --          drawtype = "allfaces_optional",
             drop = {
@@ -200,12 +201,14 @@ function unilib.pkg.tree_jungle_large.exec()
             waving = 1,
             wield_img = inv_img,
 
-            after_place_node = unilib.after_place_leaves,
+            after_place_node = unilib.flora.after_place_leaves,
         }
     )
+    unilib.register_tree_leaves_compacted("unilib:tree_jungle_leaves_yellow", mode)
 
     unilib.register_leafdecay({
         -- From moretrees/node_defs.lua
+        trunk_type = "jungle",
         trunks = {"unilib:tree_jungle_trunk"},
         leaves = {
             "unilib:tree_jungle_leaves",
@@ -245,7 +248,7 @@ function unilib.pkg.tree_jungle_large.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 plantlife_limit = -0.9,
                 rarity = 85,
             }),

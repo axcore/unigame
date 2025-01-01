@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
         description = S("Antipodean Sandstone"),
 
         category = "sedimentary",
+        colour = "#C25A25",
         grinder_flag = true,
         grinder_powder = "unilib:sand_red_antipodean",
         grinder_gravel = "unilib:gravel_red_antipodean",
@@ -44,11 +45,11 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
         description = S("Antipodean Sandstone"),
         tiles = {"unilib_stone_sandstone_antipodean.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_sandstone_antipodean_cobble",
     })
-    if unilib.pkg_executed_table["sand_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_red_antipodean"] ~= nil then
 
         unilib.register_craft_2x2({
             -- Original to unilib
@@ -59,8 +60,8 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
             -- Original to unilib
             output = "unilib:sand_red_antipodean 4",
             recipe = {
-                {"unilib:stone_sandstone_antipodean"},
-            }
+                {"unilib:stone_san,dstone_antipodean"},
+            },
         })
 
     end
@@ -89,7 +90,7 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
             description = S("Antipodean Sandstone Bricks"),
             tiles = {"unilib_stone_sandstone_antipodean_brick.png"},
             groups = {cracky = 2, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             is_ground_content = false,
         }
@@ -102,14 +103,16 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_antipodean",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_antipodean_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_antipodean_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_node("unilib:stone_sandstone_antipodean_cobble", "australia:red_cobble", mode, {
         -- From australia:red_cobble
         description = S("Antipodean Sandstone Cobble"),
         tiles = {"unilib_stone_sandstone_antipodean_cobble.png"},
         groups = {cracky = 3, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -123,6 +126,24 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
         part_name = "sandstone_antipodean",
 
         replace_mode = mode,
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_sandstone_antipodean_cobble_compressed
+        part_name = "sandstone_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Antipodean Sandstone Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_sandstone_antipodean_cobble_condensed
+        part_name = "sandstone_antipodean",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Antipodean Sandstone Cobble"),
     })
 
 end

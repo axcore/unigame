@@ -17,9 +17,9 @@
 unilib.pkg.stone_afualite = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_afualite.exec()
         description = S("Afualite"),
 
         category = "other",
+        colour = "#B32124",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -87,26 +88,22 @@ function unilib.pkg.stone_afualite.exec()
 
     -- (no mossy cobble)
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:afualite. Creates unilib:stone_afualite_cobble_compressed
+        part_name = "afualite",
+        orig_name = "compressed:afualite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:afualite. Creates unilib:stone_afualite_cobble_compressed
-            part_name = "afualite",
-            orig_name = "compressed:afualite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Afualite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Afualite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:afualite. Creates unilib:stone_afualite_cobble_condensed
+        part_name = "afualite",
+        orig_name = "condensed:afualite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:afualite. Creates unilib:stone_afualite_cobble_condensed
-            part_name = "afualite",
-            orig_name = "condensed:afualite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Afualite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Afualite Cobble"),
+    })
 
 end

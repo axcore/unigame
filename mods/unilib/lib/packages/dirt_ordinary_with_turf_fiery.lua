@@ -9,7 +9,7 @@
 unilib.pkg.dirt_ordinary_with_turf_fiery = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,15 +40,18 @@ function unilib.pkg.dirt_ordinary_with_turf_fiery.exec()
                 {
                     name = "unilib_dirt_ordinary.png^unilib_turf_fiery_side_overlay.png",
                     tileable_vertical = false
-                }
+                },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = mode,
@@ -56,9 +59,9 @@ function unilib.pkg.dirt_ordinary_with_turf_fiery.exec()
         wet_soil = "unilib:soil_ordinary_wet",
         turf_description = S("Fiery Turf"),
     })
-    if unilib.pkg_executed_table["plant_shrub_dry_fiery"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_shrub_dry_fiery"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_turf_fiery",
             "unilib:dirt_ordinary",
             "unilib:plant_shrub_dry_fiery"

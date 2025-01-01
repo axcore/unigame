@@ -13,8 +13,8 @@
 unilib.pkg.item_cartridge_ink_extra = {}
 
 local S = unilib.intllib
-local o_mode = unilib.imported_mod_table.offend_flags.add_mode
-local l_mode = unilib.imported_mod_table.labels.add_mode
+local o_mode = unilib.global.imported_mod_table.offend_flags.add_mode
+local l_mode = unilib.global.imported_mod_table.labels.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

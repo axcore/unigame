@@ -9,7 +9,7 @@
 unilib.pkg.decor_bricks_runestone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.decor_bricks_runestone.exec()
         description = S("Decorative Runestone Bricks"),
         tiles = {"unilib_decor_bricks_runestone.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. Not in original code
         is_ground_content = false,
@@ -59,6 +59,8 @@ function unilib.pkg.decor_bricks_runestone.exec()
             {c_stone, c_stone, c_stone},
         },
     })
-    unilib.set_auto_rotate("unilib:decor_bricks_runestone", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:decor_bricks_runestone", unilib.setting.auto_rotate_brick_flag
+    )
 
 end

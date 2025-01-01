@@ -9,7 +9,7 @@
 unilib.pkg.fern_crown_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.fern_crown_antipodean.exec()
 
     unilib.register_node("unilib:fern_crown_antipodean", "aotearoa:crown_fern", mode, {
         -- From aotearoa:crown_fern
-        description = unilib.annotate(S("Antipodean Crown Fern"), "Blechnum discolor"),
+        description = unilib.utils.annotate(S("Antipodean Crown Fern"), "Blechnum discolor"),
         tiles = {"unilib_fern_crown_antipodean.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -54,7 +54,7 @@ function unilib.pkg.fern_crown_antipodean.exec()
     })
     unilib.register_plant_in_pot("unilib:fern_crown_antipodean", "aotearoa:crown_fern")
 
-    unilib.register_decoration("aotearoa_fern_crown_antipodean_normal", {
+    unilib.register_decoration_generic("aotearoa_fern_crown_antipodean_normal", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:fern_crown_antipodean",
@@ -62,7 +62,7 @@ function unilib.pkg.fern_crown_antipodean.exec()
         fill_ratio = 0.01,
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_fern_crown_antipodean_dense", {
+    unilib.register_decoration_generic("aotearoa_fern_crown_antipodean_dense", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:fern_crown_antipodean",

@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_palm = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,7 @@ function unilib.pkg.deco_ethereal_tree_palm.init()
             "biome_ethereal_grove",
             "biome_ethereal_mesa",
             "biome_ethereal_plains",
-            "biome_ethereal_sand_clay",
-            "biome_ethereal_sandstone",
+            "biome_ethereal_sandstone_desert",
         },
     }
 
@@ -35,7 +34,7 @@ end
 
 function unilib.pkg.deco_ethereal_tree_palm.post()
 
-    unilib.register_decoration_now("ethereal_tree_palm", nil, {
+    unilib.register_decoration_complete("ethereal_tree_palm", nil, {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "tree_palm"
         biomes = {
@@ -44,8 +43,7 @@ function unilib.pkg.deco_ethereal_tree_palm.post()
             "ethereal_grove_ocean",
             "ethereal_mesa_ocean",
             "ethereal_plains_ocean",
-            "ethereal_sand_clay",
-            "ethereal_sandstone_ocean",
+            "ethereal_sandstone_desert_ocean",
         },
         place_on = "unilib:sand_ordinary",
         y_max = 1,

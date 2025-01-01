@@ -9,7 +9,7 @@
 unilib.pkg.deco_flowers_flower_waterlily_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_flowers_flower_waterlily_ordinary.post()
 
-    unilib.register_decoration_now("flowers_flower_waterlily_ordinary", nil, {
+    unilib.register_decoration_complete("flowers_flower_waterlily_ordinary", nil, {
         -- From flowers/mapgen.lua
         -- Completes decoration in package "flower_waterlily_ordinary"
         biomes = {

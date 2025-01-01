@@ -9,7 +9,7 @@
 unilib.pkg.food_muffin_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -21,7 +21,7 @@ function unilib.pkg.food_muffin_blueberry.init()
         description = "Blueberry muffin",
         suggested = {
             "food_bread_ordinary",              -- group:food_bread
-            "produce_blueberry_highbush",       -- group:food_blueberries
+            "fruit_blueberry_ordinary",         -- group:food_blueberries
         },
     }
 
@@ -36,7 +36,7 @@ function unilib.pkg.food_muffin_blueberry.exec()
         -- N.B. No groups in original code
         groups = {food_blueberry_muffin = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_muffin_blueberry", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_muffin_blueberry", 2),
     })
     unilib.register_craft({
         -- From farming:muffin_blueberry

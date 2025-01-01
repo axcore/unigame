@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_kelp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.stone_ordinary_with_kelp.init()
 
     return {
         description = "Ordinary stone with kelp",
-        notes = "ABMS in the \"plant_kelp_spiny\" and \"plant_kelp_giant\" grow kelp on these" ..
+        notes = "ABMs in the \"plant_kelp_spiny\" and \"plant_kelp_giant\" grow kelp on these" ..
                 " stone nodes",
         depends = "stone_ordinary",
     }
@@ -45,7 +45,7 @@ function unilib.pkg.stone_ordinary_with_kelp.exec()
                 description = S("Ordinary Stone with Kelp"),
                 tiles = {"unilib_stone_ordinary_with_coral.png"},
                 groups = {cracky = 3, not_in_creative_inventory = 1, stone = 1},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 drop = "unilib:stone_ordinary",
             }

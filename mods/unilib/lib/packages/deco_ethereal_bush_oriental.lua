@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_bush_oriental = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,13 +26,15 @@ end
 
 function unilib.pkg.deco_ethereal_bush_oriental.post()
 
-    unilib.register_decoration_now("ethereal_bush_oriental", nil, {
+    unilib.register_decoration_complete("ethereal_bush_oriental", nil, {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "bush_oriental"
         biomes = "ethereal_bamboo",
+        num_spawn_by = 6,
         place_on = "unilib:dirt_ordinary_with_turf_bamboo",
-        y_max = 100,
-        y_min = 1,
+        spawn_by = "unilib:dirt_ordinary_with_turf_bamboo",
+        y_max = 70,
+        y_min = 35,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.utensil_tray_baking = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.utensil_tray_baking.exec()
             {c_brick, c_brick, c_brick},
             {c_brick, "", c_brick},
             {c_brick, c_brick, c_brick},
-        }
+        },
     })
 
 end

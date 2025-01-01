@@ -17,8 +17,8 @@
 unilib.pkg.dirt_ordinary = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local moreblocks_add_mode = unilib.imported_mod_table.moreblocks.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local moreblocks_add_mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,9 +41,9 @@ function unilib.pkg.dirt_ordinary.exec()
         description = S("Ordinary Dirt"),
         tiles = {"unilib_dirt_ordinary.png"},
         groups = {crumbly = 3, soil = 1},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
     })
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         unilib.override_item("unilib:dirt_ordinary", {
             soil = {
@@ -63,16 +63,20 @@ function unilib.pkg.dirt_ordinary.exec()
             description = S("Ordinary Dirt"),
             tiles = {"unilib_dirt_ordinary.png"},
             groups = {crumbly = 3, soil = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = default_add_mode,
+        compressed_description = nil,
+        compressed_group_table = nil,
         dry_soil = "unilib:soil_ordinary",
         wet_soil = "unilib:soil_ordinary_wet",
     })
-    if unilib.mtgame_tweak_flag and moreblocks_add_mode ~= "defer" then
+    if unilib.setting.squeezed_stone_flag and (
+        moreblocks_add_mode ~= "defer" or not core.get_modpath("moreblocks")
+    ) then
 
         unilib.register_node(
             -- From moreblocks:dirt_compressed
@@ -85,21 +89,14 @@ function unilib.pkg.dirt_ordinary.exec()
                 -- N.B. compresseddirt = 1 not in original code; it matches the compressedstone
                 --      group in some stone packages
                 groups = {compresseddirt = 1, crumbly = 2},
-                sounds = unilib.sound_table.dirt,
+                sounds = unilib.global.sound_table.dirt,
 
                 is_ground_content = false,
+                stack_max = unilib.global.squeezed_stack_max,
             }
         )
-        unilib.register_craft_3x3({
-            output = "unilib:dirt_ordinary_compressed",
-            ingredient = "unilib:dirt_ordinary",
-        })
-        unilib.register_craft({
-            output = "unilib:dirt_ordinary 9",
-            recipe = {
-                {"unilib:dirt_ordinary_compressed"},
-            },
-        })
+        -- From moreblocks:dirt_compressed
+        unilib.misc.set_squeezed_recipes("unilib:dirt_ordinary", "unilib:dirt_ordinary_compressed")
         unilib.register_stairs("unilib:dirt_ordinary_compressed")
 
     end
@@ -120,15 +117,18 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
         }
     )
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         unilib.override_item("unilib:dirt_ordinary_with_turf", {
             soil = {
@@ -155,13 +155,16 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = default_add_mode,
@@ -171,9 +174,10 @@ function unilib.pkg.dirt_ordinary.exec()
         -- N.B. Not using group:ordinary_grass here, hoping to prevent compatibility issues
         turf_seeder = "group:normal_grass",
     })
-    if unilib.mtgame_tweak_flag and unilib.pkg_executed_table["grass_jungle"] ~= nil then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["grass_jungle"] ~= nil then
 
-        minetest.register_craft({
+        unilib.register_craft({
             -- From moreblocks
             type = "shapeless",
             output = "unilib:dirt_ordinary_with_turf",
@@ -181,9 +185,9 @@ function unilib.pkg.dirt_ordinary.exec()
         })
 
     end
-    if unilib.pkg_executed_table["grass_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_ordinary"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary",
             "unilib:grass_ordinary_1"
@@ -207,12 +211,12 @@ function unilib.pkg.dirt_ordinary.exec()
                 },
             },
             groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
 
@@ -232,15 +236,18 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             drop = "unilib:dirt_ordinary",
         }
     )
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         unilib.override_item("unilib:dirt_ordinary_with_turf_dry", {
             soil = {
@@ -267,13 +274,16 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = default_add_mode,
@@ -282,9 +292,9 @@ function unilib.pkg.dirt_ordinary.exec()
         turf_description = S("Savanna Turf"),
         turf_seeder = "group:dry_grass",
     })
-    if unilib.pkg_executed_table["grass_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_dry"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_turf_dry",
             "unilib:dirt_ordinary",
             "unilib:grass_dry_1"
@@ -305,18 +315,21 @@ function unilib.pkg.dirt_ordinary.exec()
                 {
                     name = "unilib_dirt_ordinary.png^unilib_litter_coniferous_side_overlay.png",
                     tileable_vertical = false,
-                }
+                },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         unilib.override_item("unilib:dirt_ordinary_with_litter_coniferous", {
             soil = {
@@ -327,9 +340,9 @@ function unilib.pkg.dirt_ordinary.exec()
         })
 
     end
-    if unilib.pkg_executed_table["grass_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_dry"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary",
             "unilib:grass_dry_1"
@@ -352,16 +365,19 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         }
     )
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         unilib.override_item("unilib:dirt_ordinary_with_litter_rainforest", {
             soil = {
@@ -372,9 +388,9 @@ function unilib.pkg.dirt_ordinary.exec()
         })
 
     end
-    if unilib.pkg_executed_table["grass_jungle"] ~= nil then
+    if unilib.global.pkg_executed_table["grass_jungle"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:dirt_ordinary_with_litter_rainforest",
             "unilib:dirt_ordinary",
             "unilib:grass_jungle"
@@ -398,8 +414,11 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, snowy = 1, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, snowy = 1,
+                soil = 1, spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_snow_footstep", gain = 0.2},
             }),
 
@@ -422,18 +441,21 @@ function unilib.pkg.dirt_ordinary.exec()
                     tileable_vertical = false,
                 },
             },
-            groups = {crumbly = 3, snowy = 1, soil = 1, spreading_dirt_type = 1},
-            sounds = unilib.node_sound_dirt_defaults({
+            groups = {
+                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, snowy = 1,
+                soil = 1, spreading_dirt_type = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_snow_footstep", gain = 0.2},
             }),
 
             drop = "unilib:dirt_ordinary",
-            is_ground_content = unilib.caves_chop_dirt_flag,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
         },
 
         replace_mode = default_add_mode,
         -- N.B. The turf cutter (etc) must create (ordinary) turf, not snow. See the notes in
-        --      ../shared/dirts.lua
+        --      ../lib/shared/dirt/dirt_base.lua
         alt_turf_part_name = "turf",
         turf_description = S("Turf"),
         turf_seeder = "unilib:snow_ordinary",

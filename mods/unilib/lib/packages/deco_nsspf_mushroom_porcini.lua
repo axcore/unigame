@@ -9,7 +9,7 @@
 unilib.pkg.deco_nsspf_mushroom_porcini = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nsspf.add_mode
+local mode = unilib.global.imported_mod_table.nsspf.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_nsspf_mushroom_porcini.post()
 
-    unilib.register_decoration_now("nsspf_mushroom_porcini", nil, {
+    unilib.register_decoration_complete("nsspf_mushroom_porcini", nil, {
         -- Original to unilib, replacing the collection of ABMs in the original nsspf code
         -- Completes decoration in package "mushroom_porcini"
         place_on = "unilib:dirt_ordinary_with_turf",
         spawn_by = "unilib:tree_apple_trunk",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

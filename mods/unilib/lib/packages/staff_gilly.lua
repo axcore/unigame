@@ -9,7 +9,7 @@
 unilib.pkg.staff_gilly = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,13 +28,15 @@ function unilib.pkg.staff_gilly.init()
             "dirt_mossy_mushroom",
             -- N.B. Mese is required to craft the ingot, that crafts this staff
             "mineral_mese",
-            "mineral_crystallinum",
+            "mineral_crystallite",
         },
     }
 
 end
 
 function unilib.pkg.staff_gilly.exec()
+
+    local c_ingot = "unilib:mineral_crystallite_ingot"
 
     unilib.register_tool("unilib:staff_gilly", "ethereal:crystal_gilly_staff", mode, {
         -- ethereal:crystal_gilly_staff
@@ -45,24 +47,30 @@ function unilib.pkg.staff_gilly.exec()
 
         on_use = function(itemstack, user, pointed_thing)
 
-            if user:get_breath() < 10 then
+            if user and user:get_breath() < 10 then
+
                 user:set_breath(10)
+
+                -- N.B. No wear in original code
+                local pname = user and user:get_player_name() or ""
+                if not unilib.utils.is_creative(pname) then
+
+                    -- 150 uses
+                    itemstack:add_wear(unilib.constant.max_tool_wear / 149)
+
+                end
+
             end
 
         end
     })
     unilib.register_craft({
         -- ethereal:crystal_gilly_staff
-        type = "shapeless",
         output = "unilib:staff_gilly",
         recipe = {
-            "unilib:dirt_mossy_green",
-            "unilib:dirt_mossy_grey",
-            "unilib:dirt_mossy_fiery",
-            "unilib:dirt_mossy_crystal",
-            "unilib:mineral_crystallinum_ingot",
-            "unilib:dirt_mossy_mushroom",
-            "unilib:mineral_crystallinum_ingot"
+            {"unilib:dirt_mossy_green", "unilib:dirt_mossy_grey", "unilib:dirt_mossy_fiery"},
+            {"unilib:dirt_mossy_crystal", c_ingot, "unilib:dirt_mossy_mushroom"},
+            {"", c_ingot, ""},
         },
     })
 

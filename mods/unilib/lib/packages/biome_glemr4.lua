@@ -9,13 +9,13 @@
 unilib.pkg.biome_glemr4 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 -- Environmental constants (from lib_ecology/init.lua)
 -- (Biome blending is not enabled in GLEMr4, but is added here for consistency with other GLEM
 --      revisions)
 local BIOME_VERTICAL_BLEND = 4
-if not unilib.glem_biome_blend_flag then
+if not unilib.setting.glem_biome_blend_flag then
     BIOME_VERTICAL_BLEND = nil
 end
 
@@ -66,12 +66,12 @@ unilib.pkg.biome_glemr4.optional_biome_flag = false
 local function add_biome(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr4" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, arg in pairs({b, c, e, g, h, i, j, k}) do
 
             if arg ~= nil and
-                    minetest.registered_nodes[arg] == nil and
+                    core.registered_nodes[arg] == nil and
                     unilib.pkg.dirt_custom_glemr4.dirt_table[arg] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr4.dirt_table[arg]
@@ -99,19 +99,19 @@ local function add_biome(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
 
         if arg ~= nil then
 
-            if unilib.is_registered_node_or_mtgame_alias(arg) == nil then
+            if not unilib.utils.is_registered_node_or_mtgame_alias(arg) then
 
                 if debug_warning_flag then
-                    unilib.show_warning("biome_glemr4 package: Unrecognised node", a, arg)
+                    unilib.utils.show_warning("biome_glemr4 package: Unrecognised node", a, arg)
                 end
 
                 return
 
-            elseif unilib.get_mod_name(arg) ~= "unilib" then
+            elseif unilib.utils.get_mod_name(arg) ~= "unilib" then
 
                 -- (Not a fatal error)
                 if debug_warning_flag then
-                    unilib.show_warning("biome_glemr4 package: Non-unilib node", a, arg)
+                    unilib.utils.show_warning("biome_glemr4 package: Non-unilib node", a, arg)
                 end
 
             end
@@ -124,7 +124,7 @@ local function add_biome(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
 
                 if debug_warning_flag then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "biome_glemr4 package: Invalid value (should be numeric)", a, arg
                     )
 
@@ -140,7 +140,7 @@ local function add_biome(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
 
     -- N.B. The biome description used here is simplistic and untranslated (but should be sufficient
     --      for anyone who actually wants to use this package)
-    local component_list = unilib.split_string_by_underline(a)
+    local component_list = unilib.utils.split_string_by_underline(a)
     local description = nil
     for _, component in ipairs(component_list) do
 
@@ -155,7 +155,7 @@ local function add_biome(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
             end
 
             if description == nil then
-                description = unilib.first_to_upper(component)
+                description = unilib.utils.first_to_upper(component)
             else
                 description = description .. " " .. component
             end
@@ -199,8 +199,8 @@ local function add_biomes_hot_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_humid", nil, "unilib:dirt_clayey_with_litter_rainforest", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_HOT, HUMIDITY_HUMID)
-        add_biome("glemr4_hot_humid_generic", nil, "unilib:dirt_clayey_with_litter_rainforest", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_HOT, HUMIDITY_HUMID)
-        add_biome("glemr4_hot_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_HOT, HUMIDITY_HUMID)
+        add_biome("glemr4_hot_humid_generic", nil, "unilib:dirt_clayey_with_litter_rainforest", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_HOT, HUMIDITY_HUMID)
+        add_biome("glemr4_hot_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_HOT, HUMIDITY_HUMID)
 
     end
 
@@ -218,7 +218,7 @@ local function add_biomes_hot_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_humid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 10, "unilib:stone_basalt_dark", 20, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_HOT, HUMIDITY_HUMID)
-        add_biome("glemr4_hot_humid_sky", nil, "lib_clouds:cloud_cirrus", 3, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_HOT, HUMIDITY_HUMID)
+        add_biome("glemr4_hot_humid_sky", nil, "lib_clouds:cloud_cirrus", 3, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_HOT, HUMIDITY_HUMID)
 
     end
 
@@ -229,8 +229,8 @@ local function add_biomes_hot_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_semihumid", nil, "unilib:dirt_clayey_with_litter_coniferous", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_HOT, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_hot_semihumid_generic", nil, "unilib:dirt_clayey_with_litter_coniferous", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_HOT, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_hot_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_HOT, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_hot_semihumid_generic", nil, "unilib:dirt_clayey_with_litter_coniferous", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_HOT, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_hot_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_HOT, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -250,7 +250,7 @@ local function add_biomes_hot_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_semihumid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 10, "unilib:stone_basalt_dark", 20, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_HOT, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_hot_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_HOT, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_hot_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_HOT, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -261,8 +261,8 @@ local function add_biomes_hot_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_temperate", nil, "unilib:dirt_clayey_with_turf", 1, "unilib:dirt_clayey", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_HOT, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_hot_temperate_generic", nil, "unilib:dirt_clayey_with_turf", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_HOT, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_hot_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_HOT, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_hot_temperate_generic", nil, "unilib:dirt_clayey_with_turf", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_HOT, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_hot_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_HOT, HUMIDITY_TEMPERATE)
 
     end
 
@@ -280,7 +280,7 @@ local function add_biomes_hot_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_temperate_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_HOT, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_hot_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_HOT, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_hot_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_HOT, HUMIDITY_TEMPERATE)
 
     end
 
@@ -291,8 +291,8 @@ local function add_biomes_hot_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_semiarid", nil, "unilib:dirt_clayey_with_turf_dry", 1, "unilib:dirt_clayey", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_HOT, HUMIDITY_SEMIARID)
-        add_biome("glemr4_hot_semiarid_generic", nil, "unilib:dirt_clayey_with_turf_dry", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_HOT, HUMIDITY_SEMIARID)
-        add_biome("glemr4_hot_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_sandstone_brown", nil, nil, nil, nil, unilib.y_min, -192, TEMP_HOT, HUMIDITY_SEMIARID)
+        add_biome("glemr4_hot_semiarid_generic", nil, "unilib:dirt_clayey_with_turf_dry", 1, "unilib:dirt_clayey", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_HOT, HUMIDITY_SEMIARID)
+        add_biome("glemr4_hot_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_sandstone_brown", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_HOT, HUMIDITY_SEMIARID)
 
     end
 
@@ -310,7 +310,7 @@ local function add_biomes_hot_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_semiarid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_HOT, HUMIDITY_SEMIARID)
-        add_biome("glemr4_hot_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_HOT, HUMIDITY_SEMIARID)
+        add_biome("glemr4_hot_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_HOT, HUMIDITY_SEMIARID)
 
     end
 
@@ -321,8 +321,8 @@ local function add_biomes_hot_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_arid", nil, "unilib:sand_desert", 1, "unilib:stone_brownstone_dark", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_HOT, HUMIDITY_ARID)
-        add_biome("glemr4_hot_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_brownstone_dark", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_HOT, HUMIDITY_ARID)
-        add_biome("glemr4_hot_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_HOT, HUMIDITY_ARID)
+        add_biome("glemr4_hot_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_brownstone_dark", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_HOT, HUMIDITY_ARID)
+        add_biome("glemr4_hot_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_HOT, HUMIDITY_ARID)
 
     end
 
@@ -340,7 +340,7 @@ local function add_biomes_hot_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_hot_arid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_HOT, HUMIDITY_ARID)
-        add_biome("glemr4_hot_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_HOT, HUMIDITY_ARID)
+        add_biome("glemr4_hot_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_HOT, HUMIDITY_ARID)
 
     end
 
@@ -355,8 +355,8 @@ local function add_biomes_warm_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_humid", nil, "unilib:dirt_dark_with_litter_rainforest", 1, "unilib:dirt_dark", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_WARM, HUMIDITY_HUMID)
-        add_biome("glemr4_warm_humid_generic", nil, "unilib:dirt_dark_with_litter_rainforest", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_WARM, HUMIDITY_HUMID)
-        add_biome("glemr4_warm_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_WARM, HUMIDITY_HUMID)
+        add_biome("glemr4_warm_humid_generic", nil, "unilib:dirt_dark_with_litter_rainforest", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_WARM, HUMIDITY_HUMID)
+        add_biome("glemr4_warm_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_WARM, HUMIDITY_HUMID)
 
     end
 
@@ -376,7 +376,7 @@ local function add_biomes_warm_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_humid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_WARM, HUMIDITY_HUMID)
-        add_biome("glemr4_warm_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_WARM, HUMIDITY_HUMID)
+        add_biome("glemr4_warm_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_WARM, HUMIDITY_HUMID)
 
     end
 
@@ -387,8 +387,8 @@ local function add_biomes_warm_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_semihumid", nil, "unilib:dirt_dark_with_litter_coniferous", 1, "unilib:dirt_dark", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_WARM, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_warm_semihumid_generic", nil, "unilib:dirt_dark_with_litter_coniferous", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_WARM, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_warm_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_WARM, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_warm_semihumid_generic", nil, "unilib:dirt_dark_with_litter_coniferous", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_WARM, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_warm_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_WARM, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -408,7 +408,7 @@ local function add_biomes_warm_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_semihumid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_WARM, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_warm_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_WARM, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_warm_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_WARM, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -419,8 +419,8 @@ local function add_biomes_warm_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_temperate", nil, "unilib:dirt_dark_with_turf", 1, "unilib:dirt_dark", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_WARM, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_warm_temperate_generic", nil, "unilib:dirt_dark_with_turf", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_WARM, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_warm_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_sandstone_brown", nil, nil, nil, nil, unilib.y_min, -192, TEMP_WARM, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_warm_temperate_generic", nil, "unilib:dirt_dark_with_turf", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_WARM, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_warm_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_sandstone_brown", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_WARM, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -438,7 +438,7 @@ local function add_biomes_warm_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_temperate_volcanic", nil, "air", 2, "air", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, 15, 15)
-        add_biome("glemr4_warm_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_WARM, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_warm_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_WARM, HUMIDITY_TEMPERATE)
 
     end
 
@@ -449,8 +449,8 @@ local function add_biomes_warm_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_semiarid", nil, "unilib:dirt_dark_with_turf_dry", 1, "unilib:dirt_dark", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_WARM, HUMIDITY_SEMIARID)
-        add_biome("glemr4_warm_semiarid_generic", nil, "unilib:dirt_dark_with_turf_dry", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_WARM, HUMIDITY_SEMIARID)
-        add_biome("glemr4_warm_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_desert", nil, nil, nil, nil, unilib.y_min, -192, TEMP_WARM, HUMIDITY_SEMIARID)
+        add_biome("glemr4_warm_semiarid_generic", nil, "unilib:dirt_dark_with_turf_dry", 1, "unilib:dirt_dark", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_WARM, HUMIDITY_SEMIARID)
+        add_biome("glemr4_warm_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_desert", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_WARM, HUMIDITY_SEMIARID)
 
     end
 
@@ -468,7 +468,7 @@ local function add_biomes_warm_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_semiarid_volcanic", nil, "unilib:dirt_dark_with_turf", 1, "unilib:dirt_dark", 4, "unilib:stone_limestone_white", nil, nil, nil, nil, 140, 180, TEMP_WARM, HUMIDITY_SEMIARID)
-        add_biome("glemr4_warm_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_WARM, HUMIDITY_SEMIARID)
+        add_biome("glemr4_warm_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_WARM, HUMIDITY_SEMIARID)
 
     end
 
@@ -479,8 +479,8 @@ local function add_biomes_warm_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_arid", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_brown", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_WARM, HUMIDITY_ARID)
-        add_biome("glemr4_warm_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_brown", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_WARM, HUMIDITY_ARID)
-        add_biome("glemr4_warm_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_WARM, HUMIDITY_ARID)
+        add_biome("glemr4_warm_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_brown", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_WARM, HUMIDITY_ARID)
+        add_biome("glemr4_warm_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_WARM, HUMIDITY_ARID)
 
     end
 
@@ -498,7 +498,7 @@ local function add_biomes_warm_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_warm_arid_volcanic", nil, "unilib:stone_sandstone_desert", 10, "unilib:stone_sandstone_brown", 40, "unilib:stone_basalt_dark", nil, nil, nil, nil, 140, 180, TEMP_WARM, HUMIDITY_ARID)
-        add_biome("glemr4_warm_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_WARM, HUMIDITY_ARID)
+        add_biome("glemr4_warm_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_WARM, HUMIDITY_ARID)
 
     end
 
@@ -513,8 +513,8 @@ local function add_biomes_temperate_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_humid", nil, "unilib:dirt_ordinary_with_litter_rainforest", 1, "unilib:dirt_ordinary", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_TEMPERATE, HUMIDITY_HUMID)
-        add_biome("glemr4_temperate_humid_generic", nil, "unilib:dirt_ordinary_with_litter_rainforest", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_HUMID)
-        add_biome("glemr4_temperate_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_HUMID)
+        add_biome("glemr4_temperate_humid_generic", nil, "unilib:dirt_ordinary_with_litter_rainforest", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_HUMID)
+        add_biome("glemr4_temperate_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_brownstone_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_HUMID)
 
     end
 
@@ -532,7 +532,7 @@ local function add_biomes_temperate_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_humid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 10, "unilib:stone_basalt_dark", 20, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_TEMPERATE, HUMIDITY_HUMID)
-        add_biome("glemr4_temperate_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_HUMID)
+        add_biome("glemr4_temperate_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_HUMID)
 
     end
 
@@ -543,8 +543,8 @@ local function add_biomes_temperate_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_semihumid", nil, "unilib:dirt_ordinary_with_litter_coniferous", 1, "unilib:dirt_ordinary", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_temperate_semihumid_generic", nil, "unilib:dirt_ordinary_with_litter_coniferous", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_temperate_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_temperate_semihumid_generic", nil, "unilib:dirt_ordinary_with_litter_coniferous", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_temperate_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -562,7 +562,7 @@ local function add_biomes_temperate_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_semihumid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 10, "unilib:stone_basalt_dark", 20, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_temperate_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_temperate_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -573,8 +573,8 @@ local function add_biomes_temperate_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_temperate", nil, "unilib:dirt_ordinary_with_turf", 1, "unilib:dirt_ordinary", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_temperate_temperate_generic", nil, "unilib:dirt_ordinary_with_turf", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_temperate_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_temperate_temperate_generic", nil, "unilib:dirt_ordinary_with_turf", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_temperate_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
 
     end
 
@@ -592,7 +592,7 @@ local function add_biomes_temperate_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_temperate_volcanic", nil, "air", 2, "air", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, 15, 15)
-        add_biome("glemr4_temperate_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_temperate_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
 
     end
 
@@ -603,8 +603,8 @@ local function add_biomes_temperate_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_semiarid", nil, "unilib:dirt_ordinary_with_turf_dry", 1, "unilib:dirt_ordinary", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
-        add_biome("glemr4_temperate_semiarid_generic", nil, "unilib:dirt_ordinary_with_turf_dry", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
-        add_biome("glemr4_temperate_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
+        add_biome("glemr4_temperate_semiarid_generic", nil, "unilib:dirt_ordinary_with_turf_dry", 1, "unilib:dirt_ordinary", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
+        add_biome("glemr4_temperate_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
 
     end
 
@@ -622,7 +622,7 @@ local function add_biomes_temperate_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_semiarid_volcanic", nil, "air", 2, "air", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
-        add_biome("glemr4_temperate_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
+        add_biome("glemr4_temperate_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_SEMIARID)
 
     end
 
@@ -633,8 +633,8 @@ local function add_biomes_temperate_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_arid", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_desert", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_TEMPERATE, HUMIDITY_ARID)
-        add_biome("glemr4_temperate_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_desert", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_ARID)
-        add_biome("glemr4_temperate_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_ARID)
+        add_biome("glemr4_temperate_arid_generic", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_desert", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_ARID)
+        add_biome("glemr4_temperate_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_ARID)
 
     end
 
@@ -652,7 +652,7 @@ local function add_biomes_temperate_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_temperate_arid_volcanic", nil, "unilib:stone_basalt_dark_rubble", 10, "unilib:stone_basalt_dark", 20, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_TEMPERATE, HUMIDITY_ARID)
-        add_biome("glemr4_temperate_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_ARID)
+        add_biome("glemr4_temperate_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_ARID)
 
     end
 
@@ -667,8 +667,8 @@ local function add_biomes_cool_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_humid", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COOL, HUMIDITY_HUMID)
-        add_biome("glemr4_cool_humid_generic", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COOL, HUMIDITY_HUMID)
-        add_biome("glemr4_cool_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COOL, HUMIDITY_HUMID)
+        add_biome("glemr4_cool_humid_generic", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COOL, HUMIDITY_HUMID)
+        add_biome("glemr4_cool_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COOL, HUMIDITY_HUMID)
 
     end
 
@@ -686,7 +686,7 @@ local function add_biomes_cool_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_humid_volcanic", nil, nil, nil, nil, nil, nil, "unilib:ice_ordinary", nil, nil, nil, 140, 180, TEMP_COOL, HUMIDITY_HUMID)
-        add_biome("glemr4_cool_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COOL, HUMIDITY_HUMID)
+        add_biome("glemr4_cool_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COOL, HUMIDITY_HUMID)
 
     end
 
@@ -697,8 +697,8 @@ local function add_biomes_cool_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_semihumid", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COOL, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cool_semihumid_generic", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COOL, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cool_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COOL, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cool_semihumid_generic", nil, "unilib:dirt_sandy_with_litter_coniferous", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COOL, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cool_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COOL, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -716,7 +716,7 @@ local function add_biomes_cool_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_semihumid_volcanic", nil, nil, nil, nil, nil, "unilib:ice_ordinary", nil, nil, nil, nil, 140, 180, TEMP_COOL, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cool_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COOL, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cool_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COOL, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -727,8 +727,8 @@ local function add_biomes_cool_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_temperate", nil, "unilib:dirt_sandy_with_turf", 1, "unilib:dirt_sandy", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COOL, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cool_temperate_generic", nil, "unilib:dirt_sandy_with_turf", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COOL, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cool_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COOL, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cool_temperate_generic", nil, "unilib:dirt_sandy_with_turf", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COOL, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cool_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COOL, HUMIDITY_TEMPERATE)
 
     end
 
@@ -746,7 +746,7 @@ local function add_biomes_cool_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_temperate_volcanic", nil, nil, nil, nil, nil, "unilib:ice_ordinary", nil, nil, nil, nil, 140, 180, TEMP_COOL, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cool_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COOL, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cool_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COOL, HUMIDITY_TEMPERATE)
 
     end
 
@@ -757,8 +757,8 @@ local function add_biomes_cool_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_semiarid", nil, "unilib:dirt_sandy_with_turf_dry", 1, "unilib:dirt_sandy", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COOL, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cool_semiarid_generic", nil, "unilib:dirt_sandy_with_turf_dry", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COOL, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cool_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COOL, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cool_semiarid_generic", nil, "unilib:dirt_sandy_with_turf_dry", 1, "unilib:dirt_sandy", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COOL, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cool_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COOL, HUMIDITY_SEMIARID)
 
     end
 
@@ -776,7 +776,7 @@ local function add_biomes_cool_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_semiarid_volcanic", nil, "air", 1, "air", 1, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_COOL, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cool_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COOL, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cool_semiarid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COOL, HUMIDITY_SEMIARID)
 
     end
 
@@ -787,8 +787,8 @@ local function add_biomes_cool_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_arid", nil, "unilib:dirt_sandy", 1, "unilib:stone_sandstone_brown", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COOL, HUMIDITY_ARID)
-        add_biome("glemr4_cool_arid_generic", nil, "unilib:dirt_sandy", 1, "unilib:stone_sandstone_brown", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COOL, HUMIDITY_ARID)
-        add_biome("glemr4_cool_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COOL, HUMIDITY_ARID)
+        add_biome("glemr4_cool_arid_generic", nil, "unilib:dirt_sandy", 1, "unilib:stone_sandstone_brown", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COOL, HUMIDITY_ARID)
+        add_biome("glemr4_cool_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COOL, HUMIDITY_ARID)
 
     end
 
@@ -806,7 +806,7 @@ local function add_biomes_cool_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cool_arid_volcanic", nil, "air", 1, "air", 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_COOL, HUMIDITY_ARID)
-        add_biome("glemr4_cool_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COOL, HUMIDITY_ARID)
+        add_biome("glemr4_cool_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COOL, HUMIDITY_ARID)
 
     end
 
@@ -821,17 +821,17 @@ local function add_biomes_cold_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_humid", nil, "unilib:dirt_coarse_with_litter_rainforest", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_COLD, HUMIDITY_HUMID)
-        add_biome("glemr4_cold_humid_generic", nil, "unilib:dirt_coarse_with_litter_rainforest", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COLD, HUMIDITY_HUMID)
-        add_biome("glemr4_cold_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COLD, HUMIDITY_HUMID)
+        add_biome("glemr4_cold_humid_generic", nil, "unilib:dirt_coarse_with_litter_rainforest", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COLD, HUMIDITY_HUMID)
+        add_biome("glemr4_cold_humid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COLD, HUMIDITY_HUMID)
 
     end
 
     add_biome("glemr4_cold_humid_ocean", nil, "unilib:sand_silt", 2, "unilib:sand_ordinary", 4, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, -192, -4, TEMP_COLD, HUMIDITY_HUMID)
     add_biome("glemr4_cold_humid_beach", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -4, 4, TEMP_COLD, HUMIDITY_HUMID)
 
-    add_biome("glemr4_cold_humid_coastal", nil, "unilib:dirt_silt_coarse_with_snow_ordinary", 1, "unilib:dirt_silt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_HUMID)
-    add_biome("glemr4_cold_humid_lowland", nil, "unilib:dirt_silt_fine_with_snow_ordinary", 1, "unilib:dirt_silt_fine", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_COASTAL, HEIGHT_LOWLAND, TEMP_COLD, HUMIDITY_HUMID)
-    add_biome("glemr4_cold_humid_shelf", nil, "unilib:dirt_dark_with_snow_ordinary", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_LOWLAND, HEIGHT_SHELF, TEMP_COLD, HUMIDITY_HUMID)
+    add_biome("glemr4_cold_humid_coastal", nil, "unilib:dirt_silt_coarse_with_cover_snow", 1, "unilib:dirt_silt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_HUMID)
+    add_biome("glemr4_cold_humid_lowland", nil, "unilib:dirt_silt_fine_with_cover_snow", 1, "unilib:dirt_silt_fine", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_COASTAL, HEIGHT_LOWLAND, TEMP_COLD, HUMIDITY_HUMID)
+    add_biome("glemr4_cold_humid_shelf", nil, "unilib:dirt_dark_with_cover_snow", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_LOWLAND, HEIGHT_SHELF, TEMP_COLD, HUMIDITY_HUMID)
     add_biome("glemr4_cold_humid_highland", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_SHELF, HEIGHT_HIGHLAND, TEMP_COLD, HUMIDITY_HUMID)
 
     add_biome("glemr4_cold_humid_mountain", nil, "unilib:snow_ordinary_block", 10, "unilib:stone_brownstone_dark", 20, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_HIGHLAND, HEIGHT_MOUNTAIN, TEMP_COLD, HUMIDITY_HUMID)
@@ -840,7 +840,7 @@ local function add_biomes_cold_humid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_humid_volcanic", nil, nil, nil, "unilib:ice_ordinary", 20, "unilib:stone_basalt_dark", nil, nil, nil, nil, 140, 180, TEMP_COLD, HUMIDITY_HUMID)
-        add_biome("glemr4_cold_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COLD, HUMIDITY_HUMID)
+        add_biome("glemr4_cold_humid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COLD, HUMIDITY_HUMID)
 
     end
 
@@ -851,18 +851,18 @@ local function add_biomes_cold_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_semihumid", nil, "unilib:dirt_coarse_with_litter_coniferous", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_COLD, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cold_semihumid_generic", nil, "unilib:dirt_coarse_with_litter_coniferous", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COLD, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cold_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COLD, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cold_semihumid_generic", nil, "unilib:dirt_coarse_with_litter_coniferous", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COLD, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cold_semihumid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COLD, HUMIDITY_SEMIHUMID)
 
     end
 
     add_biome("glemr4_cold_semihumid_ocean", nil, "unilib:sand_silt", 2, "unilib:sand_ordinary", 4, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, -192, -4, TEMP_COLD, HUMIDITY_SEMIHUMID)
     add_biome("glemr4_cold_semihumid_beach", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -4, 4, TEMP_COLD, HUMIDITY_SEMIHUMID)
 
-    add_biome("glemr4_cold_semihumid_coastal", nil, "unilib:dirt_silt_fine_with_snow_ordinary", 1, "unilib:dirt_silt_fine", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_SEMIHUMID)
-    add_biome("glemr4_cold_semihumid_lowland", nil, "unilib:dirt_dark_with_snow_ordinary", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_COASTAL, HEIGHT_LOWLAND, TEMP_COLD, HUMIDITY_SEMIHUMID)
+    add_biome("glemr4_cold_semihumid_coastal", nil, "unilib:dirt_silt_fine_with_cover_snow", 1, "unilib:dirt_silt_fine", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_SEMIHUMID)
+    add_biome("glemr4_cold_semihumid_lowland", nil, "unilib:dirt_dark_with_cover_snow", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_COASTAL, HEIGHT_LOWLAND, TEMP_COLD, HUMIDITY_SEMIHUMID)
     add_biome("glemr4_cold_semihumid_shelf", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_LOWLAND, HEIGHT_SHELF, TEMP_COLD, HUMIDITY_SEMIHUMID)
-    add_biome("glemr4_cold_semihumid_highland", nil, "unilib:dirt_coarse_with_snow_ordinary", 1, "unilib:dirt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_SHELF, HEIGHT_HIGHLAND, TEMP_COLD, HUMIDITY_SEMIHUMID)
+    add_biome("glemr4_cold_semihumid_highland", nil, "unilib:dirt_coarse_with_cover_snow", 1, "unilib:dirt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_SHELF, HEIGHT_HIGHLAND, TEMP_COLD, HUMIDITY_SEMIHUMID)
 
     add_biome("glemr4_cold_semihumid_mountain", nil, "unilib:snow_ordinary_block", 10, "unilib:stone_brownstone_dark", 20, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_HIGHLAND, HEIGHT_MOUNTAIN, TEMP_COLD, HUMIDITY_SEMIHUMID)
     add_biome("glemr4_cold_semihumid_strato", nil, "unilib:ice_ordinary", 15, "unilib:stone_granite_white", 25, "unilib:stone_brownstone_dark", nil, nil, nil, nil, HEIGHT_MOUNTAIN, HEIGHT_STRATO, TEMP_COLD, HUMIDITY_SEMIHUMID)
@@ -870,7 +870,7 @@ local function add_biomes_cold_semihumid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_semihumid_volcanic", nil, nil, nil, "unilib:ice_ordinary", 15, "unilib:stone_basalt_dark", nil, nil, nil, nil, 140, 180, TEMP_COLD, HUMIDITY_SEMIHUMID)
-        add_biome("glemr4_cold_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COLD, HUMIDITY_SEMIHUMID)
+        add_biome("glemr4_cold_semihumid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COLD, HUMIDITY_SEMIHUMID)
 
     end
 
@@ -881,18 +881,18 @@ local function add_biomes_cold_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_temperate", nil, "unilib:dirt_coarse_with_turf", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, 0, 100, TEMP_COLD, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cold_temperate_generic", nil, "unilib:dirt_coarse_with_turf", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COLD, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cold_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COLD, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cold_temperate_generic", nil, "unilib:dirt_coarse_with_turf", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COLD, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cold_temperate_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COLD, HUMIDITY_TEMPERATE)
 
     end
 
     add_biome("glemr4_cold_temperate_ocean", nil, "unilib:sand_silt", 2, "unilib:sand_ordinary", 4, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, -192, -4, TEMP_COLD, HUMIDITY_TEMPERATE)
     add_biome("glemr4_cold_temperate_beach", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -4, 4, TEMP_COLD, HUMIDITY_TEMPERATE)
 
-    add_biome("glemr4_cold_temperate_coastal", nil, "unilib:dirt_dark_with_snow_ordinary", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_TEMPERATE)
+    add_biome("glemr4_cold_temperate_coastal", nil, "unilib:dirt_dark_with_cover_snow", 1, "unilib:dirt_dark", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_BEACH, HEIGHT_COASTAL, TEMP_COLD, HUMIDITY_TEMPERATE)
     add_biome("glemr4_cold_temperate_lowland", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_COASTAL, HEIGHT_LOWLAND, TEMP_COLD, HUMIDITY_TEMPERATE)
-    add_biome("glemr4_cold_temperate_shelf", nil, "unilib:dirt_coarse_with_snow_ordinary", 1, "unilib:dirt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_LOWLAND, HEIGHT_SHELF, TEMP_COLD, HUMIDITY_TEMPERATE)
-    add_biome("glemr4_cold_temperate_highland", nil, "unilib:clay_red_with_snow_ordinary", 1, "unilib:clay_red", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_SHELF, HEIGHT_HIGHLAND, TEMP_COLD, HUMIDITY_TEMPERATE)
+    add_biome("glemr4_cold_temperate_shelf", nil, "unilib:dirt_coarse_with_cover_snow", 1, "unilib:dirt_coarse", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_LOWLAND, HEIGHT_SHELF, TEMP_COLD, HUMIDITY_TEMPERATE)
+    add_biome("glemr4_cold_temperate_highland", nil, "unilib:clay_red_with_cover_snow", 1, "unilib:clay_red", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_SHELF, HEIGHT_HIGHLAND, TEMP_COLD, HUMIDITY_TEMPERATE)
 
     add_biome("glemr4_cold_temperate_mountain", nil, "unilib:stone_sandstone_brown", 10, "unilib:stone_brownstone_dark", 20, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_HIGHLAND, HEIGHT_MOUNTAIN, TEMP_COLD, HUMIDITY_TEMPERATE)
     add_biome("glemr4_cold_temperate_strato", nil, "unilib:stone_gneiss_brown", 15, "unilib:stone_granite_white", 25, "unilib:stone_basalt_dark", nil, nil, nil, nil, HEIGHT_MOUNTAIN, HEIGHT_STRATO, TEMP_COLD, HUMIDITY_TEMPERATE)
@@ -900,7 +900,7 @@ local function add_biomes_cold_temperate()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_temperate_volcanic", nil, nil, nil, "unilib:ice_ordinary", 10, "unilib:stone_basalt_dark", nil, nil, nil, nil, 140, 180, TEMP_COLD, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_cold_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COLD, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_cold_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COLD, HUMIDITY_TEMPERATE)
 
     end
 
@@ -911,8 +911,8 @@ local function add_biomes_cold_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_semiarid", nil, "unilib:dirt_coarse_with_turf_dry", 1, "unilib:dirt_coarse", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COLD, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cold_semiarid_generic", nil, "unilib:dirt_coarse_with_turf_dry", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COLD, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cold_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COLD, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cold_semiarid_generic", nil, "unilib:dirt_coarse_with_turf_dry", 1, "unilib:dirt_coarse", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COLD, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cold_semiarid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COLD, HUMIDITY_SEMIARID)
 
     end
 
@@ -930,7 +930,7 @@ local function add_biomes_cold_semiarid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_semiarid_volcanic", nil, "air", 1, "air", 1, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, TEMP_COLD, HUMIDITY_SEMIARID)
-        add_biome("glemr4_cold_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COLD, HUMIDITY_SEMIARID)
+        add_biome("glemr4_cold_temperate_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COLD, HUMIDITY_SEMIARID)
 
     end
 
@@ -941,8 +941,8 @@ local function add_biomes_cold_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_arid", nil, "unilib:dirt_coarse", 1, "unilib:stone_savanna", 2, nil, nil, nil, nil, nil, 0, 100, TEMP_COLD, HUMIDITY_ARID)
-        add_biome("glemr4_cold_arid_generic", nil, "unilib:dirt_coarse", 1, "unilib:stone_savanna", 4, nil, nil, nil, nil, nil, -192, unilib.y_max, TEMP_COLD, HUMIDITY_ARID)
-        add_biome("glemr4_cold_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.y_min, -192, TEMP_COLD, HUMIDITY_ARID)
+        add_biome("glemr4_cold_arid_generic", nil, "unilib:dirt_coarse", 1, "unilib:stone_savanna", 4, nil, nil, nil, nil, nil, -192, unilib.constant.y_max, TEMP_COLD, HUMIDITY_ARID)
+        add_biome("glemr4_cold_arid_underground", nil, nil, nil, nil, nil, "unilib:stone_basalt_dark", nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_COLD, HUMIDITY_ARID)
 
     end
 
@@ -960,7 +960,7 @@ local function add_biomes_cold_arid()
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
         add_biome("glemr4_cold_arid_volcanic", nil, "air", 1, "air", 1, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, 140, 180, 15, 15)
-        add_biome("glemr4_cold_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.y_max, TEMP_COLD, HUMIDITY_ARID)
+        add_biome("glemr4_cold_arid_sky", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, 180, unilib.constant.y_max, TEMP_COLD, HUMIDITY_ARID)
 
     end
 
@@ -976,13 +976,13 @@ local function add_biomes_generic()
 
         add_biome("glemr4_generic_beach", nil, "unilib:sand_ordinary", 1, "unilib:stone_sandstone_ordinary", 4, nil, nil, nil, nil, nil, -4, 4, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
         add_biome("glemr4_generic_ocean", nil, "unilib:sand_silt", 1, "unilib:dirt_silt_coarse", 4, nil, nil, nil, nil, nil, -192, -4, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_generic_underground", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, unilib.y_min, -192, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_generic_underground", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, unilib.constant.y_min, -192, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
         add_biome("glemr4_generic_mountain", nil, "unilib:snow_ordinary_block", 1, "unilib:ice_ordinary", 4, nil, nil, nil, nil, nil, HEIGHT_HIGHLAND, HEIGHT_MOUNTAIN, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_generic_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 3, "unilib:stone_brownstone_dark", nil, nil, nil, nil, 1000, unilib.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_generic_volcanic", nil, "unilib:stone_basalt_dark_rubble", 1, "unilib:stone_basalt_dark", 3, "unilib:stone_brownstone_dark", nil, nil, nil, nil, 1000, unilib.constant.y_max, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
 
     end
 
-    add_biome("glemr4_generic_mantle", nil, nil, 1, nil, 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, unilib.y_min, -20000, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
+    add_biome("glemr4_generic_mantle", nil, nil, 1, nil, 4, "unilib:liquid_lava_ordinary_source", nil, nil, nil, nil, unilib.constant.y_min, -20000, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
     add_biome("glemr4_generic_layer_stone_basalt_dark", nil, nil, 1, nil, 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, -20000, -15000, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
     add_biome("glemr4_generic_layer_stone_brownstone_dark", nil, nil, 1, nil, 4, "unilib:stone_brownstone_dark", nil, nil, nil, nil, -15000, -10000, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
     add_biome("glemr4_generic_layer_stone_sandstone_brown", nil, nil, 1, nil, 4, "unilib:stone_sandstone_brown", nil, nil, nil, nil, -10000, -6000, TEMP_TEMPERATE, HUMIDITY_TEMPERATE)
@@ -996,7 +996,7 @@ local function add_biomes_generic()
 
         add_biome("glemr4_generic_burned", nil, "unilib:dirt_ordinary_with_turf_grey", 1, "unilib:stone_basalt_dark_rubble", 4, "unilib:stone_basalt_dark", nil, nil, nil, nil, 30, 45, 63, 37)
         add_biome("glemr4_generic_mushroom", nil, "unilib:dirt_ordinary_with_cover_fungi", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 30, TEMP_TEMPERATE, 45, 55)
-        add_biome("glemr4_generic_desert", nil, "unilib:sand_ordinary", 1, "unilib:sand_desert", 3, nil, nil, nil, nil, nil, 4, unilib.y_max, TEMP_COOL, 30)
+        add_biome("glemr4_generic_desert", nil, "unilib:sand_ordinary", 1, "unilib:sand_desert", 3, nil, nil, nil, nil, nil, 4, unilib.constant.y_max, TEMP_COOL, 30)
         add_biome("glemr4_generic_cavern", nil, "unilib:stone_limestone_white", 4, "air", 8, "unilib:stone_basalt_dark", nil, nil, nil, nil, -115, -85, -TEMP_COLD, 60)
 
     end
@@ -1021,22 +1021,22 @@ local function add_biomes_valleys()
 
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 
-        add_biome("glemr4_valleys_glacier", "unilib:snow_ordinary_block", "unilib:snow_ordinary_block", 1, "unilib:snow_ordinary_block", 3, "unilib:ice_ordinary", "unilib:ice_ordinary", nil, nil, "unilib:ice_ordinary", -8, unilib.y_max, 0, HUMIDITY_TEMPERATE)
-        add_biome("glemr4_valleys_tundra", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 1, nil, nil, nil, nil, nil, 2, unilib.y_max, 15, 35)
+        add_biome("glemr4_valleys_glacier", "unilib:snow_ordinary_block", "unilib:snow_ordinary_block", 1, "unilib:snow_ordinary_block", 3, "unilib:ice_ordinary", "unilib:ice_ordinary", nil, nil, "unilib:ice_ordinary", -8, unilib.constant.y_max, 0, HUMIDITY_TEMPERATE)
+        add_biome("glemr4_valleys_tundra", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 1, nil, nil, nil, nil, nil, 2, unilib.constant.y_max, 15, 35)
         add_biome("glemr4_valleys_tundra_beach", nil, "unilib:gravel_ordinary", 1, "unilib:gravel_ordinary", 2, nil, nil, nil, nil, nil, -3, 1, 15, 35)
-        add_biome("glemr4_valleys_taiga", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 2, unilib.y_max, 15, 65)
-        add_biome("glemr4_valleys_cold_desert", nil, "unilib:sand_silver", 1, "unilib:stone_sandstone_silver", 1, "unilib:stone_sandstone_brown", nil, nil, nil, nil, 5, unilib.y_max, TEMP_COOL, 0)
+        add_biome("glemr4_valleys_taiga", nil, "unilib:dirt_ordinary_with_cover_snow", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 2, unilib.constant.y_max, 15, 65)
+        add_biome("glemr4_valleys_cold_desert", nil, "unilib:sand_silver", 1, "unilib:stone_sandstone_silver", 1, "unilib:stone_sandstone_brown", nil, nil, nil, nil, 5, unilib.constant.y_max, TEMP_COOL, 0)
         add_biome("glemr4_valleys_cold_desert_ocean", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 3, "unilib:stone_desert", nil, nil, nil, nil, -112, 4, TEMP_COOL, HUMIDITY_ARID)
-        add_biome("glemr4_valleys_stone_grassland", nil, "unilib:dirt_sandy_with_turf", 1, "unilib:dirt_ordinary", 1, nil, nil, nil, nil, nil, 6, unilib.y_max, 35, 40)
+        add_biome("glemr4_valleys_stone_grassland", nil, "unilib:dirt_sandy_with_turf", 1, "unilib:dirt_ordinary", 1, nil, nil, nil, nil, nil, 6, unilib.constant.y_max, 35, 40)
         add_biome("glemr4_valleys_stone_grassland_dunes", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 2, nil, nil, nil, nil, nil, 5, 5, 35, 40)
         add_biome("glemr4_valleys_stone_grassland_ocean", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 3, nil, nil, nil, nil, nil, -112, 4, 35, 40)
-        add_biome("glemr4_valleys_coniferous_forest", nil, "unilib:dirt_ordinary_with_litter_coniferous", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 6, unilib.y_max, 35, 60)
+        add_biome("glemr4_valleys_coniferous_forest", nil, "unilib:dirt_ordinary_with_litter_coniferous", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 6, unilib.constant.y_max, 35, 60)
         add_biome("glemr4_valleys_coniferous_forest_dunes", nil, "unilib:sand_ordinary", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 5, 5, 35, 60)
         add_biome("glemr4_valleys_coniferous_forest_ocean", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 3, nil, nil, nil, nil, nil, -112, 4, 35, 60)
         add_biome("glemr4_valleys_sandstone_grassland", nil, "unilib:dirt_sandy_with_turf_exotic_dry_3", 1, "unilib:dirt_sandy", 2, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, 5, 24, 55, 40)
         add_biome("glemr4_valleys_sandstone_grassland_dunes", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 2, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, 1, 5, 55, 40)
         add_biome("glemr4_valleys_sandstone_grassland_ocean", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 3, "unilib:stone_sandstone_ordinary", nil, nil, nil, nil, -112, 4, 55, 40)
-        add_biome("glemr4_valleys_deciduous_forest", nil, "unilib:dirt_ordinary_with_turf", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 1, unilib.y_max, 60, 60)
+        add_biome("glemr4_valleys_deciduous_forest", nil, "unilib:dirt_ordinary_with_turf", 1, "unilib:dirt_ordinary", 3, nil, nil, nil, nil, nil, 1, unilib.constant.y_max, 60, 60)
         add_biome("glemr4_valleys_deciduous_forest_swamp", nil, "unilib:dirt_silt_fine_with_litter_coniferous", 1, "unilib:dirt_silt_fine", 3, nil, nil, nil, nil, nil, -3, 0, 60, 60)
         add_biome("glemr4_valleys_deciduous_forest_ocean", nil, "unilib:sand_ordinary", 1, "unilib:sand_ordinary", 3, nil, nil, nil, nil, nil, -112, -4, 60, 60)
         add_biome("glemr4_valleys_desert", nil, "unilib:sand_desert", 1, "unilib:stone_sandstone_desert", 3, "unilib:stone_desert", nil, nil, nil, nil, 30, 90, 80, HUMIDITY_ARID)

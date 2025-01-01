@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_tomato = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_soup_tomato.exec()
         -- N.B. no food_tomato_soup in original code
         groups = {flammable = 2, food_tomato_soup = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_soup_tomato", 8, "unilib:utensil_bowl_wooden"
         ),
     })

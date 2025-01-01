@@ -9,7 +9,7 @@
 unilib.pkg.light_brazier_floor = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_lighting.add_mode
+local mode = unilib.global.imported_mod_table.castle_lighting.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,10 +39,12 @@ function unilib.pkg.light_brazier_floor.exec()
             "unilib_door_steel_castle.png",
             "unilib_door_steel_castle.png",
         },
-        groups = {cracky=2},
+        groups = {cracky = 2},
         -- (no sounds)
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -58,7 +60,7 @@ function unilib.pkg.light_brazier_floor.exec()
                 {0.25, -0.5, 0.25, 0.375, 0.125, 0.375},
                 {-0.375, -0.5, -0.375, -0.25, 0.125, -0.25},
                 {-0.125, -0.0625, -0.125, 0.125, 0, 0.125},
-            }
+            },
         },
         paramtype = "light",
         selection_box = {
@@ -66,7 +68,7 @@ function unilib.pkg.light_brazier_floor.exec()
             fixed = {
                 {-0.375, -0.5, -0.375, 0.375, 0.25, 0.375},
                 {-0.5, 0.25, -0.5, 0.5, 0.5, 0.5},
-            }
+            },
         },
 
         allow_metadata_inventory_put =
@@ -83,7 +85,7 @@ function unilib.pkg.light_brazier_floor.exec()
         recipe = {
             {"unilib:metal_steel_ingot", "unilib:torch_ordinary", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

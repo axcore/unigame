@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_fire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,13 @@ function unilib.pkg.mushroom_fire.exec()
         -- N.B. mushroom = 1 not in original code
         groups = {attached_node = 1, flora = 1, igniter = 1, hot = 3, mushroom = 1, snappy = 3},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         inventory_image = "unilib_mushroom_fire.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -51,7 +52,7 @@ function unilib.pkg.mushroom_fire.exec()
     })
     unilib.register_mushroom_in_pot("unilib:mushroom_fire", "moreplants:firefung")
 
-    unilib.register_decoration("moreplants_mushroom_fire", {
+    unilib.register_decoration_generic("moreplants_mushroom_fire", {
         -- Original to unilib (but the "meta_moreplants_underground" package also spanws this item)
         deco_type = "simple",
         decoration = "unilib:mushroom_fire",

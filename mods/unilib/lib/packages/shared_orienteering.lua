@@ -9,9 +9,8 @@
 unilib.pkg.shared_orienteering = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
-local player_hud_table = {}
 local speed_unit = S("m/s")
 local length_unit = S("m")
 local hud_pos = {x = 0.5, y = 0}
@@ -19,6 +18,9 @@ local hud_offset = {x = 0, y = 15}
 local hud_alignment = {x = 0, y = 0}
 -- Number of lines in HUD
 local hud_lines = 4
+
+-- N.B. Removed after the introduction of unilib Standard HUDs
+--local player_hud_table = {}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -50,7 +52,7 @@ end
 
 local function update_satnav(player)
 
-    if unilib.pkg_executed_table["shared_map"] ~= nil then
+    if unilib.global.pkg_executed_table["shared_map"] ~= nil then
 
         -- Code just below interferes with code in the shared mapping package
         unilib.pkg.shared_map.update_hud_flags(player)
@@ -62,14 +64,14 @@ local function update_satnav(player)
                 tool_active(player, "unilib:item_quadcorder_digital") or
                 tool_active(player, "unilib:item_kit_radar") or
                 tool_active(player, "minimap_radar:radar") or
-                unilib.is_creative(player) then
+                unilib.utils.is_creative(player) then
 
             player:hud_set_flags({minimap = true, minimap_radar = true})
 
         elseif tool_active(player, "unilib:item_satnav_analogue") or
                 tool_active(player, "unilib:item_kit_mapping") or
                 tool_active(player, "map:mapping_kit") or
-                unilib.is_creative(player) then
+                unilib.utils.is_creative(player) then
 
             player:hud_set_flags({minimap = true, minimap_radar = false})
 
@@ -87,6 +89,7 @@ local function init_hud(player)
 
     update_satnav(player)
 
+    --[[
     local name = player:get_player_name()
     player_hud_table[name] = {}
 
@@ -94,7 +97,7 @@ local function init_hud(player)
 
         player_hud_table[name]["hud_line" .. i] = player:hud_add({
             name = "orienteering",
-            hud_elem_type = "text",
+            type = "text",
 
             alignment = hud_alignment,
             number = 0xFFFFFF,
@@ -106,6 +109,8 @@ local function init_hud(player)
         })
 
     end
+    ]]--
+    unilib.hud.add_section(player, "shared_orienteering", hud_lines)
 
 end
 
@@ -177,7 +182,7 @@ local function update_hud_displays(player)
 
     end
 
-    local time = minetest.get_timeofday()
+    local time = core.get_timeofday()
     if watch or gps or quadcorder then
 
         local totalminutes = time * 1440
@@ -185,7 +190,7 @@ local function update_hud_displays(player)
         local hours = math.floor((totalminutes - minutes) / 60)
         minutes = math.floor(minutes)
 
-        local twelve = unilib.get_player_attribute(player, "pkg_shared_orienteering_twelve")
+        local twelve = unilib.utils.get_player_attribute(player, "pkg_shared_orienteering_twelve")
         if twelve == "true" then
 
             if hours == 12 and minutes == 0 then
@@ -273,6 +278,7 @@ local function update_hud_displays(player)
 
     end
 
+    --[[
     local strs = {str_pos, str_angles, str_time, str_speed}
     local line = 1
     for i = 1, hud_lines do
@@ -289,6 +295,23 @@ local function update_hud_displays(player)
     for l = line, hud_lines do
         player:hud_change(player_hud_table[name]["hud_line" .. l], "text", "")
     end
+    ]]--
+    local strs = {str_pos, str_angles, str_time, str_speed}
+    local line = 1
+    for i = 1, hud_lines do
+
+        if strs[i] ~= "" then
+
+            unilib.hud.update_line(player, "shared_orienteering", line, strs[i])
+            line = line + 1
+
+        end
+
+    end
+
+    for l = line, hud_lines do
+        unilib.hud.update_line(player, "shared_orienteering", l, "")
+    end
 
 end
 
@@ -303,10 +326,10 @@ function unilib.pkg.shared_orienteering.toggle_time_mode(itemstack, player, poin
     -- Player attribute "unilib:orienteering_twelve":
     --      "true": Use 12h mode for time
     --      "false" or unset: Use 24h mode for time
-    if unilib.get_player_attribute(player, "pkg_shared_orienteering_twelve") == "true" then
-        unilib.set_player_attribute(player, "pkg_shared_orienteering_twelve", "false")
+    if unilib.utils.get_player_attribute(player, "pkg_shared_orienteering_twelve") == "true" then
+        unilib.utils.set_player_attribute(player, "pkg_shared_orienteering_twelve", "false")
     else
-        unilib.set_player_attribute(player, "pkg_shared_orienteering_twelve", "true")
+        unilib.utils.set_player_attribute(player, "pkg_shared_orienteering_twelve", "true")
     end
 
     update_hud_displays(player)
@@ -328,8 +351,7 @@ end
 
 function unilib.pkg.shared_orienteering.exec()
 
-    if minetest.get_modpath("map") and
-            unilib.pkg_executed_table["shared_map"] ~= nil then
+    if core.get_modpath("map") and unilib.global.pkg_executed_table["shared_map"] ~= nil then
 
         -- Override the minetest_game/map handling functions, so the code below can take over
         -- The "shared_map" package does a similar thing; don't override it twice (code in
@@ -338,19 +360,22 @@ function unilib.pkg.shared_orienteering.exec()
 
     end
 
-    minetest.register_on_newplayer(init_hud)
-    minetest.register_on_joinplayer(init_hud)
+    core.register_on_newplayer(init_hud)
+    core.register_on_joinplayer(init_hud)
 
-    minetest.register_on_leaveplayer(function(player)
+    --[[
+    core.register_on_leaveplayer(function(player)
         player_hud_table[player:get_player_name()] = nil
     end)
+    ]]--
 
     local updatetimer = 0
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
         updatetimer = updatetimer + dtime
         if updatetimer > 0.1 then
-            local players = minetest.get_connected_players()
+
+            local players = core.get_connected_players()
             for i = 1, #players do
 
                 update_satnav(players[i])

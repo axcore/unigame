@@ -9,7 +9,7 @@
 unilib.pkg.utensil_skillet_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,8 +38,8 @@ function unilib.pkg.utensil_skillet_normal.exec()
         recipe = {
             {"unilib:metal_steel_ingot", "", ""},
             {"", "unilib:metal_steel_ingot", ""},
-            {"", "", "group:stick"}
-        }
+            {"", "", "group:stick"},
+        },
     })
 
 end

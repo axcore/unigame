@@ -9,7 +9,7 @@
 unilib.pkg.drink_tonic_fruit = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.drink_tonic_fruit.exec()
         inventory_image = "unilib_drink_tonic_fruit.png",
         groups = {food = 8, vessel = 1},
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_tonic_fruit", 8, "unilib:vessel_bottle_glass_empty"
         )
     })

@@ -9,7 +9,7 @@
 unilib.pkg.shared_decorations_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decorations_sea.add_mode
+local mode = unilib.global.imported_mod_table.decorations_sea.add_mode
 
 local noise_table = {
     coral = {
@@ -132,14 +132,14 @@ function unilib.pkg.shared_decorations_sea.register_sand_item(data_table)
             "unilib_sand_ordinary.png",
         },
         groups = {crumbly = 3, falling_node = 1, not_in_creative_inventory = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         drop = shell_full_name,
         node_dig_prediction = "unilib:sand_ordinary",
         node_placement_prediction = "",
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:sand_ordinary"})
+            core.set_node(pos, {name = "unilib:sand_ordinary"})
         end,
     })
 
@@ -155,14 +155,14 @@ function unilib.pkg.shared_decorations_sea.register_sand_item(data_table)
 
             if pointed_thing and pointed_thing.type == "node" then
 
-                local pos = minetest.get_pointed_thing_position(pointed_thing)
-                local node = minetest.get_node_or_nil(pos)
-                if node and minetest.registered_nodes[node.name].name == "unilib:sand_ordinary" then
+                local pos = core.get_pointed_thing_position(pointed_thing)
+                local node = core.get_node_or_nil(pos)
+                if node and core.registered_nodes[node.name].name == "unilib:sand_ordinary" then
 
                     local name = user:get_player_name()
-                    if not minetest.is_protected(pos, name) then
+                    if not core.is_protected(pos, name) then
 
-                        minetest.set_node(pos, {name = sand_full_name})
+                        core.set_node(pos, {name = sand_full_name})
                         itemstack:take_item()
                         return itemstack
 
@@ -208,10 +208,10 @@ function unilib.pkg.shared_decorations_sea.register_seagrass(data_table)
     local full_name = "unilib:plant_seagrass_" .. part_name
 
     unilib.register_node(full_name, orig_name, replace_mode, {
-        description = unilib.annotate(description, sci_name),
+        description = unilib.utils.annotate(description, sci_name),
         tiles = {"unilib_sand_ordinary.png"},
         groups = {snappy = 3},
-        sounds = unilib.node_sound_sand_defaults({
+        sounds = unilib.sound.generate_sand({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -229,9 +229,10 @@ function unilib.pkg.shared_decorations_sea.register_seagrass(data_table)
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:sand_ordinary"})
+            core.set_node(pos, {name = "unilib:sand_ordinary"})
         end,
 
+        --[[
         on_place = function(itemstack, placer, pointed_thing)
 
             -- Call on_rightclick if the pointed node defines it
@@ -239,8 +240,8 @@ function unilib.pkg.shared_decorations_sea.register_seagrass(data_table)
                     placer and
                     not placer:get_player_control().sneak then
 
-                local node_ptu = minetest.get_node(pointed_thing.under)
-                local def_ptu = minetest.registered_nodes[node_ptu.name]
+                local node_ptu = core.get_node(pointed_thing.under)
+                local def_ptu = core.registered_nodes[node_ptu.name]
                 if def_ptu and def_ptu.on_rightclick then
 
                     return def_ptu.on_rightclick(
@@ -252,37 +253,51 @@ function unilib.pkg.shared_decorations_sea.register_seagrass(data_table)
             end
 
             local pos = pointed_thing.under
-            if minetest.get_node(pos).name ~= "unilib:sand_ordinary" then
+            if core.get_node(pos).name ~= "unilib:sand_ordinary" then
                 return itemstack
             end
 
             local height = math.random(1, max_height)
             local pos_top = {x = pos.x, y = pos.y + height, z = pos.z}
-            local node_top = minetest.get_node(pos_top)
-            local def_top = minetest.registered_nodes[node_top.name]
+            local node_top = core.get_node(pos_top)
+            local def_top = core.registered_nodes[node_top.name]
             local player_name = placer:get_player_name()
 
             if def_top and def_top.liquidtype == "source" and
-                    minetest.get_item_group(node_top.name, "water") > 0 then
+                    core.get_item_group(node_top.name, "water") > 0 then
 
-                if not minetest.is_protected(pos, player_name) and
-                        not minetest.is_protected(pos_top, player_name) then
+                if not core.is_protected(pos, player_name) and
+                        not core.is_protected(pos_top, player_name) then
 
-                    minetest.set_node(pos, {name = full_name, param2 = height * 16})
-                    if not unilib.is_creative(player_name) then
+                    core.set_node(pos, {name = full_name, param2 = height * 16})
+                    if not unilib.utils.is_creative(player_name) then
                         itemstack:take_item()
                     end
 
                 else
 
-                    minetest.chat_send_player(player_name, S("Node is protected"))
-                    minetest.record_protection_violation(pos, player_name)
+                    core.chat_send_player(player_name, S("Node is protected"))
+                    core.record_protection_violation(pos, player_name)
 
                 end
 
             end
 
             return itemstack
+
+        end,
+        ]]--
+
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:sand_ordinary",
+                    displace_flag = true,
+                    height = math.random(1, max_height),
+                }
+            )
 
         end,
     })
@@ -297,13 +312,13 @@ function unilib.pkg.shared_decorations_sea.register_coral_decoration(part_name, 
 
     -- Was register_coral_decoration()
 
-    unilib.register_decoration("decoration_sea_coral_block_" .. part_name, {
+    unilib.register_decoration_generic("decoration_sea_coral_block_" .. part_name, {
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_coral_block_" .. part_name .. ".mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_coral_block_" .. part_name .. ".mts",
 
         flags = "force_placement, all_floors",
         noise_params = noise_table[noise_type],
-        place_offset_y = 0,
+--      place_offset_y = 0,
         rotation = "random",
         sidelen = 16,
     })
@@ -314,7 +329,7 @@ function unilib.pkg.shared_decorations_sea.register_sand_decoration(part_name, c
 
     -- Was register_sand_decoration()
 
-    unilib.register_decoration("decoration_sea_" .. part_name .. "_" .. count, {
+    unilib.register_decoration_generic("decoration_sea_" .. part_name .. "_" .. count, {
         deco_type = "simple",
         decoration = "unilib:" .. part_name,
 
@@ -330,7 +345,7 @@ function unilib.pkg.shared_decorations_sea.register_simple_decoration(part_name,
 
     -- Was register_simple_decoration()
 
-    unilib.register_decoration("decoration_sea_" .. part_name .. "_" .. count, {
+    unilib.register_decoration_generic("decoration_sea_" .. part_name .. "_" .. count, {
         deco_type = "simple",
         decoration = "unilib:" .. part_name,
 
@@ -348,7 +363,7 @@ function unilib.pkg.shared_decorations_sea.register_tall_grass_decoration(
 )
     -- Was register_tall_grass_decoration()
 
-    unilib.register_decoration("decoration_sea_" .. part_name .. "_tall_" .. count, {
+    unilib.register_decoration_generic("decoration_sea_" .. part_name .. "_tall_" .. count, {
         deco_type = "simple",
         decoration = "unilib:" .. part_name,
 

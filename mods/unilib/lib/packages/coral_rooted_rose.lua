@@ -9,12 +9,13 @@
 unilib.pkg.coral_rooted_rose = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xocean.add_mode
+local mode = unilib.global.imported_mod_table.xocean.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+--[[
 local function on_place_coral(itemstack, placer, pointed_thing)
     return unilib.pkg.shared_xocean.on_place(itemstack, placer, pointed_thing, "rose")
 end
@@ -22,6 +23,7 @@ end
 local function on_place_skeleton(itemstack, placer, pointed_thing)
     return unilib.pkg.shared_xocean.on_place(itemstack, placer, pointed_thing, "rose_skeleton")
 end
+]]--
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +35,7 @@ function unilib.pkg.coral_rooted_rose.init()
         description = "Rooted rose coral",
         notes = "In original code, replaces pink coral from minetest_game; here, it is a" ..
                 " separate item",
-        depends = {"coral_block_rose", "liquid_water_ordinary", "shared_xocean"},
+        depends = {"coral_block_rose", "liquid_water_ordinary"},
     }
 
 end
@@ -44,8 +46,9 @@ function unilib.pkg.coral_rooted_rose.exec()
         -- From xocean, default:coral_pink
         description = S("Rooted Rose Coral"),
         tiles = {"unilib_coral_block_rose.png"},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -55,6 +58,8 @@ function unilib.pkg.coral_rooted_rose.exec()
         node_dig_prediction = "unilib:coral_block_rose",
         node_placement_prediction = "",
         paramtype = "light",
+        -- N.B. No .paramtype2 in original code
+        paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
             fixed = {
@@ -68,10 +73,22 @@ function unilib.pkg.coral_rooted_rose.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_rose"})
+            core.set_node(pos, {name = "unilib:coral_block_rose"})
         end,
 
-        on_place = on_place_coral,
+--      on_place = on_place_coral,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_rose",
+                    need_above = "unilib:liquid_water_ordinary_source",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
     -- N.B. The brain coral provided by the australia mod looks much more like the real thing, so
@@ -80,8 +97,9 @@ function unilib.pkg.coral_rooted_rose.exec()
         -- From xocean:skeleton_brain
         description = S("Rooted Rose Coral Skeleton"),
         tiles = {"unilib_coral_block_rose_skeleton.png"},
-        groups = {snappy = 3},
-        sounds = unilib.node_sound_stone_defaults({
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, snappy = 3},
+        sounds = unilib.sound.generate_stone({
             dig = {name = "unilib_dig_snappy", gain = 0.2},
             dug = {name = "unilib_grass_footstep", gain = 0.25},
         }),
@@ -91,6 +109,8 @@ function unilib.pkg.coral_rooted_rose.exec()
         node_dig_prediction = "unilib:coral_block_rose_skeleton",
         node_placement_prediction = "",
         paramtype = "light",
+        -- N.B. No .paramtype2 in original code
+        paramtype2 = "facedir",
         selection_box = {
             type = "fixed",
             fixed = {
@@ -104,13 +124,25 @@ function unilib.pkg.coral_rooted_rose.exec()
         waving = 1,
 
         after_destruct = function(pos, oldnode)
-            minetest.set_node(pos, {name = "unilib:coral_block_rose_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_rose_skeleton"})
         end,
 
-        on_place = on_place_skeleton,
+--      on_place = on_place_skeleton,
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {
+                    need_under = "unilib:coral_block_rose_skeleton",
+                    need_above = "unilib:liquid_water_ordinary_source",
+                    displace_flag = true,
+                }
+            )
+
+        end,
     })
 
-    unilib.register_decoration("xocean_coral_rooted_rose", {
+    unilib.register_decoration_generic("xocean_coral_rooted_rose", {
         -- From xocean/init.lua
         deco_type = "simple",
         decoration = "unilib:coral_rooted_rose",
@@ -124,13 +156,16 @@ function unilib.pkg.coral_rooted_rose.exec()
             seed = 87112,
             spread = {x = 20, y = 20, z = 20},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
+        param2 = 0,
+        param2_max = 3,
         place_offset_y = -1,
         sidelen = 16,
     })
 
-    unilib.register_decoration("xocean_coral_rooted_rose_skeleton", {
+    unilib.register_decoration_generic("xocean_coral_rooted_rose_skeleton", {
         -- From xocean/init.lua
         deco_type = "simple",
         decoration = "unilib:coral_rooted_rose_skeleton",
@@ -144,8 +179,11 @@ function unilib.pkg.coral_rooted_rose.exec()
             seed = 87112,
             spread = {x = 20, y = 20, z = 20},
         },
-        param2 = 48,
-        param2_max = 96,
+        -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--      param2 = 48,
+--      param2_max = 96,
+        param2 = 0,
+        param2_max = 3,
         place_offset_y = -1,
         sidelen = 16,
     })

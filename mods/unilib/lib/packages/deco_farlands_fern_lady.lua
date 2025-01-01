@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_fern_lady = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,10 @@ end
 
 function unilib.pkg.deco_farlands_fern_lady.post()
 
-    if unilib.pkg_executed_table["biome_farlands_forest_coniferous"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_forest_coniferous"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil then
 
-        unilib.register_decoration_now("farlands_fern_lady_1", nil, {
+        unilib.register_decoration_complete("farlands_fern_lady_1", nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "fern_lady"
             biomes = "farlands_forest_coniferous_tall",
@@ -44,10 +44,10 @@ function unilib.pkg.deco_farlands_fern_lady.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_farlands_rainforest"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary_with_turf_forest"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_rainforest"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf_forest"] ~= nil then
 
-        unilib.register_decoration_now("farlands_fern_lady_2", nil, {
+        unilib.register_decoration_complete("farlands_fern_lady_2", nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "fern_lady"
             biomes = "farlands_rainforest",

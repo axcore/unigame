@@ -9,7 +9,7 @@
 unilib.pkg.flower_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -48,9 +48,9 @@ function unilib.pkg.flower_frozen.exec()
 
     for pkg_name, orig_part_name in pairs(flower_table) do
 
-        if unilib.pkg_executed_table[pkg_name] ~= nil then
+        if unilib.global.pkg_executed_table[pkg_name] ~= nil then
 
-            local def_table = minetest.registered_nodes["unilib:" .. pkg_name]
+            local def_table = core.registered_nodes["unilib:" .. pkg_name]
 
             local full_name = def_table.name .. "_frozen"
             local orig_name = nil
@@ -64,7 +64,7 @@ function unilib.pkg.flower_frozen.exec()
                 tiles = {"unilib_" .. pkg_name .. "_frozen.png"},
                 -- N.B. not_in_creative_inventory not in original code (added here for clarity)
                 groups = {attached_node = 1, not_in_creative_inventory = 1, snappy = 3},
-                sounds = unilib.sound_table.leaves,
+                sounds = unilib.global.sound_table.leaves,
 
                 drawtype = "plantlike",
                 drop = "",
@@ -76,7 +76,7 @@ function unilib.pkg.flower_frozen.exec()
             })
             -- (not compatible with flowerpots)
 
-            unilib.register_decoration("snow_" .. pkg_name, {
+            unilib.register_decoration_generic("snow_" .. pkg_name, {
                 -- Original to unilib
                 deco_type = "simple",
                 decoration = full_name,

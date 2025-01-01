@@ -9,7 +9,7 @@
 unilib.pkg.grass_graveyard = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,13 @@ end
 
 function unilib.pkg.grass_graveyard.exec()
 
-    unilib.register_node("unilib:grass_graveyard", "cropocalypse:undead_grass", mode, {
+    local full_name = "unilib:grass_graveyard"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "cropocalypse:undead_grass", mode, {
         -- From cropocalypse:undead_grass
         description = S("Graveyard Grass"),
         tiles = {"unilib_grass_graveyard.png"},
@@ -34,10 +40,11 @@ function unilib.pkg.grass_graveyard.exec()
             attached_node = 1, flammable = 1, flora = 1, grass = 1, grave_plants = 1,
             graveyard_grass = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         inventory_image = "unilib_grass_graveyard.png",
         paramtype = "light",
         selection_box = {
@@ -49,12 +56,12 @@ function unilib.pkg.grass_graveyard.exec()
         waving = 1,
         wield_image = "unilib_grass_graveyard.png",
     })
-    unilib.register_plant_in_pot("unilib:grass_graveyard", "cropocalypse:undead_grass")
+    unilib.register_plant_in_pot(full_name, "cropocalypse:undead_grass")
 
-    unilib.register_decoration("cropocalypse_grass_graveyard", {
+    unilib.register_decoration_generic("cropocalypse_grass_graveyard", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
-        decoration = "unilib:grass_graveyard",
+        decoration = full_name,
 
         noise_params = {
             octaves = 3,

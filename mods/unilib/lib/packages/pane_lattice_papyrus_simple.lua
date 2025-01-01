@@ -9,7 +9,7 @@
 unilib.pkg.pane_lattice_papyrus_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.pane_lattice_papyrus_simple.exec()
             },
             -- N.B. pane = 1 in original code, omitted here
             groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.node,
+            sounds = unilib.global.sound_table.node,
 
             drawtype = "airlike",
             inventory_image = "unilib_pane_lattice_papyrus_simple.png",

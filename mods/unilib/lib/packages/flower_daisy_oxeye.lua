@@ -9,7 +9,7 @@
 unilib.pkg.flower_daisy_oxeye = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.flower_daisy_oxeye.exec()
         deco_part_name = "farlands",
         description = S("Oxeye Daisy"),
         fill_ratio = 0.02,
-        group_table = {color_white = 1, flammable = 1},
+        group_table = {color_white = 1, colour_white = 1, flammable = 1},
         sci_name = "Leucanthemum vulgare",
     })
 

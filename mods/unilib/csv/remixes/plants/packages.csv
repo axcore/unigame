@@ -1,7 +1,6 @@
 # "plants" remix - contains many flowers, plants and mushrooms from the plants mod, but some have
 #       been omitted. Dependence on the "habitat" mod has been replaced with standard decorations.
 #       Support for plant regeneration was not imported
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -58,7 +57,9 @@ tree_jungle|default doors moreblocks
 #dye_basic|dye bakedclay
 #grass_dry|default
 #grass_ordinary|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

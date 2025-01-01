@@ -17,9 +17,9 @@
 unilib.pkg.stone_andesite_dark = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_andesite_dark.exec()
         description = S("Dark Andesite"),
 
         category = "extrusive",
+        colour = "#62635D",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_andesite_dark.exec()
         wall_orig_name = "underch:andesite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:andesite. Creates unilib:stone_andesite_dark_cobble_compressed
+        part_name = "andesite_dark",
+        orig_name = "compressed:andesite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:andesite. Creates unilib:stone_andesite_dark_cobble_compressed
-            part_name = "andesite_dark",
-            orig_name = "compressed:andesite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Dark Andesite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Dark Andesite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:andesite. Creates unilib:stone_andesite_dark_cobble_condensed
+        part_name = "andesite_dark",
+        orig_name = "condensed:andesite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:andesite. Creates unilib:stone_andesite_dark_cobble_condensed
-            part_name = "andesite_dark",
-            orig_name = "condensed:andesite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Dark Andesite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Dark Andesite Cobble"),
+    })
 
 end

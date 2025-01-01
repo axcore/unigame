@@ -9,7 +9,7 @@
 unilib.pkg.tree_gum_river_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.tree_gum_river_red.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 3
     local sci_name = "Eucalyptus camaldulensis"
 
     unilib.register_tree({
@@ -113,7 +113,7 @@ function unilib.pkg.tree_gum_river_red.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_gum_river_red_closed
+        -- Original to unilib. Creates unilib:gate_gum_river_red_closed, etc
         part_name = "gum_river_red",
         orig_name = {nil, nil},
 
@@ -125,10 +125,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     -- N.B. Tweaked these schematics to remove a rogue tree trunk node at the top
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_central_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_central_" .. i, {
             -- From australia/biome_central_australia.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -139,10 +139,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_eastern_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_eastern_" .. i, {
             -- From australia/biome_eastern_coasts.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -153,10 +153,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_flinders_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_flinders_" .. i, {
             -- From australia/biome_flinders_lofty.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -167,10 +167,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_mulga_lands_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_mulga_lands_" .. i, {
             -- From australia/biome_mulga_lands.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -181,10 +181,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_murray_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_murray_" .. i, {
             -- From australia/biome_murray_darling_basin.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 10000,
             flags = "place_center_x, place_center_z",
@@ -195,10 +195,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_range_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_range_" .. i, {
             -- From australia/biome_great_dividing_range.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -209,10 +209,10 @@ function unilib.pkg.tree_gum_river_red.exec()
     end
     for i = 1, 4 do
 
-        unilib.register_decoration("australia_tree_gum_river_red_in_victoria_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_in_victoria_" .. i, {
             -- From australia/biome_victorian_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_" .. i .. ".mts",
 
             fill_ratio = (4 - i + 1) / 20000,
             flags = "place_center_x, place_center_z",
@@ -222,12 +222,12 @@ function unilib.pkg.tree_gum_river_red.exec()
 
     end
 
-    if unilib.pkg_executed_table["mushroom_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["mushroom_brown"] ~= nil then
 
-        unilib.register_decoration("australia_tree_gum_river_red_log", {
+        unilib.register_decoration_generic("australia_tree_gum_river_red_log", {
             -- From australia/biome_flinders_lofty.lua, etc
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_river_red_log.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_river_red_log.mts",
 
             flags = "place_center_x",
             noise_params = {

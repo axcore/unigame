@@ -9,7 +9,7 @@
 unilib.pkg.deco_farming_redo_produce_coffee = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,22 +20,23 @@ function unilib.pkg.deco_farming_redo_produce_coffee.init()
     return {
         description = "Coffee as decoration",
         depends = "produce_coffee",
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry", "dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
     }
 
 end
 
-function unilib.pkg.deco_farming_redo_produce_coffee.exec()
+function unilib.pkg.deco_farming_redo_produce_coffee.post()
 
-    unilib.register_decoration_now("farming_redo_produce_coffee", nil, {
+    unilib.register_decoration_complete("farming_redo_produce_coffee", nil, {
         -- From farming_redo/mapgen.lua
         -- Completes decoration in package "produce_coffee"
         place_on = {
             "unilib:dirt_dry_with_turf_dry",
             "unilib:dirt_ordinary_with_litter_rainforest",
-            "unilib:dirt_ordinary_with_turf",
+            "unilib:dirt_ordinary_with_turf_dry",
+            "unilib:dirt_ordinary_with_turf_prairie",
         },
-        y_max = 45,
+        y_max = 55,
         y_min = 20,
     })
 

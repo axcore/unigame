@@ -9,7 +9,7 @@
 unilib.pkg.fruit_date = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.fruit_date.exec()
         description = S("Hanging Dates"),
         tiles = {"unilib_fruit_date_hanging.png"},
         groups = {dig_immediate = 3, flammable = 2, fleshy = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         -- N.B. Replaced strange .drop in original code, with a simplified version
@@ -68,6 +68,8 @@ function unilib.pkg.fruit_date.exec()
             },
         },
         inventory_image = "unilib_fruit_date_hanging.png^[transformR0",
+        -- N.B. is_ground_content = false not in original code; added to match other fruit
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -86,9 +88,10 @@ function unilib.pkg.fruit_date.exec()
         -- N.B. No groups in original code
         groups = {food_date = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_date", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_date", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -100,6 +103,15 @@ function unilib.pkg.fruit_date.exec()
 
     end
 
-    -- N.B. No call to unilib.setup_regrowing_fruit(), due to non-standard tree code
+    unilib.register_juice({
+        ingredient = "unilib:fruit_date",
+        juice_description = S("Date"),
+        juice_type = "date",
+        rgb = "#862619",
+
+        orig_flag = false,
+    })
+
+    -- N.B. No call to unilib.register_regrowing_fruit(), due to non-standard tree code
 
 end

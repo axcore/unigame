@@ -9,7 +9,7 @@
 unilib.pkg.tool_pick_bronze = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_pick_bronze.exec()
             max_drop_level = 1,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_pick({
         -- From default:pick_bronze
         part_name = "bronze",
         ingredient = "unilib:metal_bronze_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_pick_bronze", "pickaxe")
+    unilib.tools.apply_toolranks("unilib:tool_pick_bronze", "pickaxe")
 
 end

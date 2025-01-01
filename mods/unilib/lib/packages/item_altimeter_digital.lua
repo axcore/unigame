@@ -9,7 +9,7 @@
 unilib.pkg.item_altimeter_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.item_altimeter_digital.exec()
 
     unilib.register_tool("unilib:item_altimeter_digital", "orienteering:altimeter", mode, {
         -- From orienteering:altimeter
-        description = S("Digital Altimeter"),
+        description = unilib.utils.hint(S("Digital Altimeter"), S("shows elevation")),
         inventory_image = "unilib_item_altimeter_digital.png",
         groups = {disable_repair = 1},
 

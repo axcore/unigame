@@ -9,7 +9,7 @@
 unilib.pkg.biome_default_rainforest = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.biome_default_rainforest.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "rainforest" biome
         name = "default_rainforest",
-        description = unilib.brackets(S("Rainforest biome"), "default"),
+        description = unilib.utils.brackets(S("Rainforest biome"), "default"),
         node_top = "unilib:dirt_ordinary_with_litter_rainforest",
         depth_top = 1,
         node_filler = "unilib:dirt_ordinary",
@@ -44,8 +44,8 @@ function unilib.pkg.biome_default_rainforest.post()
         depth_riverbed = 2,
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
-        y_max = unilib.y_max,
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
+        y_max = unilib.constant.y_max,
         y_min = 1,
         heat_point = 86,
         humidity_point = 65,
@@ -54,7 +54,7 @@ function unilib.pkg.biome_default_rainforest.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "rainforest_swamp" biome
         name = "default_rainforest_swamp",
-        description = unilib.brackets(S("Rainforest swamp biome"), "default"),
+        description = unilib.utils.brackets(S("Rainforest swamp biome"), "default"),
         node_top = "unilib:dirt_ordinary",
         depth_top = 1,
         node_filler = "unilib:dirt_ordinary",
@@ -63,7 +63,7 @@ function unilib.pkg.biome_default_rainforest.post()
         depth_riverbed = 2,
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = 0,
         y_min = -1,
         heat_point = 86,
@@ -73,7 +73,7 @@ function unilib.pkg.biome_default_rainforest.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "rainforest_ocean" biome
         name = "default_rainforest_ocean",
-        description = unilib.brackets(S("Rainforest ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Rainforest ocean biome"), "default"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -83,7 +83,7 @@ function unilib.pkg.biome_default_rainforest.post()
         node_cave_liquid = "unilib:liquid_water_ordinary_source",
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         vertical_blend = 1,
         y_max = -2,
         y_min = -255,
@@ -94,16 +94,16 @@ function unilib.pkg.biome_default_rainforest.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "rainforest_under" biome
         name = "default_rainforest_under",
-        description = unilib.brackets(S("Rainforest deep ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Rainforest deep ocean biome"), "default"),
         node_cave_liquid = {
             "unilib:liquid_water_ordinary_source",
             "unilib:liquid_lava_ordinary_source",
         },
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = -256,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 86,
         humidity_point = 65,
     })

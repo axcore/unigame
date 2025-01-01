@@ -9,9 +9,9 @@
 unilib.pkg.shared_ropes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
-local c_air = minetest.get_content_id("air")
+local c_air = core.get_content_id("air")
 
 -- N.B. In the original code, the ropes can drop into air or airlike-nodes, but stop at other
 --      obstructions. If it's necessary to modify this behaviour, then these variables can be
@@ -173,7 +173,7 @@ end
 
 local function move_players_down(pos, radius)
 
-    local all_objects = minetest.get_objects_inside_radius(
+    local all_objects = core.get_objects_inside_radius(
         {x = pos.x, y = pos.y + radius, z = pos.z},
         radius
     )
@@ -204,7 +204,7 @@ function unilib.pkg.shared_ropes.can_place_rope_in_node(target_node_name)
         return true
     end
 
-    local target_def = minetest.registered_nodes[target_node_name]
+    local target_def = core.registered_nodes[target_node_name]
     if target_def then
 
         if target_def.drawtype == "airlike" and can_extend_into_airlike_flag then
@@ -225,32 +225,31 @@ function unilib.pkg.shared_ropes.make_rope_on_timer(rope_node_name)
 
     return function(pos, elapsed)
 
-        local currentend = minetest.get_node(pos)
-        local currentmeta = minetest.get_meta(pos)
+        local currentend = core.get_node(pos)
+        local currentmeta = core.get_meta(pos)
         local currentlength = currentmeta:get_int("length_remaining")
         local placer_name = currentmeta:get_string("placer")
         local newpos = {x = pos.x, y = pos.y - 1, z = pos.z}
-        local newnode = minetest.get_node(newpos)
-        local oldnode = minetest.get_node(pos)
+        local newnode = core.get_node(newpos)
+        local oldnode = core.get_node(pos)
 
-        if currentlength > 1 and
-                (
-                    not minetest.is_protected(newpos, placer_name)
-                    or minetest.check_player_privs(placer_name, "protection_bypass")
-                ) then
+        if currentlength > 1 and (
+            not core.is_protected(newpos, placer_name) or
+            core.check_player_privs(placer_name, "protection_bypass")
+        ) then
 
             if unilib.pkg.shared_ropes.can_place_rope_in_node(newnode.name) then
 
-                minetest.add_node(newpos, {name = currentend.name, param2 = oldnode.param2})
-                local newmeta = minetest.get_meta(newpos)
+                core.add_node(newpos, {name = currentend.name, param2 = oldnode.param2})
+                local newmeta = core.get_meta(newpos)
                 newmeta:set_int("length_remaining", currentlength - 1)
                 newmeta:set_string("placer", placer_name)
-                minetest.set_node(pos, {name = rope_node_name, param2 = oldnode.param2})
+                core.set_node(pos, {name = rope_node_name, param2 = oldnode.param2})
                 move_players_down(pos, 1)
 
             else
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 timer:start(1)
 
             end
@@ -265,15 +264,15 @@ function unilib.pkg.shared_ropes.destroy_rope(pos, nodes)
 
     local top = pos.y
     local bottom = pos.y - 15
-    local voxel_manip = minetest.get_voxel_manip()
+    local voxel_manip = core.get_voxel_manip()
     local vmdata = {}
 
     local finished = false
     local ids_to_destroy = {}
     for _, node in pairs(nodes) do
 
-        if minetest.registered_nodes[node] then
-            ids_to_destroy[minetest.get_content_id(node)] = true
+        if core.registered_nodes[node] then
+            ids_to_destroy[core.get_content_id(node)] = true
         end
 
     end
@@ -312,7 +311,7 @@ end
 
 function unilib.pkg.shared_ropes.hanging_after_destruct(pos, top_node, middle_node, bottom_node)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name == top_node or node.name == middle_node or node.name == bottom_node then
 
         -- This was done by another ladder or rope node changing this one, don't react
@@ -322,18 +321,18 @@ function unilib.pkg.shared_ropes.hanging_after_destruct(pos, top_node, middle_no
 
     -- One up
     pos.y = pos.y + 1
-    local node_above = minetest.get_node(pos)
+    local node_above = core.get_node(pos)
     if node_above.name == middle_node then
-        minetest.swap_node(pos, {name = bottom_node, param2 = node_above.param2})
+        core.swap_node(pos, {name = bottom_node, param2 = node_above.param2})
     end
 
     -- One down
     pos.y = pos.y - 2
-    local node_below = minetest.get_node(pos)
+    local node_below = core.get_node(pos)
     if node_below.name == middle_node then
         unilib.pkg.shared_ropes.destroy_rope(pos, {middle_node, bottom_node})
     elseif node_below.name == bottom_node then
-        minetest.swap_node(pos, {name = "air"})
+        core.swap_node(pos, {name = "air"})
     end
 
 end
@@ -357,44 +356,43 @@ function unilib.pkg.shared_ropes.ladder_extender(
     local pointing_directly_below = pointed_thing.above.x == pos.x and
             pointed_thing.above.z == pos.z and
             pointed_thing.above.y == pos.y - 1 and
-            minetest.registered_nodes[minetest.get_node(pointed_thing.above).name].buildable_to
+            core.registered_nodes[core.get_node(pointed_thing.above).name].buildable_to
 
     if clicked_stack:get_name() == ladder_node and not pointing_directly_below then
 
-        local param2 = minetest.get_node(pos).param2
-        local dir = minetest.facedir_to_dir(param2)
+        local param2 = core.get_node(pos).param2
+        local dir = core.facedir_to_dir(param2)
         -- Only add ladder segments up to five nodes above the one clicked on
         local scan_limit = pos.y + 6
         pos.y = pos.y + 1
-        while pos.y < scan_limit and minetest.get_node(pos).name == ladder_node do
+        while pos.y < scan_limit and core.get_node(pos).name == ladder_node do
 
-            param2 = minetest.get_node(pos).param2
+            param2 = core.get_node(pos).param2
             pos.y = pos.y + 1
 
         end
 
-        if pos.y < scan_limit and
-                minetest.registered_nodes[minetest.get_node(pos).name].buildable_to then
+        if pos.y < scan_limit and core.registered_nodes[core.get_node(pos).name].buildable_to then
 
             -- Scan downward behind the ladder to find support
-            local behind_pos = vector.add(pos, minetest.facedir_to_dir(param2))
+            local behind_pos = vector.add(pos, core.facedir_to_dir(param2))
             local target_height = pos.y - standing_limit - 1
             while behind_pos.y > target_height and
-                    minetest.registered_nodes[minetest.get_node(behind_pos).name].buildable_to do
+                    core.registered_nodes[core.get_node(behind_pos).name].buildable_to do
                 behind_pos.y = behind_pos.y - 1
             end
 
             -- If there's enough support, build a new ladder segment
             if behind_pos.y > target_height then
 
-                if minetest.is_protected(pos, clicker:get_player_name()) then
+                if core.is_protected(pos, clicker:get_player_name()) then
 
-                    minetest.record_protection_violation(clicker:get_player_name())
+                    core.record_protection_violation(clicker:get_player_name())
 
                 else
 
-                    minetest.set_node(pos, {name = ladder_node, param2 = param2})
-                    if not minetest.settings:get_bool("creative_mode") then
+                    core.set_node(pos, {name = ladder_node, param2 = param2})
+                    if not core.settings:get_bool("creative_mode") then
                         clicked_stack:take_item(1)
                     end
 
@@ -406,7 +404,7 @@ function unilib.pkg.shared_ropes.ladder_extender(
 
     elseif clicked_stack:get_definition().type == "node" then
 
-        return minetest.item_place_node(itemstack, clicker, pointed_thing)
+        return core.item_place_node(itemstack, clicker, pointed_thing)
 
     end
 
@@ -453,7 +451,7 @@ function unilib.pkg.shared_ropes.register_spool(data_table)
             (min_rope_length * multiple) .. "m"
 
     local spool_def_table = {
-        description = unilib.brackets(
+        description = unilib.utils.brackets(
             S("Coiled Rope"), description .. " " .. (multiple * min_rope_length) .. "m"
         ),
         tiles = get_spool_tiles(spool_data[multiple].img_set, tint),
@@ -464,6 +462,8 @@ function unilib.pkg.shared_ropes.register_spool(data_table)
         climbable = true,
         collision_box = {type = "regular"},
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code; added to match other ropes
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = spool_data[multiple].node_box
@@ -490,16 +490,16 @@ function unilib.pkg.shared_ropes.register_spool(data_table)
             local pos_below = {x = pos.x, y = pos.y - 1, z = pos.z}
             local placer_name = placer:get_player_name()
 
-            if minetest.is_protected(pos_below, placer_name) and
-                    not minetest.check_player_privs(placer, "protection_bypass") then
+            if core.is_protected(pos_below, placer_name) and
+                    not core.check_player_privs(placer, "protection_bypass") then
                 return
             end
 
-            local node_below = minetest.get_node(pos_below)
+            local node_below = core.get_node(pos_below)
             if unilib.pkg.shared_ropes.can_place_rope_in_node(node_below.name) then
 
-                minetest.add_node(pos_below, {name = "unilib:rope_mining_bottom"})
-                local meta = minetest.get_meta(pos_below)
+                core.add_node(pos_below, {name = "unilib:rope_mining_bottom"})
+                local meta = core.get_meta(pos_below)
                 meta:set_int("length_remaining", min_rope_length * multiple)
                 meta:set_string("placer", placer:get_player_name())
 
@@ -511,15 +511,15 @@ function unilib.pkg.shared_ropes.register_spool(data_table)
 
             if pointed_thing.type == "node" then
 
-                local target_node = minetest.get_node(pointed_thing.under)
-                local target_def = minetest.registered_nodes[target_node.name]
+                local target_node = core.get_node(pointed_thing.under)
+                local target_def = core.registered_nodes[target_node.name]
                 if target_def.walkable == false then
                     return itemstack
                 end
 
             end
 
-            return minetest.item_place(itemstack, placer, pointed_thing)
+            return core.item_place(itemstack, placer, pointed_thing)
 
         end,
     }
@@ -544,8 +544,8 @@ function unilib.pkg.shared_ropes.register_spool(data_table)
             output = spool_name,
             recipe = {
                 {ingredient},
-                {"group:vines"}
-            }
+                {"group:vines"},
+            },
         })
 
     else

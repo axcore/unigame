@@ -9,7 +9,7 @@
 unilib.pkg.grass_seagrass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,8 +26,14 @@ end
 
 function unilib.pkg.grass_seagrass.exec()
 
+    local full_name = "unilib:grass_seagrass_1"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
     -- First variant
-    unilib.register_node("unilib:grass_seagrass_1", nil, mode, {
+    unilib.register_node(full_name, nil, mode, {
         -- Textures from farlands, mapgen:seagrass_1 etc. For consistency, code adapted from
         --      "grass_ordinary" package
         description = S("Seagrass"),
@@ -37,10 +43,11 @@ function unilib.pkg.grass_seagrass.exec()
             attached_node = 1, flammable = 1, flora = 1, grass = 1, sea = 1, seagrass = 1,
             snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         inventory_image = "unilib_grass_seagrass_1.png",
         paramtype = "light",
         selection_box = {
@@ -56,19 +63,18 @@ function unilib.pkg.grass_seagrass.exec()
 
             -- Place a random grass variant
             local stack = ItemStack("unilib:grass_seagrass_" .. math.random(1, 3))
-            local ret = minetest.item_place(stack, placer, pointed_thing)
-            return ItemStack("unilib:grass_seagrass_1 " ..
-                    itemstack:get_count() - (1 - ret:get_count()))
+            local ret = core.item_place(stack, placer, pointed_thing)
+            return ItemStack(full_name .. " " .. itemstack:get_count() - (1 - ret:get_count()))
 
         end,
     })
     unilib.register_craft({
         -- Original to unilib
         type = "fuel",
-        recipe = "unilib:grass_seagrass_1",
+        recipe = full_name,
         burntime = 2,
     })
-    unilib.register_plant_in_pot("unilib:grass_seagrass_1", nil)
+    unilib.register_plant_in_pot(full_name, nil)
 
     for i = 2, 3 do
 
@@ -82,11 +88,11 @@ function unilib.pkg.grass_seagrass.exec()
                 attached_node = 1, flammable = 1, flora = 1, grass = 1,
                 not_in_creative_inventory = 1, sea = 1, seagrass = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
-            drop = "unilib:grass_seagrass_1",
+            drop = drop,
             inventory_image = "unilib_grass_seagrass_" .. i .. ".png",
             paramtype = "light",
             selection_box = {
@@ -106,7 +112,7 @@ function unilib.pkg.grass_seagrass.exec()
     --      wants to write their own decoration package
     for i = 1, 3 do
 
-        unilib.register_decoration("farlands_grass_seagrass_" .. i, {
+        unilib.register_decoration_generic("farlands_grass_seagrass_" .. i, {
             -- Original to unilib
             deco_type = "simple",
             decoration = "unilib:grass_seagrass_" .. i,
@@ -125,7 +131,7 @@ function unilib.pkg.grass_seagrass.exec()
     end
 
     -- Update global variables
-    unilib.register_growing({
+    unilib.flora.register_growth_stages({
         base_name = "unilib:grass_seagrass",
         mode = "other",
         stage_max = 3,

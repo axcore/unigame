@@ -9,7 +9,7 @@
 unilib.pkg.weather_snowflakes = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 -- Set to world's water level. Particles are timed to disappear at this y. Particles do not spawn
 --      when player's head is below this y
@@ -28,6 +28,8 @@ local collide_flag = false
 local night_rgb = 39
 -- Clouds RGB value in daytime
 local day_rgb = 175
+-- Max temperature; was 35 in the original code. Calls to the shared function below can modify it
+local max_temp = 35
 
 local diff_rgb = day_rgb - night_rgb
 local grad = 14 / 95
@@ -74,7 +76,7 @@ local function snow_fall(pos)
     local ground_y = nil
     for y = pos.y + 10, pos.y + 20, 1 do
 
-        local n = minetest.get_node({x = pos.x, y = y, z = pos.z}).name
+        local n = core.get_node({x = pos.x, y = y, z = pos.z}).name
         if n ~= "air" and n ~= "ignore" then
             return
         end
@@ -83,7 +85,7 @@ local function snow_fall(pos)
 
     for y = pos.y + 9, pos.y - 15, -1 do
 
-        local n = minetest.get_node({x = pos.x, y = y, z = pos.z}).name
+        local n = core.get_node({x = pos.x, y = y, z = pos.z}).name
         if n ~= "air" and n ~= "ignore" then
 
             ground_y = y
@@ -100,6 +102,25 @@ local function snow_fall(pos)
     pos = {x = pos.x, y = ground_y, z = pos.z}
 
     unilib.pkg.shared_snow.place(pos, true)
+
+end
+
+---------------------------------------------------------------------------------------------------
+-- Shared functions
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.weather_snowflakes.set_max_temp(value)
+
+    -- This package acts at temperatures of less than 35; other packages can change this value by
+    --      calling this function from their .exec() functions
+    --
+    -- Args:
+    --      value (int): The maximum temperature at which this package acts; values outside the
+    --          range -100 to +100 are ignored
+
+    if tonumber(value) == value and value <= 100 and value >= 100 then
+        max_temp = value
+    end
 
 end
 
@@ -127,7 +148,7 @@ function unilib.pkg.weather_snowflakes.exec()
     -- Note that some biomes from the "snow" mod (for example, the "biome_snow_normal" package)
     --      don't satisfy these conditions, so the sky is not overcast, and snow does not fall
 
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
         timer = timer + dtime
         if timer < gs_cycle then
@@ -136,7 +157,7 @@ function unilib.pkg.weather_snowflakes.exec()
 
         timer = 0
 
-        for _, player in ipairs(minetest.get_connected_players()) do
+        for _, player in ipairs(core.get_connected_players()) do
 
             local player_name = player:get_player_name()
             local pos_player = player:get_pos()
@@ -149,15 +170,15 @@ function unilib.pkg.weather_snowflakes.exec()
                 local pposz = math.floor(pos_player.z)
                 local ppos = {x = pposx, y = pposy, z = pposz}
 
-                local nobj_temp = minetest.get_perlin(np_temp)
-                local nobj_humid = minetest.get_perlin(np_humid)
-                local nobj_prec = minetest.get_perlin(np_prec)
+                local nobj_temp = core.get_perlin(np_temp)
+                local nobj_humid = core.get_perlin(np_humid)
+                local nobj_prec = core.get_perlin(np_prec)
 
                 local nval_temp = nobj_temp:get_2d({x = pposx, y = pposz})
                 local nval_humid = nobj_humid:get_2d({x = pposx, y = pposz})
                 local nval_prec = nobj_prec:get_2d({x = os.clock() / 60, y = 0})
 
-                -- Biome system: Frozen biomes below heat 35,
+                -- Biome system: Frozen biomes below heat 35 (by default),
                 --      deserts below line 14 * t - 95 * h = -1496
                 -- h = (14 * t + 1496) / 95
                 -- h = 14/95 * t + 1496/95
@@ -165,12 +186,12 @@ function unilib.pkg.weather_snowflakes.exec()
                 -- h - 14/95 t = 1496/95 y intersection
                 -- So area above line is
                 -- h - 14/95 t > 1496/95
-                local freeze_flag = nval_temp < 35
+                local freeze_flag = nval_temp < max_temp
                 local precip_flag = nval_prec < (nval_humid - 50) / 50 + precip_offset and
                         nval_humid - grad * nval_temp > yint
 
                 -- Check if player is outside
-                local outside_flag = minetest.get_node_light(ppos, 0.5) == 15
+                local outside_flag = core.get_node_light(ppos, 0.5) == 15
 
                 -- Occasionally reset player sky
                 if math.random() < 0.1 then
@@ -179,7 +200,7 @@ function unilib.pkg.weather_snowflakes.exec()
 
                         -- Set overcast sky
                         local sval
-                        local time = minetest.get_timeofday()
+                        local time = core.get_timeofday()
                         if time >= 0.5 then
                             time = 1 - time
                         end
@@ -222,7 +243,7 @@ function unilib.pkg.weather_snowflakes.exec()
                                 pposy + 12,
                                 pposz - 24 + math.random(0, 48)
 
-                        if not unilib.snow_reduce_snowflakes_flag then
+                        if not unilib.setting.snow_reduce_snowflakes_flag then
 
                             snow_fall(
                                 {x = x, y = y, z = z},
@@ -237,7 +258,7 @@ function unilib.pkg.weather_snowflakes.exec()
                                     pposy + 12,
                                     pposz - 24 + math.random(0, 48)
 
-                            minetest.add_particle({
+                            core.add_particle({
                                 acceleration = {x = 0, y = 0, z = 0},
                                 collisiondetection = collide_flag,
                                 collision_removal = true,

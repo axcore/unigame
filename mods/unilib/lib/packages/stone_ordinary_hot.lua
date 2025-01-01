@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_hot = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.stone_ordinary_hot.exec()
         description = S("Molten Ordinary Cobblestone"),
         tiles = {"unilib_stone_ordinary_cobble_hot.png"},
         groups = {crumbly = 2, hot = 1},
-        sounds = unilib.node_sound_stone_defaults({
+        sounds = unilib.sound.generate_stone({
             footstep = {name="unilib_stone_footstep", gain = 0.25},
         }),
 

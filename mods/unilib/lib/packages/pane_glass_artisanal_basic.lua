@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_artisanal_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abripanes.add_mode
+local mode = unilib.global.imported_mod_table.abripanes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -143,7 +143,7 @@ function unilib.pkg.pane_glass_artisanal_basic.exec()
                 description = normal_description,
                 textures = {normal_img, "", normal_img},
                 groups = {cracky = 3},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 -- N.B. inventory_image emoved for aesthetic reasons
 --              inventory_image = normal_img,
@@ -160,7 +160,7 @@ function unilib.pkg.pane_glass_artisanal_basic.exec()
             replace_mode = mode,
         })
 
-        if unilib.pkg_executed_table["clay_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil then
 
             unilib.register_pane({
                 -- Original to unilib. unilib:pane_glass_artisanal_blue_cloudy_flat, etc
@@ -171,7 +171,7 @@ function unilib.pkg.pane_glass_artisanal_basic.exec()
                     description = cloudy_description,
                     textures = {cloudy_img, "", cloudy_img},
                     groups = {cracky = 3},
-                    sounds = unilib.sound_table.glass,
+                    sounds = unilib.global.sound_table.glass,
 
                     -- N.B. inventory_image emoved for aesthetic reasons
 --                  inventory_image = cloudy_img,

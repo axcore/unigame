@@ -9,7 +9,7 @@
 unilib.pkg.crop_rice_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.crop_rice_brown.exec()
         table.insert(orig_name_list, "cucina_vegana:rice_" .. i)
     end
 
-    if not unilib.cucina_vegana_redo_flag then
+    if not unilib.setting.cucina_vegana_redo_flag then
 
         -- Adapted from cucina_vegana/rice_default.lua
         unilib.register_crop_mtgame({
@@ -50,7 +50,7 @@ function unilib.pkg.crop_rice_brown.exec()
             fertility_list = fertility_list,
             harvest_description = S("Brown Rice"),
             harvest_group_table = {flammable = 4, food = 1, food_rice = 1},
-            max_light = unilib.light_max,
+            max_light = unilib.constant.light_max,
             min_light = 12,
             -- N.B. Renamed from "seed" to match the "crop_rice_white" packagge
             seed_description = S("Brown Rice Grains"),
@@ -121,7 +121,8 @@ function unilib.pkg.crop_rice_brown.exec()
 
     end
 
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

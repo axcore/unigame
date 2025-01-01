@@ -9,7 +9,7 @@
 unilib.pkg.misc_bracket_rusty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.columnia.add_mode
+local mode = unilib.global.imported_mod_table.columnia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,9 +34,11 @@ function unilib.pkg.misc_bracket_rusty.exec()
         description = "Rusty Bracket",
         tiles = {"unilib_decor_block_metal_rusty.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {

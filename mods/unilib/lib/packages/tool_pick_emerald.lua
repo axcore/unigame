@@ -9,7 +9,7 @@
 unilib.pkg.tool_pick_emerald = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.gemtools.add_mode
+local mode = unilib.global.imported_mod_table.gemtools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_pick_emerald.exec()
             max_drop_level = 3,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_pick({
         -- From gemtools:pick_emerald
         part_name = "emerald",
         ingredient = "unilib:mineral_emerald_gem",
     })
-    unilib.apply_toolranks("unilib:tool_pick_emerald", "pickaxe")
+    unilib.tools.apply_toolranks("unilib:tool_pick_emerald", "pickaxe")
 
 end

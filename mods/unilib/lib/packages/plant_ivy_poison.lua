@@ -9,7 +9,7 @@
 unilib.pkg.plant_ivy_poison = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.poisonivy.add_mode
+local mode = unilib.global.imported_mod_table.poisonivy.add_mode
 
 -- In original code, poison ivy grows only on a small selection of nodes...
 local wall_name_table = {}
@@ -30,7 +30,7 @@ end
 
 -- ...but if settings allow, they can grow on any suitable surface
 local wall_group_list = {}
-if unilib.plantlife_poison_ivy_unfussy_flag then
+if unilib.setting.plantlife_poison_ivy_unfussy_flag then
     wall_group_list = {"smoothstone", "cobble", "soil", "tree"}
 end
 
@@ -48,9 +48,9 @@ end
 local random_side_list = {"up", "down", "left", "right"}
 
 -- The rate at which poison ivy grows/spreads (which is intended to happen slowly)
--- (We don't use unilib.sapling_grow_min, etc, because a low value would cause catastrophic
+-- (We don't use unilib.setting.sapling_grow_min, etc, because a low value would cause catastrophic
 --      spreading)
-local spread_delay = unilib.sapling_grow_default
+local spread_delay = unilib.setting.sapling_grow_default
 local spread_chance = 30
 
 ---------------------------------------------------------------------------------------------------
@@ -59,9 +59,9 @@ local spread_chance = 30
 
 local function can_grow(pos)
 
-    local light = minetest.get_node_light(pos)
+    local light = core.get_node_light(pos)
 
-    if (not unilib.plantlife_poison_ivy_light_flag) or (light > 2 and light < 10) then
+    if not unilib.setting.plantlife_poison_ivy_light_flag or (light > 2 and light < 10) then
         return true
     else
         return false
@@ -73,7 +73,7 @@ local function check_group(full_name)
 
     for _, group in pairs(wall_group_list) do
 
-        if minetest.get_item_group(full_name , group) > 0 then
+        if core.get_item_group(full_name , group) > 0 then
             return true
         end
 
@@ -85,8 +85,8 @@ end
 
 local function do_poison(player)
 
-    if unilib.plantlife_poison_ivy_poison_flag then
-        player:set_hp(player:get_hp() - unilib.nettle_damage_factor)
+    if unilib.setting.plantlife_poison_ivy_poison_flag then
+        player:set_hp(player:get_hp() - unilib.setting.nettle_damage_factor)
     end
 
 end
@@ -117,16 +117,16 @@ end
 function unilib.pkg.plant_ivy_poison.exec()
 
     local damage = nil
-    if unilib.plantlife_poison_ivy_poison_flag then
-        damage = 1 * unilib.nettle_damage_factor
+    if unilib.setting.plantlife_poison_ivy_poison_flag then
+        damage = 1 * unilib.setting.nettle_damage_factor
     end
 
     unilib.register_node("unilib:plant_ivy_poison_seedling", "poisonivy:seedling", mode, {
         -- From poisonivy:seedling
-        description = unilib.annotate(S("Poison Ivy Seedling"), "Toxicodendron radicans"),
+        description = unilib.utils.annotate(S("Poison Ivy Seedling"), "Toxicodendron radicans"),
         tiles = {"unilib_plant_ivy_poison_seedling.png"},
         groups = {flora_block = 1, poisonivy = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         damage_per_second = damage,
@@ -138,12 +138,6 @@ function unilib.pkg.plant_ivy_poison.exec()
         waving = 1,
         wield_image = "unilib_plant_ivy_poison_seedling.png",
 
-        -- (A timer to replace the biome_lib.update_plant() calls in the original code; code
-        --      original to unilib)
-        on_construct = function(pos)
-            minetest.get_node_timer(pos):start(spread_delay)
-        end,
-
         on_punch = function(pos, node, player, pointed_thing)
             do_poison(player)
         end,
@@ -153,9 +147,9 @@ function unilib.pkg.plant_ivy_poison.exec()
             if can_grow(pos) then
 
                 -- N.B. The timer is not restarted by calls to .swap_node()
-                --minetest.swap_node(pos, {name = "unilib:plant_ivy_poison_sproutling"})
-                minetest.remove_node(pos)
-                minetest.set_node(pos, {name = "unilib:plant_ivy_poison_sproutling"})
+                --core.swap_node(pos, {name = "unilib:plant_ivy_poison_sproutling"})
+                core.remove_node(pos)
+                core.set_node(pos, {name = "unilib:plant_ivy_poison_sproutling"})
 
             else
 
@@ -170,11 +164,11 @@ function unilib.pkg.plant_ivy_poison.exec()
 
     unilib.register_node("unilib:plant_ivy_poison_sproutling", "poisonivy:sproutling", mode, {
         -- From poisonivy:sproutling
-        description = unilib.annotate(S("Poison Ivy Sproutling"), "Toxicodendron radicans"),
+        description = unilib.utils.annotate(S("Poison Ivy Sproutling"), "Toxicodendron radicans"),
         tiles = {"unilib_plant_ivy_poison_sproutling.png"},
         -- N.B. not_in_creative_inventory = 1 not in original code
         groups = {flora_block = 1, not_in_creative_inventory = 1, poisonivy = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         damage_per_second = damage,
@@ -189,7 +183,7 @@ function unilib.pkg.plant_ivy_poison.exec()
         -- (A timer to replace the biome_lib.update_plant() calls in the original code; code
         --      original to unilib)
         on_construct = function(pos)
-            minetest.get_node_timer(pos):start(spread_delay)
+            core.get_node_timer(pos):start(spread_delay)
         end,
 
         on_punch = function(pos, node, player, pointed_thing)
@@ -204,7 +198,7 @@ function unilib.pkg.plant_ivy_poison.exec()
             end
 
             local above_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
-            local above_node = minetest.get_node(above_pos)
+            local above_node = core.get_node(above_pos)
             if above_node.name == "air" and can_grow(above_pos) then
 
                 -- Fisher-Yates shuffle so the direction of growth is random
@@ -217,10 +211,10 @@ function unilib.pkg.plant_ivy_poison.exec()
 
                 -- Add a climber on the first suitable wall
                 local current_table = {
-                    north = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z + 1}),
-                    south = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z - 1}),
-                    west = minetest.get_node({x = pos.x - 1, y = pos.y + 1, z = pos.z}),
-                    east = minetest.get_node({x = pos.x + 1, y = pos.y + 1, z = pos.z}),
+                    north = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z + 1}),
+                    south = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z - 1}),
+                    west = core.get_node({x = pos.x - 1, y = pos.y + 1, z = pos.z}),
+                    east = core.get_node({x = pos.x + 1, y = pos.y + 1, z = pos.z}),
                 }
 
                 for _, dir in ipairs(random_dir_list) do
@@ -230,13 +224,13 @@ function unilib.pkg.plant_ivy_poison.exec()
 
                         -- N.B. The timer is not restarted by calls to .swap_node()
                         --[[
-                        minetest.swap_node(
+                        core.swap_node(
                             above_pos,
                             {name = "unilib:plant_ivy_poison_climbing", param2 = dir_table[dir]}
                         )
                         ]]--
-                        minetest.remove_node(above_pos)
-                        minetest.set_node(
+                        core.remove_node(above_pos)
+                        core.set_node(
                             above_pos,
                             {name = "unilib:plant_ivy_poison_climbing", param2 = dir_table[dir]}
                         )
@@ -260,11 +254,11 @@ function unilib.pkg.plant_ivy_poison.exec()
 
     unilib.register_node("unilib:plant_ivy_poison_climbing", "poisonivy:climbing", mode, {
         -- From poisonivy:climbing
-        description = unilib.annotate(S("Climbing Poison Ivy"), "Toxicodendron radicans"),
+        description = unilib.utils.annotate(S("Climbing Poison Ivy"), "Toxicodendron radicans"),
         tiles = {"unilib_plant_ivy_poison_climbing.png"},
         -- N.B. not_in_creative_inventory = 1 not in original code
         groups = {flora_block = 1, not_in_creative_inventory = 1, poisonivy = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         damage_per_second = damage,
@@ -282,7 +276,7 @@ function unilib.pkg.plant_ivy_poison.exec()
         -- (A timer to replace the biome_lib.update_plant() calls in the original code; code
         --      original to unilib)
         on_construct = function(pos)
-            minetest.get_node_timer(pos):start(spread_delay)
+            core.get_node_timer(pos):start(spread_delay)
         end,
 
         on_punch = function(pos, node, player, pointed_thing)
@@ -296,7 +290,7 @@ function unilib.pkg.plant_ivy_poison.exec()
                 return true
             end
 
-            local climbing_node = minetest.get_node(pos)
+            local climbing_node = core.get_node(pos)
             local side_pos_table = {
                 up = {x = pos.x, y = pos.y + 1, z = pos.z},
                 down = {x = pos.x, y = pos.y - 1, z = pos.z},
@@ -327,7 +321,7 @@ function unilib.pkg.plant_ivy_poison.exec()
             for _, side in ipairs(random_side_list) do
 
                 local side_pos = side_pos_table[side]
-                local side_node = minetest.get_node(side_pos)
+                local side_node = core.get_node(side_pos)
 
                 local wall_pos, wall_node
                 if climbing_node.param2 == 2 then
@@ -340,7 +334,7 @@ function unilib.pkg.plant_ivy_poison.exec()
                     wall_pos = {x = side_pos.x, y = side_pos.y, z = side_pos.z - 1}
                 end
 
-                wall_node = minetest.get_node(wall_pos)
+                wall_node = core.get_node(wall_pos)
                 if side_node.name == "air" and can_grow(side_pos) and (
                     wall_name_table[wall_node.name] ~= nil or
                     check_group(wall_node.name)
@@ -348,13 +342,13 @@ function unilib.pkg.plant_ivy_poison.exec()
 
                     -- N.B. The timer is not restarted by calls to .swap_node()
                     --[[
-                    minetest.swap_node(
+                    core.swap_node(
                         side_pos,
                         {name = "unilib:plant_ivy_poison_climbing", param2 = climbing_node.param2}
                     )
                     ]]--
-                    minetest.remove_node(side_pos)
-                    minetest.set_node(
+                    core.remove_node(side_pos)
+                    core.set_node(
                         side_pos,
                         {name = "unilib:plant_ivy_poison_climbing", param2 = climbing_node.param2}
                     )
@@ -374,11 +368,25 @@ function unilib.pkg.plant_ivy_poison.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("plant_ivy_poison", {
+    -- N.B. The seedling's timer starts when placed manually, but not when placed as a decoration,
+    --      so we need to use an LBM instead. The timer replaces biome_lib.update_plant() calls in
+    --      the original code; code original to unilib)
+    unilib.register_lbm({
+        label = "Convert poison ivy seedling to sproutling [plant_poison_ivy]",
+        name = "unilib:lbm_plant_poison_ivy",
+        nodenames = {"unilib:plant_ivy_poison_seedling"},
+        run_at_every_load = true,
+
+        action = function(pos)
+            core.get_node_timer(pos):start(spread_delay)
+        end
+    })
+
+    unilib.register_decoration_generic("plant_ivy_poison", {
         deco_type = "simple",
         decoration = "unilib:plant_ivy_poison_seedling",
 
-        fill_ratio = unilib.biome_lib_fill_ratio,
+        fill_ratio = unilib.setting.biome_lib_fill_ratio,
     })
 
 end

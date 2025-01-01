@@ -1,5 +1,4 @@
 # "sickles" remix - contains everything from the sickles mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -7,7 +6,7 @@
 misc_petals|sickles
 moss_blue|sickles
 moss_green|sickles
-moss_purple|sickles
+moss_violet|sickles
 moss_yellow|sickles
 shared_sickles|sickles
 tool_scythe_bronze|sickles
@@ -16,17 +15,36 @@ tool_sickle_bronze|sickles
 tool_sickle_gold|sickles
 tool_sickle_steel|sickles
 
+# unilib packages, based on sickles packages (providing the 15-colour set)
+#moss_black|unilib
+#moss_brown|unilib
+#moss_cyan|unilib
+#moss_green_dark|unilib
+#moss_grey|unilib
+#moss_grey_dark|unilib
+#moss_magenta|unilib
+#moss_orange|unilib
+#moss_pink|unilib
+#moss_red|unilib
+#moss_white|unilib
+
 # supporting packages (.depends)
-metal_bronze|default technic
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #dirt_ordinary|default farming moreblocks
 #dye_basic|dye bakedclay
 #flower_dandelion_white|flowers
+#flower_dandelion_yellow|flowers
+#machine_furnace_induction|unilib
 #misc_hay_ordinary|cottages
 #tool_pitchfork|cottages
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.flower_lily_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,15 @@ function unilib.pkg.flower_lily_mangrove.exec()
 
     unilib.register_node("unilib:flower_lily_mangrove", "australia:mangrove_lily", mode, {
         -- From australia:mangrove_lily
-        description = unilib.annotate(S("Mangrove Lily"), "Crinum pedunculatum"),
+        description = unilib.utils.annotate(S("Mangrove Lily"), "Crinum pedunculatum"),
         tiles = {"unilib_flower_lily_mangrove.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_white = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_white = 1, colour_white = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -52,7 +53,7 @@ function unilib.pkg.flower_lily_mangrove.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_lily_mangrove", "australia:mangrove_lily")
 
-    unilib.register_decoration("australia_flower_lily_mangrove", {
+    unilib.register_decoration_generic("australia_flower_lily_mangrove", {
         -- From australia:mangrove_lily
         deco_type = "simple",
         decoration = "unilib:flower_lily_mangrove",

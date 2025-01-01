@@ -9,7 +9,7 @@
 unilib.pkg.mineral_cinnabar_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_cinnabar_rock.exec()
 
     local c_lump = "unilib:mineral_cinnabar_lump"
-    local hardness = unilib.mineral_table["cinnabar"]["hardness"]
+    local hardness = unilib.global.mineral_table["cinnabar"]["hardness"]
 
     unilib.register_mineral_rock("cinnabar")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_cinnabar_rock.exec()
         description = S("Cinnabar Rock"),
         tiles = {"unilib_mineral_cinnabar_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

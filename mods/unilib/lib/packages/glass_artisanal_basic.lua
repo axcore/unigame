@@ -9,7 +9,7 @@
 unilib.pkg.glass_artisanal_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriglass.add_mode
+local mode = unilib.global.imported_mod_table.abriglass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared variables
@@ -171,9 +171,11 @@ function unilib.pkg.glass_artisanal_basic.exec()
             description = dyed_description,
             tiles = {dyed_img},
             groups = {cracky = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "glasslike",
+            -- N.B. is_ground_content = false not in original code; added to match other glass items
+            is_ground_content = false,
             light_source = 4,
             paramtype = "light",
             paramtype2 = "color",
@@ -196,16 +198,19 @@ function unilib.pkg.glass_artisanal_basic.exec()
             recipe = dyed_name
         })
 
-        if unilib.pkg_executed_table["clay_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["clay_ordinary"] ~= nil then
 
             unilib.register_node(cloudy_name, nil, mode, {
                 -- Original to unilib
                 description = cloudy_description,
                 tiles = {cloudy_img},
                 groups = {cracky = 3},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 drawtype = "glasslike",
+                -- N.B. is_ground_content = false not in original code; added to match other glass
+                --      items
+                is_ground_content = false,
                 light_source = 4,
                 paramtype = "light",
                 paramtype2 = "color",
@@ -229,16 +234,19 @@ function unilib.pkg.glass_artisanal_basic.exec()
 
         end
 
-        if unilib.pkg_executed_table["torch_ordinary"] ~= nil then
+        if unilib.global.pkg_executed_table["torch_ordinary"] ~= nil then
 
             unilib.register_node(framed_name, nil, mode, {
                 -- From abriglass:glass_light_hardware
                 description = framed_description,
                 tiles = {dyed_img},
                 groups = {cracky = 3},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 drawtype = "glasslike",
+                -- N.B. is_ground_content = false not in original code; added to match other glass
+                --      items
+                is_ground_content = false,
                 -- N.B. light_source not in original code; added for compatibility with other
                 --      abriglass nodes
                 light_source = 4,

@@ -9,7 +9,7 @@
 unilib.pkg.biome_default_icesheet = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.biome_default_icesheet.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "icesheet" biome
         name = "default_icesheet",
-        description = unilib.brackets(S("Ice sheet biome"), "default"),
+        description = unilib.utils.brackets(S("Ice sheet biome"), "default"),
         node_dust = "unilib:snow_ordinary_block",
         node_top = "unilib:snow_ordinary_block",
         depth_top = 1,
@@ -50,8 +50,8 @@ function unilib.pkg.biome_default_icesheet.post()
         node_riverbed = "unilib:gravel_ordinary",
         depth_riverbed = 2,
         node_dungeon = "unilib:ice_ordinary",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:ice_ordinary"),
-        y_max = unilib.y_max,
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:ice_ordinary"),
+        y_max = unilib.constant.y_max,
         y_min = -8,
         heat_point = 0,
         humidity_point = 73,
@@ -60,7 +60,7 @@ function unilib.pkg.biome_default_icesheet.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "icesheet_ocean" biome
         name = "default_icesheet_ocean",
-        description = unilib.brackets(S("Ice sheet ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Ice sheet ocean biome"), "default"),
         node_dust = "unilib:snow_ordinary_block",
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
@@ -71,7 +71,7 @@ function unilib.pkg.biome_default_icesheet.post()
         node_cave_liquid = "unilib:liquid_water_ordinary_source",
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = -9,
         y_min = -255,
         heat_point = 0,
@@ -81,16 +81,16 @@ function unilib.pkg.biome_default_icesheet.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "icesheet_under" biome
         name = "default_icesheet_under",
-        description = unilib.brackets(S("Ice sheet deep ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Ice sheet deep ocean biome"), "default"),
         node_cave_liquid = {
             "unilib:liquid_water_ordinary_source",
             "unilib:liquid_lava_ordinary_source",
         },
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = -256,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 0,
         humidity_point = 73,
     })

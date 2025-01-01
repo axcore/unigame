@@ -9,7 +9,7 @@
 unilib.pkg.misc_molehill = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.molehills.add_mode
+local mode = unilib.global.imported_mod_table.molehills.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -19,15 +19,15 @@ local function place_func(pos)
 
     local right_here = {x = pos.x, y = pos.y + 1, z = pos.z}
 
-    if minetest.get_node({x = pos.x + 1, y = pos.y, z = pos.z}).name ~= "air" and
-            minetest.get_node({x = pos.x - 1, y = pos.y, z = pos.z}).name ~= "air" and
-            minetest.get_node({x = pos.x, y = pos.y, z = pos.z + 1}).name ~= "air" and
-            minetest.get_node({x = pos.x, y = pos.y, z = pos.z - 1}).name ~= "air" and
-            minetest.get_node({x = pos.x + 1, y = pos.y, z = pos.z + 1}).name ~= "air" and
-            minetest.get_node({x = pos.x + 1, y = pos.y, z = pos.z - 1}).name ~= "air" and
-            minetest.get_node({x = pos.x - 1, y = pos.y, z = pos.z + 1}).name ~= "air" and
-            minetest.get_node({x = pos.x - 1, y = pos.y, z = pos.z - 1}).name ~= "air" then
-        minetest.swap_node(right_here, {name = "unilib:misc_molehill"})
+    if core.get_node({x = pos.x + 1, y = pos.y, z = pos.z}).name ~= "air" and
+            core.get_node({x = pos.x - 1, y = pos.y, z = pos.z}).name ~= "air" and
+            core.get_node({x = pos.x, y = pos.y, z = pos.z + 1}).name ~= "air" and
+            core.get_node({x = pos.x, y = pos.y, z = pos.z - 1}).name ~= "air" and
+            core.get_node({x = pos.x + 1, y = pos.y, z = pos.z + 1}).name ~= "air" and
+            core.get_node({x = pos.x + 1, y = pos.y, z = pos.z - 1}).name ~= "air" and
+            core.get_node({x = pos.x - 1, y = pos.y, z = pos.z + 1}).name ~= "air" and
+            core.get_node({x = pos.x - 1, y = pos.y, z = pos.z - 1}).name ~= "air" then
+        core.swap_node(right_here, {name = "unilib:misc_molehill"})
     end
 
 end
@@ -52,7 +52,7 @@ function unilib.pkg.misc_molehill.exec()
         description = S("Molehill"),
         tiles = {"unilib_misc_molehill.png"},
         groups = {crumbly = 3},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         collision_box = {
             type = "fixed",
@@ -74,7 +74,7 @@ function unilib.pkg.misc_molehill.exec()
         recipe = {
             {"unilib:misc_molehill", "unilib:misc_molehill"},
             {"unilib:misc_molehill", "unilib:misc_molehill"},
-        }
+        },
     })
 
     unilib.register_decoration_convertable({
@@ -84,7 +84,7 @@ function unilib.pkg.misc_molehill.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 99.5,
                 rarity_fertility = 1,
             }),

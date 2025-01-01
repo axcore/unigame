@@ -9,7 +9,7 @@
 unilib.pkg.decor_paving_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_masonry.add_mode
+local mode = unilib.global.imported_mod_table.castle_masonry.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,9 +35,11 @@ function unilib.pkg.decor_paving_normal.exec()
             description = S("Normal Paving Stone"),
             tiles = {"unilib_decor_paving_normal.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code; added to match other decor items
+            is_ground_content = false,
             paramtype = "light",
         }
     )

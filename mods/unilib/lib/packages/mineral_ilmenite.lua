@@ -9,7 +9,7 @@
 unilib.pkg.mineral_ilmenite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.mineral_ilmenite.exec()
         description = S("Ilmenite Lump"),
         inventory_image = "unilib_mineral_ilmenite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_titanium"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_titanium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

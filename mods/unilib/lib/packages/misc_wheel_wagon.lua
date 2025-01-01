@@ -9,7 +9,7 @@
 unilib.pkg.misc_wheel_wagon = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,6 @@ function unilib.pkg.misc_wheel_wagon.init()
         notes = "Decorative item. Could be used to build a non-moving wagon (as in the" ..
                 " screenshot for the original cottages mod)",
         depends = {"metal_iron", "metal_steel"},
-        optional = "road_country",
     }
 
 end
@@ -59,23 +58,7 @@ function unilib.pkg.misc_wheel_wagon.exec()
             {c_lump, "group:stick", c_lump},
             {"group:stick", c_ingot, "group:stick"},
             {c_lump, "group:stick", c_lump}
-        }
+        },
     })
-    if unilib.pkg_executed_table["road_country"] ~= nil then
-
-        -- Run a wagon wheel over dirt, and retain the wheel afterwards
-        unilib.register_craft({
-            -- From cottages:wagon_wheel
-            output = "unilib:road_country_straight 4",
-            recipe = {
-                {"", "unilib:misc_wheel_wagon", ""},
-                {"unilib:dirt_ordinary", "unilib:dirt_ordinary", "unilib:dirt_ordinary"}
-            },
-            replacements = {
-                {"unilib:misc_wheel_wagon", "unilib:misc_wheel_wagon"},
-            }
-        })
-
-    end
 
 end

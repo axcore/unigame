@@ -9,7 +9,7 @@
 unilib.pkg.misc_bars_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,8 +31,8 @@ function unilib.pkg.misc_bars_iron.exec()
         description = S("Iron Bars"),
         tiles = {"unilib_misc_bars_iron.png"},
         groups = {cracky = 3},
-        -- (In original code, unilib.sound_table.stone)
-        sounds = unilib.sound_table.metal,
+        -- (In original code, unilib.global.sound_table.stone)
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "glasslike",
         inventory_image = "unilib_misc_bars_iron.png",
@@ -48,7 +48,7 @@ function unilib.pkg.misc_bars_iron.exec()
             {"unilib:item_stick_iron", "", "unilib:item_stick_iron"},
             {"unilib:item_stick_iron", "", "unilib:item_stick_iron"},
             {"unilib:item_stick_iron", "", "unilib:item_stick_iron"},
-        }
+        },
     })
 
 end

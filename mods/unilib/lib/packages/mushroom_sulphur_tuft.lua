@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_sulphur_tuft = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.mushroom_sulphur_tuft.exec()
                 oddly_breakable_by_hand = 1, snappy = 3,
             },
             -- N.B. No sounds in original code
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = false,
             drawtype = "plantlike",
@@ -47,7 +47,8 @@ function unilib.pkg.mushroom_sulphur_tuft.exec()
 --          floodable = true,
             -- N.B. inventory_image not in original code
             inventory_image = "unilib_mushroom_sulphur_tuft.png",
-            is_ground_content = false,
+            -- N.B. removed is_ground_content = false to match other mushrooms
+--          is_ground_content = false,
             paramtype = "light",
             selection_box = {
                 type = "fixed",
@@ -63,5 +64,7 @@ function unilib.pkg.mushroom_sulphur_tuft.exec()
     unilib.register_mushroom_in_pot(
         "unilib:mushroom_sulphur_tuft", "lib_ecology:mushroom_sulfur_tuft_1"
     )
+
+    unilib.register_decoration_spare("unilib:mushroom_sulphur_tuft")
 
 end

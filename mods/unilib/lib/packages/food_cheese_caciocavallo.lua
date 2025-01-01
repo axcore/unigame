@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_caciocavallo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -52,6 +52,8 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
         },
         drawtype = "nodebox",
         inventory_image = "unilib_food_cheese_caciocavallo_inv.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -78,17 +80,17 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
 
             if placer:is_player() and itemstack:is_empty() == false then
 
-                local above_name = minetest.get_node(vector.add(pos, vector.new(0, 1, 0))).name
-                if minetest.get_item_group(above_name , "wood") == 0 then
+                local above_name = core.get_node(vector.add(pos, vector.new(0, 1, 0))).name
+                if core.get_item_group(above_name , "wood") == 0 then
 
-                    minetest.set_node(pos, {name = "air"})
-                    minetest.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
+                    core.set_node(pos, {name = "air"})
+                    core.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
 
                 end
             end
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cheese_caciocavallo", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cheese_caciocavallo", 8),
     })
 
     unilib.register_node(
@@ -117,6 +119,8 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
             },
             drawtype = "nodebox",
             inventory_image = "unilib_food_cheese_caciocavallo_fresh_inv.png",
+            -- N.B. is_ground_content = false not in original code; added to match other food items
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -143,13 +147,13 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
 
                 if placer:is_player() and itemstack:is_empty() == false then
 
-                    local above_name = minetest.get_node(vector.add(pos, vector.new(0, 1, 0))).name
+                    local above_name = core.get_node(vector.add(pos, vector.new(0, 1, 0))).name
 
                     if above_name ~= "ignore" and
-                            minetest.get_item_group( above_name , "wood" ) == 0 then
+                            core.get_item_group(above_name , "wood") == 0 then
 
-                        minetest.set_node(pos, {name = "air"})
-                        minetest.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
+                        core.set_node(pos, {name = "air"})
+                        core.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
 
                     end
 
@@ -159,23 +163,21 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
 
             on_construct = function(pos)
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 timer:start(70 + math.random(-5.0, 5.0))
 
             end,
 
             on_timer = function(pos)
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
 
                 -- Fake a reverse group:attached behaviour
-                local above_name = minetest.get_node(vector.add(pos, vector.new(0, 1, 0))).name
-                if above_name ~= "ignore" and
-                        minetest.get_item_group(above_name , "wood") > 0 then
+                local above_name = core.get_node(vector.add(pos, vector.new(0, 1, 0))).name
+                if above_name ~= "ignore" and core.get_item_group(above_name , "wood") > 0 then
 
-                    if minetest.get_node_light(pos) <= 7 and (
-                        minetest.get_node_light(pos) >= 12 or
-                        math.random() > 0.1
+                    if core.get_node_light(pos) <= 7 and (
+                        core.get_node_light(pos) >= 12 or math.random() > 0.1
                     ) then
                         return true
                     end
@@ -183,18 +185,19 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
                 else
 
                     timer:stop()
-                    minetest.set_node(pos, {name = "air"})
-                    minetest.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
+                    core.set_node(pos, {name = "air"})
+                    core.add_item(pos, "unilib:food_cheese_caciocavallo_fresh")
                     return false
 
                 end
 
-                local node = minetest.get_node(pos)
+                local node = core.get_node(pos)
                 if node.name ~= "ignore" then
 
-                    minetest.set_node(
+                    core.set_node(
                         pos, {name = "unilib:food_cheese_caciocavallo", param2 = node.param2}
                     )
+
                     return false
 
                 end
@@ -211,7 +214,7 @@ function unilib.pkg.food_cheese_caciocavallo.exec()
             {"", "unilib:item_string_ordinary", c_stretched},
             {c_stretched, c_stretched, "unilib:item_string_ordinary"},
             {c_stretched, c_stretched, ""},
-        }
+        },
     })
 
 end

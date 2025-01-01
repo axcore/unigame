@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_beige = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_sandstone_beige.exec()
         description = S("Beige Sandstone"),
 
         category = "sedimentary",
+        colour = "#B8966F",
         grinder_flag = true,
         grinder_powder = "unilib:sand_beige",
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 4)
@@ -40,7 +41,7 @@ function unilib.pkg.stone_sandstone_beige.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_beige", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_beige", 3, nil)
 
     unilib.register_node("unilib:stone_sandstone_beige", "default:yellow_sandstone", mode, {
         -- From decoblocks, default:yellow_sandstone
@@ -48,7 +49,7 @@ function unilib.pkg.stone_sandstone_beige.exec()
         tiles = {"unilib_stone_sandstone_beige.png"},
         -- N.B. cracky = 3, stone = 1 in original code. Changed to match minetest_game sandstones
         groups = {cracky = smooth_cracky, crumbly = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft_2x2({
         -- Original to unilib
@@ -60,10 +61,10 @@ function unilib.pkg.stone_sandstone_beige.exec()
         output = "unilib:sand_beige 4",
         recipe = {
             {"unilib:stone_sandstone_beige"},
-        }
+        },
     })
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_beige", {
             drop_name = "unilib:stone_sandstone_beige_rubble",
@@ -105,7 +106,7 @@ function unilib.pkg.stone_sandstone_beige.exec()
         img_list = {"unilib_stone_sandstone_beige.png^unilib_stone_brick_overlay.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble_or_rubble_or_nothing({
             -- Original to unilib. Depending on real hardness, creates
@@ -113,7 +114,13 @@ function unilib.pkg.stone_sandstone_beige.exec()
             --      nothing
             part_name = "sandstone_beige",
             cobble_description = S("Beige Sandstone Cobble"),
+            cobble_compressed_description = S("Compressed Beige Sandstone Cobble"),
+            cobble_condensed_description = S("Condensed Beige Sandstone Cobble"),
             rubble_description = S("Beige Sandstone Rubble"),
+            rubble_compressed_description = S("Compressed Beige Sandstone Rubble"),
+            rubble_condensed_description = S("Condensed Beige Sandstone Rubble"),
+            smooth_compressed_description = S("Compressed Beige Sandstone"),
+            smooth_condensed_description = S("Condensed Beige Sandstone"),
 
             replace_mode = mode,
             override_drop_flag = true,

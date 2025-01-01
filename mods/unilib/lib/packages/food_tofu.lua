@@ -9,7 +9,7 @@
 unilib.pkg.food_tofu = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_tofu.exec()
         inventory_image = "unilib_food_tofu.png",
         groups = {flammable = 2, food_meat_raw = 1, food_tofu = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_tofu", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_tofu", 3),
     })
     unilib.register_craft({
         -- From farming:tofu
@@ -56,7 +56,7 @@ function unilib.pkg.food_tofu.exec()
         inventory_image = "unilib_food_tofu_cooked.png",
         groups = {flammable = 2, food_meat = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_tofu_cooked", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_tofu_cooked", 6),
     })
     unilib.register_craft({
         -- From farming:tofu_cooked

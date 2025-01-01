@@ -9,7 +9,7 @@
 unilib.pkg.mineral_hollandite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_hollandite_rock.exec()
 
     local c_lump = "unilib:mineral_hollandite_lump"
-    local hardness = unilib.mineral_table["hollandite"]["hardness"]
+    local hardness = unilib.global.mineral_table["hollandite"]["hardness"]
 
     unilib.register_mineral_rock("hollandite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_hollandite_rock.exec()
         description = S("Hollandite Rock"),
         tiles = {"unilib_mineral_hollandite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

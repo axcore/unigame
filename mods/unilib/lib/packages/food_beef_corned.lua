@@ -9,7 +9,7 @@
 unilib.pkg.food_beef_corned = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_beef_corned.exec()
         description = S("Raw Corned Beef"),
         inventory_image = "unilib_food_beef_corned_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_corned_raw", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_corned_raw", 5),
     })
     unilib.register_craft({
         -- From bbq:corned_beef_raw
@@ -52,7 +52,7 @@ function unilib.pkg.food_beef_corned.exec()
         description = S("Corned Beef"),
         inventory_image = "unilib_food_beef_corned.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_beef_corned", 10),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_beef_corned", 10),
     })
     unilib.register_craft({
         -- From bbq:corned_beef

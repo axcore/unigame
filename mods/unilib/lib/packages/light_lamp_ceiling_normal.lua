@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_ceiling_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.columnia.add_mode
+local mode = unilib.global.imported_mod_table.columnia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,10 +40,12 @@ function unilib.pkg.light_lamp_ceiling_normal.exec()
             "unilib_light_lamp_ceiling_normal.png",
         },
         groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "nodebox",
         inventory_image = "unilib_light_lamp_ceiling_normal_inv.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 13,
         node_box = {
             type = "fixed",
@@ -75,7 +77,7 @@ function unilib.pkg.light_lamp_ceiling_normal.exec()
     unilib.override_item("unilib:light_lamp_ceiling_normal", {
         on_place = function(itemstack, placer, pointed_thing)
 
-            return unilib.rotate_and_place(
+            return unilib.misc.rotate_and_place(
                 itemstack, placer, pointed_thing, {[0] = 0, 20, 12, 16, 4, 8}
             )
 

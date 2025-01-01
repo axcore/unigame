@@ -9,7 +9,7 @@
 unilib.pkg.liquid_water_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -66,12 +66,14 @@ function unilib.pkg.liquid_water_swamp.exec()
                 },
             },
             groups = {cools_lava = 1, liquid = 2, puts_out_fire = 1, water = 3},
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,
             drawtype = "liquid",
             drowning = 1,
+            -- N.B. is_ground_content = false not in original code; added to match other liquids
+            is_ground_content = false,
             liquid_alternative_flowing = "unilib:liquid_water_swamp_flowing",
             liquid_alternative_source = "unilib:liquid_water_swamp_source",
             liquid_range = 3,
@@ -97,12 +99,14 @@ function unilib.pkg.liquid_water_swamp.exec()
                 cools_lava = 1, liquid = 2, not_in_creative_inventory = 1, puts_out_fire = 1,
                 water = 3,
             },
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,
             drawtype = "flowingliquid",
             drowning = 1,
+            -- N.B. is_ground_content = false not in original code; added to match other liquids
+            is_ground_content = false,
             liquid_alternative_flowing = "unilib:liquid_water_swamp_flowing",
             liquid_alternative_source = "unilib:liquid_water_swamp_source",
             liquid_range = 3,

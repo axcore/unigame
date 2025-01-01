@@ -9,7 +9,7 @@
 unilib.pkg.decor_stone_plaster = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,10 +46,10 @@ function unilib.pkg.decor_stone_plaster.exec()
                 img_chalk,
             },
             groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:stone_ordinary_cobble",
-            -- N.B. unilib.auto_rotate_brick_flag does not apply to this node
+            -- N.B. unilib.setting.auto_rotate_brick_flag does not apply to this node
             is_ground_content = false,
             paramtype2 = "facedir",
         }
@@ -83,7 +83,7 @@ function unilib.pkg.decor_stone_plaster.exec()
             img_chalk,
         },
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_ordinary_cobble",
         is_ground_content = false,

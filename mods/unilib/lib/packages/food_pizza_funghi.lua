@@ -9,7 +9,7 @@
 unilib.pkg.food_pizza_funghi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,7 @@ function unilib.pkg.food_pizza_funghi.exec()
         recipe = {
             {"", "group:food_oil", "unilib:crop_rosemary_harvest"},
             {"unilib:mushroom_brown", "unilib:food_meat_imitation", "unilib:mushroom_brown"},
-            {"", "unilib:ingredient_dough_pizza", ""}
+            {"", "unilib:ingredient_dough_pizza", ""},
         },
         replacements = {
             {"group:food_oil", "unilib:vessel_bottle_glass_empty"},
@@ -84,7 +84,7 @@ function unilib.pkg.food_pizza_funghi.exec()
         walkable = false,
         wield_image = "unilib_food_pizza_funghi_cooked.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_funghi_cooked", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_funghi_cooked", 6),
     })
     unilib.register_craft({
         -- From cucina_vegana:pizza_funghi

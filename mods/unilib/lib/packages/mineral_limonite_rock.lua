@@ -9,7 +9,7 @@
 unilib.pkg.mineral_limonite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,14 +30,14 @@ function unilib.pkg.mineral_limonite_rock.exec()
     -- (No call to unilib.register_mineral_rock(), because the lumps come in two variants)
 
     -- (Assume both limonites have the same hardness)
-    local hardness = unilib.mineral_table["limonite_brown"]["hardness"]
+    local hardness = unilib.global.mineral_table["limonite_brown"]["hardness"]
 
     unilib.register_node("unilib:mineral_limonite_rock", nil, mode, {
         -- Texture from AATO, limonite.png. Original code
         description = S("Limonite Rock"),
         tiles = {"unilib_mineral_limonite_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- (AATO provides limonite in two colours; this rock drops both of them)
         drop = {

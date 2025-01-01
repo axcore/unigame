@@ -3,7 +3,6 @@
 #       similar functionality); however the palm tree door was imported
 # Did not import the python_locale_tool mod
 # Longer growth times in cool_trees were not implemented for any package
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -113,10 +112,12 @@ fruit_coconut|ethereal
 liquid_lava_ordinary|default
 liquid_water_ordinary|default
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 sand_ordinary|default
 stone_ordinary|default moreblocks technic
 tree_palm|ethereal
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
@@ -124,7 +125,9 @@ tree_palm|ethereal
 #grass_jungle|default
 #grass_ordinary|default
 #liquid_water_river|default
-#mineral_mese|default
+#machine_furnace_induction|unilib
+#material_scrap_steel|steel
+#mineral_mese|default glemr11
 #moss_green|sickles
 #soil_arid|farming
 #soil_ordinary|farming

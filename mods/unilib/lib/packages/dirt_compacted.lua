@@ -9,7 +9,7 @@
 unilib.pkg.dirt_compacted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,9 +32,11 @@ function unilib.pkg.dirt_compacted.exec()
         description = S("Compacted Dirt"),
         tiles = {"unilib_dirt_compacted.png"},
         groups = {crumbly = 2},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_ordinary",
+        -- N.B. is_ground_content = false not in original code; added to match other dirts
+        is_ground_content = false,
     })
 
 end

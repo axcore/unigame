@@ -1,0 +1,1233 @@
+# =================================================================================================
+# Hot humid biome ecosystems
+# =================================================================================================
+
+# Hot humid ocean
+
+# Hot humid beach
+
+# Hot humid coastal
+fungi|gaia_hot_humid_coastal|unilib:dirt_mud_swamp|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+fungi|gaia_hot_humid_coastal|unilib:dirt_black_with_cover_fungi|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+fungi|gaia_hot_humid_coastal|unilib:dirt_black_with_cover_vine|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_black_with_litter_rainforest|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_black_with_turf_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_brown_with_litter_rainforest|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_brown_with_turf_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_clayey_with_litter_rainforest|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_clayey_with_turf_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_sandy_with_litter_rainforest|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_sandy_with_turf_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_silt_fine_with_litter_rainforest|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+default|gaia_hot_humid_coastal|unilib:dirt_silt_fine_with_turf_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|0.8|COASTAL|MANGROVE_MAX
+
+# Hot humid lowland
+fungi|gaia_hot_humid_lowland|unilib:dirt_black_with_cover_fungi|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+fungi|gaia_hot_humid_lowland|unilib:dirt_black_with_cover_vine|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_humid_lowland|unilib:dirt_black_with_litter_rainforest|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_humid_lowland|unilib:dirt_clayey_with_turf_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_humid_lowland|unilib:dirt_dark_with_litter_rainforest|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_humid_lowland|unilib:dirt_sandy_with_turf_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_humid_lowland|unilib:dirt_silt_coarse_with_turf_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|0.8|LOWLAND|COASTAL
+
+# Hot humid shelf
+fungi|gaia_hot_humid_shelf|unilib:dirt_black_with_cover_fungi|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+fungi|gaia_hot_humid_shelf|unilib:dirt_black_with_cover_vine|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_humid_shelf|unilib:dirt_black_with_litter_rainforest|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_humid_shelf|unilib:dirt_clayey_with_turf_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_humid_shelf|unilib:dirt_dark_with_litter_rainforest|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_humid_shelf|unilib:dirt_sandy_with_turf_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_humid_shelf|unilib:dirt_silt_fine_with_turf_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|0.8|SHELF|LOWLAND
+
+# Hot humid highland
+fungi|gaia_hot_humid_highland|unilib:dirt_black_with_cover_fungi|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+fungi|gaia_hot_humid_highland|unilib:dirt_black_with_cover_vine|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_humid_highland|unilib:dirt_black_with_litter_rainforest|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_humid_highland|unilib:dirt_clayey_with_turf_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_humid_highland|unilib:dirt_dark_with_litter_rainforest|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_humid_highland|unilib:dirt_sandy_with_turf_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_humid_highland|unilib:dirt_silt_fine_with_turf_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|0.8|HIGHLAND|SHELF
+
+# Hot humid mountain
+
+# Hot humid strato
+
+# =================================================================================================
+# Hot semihumid biome ecosystems
+# =================================================================================================
+
+# Hot semihumid ocean
+
+# Hot semihumid beach
+default|gaia_hot_semihumid_beach|unilib:sand_silt|unilib:sand_volcanic_dust|0.8|BEACH_MAX|BEACH_MIN
+
+# Hot semihumid coastal
+default|gaia_hot_semihumid_coastal|unilib:dirt_black_with_litter_rainforest|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_hot_semihumid_coastal|unilib:dirt_black_with_turf_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semihumid_coastal|unilib:dirt_brown_with_turf_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semihumid_coastal|unilib:dirt_clayey_with_turf_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semihumid_coastal|unilib:dirt_sandy_with_turf_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semihumid_coastal|unilib:dirt_silt_coarse_with_turf_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Hot semihumid lowland
+default|gaia_hot_semihumid_lowland|unilib:dirt_black_with_litter_rainforest|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.7|LOWLAND|COASTAL
+default|gaia_hot_semihumid_lowland|unilib:dirt_black_with_turf_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semihumid_lowland|unilib:dirt_brown_with_turf_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semihumid_lowland|unilib:dirt_clayey_with_turf_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semihumid_lowland|unilib:dirt_sandy_with_turf_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semihumid_lowland|unilib:dirt_silt_fine_with_turf_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|0.8|LOWLAND|COASTAL
+
+# Hot semihumid shelf
+default|gaia_hot_semihumid_shelf|unilib:dirt_black_with_litter_rainforest|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semihumid_shelf|unilib:dirt_black_with_turf_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semihumid_shelf|unilib:dirt_brown_with_turf_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semihumid_shelf|unilib:dirt_clayey_with_turf_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semihumid_shelf|unilib:dirt_sandy_with_turf_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semihumid_shelf|unilib:dirt_silt_fine_with_turf_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|0.8|SHELF|LOWLAND
+
+# Hot semihumid highland
+default|gaia_hot_semihumid_highland|unilib:dirt_black_with_litter_rainforest|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semihumid_highland|unilib:dirt_black_with_turf_hot_semihumid_highland|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semihumid_highland|unilib:dirt_brown_with_turf_hot_semihumid_highland|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semihumid_highland|unilib:dirt_clayey_with_turf_hot_semihumid_highland|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semihumid_highland|unilib:dirt_sandy_with_turf_hot_semihumid_highland|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semihumid_highland|unilib:dirt_silt_fine_with_turf_hot_semihumid_highland|unilib:dirt_coarse_with_turf_hot_semihumid_highland|0.8|HIGHLAND|SHELF
+
+# Hot semihumid mountain
+
+# Hot semihumid strato
+
+# =================================================================================================
+# Hot temperate biome ecosystems
+# =================================================================================================
+
+# Hot temperate ocean
+
+# Hot temperate beach
+
+# Hot temperate coastal
+default|gaia_hot_temperate_coastal|unilib:dirt_black_with_litter_rainforest|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_hot_temperate_coastal|unilib:dirt_black_with_turf_hot_temperate_coastal|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_temperate_coastal|unilib:dirt_brown_with_turf_hot_temperate_coastal|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_temperate_coastal|unilib:dirt_clayey_with_turf_hot_temperate_coastal|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_temperate_coastal|unilib:dirt_sandy_with_turf_hot_temperate_coastal|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_temperate_coastal|unilib:dirt_silt_fine_with_turf_hot_temperate_coastal|unilib:dirt_dark_with_turf_hot_temperate_coastal|0.8|COASTAL|BEACH_MAX
+
+# Hot temperate lowland
+default|gaia_hot_temperate_lowland|unilib:dirt_black_with_litter_rainforest|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.7|LOWLAND|COASTAL
+default|gaia_hot_temperate_lowland|unilib:dirt_black_with_turf_hot_temperate_lowland|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_temperate_lowland|unilib:dirt_brown_with_turf_hot_temperate_lowland|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_temperate_lowland|unilib:dirt_clayey_with_turf_hot_temperate_lowland|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_temperate_lowland|unilib:dirt_sandy_with_turf_hot_temperate_lowland|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_temperate_lowland|unilib:dirt_silt_fine_with_turf_hot_temperate_lowland|unilib:dirt_ordinary_with_turf_hot_temperate_lowland|0.8|LOWLAND|COASTAL
+
+# Hot temperate shelf
+default|gaia_hot_temperate_shelf|unilib:dirt_black_with_litter_rainforest|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_temperate_shelf|unilib:dirt_black_with_turf_hot_temperate_shelf|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_temperate_shelf|unilib:dirt_brown_with_turf_hot_temperate_shelf|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_temperate_shelf|unilib:dirt_clayey_with_turf_hot_temperate_shelf|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_temperate_shelf|unilib:dirt_sandy_with_turf_hot_temperate_shelf|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_temperate_shelf|unilib:dirt_silt_fine_with_turf_hot_temperate_shelf|unilib:dirt_coarse_with_turf_hot_temperate_shelf|0.8|SHELF|LOWLAND
+
+# Hot temperate highland
+default|gaia_hot_temperate_highland|unilib:dirt_black_with_litter_rainforest|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_temperate_highland|unilib:dirt_black_with_turf_hot_temperate_highland|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_temperate_highland|unilib:dirt_brown_with_turf_hot_temperate_highland|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_temperate_highland|unilib:dirt_clayey_with_turf_hot_temperate_highland|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_temperate_highland|unilib:dirt_sandy_with_turf_hot_temperate_highland|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_temperate_highland|unilib:dirt_silt_fine_with_turf_hot_temperate_highland|unilib:clay_red_with_turf_hot_temperate_highland|0.8|HIGHLAND|SHELF
+
+# Hot temperate mountain
+
+# Hot temperate strato
+
+# =================================================================================================
+# Hot semiarid biome ecosystems
+# =================================================================================================
+
+# Hot semiarid ocean
+
+# Hot semiarid beach
+
+# Hot semiarid coastal
+default|gaia_hot_semiarid_coastal|unilib:dirt_black_with_turf_hot_semiarid_coastal|unilib:dirt_ordinary_with_turf_hot_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semiarid_coastal|unilib:dirt_brown_with_turf_hot_semiarid_coastal|unilib:dirt_ordinary_with_turf_hot_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semiarid_coastal|unilib:dirt_clayey_with_turf_hot_semiarid_coastal|unilib:dirt_ordinary_with_turf_hot_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semiarid_coastal|unilib:dirt_sandy_with_turf_hot_semiarid_coastal|unilib:dirt_ordinary_with_turf_hot_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_semiarid_coastal|unilib:dirt_silt_fine_with_turf_hot_semiarid_coastal|unilib:dirt_ordinary_with_turf_hot_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Hot semiarid lowland
+default|gaia_hot_semiarid_lowland|unilib:dirt_black_with_turf_hot_semiarid_lowland|unilib:dirt_coarse_with_turf_hot_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semiarid_lowland|unilib:dirt_brown_with_turf_hot_semiarid_lowland|unilib:dirt_coarse_with_turf_hot_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semiarid_lowland|unilib:dirt_clayey_with_turf_hot_semiarid_lowland|unilib:dirt_coarse_with_turf_hot_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semiarid_lowland|unilib:dirt_sandy_with_turf_hot_semiarid_lowland|unilib:dirt_coarse_with_turf_hot_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_hot_semiarid_lowland|unilib:dirt_silt_fine_with_turf_hot_semiarid_lowland|unilib:dirt_coarse_with_turf_hot_semiarid_lowland|0.8|LOWLAND|COASTAL
+
+# Hot semiarid shelf
+default|gaia_hot_semiarid_shelf|unilib:dirt_black_with_turf_hot_semiarid_shelf|unilib:clay_red_with_turf_hot_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semiarid_shelf|unilib:dirt_brown_with_turf_hot_semiarid_shelf|unilib:clay_red_with_turf_hot_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semiarid_shelf|unilib:dirt_clayey_with_turf_hot_semiarid_shelf|unilib:clay_red_with_turf_hot_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semiarid_shelf|unilib:dirt_sandy_with_turf_hot_semiarid_shelf|unilib:clay_red_with_turf_hot_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_hot_semiarid_shelf|unilib:dirt_silt_fine_with_turf_hot_semiarid_shelf|unilib:clay_red_with_turf_hot_semiarid_shelf|0.8|SHELF|LOWLAND
+
+# Hot semiarid highland
+default|gaia_hot_semiarid_highland|unilib:dirt_black_with_turf_hot_semiarid_highland|unilib:dirt_clayey_with_turf_hot_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semiarid_highland|unilib:dirt_brown_with_turf_hot_semiarid_highland|unilib:dirt_clayey_with_turf_hot_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semiarid_highland|unilib:dirt_ordinary_with_turf_hot_semiarid_highland|unilib:dirt_clayey_with_turf_hot_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semiarid_highland|unilib:dirt_sandy_with_turf_hot_semiarid_highland|unilib:dirt_clayey_with_turf_hot_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_hot_semiarid_highland|unilib:dirt_silt_fine_with_turf_hot_semiarid_highland|unilib:dirt_clayey_with_turf_hot_semiarid_highland|0.8|HIGHLAND|SHELF
+
+# Hot semiarid mountain
+
+# Hot semiarid strato
+
+# =================================================================================================
+# Hot arid biome ecosystems
+# =================================================================================================
+
+# Hot arid ocean
+
+# Hot arid beach
+
+# Hot arid coastal
+default|gaia_hot_arid_coastal|unilib:dirt_sandy|unilib:sand_barren|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_arid_coastal|unilib:dirt_sandy_with_turf_hot_arid_coastal|unilib:sand_barren|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_arid_coastal|unilib:sand_pink|unilib:sand_barren|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_arid_coastal|unilib:sand_silica|unilib:sand_barren|0.8|COASTAL|BEACH_MAX
+default|gaia_hot_arid_coastal|unilib:stone_sandstone_red|unilib:sand_barren|0.8|COASTAL|BEACH_MAX
+
+# Hot arid lowland
+rare|gaia_hot_arid_lowland|unilib:dirt_sandy|unilib:clay_baked_orange|0.8|LOWLAND|COASTAL
+rare|gaia_hot_arid_lowland|unilib:dirt_sandy_with_turf_hot_arid_lowland|unilib:clay_baked_orange|0.8|LOWLAND|COASTAL
+rare|gaia_hot_arid_lowland|unilib:sand_pink|unilib:clay_baked_orange|0.8|LOWLAND|COASTAL
+rare|gaia_hot_arid_lowland|unilib:sand_silica|unilib:clay_baked_orange|0.8|LOWLAND|COASTAL
+rare|gaia_hot_arid_lowland|unilib:stone_sandstone_red|unilib:clay_baked_orange|0.8|LOWLAND|COASTAL
+
+# Hot arid shelf
+rare|gaia_hot_arid_shelf|unilib:dirt_sandy|unilib:clay_baked_orange|0.8|SHELF|LOWLAND
+rare|gaia_hot_arid_shelf|unilib:dirt_sandy_with_turf_hot_arid_shelf|unilib:clay_baked_orange|0.8|SHELF|LOWLAND
+rare|gaia_hot_arid_shelf|unilib:sand_pink|unilib:clay_baked_orange|0.8|SHELF|LOWLAND
+rare|gaia_hot_arid_shelf|unilib:sand_silica|unilib:clay_baked_orange|0.8|SHELF|LOWLAND
+rare|gaia_hot_arid_shelf|unilib:stone_sandstone_red|unilib:clay_baked_orange|0.8|SHELF|LOWLAND
+
+# Hot arid highland
+rare|gaia_hot_arid_highland|unilib:dirt_sandy|unilib:clay_baked_orange|0.8|HIGHLAND|SHELF
+rare|gaia_hot_arid_highland|unilib:dirt_sandy_with_turf_hot_arid_highland|unilib:clay_baked_orange|0.8|HIGHLAND|SHELF
+rare|gaia_hot_arid_highland|unilib:sand_pink|unilib:clay_baked_orange|0.8|HIGHLAND|SHELF
+rare|gaia_hot_arid_highland|unilib:sand_silica|unilib:clay_baked_orange|0.8|HIGHLAND|SHELF
+rare|gaia_hot_arid_highland|unilib:stone_sandstone_red|unilib:clay_baked_orange|0.8|HIGHLAND|SHELF
+
+# Hot arid mountain
+
+# Hot arid strato
+
+# =================================================================================================
+# Warm humid biome ecosystems
+# =================================================================================================
+
+# Warm humid ocean
+
+# Warm humid beach
+default|gaia_warm_humid_beach|unilib:sand_silt|unilib:sand_silica|0.8|BEACH_MAX|BEACH_MIN
+
+# Warm humid coastal
+default|gaia_warm_humid_coastal|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_black_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_brown_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_clayey_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_ordinary_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_sandy_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_humid_coastal|unilib:dirt_silt_fine_with_turf_warm_humid_coastal|unilib:dirt_silt_coarse_with_turf_warm_humid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Warm humid lowland
+default|gaia_warm_humid_lowland|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.7|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_black_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_brown_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_clayey_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_ordinary_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_sandy_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_humid_lowland|unilib:dirt_silt_coarse_with_turf_warm_humid_lowland|unilib:dirt_silt_fine_with_turf_warm_humid_lowland|0.8|LOWLAND|COASTAL
+
+# Warm humid shelf
+default|gaia_warm_humid_shelf|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_black_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_brown_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_clayey_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_ordinary_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_sandy_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_humid_shelf|unilib:dirt_silt_fine_with_turf_warm_humid_shelf|unilib:dirt_dark_with_turf_warm_humid_shelf|0.8|SHELF|LOWLAND
+
+# Warm humid highland
+default|gaia_warm_humid_highland|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_black_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_brown_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_clayey_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_ordinary_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_sandy_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_humid_highland|unilib:dirt_silt_fine_with_turf_warm_humid_highland|unilib:dirt_dark_with_turf_warm_humid_highland|0.8|HIGHLAND|SHELF
+
+# Warm humid mountain
+
+# Warm humid strato
+
+# =================================================================================================
+# Warm semihumid biome ecosystems
+# =================================================================================================
+
+# Warm semihumid ocean
+
+# Warm semihumid beach
+
+# Warm semihumid coastal
+default|gaia_warm_semihumid_coastal|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_black_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_brown_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_clayey_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_ordinary_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_sandy_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semihumid_coastal|unilib:dirt_silt_coarse_with_turf_warm_semihumid_coastal|unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Warm semihumid lowland
+default|gaia_warm_semihumid_lowland|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.7|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_black_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_brown_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_clayey_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_ordinary_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_sandy_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semihumid_lowland|unilib:dirt_silt_fine_with_turf_warm_semihumid_lowland|unilib:dirt_dark_with_turf_warm_semihumid_lowland|0.8|LOWLAND|COASTAL
+
+# Warm semihumid shelf
+default|gaia_warm_semihumid_shelf|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_black_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_brown_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_clayey_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_ordinary_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_sandy_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semihumid_shelf|unilib:dirt_silt_fine_with_turf_warm_semihumid_shelf|unilib:dirt_coarse_with_turf_warm_semihumid_shelf|0.8|SHELF|LOWLAND
+
+# Warm semihumid highland
+default|gaia_warm_semihumid_highland|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_black_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_brown_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_clayey_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_ordinary_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_sandy_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semihumid_highland|unilib:dirt_silt_fine_with_turf_warm_semihumid_highland|unilib:dirt_parched_with_turf_warm_semihumid_highland|0.8|HIGHLAND|SHELF
+
+# Warm semihumid mountain
+
+# Warm semihumid strato
+
+# =================================================================================================
+# Warm temperate biome ecosystems
+# =================================================================================================
+
+# Warm temperate ocean
+
+# Warm temperate beach
+
+# Warm temperate coastal
+default|gaia_warm_temperate_coastal|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_black_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_brown_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_clayey_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_ordinary_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_sandy_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_temperate_coastal|unilib:dirt_silt_fine_with_turf_warm_temperate_coastal|unilib:dirt_dark_with_turf_warm_temperate_coastal|0.8|COASTAL|BEACH_MAX
+
+# Warm temperate lowland
+default|gaia_warm_temperate_lowland|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.7|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_black_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_brown_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_clayey_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_sandy_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_silt_coarse_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_temperate_lowland|unilib:dirt_silt_fine_with_turf_warm_temperate_lowland|unilib:dirt_ordinary_with_turf_warm_temperate_lowland|0.8|LOWLAND|COASTAL
+
+# Warm temperate shelf
+default|gaia_warm_temperate_shelf|unilib:dirt_black_with_litter_forest_leafy|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_black_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_brown_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_clayey_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_ordinary_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_sandy_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_temperate_shelf|unilib:dirt_silt_fine_with_turf_warm_temperate_shelf|unilib:dirt_coarse_with_turf_warm_temperate_shelf|0.8|SHELF|LOWLAND
+
+# Warm temperate highland
+default|gaia_warm_temperate_highland|unilib:dirt_black_with_litter_forest_leafy|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_black_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_brown_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_clayey_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_ordinary_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_sandy_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_temperate_highland|unilib:dirt_silt_fine_with_turf_warm_temperate_highland|unilib:clay_red_with_turf_warm_temperate_highland|0.8|HIGHLAND|SHELF
+
+# Warm temperate mountain
+
+# Warm temperate strato
+
+# =================================================================================================
+# Warm semiarid biome ecosystems
+# =================================================================================================
+
+# Warm semiarid ocean
+
+# Warm semiarid beach
+
+# Warm semiarid coastal
+default|gaia_warm_semiarid_coastal|unilib:dirt_black_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semiarid_coastal|unilib:dirt_brown_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semiarid_coastal|unilib:dirt_clayey_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semiarid_coastal|unilib:dirt_ordinary_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semiarid_coastal|unilib:dirt_sandy_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_semiarid_coastal|unilib:dirt_silt_fine_with_turf_warm_semiarid_coastal|unilib:stone_sandstone_white|0.8|COASTAL|BEACH_MAX
+
+# Warm semiarid lowland
+default|gaia_warm_semiarid_lowland|unilib:dirt_black_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semiarid_lowland|unilib:dirt_brown_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semiarid_lowland|unilib:dirt_clayey_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semiarid_lowland|unilib:dirt_ordinary_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semiarid_lowland|unilib:dirt_sandy_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_warm_semiarid_lowland|unilib:dirt_silt_fine_with_turf_warm_semiarid_lowland|unilib:dirt_coarse_with_turf_warm_semiarid_lowland|0.8|LOWLAND|COASTAL
+
+# Warm semiarid shelf
+default|gaia_warm_semiarid_shelf|unilib:dirt_black_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semiarid_shelf|unilib:dirt_brown_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semiarid_shelf|unilib:dirt_clayey_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semiarid_shelf|unilib:dirt_ordinary_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semiarid_shelf|unilib:dirt_sandy_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_warm_semiarid_shelf|unilib:dirt_silt_fine_with_turf_warm_semiarid_shelf|unilib:clay_red_with_turf_warm_semiarid_shelf|0.8|SHELF|LOWLAND
+
+# Warm semiarid highland
+default|gaia_warm_semiarid_highland|unilib:dirt_black_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semiarid_highland|unilib:dirt_brown_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semiarid_highland|unilib:dirt_ordinary_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semiarid_highland|unilib:dirt_sandy_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semiarid_highland|unilib:dirt_silt_coarse_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_warm_semiarid_highland|unilib:dirt_silt_fine_with_turf_warm_semiarid_highland|unilib:dirt_clayey_with_turf_warm_semiarid_highland|0.8|HIGHLAND|SHELF
+
+# Warm semiarid mountain
+
+# Warm semiarid strato
+
+# =================================================================================================
+# Warm arid biome ecosystems
+# =================================================================================================
+
+# Warm arid ocean
+
+# Warm arid beach
+
+# Warm arid coastal
+default|gaia_warm_arid_coastal|unilib:dirt_dried|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+rare|gaia_warm_arid_coastal|unilib:dirt_dried_with_turf_warm_arid_coastal|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_arid_coastal|unilib:sand_brown|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_arid_coastal|unilib:sand_ordinary|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_arid_coastal|unilib:sand_white|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+default|gaia_warm_arid_coastal|unilib:stone_sandstone_desert|unilib:sand_desert|0.8|COASTAL|BEACH_MAX
+
+# Warm arid lowland
+default|gaia_warm_arid_lowland|unilib:dirt_dried|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+rare|gaia_warm_arid_lowland|unilib:dirt_dried_with_turf_warm_arid_lowland|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+default|gaia_warm_arid_lowland|unilib:sand_beige|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+default|gaia_warm_arid_lowland|unilib:sand_desert|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+default|gaia_warm_arid_lowland|unilib:sand_silver|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+default|gaia_warm_arid_lowland|unilib:stone_sandstone_ordinary|unilib:sand_ordinary|0.8|LOWLAND|COASTAL
+
+# Warm arid shelf
+default|gaia_warm_arid_shelf|unilib:dirt_dried|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+rare|gaia_warm_arid_shelf|unilib:dirt_dried_with_turf_warm_arid_shelf|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+default|gaia_warm_arid_shelf|unilib:sand_beige|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+default|gaia_warm_arid_shelf|unilib:sand_desert|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+default|gaia_warm_arid_shelf|unilib:sand_silver|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+default|gaia_warm_arid_shelf|unilib:stone_sandstone_ordinary|unilib:sand_ordinary|0.8|SHELF|LOWLAND
+
+# Warm arid highland
+default|gaia_warm_arid_highland|unilib:dirt_dried|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+rare|gaia_warm_arid_highland|unilib:dirt_dried_with_turf_warm_arid_highland|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+default|gaia_warm_arid_highland|unilib:sand_beige|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+default|gaia_warm_arid_highland|unilib:sand_desert|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+default|gaia_warm_arid_highland|unilib:sand_silver|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+default|gaia_warm_arid_highland|unilib:stone_sandstone_ordinary|unilib:sand_ordinary|0.8|HIGHLAND|SHELF
+
+# Warm arid mountain
+
+# Warm arid strato
+
+# =================================================================================================
+# Mild humid biome ecosystems
+# =================================================================================================
+
+# Mild humid ocean
+
+# Mild humid beach
+
+# Mild humid coastal
+default|gaia_mild_humid_coastal|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_black_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_brown_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_clayey_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_ordinary_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_sandy_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_humid_coastal|unilib:dirt_silt_fine_with_turf_mild_humid_coastal|unilib:dirt_silt_coarse_with_turf_mild_humid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Mild humid lowland
+default|gaia_mild_humid_lowland|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.7|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_black_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_brown_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_clayey_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_ordinary_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_sandy_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_humid_lowland|unilib:dirt_silt_coarse_with_turf_mild_humid_lowland|unilib:dirt_silt_fine_with_turf_mild_humid_lowland|0.8|LOWLAND|COASTAL
+
+# Mild humid shelf
+default|gaia_mild_humid_shelf|unilib:dirt_black_with_litter_forest_light|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_black_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_brown_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_clayey_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_ordinary_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_sandy_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_humid_shelf|unilib:dirt_silt_fine_with_turf_mild_humid_shelf|unilib:dirt_dark_with_turf_mild_humid_shelf|0.8|SHELF|LOWLAND
+
+# Mild humid highland
+default|gaia_mild_humid_highland|unilib:dirt_black_with_litter_forest_light|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_black_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_brown_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_clayey_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_ordinary_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_sandy_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_humid_highland|unilib:dirt_silt_fine_with_turf_mild_humid_highland|unilib:dirt_dark_with_turf_mild_humid_highland|0.8|HIGHLAND|SHELF
+
+# Mild humid mountain
+
+# Mild humid strato
+
+# =================================================================================================
+# Mild semihumid biome ecosystems
+# =================================================================================================
+
+# Mild semihumid ocean
+
+# Mild semihumid beach
+
+# Mild semihumid coastal
+default|gaia_mild_semihumid_coastal|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_black_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_brown_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_clayey_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_ordinary_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_sandy_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semihumid_coastal|unilib:dirt_silt_coarse_with_turf_mild_semihumid_coastal|unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Mild semihumid lowland
+default|gaia_mild_semihumid_lowland|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.7|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_black_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_brown_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_clayey_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_ordinary_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_sandy_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semihumid_lowland|unilib:dirt_silt_fine_with_turf_mild_semihumid_lowland|unilib:dirt_dark_with_turf_mild_semihumid_lowland|0.8|LOWLAND|COASTAL
+
+# Mild semihumid shelf
+default|gaia_mild_semihumid_shelf|unilib:dirt_black_with_litter_forest_light|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_black_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_brown_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_clayey_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_sandy_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_silt_coarse_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semihumid_shelf|unilib:dirt_silt_fine_with_turf_mild_semihumid_shelf|unilib:dirt_ordinary_with_turf_mild_semihumid_shelf|0.8|SHELF|LOWLAND
+
+# Mild semihumid highland
+default|gaia_mild_semihumid_highland|unilib:dirt_black_with_litter_forest_light|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_black_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_brown_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_clayey_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_ordinary_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_sandy_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semihumid_highland|unilib:dirt_silt_fine_with_turf_mild_semihumid_highland|unilib:clay_red_with_turf_mild_semihumid_highland|0.8|HIGHLAND|SHELF
+
+# Mild semihumid mountain
+
+# Mild semihumid strato
+
+# =================================================================================================
+# Mild temperate biome ecosystems
+# =================================================================================================
+
+# Mild temperate ocean
+
+# Mild temperate beach
+
+# Mild temperate coastal
+default|gaia_mild_temperate_coastal|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.6|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_black_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_brown_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_clayey_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_ordinary_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_sandy_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_temperate_coastal|unilib:dirt_silt_fine_with_turf_mild_temperate_coastal|unilib:dirt_dark_with_turf_mild_temperate_coastal|0.8|COASTAL|BEACH_MAX
+
+# Mild temperate lowland
+default|gaia_mild_temperate_lowland|unilib:dirt_black_with_litter_forest_medium|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.7|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_black_with_turf_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_brown_with_turf_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_clayey_with_turf_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_grey|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_sandy_with_turf_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_temperate_lowland|unilib:dirt_silt_fine_with_turf_mild_temperate_lowland|unilib:dirt_ordinary_with_turf_mild_temperate_lowland|0.8|LOWLAND|COASTAL
+
+# Mild temperate shelf
+default|gaia_mild_temperate_shelf|unilib:dirt_black_with_litter_forest_light|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_black_with_turf_mild_temperate_shelf|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_brown_with_turf_mild_temperate_shelf|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_clayey_with_turf_mild_temperate_shelf|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_ordinary_with_turf_grey|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_sandy_with_turf_mild_temperate_shelf|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_temperate_shelf|unilib:dirt_silt_fine_with_turf_mild_temperate_shelf|unilib:dirt_coarse_with_turf_mild_temperate_shelf|0.8|SHELF|LOWLAND
+
+# Mild temperate highland
+default|gaia_mild_temperate_highland|unilib:dirt_black_with_litter_forest_light|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_black_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_brown_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_clayey_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_ordinary_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_sandy_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_temperate_highland|unilib:dirt_silt_fine_with_turf_mild_temperate_highland|unilib:clay_red_with_turf_mild_temperate_highland|0.8|HIGHLAND|SHELF
+
+# Mild temperate mountain
+
+# Mild temperate strato
+
+# =================================================================================================
+# Mild semiarid biome ecosystems
+# =================================================================================================
+
+# Mild semiarid ocean
+
+# Mild semiarid beach
+
+# Mild semiarid coastal
+default|gaia_mild_semiarid_coastal|unilib:dirt_black_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semiarid_coastal|unilib:dirt_brown_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semiarid_coastal|unilib:dirt_clayey_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semiarid_coastal|unilib:dirt_sandy_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semiarid_coastal|unilib:dirt_silt_coarse_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_semiarid_coastal|unilib:dirt_silt_fine_with_turf_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Mild semiarid lowland
+default|gaia_mild_semiarid_lowland|unilib:dirt_black_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semiarid_lowland|unilib:dirt_brown_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semiarid_lowland|unilib:dirt_clayey_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semiarid_lowland|unilib:dirt_ordinary_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semiarid_lowland|unilib:dirt_sandy_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_mild_semiarid_lowland|unilib:dirt_silt_fine_with_turf_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|0.8|LOWLAND|COASTAL
+
+# Mild semiarid shelf
+default|gaia_mild_semiarid_shelf|unilib:dirt_black_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semiarid_shelf|unilib:dirt_brown_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semiarid_shelf|unilib:dirt_clayey_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semiarid_shelf|unilib:dirt_ordinary_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semiarid_shelf|unilib:dirt_sandy_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_mild_semiarid_shelf|unilib:dirt_silt_fine_with_turf_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|0.8|SHELF|LOWLAND
+
+# Mild semiarid highland
+default|gaia_mild_semiarid_highland|unilib:dirt_black_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semiarid_highland|unilib:dirt_brown_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semiarid_highland|unilib:dirt_ordinary_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semiarid_highland|unilib:dirt_sandy_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semiarid_highland|unilib:dirt_silt_coarse_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_mild_semiarid_highland|unilib:dirt_silt_fine_with_turf_mild_semiarid_highland|unilib:dirt_clayey_with_turf_mild_semiarid_highland|0.8|HIGHLAND|SHELF
+
+# Mild semiarid mountain
+
+# Mild semiarid strato
+
+# =================================================================================================
+# Mild arid biome ecosystems
+# =================================================================================================
+
+# Mild arid ocean
+
+# Mild arid beach
+
+# Mild arid coastal
+default|gaia_mild_arid_coastal|unilib:dirt_sandy_with_turf_mild_arid_coastal|unilib:dirt_brown_with_turf_mild_arid_coastal|0.5|COASTAL|BEACH_MAX
+default|gaia_mild_arid_coastal|unilib:gravel_sandstone_golden|unilib:dirt_brown_with_turf_mild_arid_coastal|0.5|COASTAL|BEACH_MAX
+default|gaia_mild_arid_coastal|unilib:sand_golden|unilib:dirt_brown_with_turf_mild_arid_coastal|0.5|COASTAL|BEACH_MAX
+default|gaia_mild_arid_coastal|unilib:sand_silica|unilib:dirt_brown_with_turf_mild_arid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_mild_arid_coastal|unilib:stone_sandstone_white|unilib:dirt_brown_with_turf_mild_arid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Mild arid lowland
+rare|gaia_mild_arid_lowland|unilib:dirt_brown_with_turf_mild_arid_lowland|unilib:stone_sandstone_golden|0.95|LOWLAND|COASTAL
+rare|gaia_mild_arid_lowland|unilib:dirt_sandy_with_turf_mild_arid_lowland|unilib:stone_sandstone_golden|0.95|LOWLAND|COASTAL
+rare|gaia_mild_arid_lowland|unilib:sand_golden|unilib:stone_sandstone_golden|0.85|LOWLAND|COASTAL
+rare|gaia_mild_arid_lowland|unilib:sand_silica|unilib:stone_sandstone_golden|0.85|LOWLAND|COASTAL
+rare|gaia_mild_arid_lowland|unilib:stone_sandstone_white|unilib:stone_sandstone_golden|0.85|LOWLAND|COASTAL
+
+# Mild arid shelf
+rare|gaia_mild_arid_shelf|unilib:dirt_brown_with_turf_mild_arid_shelf|unilib:stone_sandstone_golden|0.95|SHELF|LOWLAND
+rare|gaia_mild_arid_shelf|unilib:dirt_sandy_with_turf_mild_arid_shelf|unilib:stone_sandstone_golden|0.95|SHELF|LOWLAND
+rare|gaia_mild_arid_shelf|unilib:sand_golden|unilib:stone_sandstone_golden|0.9|SHELF|LOWLAND
+rare|gaia_mild_arid_shelf|unilib:sand_silica|unilib:stone_sandstone_golden|0.9|SHELF|LOWLAND
+rare|gaia_mild_arid_shelf|unilib:stone_sandstone_white|unilib:stone_sandstone_golden|0.9|SHELF|LOWLAND
+
+# Mild arid highland
+rare|gaia_mild_arid_highland|unilib:dirt_brown_with_turf_mild_arid_highland|unilib:stone_sandstone_golden|0.95|HIGHLAND|SHELF
+rare|gaia_mild_arid_highland|unilib:dirt_sandy_with_turf_mild_arid_highland|unilib:stone_sandstone_golden|0.95|HIGHLAND|SHELF
+rare|gaia_mild_arid_highland|unilib:sand_golden|unilib:stone_sandstone_golden|0.95|HIGHLAND|SHELF
+rare|gaia_mild_arid_highland|unilib:sand_silica|unilib:stone_sandstone_golden|0.95|HIGHLAND|SHELF
+rare|gaia_mild_arid_highland|unilib:stone_sandstone_white|unilib:stone_sandstone_golden|0.95|HIGHLAND|SHELF
+
+# Mild arid mountain
+
+# Mild arid strato
+
+# =================================================================================================
+# Cool humid biome ecosystems
+# =================================================================================================
+
+# Cool humid ocean
+
+# Cool humid beach
+
+# Cool humid coastal
+default|gaia_cool_humid_coastal|unilib:dirt_black_with_litter_coniferous|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_black_with_turf_cool_humid_coastal|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_brown_with_litter_coniferous|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_brown_with_turf_cool_humid_coastal|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_clayey_with_litter_coniferous|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_clayey_with_turf_cool_humid_coastal|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_sandy_with_litter_coniferous|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_sandy_with_turf_cool_humid_coastal|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_silt_fine_with_litter_coniferous|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_humid_coastal|unilib:dirt_silt_fine_with_turf_cool_humid_coastal|unilib:dirt_silt_coarse_with_litter_coniferous|0.8|COASTAL|BEACH_MAX
+
+# Cool humid lowland
+default|gaia_cool_humid_lowland|unilib:dirt_black_with_litter_coniferous|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_black_with_turf_cool_humid_lowland|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_brown_with_litter_coniferous|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_brown_with_turf_cool_humid_lowland|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_clayey_with_litter_coniferous|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_clayey_with_turf_cool_humid_lowland|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_sandy_with_litter_coniferous|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_sandy_with_turf_cool_humid_lowland|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_silt_coarse_with_litter_coniferous|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+default|gaia_cool_humid_lowland|unilib:dirt_silt_coarse_with_turf_cool_humid_lowland|unilib:dirt_silt_fine_with_litter_coniferous|0.8|LOWLAND|COASTAL
+
+# Cool humid shelf
+default|gaia_cool_humid_shelf|unilib:dirt_black_with_litter_coniferous|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_black_with_turf_cool_humid_shelf|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_brown_with_litter_coniferous|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_brown_with_turf_cool_humid_shelf|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_clayey_with_litter_coniferous|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_clayey_with_turf_cool_humid_shelf|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_sandy_with_litter_coniferous|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_sandy_with_turf_cool_humid_shelf|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_silt_fine_with_litter_coniferous|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+default|gaia_cool_humid_shelf|unilib:dirt_silt_fine_with_turf_cool_humid_shelf|unilib:dirt_dark_with_litter_coniferous|0.8|SHELF|LOWLAND
+
+# Cool humid highland
+default|gaia_cool_humid_highland|unilib:dirt_black_with_litter_coniferous|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_black_with_turf_cool_humid_highland|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_brown_with_litter_coniferous|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_brown_with_turf_cool_humid_highland|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_clayey_with_litter_coniferous|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_clayey_with_turf_cool_humid_highland|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_sandy_with_litter_coniferous|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_sandy_with_turf_cool_humid_highland|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_silt_fine_with_litter_coniferous|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+default|gaia_cool_humid_highland|unilib:dirt_silt_fine_with_turf_cool_humid_highland|unilib:dirt_ordinary_with_litter_coniferous|0.8|HIGHLAND|SHELF
+
+# Cool humid mountain
+
+# Cool humid strato
+
+# =================================================================================================
+# Cool semihumid biome ecosystems
+# =================================================================================================
+
+# Cool semihumid ocean
+
+# Cool semihumid beach
+
+# Cool semihumid coastal
+default|gaia_cool_semihumid_coastal|unilib:dirt_black_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semihumid_coastal|unilib:dirt_brown_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semihumid_coastal|unilib:dirt_clayey_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semihumid_coastal|unilib:dirt_ordinary_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semihumid_coastal|unilib:dirt_sandy_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semihumid_coastal|unilib:dirt_silt_coarse_with_turf_cool_semihumid_coastal|unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Cool semihumid lowland
+default|gaia_cool_semihumid_lowland|unilib:dirt_black_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semihumid_lowland|unilib:dirt_brown_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semihumid_lowland|unilib:dirt_clayey_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semihumid_lowland|unilib:dirt_ordinary_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semihumid_lowland|unilib:dirt_sandy_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semihumid_lowland|unilib:dirt_silt_fine_with_turf_cool_semihumid_lowland|unilib:dirt_dark_with_turf_cool_semihumid_lowland|0.8|LOWLAND|COASTAL
+
+# Cool semihumid shelf
+default|gaia_cool_semihumid_shelf|unilib:dirt_black_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semihumid_shelf|unilib:dirt_brown_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semihumid_shelf|unilib:dirt_clayey_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semihumid_shelf|unilib:dirt_sandy_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semihumid_shelf|unilib:dirt_silt_coarse_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semihumid_shelf|unilib:dirt_silt_fine_with_turf_cool_semihumid_shelf|unilib:dirt_ordinary_with_turf_cool_semihumid_shelf|0.8|SHELF|LOWLAND
+
+# Cool semihumid highland
+default|gaia_cool_semihumid_highland|unilib:dirt_black_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semihumid_highland|unilib:dirt_brown_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semihumid_highland|unilib:dirt_clayey_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semihumid_highland|unilib:dirt_ordinary_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semihumid_highland|unilib:dirt_sandy_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semihumid_highland|unilib:dirt_silt_fine_with_turf_cool_semihumid_highland|unilib:clay_red_with_turf_cool_semihumid_highland|0.8|HIGHLAND|SHELF
+
+# Cool semihumid mountain
+
+# Cool semihumid strato
+
+# =================================================================================================
+# Cool temperate biome ecosystems
+# =================================================================================================
+
+# Cool temperate ocean
+
+# Cool temperate beach
+
+# Cool temperate coastal
+default|gaia_cool_temperate_coastal|unilib:dirt_black_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_temperate_coastal|unilib:dirt_brown_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_temperate_coastal|unilib:dirt_clayey_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_temperate_coastal|unilib:dirt_ordinary_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_temperate_coastal|unilib:dirt_sandy_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_temperate_coastal|unilib:dirt_silt_fine_with_turf_cool_temperate_coastal|unilib:dirt_dark_with_turf_cool_temperate_coastal|0.8|COASTAL|BEACH_MAX
+
+# Cool temperate lowland
+default|gaia_cool_temperate_lowland|unilib:dirt_black_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_temperate_lowland|unilib:dirt_brown_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_temperate_lowland|unilib:dirt_clayey_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_temperate_lowland|unilib:dirt_sandy_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_temperate_lowland|unilib:dirt_silt_coarse_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_temperate_lowland|unilib:dirt_silt_fine_with_turf_cool_temperate_lowland|unilib:dirt_ordinary_with_turf_cool_temperate_lowland|0.8|LOWLAND|COASTAL
+
+# Cool temperate shelf
+default|gaia_cool_temperate_shelf|unilib:dirt_black_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_temperate_shelf|unilib:dirt_brown_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_temperate_shelf|unilib:dirt_clayey_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_temperate_shelf|unilib:dirt_ordinary_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_temperate_shelf|unilib:dirt_sandy_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_temperate_shelf|unilib:dirt_silt_fine_with_turf_cool_temperate_shelf|unilib:dirt_coarse_with_turf_cool_temperate_shelf|0.8|SHELF|LOWLAND
+
+# Cool temperate highland
+default|gaia_cool_temperate_highland|unilib:dirt_black_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_temperate_highland|unilib:dirt_brown_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_temperate_highland|unilib:dirt_clayey_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_temperate_highland|unilib:dirt_ordinary_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_temperate_highland|unilib:dirt_sandy_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_temperate_highland|unilib:dirt_silt_fine_with_turf_cool_temperate_highland|unilib:clay_red_with_turf_cool_temperate_highland|0.8|HIGHLAND|SHELF
+
+# Cool temperate mountain
+
+# Cool temperate strato
+
+# =================================================================================================
+# Cool semiarid biome ecosystems
+# =================================================================================================
+
+# Cool semiarid ocean
+
+# Cool semiarid beach
+
+# Cool semiarid coastal
+default|gaia_cool_semiarid_coastal|unilib:dirt_black_with_turf_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semiarid_coastal|unilib:dirt_brown_with_turf_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semiarid_coastal|unilib:dirt_clayey_with_turf_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semiarid_coastal|unilib:dirt_ordinary_with_turf_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_semiarid_coastal|unilib:dirt_silt_fine_with_turf_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|0.8|COASTAL|BEACH_MAX
+
+# Cool semiarid lowland
+default|gaia_cool_semiarid_lowland|unilib:dirt_black_with_turf_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semiarid_lowland|unilib:dirt_brown_with_turf_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semiarid_lowland|unilib:dirt_clayey_with_turf_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semiarid_lowland|unilib:dirt_sandy_with_turf_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_semiarid_lowland|unilib:dirt_silt_fine_with_turf_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|0.8|LOWLAND|COASTAL
+
+# Cool semiarid shelf
+default|gaia_cool_semiarid_shelf|unilib:dirt_black_with_turf_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semiarid_shelf|unilib:dirt_brown_with_turf_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semiarid_shelf|unilib:dirt_clayey_with_turf_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semiarid_shelf|unilib:dirt_sandy_with_turf_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|0.8|SHELF|LOWLAND
+default|gaia_cool_semiarid_shelf|unilib:dirt_silt_fine_with_turf_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|0.8|SHELF|LOWLAND
+
+# Cool semiarid highland
+default|gaia_cool_semiarid_highland|unilib:dirt_black_with_turf_cool_semiarid_highland|unilib:dirt_clayey_with_turf_cool_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semiarid_highland|unilib:dirt_brown_with_turf_cool_semiarid_highland|unilib:dirt_clayey_with_turf_cool_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semiarid_highland|unilib:dirt_ordinary_with_turf_cool_semiarid_highland|unilib:dirt_clayey_with_turf_cool_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semiarid_highland|unilib:dirt_sandy_with_turf_cool_semiarid_highland|unilib:dirt_clayey_with_turf_cool_semiarid_highland|0.8|HIGHLAND|SHELF
+default|gaia_cool_semiarid_highland|unilib:dirt_silt_fine_with_turf_cool_semiarid_highland|unilib:dirt_clayey_with_turf_cool_semiarid_highland|0.8|HIGHLAND|SHELF
+
+# Cool semiarid mountain
+
+# Cool semiarid strato
+
+# =================================================================================================
+# Cool arid biome ecosystems
+# =================================================================================================
+
+# Cool arid ocean
+
+# Cool arid beach
+default|gaia_cool_arid_beach|unilib:sand_silver|unilib:gravel_sandstone_silver|0.8|BEACH_MAX|BEACH_MIN
+
+# Cool arid coastal
+default|gaia_cool_arid_coastal|unilib:dirt_black|unilib:dirt_mud_dry|0.9|COASTAL|BEACH_MAX
+default|gaia_cool_arid_coastal|unilib:dirt_black_with_turf_cool_arid_coastal|unilib:dirt_mud_dry|0.5|COASTAL|BEACH_MAX
+default|gaia_cool_arid_coastal|unilib:gravel_sandstone_silver|unilib:dirt_mud_dry|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_arid_coastal|unilib:sand_ordinary|unilib:dirt_mud_dry|0.8|COASTAL|BEACH_MAX
+default|gaia_cool_arid_coastal|unilib:sand_pink|unilib:dirt_mud_dry|0.5|COASTAL|BEACH_MAX
+
+# Cool arid lowland
+default|gaia_cool_arid_lowland|unilib:dirt_black_with_turf_cool_arid_lowland|unilib:dirt_silt_coarse_with_turf_cool_arid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_arid_lowland|unilib:dirt_brown_with_turf_cool_arid_lowland|unilib:dirt_silt_coarse_with_turf_cool_arid_lowland|0.8|LOWLAND|COASTAL
+default|gaia_cool_arid_lowland|unilib:stone_gneiss_brown|unilib:dirt_silt_coarse_with_turf_cool_arid_lowland|0.9|LOWLAND|COASTAL
+default|gaia_cool_arid_lowland|unilib:stone_granite_dark|unilib:dirt_silt_coarse_with_turf_cool_arid_lowland|0.9|LOWLAND|COASTAL
+default|gaia_cool_arid_lowland|unilib:stone_granite_white|unilib:dirt_silt_coarse_with_turf_cool_arid_lowland|0.9|LOWLAND|COASTAL
+
+# Cool arid shelf
+default|gaia_cool_arid_shelf|unilib:dirt_black_with_turf_cool_arid_shelf|unilib:dirt_silt_fine_with_turf_cool_arid_shelf|0.9|SHELF|LOWLAND
+default|gaia_cool_arid_shelf|unilib:dirt_brown_with_turf_cool_arid_shelf|unilib:dirt_silt_fine_with_turf_cool_arid_shelf|0.9|SHELF|LOWLAND
+default|gaia_cool_arid_shelf|unilib:stone_granite_dark|unilib:dirt_silt_fine_with_turf_cool_arid_shelf|0.9|SHELF|LOWLAND
+
+# Cool arid highland
+default|gaia_cool_arid_highland|unilib:dirt_black_with_turf_cool_arid_highland|unilib:stone_limestone_beige|0.9|HIGHLAND|SHELF
+default|gaia_cool_arid_highland|unilib:dirt_brown_with_turf_cool_arid_highland|unilib:stone_limestone_beige|0.9|HIGHLAND|SHELF
+default|gaia_cool_arid_highland|unilib:stone_gneiss_brown|unilib:stone_limestone_beige|0.9|HIGHLAND|SHELF
+
+# Cool arid mountain
+
+# Cool arid strato
+
+# =================================================================================================
+# Cold humid biome ecosystems
+# =================================================================================================
+
+# Cold humid ocean
+
+# Cold humid beach
+
+# Cold humid coastal
+default|gaia_cold_humid_coastal|unilib:dirt_brown_with_cover_snow|unilib:dirt_permafrost_brown_with_cover_snow|0.8|COASTAL|BEACH_MAX
+rare|gaia_cold_humid_coastal|unilib:dirt_brown_with_turf_cold_humid_coastal|unilib:dirt_permafrost_brown_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_humid_coastal|unilib:dirt_permafrost_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_humid_coastal|unilib:dirt_permafrost_brown_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.9|COASTAL|BEACH_MAX
+fungi|gaia_cold_humid_coastal|unilib:dirt_permafrost_brown_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|COASTAL|BEACH_MAX
+default|gaia_cold_humid_coastal|unilib:dirt_permafrost_brown_dark_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.95|COASTAL|BEACH_MAX
+fungi|gaia_cold_humid_coastal|unilib:dirt_permafrost_brown_dark_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|COASTAL|BEACH_MAX
+# (Bonus material)
+default|gaia_cold_humid_coastal|unilib:clay_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.9|COASTAL|BEACH_MAX
+
+# Cold humid lowland
+default|gaia_cold_humid_lowland|unilib:dirt_brown_with_cover_snow|unilib:dirt_permafrost_brown_with_cover_snow|0.8|LOWLAND|COASTAL
+rare|gaia_cold_humid_lowland|unilib:dirt_brown_with_turf_cold_humid_lowland|unilib:dirt_permafrost_brown_with_cover_snow|0.8|LOWLAND|COASTAL
+#default|gaia_cold_humid_lowland|unilib:dirt_permafrost_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.8|LOWLAND|COASTAL
+default|gaia_cold_humid_lowland|unilib:dirt_permafrost_brown_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.9|LOWLAND|COASTAL
+fungi|gaia_cold_humid_lowland|unilib:dirt_permafrost_brown_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|LOWLAND|COASTAL
+default|gaia_cold_humid_lowland|unilib:dirt_permafrost_brown_dark_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.95|LOWLAND|COASTAL
+fungi|gaia_cold_humid_lowland|unilib:dirt_permafrost_brown_dark_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|LOWLAND|COASTAL
+# (Bonus material)
+default|gaia_cold_humid_lowland|unilib:clay_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.9|LOWLAND|COASTAL
+
+# Cold humid shelf
+default|gaia_cold_humid_shelf|unilib:dirt_brown_with_cover_snow|unilib:dirt_permafrost_brown_with_cover_snow|0.8|SHELF|LOWLAND
+rare|gaia_cold_humid_shelf|unilib:dirt_brown_with_turf_cold_humid_shelf|unilib:dirt_permafrost_brown_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_humid_shelf|unilib:dirt_permafrost_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_humid_shelf|unilib:dirt_permafrost_brown_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.9|SHELF|LOWLAND
+#fungi|gaia_cold_humid_shelf|unilib:dirt_permafrost_brown_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|SHELF|LOWLAND
+default|gaia_cold_humid_shelf|unilib:dirt_permafrost_brown_dark_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.95|SHELF|LOWLAND
+fungi|gaia_cold_humid_shelf|unilib:dirt_permafrost_brown_dark_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|SHELF|LOWLAND
+
+# Cold humid highland
+default|gaia_cold_humid_highland|unilib:dirt_brown_with_cover_snow|unilib:dirt_permafrost_brown_with_cover_snow|0.8|HIGHLAND|SHELF
+rare|gaia_cold_humid_highland|unilib:dirt_brown_with_turf_cold_humid_highland|unilib:dirt_permafrost_brown_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_humid_highland|unilib:dirt_permafrost_brown|unilib:dirt_permafrost_brown_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_humid_highland|unilib:dirt_permafrost_brown_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.9|HIGHLAND|SHELF
+#fungi|gaia_cold_humid_highland|unilib:dirt_permafrost_brown_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|HIGHLAND|SHELF
+#default|gaia_cold_humid_highland|unilib:dirt_permafrost_brown_dark_with_litter_stone|unilib:dirt_permafrost_brown_with_cover_snow|0.95|HIGHLAND|SHELF
+#fungi|gaia_cold_humid_highland|unilib:dirt_permafrost_brown_dark_with_moss|unilib:dirt_permafrost_brown_with_cover_snow|0.99|HIGHLAND|SHELF
+
+# Cold humid mountain
+
+# Cold humid strato
+
+# =================================================================================================
+# Cold semihumid biome ecosystems
+# =================================================================================================
+
+# Cold semihumid ocean
+
+# Cold semihumid beach
+
+# Cold semihumid coastal
+default|gaia_cold_semihumid_coastal|unilib:dirt_dark_with_cover_snow|unilib:dirt_permafrost_green_with_cover_snow|0.8|COASTAL|BEACH_MAX
+rare|gaia_cold_semihumid_coastal|unilib:dirt_dark_with_turf_cold_semihumid_coastal|unilib:dirt_permafrost_green_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_semihumid_coastal|unilib:dirt_permafrost_green|unilib:dirt_permafrost_green_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_semihumid_coastal|unilib:dirt_permafrost_green_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.9|COASTAL|BEACH_MAX
+fungi|gaia_cold_semihumid_coastal|unilib:dirt_permafrost_green_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|COASTAL|BEACH_MAX
+default|gaia_cold_semihumid_coastal|unilib:dirt_permafrost_green_dark_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.95|COASTAL|BEACH_MAX
+fungi|gaia_cold_semihumid_coastal|unilib:dirt_permafrost_green_dark_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|COASTAL|BEACH_MAX
+# (Bonus materials)
+default|gaia_cold_semihumid_coastal|unilib:clay_bentonite_calcium|unilib:dirt_permafrost_green_with_cover_snow|0.95|COASTAL|BEACH_MAX
+default|gaia_cold_semihumid_coastal|unilib:clay_bentonite_sodium|unilib:dirt_permafrost_green_with_cover_snow|0.95|COASTAL|BEACH_MAX
+
+# Cold semihumid lowland
+default|gaia_cold_semihumid_lowland|unilib:dirt_dark_with_cover_snow|unilib:dirt_permafrost_green_with_cover_snow|0.8|LOWLAND|COASTAL
+rare|gaia_cold_semihumid_lowland|unilib:dirt_dark_with_turf_cold_semihumid_lowland|unilib:dirt_permafrost_green_with_cover_snow|0.8|LOWLAND|COASTAL
+#default|gaia_cold_semihumid_lowland|unilib:dirt_permafrost_green|unilib:dirt_permafrost_green_with_cover_snow|0.8|LOWLAND|COASTAL
+default|gaia_cold_semihumid_lowland|unilib:dirt_permafrost_green_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.9|LOWLAND|COASTAL
+fungi|gaia_cold_semihumid_lowland|unilib:dirt_permafrost_green_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|LOWLAND|COASTAL
+default|gaia_cold_semihumid_lowland|unilib:dirt_permafrost_green_dark_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.95|LOWLAND|COASTAL
+fungi|gaia_cold_semihumid_lowland|unilib:dirt_permafrost_green_dark_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|LOWLAND|COASTAL
+# (Bonus materials)
+default|gaia_cold_semihumid_lowland|unilib:clay_bentonite_calcium|unilib:dirt_permafrost_green_with_cover_snow|0.95|LOWLAND|COASTAL
+default|gaia_cold_semihumid_lowland|unilib:clay_bentonite_sodium|unilib:dirt_permafrost_green_with_cover_snow|0.95|LOWLAND|COASTAL
+
+# Cold semihumid shelf
+default|gaia_cold_semihumid_shelf|unilib:dirt_dark_with_cover_snow|unilib:dirt_permafrost_green_with_cover_snow|0.8|SHELF|LOWLAND
+rare|gaia_cold_semihumid_shelf|unilib:dirt_dark_with_turf_cold_semihumid_shelf|unilib:dirt_permafrost_green_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_semihumid_shelf|unilib:dirt_permafrost_green|unilib:dirt_permafrost_green_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_semihumid_shelf|unilib:dirt_permafrost_green_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.9|SHELF|LOWLAND
+#fungi|gaia_cold_semihumid_shelf|unilib:dirt_permafrost_green_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|SHELF|LOWLAND
+default|gaia_cold_semihumid_shelf|unilib:dirt_permafrost_green_dark_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.95|SHELF|LOWLAND
+fungi|gaia_cold_semihumid_shelf|unilib:dirt_permafrost_green_dark_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|SHELF|LOWLAND
+
+# Cold semihumid highland
+default|gaia_cold_semihumid_highland|unilib:dirt_dark_with_cover_snow|unilib:dirt_permafrost_green_with_cover_snow|0.8|HIGHLAND|SHELF
+rare|gaia_cold_semihumid_highland|unilib:dirt_dark_with_turf_cold_semihumid_highland|unilib:dirt_permafrost_green_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_semihumid_highland|unilib:dirt_permafrost_green|unilib:dirt_permafrost_green_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_semihumid_highland|unilib:dirt_permafrost_green_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.9|HIGHLAND|SHELF
+#fungi|gaia_cold_semihumid_highland|unilib:dirt_permafrost_green_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|HIGHLAND|SHELF
+#default|gaia_cold_semihumid_highland|unilib:dirt_permafrost_green_dark_with_litter_stone|unilib:dirt_permafrost_green_with_cover_snow|0.95|HIGHLAND|SHELF
+#fungi|gaia_cold_semihumid_highland|unilib:dirt_permafrost_green_dark_with_moss|unilib:dirt_permafrost_green_with_cover_snow|0.99|HIGHLAND|SHELF
+
+# Cold semihumid mountain
+
+# Cold semihumid strato
+
+# =================================================================================================
+# Cold temperate biome ecosystems
+# =================================================================================================
+
+# Cold temperate ocean
+
+# Cold temperate beach
+
+# Cold temperate coastal
+default|gaia_cold_temperate_coastal|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_red_with_cover_snow|0.8|COASTAL|BEACH_MAX
+rare|gaia_cold_temperate_coastal|unilib:dirt_black_with_turf_cold_temperate_coastal|unilib:dirt_permafrost_red_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_temperate_coastal|unilib:dirt_permafrost_red|unilib:dirt_permafrost_red_with_cover_snow|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_temperate_coastal|unilib:dirt_permafrost_red_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.9|COASTAL|BEACH_MAX
+fungi|gaia_cold_temperate_coastal|unilib:dirt_permafrost_red_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|COASTAL|BEACH_MAX
+default|gaia_cold_temperate_coastal|unilib:dirt_permafrost_red_dark_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.95|COASTAL|BEACH_MAX
+fungi|gaia_cold_temperate_coastal|unilib:dirt_permafrost_red_dark_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|COASTAL|BEACH_MAX
+# (Bonus material)
+default|gaia_cold_temperate_coastal|unilib:clay_ordinary|unilib:dirt_permafrost_red_with_cover_snow|0.9|COASTAL|BEACH_MAX
+
+# Cold temperate lowland
+default|gaia_cold_temperate_lowland|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_red_with_cover_snow|0.8|LOWLAND|COASTAL
+rare|gaia_cold_temperate_lowland|unilib:dirt_black_with_turf_cold_temperate_lowland|unilib:dirt_permafrost_red_with_cover_snow|0.8|LOWLAND|COASTAL
+#default|gaia_cold_temperate_lowland|unilib:dirt_permafrost_red|unilib:dirt_permafrost_red_with_cover_snow|0.8|LOWLAND|COASTAL
+default|gaia_cold_temperate_lowland|unilib:dirt_permafrost_red_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.9|LOWLAND|COASTAL
+fungi|gaia_cold_temperate_lowland|unilib:dirt_permafrost_red_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|LOWLAND|COASTAL
+default|gaia_cold_temperate_lowland|unilib:dirt_permafrost_red_dark_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.95|LOWLAND|COASTAL
+fungi|gaia_cold_temperate_lowland|unilib:dirt_permafrost_red_dark_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|LOWLAND|COASTAL
+# (Bonus material)
+default|gaia_cold_temperate_lowland|unilib:clay_ordinary|unilib:dirt_permafrost_red_with_cover_snow|0.9|LOWLAND|COASTAL
+
+# Cold temperate shelf
+default|gaia_cold_temperate_shelf|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_red_with_cover_snow|0.8|SHELF|LOWLAND
+rare|gaia_cold_temperate_shelf|unilib:dirt_black_with_turf_cold_temperate_shelf|unilib:dirt_permafrost_red_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_temperate_shelf|unilib:dirt_permafrost_red|unilib:dirt_permafrost_red_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_temperate_shelf|unilib:dirt_permafrost_red_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.9|SHELF|LOWLAND
+#fungi|gaia_cold_temperate_shelf|unilib:dirt_permafrost_red_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|SHELF|LOWLAND
+default|gaia_cold_temperate_shelf|unilib:dirt_permafrost_red_dark_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.95|SHELF|LOWLAND
+fungi|gaia_cold_temperate_shelf|unilib:dirt_permafrost_red_dark_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|SHELF|LOWLAND
+
+# Cold temperate highland
+default|gaia_cold_temperate_highland|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_red_with_cover_snow|0.8|HIGHLAND|SHELF
+rare|gaia_cold_temperate_highland|unilib:dirt_black_with_turf_cold_temperate_highland|unilib:dirt_permafrost_red_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_temperate_highland|unilib:dirt_permafrost_red|unilib:dirt_permafrost_red_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_temperate_highland|unilib:dirt_permafrost_red_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.9|HIGHLAND|SHELF
+#fungi|gaia_cold_temperate_highland|unilib:dirt_permafrost_red_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|HIGHLAND|SHELF
+#default|gaia_cold_temperate_highland|unilib:dirt_permafrost_red_dark_with_litter_stone|unilib:dirt_permafrost_red_with_cover_snow|0.95|HIGHLAND|SHELF
+#fungi|gaia_cold_temperate_highland|unilib:dirt_permafrost_red_dark_with_moss|unilib:dirt_permafrost_red_with_cover_snow|0.99|HIGHLAND|SHELF
+
+# Cold temperate mountain
+
+# Cold temperate strato
+
+# =================================================================================================
+# Cold semiarid biome ecosystems
+# =================================================================================================
+
+# Cold semiarid ocean
+
+# Cold semiarid beach
+
+# Cold semiarid coastal
+default|gaia_cold_semiarid_coastal|unilib:dirt_dry|unilib:dirt_permafrost_ordinary|0.8|COASTAL|BEACH_MAX
+rare|gaia_cold_semiarid_coastal|unilib:dirt_parched_with_turf_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary_with_cover_snow|unilib:dirt_permafrost_ordinary|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary_with_litter_stone|unilib:dirt_permafrost_ordinary|0.9|COASTAL|BEACH_MAX
+fungi|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary_with_moss|unilib:dirt_permafrost_ordinary|0.99|COASTAL|BEACH_MAX
+default|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_dark_with_litter_stone|unilib:dirt_permafrost_ordinary|0.95|COASTAL|BEACH_MAX
+fungi|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_dark_with_moss|unilib:dirt_permafrost_ordinary|0.99|COASTAL|BEACH_MAX
+# (Exposed stone, to match the boulder decorations)
+default|gaia_cold_semiarid_coastal|unilib:stone_basalt_dark|unilib:dirt_permafrost_ordinary|0.9|COASTAL|BEACH_MAX
+default|gaia_cold_semiarid_coastal|unilib:stone_limestone_white|unilib:dirt_permafrost_ordinary|0.9|COASTAL|BEACH_MAX
+default|gaia_cold_semiarid_coastal|unilib:stone_sandstone_silver|unilib:dirt_permafrost_ordinary|0.9|COASTAL|BEACH_MAX
+
+# Cold semiarid lowland
+default|gaia_cold_semiarid_lowland|unilib:dirt_parched_with_cover_snow|unilib:dirt_permafrost_dark|0.8|LOWLAND|COASTAL
+rare|gaia_cold_semiarid_lowland|unilib:dirt_parched_with_turf_cold_semiarid_lowland|unilib:dirt_permafrost_dark|0.8|LOWLAND|COASTAL
+#default|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_ordinary_with_cover_snow|unilib:dirt_permafrost_dark|0.8|LOWLAND|COASTAL
+default|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_ordinary_with_litter_stone|unilib:dirt_permafrost_dark|0.9|LOWLAND|COASTAL
+fungi|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_ordinary_with_moss|unilib:dirt_permafrost_dark|0.99|LOWLAND|COASTAL
+default|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark_with_litter_stone|unilib:dirt_permafrost_dark|0.95|LOWLAND|COASTAL
+fungi|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark_with_moss|unilib:dirt_permafrost_dark|0.99|LOWLAND|COASTAL
+# (Exposed stone, to match the boulder decorations)
+default|gaia_cold_semiarid_lowland|unilib:stone_basalt_dark|unilib:dirt_permafrost_dark|0.9|LOWLAND|COASTAL
+default|gaia_cold_semiarid_lowland|unilib:stone_limestone_white|unilib:dirt_permafrost_dark|0.9|LOWLAND|COASTAL
+default|gaia_cold_semiarid_lowland|unilib:stone_sandstone_silver|unilib:dirt_permafrost_dark|0.9|LOWLAND|COASTAL
+
+# Cold semiarid shelf
+default|gaia_cold_semiarid_shelf|unilib:dirt_parched_with_cover_snow|unilib:dirt_permafrost_dark_with_cover_snow|0.8|SHELF|LOWLAND
+rare|gaia_cold_semiarid_shelf|unilib:dirt_parched_with_turf_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_ordinary|unilib:dirt_permafrost_dark_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_ordinary_with_litter_stone|unilib:dirt_permafrost_dark_with_cover_snow|0.9|SHELF|LOWLAND
+#fungi|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_ordinary_with_moss|unilib:dirt_permafrost_dark_with_cover_snow|0.99|SHELF|LOWLAND
+default|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_litter_stone|unilib:dirt_permafrost_dark_with_cover_snow|0.95|SHELF|LOWLAND
+fungi|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_moss|unilib:dirt_permafrost_dark_with_cover_snow|0.99|SHELF|LOWLAND
+
+# Cold semiarid highland
+default|gaia_cold_semiarid_highland|unilib:dirt_parched_with_cover_snow|unilib:dirt_permafrost_dark_with_cover_snow|0.8|HIGHLAND|SHELF
+rare|gaia_cold_semiarid_highland|unilib:dirt_parched_with_turf_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_semiarid_highland|unilib:dirt_permafrost_ordinary|unilib:dirt_permafrost_dark_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_semiarid_highland|unilib:dirt_permafrost_ordinary_with_litter_stone|unilib:dirt_permafrost_dark_with_cover_snow|0.9|HIGHLAND|SHELF
+#fungi|gaia_cold_semiarid_highland|unilib:dirt_permafrost_ordinary_with_moss|unilib:dirt_permafrost_dark_with_cover_snow|0.99|HIGHLAND|SHELF
+#default|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_litter_stone|unilib:dirt_permafrost_dark_with_cover_snow|0.95|HIGHLAND|SHELF
+#fungi|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_moss|unilib:dirt_permafrost_dark_with_cover_snow|0.99|HIGHLAND|SHELF
+
+# Cold semiarid mountain
+
+# Cold semiarid strato
+
+# =================================================================================================
+# Cold arid biome ecosystems
+# =================================================================================================
+
+# Cold arid ocean
+
+# Cold arid beach
+
+# Cold arid coastal
+default|gaia_cold_arid_coastal|unilib:dirt_mud_dry|unilib:dirt_permafrost_blue|0.8|COASTAL|BEACH_MAX
+rare|gaia_cold_arid_coastal|unilib:dirt_black_with_turf_cold_arid_coastal|unilib:dirt_permafrost_blue|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_arid_coastal|unilib:dirt_permafrost_blue_with_cover_snow|unilib:dirt_permafrost_blue|0.8|COASTAL|BEACH_MAX
+default|gaia_cold_arid_coastal|unilib:dirt_permafrost_blue_with_litter_stone|unilib:dirt_permafrost_blue|0.9|COASTAL|BEACH_MAX
+fungi|gaia_cold_arid_coastal|unilib:dirt_permafrost_blue_with_moss|unilib:dirt_permafrost_blue|0.99|COASTAL|BEACH_MAX
+default|gaia_cold_arid_coastal|unilib:dirt_permafrost_blue_dark_with_litter_stone|unilib:dirt_permafrost_blue|0.95|COASTAL|BEACH_MAX
+fungi|gaia_cold_arid_coastal|unilib:dirt_permafrost_blue_dark_with_moss|unilib:dirt_permafrost_blue|0.99|COASTAL|BEACH_MAX
+# (Exposed stone, to match the boulder decorations)
+default|gaia_cold_arid_coastal|unilib:stone_basalt_dark|unilib:dirt_permafrost_blue|0.9|COASTAL|BEACH_MAX
+default|gaia_cold_arid_coastal|unilib:stone_bluestone|unilib:dirt_permafrost_blue|0.9|COASTAL|BEACH_MAX
+default|gaia_cold_arid_coastal|unilib:stone_sandstone_silver|unilib:dirt_permafrost_blue|0.9|COASTAL|BEACH_MAX
+
+# Cold arid lowland
+default|gaia_cold_arid_lowland|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_blue|0.8|LOWLAND|COASTAL
+rare|gaia_cold_arid_lowland|unilib:dirt_black_with_turf_cold_arid_lowland|unilib:dirt_permafrost_blue|0.8|LOWLAND|COASTAL
+#default|gaia_cold_arid_lowland|unilib:dirt_permafrost_blue_with_cover_snow|unilib:dirt_permafrost_blue|0.8|LOWLAND|COASTAL
+default|gaia_cold_arid_lowland|unilib:dirt_permafrost_blue_with_litter_stone|unilib:dirt_permafrost_blue|0.9|LOWLAND|COASTAL
+fungi|gaia_cold_arid_lowland|unilib:dirt_permafrost_blue_with_moss|unilib:dirt_permafrost_blue|0.99|LOWLAND|COASTAL
+default|gaia_cold_arid_lowland|unilib:dirt_permafrost_blue_dark_with_litter_stone|unilib:dirt_permafrost_blue|0.95|LOWLAND|COASTAL
+fungi|gaia_cold_arid_lowland|unilib:dirt_permafrost_blue_dark_with_moss|unilib:dirt_permafrost_blue|0.99|LOWLAND|COASTAL
+# (Exposed stone, to match the boulder decorations)
+default|gaia_cold_arid_lowland|unilib:stone_basalt_dark|unilib:dirt_permafrost_blue|0.95|LOWLAND|COASTAL
+default|gaia_cold_arid_lowland|unilib:stone_granite_white|unilib:dirt_permafrost_blue|0.95|LOWLAND|COASTAL
+default|gaia_cold_arid_lowland|unilib:stone_andesite_grey|unilib:dirt_permafrost_blue|0.95|LOWLAND|COASTAL
+
+# Cold arid shelf
+default|gaia_cold_arid_shelf|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_blue_with_cover_snow|0.8|SHELF|LOWLAND
+rare|gaia_cold_arid_shelf|unilib:dirt_black_with_turf_cold_arid_shelf|unilib:dirt_permafrost_blue_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_arid_shelf|unilib:dirt_permafrost_blue|unilib:dirt_permafrost_blue_with_cover_snow|0.8|SHELF|LOWLAND
+#default|gaia_cold_arid_shelf|unilib:dirt_permafrost_blue_with_litter_stone|unilib:dirt_permafrost_blue_with_cover_snow|0.9|SHELF|LOWLAND
+#fungi|gaia_cold_arid_shelf|unilib:dirt_permafrost_blue_with_moss|unilib:dirt_permafrost_blue_with_cover_snow|0.99|SHELF|LOWLAND
+default|gaia_cold_arid_shelf|unilib:dirt_permafrost_blue_dark_with_litter_stone|unilib:dirt_permafrost_blue_with_cover_snow|0.95|SHELF|LOWLAND
+fungi|gaia_cold_arid_shelf|unilib:dirt_permafrost_blue_dark_with_moss|unilib:dirt_permafrost_blue_with_cover_snow|0.99|SHELF|LOWLAND
+
+# Cold arid highland
+default|gaia_cold_arid_highland|unilib:dirt_black_with_cover_snow|unilib:dirt_permafrost_blue_with_cover_snow|0.8|HIGHLAND|SHELF
+rare|gaia_cold_arid_highland|unilib:dirt_black_with_turf_cold_arid_highland|unilib:dirt_permafrost_blue_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_arid_highland|unilib:dirt_permafrost_blue|unilib:dirt_permafrost_blue_with_cover_snow|0.8|HIGHLAND|SHELF
+#default|gaia_cold_arid_highland|unilib:dirt_permafrost_blue_with_litter_stone|unilib:dirt_permafrost_blue_with_cover_snow|0.9|HIGHLAND|SHELF
+#fungi|gaia_cold_arid_highland|unilib:dirt_permafrost_blue_with_moss|unilib:dirt_permafrost_blue_with_cover_snow|0.99|HIGHLAND|SHELF
+#default|gaia_cold_arid_highland|unilib:dirt_permafrost_blue_dark_with_litter_stone|unilib:dirt_permafrost_blue_with_cover_snow|0.95|HIGHLAND|SHELF
+#fungi|gaia_cold_arid_highland|unilib:dirt_permafrost_blue_dark_with_moss|unilib:dirt_permafrost_blue_with_cover_snow|0.99|HIGHLAND|SHELF
+
+# Cold arid mountain
+
+# Cold arid strato
+
+# =================================================================================================
+# Special biome ecosystems
+# =================================================================================================
+
+# Hot desert land
+default|gaia_hot_desert_land|unilib:sand_ordinary|unilib:sand_desert|0.8||BEACH_MAX
+default|gaia_hot_desert_land|unilib:stone_desert|unilib:sand_desert|0.8||BEACH_MAX
+
+# Hot desert ocean
+
+# Warm desert land
+default|gaia_warm_desert_land|unilib:sand_white|unilib:sand_ordinary|0.8||BEACH_MAX
+default|gaia_warm_desert_land|unilib:stone_sandstone_ordinary|unilib:sand_ordinary|0.8||BEACH_MAX
+
+# Warm desert ocean
+
+# Mild desert land
+default|gaia_mild_desert_land|unilib:sand_white|unilib:sand_pink|0.8||BEACH_MAX
+default|gaia_mild_desert_land|unilib:stone_sandstone_pink|unilib:sand_pink|0.8||BEACH_MAX
+
+# Mild desert ocean
+
+# Cool desert land
+default|gaia_cool_desert_land|unilib:sand_silica|unilib:sand_silver|0.8||BEACH_MAX
+default|gaia_cool_desert_land|unilib:stone_sandstone_silver|unilib:sand_silver|0.8||BEACH_MAX
+
+# Cool desert ocean
+
+# Cold desert land
+default|gaia_cold_desert_land|unilib:ice_ordinary|unilib:snow_ordinary_block|0.7||BEACH_MAX
+default|gaia_cold_desert_land|unilib:ice_blue|unilib:snow_ordinary_block|0.7||BEACH_MAX
+
+# Cold desert ocean
+
+# =================================================================================================
+# Generic biome ecosystems
+# =================================================================================================
+
+# =================================================================================================
+# Misc
+# =================================================================================================
+
+# Underwater rare clays/sands (can appear in any biome with ordinary sand)
+rare||unilib:clay_bentonite_calcium|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:clay_bentonite_sodium|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_cassiterite|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_diatomite|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_garnet|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_glauconite|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_mineral_basaltic|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_mineral_granitic|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_ordinary_with_oil_crude|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_quartz|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN
+rare||unilib:sand_sulphur|unilib:sand_ordinary|0.98|BEACH_MIN|OCEAN

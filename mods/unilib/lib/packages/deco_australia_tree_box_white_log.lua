@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_box_white_log = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,22 +19,21 @@ function unilib.pkg.deco_australia_tree_box_white_log.init()
 
     return {
         description = "White box tree log as decoration",
-        depends = {
-            "biome_australia_victorian_forests",
-            "dirt_ordinary",
-            "mushroom_brown",
-            "tree_box_white",
-        },
+        depends = {"biome_australia_victorian_forests", "mushroom_brown", "tree_box_white"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
     }
 
 end
 
-function unilib.pkg.deco_australia_tree_box_white_log.exec()
+function unilib.pkg.deco_australia_tree_box_white_log.post()
 
-    unilib.register_decoration_now("australia_tree_box_white_log", nil, {
+    unilib.register_decoration_complete("australia_tree_box_white_log", nil, {
         -- From australia/biome_victorian_forests.lua
         biomes = "australia_victorian_forests",
-        place_on = "unilib:dirt_ordinary_with_turf",
+        place_on = {
+            "unilib:dirt_ordinary_with_turf",
+            "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+        },
         y_max = 175,
         y_min = 36,
     })

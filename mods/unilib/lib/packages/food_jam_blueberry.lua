@@ -9,7 +9,7 @@
 unilib.pkg.food_jam_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_jam_blueberry.exec()
         description = S("Blueberry Jam"),
         tiles = {"unilib_food_jam_blueberry.png"},
         groups = {
-            attached_node = 1, dig_immediate = 3, eatable = 1, food_vegan = 1, food_sweet = 1,
+            attached_node = 1, dig_immediate = 3, eatable = 1, food_sweet = 1, food_vegan = 1,
         },
         -- (no sounds)
 
@@ -46,12 +46,22 @@ function unilib.pkg.food_jam_blueberry.exec()
         walkable = false,
         wield_image = "unilib_food_jam_blueberry.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_jam_blueberry", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_jam_blueberry", 8),
     })
 
 end
 
 function unilib.pkg.food_jam_blueberry.post()
+
+    local replace_table = { {"group:wool", "unilib:crop_cotton_harvest"} }
+    if unilib.global.fallback_empty_bucket ~= nil then
+
+        table.insert(
+            replace_table,
+            {"unilib:food_hotpot_blueberry_cooked", unilib.global.fallback_empty_bucket}
+        )
+
+    end
 
     unilib.register_craft({
         -- From cucina_vegana:blueberry_jam
@@ -61,10 +71,11 @@ function unilib.pkg.food_jam_blueberry.post()
             {"group:wool", "", ""},
             {"unilib:vessel_bottle_glass_empty", "", ""},
         },
-        replacements = {
-            {"unilib:food_hotpot_blueberry_cooked", unilib.fallback_empty_bucket},
-            {"group:wool", "unilib:crop_cotton_harvest"},
-        },
+--      replacements = {
+--          {"unilib:food_hotpot_blueberry_cooked", unilib.global.fallback_empty_bucket},
+--          {"group:wool", "unilib:crop_cotton_harvest"},
+--      },
+        replacements = replace_table,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.admin_light_invisible = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,12 +41,12 @@ function unilib.pkg.admin_light_invisible.exec()
             orig_name,
             mode,
             {
-                description = unilib.brackets(
+                description = unilib.utils.brackets(
                     S("Invisible Light Bulb"), S("Strength %s"):format(i)
                 ),
                 -- (no tiles)
                 -- N.B. not_in_creative_inventory not in original code
-                groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+                groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
                 -- (no sounds)
 
                 drawtype = "airlike",
@@ -54,6 +54,8 @@ function unilib.pkg.admin_light_invisible.exec()
                 inventory_image = "unilib_metal_steel_block.png" ..
                         "^unilib_mineral_mese_crystal_fragment.png" ..
                         "^unilib_numeric_overlay_" .. i .. ".png",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 light_source = 14,
                 paramtype = "light",
                 pointable = false,

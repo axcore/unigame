@@ -9,7 +9,7 @@
 unilib.pkg.food_sushi_imitation = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,16 +33,16 @@ function unilib.pkg.food_sushi_imitation.exec()
         inventory_image = "unilib_food_sushi_imitation.png",
         groups = {eatable = 1, food = 1, food_vegan = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_sushi_imitation", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_sushi_imitation", 4),
     })
-    if unilib.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_papyrus_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:vegan_sushi
             output = "unilib:food_sushi_imitation",
             recipe = {
                 {"unilib:food_fish_imitation", "unilib:food_rice_brown_raw", ""},
-                {"unilib:plant_papyrus_ordinary", "", ""}
+                {"unilib:plant_papyrus_ordinary", "", ""},
             },
             replacements = {
                 {"unilib:food_rice_brown_raw", "unilib:utensil_bowl_glass"},
@@ -50,14 +50,14 @@ function unilib.pkg.food_sushi_imitation.exec()
         })
 
     end
-    if unilib.pkg_executed_table["plant_kelp_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["plant_kelp_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:vegan_sushi
             output = "unilib:food_sushi_imitation",
             recipe = {
                 {"unilib:food_fish_imitation", "unilib:food_rice_brown_raw", ""},
-                {"unilib:plant_kelp_ordinary", "", ""}
+                {"unilib:plant_kelp_ordinary", "", ""},
             },
         })
 

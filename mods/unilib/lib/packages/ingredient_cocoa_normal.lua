@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_cocoa_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cacaotree.add_mode
+local mode = unilib.global.imported_mod_table.cacaotree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

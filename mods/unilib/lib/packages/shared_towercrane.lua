@@ -9,7 +9,8 @@
 unilib.pkg.shared_towercrane = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 -- Minetest settings provide maximum crane/rope sizes. This is the minium value
 local crane_min_size = 8
@@ -19,7 +20,7 @@ local days_without_use = 365
 --      crashes
 local departed_player_table = {}
 -- Flag (original to unilib), set to true on first call to .register_crane(), as
---      minetest.register_on_joinplayer() etc only needs to be called once
+--      core.register_on_joinplayer() etc only needs to be called once
 local first_crane_flag = false
 
 ---------------------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ local function chat(player, text)
     -- Adapted from towercrane/init.lua, was .chat()
 
     if player ~= nil then
-        minetest.chat_send_player(player, text)
+        core.chat_send_player(player, text)
     end
 
 end
@@ -87,12 +88,12 @@ local function check_space(pos, dir, height, width, owner, part_name)
 
     local check = function(pos, node_name, arg_table)
 
-        if minetest.get_node(pos).name ~= "air" then
+        if core.get_node(pos).name ~= "air" then
 
             arg_table.res = false
             chat(owner, S("There is not enough space to erect this crane!"))
 
-        elseif minetest.is_protected(pos, arg_table.owner) then
+        elseif core.is_protected(pos, arg_table.owner) then
 
             arg_table.res = false
             chat(owner, S("This crane cannot be erected in a protected area!"))
@@ -112,12 +113,7 @@ local function construct_crane(pos, dir, height, width, part_name)
     -- Adapted from towercrane/init.lua, was .construct_crane()
 
     local add = function(pos, node_name, arg_table)
-
-        minetest.add_node(
-            pos,
-            {name = node_name, param2 = minetest.dir_to_facedir(arg_table.dir)}
-        )
-
+        core.add_node(pos, {name = node_name, param2 = core.dir_to_facedir(arg_table.dir)})
     end
 
     local arg_table = {dir = dir}
@@ -142,12 +138,12 @@ local function get_formspec(height, width, max_height, max_width)
         "button_exit[1,2;2,1;exit;"..S("Build").."]"
     ]]--
     return "size[5,3]" ..
-        "label[0,0;" .. S("Size of construction area") .. "]" ..
-        "label[0.5,0.5;" .. S("Example: 8,8") .. "]" ..
-        "label[0.5,1;" .. S("Maximum size") .. ": " .. tostring(max_height) .. "," ..
+        "label[0,0;" .. FS("Size of construction area") .. "]" ..
+        "label[0.5,0.5;" .. FS("Example") .. ": 8,8" .. "]" ..
+        "label[0.5,1;" .. FS("Maximum size") .. ": " .. tostring(max_height) .. "," ..
                 tostring(max_width) .. "]" ..
-        "field[0.3,2.5;3,1;size;" .. S("height,width") .. ";" .. text .. "]" ..
-        "button_exit[3,2.2;2,1;exit;" .. S("Build") .. "]"
+        "field[0.3,2.5;3,1;size;" .. FS("height,width") .. ";" .. text .. "]" ..
+        "button_exit[3,2.2;2,1;exit;" .. FS("Build") .. "]"
 
 end
 
@@ -157,8 +153,8 @@ local function build_crane_up(pos, owner, height, width, max_height, max_width, 
 
     if height > 0 and width > 0 then
 
-        local meta = minetest.get_meta(pos)
-        local dir = minetest.string_to_pos(meta:get_string("dir"))
+        local meta = core.get_meta(pos)
+        local dir = core.string_to_pos(meta:get_string("dir"))
         if dir then
 
             if check_space(pos, dir, height, width, owner, part_name) then
@@ -190,8 +186,8 @@ local function get_crane_data_main(pos)
 
     -- Adapted from towercrane/init.lua, was .get_crane_data()
 
-    local meta = minetest.get_meta(pos)
-    local dir = minetest.string_to_pos(meta:get_string("dir"))
+    local meta = core.get_meta(pos)
+    local dir = core.string_to_pos(meta:get_string("dir"))
     local owner = meta:get_string("owner")
     local height = meta:get_int("height")
     local width = meta:get_int("width")
@@ -216,8 +212,8 @@ local function turn_left(dir)
 
     -- Adapted from towercrane/init.lua, was .turnleft()
 
-    local facedir = minetest.dir_to_facedir(dir)
-    return minetest.facedir_to_dir((facedir + 3) % 4)
+    local facedir = core.dir_to_facedir(dir)
+    return core.facedir_to_dir((facedir + 3) % 4)
 
 end
 
@@ -225,8 +221,8 @@ local function turn_right(dir)
 
     -- Adapted from towercrane/init.lua, was .turnright()
 
-    local facedir = minetest.dir_to_facedir(dir)
-    return minetest.facedir_to_dir((facedir + 1) % 4)
+    local facedir = core.dir_to_facedir(dir)
+    return core.facedir_to_dir((facedir + 1) % 4)
 
 end
 
@@ -242,7 +238,7 @@ local function calc_construction_area(pos)
         local pos1 = vector.add(pos, vector.multiply(dir, data.width / 2))
         dir = turn_left(dir)
         pos1 = vector.add(pos1, vector.multiply(dir, 1))
-        pos1.y = pos.y - 2 + data.height - unilib.crane_rope_length
+        pos1.y = pos.y - 2 + data.height - unilib.setting.crane_rope_length
 
         -- pos2 = far/left/above
         local pos2 = vector.add(pos1, vector.multiply(dir, data.width - 1))
@@ -296,7 +292,7 @@ local function is_crane_running_control(pos)
     -- Adapted from towercrane/control.lua, was .is_crane_running()
     -- "pos" is the switch position
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     return meta:get_int("running") == 1
 
 end
@@ -316,18 +312,18 @@ local function is_my_crane_main(pos, player)
     -- Adapted from towercrane/init.lua, was .is_my_crane()
     -- "pos" is the base position
 
-    if minetest.check_player_privs(player, "server") then
+    if core.check_player_privs(player, "server") then
         return true
     end
 
     -- Check protection
     local player_name = player and player:get_player_name() or ""
-    if minetest.is_protected(pos, player_name) then
+    if core.is_protected(pos, player_name) then
         return false
     end
 
     -- Check owner
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     if not meta or player_name ~= meta:get_string("owner") then
         return false
     end
@@ -351,7 +347,7 @@ local function pos_to_string(pos)
     -- Adapted from towercrane/init.lua and control.lua, was P2S()
 
     if pos then
-        return minetest.pos_to_string(pos)
+        return core.pos_to_string(pos)
     end
 
 end
@@ -361,8 +357,8 @@ local function store_last_used(pos)
     -- Adapted from towercrane/control.lua, was .store_last_used()
     -- "pos" is the switch position
 
-    local meta = minetest.get_meta(pos)
-    meta:set_int("last_used", minetest.get_day_count() + days_without_use)
+    local meta = core.get_meta(pos)
+    meta:set_int("last_used", core.get_day_count() + days_without_use)
 
 end
 
@@ -378,7 +374,7 @@ local function place_player(pos, player)
             local new_pos = vector.add(pos, data.dir)
             new_pos.y = new_pos.y - 1
             player:set_pos(new_pos)
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("last_known_pos", pos_to_string(new_pos))
 
         end
@@ -391,32 +387,34 @@ local function reset_operator_privs(player)
 
     -- Adapted from towercrane/control.lua, was .reset_operator_privs()
 
-    local privs = minetest.get_player_privs(player:get_player_name())
+    local privs = core.get_player_privs(player:get_player_name())
     local physics = player:get_physics_override()
     if privs and physics then
 
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_pos", "")
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_pos", "")
 
         -- Restore the player privs default values
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_is_operator", 0)
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_player_physics_locked", 0)
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_is_operator", 0)
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_player_physics_locked", 0)
         privs["fast"] =
-            unilib.get_player_attribute(player, "pkg_shared_towercrane_fast") == "true" or nil
+            unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_fast") == "true" or nil
         privs["fly"] =
-            unilib.get_player_attribute(player, "pkg_shared_towercrane_fly") == "true" or nil
-        physics.speed = tonumber(unilib.get_player_attribute(player, "pkg_shared_towercrane_speed"))
+            unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_fly") == "true" or nil
+        physics.speed = tonumber(
+            unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_speed")
+        )
         if physics.speed == 0 or physics.speed == nil then
             physics.speed = 1
         end
 
         -- Delete stored default values
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_fast", "")
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_fly", "")
-        unilib.set_player_attribute(player, "pkg_shared_towercrane_speed", "")
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_fast", "")
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_fly", "")
+        unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_speed", "")
 
         -- Write back
         player:set_physics_override(physics)
-        minetest.set_player_privs(player:get_player_name(), privs)
+        core.set_player_privs(player:get_player_name(), privs)
 
     end
 
@@ -433,7 +431,7 @@ local function control_player(pos, pos1, pos2, player_name)
 
     end
 
-    local player = player_name and minetest.get_player_by_name(player_name)
+    local player = player_name and core.get_player_by_name(player_name)
     if player then
 
         if is_crane_running_control(pos) then
@@ -486,17 +484,17 @@ local function control_player(pos, pos1, pos2, player_name)
                 end
 
                 -- Check if a protected area is violated
-                if correction == false and minetest.is_protected(pl_pos, player_name) then
+                if correction == false and core.is_protected(pl_pos, player_name) then
 
                     chat(player_name, S("This crane cannot be erected in a protected area!"))
                     correction = true
 
                 end
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 if correction == true then
 
-                    local last_pos = minetest.string_to_pos(meta:get_string("last_known_pos"))
+                    local last_pos = core.string_to_pos(meta:get_string("last_known_pos"))
                     if last_pos then
                         player:set_pos(last_pos)
                     end
@@ -508,7 +506,7 @@ local function control_player(pos, pos1, pos2, player_name)
 
                 end
 
-                minetest.after(1, control_player, pos, pos1, pos2, player_name)
+                core.after(1, control_player, pos, pos1, pos2, player_name)
 
             end
 
@@ -522,7 +520,7 @@ local function control_player(pos, pos1, pos2, player_name)
 
     else
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         meta:set_int("running", 0)
 
     end
@@ -533,12 +531,12 @@ local function get_node_lvm(pos)
 
     -- Adapted from towercrane/init.lua, was .get_node_lvm()
 
-    local node = minetest.get_node_or_nil(pos)
+    local node = core.get_node_or_nil(pos)
     if node then
         return node
     end
 
-    local vm = minetest.get_voxel_manip()
+    local vm = core.get_voxel_manip()
     local MinEdge, MaxEdge = vm:read_from_map(pos, pos)
     local data = vm:get_data()
     local param2_data = vm:get_param2_data()
@@ -547,7 +545,7 @@ local function get_node_lvm(pos)
     if data[idx] and param2_data[idx] then
 
         return {
-            name = minetest.get_name_from_content_id(data[idx]),
+            name = core.get_name_from_content_id(data[idx]),
             param2 = param2_data[idx]
         }
 
@@ -566,7 +564,7 @@ local function remove_crane(pos, dir, height, width, part_name)
         local node = get_node_lvm(pos)
         if node.name == node_name or
                 node.name == "unilib:crane_" .. part_name .. "_mast_ctrl_on" then
-            minetest.remove_node(pos)
+            core.remove_node(pos)
         end
 
     end
@@ -584,7 +582,7 @@ local function get_crane_down(pos, max_height, max_width, part_name)
     if data then
 
         remove_crane(pos, data.dir, data.height, data.width, part_name)
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         meta:set_string("formspec", get_formspec(data.height, data.width, max_height, max_width))
 
     end
@@ -596,13 +594,16 @@ local function get_my_crane_pos(player)
     -- Adapted from towercrane/control.lua, was .get_my_crane_pos()
 
     -- Check operator state
-    if tonumber(unilib.get_player_attribute(player, "pkg_shared_towercrane_is_operator")) ~= 1 then
+    if tonumber(
+        unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_is_operator")
+    ) ~= 1 then
         return
     end
 
     -- Check owner
-    local pos =
-        minetest.string_to_pos(unilib.get_player_attribute(player, "pkg_shared_towercrane_pos"))
+    local pos = core.string_to_pos(
+        unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_pos")
+    )
     local player_name = (player and player:get_player_name()) or ""
     local data = get_crane_data_control(pos)
     if not data or player_name ~= data.owner then
@@ -610,7 +611,7 @@ local function get_my_crane_pos(player)
     end
 
     -- Check protection
-    if minetest.is_protected(pos, player_name) then
+    if core.is_protected(pos, player_name) then
         return
     end
 
@@ -623,7 +624,9 @@ local function is_operator(player)
 
     -- Adapted from towercrane/control.lua, was .is_operator()
 
-    if tonumber(unilib.get_player_attribute(player, "pkg_shared_towercrane_is_operator")) ~= 1 then
+    if tonumber(unilib.utils.get_player_attribute(
+        player, "pkg_shared_towercrane_is_operator")
+    ) ~= 1 then
         return false
     else
         return true
@@ -635,42 +638,47 @@ local function set_operator_privs(player, pos)
 
     -- Adapted from towercrane/control.lua, was .set_operator_privs()
 
-    local privs = minetest.get_player_privs(player:get_player_name())
+    local privs = core.get_player_privs(player:get_player_name())
     local physics = player:get_physics_override()
 
     -- Check access conflicts with other mods
-    if unilib.get_player_attribute(player, "pkg_shared_towercrane_player_physics_locked") == "" or
-            tonumber(
-                unilib.get_player_attribute(player, "pkg_shared_towercrane_player_physics_locked")
-            ) == 0 then
+    if unilib.utils.get_player_attribute(
+        player, "pkg_shared_towercrane_player_physics_locked"
+    ) == "" or tonumber(
+        unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_player_physics_locked")
+    ) == 0 then
 
         if pos and privs and physics then
 
-            unilib.set_player_attribute(player, "pkg_shared_towercrane_pos", pos_to_string(pos))
+            unilib.utils.set_player_attribute(
+                player, "pkg_shared_towercrane_pos", pos_to_string(pos)
+            )
 
             -- Store the player privs default values
-            unilib.set_player_attribute(
+            unilib.utils.set_player_attribute(
                 player,
                 "pkg_shared_towercrane_fast",
                 privs["fast"] and "true" or "false"
             )
-            unilib.set_player_attribute(
+            unilib.utils.set_player_attribute(
                 player,
                 "pkg_shared_towercrane_fly",
                 privs["fly"] and "true" or "false"
             )
-            unilib.set_player_attribute(player, "pkg_shared_towercrane_speed", physics.speed)
+            unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_speed", physics.speed)
 
             -- Set operator privs
-            unilib.set_player_attribute(player, "pkg_shared_towercrane_is_operator", 1)
-            unilib.set_player_attribute(player, "pkg_shared_towercrane_player_physics_locked", 1)
+            unilib.utils.set_player_attribute(player, "pkg_shared_towercrane_is_operator", 1)
+            unilib.utils.set_player_attribute(
+                player, "pkg_shared_towercrane_player_physics_locked", 1
+            )
             privs["fly"] = true
             privs["fast"] = nil
             physics.speed = 0.7
 
             -- Write back
             player:set_physics_override(physics)
-            minetest.set_player_privs(player:get_player_name(), privs)
+            core.set_player_privs(player:get_player_name(), privs)
 
             return true
 
@@ -688,7 +696,7 @@ local function swap_node(pos, state, part_name)
     -- State must be "on" or "off"
 
     -- Check node
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name ~= "unilib:crane_" .. part_name .. "_mast_ctrl_" ..
             (state == "on" and "off" or "on") then
         return
@@ -696,7 +704,7 @@ local function swap_node(pos, state, part_name)
 
     -- Switch node
     node.name = "unilib:crane_" .. part_name .. "_mast_ctrl_" .. state
-    minetest.swap_node(pos, node)
+    core.swap_node(pos, node)
 
 end
 
@@ -705,7 +713,7 @@ local function start_crane(pos, player, part_name)
     -- Adapted from towercrane/control.lua, was .start_crane()
 
     swap_node(pos, "on", part_name)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_int("running", 1)
     store_last_used(pos)
     place_player(pos, player)
@@ -717,7 +725,7 @@ local function stop_crane(pos, player, part_name)
     -- Adapted from towercrane/control.lua, was .stop_crane()
 
     swap_node(pos, "off", part_name)
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_int("running", 0)
     store_last_used(pos)
     place_player(pos, player)
@@ -757,8 +765,8 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
     local description = data_table.description or S("Crane")
-    local max_height = data_table.max_height or unilib.crane_max_height
-    local max_width = data_table.max_height or unilib.crane_max_width
+    local max_height = data_table.max_height or unilib.setting.crane_max_height
+    local max_width = data_table.max_height or unilib.setting.crane_max_width
     local minor_ingredient = data_table.minor_ingredient or ingredient
 
     -- (Set up original node names)
@@ -790,17 +798,17 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
     local screws_img = "unilib_crane_generic_screws_overlay.png"
 
     -- (Absolute xaximum/minimum heights are specified by Minetest settings)
-    max_height = math.min(max_height, unilib.crane_max_height)
-    max_width = math.min(max_width, unilib.crane_max_width)
+    max_height = math.min(max_height, unilib.setting.crane_max_height)
+    max_width = math.min(max_width, unilib.setting.crane_max_width)
 
     -- (From init.lua)
 
     unilib.register_node("unilib:crane_" .. part_name .. "_base", orig_base, replace_mode, {
         -- From towercrane:base
-        description = unilib.brackets(description, S("Base")),
+        description = unilib.utils.brackets(description, S("Base")),
         tiles = {base_img .. "^" .. arrow_img, base_img .. "^" .. screws_img},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         inventory_image = "[inventorycube{" .. mast_img .. "{" .. mast_img .. "{" .. mast_img,
         is_ground_content = false,
@@ -812,20 +820,20 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
             -- Set metadata (a form for crane height and width, and for the direction of the arm)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local owner = placer:get_player_name()
             meta:set_string("owner", owner)
             meta:set_string("formspec", get_formspec(nil, nil, max_height, max_width))
 
-            local fdir = minetest.dir_to_facedir(placer:get_look_dir(), false)
-            local dir = minetest.facedir_to_dir(fdir)
+            local fdir = core.dir_to_facedir(placer:get_look_dir(), false)
+            local dir = core.facedir_to_dir(fdir)
             meta:set_string("dir", pos_to_string(dir))
 
         end,
 
         can_dig = function(pos, player)
 
-            if minetest.check_player_privs(player, "server") then
+            if core.check_player_privs(player, "server") then
                 return true
             end
 
@@ -876,7 +884,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
             -- Check whether crane is built up
             local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-            local node_above = minetest.get_node(pos_above)
+            local node_above = core.get_node(pos_above)
 
             if node_above.name == "unilib:crane_" .. part_name .. "_mast_ctrl_on" or
                     node_above.name == "unilib:crane_" .. part_name .. "_mast_ctrl_off" then
@@ -886,12 +894,12 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
             -- Only allow rotation around y-axis
             new_facedir = new_facedir % 4
 
-            local dir = minetest.facedir_to_dir(new_facedir)
-            local meta = minetest.get_meta(pos)
+            local dir = core.facedir_to_dir(new_facedir)
+            local meta = core.get_meta(pos)
             meta:set_string("dir", pos_to_string(dir))
 
             node.param2 = new_facedir
-            minetest.swap_node(pos, node, part_name)
+            core.swap_node(pos, node, part_name)
             return true
 
         end,
@@ -904,12 +912,12 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
             {ingredient, ingredient, ingredient},
             {ingredient, "", ""},
             {minor_ingredient, ingredient, ""},
-        }
+        },
     })
 
     unilib.register_node("unilib:crane_" .. part_name .. "_balance", orig_balance, replace_mode, {
         -- From towercrane:balance
-        description = unilib.brackets(description, S("Balance")),
+        description = unilib.utils.brackets(description, S("Balance")),
         tiles = {base_img .. "^" .. screws_img .. "^" .. light_img},
         groups = {crumbly = 0, not_in_creative_inventory = 1},
         -- (no sounds)
@@ -923,7 +931,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
     unilib.register_node("unilib:crane_" .. part_name .. "_mast", orig_mast, replace_mode, {
         -- From towercrane:mast
-        description = unilib.brackets(description, S("Mast")),
+        description = unilib.utils.brackets(description, S("Mast")),
         tiles = {
             mast_img,
             {
@@ -943,7 +951,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
     unilib.register_node("unilib:crane_" .. part_name .. "_arm_left", orig_arm_left, replace_mode, {
         -- From towercrane:arm
-        description = unilib.brackets(description, S("Left Arm")),
+        description = unilib.utils.brackets(description, S("Left Arm")),
         tiles = {
             arm_left_img,
             {
@@ -967,7 +975,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
         orig_arm_right,
         replace_mode,
         {
-            description = unilib.brackets(description, S("Right Arm")),
+            description = unilib.utils.brackets(description, S("Right Arm")),
             tiles = {
                 arm_right_img,
                 {
@@ -994,7 +1002,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
         orig_mast_on,
         replace_mode,
         {
-            description = unilib.brackets(description, S("Mast Control On")),
+            description = unilib.utils.brackets(description, S("Mast Control On")),
             tiles = {
                 base_img,
                 base_img,
@@ -1015,7 +1023,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
             on_construct = function(pos)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 meta:set_string("infotext", S("Switch crane on/off"))
 
             end,
@@ -1024,11 +1032,9 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
                 -- Switch the crane off
                 local pos2 = get_my_crane_pos(clicker)
-                if pos2 and
-                        (
-                            vector.equals(pos, pos2) or
-                            minetest.check_player_privs(clicker, "server")
-                        ) then
+                if pos2 and (
+                    vector.equals(pos, pos2) or core.check_player_privs(clicker, "server")
+                ) then
                     stop_crane(pos, clicker, part_name)
                 end
 
@@ -1042,7 +1048,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
         orig_mast_off,
         replace_mode,
         {
-            description = unilib.brackets(description, S("Mast Control Off")),
+            description = unilib.utils.brackets(description, S("Mast Control Off")),
             tiles = {
                 base_img,
                 base_img,
@@ -1062,7 +1068,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
             on_construct = function(pos)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 meta:set_string("infotext", S("Switch crane on/off"))
 
             end,
@@ -1077,9 +1083,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
                         start_crane(pos, clicker, part_name)
                         local pos1, pos2 = calc_construction_area(pos)
                         -- Control player every second
-                        minetest.after(
-                            1, control_player, pos, pos1, pos2, clicker:get_player_name()
-                        )
+                        core.after(1, control_player, pos, pos1, pos2, clicker:get_player_name())
 
                     end
 
@@ -1091,10 +1095,10 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
     if not first_crane_flag then
 
-        -- Only call minetest.register_on_joinplayer() etc once
+        -- Only call core.register_on_joinplayer() etc once
         first_crane_flag = true
 
-        minetest.register_on_joinplayer(function(player)
+        core.register_on_joinplayer(function(player)
 
             local pos = get_my_crane_pos(player)
             if pos then
@@ -1106,7 +1110,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
         end)
 
-        minetest.register_on_leaveplayer(function(player)
+        core.register_on_leaveplayer(function(player)
 
             if is_operator(player) then
                 departed_player_table[player:get_player_name()] = true
@@ -1114,7 +1118,7 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
         end)
 
-        minetest.register_on_dieplayer(function(player, reason)
+        core.register_on_dieplayer(function(player, reason)
 
             if is_operator(player) then
 
@@ -1145,8 +1149,8 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
 
         action = function(pos, node)
 
-            local t = minetest.get_day_count()
-            local meta = minetest.get_meta(pos)
+            local t = core.get_day_count()
+            local meta = core.get_meta(pos)
             local last_used = meta:get_int("last_used") or 0
             if last_used == 0 then
 

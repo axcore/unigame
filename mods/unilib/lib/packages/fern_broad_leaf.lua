@@ -9,7 +9,7 @@
 unilib.pkg.fern_broad_leaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.fern_broad_leaf.exec()
         description = S("Broad Leaf Fern"),
         tiles = {"unilib_fern_broad_leaf.png"},
         groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "mesh",
@@ -46,7 +46,7 @@ function unilib.pkg.fern_broad_leaf.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_fern_broad_leaf", {
+    unilib.register_decoration_generic("farlands_fern_broad_leaf", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:fern_broad_leaf",

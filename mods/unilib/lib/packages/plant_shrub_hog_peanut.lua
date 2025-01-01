@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_hog_peanut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,17 +27,18 @@ function unilib.pkg.plant_shrub_hog_peanut.exec()
 
     unilib.register_node("unilib:plant_shrub_hog_peanut", "mapgen:shrub", mode, {
         -- From farlands, mapgen:shrub
-        description = unilib.annotate(S("Hog Peanut Shrub"), "Amphicarpaea bracteata"),
+        description = unilib.utils.annotate(S("Hog Peanut Shrub"), "Amphicarpaea bracteata"),
         tiles = {"unilib_plant_shrub_hog_peanut.png"},
         groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "mesh",
         -- N.B. inventory_image not added here, because the 3D-rendering actually looks better
         mesh = "unilib_plant_shrub_hog_peanut.obj",
         paramtype = "light",
-        paramtype2 = "degrotate",
+        -- N.B. Remove .paramtype2 as the callback below doesn't work on modern Minetest
+--      paramtype2 = "degrotate",
         selection_box = {
             type = "fixed",
             fixed = {-0.3, -0.5, -0.3, 0.3, 0.3, 0.3},
@@ -50,7 +51,7 @@ function unilib.pkg.plant_shrub_hog_peanut.exec()
         --[[
         on_construct = function(pos, node)
 
-            local node = minetest.get_node(pos)
+            local node = core.get_node(pos)
             node.param2 = math.random(0, 179)
 
         end,
@@ -58,7 +59,7 @@ function unilib.pkg.plant_shrub_hog_peanut.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_plant_shrub_hog_peanut", {
+    unilib.register_decoration_generic("farlands_plant_shrub_hog_peanut", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_shrub_hog_peanut",

@@ -9,7 +9,7 @@
 unilib.pkg.shared_cottages = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 -- Hatches rotate around their axis
 hatch_table = {10, 19, 4, 13, 2, 18, 22, 14, 20, 16, 0, 12, 11, 3, 7, 21, 9, 23, 5, 1, 8, 15, 6, 17}
@@ -78,7 +78,7 @@ function unilib.pkg.shared_cottages.register_hatch(data_table)
         tiles = {img},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -106,10 +106,10 @@ function unilib.pkg.shared_cottages.register_hatch(data_table)
             fixed = {-0.5, -0.55, -0.5, 0.5, -0.45, 0.5},
         },
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
 
         on_rightclick = function(pos, node, puncher)
-            minetest.swap_node(pos, {name = node.name, param2 = hatch_table[node.param2 + 1]})
+            core.swap_node(pos, {name = node.name, param2 = hatch_table[node.param2 + 1]})
         end,
     })
     unilib.register_craft({
@@ -118,7 +118,7 @@ function unilib.pkg.shared_cottages.register_hatch(data_table)
             {"", "", ingredient},
             {ingredient, "group:stick", ""},
             {"", "", ""},
-        }
+        },
     })
 
     return full_name
@@ -167,11 +167,11 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
         "cottages:roof_" .. orig_part_name,
         replace_mode,
         {
-            description = unilib.brackets(S("Rustic Roofing"), description),
+            description = unilib.utils.brackets(S("Rustic Roofing"), description),
             tiles = tile_table,
             groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -200,8 +200,8 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
             recipe = {
                 {"", "", ingredient},
                 {"", ingredient, ""},
-                {ingredient, "", ""}
-            }
+                {ingredient, "", ""},
+            },
         })
 
     else
@@ -211,13 +211,13 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
             recipe = {
                 {ingredient, "", "unilib:roof_rustic_wood"},
                 {"", "unilib:roof_rustic_wood", ""},
-                {"unilib:roof_rustic_wood", "", ""}
-            }
+                {"unilib:roof_rustic_wood", "", ""},
+            },
         })
 
     end
 
-    -- Create a node identical to a simple stair node (from ../lib/shared/stairs.lua)
+    -- Create a node identical to a simple stair node (from ../lib/shared/stairs/stairs_basic.lua)
     -- N.B. When part_name is "straw", duplicates of the straw stair nodes are created. However,
     --      the stair nodes are not usually visible in the creative inventory, whereas these roof
     --      nodes are. This is a change from the original code
@@ -226,11 +226,11 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
         "cottages:roof_connector_" .. orig_part_name,
         replace_mode,
         {
-            description = unilib.brackets(S("Rustic Roofing Connector"), description),
+            description = unilib.utils.brackets(S("Rustic Roofing Connector"), description),
             tiles = tile_table,
             groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -257,16 +257,16 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
         recipe = {
             {"unilib:roof_rustic_" .. part_name},
             {"group:wood"},
-        }
+        },
     })
 
-    -- Create a node identical to a slab stair node (from ../lib/shared/stairs.lua)
+    -- Create a node identical to a slab stair node (from ../lib/shared/stairs/stairs_basic.lua)
     unilib.register_node(
         "unilib:roof_rustic_flat_" .. part_name,
         "cottages:roof_flat_" .. orig_part_name,
         replace_mode,
         {
-            description = unilib.brackets(S("Flat Rustic Roofing"), description),
+            description = unilib.utils.brackets(S("Flat Rustic Roofing"), description),
             tiles = {
                 tile_table[1],
                 tile_table[2],
@@ -277,7 +277,7 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -301,13 +301,13 @@ function unilib.pkg.shared_cottages.register_roof(data_table)
         output = "unilib:roof_rustic_flat_" .. part_name .. " 2",
         recipe = {
             {"unilib:roof_rustic_" .. part_name, "unilib:roof_rustic_" .. part_name},
-        }
+        },
     })
     unilib.register_craft({
         output = "unilib:roof_rustic_" .. part_name,
         recipe = {
             {"unilib:roof_rustic_flat_" .. part_name, "unilib:roof_rustic_flat_" .. part_name},
-        }
+        },
     })
 
 end
@@ -318,7 +318,7 @@ end
 
 function unilib.pkg.shared_cottages.sit_on_bench(pos, node, clicker, itemstack, pointed_thing)
 
-    if not(clicker) or not(allow_sit(clicker)) then
+    if not clicker or not allow_sit(clicker) then
         return
     end
 
@@ -330,7 +330,8 @@ function unilib.pkg.shared_cottages.sit_on_bench(pos, node, clicker, itemstack, 
         unilib.player_api.set_player_attached(pname, false)
         clicker:set_pos({x = pos.x, y = pos.y - 0.5, z = pos.z})
         clicker:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
-        clicker:set_physics_override(1, 1, 1)
+        -- N.B. Fixed deprecated format of set_physics_override(), not yet corrected in original mod
+        clicker:set_physics_override({gravity = 1, jump = 1, speed = 1})
         unilib.player_api.set_animation(clicker, "stand", 30)
 
     else
@@ -350,7 +351,7 @@ function unilib.pkg.shared_cottages.sit_on_bench(pos, node, clicker, itemstack, 
         end
         ]]--
         -- (Incorporate Git #15 fix for getting stuck on benches)
-        if not(node) or node.param2 == 0 then
+        if not node or node.param2 == 0 then
             p2.z = p2.z + 0.2
         elseif node.param2 == 1 then
             p2.x = p2.x + 0.3
@@ -360,10 +361,14 @@ function unilib.pkg.shared_cottages.sit_on_bench(pos, node, clicker, itemstack, 
             p2.x = p2.x - 0.3
         end
 
-        clicker:set_eye_offset({x = 0, y = -7, z = 2}, {x = 0, y = 0, z = 0})
+        -- N.B. Tweaked the original cottages camera position, so the player isn't looking inside
+        --      the bench
+--        clicker:set_eye_offset({x = 0, y = -7, z = 2}, {x = 0, y = 0, z = 0})
+        clicker:set_eye_offset({x = 0, y = -3, z = 2}, {x = 0, y = 0, z = 0})
         clicker:set_pos(p2)
         unilib.player_api.set_animation(clicker, "sit", 30)
-        clicker:set_physics_override(0, 0, 0)
+        -- N.B. Fixed deprecated format of set_physics_override(), not yet corrected in original mod
+        clicker:set_physics_override({gravity = 0, jump = 0, speed = 0})
         unilib.player_api.set_player_attached(pname, true)
 
     end
@@ -371,17 +376,19 @@ end
 
 function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, pointed_thing)
 
-    if not(clicker) or not(node) or not(node.name) or not(pos) or not(allow_sit(clicker)) then
+    -- N.B. Used for "sleeping" on both decorative beds and mats
+
+    if not clicker or not node or not node.name or not pos or not allow_sit(clicker) then
         return
     end
 
     local animation = unilib.player_api.get_animation(clicker)
     local pname = clicker:get_player_name()
 
-    local p_above = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
-    if not(p_above) or not(p_above.name) or p_above.name ~= "air" then
+    local p_above = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+    if not p_above or not p_above.name or p_above.name ~= "air" then
 
-        minetest.chat_send_player(pname, S("This place is too narrow for sleeping"))
+        core.chat_send_player(pname, S("This place is too narrow for sleeping"))
         return
 
     end
@@ -397,11 +404,15 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
     if animation and animation.animation == "lay" then
 
         unilib.player_api.set_player_attached(pname, false)
-        clicker:set_pos({x = pos.x, y = pos.y - 0.5, z = pos.z})
+        -- N.B. Tweaked the original cottages position, so player isn't standing in the middle of
+        --      a bed
+--      clicker:set_pos({x = pos.x, y = pos.y - 0.5, z = pos.z})
+        clicker:set_pos({x = pos.x, y = pos.y + 0.5, z = pos.z})
         clicker:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
-        clicker:set_physics_override(1, 1, 1)
+        -- N.B. Fixed deprecated format of set_physics_override(), not yet corrected in original mod
+        clicker:set_physics_override({gravity = 1, jump = 1, speed = 1})
         unilib.player_api.set_animation(clicker, "stand", 30)
-        minetest.chat_send_player(pname, S("That's enough sleep for now. You stand up again."))
+        core.chat_send_player(pname, S("That's enough sleep for now. You stand up again."))
         return
 
     end
@@ -425,11 +436,11 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
             second_node_pos.x = pos.x + 1
         end
 
-        local node2 = minetest.get_node(second_node_pos)
-        if not(node2) or
-                not(node2.param2) or
-                not(node.param2) or
-                node2.name ~= "unilib:bed_decorative_head" or
+        local node2 = core.get_node(second_node_pos)
+        if not node2 or
+                not node2.param2 or
+                not node.param2 or
+                node2.name ~= "unilib:bed_decorative_foot" or
                 node2.param2 ~= node.param2 then
             allow_sleep = false
         else
@@ -439,7 +450,7 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
         place_name = "bed"
 
     -- If the player clicked on the foot of the bed, locate the head
-    elseif node.name == "unilib:bed_decorative_head" then
+    elseif node.name == "unilib:bed_decorative_foot" then
 
         if node.param2 == 2 then
             second_node_pos.z = pos.z - 1
@@ -451,10 +462,10 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
             second_node_pos.x = pos.x + 1
         end
 
-        local node2 = minetest.get_node(second_node_pos)
-        if not(node2) or
-                not(node2.param2) or
-                not(node.param2) or
+        local node2 = core.get_node(second_node_pos)
+        if not node2 or
+                not node2.param2 or
+                not node.param2 or
                 node2.name ~= "unilib:bed_decorative_head" or
                 node2.param2 ~= node.param2 then
             allow_sleep = false
@@ -479,7 +490,7 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
         local offset = {{x = 0, z = -1}, {x = -1, z = 0}, {x = 0, z = 1}, {x = 1, z = 0}}
         for i, off in ipairs(offset) do
 
-            node2 = minetest.get_node({x = pos.x + off.x, y = pos.y, z = pos.z + off.z})
+            node2 = core.get_node({x = pos.x + off.x, y = pos.y, z = pos.z + off.z})
             if node2.name == "unilib:bed_mat_sleeping" or
                     node2.name == "unilib:bed_mat_straw" or
                     node.name == "unilib:bed_mat_sleeping_head" then
@@ -495,7 +506,10 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
     end
 
     -- Set the right height for the bed
-    if place_name == "bed" then
+    -- N.B. Tweaked the original code so that, when the player clicks either end of the bed, they
+    --      move to the sitting position
+--  if place_name == "bed" then
+    if place_name ~= "mat" then
         p.y = p.y + 0.4
     end
 
@@ -520,11 +534,11 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
         if allow_sleep == true then
 
             unilib.player_api.set_animation(clicker, "lay", 30)
-            clicker:set_eye_offset({x = 0, y = -14, z = 2}, {x = 0, y = 0, z = 0})
-            minetest.chat_send_player(
-                pname,
-                S("You lie down and take a nap. Right-click to wake up.")
-            )
+            -- N.B. Tweaked the original cottages camera position, so the player isn't looking
+            --      inside the bed/mat
+--          clicker:set_eye_offset({x = 0, y = -14, z = 2}, {x = 0, y = 0, z = 0})
+            clicker:set_eye_offset({x = 0, y = 0, z = 2}, {x = 0, y = 0, z = 0})
+            core.chat_send_player(pname, S("You lie down and take a nap. Right-click to wake up."))
 
             return
 
@@ -532,33 +546,47 @@ function unilib.pkg.shared_cottages.sleep_in_bed(pos, node, clicker, itemstack, 
         else
 
             unilib.player_api.set_player_attached(pname, false)
-            clicker:set_pos({x = pos.x, y = pos.y - 0.5, z = pos.z})
+            -- N.B. Tweaked the original cottages camera position, so player isn't standing in the
+            --      middle of a bed
+--          clicker:set_pos({x = pos.x, y = pos.y - 0.5, z = pos.z})
+            clicker:set_pos({x = pos.x, y = pos.y + 0.5, z = pos.z})
             clicker:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
-            clicker:set_physics_override(1, 1, 1)
+            -- N.B. Fixed deprecated format of set_physics_override(), not yet corrected in original
+            --      mod
+            clicker:set_physics_override({gravity = 1, jump = 1, speed = 1})
             unilib.player_api.set_animation(clicker, "stand", 30)
-            minetest.chat_send_player(pname, S("You stand up again"))
+            core.chat_send_player(pname, S("You stand up again"))
             return
 
         end
 
     end
 
-    clicker:set_eye_offset({x = 0, y = -7, z = 2}, {x = 0, y = 0, z = 0})
+    -- N.B. Tweaked the original cottages camera position, so the player isn't looking inside the
+    --      bed/mat
+--  clicker:set_eye_offset({x = 0, y = -7, z = 2}, {x = 0, y = 0, z = 0})
+    if place_name == "bed" then
+        clicker:set_eye_offset({x = 0, y = -3, z = 2}, {x = 0, y = 0, z = 0})
+    else
+        clicker:set_eye_offset({x = 0, y = 2, z = 2}, {x = 0, y = 0, z = 0})
+    end
+
     clicker:set_pos(p)
     unilib.player_api.set_animation(clicker, new_animation, 30)
-    clicker:set_physics_override(0, 0, 0)
+    -- N.B. Fixed deprecated format of set_physics_override(), not yet corrected in original mod
+    clicker:set_physics_override({gravity = 0, jump = 0, speed = 0})
     unilib.player_api.set_player_attached(pname, true)
 
     if allow_sleep == true then
 
-        minetest.chat_send_player(
+        core.chat_send_player(
             pname,
             S("Aaah! What a comfortable place. Right click again to sleep.")
         )
 
     else
 
-        minetest.chat_send_player(
+        core.chat_send_player(
             pname,
             S("Comfortable, but not good enough for a nap. Right click again to get back up.")
         )
@@ -574,14 +602,14 @@ end
 function unilib.pkg.shared_cottages.player_can_use(meta, player)
 
     -- If no owner is set, all players may use the item, otherwise only the owner
-    if not(player) or not(meta) then
+    if not player or not meta then
         return false
     end
 
     local pname = player:get_player_name()
     local owner = meta:get_string("owner")
     local public = meta:get_string("public")
-    if not(owner) or owner == "" or owner == pname or public == "public" then
+    if not owner or owner == "" or owner == pname or public == "public" then
         return true
     else
         return false
@@ -591,7 +619,7 @@ end
 
 function unilib.pkg.shared_cottages.switch_public(pos, formname, fields, sender, description)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local public = meta:get_string("public")
     local owner = meta:get_string("owner")
 
@@ -602,24 +630,18 @@ function unilib.pkg.shared_cottages.switch_public(pos, formname, fields, sender,
             meta:set_string("public", "public")
             meta:set_string(
                 "infotext",
-                unilib.brackets(description, S("public, owned by %s"):format(owner))
+                unilib.utils.brackets(description, S("public, owned by %s"):format(owner))
             )
-            minetest.chat_send_player(
-                owner,
-                S("Your machine can now be used by other players as well")
-            )
+            core.chat_send_player(owner, S("Your machine can now be used by other players as well"))
 
         else
 
             meta:set_string("public", "")
             meta:set_string(
                 "infotext",
-                unilib.brackets(description, S("private, owned by %s"):format(owner))
+                unilib.utils.brackets(description, S("private, owned by %s"):format(owner))
             )
-            minetest.chat_send_player(
-                owner,
-                S("Your machine can now be used only by you")
-            )
+            core.chat_send_player(owner, S("Your machine can now be used only by you"))
 
         end
 
@@ -638,14 +660,5 @@ function unilib.pkg.shared_cottages.init()
     return {
         description = "Shared functions for beds, benches and hatches (from cottages)",
     }
-
-end
-
-function unilib.pkg.shared_cottages.exec()
-
-    -- Calls to unilib.pkg.shared_cottages.sit_on_bench() and
-    --      unilib.pkg.shared_cottages.sleep_in_bed() require code imported from
-    --      minetest_game/player_api, if not already loaded
-    unilib.load_player_api()
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_ceiling_modern = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,14 +34,16 @@ function unilib.pkg.light_lamp_ceiling_modern.exec()
         {
             description = S("Modern Ceiling Light"),
             tiles = {
-                "unilib_pole_metal_dark.png",
-                "unilib_pole_metal_dark.png^unilib_light_lamp_ceiling_modern_overlay.png"
+                "unilib_hardware_pole_metal_dark.png",
+                "unilib_hardware_pole_metal_dark.png^unilib_light_lamp_ceiling_modern_overlay.png",
             },
             groups = {cracky = 3, handy = 1, oddly_breakable_by_hand = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "nodebox",
-            light_source = unilib.light_max,
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
+            light_source = unilib.constant.light_max,
             node_box = {
                 type = "fixed",
                 fixed = {-1/4, 3/8, -1/4, 1/4, 1/2, 1/4},
@@ -52,7 +54,7 @@ function unilib.pkg.light_lamp_ceiling_modern.exec()
 
             on_place = function(itemstack, placer, pointed_thing)
 
-                return unilib.rotate_and_place(
+                return unilib.misc.rotate_and_place(
                     itemstack, placer, pointed_thing, {[0] = 0, 20, 12, 16, 4, 8}
                 )
 

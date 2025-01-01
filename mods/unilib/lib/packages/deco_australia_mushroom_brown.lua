@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_mushroom_brown = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,15 +19,20 @@ function unilib.pkg.deco_australia_mushroom_brown.init()
 
     return {
         description = "Brown mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_brown"},
-        at_least_one = {"biome_australia_tasmania", "biome_australia_victorian_forests"},
+        depends = "mushroom_brown",
+        optional = {
+            "biome_australia_tasmania",
+            "biome_australia_victorian_forests",
+            "dirt_custom_antipodean",
+            "dirt_ordinary",
+        },
     }
 
 end
 
 function unilib.pkg.deco_australia_mushroom_brown.exec()
 
-    unilib.register_decoration("flowers_mushroom_brown_in_australia", {
+    unilib.register_decoration_generic("flowers_mushroom_brown_in_australia", {
         -- From australia/biome_tasmania.lua, etc
         deco_type = "simple",
         decoration = "unilib:mushroom_brown",
@@ -47,31 +52,43 @@ end
 
 function unilib.pkg.deco_australia_mushroom_brown.post()
 
-    if unilib.pkg_executed_table["biome_australia_tasmania"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now(
+        unilib.register_decoration_complete(
             -- From australia/biome_tasmania.lua
             "flowers_mushroom_brown_in_australia",
             "flowers_mushroom_brown_in_australia_1",
             {
                 biomes = "australia_tasmania",
-                place_on = "unilib:dirt_ordinary_with_turf",
-                y_max = unilib.y_max,
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                },
+                y_max = unilib.constant.y_max,
                 y_min = 7,
             }
         )
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_victorian_forests"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
-        unilib.register_decoration_now(
+        unilib.register_decoration_complete(
             -- From australia/biome_victorian_forests.lua
             "flowers_mushroom_brown_in_australia",
             "flowers_mushroom_brown_in_australia_2",
             {
                 biomes = "australia_victorian_forests",
-                place_on = "unilib:dirt_ordinary_with_turf",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                },
                 y_max = 180,
                 y_min = 36,
             }

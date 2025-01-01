@@ -9,7 +9,7 @@
 unilib.pkg.deco_cropocalypse_fern_flowering = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ function unilib.pkg.deco_cropocalypse_fern_flowering.init()
             "biome_default_rainforest",
             "biome_default_tundra",
         },
-        optional = "dirt_permafrost",
+        optional = "dirt_permafrost_ordinary",
     }
 
 end
 
 function unilib.pkg.deco_cropocalypse_fern_flowering.post()
 
-    unilib.register_decoration_now("cropocalypse_fern_flowering", nil, {
+    unilib.register_decoration_complete("cropocalypse_fern_flowering", nil, {
         -- From cropocalypse/decorative_plants.lua
         -- Completes decoration in package "fern_flowering"
         biomes = {
@@ -47,10 +47,10 @@ function unilib.pkg.deco_cropocalypse_fern_flowering.post()
         place_on = {
             "group:sand",
             "group:soil",
-            "unilib:dirt_permafrost_with_moss",
-            "unilib:dirt_permafrost_with_stonelet",
+            "unilib:dirt_permafrost_ordinary_with_moss",
+            "unilib:dirt_permafrost_ordinary_with_litter_stone",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

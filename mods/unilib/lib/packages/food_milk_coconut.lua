@@ -9,7 +9,7 @@
 unilib.pkg.food_milk_coconut = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,11 +31,11 @@ function unilib.pkg.food_milk_coconut.exec()
         description = S("Coconut Milk"),
         inventory_image = "unilib_food_milk_coconut_inv.png",
         -- N.B. no food_coconut_milk or food_milk_glass in original code
-        groups = {food_milk_glass = 1, vessel = 1},
+        groups = {food_coconut_milk = 1, food_milk_glass = 1, vessel = 1},
 
         wield_image = "unilib_food_milk_coconut.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_milk_coconut", 2, "unilib:vessel_glass_empty"
         ),
     })

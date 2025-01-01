@@ -9,7 +9,7 @@
 unilib.pkg.crop_undersea_anemone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.crop_undersea_anemone.exec()
             inventory_image = "unilib_crop_undersea_anemone_harvest.png",
             groups = {food = 1, food_vegan = 1, seafood = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:crop_undersea_anemone_harvest", 5),
+            on_use = unilib.cuisine.eat_on_use("unilib:crop_undersea_anemone_harvest", 5),
         }
     )
 
@@ -60,8 +60,8 @@ function unilib.pkg.crop_undersea_anemone.exec()
 
         replace_mode = mode,
         base_node = "unilib:gravel_ordinary",
-        chance = 5,
-        delay = 8,
+        -- N.B. 5 in original code
+        chance = 10,
         drop_table = {
             items = {
                 {items = {"unilib:crop_undersea_anemone_harvest 2"}},
@@ -70,11 +70,14 @@ function unilib.pkg.crop_undersea_anemone.exec()
                 {items = {"unilib:crop_undersea_anemone_seed 3"}, rarity = 10},
             },
         },
+        -- N.B. 8 in original code
+        interval = 10,
         min_light = 8,
         seed_description = S("Sea Anemone Seed"),
         wild_description = S("Wild Sea Anemone"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -89,7 +92,7 @@ function unilib.pkg.crop_undersea_anemone.exec()
 
     for i = 1, 4 do
 
-        unilib.register_decoration("aqua_farming_crop_sea_anemone_" .. i, {
+        unilib.register_decoration_generic("aqua_farming_crop_sea_anemone_" .. i, {
             -- From aqua_farming/mapgen_sea_anemone.lua
             deco_type = "simple",
             decoration = "unilib:crop_undersea_anemone_wild",
@@ -103,8 +106,11 @@ function unilib.pkg.crop_undersea_anemone.exec()
                 seed = 87112,
                 spread = {x = 70, y = 70, z = 70},
             },
-            param2 = 48,
-            param2_max = 96,
+            -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--          param2 = 48,
+--          param2_max = 96,
+            param2 = 0,
+            param2_max = 3,
             place_offset_y = -1,
             sidelen = 16,
         })

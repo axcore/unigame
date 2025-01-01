@@ -9,55 +9,36 @@
 unilib.pkg.item_hangglider = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hangglider.add_mode
+local mode = unilib.global.imported_mod_table.hangglider.add_mode
 
 -- Show glider struts as overlay on HUD
 local hud_overlay_flag = true
 local id_table = {}
 local move_model_up_flag = true
 local use_table = {}
-local no_fly_zone_flag = false
 local physics_table = {"jump", "speed", "gravity"}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function can_fly(pname, pos)
+local function apply_physics_override(player, overrides)
 
-    -- Checks if the player will get shot down at the position
+    if core.get_modpath("player_monoids") then
 
-    if areas and
-            minetest.is_protected(vector.round(pos), pname) and
-            no_fly_zone_flag then
+        for _, attr in pairs(physics_table) do
 
-        for id, area in pairs(areas:getAreasAtPos(pos)) do
-
-            if area.no_fly then
-                return false
+            if overrides[attr] then
+                player_monoids[attr]:add_change(player, overrides[attr], "unilib:entity_hangglider")
             end
 
         end
 
+    else
+
+        player:set_physics_override(overrides)
+
     end
-
-    return true
-
-end
-
-local function shot_sound(pos)
-
-    minetest.sound_play("unilib_item_hangglider_warning", {
-        pos = pos,
-        max_hear_distance = 30,
-        gain = 10.0,
-    })
-
-end
-
-local function apply_physics_override(player, overrides)
-
-    player:set_physics_override(overrides)
 
 end
 
@@ -66,7 +47,13 @@ local function remove_physics_override(player, overrides)
     for _, attr in pairs(physics_table) do
 
         if overrides[attr] then
-            player:set_physics_override({[attr] = 1})
+
+            if core.get_modpath("player_monoids") then
+                player_monoids[attr]:del_change(player, "unilib:entity_hangglider")
+            else
+                player:set_physics_override({[attr] = 1})
+            end
+
         end
 
     end
@@ -84,7 +71,7 @@ function unilib.pkg.item_hangglider.init()
         notes = "Left-click to equip or unequip the hangglider while falling. Use the" ..
                 " /no_fly_zone command to disable flying in your protected areas",
         mod_optional = "areas",
-        depends = {"item_stick_ordinary", "wool_basic"},
+        depends = {"item_stick_ordinary", "shared_hangglider", "wool_basic"},
         optional = "item_paper_ordinary",
     }
 
@@ -94,52 +81,19 @@ function unilib.pkg.item_hangglider.exec()
 
     local c_paper = "unilib:item_paper_ordinary"
 
-    if core.global_exists("areas") then
-
-        no_fly_zone_flag = true
-
-        -- chat command definition adapted from "areas" mod
-        minetest.register_chatcommand("no_fly_zone",{
-            params = "<ID>",
-            description = "Toggle airspace restrictions for area <ID>",
-
-            func = function(name, param)
-
-                local id = tonumber(param)
-                if not id then
-                    return false, "Invalid usage, see /help no_fly_zone."
-                end
-
-                if not areas:isAreaOwner(id, name) then
-                    return false, "Area " .. id .. " does not exist or is not owned by you."
-                end
-
-                local open = not areas.areas[id].no_fly
-
-                -- Save false as nil to avoid inflating the DB
-                areas.areas[id].no_fly = open or nil
-                areas:save()
-                if open then
-                    return true, ("No-fly-zone enabled in the area.")
-                else
-                    return true, ("No-fly-zone disabled in the area.")
-                end
-
-            end,
-        })
-
-    end
-
     local step_v
-    minetest.register_entity("unilib:entity_hangglider", {
+    unilib.register_entity("unilib:entity_hangglider", {
         -- From hangglider:glider
-        collisionbox = {0, 0, 0, 0, 0, 0},
+        initial_properties = {
+            collisionbox = {0, 0, 0, 0, 0, 0},
+            mesh = "unilib_item_hangglider.obj",
+            static_save = false,
+            textures = {"unilib_wool_white.png", "unilib_tree_apple_wood.png"},
+            visual = "mesh",
+            visual_size = {x = 12, y = 12},
+        },
+
         immortal = true,
-        mesh = "unilib_item_hangglider.obj",
-        static_save = false,
-        textures = {"unilib_wool_white.png", "unilib_tree_apple_wood.png"},
-        visual = "mesh",
-        visual_size = {x = 12, y = 12},
 
         on_step = function(self, dtime)
 
@@ -153,7 +107,7 @@ function unilib.pkg.item_hangglider.exec()
                     local pname = player:get_player_name()
                     if use_table[pname] then
 
-                        local mrn_name = minetest.registered_nodes[minetest.get_node(
+                        local mrn_name = core.registered_nodes[core.get_node(
                             vector.new(pos.x, pos.y - 0.5, pos.z)
                         ).name]
 
@@ -172,7 +126,7 @@ function unilib.pkg.item_hangglider.exec()
 
                                 elseif step_v <= -3 then
 
-                                    --Cap our gliding movement speed.
+                                    -- Cap our gliding movement speed.
                                     apply_physics_override(player, {speed = 2.25})
 
                                 else
@@ -188,18 +142,18 @@ function unilib.pkg.item_hangglider.exec()
 
                     end
 
-                    if not can_fly(pname, pos) then
+                    if not unilib.pkg.shared_hangglider.can_fly(pname, pos) then
 
                         -- Warning shot
                         if not self.warned then
 
                             self.warned = 0
-                            shot_sound(pos)
-                            minetest.chat_send_player(
+                            unilib.pkg.shared_hangglider.play_shooting_sound(pos)
+                            core.chat_send_player(
                                 pname,
                                 S(
                                     "No fly zone! You will be shot down in @1 seconds!",
-                                    unilib.hangglider_no_fly_time
+                                    unilib.setting.hangglider_warning_time
                                 )
                             )
 
@@ -207,14 +161,14 @@ function unilib.pkg.item_hangglider.exec()
 
                         -- Shoot down
                         self.warned = self.warned + dtime
-                        if self.warned > unilib.hangglider_no_fly_time then
+                        if self.warned > unilib.setting.hangglider_warning_time then
 
                             player:set_hp(1)
                             player:get_inventory():remove_item(
                                 "main", ItemStack("unilib:item_hangglider")
                             )
 
-                            shot_sound(pos)
+                            unilib.pkg.shared_hangglider.play_shooting_sound(pos)
                             can_exist_flag = false
 
                         end
@@ -245,7 +199,7 @@ function unilib.pkg.item_hangglider.exec()
         end,
     })
 
-    minetest.register_on_dieplayer(function(player)
+    core.register_on_dieplayer(function(player)
 
         remove_physics_override(player, {gravity = 1, jump = 1})
         use_table[player:get_player_name()] = false
@@ -253,7 +207,7 @@ function unilib.pkg.item_hangglider.exec()
     end)
 
 
-    minetest.register_on_joinplayer(function(player)
+    core.register_on_joinplayer(function(player)
 
         local pname = player:get_player_name()
         remove_physics_override(player, {gravity = 1, jump = 1})
@@ -263,7 +217,7 @@ function unilib.pkg.item_hangglider.exec()
 
             id_table[pname] = player:hud_add({
                 name = "hangglider",
-                hud_elem_type = "image",
+                type = "image",
 
                 alignment = {x = 1, y = 1},
                 offset = {x = 0, y = 0},
@@ -276,7 +230,7 @@ function unilib.pkg.item_hangglider.exec()
 
     end)
 
-    minetest.register_on_leaveplayer(function(player)
+    core.register_on_leaveplayer(function(player)
 
         local pname = player:get_player_name()
         use_table[pname] = nil
@@ -306,7 +260,7 @@ function unilib.pkg.item_hangglider.exec()
             -- Equip
             if not use_table[pname] then
 
-                minetest.sound_play(
+                core.sound_play(
                     "unilib_item_hangglider_equip",
                     {pos = pos, max_hear_distance = 8, gain = 1.0}
                 )
@@ -322,13 +276,13 @@ function unilib.pkg.item_hangglider.exec()
 
                     if move_model_up_flag then
 
-                        minetest.add_entity(pos, "unilib:entity_hangglider"):set_attach(
+                        core.add_entity(pos, "unilib:entity_hangglider"):set_attach(
                             player, "", {x = 0, y = 10, z = 0}, {x = 0, y = 0, z = 0}
                         )
 
                     else
 
-                        minetest.add_entity(pos, "unilib:entity_hangglider"):set_attach(
+                        core.add_entity(pos, "unilib:entity_hangglider"):set_attach(
                             player, "", {x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0}
                         )
 
@@ -367,9 +321,9 @@ function unilib.pkg.item_hangglider.exec()
             {"unilib:wool_white", "unilib:wool_white", "unilib:wool_white"},
             {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
             {"", "unilib:item_stick_ordinary", ""},
-        }
+        },
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From hangglider:hangglider
@@ -383,7 +337,7 @@ function unilib.pkg.item_hangglider.exec()
         })
 
     end
-    unilib.register_tool_no_repair(
+    unilib.tools.register_no_repair(
         "unilib:item_hangglider", S("This hangglider cannot be repaired")
     )
 

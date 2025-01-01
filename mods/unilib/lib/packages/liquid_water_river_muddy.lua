@@ -9,7 +9,7 @@
 unilib.pkg.liquid_water_river_muddy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -58,7 +58,7 @@ function unilib.pkg.liquid_water_river_muddy.exec()
             },
             groups = {liquid = 3, puts_out_fire = 1, water = 3},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,
@@ -103,7 +103,7 @@ function unilib.pkg.liquid_water_river_muddy.exec()
             tiles = {"unilib_liquid_water_river_muddy_source.png"},
             groups = {liquid = 3, not_in_creative_inventory = 1, puts_out_fire = 1, water = 3},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.water,
+            sounds = unilib.global.sound_table.water,
 
             buildable_to = true,
             diggable = false,

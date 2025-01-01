@@ -9,7 +9,7 @@
 unilib.pkg.container_chest_bottomless = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.twchests.add_mode
+local mode = unilib.global.imported_mod_table.twchests.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.container_chest_bottomless.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- Original to unilib. Creates unilib:container_chest_bottomless
         part_name = "bottomless",
-        orig_name = {},
+        orig_name_list = {nil, nil},
         def_table = {
             description = S("Bottomless Chest"),
             tiles = {
@@ -53,7 +53,7 @@ function unilib.pkg.container_chest_bottomless.exec()
                 "unilib_container_chest_bottomless_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             sound_close = "unilib_chest_close",
             sound_open = "unilib_chest_open",
@@ -84,7 +84,7 @@ function unilib.pkg.container_chest_bottomless.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- Original to unilib. Creates unilib:container_chest_bottomless_locked
         part_name = "bottomless_locked",
-        orig_name = {},
+        orig_name_list = {nil, nil},
         def_table = {
             description = S("Locked Bottomless Chest"),
             tiles = {
@@ -96,7 +96,7 @@ function unilib.pkg.container_chest_bottomless.exec()
                 "unilib_container_chest_bottomless_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             protected = true,
             sound_close = "unilib_chest_close",
@@ -116,7 +116,7 @@ function unilib.pkg.container_chest_bottomless.exec()
             {c_diamond, c_ord_chest, c_diamond},
             {c_ord_chest, "unilib:metal_steel_ingot", c_ord_chest},
             {c_diamond, c_ord_chest, c_diamond},
-        }
+        },
     })
     unilib.register_craft({
         -- Original to unilib
@@ -124,9 +124,9 @@ function unilib.pkg.container_chest_bottomless.exec()
         output = "unilib:container_chest_bottomless_locked",
         recipe = {"unilib:container_chest_bottomless", "unilib:metal_steel_ingot"},
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
-        if unilib.pkg_executed_table["metal_bronze"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_bronze"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -137,7 +137,7 @@ function unilib.pkg.container_chest_bottomless.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_copper"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_copper"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -148,7 +148,7 @@ function unilib.pkg.container_chest_bottomless.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_gold"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_gold"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks

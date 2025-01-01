@@ -13,7 +13,7 @@
 unilib.pkg.item_paper_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.item_paper_ordinary.exec()
         inventory_image = "unilib_item_paper_ordinary.png",
         groups = {flammable = 3},
     })
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         unilib.register_craft({
             -- From default:paper
@@ -47,7 +47,7 @@ function unilib.pkg.item_paper_ordinary.exec()
                     "unilib:plant_papyrus_ordinary",
                     "unilib:plant_papyrus_ordinary",
                 },
-            }
+            },
         })
 
     else
@@ -61,7 +61,7 @@ function unilib.pkg.item_paper_ordinary.exec()
                     "unilib:plant_papyrus_ordinary",
                     "unilib:plant_papyrus_ordinary",
                 },
-            }
+            },
         })
 
     end

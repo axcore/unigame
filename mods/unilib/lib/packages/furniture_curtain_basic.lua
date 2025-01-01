@@ -9,7 +9,7 @@
 unilib.pkg.furniture_curtain_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -70,7 +70,7 @@ function unilib.pkg.furniture_curtain_basic.exec()
                 description = description,
                 tiles = {img},
                 groups = {dig_immediate = 3, flammable = 3},
-                sounds = unilib.sound_table.node,
+                sounds = unilib.global.sound_table.node,
 
                 drawtype = "signlike",
                 -- N.B. Replaced the original overlay texture with an all-black one, as the original
@@ -79,6 +79,9 @@ function unilib.pkg.furniture_curtain_basic.exec()
 --                      "^[makealpha:255,126,126",
                 inventory_image = img .. "^unilib_furniture_curtain_overlay.png" ..
                         "^[makealpha:0,0,0",
+                -- N.B. is_ground_content = false not in original code; added to match other
+                --      furniture
+                is_ground_content = false,
                 paramtype = "light",
                 paramtype2 = "colorwallmounted",
                 selection_box = {type = "wallmounted"},
@@ -88,7 +91,7 @@ function unilib.pkg.furniture_curtain_basic.exec()
 
                 on_rightclick = function(pos, node, _, itemstack)
 
-                    minetest.set_node(
+                    core.set_node(
                         pos,
                         {
                             name = "unilib:furniture_curtain_" .. part_name .. "_open",
@@ -121,10 +124,13 @@ function unilib.pkg.furniture_curtain_basic.exec()
 --              tiles = {img .. "^unilib_furniture_curtain_overlay.png^[makealpha:255,126,126"},
                 tiles = {img .. "^unilib_furniture_curtain_overlay.png^[makealpha:0,0,0"},
                 groups = {dig_immediate = 3, flammable = 3, not_in_creative_inventory = 1},
-                sounds = unilib.sound_table.node,
+                sounds = unilib.global.sound_table.node,
 
                 drawtype = "signlike",
                 drop = "unilib:furniture_curtain_" .. part_name,
+                -- N.B. is_ground_content = false not in original code; added to match other
+                --      furniture
+                is_ground_content = false,
                 paramtype = "light",
                 paramtype2 = "colorwallmounted",
                 selection_box = {type = "wallmounted"},
@@ -133,7 +139,7 @@ function unilib.pkg.furniture_curtain_basic.exec()
 
                 on_rightclick = function(pos, node, _, itemstack)
 
-                    minetest.set_node(
+                    core.set_node(
                         pos,
                         {name = "unilib:furniture_curtain_" .. part_name, param2 = node.param2}
                     )

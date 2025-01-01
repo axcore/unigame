@@ -17,9 +17,9 @@
 unilib.pkg.stone_vindesite_white = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_vindesite_white.exec()
         description = S("White Vindesite"),
 
         category = "other",
+        colour = "#141119",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -96,26 +97,22 @@ function unilib.pkg.stone_vindesite_white.exec()
         wall_orig_name = "underch:vindesite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:vindesite. Creates unilib:stone_vindesite_white_cobble_compressed
+        part_name = "vindesite_white",
+        orig_name = "compressed:vindesite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:vindesite. Creates unilib:stone_vindesite_white_cobble_compressed
-            part_name = "vindesite_white",
-            orig_name = "compressed:vindesite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed White Vindesite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed White Vindesite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:vindesite. Creates unilib:stone_vindesite_white_cobble_condensed
+        part_name = "vindesite_white",
+        orig_name = "condensed:vindesite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:vindesite. Creates unilib:stone_vindesite_white_cobble_condensed
-            part_name = "vindesite_white",
-            orig_name = "condensed:vindesite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed White Vindesite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed White Vindesite Cobble"),
+    })
 
 end

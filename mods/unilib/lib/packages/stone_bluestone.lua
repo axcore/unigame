@@ -13,8 +13,8 @@
 unilib.pkg.stone_bluestone = {}
 
 local S = unilib.intllib
-local material_add_mode = unilib.imported_mod_table.material.add_mode
-local mineral_add_mode = unilib.imported_mod_table.mineral.add_mode
+local material_add_mode = unilib.global.imported_mod_table.material.add_mode
+local mineral_add_mode = unilib.global.imported_mod_table.mineral.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,6 +36,7 @@ function unilib.pkg.stone_bluestone.exec()
         description = S("Bluestone"),
 
         category = "other",
+        colour = "#536167",
         grinder_flag = true,
         -- (N.B. This is not a fictional stone)
         hardness = 2,
@@ -81,6 +82,24 @@ function unilib.pkg.stone_bluestone.exec()
         replace_mode = mineral_add_mode,
         description = S("Bluestone Cobble"),
         img_list = {"unilib_stone_bluestone.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_bluestone_cobble_compressed
+        part_name = "bluestone",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Compressed Bluestone Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_bluestone_cobble_condensed
+        part_name = "bluestone",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Condensed Bluestone Cobble"),
     })
 
 end

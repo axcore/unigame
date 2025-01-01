@@ -9,7 +9,7 @@
 unilib.pkg.bed_mat_straw = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.bed_mat_straw.exec()
         description = S("Decorative Straw Mat"),
         tiles = {"unilib_misc_straw_ordinary.png"},
         groups = {flammable = 3, hay = 3, oddly_breakable_by_hand = 2, snappy = 2},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         -- N.B. Removed ,so that this item and "unilib:misc_hay_ordinary_pile" are rotated the same
@@ -56,7 +56,7 @@ function unilib.pkg.bed_mat_straw.exec()
             type = "fixed",
             fixed = {
                 {-0.48, -0.5, -0.48, 0.48, -0.25, 0.48},
-            }
+            },
         },
         sunlight_propagates = true,
         walkable = false,
@@ -81,7 +81,7 @@ function unilib.pkg.bed_mat_straw.exec()
             {"unilib:stone_ordinary", "unilib:crop_wheat_seed 3"},
         },
     })
-    if unilib.pkg_executed_table["misc_straw_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_straw_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From cottages:straw_mat

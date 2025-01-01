@@ -9,7 +9,7 @@
 unilib.pkg.machine_caretaker = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.chunkkeeper.add_mode
+local mode = unilib.global.imported_mod_table.chunkkeeper.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -18,14 +18,14 @@ local mode = unilib.imported_mod_table.chunkkeeper.add_mode
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
     -- Add fuel
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local count = stack:get_count()
     local inv = meta:get_inventory()
 
     if player:get_player_name() ~= meta:get_string("owner") or
             meta:get_string("owner") == "" then
 
-        if not minetest.check_player_privs(player, {protection_bypass = true}) then
+        if not core.check_player_privs(player, {protection_bypass = true}) then
             return count
         end
 
@@ -38,7 +38,7 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
     end
 
-    local recipe = minetest.get_craft_result({
+    local recipe = core.get_craft_result({
         method = "fuel",
         items = {stack},
     })
@@ -69,7 +69,7 @@ end
 
 local function on_construct(pos, node)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_int("super_user", 0)
     meta:set_int("time_left", 0)
     meta:set_int("running", 0)
@@ -99,7 +99,7 @@ function unilib.pkg.machine_caretaker.exec()
 
     unilib.register_node("unilib:machine_caretaker_off", "chunkkeeper:keeper_off", mode, {
         -- From chunkkeeper:keeper_off
-        description = unilib.brackets(S("Caretaker Machine"), S("Off")),
+        description = unilib.utils.brackets(S("Caretaker Machine"), S("Off")),
         tiles = {
             "unilib_machine_caretaker_top_off.png",
             "unilib_machine_caretaker_bottom.png",
@@ -129,13 +129,13 @@ function unilib.pkg.machine_caretaker.exec()
         recipe = {
             {"", "unilib:mineral_diamond_gem", ""},
             {"unilib:metal_steel_ingot", "unilib:mineral_diamond_gem", "unilib:metal_steel_ingot"},
-            {"unilib:metal_steel_ingot", "unilib:metal_gold_ingot", "unilib:metal_steel_ingot"}
-        }
+            {"unilib:metal_steel_ingot", "unilib:metal_gold_ingot", "unilib:metal_steel_ingot"},
+        },
     })
 
     unilib.register_node("unilib:machine_caretaker_on", "chunkkeeper:keeper_on", mode, {
         -- From chunkkeeper:keeper_on
-        description = unilib.brackets(S("Caretaker Machine"), S("On")),
+        description = unilib.utils.brackets(S("Caretaker Machine"), S("On")),
         tiles = {
             {
                 name = "unilib_machine_caretaker_animated.png",
@@ -144,7 +144,7 @@ function unilib.pkg.machine_caretaker.exec()
                     aspect_w = 32,
                     aspect_h = 32,
                     length = 2.0
-                }
+                },
             },
             "unilib_machine_caretaker_bottom.png",
         },

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_salt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.mineral_salt.exec()
         description = S("Crystallised Salt Block"),
         tiles = {"unilib_mineral_salt_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         light_source = 11,
@@ -53,7 +53,7 @@ function unilib.pkg.mineral_salt.exec()
         description = S("Crystallised Pure Salt Block"),
         tiles = {"unilib_mineral_salt_pure_block.png"},
         groups = {crumbly = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         light_source = 9,

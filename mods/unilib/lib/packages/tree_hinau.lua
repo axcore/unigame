@@ -9,7 +9,7 @@
 unilib.pkg.tree_hinau = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 
 function unilib.pkg.tree_hinau.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Elaeocarpus dentatus"
 
     unilib.register_tree({
@@ -47,9 +47,9 @@ function unilib.pkg.tree_hinau.exec()
         group_table = {choppy = 2, flammable = 2, tree = 1},
         sci_name = sci_name,
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
-        minetest.register_craft({
+        unilib.register_craft({
              -- From aotearoa:hinau_tree
             type = "cooking",
             output = "unilib:dye_black 4",
@@ -81,8 +81,10 @@ function unilib.pkg.tree_hinau.exec()
     })
     unilib.register_leafdecay({
         -- From aotearoa:hinau_leaves
+        trunk_type = "hinau",
         trunks = {"unilib:tree_hinau_trunk"},
-        leaves = {"unilib:tree_hinau_leaves", "unilib:fruit_hinau"},
+        leaves = {"unilib:tree_hinau_leaves"},
+        others = {"unilib:fruit_hinau"},
         radius = 2,
     })
 
@@ -128,7 +130,7 @@ function unilib.pkg.tree_hinau.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From aotearoa:gate_hinau_wood. Creates unilib:gate_hinau_closed
+        -- From aotearoa:gate_hinau_wood_closed, etc. Creates unilib:gate_hinau_closed, etc
         part_name = "hinau",
         orig_name = {"aotearoa:gate_hinau_wood_closed", "aotearoa:gate_hinau_wood_open"},
 
@@ -139,20 +141,20 @@ function unilib.pkg.tree_hinau.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("aotearoa_tree_hinau_dense_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_hinau_dense_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_hinau_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_hinau_" .. i .. ".mts",
 
             fill_ratio = 0.0078,
             flags = "place_center_x, place_center_z",
             rotation = "random",
             sidelen = 8,
         })
-        unilib.register_decoration("aotearoa_tree_hinau_rare_" .. i, {
+        unilib.register_decoration_generic("aotearoa_tree_hinau_rare_" .. i, {
             -- From aotearoa/spawn_trees.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_hinau_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_hinau_" .. i .. ".mts",
 
             fill_ratio = 0.00039,
             flags = "place_center_x, place_center_z",

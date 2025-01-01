@@ -9,7 +9,7 @@
 unilib.pkg.food_tofu_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_tofu_red.exec()
         inventory_image = "unilib_food_tofu_red_raw.png",
         groups = {eatable = 1, flammable = 1, food = 1, food_vegan = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_tofu_red_raw", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_tofu_red_raw", 2),
     })
     unilib.register_craft_3x3({
         -- From cucina_vegana:tofu
@@ -46,7 +46,7 @@ function unilib.pkg.food_tofu_red.exec()
         inventory_image = "unilib_food_tofu_red_cooked.png",
         groups = {eatable = 1, flammable = 1, food = 1, food_tofu = 1, food_vegan = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_tofu_red_cooked", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_tofu_red_cooked", 3),
     })
     unilib.register_craft({
         -- From cucina_vegana:tofu
@@ -55,7 +55,7 @@ function unilib.pkg.food_tofu_red.exec()
         recipe = "unilib:food_tofu_red_raw",
         cooktime = 5,
     })
-    if unilib.technic_extra_flag then
+    if unilib.setting.technic_extra_flag then
 
         technic.register_compressor_recipe({
             -- From cucina_vegana:tofu

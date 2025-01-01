@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_plant_spinifex = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,43 +32,51 @@ function unilib.pkg.deco_australia_plant_spinifex.init()
 
 end
 
-function unilib.pkg.deco_australia_plant_spinifex.exec()
+function unilib.pkg.deco_australia_plant_spinifex.post()
 
-    if unilib.pkg_executed_table["biome_australia_central_australia"] ~= nil and
-            unilib.pkg_executed_table["dirt_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_central_australia"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_red_antipodean"] ~= nil then
 
-        unilib.register_decoration_now("australia_plant_spinifex_1", "australia_plant_spinifex_1", {
+        unilib.register_decoration_complete(
             -- From australia:spinifex
-            biomes = "australia_central_australia",
-            place_on = "unilib:dirt_red_antipodean",
-            y_max = 170,
-            y_min = 37,
-        })
+            "australia_plant_spinifex_1",
+            "australia_plant_spinifex_1",
+            {
+                biomes = "australia_central_australia",
+                place_on = "unilib:dirt_red_antipodean",
+                y_max = 170,
+                y_min = 37,
+            }
+        )
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_goldfields_esperance"] ~= nil and
-            unilib.pkg_executed_table["sand_desert"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_goldfields_esperance"] ~= nil and
+            unilib.global.pkg_executed_table["sand_desert"] ~= nil then
 
         -- N.B. "australia_plant_spinifex_1" is not an error
-        unilib.register_decoration_now("australia_plant_spinifex_1", "australia_plant_spinifex_2", {
+        unilib.register_decoration_complete(
             -- From australia:spinifex
-            biomes = "australia_goldfields_esperance",
-            place_on = "unilib:sand_desert",
-            y_max = 35,
-            y_min = 6,
-        })
+            "australia_plant_spinifex_1",
+            "australia_plant_spinifex_2",
+            {
+                biomes = "australia_goldfields_esperance",
+                place_on = "unilib:sand_desert",
+                y_max = 35,
+                y_min = 6,
+            }
+        )
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_pilbara"] ~= nil and
-            unilib.pkg_executed_table["gravel_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_pilbara"] ~= nil and
+            unilib.global.pkg_executed_table["gravel_red_antipodean"] ~= nil then
 
-        unilib.register_decoration_now("australia_plant_spinifex_3", nil, {
+        unilib.register_decoration_complete("australia_plant_spinifex_3", nil, {
             -- From australia:spinifex
             biomes = "australia_pilbara",
             place_on = "unilib:gravel_red_antipodean",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 8,
         })
 

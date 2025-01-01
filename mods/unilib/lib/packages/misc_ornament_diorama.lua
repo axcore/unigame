@@ -9,7 +9,7 @@
 unilib.pkg.misc_ornament_diorama = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.misc_ornament_diorama.exec()
             "unilib_misc_ornament_diorama_front.png^" .. img,
         },
         groups = {oddly_breakable_by_hand = 3},
-        sounds = unilib.node_sound_wood_defaults({
+        sounds = unilib.sound.generate_wood({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),
@@ -97,14 +97,14 @@ function unilib.pkg.misc_ornament_diorama.exec()
 
         after_destruct = function(pos,node)
 
-            minetest.set_node(
+            core.set_node(
                 pos,
-                {name= "unilib:misc_ornament_diorama_model", param2 = node.param2}
+                {name = "unilib:misc_ornament_diorama_model", param2 = node.param2}
             )
 
         end,
     })
-    if not unilib.use_unipanes_flag then
+    if not unilib.global.use_unipanes_flag then
 
         unilib.register_craft({
             -- From nbea:nbox_014
@@ -112,8 +112,8 @@ function unilib.pkg.misc_ornament_diorama.exec()
             recipe = {
                 {"group:stick", "group:pane", "group:stick"},
                 {"group:pane", "unilib:misc_ornament_diorama_model", "group:pane"},
-                {"group:stick", "group:pane", "group:stick"}
-            }
+                {"group:stick", "group:pane", "group:stick"},
+            },
         })
 
     else
@@ -124,12 +124,12 @@ function unilib.pkg.misc_ornament_diorama.exec()
             recipe = {
                 {"group:stick", "group:unipane", "group:stick"},
                 {"group:unipane", "unilib:misc_ornament_diorama_model", "group:unipane"},
-                {"group:stick", "group:unipane", "group:stick"}
-            }
+                {"group:stick", "group:unipane", "group:stick"},
+            },
         })
 
     end
-    if unilib.pkg_executed_table["misc_frame_wood_simple"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_frame_wood_simple"] ~= nil then
 
         unilib.register_craft({
             -- From nbea:nbox_014
@@ -155,7 +155,7 @@ function unilib.pkg.misc_ornament_diorama.exec()
         --      used as a crafting ingredient (as in the original code)
 --      groups = {falling_node = 1, not_in_creative_inventory = 1, oddly_breakable_by_hand = 3},
         groups = {falling_node = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -187,7 +187,7 @@ end
 
 function unilib.pkg.misc_ornament_diorama.post()
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"

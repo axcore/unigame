@@ -9,7 +9,7 @@
 unilib.pkg.misc_pile_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 local formspec =
     "size[8,7;]" ..
@@ -18,7 +18,7 @@ local formspec =
     "list[current_player;main;0,4.08;8,3;8]" ..
     "listring[context;pile]" ..
     "listring[current_player;main]" ..
-    unilib.get_hotbar_bg(0, 2.85)
+    unilib.misc.get_hotbar_bg(0, 2.85)
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -57,6 +57,74 @@ local function get_formspec(inv)
 
 end
 
+local function combine_textures(part_name)
+
+    local trunk_img = "unilib_tree_" .. part_name .. "_trunk.png"
+    local rotate_img = "(" .. trunk_img .. "^[transformFXR90" .. ")"
+    local top_img = "unilib_tree_" .. part_name .. "_trunk_top.png"
+
+    local comb_top_img = "[combine:48x48" ..
+            ":0,0=" .. trunk_img ..
+            ":0,16=" .. trunk_img ..
+            ":0,32=" .. trunk_img ..
+            ":16,0=" .. trunk_img ..
+            ":16,16=" .. trunk_img ..
+            ":16,32=" .. trunk_img ..
+            ":32,0=" .. trunk_img ..
+            ":32,16=" .. trunk_img ..
+            ":32,32=" .. trunk_img ..
+            "^unilib_misc_pile_wood_top_overlay.png"
+
+    local comb_side_img = "[combine:48x48" ..
+            ":0,0=" .. rotate_img ..
+            ":0,8=" .. top_img ..
+            ":0,16=" .. rotate_img ..
+            ":0,24=" .. top_img ..
+            ":0,32=" .. rotate_img ..
+            ":0,40=" .. top_img ..
+
+            ":16,0=" .. rotate_img ..
+            ":16,8=" .. top_img ..
+            ":16,16=" .. rotate_img ..
+            ":16,24=" .. top_img ..
+            ":16,32=" .. rotate_img ..
+            ":16,40=" .. top_img ..
+
+            ":32,0=" .. rotate_img ..
+            ":32,8=" .. top_img ..
+            ":32,16=" .. rotate_img ..
+            ":32,24=" .. top_img ..
+            ":32,32=" .. rotate_img ..
+            ":32,40=" .. top_img ..
+            "^unilib_misc_pile_wood_side_overlay.png"
+
+    local comb_front_img = "[combine:48x48" ..
+            ":0,0=" .. top_img ..
+            ":0,8=" .. rotate_img ..
+            ":0,16=" .. top_img ..
+            ":0,24=" .. rotate_img ..
+            ":0,32=" .. top_img ..
+            ":0,40=" .. rotate_img ..
+
+            ":16,0=" .. top_img ..
+            ":16,8=" .. rotate_img ..
+            ":16,16=" .. top_img ..
+            ":16,24=" .. rotate_img ..
+            ":16,32=" .. top_img ..
+            ":16,40=" .. rotate_img ..
+
+            ":32,0=" .. top_img ..
+            ":32,8=" .. rotate_img ..
+            ":32,16=" .. top_img ..
+            ":32,24=" .. rotate_img ..
+            ":32,32=" .. top_img ..
+            ":32,40=" .. rotate_img ..
+            "^unilib_misc_pile_wood_front_overlay.png"
+
+    return  comb_top_img, comb_side_img, comb_front_img
+
+end
+
 local function do_register(data_table)
 
     -- Adapted from bbq/woodpile.lua
@@ -82,18 +150,27 @@ local function do_register(data_table)
 
     local full_name = "unilib:misc_pile_wood_" .. part_name
 
-    unilib.register_node(full_name, orig_name, replace_mode, {
-        description = unilib.brackets(S("Wood Pile"), description),
+    -- "orig_name" is specified for the five minetest_game woods, for which BBQ provides a full set
+    --      of textures; for everything else, create composite textures
+    local comb_top_img = "unilib_misc_pile_wood_" .. part_name .. "_top.png"
+    local comb_side_img = "unilib_misc_pile_wood_" .. part_name .. "_side.png"
+    local comb_front_img = "unilib_misc_pile_wood_" .. part_name .. "_front.png"
+    if orig_name == nil then
+        comb_top_img, comb_side_img, comb_front_img = combine_textures(part_name)
+    end
+
+    local def_table = {
+        description = unilib.utils.brackets(S("Wood Pile"), description),
         tiles = {
-            "unilib_misc_pile_wood_" .. part_name .. "_top.png",
-            "unilib_misc_pile_wood_" .. part_name .. "_top.png",
-            "unilib_misc_pile_wood_" .. part_name .. "_side.png",
-            "unilib_misc_pile_wood_" .. part_name .. "_side.png",
-            "unilib_misc_pile_wood_" .. part_name .. "_front.png",
-            "unilib_misc_pile_wood_" .. part_name .. "_front.png",
+            comb_top_img,
+            comb_top_img,
+            comb_front_img,
+            comb_front_img,
+            comb_side_img,
+            comb_side_img,
         },
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         -- N.B. drop not in original code; added to match code in "misc_pile_logs" package
         drop = ingredient .. " 7",
@@ -107,15 +184,15 @@ local function do_register(data_table)
             -- This version of the wood pile only accepts trunks, wood, leaves and sapling from
             --      the correct tree type
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             local stack_name = stack:get_name()
 
             if (
-                minetest.get_item_group(stack_name, "tree") == 0 and
-                minetest.get_item_group(stack_name, "wood") == 0 and
-                minetest.get_item_group(stack_name, "leaves") == 0 and
-                minetest.get_item_group(stack_name, "sapling") == 0
+                core.get_item_group(stack_name, "tree") == 0 and
+                core.get_item_group(stack_name, "wood") == 0 and
+                core.get_item_group(stack_name, "leaves") == 0 and
+                core.get_item_group(stack_name, "sapling") == 0
             ) or not string.find(stack_name, "^unilib:tree_" .. part_name .. "_") then
                 return 0
             else
@@ -126,7 +203,7 @@ local function do_register(data_table)
 
         can_dig = function(pos,player)
 
-            local inv = minetest.get_meta(pos):get_inventory()
+            local inv = core.get_meta(pos):get_inventory()
             return inv:is_empty("pile")
 
         end,
@@ -134,62 +211,68 @@ local function do_register(data_table)
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "pile", drops)
+            unilib.misc.get_inventory_drops(pos, "pile", drops)
             drops[#drops + 1] = full_name
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_formspec(nil))
             local inv = meta:get_inventory()
             inv:set_size("pile", 8 * 2)
 
         end,
 
+        --[[
         on_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff in wood pile at " ..
-                minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items in wood pile at " ..
+                        core.pos_to_string(pos)
             )
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_formspec(meta:get_inventory()))
 
         end,
 
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " moves stuff to wood pile at " ..
-                minetest.pos_to_string(pos)
+                player:get_player_name() .. " moves items to wood pile at " ..
+                        core.pos_to_string(pos)
             )
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_formspec(meta:get_inventory()))
 
         end,
 
         on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            unilib.log(
+            unilib.utils.log(
                 "action",
-                player:get_player_name() .. " takes stuff from wood pile at " ..
-                minetest.pos_to_string(pos)
+                player:get_player_name() .. " takes items from wood pile at " ..
+                        core.pos_to_string(pos)
             )
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", get_formspec(meta:get_inventory()))
 
         end,
-    })
+        ]]--
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "wood pile")
+    unilib.register_node(full_name, orig_name, replace_mode, def_table)
+
     -- N.B. Original craft recipe conflicts with recipe in "shared_fachwerk" package
     --[[
     unilib.register_craft_3x3({
@@ -216,56 +299,39 @@ function unilib.pkg.misc_pile_wood.init()
 
     return {
         description = "Wood pile set",
-        notes = "This package creates wood piles from a limited range of super trees. Wood" ..
-                " piles differ from log piles, in that they act as containers for trunks, wood," ..
-                " leaves and saplings for a specific tree type",
+        notes = "This package creates wood piles from the full range of super trees. Wood piles" ..
+                " differ from log piles, in that they act as containers for trunks, wood, leaves" ..
+                " and saplings for a specific tree type",
     }
 
 end
 
 function unilib.pkg.misc_pile_wood.post()
 
-    local pile_list = {
-        -- minetest_game trees
-        {
-            part_name = "acacia",
-            orig_name = "bbq:woodpile_acacia",
-        },
-        {
-            part_name = "apple",
-            orig_name = "bbq:woodpile",
-        },
-        {
-            part_name = "aspen",
-            orig_name = "bbq:woodpile_aspen",
-        },
-        {
-            part_name = "jungle",
-            orig_name = "bbq:woodpile_jungle",
-        },
-        {
-            part_name = "pine",
-            orig_name = "bbq:woodpile_pine",
-        },
+    local orig_name_table = {
+        acacia = "bbq:woodpile_acacia",
+        apple = "bbq:woodpile",
+        aspen = "bbq:woodpile_aspen",
+        jungle = "bbq:woodpile_jungle",
+        pine = "bbq:woodpile_pine",
     }
 
-    for _, mini_table in pairs(pile_list) do
+    for part_name, _ in pairs(unilib.global.super_tree_table) do
 
-        local data_table = unilib.tree_table[mini_table.part_name]
-        local ingredient = mini_table.ingredient or
-                "unilib:tree_" .. mini_table.part_name .. "_wood"
+        local data_table = unilib.global.tree_table[part_name]
+        local ingredient = "unilib:tree_" .. part_name .. "_wood"
 
-        if unilib.super_tree_table[mini_table.part_name] ~= nil and
-                unilib.pkg_executed_table["tree_" .. mini_table.part_name] ~= nil and
-                minetest.registered_nodes[ingredient] ~= nil then
+        if unilib.global.super_tree_table[part_name] ~= nil and
+                unilib.global.pkg_executed_table["tree_" .. part_name] ~= nil and
+                core.registered_nodes[ingredient] ~= nil then
 
             do_register({
-                part_name = mini_table.part_name,
-                orig_name = mini_table.orig_name,
+                part_name = part_name,
+                orig_name = orig_name_table[part_name],
                 ingredient = ingredient,
 
                 replace_mode = mode,
-                description = unilib.brackets(S("Wood Pile"), data_table.description),
+                description = unilib.utils.brackets(S("Wood Pile"), data_table.description),
             })
 
         end

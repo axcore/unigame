@@ -1,0 +1,657 @@
+# "gaia" remix - a large collection of biomes, ecosystems, decorations and ores with a focus on
+#   natural materials and naturalistic beauty, based on various versions of GLEM (but heavily
+#   modified)
+# The world is divided into five temperature zones (hot, warm, mild, cool, cold), six humidity
+#   zones (humid, semihumid, temperate, semiarid, arid, desert) and eight height levels (ocean,
+#   beach, coastal, lowland, shelf, highland, mountain, strato) producing 240 unique biomes
+# In addition, each biome has a number of "ecosystems" - areas which are slightly different to their
+#   parent biome, in which a different selection of items are placed, so that each biome doesn't
+#   look the same in every direction. (Ecosystems are implemented as Minetest ores.)
+# A set of custom dirts is created for each biome. Food is widely available, but crop and produce
+#   items are generally found in certain forested areas
+# Ore distributions from several mods have been added (namely badlands, darkage, minetest_game,
+#   GLEMr4, moreores, technic and underch). By default, these ore extend to the bottom of the world.
+#   If you want to change the lower limit, for example because this remix is being alongside a
+#   package like "magpen_underch", you can edit the variable in the "ore_gaia" package
+#
+# The "gaia" remix should be played alongside the "mtgame_mini" remix, or some other suitable
+#   replacement
+# The "gaia" remix is designed to be compatible with the following remixes which generate
+#   underworld pseudo-biomes (below the OCEAN level, as defined in the constants.csv file):
+#       mapgen_hades mapgen_hades_jit mapgen_underch mapgen_underch_jit
+# In this context, "compatible" means that "gaia" won't generate ores below that level,
+#   thus not duplicating ore distributions from the underworld remixes
+#
+# A stripped-down version of this remix, "gaia_simple", is available. It removes all ecosystems and
+#   therefore requires fewer packages (at the cost of a less beautiful world)
+
+# Setup ###########################################################################################
+
+base_gaia|unilib
+
+@minimal
+# @minimal provides...
+#base_minimal|unilib
+#liquid_lava_ordinary|default
+#liquid_water_ordinary|default
+#liquid_water_river|default
+#stone_ordinary|default moreblocks technic
+
+# Optional packages ###############################################################################
+
+# This package is an optional addition to the "gaia" remix, automatically overriding some Minetest
+# settings to produce a customised player experience. If you don't want it, comment out the line
+# below
+override_gaia|unilib
+# This package converts dirts and dirts-with-turf near trees and ferns to woodsoils. You can enable
+#   this package if you want that behaviour. However, it will only work as inteded if the override
+#   package above has been enabled, or if you have added all dirt types to unilib's super dirt set
+#   (in Minetest settings)
+#shared_woodsoils|woodsoils
+
+# Optimisation ####################################################################################
+
+# This package, if available, produces an optimised version of decorations.csv, writing a new file
+#   in the same folder. In testing, it reduces the size of decorations.csv by about 75%
+# To use this package:
+#   - Uncomment the line below by removing the initial #
+#   - Start a Minetest game, using the "gaia" remix, then shut down the client
+#   - In the remix folder, rename the original file to something like "decorations_original.csv"
+#   - ...and rename the optimised file to "decorations.csv"
+#   - Comment the line below by re-inserting the initial #
+#meta_deco_optimise|unilib
+
+# Biome, ecosystem, decoration and ore packages ###################################################
+
+bush_acacia|default
+bush_blueberry_ordinary|default
+bush_hawthorn|glemr11
+bush_ordinary|default
+bush_rhododendron|glemr11
+clay_baked_basic|bakedclay
+clay_bentonite_calcium|pfaa
+clay_bentonite_sodium|pfaa
+clay_brown|underch
+clay_ordinary|default
+clay_red|valleys_c
+coral_block_blue|decorations_sea
+coral_block_brown|default
+coral_block_bubble|xocean
+coral_block_crimson|decorations_sea
+coral_block_fire|xocean
+coral_block_green|decorations_sea
+coral_block_horn|xocean
+coral_block_orange|default
+coral_block_pink|decorations_sea
+coral_block_red|decorations_sea
+coral_block_rose|xocean
+coral_block_skeleton|default
+coral_block_tangerine|decorations_sea
+coral_block_tube|xocean
+coral_block_violet|decorations_sea
+coral_block_yellow|decorations_sea
+coral_rooted_blue|farlands
+coral_rooted_blue_glow|ethereal
+coral_rooted_bubble|xocean
+coral_rooted_cyan|default
+coral_rooted_fire|xocean
+coral_rooted_green|default
+coral_rooted_green_glow|ethereal
+coral_rooted_horn|xocean
+coral_rooted_orange|farlands
+coral_rooted_orange_glow|ethereal
+coral_rooted_pink|default
+coral_rooted_pink_big|farlands
+coral_rooted_pink_glow|ethereal
+coral_rooted_red|farlands
+coral_rooted_rose|xocean
+coral_rooted_tube|xocean
+coral_seawhip_blue|decorations_sea
+coral_seawhip_crimson|decorations_sea
+coral_seawhip_green|decorations_sea
+coral_seawhip_red|decorations_sea
+coral_seawhip_yellow|decorations_sea
+crop_aubergine|better_farming
+crop_barley|farming
+crop_beet_sugar|agriculture
+crop_cotton|farming
+crop_hemp|farming
+crop_mint_normal|farming
+crop_oat|farming
+crop_rice_white|farming
+crop_rye|farming
+crop_spinach|better_farming
+crop_sunflower_giant|farming
+crop_tomato_cherry|better_farming
+crop_wheat|farming
+dirt_black|glemr4
+dirt_brown|glemr4
+dirt_clayey|valleys_c
+dirt_coarse|farlands
+dirt_dark|darkage
+dirt_dried|ethereal
+dirt_dry|default
+dirt_mud_dry|darkage
+dirt_mud_swamp|30biomes
+dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf_grey|ethereal
+dirt_parched|farlands
+dirt_peat_with_oil_crude|pfaa
+dirt_peat_with_shale|pfaa
+dirt_permafrost_blue|unilib
+dirt_permafrost_blue_dark|unilib
+dirt_permafrost_brown|unilib
+dirt_permafrost_brown_dark|unilib
+dirt_permafrost_dark|glemr6
+dirt_permafrost_green|unilib
+dirt_permafrost_green_dark|unilib
+dirt_permafrost_ordinary|default
+dirt_permafrost_red|unilib
+dirt_permafrost_red_dark|unilib
+dirt_sandy|valleys_c
+dirt_silt_coarse|valleys_c
+dirt_silt_fine|valleys_c
+fern_boston|ethereal
+fern_broad_leaf|farlands
+fern_broad_leaf_young|glemr4
+fern_christmas|moreplants
+fern_dicksonia|farlands
+fern_horsetail|ferns
+fern_lady|farlands
+fern_lady_small|glemr4
+fern_ordinary|default
+fern_spike|moreplants
+flower_bird_of_paradise|valleys_c
+flower_chrysanthemum_green|flowers
+flower_daisy_oxeye|farlands
+flower_dandelion_white|flowers
+flower_dandelion_yellow|flowers
+flower_dandelion_yellow_tall|glemr11
+flower_delphinium_blue|bakedclay
+flower_geranium_blue|flowers
+flower_hibiscus|valleys_c
+flower_lantana|farlands
+flower_lavender|farlands
+flower_lazarus_bell|bakedclay
+flower_lilac|ethereal
+flower_lily_calla|valleys_c
+flower_orchid|valleys_c
+flower_petunia_blue|farlands
+flower_petunia_pink|farlands
+flower_petunia_white|farlands
+flower_poppy_normal|ethereal
+flower_rose_red|flowers
+flower_thistle|bakedclay
+flower_tulip_black|flowers
+flower_tulip_orange|flowers
+flower_viola_purple|flowers
+flower_waterlily_exotic_pink|farlands
+flower_waterlily_exotic_yellow|farlands
+flower_waterlily_ordinary|flowers
+fruit_apple_exotic|farlands
+fruit_apple_frozen|snow
+fruit_apple_golden|ethereal
+fruit_banana|ethereal
+fruit_cherry|cherrytree
+fruit_clementine|clementinetree
+fruit_coconut|ethereal
+fruit_date|moretrees
+fruit_lavender|glemr11
+fruit_lemon_mature|lemontree
+fruit_mirabelle|glemr11
+fruit_orange|ethereal
+fruit_peach_exotic|farlands
+fruit_pear_exotic|farlands
+fruit_plum_exotic|farlands
+grass_bamboo|farlands
+grass_dead|farlands
+grass_deciduous|farlands
+grass_dry|default
+grass_frozen|farlands
+grass_giant|farlands
+grass_golden|glemr11
+grass_jungle|default
+grass_marram_african|unilib
+grass_marram_american|unilib
+grass_marram_baltic|unilib
+grass_marram_european|unilib
+grass_marram_ordinary|default
+grass_ordinary|default
+grass_rainforest|farlands
+grass_reed_mannagrass|bakedclay
+grass_ryegrass|beautiflowers
+grass_seagrass|farlands
+grass_swamp|farlands
+grass_tall|farlands
+grass_wild|glemr11
+gravel_mossy|underch
+gravel_ordinary|default mtg_plus
+gravel_sandstone_desert|glemr4
+gravel_sandstone_golden|unilib
+gravel_sandstone_silver|unilib
+gravel_stone_desert|glemr11
+ice_blue|caverealms
+ice_ordinary|default ethereal mtg_plus
+ice_thin|ethereal
+ingredient_fish_bonus|ethereal
+ingredient_fish_gaia|ethereal
+ingredient_fish_junk|ethereal
+item_rod_fishing|ethereal
+misc_matrix_gaia|unilib
+misc_patch_grass|dryplants
+misc_seashell_auger|decorations_sea
+misc_seashell_clam|decorations_sea
+misc_seashell_spiral|decorations_sea
+misc_starfish_blue|decorations_sea
+misc_starfish_red|decorations_sea
+mushroom_blotchy|glemr4
+mushroom_brown|flowers
+mushroom_red|flowers
+pebble_large|cavestuff
+pebble_small|valleys_c
+plant_aloe_vera|farlands
+plant_anemone_normal|farlands
+plant_arrow_arum|valleys_c
+plant_bamboo_small|farlands
+plant_bulrush|dryplants
+plant_bulrush_small|moreplants
+plant_cactus_ordinary|default
+plant_cactus_prickly_pear|glemr11
+plant_cactus_purple|glemr4
+plant_cactus_purple_small|glemr4
+plant_cactus_purple_small_mature|glemr11
+plant_cactus_small|farlands
+plant_cactus_thorny|glemr4
+plant_cactus_tiny|moreplants
+plant_cattail_normal|farlands
+plant_enigma|moreplants
+plant_fungus_ground|moreplants
+plant_heath_gold|glemr11
+plant_heath_green|glemr11
+plant_heath_purple|glemr11
+plant_heath_red|glemr11
+plant_juncus|dryplants
+plant_kelp_dried|xocean
+plant_kelp_green|farlands
+plant_kelp_ordinary_gaia|farlands
+plant_kelp_yellow|farlands
+plant_nettle_carduus|nettle
+plant_nettle_cleavers|nettle
+plant_nettle_hogweed_giant|nettle
+plant_nettle_impatiens|nettle
+plant_nettle_normal|nettle
+plant_nettle_scotch_broom|nettle
+plant_oat_wild|farlands
+plant_palmetto_saw|glemr4
+plant_papyrus_ordinary|default mtg_plus
+plant_pickle_sea|xocean
+plant_reedmace|dryplants
+plant_sandwort|glemr11
+plant_saxifrage_purple|glemr11
+plant_seagrass_paddle|decorations_sea
+plant_seagrass_ribbon_serrated|decorations_sea
+plant_seagrass_sickle|xocean
+plant_seagrass_spoon|decorations_sea
+plant_seagrass_tape_blue|decorations_sea
+plant_seagrass_tape_green|decorations_sea
+plant_seagrass_tape_red|decorations_sea
+plant_seagrass_zostera|decorations_sea
+plant_seaweed_undersea|ethereal
+plant_shrub_banana|farlands
+plant_shrub_banana_large|glemr4
+plant_shrub_banana_young|glemr11
+plant_shrub_dead|glemr11
+plant_shrub_dry|default
+plant_shrub_forest_deciduous|farlands
+plant_shrub_green|glemr11
+plant_shrub_green_dark|glemr11
+plant_shrub_green_light|glemr11
+plant_shrub_hog_peanut|farlands
+plant_shrub_snowy|ethereal
+plant_shrub_taiga|moreplants
+plant_shrub_white|glemr11
+plant_weed_normal|moreplants
+plant_weed_stone|moreplants
+produce_artichoke|farming
+produce_bean_green|farming
+produce_beetroot_normal|farming
+produce_blackberry|farming
+produce_blueberry_highbush|farming
+produce_cabbage_normal|farming
+produce_carrot_normal|farming
+produce_chilli_normal|farming
+produce_cocoa_jungle|farming
+produce_coffee|farming
+produce_corn_normal|farming
+produce_cucumber_normal|farming
+produce_garlic_normal|farming
+produce_grape|farming
+produce_lettuce|farming
+produce_melon|farming
+produce_onion_normal|farming
+produce_onion_wild|ethereal
+produce_parsley_flatleaf|farming
+produce_pea|farming
+produce_pepper|farming
+produce_pineapple|farming
+produce_potato_normal|farming
+produce_pumpkin_yellow|farming
+produce_radish|farlands
+produce_raspberry|farming
+produce_rice_arborio|better_farming
+produce_rhubarb|farming
+produce_soy_normal|farming
+produce_strawberry_normal|ethereal
+produce_tomato_salad|farming
+produce_vanilla|farming
+sand_barren|badlands
+sand_beige|unilib
+sand_brown|unilib
+sand_cassiterite|pfaa
+sand_desert|default farming
+sand_desert_nosoil|default
+sand_diatomite|pfaa
+sand_garnet|pfaa
+sand_glauconite|pfaa
+sand_golden|unilib
+sand_mineral_basaltic|pfaa
+sand_mineral_granitic|pfaa
+sand_ordinary|default
+sand_ordinary_with_oil_crude|pfaa
+sand_pink|unilib
+sand_quartz|pfaa
+sand_quicksand|ethereal
+sand_silica|glemr6
+sand_silt|darkage
+sand_silver|default
+sand_sulphur|pfaa
+sand_volcanic_ash|pfaa
+sand_volcanic_dust|glemr4
+sand_white|glemr4
+shared_bakedclay|bakedclay
+shared_decorations_sea|decorations_sea
+shared_ethereal_fish|ethereal
+shared_farlands_fruit|unilib
+snow_ordinary|default ethereal mtg_plus
+soil_arid|farming
+soil_ordinary|farming
+stone_andesite_grey|glemr4
+stone_basalt_brown|material mineral
+stone_basalt_dark|darkage
+stone_bluestone|material mineral
+stone_brownstone_dark|glemr4
+stone_brownstone_pale|decoblocks
+stone_chalk_white|darkage
+stone_desert|default moreblocks
+stone_diorite_dark|pfaa
+stone_gabbro_red|pfaa
+stone_gneiss_brown|pfaa
+stone_granite_dark|technic_worldgen
+stone_granite_orange|ugbc
+stone_granite_pink|farlands
+stone_granite_white|farlands
+stone_greenstone|material mineral
+stone_limestone_beige|ugbc
+stone_limestone_red|pfaa
+stone_limestone_white|farlands
+stone_marble_brown|technic_worldgen
+stone_mudstone|pfaa
+stone_ordinary_with_chromium|technic_worldgen
+stone_ordinary_with_lead|technic_worldgen
+stone_ordinary_with_mithril|moreores
+stone_ordinary_with_silver|moreores
+stone_ordinary_with_uranium|technic_worldgen
+stone_ordinary_with_zinc|technic_worldgen
+stone_quartzite_brown|underch compressed condensed
+stone_quartzite_red|ugbc
+stone_sandstone_barren|badlands
+stone_sandstone_beige|decoblocks
+stone_sandstone_brown|glemr4
+stone_sandstone_desert|default mtg_plus
+stone_sandstone_golden|unilib
+stone_sandstone_old_red|darkage
+stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_pink|pfaa
+stone_sandstone_red|pfaa
+stone_sandstone_silver|default mtg_plus
+stone_sandstone_white|glemr4
+stone_schist_grey|darkage
+stone_serpentinite_dark|pfaa
+stone_serpentinite_pale|decoblocks
+stone_travertine|decoblocks
+stone_tuff|darkage
+stone_tuff_rhyolitic|darkage
+tree_acacia|default doors moreblocks
+tree_acacia_exotic|farlands
+tree_apple|default doors moreblocks
+tree_apple_frozen|snow
+tree_apple_mature|moretrees
+tree_ash|glemr4
+tree_aspen|default doors moreblocks
+tree_bamboo|ethereal
+tree_bamboo_exotic|farlands
+tree_banana|ethereal
+tree_baobab|farlands
+tree_beech_mature|glemr4
+tree_beech_southern|glemr11
+tree_birch|ethereal
+tree_birch_large|moretrees
+tree_birch_small|glemr4
+tree_cedar|moretrees
+tree_cherry|cherrytree
+tree_cherry_blossom|glemr4
+tree_chestnut|chestnuttree
+tree_chestnut_exotic|glemr4
+tree_clementine|clementinetree
+tree_cypress|glemr4
+tree_cypress_bald|baldcypress
+tree_deciduous_mature|glemr4
+tree_deciduous_normal|glemr4
+tree_dry|glemr4
+tree_ebony|ebony
+tree_eucalyptus|glemr4
+tree_exotic|farlands
+tree_fern|ferns
+tree_fern_giant|ferns
+tree_fern_yellow|glemr4
+tree_fir|30biomes
+tree_fir_douglas|moretrees
+tree_fir_douglas_coast|glemr4
+tree_frost|ethereal
+tree_ginkgo|glemr11
+tree_ipe_yellow|farlands
+tree_healing|ethereal
+tree_jacaranda|jacaranda
+tree_jungle|default doors moreblocks
+tree_jungle_ancient|glemr4
+tree_jungle_exotic|farlands
+tree_jungle_mature|glemr4
+tree_larch|larch
+tree_lavender|glemr11
+tree_lemon|ethereal
+tree_lemon_mature|lemontree
+tree_mahogany|mahogany
+tree_mangrove_green|glemr4
+tree_maple_mature|glemr11
+tree_maple_red|maple
+tree_maple_sugar|glemr4
+tree_mirabelle|glemr11
+tree_mushroom_brown|ethereal
+tree_mushroom_generic|ethereal
+tree_mushroom_mixed|farlands glemr11
+tree_mushroom_red|ethereal
+tree_oak|moretrees
+tree_oak_graveyard|grave
+tree_oak_mature|oak
+tree_oak_red|glemr11
+tree_orange|ethereal
+tree_palm|ethereal
+tree_palm_caribbean|glemr11
+tree_palm_date|moretrees
+tree_palm_desert|glemr11
+tree_palm_desert_ancient|glemr11
+tree_palm_desert_mature|glemr11
+tree_palm_exotic|farlands
+tree_palm_jungle|glemr4
+tree_palm_plain|glemr4
+tree_pine|default doors moreblocks
+tree_pine_ancient|glemr4
+tree_pine_christmas|snow
+tree_pine_exotic|farlands
+tree_pine_exposed|glemr4
+tree_pine_frozen|snow
+tree_poplar|moretrees
+tree_redwood|ethereal
+tree_rubber|moretrees technic_worldgen
+tree_sakura|ethereal
+tree_scorched|ethereal
+tree_sequoia|moretrees
+tree_spruce|moretrees
+tree_spruce_mature|glemr4
+tree_teak|glemr11
+tree_willow_ancient|glemr4
+tree_willow_exotic|farlands
+tree_willow_large|moretrees
+tree_willow_mature|willow
+tree_willow_weeping|ethereal
+tree_young_jungle|farlands
+tree_young_palm_desert|glemr4
+vine_jungle|farlands
+#weather_snowflakes|snow
+
+# Basic "gaia" remix packages #####################################################################
+
+biome_gaia|unilib
+deco_gaia|unilib
+deco_gaia_butterflies|unilib
+deco_gaia_coral|unilib
+deco_gaia_coral_decorations_sea|unilib
+deco_gaia_coral_xocean|unilib
+deco_gaia_fireflies|unilib
+deco_gaia_ice_thin|unilib
+deco_gaia_kelp|unilib
+deco_gaia_misc_decorations_sea|unilib
+deco_gaia_pebbles|unilib
+deco_gaia_seagrass|unilib
+deco_gaia_seagrass_decorations_sea|unilib
+deco_gaia_seagrass_xocean|unilib
+dirt_custom_gaia|unilib
+ore_gaia|badlands darkage default glemr4 moreores technic underch unilib
+ore_gaia_hot_arid|unilib
+ore_gaia_mild_arid|unilib
+
+# Dependencies for all packages above #############################################################
+
+# supporting packages (.depends)
+dye_basic|dye bakedclay
+flower_fire|ethereal
+food_pepper|farming
+fruit_apple|default
+fruit_blueberry_ordinary|default
+fruit_coconut_exotic|farlands
+fruit_lemon|ethereal
+fruit_mango_exotic|farlands
+fruit_orange_exotic|farlands
+fruit_persimmon|ebony
+ingredient_acorn|moretrees
+ingredient_acorn_oak_mature|oak
+ingredient_cone_cedar|moretrees
+ingredient_cone_fir_douglas|moretrees
+ingredient_cone_spruce|moretrees
+ingredient_cone_spruce_mature|glemr4
+ingredient_sugar_normal|farming
+item_stick_ordinary|default
+item_string_ordinary|farming
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
+metal_chromium|glemr11 technic_worldgen technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
+metal_iron|default
+metal_lead|glemr11 technic_worldgen technic
+metal_mithril|glemr11 moreores technic
+metal_silver|glemr11 moreores technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+metal_uranium|technic_worldgen technic
+metal_zinc|glemr11 technic_worldgen technic
+mineral_coal|default technic
+mineral_diamond|default mtg_plus
+mineral_mese|default glemr11
+mineral_sulphur|technic_worldgen technic
+misc_beanpole|farming
+misc_butterfly|butterflies
+misc_firefly|fireflies
+misc_trellis|farming
+shared_moretrees|moretrees
+shared_snow|snow
+soil_sand_desert|farming
+stone_ordinary|default moreblocks technic
+stone_ordinary_with_coal|default
+stone_ordinary_with_copper|default
+stone_ordinary_with_diamond|default
+stone_ordinary_with_gold|default
+stone_ordinary_with_iron|default
+stone_ordinary_with_mese|default
+stone_ordinary_with_sulphur|technic_worldgen
+stone_ordinary_with_tin|default
+utensil_board_cutting|farming
+vine_jungle_knotted|glemr4
+vine_normal|ethereal
+vine_string_light|ethereal
+
+# supporting packages (.at_least_one)
+plant_kelp_ordinary|default
+
+# supporting packages (.optional)
+#abm_farlands_bushes_trees|unilib
+#brick_ordinary|default
+#bucket_steel|bucket
+#container_chest_ordinary|default
+#dirt_ordinary_with_turf_bamboo|ethereal
+#dirt_ordinary_with_turf_crystal|ethereal
+#dirt_ordinary_with_turf_grove|ethereal
+#dirt_ordinary_with_turf_mushroom|ethereal
+#dirt_ordinary_with_turf_prairie|ethereal
+#gravel_sandstone_ordinary|unilib
+#ingredient_flour_barley|grains
+#ingredient_flour_oat|grains
+#ingredient_flour_ordinary|farming
+#ingredient_flour_rye|grains
+#item_book_ordinary|default
+#item_paper_ordinary|default moreblocks
+#item_sweeper|moreblocks
+#item_worm_juicy|ethereal
+#liquid_oil_crude|unilib
+#liquid_water_river|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#mapgen_hades|unilib
+#mapgen_hades_jit|unilib
+#mapgen_underch|underch
+#mapgen_underch_jit|underch
+#mineral_cassiterite|real_minerals
+#mineral_flint|default fire mtg_plus
+#mineral_magnetite|real_minerals
+#moss_blue|sickles
+#moss_brown|unilib
+#moss_cyan|unilib
+#moss_green|sickles
+#moss_green_dark|unilib
+#moss_pink|unilib
+#moss_red|unilib
+#moss_violet|sickles
+#moss_white|unilib
+#moss_yellow|sickles
+#sand_red|unilib
+#shared_darkage|darkage
+#shared_woodsoils|woodsoils
+#stone_gneiss_white|darkage
+#stone_granite_salmon|underch compressed condensed
+#stone_obsidian|default moreblocks
+#stone_slate_grey|darkage
+#torch_ordinary|default
+#utensil_mortar_pestle|farming
+#vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.stone_obscurite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_obscurite.exec()
         description = S("Obscurite"),
 
         category = "other",
+        colour = "#96352F",
         fictional_flag = true,
         grinder_flag = false,
         hardness = 5,
@@ -42,7 +43,7 @@ function unilib.pkg.stone_obscurite.exec()
         description = S("Obscurite"),
         tiles = {"unilib_stone_obscurite.png"},
         -- (no groups)
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
 
     -- (no block/brick/cobble/rubble variants)

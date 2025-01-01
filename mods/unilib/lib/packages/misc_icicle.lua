@@ -9,7 +9,7 @@
 unilib.pkg.misc_icicle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_icicle.exec()
         description = S("Icicle"),
         tiles = {"unilib_misc_icicle.png"},
         groups = {crumbly = 1, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_misc_icicle.png",

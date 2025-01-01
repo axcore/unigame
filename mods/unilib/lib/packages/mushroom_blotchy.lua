@@ -9,7 +9,7 @@
 unilib.pkg.mushroom_blotchy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,15 +31,16 @@ function unilib.pkg.mushroom_blotchy.exec()
         -- From GLEMr4, lib_ecology:mushroom_03_stem
         description = S("Blotchy Mushroom Trunk"),
         tiles = {
-            "unilib_tree_mushroom_red_trunk_top.png",
-            "unilib_tree_mushroom_red_trunk_top.png",
+            "unilib_tree_mushroom_generic_trunk_top.png",
+            "unilib_tree_mushroom_generic_trunk_top.png",
             "unilib_mushroom_blotchy_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, plant = 1, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -61,7 +62,8 @@ function unilib.pkg.mushroom_blotchy.exec()
         -- (no sounds)
 
         drawtype = "nodebox",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other mushrooms
+--      is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -91,7 +93,8 @@ function unilib.pkg.mushroom_blotchy.exec()
             -- (no sounds)
 
             drawtype = "nodebox",
-            is_ground_content = false,
+            -- N.B. removed is_ground_content = false to match other mushrooms
+--          is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -105,20 +108,20 @@ function unilib.pkg.mushroom_blotchy.exec()
         }
     )
 
-    unilib.register_decoration("glem_mushroom_blotchy", {
+    unilib.register_decoration_generic("glem_mushroom_blotchy", {
         -- From GLEMr4
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_mushroom_blotchy.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_mushroom_blotchy.mts",
 
         fill_ratio = 0.01,
         flags = "place_center_x, place_center_z",
         sidelen = 80,
     })
 
-    unilib.register_decoration("glem_mushroom_blotchy_large", {
+    unilib.register_decoration_generic("glem_mushroom_blotchy_large", {
         -- From GLEMr4
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_glem_mushroom_blotchy_large.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_glem_mushroom_blotchy_large.mts",
 
         fill_ratio = 0.01,
         flags = "place_center_x, place_center_z",

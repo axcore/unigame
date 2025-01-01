@@ -17,9 +17,9 @@
 unilib.pkg.stone_pegmatite_red = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_pegmatite_red.exec()
         description = S("Red Pegmatite"),
 
         category = "intrusive",
+        colour = "#E3B3A9",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_pegmatite_red.exec()
         wall_orig_name = "underch:pegmatite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:pegmatite. Creates unilib:stone_pegmatite_red_cobble_compressed
+        part_name = "pegmatite_red",
+        orig_name = "compressed:pegmatite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:pegmatite. Creates unilib:stone_pegmatite_red_cobble_compressed
-            part_name = "pegmatite_red",
-            orig_name = "compressed:pegmatite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Red Pegmatite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Red Pegmatite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:pegmatite. Creates unilib:stone_pegmatite_red_cobble_condensed
+        part_name = "pegmatite_red",
+        orig_name = "condensed:pegmatite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:pegmatite. Creates unilib:stone_pegmatite_red_cobble_condensed
-            part_name = "pegmatite_red",
-            orig_name = "condensed:pegmatite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Red Pegmatite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Red Pegmatite Cobble"),
+    })
 
 end

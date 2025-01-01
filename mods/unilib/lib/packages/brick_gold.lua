@@ -9,7 +9,7 @@
 unilib.pkg.brick_gold = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_gold.init()
 
     return {
         description = "Gold brick",
-        depends = "metal_gold",
+        depends = {"metal_gold", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_gold.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:gold and morebricks:goldvertical, creates unilib:brick_gold_block and
         --      unilib:brick_gold_block_vertical
         part_name = "gold",

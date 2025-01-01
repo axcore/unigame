@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_maple_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maple.add_mode
+local mode = unilib.global.imported_mod_table.maple.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_maple_red.post()
 
-    unilib.register_decoration_now("cool_trees_tree_maple_red", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_maple_red", nil, {
         -- From maple/init.lua
         -- Completes decoration in package "tree_maple_red"
         biomes = "default_grassland",

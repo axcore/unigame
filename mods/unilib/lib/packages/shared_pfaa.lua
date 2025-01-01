@@ -9,7 +9,7 @@
 unilib.pkg.shared_pfaa = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 local band_list = {
     {
@@ -73,7 +73,7 @@ local band_list = {
         clust_scarcity          = 15 * 15 * 15,
         clust_size              = 5,
         y_max                   = -2048,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     },
 }
 

@@ -4,9 +4,9 @@
 # Because many farlands mods share a name with minetest_game mods, everything has been grouped into
 #       a hypothetical "farlands" mod. Original names for items are only specified in code when
 #       their mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
+abm_farlands_disintegrate|farlands
 base_farlands|farlands
 biome_farlands_desert|farlands
 biome_farlands_desert_sandstone|farlands
@@ -74,8 +74,12 @@ deco_farlands_tree_jungle_exotic_log|farlands
 deco_farlands_tree_palm_exotic|farlands
 deco_farlands_tree_willow_exotic|farlands
 deco_farlands_tree_young_jungle|farlands
+decor_disintegrating_stone_desert|farlands
+decor_disintegrating_stone_ordinary|farlands
+decor_disintegrating_stone_sandstone_desert|farlands
+decor_disintegrating_stone_sandstone_ordinary|farlands
+decor_disintegrating_stone_sandstone_silver|farlands
 decor_pillar_bone|farlands
-decor_stone_disintegrating|farlands
 decor_stone_tiles|farlands
 dirt_coarse|farlands
 dirt_ordinary_with_cover_fungi|farlands
@@ -128,7 +132,7 @@ fruit_peach_exotic|farlands
 fruit_pear_exotic|farlands
 fruit_plum_exotic|farlands
 glass_framed_wood|farlands
-glass_tinted|farlands
+glass_tinted_basic|farlands
 grass_bamboo|farlands
 grass_dead|farlands
 grass_deciduous|farlands
@@ -143,11 +147,12 @@ liquid_water_dirty|farlands
 mapgen_farlands_grasses|farlands
 mapgen_farlands_sealife|farlands
 material_stucco|farlands
+meta_farlands_underground|farlands
 metal_steel_rusty|farlands
 misc_icicle|farlands
 misc_scarecrow_pumpkin|farlands
 misc_skeleton_human|farlands
-misc_skeleton_skull_human|farlands
+misc_skeleton_human_skull|farlands
 misc_spikes|farlands
 misc_stalactite|farlands
 misc_stalagmite|farlands
@@ -156,7 +161,8 @@ misc_vase|farlands
 misc_walkway_wood|farlands
 moss_normal_thick|farlands
 mushroom_white_glowing|farlands
-ore_farlands_bush_exotic|farlands
+# (Commented out because it's handled below)
+#ore_farlands_bush_exotic|farlands
 ore_farlands_dirt_coarse|farlands
 ore_farlands_dirt_ordinary|farlands
 ore_farlands_dirt_parched|farlands
@@ -178,16 +184,17 @@ ore_farlands_stone_ordinary_with_mese|default farlands
 ore_farlands_stone_ordinary_with_tin|default farlands
 ore_farlands_stone_savanna_with_coal|farlands
 ore_farlands_stone_savanna_with_iron|farlands
-ore_farlands_tree_acacia_exotic|farlands
-ore_farlands_tree_exotic|farlands
-ore_farlands_tree_jungle_exotic|farlands
-ore_farlands_tree_palm_exotic|farlands
+# (Commented out because they're handled below)
+#ore_farlands_tree_acacia_exotic|farlands
+#ore_farlands_tree_exotic|farlands
+#ore_farlands_tree_jungle_exotic|farlands
+#ore_farlands_tree_palm_exotic|farlands
 pane_glass_framed_wood|farlands
-pane_glass_tinted|farlands
+pane_glass_tinted_basic|farlands
 pane_ice_ordinary|farlands
 pane_lattice_stick|farlands
 plant_aloe_vera|farlands
-plant_anemone|farlands
+plant_anemone_normal|farlands
 plant_bamboo_small|farlands
 plant_cactus_exotic|farlands
 plant_cactus_small|farlands
@@ -213,8 +220,9 @@ stone_ordinary_with_gold|default
 stone_ordinary_with_iron|default
 stone_ordinary_with_mese|default
 stone_ordinary_with_tin|default
+stone_sandstone_ordinary_pillar|farlands
+stone_sandstone_ordinary_tile_painted|farlands
 stone_sandstone_ordinary_with_mural|farlands
-stone_sandstone_ornate|farlands
 stone_savanna|farlands
 stone_savanna_with_coal|farlands
 stone_savanna_with_iron|farlands
@@ -237,6 +245,21 @@ vine_jungle|farlands
 ore_default_clay_ordinary|default
 ore_default_gravel_ordinary|default
 
+# "bush_exotic", "tree_acacia_exotic", "tree_exotic", "tree_jungle_exotic" and "tree_palm_exotic"
+#   use the following ore packages to produce leaves-with-fruit nodes...
+ore_farlands_bush_exotic|farlands
+ore_farlands_tree_acacia_exotic|farlands
+ore_farlands_tree_exotic|farlands
+ore_farlands_tree_jungle_exotic|farlands
+ore_farlands_tree_palm_exotic|farlands
+# ...that does not work very well on modern Minetest, so it's recommended that you COMMENT OUT the
+#   ore packages above, and instead load this shared package, which uses an ABM
+#abm_farlands_bushes_trees|unilib
+# The following package provides fruit-as-node variants. You should add it to your remixes (or
+#   uncomment the line below) if you use schematics that need the fruit-as-node variants, such as
+#   the GLEM exotic palm trees
+#shared_farlands_fruit|unilib
+
 # supporting packages (.depends)
 clay_ordinary|default
 coral_block_brown|default
@@ -256,15 +279,14 @@ item_bone|bonemeal
 item_paper_ordinary|default moreblocks
 item_stick_ordinary|default
 liquid_water_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 misc_straw_ordinary|farming darkage
 mushroom_brown|flowers
 mushroom_red|flowers
@@ -273,11 +295,15 @@ plant_shrub_dry|default
 produce_pumpkin_yellow|farming
 sand_desert|default farming
 sand_ordinary|default
+shared_tsm_pyramids_engravings|tsm_pyramids
 snow_ordinary|default ethereal mtg_plus
 soil_sand_desert|farming
 stone_desert|default moreblocks
 stone_ordinary|default moreblocks technic
+stone_sandstone_desert|default mtg_plus
 stone_sandstone_ordinary|default moreblocks mtg_plus
+stone_sandstone_ordinary_with_engraving|tsm_pyramids
+stone_sandstone_silver|default mtg_plus
 torch_ordinary|default
 tree_apple|default doors moreblocks
 utensil_board_cutting|farming
@@ -288,18 +314,23 @@ dirt_dry|default
 sand_silver|default
 
 # supporting packages (.optional)
+#abm_farlands_bushes_trees|unilib
 #bush_blueberry_ordinary|default
 #crop_barley|farming
 #crop_cotton|farming
 #crop_oat|farming
 #crop_rice_white|farming
 #crop_rye|farming
-#fire_ordinary|fire
-#fire_permanent|fire underch
+#gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11
-#liquid_lava_ordinary|default
-#liquid_water_river|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#material_scrap_steel|steel
+#mineral_flint|default fire mtg_plus
 #moss_green|sickles
 #plant_cactus_ordinary|default
+#shared_farlands_fruit|unilib
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.food_gyoza = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.food_gyoza.exec()
         -- N.B. no food_gyoza in original code
         groups = {flammable = 2, food_gyoza = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_gyoza", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_gyoza", 4),
     })
     unilib.register_craft({
         -- From farming:gyoza

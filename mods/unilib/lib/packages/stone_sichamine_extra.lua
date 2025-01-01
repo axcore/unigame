@@ -9,7 +9,7 @@
 unilib.pkg.stone_sichamine_extra = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.stone_sichamine_extra.init()
 
     return {
         description = "Extra sichamine items",
-        depends = {"mineral_coal", "stone_sichamine"}
+        depends = {"mineral_coal", "stone_sichamine"},
     }
 
 end
@@ -33,7 +33,7 @@ function unilib.pkg.stone_sichamine_extra.exec()
         description = S("Dark Sichamine"),
         tiles = {"unilib_stone_sichamine_dark.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft({
         -- From underch:dark_sichamine
@@ -48,7 +48,7 @@ function unilib.pkg.stone_sichamine_extra.exec()
         description = S("Weedy Sichamine"),
         tiles = {"unilib_stone_sichamine_weedy.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft({
         -- From underch:weedy_sichamine

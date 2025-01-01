@@ -9,7 +9,7 @@
 unilib.pkg.stone_serpentinite_pale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,15 @@ function unilib.pkg.stone_serpentinite_pale.exec()
         description = S("Pale Serpentinite"),
 
         category = "metamorphic",
+        colour = "#90A890",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 2)
         hardness = 1,
         hardness_real = 2,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("serpentinite_pale", 3, nil)
+    local smooth_cracky, block_cracky =
+            unilib.stone.get_adjusted_cracky("serpentinite_pale", 3, nil)
 
     unilib.register_node("unilib:stone_serpentinite_pale", "default:serpentinite", mode, {
         -- From decoblocks, default:serpentinite
@@ -45,7 +47,7 @@ function unilib.pkg.stone_serpentinite_pale.exec()
         tiles = {"unilib_stone_serpentinite_pale.png"},
         -- N.B. smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_stone_smooth_cuttings({
         part_name = "serpentinite_pale",
@@ -77,7 +79,13 @@ function unilib.pkg.stone_serpentinite_pale.exec()
         --      nothing
         part_name = "serpentinite_pale",
         cobble_description = S("Pale Serpentinite Cobble"),
+        cobble_compressed_description = S("Compressed Pale Serpentinite Cobble"),
+        cobble_condensed_description = S("Condensed Pale Serpentinite Cobble"),
         rubble_description = S("Pale Serpentinite Rubble"),
+        rubble_compressed_description = S("Compressed Pale Serpentinite Rubble"),
+        rubble_condensed_description = S("Condensed Pale Serpentinite Rubble"),
+        smooth_compressed_description = S("Compressed Pale Serpentinite"),
+        smooth_condensed_description = S("Condensed Pale Serpentinite"),
 
         replace_mode = mode,
         override_drop_flag = true,

@@ -9,7 +9,7 @@
 unilib.pkg.misc_hearth = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -21,10 +21,10 @@ local function after_destruct(pos, oldnode)
     -- Remove the hearth node, making sure to remove the invisible node too
 
     local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local node_above = minetest.get_node(pos_above)
+    local node_above = core.get_node(pos_above)
 
     if node_above.name == "unilib:misc_hearth_air" then
-        minetest.set_node(pos_above, {name = "air"})
+        core.set_node(pos_above, {name = "air"})
     end
 
 end
@@ -35,7 +35,7 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
     if listname == "fuel" then
 
-        if minetest.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
+        if core.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
             return stack:get_count()
         else
             return 0
@@ -51,7 +51,7 @@ local function can_dig(pos, player)
 
     -- Was hearth_can_dig()
 
-    local inv = minetest.get_meta(pos):get_inventory()
+    local inv = core.get_meta(pos):get_inventory()
     return inv:is_empty("fuel")
 
 end
@@ -61,21 +61,14 @@ local function produce_particles(pos, time)
     -- Was hearth_fire_on()
     -- Add particle effects
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
 
     -- Flames
-    minetest.add_particlespawner({
+    core.add_particlespawner({
         amount = 4,
         time = time,
+        texture = "unilib_fire_ordinary_animated.png",
 
-        animation = {
-            type = "vertical_frames",
-            aspect_w = 16,
-            aspect_h = 16,
-            length = 1
-        },
-        collisiondetection = false,
-        glow = 13,
         maxacc = {x = 0.001, y = 0.001, z = 0.001},
         minacc = {x = 0, y = 0, z = 0},
         maxexptime = 5,
@@ -86,17 +79,24 @@ local function produce_particles(pos, time)
         minsize = 4,
         maxvel = {x = 0.001, y = 0.001, z = 0.001},
         minvel = {x = 0, y = 0, z = 0},
-        texture = "unilib_fire_ordinary_animated.png",
-        vertical = true,
 
+        animation = {
+            type = "vertical_frames",
+            aspect_w = 16,
+            aspect_h = 16,
+            length = 1
+        },
+        collisiondetection = false,
+        glow = 13,
+        vertical = true,
     })
 
     -- Smoke
-    minetest.add_particlespawner({
+    core.add_particlespawner({
         amount = 4,
         time = time,
+        texture = "unilib_misc_smoke.png",
 
-        collisiondetection = true,
         maxacc = {x = 0.01, y = 0.2, z = 0.01},
         minacc = {x = 0, y = 0, z = 0},
         maxexptime = 20,
@@ -107,7 +107,8 @@ local function produce_particles(pos, time)
         minsize = 1,
         maxvel = {x = 0.01, y = 0.07, z = 0.01},
         minvel = {x = 0, y = 0, z = 0},
-        texture = "unilib_misc_smoke.png",
+
+        collisiondetection = true,
         vertical = true,
     })
 
@@ -119,18 +120,17 @@ local function do_burn(pos, elapsed)
     -- Add flames and burn fuel
 
     local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local node_above = minetest.get_node(pos_above)
-    local timer = minetest.get_node_timer(pos)
+    local node_above = core.get_node(pos_above)
+    local timer = core.get_node_timer(pos)
 
-    local inv = minetest.get_inventory({type = "node", pos = pos})
+    local inv = core.get_inventory({type = "node", pos = pos})
     local item = inv:get_stack("fuel", 1)
-    local fuel_burned = minetest.get_craft_result(
-        {method = "fuel", width = 1, items = {item:peek_item(1)}}
-    ).time
+    local fuel_burned =
+            core.get_craft_result({method = "fuel", width = 1, items = {item:peek_item(1)}}).time
 
     -- Remove the invisible node, so it doesn't keep glowing
     if inv:is_empty("fuel") and node_above.name == "unilib:misc_hearth_air" then
-        minetest.set_node(pos_above, {name = "air"})
+        core.set_node(pos_above, {name = "air"})
     end
 
     -- Burn the inventory item, and add smoke and flames
@@ -152,13 +152,13 @@ local function do_burn(pos, elapsed)
 
         -- Place the invisible node
         if node_above.name == "air" then
-            minetest.set_node(pos_above, {name = "unilib:misc_hearth_air"})
+            core.set_node(pos_above, {name = "unilib:misc_hearth_air"})
         end
 
         -- Do fire effects, and restart the timer
         timer:start(5)
         produce_particles(pos, 5)
-        minetest.sound_play(
+        core.sound_play(
             "unilib_misc_hearth",
             {pos = pos, max_hear_distance = 15, loop = false, gain = 0.2}
         )
@@ -171,10 +171,10 @@ local function on_construct(pos)
 
     -- Was hearth_on_construct()
 
-    local inv = minetest.get_meta(pos):get_inventory()
+    local inv = core.get_meta(pos):get_inventory()
     inv:set_size("fuel", 1)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_string("formspec",
         "size[8,5.3]" ..
         "list[current_name;fuel;3.5,0;1,1;]" ..
@@ -182,7 +182,7 @@ local function on_construct(pos)
         "list[current_player;main;0,2.38;8,3;8]" ..
         "listring[current_name;main]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0,1.15)
+        unilib.misc.get_hotbar_bg(0,1.15)
     )
 
 end
@@ -214,10 +214,12 @@ function unilib.pkg.misc_hearth.exec()
             "unilib_misc_hearth_side.png"
         },
         groups = {cracky = 1, crumbly = 1, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         damage_per_second = 1,
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         paramtype = "light",
 
         after_destruct = after_destruct,
@@ -232,7 +234,7 @@ function unilib.pkg.misc_hearth.exec()
 
         on_timer = do_burn,
     })
-    if unilib.pkg_executed_table["dirt_rammed"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_rammed"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:hearth
@@ -241,11 +243,11 @@ function unilib.pkg.misc_hearth.exec()
                 {"", "group:tree", ""},
                 {"group:stick", "group:stick", "group:stick"},
                 {"", "unilib:dirt_rammed", ""},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["material_cob"] ~= nil then
+    if unilib.global.pkg_executed_table["material_cob"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:hearth
@@ -254,11 +256,11 @@ function unilib.pkg.misc_hearth.exec()
                 {"", "group:tree", ""},
                 {"group:stick", "group:stick", "group:stick"},
                 {"", "unilib:material_cob", ""},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:hearth
@@ -267,7 +269,7 @@ function unilib.pkg.misc_hearth.exec()
                 {"", "group:tree", ""},
                 {"group:stick", "group:stick", "group:stick"},
                 {"unilib:dirt_ordinary", "unilib:dirt_ordinary", "unilib:dirt_ordinary"},
-            }
+            },
         })
 
     end
@@ -284,6 +286,8 @@ function unilib.pkg.misc_hearth.exec()
         buildable_to = true,
         diggable = false,
         drawtype = "airlike",
+        -- N.B. is_ground_content = false not in original code; added to match other rooves
+        is_ground_content = false,
         light_source = 9,
         paramtype = "light",
         pointable = false,

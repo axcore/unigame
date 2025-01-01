@@ -9,7 +9,7 @@
 unilib.pkg.container_box_ironbound = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_storage.add_mode
+local mode = unilib.global.imported_mod_table.castle_storage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -40,7 +40,7 @@ local function has_privilege(meta, player)
     local name = ""
     if player then
 
-        if minetest.check_player_privs(player, "protection_bypass") then
+        if core.check_player_privs(player, "protection_bypass") then
             return true
         end
 
@@ -72,192 +72,227 @@ end
 
 function unilib.pkg.container_box_ironbound.exec()
 
+    local def_table = {
+        description = S("Ironbound Box"),
+        tiles = {
+            "unilib_container_box_ironbound_top.png",
+            "unilib_container_box_ironbound_top.png",
+            "unilib_container_box_ironbound_side.png",
+            "unilib_container_box_ironbound_side.png",
+            "unilib_container_box_ironbound_back.png",
+            "unilib_container_box_ironbound_front.png",
+        },
+        groups = {cracky = 2},
+        sounds = unilib.global.sound_table.wood,
+
+        drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        node_box = {
+            type = "fixed",
+            fixed = {
+                {-0.5, -0.5, -0.3125, 0.5, -0.0625, 0.3125},
+                {-0.5, -0.0625, -0.25, 0.5, 0, 0.25},
+                {-0.5, 0, -0.1875,0.5, 0.0625, 0.1875},
+                {-0.5, 0.0625, -0.0625, 0.5, 0.125, 0.0625},
+            },
+        },
+        paramtype = "light",
+        paramtype2 = "facedir",
+        selection_box = {
+            type = "fixed",
+            fixed = {
+                {-0.5, -0.5, -0.4, 0.5, 0.2, 0.4},
+            },
+        },
+
+        after_place_node = function(pos, placer)
+
+            local meta = core.get_meta(pos)
+            meta:set_string("owner", placer:get_player_name() or "")
+            meta:set_string(
+                "infotext", S("Ironbound Box (owned by @1)", meta:get_string("owner"))
+            )
+
+        end,
+
+        allow_metadata_inventory_move = function(
+            pos, from_list, from_index, to_list, to_index, count, player
+        )
+            local meta = core.get_meta(pos)
+            if not has_privilege(meta, player) then
+
+                --[[
+                unilib.utils.log(
+                    "action",
+                    S(
+                        "@1 tried to access a locked box belonging to @2 at @3",
+                        player:get_player_name(),
+                        meta:get_string("owner"),
+                        core.pos_to_string(pos)
+                    )
+                )
+                ]]--
+                unilib.utils.log_player_action(
+                    player,
+                    "tried to access a locked box belonging to",
+                    meta:get_string("owner"),
+                    "at",
+                    pos
+                )
+
+                return 0
+
+            end
+
+            return count
+
+        end,
+
+        allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+
+            local meta = core.get_meta(pos)
+            if not has_privilege(meta, player) then
+
+                --[[
+                unilib.utils.log(
+                    "action",
+                    S(
+                        "@1 tried to access a locked box belonging to @2 at @3",
+                        player:get_player_name(),
+                        meta:get_string("owner"),
+                        core.pos_to_string(pos)
+                    )
+                )
+                ]]--
+                unilib.utils.log_player_action(
+                    player,
+                    "tried to access a locked box belonging to",
+                    meta:get_string("owner"),
+                    "at",
+                    pos
+                )
+
+                return 0
+
+            end
+
+            return stack:get_count()
+
+        end,
+
+        allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+
+            local meta = core.get_meta(pos)
+            if not has_privilege(meta, player) then
+
+                --[[
+                unilib.utils.log(
+                    "action",
+                    S(
+                        "@1 tried to access a locked box belonging to @2 at @3",
+                        player:get_player_name(),
+                        meta:get_string("owner"),
+                        core.pos_to_string(pos)
+                    )
+                )
+                ]]--
+                unilib.utils.log_player_action(
+                    player,
+                    "tried to access a locked box belonging to",
+                    meta:get_string("owner"),
+                    "at",
+                    pos
+                )
+
+                return 0
+
+            end
+
+            return stack:get_count()
+
+        end,
+
+        can_dig = function(pos,player)
+
+            local meta = core.get_meta(pos)
+            local inv = meta:get_inventory()
+            return inv:is_empty("main") and has_privilege(meta, player)
+
+        end,
+
+        on_construct = function(pos)
+
+            local meta = core.get_meta(pos)
+            meta:set_string("infotext", S("Ironbound Box"))
+            meta:set_string("owner", "")
+            local inv = meta:get_inventory()
+            -- N.B. Size was 8 * 4 in original code; reduced it, as the box is smaller than an
+            --      ordinary chest
+            inv:set_size("main", 8 * 3)
+
+        end,
+
+        on_blast = function() end,
+
+        --[[
+        on_metadata_inventory_move = function(
+            pos, from_list, from_index, to_list, to_index, count, player
+        )
+            unilib.utils.log(
+                "action",
+                player:get_player_name() .. " moves items in ironbound box at " ..
+                        core.pos_to_string(pos)
+            )
+
+        end,
+
+        on_metadata_inventory_put = function(pos, listname, index, stack, player)
+
+            unilib.utils.log(
+                "action",
+                player:get_player_name() .. " moves items to ironbound box at " ..
+                        core.pos_to_string(pos)
+            )
+
+        end,
+
+        on_metadata_inventory_take = function(pos, listname, index, stack, player)
+
+            unilib.utils.log(
+                "action",
+                player:get_player_name() .. " takes items from ironbound box at " ..
+                        core.pos_to_string(pos)
+            )
+
+        end,
+        ]]--
+
+        on_rightclick = function(pos, node, clicker)
+
+            local meta = core.get_meta(pos)
+            if has_privilege(meta, clicker) then
+
+                core.show_formspec(
+                    clicker:get_player_name(),
+                    "unilib:container_box_ironbound",
+                    get_formspec(pos)
+                )
+
+            end
+
+        end,
+    }
+
+    unilib.utils.set_inventory_action_loggers(def_table, "ironbound box")
     unilib.register_node(
         -- From castle_storage:ironbound_chest
         "unilib:container_box_ironbound",
         "castle_storage:ironbound_chest",
         mode,
-        {
-            description = S("Ironbound Box"),
-            tiles = {
-                "unilib_container_box_ironbound_top.png",
-                "unilib_container_box_ironbound_top.png",
-                "unilib_container_box_ironbound_side.png",
-                "unilib_container_box_ironbound_side.png",
-                "unilib_container_box_ironbound_back.png",
-                "unilib_container_box_ironbound_front.png",
-            },
-            groups = {cracky = 2},
-            sounds = unilib.sound_table.wood,
-
-            drawtype = "nodebox",
-            node_box = {
-                type = "fixed",
-                fixed = {
-                    {-0.5, -0.5, -0.3125, 0.5, -0.0625, 0.3125},
-                    {-0.5, -0.0625, -0.25, 0.5, 0, 0.25},
-                    {-0.5, 0, -0.1875,0.5, 0.0625, 0.1875},
-                    {-0.5, 0.0625, -0.0625, 0.5, 0.125, 0.0625},
-                },
-            },
-            paramtype = "light",
-            paramtype2 = "facedir",
-            selection_box = {
-                type = "fixed",
-                fixed = {
-                    {-0.5, -0.5, -0.4, 0.5, 0.2, 0.4},
-                },
-            },
-
-            after_place_node = function(pos, placer)
-
-                local meta = minetest.get_meta(pos)
-                meta:set_string("owner", placer:get_player_name() or "")
-                meta:set_string(
-                    "infotext", S("Ironbound Box (owned by @1)", meta:get_string("owner"))
-                )
-
-            end,
-
-            allow_metadata_inventory_move = function(
-                pos, from_list, from_index, to_list, to_index, count, player
-            )
-                local meta = minetest.get_meta(pos)
-                if not has_privilege(meta, player) then
-
-                    unilib.log(
-                        "action",
-                        S(
-                            "@1 tried to access a locked box belonging to @2 at @3",
-                            player:get_player_name(),
-                            meta:get_string("owner"),
-                            minetest.pos_to_string(pos)
-                        )
-                    )
-
-                    return 0
-
-                end
-
-                return count
-
-            end,
-
-            allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-
-                local meta = minetest.get_meta(pos)
-                if not has_privilege(meta, player) then
-
-                    unilib.log(
-                        "action",
-                        S(
-                            "@1 tried to access a locked box belonging to @2 at @3",
-                            player:get_player_name(),
-                            meta:get_string("owner"),
-                            minetest.pos_to_string(pos)
-                        )
-                    )
-
-                    return 0
-
-                end
-
-                return stack:get_count()
-
-            end,
-
-            allow_metadata_inventory_take = function(pos, listname, index, stack, player)
-
-                local meta = minetest.get_meta(pos)
-                if not has_privilege(meta, player) then
-
-                    unilib.log(
-                        "action",
-                        S(
-                            "@1 tried to access a locked box belonging to @2 at @3",
-                            player:get_player_name(),
-                            meta:get_string("owner"),
-                            minetest.pos_to_string(pos)
-                        )
-                    )
-
-                    return 0
-
-                end
-
-                return stack:get_count()
-
-            end,
-
-            on_construct = function(pos)
-
-                local meta = minetest.get_meta(pos)
-                meta:set_string("infotext", S("Ironbound Box"))
-                meta:set_string("owner", "")
-                local inv = meta:get_inventory()
-                -- N.B. Size was 8 * 4 in original code; reduced it, as the box is smaller than an
-                --      ordinary chest
-                inv:set_size("main", 8 * 3)
-
-            end,
-
-            can_dig = function(pos,player)
-
-                local meta = minetest.get_meta(pos);
-                local inv = meta:get_inventory()
-                return inv:is_empty("main") and has_privilege(meta, player)
-
-            end,
-
-            on_blast = function() end,
-
-            on_metadata_inventory_move = function(
-                pos, from_list, from_index, to_list, to_index, count, player
-            )
-                unilib.log(
-                    "action",
-                    player:get_player_name() .. " moves stuff in ironbound box at " ..
-                            minetest.pos_to_string(pos)
-                )
-
-            end,
-
-            on_metadata_inventory_put = function(pos, listname, index, stack, player)
-
-                unilib.log(
-                    "action",
-                    player:get_player_name() .. " moves stuff to ironbound box at " ..
-                            minetest.pos_to_string(pos)
-                )
-
-            end,
-
-            on_metadata_inventory_take = function(pos, listname, index, stack, player)
-
-                unilib.log(
-                    "action",
-                    player:get_player_name() .. " takes stuff from ironbound box at " ..
-                            minetest.pos_to_string(pos)
-                )
-
-            end,
-
-            on_rightclick = function(pos, node, clicker)
-
-                local meta = minetest.get_meta(pos)
-                if has_privilege(meta, clicker) then
-
-                    minetest.show_formspec(
-                        clicker:get_player_name(),
-                        "unilib:container_box_ironbound",
-                        get_formspec(pos)
-                    )
-
-                end
-
-            end,
-        }
+        def_table
     )
+
     -- N.B. Original code used "default:wood"
     unilib.register_craft({
         -- From castle_storage:ironbound_chest

@@ -9,7 +9,7 @@
 unilib.pkg.item_chisel_tree = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.stripped_tree.add_mode
+local mode = unilib.global.imported_mod_table.stripped_tree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,8 @@ function unilib.pkg.item_chisel_tree.init()
 
     return {
         description = "Tree chisel",
-        notes = "Used to strip the bark from compatible tree trunks",
+        notes = "Used to strip the bark from compatible tree trunks. Does not work on bamboo," ..
+                " fern or mushroom trees",
         depends = {"item_bark_tree", "item_screwdriver_ordinary", "metal_steel"},
     }
 
@@ -48,32 +49,32 @@ function unilib.pkg.item_chisel_tree.exec()
             local pos = pointed_thing.under
             local pname = user:get_player_name()
 
-            if minetest.is_protected(pos, pname) then
+            if core.is_protected(pos, pname) then
 
-                minetest.record_protection_violation(pos, pname)
+                core.record_protection_violation(pos, pname)
                 return
 
             end
 
-            local trunk_name = minetest.get_node(pos).name
+            local trunk_name = core.get_node(pos).name
             local stripped_name = trunk_name .. "_stripped"
 
-            if minetest.registered_nodes[stripped_name] then
+            if core.registered_nodes[stripped_name] then
 
-                minetest.swap_node(pos, {name = stripped_name})
+                core.swap_node(pos, {name = stripped_name})
 
-                if not unilib.is_creative(user:get_player_name()) then
+                if not unilib.utils.is_creative(user:get_player_name()) then
 
                     local inv = user:get_inventory()
                     -- Check for room in inventory, if not, drop item
                     if inv:room_for_item("main", c_bark) then
                         inv:add_item("main", {name = c_bark})
                     else
-                        minetest.add_item(pos, c_bark)
+                        core.add_item(pos, c_bark)
                     end
 
                     -- 300 uses
-                    itemstack:add_wear(65535 / 299)
+                    itemstack:add_wear(unilib.constant.max_tool_wear / 299)
 
                 end
 

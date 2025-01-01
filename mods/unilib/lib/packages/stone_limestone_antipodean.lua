@@ -9,7 +9,7 @@
 unilib.pkg.stone_limestone_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,13 +32,15 @@ function unilib.pkg.stone_limestone_antipodean.exec()
         description = S("Antipodean Limestone"),
 
         category = "sedimentary",
+        colour = "#9B968C",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 1)
         hardness = 2,
         hardness_real = 1,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("limestone_antipodean", 2, 2)
+    local smooth_cracky, block_cracky =
+            unilib.stone.get_adjusted_cracky("limestone_antipodean", 2, 2)
 
     unilib.register_node("unilib:stone_limestone_antipodean", "aotearoa:limestone", mode, {
         -- From aotearoa:limestone
@@ -46,11 +48,11 @@ function unilib.pkg.stone_limestone_antipodean.exec()
         tiles = {"unilib_stone_limestone_antipodean.png"},
         -- N.B. limestone = 1, smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, limestone = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. drops smoothstone in original code
     })
-    if unilib.pkg_executed_table["stone_limestone_coquina"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_limestone_coquina"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:limestone
@@ -62,7 +64,7 @@ function unilib.pkg.stone_limestone_antipodean.exec()
 
     end
     -- N.B. original code uses non-existence "default:coral"
-    if unilib.pkg_executed_table["coral_block_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["coral_block_brown"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:limestone
@@ -73,7 +75,7 @@ function unilib.pkg.stone_limestone_antipodean.exec()
         })
 
     end
-    if unilib.pkg_executed_table["coral_block_orange"] ~= nil then
+    if unilib.global.pkg_executed_table["coral_block_orange"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:limestone
@@ -105,7 +107,10 @@ function unilib.pkg.stone_limestone_antipodean.exec()
             tiles = {"unilib_stone_limestone_antipodean_block.png"},
             -- N.B. stoneblock = 1 not in original code
             groups = {cracky = block_cracky, stone = 1, stoneblock = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_3x3x9({
@@ -132,7 +137,10 @@ function unilib.pkg.stone_limestone_antipodean.exec()
             tiles = {"unilib_stone_limestone_antipodean_brick.png"},
             -- N.B. stonebrick = 1 not in original code
             groups = {cracky = 2, stone = 1, stonebrick = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_2x2x4({
@@ -148,7 +156,9 @@ function unilib.pkg.stone_limestone_antipodean.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "limestone_antipodean",
     })
-    unilib.set_auto_rotate("unilib:stone_limestone_antipodean_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_limestone_antipodean_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     unilib.register_stone_cobble_or_rubble_or_nothing({
         -- Original to unilib. Depending on real hardness, creates
@@ -156,7 +166,13 @@ function unilib.pkg.stone_limestone_antipodean.exec()
         --      unilib:stone_limestone_antipodean_rubble, or nothing
         part_name = "limestone_antipodean",
         cobble_description = S("Antipodean Limestone Cobble"),
+        cobble_compressed_description = S("Compressed Antipodean Limestone Cobble"),
+        cobble_condensed_description = S("Condensed Antipodean Limestone Cobble"),
         rubble_description = S("Antipodean Limestone Rubble"),
+        rubble_compressed_description = S("Compressed Antipodean Limestone Rubble"),
+        rubble_condensed_description = S("Condensed Antipodean Limestone Rubble"),
+        smooth_compressed_description = S("Compressed Antipodean Limestone"),
+        smooth_condensed_description = S("Condensed Antipodean Limestone"),
 
         replace_mode = mode,
         override_drop_flag = true,

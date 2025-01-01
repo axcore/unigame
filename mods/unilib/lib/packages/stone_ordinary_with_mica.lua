@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_mica = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,10 @@ function unilib.pkg.stone_ordinary_with_mica.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_mica", nil, mode, {
         -- Texture from PFAA, weakOreRock_mica.png. Original code
-        description = unilib.brackets(S("Mica Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Mica Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_mica.png"},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        groups = {cracky = 3, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_mica_lump",
     })

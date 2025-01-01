@@ -9,7 +9,7 @@
 unilib.pkg.decor_stone_coal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreblocks.add_mode
+local mode = unilib.global.imported_mod_table.moreblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.decor_stone_coal.exec()
         description = S("Decorative Coal Stone"),
         tiles = {"unilib_decor_stone_coal.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -42,7 +42,7 @@ function unilib.pkg.decor_stone_coal.exec()
         output = "unilib:decor_stone_coal",
         recipe = {"unilib:mineral_coal_lump", "unilib:stone_ordinary"},
     })
-    if unilib.pkg_executed_table["metal_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_steel"] ~= nil then
 
         unilib.register_craft({
             -- From moreblocks:coal_stone

@@ -13,8 +13,8 @@
 unilib.pkg.mineral_sulphur = {}
 
 local S = unilib.intllib
-local technic_add_mode = unilib.imported_mod_table.technic.add_mode
-local worldgen_add_mode = unilib.imported_mod_table.technic_worldgen.add_moe
+local technic_add_mode = unilib.global.imported_mod_table.technic.add_mode
+local worldgen_add_mode = unilib.global.imported_mod_table.technic_worldgen.add_moe
 
 ---------------------------------------------------------------------------------------------------
 -- New code

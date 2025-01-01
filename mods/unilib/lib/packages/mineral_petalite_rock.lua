@@ -9,7 +9,7 @@
 unilib.pkg.mineral_petalite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_petalite_rock.exec()
 
     local c_lump = "unilib:mineral_petalite_lump"
-    local hardness = unilib.mineral_table["petalite"]["hardness"]
+    local hardness = unilib.global.mineral_table["petalite"]["hardness"]
 
     unilib.register_mineral_rock("petalite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_petalite_rock.exec()
         description = S("Petalite Rock"),
         tiles = {"unilib_mineral_petalite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

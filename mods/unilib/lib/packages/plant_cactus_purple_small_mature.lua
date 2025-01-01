@@ -9,7 +9,7 @@
 unilib.pkg.plant_cactus_purple_small_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,11 +40,12 @@ function unilib.pkg.plant_cactus_purple_small_mature.exec()
             -- N.B. flora = 1 not in original code
             groups = {choppy = 2, flammable = 2, flora = 1, oddly_breakable_by_hand = 1, tree = 1},
             -- N.B. No sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             damage_per_second = 1,
             drawtype = "nodebox",
-            is_ground_content = false,
+            -- N.B. removed is_ground_content = false to match other plants
+--          is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {-0.25, -0.5, -0.25, 0.25, 0.5, 0.25},
@@ -60,5 +61,7 @@ function unilib.pkg.plant_cactus_purple_small_mature.exec()
         }
     )
     -- (not compatible with flowerpots)
+
+    unilib.register_decoration_spare("unilib:plant_cactus_purple_small_mature")
 
 end

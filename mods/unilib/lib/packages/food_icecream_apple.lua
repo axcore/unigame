@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.icecream.add_mode
+local mode = unilib.global.imported_mod_table.icecream.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.food_icecream_apple.exec()
         inventory_image = "unilib_food_icecream_apple.png",
         groups = {food_icecream = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_apple", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_apple", 8),
     })
     unilib.register_craft({
         -- From icecream:apple

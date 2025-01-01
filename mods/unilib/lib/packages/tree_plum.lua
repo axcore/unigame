@@ -9,7 +9,7 @@
 unilib.pkg.tree_plum = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plumtree.add_mode
+local mode = unilib.global.imported_mod_table.plumtree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -72,9 +72,11 @@ function unilib.pkg.tree_plum.exec()
     })
     unilib.register_leafdecay({
         -- From plumtree:leaves
+        trunk_type = "plum",
         trunks = {"unilib:tree_plum_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {"unilib:tree_plum_leaves", "unilib:fruit_plum"},
+        leaves = {"unilib:tree_plum_leaves"},
+        others = {"unilib:fruit_plum"},
         radius = 3,
     })
 
@@ -123,7 +125,7 @@ function unilib.pkg.tree_plum.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From plumtree:gate. Creates unilib:gate_plum_closed
+        -- From plumtree:gate_closed, etc. Creates unilib:gate_plum_closed, etc
         part_name = "plum",
         orig_name = {"plumtree:gate_closed", "plumtree:gate_open"},
 
@@ -133,10 +135,10 @@ function unilib.pkg.tree_plum.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_plum", {
+    unilib.register_decoration_generic("cool_trees_tree_plum", {
         -- From plumtree/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_plum.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_plum.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         noise_params = {

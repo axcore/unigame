@@ -1,6 +1,5 @@
 # "offend_flags" remix - contains the flag printer and flag-generation code from the "offend_flags"
 #       mod, and a (new) set of national flags
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -16,11 +15,11 @@ item_paper_ordinary|default moreblocks
 material_oil_extract|basic_materials
 material_paraffin|basic_materials
 material_plastic|basic_materials
-metal_bronze|default technic
-metal_copper|default moreblocks technic
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 plant_papyrus_ordinary|default mtg_plus
 
 # supporting packages (.at_least_one)
@@ -29,6 +28,9 @@ dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
+#machine_furnace_induction|unilib
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #shared_screwdriver|screwdriver
+
+# supporting packages (.suggested)

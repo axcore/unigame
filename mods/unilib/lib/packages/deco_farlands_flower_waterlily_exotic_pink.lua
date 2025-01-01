@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_flower_waterlily_exotic_pink = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_farlands_flower_waterlily_exotic_pink.post()
 
-    unilib.register_decoration_now("farlands_flower_waterlily_exotic_pink", nil, {
+    unilib.register_decoration_complete("farlands_flower_waterlily_exotic_pink", nil, {
         -- From farlands, flowers/mapgen.lua
         -- Completes decoration in package "flower_waterlily_exotic_pink"
         biomes = {

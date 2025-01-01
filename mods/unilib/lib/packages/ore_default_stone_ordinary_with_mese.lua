@@ -9,7 +9,7 @@
 unilib.pkg.ore_default_stone_ordinary_with_mese = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.ore_default_stone_ordinary_with_mese.post()
         clust_num_ores          = 5,
         clust_scarcity          = 14 * 14 * 14,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -62,7 +62,7 @@ function unilib.pkg.ore_default_stone_ordinary_with_mese.post()
         clust_scarcity          = 14 * 14 * 14,
         clust_size              = 3,
         y_max                   = -1024,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

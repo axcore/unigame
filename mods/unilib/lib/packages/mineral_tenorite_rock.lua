@@ -9,7 +9,7 @@
 unilib.pkg.mineral_tenorite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_tenorite_rock.exec()
 
     local c_lump = "unilib:mineral_tenorite_lump"
-    local hardness = unilib.mineral_table["tenorite"]["hardness"]
+    local hardness = unilib.global.mineral_table["tenorite"]["hardness"]
 
     unilib.register_mineral_rock("tenorite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_tenorite_rock.exec()
         description = S("Tenorite Rock"),
         tiles = {"unilib_mineral_tenorite_rock.png"},
         groups = {cracky = 2},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

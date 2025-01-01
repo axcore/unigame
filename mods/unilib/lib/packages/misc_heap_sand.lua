@@ -9,7 +9,7 @@
 unilib.pkg.misc_heap_sand = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.forest.add_mode
+local mode = unilib.global.imported_mod_table.forest.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.misc_heap_sand.exec()
         },
         -- N.B. way = 1 in original code, omitted here
         groups = {dig_immediate = 3},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         drawtype = "raillike",
         inventory_image = "unilib_misc_heap_sand_inv.png",
@@ -60,7 +60,7 @@ function unilib.pkg.misc_heap_sand.exec()
         output = "unilib:misc_heap_sand 9",
         recipe = {
             {"unilib:sand_ordinary"},
-        }
+        },
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.window_ice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.window_ice.exec()
         description = S("Ice Window"),
         tiles = {"unilib_window_ice.png"},
         groups = {cools_lava = 1, cracky = 3, slippery = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         is_ground_content = false,
@@ -47,8 +47,8 @@ function unilib.pkg.window_ice.exec()
         cooktime = 1,
     })
 
-    if unilib.mtgame_tweak_flag and
-            unilib.pkg_executed_table["item_sweeper"] ~= nil then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["item_sweeper"] ~= nil then
 
         unilib.register_craft({
             -- From mtg_plus:ice_window

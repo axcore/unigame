@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.light_lantern_steel.exec()
         description = S("Steel-Framed Lantern"),
         tiles = {"unilib_light_block_mese.png"},
         groups = {cracky = 3},
-        sounds = unilib.node_sound_metal_defaults({
+        sounds = unilib.sound.generate_metal({
             footstep = {name = "unilib_glass_footstep", gain = 0.5},
             dug = {name = "unilib_break_glass", gain = 1.0},
         }),
@@ -81,7 +81,7 @@ function unilib.pkg.light_lantern_steel.exec()
         },
     })
 
-    if minetest.get_modpath("mesecons") then
+    if core.get_modpath("mesecons") then
 
         unilib.override_item("unilib:light_lantern_steel", {
             groups = {cracky = 1, mesecon = 1},

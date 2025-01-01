@@ -9,7 +9,7 @@
 unilib.pkg.ore_technic_stone_granite_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.ore_technic_stone_granite_dark.post()
         },
         noise_threshold         = 0.4,
         y_max                   = -150,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

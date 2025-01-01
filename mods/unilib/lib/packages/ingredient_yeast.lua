@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_yeast = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,10 +34,12 @@ function unilib.pkg.ingredient_yeast.exec()
         description = S("Yeast"),
         tiles = {"unilib_ingredient_yeast.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_vinegarmother = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_yeast.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_ingredient_yeast.png",
@@ -66,7 +68,7 @@ end
 
 function unilib.pkg.ingredient_yeast.post()
 
-    if unilib.pkg_executed_table["crop_cotton"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_cotton"] ~= nil then
 
         local c_cotton = "unilib:crop_cotton_seed"
 
@@ -78,12 +80,12 @@ function unilib.pkg.ingredient_yeast.post()
                 {"", "group:potable_bucket", ""},
                 {c_cotton, "", c_cotton},
             },
-            replacements = unilib.potable_bucket_list,
+            replacements = unilib.global.potable_bucket_list,
         })
 
     end
 
-    if unilib.pkg_executed_table["crop_wheat"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_wheat"] ~= nil then
 
         local c_wheat = "unilib:crop_wheat_seed"
 
@@ -95,7 +97,7 @@ function unilib.pkg.ingredient_yeast.post()
                 {"", "group:potable_bucket", ""},
                 {c_wheat, "", c_wheat},
             },
-            replacements = unilib.potable_bucket_list,
+            replacements = unilib.global.potable_bucket_list,
         })
 
     end

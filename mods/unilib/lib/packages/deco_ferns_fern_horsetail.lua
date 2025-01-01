@@ -9,7 +9,7 @@
 unilib.pkg.deco_ferns_fern_horsetail = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ end
 
 function unilib.pkg.deco_ferns_fern_horsetail.post()
 
-    unilib.register_decoration_now("ferns_fern_horsetail", nil, {
+    unilib.register_decoration_complete("ferns_fern_horsetail", nil, {
         -- From ferns/horsetail.lua
         -- Completes decoration in package "fern_horsetail"
         place_on = {
@@ -49,7 +49,7 @@ function unilib.pkg.deco_ferns_fern_horsetail.post()
             "unilib:sand_ordinary",
             "unilib:stone_ordinary_cobble_mossy",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

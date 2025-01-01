@@ -9,7 +9,7 @@
 unilib.pkg.misc_straw_plastered = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,12 +32,14 @@ function unilib.pkg.misc_straw_plastered.exec()
         description = S("Plastered Straw Bale"),
         tiles = {"unilib_material_wattle_and_daub.png"},
         groups = {crumbly = 1, falling_node = 1, snappy = 2},
-        sounds = unilib.sound_table.dirt,
+        sounds = unilib.global.sound_table.dirt,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
-    if unilib.pkg_executed_table["roof_thatch"] ~= nil then
+    if unilib.global.pkg_executed_table["roof_thatch"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:strawbale
@@ -46,11 +48,11 @@ function unilib.pkg.misc_straw_plastered.exec()
                 {"unilib:roof_thatch", "unilib:roof_thatch", "unilib:roof_thatch"},
                 {"unilib:roof_thatch", "unilib:roof_thatch", "unilib:roof_thatch"},
                 {"", "unilib:material_cob", ""},
-            }
+            },
         })
 
     end
-    if unilib.pkg_executed_table["misc_straw_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["misc_straw_ordinary"] ~= nil then
 
         local c_straw = "unilib:misc_straw_ordinary"
 
@@ -61,7 +63,7 @@ function unilib.pkg.misc_straw_plastered.exec()
                 {c_straw, c_straw, c_straw},
                 {c_straw, c_straw, c_straw},
                 {"", "unilib:material_cob", ""},
-            }
+            },
         })
 
     end

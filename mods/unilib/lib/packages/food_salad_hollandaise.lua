@@ -9,7 +9,7 @@
 unilib.pkg.food_salad_hollandaise = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.food_salad_hollandaise.exec()
         description = S("Salad Hollandaise"),
         tiles = {"unilib_food_salad_hollandaise.png"},
         groups = {attached_node = 1, dig_immediate = 3, eatable = 1, food_vegan = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_salad_hollandaise.png",
@@ -54,18 +54,18 @@ function unilib.pkg.food_salad_hollandaise.exec()
         walkable = false,
         wield_image = "unilib_food_salad_hollandaise.png",
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_salad_hollandaise", 5, "unilib:utensil_bowl_glass"
         ),
     })
-    if unilib.pkg_executed_table["food_salad_green"] ~= nil and
-             unilib.pkg_executed_table["utensil_bowl_glass"] ~= nil then
+    if unilib.global.pkg_executed_table["food_salad_green"] ~= nil and
+             unilib.global.pkg_executed_table["utensil_bowl_glass"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:salad_hollandaise
             output = "unilib:food_salad_hollandaise",
             recipe = {
-                {"unilib:ingredient_sauce_hollandaise", "unilib:food_salad_green", ""}
+                {"unilib:ingredient_sauce_hollandaise", "unilib:food_salad_green", ""},
             },
             replacements = {
                 {"unilib:ingredient_sauce_hollandaise", "unilib:vessel_bottle_glass_empty"},
@@ -74,9 +74,9 @@ function unilib.pkg.food_salad_hollandaise.exec()
 
     end
 
-    if unilib.pkg_executed_table["crop_chives"] ~= nil and
-             unilib.pkg_executed_table["crop_parsley_curly"] ~= nil and
-             unilib.pkg_executed_table["crop_radicchio"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_chives"] ~= nil and
+             unilib.global.pkg_executed_table["crop_parsley_curly"] ~= nil and
+             unilib.global.pkg_executed_table["crop_radicchio"] ~= nil then
 
         local c_chives = "unilib:crop_chives_harvest"
         local c_parsley = "unilib:crop_parsley_curly_harvest"
@@ -88,11 +88,11 @@ function unilib.pkg.food_salad_hollandaise.exec()
             recipe = {
                 {c_parsley, c_radicchio, c_chives},
                 {"unilib:ingredient_sauce_hollandaise", "group:food_oil", ""},
-                {"", "unilib:utensil_bowl_glass", ""}
+                {"", "unilib:utensil_bowl_glass", ""},
             },
             replacements = {
                 {"group:food_oil", "unilib:vessel_bottle_glass_empty"},
-                {"unilib:ingredient_sauce_hollandaise", "unilib:vessel_bottle_glass_empty"}
+                {"unilib:ingredient_sauce_hollandaise", "unilib:vessel_bottle_glass_empty"},
             },
         })
 

@@ -1,6 +1,5 @@
 # "elements" remix - contains packages which provide all 118 chemical elements, in the form of
 #       ingots/blocks/powder, or chunks, or samples, or mineral lumps (as appropriate)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -21,10 +20,10 @@ metal_caesium|unilib
 metal_calcium|unilib
 metal_californium|unilib
 metal_cerium|unilib
-metal_chromium|technic_worldgen technic
+metal_chromium|glemr11 technic_worldgen technic
 metal_cobalt|unilib
-metal_copernecium|unilib
-metal_copper|default moreblocks technic
+metal_copernicium|unilib
+metal_copper|default glemr11 moreblocks technic
 metal_curium|unilib
 metal_darmstadtium|unilib
 metal_dubnium|unilib
@@ -38,7 +37,7 @@ metal_francium|unilib
 metal_gadolinium|unilib
 metal_gallium|unilib
 metal_germanium|unilib
-metal_gold|default technic
+metal_gold|default glemr11 technic
 metal_hafnium|unilib
 metal_hassium|unilib
 metal_holmium|unilib
@@ -47,7 +46,7 @@ metal_iridium|unilib
 metal_iron|default
 metal_lanthanum|unilib
 metal_lawrencium|unilib
-metal_lead|technic_worldgen technic
+metal_lead|glemr11 technic_worldgen technic
 metal_lithium|unilib
 metal_livermorium|unilib
 metal_lutetium|unilib
@@ -55,7 +54,7 @@ metal_magnesium|unilib
 metal_manganese|unilib
 metal_meitnerium|unilib
 metal_mendelevium|unilib
-metal_mercury|unilib
+metal_mercury|glemr11 unilib
 metal_molybdenum|unilib
 metal_moscovium|unilib
 metal_neodymium|unilib
@@ -84,7 +83,7 @@ metal_samarium|unilib
 metal_scandium|unilib
 metal_seaborgium|unilib
 metal_silicon|unilib
-metal_silver|moreores technic
+metal_silver|glemr11 moreores technic
 metal_sodium|unilib
 metal_strontium|unilib
 metal_tantalum|unilib
@@ -94,14 +93,14 @@ metal_terbium|unilib
 metal_thallium|unilib
 metal_thorium|unilib
 metal_thulium|unilib
-metal_tin|default technic
+metal_tin|default glemr11 technic
 metal_titanium|unilib
 metal_tungsten|unilib
 metal_uranium|technic_worldgen technic
 metal_vanadium|unilib
 metal_ytterbium|unilib
 metal_yttrium|unilib
-metal_zinc|technic_worldgen technic
+metal_zinc|glemr11 technic_worldgen technic
 metal_zirconium|unilib
 mineral_sulphur|technic_worldgen technic
 substance_argon|unilib
@@ -129,5 +128,11 @@ mineral_bauxite|real_minerals
 mineral_bismuthinite|real_minerals
 mineral_garnierite|real_minerals
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #container_chest_ordinary|default
+#gravel_ordinary|default mtg_plus
+#machine_furnace_induction|unilib
+
+# supporting packages (.suggested)

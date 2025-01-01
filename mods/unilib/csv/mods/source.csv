@@ -16,6 +16,7 @@ farming|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron
 fire|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything
 fireflies|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
 flowers|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+keys|minetest_game|20241116|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything. Note that this mod did not exist when minetest_game code was first imported into unilib in 2021
 map|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
 player_api|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|CC BY-SA 3.0|Imported everything, but the namespace has been changed to unilib.player_api, and the unmodified player_api mod is still available in unigame
 screwdriver|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|unknown|Imported everything
@@ -25,6 +26,29 @@ vessels|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron
 walls|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|LGPL 2.1|n/a|Imported everything
 wool|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
 xpanes|minetest_game|20211020|https://github.com/minetest/minetest_game|celeron55/Perttu Ahola et al|MIT|CC BY-SA 3.0|Imported everything
+
+# From 3d_armor
+3d_armor|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+3d_armor_ip|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+3d_armor_sfinv|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+3d_armor_stand|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+3d_armor_ui|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_admin|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_bronze|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_cactus|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_crystal|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_diamond|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_gold|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_mithril|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_nether|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_steel|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+armor_wood|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+shields|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+wieldview|3d_armor|20241108|https://github.com/minetest-mods/3d_armor|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
+
+# From armor_expanded
+armor_leather|armor_expanded|20241112|https://github.com/Crystalwarrior/armor_expanded|Crystalwarrior|MIT|CC-BY-SA 3.0|Imported everything
+armor_woven|armor_expanded|20241112|https://github.com/Crystalwarrior/armor_expanded|Crystalwarrior|MIT|CC-BY-SA 3.0|Imported everything
 
 # From castle modpack
 castle_farming|castle|20220828|https://github.com/minetest-mods/castle/|Philipbenr/DanDuncombe|MIT|CC-BY-SA 3.0/CC BY 3.0|Imported everything
@@ -105,11 +129,14 @@ gemtools|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC BY-SA 3.0|Impor
 gravelcraft|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|n/a|Imported everything
 
 # From xtraores
-xtraores|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything except awards. Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium, palatinium and tritonium to avoid clashing with any code that wants the real-life metals
+xtraores|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything except awards. Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium, planexium and tritonium to avoid clashing with any code that wants the real-life metals
+xtraores_armor|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything
+xtraores_rainbow|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything
 
 # All other mods
 24hr_clock||20221126|https://github.com/kestral246/24hr_clock|David_G et al|WTFPL/CC0|CC BY-SA|Imported everything
 30biomes||20211210|https://github.com/Gael-de-Sailly/30-biomes|Gael-de-Sailly|WTFPL|WTFPL|Imported the fir tree and mud node only. Did not import biomes, decorations (except for the fir tree) or ores. (The biomes are actually available in a CSV file that is not loaded, by default. See the notes in the remix's _biomes.csv)
+3d_armor_gloves||20241112|https://github.com/sirrobzeroone/3d_armor_gloves|Stuart Jones|LGPL v2.1|CC-BY-SA 3.0|Imported everything
 aato||20220903|https://github.com/waylanderou/almost-all-the-ores|waylanderou|GPL 3.0|GPL 3.0|AATO/Almost All the Ores, a Minecraft mod. Imported all suitable textures from the mod, with original code and (where necessary) original textures. Only natural materials were imported; no machinery was imported
 abriflame||20221114|https://github.com/mt-mods/abriflame|Shara RedCat|MIT|CC-BY-SA 3.0/CC0|Imported everything
 abriglass||20221114|https://github.com/mt-mods/abriglass|Shara RedCat|MIT|CC BY-SA 4.0|Imported everything except the hidden light and crystal
@@ -120,12 +147,15 @@ anvil||20221208|https://github.com/minetest-mods/anvil|Sokomine/FaceDeer|GPL-3.0
 aotearoa||20220629|https://github.com/DokimiCU/aotearoa|Dokimi|LGPLv2+|CC BY-SA 3.0 Unported|Imported everything except ambient sounds and stairs for tree trunks
 aqua_farming||20230315|https://github.com/acmgit/aqua_farming|Clyde|GPL 3.0|CC-BY-3.0|Imported everything
 australia||20220620|https://github.com/vlapsley/australia|vlapsley|GPLv3/LGPL 2.1/BSD|CC by 3.0/CC BY-SA 3.0/WTFPL|Imported everything except the sunken ship, submarine and their chests
+badlands||20231101|https://content.minetest.net/packages/AwesomeDragon97/badlands/|AwesomeDragon97|LGPL-3.0|LGPL-3.0|Imported everything
 bakedclay||20211117|https://notabug.org/tenplus1/bakedclay|TenPlus1|MIT|CC|Imported everything except luckyblocks/coloured_clay/flowerpot compatibility code
 basic_materials||20211113|https://gitlab.com/VanessaE/basic_materials|Vanessa Dannenberg|LGPL 3.0|CC-by-SA 4.0|Imported everything
 bbq||20230307|https://github.com/Grizzly-Adam/BBQ|Grizzly Adam|LGPL-2.1+|CC-BY-SA-3.0/CC-BY-3.0|Imported everything except a few items provided by other mods (charcoal, molasses and sugar)
 beacons||20221202|https://notabug.org/SpaghettiToastBook/beacons|SpaghettiToastBook|CC0|CC0|Imported everything
 beautiflowers||20220210|https://github.com/minefaco/beautiflowers|minefaco|GPLv3.0|CC0|Imported everything
+better_basic_materials||20241118|https://content.luanti.org/packages/AwesomeDragon97/better_basic_materials/|AwesomeDragon97|n/a|CC-BY-SA-3.0|Imported all four 16x16 replacement textures, using them to replace the 64x64 textures provided by basic_materials
 better_farming||20230212|https://forum.minetest.net/viewtopic.php?f=9&t=28849|Atlante|MIT|MIT|Imported everything from the better_farming mod except the onigiri, which is already provided by another package, and crates shaped as stairs
+bluetangs_ethereal_fishes||20241125|https://github.com/BlueTangsRock/Bluetangs-ethereal-fishes|BlueTangs Rock|n/a|CC-BY-SA 3.0|Imported many (but not all) textures not already imported into ethereal-ng, and provided original code for them
 bonemeal||20220427|https://notabug.org/tenplus1/bonemeal|TenPlus1|MIT|CC0-1.0|Imported everything
 bread||20230302|https://codeberg.org/Lahusen/bread.git|Marc/Lahusen|MIT|CC0/CC-BY-SA 3.0|Imported everything
 bridges||20230310|https://github.com/mt-historical/bridges|Sokomine|GPL 3.0|n/a|Imported everything
@@ -184,6 +214,7 @@ moretrees||20220608|https://github.com/mt-mods/moretrees|Vanessa Ezekowitz|LGPL 
 mtg_plus||20220425|https://repo.or.cz/minetest_mtg_plus.git|Wuzzy|MIT|CC-BY-SA 3.0/CC-BY 3.0/MIT|Imported everything except the duplicate ice bricks, and the special textures for stairs/slabs
 mymillwork||20211103|https://github.com/minetest-mods/mymillwork|Don|DWYWPL|DWYWPL|Imported everything
 nbea||20220812|https://github.com/Napiophelios/NBox_Abuse|Napiophelios|WTFPL|CC BY-SA 3.0|Imported decorative items and compatibility with mesecons, but no furniture
+nether||20241115|https://github.com/minetest-mods/nether|PilzAdam|ISC|CC-BY-SA-3.0|PilzAdam's nether mod. The "override_nether_portal" package creates a portal using unilib obsidian/mese, but nothing else has been imported. Compatible with unilib's implementation of armour and staff of light
 nettle||20220213|https://gitlab.com/h2mm/nettle|Hume2|MIT|MIT|Imported everything
 nextgen_compass||20221126|https://github.com/starninjas/nextgen_compass|StarNinjas et al|GPLv3|CC BY-SA 4.0|Imported everything, creating two separate compasses pointing at origin and spawn
 nsspf||20230217|https://github.com/NPXcoot/nsspf|npx|LGPL|CC BY-SA 4.0|Imported all mushrooms, fungi and truffles, but their behaviour has been changed to drastically improve the player experience (removing most ABMs). Mushrooms/funig growing on the ground now behave like minetest_game mushrooms (i.e. they are spreadable). Other mushrooms/fungi tend to grow on trees, and are not spreadable or placeable. Truffles can be found growing at the base of some trees, just below the surface. Spores have not been imported at all
@@ -205,7 +236,7 @@ real_torch||20221125|https://notabug.org/TenPlus1/real_torch|TenPlus1|MIT|CC BY-
 realcompass||20221126|https://github.com/kestral246/realcompass|David_G et al|WTFPL/CC0|CC BY-SA|Imported everything
 replacer||20230724|https://github.com/Sokomine/replacer|Sokomine|GPL 3.0|GPL 3.0|Imported everything
 rocks||20220906|https://github.com/Gael-de-Sailly/rocks|Tomas Brod/Gael-de-Sailly|GPLv2|GPLv2|Imported a few items from rocks that are not found in AATO/PFAA (but are required by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest mod, everything has been grouped into a hypothetical "rocks" mod. The trench-digging code was imported as a separate chat command, /trench
-ropes||20211117|https://github.com/minetest-mods/ropes|unknown|MIT|unknown (textures), CC0 (sounds)|unknown|Imported everything
+ropes||20211117|https://github.com/minetest-mods/ropes|unknown|MIT|unknown (textures), CC0 (sounds)|Imported everything
 scaffolding||20221116|https://bitbucket.org/Infinatum/scaffolding/src/master/|Semmett9|CC-BY-SA-4.0|CC-BY-SA-4.0|Imported everything
 sickles||20220213|https://github.com/t-affeldt/sickles|TestificateMods|LGPL v3|CC BY-SA 3.0/4.0|Imported everything
 simple_furniture||20230310|https://content.minetest.net/packages/Tarruvi/simple_furniture/|Tarruvi|MIT|n/a|Imported only furniture crafted from the five basic tree types
@@ -219,6 +250,7 @@ steampunk||20220818|https://forum.minetest.net/viewtopic.php?t=18118|blueph03nix
 steel||20230310|https://github.com/mt-mods/steel|João Matos et al|GPL-2.0|CC-BY-SA-4.0|Imported everything
 stripped_tree||20221110|https://github.com/minefaco/stripped_tree|minefaco|GPLv3.0|GPLv3.0|Imported everything except axe overrides (so a chisel is required to scrape bark from tree trunks)
 tea||20230210|https://github.com/Mathiaszero/Minetest-tea-abandoned|Mathias|LGPL v2.1|CC BY 3.0|Imported everything, adding new code for 8 textures that were unused in the original mod
+technic_armor||20241112|https://github.com/mt-mods/technic_armor|Stuart Jones|LGPL v2.1|WTFPL|Imported everything
 thirsty||20221206|https://forum.minetest.net/viewtopic.php?f=9&t=11820|Ben Deutsch|LGPL 2.1|CC-BY-SA-4.0|Imported everything
 toolranks||20221205|https://github.com/lisacvuk/minetest-toolranks|lisacvuk|LGPLv2.1+|CC BY 3.0|Imported everything, and improved the functionality. toolranks support is enabled for (most) axes, picks, shovels and swords, but not for other types of tools (such as hoes)
 towercrane||20211126|https://github.com/minetest-mods/towercrane|Joachim Stolberg|LGPL 2.1|CC0/CC BY-SA 4.0|Imported everything
@@ -231,5 +263,5 @@ valleys_c||20220902|https://git.minetest.org/blert2112/valleys_c|Duane Robertson
 what_is_this_owo||20230316|https://github.com/Rotfuchs-von-Vulpes/what_is_this_owo-minetest|Rotfuchs von Vulpes|MIT|MIT|Imported everything, combining it with the imported code from "what_is_this_uwu". A Minetest setting can be used to toggle between the two
 what_is_this_uwu||20230316|https://github.com/Rotfuchs-von-Vulpes/what_is_this_uwu-minetest/|Rotfuchs von Vulpes|MIT|MIT|Imported everything as a player effect; the chat command is changed to /what
 wielded_light||20221113|https://github.com/minetest-mods/wielded_light|bell07|GPLv3.0|unknown|Imported all functionality (there are no new items). Wielded light can be enabled/disabled with a Minetest setting
-xdecor||20220831|https://github.com/minetest-mods/xdecor|kilbith|BSD|WTFPL/CC BY-SA/CC BY 3.0|Imported everything except the cauldron/soup, enchanting table, workbench and chess set. Some non-free textures were replaced using alternatives in MCLx86's fork (https://github.com/MCLx86/xdecor)
+xdecor||20220831|https://github.com/minetest-mods/xdecor|kilbith|BSD|WTFPL/CC BY-SA/CC BY 3.0|Imported everything except the chess set. Some non-free textures were replaced using alternatives in MCLx86's fork (https://github.com/MCLx86/xdecor)
 xocean||20220812|https://github.com/starninjas/xocean|starninjas|MIT|MIT|Imported everything except mobs and food items derived from them

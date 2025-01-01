@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_rush_sea = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_rush_sea.post()
 
-    unilib.register_decoration_now("aotearoa_plant_rush_sea", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_rush_sea", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_rush_sea"
         biomes = "aotearoa_dunes_salt_marsh",

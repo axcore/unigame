@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wattle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.trapdoor_wattle.exec()
 
     unilib.register_trapdoor({
-        -- From earthbuild:trapdoor_wattle. Creates unilib:trapdoor_wattle
+        -- From earthbuild:trapdoor_wattle. Creates unilib:trapdoor_wattle_closed, etc
         part_name = "wattle",
-        orig_name = {"earthbuild:trapdoor_wattle", "earthbuild:trapdoor_wattle_open"},
+        orig_name_list = {"earthbuild:trapdoor_wattle", "earthbuild:trapdoor_wattle_open"},
         def_table = {
             description = S("Wattle Trapdoor"),
             -- (no tiles)
@@ -51,7 +51,7 @@ function unilib.pkg.trapdoor_wattle.exec()
             {"unilib:material_wattle", "unilib:material_wattle", ""},
             {"unilib:material_wattle", "unilib:material_wattle", ""},
             {"", "", ""},
-        }
+        },
     })
     unilib.register_craft({
         -- From earthbuild:trapdoor_wattle

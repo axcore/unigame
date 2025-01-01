@@ -9,7 +9,7 @@
 unilib.pkg.tree_palm_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,13 +19,24 @@ function unilib.pkg.tree_palm_exotic.init()
 
     return {
         description = "Exotic palm tree",
+        depends = "fruit_coconut_exotic",
+        optional = {
+            -- If the "ore_farlands_tree_palm_exotic" package is not loaded, then the shared package
+            --      will use an ABM to place leaves-with-fruit nodes instead
+            "abm_farlands_bushes_trees",
+            -- Create fruit-as-node variants for use in schematics
+            "shared_farlands_fruit",
+        },
     }
 
 end
 
 function unilib.pkg.tree_palm_exotic.exec()
 
-    -- (no burnlevel)
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
+
+    local burnlevel = 2
     -- (no sci_name)
 
     unilib.register_tree({
@@ -64,7 +75,55 @@ function unilib.pkg.tree_palm_exotic.exec()
         group_table = {flammable = 1, leafdecay = 1, leaves = 1, snappy = 3},
         special_list = {"unilib_tree_palm_exotic_leaves_simple.png"},
     })
-    unilib.register_quick_tree_leafdecay("palm_exotic")
+    -- (unilib.register_leafdecay() occurs below)
+
+    unilib.register_node(
+        -- From farlands, fruit:palm_leaves_coconut
+        "unilib:tree_palm_exotic_leaves_with_coconut",
+        "fruit:palm_leaves_coconut",
+        mode,
+        {
+            description = S("Exotic Palm Tree Leaves with Coconuts"),
+            tiles = {"unilib_tree_palm_exotic_leaves_with_coconut.png"},
+            -- N.B. added not_in_creative_inventory for consistency with other farlands stuff
+            groups = {
+                flammable = 1, leafdecay = 3, leaves = 1, not_in_creative_inventory = 1, snappy = 2,
+            },
+            sounds = unilib.global.sound_table.leaves,
+
+            drawtype = "allfaces_optional",
+            -- N.B. is_ground_content = false not in original code; added to match other leaves
+            is_ground_content = false,
+            paramtype = "light",
+            special_tiles = {"unilib_tree_palm_exotic_leaves_with_coconut.png"},
+            waving = 1,
+
+            on_destruct = function(pos, oldnode)
+                core.add_item(pos, "unilib:fruit_coconut_exotic")
+            end,
+
+            on_rightclick = function(pos)
+                core.set_node(pos, {name = "unilib:tree_palm_exotic_leaves"})
+            end,
+        }
+    )
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        -- Create the fruit-as-node variant for use in schematics, unilib:fruit_coconut_exotic_node
+        unilib.pkg.shared_farlands_fruit.create_fruit_nodes("coconut", "food_coconut")
+
+    end
+
+    unilib.register_leafdecay({
+        -- From farlands, mapgen:palm_leaves
+        trunk_type = "palm_exotic",
+        trunks = {"unilib:tree_palm_exotic_trunk"},
+        leaves = {"unilib:tree_palm_exotic_leaves", "unilib:tree_palm_exotic_leaves_with_coconut"},
+        -- N.B. required if the "shared_farlands_fruit" package is loaded
+        others = {"unilib:fruit_coconut_exotic_node"},
+        radius = 3,
+    })
 
     unilib.register_tree_sapling({
         -- From farlands, default:palmtree_sapling. Creates unilib:tree_palm_exotic_sapling
@@ -105,7 +164,7 @@ function unilib.pkg.tree_palm_exotic.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_palm_exotic_closed
+        -- Original to unilib. Creates unilib:gate_palm_exotic_closed, etc
         part_name = "palm_exotic",
         orig_name = {nil, nil},
 
@@ -116,10 +175,10 @@ function unilib.pkg.tree_palm_exotic.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("farlands_tree_palm_exotic_" .. i, {
+        unilib.register_decoration_generic("farlands_tree_palm_exotic_" .. i, {
             -- From farlands, mapgen/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_palm_exotic.mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_palm_exotic.mts",
 
             flags = "place_center_x, place_center_z",
             noise_params = {
@@ -131,6 +190,22 @@ function unilib.pkg.tree_palm_exotic.exec()
                 spread = {x = 250, y = 250, z = 250},
             },
             sidelen = 16,
+        })
+
+    end
+
+end
+
+function unilib.pkg.tree_palm_exotic.post()
+
+    if unilib.global.pkg_executed_table["shared_farlands_fruit"] ~= nil then
+
+        unilib.register_regrowing_fruit({
+            fruit_name = "unilib:fruit_coconut_exotic_node",
+
+            replace_mode = mode,
+            leaves_list = {"unilib:tree_palm_exotic_leaves"},
+            pkg_list = {"tree_palm_exotic"},
         })
 
     end

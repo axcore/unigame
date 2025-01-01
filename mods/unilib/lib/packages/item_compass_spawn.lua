@@ -9,7 +9,7 @@
 unilib.pkg.item_compass_spawn = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nextgen_compass.add_mode
+local mode = unilib.global.imported_mod_table.nextgen_compass.add_mode
 
 -- Number of textures, one for each compass needle direction
 local frame_count = 32
@@ -19,6 +19,8 @@ local random_frame = math.random(0, frame_count - 1)
 local random_timer = 0
 -- Random compass spinning tick in seconds. Increase if there are performance problems
 local random_timer_trigger = 0.5
+-- Default spawn point (updated below)
+local spawn_pos = {x = 0, y = 0, z = 0}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -26,22 +28,7 @@ local random_timer_trigger = 0.5
 
 local function get_compass_img(pos, dir)
 
-    -- Use the spawn specified by minetest.conf, e.g.
-    --      static_spawnpoint = 100, 5, 100
-    -- If minetest.conf doesn't specify a spawn, use the world origin instead
-
-    local spawn = {x = 0, y = 0, z = 0}
-    local ssp = minetest.setting_get_pos("static_spawnpoint")
-
-    if ssp and
-            type(ssp) == "table" and
-            type(ssp.x) == "number" and
-            type(ssp.y) == "number" and
-            type(ssp.z) == "number" then
-        spawn = ssp
-    end
-
-    local angle_north = math.deg(math.atan2(spawn.x - pos.x, spawn.z - pos.z))
+    local angle_north = math.deg(math.atan2(spawn_pos.x - pos.x, spawn_pos.z - pos.z))
     if angle_north < 0 then
         angle_north = angle_north + 360
     end
@@ -57,7 +44,7 @@ local function has_compass(player)
 
     for _,stack in pairs(player:get_inventory():get_list("main")) do
 
-        if minetest.get_item_group(stack:get_name(), "spawn_compass") ~= 0 then
+        if core.get_item_group(stack:get_name(), "spawn_compass") ~= 0 then
             return true
         end
 
@@ -75,8 +62,10 @@ function unilib.pkg.item_compass_spawn.init()
 
     return {
         description = "A compass that points towards spawn",
-        notes = "spawn must be specified in minetest.conf. If not, this compass points towards" ..
-                " the world origin, behaving exactly like an origin compass",
+        notes = "If the \"spawnpoint\" mod is loaded, uses the spawn specified by that mod (if" ..
+                " any). Otherwise, uses the spawn specified in minetest.conf. If neither is" ..
+                " specified, this compass points towards the world origin, behaving exactly like" ..
+                " an origin compass",
         depends = {"metal_steel", "mineral_diamond"},
     }
 
@@ -84,7 +73,28 @@ end
 
 function unilib.pkg.item_compass_spawn.exec()
 
-    minetest.register_globalstep(function(dtime)
+    -- Use the spawn specified by minetest.conf, e.g.
+    --      static_spawnpoint = 100, 5, 100
+    -- However, if the "spawnpoint mod" is enabled, use that instead
+    if core.get_modpath("spawnpoint") and spawnpoint.pos then
+
+        spawn_pos = spawnpoint.pos
+
+    else
+
+        local ssp = core.setting_get_pos("static_spawnpoint")
+        if ssp and
+                type(ssp) == "table" and
+                type(ssp.x) == "number" and
+                type(ssp.y) == "number" and
+                type(ssp.z) == "number" then
+            spawn_pos = ssp
+        end
+
+    end
+
+    -- Update the compass on a continuous basis
+    core.register_globalstep(function(dtime)
 
         random_timer = random_timer + dtime
 
@@ -95,7 +105,7 @@ function unilib.pkg.item_compass_spawn.exec()
 
         end
 
-        for i, player in pairs(minetest.get_connected_players()) do
+        for i, player in pairs(core.get_connected_players()) do
 
             if has_compass(player) then
 
@@ -104,8 +114,8 @@ function unilib.pkg.item_compass_spawn.exec()
 
                 for j, stack in pairs(player:get_inventory():get_list("main")) do
 
-                    if minetest.get_item_group(stack:get_name(), "spawn_compass") ~= 0 and
-                            minetest.get_item_group(stack:get_name(), "spawn_compass") - 1 ~=
+                    if core.get_item_group(stack:get_name(), "spawn_compass") ~= 0 and
+                            core.get_item_group(stack:get_name(), "spawn_compass") - 1 ~=
                                     compass_img then
 
                         local itemname = "unilib:item_compass_spawn_" .. compass_img
@@ -159,8 +169,8 @@ function unilib.pkg.item_compass_spawn.exec()
         recipe = {
             {"", "unilib:metal_steel_ingot", ""},
             {"unilib:metal_steel_ingot", "unilib:mineral_diamond_gem", "unilib:metal_steel_ingot"},
-            {"", "unilib:metal_steel_ingot", ""}
-        }
+            {"", "unilib:metal_steel_ingot", ""},
+        },
     })
 
 end

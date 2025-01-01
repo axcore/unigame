@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_oil_olive = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.ingredient_oil_olive.init()
 
     return {
         description = "Olive oil",
-        depends = {"fruit_olive", "utensil_juicer_normal", "vessel_bottle_glass_empty"},
+        depends = {"fruit_olive", "utensil_press_hand", "vessel_bottle_glass_empty"},
     }
 
 end
@@ -40,10 +40,10 @@ function unilib.pkg.ingredient_oil_olive.exec()
         recipe = {
             {"unilib:fruit_olive", "unilib:fruit_olive", "unilib:fruit_olive"},
             {"unilib:fruit_olive", "unilib:fruit_olive", "unilib:fruit_olive"},
-            {"unilib:utensil_juicer_normal", "unilib:vessel_bottle_glass_empty", ""}
+            {"unilib:utensil_press_hand", "unilib:vessel_bottle_glass_empty", ""},
         },
         replacements = {
-            {"unilib:utensil_juicer_normal", "unilib:utensil_juicer_normal"},
+            {"unilib:utensil_press_hand", "unilib:utensil_press_hand"},
         },
     })
 

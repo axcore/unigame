@@ -9,7 +9,7 @@
 unilib.pkg.stone_savanna_with_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,12 @@ function unilib.pkg.stone_savanna_with_iron.exec()
 
     unilib.register_node("unilib:stone_savanna_with_iron", "mapgen:savanna_iron", mode, {
         -- From farlands, mapgen:savanna_iron
-        description = unilib.brackets(S("Iron Ore"), S("Savanna Stone")),
+        description = unilib.utils.brackets(S("Iron Ore"), S("Savanna Stone")),
         tiles = {"unilib_stone_savanna_with_iron.png"},
-        groups = {cracky = 2, ore = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        -- N.B. Omitted stone = 1 from original code
+--      groups = {cracky = 2, ore = 1, stone = 1},
+        groups = {cracky = 2, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:mineral_iron_lump",
     })

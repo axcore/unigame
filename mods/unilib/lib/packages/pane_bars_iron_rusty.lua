@@ -9,7 +9,7 @@
 unilib.pkg.pane_bars_iron_rusty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.pane_bars_iron_rusty.exec()
             textures = {"unilib_pane_bars_iron_rusty.png", "", "unilib_pane_bars_iron_rusty.png"},
             -- N.B. pane = 1 in original code, omitted here
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
 
             drawtype = "airlike",
             inventory_image = "unilib_pane_bars_iron_rusty.png",

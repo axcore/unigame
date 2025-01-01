@@ -17,9 +17,9 @@
 unilib.pkg.stone_vindesite_blue = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_vindesite_blue.exec()
         description = S("Blue Vindesite"),
 
         category = "other",
+        colour = "#23263B",
         fictional_flag = true,
         grinder_flag = true,
         hardness = 1,
@@ -97,26 +98,22 @@ function unilib.pkg.stone_vindesite_blue.exec()
         wall_orig_name = "underch:dark_vindesite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:dark_vindesite. Creates unilib:stone_vindesite_blue_cobble_compressed
+        part_name = "vindesite_blue",
+        orig_name = "compressed:dark_vindesite",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:dark_vindesite. Creates unilib:stone_vindesite_blue_cobble_compressed
-            part_name = "vindesite_blue",
-            orig_name = "compressed:dark_vindesite",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Blue Vindesite Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Blue Vindesite Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:dark_vindesite. Creates unilib:stone_vindesite_blue_cobble_condensed
+        part_name = "vindesite_blue",
+        orig_name = "condensed:dark_vindesite",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:dark_vindesite. Creates unilib:stone_vindesite_blue_cobble_condensed
-            part_name = "vindesite_blue",
-            orig_name = "condensed:dark_vindesite",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Blue Vindesite Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Blue Vindesite Cobble"),
+    })
 
 end

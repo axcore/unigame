@@ -1,0 +1,362 @@
+# =================================================================================================
+# Hot humid biomes
+# =================================================================================================
+
+# N.B. To make mangrove swamps look the way they're supposed to, use MANGROVE rather than BEACH constants
+gaia_hot_humid_ocean|Hot humid ocean biome|||unilib:sand_silt 4|unilib:dirt_silt_fine 6|unilib:stone_basalt_dark|||||||||MANGROVE_MIN|OCEAN||HOT|HUMID
+gaia_hot_humid_beach|Hot humid beach biome|||unilib:dirt_silt_fine 2|unilib:dirt_silt_coarse 4|unilib:stone_basalt_dark|||||||||MANGROVE_MAX|MANGROVE_MIN||HOT|HUMID
+gaia_hot_humid_coastal|Hot humid coastal biome|||unilib:dirt_silt_coarse_with_litter_rainforest 1|unilib:dirt_silt_coarse 6|unilib:stone_basalt_dark|||||||||COASTAL|MANGROVE_MAX||HOT|HUMID
+gaia_hot_humid_lowland|Hot humid lowland biome|||unilib:dirt_silt_fine_with_turf_hot_humid_lowland 1|unilib:dirt_silt_fine 5|unilib:stone_basalt_dark|||||||||LOWLAND|COASTAL||HOT|HUMID
+gaia_hot_humid_shelf|Hot humid shelfbiome|||unilib:dirt_dark_with_turf_hot_humid_shelf 1|unilib:dirt_dark 4|unilib:stone_basalt_dark|||||||||SHELF|LOWLAND||HOT|HUMID
+gaia_hot_humid_highland|Hot humid highland biome|||unilib:dirt_ordinary_with_turf_hot_humid_highland 1|unilib:dirt_ordinary 3|unilib:stone_basalt_dark|||||||||HIGHLAND|SHELF||HOT|HUMID
+gaia_hot_humid_mountain|Hot humid mountain biome|||unilib:stone_basalt_dark 10|unilib:stone_sandstone_brown 20|unilib:stone_brownstone_dark|||||||||MOUNTAIN|HIGHLAND||HOT|HUMID
+gaia_hot_humid_strato|Hot humid stratospheric biome|||unilib:stone_basalt_dark 15|unilib:stone_sandstone_brown 25|unilib:stone_brownstone_dark|||||||||STRATO|MOUNTAIN||HOT|HUMID
+
+# =================================================================================================
+# Hot semihumid biomes
+# =================================================================================================
+
+gaia_hot_semihumid_ocean|Hot semi-humid ocean biome|||unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary 6|unilib:stone_gneiss_brown|||||||||BEACH_MIN|OCEAN||HOT|SEMIHUMID
+gaia_hot_semihumid_beach|Hot semi-humid beach biome|||unilib:sand_volcanic_dust 2|unilib:sand_volcanic_ash 4|unilib:stone_gneiss_brown|||||||||BEACH_MAX|BEACH_MIN||HOT|SEMIHUMID
+gaia_hot_semihumid_coastal|Hot semi-humid coastal biome|||unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal 1|unilib:dirt_silt_fine 6|unilib:stone_gneiss_brown|||||||||COASTAL|BEACH_MAX||HOT|SEMIHUMID
+gaia_hot_semihumid_lowland|Hot semi-humid lowland biome|||unilib:dirt_dark_with_turf_hot_semihumid_lowland 1|unilib:dirt_dark 5|unilib:stone_gneiss_brown|||||||||LOWLAND|COASTAL||HOT|SEMIHUMID
+gaia_hot_semihumid_shelf|Hot semi-humid shelf biome|||unilib:dirt_ordinary_with_turf_hot_semihumid_shelf 1|unilib:dirt_ordinary 4|unilib:stone_gneiss_brown|||||||||SHELF|LOWLAND||HOT|SEMIHUMID
+gaia_hot_semihumid_highland|Hot semi-humid highland biome|||unilib:dirt_coarse_with_turf_hot_semihumid_highland 1|unilib:dirt_coarse 3|unilib:stone_gneiss_brown|||||||||HIGHLAND|SHELF||HOT|SEMIHUMID
+gaia_hot_semihumid_mountain|Hot semi-humid mountain biome|||unilib:stone_gneiss_brown 10|unilib:stone_quartzite_brown 20|unilib:stone_diorite_dark|||||||||MOUNTAIN|HIGHLAND||HOT|SEMIHUMID
+gaia_hot_semihumid_strato|Hot semi-humid stratospheric biome|||unilib:stone_gneiss_brown 15|unilib:stone_quartzite_brown 25|unilib:stone_diorite_dark|||||||||STRATO|MOUNTAIN||HOT|SEMIHUMID
+
+# =================================================================================================
+# Hot temperate biomes
+# =================================================================================================
+
+gaia_hot_temperate_ocean|Hot temperate ocean biome|||unilib:sand_ordinary 4|unilib:sand_white 6|unilib:stone_sandstone_white|||||||||BEACH_MIN|OCEAN||HOT|TEMPERATE
+gaia_hot_temperate_beach|Hot temperate beach biome|||unilib:sand_pink 2|unilib:sand_white 4|unilib:stone_sandstone_white|||||||||BEACH_MAX|BEACH_MIN||HOT|TEMPERATE
+gaia_hot_temperate_coastal|Hot temperate coastal biome|||unilib:dirt_dark_with_turf_hot_temperate_coastal 1|unilib:dirt_dark 6|unilib:stone_sandstone_white|||||||||COASTAL|BEACH_MAX||HOT|TEMPERATE
+gaia_hot_temperate_lowland|Hot temperate lowland biome|||unilib:dirt_ordinary_with_turf_hot_temperate_lowland 1|unilib:dirt_ordinary 5|unilib:stone_sandstone_white|||||||||LOWLAND|COASTAL||HOT|TEMPERATE
+gaia_hot_temperate_shelf|Hot temperate shelf biome|||unilib:dirt_coarse_with_turf_hot_temperate_shelf 1|unilib:dirt_coarse 4|unilib:stone_sandstone_white|||||||||SHELF|LOWLAND||HOT|TEMPERATE
+gaia_hot_temperate_highland|Hot temperate highland biome|||unilib:clay_red_with_turf_hot_temperate_highland 1|unilib:clay_red 3|unilib:stone_sandstone_white|||||||||HIGHLAND|SHELF||HOT|TEMPERATE
+gaia_hot_temperate_mountain|Hot temperate mountain biome|||unilib:stone_sandstone_white 10|unilib:stone_granite_white 20|unilib:stone_schist_grey|||||||||MOUNTAIN|HIGHLAND||HOT|TEMPERATE
+gaia_hot_temperate_strato|Hot tempera testratospheric biome|||unilib:stone_sandstone_white 15|unilib:stone_granite_white 25|unilib:stone_schist_grey|||||||||STRATO|MOUNTAIN||HOT|TEMPERATE
+
+# =================================================================================================
+# Hot semiarid biomes
+# =================================================================================================
+
+gaia_hot_semiarid_ocean|Hot semi-arid ocean biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_granite_pink|||||||||BEACH_MIN|OCEAN||HOT|SEMIARID
+gaia_hot_semiarid_beach|Hot semi-arid beach biome|||unilib:sand_ordinary 2|unilib:dirt_clayey 4|unilib:stone_granite_pink|||||||||BEACH_MAX|BEACH_MIN||HOT|SEMIARID
+gaia_hot_semiarid_coastal|Hot semi-arid coastal biome|||unilib:dirt_ordinary_with_turf_hot_semiarid_coastal 1|unilib:dirt_ordinary 6|unilib:stone_granite_pink|||||||||COASTAL|BEACH_MAX||HOT|SEMIARID
+gaia_hot_semiarid_lowland|Hot semi-arid lowland biome|||unilib:dirt_coarse_with_turf_hot_semiarid_lowland 1|unilib:dirt_coarse 5|unilib:stone_granite_pink|||||||||LOWLAND|COASTAL||HOT|SEMIARID
+gaia_hot_semiarid_shelf|Hot semi-arid shelf biome|||unilib:clay_red_with_turf_hot_semiarid_shelf 1|unilib:clay_red 4|unilib:stone_granite_pink|||||||||SHELF|LOWLAND||HOT|SEMIARID
+gaia_hot_semiarid_highland|Hot semi-arid highland biome|||unilib:dirt_clayey_with_turf_hot_semiarid_highland 1|unilib:dirt_clayey 3|unilib:stone_granite_pink|||||||||HIGHLAND|SHELF||HOT|SEMIARID
+gaia_hot_semiarid_mountain|Hot semi-arid mountain biome|||unilib:stone_granite_pink 10|unilib:stone_limestone_red 20|unilib:stone_gabbro_red|||||||||MOUNTAIN|HIGHLAND||HOT|SEMIARID
+gaia_hot_semiarid_strato|Hot semi-arid stratospheric biome|||unilib:stone_granite_pink 15|unilib:stone_limestone_red 25|unilib:stone_gabbro_red|||||||||STRATO|MOUNTAIN||HOT|SEMIARID
+
+# =================================================================================================
+# Hot arid biomes
+# =================================================================================================
+
+# N.B. The "ore_gaia_hot_arid" package replaces matrix nodes with clay strata
+gaia_hot_arid_ocean|Hot arid ocean biome|||unilib:sand_ordinary 2|unilib:clay_red 4|unilib:stone_desert|||||||||BEACH_MIN|OCEAN||HOT|ARID
+gaia_hot_arid_beach|Hot arid beach biome|||unilib:gravel_sandstone_desert 1|unilib:clay_red 4|unilib:stone_desert|||||||||BEACH_MAX|BEACH_MIN||HOT|ARID
+gaia_hot_arid_coastal|Hot arid coastal biome|||unilib:sand_barren 1|unilib:sand_barren 1|unilib:stone_desert|||unilib:sand_ordinary||||||COASTAL|BEACH_MAX||HOT|ARID
+gaia_hot_arid_lowland|Hot arid lowland biome|||||unilib:misc_matrix_gaia_hot|||unilib:sand_ordinary||||||LOWLAND|COASTAL||HOT|ARID
+gaia_hot_arid_shelf|Hot arid shelf biome|||||unilib:misc_matrix_gaia_hot|||unilib:sand_ordinary||||||SHELF|LOWLAND||HOT|ARID
+gaia_hot_arid_highland|Hot arid highland biome|||||unilib:misc_matrix_gaia_hot|||unilib:sand_ordinary||||||HIGHLAND|SHELF||HOT|ARID
+gaia_hot_arid_mountain|Hot arid mountain biome|||||unilib:stone_sandstone_barren|||||||||MOUNTAIN|HIGHLAND||HOT|ARID
+gaia_hot_arid_strato|Hot arid stratospheric biome|||||unilib:stone_sandstone_barren|||||||||STRATO|MOUNTAIN||HOT|ARID
+
+# =================================================================================================
+# Warm humid biomes
+# =================================================================================================
+
+gaia_warm_humid_ocean|Warm humid ocean biome|||unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary 6|unilib:stone_brownstone_dark|||||||||BEACH_MIN|OCEAN||WARM|HUMID
+gaia_warm_humid_beach|Warm humid beach biome|||unilib:sand_silica 2|unilib:sand_volcanic_dust 4|unilib:stone_brownstone_dark|||||||||BEACH_MAX|BEACH_MIN||WARM|HUMID
+gaia_warm_humid_coastal|Warm humid coastal biome|||unilib:dirt_silt_coarse_with_turf_warm_humid_coastal 1|unilib:dirt_silt_coarse 6|unilib:stone_brownstone_dark|||||||||COASTAL|BEACH_MAX||WARM|HUMID
+gaia_warm_humid_lowland|Warm humid lowland biome|||unilib:dirt_silt_fine_with_turf_warm_humid_lowland 1|unilib:dirt_silt_fine 5|unilib:stone_brownstone_dark|||||||||LOWLAND|COASTAL||WARM|HUMID
+gaia_warm_humid_shelf|Warm humid shelf biome|||unilib:dirt_dark_with_turf_warm_humid_shelf 1|unilib:dirt_dark 4|unilib:stone_brownstone_dark|||||||||SHELF|LOWLAND||WARM|HUMID
+gaia_warm_humid_highland|Warm humid highland biome|||unilib:dirt_dark_with_turf_warm_humid_highland 1|unilib:dirt_ordinary 3|unilib:stone_brownstone_dark|||||||||HIGHLAND|SHELF||WARM|HUMID
+gaia_warm_humid_mountain|Warm humid mountain biome|||unilib:stone_brownstone_dark 10|unilib:stone_sandstone_brown 20|unilib:stone_basalt_dark|||||||||MOUNTAIN|HIGHLAND||WARM|HUMID
+gaia_warm_humid_strato|Warm humid stratospheric biome|||unilib:stone_brownstone_dark 15|unilib:stone_sandstone_brown 25|unilib:stone_basalt_dark|||||||||STRATO|MOUNTAIN||WARM|HUMID
+
+# =================================================================================================
+# Warm semihumid biomes
+# =================================================================================================
+
+gaia_warm_semihumid_ocean|Warm semi-humid ocean biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_quartzite_brown|||||||||BEACH_MIN|OCEAN||WARM|SEMIHUMID
+gaia_warm_semihumid_beach|Warm semi-humid beach biome|||unilib:sand_silica 2|unilib:sand_silica 4|unilib:stone_quartzite_brown|||||||||BEACH_MAX|BEACH_MIN||WARM|SEMIHUMID
+gaia_warm_semihumid_coastal|Warm semi-humid coastal biome|||unilib:dirt_silt_fine_with_turf_warm_semihumid_coastal 1|unilib:dirt_silt_fine 6|unilib:stone_quartzite_brown|||||||||COASTAL|BEACH_MAX||WARM|SEMIHUMID
+gaia_warm_semihumid_lowland|Warm semi-humid lowland biome|||unilib:dirt_dark_with_turf_warm_semihumid_lowland 1|unilib:dirt_dark 5|unilib:stone_quartzite_brown|||||||||LOWLAND|COASTAL||WARM|SEMIHUMID
+gaia_warm_semihumid_shelf|Warm semi-humid shelf biome|||unilib:dirt_coarse_with_turf_warm_semihumid_shelf 1|unilib:dirt_coarse 4|unilib:stone_quartzite_brown|||||||||SHELF|LOWLAND||WARM|SEMIHUMID
+gaia_warm_semihumid_highland|Warm semi-humid highland biome|||unilib:dirt_parched_with_turf_warm_semihumid_highland 1|unilib:dirt_parched 3|unilib:stone_quartzite_brown|||||||||HIGHLAND|SHELF||WARM|SEMIHUMID
+gaia_warm_semihumid_mountain|Warm semi-humid mountain biome|||unilib:stone_quartzite_brown 10|unilib:stone_sandstone_beige 20|unilib:stone_gneiss_brown|||||||||MOUNTAIN|HIGHLAND||WARM|SEMIHUMID
+gaia_warm_semihumid_strato|Warm semi-humid stratospheric biome|||unilib:stone_quartzite_brown 15|unilib:stone_sandstone_beige 25|unilib:stone_gneiss_brown|||||||||STRATO|MOUNTAIN||WARM|SEMIHUMID
+
+# =================================================================================================
+# Warm temperate biomes
+# =================================================================================================
+
+gaia_warm_temperate_ocean|Warm temperate ocean biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_white|||||||||BEACH_MIN|OCEAN||WARM|TEMPERATE
+gaia_warm_temperate_beach|Warm temperate beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_white|||||||||BEACH_MAX|BEACH_MIN||WARM|TEMPERATE
+gaia_warm_temperate_coastal|Warm temperate coastal biome|||unilib:dirt_dark_with_turf_warm_temperate_coastal 1|unilib:dirt_dark 6|unilib:stone_limestone_white|||||||||COASTAL|BEACH_MAX||WARM|TEMPERATE
+gaia_warm_temperate_lowland|Warm temperate lowland biome|||unilib:dirt_ordinary_with_turf_warm_temperate_lowland 1|unilib:dirt_ordinary 5|unilib:stone_limestone_white|||||||||LOWLAND|COASTAL||WARM|TEMPERATE
+gaia_warm_temperate_shelf|Warm temperate shelf biome|||unilib:dirt_coarse_with_turf_warm_temperate_shelf 1|unilib:dirt_coarse 4|unilib:stone_limestone_white|||||||||SHELF|LOWLAND||WARM|TEMPERATE
+gaia_warm_temperate_highland|Warm temperate highland biome|||unilib:clay_red_with_turf_warm_temperate_highland 1|unilib:clay_red 3|unilib:stone_limestone_white|||||||||HIGHLAND|SHELF||WARM|TEMPERATE
+gaia_warm_temperate_mountain|Warm temperate mountain biome|||unilib:stone_limestone_white 10|unilib:stone_granite_white 20|unilib:stone_schist_grey|||||||||MOUNTAIN|HIGHLAND||WARM|TEMPERATE
+gaia_warm_temperate_strato|Warm temperate stratospheric biome|||unilib:stone_limestone_white 15|unilib:stone_granite_white 25|unilib:stone_schist_grey|||||||||STRATO|MOUNTAIN||WARM|TEMPERATE
+
+# =================================================================================================
+# Warm semiarid biomes
+# =================================================================================================
+
+gaia_warm_semiarid_ocean|Warm semi-arid ocean biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_gabbro_red|||||||||BEACH_MIN|OCEAN||WARM|SEMIARID
+gaia_warm_semiarid_beach|Warm semi-arid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_gabbro_red|||||||||BEACH_MAX|BEACH_MIN||WARM|SEMIARID
+gaia_warm_semiarid_coastal|Warm semi-arid coastal biome|||unilib:stone_sandstone_white 1|unilib:dirt_ordinary 4|unilib:stone_gabbro_red|||||||||COASTAL|BEACH_MAX||WARM|SEMIARID
+gaia_warm_semiarid_lowland|Warm semi-arid lowland biome|||unilib:dirt_coarse_with_turf_warm_semiarid_lowland 1|unilib:dirt_coarse 4|unilib:stone_gabbro_red|||||||||LOWLAND|COASTAL||WARM|SEMIARID
+gaia_warm_semiarid_shelf|Warm semi-arid shelf biome|||unilib:clay_red_with_turf_warm_semiarid_shelf 1|unilib:clay_red 4|unilib:stone_gabbro_red|||||||||SHELF|LOWLAND||WARM|SEMIARID
+gaia_warm_semiarid_highland|Warm semi-arid highland biome|||unilib:dirt_clayey_with_turf_warm_semiarid_highland 1|unilib:dirt_clayey 4|unilib:stone_gabbro_red|||||||||HIGHLAND|SHELF||WARM|SEMIARID
+gaia_warm_semiarid_mountain|Warm semi-arid mountain biome|||unilib:stone_gabbro_red 10|unilib:stone_granite_pink 20|unilib:stone_limestone_red|||||||||MOUNTAIN|HIGHLAND||WARM|SEMIARID
+gaia_warm_semiarid_strato|Warm semi-arid stratospheric biome|||unilib:stone_gabbro_red 15|unilib:stone_granite_pink 25|unilib:stone_limestone_red|||||||||STRATO|MOUNTAIN||WARM|SEMIARID
+
+# =================================================================================================
+# Warm arid biomes
+# =================================================================================================
+
+gaia_warm_arid_ocean|Warm arid ocean biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary|||||||||BEACH_MIN|OCEAN||WARM|ARID
+gaia_warm_arid_beach|Warm arid beach biome|||unilib:gravel_sandstone_desert 1|unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary|||||||||BEACH_MAX|BEACH_MIN||WARM|ARID
+gaia_warm_arid_coastal|Warm arid coastal biome|||unilib:sand_desert 4|unilib:stone_sandstone_desert 10|unilib:stone_sandstone_brown|||unilib:stone_sandstone_white||||||COASTAL|BEACH_MAX||WARM|ARID
+gaia_warm_arid_lowland|Warm arid lowland biome|||unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary 10|unilib:stone_sandstone_desert|||unilib:stone_sandstone_white||||||LOWLAND|COASTAL||WARM|ARID
+gaia_warm_arid_shelf|Warm arid shelf biome|||unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary 10|unilib:stone_sandstone_desert|||unilib:stone_sandstone_white||||||SHELF|LOWLAND||WARM|ARID
+gaia_warm_arid_highland|Warm arid highland biome|||unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary 15|unilib:stone_sandstone_desert|||unilib:stone_sandstone_white||||||HIGHLAND|SHELF||WARM|ARID
+gaia_warm_arid_mountain|Warm arid mountain biome|||unilib:stone_sandstone_desert 10|unilib:stone_sandstone_pink 20|unilib:stone_desert|||unilib:stone_sandstone_white||||||MOUNTAIN|HIGHLAND||WARM|ARID
+gaia_warm_arid_strato|Warm arid stratospheric biome|||unilib:stone_sandstone_desert 15|unilib:stone_sandstone_pink 25|unilib:stone_desert|||unilib:stone_sandstone_white||||||STRATO|MOUNTAIN||WARM|ARID
+
+# =================================================================================================
+# Mild humid biomes
+# =================================================================================================
+
+gaia_mild_humid_ocean|Mild humid ocean biome|||unilib:sand_silt 4|unilib:sand_ordinary 6|unilib:stone_brownstone_pale|||||||||BEACH_MIN|OCEAN||MILD|HUMID
+gaia_mild_humid_beach|Mild humid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_brownstone_pale|||||||||BEACH_MAX|BEACH_MIN||MILD|HUMID
+gaia_mild_humid_coastal|Mild humid coastal biome|||unilib:dirt_silt_coarse_with_turf_mild_humid_coastal 1|unilib:dirt_silt_coarse 6|unilib:stone_brownstone_pale|||||||||COASTAL|BEACH_MAX||MILD|HUMID
+gaia_mild_humid_lowland|Mild humid lowland biome|||unilib:dirt_silt_fine_with_turf_mild_humid_lowland 1|unilib:dirt_silt_fine 5|unilib:stone_brownstone_pale|||||||||LOWLAND|COASTAL||MILD|HUMID
+gaia_mild_humid_shelf|Mild humid shelf biome|||unilib:dirt_dark_with_turf_mild_humid_shelf 1|unilib:dirt_dark 4|unilib:stone_brownstone_pale|||||||||SHELF|LOWLAND||MILD|HUMID
+gaia_mild_humid_highland|Mild humid highland biome|||unilib:dirt_dark_with_turf_mild_humid_highland 1|unilib:dirt_ordinary 3|unilib:stone_brownstone_pale|||||||||HIGHLAND|SHELF||MILD|HUMID
+gaia_mild_humid_mountain|Mild humid mountain biome||unilib:snow_ordinary|unilib:stone_brownstone_pale 10|unilib:stone_sandstone_brown 20|unilib:stone_brownstone_dark|||||||||MOUNTAIN|HIGHLAND||MILD|HUMID
+gaia_mild_humid_strato|Mild humid stratospheric biome||unilib:snow_ordinary|unilib:stone_brownstone_pale 15|unilib:stone_sandstone_brown 25|unilib:stone_brownstone_dark|||||||||STRATO|MOUNTAIN||MILD|HUMID
+
+# =================================================================================================
+# Mild semihumid biomes
+# =================================================================================================
+
+gaia_mild_semihumid_ocean|Mild semi-humid ocean biome|||unilib:sand_ordinary 2|unilib:sand_beige 4|unilib:stone_sandstone_beige|||||||||BEACH_MIN|OCEAN||MILD|SEMIHUMID
+gaia_mild_semihumid_beach|Mild semi-humid beach biome|||unilib:sand_ordinary 2|unilib:sand_beige 4|unilib:stone_sandstone_beige|||||||||BEACH_MAX|BEACH_MIN||MILD|SEMIHUMID
+gaia_mild_semihumid_coastal|Mild semi-humid coastal biome|||unilib:dirt_silt_fine_with_turf_mild_semihumid_coastal 1|unilib:dirt_silt_fine 4|unilib:stone_sandstone_beige|||||||||COASTAL|BEACH_MAX||MILD|SEMIHUMID
+gaia_mild_semihumid_lowland|Mild semi-humid lowland biome|||unilib:dirt_dark_with_turf_mild_semihumid_lowland 1|unilib:dirt_dark 4|unilib:stone_sandstone_beige|||||||||LOWLAND|COASTAL||MILD|SEMIHUMID
+gaia_mild_semihumid_shelf|Mild semi-humid shelf biome|||unilib:dirt_ordinary_with_turf_mild_semihumid_shelf 1|unilib:dirt_ordinary 4|unilib:stone_sandstone_beige|||||||||SHELF|LOWLAND||MILD|SEMIHUMID
+gaia_mild_semihumid_highland|Mild semi-humid highland biome|||unilib:clay_red_with_turf_mild_semihumid_highland 1|unilib:clay_red 4|unilib:stone_sandstone_beige|||||||||HIGHLAND|SHELF||MILD|SEMIHUMID
+gaia_mild_semihumid_mountain|Mild semi-humid mountain biome||unilib:snow_ordinary|unilib:stone_sandstone_beige 10|unilib:stone_quartzite_brown 20|unilib:stone_gneiss_brown|||||||||MOUNTAIN|HIGHLAND||MILD|SEMIHUMID
+gaia_mild_semihumid_strato|Mild semi-humid stratospheric biome||unilib:snow_ordinary|unilib:stone_sandstone_beige 15|unilib:stone_quartzite_brown 25|unilib:stone_gneiss_brown|||||||||STRATO|MOUNTAIN||MILD|SEMIHUMID
+
+# =================================================================================================
+# Mild temperate biomes
+# =================================================================================================
+
+gaia_mild_temperate_ocean|Mild ocean biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_schist_grey|||||||||BEACH_MIN|OCEAN||MILD|TEMPERATE
+gaia_mild_temperate_beach|Mild beach biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_schist_grey|||||||||BEACH_MAX|BEACH_MIN||MILD|TEMPERATE
+gaia_mild_temperate_coastal|Mild coastal biome|||unilib:dirt_dark_with_turf_mild_temperate_coastal 1|unilib:dirt_dark 4|unilib:stone_schist_grey|||||||||COASTAL|BEACH_MAX||MILD|TEMPERATE
+gaia_mild_temperate_lowland|Mild lowland biome|||unilib:dirt_ordinary_with_turf_mild_temperate_lowland 1|unilib:dirt_ordinary 4|unilib:stone_schist_grey|||||||||LOWLAND|COASTAL||MILD|TEMPERATE
+gaia_mild_temperate_shelf|Mild shelf biome|||unilib:dirt_coarse_with_turf_mild_temperate_shelf 1|unilib:dirt_coarse 4|unilib:stone_schist_grey|||||||||SHELF|LOWLAND||MILD|TEMPERATE
+gaia_mild_temperate_highland|Mild highland biome|||unilib:clay_red_with_turf_mild_temperate_highland 1|unilib:clay_red 4|unilib:stone_schist_grey|||||||||HIGHLAND|SHELF||MILD|TEMPERATE
+gaia_mild_temperate_mountain|Mild mountain biome||unilib:snow_ordinary|unilib:stone_schist_grey 10|unilib:stone_granite_white 20|unilib:stone_limestone_white|||||||||MOUNTAIN|HIGHLAND||MILD|TEMPERATE
+gaia_mild_temperate_strato|Mild stratospheric biome||unilib:snow_ordinary|unilib:stone_schist_grey 15|unilib:stone_granite_white 25|unilib:stone_limestone_white|||||||||STRATO|MOUNTAIN||MILD|TEMPERATE
+
+# =================================================================================================
+# Mild semiarid biomes
+# =================================================================================================
+
+gaia_mild_semiarid_ocean|Mild semi-arid ocean biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_red|||||||||BEACH_MIN|OCEAN||MILD|SEMIARID
+gaia_mild_semiarid_beach|Mild semi-arid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_red|||||||||BEACH_MAX|BEACH_MIN||MILD|SEMIARID
+gaia_mild_semiarid_coastal|Mild semi-arid coastal biome|||unilib:dirt_ordinary_with_turf_mild_semiarid_coastal 1|unilib:dirt_ordinary 4|unilib:stone_limestone_red|||||||||COASTAL|BEACH_MAX||MILD|SEMIARID
+gaia_mild_semiarid_lowland|Mild semi-arid lowland biome|||unilib:dirt_coarse_with_turf_mild_semiarid_lowland 1|unilib:dirt_coarse 4|unilib:stone_limestone_red|||||||||LOWLAND|COASTAL||MILD|SEMIARID
+gaia_mild_semiarid_shelf|Mild semi-arid shelf biome|||unilib:clay_red_with_turf_mild_semiarid_shelf 1|unilib:clay_red 4|unilib:stone_limestone_red|||||||||SHELF|LOWLAND||MILD|SEMIARID
+gaia_mild_semiarid_highland|Mild semi-arid highland biome|||unilib:dirt_clayey_with_turf_mild_semiarid_highland 1|unilib:dirt_clayey 4|unilib:stone_limestone_red|||||||||HIGHLAND|SHELF||MILD|SEMIARID
+gaia_mild_semiarid_mountain|Mild semi-arid mountain biome|||unilib:stone_limestone_red 10|unilib:stone_granite_pink 20|unilib:stone_gabbro_red|||||||||MOUNTAIN|HIGHLAND||MILD|SEMIARID
+gaia_mild_semiarid_strato|Mild semi-arid stratospheric biome|||unilib:stone_limestone_red 15|unilib:stone_granite_pink 25|unilib:stone_gabbro_red|||||||||STRATO|MOUNTAIN||MILD|SEMIARID
+
+# =================================================================================================
+# Mild arid biomes
+# =================================================================================================
+
+# N.B. The "ore_gaia_mild_arid" package replaces matrix nodes with non-clay strata
+gaia_mild_arid_ocean|Mild arid ocean biome|||unilib:sand_golden 2|unilib:sand_golden 4|unilib:stone_sandstone_ordinary|||||||||BEACH_MIN|OCEAN||MILD|ARID
+gaia_mild_arid_beach|Mild arid beach biome|||unilib:gravel_sandstone_golden 1|unilib:sand_golden 4|unilib:stone_sandstone_ordinary|||||||||BEACH_MAX|BEACH_MIN||MILD|ARID
+gaia_mild_arid_coastal|Mild arid coastal biome|||unilib:dirt_brown_with_turf_mild_arid_coastal 5|unilib:gravel_sandstone_golden 4|unilib:stone_sandstone_ordinary|||||||||COASTAL|BEACH_MAX||MILD|ARID
+gaia_mild_arid_lowland|Mild arid lowland biome|||||unilib:misc_matrix_gaia_mild|||unilib:sand_ordinary||||||LOWLAND|COASTAL||MILD|ARID
+gaia_mild_arid_shelf|Mild arid shelf biome|||||unilib:misc_matrix_gaia_mild|||unilib:sand_ordinary||||||SHELF|LOWLAND||MILD|ARID
+gaia_mild_arid_highland|Mild arid highland biome|||||unilib:misc_matrix_gaia_mild|||unilib:sand_ordinary||||||HIGHLAND|SHELF||MILD|ARID
+gaia_mild_arid_mountain|Mild arid mountain biome|||unilib:stone_sandstone_ordinary 15|unilib:stone_sandstone_desert 25|unilib:stone_desert|||||||||MOUNTAIN|HIGHLAND||MILD|ARID
+gaia_mild_arid_strato|Mild arid stratospheric biome|||unilib:stone_sandstone_ordinary 15|unilib:stone_sandstone_desert 25|unilib:stone_desert|||||||||STRATO|MOUNTAIN||MILD|ARID
+
+# =================================================================================================
+# Cool humid biomes
+# =================================================================================================
+
+gaia_cool_humid_ocean|Cool humid ocean biome|||unilib:sand_silt 2|unilib:sand_ordinary 4|unilib:stone_basalt_brown|||||||||BEACH_MIN|OCEAN||COOL|HUMID
+gaia_cool_humid_beach|Cool humid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_basalt_brown|||||||||BEACH_MAX|BEACH_MIN||COOL|HUMID
+gaia_cool_humid_coastal|Cool humid coastal biome|||unilib:dirt_silt_coarse_with_litter_coniferous 1|unilib:dirt_silt_coarse 4|unilib:stone_basalt_brown|||||||||COASTAL|BEACH_MAX||COOL|HUMID
+gaia_cool_humid_lowland|Cool humid lowland biome|||unilib:dirt_silt_fine_with_litter_coniferous 1|unilib:dirt_silt_fine 4|unilib:stone_basalt_brown|||||||||LOWLAND|COASTAL||COOL|HUMID
+gaia_cool_humid_shelf|Cool humid shelf biome|||unilib:dirt_dark_with_litter_coniferous 1|unilib:dirt_dark 4|unilib:stone_basalt_brown|||||||||SHELF|LOWLAND||COOL|HUMID
+gaia_cool_humid_highland|Cool humid highland biome|||unilib:dirt_ordinary_with_litter_coniferous 1|unilib:dirt_ordinary 4|unilib:stone_basalt_brown|||||||||HIGHLAND|SHELF||COOL|HUMID
+gaia_cool_humid_mountain|Cool humid mountain biome||unilib:snow_ordinary|unilib:stone_basalt_brown 10|unilib:stone_sandstone_brown 20|unilib:stone_brownstone_dark|||||||||MOUNTAIN|HIGHLAND||COOL|HUMID
+gaia_cool_humid_strato|Cool humid stratospheric biome||unilib:ice_ordinary|unilib:stone_basalt_brown 15|unilib:stone_sandstone_brown 25|unilib:stone_brownstone_dark|||||||||STRATO|MOUNTAIN||COOL|HUMID
+
+# =================================================================================================
+# Cool semihumid biomes
+# =================================================================================================
+
+gaia_cool_semihumid_ocean|Cool semi-humid ocean biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_diorite_dark|||||||||BEACH_MIN|OCEAN||COOL|SEMIHUMID
+gaia_cool_semihumid_beach|Cool semi-humid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_diorite_dark|||||||||BEACH_MAX|BEACH_MIN||COOL|SEMIHUMID
+gaia_cool_semihumid_coastal|Cool semi-humid coastal biome|||unilib:dirt_silt_fine_with_turf_cool_semihumid_coastal 1|unilib:dirt_silt_fine 4|unilib:stone_diorite_dark|||||||||COASTAL|BEACH_MAX||COOL|SEMIHUMID
+gaia_cool_semihumid_lowland|Cool semi-humid lowland biome|||unilib:dirt_dark_with_turf_cool_semihumid_lowland 1|unilib:dirt_dark 4|unilib:stone_diorite_dark|||||||||LOWLAND|COASTAL||COOL|SEMIHUMID
+gaia_cool_semihumid_shelf|Cool semi-humid shelf biome|||unilib:dirt_ordinary_with_turf_cool_semihumid_shelf 1|unilib:dirt_ordinary 4|unilib:stone_diorite_dark|||||||||SHELF|LOWLAND||COOL|SEMIHUMID
+gaia_cool_semihumid_highland|Cool semi-humid highland biome|||unilib:clay_red_with_turf_cool_semihumid_highland 1|unilib:clay_red 4|unilib:stone_diorite_dark|||||||||HIGHLAND|SHELF||COOL|SEMIHUMID
+gaia_cool_semihumid_mountain|Cool semi-humid mountain biome||unilib:snow_ordinary|unilib:stone_diorite_dark 10|unilib:stone_quartzite_brown 20|unilib:stone_gneiss_brown|||||||||MOUNTAIN|HIGHLAND||COOL|SEMIHUMID
+gaia_cool_semihumid_strato|Cool semi-humid stratospheric biome||unilib:ice_ordinary|unilib:stone_diorite_dark 15|unilib:stone_quartzite_brown 25|unilib:stone_gneiss_brown|||||||||STRATO|MOUNTAIN||COOL|SEMIHUMID
+
+# =================================================================================================
+# Cool temperate biomes
+# =================================================================================================
+
+gaia_cool_temperate_ocean|Cool temperate ocean biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_granite_white|||||||||BEACH_MIN|OCEAN||COOL|TEMPERATE
+gaia_cool_temperate_beach|Cool temperate beach biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_granite_white|||||||||BEACH_MAX|BEACH_MIN||COOL|TEMPERATE
+gaia_cool_temperate_coastal|Cool temperate coastal biome|||unilib:dirt_dark_with_turf_cool_temperate_coastal 1|unilib:dirt_dark 4|unilib:stone_granite_white|||||||||COASTAL|BEACH_MAX||COOL|TEMPERATE
+gaia_cool_temperate_lowland|Cool temperate lowland biome|||unilib:dirt_ordinary_with_turf_cool_temperate_lowland 1|unilib:dirt_ordinary 4|unilib:stone_granite_white|||||||||LOWLAND|COASTAL||COOL|TEMPERATE
+gaia_cool_temperate_shelf|Cool temperate shelf biome|||unilib:dirt_coarse_with_turf_cool_temperate_shelf 1|unilib:dirt_coarse 4|unilib:stone_granite_white|||||||||SHELF|LOWLAND||COOL|TEMPERATE
+gaia_cool_temperate_highland|Cool temperate highland biome|||unilib:clay_red_with_turf_cool_temperate_highland 1|unilib:clay_red 4|unilib:stone_granite_white|||||||||HIGHLAND|SHELF||COOL|TEMPERATE
+gaia_cool_temperate_mountain|Cool temperate mountain biome||unilib:snow_ordinary|unilib:stone_granite_white 10|unilib:stone_granite_orange 20|unilib:stone_schist_grey|||||||||MOUNTAIN|HIGHLAND||COOL|TEMPERATE
+gaia_cool_temperate_strato|Cool temperate stratospheric biome||unilib:ice_ordinary|unilib:stone_granite_white 15|unilib:stone_granite_orange 25|unilib:stone_schist_grey|||||||||STRATO|MOUNTAIN||COOL|TEMPERATE
+
+# =================================================================================================
+# Cool semiarid biomes
+# =================================================================================================
+
+gaia_cool_semiarid_ocean|Cool semi-arid ocean biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_beige|||||||||BEACH_MIN|OCEAN||COOL|SEMIARID
+gaia_cool_semiarid_beach|Cool semi-arid beach biome|||unilib:sand_ordinary 2|unilib:stone_sandstone_ordinary 4|unilib:stone_limestone_beige|||||||||BEACH_MAX|BEACH_MIN||COOL|SEMIARID
+gaia_cool_semiarid_coastal|Cool semi-arid coastal biome|||unilib:dirt_sandy_with_turf_cool_semiarid_coastal 1|unilib:dirt_sandy 4|unilib:stone_limestone_beige|||||||||COASTAL|BEACH_MAX||COOL|SEMIARID
+gaia_cool_semiarid_lowland|Cool semi-arid lowland biome|||unilib:dirt_coarse_with_turf_cool_semiarid_lowland 1|unilib:dirt_coarse 4|unilib:stone_limestone_beige|||||||||LOWLAND|COASTAL||COOL|SEMIARID
+gaia_cool_semiarid_shelf|Cool semi-arid shelf biome|||unilib:clay_red_with_turf_cool_semiarid_shelf 1|unilib:clay_red 4|unilib:stone_limestone_beige|||||||||SHELF|LOWLAND||COOL|SEMIARID
+gaia_cool_semiarid_highland|Cool semi-arid highland biome|||unilib:dirt_clayey_with_turf_cool_semiarid_highland 1|unilib:dirt_clayey 4|unilib:stone_limestone_beige|||||||||HIGHLAND|SHELF||COOL|SEMIARID
+gaia_cool_semiarid_mountain|Cool semi-arid mountain biome|||unilib:stone_limestone_beige 10|unilib:stone_granite_pink 20|unilib:stone_gabbro_red|||||||||MOUNTAIN|HIGHLAND||COOL|SEMIARID
+gaia_cool_semiarid_strato|Cool semi-arid stratospheric biome|||unilib:stone_limestone_beige 15|unilib:stone_granite_pink 25|unilib:stone_gabbro_red|||||||||STRATO|MOUNTAIN||COOL|SEMIARID
+
+# =================================================================================================
+# Cool arid biomes
+# =================================================================================================
+
+gaia_cool_arid_ocean|Cool arid ocean biome|||unilib:sand_silver 2|unilib:sand_silver 4|unilib:stone_sandstone_pink|||||||||BEACH_MIN|OCEAN||COOL|ARID
+gaia_cool_arid_beach|Cool arid beach biome|||unilib:gravel_sandstone_silver 1|unilib:sand_silver 4|unilib:stone_sandstone_pink|||||||||BEACH_MAX|BEACH_MIN||COOL|ARID
+gaia_cool_arid_coastal|Cool arid coastal biome|||unilib:dirt_mud_dry 5|unilib:stone_andesite_grey 4|unilib:stone_sandstone_pink|||||||||COASTAL|BEACH_MAX||COOL|ARID
+gaia_cool_arid_lowland|Cool arid lowland biome|||unilib:dirt_silt_coarse_with_turf_cool_arid_lowland 4|unilib:stone_andesite_grey 6|unilib:stone_sandstone_pink|||||||||LOWLAND|COASTAL||COOL|ARID
+gaia_cool_arid_shelf|Cool arid shelf biome|||unilib:dirt_silt_fine_with_turf_cool_arid_shelf 3|unilib:stone_andesite_grey 8|unilib:stone_sandstone_pink|||||||||SHELF|LOWLAND||COOL|ARID
+gaia_cool_arid_highland|Cool arid highland biome|||unilib:stone_limestone_beige 2|unilib:stone_andesite_grey 10|unilib:stone_sandstone_pink|||||||||HIGHLAND|SHELF||COOL|ARID
+gaia_cool_arid_mountain|Cool arid mountain biome|||unilib:stone_sandstone_pink 15|unilib:stone_sandstone_desert 25|unilib:stone_desert|||||||||MOUNTAIN|HIGHLAND||COOL|ARID
+gaia_cool_arid_strato|Cool arid stratospheric biome|||unilib:stone_sandstone_pink 15|unilib:stone_sandstone_desert 25|unilib:stone_desert|||||||||STRATO|MOUNTAIN||COOL|ARID
+
+# =================================================================================================
+# Cold humid biomes
+# =================================================================================================
+
+gaia_cold_humid_ocean|Cold humid ocean biome|||unilib:sand_volcanic_dust 2|unilib:sand_volcanic_ash 4|unilib:stone_travertine|||||||||BEACH_MIN|OCEAN||COLD|HUMID
+gaia_cold_humid_beach|Cold humid beach biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_quartzite_red|||||||||BEACH_MAX|BEACH_MIN||COLD|HUMID
+gaia_cold_humid_coastal|Cold humid coastal biome|||unilib:dirt_permafrost_brown_with_cover_snow 1|unilib:dirt_permafrost_brown 2|unilib:dirt_permafrost_brown_dark|||||||||COASTAL|BEACH_MAX||COLD|HUMID
+gaia_cold_humid_lowland|Cold humid lowland biome|||unilib:dirt_permafrost_brown_with_cover_snow 1|unilib:dirt_permafrost_brown 2|unilib:dirt_permafrost_brown_dark|||||||||LOWLAND|COASTAL||COLD|HUMID
+gaia_cold_humid_shelf|Cold humid shelf biome|||unilib:dirt_permafrost_brown_with_cover_snow 1|unilib:dirt_permafrost_brown_dark 2|unilib:stone_quartzite_red|||||||||SHELF|LOWLAND||COLD|HUMID
+gaia_cold_humid_highland|Cold humid highland biome|||unilib:dirt_permafrost_brown_with_cover_snow 1|unilib:dirt_permafrost_brown_dark 2|unilib:stone_quartzite_red|||||||||HIGHLAND|SHELF||COLD|HUMID
+gaia_cold_humid_mountain|Cold humid mountain biome||unilib:snow_ordinary|unilib:ice_ordinary 10|unilib:stone_travertine 20|unilib:stone_quartzite_red|||||||||MOUNTAIN|HIGHLAND||COLD|HUMID
+gaia_cold_humid_strato|Cold humid stratospheric biome||unilib:ice_ordinary|unilib:ice_ordinary 15|unilib:stone_travertine 25|unilib:stone_quartzite_red|||||||||STRATO|MOUNTAIN||COLD|HUMID
+
+# =================================================================================================
+# Cold semihumid biomes
+# =================================================================================================
+
+gaia_cold_semihumid_ocean|Cold semi-humid ocean biome|||unilib:sand_silt 2|unilib:sand_ordinary 4|unilib:stone_serpentinite_pale|||||||||BEACH_MIN|OCEAN||COLD|SEMIHUMID
+gaia_cold_semihumid_beach|Cold semi-humid beach biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_serpentinite_dark|||||||||BEACH_MAX|BEACH_MIN||COLD|SEMIHUMID
+gaia_cold_semihumid_coastal|Cold semi-humid coastal biome|||unilib:dirt_permafrost_green_with_cover_snow 1|unilib:dirt_permafrost_green 2|unilib:dirt_permafrost_green_dark|||||||||COASTAL|BEACH_MAX||COLD|SEMIHUMID
+gaia_cold_semihumid_lowland|Cold semi-humid lowland biome|||unilib:dirt_permafrost_green_with_cover_snow 1|unilib:dirt_permafrost_green 2|unilib:dirt_permafrost_green_dark|||||||||LOWLAND|COASTAL||COLD|SEMIHUMID
+gaia_cold_semihumid_shelf|Cold semi-humid shelf biome|||unilib:dirt_permafrost_green_with_cover_snow 1|unilib:dirt_permafrost_green_dark 2|unilib:stone_serpentinite_dark|||||||||SHELF|LOWLAND||COLD|SEMIHUMID
+gaia_cold_semihumid_highland|Cold semi-humid highland biome|||unilib:dirt_permafrost_green_with_cover_snow 1|unilib:dirt_permafrost_green_dark 2|unilib:stone_serpentinite_dark|||||||||HIGHLAND|SHELF||COLD|SEMIHUMID
+gaia_cold_semihumid_mountain|Cold semi-humid mountain biome||unilib:snow_ordinary|unilib:ice_ordinary 10|unilib:stone_serpentinite_pale 20|unilib:stone_serpentinite_dark|||||||||MOUNTAIN|HIGHLAND||COLD|SEMIHUMID
+gaia_cold_semihumid_strato|Cold semi-humid strato biome||unilib:ice_ordinary|unilib:ice_ordinary 15|unilib:stone_serpentinite_pale 25|unilib:stone_serpentinite_dark|||||||||STRATO|MOUNTAIN||COLD|SEMIHUMID
+
+# =================================================================================================
+# Cold temperate biomes
+# =================================================================================================
+
+gaia_cold_temperate_ocean|Cold temperate ocean biome|||unilib:sand_silver 2|unilib:sand_ordinary 4|unilib:stone_granite_orange|||||||||BEACH_MIN|OCEAN||COLD|TEMPERATE
+gaia_cold_temperate_beach|Cold temperate beach biome|||unilib:sand_ordinary 2|unilib:sand_ordinary 4|unilib:stone_granite_white|||||||||BEACH_MAX|BEACH_MIN||COLD|TEMPERATE
+gaia_cold_temperate_coastal|Cold temperate coastal biome|||unilib:dirt_permafrost_red_with_cover_snow 1|unilib:dirt_permafrost_red 2|unilib:dirt_permafrost_red_dark|||||||||COASTAL|BEACH_MAX||COLD|TEMPERATE
+gaia_cold_temperate_lowland|Cold temperate lowland biome|||unilib:dirt_permafrost_red_with_cover_snow 1|unilib:dirt_permafrost_red 2|unilib:dirt_permafrost_red_dark|||||||||LOWLAND|COASTAL||COLD|TEMPERATE
+gaia_cold_temperate_shelf|Cold temperate shelf biome|||unilib:dirt_permafrost_red_with_cover_snow 1|unilib:dirt_permafrost_red_dark 2|unilib:stone_granite_orange|||||||||SHELF|LOWLAND||COLD|TEMPERATE
+gaia_cold_temperate_highland|Cold temperate highland biome|||unilib:dirt_permafrost_red_with_cover_snow 1|unilib:dirt_permafrost_red_dark 2|unilib:stone_granite_orange|||||||||HIGHLAND|SHELF||COLD|TEMPERATE
+gaia_cold_temperate_mountain|Cold temperate mountain biome||unilib:snow_ordinary|unilib:snow_ordinary_block 10|unilib:ice_ordinary 20|unilib:stone_granite_orange|||||||||MOUNTAIN|HIGHLAND||COLD|TEMPERATE
+gaia_cold_temperate_strato|Cold temperate stratospheric biome||unilib:ice_ordinary|unilib:ice_ordinary 15|unilib:stone_granite_white 25|unilib:stone_granite_orange|||||||||STRATO|MOUNTAIN||COLD|TEMPERATE
+
+# =================================================================================================
+# Cold semiarid biomes
+# =================================================================================================
+
+gaia_cold_semiarid_ocean|Cold semi-arid ocean biome|||unilib:sand_silver 2|unilib:stone_sandstone_silver 4|unilib:stone_ordinary|||||||||BEACH_MIN|OCEAN||COLD|SEMIARID
+gaia_cold_semiarid_beach|Cold semi-arid beach biome|||unilib:dirt_permafrost_ordinary_with_litter_stone 1|unilib:stone_sandstone_silver 4|unilib:stone_ordinary|||||||||BEACH_MAX|BEACH_MIN||COLD|SEMIARID
+gaia_cold_semiarid_coastal|Cold semi-arid coastal biome|||unilib:dirt_permafrost_ordinary 1|unilib:dirt_permafrost_dark 4|unilib:stone_sandstone_silver|||||||||COASTAL|BEACH_MAX||COLD|SEMIARID
+gaia_cold_semiarid_lowland|Cold semi-arid lowland biome|||unilib:dirt_permafrost_dark 1|unilib:dirt_permafrost_dark 6|unilib:stone_sandstone_silver|||||||||LOWLAND|COASTAL||COLD|SEMIARID
+gaia_cold_semiarid_shelf|Cold semi-arid shelf biome|||unilib:dirt_permafrost_dark_with_cover_snow 1|unilib:dirt_permafrost_dark 8|unilib:stone_sandstone_silver|||||||||SHELF|LOWLAND||COLD|SEMIARID
+gaia_cold_semiarid_highland|Cold semi-arid highland biome|||unilib:dirt_permafrost_dark_with_cover_snow 1|unilib:dirt_permafrost_dark 10|unilib:stone_sandstone_silver|||||||||HIGHLAND|SHELF||COLD|SEMIARID
+gaia_cold_semiarid_mountain|Cold semi-arid mountain biome||unilib:snow_ordinary|unilib:stone_sandstone_silver 10|unilib:stone_granite_pink 20|unilib:stone_gabbro_red|||||||||MOUNTAIN|HIGHLAND||COLD|SEMIARID
+gaia_cold_semiarid_strato|Cold semi-arid stratospheric biome||unilib:snow_ordinary|unilib:stone_sandstone_silver 15|unilib:stone_granite_pink 25|unilib:stone_gabbro_red|||||||||STRATO|MOUNTAIN||COLD|SEMIARID
+
+# =================================================================================================
+# Cold arid biomes
+# =================================================================================================
+
+gaia_cold_arid_ocean|Cold arid ocean biome|||unilib:sand_silver 2|unilib:stone_sandstone_silver 4|unilib:stone_bluestone|||||||||BEACH_MIN|OCEAN||COLD|ARID
+gaia_cold_arid_beach|Cold arid beach biome|||unilib:dirt_permafrost_blue_with_litter_stone 1|unilib:stone_sandstone_silver 4|unilib:stone_greenstone|||||||||BEACH_MAX|BEACH_MIN||COLD|ARID
+gaia_cold_arid_coastal|Cold arid coastal biome|||unilib:dirt_permafrost_blue 1|unilib:dirt_permafrost_blue_dark 6|unilib:stone_sandstone_silver|||||||||COASTAL|BEACH_MAX||COLD|ARID
+gaia_cold_arid_lowland|Cold arid lowland biome|||unilib:dirt_permafrost_blue 1|unilib:dirt_permafrost_blue_dark 8|unilib:stone_granite_white|||||||||LOWLAND|COASTAL||COLD|ARID
+gaia_cold_arid_shelf|Cold arid shelf biome|||unilib:dirt_permafrost_blue_with_cover_snow 1|unilib:dirt_permafrost_blue_dark 10|unilib:stone_andesite_grey|||||||||SHELF|LOWLAND||COLD|ARID
+gaia_cold_arid_highland|Cold arid highland biome|||unilib:dirt_permafrost_blue_with_cover_snow 1|unilib:dirt_permafrost_blue_dark 15|unilib:stone_bluestone|||||||||HIGHLAND|SHELF||COLD|ARID
+gaia_cold_arid_mountain|Cold arid mountain biome||unilib:snow_ordinary|unilib:ice_ordinary 15|unilib:stone_bluestone 20|unilib:stone_greenstone|||||||||MOUNTAIN|HIGHLAND||COLD|ARID
+gaia_cold_arid_strato|Cold arid stratospheric biome||unilib:snow_ordinary|unilib:ice_ordinary 15|unilib:stone_bluestone 25|unilib:stone_greenstone|||||||||STRATO|MOUNTAIN||COLD|ARID
+
+# =================================================================================================
+# Special biomes
+# =================================================================================================
+
+# From "biome_default_desert" package
+gaia_hot_desert_land|Hot desert biome|||unilib:sand_desert 1|unilib:sand_desert 4|unilib:stone_desert||||unilib:sand_ordinary 2||unilib:stone_desert||unilib:stone_desert||BEACH_MIN||HOT|DESERT
+gaia_hot_desert_ocean|Hot desert ocean biome|||unilib:sand_ordinary 1|unilib:sand_ordinary 3|unilib:stone_desert||||unilib:sand_ordinary 2|unilib:liquid_water_ordinary_source|unilib:stone_desert||unilib:stone_desert|BEACH_MIN|OCEAN||HOT|DESERT
+
+# From "biome_default_desert_sandstone" package
+gaia_warm_desert_land|Warm desert biome|||unilib:sand_ordinary 1|unilib:sand_ordinary 4|unilib:stone_sandstone_ordinary||||unilib:sand_ordinary 2||unilib:stone_sandstone_ordinary_brick||unilib:stone_sandstone_ordinary_block||BEACH_MIN||WARM|DESERT
+gaia_warm_desert_ocean|Warm desert ocean biome|||unilib:sand_ordinary 1|unilib:sand_ordinary 3|unilib:stone_sandstone_ordinary||||unilib:sand_ordinary 2|unilib:liquid_water_ordinary_source|unilib:stone_sandstone_ordinary_brick||unilib:stone_sandstone_ordinary_block|BEACH_MIN|OCEAN||WARM|DESERT
+
+# Original to unilib
+gaia_mild_desert_land|Mild desert biome|||unilib:sand_pink 1|unilib:sand_pink 4|unilib:stone_sandstone_pink||||unilib:sand_ordinary 2||unilib:stone_sandstone_pink_brick||unilib:stone_sandstone_pink_block||BEACH_MIN||MILD|DESERT
+gaia_mild_desert_ocean|Mild desert ocean biome|||unilib:sand_pink 1|unilib:sand_pink 3|unilib:stone_sandstone_pink||||unilib:sand_ordinary 2|unilib:liquid_water_ordinary_source|unilib:stone_sandstone_pink_brick||unilib:stone_sandstone_pink_block|BEACH_MIN|OCEAN||MILD|DESERT
+
+# From "biome_default_desert_sandstone" package
+gaia_cool_desert_land|Cooldesert biome|||unilib:sand_silver 1|unilib:sand_silver 4|unilib:stone_sandstone_silver||||unilib:sand_ordinary 2||unilib:stone_ordinary_cobble|unilib:stone_ordinary_cobble_mossy|unilib:stone_ordinary_cobble||BEACH_MIN||COOL|DESERT
+gaia_cool_desert_ocean|Cool desert ocean biome|||unilib:sand_ordinary 1|unilib:sand_ordinary 3|unilib:stone_sandstone_silver||||unilib:sand_ordinary 2|unilib:liquid_water_ordinary_source|unilib:stone_ordinary_cobble|unilib:stone_ordinary_cobble_mossy|unilib:stone_ordinary_cobble|BEACH_MIN|OCEAN||COOL|DESERT
+
+# From "biome_default_icesheet" package
+gaia_cold_desert_land|Cold desert biome|||unilib:snow_ordinary_block 1|unilib:snow_ordinary_block 4|unilib:ice_ordinary_cave|unilib:ice_ordinary 10||unilib:ice_ordinary|unilib:gravel_ordinary 2|unilib:ice_ordinary||unilib:ice_ordinary|||BEACH_MIN||COLD|DESERT
+gaia_cold_desert_ocean|Cold desert ocean biome||unilib:snow_ordinary_block|unilib:sand_ordinary 1|unilib:sand_ordinary 3|unilib:ice_ordinary_cave|unilib:ice_ordinary 10|||unilib:gravel_ordinary 2|unilib:liquid_water_ordinary_source|unilib:stone_ordinary_cobble|unilib:stone_ordinary_cobble_mossy|unilib:stone_ordinary_cobble|BEACH_MIN|OCEAN||COLD|DESERT
+
+# =================================================================================================
+# Generic biomes
+# =================================================================================================
+
+gaia_generic_underground|Generic underground biome|||unilib:sand_ordinary 1|unilib:sand_ordinary 2||||||unilib:liquid_water_ordinary_source unilib:liquid_lava_ordinary_source|unilib:stone_ordinary_cobble|unilib:stone_ordinary_cobble_mossy|unilib:stone_ordinary_cobble|OCEAN||||
+gaia_generic_sky|Generic sky biome||unilib:snow_ordinary|unilib:snow_ordinary_block 2|unilib:ice_ordinary 2|unilib:stone_ordinary||||||||||STRATO|||
+
+# =================================================================================================
+# Misc
+# =================================================================================================

@@ -9,7 +9,7 @@
 unilib.pkg.utensil_bowl_mixing_glass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,17 +37,17 @@ function unilib.pkg.utensil_bowl_mixing_glass.exec()
         output = "unilib:utensil_bowl_mixing_glass",
         recipe = {
             {"unilib:glass_ordinary", "group:stick", "unilib:glass_ordinary"},
-            {"", "unilib:glass_ordinary", ""}
-        }
+            {"", "unilib:glass_ordinary", ""},
+        },
     })
     unilib.register_craft({
         -- From farming:mixing_bowl
         output = "unilib:glass_ordinary_fragments",
         recipe = {
             {"unilib:utensil_bowl_mixing_glass"},
-        }
+        },
     })
     -- (Original to unilib)
-    unilib.hydration_enable_drinking_from_container("unilib:utensil_bowl_mixing_glass", 25)
+    unilib.hydration.enable_drinking_from_container("unilib:utensil_bowl_mixing_glass", 25)
 
 end

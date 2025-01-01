@@ -9,7 +9,7 @@
 unilib.pkg.test_stair = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.test_stair.exec()
         description = S("Test Node 2"),
         tiles = {"unilib_unknown_2.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
     })
     unilib.register_stairs("unilib:test_node2")
 

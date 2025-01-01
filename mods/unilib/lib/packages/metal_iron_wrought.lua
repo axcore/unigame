@@ -9,7 +9,7 @@
 unilib.pkg.metal_iron_wrought = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.technic_worldgen.add_mode
+local mode = unilib.global.imported_mod_table.technic_worldgen.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Notes
@@ -56,24 +56,28 @@ function unilib.pkg.metal_iron_wrought.exec()
         hardness = 2,
     })
 
-    if minetest.registered_craftitems["unilib:metal_steel_powder"] ~= nil then
+    if core.registered_craftitems["unilib:metal_steel_powder"] ~= nil then
 
-        unilib.upgrade_craftitem("unilib:metal_steel_powder", "technic:wrought_iron_dust", {
+        unilib.register.upgrade_craftitem(
             -- From technic:wrought_iron_dust
-            description = S("Wrought Iron Powder"),
-            inventory_image = "unilib_metal_iron_wrought_powder.png",
-        })
+            "unilib:metal_steel_powder",
+            "technic:wrought_iron_dust",
+            {
+                description = S("Wrought Iron Powder"),
+                inventory_image = "unilib_metal_iron_wrought_powder.png",
+            }
+        )
 
     end
 
-    unilib.upgrade_craftitem("unilib:metal_steel_ingot", "technic:wrought_iron_ingot", {
+    unilib.register.upgrade_craftitem("unilib:metal_steel_ingot", "technic:wrought_iron_ingot", {
         -- From technic:wrought_iron_ingot
         description = S("Wrought Iron Ingot"),
         inventory_image = "unilib_metal_iron_wrought_ingot.png",
         -- N.B. no groups in original code
         groups = {alloy = 1, metal_ingot = 1},
     })
-    if unilib.pkg_executed_table["metal_iron_cast"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_iron_cast"] ~= nil then
 
         unilib.register_craft({
             -- From technic:wrought_iron_ingot
@@ -91,8 +95,8 @@ function unilib.pkg.metal_iron_wrought.exec()
         })
 
     end
-    if unilib.pkg_executed_table["metal_steel_carbon"] ~= nil and
-            unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_steel_carbon"] ~= nil and
+            unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         unilib.register_craft({
             -- From technic:wrought_iron_ingot
@@ -104,7 +108,7 @@ function unilib.pkg.metal_iron_wrought.exec()
 
         -- In the technic mod, an alloy furnace is required to craft carbon steel ingots. In case
         --      technic is not available, provide an alternative recipe
-        if minetest.get_modpath("technic") == nil then
+        if core.get_modpath("technic") == nil then
 
             unilib.register_craft({
                 -- Original to unilib
@@ -119,10 +123,20 @@ function unilib.pkg.metal_iron_wrought.exec()
 
     end
 
-    unilib.upgrade_node("unilib:metal_steel_block", "technic:wrought_iron_block", {
+    unilib.register.upgrade_node("unilib:metal_steel_block", "technic:wrought_iron_block", {
         -- From technic:wrought_iron_block
         description = S("Wrought Iron Block"),
-        inventory_image = "unilib_metal_iron_wrought_block.png",
+        tiles = {"unilib_metal_iron_wrought_block.png"},
     })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register.upgrade_node("unilib:metal_steel_block_compressed", nil, {
+            -- Original to unilib
+            description = S("Compressed Wrought Iron Block"),
+            tiles = {"unilib_metal_iron_wrought_block_compressed.png"},
+        })
+
+    end
 
 end

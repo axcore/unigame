@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_tree_olive = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,12 +26,12 @@ end
 
 function unilib.pkg.deco_ethereal_tree_olive.post()
 
-    unilib.register_decoration_now("ethereal_tree_olive", nil, {
+    unilib.register_decoration_complete("ethereal_tree_olive", nil, {
         -- From ethereal-ng/schems.lua
         -- Completes decoration in package "tree_olive"
         biomes = "ethereal_mediterranean",
         place_on = "unilib:dirt_ordinary_with_turf_grove",
-        y_max = 35,
+        y_max = 45,
         y_min = 5,
     })
 

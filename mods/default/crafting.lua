@@ -5,8 +5,8 @@
 --
 
 minetest.register_craft({
-    type = "toolrepair",
-    additional_wear = -0.02,
+	type = "toolrepair",
+	additional_wear = -0.02,
 })
 
 
@@ -16,7 +16,7 @@ minetest.register_craft({
 
 -- Support use of group:tree, includes default:tree which has the same burn time
 minetest.register_craft({
-    type = "fuel",
-    recipe = "group:tree",
-    burntime = 30,
+	type = "fuel",
+	recipe = "group:tree",
+	burntime = 30,
 })

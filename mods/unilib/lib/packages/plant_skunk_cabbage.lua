@@ -9,7 +9,7 @@
 unilib.pkg.plant_skunk_cabbage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,11 @@ function unilib.pkg.plant_skunk_cabbage.exec()
 
     unilib.register_node("unilib:plant_skunk_cabbage", "cropocalypse:skunk_cabbage", mode, {
         -- From cropocalypse:skunk_cabbage
-        description = unilib.annotate(S("Skunk Cabbage"), "Lysichiton americanus"),
+        description = unilib.utils.annotate(S("Skunk Cabbage"), "Lysichiton americanus"),
         tiles = {"unilib_plant_skunk_cabbage.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, decorative_plants = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -47,7 +47,7 @@ function unilib.pkg.plant_skunk_cabbage.exec()
         waving = 1,
         wield_image = "unilib_plant_skunk_cabbage.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:skunk_cabbage
@@ -60,7 +60,7 @@ function unilib.pkg.plant_skunk_cabbage.exec()
     end
     unilib.register_plant_in_pot("unilib:plant_skunk_cabbage", "cropocalypse:skunk_cabbage")
 
-    unilib.register_decoration("cropocalypse_plant_skunk_cabbage", {
+    unilib.register_decoration_generic("cropocalypse_plant_skunk_cabbage", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_skunk_cabbage",

@@ -9,7 +9,7 @@
 unilib.pkg.biome_aotearoa_ocean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "kermadec_ocean" biome
         name = "aotearoa_ocean_kermadec",
-        description = unilib.brackets(S("Kermadec ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Kermadec ocean biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:stone_andesite_antipodean",
@@ -56,7 +56,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "north_eastern_ocean" biome
         name = "aotearoa_ocean_north_eastern",
-        description = unilib.brackets(S("Northeastern ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Northeastern ocean biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_wet",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -71,7 +71,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "west_coast_north_ocean" biome
         name = "aotearoa_ocean_west_coast_north",
-        description = unilib.brackets(S("West coast north ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("West coast north ocean biome"), "aotearoa"),
         node_top = "unilib:sand_ironsand",
         depth_top = 1,
         node_filler = "unilib:sand_ironsand",
@@ -86,7 +86,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "east_coast_north_ocean" biome
         name = "aotearoa_ocean_east_coast_north",
-        description = unilib.brackets(S("East coast north ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("East coast north ocean biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_wet",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -101,7 +101,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "north_cook_straight" biome
         name = "aotearoa_ocean_north_cook_strait",
-        description = unilib.brackets(S("North cook strait biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("North cook strait biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_dry",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -116,7 +116,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "south_cook_straight" biome
         name = "aotearoa_ocean_south_cook_strait",
-        description = unilib.brackets(S("South cook strait biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("South cook strait biome"), "aotearoa"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -131,7 +131,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "west_coast_south_ocean" biome
         name = "aotearoa_ocean_west_coast_south",
-        description = unilib.brackets(S("West coast south ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("West coast south ocean biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_dry",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -146,7 +146,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "east_coast_south_ocean" biome
         name = "aotearoa_ocean_east_coast_south",
-        description = unilib.brackets(S("East coast south ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("East coast south ocean biome"), "aotearoa"),
         node_top = "unilib:dirt_mud_antipodean_wet",
         depth_top = 1,
         node_filler = "unilib:dirt_mud_antipodean_dry",
@@ -160,7 +160,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
 
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "fiordland_ocean" biome
-        description = unilib.brackets(S("Fiordland ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Fiordland ocean biome"), "aotearoa"),
         name = "aotearoa_ocean_fiordland",
         node_top = "unilib:dirt_mud_antipodean_dry",
         depth_top = 1,
@@ -176,7 +176,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "southern_ocean" biome
         name = "aotearoa_ocean_southern",
-        description = unilib.brackets(S("Southern ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Southern ocean biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:gravel_ordinary",
@@ -191,7 +191,7 @@ function unilib.pkg.biome_aotearoa_ocean.post()
     unilib.register_biome({
         -- From aotearoa/mapgen.lua, "subantarctic_ocean" biome
         name = "aotearoa_ocean_subantarctic",
-        description = unilib.brackets(S("Subantarctic ocean biome"), "aotearoa"),
+        description = unilib.utils.brackets(S("Subantarctic ocean biome"), "aotearoa"),
         node_top = "unilib:gravel_ordinary",
         depth_top = 1,
         node_filler = "unilib:gravel_ordinary",

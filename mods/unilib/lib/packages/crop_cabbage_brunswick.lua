@@ -9,7 +9,7 @@
 unilib.pkg.crop_cabbage_brunswick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -53,7 +53,8 @@ function unilib.pkg.crop_cabbage_brunswick.exec()
         seed_description = S("Brunswick Cabbage Seed"),
         seed_group_table = {attached_node = 1, flammable = 2, seed = 1, snappy = 3},
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,7 +66,16 @@ function unilib.pkg.crop_cabbage_brunswick.exec()
 
     end
 
-    unilib.register_decoration("better_farming_crop_cabbage_brunswick", {
+    unilib.register_juice({
+        ingredient = "unilib:crop_cabbage_brunswick_harvest",
+        juice_description = S("Cabbage"),
+        juice_type = "cabbage",
+        rgb = "#a4c088",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("better_farming_crop_cabbage_brunswick", {
         -- From better_farming:cabbage_6
         deco_type = "simple",
         decoration = "unilib:crop_cabbage_brunswick_grow_6",

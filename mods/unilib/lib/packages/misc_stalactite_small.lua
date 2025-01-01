@@ -9,11 +9,26 @@
 unilib.pkg.misc_stalactite_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.valleys_c.add_mode
+local mode = unilib.global.imported_mod_table.valleys_c.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
+
+local function on_place(itemstack, placer, pointed_thing)
+
+    -- Allow placing the node only on ceilings
+    local dir = core.dir_to_wallmounted(
+        vector.subtract(pointed_thing.under, pointed_thing.above)
+    )
+
+    if dir == 0 then
+        core.item_place(itemstack, placer, pointed_thing, 1)
+    end
+
+    return itemstack
+
+end
 
 local function do_register(data_table)
 
@@ -32,7 +47,7 @@ local function do_register(data_table)
         description = description,
         tiles = {img},
         groups = {cracky = 3, rock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
         drop = drop,
@@ -47,6 +62,9 @@ local function do_register(data_table)
         paramtype = "light",
         use_texture_alpha = alpha,
         walkable = false,
+
+        -- N.B. No .on_place() in original code
+        on_place = on_place,
     })
     -- (Allow conversion to cobble, to get them out of the inventory. Original code used a 3x3 grid)
     unilib.register_craft({
@@ -101,13 +119,13 @@ function unilib.pkg.misc_stalactite_small.exec()
         description = S("Small Mossy Stalactite"),
     })
 
-    if unilib.pkg_executed_table["ice_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["ice_ordinary"] ~= nil then
 
         -- From valleys_c:icicle_down. Creates unilib:misc_stalactite_small_icy
         do_register({
             part_name = "icy",
             orig_name = "icicle_down",
-            img = "unilib_ice_thin.png",
+            img = "unilib_ice_blue.png",
 
             alpha = "clip",
             description = S("Small Icy Stalactite"),

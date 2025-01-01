@@ -9,7 +9,7 @@
 unilib.pkg.pane_window_ice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.pane_window_ice.exec()
             description = S("Ice Window Pane"),
             textures = {img, img, img},
             groups = {cracky = 3, slippery = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = img,
             recipe = {

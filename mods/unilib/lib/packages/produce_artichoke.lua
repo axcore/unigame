@@ -9,7 +9,7 @@
 unilib.pkg.produce_artichoke = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,14 +51,15 @@ function unilib.pkg.produce_artichoke.exec()
                     items = {
                         {items = {"unilib:produce_artichoke_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_artichoke_harvest"}, rarity = 2},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_artichoke = 1, seed = 2},
         min_light = 13,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -70,7 +71,7 @@ function unilib.pkg.produce_artichoke.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_artichoke", {
+    unilib.register_decoration_generic("farming_redo_produce_artichoke", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_artichoke_grow_5",
@@ -79,8 +80,8 @@ function unilib.pkg.produce_artichoke.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 448,
+            scale = 0.002,
+            seed = 123,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

@@ -9,7 +9,7 @@
 unilib.pkg.ladder_steel_extendable = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.ladder_steel_extendable.exec()
             "unilib_ladder_steel.png",
         },
         groups = {cracky = 2, flow_through = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         climbable = true,
         drawtype = "nodebox",
@@ -54,7 +54,7 @@ function unilib.pkg.ladder_steel_extendable.exec()
                 {-0.25, -0.1875, 0.375, 0.25, -0.0625, 0.5},
                 {-0.25, -0.4375, 0.375, 0.25, -0.3125, 0.5},
                 {-0.25, 0.0625, 0.375, 0.25, 0.1875, 0.5},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",

@@ -9,7 +9,7 @@
 unilib.pkg.material_flax_roasted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,7 +46,7 @@ function unilib.pkg.material_flax_roasted.exec()
         inventory_image = "unilib_material_flax_roasted.png",
         groups = {flammable = 1, string = 1},
     })
-    if unilib.pkg_executed_table["crop_flax_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_flax_brown"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -56,7 +56,7 @@ function unilib.pkg.material_flax_roasted.exec()
             cooktime = 10,
         })
 
-    elseif unilib.pkg_executed_table["crop_flax_golden"] ~= nil then
+    elseif unilib.global.pkg_executed_table["crop_flax_golden"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -73,7 +73,7 @@ function unilib.pkg.material_flax_roasted.exec()
         recipe = c_flax,
         burntime = 7,
     })
-    if unilib.pkg_executed_table["wool_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["wool_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -85,8 +85,8 @@ function unilib.pkg.material_flax_roasted.exec()
         })
 
     end
-    if unilib.pkg_executed_table["crop_cotton"] ~= nil and
-            unilib.pkg_executed_table["item_stick_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_cotton"] ~= nil and
+            unilib.global.pkg_executed_table["item_stick_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -100,7 +100,7 @@ function unilib.pkg.material_flax_roasted.exec()
         })
 
     end
-    if unilib.pkg_executed_table["rope_mining"] ~= nil then
+    if unilib.global.pkg_executed_table["rope_mining"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -122,7 +122,7 @@ function unilib.pkg.material_flax_roasted.exec()
         })
 
     end
-    if unilib.pkg_executed_table["rope_sturdy"] ~= nil then
+    if unilib.global.pkg_executed_table["rope_sturdy"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -135,7 +135,7 @@ function unilib.pkg.material_flax_roasted.exec()
         })
 
     end
-    if unilib.pkg_executed_table["rope_normal"] ~= nil then
+    if unilib.global.pkg_executed_table["rope_normal"] ~= nil then
 
         unilib.register_craft({
             -- From cucina_vegana:flax_roasted
@@ -144,7 +144,7 @@ function unilib.pkg.material_flax_roasted.exec()
                 {c_flax},
                 {c_flax},
                 {c_flax},
-            }
+            },
         })
 
     end
@@ -156,9 +156,9 @@ function unilib.pkg.material_flax_roasted.post()
     --[[
     local c_flax = "unilib:material_flax_roasted"
 
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
-        for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+        for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
             local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"
 
@@ -201,7 +201,7 @@ function unilib.pkg.material_flax_roasted.post()
     end
     ]]--
 
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         local c_cobble = "unilib:stone_ordinary_cobble"
         local c_desert_cobble = "unilib:stone_desert_cobble"
@@ -209,7 +209,7 @@ function unilib.pkg.material_flax_roasted.post()
         local c_stone = "unilib:stone_ordinary"
         local c_desert_stone = "unilib:stone_desert"
 
-        for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+        for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
             local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"
 
@@ -218,7 +218,7 @@ function unilib.pkg.material_flax_roasted.post()
                 "unilib:" .. bucket_type .. "_with_water_river",
             }) do
 
-                if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+                if unilib.global.pkg_executed_table["stone_ordinary"] ~= nil then
 
                     unilib.register_craft({
                         -- From cucina_vegana:flax_roasted
@@ -250,7 +250,7 @@ function unilib.pkg.material_flax_roasted.post()
 
                 end
 
-                if unilib.pkg_executed_table["stone_desert"] ~= nil then
+                if unilib.global.pkg_executed_table["stone_desert"] ~= nil then
 
                     unilib.register_craft({
                         -- From cucina_vegana:flax_roasted

@@ -1,11 +1,12 @@
 # "snow" remix - contains everything from the "snow biomes" mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # snow packages
 abm_snow_freezing|snow
 abm_snow_remove|snow
+abm_standard_ice_snow_melt|snow
+abm_standard_moss_spread|snow
 flower_frozen|snow
 fruit_apple_frozen|snow
 ice_hard|snow
@@ -40,6 +41,7 @@ fruit_apple|default
 ice_ordinary|default ethereal mtg_plus
 liquid_water_ordinary|default
 sand_ordinary|default
+shared_standard|flowers fire
 stone_ordinary|default moreblocks technic
 tree_apple|default doors moreblocks
 tree_pine|default doors moreblocks
@@ -61,8 +63,10 @@ snow_ordinary|default ethereal mtg_plus
 #grass_jungle|default
 #grass_ordinary|default
 #item_stick_ordinary|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #mushroom_brown|flowers
 #mushroom_red|flowers
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

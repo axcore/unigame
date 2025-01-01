@@ -9,7 +9,7 @@
 unilib.pkg.shared_maptools = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Shared variables
@@ -36,7 +36,7 @@ unilib.pkg.shared_maptools.toolcaps_table = {
 
 function unilib.pkg.shared_maptools.on_drop(itemstack, player)
 
-    unilib.show_warning(
+    unilib.utils.show_warning(
         "shared_maptools package: Admin nodes and tools cannot be dropped!",
         itemstack:get_name()
     )
@@ -48,31 +48,31 @@ function unilib.pkg.shared_maptools.register_node(full_name, orig_name, replace_
     -- Increases the interaction range when holding maptools nodes to make building easier, and
     --      make some other tweaks
 
-    def_table.range = 12
-    def_table.stack_max = 65535
-    def_table.drop = ""
-    def_table.on_drop = unilib.pkg.shared_maptools.on_drop
-
     if def_table.groups then
 
         if not def_table.groups.dig_immediate then
             def_table.groups.unbreakable = 1
         end
 
-        def_table.groups.not_in_creative_inventory = unilib.show_admin_item_group
+        def_table.groups.not_in_creative_inventory = unilib.globalshow_admin_item_group
 
     else
 
         def_table.groups = {
-            not_in_creative_inventory = unilib.show_admin_item_group, unbreakable = 1,
+            not_in_creative_inventory = unilib.globalshow_admin_item_group, unbreakable = 1,
         }
 
     end
 
     -- Not in original code: invisible items should still generate a sound when placed in the world
     if def_table.sounds == nil then
-        def_table.sounds = unilib.sound_table.node
+        def_table.sounds = unilib.global.sound_table.node
     end
+
+    def_table.range = 12
+    def_table.stack_max = 65535
+    def_table.drop = ""
+    def_table.on_drop = unilib.pkg.shared_maptools.on_drop
 
     -- Prevent maptools nodes from being exploded by TNT
     def_table.on_blast = function() end

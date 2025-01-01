@@ -9,7 +9,7 @@
 unilib.pkg.biome_default_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.biome_default_desert.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "desert" biome
         name = "default_desert",
-        description = unilib.brackets(S("Desert biome"), "default"),
+        description = unilib.utils.brackets(S("Desert biome"), "default"),
         node_top = "unilib:sand_desert",
         depth_top = 1,
         node_filler = "unilib:sand_desert",
@@ -45,8 +45,8 @@ function unilib.pkg.biome_default_desert.post()
         node_riverbed = "unilib:sand_ordinary",
         depth_riverbed = 2,
         node_dungeon = "unilib:stone_desert",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_desert"),
-        y_max = unilib.y_max,
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_desert"),
+        y_max = unilib.constant.y_max,
         y_min = 4,
         heat_point = 92,
         humidity_point = 16,
@@ -55,7 +55,7 @@ function unilib.pkg.biome_default_desert.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "desert_ocean" biome
         name = "default_desert_ocean",
-        description = unilib.brackets(S("Desert ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Desert ocean biome"), "default"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -65,7 +65,7 @@ function unilib.pkg.biome_default_desert.post()
         depth_riverbed = 2,
         node_cave_liquid = "unilib:liquid_water_ordinary_source",
         node_dungeon = "unilib:stone_desert",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_desert"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_desert"),
         vertical_blend = 1,
         y_max = 3,
         y_min = -255,
@@ -76,16 +76,16 @@ function unilib.pkg.biome_default_desert.post()
     unilib.register_biome({
         -- From default/mapgen.lua, "desert_under" biome
         name = "default_desert_under",
-        description = unilib.brackets(S("Desert deep ocean biome"), "default"),
+        description = unilib.utils.brackets(S("Desert deep ocean biome"), "default"),
         node_cave_liquid = {
             "unilib:liquid_water_ordinary_source",
             "unilib:liquid_lava_ordinary_source",
         },
         node_dungeon = "unilib:stone_ordinary_cobble",
         node_dungeon_alt = "unilib:stone_ordinary_cobble_mossy",
-        node_dungeon_stair = unilib.convert_stairs_simple("unilib:stone_ordinary_cobble"),
+        node_dungeon_stair = unilib.stairs.convert_simple("unilib:stone_ordinary_cobble"),
         y_max = -256,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 92,
         humidity_point = 16,
     })

@@ -9,7 +9,7 @@
 unilib.pkg.item_spool_empty = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,11 +28,16 @@ function unilib.pkg.item_spool_empty.exec()
 
     local c_sheet = "unilib:material_plastic_sheet"
 
-    unilib.register_craftitem("unilib:item_spool_empty", "basic_materials:empty_spool", mode, {
+    unilib.register_craftitem(
         -- From basic_materials:empty_spool
-        description = S("Empty Wire Spool"),
-        inventory_image = "unilib_item_spool_empty.png"
-    })
+        "unilib:item_spool_empty",
+        {"basic_materials:empty_spool", "homedecor:empty_spool"},
+        mode,
+        {
+            description = S("Empty Wire Spool"),
+            inventory_image = "unilib_item_spool_empty.png"
+        }
+    )
     unilib.register_craft( {
         -- From basic_materials:empty_spool
         output = "unilib:item_spool_empty 3",

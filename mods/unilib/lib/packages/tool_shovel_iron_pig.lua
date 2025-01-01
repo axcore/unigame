@@ -9,7 +9,7 @@
 unilib.pkg.tool_shovel_iron_pig = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pigiron.add_mode
+local mode = unilib.global.imported_mod_table.pigiron.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -47,13 +47,13 @@ function unilib.pkg.tool_shovel_iron_pig.exec()
         },
         wield_image = "unilib_tool_shovel_iron_pig.png^[transformR90",
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_shovel({
         -- From pigiron:shovel_iron
         part_name = "iron_pig",
         ingredient = "unilib:metal_iron_pig_ingot",
     })
-    unilib.apply_toolranks("unilib:tool_shovel_iron_pig", "shovel")
+    unilib.tools.apply_toolranks("unilib:tool_shovel_iron_pig", "shovel")
 
 end

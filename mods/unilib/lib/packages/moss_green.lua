@@ -9,7 +9,7 @@
 unilib.pkg.moss_green = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,8 @@ function unilib.pkg.moss_green.exec()
         block_orig_name = "sickles:moss_block",
         description = S("Green Moss"),
         block_description = S("Green Moss Block"),
-        dye = "green_dark",
+        -- N.B. Dark green dye in the original code
+        dye = "green",
 
         replace_mode = mode,
     })

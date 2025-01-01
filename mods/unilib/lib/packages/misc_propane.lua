@@ -9,7 +9,7 @@
 unilib.pkg.misc_propane = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,12 @@ function unilib.pkg.misc_propane.exec()
         description = S("Propane"),
         tiles = {"unilib_misc_propane.png"},
         groups = {attached_node = 1, dig_immediate = 3, explody = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "plantlike",
         inventory_image = "unilib_misc_propane.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         sunlight_propagates = true,
@@ -46,7 +48,7 @@ function unilib.pkg.misc_propane.exec()
         recipe = {
             {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
             {"unilib:metal_steel_ingot", "unilib:torch_ordinary", "unilib:metal_steel_ingot"},
-            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"}
+            {"unilib:metal_steel_ingot", "unilib:metal_steel_ingot", "unilib:metal_steel_ingot"},
         },
     })
     unilib.register_craft({

@@ -9,16 +9,17 @@
 unilib.pkg.container_barrel_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+--[[
 local function can_dig(pos, player)
 
     -- Can only dig the barrel if there are no more vessels/buckets in either slot
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     return inv:is_empty("input") and inv:is_empty("output")
@@ -38,7 +39,7 @@ local function on_construct(pos)
 
     -- Prepares the formspec
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local percent = math.random(1, 100)
 
     meta:set_string(
@@ -63,6 +64,7 @@ local function on_construct(pos)
     inv:set_size("output", 1)
 
 end
+]]--
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -71,9 +73,11 @@ end
 function unilib.pkg.container_barrel_normal.init()
 
     return {
-        description = "Normal barrel (to contain liquids)",
-        notes = "Punch to change between horizontal/vertical position, right-click to open/close" ..
-                " the barrel",
+        description = "Decorative normal barrel",
+        notes = "Punch to change between horizontal/vertical position. The original \"cottages\"" ..
+                " code intended a barrel that could contain liquids, but the code was never" ..
+                " finished; in our version, the unfinished code is commented out, leaving a" ..
+                " barrel that is merely decorative",
         depends = {"metal_steel", "misc_tub"},
     }
 
@@ -82,18 +86,18 @@ end
 function unilib.pkg.container_barrel_normal.exec()
 
     -- The barrel contains a lot of nodeboxes, which may be too much for weaker hardware
-    if unilib.cottages_slow_flag then
+    if unilib.setting.cottages_slow_flag then
         return
     end
 
     -- (Upright barrel)
     unilib.register_node("unilib:container_barrel_normal", "cottages:barrel", mode, {
         -- From cottages:barrel
-        description = unilib.brackets(S("Normal Barrel"), S("Closed")),
+        description = unilib.utils.brackets(S("Decorative Normal Barrel"), S("Closed")),
         tiles = {"unilib_container_barrel_normal.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:container_barrel_normal",
@@ -101,21 +105,21 @@ function unilib.pkg.container_barrel_normal.exec()
         mesh = "unilib_container_barrel_normal.obj",
         paramtype = "light",
 
-        can_dig = function(pos,player)
-            return can_dig(pos, player)
-        end,
+--      can_dig = function(pos,player)
+--          return can_dig(pos, player)
+--      end,
 
-        on_construct = function(pos)
-            return on_construct(pos)
-        end,
+--      on_construct = function(pos)
+--          return on_construct(pos)
+--      end,
 
-        on_metadata_inventory_put = function(pos, listname, index, stack, player)
-            return on_metadata_inventory_put(pos, listname, index, stack, player)
-        end,
+--      on_metadata_inventory_put = function(pos, listname, index, stack, player)
+--          return on_metadata_inventory_put(pos, listname, index, stack, player)
+--      end,
 
         on_punch = function(pos, node, puncher)
 
-            minetest.add_node(
+            core.add_node(
                 pos,
                 {name = "unilib:container_barrel_normal_horizontal", param2 = node.param2}
             )
@@ -126,14 +130,16 @@ function unilib.pkg.container_barrel_normal.exec()
     -- (Upright barrel, open)
     unilib.register_node("unilib:container_barrel_normal_open", "cottages:barrel_open", mode, {
         -- From cottages:barrel_open
-        description = unilib.brackets(S("Normal Barrel"), S("Open")),
+        description = unilib.utils.brackets(S("Decorative Normal Barrel"), S("Open")),
         tiles = {"unilib_container_barrel_normal.png"},
-        groups = {
-            choppy = 2, flammable = 2, not_in_creative_inventory = 1, oddly_breakable_by_hand = 1,
-            snappy = 1, tree = 1,
-        },
+        -- N.B. removed not_in_creative_inventory = 1 from original code
+--      groups = {
+--          choppy = 2, flammable = 2, not_in_creative_inventory = 1, oddly_breakable_by_hand = 1,
+--          snappy = 1, tree = 1,
+--      },
+        groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, snappy = 1, tree = 1},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "mesh",
         drop = "unilib:container_barrel_normal",
@@ -143,10 +149,11 @@ function unilib.pkg.container_barrel_normal.exec()
 
         on_punch = function(pos, node, puncher)
 
-            minetest.add_node(
+            core.add_node(
                 pos,
                 {name = "unilib:container_barrel_normal_horizontal_open", param2 = node.param2}
             )
+
         end,
     })
 
@@ -157,14 +164,15 @@ function unilib.pkg.container_barrel_normal.exec()
         mode,
         {
             -- From cottages:barrel_lying
-            description = unilib.brackets(S("Horizontal Normal Barrel"), S("Closed")),
+            description =
+                    unilib.utils.brackets(S("Decorative Horizontal Normal Barrel"), S("Closed")),
             tiles = {"unilib_container_barrel_normal.png"},
             groups = {
                 choppy = 2, flammable = 2, not_in_creative_inventory = 1,
                 oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
             },
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "mesh",
             drop = "unilib:container_barrel_normal",
@@ -177,7 +185,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
                 if node.param2 < 4 then
 
-                    minetest.add_node(
+                    core.add_node(
                         pos,
                         {
                             name = "unilib:container_barrel_normal_horizontal",
@@ -187,7 +195,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
                 else
 
-                    minetest.add_node(pos, {name = "unilib:container_barrel_normal", param2 = 0})
+                    core.add_node(pos, {name = "unilib:container_barrel_normal", param2 = 0})
 
                 end
 
@@ -195,7 +203,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
             on_rightclick = function(pos, node, puncher)
 
-                minetest.add_node(
+                core.add_node(
                     pos,
                     {name = "unilib:container_barrel_normal_horizontal_open", param2 = node.param2}
                 )
@@ -211,14 +219,15 @@ function unilib.pkg.container_barrel_normal.exec()
         "cottages:barrel_lying_open",
         mode,
         {
-            description = unilib.brackets(S("Horizontal Normal Barrel"), S("Open")),
+            description =
+                unilib.utils.brackets(S("Decorative Horizontal Normal Barrel"), S("Open")),
             tiles = {"unilib_container_barrel_normal.png"},
             groups = {
                 choppy = 2, flammable = 2, not_in_creative_inventory = 1,
                 oddly_breakable_by_hand = 1, snappy = 1, tree = 1,
             },
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             drawtype = "mesh",
             drop = "unilib:container_barrel_normal",
@@ -231,7 +240,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
                 if node.param2 < 4 then
 
-                    minetest.add_node(
+                    core.add_node(
                         pos,
                         {
                             name = "unilib:container_barrel_normal_horizontal_open",
@@ -241,7 +250,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
                 else
 
-                    minetest.add_node(
+                    core.add_node(
                         pos,
                         {name = "unilib:container_barrel_normal_open", param2 = 0}
                     )
@@ -252,7 +261,7 @@ function unilib.pkg.container_barrel_normal.exec()
 
             on_rightclick = function(pos, node, puncher)
 
-                minetest.add_node(
+                core.add_node(
                     pos,
                     {name = "unilib:container_barrel_normal_horizontal", param2 = node.param2}
                 )
@@ -262,9 +271,20 @@ function unilib.pkg.container_barrel_normal.exec()
     )
 
     -- (Craft recipes)
+    -- N.B. The original code contains no craft recipe for the "open" variant, so I have introduced
+    --      one
+    unilib.register_craft({
+        -- Original to unilib
+        output = "unilib:container_barrel_normal",
+        recipe = {
+            {"group:wood", "unilib:metal_steel_ingot", "group:wood" },
+            {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},
+            {"group:wood", "group:wood", "group:wood"},
+        },
+    })
     unilib.register_craft({
         -- From cottages:barrel
-        output = "unilib:container_barrel_normal",
+        output = "unilib:container_barrel_normal_open",
         recipe = {
             {"group:wood", "", "group:wood" },
             {"unilib:metal_steel_ingot", "", "unilib:metal_steel_ingot"},

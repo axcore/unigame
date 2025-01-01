@@ -1,7 +1,6 @@
 # "underch-jit" remix - almost exactly the same as the "underch" remix (see below for a list of
 #       removed packages), but uses code from the "experimental" version of the underch mod, to
 #       produce just-in-time underground biome generation
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -26,7 +25,6 @@ misc_granules_normal|underch
 misc_granules_ruby|underch
 misc_matrix|underch
 misc_stone_burner|underch
-moss_mould_underground|underch
 moss_underground|underch
 moss_underground_dry|underch
 mushroom_black|underch
@@ -35,6 +33,7 @@ mushroom_green|underch
 mushroom_orange|underch
 plant_bush_underground|underch
 plant_bush_underground_dead|underch
+plant_mould_underground|underch
 plant_torchberry|underch
 plant_tuber_dark|underch
 shared_underch_slime|underch
@@ -78,7 +77,7 @@ stone_shinestone|underch
 stone_sichamine|underch compressed condensed
 stone_sichamine_extra|underch
 stone_slate_red|underch compressed condensed
-stone_slate_red_extra|underch
+stone_slimestone_black_extra|underch
 stone_slimestone_green|underch compressed condensed
 stone_slimestone_green_extra|underch
 stone_slimestone_purple|underch compressed condensed
@@ -111,37 +110,37 @@ gravel_ordinary|default mtg_plus
 item_stick_ordinary|default
 liquid_lava_ordinary|default
 liquid_water_ordinary|default
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_steel|default technic
-metal_tin|default technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 mineral_flint|default fire mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 mushroom_brown|flowers
 mushroom_red|flowers
-ore_default_stone_ordinary_with_coal|default
-ore_default_stone_ordinary_with_copper|default
-ore_default_stone_ordinary_with_diamond|default
-ore_default_stone_ordinary_with_gold|default
-ore_default_stone_ordinary_with_iron|default
-ore_default_stone_ordinary_with_mese|default
-ore_default_stone_ordinary_with_tin|default
-ore_moreores_stone_ordinary_with_mithril|moreores
-ore_moreores_stone_ordinary_with_silver|moreores
-ore_technic_stone_ordinary_with_chromium|technic_worldgen
-ore_technic_stone_ordinary_with_lead|technic_worldgen
-ore_technic_stone_ordinary_with_uranium|technic_worldgen
-ore_technic_stone_ordinary_with_zinc|technic_worldgen
-ore_xtraores_stone_ordinary_with_adamantite|xtraores
-ore_xtraores_stone_ordinary_with_geminitinum|xtraores
-ore_xtraores_stone_ordinary_with_palatinium|xtraores
-ore_xtraores_stone_ordinary_with_rarium|xtraores
-ore_xtraores_stone_ordinary_with_sybilline|xtraores
-ore_xtraores_stone_ordinary_with_tritonium|xtraores
-ore_xtraores_stone_ordinary_with_unobtainium|xtraores
+#ore_default_stone_ordinary_with_coal|default
+#ore_default_stone_ordinary_with_copper|default
+#ore_default_stone_ordinary_with_diamond|default
+#ore_default_stone_ordinary_with_gold|default
+#ore_default_stone_ordinary_with_iron|default
+#ore_default_stone_ordinary_with_mese|default
+#ore_default_stone_ordinary_with_tin|default
+#ore_moreores_stone_ordinary_with_mithril|moreores
+#ore_moreores_stone_ordinary_with_silver|moreores
+#ore_technic_stone_ordinary_with_chromium|technic_worldgen
+#ore_technic_stone_ordinary_with_lead|technic_worldgen
+#ore_technic_stone_ordinary_with_uranium|technic_worldgen
+#ore_technic_stone_ordinary_with_zinc|technic_worldgen
+#ore_xtraores_stone_ordinary_with_adamantite|xtraores
+#ore_xtraores_stone_ordinary_with_geminitium|xtraores
+#ore_xtraores_stone_ordinary_with_planexium|xtraores
+#ore_xtraores_stone_ordinary_with_rarium|xtraores
+#ore_xtraores_stone_ordinary_with_sybilline|xtraores
+#ore_xtraores_stone_ordinary_with_tritonium|xtraores
+#ore_xtraores_stone_ordinary_with_unobtainium|xtraores
 sand_silver|default
 stone_desert|default moreblocks
 stone_obsidian|default moreblocks
@@ -151,15 +150,15 @@ stone_ordinary_with_chromium|technic_worldgen
 stone_ordinary_with_coal|default
 stone_ordinary_with_copper|default
 stone_ordinary_with_diamond|default
-stone_ordinary_with_geminitinum|xtraores
+stone_ordinary_with_geminitium|xtraores
 stone_ordinary_with_gold|default
 stone_ordinary_with_iron|default
 stone_ordinary_with_lead|technic_worldgen
 stone_ordinary_with_mese|default
-stone_ordinary_with_palatinium|xtraores
 stone_ordinary_with_rarium|xtraores
 stone_ordinary_with_tin|default
 stone_ordinary_with_mithril|moreores
+stone_ordinary_with_planexium|xtraores
 stone_ordinary_with_silver|moreores
 stone_ordinary_with_sybilline|xtraores
 stone_ordinary_with_tritonium|xtraores
@@ -176,30 +175,40 @@ torch_ordinary|default
 #ore_underch_gravel_mossy|underch
 #ore_underch_stone_ordinary_cobble|underch
 
-# supporting packages (.depends) (all appear above)
-#dirt_ordinary|default farming moreblocks
-#fire_permanent|fire underch
-#gravel_ordinary|default mtg_plus
-#liquid_lava_ordinary|default
-#metal_copper|default moreblocks technic
-#metal_gold|default technic
-#metal_iron|default
-#mineral_coal|default technic
-#mineral_diamond|default mtg_plus
-#mineral_flint|default fire mtg_plus
-#mineral_mese|default
-#stone_ordinary|default moreblocks technic
+# supporting packages (.depends)
+clay_ordinary|default
+metal_adamantite|xtraores
+metal_chromium|glemr11 technic_worldgen technic
+metal_geminitium|xtraores
+metal_lead|glemr11 technic_worldgen technic
+metal_mithril|glemr11 moreores technic
+metal_planexium|xtraores
+metal_rarium|xtraores
+metal_silver|glemr11 moreores technic
+metal_sybilline|xtraores
+metal_tritonium|xtraores
+metal_unobtainium|xtraores
+metal_uranium|technic_worldgen technic
+metal_zinc|glemr11 technic_worldgen technic
+
+# supporting packages (.at_least_one)
 
 # supporting packages (.optional)
-#brick_ordinary|default
+#container_chest_ordinary|default
 #fire_ordinary|fire
 #grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
-#item_stick_ordinary|default
-#metal_steel|default technic
-#metal_tin|default technic
+#gravel_sandstone_desert|glemr4
+#gravel_sandstone_ordinary|unilib
+#gravel_stone_desert|glemr11
+#item_screwdriver_ordinary|screwdriver
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
 #moss_green|sickles
+#plant_shrub_dry|default
+#sand_desert|default farming
+#sand_ordinary|default
 #soil_ordinary|farming
-#stone_obsidian|default moreblocks
-#torch_ordinary|default
+
+# supporting packages (.suggested)

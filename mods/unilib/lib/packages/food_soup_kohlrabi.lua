@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_kohlrabi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.food_soup_kohlrabi.exec()
         description = S("Uncooked Kohlrabi Soup"),
         tiles = {"unilib_food_soup_kohlrabi_raw.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_soup = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_soup_kohlrabi_raw.png",
@@ -63,7 +63,7 @@ function unilib.pkg.food_soup_kohlrabi.exec()
             description = S("Cooked Kohlrabi Soup"),
             tiles = {"unilib_food_soup_kohlrabi_cooked.png"},
             groups = {attached_node = 1, dig_immediate = 3, eatable = 1},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_food_soup_kohlrabi_cooked.png",
@@ -76,7 +76,7 @@ function unilib.pkg.food_soup_kohlrabi.exec()
             walkable = false,
             wield_image = "unilib_food_soup_kohlrabi_cooked.png",
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:food_soup_kohlrabi_cooked", 5, "unilib:utensil_plate_ceramic"
             ),
         }
@@ -96,7 +96,7 @@ function unilib.pkg.food_soup_kohlrabi.post()
     local c_kohlrabi = "unilib:crop_kohlrabi_harvest"
     local c_parsley = "unilib:crop_parsley_curly_harvest"
 
-    local replace_list = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_list = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(replace_list, {"group:food_oil", "unilib:vessel_bottle_glass_empty"})
 
     unilib.register_craft({

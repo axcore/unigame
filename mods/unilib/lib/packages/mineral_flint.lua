@@ -17,9 +17,9 @@
 unilib.pkg.mineral_flint = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local fire_add_mode = unilib.imported_mod_table.fire.add_mode
-local mtg_plus_add_mode = unilib.imported_mod_table.mtg_plus.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local fire_add_mode = unilib.global.imported_mod_table.fire.add_mode
+local mtg_plus_add_mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,7 @@ function unilib.pkg.mineral_flint.exec()
         inventory_image = "unilib_mineral_flint_lump.png"
     })
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_node(
             -- From mtg_plus:flint_block
@@ -65,7 +65,7 @@ function unilib.pkg.mineral_flint.exec()
                 description = S("Flint Block"),
                 tiles = {"unilib_mineral_flint_block.png"},
                 groups = {cracky = 2},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 is_ground_content = false,
             }
@@ -83,6 +83,9 @@ function unilib.pkg.mineral_flint.exec()
             },
         })
         unilib.register_stairs("unilib:mineral_flint_block")
+        unilib.register_carvings("unilib:mineral_flint_block", {
+            millwork_flag = true,
+        })
 
     end
 
@@ -94,8 +97,8 @@ function unilib.pkg.mineral_flint.post()
         return
     end
 
-    if unilib.pkg_executed_table["fire_ordinary"] ~= nil and
-            unilib.pkg_executed_table["metal_steel"] ~= nil then
+    if unilib.global.pkg_executed_table["fire_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["metal_steel"] ~= nil then
 
         unilib.register_tool(
             -- From fire:flint_and_steel
@@ -111,37 +114,39 @@ function unilib.pkg.mineral_flint.post()
                 on_use = function(itemstack, user, pointed_thing)
 
                     local sound_pos = pointed_thing.above or user:get_pos()
-                    minetest.sound_play(
+                    core.sound_play(
                         "unilib_flint_with_steel",
-                        {pos = sound_pos, gain = 0.5, max_hear_distance = 8},
+                        {pos = sound_pos, gain = 0.2, max_hear_distance = 8},
                         true
                     )
 
                     local player_name = user:get_player_name()
                     if pointed_thing.type == "node" then
 
-                        local node_under = minetest.get_node(pointed_thing.under).name
-                        local nodedef = minetest.registered_nodes[node_under]
+                        local node_under = core.get_node(pointed_thing.under).name
+                        local nodedef = core.registered_nodes[node_under]
                         if not nodedef then
                             return
                         end
 
-                        if minetest.is_protected(pointed_thing.under, player_name) then
+                        if core.is_protected(pointed_thing.under, player_name) then
 
-                            minetest.chat_send_player(player_name, S("This area is protected"))
+                            core.record_protection_violation(pointed_thing.under, player_name)
                             return
+
                         end
 
                         -- (Special handling for artisanal glass nodes, which ignite tinted flames)
-                        if unilib.pkg_executed_table["fire_permanent_tinted"] ~= nil and
+                        if unilib.global.pkg_executed_table["fire_permanent_tinted"] ~= nil and
                                 string.find(node_under, "^unilib:glass_artisanal_dyed_") then
 
+                            -- (Assuming "unilib:glass_artisanal_dyed_X")
                             local flame_name = "unilib:fire_permanent_tinted_" ..
-                                    unilib.get_last_component(node_under)
+                                    string.sub(node_under, 29)
 
-                            if minetest.registered_nodes[flame_name] ~= nil then
+                            if core.registered_nodes[flame_name] ~= nil then
 
-                                minetest.set_node(
+                                core.set_node(
                                     {
                                         x = pointed_thing.under.x,
                                         y = pointed_thing.under.y + 1,
@@ -157,28 +162,32 @@ function unilib.pkg.mineral_flint.post()
 
                             nodedef.on_ignite(pointed_thing.under, user)
 
-                        elseif minetest.get_item_group(node_under, "flammable") >= 1
-                                and minetest.get_node(pointed_thing.above).name == "air" then
+                        elseif core.get_item_group(node_under, "flammable") >= 1
+                                and core.get_node(pointed_thing.above).name == "air" then
 
-                            minetest.set_node(
-                                pointed_thing.above,
-                                {name = "unilib:fire_ordinary"}
-                            )
+                            if core.is_protected(pointed_thing.above, player_name) then
+
+                                core.record_protection_violation(pointed_thing.above, player_name)
+                                return
+
+                            end
+
+                            core.set_node(pointed_thing.above, {name = "unilib:fire_ordinary"})
 
                         end
 
                     end
 
-                    if not unilib.is_creative(player_name) then
+                    if not unilib.utils.is_creative(player_name) then
 
                         -- Wear tool
                         local wdef = itemstack:get_definition()
-                        itemstack:add_wear(1000)
+                        itemstack:add_wear_by_uses(66)
 
                         -- Tool break sound
                         if itemstack:get_count() == 0 and wdef.sound and wdef.sound.breaks then
 
-                            minetest.sound_play(
+                            core.sound_play(
                                 wdef.sound.breaks,
                                 {pos = sound_pos, gain = 0.5},
                                 true
@@ -197,14 +206,14 @@ function unilib.pkg.mineral_flint.post()
             -- From fire:flint_and_steel
             output = "unilib:mineral_flint_lump_with_steel",
             recipe = {
-                {"unilib:mineral_flint_lump", "unilib:metal_steel_ingot"}
-            }
+                {"unilib:mineral_flint_lump", "unilib:metal_steel_ingot"},
+            },
         })
 
     end
 
-    if unilib.pkg_executed_table["fire_permanent"] ~= nil and
-            unilib.pkg_executed_table["mineral_coal"] ~= nil then
+    if unilib.global.pkg_executed_table["fire_permanent"] ~= nil and
+            unilib.global.pkg_executed_table["mineral_coal"] ~= nil then
 
         -- Notes from fire:
         -- Override coalblock to enable permanent flame
@@ -214,8 +223,8 @@ function unilib.pkg.mineral_flint.post()
             after_destruct = function(pos)
 
                 pos.y = pos.y + 1
-                if minetest.get_node(pos).name == "unilib:fire_permanent" then
-                    minetest.remove_node(pos)
+                if core.get_node(pos).name == "unilib:fire_permanent" then
+                    core.remove_node(pos)
                 end
 
             end,
@@ -223,8 +232,8 @@ function unilib.pkg.mineral_flint.post()
             on_ignite = function(pos)
 
                 local flame_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
-                if minetest.get_node(flame_pos).name == "air" then
-                    minetest.set_node(flame_pos, {name = "unilib:fire_permanent"})
+                if core.get_node(flame_pos).name == "air" then
+                    core.set_node(flame_pos, {name = "unilib:fire_permanent"})
                 end
 
             end

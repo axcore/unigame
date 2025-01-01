@@ -9,7 +9,7 @@
 unilib.pkg.plant_pumpkin_red_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.plant_pumpkin_red_wild.exec()
         {"cropocalypse:pumpkin", "cropocalypse:pumpkin_wild"},
         mode,
         {
-            description = unilib.annotate(S("Wild Red Pumpkin Plant"), "Cucurbita"),
+            description = unilib.utils.annotate(S("Wild Red Pumpkin Plant"), "Cucurbita"),
             tiles = {
                 "unilib_plant_pumpkin_red_wild_top.png",
                 "unilib_plant_pumpkin_red_wild_bottom.png",
@@ -46,21 +46,21 @@ function unilib.pkg.plant_pumpkin_red_wild.exec()
             groups = {
                 choppy = 2, flammable = 1, flora = 1, oddly_breakable_by_hand = 2, pumpkin = 1,
             },
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
                     {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
-                }
+                },
             },
             paramtype2 = "facedir",
         }
     )
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("cropocalypse_plant_pumpkin_red_wild", {
+    unilib.register_decoration_generic("cropocalypse_plant_pumpkin_red_wild", {
         -- From cropocalypse/plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_pumpkin_red_wild",
@@ -89,7 +89,7 @@ function unilib.pkg.plant_pumpkin_red_wild.exec()
             paramtype = "meshoptions",
             wield_image = "unilib_plant_pumpkin_red_wild_chunk.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:plant_pumpkin_red_chunk", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:plant_pumpkin_red_chunk", 1),
         }
     )
 

@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,12 +28,12 @@ function unilib.pkg.deco_farlands_grass_dry.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("default_grass_dry_" .. i, "farlands_grass_dry_" .. i, {
+        unilib.register_decoration_complete("default_grass_dry_" .. i, "farlands_grass_dry_" .. i, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "grass_dry"
             biomes = "farlands_savanna",
             place_on = "unilib:dirt_ordinary_with_turf_dry",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 1,
         })
 

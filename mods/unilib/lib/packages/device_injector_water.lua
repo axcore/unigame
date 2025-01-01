@@ -9,7 +9,7 @@
 unilib.pkg.device_injector_water = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.thirsty.add_mode
+local mode = unilib.global.imported_mod_table.thirsty.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ end
 function unilib.pkg.device_injector_water.exec()
 
     -- N.B. Most of the code providing functionality for this craftitem is in
-    --      ../effects/hydration.lua
+    --      ../lib/effects/hydration/hydration_base.lua
 
     unilib.register_craftitem("unilib:device_injector_water", "thirsty:injector", mode, {
         -- From thirsty:injector
@@ -45,7 +45,7 @@ function unilib.pkg.device_injector_water.post()
     local c_diamond = "unilib:mineral_diamond_gem"
     local c_mese = "unilib:mineral_mese_crystal"
 
-    minetest.register_craft({
+    unilib.register_craft({
         -- From thirsty:injector
         output = "unilib:device_injector_water",
         recipe = {
@@ -53,7 +53,7 @@ function unilib.pkg.device_injector_water.post()
             {c_mese, "group:craftable_bucket", c_mese},
             {c_diamond, c_mese, c_diamond},
         },
-        -- N.B. no replacement table with unilib.craftable_bucket_list required
+        -- N.B. no replacement table with unilib.global.craftable_bucket_list required
     })
 
 end

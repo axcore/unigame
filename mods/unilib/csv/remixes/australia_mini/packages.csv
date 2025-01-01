@@ -1,8 +1,14 @@
 # "australia_mini" remix - the "australia" remix without biomes, decorations or ores (or the base
-#       package)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
+#       package; there are no ABM/LBM packages to omit)
+# unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
+#   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
+#   enable them by uncommenting the optional package below
 
 # node_name | original_mod
+
+# Optional package. Uncomment this package to replace minetest_game dirt-with-turf nodes with
+#       custom Australia-themed ones
+#dirt_custom_antipodean|unilib
 
 # australia packages
 #base_australia|australia
@@ -123,10 +129,10 @@ flower_daisy_silver|australia
 flower_lily_darling|australia
 flower_lily_mangrove|australia
 food_nuts_macadamia|australia
+fruit_apple_mangrove|australia
 fruit_berry_lilly_pilly|australia
 fruit_cherry_australian|australia
 fruit_fig_moreton_bay|australia
-fruit_mangrove_apple|australia
 fruit_quandong_desert|australia
 grass_mitchell|australia
 gravel_red_antipodean|australia
@@ -229,13 +235,13 @@ tree_fern|ferns
 tree_fern_giant|ferns
 
 # supporting packages (.depends)
-metal_copper|default moreblocks technic
-metal_gold|default technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
 metal_iron|default
-metal_tin|default technic
+metal_tin|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
-mineral_mese|default
+mineral_mese|default glemr11
 stone_ordinary|default moreblocks technic
 
 # supporting packages (.at_least_one)
@@ -246,5 +252,9 @@ liquid_water_ordinary|default
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
 #grass_jungle|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
 #moss_green|sickles
 #mushroom_brown|flowers
+
+# supporting packages (.suggested)

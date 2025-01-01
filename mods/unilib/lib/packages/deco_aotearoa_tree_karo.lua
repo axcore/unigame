@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_tree_karo = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -23,6 +23,7 @@ function unilib.pkg.deco_aotearoa_tree_karo.init()
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_dunes"},
             {
+                "dirt_custom_antipodean",
                 "dirt_ordinary",
                 "gravel_ordinary",
                 "sand_ironsand",
@@ -37,7 +38,7 @@ function unilib.pkg.deco_aotearoa_tree_karo.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_tree_karo_clump_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_karo_clump_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_karo"
             biomes = {
@@ -49,7 +50,7 @@ function unilib.pkg.deco_aotearoa_tree_karo.post()
                 "aotearoa_dunes_sand",
             },
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_antipodean_with_turf_coastal_scrub",
                 "unilib:gravel_ordinary",
                 "unilib:sand_ironsand",
                 "unilib:sand_ordinary",
@@ -57,7 +58,7 @@ function unilib.pkg.deco_aotearoa_tree_karo.post()
             y_max = 14,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_tree_karo_normal_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_tree_karo_normal_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "tree_karo"
             biomes = "aotearoa_coastal_pohutukawa_forest",

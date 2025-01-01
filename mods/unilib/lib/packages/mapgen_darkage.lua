@@ -9,11 +9,11 @@
 unilib.pkg.mapgen_darkage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 -- Local constants for the mapgen, set during the .post() function below
-local c_air = minetest.CONTENT_AIR
-local c_ignore = minetest.CONTENT_IGNORE
+local c_air = core.CONTENT_AIR
+local c_ignore = core.CONTENT_IGNORE
 local c_lawn = nil
 local c_dirt = nil
 local c_sand = nil
@@ -31,7 +31,7 @@ local dbuf_table = {}
 -- Notes from darkage:
 -- Makes a stratus of rocks
 -- name of the rock to generate
--- c_wherein id of node to replace, for example minetest.get_content_id("default:stone")
+-- c_wherein id of node to replace, for example core.get_content_id("default:stone")
 -- ca_ceilin associative array
 -- minp, maxp the corners of the map to be generated
 -- seed random seed
@@ -48,7 +48,7 @@ local function generate_stratus(
         return
     end
 
-    local c_node = minetest.get_content_id(name)
+    local c_node = core.get_content_id(name)
 
     -- It will be only generate a stratus for every 100 m of area
     local stratus_per_volume=1
@@ -152,7 +152,7 @@ local function generate_claylike(
 )
     if maxp.y >= maxh + 1 and minp.y <= minh - 1 then
 
-        local c_ore = minetest.get_content_id(name)
+        local c_ore = core.get_content_id(name)
         local pr = PseudoRandom(seed)
 
         local divlen = 4
@@ -232,19 +232,19 @@ local function generate_strati(minp, maxp, seed)
 
     local t1 = os.clock()
 
-    local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
+    local vm, emin, emax = core.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new({MinEdge = emin, MaxEdge = emax})
     local data = vm:get_data(dbuf_table)
 
-    if unilib.pkg_executed_table["dirt_mud_dry"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_mud_dry"] ~= nil then
         generate_claylike(data, area, "unilib:dirt_mud_dry", minp, maxp, seed + 1, 4, 0, 2, false)
     end
 
-    if unilib.pkg_executed_table["sand_silt"] ~= nil then
+    if unilib.global.pkg_executed_table["sand_silt"] ~= nil then
         generate_claylike(data, area, "unilib:sand_silt", minp, maxp, seed + 2, 4, -1, 1, true)
     end
 
-    if unilib.pkg_executed_table["stone_shale_brown"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_shale_brown"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_shale_brown",
@@ -255,7 +255,7 @@ local function generate_strati(minp, maxp, seed)
 
     end
 
-    if unilib.pkg_executed_table["stone_slate_grey"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_slate_grey"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_slate_grey",
@@ -266,57 +266,57 @@ local function generate_strati(minp, maxp, seed)
 
     end
 
-    if unilib.pkg_executed_table["stone_schist_grey"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_schist_grey"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_schist_grey",
             c_stone,
             stone_air_table,
-            minp, maxp, seed + 7, 6, 19, 6, 50, unilib.y_min, -10
+            minp, maxp, seed + 7, 6, 19, 6, 50, unilib.constant.y_min, -10
         )
 
     end
 
-    if unilib.pkg_executed_table["stone_basalt_dark"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_basalt_dark"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_basalt_dark",
             c_stone,
             stone_air_table,
-            minp, maxp, seed + 8, 5, 20, 5, 20, unilib.y_min, -50
+            minp, maxp, seed + 8, 5, 20, 5, 20, unilib.constant.y_min, -50
         )
 
     end
 
-    if unilib.pkg_executed_table["stone_marble_grey"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_marble_grey"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_marble_grey",
             c_stone,
             stone_air_table,
-            minp, maxp, seed + 9, 4, 25, 6, 50, unilib.y_min,  -75
+            minp, maxp, seed + 9, 4, 25, 6, 50, unilib.constant.y_min,  -75
         )
 
     end
 
-    if unilib.pkg_executed_table["stone_serpentine"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_serpentine"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_serpentine",
             c_stone,
             stone_air_table,
-            minp, maxp, seed + 10, 4, 28, 8, 50, unilib.y_min,  -350
+            minp, maxp, seed + 10, 4, 28, 8, 50, unilib.constant.y_min,  -350
         )
 
     end
 
-    if unilib.pkg_executed_table["stone_gneiss_white"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_gneiss_white"] ~= nil then
 
         generate_stratus(data, area,
             "unilib:stone_gneiss_white",
             c_stone,
             stone_air_table,
-            minp, maxp, seed + 11, 4, 15, 5, 50, unilib.y_min, -250
+            minp, maxp, seed + 11, 4, 15, 5, 50, unilib.constant.y_min, -250
         )
 
     end
@@ -359,13 +359,13 @@ end
 function unilib.pkg.mapgen_darkage.post()
 
     -- (The local variables can now be set. All of the parent packages are hard dependencies)
-    c_dirt = minetest.get_content_id("unilib:dirt_ordinary")
-    c_lawn = minetest.get_content_id("unilib:dirt_ordinary_with_turf")
-    c_sand = minetest.get_content_id("unilib:sand_ordinary")
-    c_stone = minetest.get_content_id("unilib:stone_ordinary")
-    c_water = minetest.get_content_id("unilib:liquid_water_ordinary_source")
+    c_dirt = core.get_content_id("unilib:dirt_ordinary")
+    c_lawn = core.get_content_id("unilib:dirt_ordinary_with_turf")
+    c_sand = core.get_content_id("unilib:sand_ordinary")
+    c_stone = core.get_content_id("unilib:stone_ordinary")
+    c_water = core.get_content_id("unilib:liquid_water_ordinary_source")
     stone_air_table = {[c_stone] = true, [c_air] = true}
 
-    minetest.register_on_generated(generate_strati)
+    core.register_on_generated(generate_strati)
 
 end

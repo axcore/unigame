@@ -9,7 +9,7 @@
 unilib.pkg.bed_fancy_quilt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.colored_beds.add_mode
+local mode = unilib.global.imported_mod_table.colored_beds.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.bed_fancy_quilt.init()
 
     return {
         description = "Fancy bed with quilt set (15 colours)",
-        depends = "wool_basic",
+        depends = {"shared_beds", "wool_basic"},
         optional = "bed_fancy",
     }
 
@@ -46,14 +46,14 @@ function unilib.pkg.bed_fancy_quilt.exec()
     }
 
     -- (Avoid craft recipe conflict with the minetest_game bed)
-    if unilib.pkg_executed_table["bed_fancy"] == nil then
+    if unilib.global.pkg_executed_table["bed_fancy"] == nil then
 
         table.insert(bed_list, {"red", "", S("Fancy Bed with Red Quilt")})
 
     else
 
-        minetest.register_alias("unilib:bed_fancy_quilt_red_bottom", "beds:fancy_bed_bottom")
-        minetest.register_alias("unilib:bed_fancy_quilt_red_top", "beds:fancy_bed_top")
+        core.register_alias("unilib:bed_fancy_quilt_red_bottom", "beds:fancy_bed_bottom")
+        core.register_alias("unilib:bed_fancy_quilt_red_top", "beds:fancy_bed_top")
 
     end
 
@@ -69,13 +69,13 @@ function unilib.pkg.bed_fancy_quilt.exec()
         local inv_img = "unilib_bed_fancy_inv_overlay.png^unilib_wool_" .. part_name .. ".png" ..
                 "^unilib_bed_fancy_inv_overlay.png^[makealpha:255,128,128"
 
-        if not unilib.mtgame_tweak_flag then
+        if not unilib.setting.mtgame_tweak_flag then
 
             -- Current minetest_game recipe
             recipe_table = {
                 {"", "", "group:stick"},
                 {c_wool, c_wool, c_wool},
-                {"group:wood", "group:wood", "group:wood"}
+                {"group:wood", "group:wood", "group:wood"},
             }
 
         else
@@ -84,16 +84,16 @@ function unilib.pkg.bed_fancy_quilt.exec()
             recipe_table = {
                 {"", "", "group:stick"},
                 {c_wool, c_wool, "unilib:wool_white"},
-                {"group:wood", "group:wood", "group:wood"}
+                {"group:wood", "group:wood", "group:wood"},
             }
 
         end
 
-        unilib.register_bed({
+        unilib.pkg.shared_beds.register_bed({
             -- Code adapted from the "bed_fancy" package, textures from "colored_beds" mod. Creates
             --      unilib:bed_fancy_quilt_black_bottom, unilib:bed_fancy_quilt_black_top, etc
             part_name = "fancy_quilt_" .. part_name,
-            orig_name = {
+            orig_name_list = {
                 "beds:fancy_bed_" .. orig_name .. "_bottom",
                 "beds:fancy_bed_" .. orig_name .. "_top",
             },
@@ -136,7 +136,7 @@ function unilib.pkg.bed_fancy_quilt.exec()
                     {-0.5, -0.375, -0.5, -0.4375, -0.125, 0.5},
                     {0.4375, -0.375, -0.5, 0.5, -0.125, 0.5},
                     {-0.4375, -0.3125, -0.5, 0.4375, -0.0625, 0.4375},
-                }
+                },
             },
             select_table = {-0.5, -0.5, -0.5, 0.5, 0.06, 1.5},
             wield_image = inv_img,

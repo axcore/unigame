@@ -9,7 +9,7 @@
 unilib.pkg.stone_jungle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mtg_plus.add_mode
+local mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,13 +32,42 @@ function unilib.pkg.stone_jungle.exec()
         description = S("Jungle Stone"),
 
         category = "other",
+        colour = "#5A6D49",
         fictional_flag = true,
         grinder_flag = false,
         hardness = 1,
         no_smooth_flag = true,
     })
 
-    -- (no smoothstone/block/brick variants)
+    unilib.register_stone_smooth({
+        -- Original to unilib. Creates unilib:stone_jungle
+        part_name = "jungle",
+        orig_name = nil,
+
+        replace_mode = mode,
+        cobble_mode = "cobble",
+        description = S("Jungle Stone"),
+    })
+
+    unilib.register_stone_block({
+        -- Original to unilib. Creates unilib:stone_jungle_block
+        part_name = "jungle",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Jungle Stone Block"),
+        img_list = {"unilib_stone_jungle.png^unilib_stone_block_overlay.png"},
+    })
+
+    unilib.register_stone_brick({
+        -- Original to unilib. Creates unilib:stone_jungle_brick
+        part_name = "jungle",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Jungle Stone Bricks"),
+        img_list = {"unilib_stone_jungle.png^unilib_stone_brick_overlay.png"},
+    })
 
     unilib.register_node("unilib:stone_jungle_cobble", "mtg_plus:jungle_cobble", mode, {
         -- From mtg_plus:jungle_cobble
@@ -46,7 +75,7 @@ function unilib.pkg.stone_jungle.exec()
         tiles = {"unilib_stone_jungle_cobble.png"},
         -- N.B cobble = 1 not in original code
         groups = {cobble = 1, cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -72,9 +101,7 @@ function unilib.pkg.stone_jungle.exec()
         output = "unilib:stone_ordinary",
         recipe = "unilib:stone_jungle_cobble",
     })
-    -- N.B. Because of the lack of a smoothstone, we can't call
-    --      unilib.register_stone_smooth_cuttings() here
-    if unilib.super_stone_table["jungle"] ~= nil then
+    if unilib.global.super_stone_table["jungle"] ~= nil then
 
         unilib.register_stairs("unilib:stone_jungle_cobble", {
             group_type = "cobble",
@@ -91,5 +118,23 @@ function unilib.pkg.stone_jungle.exec()
         })
 
     end
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_jungle_cobble_compressed
+        part_name = "jungle",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Jungle Cobblestone"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_jungle_cobble_condensed
+        part_name = "jungle",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Jungle Cobblestone"),
+    })
 
 end

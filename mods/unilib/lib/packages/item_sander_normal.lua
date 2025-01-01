@@ -9,7 +9,7 @@
 unilib.pkg.item_sander_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cement.add_mode
+local mode = unilib.global.imported_mod_table.cement.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -54,7 +54,7 @@ function unilib.pkg.item_sander_normal.exec()
         --      get the just digged node position in a custom .after_use() function
         on_use = function(itemstack, user, pointed_thing)
 
-            local node = minetest.get_node(pointed_thing.under).name
+            local node = core.get_node(pointed_thing.under).name
             local player_name = user:get_player_name()
             local node_pos = pointed_thing.under
 
@@ -62,21 +62,25 @@ function unilib.pkg.item_sander_normal.exec()
                 return
             end
 
-            if minetest.is_protected(node_pos, player_name) then
+            if core.is_protected(node_pos, player_name) then
 
-                minetest.record_protection_violation(node_pos, player_name)
+                core.record_protection_violation(node_pos, player_name)
                 return
 
             end
 
-            minetest.set_node(
-                pointed_thing.under, {name = "unilib:material_concrete_normal_smooth"}
-            )
+            core.set_node(pointed_thing.under, {name = "unilib:material_concrete_normal_smooth"})
 
             -- Notes from original mod:
             -- Manually determined by testing with custom .after_use() function printing the value.
             --      (218 is valid for 0.2 for all times and 100 for the "uses" value)
             itemstack:add_wear(218)
+            -- N.B. No sound in original code
+            core.sound_play(
+                "unilib_flint_with_steel",
+                {pos = pos, max_hear_distance = 16},
+                true
+            )
 
             return itemstack
 

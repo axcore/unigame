@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream_blueberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.icecream.add_mode
+local mode = unilib.global.imported_mod_table.icecream.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,9 +36,9 @@ function unilib.pkg.food_icecream_blueberry.exec()
         inventory_image = "unilib_food_icecream_blueberry.png",
         groups = {food_icecream = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_blueberry", 6),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_blueberry", 6),
     })
-    if unilib.pkg_executed_table["fruit_blueberry_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["fruit_blueberry_ordinary"] ~= nil then
 
         local c_blueberry = "unilib:fruit_blueberry_ordinary"
 
@@ -63,7 +63,7 @@ function unilib.pkg.food_icecream_blueberry.exec()
         })
 
     end
-    if unilib.pkg_executed_table["produce_blueberry_highbush"] ~= nil then
+    if unilib.global.pkg_executed_table["produce_blueberry_highbush"] ~= nil then
 
         local c_blueberry = "unilib:produce_blueberry_highbush_harvest"
 

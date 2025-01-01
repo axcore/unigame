@@ -9,7 +9,7 @@
 unilib.pkg.deco_plants_plant_potato_ancient_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plants.add_mode
+local mode = unilib.global.imported_mod_table.plants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,7 +27,7 @@ end
 
 function unilib.pkg.deco_plants_plant_potato_ancient_wild.post()
 
-    unilib.register_decoration_now("plants_plant_potato_ancient_wild", nil, {
+    unilib.register_decoration_complete("plants_plant_potato_ancient_wild", nil, {
         -- Original to unilib, replacing the calls to the habitat mod in the original code
         -- Completes decoration in package "plant_potato_ancient_wild"
         -- N.B. Swapped original dirt type for rainforest litter, which is where jungle trees are

@@ -9,7 +9,7 @@
 unilib.pkg.misc_scarecrow_straw = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.agriculture.add_mode
+local mode = unilib.global.imported_mod_table.agriculture.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,13 +33,15 @@ function unilib.pkg.misc_scarecrow_straw.exec()
         description = S("Straw Scarecrow"),
         tiles = {"unilib_misc_scarecrow_straw.png"},
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, stick = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
             fixed = {-0.5, -0.5, -0.5, 0.5, 1.5, 0.5},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         mesh = "unilib_misc_scarecrow_straw.obj",
         paramtype = "light",
         paramtype2 = "facedir",

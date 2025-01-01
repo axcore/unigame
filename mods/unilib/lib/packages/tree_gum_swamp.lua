@@ -9,7 +9,7 @@
 unilib.pkg.tree_gum_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_gum_swamp.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Eucalyptus regnans"
 
     unilib.register_tree({
@@ -107,7 +107,7 @@ function unilib.pkg.tree_gum_swamp.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_gum_swamp_closed
+        -- Original to unilib. Creates unilib:gate_gum_swamp_closed, etc
         part_name = "gum_swamp",
         orig_name = {nil, nil},
 
@@ -117,20 +117,20 @@ function unilib.pkg.tree_gum_swamp.exec()
     })
 
     -- N.B. Tweaked these schematics to remove a rogue tree trunk node at the top
-    unilib.register_decoration("australia_tree_gum_swamp_in_tasmania", {
+    unilib.register_decoration_generic("australia_tree_gum_swamp_in_tasmania", {
         -- From australia/biome_tasmania.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_gum_swamp.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_swamp.mts",
 
         fill_ratio = 1 / 10000,
         flags = "place_center_x, place_center_z",
         rotation = "random",
         sidelen = 80,
     })
-    unilib.register_decoration("australia_tree_gum_swamp_in_victoria", {
+    unilib.register_decoration_generic("australia_tree_gum_swamp_in_victoria", {
         -- From australia/biome_victorian_forests.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_gum_swamp.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_swamp.mts",
 
         fill_ratio = 1 / 15000,
         flags = "place_center_x, place_center_z",

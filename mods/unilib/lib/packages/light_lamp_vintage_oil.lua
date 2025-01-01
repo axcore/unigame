@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_vintage_oil = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_vintage.add_mode
+local mode = unilib.global.imported_mod_table.morelights_vintage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,19 +37,21 @@ function unilib.pkg.light_lamp_vintage_oil.exec()
                     frames_w = 16,
                     frames_h = 1,
                     frame_length = 0.3,
-                }
+                },
             },
             "unilib_light_lamp_vintage_oil.png",
-            "unilib_chain_brass_vintage.png",
+            "unilib_hardware_chain_brass_vintage.png",
         },
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         collision_box = {
             type = "fixed",
             fixed = {-1/8, -1/2, -1/8, 1/8, 1/4, 1/8},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 8,
         mesh = "unilib_light_lamp_vintage_oil.obj",
         paramtype = "light",
@@ -66,8 +68,8 @@ function unilib.pkg.light_lamp_vintage_oil.exec()
         recipe = {
             {"", "unilib:glass_ordinary", ""},
             {"", "unilib:item_string_ordinary", ""},
-            {"", "unilib:metal_brass_ingot", ""}
-        }
+            {"", "unilib:metal_brass_ingot", ""},
+        },
     })
 
 end

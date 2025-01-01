@@ -9,7 +9,7 @@
 unilib.pkg.pane_glass_framed_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,7 +41,7 @@ function unilib.pkg.pane_glass_framed_wood.exec()
                 "unilib_pane_glass_framed_wood_half_top.png",
             },
             groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             inventory_image = "unilib_glass_framed_wood.png",
             recipe = {

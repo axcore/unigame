@@ -9,7 +9,7 @@
 unilib.pkg.decor_frame_timber_clay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.fachwerk.add_mode
+local mode = unilib.global.imported_mod_table.fachwerk.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,8 +38,8 @@ function unilib.pkg.decor_frame_timber_clay.exec()
     })
 
     -- Add baked clays in many colours
-    if unilib.fachwerk_extra_nodes_flag and
-            unilib.pkg_executed_table["clay_baked_basic"] ~= nil then
+    if unilib.setting.fachwerk_extra_nodes_flag and
+            unilib.global.pkg_executed_table["clay_baked_basic"] ~= nil then
 
         local clay_list = {
             "black", "blue", "brown", "cyan", "green", "green_dark", "grey", "grey_dark",
@@ -49,7 +49,7 @@ function unilib.pkg.decor_frame_timber_clay.exec()
         for _, part_name in pairs(clay_list) do
 
             local ingredient = "unilib:clay_baked_" .. part_name
-            local def_table = minetest.registered_nodes[ingredient]
+            local def_table = core.registered_nodes[ingredient]
 
             if def_table ~= nil then
 
@@ -68,7 +68,8 @@ function unilib.pkg.decor_frame_timber_clay.exec()
     end
 
     -- Also add brown clays, because they are ubiquitous in the "underground challenge" mod
-    if unilib.fachwerk_extra_nodes_flag and unilib.pkg_executed_table["clay_brown"] ~= nil then
+    if unilib.setting.fachwerk_extra_nodes_flag and
+            unilib.global.pkg_executed_table["clay_brown"] ~= nil then
 
         unilib.pkg.shared_fachwerk.register_timber_frame({
             -- Original to unilib. Creates unilib:clay_baked_black_with_frame_timber, etc

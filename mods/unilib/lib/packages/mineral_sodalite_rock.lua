@@ -9,7 +9,7 @@
 unilib.pkg.mineral_sodalite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.decoblocks.add_mode
+local mode = unilib.global.imported_mod_table.decoblocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_sodalite_rock.exec()
 
     local c_lump = "unilib:mineral_sodalite_lump"
-    local hardness = unilib.mineral_table["sodalite"]["hardness"]
+    local hardness = unilib.global.mineral_table["sodalite"]["hardness"]
 
     unilib.register_mineral_rock("sodalite")
 
@@ -38,7 +38,7 @@ function unilib.pkg.mineral_sodalite_rock.exec()
         tiles = {"unilib_mineral_sodalite_rock.png"},
         -- N.B. stone = 1 in original code, omitted here
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

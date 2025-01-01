@@ -9,7 +9,7 @@
 unilib.pkg.dirt_peat_forest = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,12 +34,12 @@ function unilib.pkg.dirt_peat_forest.exec()
             "unilib_dirt_peat_forest_top.png",
             "unilib_dirt_peat_antipodean.png",
             {
-                name ="unilib_dirt_peat_antipodean.png^unilib_dirt_peat_forest_side.png",
+                name ="unilib_dirt_peat_antipodean.png^unilib_dirt_peat_forest_side_overlay.png",
                 tileable_vertical = false,
             },
         },
         groups = {crumbly = 3},
-        sounds = unilib.node_sound_dirt_defaults({
+        sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
         }),
@@ -51,7 +51,7 @@ function unilib.pkg.dirt_peat_forest.exec()
                 {items = {"unilib:dirt_peat_antipodean"}},
             },
         },
-        is_ground_content = unilib.caves_chop_dirt_flag,
+        is_ground_content = unilib.setting.caves_chop_dirt_flag,
     })
 
 end

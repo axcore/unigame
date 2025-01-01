@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_beetroot = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_soup_beetroot.exec()
         -- N.B. no food_beetroot in original code
         groups = {flammable = 2, food_beetroot_soup = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_soup_beetroot", 6, "unilib:utensil_bowl_wooden"
         ),
     })

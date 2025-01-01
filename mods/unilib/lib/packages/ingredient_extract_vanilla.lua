@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_extract_vanilla = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.ingredient_extract_vanilla.init()
 
     return {
         description = "Vanilla extract",
-        depends = {"produce_vanilla", "vessel_bottle_glass_ethanol"},
+        depends = {"produce_vanilla", "vessel_bottle_glass_with_ethanol"},
         optional = "vessel_bottle_glass_empty",
         suggested = {
             "bucket_steel",                     -- group:potable_bucket
@@ -35,7 +35,7 @@ function unilib.pkg.ingredient_extract_vanilla.exec()
         description = S("Vanilla Extract"),
         tiles = {"unilib_ingredient_extract_vanilla.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_extract_vanilla.png",
@@ -48,7 +48,7 @@ function unilib.pkg.ingredient_extract_vanilla.exec()
         walkable = false,
         wield_image = "unilib_ingredient_extract_vanilla.png",
     })
-    if unilib.pkg_executed_table["vessel_bottle_glass_empty"] ~= nil then
+    if unilib.global.pkg_executed_table["vessel_bottle_glass_empty"] ~= nil then
 
         unilib.register_craft({
             -- From farming:vanilla_extract
@@ -66,14 +66,16 @@ end
 
 function unilib.pkg.ingredient_extract_vanilla.post()
 
+    local c_vanilla = "group:food_vanilla"
+
     unilib.register_craft( {
         -- From farming:vanilla_extract
         output = "unilib:ingredient_extract_vanilla",
         recipe = {
-            {"group:food_vanilla", "group:food_vanilla", "group:food_vanilla"},
-            {"group:food_vanilla", "unilib:vessel_bottle_glass_ethanol", "group:potable_bucket"},
+            {c_vanilla, c_vanilla, c_vanilla},
+            {c_vanilla, "unilib:vessel_bottle_glass_with_ethanol", "group:potable_bucket"},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

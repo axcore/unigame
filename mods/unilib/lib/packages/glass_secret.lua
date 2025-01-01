@@ -9,7 +9,7 @@
 unilib.pkg.glass_secret = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriglass.add_mode
+local mode = unilib.global.imported_mod_table.abriglass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,33 +19,37 @@ function unilib.pkg.glass_secret.init()
 
     return {
         description = "Secret glass nodes",
-        notes = "One face of the node looks like bricks, the other faces are transparent, which" ..
-                " creates one-way glass. Secret glasses are available with the full set of" ..
-                " super stone facades, as well as some sandstones from minetest_game",
+        notes = "One face of the node looks like a smoothstone, cobble or brick, but only when" ..
+                " viewed from the outside; all other surfaces are transparent, which creates" ..
+                " a one-way window. Secret glass nodes are available for all super stones, in" ..
+                " addition to basic white and black variants",
         depends = {"glass_artisanal_clear", "mineral_mese"},
-        at_least_one = {
-            "decor_wall_clay_dark",
-            "decor_wall_clay_pale",
-            "stone_desert",
-            "stone_ordinary",
-            "stone_sandstone_desert",
-            "stone_sandstone_ordinary",
-            "stone_sandstone_silver",
-        },
+        optional = {"decor_wall_clay_dark", "decor_wall_clay_pale"},
     }
 
 end
 
-function unilib.pkg.glass_secret.exec()
+function unilib.pkg.glass_secret.post()
 
     local secret_list = {}
-    if unilib.pkg_executed_table["decor_wall_clay_dark"] ~= nil then
+
+    -- N.B. "stone_sandstone_desert" and "stone_sandstone_silver" variants are not found in the
+    --      original code
+    local orig_name_table = {
+        decor_wall_clay_dark = "abriglass:oneway_glass_dark",
+        decor_wall_clay_pale = "abriglass:oneway_glass_pale",
+        stone_desert_brick = "abriglass:oneway_glass_desert_brick",
+        stone_ordinary_brick = "abriglass:oneway_glass_stone_brick",
+        stone_sandstone_ordinary_brick = "abriglass:oneway_glass_sandstone_brick",
+    }
+
+    if unilib.global.pkg_executed_table["decor_wall_clay_dark"] ~= nil then
 
         table.insert(
             secret_list,
             {
                 "decor_wall_clay_dark",
-                "abriglass:oneway_glass_dark",
+                orig_name_table["decor_wall_clay_dark"],
                 S("Decorative Dark Clay Wall"),
                 "unilib_glass_secret_face.png",
                 "unilib_decor_wall_clay_dark.png",
@@ -54,13 +58,13 @@ function unilib.pkg.glass_secret.exec()
 
     end
 
-    if unilib.pkg_executed_table["decor_wall_clay_pale"] ~= nil then
+    if unilib.global.pkg_executed_table["decor_wall_clay_pale"] ~= nil then
 
         table.insert(
             secret_list,
             {
                 "decor_wall_clay_pale",
-                "abriglass:oneway_glass_pale",
+                orig_name_table["decor_wall_clay_pale"],
                 S("Decorative Pale Clay Wall"),
                 "unilib_glass_secret_face.png^[colorize:#F8F8FF:200",
                 "unilib_decor_wall_clay_dark.png^[colorize:#E6E6FA:200",
@@ -69,80 +73,64 @@ function unilib.pkg.glass_secret.exec()
 
     end
 
-    if unilib.pkg_executed_table["stone_desert"] ~= nil then
+    for stone_type, _ in pairs(unilib.global.super_stone_table) do
 
-        table.insert(
-            secret_list,
-            {
-                "stone_desert_brick",
-                "abriglass:oneway_glass_desert_brick",
-                S("Desert Stone Bricks"),
-                "unilib_glass_secret_face.png^[colorize:#814F3C:200",
-                "unilib_stone_desert_brick.png",
-            }
-        )
+        local data_table = unilib.global.stone_table[stone_type]
 
-    end
+        if unilib.global.pkg_executed_table["stone_" .. stone_type] ~= nil then
 
-    if unilib.pkg_executed_table["stone_ordinary"] ~= nil then
+            local smooth_item_name = "stone_" .. stone_type
+            local smooth_def_table = core.registered_nodes["unilib:" .. smooth_item_name]
+            if smooth_def_table then
 
-        table.insert(
-            secret_list,
-            {
-                "stone_ordinary_brick",
-                "abriglass:oneway_glass_stone_brick",
-                S("Ordinary Stone Bricks"),
-                "unilib_glass_secret_face.png^[colorize:#615E5D:200",
-                "unilib_stone_ordinary_brick.png",
-            }
-        )
+                table.insert(
+                    secret_list,
+                    {
+                        smooth_item_name,
+                        orig_name_table[smooth_item_name],
+                        smooth_def_table.description,
+                        "unilib_glass_secret_face.png^[colorize:" .. data_table.colour .. ":200",
+                        smooth_def_table.tiles[1],
+                    }
+                )
 
-    end
+            end
 
-    if unilib.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
+            local block_item_name = "stone_" .. stone_type .. "_block"
+            local block_def_table = core.registered_nodes["unilib:" .. block_item_name]
+            if block_def_table then
 
-        table.insert(
-            secret_list,
-            {
-                "stone_sandstone_ordinary_brick",
-                "abriglass:oneway_glass_sandstone_brick",
-                S("Ordinary Sandstone Bricks"),
-                "unilib_glass_secret_face.png^[colorize:#FFF9C5:200",
-                "unilib_stone_sandstone_ordinary_brick.png",
-            }
-        )
+                table.insert(
+                    secret_list,
+                    {
+                        block_item_name,
+                        orig_name_table[block_item_name],
+                        block_def_table.description,
+                        "unilib_glass_secret_face.png^[colorize:" .. data_table.colour .. ":200",
+                        block_def_table.tiles[1],
+                    }
+                )
 
-    end
+            end
 
-    -- N.B. Not found in the original code
-    if unilib.pkg_executed_table["stone_sandstone_desert"] ~= nil then
+            local brick_item_name = "stone_" .. stone_type .. "_brick"
+            local brick_def_table = core.registered_nodes["unilib:" .. brick_item_name]
+            if brick_def_table then
 
-        table.insert(
-            secret_list,
-            {
-                "stone_sandstone_desert_brick",
-                nil,
-                S("Desert Sandstone Bricks"),
-                "unilib_glass_secret_face.png^[colorize:#BC955E:200",
-                "unilib_stone_sandstone_desert_brick.png",
-            }
-        )
+                table.insert(
+                    secret_list,
+                    {
+                        brick_item_name,
+                        orig_name_table[brick_item_name],
+                        brick_def_table.description,
+                        "unilib_glass_secret_face.png^[colorize:" .. data_table.colour .. ":200",
+                        brick_def_table.tiles[1],
+                    }
+                )
 
-    end
+            end
 
-    -- N.B. Not found in the original code
-    if unilib.pkg_executed_table["stone_sandstone_silver"] ~= nil then
-
-        table.insert(
-            secret_list,
-            {
-                "stone_sandstone_silver_brick",
-                nil,
-                S("Silver Sandstone Bricks"),
-                "unilib_glass_secret_face.png^[colorize:#C4C2B7:200",
-                "unilib_stone_sandstone_silver_brick.png",
-            }
-        )
+        end
 
     end
 
@@ -159,7 +147,7 @@ function unilib.pkg.glass_secret.exec()
         unilib.register_node("unilib:glass_secret_" .. part_name, orig_name, mode, {
             -- From abriglass:oneway_glass_desert_brick, etc. Creates
             --      unilib:glass_secret_stone_desert_brick, etc
-            description = unilib.brackets(S("One-Way Glass"), description),
+            description = unilib.utils.brackets(S("One-Way Glass"), description),
             -- N.B. tweaked the tile list from the original code for realism, as some faces were
             --      invisible
             tiles = {glass_img, glass_img, glass_img, glass_img, glass_img, other_img},
@@ -167,7 +155,8 @@ function unilib.pkg.glass_secret.exec()
             -- (no sounds)
 
             drawtype = "nodebox",
-            inventory_image = minetest.inventorycube(glass_img),
+            -- N.B. only "glass_img" used in the original code
+            inventory_image = core.inventorycube(glass_img, other_img, glass_img),
             is_ground_content = false,
             node_box = {
                 type = "fixed",

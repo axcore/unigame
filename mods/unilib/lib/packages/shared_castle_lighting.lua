@@ -9,7 +9,7 @@
 unilib.pkg.shared_castle_lighting = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_lighting.add_mode
+local mode = unilib.global.imported_mod_table.castle_lighting.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -24,15 +24,15 @@ local function get_ingredient_properties(data_table)
     -- Override the properties of the ingredient, if required, as described below
     if data_table.override_ingredient ~= nil then
 
-        ingredient_def_table = minetest.registered_nodes[data_table.override_ingredient]
-        burn_time = minetest.get_craft_result(
+        ingredient_def_table = core.registered_nodes[data_table.override_ingredient]
+        burn_time = core.get_craft_result(
             {method = "fuel", width = 1, items = {ItemStack(data_table.override_ingredient)}}
         ).time
 
     else
 
-        ingredient_def_table = minetest.registered_nodes[data_table.ingredient]
-        burn_time = minetest.get_craft_result(
+        ingredient_def_table = core.registered_nodes[data_table.ingredient]
+        burn_time = core.get_craft_result(
             {method = "fuel", width = 1, items = {ItemStack(data_table.ingredient)}}
         ).time
 
@@ -86,7 +86,7 @@ function unilib.pkg.shared_castle_lighting.brazier_allow_metadata_inventory_put(
 
     if listname == "fuel" then
 
-        if minetest.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
+        if core.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
             return stack:get_count()
         else
             return 0
@@ -103,17 +103,17 @@ function unilib.pkg.shared_castle_lighting.brazier_burn(pos)
     -- Adapted from castle_lighting/brasier.lua
 
     local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local node_above = minetest.get_node(pos_above)
-    local timer = minetest.get_node_timer(pos)
+    local node_above = core.get_node(pos_above)
+    local timer = core.get_node_timer(pos)
 
     -- If already burning, don't burn something new
     if timer:is_started() and node_above.name == "unilib:fire_permanent" then
         return
     end
 
-    local inv = minetest.get_inventory({type = "node", pos = pos})
+    local inv = core.get_inventory({type = "node", pos = pos})
     local item = inv:get_stack("fuel", 1)
-    local fuel_burned = minetest.get_craft_result(
+    local fuel_burned = core.get_craft_result(
         {method = "fuel", width = 1, items = {item:peek_item(1)}}
     ).time
 
@@ -128,13 +128,13 @@ function unilib.pkg.shared_castle_lighting.brazier_burn(pos)
         timer:start(fuel_burned * 60)
 
         if node_above.name == "air" then
-            minetest.set_node(pos_above, {name = "unilib:fire_permanent"})
+            core.set_node(pos_above, {name = "unilib:fire_permanent"})
         end
 
     else
 
         if node_above.name == "unilib:fire_permanent" then
-            minetest.set_node(pos_above, {name = "air"})
+            core.set_node(pos_above, {name = "air"})
         end
 
     end
@@ -145,7 +145,7 @@ function unilib.pkg.shared_castle_lighting.brazier_can_dig(pos, player)
 
     -- Adapted from castle_lighting/brasier.lua
 
-    local inv = minetest.get_meta(pos):get_inventory()
+    local inv = core.get_meta(pos):get_inventory()
     return inv:is_empty("fuel")
 
 end
@@ -154,10 +154,10 @@ function unilib.pkg.shared_castle_lighting.brazier_on_construct(pos)
 
     -- Adapted from castle_lighting/brasier.lua
 
-    local inv = minetest.get_meta(pos):get_inventory()
+    local inv = core.get_meta(pos):get_inventory()
     inv:set_size("fuel", 1)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     meta:set_string("formspec",
         "size[8,5.3]" ..
         "list[current_name;fuel;3.5,0;1,1;]" ..
@@ -165,7 +165,7 @@ function unilib.pkg.shared_castle_lighting.brazier_on_construct(pos)
         "list[current_player;main;0,2.38;8,3;8]" ..
         "listring[current_name;main]" ..
         "listring[current_player;main]" ..
-        unilib.get_hotbar_bg(0, 1.15)
+        unilib.misc.get_hotbar_bg(0, 1.15)
     )
 
 end
@@ -175,10 +175,10 @@ function unilib.pkg.shared_castle_lighting.brazier_on_destruct(pos, oldnode)
     -- Adapted from castle_lighting/brasier.lua
 
     local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local node_above = minetest.get_node(pos_above)
+    local node_above = core.get_node(pos_above)
 
     if node_above.name == "unilib:fire_permanent" then
-        minetest.set_node(pos_above, {name = "air"})
+        core.set_node(pos_above, {name = "air"})
     end
 
 end
@@ -229,12 +229,14 @@ function unilib.pkg.shared_castle_lighting.register_pillar_brazier(data_table)
     group_table.crossbrace_connectable = 1
 
     unilib.register_node(full_name, orig_name, replace_mode, {
-        description = unilib.brackets(description, S("Pillar Brazier")),
+        description = unilib.utils.brackets(description, S("Pillar Brazier")),
         tiles = img_list,
         groups = group_table,
         sounds = ingredient_def_table.sounds,
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -266,7 +268,7 @@ function unilib.pkg.shared_castle_lighting.register_pillar_brazier(data_table)
         on_metadata_inventory_put = unilib.pkg.shared_castle_lighting.brazier_burn,
         on_timer = unilib.pkg.shared_castle_lighting.brazier_burn,
     })
-    minetest.register_craft({
+    unilib.register_craft({
         output = full_name .. " 5",
         recipe = {
             {ingredient, "unilib:torch_ordinary", ingredient},

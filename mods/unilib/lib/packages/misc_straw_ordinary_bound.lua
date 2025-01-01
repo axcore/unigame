@@ -9,7 +9,7 @@
 unilib.pkg.misc_straw_ordinary_bound = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.castle_farming.add_mode
+local mode = unilib.global.imported_mod_table.castle_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,12 +32,14 @@ function unilib.pkg.misc_straw_ordinary_bound.exec()
         description = S("Bound Ordinary Straw"),
         tiles = {"unilib_misc_straw_ordinary_bound.png"},
         groups = {choppy = 4, flammable = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "normal",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
     })
-    if unilib.pkg_executed_table["rope_mining"] ~= nil then
+    if unilib.global.pkg_executed_table["rope_mining"] ~= nil then
 
         unilib.register_craft({
             -- From castle_farming:bound_straw
@@ -55,13 +57,13 @@ function unilib.pkg.misc_straw_ordinary_bound.exec()
         })
 
     end
-    if unilib.pkg_executed_table["crop_cotton"] ~= nil then
+    if unilib.global.pkg_executed_table["crop_cotton"] ~= nil then
 
         unilib.register_craft({
             -- From castle_farming:bound_straw
             type = "shapeless",
             output = "unilib:misc_straw_ordinary_bound",
-            recipe = {"unilib:misc_straw_ordinary", "unilib:crop_cotton_harvest"}
+            recipe = {"unilib:misc_straw_ordinary", "unilib:crop_cotton_harvest"},
         })
 
     end

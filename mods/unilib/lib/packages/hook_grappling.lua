@@ -9,7 +9,7 @@
 unilib.pkg.hook_grappling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.hook.add_mode
+local mode = unilib.global.imported_mod_table.hook.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.hook_grappling.exec()
 
     unilib.register_tool("unilib:hook_grappling", "hook:hook", mode, {
         -- From hook:hook
-        description = unilib.hint(S("Grappling Hook"), S("hit a corner to climb")),
+        description = unilib.utils.hint(S("Grappling Hook"), S("hit a corner to climb")),
         inventory_image = "unilib_hook_grappling.png",
 
         on_use = function(itemstack, user, pointed_thing)
@@ -41,7 +41,7 @@ function unilib.pkg.hook_grappling.exec()
                 return itemstack
             end
 
-            local d = minetest.dir_to_facedir(user:get_look_dir())
+            local d = core.dir_to_facedir(user:get_look_dir())
             local pos = pointed_thing.above
             local pos2 = pointed_thing.under
             local name = user:get_player_name()
@@ -51,11 +51,10 @@ function unilib.pkg.hook_grappling.exec()
                     == false and
             (
                 unilib.pkg.shared_hook.has_property(
-                    {x = pos2.x, y = pos2.y + 1, z = pos2.z},
-                    "walkable"
-                ) == false or
-                minetest.get_node({x = pos2.x, y = pos2.y + 1, z = pos2.z}).name
-                        == "unilib:snow_ordinary"
+                    {x = pos2.x, y = pos2.y + 1, z = pos2.z}, "walkable"
+                ) == false or core.get_node(
+                    {x = pos2.x, y = pos2.y + 1, z = pos2.z}
+                ).name == "unilib:snow_ordinary"
             ) and
             unilib.pkg.shared_hook.is_hook(pos,name) and
             unilib.pkg.shared_hook.has_property({x = pos.x, y = pos.y + 1, z = pos.z}, "walkable")
@@ -73,11 +72,12 @@ function unilib.pkg.hook_grappling.exec()
 
                 if unilib.pkg.shared_hook.is_hook({x = pos.x, y = pos.y + 1, z = pos.z}, name) then
 
-                    minetest.set_node(
+                    core.set_node(
                         {x = pos.x, y = pos.y + 1, z = pos.z},
                         {name = "unilib:hook_generic_temp", param2 = d}
                     )
-                    minetest.get_node_timer({x = pos.x, y = pos.y + 1, z = pos.z}):start(3)
+
+                    core.get_node_timer({x = pos.x, y = pos.y + 1, z = pos.z}):start(3)
 
                 else
 
@@ -92,7 +92,7 @@ function unilib.pkg.hook_grappling.exec()
                         name
                     ) then
 
-                        minetest.set_node(
+                        core.set_node(
                             {x = pos.x, y = pos.y + i, z = pos.z},
                             {name = "unilib:hook_grappling_temp", param2 = d}
                         )
@@ -118,12 +118,14 @@ function unilib.pkg.hook_grappling.exec()
             {"", c_ingot, ""},
             {"", c_ingot, c_ingot},
             {c_ingot, "", ""},
-        }
+        },
     })
 
     unilib.register_tool("unilib:hook_grappling_long", "hook:hook_upgrade", mode, {
         -- From hook:hook_upgrade
-        description = unilib.hint(S("Grappling Hook with Long Rope"), S("hit a corner to climb")),
+        description = unilib.utils.hint(
+            S("Grappling Hook with Long Rope"), S("hit a corner to climb")
+        ),
         inventory_image = "unilib_hook_grappling_long.png",
 
         range = 6,
@@ -134,7 +136,7 @@ function unilib.pkg.hook_grappling.exec()
                 return itemstack
             end
 
-            local d = minetest.dir_to_facedir(user:get_look_dir())
+            local d = core.dir_to_facedir(user:get_look_dir())
             local pos = pointed_thing.above
             local pos2 = pointed_thing.under
             local name = user:get_player_name()
@@ -144,11 +146,10 @@ function unilib.pkg.hook_grappling.exec()
                     == false and
             (
                 unilib.pkg.shared_hook.has_property(
-                    {x = pos2.x, y = pos2.y + 1, z = pos2.z},
-                    "walkable"
-                ) == false or
-                minetest.get_node({x = pos2.x, y = pos2.y + 1, z = pos2.z}).name
-                        == "unilib:snow_ordinary"
+                    {x = pos2.x, y = pos2.y + 1, z = pos2.z}, "walkable"
+                ) == false or core.get_node(
+                    {x = pos2.x, y = pos2.y + 1, z = pos2.z}
+                ).name == "unilib:snow_ordinary"
             ) and
             unilib.pkg.shared_hook.is_hook(pos, name) and
             unilib.pkg.shared_hook.has_property({x = pos.x, y = pos.y + 1, z = pos.z}, "walkable")
@@ -166,11 +167,12 @@ function unilib.pkg.hook_grappling.exec()
 
                 if unilib.pkg.shared_hook.is_hook({x = pos.x, y = pos.y + 1, z = pos.z}, name) then
 
-                    minetest.set_node(
+                    core.set_node(
                         {x = pos.x, y = pos.y + 1, z = pos.z},
                         {name = "unilib:hook_generic_temp", param2 = d}
                     )
-                    minetest.get_node_timer({x = pos.x, y = pos.y + 1, z = pos.z}):start(3)
+
+                    core.get_node_timer({x = pos.x, y = pos.y + 1, z = pos.z}):start(3)
 
                 else
 
@@ -185,7 +187,7 @@ function unilib.pkg.hook_grappling.exec()
                         name
                     ) then
 
-                        minetest.set_node(
+                        core.set_node(
                             {x = pos.x, y = pos.y + i, z = pos.z},
                             {name = "unilib:hook_grappling_temp", param2 = d}
                         )
@@ -211,7 +213,7 @@ function unilib.pkg.hook_grappling.exec()
             {"", "unilib:hook_grappling", ""},
             {"", "unilib:hook_grappling", ""},
             {"", c_ingot, ""},
-        }
+        },
     })
 
     unilib.register_node("unilib:hook_grappling_temp", "hook:rope", mode, {
@@ -237,7 +239,7 @@ function unilib.pkg.hook_grappling.exec()
             type = "fixed",
             fixed = {
                 {-0.0625, -0.5, -0.5, 0.0625, 0.5, -0.375},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
@@ -245,12 +247,12 @@ function unilib.pkg.hook_grappling.exec()
         walkable = false,
 
         on_construct = function(pos)
-            minetest.get_node_timer(pos):start(3)
+            core.get_node_timer(pos):start(3)
         end,
 
         on_timer = function(pos, elapsed)
 
-            for i, ob in pairs(minetest.get_objects_inside_radius(pos, 3)) do
+            for i, ob in pairs(core.get_objects_inside_radius(pos, 3)) do
 
                 if ob:is_player() then
                     return true
@@ -258,7 +260,7 @@ function unilib.pkg.hook_grappling.exec()
 
             end
 
-            minetest.set_node(pos, {name = "air"})
+            core.set_node(pos, {name = "air"})
             return false
 
         end,

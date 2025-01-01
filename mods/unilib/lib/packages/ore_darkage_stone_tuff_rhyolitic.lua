@@ -9,7 +9,7 @@
 unilib.pkg.ore_darkage_stone_tuff_rhyolitic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.ore_darkage_stone_tuff_rhyolitic.post()
             offset = 0.35,
             persistence = 0.6,
             scale = 0.2,
-            seed = minetest.get_mapgen_setting("seed") + 13,
+            seed = unilib.utils.get_mod_attribute("storage_random_seed_offset") + 13,
             spread = {x = 100, y = 100, z = 100},
         },
         noise_threshold         = 0.53,

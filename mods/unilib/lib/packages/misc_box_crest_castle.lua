@@ -9,7 +9,7 @@
 unilib.pkg.misc_box_crest_castle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.misc_box_crest_castle.exec()
         description = S("Castle Crest Box"),
         tiles = {"unilib_misc_box_crest_castle.png"},
         groups = {choppy = 2, cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drawtype = "nodebox",
         -- N.B. inventory_image removed from original code

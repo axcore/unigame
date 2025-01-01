@@ -13,7 +13,7 @@
 unilib.pkg.coral_block_skeleton = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 function unilib.pkg.coral_block_skeleton.exec()
 
     local img = "unilib_coral_block_skeleton.png"
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
         img = "unilib_coral_block_skeleton_farlands.png"
     end
 
@@ -39,8 +39,9 @@ function unilib.pkg.coral_block_skeleton.exec()
         -- From default:coral_skeleton
         description = S("Coral Skeleton"),
         tiles = {img},
-        groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        -- N.B. No coral = 1 in original code
+        groups = {coral = 1, cracky = 3},
+        sounds = unilib.global.sound_table.stone,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.container_chest_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.container_chest_ordinary.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- From default:chest. Creates unilib:container_chest_ordinary
         part_name = "ordinary",
-        orig_name = {"default:chest", "default:chest_open"},
+        orig_name_list = {"default:chest", "default:chest_open"},
         def_table = {
             description = S("Ordinary Chest"),
             tiles = {
@@ -45,7 +45,7 @@ function unilib.pkg.container_chest_ordinary.exec()
                 "unilib_container_chest_ordinary_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             sound_close = "unilib_chest_close",
             sound_open = "unilib_chest_open",
@@ -60,7 +60,7 @@ function unilib.pkg.container_chest_ordinary.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:chest
@@ -72,7 +72,7 @@ function unilib.pkg.container_chest_ordinary.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- From default:chest_locked. Creates unilib:container_chest_ordinary_locked
         part_name = "ordinary_locked",
-        orig_name = {"default:chest_locked", "default:chest_locked_open"},
+        orig_name_list = {"default:chest_locked", "default:chest_locked_open"},
         def_table = {
             description = S("Locked Ordinary Chest"),
             tiles = {
@@ -84,7 +84,7 @@ function unilib.pkg.container_chest_ordinary.exec()
                 "unilib_container_chest_ordinary_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             protected = true,
             sound_close = "unilib_chest_close",
@@ -100,7 +100,7 @@ function unilib.pkg.container_chest_ordinary.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "unilib:metal_steel_ingot", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:chest_locked
@@ -108,9 +108,9 @@ function unilib.pkg.container_chest_ordinary.exec()
         output = "unilib:container_chest_ordinary_locked",
         recipe = {"unilib:container_chest_ordinary", "unilib:metal_steel_ingot"},
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
-        if unilib.pkg_executed_table["metal_bronze"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_bronze"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -121,7 +121,7 @@ function unilib.pkg.container_chest_ordinary.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_copper"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_copper"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -132,7 +132,7 @@ function unilib.pkg.container_chest_ordinary.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_gold"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_gold"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -149,6 +149,19 @@ function unilib.pkg.container_chest_ordinary.exec()
         type = "fuel",
         recipe = "unilib:container_chest_ordinary_locked",
         burntime = 30,
+    })
+
+    -- Replace minetest_game LBMs. The code is here, rather than in the "shared_default_chest"
+    --      package, because the LBMs relate to these two specific chests
+    unilib.register_obsolete_lbm({
+        mod_origin = "default",
+        name = "default:close_chest_open",
+        label = "close opened chests on load",
+    })
+    unilib.register_obsolete_lbm({
+        mod_origin = "default",
+        name = "default:close_chest_locked_open",
+        label = "close opened chests on load",
     })
 
 end

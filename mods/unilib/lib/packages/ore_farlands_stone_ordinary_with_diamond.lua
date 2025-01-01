@@ -13,7 +13,7 @@
 unilib.pkg.ore_farlands_stone_ordinary_with_diamond = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.ore_farlands_stone_ordinary_with_diamond.post()
         clust_num_ores          = 4,
         clust_scarcity          = 15 * 15 * 15,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -66,7 +66,7 @@ function unilib.pkg.ore_farlands_stone_ordinary_with_diamond.post()
         clust_scarcity          = 15 * 15 * 15,
         clust_size              = 3,
         y_max                   = -256,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

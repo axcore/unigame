@@ -9,7 +9,7 @@
 unilib.pkg.food_chicken_barbecued = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_chicken_barbecued.exec()
         description = S("Raw Barbecued Chicken"),
         inventory_image = "unilib_food_chicken_barbecued_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chicken_barbecued_raw", 4),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chicken_barbecued_raw", 4),
     })
     unilib.register_craft({
         -- From bbq:bbq_chicken_raw
@@ -52,7 +52,7 @@ function unilib.pkg.food_chicken_barbecued.exec()
         description = S("Barbecued Chicken"),
         inventory_image = "unilib_food_chicken_barbecued.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_chicken_barbecued", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_chicken_barbecued", 8),
     })
     unilib.register_craft({
         -- From bbq:bbq_chicken

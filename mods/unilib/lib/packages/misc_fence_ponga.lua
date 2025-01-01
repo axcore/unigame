@@ -9,7 +9,7 @@
 unilib.pkg.misc_fence_ponga = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.misc_fence_ponga.exec()
             "unilib_misc_fence_ponga.png"
         },
         groups = {choppy = 3, flammable = 2, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         connects_to = {
             "unilib:misc_fence_ponga",
@@ -46,6 +46,8 @@ function unilib.pkg.misc_fence_ponga.exec()
         },
         drawtype = "nodebox",
         inventory_image = "unilib_misc_fence_ponga.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "connected",
             fixed = {
@@ -68,7 +70,7 @@ function unilib.pkg.misc_fence_ponga.exec()
         use_texture_alpha = "clip",
         wield_image = "unilib_misc_fence_ponga.png",
     })
-    if unilib.pkg_executed_table["tree_fern_silver"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_fern_silver"] ~= nil then
 
         local c_trunk = "unilib:tree_fern_silver_trunk"
 
@@ -83,7 +85,7 @@ function unilib.pkg.misc_fence_ponga.exec()
         })
 
     end
-    if unilib.pkg_executed_table["tree_mamaku"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_mamaku"] ~= nil then
 
         local c_trunk = "unilib:tree_mamaku_trunk"
 
@@ -98,7 +100,7 @@ function unilib.pkg.misc_fence_ponga.exec()
         })
 
     end
-    if unilib.pkg_executed_table["tree_wheki"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_wheki"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:ponga_fence

@@ -9,7 +9,7 @@
 unilib.pkg.decor_paving_slate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr6.add_mode
+local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,10 @@ function unilib.pkg.decor_paving_slate.exec()
             description = S("Paving Slates"),
             tiles = {"unilib_roof_slate_castle.png"},
             groups = {cracky = 3, stone = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other decor items
+            is_ground_content = false,
         }
     )
     unilib.register_craft_2x2x4({

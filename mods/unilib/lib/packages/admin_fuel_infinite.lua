@@ -9,7 +9,7 @@
 unilib.pkg.admin_fuel_infinite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.admin_fuel_infinite.exec()
         -- From maptools:infinitefuel
         description = S("Infinite Fuel"),
         inventory_image = "unilib_admin_fuel_infinite.png",
-        groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+        groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
 
         stack_max = 65535,
     })

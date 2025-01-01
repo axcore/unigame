@@ -9,7 +9,7 @@
 unilib.pkg.item_fertiliser_compound = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bonemeal.add_mode
+local mode = unilib.global.imported_mod_table.bonemeal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,15 +40,15 @@ function unilib.pkg.item_fertiliser_compound.exec()
             end
 
             -- Is the area protected?
-            if minetest.is_protected(pointed_thing.under, user:get_player_name()) then
+            if core.is_protected(pointed_thing.under, user:get_player_name()) then
                 return
             end
 
             -- Call the global on_use function with strength of 3
-            if unilib.use_fertiliser(pointed_thing.under, 3) then
+            if unilib.fertiliser.callback_on_use(pointed_thing.under, "compound", 3) then
 
                 -- Take item if not in creative
-                if not unilib.is_creative(user:get_player_name()) then
+                if not unilib.utils.is_creative(user:get_player_name()) then
                     itemstack:take_item()
                 end
 
@@ -66,15 +66,15 @@ function unilib.pkg.item_fertiliser_compound.exec()
         output = "unilib:item_fertiliser_compound 2",
         recipe = {
             {"unilib:item_fertiliser_bonemeal", "unilib:item_fertiliser_mulch"},
-        }
+        },
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From bonemeal:mulch
             output = "unilib:dye_green 4",
             recipe = {
-                {"unilib:item_fertiliser_compound"}
+                {"unilib:item_fertiliser_compound"},
             },
         })
 

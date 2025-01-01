@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_coral = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 local init_list = {
     {"brain", "unilib:coral_brain"},
@@ -20,7 +20,7 @@ local init_list = {
     {"cluster_orange", "unilib:coral_cluster_orange"},
     {"cluster_purple", "unilib:coral_cluster_purple"},
     {"hammer", "unilib:coral_hammer"},
-    {"seafan", "unilib:coral_seafan_white"},
+    {"seafan_white", "unilib:coral_seafan_white"},
     {"staghorn_blue", "unilib:coral_staghorn_blue"},
     {"staghorn_pink", "unilib:coral_staghorn_pink"},
     {"staghorn_purple", "unilib:coral_staghorn_purple"},
@@ -52,7 +52,23 @@ function unilib.pkg.stone_ordinary_with_coral.init()
     return {
         description = "Ordinary stone with coral",
         notes = "All corals spawned by this package heal nearby objects, for example players",
-        at_least_one = "liquid_water_ordinary",
+        depends = "liquid_water_ordinary",
+        at_least_one = {
+            "coral_brain",
+            "coral_cauliflower_brown",
+            "coral_cauliflower_green",
+            "coral_cauliflower_pink",
+            "coral_cluster_green",
+            "coral_cluster_orange",
+            "coral_cluster_purple",
+            "coral_hammer",
+            "coral_seafan_white",
+            "coral_staghorn_blue",
+            "coral_staghorn_pink",
+            "coral_staghorn_purple",
+            "coral_staghorn_yellow",
+            "plant_sponge_tube",
+        },
     }
 
 end
@@ -71,7 +87,7 @@ function unilib.pkg.stone_ordinary_with_coral.exec()
                 description = S("Ordinary Stone with Coral"),
                 tiles = {"unilib_stone_ordinary_with_coral.png"},
                 groups = {cracky = 3, not_in_creative_inventory = 1, stone = 1},
-                sounds = unilib.sound_table.stone,
+                sounds = unilib.global.sound_table.stone,
 
                 drop = "unilib:stone_ordinary",
             }
@@ -91,10 +107,10 @@ function unilib.pkg.stone_ordinary_with_coral.exec()
         action = function(pos, node)
 
             local yp = {x = pos.x, y = pos.y + 1, z = pos.z}
-            if minetest.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
+            if core.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
 
                 pos.y = pos.y + 1
-                minetest.add_node(pos, {name = convert_table[node.name]})
+                core.add_node(pos, {name = convert_table[node.name]})
 
             else
 
@@ -119,10 +135,10 @@ function unilib.pkg.stone_ordinary_with_coral.exec()
             local yp = {x = pos.x, y = pos.y + 1, z = pos.z}
             local yyp = {x = pos.x, y = pos.y + 2, z = pos.z}
 
-            if minetest.get_node(yp).name == "unilib:liquid_water_ordinary_source" and
-                    minetest.get_node(yyp).name == "unilib:liquid_water_ordinary_source" then
+            if core.get_node(yp).name == "unilib:liquid_water_ordinary_source" and
+                    core.get_node(yyp).name == "unilib:liquid_water_ordinary_source" then
 
-                local objs = minetest.get_objects_inside_radius(pos, 2)
+                local objs = core.get_objects_inside_radius(pos, 2)
                 for k, obj in pairs(objs) do
                     obj:set_hp(obj:get_hp() + 1)
                 end

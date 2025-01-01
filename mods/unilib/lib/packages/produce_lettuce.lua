@@ -9,7 +9,7 @@
 unilib.pkg.produce_lettuce = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -51,13 +51,14 @@ function unilib.pkg.produce_lettuce.exec()
                     items = {
                         {items = {"unilib:produce_lettuce_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_lettuce_harvest 1"}, rarity = 2},
-                    }
+                    },
                 },
             },
         },
         harvest_group_table = {flammable = 2, food_lettuce = 1, seed = 2},
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -69,7 +70,16 @@ function unilib.pkg.produce_lettuce.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_lettuce", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_lettuce_harvest",
+        juice_description = S("Lettuce"),
+        juice_type = "lettuce",
+        rgb = "#c0dd91",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_produce_lettuce", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_lettuce_grow_5",
@@ -78,8 +88,8 @@ function unilib.pkg.produce_lettuce.exec()
             octaves = 3,
             offset = 0,
             persist = 0.6,
-            scale = 0.001,
-            seed = 329,
+            scale = 0.002,
+            seed = 689,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

@@ -9,7 +9,7 @@
 unilib.pkg.item_triangulator_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,9 @@ function unilib.pkg.item_triangulator_digital.exec()
 
     unilib.register_tool("unilib:item_triangulator_digital", "orienteering:triangulator", mode, {
         -- From orienteering:triangulator
-        description = S("Digital Triangulator"),
+        description = unilib.utils.hint(
+            S("Digital Triangulator"), S("shows horizontal coordinates")
+        ),
         inventory_image = "unilib_item_triangulator_digital.png",
         groups = {disable_repair = 1},
 

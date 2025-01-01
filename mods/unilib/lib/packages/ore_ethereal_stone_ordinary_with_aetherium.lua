@@ -9,7 +9,7 @@
 unilib.pkg.ore_ethereal_stone_ordinary_with_aetherium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ore_ethereal_stone_ordinary_with_aetherium.post()
         clust_num_ores          = 6,
         clust_scarcity          = 9 * 9 * 9,
         clust_size              = 2,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 

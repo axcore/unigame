@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_cone_fir_douglas = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.ingredient_cone_fir_douglas.exec()
         attached_node = 1, dig_immediate = 3, flammable = 2, fleshy = 3, leafdecay = 1,
         leafdecay_drop = 1,
     }
-    if unilib.regrow_fruit_flag then
+    if unilib.setting.regrow_fruit_flag then
         group_table.attached_node = nil
     end
 
@@ -40,7 +40,7 @@ function unilib.pkg.ingredient_cone_fir_douglas.exec()
         description = S("Douglas Fir Cone"),
         tiles = {"unilib_ingredient_cone_fir_douglas.png"},
         groups = group_table,
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_ingredient_cone_fir_douglas.png^[transformR180",
@@ -60,7 +60,7 @@ end
 
 function unilib.pkg.ingredient_cone_fir_douglas.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:ingredient_cone_fir_douglas",
 
         replace_mode = mode,

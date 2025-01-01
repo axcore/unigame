@@ -9,7 +9,7 @@
 unilib.pkg.brick_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morebricks.add_mode
+local mode = unilib.global.imported_mod_table.morebricks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,14 +19,14 @@ function unilib.pkg.brick_steel.init()
 
     return {
         description = "Steel brick",
-        depends = "metal_steel",
+        depends = {"metal_steel", "shared_morebricks"},
     }
 
 end
 
 function unilib.pkg.brick_steel.exec()
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:steel and morebricks:steelvertical, creates unilib:brick_steel_block and
         --      unilib:brick_steel_block_vertical
         part_name = "steel",
@@ -40,7 +40,7 @@ function unilib.pkg.brick_steel.exec()
         quantity = 5,
     })
 
-    unilib.register_coloured_brick_block({
+    unilib.pkg.shared_morebricks.register_bricks({
         -- From morebricks:steelaged and morebricks:steelagedvertical, creates
         --      unilib:brick_steel_old_block and unilib:brick_steel_old_block_vertical
         part_name = "steel_old",

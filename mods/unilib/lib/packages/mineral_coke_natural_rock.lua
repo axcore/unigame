@@ -9,7 +9,7 @@
 unilib.pkg.mineral_coke_natural_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_coke_natural_rock.exec()
 
     local c_lump = "unilib:mineral_coke_natural_lump"
-    local hardness = unilib.mineral_table["coke_natural"]["hardness"]
+    local hardness = unilib.global.mineral_table["coke_natural"]["hardness"]
 
     unilib.register_mineral_rock("coke_natural")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_coke_natural_rock.exec()
         description = S("Natural Coke Rock"),
         tiles = {"unilib_mineral_coke_natural_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

@@ -9,7 +9,7 @@
 unilib.pkg.trapdoor_wood_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.doors.add_mode
+local mode = unilib.global.imported_mod_table.doors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,9 +26,9 @@ end
 function unilib.pkg.trapdoor_wood_ordinary.exec()
 
     unilib.register_trapdoor({
-        -- From doors:trapdoor. Creates unilib:trapdoor_wood_ordinary
+        -- From doors:trapdoor. Creates unilib:trapdoor_wood_ordinary_closed, etc
         part_name = "wood_ordinary",
-        orig_name = {"doors:trapdoor", "doors:trapdoor_open"},
+        orig_name_list = {"doors:trapdoor", "doors:trapdoor_open"},
         def_table = {
             description = S("Ordinary Wooden Trapdoor"),
             -- (no tiles)
@@ -52,7 +52,7 @@ function unilib.pkg.trapdoor_wood_ordinary.exec()
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
             {"", "", ""},
-        }
+        },
     })
     unilib.register_craft({
         -- From doors:trapdoor

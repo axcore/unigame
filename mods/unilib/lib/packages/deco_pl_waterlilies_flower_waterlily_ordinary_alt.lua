@@ -9,7 +9,7 @@
 unilib.pkg.deco_pl_waterlilies_flower_waterlily_ordinary_alt = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pl_waterlilies.add_mode
+local mode = unilib.global.imported_mod_table.pl_waterlilies.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,14 +31,14 @@ function unilib.pkg.deco_pl_waterlilies_flower_waterlily_ordinary_alt.init()
 
 end
 
-function unilib.pkg.deco_pl_waterlilies_flower_waterlily_ordinary_alt.exec()
+function unilib.pkg.deco_pl_waterlilies_flower_waterlily_ordinary_alt.post()
 
     -- N.B. In the original code, the decoration seems to be broken, as
-    --      minetest.register_decoration() doesn't seem to work when .place_on is a liquid
+    --      core.register_decoration() doesn't seem to work when .place_on is a liquid
     -- Here, it is replaced with original decorations adapted from minetest_game waterlilies
 
     --[[
-    unilib.register_decoration_now("convert_flower_waterlily_ordinary", nil, {
+    unilib.register_decoration_complete("convert_flower_waterlily_ordinary", nil, {
         -- From pl_seaweed/init.lua
         -- Completes decoration in package "flower_waterlily_ordinary_alt"
         place_on = "unilib:liquid_water_ordinary_source",
@@ -47,7 +47,7 @@ function unilib.pkg.deco_pl_waterlilies_flower_waterlily_ordinary_alt.exec()
         y_min = 1,
     })
     ]]--
-    unilib.register_decoration_now("convert_flower_waterlily_ordinary", nil, {
+    unilib.register_decoration_complete("convert_flower_waterlily_ordinary", nil, {
         -- From pl_waterlilies/init.lua
         -- Completes decoration in package "flower_waterlily_ordinary_alt"
         biomes = {

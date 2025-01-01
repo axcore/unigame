@@ -1,5 +1,4 @@
 # "minimal" remix - the absolute minimum set of packages required for the minetest mapgen to work
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -12,8 +11,14 @@ liquid_water_river|default
 # Stone
 stone_ordinary|default moreblocks technic
 
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #grass_jungle|default
-#mineral_mese|default
+#mineral_mese|default glemr11
 #moss_green|sickles
 #stone_obsidian|default moreblocks
+
+# supporting packages (.suggested)

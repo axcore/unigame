@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_strawberry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,7 +40,7 @@ function unilib.pkg.food_cake_strawberry.exec()
             description = S("Strawberry Cake"),
             inventory_image = "unilib_food_cake_strawberry.png",
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_cake_strawberry", 5),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_cake_strawberry", 5),
     })
     unilib.register_craft({
         -- From better_farming:strawberry_cake
@@ -49,8 +49,8 @@ function unilib.pkg.food_cake_strawberry.exec()
         recipe = {
             {"group:food_strawberry", "group:food_strawberry", "group:food_strawberry"},
             {"group:food_egg", c_flour, "group:food_egg"},
-            {c_flour, c_flour, c_flour}
-        }
+            {c_flour, c_flour, c_flour},
+        },
     })
     unilib.register_external_ingredient("unilib:food_cake_strawberry", {
         "group:food_egg",                       -- Originally animalia:chicken_egg_fried

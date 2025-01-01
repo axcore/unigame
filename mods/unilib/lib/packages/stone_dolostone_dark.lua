@@ -9,7 +9,7 @@
 unilib.pkg.stone_dolostone_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_dolostone_dark.exec()
         description = S("Dark Dolostone"),
 
         category = "sedimentary",
+        colour = "#787862",
         grinder_flag = true,
         hardness = 1,
     })
@@ -73,6 +74,24 @@ function unilib.pkg.stone_dolostone_dark.exec()
         replace_mode = mode,
         description = S("Dark Dolostone Rubble"),
         img_list = {"unilib_stone_dolostone_dark.png^unilib_stone_rubble_overlay.png"},
+    })
+
+    unilib.register_stone_rubble_compressed({
+        -- Original to unilib. Creates unilib:stone_dolostone_dark_rubble_compressed
+        part_name = "dolostone_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Dark Dolostone Rubble"),
+    })
+
+    unilib.register_stone_rubble_condensed({
+        -- Original to unilib. Creates unilib:stone_dolostone_dark_rubble_condensed
+        part_name = "dolostone_dark",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Dark Dolostone Rubble"),
     })
 
 end

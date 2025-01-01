@@ -9,7 +9,7 @@
 unilib.pkg.deco_molehills_misc_molehill = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.molehills.add_mode
+local mode = unilib.global.imported_mod_table.molehills.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_molehills_misc_molehill.post()
 
-    unilib.register_decoration_now("convert_misc_molehill", nil, {
+    unilib.register_decoration_complete("convert_misc_molehill", nil, {
         -- From molehills/init.lua
         -- Completes decoration in package "misc_molehill"
         place_on = "unilib:dirt_ordinary_with_turf",

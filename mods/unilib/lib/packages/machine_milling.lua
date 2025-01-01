@@ -9,7 +9,8 @@
 unilib.pkg.machine_milling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mymillwork.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.mymillwork.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -19,7 +20,7 @@ local function check_removability(pos, player)
 
     -- Updated with code from facade/shapre.lua
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local owner = meta:set_string("owner")
     local pname = player:get_player_name()
     local inv = meta:get_inventory()
@@ -35,7 +36,7 @@ local function check_removability(pos, player)
 
     end
 
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return false
     end
 
@@ -52,7 +53,8 @@ local function form_handler(pos, formname, fields, sender)
     -- Updated with code from facade/shapre.lua
     -- Convert the ingredient into the desired carving
 
-    if unilib.protect_machines_flag and minetest.is_protected(pos, sender:get_player_name()) then
+    if unilib.setting.protect_machines_flag and
+            core.is_protected(pos, sender:get_player_name()) then
         return
     end
 
@@ -60,7 +62,7 @@ local function form_handler(pos, formname, fields, sender)
         return
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
     if inv:is_empty("source") then
@@ -75,13 +77,13 @@ local function form_handler(pos, formname, fields, sender)
         local result = inputname .. carving_type
 
         -- One can never be overly paranoid, unlike the quick check before, this one is precise
-        if not minetest.registered_nodes[result] then
+        if not core.registered_nodes[result] then
             return
         end
 
         -- Output quantities are adjusted to preserve roughly same mass of resulting products
-        if unilib.carving_output_table[carving_type] then
-            result = result .. " " .. unilib.carving_output_table[carving_type]
+        if unilib.global.carving_output_table[carving_type] then
+            result = result .. " " .. unilib.global.carving_output_table[carving_type]
         end
 
         if not inv:room_for_item("dest", result) then
@@ -98,55 +100,54 @@ end
 
 local function prepare_formspec()
 
-      local formspec =
+    local formspec = "size[10,11;]" ..
+        "background[-0.15,-0.25;10.40,11.75;unilib_mill_bg.png]" ..
+        "list[current_name;source;7,5.5.5;1,1;]" ..
+        "list[current_name;dest;8.5,5.5;1,1;]" ..
+        "label[7,5;" .. FS("Input") .. ":]" ..
+        "label[8.5,5;" .. FS("Output") .. ":]" ..
+        "label[0,0;" .. FS("Choose Millwork") .. ":]" ..
 
-    "size[10,11;]" ..
-    "background[-0.15,-0.25;10.40,11.75;unilib_mill_bg.png]" ..
-    "list[current_name;source;7,5.5.5;1,1;]" ..
-    "list[current_name;dest;8.5,5.5;1,1;]" ..
-    "label[7,5;" .. S("Input") .. ":]" ..
-    "label[8.5,5;" .. S("Output") .. ":]" ..
-    "label[0,0;" .. S("Choose Millwork") .. ":]" ..
+        "label[0.5,0.5;" .. FS("Crown Mould") .. "]"..
+        "image_button[0.5,1;1,1;unilib_mill_crownmould.png;_mill_crownmould;]" ..
+        "image_button[1.5,1;1,1;unilib_mill_crownmould_corner_inner.png;" ..
+                "_mill_crownmould_corner_inner;]" ..
+        "image_button[2.5,1;1,1;unilib_mill_crownmould_corner_outer.png;" ..
+                "_mill_crownmould_corner_outer;]" ..
+        "image_button[3.5,1;1,1;unilib_mill_crownmould_beam.png;_mill_crownmould_beam;]" ..
 
-    "label[0.5,0.5;" .. S("Crown Mould") .. "]"..
-    "image_button[0.5,1;1,1;unilib_mill_crownmould.png;_mill_crownmould;]" ..
-    "image_button[1.5,1;1,1;unilib_mill_crownmould_corner_inner.png;" ..
-            "_mill_crownmould_corner_inner;]" ..
-    "image_button[2.5,1;1,1;unilib_mill_crownmould_corner_outer.png;" ..
-            "_mill_crownmould_corner_outer;]" ..
-    "image_button[3.5,1;1,1;unilib_mill_crownmould_beam.png;_mill_crownmould_beam;]" ..
+        "label[0.5,2;" .. FS("Columns") .. "]" ..
+        "image_button[0.5,2.5;1,1;unilib_mill_column.png;_mill_column;]" ..
+        "image_button[1.5,2.5;1,1;unilib_mill_column_base.png;_mill_column_base;]" ..
+        "image_button[2.5,2.5;1,1;unilib_mill_column_half.png;_mill_column_half;]" ..
+        "image_button[3.5,2.5;1,1;unilib_mill_column_half_base.png;_mill_column_half_base;]" ..
+        "image_button[4.5,2.5;1,1;unilib_mill_column_half_base_beam.png;" ..
+                "_mill_column_half_base_beam;]" ..
+        "image_button[5.5,2.5;1,1;unilib_mill_column_quarter.png;_mill_column_quarter;]" ..
+        "image_button[6.5,2.5;1,1;unilib_mill_column_quarter_base.png;" ..
+                "_mill_column_quarter_base;]" ..
+        "image_button[7.5,2.5;1,1;unilib_mill_column_quarter_base_board.png;" ..
+                "_mill_column_quarter_base_board;]" ..
+        "image_button[8.5,2.5;1,1;unilib_mill_column_quarter_bace_fancy.png;" ..
+                "_mill_column_quarter_base_fancy;]" ..
 
-    "label[0.5,2;" .. S("Columns") .. "]" ..
-    "image_button[0.5,2.5;1,1;unilib_mill_column.png;_mill_column;]" ..
-    "image_button[1.5,2.5;1,1;unilib_mill_column_base.png;_mill_column_base;]" ..
-    "image_button[2.5,2.5;1,1;unilib_mill_column_half.png;_mill_column_half;]" ..
-    "image_button[3.5,2.5;1,1;unilib_mill_column_half_base.png;_mill_column_half_base;]" ..
-    "image_button[4.5,2.5;1,1;unilib_mill_column_half_base_beam.png;" ..
-            "_mill_column_half_base_beam;]" ..
-    "image_button[5.5,2.5;1,1;unilib_mill_column_quarter.png;_mill_column_quarter;]" ..
-    "image_button[6.5,2.5;1,1;unilib_mill_column_quarter_base.png;_mill_column_quarter_base;]" ..
-    "image_button[7.5,2.5;1,1;unilib_mill_column_quarter_base_board.png;" ..
-            "_mill_column_quarter_base_board;]" ..
-    "image_button[8.5,2.5;1,1;unilib_mill_column_quarter_bace_fancy.png;" ..
-            "_mill_column_quarter_base_fancy;]" ..
+        "label[0.5,3.5;" .. FS("Ceiling and Beams") .. "]"..
+        "image_button[0.5,4;1,1;unilib_mill_ceiling.png;_mill_ceiling;]" ..
+        "image_button[1.5,4;1,1;unilib_mill_ceiling_post.png;_mill_ceiling_post;]" ..
+        "image_button[2.5,4;1,1;unilib_mill_beam.png;_mill_beam;]" ..
+        "image_button[3.5,4;1,1;unilib_mill_beam_t.png;_mill_beam_t;]" ..
+        "image_button[4.5,4;1,1;unilib_mill_ceiling_beam_t.png;_mill_ceiling_beam_t;]" ..
 
-    "label[0.5,3.5;" .. S("Ceiling and Beams") .. "]"..
-    "image_button[0.5,4;1,1;unilib_mill_ceiling.png;_mill_ceiling;]" ..
-    "image_button[1.5,4;1,1;unilib_mill_ceiling_post.png;_mill_ceiling_post;]" ..
-    "image_button[2.5,4;1,1;unilib_mill_beam.png;_mill_beam;]" ..
-    "image_button[3.5,4;1,1;unilib_mill_beam_t.png;_mill_beam_t;]" ..
-    "image_button[4.5,4;1,1;unilib_mill_ceiling_beam_t.png;_mill_ceiling_beam_t;]" ..
-
-    "label[0.5,5;" .. S("Bases") .. "]" ..
-    "image_button[0.5,5.5;1,1;unilib_mill_base.png;_mill_base;]" ..
-    "image_button[1.5,5.5;1,1;unilib_mill_base_corner_inner.png;_mill_base_corner_inner;]" ..
-    "image_button[2.5,5.5;1,1;unilib_mill_base_corner_outer.png;_mill_base_corner_outer;]" ..
-    "image_button[3.5,5.5;1,1;unilib_mill_base_fancy.png;_mill_base_fancy;]" ..
-    "image_button[4.5,5.5;1,1;unilib_mill_base_fancy_corner_inner.png;" ..
-            "_mill_base_fancy_corner_inner;]" ..
-    "image_button[5.5,5.5;1,1;unilib_mill_base_fancy_corner_outer.png;" ..
-            "_mill_base_fancy_corner_outer;]" ..
-    "list[current_player;main;1,7;8,4;]"
+        "label[0.5,5;" .. FS("Bases") .. "]" ..
+        "image_button[0.5,5.5;1,1;unilib_mill_base.png;_mill_base;]" ..
+        "image_button[1.5,5.5;1,1;unilib_mill_base_corner_inner.png;_mill_base_corner_inner;]" ..
+        "image_button[2.5,5.5;1,1;unilib_mill_base_corner_outer.png;_mill_base_corner_outer;]" ..
+        "image_button[3.5,5.5;1,1;unilib_mill_base_fancy.png;_mill_base_fancy;]" ..
+        "image_button[4.5,5.5;1,1;unilib_mill_base_fancy_corner_inner.png;" ..
+                "_mill_base_fancy_corner_inner;]" ..
+        "image_button[5.5,5.5;1,1;unilib_mill_base_fancy_corner_outer.png;" ..
+                "_mill_base_fancy_corner_outer;]" ..
+        "list[current_player;main;1,7;8,4;]"
 
     return formspec
 
@@ -183,6 +184,8 @@ function unilib.pkg.machine_milling.exec()
         -- (no sounds)
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -197,20 +200,20 @@ function unilib.pkg.machine_milling.exec()
                 {-0.125, 0.375, 0.0625, 0.0625, 0.5, 0.5},
                 {-0.0625, 0.0625, -0.3125, 0, 0.125, 0.0625},
                 {-0.0625, 0, -0.25, 0, 0.125, 0},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",
 
         after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local owner = placer and placer:get_player_name() or ""
             meta:set_string("owner", owner)
             if owner then
-                meta:set_string("infotext", ("Milling Machine (owned by %s)"):format(owner))
+                meta:set_string("infotext", S("Milling Machine (owned by %s)"):format(owner))
             else
-                meta:set_string("infotext", "Milling Machine")
+                meta:set_string("infotext", S("Milling Machine"))
             end
 
         end,
@@ -219,9 +222,9 @@ function unilib.pkg.machine_milling.exec()
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", prepare_formspec())
-            meta:set_string("infotext", "Milling Machine")
+            meta:set_string("infotext", S("Milling Machine"))
             local inv = meta:get_inventory()
             inv:set_size("source", 1)
             inv:set_size("dest", 1)

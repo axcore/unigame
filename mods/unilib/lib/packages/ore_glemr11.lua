@@ -9,7 +9,7 @@
 unilib.pkg.ore_glemr11 = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 -- Flag set to true, if we should check that specified nodes and biomes exist, showing a warning for
 --      any problems. This flag can be disabled once any changes to the remix and its packages have
@@ -23,11 +23,11 @@ local debug_warning_flag = false
 local function check_nodes(node_list)
 
     -- Register dirt on demand (see comments in the "dirt_custom_glemr11" package)
-    if unilib.glem_dirt_on_demand_flag then
+    if unilib.setting.dirt_on_demand_flag then
 
         for _, full_name in pairs(node_list) do
 
-            if minetest.registered_nodes[full_name] == nil and
+            if core.registered_nodes[full_name] == nil and
                     unilib.pkg.dirt_custom_glemr11.dirt_table[full_name] ~= nil then
 
                 local data_table = unilib.pkg.dirt_custom_glemr11.dirt_table[full_name]
@@ -55,19 +55,19 @@ local function check_nodes(node_list)
     -- Check arguments, if required
     for _, full_name in pairs(node_list) do
 
-        if not unilib.is_registered_node_or_mtgame_alias(full_name) then
+        if not unilib.utils.is_registered_node_or_mtgame_alias(full_name) then
 
             if debug_warning_flag then
-                unilib.show_warning("ore_glemr11 package: Unrecognised node", full_name)
+                unilib.utils.show_warning("ore_glemr11 package: Unrecognised node", full_name)
             end
 
             return false
 
-        elseif unilib.get_mod_name(full_name) ~= "unilib" then
+        elseif unilib.utils.get_mod_name(full_name) ~= "unilib" then
 
             -- (Not a fatal error)
             if debug_warning_flag then
-                unilib.show_warning("ore_glemr11 package: Non-unilib node", full_name)
+                unilib.utils.show_warning("ore_glemr11 package: Non-unilib node", full_name)
             end
 
         end
@@ -958,7 +958,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -4096,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -981,7 +981,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_num_ores          = 3,
         clust_scarcity          = 5000,
         clust_size              = 2,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -1102,7 +1102,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 5,
         y_max                   = -128,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1125,7 +1125,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_num_ores          = 9,
         clust_scarcity          = 5000,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -1138,7 +1138,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 6,
         y_max                   = -16,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1162,7 +1162,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -128,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1173,7 +1173,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_num_ores          = 5,
         clust_scarcity          = 5000,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -1186,7 +1186,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -64,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1198,7 +1198,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -2048,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1209,7 +1209,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_num_ores          = 4,
         clust_scarcity          = 5000,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -1234,7 +1234,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -256,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1258,7 +1258,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -512,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1269,7 +1269,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_num_ores          = 5,
         clust_scarcity          = 5000,
         clust_size              = 3,
-        y_max                   = unilib.y_max,
+        y_max                   = unilib.constant.y_max,
         y_min                   = 1025,
     })
 
@@ -1294,7 +1294,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -256,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1318,7 +1318,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 5,
         y_max                   = -256,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1354,7 +1354,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 6,
         y_max                   = -64,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1402,7 +1402,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -128,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1438,7 +1438,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -1024,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1450,7 +1450,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -256,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1558,7 +1558,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -128,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
     register_ore({
@@ -1618,7 +1618,7 @@ function unilib.pkg.ore_glemr11.post()
         clust_scarcity          = 5000,
         clust_size              = 3,
         y_max                   = -32,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 

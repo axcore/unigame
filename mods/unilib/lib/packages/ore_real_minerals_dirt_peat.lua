@@ -9,7 +9,7 @@
 unilib.pkg.ore_real_minerals_dirt_peat = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ore_real_minerals_dirt_peat.post()
         clust_scarcity          = 20 * 20 * 20,
         clust_size              = 7,
         y_max                   = 0,
-        y_min                   = unilib.y_min,
+        y_min                   = unilib.constant.y_min,
     })
 
 end

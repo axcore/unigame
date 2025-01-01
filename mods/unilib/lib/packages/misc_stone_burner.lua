@@ -9,7 +9,7 @@
 unilib.pkg.misc_stone_burner = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,7 @@ function unilib.pkg.misc_stone_burner.init()
     return {
         description = "Burner stone",
         notes = "Can be ignited (to create a permanent flame)",
-        depends = {"fire_permanent", "mineral_flint", "mineral_quartz_white", "mineral_ruby"}
+        depends = {"fire_permanent", "mineral_flint", "mineral_quartz_white", "mineral_ruby"},
     }
 
 end
@@ -38,7 +38,7 @@ function unilib.pkg.misc_stone_burner.exec()
         description = S("Burner Stone"),
         tiles = {"unilib_misc_stone_burner.png"},
         groups = {cracky = 3, igniter = 4},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         after_destruct = unilib.pkg.fire_permanent.remove,
         on_ignite = unilib.pkg.fire_permanent.add,
@@ -52,7 +52,7 @@ function unilib.pkg.misc_stone_burner.exec()
             {c_white_vindesite, c_ruby, c_white_vindesite},
             {c_quartz, c_flint, c_quartz},
             {c_white_vindesite, c_ruby, c_white_vindesite},
-        }
+        },
     })
     unilib.register_craft({
         -- From underch:burner
@@ -61,7 +61,7 @@ function unilib.pkg.misc_stone_burner.exec()
             {c_blue_vindesite, c_ruby, c_blue_vindesite},
             {c_quartz, c_flint, c_quartz},
             {c_blue_vindesite, c_ruby, c_blue_vindesite},
-        }
+        },
     })
 
 end

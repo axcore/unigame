@@ -9,7 +9,7 @@
 unilib.pkg.misc_cavern_emerald = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.misc_cavern_emerald.exec()
         description = S("Cavern Emerald Block"),
         tiles = {"unilib_misc_cavern_emerald_block.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike",
         light_source = 13,
@@ -51,7 +51,7 @@ function unilib.pkg.misc_cavern_emerald.exec()
             description = S("Embedded Cavern Emerald"),
             tiles = {"unilib_misc_cavern_emerald_embedded.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             light_source = 10,
             paramtype = "light",

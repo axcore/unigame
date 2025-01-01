@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_kelp_saltwater = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.ingredient_kelp_saltwater.exec()
             inventory_image = "unilib_ingredient_kelp_saltwater.png",
             groups = {flammable = 1, food_saltwater_kelp_jar = 1},
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:ingredient_kelp_saltwater", 1, "unilib:vessel_bottle_glass_empty"
             ),
         }
@@ -55,7 +55,7 @@ function unilib.pkg.ingredient_kelp_saltwater.exec()
 
     -- Notes from cropocalypse:
     -- Multiple kelp jars, because kelp is currently not renewable
-    if unilib.cropocalypse_infinite_kelp_flag then
+    if unilib.setting.cropocalypse_infinite_kelp_flag then
 
         unilib.register_craft({
             type = "shapeless",
@@ -70,7 +70,7 @@ function unilib.pkg.ingredient_kelp_saltwater.exec()
             -- From cropocalypse:saltwater_kelp_jar
             type = "shapeless",
             output = "unilib:plant_kelp_ordinary",
-            recipe = {"unilib:ingredient_kelp_saltwater"}
+            recipe = {"unilib:ingredient_kelp_saltwater"},
         })
 
     end

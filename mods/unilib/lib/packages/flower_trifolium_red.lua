@@ -9,7 +9,7 @@
 unilib.pkg.flower_trifolium_red = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_trifolium_red.exec()
 
     unilib.register_node("unilib:flower_trifolium_red", "herbs:trifolium_red", mode, {
         -- From herbs:trifolium_red
-        description = unilib.annotate(S("Red Trifolium"), "Trifolium"),
+        description = unilib.utils.annotate(S("Red Trifolium"), "Trifolium"),
         tiles = {"unilib_flower_trifolium_red.png"},
         groups = {
-            attached_node = 1, color_violet = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_violet = 1, colour_violet = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_trifolium_red.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_trifolium_red", "herbs:trifolium_red")
 
-    unilib.register_decoration("herbs_flower_trifolium_red", {
+    unilib.register_decoration_generic("herbs_flower_trifolium_red", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_trifolium_red",

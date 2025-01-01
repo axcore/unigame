@@ -9,7 +9,7 @@
 unilib.pkg.plant_kelp_spiny = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,10 +29,10 @@ function unilib.pkg.plant_kelp_spiny.exec()
 
     unilib.register_node("unilib:plant_kelp_spiny", "australia:kelp_brown", mode, {
         -- From australia:kelp_brown
-        description = unilib.annotate(S("Spiny Kelp"), "Ecklonia radiata"),
+        description = unilib.utils.annotate(S("Spiny Kelp"), "Ecklonia radiata"),
         tiles = {"unilib_plant_kelp_spiny.png"},
         groups = {sea = 1, seaplants = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         climbable = true,
         drawtype = "plantlike",
@@ -47,6 +47,16 @@ function unilib.pkg.plant_kelp_spiny.exec()
         walkable = false,
         waving = 1,
         wield_image = "unilib_plant_kelp_spiny.png",
+
+        -- N.B. No .on_place() in original code
+        on_place = function(itemstack, placer, pointed_thing)
+
+            return unilib.misc.place_in_medium(
+                itemstack, placer, pointed_thing,
+                {need_under = "unilib:stone_ordinary_with_kelp_spiny"}
+            )
+
+        end,
     })
     -- (not compatible with flowerpots)
 
@@ -62,10 +72,10 @@ function unilib.pkg.plant_kelp_spiny.exec()
         action = function(pos)
 
             local yp = {x = pos.x, y = pos.y + 1, z = pos.z}
-            if minetest.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
+            if core.get_node(yp).name == "unilib:liquid_water_ordinary_source" then
 
                 pos.y = pos.y + 1
-                minetest.add_node(pos, {name = "unilib:plant_kelp_spiny"})
+                core.add_node(pos, {name = "unilib:plant_kelp_spiny"})
 
             else
 

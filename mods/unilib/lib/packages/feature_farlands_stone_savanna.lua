@@ -9,7 +9,7 @@
 unilib.pkg.feature_farlands_stone_savanna = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,10 +29,10 @@ function unilib.pkg.feature_farlands_stone_savanna.exec()
     -- N.B. In original code, only schematics 1-3 are used; here we use all of them
     for i = 1, 5 do
 
-        unilib.register_decoration("farlands_feature_stone_savanna_" .. i, {
+        unilib.register_decoration_generic("farlands_feature_stone_savanna_" .. i, {
             -- From farlands, mapgen/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_feature_stone_savanna_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_feature_stone_savanna_" .. i .. ".mts",
 
             flags = "place_center_x, place_center_z",
             noise_params = {
@@ -54,11 +54,11 @@ function unilib.pkg.feature_farlands_stone_savanna.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("farlands_feature_stone_savanna_" .. i, nil, {
+        unilib.register_decoration_complete("farlands_feature_stone_savanna_" .. i, nil, {
             -- From farlands, mapgen/mapgen.lua
             biomes = {"farlands_forest_coniferous_tall"},
             place_on = "unilib:dirt_ordinary_with_turf",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 1,
         })
 

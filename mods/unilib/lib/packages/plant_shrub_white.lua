@@ -9,7 +9,7 @@
 unilib.pkg.plant_shrub_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.plant_shrub_white.exec()
             snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -42,7 +42,8 @@ function unilib.pkg.plant_shrub_white.exec()
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_plant_shrub_white.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,5 +56,7 @@ function unilib.pkg.plant_shrub_white.exec()
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_white", "lib_ecology:bush_01_1")
+
+    unilib.register_decoration_spare("unilib:plant_shrub_white")
 
 end

@@ -1,18 +1,24 @@
 # "steel" remix - contains everything from the steel mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
 # steel packages
-metal_steel_fence_hard|steel
-metal_steel_fence_soft|steel
-metal_steel_plate_hard|steel
-metal_steel_plate_rusted|steel
-metal_steel_plate_soft|steel
-metal_steel_scrap|steel
-metal_steel_strut|steel
+decor_plate_steel_hard|steel
+decor_plate_steel_rusty|steel
+decor_plate_steel_soft|steel
+material_scrap_steel|steel
+misc_fence_steel_hard|steel
+misc_fence_steel_soft|steel
+misc_strut_steel|steel
 roof_steel_corrugated|steel
 
 # supporting packages (.depends)
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#machine_furnace_induction|unilib
+
+# supporting packages (.suggested)

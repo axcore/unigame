@@ -9,7 +9,7 @@
 unilib.pkg.admin_fruit_apple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,12 +37,14 @@ function unilib.pkg.admin_fruit_apple.exec()
             tiles = {"unilib_admin_fruit_apple.png"},
             groups = {
                 dig_immediate = 3, fleshy = 3,
-                not_in_creative_inventory = unilib.show_admin_item_group,
+                not_in_creative_inventory = unilib.globalshow_admin_item_group,
             },
-            sounds = unilib.sound_table.node,
+            sounds = unilib.global.sound_table.node,
 
             drawtype = "plantlike",
             inventory_image = "unilib_admin_fruit_apple.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             selection_box = {
                 type = "fixed",
@@ -53,7 +55,7 @@ function unilib.pkg.admin_fruit_apple.exec()
             walkable = false,
 
             -- Don't use cuisine history for an admin apple
-            on_use = minetest.item_eat(20),
+            on_use = core.item_eat(20),
         }
     )
 

@@ -9,7 +9,7 @@
 unilib.pkg.plant_flax_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,10 +30,10 @@ function unilib.pkg.plant_flax_antipodean.exec()
 
     unilib.register_node(c_flax, "aotearoa:flax", mode, {
         -- From aotearoa:flax
-        description = unilib.annotate(S("Antipodean Flax Plant"), "Phormium tenax"),
+        description = unilib.utils.annotate(S("Antipodean Flax Plant"), "Phormium tenax"),
         tiles = {"unilib_plant_flax_antipodean.png"},
         groups = {attached_node = 1, flammable = 1, flora = 1, flower = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -55,20 +55,20 @@ function unilib.pkg.plant_flax_antipodean.exec()
         recipe = c_flax,
         burntime = 1,
     })
-    if unilib.pkg_executed_table["item_paper_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["item_paper_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From aotearoa:flax
             output = "unilib:item_paper_ordinary",
             recipe = {
                 {c_flax, c_flax, c_flax},
-            }
+            },
         })
 
     end
     unilib.register_plant_in_pot(c_flax, "aotearoa:flax")
 
-    unilib.register_decoration("aotearoa_plant_flax_antipodean_normal", {
+    unilib.register_decoration_generic("aotearoa_plant_flax_antipodean_normal", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = c_flax,
@@ -76,7 +76,7 @@ function unilib.pkg.plant_flax_antipodean.exec()
         fill_ratio = 0.01,
         sidelen = 16,
     })
-    unilib.register_decoration("aotearoa_plant_flax_antipodean_dense", {
+    unilib.register_decoration_generic("aotearoa_plant_flax_antipodean_dense", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = c_flax,

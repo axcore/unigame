@@ -9,7 +9,7 @@
 unilib.pkg.plant_seaweed_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pl_seaweed.add_mode
+local mode = unilib.global.imported_mod_table.pl_seaweed.add_mode
 
 local seaweed_list = {
     {"flowers:seaweed", "thick"},
@@ -28,7 +28,7 @@ local function place_func(pos)
     local full_name = "unilib:plant_seaweed_normal_" .. seaweed_list[math.random(1, 4)][2]
     -- N.B. math.random(1, 3) in the original code, for consistency with code in the
     --      "flower_waterlily_ordinary_alt" package
-    minetest.swap_node(right_here, {name = full_name, param2 = math.random(0, 3)})
+    core.swap_node(right_here, {name = full_name, param2 = math.random(0, 3)})
 
 end
 
@@ -58,13 +58,13 @@ function unilib.pkg.plant_seaweed_normal.exec()
 
         unilib.register_node("unilib:plant_seaweed_normal_" .. part_name, orig_name, mode, {
             -- From pl_seaweed, flowers:seaweed etc
-            description = S("Seaweed"),
+            description = S("Normal Seaweed"),
             tiles = {
                 "unilib_plant_seaweed_normal_" .. part_name .. ".png",
                 "unilib_plant_seaweed_normal_" .. part_name .. ".png^[transformFY",
             },
             groups = group_table,
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "nodebox",
@@ -93,22 +93,22 @@ function unilib.pkg.plant_seaweed_normal.exec()
 
                 local place_pos = nil
                 local top_pos = {x = pt.under.x, y = pt.under.y + 1, z = pt.under.z}
-                local under_node = minetest.get_node(pt.under)
-                local above_node = minetest.get_node(pt.above)
-                local top_node = minetest.get_node(top_pos)
+                local under_node = core.get_node(pt.under)
+                local above_node = core.get_node(pt.above)
+                local top_node = core.get_node(top_pos)
 
-                if unilib.get_node_field(under_node.name, "buildable_to") then
+                if unilib.utils.get_node_field(under_node.name, "buildable_to") then
 
                     if under_node.name ~= "unilib:liquid_water_ordinary_source" then
                         place_pos = pt.under
                     elseif top_node.name ~= "unilib:liquid_water_ordinary_source" and
-                            unilib.get_node_field(top_node.name, "buildable_to") then
+                            unilib.utils.get_node_field(top_node.name, "buildable_to") then
                         place_pos = top_pos
                     else
                         return
                     end
 
-                elseif unilib.get_node_field(above_node.name, "buildable_to") then
+                elseif unilib.utils.get_node_field(above_node.name, "buildable_to") then
 
                     place_pos = pt.above
 
@@ -122,7 +122,7 @@ function unilib.pkg.plant_seaweed_normal.exec()
                 end
 
                 local player_name = placer:get_player_name()
-                if not minetest.is_protected(place_pos, player_name) then
+                if not core.is_protected(place_pos, player_name) then
 
                     -- Notes from corresponding code in pl_waterlilies:
                     -- If this block appears in the world, something went wrong
@@ -132,19 +132,19 @@ function unilib.pkg.plant_seaweed_normal.exec()
 
                         nodename = "unilib:plant_seaweed_normal_" ..
                                 seaweed_list[math.random(1, 4)][2]
-                        minetest.swap_node(place_pos, {name = nodename, param2 = math.random(0, 3)})
+                        core.swap_node(place_pos, {name = nodename, param2 = math.random(0, 3)})
 
                     else
 
-                        local fdir = minetest.dir_to_facedir(placer:get_look_dir())
-                        minetest.swap_node(
+                        local fdir = core.dir_to_facedir(placer:get_look_dir())
+                        core.swap_node(
                             place_pos,
                             {name = "unilib:plant_seaweed_normal_thick", param2 = fdir}
                         )
 
                     end
 
-                    if not unilib.is_creative(player_name) then
+                    if not unilib.utils.is_creative(player_name) then
                         itemstack:take_item()
                     end
 
@@ -159,7 +159,7 @@ function unilib.pkg.plant_seaweed_normal.exec()
     end
 
     -- N.B. biome_lib decorations from the original code are difficult to translate into
-    --      minetest.register_decoration() calls, because the latter doesn't work when the .place_on
+    --      core.register_decoration() calls, because the latter doesn't work when the .place_on
     --      node is a liquid
     -- The "plant_seaweed_normal_on_sand" decoration is not affected); the other two are more
     --      closely related to minetest_game's waterlily decoration, than to the plantlife versions
@@ -170,7 +170,7 @@ function unilib.pkg.plant_seaweed_normal.exec()
         replace_mode = mode,
 
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 33,
                 plantlife_limit = -0.9,
             }),
@@ -184,11 +184,11 @@ function unilib.pkg.plant_seaweed_normal.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(-0.64),
-            temp_min = unilib.convert_biome_lib_temp(-0.22),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.64),
+            temp_min = unilib.utils.convert_biome_lib_temp(-0.22),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 33,
                 plantlife_limit = -0.9,
             }),
@@ -202,11 +202,11 @@ function unilib.pkg.plant_seaweed_normal.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(-0.64),
-            temp_min = unilib.convert_biome_lib_temp(-0.22),
+            temp_max = unilib.utils.convert_biome_lib_temp(-0.64),
+            temp_min = unilib.utils.convert_biome_lib_temp(-0.22),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 33 / 2,
                 plantlife_limit = -0.9,
             }),

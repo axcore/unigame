@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_pomegranate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pomegranate.add_mode
+local mode = unilib.global.imported_mod_table.pomegranate.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_pomegranate.post()
 
-    unilib.register_decoration_now("cool_trees_tree_pomegranate", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_pomegranate", nil, {
         -- From pomegranate/init.lua
         -- Completes decoration in package "tree_pomegranate"
         biomes = "default_savanna",

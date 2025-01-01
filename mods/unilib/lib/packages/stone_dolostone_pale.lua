@@ -17,9 +17,9 @@
 unilib.pkg.stone_dolostone_pale = {}
 
 local S = unilib.intllib
-local underch_add_mode = unilib.imported_mod_table.underch.add_mode
-local compressed_add_mode = unilib.imported_mod_table.compressed.add_mode
-local condensed_add_mode = unilib.imported_mod_table.condensed.add_mode
+local underch_add_mode = unilib.global.imported_mod_table.underch.add_mode
+local compressed_add_mode = unilib.global.imported_mod_table.compressed.add_mode
+local condensed_add_mode = unilib.global.imported_mod_table.condensed.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -41,6 +41,7 @@ function unilib.pkg.stone_dolostone_pale.exec()
         description = S("Pale Dolostone"),
 
         category = "sedimentary",
+        colour = "#B9B395",
         grinder_flag = true,
         hardness = 1,
         moss_flag = true,
@@ -95,26 +96,22 @@ function unilib.pkg.stone_dolostone_pale.exec()
         wall_orig_name = "underch:dolomite_mossy_cobble_wall",
     })
 
-    if unilib.underch_tweak_flag then
+    unilib.register_stone_cobble_compressed({
+        -- From compressed:dolomite. Creates unilib:stone_dolostone_pale_cobble_compressed
+        part_name = "dolostone_pale",
+        orig_name = "compressed:dolostone",
 
-        unilib.register_stone_cobble_compressed({
-            -- From compressed:dolomite. Creates unilib:stone_dolostone_pale_cobble_compressed
-            part_name = "dolostone_pale",
-            orig_name = "compressed:dolostone",
+        replace_mode = compressed_add_mode,
+        description = S("Compressed Pale Dolostone Cobble"),
+    })
 
-            replace_mode = compressed_add_mode,
-            description = S("Compressed Pale Dolostone Cobble"),
-        })
+    unilib.register_stone_cobble_condensed({
+        -- From condensed:dolomite. Creates unilib:stone_dolostone_pale_cobble_condensed
+        part_name = "dolostone_pale",
+        orig_name = "condensed:dolostone",
 
-        unilib.register_stone_cobble_condensed({
-            -- From condensed:dolomite. Creates unilib:stone_dolostone_pale_cobble_condensed
-            part_name = "dolostone_pale",
-            orig_name = "condensed:dolostone",
-
-            replace_mode = condensed_add_mode,
-            description = S("Condensed Pale Dolostone Cobble"),
-        })
-
-    end
+        replace_mode = condensed_add_mode,
+        description = S("Condensed Pale Dolostone Cobble"),
+    })
 
 end

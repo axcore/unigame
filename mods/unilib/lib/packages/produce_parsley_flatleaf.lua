@@ -9,7 +9,7 @@
 unilib.pkg.produce_parsley_flatleaf = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -62,7 +62,8 @@ function unilib.pkg.produce_parsley_flatleaf.exec()
         max_light = 15,
         min_light = 13,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -74,7 +75,16 @@ function unilib.pkg.produce_parsley_flatleaf.exec()
 
     end
 
-    unilib.register_decoration("farming_redo_produce_parsley_flatleaf", {
+    unilib.register_juice({
+        ingredient = "unilib:produce_parsley_flatleaf_harvest",
+        juice_description = S("Parsley"),
+        juice_type = "parsley",
+        rgb = "#6fcd00",
+
+        orig_flag = false,
+    })
+
+    unilib.register_decoration_generic("farming_redo_produce_parsley_flatleaf", {
         -- From farming_redo/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:produce_parsley_flatleaf_grow_3",
@@ -84,7 +94,7 @@ function unilib.pkg.produce_parsley_flatleaf.exec()
             offset = 0,
             persist = 0.6,
             scale = 0.002,
-            seed = 329,
+            seed = 23,
             spread = {x = 100, y = 100, z = 100},
         },
         sidelen = 16,

@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    default
+-- From:    keys
 -- Code:    LGPL 2.1
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.item_key_skeleton = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.keys.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,7 @@ end
 
 function unilib.pkg.item_key_skeleton.exec()
 
-    -- ("default:skeleton_key" is already aliased on to "keys:skeleton_key" by something; maybe in
-    --      the engine? Anyway, we need to un-alias it to prevent a warning in debug.txt)
-    minetest.registered_aliases["default:skeleton_key"] = nil
-
+    -- (Note that keys were moved from minetest_game/default to minetest_game/keys in 2022)
     unilib.register_craftitem(
         -- From default:skeleton_key
         "unilib:item_key_skeleton",
@@ -48,13 +45,13 @@ function unilib.pkg.item_key_skeleton.exec()
                 end
 
                 local pos = pointed_thing.under
-                local node = minetest.get_node(pos)
+                local node = core.get_node(pos)
 
                 if not node then
                     return itemstack
                 end
 
-                local node_reg = minetest.registered_nodes[node.name]
+                local node_reg = core.registered_nodes[node.name]
                 local on_skeleton_key_use = node_reg and node_reg.on_skeleton_key_use
                 if not on_skeleton_key_use then
                     return itemstack
@@ -74,9 +71,7 @@ function unilib.pkg.item_key_skeleton.exec()
 
                 if secret then
 
-                    local inv = minetest.get_inventory(
-                        {type = "player", name = user:get_player_name()}
-                    )
+                    local inv = core.get_inventory({type = "player", name = user:get_player_name()})
 
                     -- Update the original itemstack
                     itemstack:take_item()
@@ -89,7 +84,7 @@ function unilib.pkg.item_key_skeleton.exec()
                         "description",
                         S("Key to @1's @2",
                         user:get_player_name(),
-                        minetest.registered_nodes[node.name].description)
+                        core.registered_nodes[node.name].description)
                     )
 
                     if itemstack:get_count() == 0 then
@@ -98,9 +93,10 @@ function unilib.pkg.item_key_skeleton.exec()
 
                     else
 
+                        -- If not added to inventory successfully...
                         if inv:add_item("main", new_stack):get_count() > 0 then
-                            minetest.add_item(user:get_pos(), new_stack)
-                        end -- else: added to inventory successfully
+                            core.add_item(user:get_pos(), new_stack)
+                        end
 
                     end
 
@@ -115,7 +111,7 @@ function unilib.pkg.item_key_skeleton.exec()
         output = "unilib:item_key_skeleton",
         recipe = {
             {"unilib:metal_gold_ingot"},
-        }
+        },
     })
     unilib.register_craft({
         -- From default:gold_ingot

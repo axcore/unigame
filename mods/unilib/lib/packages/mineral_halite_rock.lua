@@ -9,7 +9,7 @@
 unilib.pkg.mineral_halite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pfaa.add_mode
+local mode = unilib.global.imported_mod_table.pfaa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_halite_rock.exec()
 
     local c_lump = "unilib:mineral_halite_lump"
-    local hardness = unilib.mineral_table["halite"]["hardness"]
+    local hardness = unilib.global.mineral_table["halite"]["hardness"]
 
     unilib.register_mineral_rock("halite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_halite_rock.exec()
         description = S("Halite Rock"),
         tiles = {"unilib_mineral_halite_rock.png"},
         groups = {cracky = 3},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

@@ -9,7 +9,7 @@
 unilib.pkg.plant_cattail_parched = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ function unilib.pkg.plant_cattail_parched.exec()
 
     unilib.register_node("unilib:plant_cattail_parched", "lib_ecology:plant_cattails_03", mode, {
         -- From GLEMr11, lib_ecology:plant_cattails_03
-        description = unilib.annotate(S("Parched Cattail"), "Typha"),
+        description = unilib.utils.annotate(S("Parched Cattail"), "Typha"),
         tiles = {"unilib_plant_cattail_parched.png"},
         groups = {
             attached_node = 1, flammable = 1, flora = 1, leaves = 1, oddly_breakable_by_hand = 1,
             snappy = 3,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -42,7 +42,8 @@ function unilib.pkg.plant_cattail_parched.exec()
 --      floodable = true,
         -- N.B. inventory_image not in original code
         inventory_image = "unilib_plant_cattail_parched.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other plants
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,5 +56,7 @@ function unilib.pkg.plant_cattail_parched.exec()
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
     unilib.register_plant_in_pot("unilib:plant_cattail_parched", "lib_ecology:plant_cattails_03")
+
+    unilib.register_decoration_spare("unilib:plant_cattail_parched")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.sand_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,24 @@ function unilib.pkg.sand_white.exec()
         -- N.B. Originally cracky = 3, stone = 1, level = 2
         groups = {crumbly = 3, falling_node = 1, sand = 1},
         -- N.B. Originally gravel sounds
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
     })
+
+    if unilib.setting.squeezed_sand_flag then
+
+        unilib.register_node("unilib:sand_white_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed White Sand"),
+            tiles = {"unilib_sand_white_compressed.png"},
+            groups = {compressedsand = 1, crumbly = 2},
+            sounds = unilib.global.sound_table.sand,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        -- Original to unilib
+        unilib.misc.set_squeezed_recipes("unilib:sand_white", "unilib:sand_white_compressed")
+
+    end
 
 end

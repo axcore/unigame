@@ -1,6 +1,5 @@
 # "xocean" remix - contains everything from the xocean mod, except mobs and food items derived from
 #       them
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -30,7 +29,7 @@ deco_xocean_plant_seagrass_sickle|xocean
 decor_stone_ocean|xocean
 light_lantern_sea|xocean
 ore_xocean_stone_ocean|xocean
-plant_kelp_ordinary_dried|xocean
+plant_kelp_dried|xocean
 plant_pickle_sea|xocean
 plant_seagrass_sickle|xocean
 shared_xocean|xocean
@@ -40,7 +39,6 @@ stone_ocean|xocean
 glass_ordinary|default moreblocks vessels
 liquid_water_ordinary|default
 mineral_coal|default technic
-plant_kelp_ordinary|default
 sand_ordinary|default
 torch_ordinary|default
 
@@ -52,6 +50,12 @@ biome_default_forest_deciduous|default
 biome_default_grassland|default
 biome_default_grassland_snowy|default
 biome_default_taiga|default
+plant_kelp_green|farlands
+plant_kelp_ordinary|default
+plant_kelp_ordinary_gaia|farlands
+plant_kelp_yellow|farlands
 
 # supporting packages (.optional)
-#mineral_mese|default
+#mineral_mese|default glemr11
+
+# supporting packages (.suggested)

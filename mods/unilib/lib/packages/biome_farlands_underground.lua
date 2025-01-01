@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_underground = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,9 +28,9 @@ function unilib.pkg.biome_farlands_underground.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "underground" biome
         name = "farlands_underground",
-        description = unilib.brackets(S("Underground biome"), "farlands"),
+        description = unilib.utils.brackets(S("Underground biome"), "farlands"),
         y_max = -113,
-        y_min = unilib.y_min,
+        y_min = unilib.constant.y_min,
         heat_point = 50,
         humidity_point = 50,
     })

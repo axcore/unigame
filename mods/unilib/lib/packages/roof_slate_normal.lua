@@ -9,7 +9,7 @@
 unilib.pkg.roof_slate_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.roof_slate_normal.exec()
             "unilib_roof_slate_normal.png",
         },
         groups = {cracky = 2, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
         paramtype2 = "facedir",
@@ -48,7 +48,7 @@ function unilib.pkg.roof_slate_normal.exec()
         output = "unilib:roof_slate_normal",
         recipe = {
             {"unilib:stone_ordinary", "group:wood"},
-        }
+        },
     })
 
 end

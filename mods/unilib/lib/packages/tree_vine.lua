@@ -9,7 +9,7 @@
 unilib.pkg.tree_vine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,20 +38,24 @@ function unilib.pkg.tree_vine.exec()
         description = S("Apple Tree Wood"),
 
         burnlevel = burnlevel,
+        -- This tree does not have its own sapling
+        incomplete_flag = true,
         not_super_flag = true,
     })
 
     unilib.register_leafdecay({
         -- From ethereal-ng/leaves.lua
+        trunk_type = "apple",
         trunks = {"unilib:tree_apple_trunk"},
-        leaves = {"unilib:tree_apple_leaves", "unilib:vine_normal"},
+        leaves = {"unilib:tree_apple_leaves"},
+        others = {"unilib:vine_normal"},
         radius = 3,
     })
 
-    unilib.register_decoration("ethereal_tree_vine", {
+    unilib.register_decoration_generic("ethereal_tree_vine", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_vine_ethereal.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_vine_ethereal.mts",
 
         fill_ratio = 0.02,
         flags = "place_center_x, place_center_z",

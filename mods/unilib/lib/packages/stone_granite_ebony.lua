@@ -9,7 +9,7 @@
 unilib.pkg.stone_granite_ebony = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,6 +33,7 @@ function unilib.pkg.stone_granite_ebony.exec()
         description = S("Ebony Granite"),
 
         category = "intrusive",
+        colour = "#3A3A31",
         grinder_flag = true,
         hardness = 3,
     })
@@ -77,6 +78,24 @@ function unilib.pkg.stone_granite_ebony.exec()
 
         replace_mode = mode,
         description = S("Ebony Granite Cobble"),
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_granite_ebony_cobble_compressed
+        part_name = "granite_ebony",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Ebony Granite Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_granite_ebony_cobble_condensed
+        part_name = "granite_ebony",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Ebony Granite Cobble"),
     })
 
 end

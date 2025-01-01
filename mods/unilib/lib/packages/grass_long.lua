@@ -9,7 +9,7 @@
 unilib.pkg.grass_long = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,13 @@ end
 
 function unilib.pkg.grass_long.exec()
 
-    unilib.register_node("unilib:grass_long", "moreplants:tallgrass", mode, {
+    local full_name = "unilib:grass_long"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "moreplants:tallgrass", mode, {
         -- From moreplants:tallgrass
         description = S("Long Grass"),
         tiles = {"unilib_grass_long.png"},
@@ -34,12 +40,14 @@ function unilib.pkg.grass_long.exec()
             attached_node = 1, flammable = 1, flora = 1, grass = 1, long_grass = 1, snappy = 3,
         },
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
+        drop = drop,
         inventory_image = "unilib_grass_long.png",
-        is_ground_content = false,
+        -- N.B. removed is_ground_content = false to match other grasses
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -51,12 +59,12 @@ function unilib.pkg.grass_long.exec()
         waving = 1,
         wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     })
-    unilib.register_plant_in_pot("unilib:grass_long", "moreplants:tallgrass")
+    unilib.register_plant_in_pot(full_name, "moreplants:tallgrass")
 
-    unilib.register_decoration("moreplants_grass_long", {
+    unilib.register_decoration_generic("moreplants_grass_long", {
         -- From moreplants:tallgrass
         deco_type = "simple",
-        decoration = "unilib:grass_long",
+        decoration = full_name,
 
         fill_ratio = 0.01,
         height = 1,

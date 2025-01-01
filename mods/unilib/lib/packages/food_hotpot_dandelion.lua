@@ -9,7 +9,7 @@
 unilib.pkg.food_hotpot_dandelion = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -74,10 +74,10 @@ function unilib.pkg.food_hotpot_dandelion.post()
         recipe = {
             {c_dandelion, c_dandelion, c_dandelion},
             {c_dandelion, c_dandelion, c_dandelion},
-            {"", "group:potable_bucket", ""}
+            {"", "group:potable_bucket", ""},
         },
         -- N.B. Not in original code
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_grass_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,12 +33,12 @@ function unilib.pkg.deco_farlands_grass_frozen.post()
 
     for i = 1, 5 do
 
-        unilib.register_decoration_now("farlands_grass_frozen_" .. i, nil, {
+        unilib.register_decoration_complete("farlands_grass_frozen_" .. i, nil, {
             -- From farlands, mapgen/mapgen.lua
             -- Completes decoration in package "grass_frozen"
             biomes = {"farlands_grassland_snowy", "farlands_icesheet", "farlands_taiga"},
             place_on = "unilib:dirt_ordinary_with_cover_snow",
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 1,
         })
 

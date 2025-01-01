@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_tussock_bristle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,7 +22,7 @@ function unilib.pkg.deco_aotearoa_plant_tussock_bristle.init()
         depends = "plant_tussock_bristle",
         at_least_one = {
             {"biome_aotearoa_alpine", "biome_aotearoa_highland"},
-            {"dirt_ordinary", "stone_schist_antipodean", "sand_volcanic"},
+            {"dirt_custom_antipodean", "stone_schist_antipodean", "sand_volcanic"},
         },
     }
 
@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_tussock_bristle.post()
 
-    unilib.register_decoration_now("aotearoa_plant_tussock_bristle", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_tussock_bristle", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_tussock_bristle"
         biomes = {
@@ -39,7 +39,7 @@ function unilib.pkg.deco_aotearoa_plant_tussock_bristle.post()
             "aotearoa_highland_rangipo_desert",
         },
         place_on = {
-            "unilib:dirt_ordinary_with_turf_dry",
+            "unilib:dirt_ordinary_with_turf_highland_mountain_tussock",
             "unilib:sand_volcanic",
             "unilib:stone_schist_antipodean",
         },

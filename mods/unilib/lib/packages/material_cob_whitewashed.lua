@@ -9,7 +9,7 @@
 unilib.pkg.material_cob_whitewashed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,9 +36,11 @@ function unilib.pkg.material_cob_whitewashed.exec()
             description = S("Whitewashed Cob"),
             tiles = {"unilib_dirt_whitewashed.png"},
             groups = {cracky = 2, crumbly = 1, falling_node = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
         }
     )
@@ -47,9 +49,9 @@ function unilib.pkg.material_cob_whitewashed.exec()
         output = "unilib:material_cob_whitewashed",
         recipe = {
             {"unilib:material_cob", "unilib:material_lime_slaked"},
-        }
+        },
     })
-    if unilib.pkg_executed_table["dirt_rammed"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_rammed"] ~= nil then
 
         -- Note from earthbuild:
         -- Whitewashed cob and rammed dirt look indistinguishable
@@ -73,9 +75,11 @@ function unilib.pkg.material_cob_whitewashed.exec()
             description = S("Whitewashed Mud Brick"),
             tiles = {"unilib_dirt_whitewashed.png"},
             groups = {cracky = 2, crumbly = 1},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "normal",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
         }
     )

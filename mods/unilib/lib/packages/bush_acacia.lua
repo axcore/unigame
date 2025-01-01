@@ -9,7 +9,7 @@
 unilib.pkg.bush_acacia = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -40,14 +40,14 @@ function unilib.pkg.bush_acacia.exec()
         description = S("Acacia Bush Stem"),
         select_table = {-7 / 16, -0.5, -7 / 16, 7 / 16, 0.5, 7 / 16},
     })
-    if unilib.pkg_executed_table["tree_acacia"] ~= nil then
+    if unilib.global.pkg_executed_table["tree_acacia"] ~= nil then
 
         unilib.register_craft({
             -- From default:acacia_wood
             output = "unilib:tree_acacia_wood",
             recipe = {
                 {"unilib:bush_acacia_stem"},
-            }
+            },
         })
 
     end
@@ -55,7 +55,7 @@ function unilib.pkg.bush_acacia.exec()
         -- From default:acacia_bush_stem
         type = "fuel",
         recipe = "unilib:bush_acacia_stem",
-        burntime = unilib.bush_burn_table.stem[burnlevel],
+        burntime = unilib.global.bush_burn_table.stem[burnlevel],
     })
 
     unilib.register_bush_leaves({
@@ -87,13 +87,13 @@ function unilib.pkg.bush_acacia.exec()
         -- From default:acacia_bush_sapling
         type = "fuel",
         recipe = "unilib:bush_acacia_sapling",
-        burntime = unilib.bush_burn_table.sapling[burnlevel],
+        burntime = unilib.global.bush_burn_table.sapling[burnlevel],
     })
 
-    unilib.register_decoration("default_bush_acacia", {
+    unilib.register_decoration_generic("default_bush_acacia", {
         -- From default/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_bush_acacia.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_bush_acacia.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_sauce_tomato = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.ingredient_sauce_tomato.exec()
         -- N.B. food_sauce = 1 not in original code
         groups = {food_sauce = 1, food_tomato_sauce = 1, vessel = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_sauce_tomato", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_sauce_tomato", 2),
     })
     unilib.register_craft({
         -- From bbq:tomato_sauce

@@ -9,7 +9,7 @@
 unilib.pkg.vine_jungle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -43,6 +43,8 @@ function unilib.pkg.vine_jungle.exec()
         drawtype = "nodebox",
         drop = "unilib:vine_jungle",
         inventory_image = "unilib_vine_jungle.png",
+        -- N.B. is_ground_content = false not in original code; added to match other vine packages
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {

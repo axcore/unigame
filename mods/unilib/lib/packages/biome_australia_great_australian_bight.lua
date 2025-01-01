@@ -9,7 +9,7 @@
 unilib.pkg.biome_australia_great_australian_bight = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,18 +18,18 @@ local mode = unilib.imported_mod_table.australia.add_mode
 function unilib.pkg.biome_australia_great_australian_bight.init()
 
     return {
-        description = "Great Australian bight biome",
+        description = "Great Australian Bight biome",
         depends = "stone_sandstone_ordinary",
     }
 
 end
 
-function unilib.pkg.biome_australia_great_australian_bight.exec()
+function unilib.pkg.biome_australia_great_australian_bight.post()
 
     unilib.register_biome({
         -- From australia/biome_great_australian_bight.lua, "great_australian_bight" biome
         name = "australia_great_australian_bight",
-        description = unilib.brackets(S("Great Australian bight biome"), "australia"),
+        description = unilib.utils.brackets(S("Great Australian Bight biome"), "australia"),
         node_top = "unilib:stone_sandstone_ordinary",
         depth_top = 1,
         node_filler = "unilib:stone_sandstone_ordinary",

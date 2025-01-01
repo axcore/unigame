@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_plant_shrub_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,12 +30,12 @@ end
 
 function unilib.pkg.deco_farlands_plant_shrub_dry.post()
 
-    unilib.register_decoration_now("default_plant_shrub_dry", "farlands_plant_shrub_dry", {
+    unilib.register_decoration_complete("default_plant_shrub_dry", "farlands_plant_shrub_dry", {
         -- From farlands, mapgen/mapgen.lua
         -- Completes decoration in package "plant_shrub_dry"
         biomes = {"farlands_desert", "farlands_desert_sandstone"},
         place_on = {"unilib:sand_desert", "unilib:sand_ordinary", "unilib:sand_silver"},
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 2,
     })
 

@@ -9,7 +9,7 @@
 unilib.pkg.utensil_spatula = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,13 @@ function unilib.pkg.utensil_spatula.exec()
         description = S("Spatula"),
         tiles = {"unilib_utensil_spatula_tile.png"},
         groups = {cracky = 1, dig_immediate = 3, oddly_breakable_by_hand = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         drawtype = "nodebox",
         inventory_image = "unilib_utensil_spatula.png",
+        -- N.B. is_ground_content = false not in original code; added to match other utensil and
+        --      vessel packages
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -56,7 +59,7 @@ function unilib.pkg.utensil_spatula.exec()
         recipe = {
             {"", "unilib:metal_tin_ingot", ""},
             {"", "unilib:metal_tin_ingot", ""},
-            {"", "unilib:item_stick_ordinary", ""}
+            {"", "unilib:item_stick_ordinary", ""},
         },
     })
 

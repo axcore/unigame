@@ -9,7 +9,7 @@
 unilib.pkg.misc_box_disco = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nbea.add_mode
+local mode = unilib.global.imported_mod_table.nbea.add_mode
 
 local sound_table = {}
 
@@ -19,9 +19,9 @@ local sound_table = {}
 
 local function stop_sound(pos)
 
-    local spos = minetest.hash_node_position(pos)
+    local spos = core.hash_node_position(pos)
     if sound_table[spos]
-        then minetest.sound_stop(sound_table[spos])
+        then core.sound_stop(sound_table[spos])
     end
 
 end
@@ -52,7 +52,7 @@ function unilib.pkg.misc_box_disco.exec()
         description = S("Disco Box"),
         tiles = {"unilib_misc_box_disco.png"},
         groups = {cracky = 3},
-        sounds = unilib.node_sound_metal_defaults({
+        sounds = unilib.sound.generate_metal({
             place = {name = "unilib_metal_footstep", gain = 0.5},
             dig = {name = "unilib_metal_footstep", gain = 1.0},
             dug = {name = "unilib_metal_footstep", gain = 1.0},
@@ -256,7 +256,7 @@ function unilib.pkg.misc_box_disco.exec()
         },
     })
 
-    if minetest.get_modpath("mesecons") then
+    if core.get_modpath("mesecons") then
 
         unilib.override_item("unilib:misc_box_disco", {
             groups = {cracky = 3, mesecon = 1, mesecon_effector_off = 1},
@@ -267,10 +267,10 @@ function unilib.pkg.misc_box_disco.exec()
 
                     action_on = function(pos, node)
 
-                        minetest.swap_node(pos, {name = "unilib:misc_box_disco_on"})
+                        core.swap_node(pos, {name = "unilib:misc_box_disco_on"})
 
-                        local spos = minetest.hash_node_position(pos)
-                        sound_table[spos] = minetest.sound_play(
+                        local spos = core.hash_node_position(pos)
+                        sound_table[spos] = core.sound_play(
                             "unilib_misc_box_disco",
                             {pos = pos, max_hear_distance = 10, gain = 1.25, loop = true}
                         )
@@ -297,10 +297,10 @@ function unilib.pkg.misc_box_disco.exec()
                     },
                     backface_culling = false,
                     image = "unilib_misc_box_disco_animated.png",
-                }
+                },
             },
             groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
-            sounds = unilib.node_sound_metal_defaults({
+            sounds = unilib.sound.generate_metal({
                 place = {name = "unilib_metal_footstep", gain = 0.5},
                 dig = {name = "unilib_metal_footstep", gain = 1.0},
                 dug = {name = "unilib_metal_footstep", gain = 1.0},
@@ -316,7 +316,7 @@ function unilib.pkg.misc_box_disco.exec()
                     action_off = function(pos, node)
 
                         stop_sound(pos)
-                        minetest.swap_node(pos, {name = "unilib:misc_box_disco"})
+                        core.swap_node(pos, {name = "unilib:misc_box_disco"})
 
                     end,
                 },

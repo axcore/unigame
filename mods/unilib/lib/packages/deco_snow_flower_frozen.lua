@@ -9,7 +9,7 @@
 unilib.pkg.deco_snow_flower_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -38,7 +38,7 @@ function unilib.pkg.deco_snow_flower_frozen.post()
         "flower_viola_purple",
     }) do
 
-        unilib.register_decoration_now("snow_" .. pkg_name, nil, {
+        unilib.register_decoration_complete("snow_" .. pkg_name, nil, {
             -- Original to unilib
             -- Completes the decoration in "flower_frozen"
             biomes = {"snow_lush", "snow_normal"},

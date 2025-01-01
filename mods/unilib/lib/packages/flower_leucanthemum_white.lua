@@ -9,7 +9,7 @@
 unilib.pkg.flower_leucanthemum_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,13 @@ function unilib.pkg.flower_leucanthemum_white.exec()
 
     unilib.register_node("unilib:flower_leucanthemum_white", "herbs:leucanthemum_white", mode, {
         -- From herbs:leucanthemum_white
-        description = unilib.annotate(S("White Leucanthemum"), "Leucanthemum"),
+        description = unilib.utils.annotate(S("White Leucanthemum"), "Leucanthemum"),
         tiles = {"unilib_flower_leucanthemum_white.png"},
         groups = {
-            attached_node = 1, color_white = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_white = 1, colour_white = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -49,7 +50,7 @@ function unilib.pkg.flower_leucanthemum_white.exec()
     })
     unilib.register_flower_in_pot("unilib:flower_leucanthemum_white", "herbs:leucanthemum_white")
 
-    unilib.register_decoration("herbs_flower_leucanthemum_white", {
+    unilib.register_decoration_generic("herbs_flower_leucanthemum_white", {
         -- From herbs/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:flower_leucanthemum_white",

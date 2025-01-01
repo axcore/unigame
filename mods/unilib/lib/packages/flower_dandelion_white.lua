@@ -9,7 +9,7 @@
 unilib.pkg.flower_dandelion_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.flowers.add_mode
+local mode = unilib.global.imported_mod_table.flowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_dandelion_white.exec()
         replace_mode = mode,
         deco_part_name = "flowers",
         description = S("White Dandelion"),
-        group_table = {color_white = 1, flammable = 1},
+        group_table = {color_white = 1, colour_white = 1, flammable = 1},
         sci_name = "Taraxacum",
         seed = 1220999,
     })

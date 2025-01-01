@@ -9,7 +9,7 @@
 unilib.pkg.admin_tool_hoe = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -18,9 +18,9 @@ local mode = unilib.imported_mod_table.farming.add_mode
 local function hoe_area(pos, player)
 
     -- Check for protection
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
 
-        minetest.record_protection_violation(pos, player:get_player_name())
+        core.record_protection_violation(pos, player:get_player_name())
         return
 
     end
@@ -29,19 +29,19 @@ local function hoe_area(pos, player)
     local r = 5
 
     -- Remove flora (grass, flowers etc.)
-    local res = minetest.find_nodes_in_area(
+    local res = core.find_nodes_in_area(
         {x = pos.x - r, y = pos.y - 1, z = pos.z - r},
         {x = pos.x + r, y = pos.y + 2, z = pos.z + r},
         {"group:flora"}
     )
 
     for n = 1, #res do
-        minetest.swap_node(res[n], {name = "air"})
+        core.swap_node(res[n], {name = "air"})
     end
 
     -- Replace dirt with the corresponding tilled soil
     res = nil
-    res = minetest.find_nodes_in_area_under_air(
+    res = core.find_nodes_in_area_under_air(
         {x = pos.x - r, y = pos.y - 1, z = pos.z - r},
         {x = pos.x + r, y = pos.y + 2, z = pos.z + r},
         {"group:soil"}
@@ -49,10 +49,10 @@ local function hoe_area(pos, player)
 
     for n = 1, #res do
 
-        local this_node = minetest.get_node(res[n])
-        local def_table = minetest.registered_nodes[this_node.name]
+        local this_node = core.get_node(res[n])
+        local def_table = core.registered_nodes[this_node.name]
         if def_table ~= nil and def_table.soil ~= nil and def_table.soil.dry ~= nil then
-            minetest.swap_node(res[n], {name = def_table.soil.dry})
+            core.swap_node(res[n], {name = def_table.soil.dry})
         end
 
     end
@@ -63,12 +63,8 @@ local function throw_potion(itemstack, player)
 
     local playerpos = player:get_pos()
 
-    local obj = minetest.add_entity(
-        {
-            x = playerpos.x,
-            y = playerpos.y + 1.5,
-            z = playerpos.z,
-        },
+    local obj = core.add_entity(
+        {x = playerpos.x, y = playerpos.y + 1.5, z = playerpos.z},
         "unilib:entity_admin_tool_hoe"
     )
 
@@ -109,13 +105,16 @@ end
 function unilib.pkg.admin_tool_hoe.exec()
 
     unilib.register_entity("unilib:entity_admin_tool_hoe", {
-        collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
+        initial_properties = {
+            collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
+            physical = true,
+            player = "",
+            textures = {"unilib_admin_tool_hoe.png"},
+            visual = "sprite",
+            visual_size = {x = 1.0, y = 1.0},
+        },
+
         lastpos = {},
-        physical = true,
-        player = "",
-        textures = {"unilib_admin_tool_hoe.png"},
-        visual = "sprite",
-        visual_size = {x = 1.0, y = 1.0},
 
         on_step = function(self, dtime)
 
@@ -158,9 +157,11 @@ function unilib.pkg.admin_tool_hoe.exec()
 
     unilib.register_craftitem("unilib:admin_tool_hoe", "farming:hoe_bomb", mode, {
         -- From farming:hoe_bomb
-        description = unilib.hint(S("Admin Hoe"), S("punch on or above turf to hoe the land")),
+        description = unilib.utils.hint(
+            S("Admin Hoe"), S("punch on or above turf to hoe the land")
+        ),
         inventory_image = "unilib_admin_tool_hoe.png",
-        groups = {flammable = 2, not_in_creative_inventory = unilib.show_admin_item_group},
+        groups = {flammable = 2, not_in_creative_inventory = unilib.globalshow_admin_item_group},
 
         on_use = function(itemstack, user, pointed_thing)
 
@@ -172,7 +173,7 @@ function unilib.pkg.admin_tool_hoe.exec()
 
                 throw_potion(itemstack, user)
 
-                if not unilib.is_creative(user:get_player_name()) then
+                if not unilib.utils.is_creative(user:get_player_name()) then
 
                     itemstack:take_item()
                     return itemstack

@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_carrot = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_cake_carrot.exec()
         inventory_image = "unilib_food_cake_carrot.png",
         groups = {flammable = 1, food_carrot_cake = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_cake_carrot", 7),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_cake_carrot", 7),
     })
     unilib.register_craft({
         -- From cropocalypse:carrot_cake

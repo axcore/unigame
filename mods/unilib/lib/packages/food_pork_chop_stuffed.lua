@@ -9,7 +9,7 @@
 unilib.pkg.food_pork_chop_stuffed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.food_pork_chop_stuffed.exec()
         description = S("Raw Stuffed Pork Chop"),
         inventory_image = "unilib_food_pork_chop_stuffed_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pork_chop_stuffed_raw", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pork_chop_stuffed_raw", 3),
     })
     unilib.register_craft({
         -- From bbq:stuffed_chop_raw
@@ -57,7 +57,7 @@ function unilib.pkg.food_pork_chop_stuffed.exec()
         description = S("Stuffed Pork Chop"),
         inventory_image = "unilib_food_pork_chop_stuffed.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pork_chop_stuffed", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pork_chop_stuffed", 8),
     })
     unilib.register_craft({
         -- From bbq:stuffed_chop

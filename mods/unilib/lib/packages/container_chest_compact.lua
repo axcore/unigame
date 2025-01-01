@@ -9,7 +9,7 @@
 unilib.pkg.container_chest_compact = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.twchests.add_mode
+local mode = unilib.global.imported_mod_table.twchests.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.container_chest_compact.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- Original to unilib. Creates unilib:container_chest_compact
         part_name = "compact",
-        orig_name = {},
+        orig_name_list = {nil, nil},
         def_table = {
             description = S("Compact Chest"),
             tiles = {
@@ -46,7 +46,7 @@ function unilib.pkg.container_chest_compact.exec()
                 "unilib_container_chest_compact_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             sound_close = "unilib_chest_close",
             sound_open = "unilib_chest_open",
@@ -87,7 +87,7 @@ function unilib.pkg.container_chest_compact.exec()
     unilib.pkg.shared_default_chest.register_chest({
         -- Original to unilib. Creates unilib:container_chest_compact_locked
         part_name = "compact_locked",
-        orig_name = {},
+        orig_name_list = {nil, nil},
         def_table = {
             description = S("Locked Compact Chest"),
             tiles = {
@@ -99,7 +99,7 @@ function unilib.pkg.container_chest_compact.exec()
                 "unilib_container_chest_compact_inside.png",
             },
             groups = {choppy = 2, oddly_breakable_by_hand = 2},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             protected = true,
             sound_close = "unilib_chest_close",
@@ -118,7 +118,7 @@ function unilib.pkg.container_chest_compact.exec()
             {"", "group:wood", ""},
             {"group:wood", "unilib:metal_steel_ingot", "group:wood"},
             {"", "group:wood", ""},
-        }
+        },
     })
     ]]--
     unilib.register_craft({
@@ -136,9 +136,9 @@ function unilib.pkg.container_chest_compact.exec()
         output = "unilib:container_chest_compact_locked",
         recipe = {"unilib:container_chest_compact", "unilib:metal_steel_ingot"},
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
-        if unilib.pkg_executed_table["metal_bronze"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_bronze"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -149,7 +149,7 @@ function unilib.pkg.container_chest_compact.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_copper"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_copper"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks
@@ -160,7 +160,7 @@ function unilib.pkg.container_chest_compact.exec()
 
         end
 
-        if unilib.pkg_executed_table["metal_gold"] ~= nil then
+        if unilib.global.pkg_executed_table["metal_gold"] ~= nil then
 
             unilib.register_craft({
                 -- From moreblocks

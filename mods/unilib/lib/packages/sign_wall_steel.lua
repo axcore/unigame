@@ -9,7 +9,7 @@
 unilib.pkg.sign_wall_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.sign_wall_steel.init()
 
     return {
         description = "Steel wall sign",
-        depends = "metal_steel",
+        depends = {"metal_steel", "shared_default_sign"},
     }
 
 end
@@ -28,7 +28,7 @@ function unilib.pkg.sign_wall_steel.exec()
 
     local c_ingot = "unilib:metal_steel_ingot"
 
-    unilib.register_wall_sign({
+    unilib.pkg.shared_default_sign.register_wall_sign({
         -- From default:sign_wall_steel. Creates unilib:sign_wall_steel
         part_name = "steel",
         orig_name = "default:sign_wall_steel",
@@ -38,7 +38,7 @@ function unilib.pkg.sign_wall_steel.exec()
         group_table = {attached_node = 1, cracky = 2},
         sound_name = "metal",
     })
-    if not unilib.mtgame_tweak_flag then
+    if not unilib.setting.mtgame_tweak_flag then
 
         unilib.register_craft({
             -- From default:sign_wall_steel

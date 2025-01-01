@@ -9,7 +9,7 @@
 unilib.pkg.food_pizza_grilled = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.food_pizza_grilled.exec()
         description = S("Raw Grilled Pizza"),
         inventory_image = "unilib_food_pizza_grilled_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_grilled_raw", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_grilled_raw", 5),
     })
     unilib.register_craft({
         -- From bbq:grilled_pizza_raw
@@ -58,7 +58,7 @@ function unilib.pkg.food_pizza_grilled.exec()
         description = S("Grilled Pizza"),
         inventory_image = "unilib_food_pizza_grilled.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pizza_grilled", 8),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pizza_grilled", 8),
     })
     unilib.register_craft({
         -- From bbq:grilled_pizza

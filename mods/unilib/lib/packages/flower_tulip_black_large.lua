@@ -9,7 +9,7 @@
 unilib.pkg.flower_tulip_black_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.flower_tulip_black_large.exec()
         replace_mode = mode,
         deco_part_name = "cropocalypse",
         description = S("Large Black Tulip"),
-        group_table = {color_black = 1, flammable = 1},
+        group_table = {color_black = 1, colour_black = 1, flammable = 1},
         sci_name = "Tulipa",
         seed = 900082,
     })

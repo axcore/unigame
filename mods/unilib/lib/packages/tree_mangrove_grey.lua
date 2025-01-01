@@ -9,7 +9,7 @@
 unilib.pkg.tree_mangrove_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,39 +25,51 @@ end
 
 function unilib.pkg.tree_mangrove_grey.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Avicennia marina"
+
+    local node_box = {
+        type = "fixed",
+        fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
+    }
 
     unilib.register_tree({
         -- Original to unilib
         part_name = "mangrove_grey",
         description = S("Grey Mangrove Wood"),
+
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_mangrove_grey_trunk", "australia:grey_mangrove_tree", mode, {
         -- From australia:grey_mangrove_tree
-        description = unilib.annotate(S("Grey Mangrove Tree Trunk"), sci_name),
+        description = unilib.utils.annotate(S("Grey Mangrove Tree Trunk"), sci_name),
         tiles = {
             "unilib_tree_mangrove_grey_trunk_top.png",
             "unilib_tree_mangrove_grey_trunk_top.png",
             "unilib_tree_mangrove_grey_trunk.png",
         },
         groups = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
-        node_box = {
-            type = "fixed",
-            fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
-        },
+        node_box = node_box,
         paramtype = "light",
-        selection_box = {
-            type = "fixed",
-            fixed = {-0.125, -0.5, -0.125, 0.125, 0.5, 0.125},
-        },
+        selection_box = node_box,
 
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
+    })
+
+    unilib.register_tree_trunk_stripped({
+        -- Original to unilib. Creates unilib:tree_mangrove_grey_trunk_stripped
+        part_name = "mangrove_grey",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Grey Mangrove Tree Trunk"),
+        group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 1, tree = 1},
+        node_box = node_box,
     })
 
     unilib.register_tree_wood({
@@ -126,7 +138,7 @@ function unilib.pkg.tree_mangrove_grey.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_mangrove_grey_closed
+        -- Original to unilib. Creates unilib:gate_mangrove_grey_closed, etc
         part_name = "mangrove_grey",
         orig_name = {nil, nil},
 
@@ -137,10 +149,10 @@ function unilib.pkg.tree_mangrove_grey.exec()
 
     for i = 1, 3 do
 
-        unilib.register_decoration("australia_tree_mangrove_grey_in_mangroves_" .. i, {
+        unilib.register_decoration_generic("australia_tree_mangrove_grey_in_mangroves_" .. i, {
             -- From australia/biome_mangroves.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_mangrove_grey_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_mangrove_grey_" .. i .. ".mts",
 
             fill_ratio = 0.003,
             flags = "place_center_x, place_center_z",

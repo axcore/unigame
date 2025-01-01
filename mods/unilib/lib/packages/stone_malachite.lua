@@ -9,7 +9,7 @@
 unilib.pkg.stone_malachite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_malachite.exec()
         description = S("Malachite"),
 
         category = "other",
+        colour = "#57A438",
         fictional_flag = true,
         grinder_flag = false,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 2)
@@ -47,7 +48,7 @@ function unilib.pkg.stone_malachite.exec()
         description = S("Malachite"),
         tiles = {"unilib_stone_malachite.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     --[[
     unilib.register_stairs("unilib:stone_malachite", {

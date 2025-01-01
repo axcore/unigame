@@ -9,7 +9,7 @@
 unilib.pkg.moss_underground_dry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.moss_underground_dry.exec()
         tiles = {img},
         -- N.B. moss = 1 not in original code
         groups = {moss = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "signlike",

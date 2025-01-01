@@ -1,6 +1,5 @@
 # "30biomes" remix - contains only the fir tree and mud from 30biomes
 # The _biomes.csv in this remix is not loaded, by default. See the notes in that file
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -23,3 +22,5 @@ biome_default_taiga|default
 #grass_jungle|default
 #grass_ordinary|default
 #soil_ordinary|farming
+
+# supporting packages (.suggested)

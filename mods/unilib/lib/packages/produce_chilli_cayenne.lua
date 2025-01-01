@@ -9,7 +9,7 @@
 unilib.pkg.produce_chilli_cayenne = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -50,7 +50,7 @@ function unilib.pkg.produce_chilli_cayenne.exec()
                     items = {
                         {items = {"unilib:produce_chilli_cayenne_harvest"}, rarity = 1},
                         {items = {"unilib:produce_chilli_cayenne_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
             {
@@ -58,17 +58,18 @@ function unilib.pkg.produce_chilli_cayenne.exec()
                     items = {
                         {items = {"unilib:produce_chilli_cayenne_harvest"}, rarity = 1},
                         {items = {"unilib:produce_chilli_cayenne_harvest 2"}, rarity = 3},
-                    }
+                    },
                 },
             },
         },
-        -- N.B. updated the food groups to match "produce_chilli" package
+        -- N.B. updated the food groups to match "produce_chilli_normal" package
         harvest_group_table = {
             flammable = 2, food_chili_pepper = 1, food_chilli_pepper = 1, seed = 2,
         },
         min_light = 7,
     })
-    if unilib.dye_from_produce_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_produce_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -80,7 +81,7 @@ function unilib.pkg.produce_chilli_cayenne.exec()
 
     end
 
-    unilib.register_decoration("better_farming_produce_chilli_cayenne", {
+    unilib.register_decoration_generic("better_farming_produce_chilli_cayenne", {
         -- From better_farming:chilie_5
         deco_type = "simple",
         decoration = "unilib:produce_chilli_cayenne_grow_5",

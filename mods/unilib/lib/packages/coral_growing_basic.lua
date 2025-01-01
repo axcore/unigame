@@ -9,7 +9,7 @@
 unilib.pkg.coral_growing_basic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.more_coral.add_mode
+local mode = unilib.global.imported_mod_table.more_coral.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,6 +29,7 @@ end
 function unilib.pkg.coral_growing_basic.exec()
 
     -- Basic growing coral set (based on the basic 15 dye set)
+    local deco_list = {}
     local coral_list = {
         {"black",       "",             S("Black Growing Coral"),           "#0C0C0C"},
         {"blue",        "",             S("Blue Growing Coral"),            "#0000FF"},
@@ -50,6 +51,7 @@ function unilib.pkg.coral_growing_basic.exec()
     for _, row_list in ipairs(coral_list) do
 
         local part_name = row_list[1]
+        local full_name = "unilib:coral_growing_" .. part_name
 
         local orig_name = row_list[2]
         if orig_name == "" then
@@ -59,26 +61,23 @@ function unilib.pkg.coral_growing_basic.exec()
         local description = row_list[3]
         local rgb = row_list[4]
 
-        unilib.register_node(
-            -- From more_coral:coral_black, etc. Creates unilib:coral_growing_black, etc
-            "unilib:coral_growing_" .. part_name,
-            "more_coral:coral_"..orig_name,
-            mode,
-            {
-                description = description,
-                tiles = {"unilib_coral_growing_base.png^[multiply:" .. rgb .. ":100"},
-                -- N.B. growing_coral = 1 not in original code; it has been inserted so that the
-                --      ABMs below act only on this coral
-                groups = {coral = 1, cracky = 3, growing_coral = 1},
-                sounds = unilib.sound_table.stone,
+        table.insert(deco_list, full_name)
 
-                drop = "unilib:coral_block_skeleton",
-            }
-        )
+        unilib.register_node(full_name, "more_coral:coral_"..orig_name, mode, {
+            -- From more_coral:coral_black, etc. Creates unilib:coral_growing_black, etc
+            description = description,
+            tiles = {"unilib_coral_growing_base.png^[multiply:" .. rgb .. ":100"},
+            -- N.B. growing_coral = 1 not in original code; it has been inserted so that the ABMs
+            --      below act only on this coral
+            groups = {coral = 1, cracky = 3, growing_coral = 1},
+            sounds = unilib.global.sound_table.stone,
+
+            drop = "unilib:coral_block_skeleton",
+        })
         unilib.register_craft({
             -- From more_coral:coral_black, etc
             type = "shapeless",
-            output = "unilib:coral_growing_" .. part_name,
+            output = full_name,
             recipe = {"unilib:coral_block_skeleton", "unilib:dye_" .. part_name},
         })
 
@@ -96,7 +95,7 @@ function unilib.pkg.coral_growing_basic.exec()
         interval = 17,
 
         action = function(pos, node)
-            minetest.set_node(pos, {name = "unilib:coral_block_skeleton"})
+            core.set_node(pos, {name = "unilib:coral_block_skeleton"})
         end,
     })
 
@@ -117,28 +116,19 @@ function unilib.pkg.coral_growing_basic.exec()
             local posy = math.random(-1, 1)
             local posz = math.random(-1, 1)
             local new_pos = {x = pos.x + posx, y = pos.y + posy, z = pos.z + posz}
-            local new_node = minetest.get_node(new_pos).name
+            local new_node = core.get_node(new_pos).name
 
-            if minetest.get_item_group(new_node, "water") > 0 then
-                minetest.set_node(new_pos, {name = node.name})
+            if core.get_item_group(new_node, "water") > 0 then
+                core.set_node(new_pos, {name = node.name})
             end
 
        end,
     })
 
     -- Growing coral as decoration
-    unilib.register_decoration("more_coral_coral_growing_basic", {
+    unilib.register_decoration_generic("more_coral_coral_growing_basic", {
         deco_type = "simple",
-        decoration = {
-            "unilib:coral_growing_blue",
-            "unilib:coral_growing_cyan",
-            "unilib:coral_growing_green",
-            "unilib:coral_growing_grey",
-            "unilib:coral_growing_pink",
-            "unilib:coral_growing_red",
-            "unilib:coral_growing_violet",
-            "unilib:coral_growing_yellow",
-        },
+        decoration = deco_list,
 
         flags = "force_placement",
         noise_params = {

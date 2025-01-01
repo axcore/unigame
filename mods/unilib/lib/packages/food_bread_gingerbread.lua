@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_gingerbread = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.food_bread_gingerbread.exec()
         inventory_image = "unilib_food_bread_gingerbread.png",
         groups = {flammable = 2, food_cotton_candy = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_gingerbread", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_gingerbread", 2),
     })
     unilib.register_craft({
         -- From better_farming:gingerbread
@@ -56,7 +56,7 @@ function unilib.pkg.food_bread_gingerbread.exec()
             inventory_image = "unilib_food_bread_gingerbread_man.png",
             groups = {flammable = 2, food_cotton_candy = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_bread_gingerbread_man", 1),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_bread_gingerbread_man", 1),
         }
     )
     unilib.register_craft({
@@ -66,7 +66,7 @@ function unilib.pkg.food_bread_gingerbread.exec()
             {"", c_dough, ""},
             {c_dough, c_dough, c_dough},
             {c_dough, "", c_dough},
-        }
+        },
     })
 
     unilib.register_craftitem("unilib:food_bread_gingerbread_woman", nil, mode, {
@@ -75,7 +75,7 @@ function unilib.pkg.food_bread_gingerbread.exec()
         inventory_image = "unilib_food_bread_gingerbread_woman.png",
         groups = {flammable = 2, food_cotton_candy = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_gingerbread_woman", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_gingerbread_woman", 1),
     })
     unilib.register_craft({
         -- Original to unilib
@@ -84,7 +84,7 @@ function unilib.pkg.food_bread_gingerbread.exec()
             {"", c_dough, ""},
             {c_dough, "group:food_sugar", c_dough},
             {c_dough, "", c_dough},
-        }
+        },
     })
 
 end

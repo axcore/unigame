@@ -9,7 +9,7 @@
 unilib.pkg.shared_screwdriver = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.screwdriver.add_mode
+local mode = unilib.global.imported_mod_table.screwdriver.add_mode
 
 unilib.pkg.shared_screwdriver.rotate_face = 1
 unilib.pkg.shared_screwdriver.rotate_axis = 2
@@ -51,10 +51,10 @@ local function check_attached_node(pos, rotation)
     -- Notes from screwdriver:
     -- For attached wallmounted nodes: returns true if rotation is valid
 
-    local d = minetest.wallmounted_to_dir(rotation)
+    local d = core.wallmounted_to_dir(rotation)
     local p2 = vector.add(pos, d)
-    local n = minetest.get_node(p2).name
-    local def2 = minetest.registered_nodes[n]
+    local n = core.get_node(p2).name
+    local def2 = core.registered_nodes[n]
     if def2 and not def2.walkable then
         return false
     end
@@ -107,6 +107,34 @@ function unilib.pkg.shared_screwdriver.rotate_colour_facedir(pos, node, mode)
 
 end
 
+function unilib.pkg.shared_screwdriver.rotate_4dir(pos, node, mode)
+
+    -- Adapted from screwdriver.rotate["4dir"]()
+
+    if mode ~= unilib.pkg.shared_screwdriver.rotate_face then
+
+        -- Can only rotate 4dir nodes in face mode
+        return nil
+
+    end
+
+    -- (Get first 2 bits)
+    local rotation = node.param2 % 4
+
+    local other = node.param2 - rotation
+    rotation = (rotation + 1) % 4
+    return rotation + other
+
+end
+
+function unilib.pkg.shared_screwdriver.rotate_colour_4dir(pos, node, mode)
+
+    -- Adapted from screwdriver.rotate["color4dir"]
+
+    return unilib.pkg.shared_screwdriver.rotate_4dir(pos, node, mode)
+
+end
+
 function unilib.pkg.shared_screwdriver.rotate_wallmounted(pos, node, mode)
 
     -- Adapted from screwdriver.rotate.wallmounted()
@@ -116,7 +144,7 @@ function unilib.pkg.shared_screwdriver.rotate_wallmounted(pos, node, mode)
     local other = node.param2 - rotation
     rotation = wallmounted_tbl[mode][rotation] or 0
 
-    if minetest.get_item_group(node.name, "attached_node") ~= 0 then
+    if core.get_item_group(node.name, "attached_node") ~= 0 then
 
         -- Find an acceptable orientation
         for i = 1, 5 do
@@ -155,15 +183,15 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
     local pos = pointed_thing.under
     local player_name = user and user:get_player_name() or ""
 
-    if minetest.is_protected(pos, player_name) then
+    if core.is_protected(pos, player_name) then
 
-        minetest.record_protection_violation(pos, player_name)
+        core.record_protection_violation(pos, player_name)
         return
 
     end
 
-    local node = minetest.get_node(pos)
-    local ndef = minetest.registered_nodes[node.name]
+    local node = core.get_node(pos)
+    local ndef = core.registered_nodes[node.name]
     if not ndef then
         return itemstack
     end
@@ -177,9 +205,19 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
     local should_rotate = true
     local new_param2
     if fn then
+
         new_param2 = fn(pos, node, mode)
+        if not new_param2 then
+
+            -- Rotation refused
+            return itemstack
+
+        end
+
     else
+
         new_param2 = node.param2
+
     end
 
     -- Node provides a handler, so let the handler decide instead if the node can be rotated
@@ -213,13 +251,13 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
     if should_rotate and new_param2 ~= node.param2 then
 
         node.param2 = new_param2
-        minetest.swap_node(pos, node)
-        minetest.check_for_falling(pos)
+        core.swap_node(pos, node)
+        core.check_for_falling(pos)
 
     end
 
-    if not unilib.is_creative(player_name) then
-        itemstack:add_wear(65535 / ((uses or 200) - 1))
+    if not unilib.utils.is_creative(player_name) then
+        itemstack:add_wear_by_uses(uses or 200)
     end
 
     return itemstack

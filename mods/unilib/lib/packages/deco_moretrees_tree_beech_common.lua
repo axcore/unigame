@@ -9,7 +9,7 @@
 unilib.pkg.deco_moretrees_tree_beech_common = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,11 +27,11 @@ end
 function unilib.pkg.deco_moretrees_tree_beech_common.post()
 
     -- N.B. no y_min in the original code
-    unilib.register_decoration_now("convert_tree_beech_common", nil, {
+    unilib.register_decoration_complete("convert_tree_beech_common", nil, {
         -- From moretrees/init.lua
         -- Completes decoration in package "tree_beech_common"
         place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

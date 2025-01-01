@@ -9,7 +9,7 @@
 unilib.pkg.override_pigiron_crafting = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pigiron.add_mode
+local mode = unilib.global.imported_mod_table.pigiron.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.override_pigiron_crafting.exec()
     local c_ingot = "unilib:metal_iron_pig_ingot"
 
     -- Remove the "iron lump > steel ingot" recipe originating in minetest_game
-    minetest.clear_craft({
+    core.clear_craft({
         type = "cooking",
         recipe = "unilib:metal_iron_lump"
     })
@@ -48,35 +48,35 @@ function unilib.pkg.override_pigiron_crafting.exec()
         recipe = "unilib:metal_iron_lump"
     })
 
-    unilib.register_craftitem("unilib:metal_iron_charcoal_mix", "pigiron:iron_charcoal_mix", mode, {
+    unilib.register_craftitem("unilib:misc_iron_charcoal_mix", "pigiron:iron_charcoal_mix", mode, {
         -- From pigiron:iron_charcoal_mix
         description = S("Iron and Charcoal Mix"),
         inventory_image = "unilib_metal_iron_pig_ingot.png" ..
                 "^unilib_material_charcoal_artificial_lump.png"
     })
-    if unilib.pkg_executed_table["material_charcoal_artificial_lump"] ~= nil then
+    if unilib.global.pkg_executed_table["material_charcoal_artificial_lump"] ~= nil then
 
         unilib.register_craft({
             -- From pigiron:iron_charcoal_mix
-            output = "unilib:metal_iron_charcoal_mix",
+            output = "unilib:misc_iron_charcoal_mix",
             recipe = {
                 {"", c_material, ""},
                 {c_material, c_ingot, c_material},
-                {"", c_material, ""}
-            }
+                {"", c_material, ""},
+            },
         })
 
     end
-    if unilib.pkg_executed_table["mineral_charcoal_natural"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_charcoal_natural"] ~= nil then
 
         unilib.register_craft({
             -- From pigiron:iron_charcoal_mix
-            output = "unilib:metal_iron_charcoal_mix",
+            output = "unilib:misc_iron_charcoal_mix",
             recipe = {
                 {"", c_mineral, ""},
                 {c_mineral, c_ingot, c_mineral},
-                {"", c_mineral, ""}
-            }
+                {"", c_mineral, ""},
+            },
         })
 
     end
@@ -85,7 +85,7 @@ function unilib.pkg.override_pigiron_crafting.exec()
         -- From pigiron:iron_charcoal_mix
         type = "cooking",
         output = "unilib:metal_steel_ingot",
-        recipe = "unilib:metal_iron_charcoal_mix",
+        recipe = "unilib:misc_iron_charcoal_mix",
         cooktime = 10
     })
 

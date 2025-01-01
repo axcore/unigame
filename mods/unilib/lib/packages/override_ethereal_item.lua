@@ -9,7 +9,7 @@
 unilib.pkg.override_ethereal_item = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,18 +27,16 @@ end
 
 function unilib.pkg.override_ethereal_item.exec()
 
-    if unilib.mtgame_tweak_flag then
+    local c_cotton = "unilib:crop_cotton_harvest"
+
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_craft({
             -- From ethereal-ng/extras.lua
             output = "unilib:item_paper_ordinary 2",
             recipe = {
-                {
-                    "unilib:crop_cotton_harvest",
-                    "unilib:crop_cotton_harvest",
-                    "unilib:crop_cotton_harvest",
-                },
-            }
+                {c_cotton, c_cotton, c_cotton},
+            },
         })
 
     end

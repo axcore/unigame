@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_pine_ornate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrapdoors.add_mode
+local mode = unilib.global.imported_mod_table.moretrapdoors.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_pine_ornate.exec()
 
     unilib.register_door({
-        -- From moretrapdoors:pine_door. Creates unilib:door_wood_pine_ornate
+        -- From moretrapdoors:pine_door. Creates unilib:door_wood_pine_ornate_closed_left, etc
         part_name = "wood_pine_ornate",
-        orig_name = {
+        orig_name_list = {
             "doors:pine_door_a",
             "doors:pine_door_b",
             "doors:pine_door_c",
@@ -48,7 +48,7 @@ function unilib.pkg.door_wood_pine_ornate.exec()
                 {"unilib:tree_pine_wood", "unilib:tree_pine_wood"},
                 {"unilib:tree_pine_trunk", "unilib:tree_pine_trunk"},
                 {"unilib:tree_pine_wood", "unilib:tree_pine_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

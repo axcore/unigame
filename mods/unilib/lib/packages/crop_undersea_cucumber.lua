@@ -9,7 +9,7 @@
 unilib.pkg.crop_undersea_cucumber = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.crop_undersea_cucumber.exec()
             inventory_image = "unilib_crop_undersea_cucumber_harvest.png",
             groups = {food = 1, food_cucumber = 1, food_vegan = 1, seafood = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:crop_undersea_cucumber_harvest", 4),
+            on_use = unilib.cuisine.eat_on_use("unilib:crop_undersea_cucumber_harvest", 4),
         }
     )
 
@@ -61,7 +61,6 @@ function unilib.pkg.crop_undersea_cucumber.exec()
         replace_mode = mode,
         base_node = "unilib:sand_ordinary",
         chance = 10,
-        delay = 9,
         drop_table = {
             items = {
                 {items = {"unilib:crop_undersea_cucumber_seed 2"}},
@@ -69,11 +68,14 @@ function unilib.pkg.crop_undersea_cucumber.exec()
                 {items = {"unilib:crop_undersea_cucumber_seed 3"}, rarity = 15},
             },
         },
+        -- N.B. 9 in original code
+        interval = 15,
         min_light = 6,
         seed_description = S("Sea Cucumber Seed"),
         wild_description = S("Wild Sea Cucumber"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -86,9 +88,18 @@ function unilib.pkg.crop_undersea_cucumber.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:crop_undersea_cucumber_harvest",
+        juice_description = S("Cucumber"),
+        juice_type = "cucumber",
+        rgb = "#73af59",
+
+        orig_flag = false,
+    })
+
     for i = 1, 3 do
 
-        unilib.register_decoration("aqua_farming_crop_sea_cucumber_" .. i, {
+        unilib.register_decoration_generic("aqua_farming_crop_sea_cucumber_" .. i, {
             -- From aqua_farming/mapgen_sea_cucumber.lua
             deco_type = "simple",
             decoration = "unilib:crop_undersea_cucumber_wild",
@@ -102,8 +113,11 @@ function unilib.pkg.crop_undersea_cucumber.exec()
                 seed = 87112,
                 spread = {x = 70, y = 70, z = 70},
             },
-            param2 = 48,
-            param2_max = 96,
+            -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--          param2 = 48,
+--          param2_max = 96,
+            param2 = 0,
+            param2_max = 3,
             place_offset_y = -1,
             sidelen = 16,
         })

@@ -9,7 +9,7 @@
 unilib.pkg.misc_fence_simple = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.misc_fence_simple.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -60,7 +60,7 @@ function unilib.pkg.misc_fence_simple.exec()
         recipe = {
             -- N.B. Was default wood in original code
             {"group:wood", "group:wood"},
-        }
+        },
     })
 
     unilib.register_node("unilib:misc_fence_simple_corner", "cottages:fence_corner", mode, {
@@ -69,7 +69,7 @@ function unilib.pkg.misc_fence_simple.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,
@@ -118,7 +118,7 @@ function unilib.pkg.misc_fence_simple.exec()
         tiles = {"unilib_misc_wood_rustic.png"},
         groups = {choppy = 2, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. no sounds in original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
         is_ground_content = false,

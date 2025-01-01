@@ -9,7 +9,7 @@
 unilib.pkg.tree_birch_large = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moretrees.add_mode
+local mode = unilib.global.imported_mod_table.moretrees.add_mode
 
 local ltree_model = {
     trunk = "unilib:tree_birch_trunk",
@@ -50,12 +50,12 @@ local ltree_model2 = {
 
 function unilib.pkg.tree_birch_large.grow_func(pos)
 
-    minetest.swap_node(pos, {name = "air"})
+    core.swap_node(pos, {name = "air"})
 
     if math.random(2) == 1 then
-        minetest.spawn_tree(pos, ltree_model)
+        core.spawn_tree(pos, ltree_model)
     else
-        minetest.spawn_tree(pos, ltree_model2)
+        core.spawn_tree(pos, ltree_model2)
     end
 
 end
@@ -68,7 +68,7 @@ function unilib.pkg.tree_birch_large.init()
 
     return {
         description = "Large birch tree",
-        depends = {"shared_moretrees", "tree_birch"}
+        depends = {"shared_moretrees", "tree_birch"},
     }
 
 end
@@ -128,11 +128,11 @@ function unilib.pkg.tree_birch_large.exec()
         replace_mode = mode,
 
         climate_table = {
-            temp_max = unilib.convert_biome_lib_temp(0.3),
-            temp_min = unilib.convert_biome_lib_temp(0.9),
+            temp_max = unilib.utils.convert_biome_lib_temp(0.3),
+            temp_min = unilib.utils.convert_biome_lib_temp(0.9),
         },
         generic_def_table = {
-            fill_ratio = unilib.convert_biome_lib({
+            fill_ratio = unilib.utils.convert_biome_lib({
                 rarity = 50,
             }),
         },

@@ -9,7 +9,8 @@
 unilib.pkg.shared_drinks = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.drinks.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.drinks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -19,7 +20,7 @@ function retrieve_juice(liq_vol, ves_vol, pos, able_to_fill, leftover_count, out
 
     -- Adapted from drinks/drink_machines.lua, was drinks.drinks_liquid_sub()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fullness = tonumber(meta:get_string("fullness"))
     local fruit = meta:get_string("fruit")
     local fruit_name = meta:get_string("fruit_name")
@@ -77,7 +78,7 @@ function add_juice(liq_vol, ves_typ, ves_vol, pos, inputcount, leftover_count, i
 
     -- Adapted from drinks/drink_machines.lua, was drinks.drinks_liquid_add()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fullness = tonumber(meta:get_string("fullness"))
     local fruit = meta:get_string("fruit")
     local fruit_name = meta:get_string("fruit_name")
@@ -116,8 +117,8 @@ function register_vessel(data_table)
     -- data_table compulsory fields:
     --      juice_type (str): e.g. "apple", the string used to identify a juice in the "drinks"
     --          mod's internal code
-    --      part_vessel_name (str): e.g. "unilib:vessel_glass_juice", add the "juice_type" to get
-    --          the actual item registered, e.g. "unilib:vessel_glass_juice_apple"
+    --      part_vessel_name (str): e.g. "unilib:vessel_glass_with_juice", add the "juice_type" to
+    --          get the actual item registered, e.g. "unilib:vessel_glass_with_juice_apple"
     --      orig_vessel_name (str): e.g. "drinks:jcu_apple"
     --      empty_name (str): e.g. "unilib:vessel_glass_empty"
     --      orig_empty_name (str): e.g. "vessels:drinking_glass"
@@ -146,7 +147,7 @@ function register_vessel(data_table)
 
     local vessel_name = part_vessel_name .. "_" .. juice_type
 
-    local empty_def_table = minetest.registered_nodes[orig_empty_name]
+    local empty_def_table = core.registered_nodes[orig_empty_name]
     if empty_def_table then
 
         local juice_def_table = table.copy(empty_def_table)
@@ -186,7 +187,7 @@ function unilib.pkg.shared_drinks.retrieve_available(liq_vol, ves_vol, outputsta
 
     -- Adapted from drinks/drink_machines.lua, was drinks.drinks_liquid_avail_sub()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fullness = tonumber(meta:get_string("fullness"))
 
     if fullness - (liq_vol * count) < 0 then
@@ -208,7 +209,7 @@ function unilib.pkg.shared_drinks.add_available(
 )
     -- Adapted from drinks/drink_machines.lua, was drinks.drinks_liquid_avail_add()
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fullness = tonumber(meta:get_string("fullness"))
     if fullness + (liq_vol * inputcount) > ves_vol then
 
@@ -230,14 +231,14 @@ function unilib.pkg.shared_drinks.juice_storage_formspec(fruit_name, fullness, m
     -- Adapted from drinks/formspecs.lua, was drinks.liquid_storage_formspec()
 
     return "size[8,8]" ..
-        "label[0,0;" .. S("Fill with the juice of your choice.") .. "]" ..
-        "label[0,0.4;" .. S("Only one type of juice can be stored.") .. "]" ..
-        "label[1,1.2;" .. S("Add juice here") .. "]" ..
-        "label[4,1.2;" .. S("Storing @1 juice.", fruit_name) .. "]" ..
-        "label[4,1.7;" .. S("Holding @1 of @2 fruits.", (fullness / 2), (max / 2)) .. "]" ..
-        "label[1,2.2;" .. S("Retrieve juice here") .. "]" ..
-        "button[0,3;3,1;purge;" .. S("Discard juice") .. "]" ..
-        "label[3,3.2;" .. S("(This button completely empties the container)") .. "]" ..
+        "label[0,0;" .. FS("Fill with the juice of your choice") .. "]" ..
+        "label[0,0.4;" .. FS("Only one type of juice can be stored") .. "]" ..
+        "label[1,1.2;" .. FS("Add juice here") .. "]" ..
+        "label[4,1.2;" .. FS("Storing @1 juice", fruit_name) .. "]" ..
+        "label[4,1.7;" .. FS("Holding @1 of @2 fruits", (fullness / 2), (max / 2)) .. "]" ..
+        "label[1,2.2;" .. FS("Retrieve juice here") .. "]" ..
+        "button[0,3;3,1;purge;" .. FS("Discard juice") .. "]" ..
+        "label[3,3.2;" .. FS("(This button completely empties the container)") .. "]" ..
         "list[current_name;src;0,1;1,1;]" ..
         "list[current_name;dst;0,2;1,1;]" ..
         "list[current_player;main;0,4;8,5;]"
@@ -254,14 +255,14 @@ end
 --      ingredient_convert_table[item_name] = juice_type
 unilib.pkg.shared_drinks.ingredient_convert_table = {}
 -- Table converting a full vessel's name (e.g. "unilib:bucket_steel_with_juice_apple",
---      "unilib:vessel_glass_juice_apple") into the ingredient's "juice_type" (e.g. "apple")
+--      "unilib:vessel_glass_with_juice_apple") into the ingredient's "juice_type" (e.g. "apple")
 unilib.pkg.shared_drinks.vessel_convert_table = {}
 -- Table converting a full vessel's name into the equivalent empty vessel's item name (e.g.
 --      "unilib:vessel_glass_empty")
 unilib.pkg.shared_drinks.empty_convert_table = {}
 -- Reverse table, converting an empty vessel's name into the partial full vessel's name; just add
 --      the "juice_type" to that (e.g. "unilib:vessel_glass_empty" >
---      "unilib:vessel_glass_juice" + "apple" = "unilib:vessel_glass_juice_apple"
+--      "unilib:vessel_glass_with_juice" + "apple" = "unilib:vessel_glass_with_juice_apple"
 unilib.pkg.shared_drinks.reverse_convert_table = {}
 
 -- Table specifying the size of an empty vessel
@@ -287,7 +288,7 @@ function unilib.pkg.shared_drinks.init()
 
     return {
         description = "Shared functions for juice containers (from the drinks mod)",
-        notes = "See also the \"utensil_juicer_normal\" package, which creates some juices" ..
+        notes = "See also the \"utensil_press_hand\" package, which creates some squeezed drinks" ..
                 " that are nothing to do with this code's original mod",
     }
 
@@ -296,7 +297,7 @@ end
 function unilib.pkg.shared_drinks.post()
 
     -- Set up local variables using the global variable which stores all registered juice types
-    for juice_type, mini_table in pairs(unilib.generic_juice_table) do
+    for juice_type, mini_table in pairs(unilib.global.generic_juice_table) do
 
         local glass_orig_name, bottle_orig_name, steel_orig_name
         if mini_table.orig_flag then
@@ -310,12 +311,12 @@ function unilib.pkg.shared_drinks.post()
         unilib.pkg.shared_drinks.juiceable_table[juice_type] = true
         for _, ingredient in pairs(mini_table.ingredient_list) do
 
-            local item_name = unilib.get_item_name(ingredient)
+            local item_name = unilib.utils.get_item_name(ingredient)
             unilib.pkg.shared_drinks.ingredient_convert_table[item_name] = juice_type
 
         end
 
-        for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+        for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
             local part_vessel_name = "unilib:" .. bucket_type .. "_with_juice"
             local vessel_name = part_vessel_name .. "_" .. juice_type
@@ -343,7 +344,7 @@ function unilib.pkg.shared_drinks.post()
                 description = S("Bucket of @1 Juice", mini_table.juice_description),
                 tiles = {img},
                 groups = {attached_node = 1, dig_immediate = 3, drink = 1, vessel = 1},
-                sounds = unilib.sound_table.node,
+                sounds = unilib.global.sound_table.node,
 
                 drawtype = "plantlike",
                 inventory_image = img,
@@ -377,12 +378,12 @@ function unilib.pkg.shared_drinks.post()
 
         -- N.B. In original code, when hydration is enabled, a bottle hydrates a player twice as
         --      much as a glass
-        -- unilib code (in ../effects/cuisine) fully hydrates the player after drinking any drink,
-        --      including these glasses/bottles of juice
+        -- unilib code (in ../lib/effects/cuisine/) fully hydrates the player after drinking any
+        --      drink, including these glasses/bottles of juice
 
         register_vessel({
             juice_type = juice_type,
-            part_vessel_name = "unilib:vessel_glass_juice",
+            part_vessel_name = "unilib:vessel_glass_with_juice",
             orig_vessel_name = glass_orig_name,
             empty_name = "unilib:vessel_glass_empty",
             orig_empty_name = "vessels:drinking_glass",
@@ -394,8 +395,8 @@ function unilib.pkg.shared_drinks.post()
             juice_description = mini_table.juice_description,
             size = 2,
 
-            on_use_func = unilib.cuisine_drink_on_use(
-                "unilib:vessel_glass_juice_" .. juice_type,
+            on_use_func = unilib.cuisine.drink_on_use(
+                "unilib:vessel_glass_with_juice_" .. juice_type,
                 mini_table.health,
                 "unilib:vessel_glass_empty",
                 nil,
@@ -405,7 +406,7 @@ function unilib.pkg.shared_drinks.post()
 
         register_vessel({
             juice_type = juice_type,
-            part_vessel_name = "unilib:vessel_bottle_glass_juice",
+            part_vessel_name = "unilib:vessel_bottle_glass_with_juice",
             orig_vessel_name = bottle_orig_name,
             empty_name = "unilib:vessel_bottle_glass_empty",
             orig_empty_name = "vessels:glass_bottle",
@@ -417,8 +418,8 @@ function unilib.pkg.shared_drinks.post()
             juice_description = mini_table.juice_description,
             size = 4,
 
-            on_use_func = unilib.cuisine_drink_on_use(
-                "unilib:vessel_bottle_glass_juice_" .. juice_type,
+            on_use_func = unilib.cuisine.drink_on_use(
+                "unilib:vessel_bottle_glass_with_juice_" .. juice_type,
                 mini_table.health * 2,
                 "unilib:vessel_bottle_glass_empty",
                 nil,
@@ -428,7 +429,7 @@ function unilib.pkg.shared_drinks.post()
 
         register_vessel({
             juice_type = juice_type,
-            part_vessel_name = "unilib:vessel_bottle_steel_juice",
+            part_vessel_name = "unilib:vessel_bottle_steel_with_juice",
             orig_vessel_name = steel_orig_name,
             empty_name = "unilib:vessel_bottle_steel_empty",
             orig_empty_name = "vessels:steel_bottle",
@@ -439,8 +440,8 @@ function unilib.pkg.shared_drinks.post()
             juice_description = mini_table.juice_description,
             size = 4,
 
-            on_use_func = unilib.cuisine_drink_on_use(
-                "unilib:vessel_bottle_steel_juice_" .. juice_type,
+            on_use_func = unilib.cuisine.drink_on_use(
+                "unilib:vessel_bottle_steel_with_juice_" .. juice_type,
                 mini_table.health * 2,
                 "unilib:vessel_bottle_steel_empty",
                 nil,

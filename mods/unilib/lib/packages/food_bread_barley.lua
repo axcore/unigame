@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_barley = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.grains.add_mode
+local mode = unilib.global.imported_mod_table.grains.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_bread_barley.exec()
         -- N.B. food_bread not in original code
         groups = {flammable = 2, food_bread = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_barley", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_barley", 5),
     })
     unilib.register_craft({
         -- From grains:barley_bread

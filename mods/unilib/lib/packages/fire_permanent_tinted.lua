@@ -9,7 +9,7 @@
 unilib.pkg.fire_permanent_tinted = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.abriflame.add_mode
+local mode = unilib.global.imported_mod_table.abriflame.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -17,17 +17,17 @@ local mode = unilib.imported_mod_table.abriflame.add_mode
 
 local function do_smoke(pos, node, clicker, enable)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local handler = meta:get_int("sound")
     local particle = meta:get_int("smoke")
 
     if particle ~= 0 or enable ~= true then
 
         if handler then
-            minetest.sound_stop(handler)
+            core.sound_stop(handler)
         end
 
-        minetest.delete_particlespawner(particle)
+        core.delete_particlespawner(particle)
         meta:set_int("smoke", 0)
         meta:set_int("sound", 0)
 
@@ -35,15 +35,15 @@ local function do_smoke(pos, node, clicker, enable)
 
     end
 
-    if minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name ~= "air" or particle ~= 0 then
+    if core.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name ~= "air" or particle ~= 0 then
         return
     end
 
-    particle = minetest.add_particlespawner({
+    particle = core.add_particlespawner({
         amount = 4,
         time = 0,
+        texture = "unilib_fire_permanent_tinted_smoke.png",
 
-        collisiondetection = true,
         maxacc = {x = 0, y = 0.5, z = 0},
         minacc = {x = 0, y = 0, z = 0},
         maxexptime = 3,
@@ -54,10 +54,11 @@ local function do_smoke(pos, node, clicker, enable)
         minsize = 4,
         maxvel = {x = 0.2, y = 1, z = 0.2},
         minvel = {x = -0.2, y = 0.3, z = -0.2},
-        texture = "unilib_fire_permanent_tinted_smoke.png",
+
+        collisiondetection = true,
     })
 
-    handler = minetest.sound_play("fire_small", {
+    handler = core.sound_play("fire_small", {
         pos = pos,
         max_hear_distance = 5,
         loop = true
@@ -75,7 +76,7 @@ end
 function unilib.pkg.fire_permanent_tinted.init()
 
     return {
-        description = "Tinted permanent flame set (10 colours)",
+        description = "Tinted permanent flame set (15 colours)",
         notes = "In order to ignite a tinted flame, place any dyed artisanal glass, and then" ..
                 " punch it with flint and steel",
         depends = "glass_artisanal_basic",
@@ -98,15 +99,12 @@ function unilib.pkg.fire_permanent_tinted.exec()
         {"red",         "red",      S("Red-Tinted Permanent Flame")},
         {"white",       "frosted",  S("White-Tinted Permanent Flame")},
         {"yellow",      "yellow",   S("Yellow-Tinted Permanent Flame")},
-        -- Hypothetical extra colours not included in the original code, to complete the standard
-        --      15-colour set (no textures exist for these items)
-        --[[
+        -- Extra colours not included in the original code, to complete the standard 15-dye set
         {"brown",       nil,        S("Brown-Tinted Permanent Flame")},
         {"green_dark",  nil,        S("Dark-Green-Tinted Permanent Flame")},
         {"grey",        nil,        S("Grey-Tinted Permanent Flame")},
         {"grey_dark",   nil,        S("Dark-Grey-Tinted Permanent Flame")},
         {"pink",        nil,        S("Pink-Tinted Permanent Flame")},
-        ]]--
     }
 
     for _, row_list in pairs(flame_list) do
@@ -155,7 +153,7 @@ function unilib.pkg.fire_permanent_tinted.exec()
             on_destruct = function(pos)
 
                 do_smoke(pos, nil, nil, false)
-                minetest.sound_play("unilib_extinguish_flame", {
+                core.sound_play("unilib_extinguish_flame", {
                     pos = pos,
                     max_hear_distance = 5,
                     gain = 0.25,
@@ -166,9 +164,9 @@ function unilib.pkg.fire_permanent_tinted.exec()
 
     end
 
-    if minetest.features.particlespawner_tweenable then
+    if core.features.particlespawner_tweenable then
 
-        minetest.register_abm({
+        unilib.register_abm({
             label = "Permanent fire particles [fire_permanent_tinted]",
             nodenames = {"group:tinted_fire"},
 
@@ -178,9 +176,17 @@ function unilib.pkg.fire_permanent_tinted.exec()
 
             action = function(pos, node)
 
-                local colour = unilib.get_last_component(node.name)
+                -- The colour of the particles must match the flame (more or less)
+                -- (Assuming "unilib:fire_permanent_tinted_X")
+                local colour = string.sub(node.name, 30)
+                -- (Ugly but effective)
+                if colour == "green_dark" then
+                    colour = "green"
+                elseif colour == "grey_dark" then
+                    colour = "grey"
+                end
 
-                minetest.add_particlespawner({
+                core.add_particlespawner({
                     amount = 100,
                     time = 1,
 

@@ -9,7 +9,7 @@
 unilib.pkg.crop_undersea_grass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aqua_farming.add_mode
+local mode = unilib.global.imported_mod_table.aqua_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -59,7 +59,6 @@ function unilib.pkg.crop_undersea_grass.exec()
         replace_mode = mode,
         base_node = "unilib:sand_ordinary",
         chance = 10,
-        delay = 6,
         drop_table = {
             items = {
                 {items = {"unilib:crop_undersea_grass_harvest"}},
@@ -67,11 +66,14 @@ function unilib.pkg.crop_undersea_grass.exec()
                 {items = {"unilib:crop_undersea_grass_seed 3"}, rarity = 10},
             },
         },
+        -- N.B. 6 in original code
+        interval = 10,
         min_light = 4,
         seed_description = S("Edible Sea Grass Seed"),
         wild_description = S("Wild Edible Sea Grass"),
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -86,7 +88,7 @@ function unilib.pkg.crop_undersea_grass.exec()
 
     for i = 1, 4 do
 
-        unilib.register_decoration("aqua_farming_crop_sea_grass_" .. i, {
+        unilib.register_decoration_generic("aqua_farming_crop_sea_grass_" .. i, {
             -- From aqua_farming/mapgen_sea_grass.lua
             deco_type = "simple",
             decoration = "unilib:crop_undersea_grass_wild",
@@ -100,8 +102,11 @@ function unilib.pkg.crop_undersea_grass.exec()
                 seed = 87112,
                 spread = {x = 200, y = 200, z = 200},
             },
-            param2 = 48,
-            param2_max = 96,
+            -- N.B. Replaced apparently useless values of .param2/.param2_max from original code
+--          param2 = 48,
+--          param2_max = 96,
+            param2 = 0,
+            param2_max = 3,
             place_offset_y = -1,
             sidelen = 16,
         })

@@ -1,7 +1,6 @@
 # "rocks" remix - contains a few items from rocks that are not found in AATO/PFAA (but are required
 #       by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest
 #       mod, everything has been grouped into a hypothetical "rocks" mod
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -37,10 +36,14 @@ mineral_sphalerite|real_minerals
 stone_pegmatite_white|pfaa
 stone_skarn|pfaa
 
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
-#metal_copper|default moreblocks technic
+#metal_copper|default glemr11 moreblocks technic
 #metal_iron_wrought|technic_worldgen
-#metal_lead|technic_worldgen technic
+#metal_lead|glemr11 technic_worldgen technic
 #metal_magnesium|unilib
-#metal_tin|default technic
-#metal_zinc|technic_worldgen technic
+#metal_tin|default glemr11 technic
+#metal_zinc|glemr11 technic_worldgen technic
+
+# supporting packages (.suggested)

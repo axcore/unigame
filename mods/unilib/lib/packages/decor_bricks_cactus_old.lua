@@ -9,7 +9,7 @@
 unilib.pkg.decor_bricks_cactus_old = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.decor_bricks_cactus_old.exec()
         description = S("Decorative Old Cactus Bricks"),
         tiles = {"unilib_decor_bricks_cactus_old.png"},
         groups = {cracky = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. Not in original code
         is_ground_content = false,
@@ -43,6 +43,8 @@ function unilib.pkg.decor_bricks_cactus_old.exec()
             {"unilib:brick_ordinary_block", "unilib:plant_cactus_ordinary"},
         },
     })
-    unilib.set_auto_rotate("unilib:decor_bricks_cactus_old", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:decor_bricks_cactus_old", unilib.setting.auto_rotate_brick_flag
+    )
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.decor_stone_drystack = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.earthbuild.add_mode
+local mode = unilib.global.imported_mod_table.earthbuild.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,10 @@ function unilib.pkg.decor_stone_drystack.exec()
         description = S("Drystack Block"),
         tiles = {"unilib_decor_stone_drystack.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 1, stone = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
     })
     unilib.register_stairs("unilib:decor_stone_drystack", {
         basic_flag = true,
@@ -49,7 +52,7 @@ function unilib.pkg.decor_stone_drystack.exec()
         sound_name = "stone",
         img_list = {"unilib_decor_stone_drystack.png"},
     })
-    if unilib.pkg_executed_table["gravel_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil then
 
         unilib.register_craft({
             -- From earthbuild:drystack
@@ -60,7 +63,7 @@ function unilib.pkg.decor_stone_drystack.exec()
         })
 
     end
-    if unilib.pkg_executed_table["mineral_flint"] ~= nil then
+    if unilib.global.pkg_executed_table["mineral_flint"] ~= nil then
 
         -- N.B. Original craft recipe conflicts with recipe in "mineral_flint" package
         --[[

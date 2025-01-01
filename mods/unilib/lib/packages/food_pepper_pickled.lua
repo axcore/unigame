@@ -9,7 +9,7 @@
 unilib.pkg.food_pepper_pickled = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,21 +35,23 @@ function unilib.pkg.food_pepper_pickled.exec()
         description = S("Pickled Peppers"),
         tiles = {"unilib_food_pepper_pickled.png"},
         groups = {attached_node = 1, dig_immediate = 3, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_food_pepper_pickled.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         wield_image = "unilib_food_pepper_pickled.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_pepper_pickled", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_pepper_pickled", 5),
     })
     unilib.register_craft({
         -- From bbq:pickled_peppers
         type = "shapeless",
         output = "unilib:food_pepper_pickled",
-        recipe = {"group:food_peppercorn", "group:food_pepper", "unilib:ingredient_brine"}
+        recipe = {"group:food_peppercorn", "group:food_pepper", "unilib:ingredient_brine"},
     })
 
 end

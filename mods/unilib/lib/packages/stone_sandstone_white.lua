@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,6 +37,7 @@ function unilib.pkg.stone_sandstone_white.exec()
         description = S("White Sandstone"),
 
         category = "sedimentary",
+        colour = "#BAA981",
         grinder_flag = true,
         grinder_powder = "unilib:sand_white",
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 4)
@@ -45,7 +46,7 @@ function unilib.pkg.stone_sandstone_white.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("sandstone_white", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("sandstone_white", 3, nil)
 
     unilib.register_node(
         -- From GLEMr4, lib_materials:stone_sandstone_white_gravel, originally from "node texture
@@ -59,7 +60,7 @@ function unilib.pkg.stone_sandstone_white.exec()
             tiles = {"unilib_stone_sandstone_white.png"},
             -- N.B. Originally cracky = 3, level = 2, stone = 1
             groups = {cracky = smooth_cracky, crumbly = 1},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
         }
     )
     unilib.register_craft_2x2({
@@ -72,10 +73,10 @@ function unilib.pkg.stone_sandstone_white.exec()
         output = "unilib:sand_white 4",
         recipe = {
             {"unilib:stone_sandstone_white"},
-        }
+        },
     })
     --[[
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stairs("unilib:stone_sandstone_white", {
             drop_name = "unilib:stone_sandstone_white_rubble",
@@ -118,7 +119,10 @@ function unilib.pkg.stone_sandstone_white.exec()
             tiles = {"unilib_stone_sandstone_white_brick.png"},
             -- N.B. Originally cracky = 3, level = 2, stone = 1
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
+
+            -- N.B. is_ground_content = false not in original code; added to match other stones
+            is_ground_content = false,
         }
     )
     unilib.register_craft_2x2x4({
@@ -129,9 +133,11 @@ function unilib.pkg.stone_sandstone_white.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "sandstone_white",
     })
-    unilib.set_auto_rotate("unilib:stone_sandstone_white_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_sandstone_white_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble_or_rubble_or_nothing({
             -- Original to unilib. Depending on real hardness, creates
@@ -139,7 +145,13 @@ function unilib.pkg.stone_sandstone_white.exec()
             --      nothing
             part_name = "sandstone_white",
             cobble_description = S("White Sandstone Cobble"),
+            cobble_compressed_description = S("Compressed White Sandstone Cobble"),
+            cobble_condensed_description = S("Condensed White Sandstone Cobble"),
             rubble_description = S("White Sandstone Rubble"),
+            rubble_compressed_description = S("Compressed White Sandstone Rubble"),
+            rubble_condensed_description = S("Condensed White Sandstone Rubble"),
+            smooth_compressed_description = S("Compressed White Sandstone"),
+            smooth_condensed_description = S("Condensed White Sandstone"),
 
             replace_mode = mode,
             override_drop_flag = true,

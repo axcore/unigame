@@ -9,7 +9,7 @@
 unilib.pkg.metal_bismuth = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -63,7 +63,7 @@ function unilib.pkg.metal_bismuth.exec()
         output = "unilib:metal_bismuth_ingot 9",
         recipe = {
             {"unilib:metal_bismuth_block"},
-        }
+        },
     })
 
     unilib.register_node("unilib:metal_bismuth_block", "real_minerals:bismuth_block", mode, {
@@ -71,7 +71,7 @@ function unilib.pkg.metal_bismuth.exec()
         description = S("Bismuth Block"),
         tiles = {"unilib_metal_bismuth_block.png"},
         groups = {bendy = 2, cracky = 2, level = 0, melty = 2, snappy = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         -- N.B. true in original code
         is_ground_content = false,
@@ -82,5 +82,24 @@ function unilib.pkg.metal_bismuth.exec()
         ingredient = "unilib:metal_bismuth_ingot",
     })
     unilib.register_stairs("unilib:metal_bismuth_block")
+    unilib.register_carvings("unilib:metal_bismuth_block", {
+        millwork_flag = true,
+    })
+
+    if unilib.setting.squeezed_metal_flag then
+
+        unilib.register_node("unilib:metal_bismuth_block_compressed", nil, mode, {
+            -- Original to unilib
+            description = S("Compressed Bismuth Block"),
+            tiles = {"unilib_metal_bismuth_block_compressed.png"},
+            groups = {cracky = 1, level = 3},
+            sounds = unilib.global.sound_table.metal,
+
+            is_ground_content = false,
+            stack_max = unilib.global.squeezed_stack_max,
+        })
+        unilib.misc.set_compressed_metal_recipes("bismuth")
+
+    end
 
 end

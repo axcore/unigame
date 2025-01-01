@@ -1,6 +1,7 @@
 # "carvings" remix - contains everything from columnia, facade and mymillwork
-# Code handling carvings from these mods has been incorporated directly into unilib's core code
-# See the STANDARDS file for more information about what belongs in each category, and what does not
+# Code handling carvings from these mods has been incorporated directly into unilib's core code.
+#   This includes some nodes from farlands, whose packages are not otherwise included in this
+#   remix
 
 # node_name | original_mod
 
@@ -20,7 +21,7 @@ machine_milling|mymillwork
 glass_ordinary|default moreblocks vessels
 item_paper_ordinary|default moreblocks
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
 mineral_diamond|default mtg_plus
 plant_papyrus_ordinary|default mtg_plus
@@ -35,6 +36,10 @@ liquid_water_river|default
 
 # supporting packages (.optional)
 #grass_jungle|default
-#metal_gold|default technic
-#mineral_mese|default
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_gold|default glemr11 technic
+#mineral_mese|default glemr11
 #moss_green|sickles
+
+# supporting packages (.suggested)

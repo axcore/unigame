@@ -9,7 +9,7 @@
 unilib.pkg.food_fish_imitation = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,7 +32,7 @@ function unilib.pkg.food_fish_imitation.exec()
         inventory_image = "unilib_food_fish_imitation.png",
         groups = {eatable = 1, food = 1, food_fish = 1, food_vegan = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_fish_imitation", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_fish_imitation", 3),
     })
     unilib.register_craft({
         -- From cucina_vegana:imitation_fish

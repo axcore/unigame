@@ -1,0 +1,39 @@
+# Environment constants for the "gaia" remix, replacing temperature/humidity/elevation values in
+#       the corresponding biomes.csv/decorations.csv files
+
+# Temperatures
+#BOILING|125
+HOT|100
+WARM|75
+MILD|50
+COOL|25
+COLD|0
+#FREEZING|-25
+
+# Humidities
+#SWAMP|125
+HUMID|100
+SEMIHUMID|75
+TEMPERATE|50
+SEMIARID|25
+ARID|0
+DESERT|-25
+
+# Elevations
+OCEAN|-192
+KELP_MIN|-32
+CORAL_MIN|-16
+BEACH_MIN|-4
+MANGROVE_MIN|-2
+BELOW_SEA_LEVEL|0
+SEA_LEVEL|1
+MANGROVE_MAX|2
+BEACH_MAX|4
+COASTAL|40
+LOWLAND|80
+SHELF|120
+HIGHLAND|160
+MOUNTAIN|200
+STRATO|480
+
+# Blend values

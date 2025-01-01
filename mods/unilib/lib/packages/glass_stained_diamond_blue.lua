@@ -9,7 +9,7 @@
 unilib.pkg.glass_stained_diamond_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glass_stained.add_mode
+local mode = unilib.global.imported_mod_table.glass_stained.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

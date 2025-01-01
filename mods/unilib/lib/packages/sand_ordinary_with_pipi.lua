@@ -9,7 +9,7 @@
 unilib.pkg.sand_ordinary_with_pipi = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,13 @@ function unilib.pkg.sand_ordinary_with_pipi.exec()
         description = S("Ordinary Sand with Pipi"),
         tiles = {"unilib_sand_ordinary_with_pipi.png"},
         groups = {crumbly = 3, falling_node = 1, sand = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
 
         on_punch = function(pos, node, puncher)
 
             -- Dig up pipi
             puncher:get_inventory():add_item("main", "unilib:food_clam_pipi")
-            minetest.set_node(pos, {name = "unilib:sand_ordinary"})
+            core.set_node(pos, {name = "unilib:sand_ordinary"})
 
         end,
     })

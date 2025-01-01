@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_fossil_ammonite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ function unilib.pkg.stone_ordinary_with_fossil_ammonite.exec()
             description = S("Ordinary Stone with Ammonite Fossil"),
             tiles = {"unilib_stone_ordinary_with_fossil_ammonite.png"},
             groups = {cracky = 2},
-            sounds = unilib.sound_table.stone,
+            sounds = unilib.global.sound_table.stone,
         }
     )
 

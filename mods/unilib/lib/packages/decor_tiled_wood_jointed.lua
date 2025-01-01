@@ -9,7 +9,7 @@
 unilib.pkg.decor_tiled_wood_jointed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,8 +30,10 @@ function unilib.pkg.decor_tiled_wood_jointed.exec()
         description = S("Decorative Jointed Wood Tile"),
         tiles = {"unilib_decor_tiled_wood_jointed.png"},
         groups = {choppy = 1, flammable = 2, wood = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
+        -- N.B. is_ground_content = false not in original code; added to match other decor items
+        is_ground_content = false,
         paramtype2 = "facedir",
     })
     unilib.register_craft({
@@ -40,8 +42,8 @@ function unilib.pkg.decor_tiled_wood_jointed.exec()
         recipe = {
             {"", "group:wood", ""},
             {"group:wood", "", "group:wood"},
-            {"", "group:wood", ""}
-        }
+            {"", "group:wood", ""},
+        },
     })
 
 end

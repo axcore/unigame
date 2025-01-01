@@ -9,7 +9,7 @@
 unilib.pkg.deco_farming_redo_produce_lettuce = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,18 +19,19 @@ function unilib.pkg.deco_farming_redo_produce_lettuce.init()
 
     return {
         description = "Lettuce as decoration",
-        depends = {"dirt_ordinary", "produce_lettuce"},
+        depends = "produce_lettuce",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
     }
 
 end
 
-function unilib.pkg.deco_farming_redo_produce_lettuce.exec()
+function unilib.pkg.deco_farming_redo_produce_lettuce.post()
 
-    unilib.register_decoration_now("farming_redo_produce_lettuce", nil, {
+    unilib.register_decoration_complete("farming_redo_produce_lettuce", nil, {
         -- From farming_redo/mapgen.lua
         -- Completes decoration in package "produce_lettuce"
-        place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = 30,
+        place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary_with_turf_prairie"},
+        y_max = 35,
         y_min = 5,
     })
 

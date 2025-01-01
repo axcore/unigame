@@ -9,7 +9,7 @@
 unilib.pkg.shared_offend_flags = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.offend_flags.add_mode
+local mode = unilib.global.imported_mod_table.offend_flags.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local variables (from the original mod)
@@ -79,7 +79,7 @@ local function delete_entity_if_orphan(self)
     -- Delete entity if there is no flag mast node
 
     local pos = self.object:get_pos()
-    local node = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
+    local node = core.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
     if not is_upper_mast(node.name) and node.name ~= "ignore" then
 
         self.object:remove()
@@ -124,11 +124,11 @@ end
 
 local function spawn_flag(pos, flag_type)
 
-    local node_idx = minetest.hash_node_position(pos)
-    local param2 = minetest.get_node(pos).param2
+    local node_idx = core.hash_node_position(pos)
+    local param2 = core.get_node(pos).param2
 
     local flag_pos = get_flag_pos(pos, param2)
-    local obj = minetest.add_entity(flag_pos, "unilib:entity_flag_waving")
+    local obj = core.add_entity(flag_pos, "unilib:entity_flag_waving")
     if not obj or not obj:get_luaentity() then
         return
     end
@@ -149,7 +149,7 @@ local function spawn_flag_and_set_texture(pos, flag_type)
     local flag = spawn_flag(pos, flag_type)
     if flag and flag:get_luaentity() then
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         if flag_type == "" then
             flag_type = meta:get_string("flag_type")
         end
@@ -192,7 +192,7 @@ end
 
 function unilib.pkg.shared_offend_flags.set_flag_at(pos, flag_type)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if not is_upper_mast(node.name) then
         return false
     end
@@ -201,7 +201,7 @@ function unilib.pkg.shared_offend_flags.set_flag_at(pos, flag_type)
         return false
     end
 
-    local node_idx = minetest.hash_node_position(pos)
+    local node_idx = core.hash_node_position(pos)
     local aflag = active_flag_table[node_idx]
     local flag
     if aflag then
@@ -213,7 +213,7 @@ function unilib.pkg.shared_offend_flags.set_flag_at(pos, flag_type)
         local set_flag_type = flag:reset_texture(flag_type)
         if set_flag_type == flag_type then
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("flag_type", flag_type)
             return true
 
@@ -227,12 +227,12 @@ end
 
 function unilib.pkg.shared_offend_flags.get_flag_at(pos)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if not flag_exists(flag_type) then
         return nil
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local flag_type = meta:get_string("flag_type")
     if flag_type ~= "" then
         return flag_type
@@ -291,12 +291,12 @@ function unilib.pkg.shared_offend_flags.exec()
     --      - A capitalised description, e.g. "United Kingdom". If it is omitted, a generic
     --              description is used
 
-    local csv_path = unilib.path_mod .. "/csv/remixes/offend_flags/flags.csv"
-    if unilib.is_file(csv_path) then
+    local csv_path = unilib.utils.get_remix_dir("offend_flags") .. "/flags.csv"
+    if unilib.utils.is_file(csv_path) then
 
         local check_table = {}
 
-        for i, csv_table in ipairs(unilib.read_csv(csv_path)) do
+        for i, csv_table in ipairs(unilib.utils.read_csv(csv_path)) do
 
             -- "key" is expected to contain at least one letter, "value" at least one digit
             local flag_type, flag_img, flag_description = unpack(csv_table)
@@ -306,7 +306,7 @@ function unilib.pkg.shared_offend_flags.exec()
                         string.find(flag_type, "[^%w_]+") or
                         flag_type == "blank" then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "shared_offend_flags package: Invalid flag name",
                         csv_path,
                         i
@@ -314,7 +314,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
                 elseif check_table[flag_type] ~= nil then
 
-                    unilib.show_warning(
+                    unilib.utils.show_warning(
                         "shared_offend_flags package: Duplicate flag name",
                         csv_path,
                         i
@@ -332,8 +332,9 @@ function unilib.pkg.shared_offend_flags.exec()
 
                     else
 
-                        flag_description =
-                                unilib.brackets(S("Flag Pole with Flag"), S(flag_description))
+                        flag_description = unilib.utils.brackets(
+                            S("Flag Pole with Flag"), S(flag_description)
+                        )
 
                     end
 
@@ -381,7 +382,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
             if staticdata ~= "" then
 
-                local data = minetest.deserialize(staticdata)
+                local data = core.deserialize(staticdata)
                 if data.flag_type then
                     self.flag_type = data.flag_type
                 else
@@ -408,7 +409,7 @@ function unilib.pkg.shared_offend_flags.exec()
             end
 
             -- Delete entity if there is already one for this pos
-            local objs = minetest.get_objects_inside_radius(self.object:get_pos(), 0.5)
+            local objs = core.get_objects_inside_radius(self.object:get_pos(), 0.5)
             for o = 1, #objs do
 
                 local obj = objs[o]
@@ -431,7 +432,7 @@ function unilib.pkg.shared_offend_flags.exec()
         on_deactivate = function(self)
 
             if self.sound_id then
-                minetest.sound_stop(self.sound_id)
+                core.sound_stop(self.sound_id)
             end
 
         end,
@@ -501,7 +502,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
             if not self.sound_id then
 
-                self.sound_id = minetest.sound_play(
+                self.sound_id = core.sound_play(
                     wave_sound,
                     {object = self.object, gain = 1.0, loop = true}
                 )
@@ -524,7 +525,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
         get_staticdata = function(self)
 
-            return minetest.serialize({
+            return core.serialize({
                 node_idx = self.node_idx,
                 flag_type = self.flag_type,
             })
@@ -539,7 +540,7 @@ function unilib.pkg.shared_offend_flags.exec()
         description = S("Flag Pole"),
         tiles = {"unilib_flag_metal.png", "unilib_flag_metal.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         collision_box = {
             type = "fixed",
@@ -561,7 +562,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
         on_rotate = function(pos, node, user, mode, new_param2)
 
-            if unilib.pkg_executed_table["shared_screwdriver"] ~= nil and
+            if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil and
                     mode == unilib.pkg.shared_screwdriver.rotate_axis  then
                 return false
             end
@@ -596,7 +597,7 @@ function unilib.pkg.shared_offend_flags.exec()
                 description = unilib.pkg.shared_offend_flags.description_table[flag_type],
                 tiles = {"unilib_flag_metal.png", "unilib_flag_metal.png"},
                 groups = {cracky = 2},
-                sounds = unilib.sound_table.metal,
+                sounds = unilib.global.sound_table.metal,
 
                 drawtype = "mesh",
                 inventory_image = img,
@@ -621,8 +622,8 @@ function unilib.pkg.shared_offend_flags.exec()
                         return itemstack
                     end
 
-                    local node = minetest.get_node(pointed_thing.under)
-                    local pdef = minetest.registered_nodes[node.name]
+                    local node = core.get_node(pointed_thing.under)
+                    local pdef = core.registered_nodes[node.name]
                     if pdef and
                             pdef.on_rightclick and
                             not placer:get_player_control().sneak then
@@ -641,8 +642,8 @@ function unilib.pkg.shared_offend_flags.exec()
                     else
 
                         pos = pointed_thing.above
-                        node = minetest.get_node(pos)
-                        pdef = minetest.registered_nodes[node.name]
+                        node = core.get_node(pos)
+                        pdef = core.registered_nodes[node.name]
                         if not pdef or not pdef.buildable_to then
                             return itemstack
                         end
@@ -651,10 +652,10 @@ function unilib.pkg.shared_offend_flags.exec()
 
                     local above1 = {x = pos.x, y = pos.y + 1, z = pos.z}
                     local above2 = {x = pos.x, y = pos.y + 2, z = pos.z}
-                    local anode1 = minetest.get_node_or_nil(above1)
-                    local anode2 = minetest.get_node_or_nil(above2)
-                    local adef1 = anode1 and minetest.registered_nodes[anode1.name]
-                    local adef2 = anode2 and minetest.registered_nodes[anode2.name]
+                    local anode1 = core.get_node_or_nil(above1)
+                    local anode2 = core.get_node_or_nil(above2)
+                    local adef1 = anode1 and core.registered_nodes[anode1.name]
+                    local adef2 = anode2 and core.registered_nodes[anode2.name]
 
                     -- Don't build if upper nodes are blocked, unless it's a hidden node
                     if not adef1 or (
@@ -672,37 +673,37 @@ function unilib.pkg.shared_offend_flags.exec()
                     end
 
                     local pn = placer:get_player_name()
-                    if minetest.is_protected(pos, pn) then
+                    if core.is_protected(pos, pn) then
 
-                        minetest.record_protection_violation(pos, pn)
+                        core.record_protection_violation(pos, pn)
                         return itemstack
 
-                    elseif minetest.is_protected(above1, pn) then
+                    elseif core.is_protected(above1, pn) then
 
-                        minetest.record_protection_violation(above1, pn)
+                        core.record_protection_violation(above1, pn)
                         return itemstack
 
-                    elseif minetest.is_protected(above2, pn) then
+                    elseif core.is_protected(above2, pn) then
 
-                        minetest.record_protection_violation(above2, pn)
+                        core.record_protection_violation(above2, pn)
                         return itemstack
 
                     end
 
                     local yaw = placer:get_look_horizontal()
-                    local dir = minetest.yaw_to_dir(yaw)
-                    local param2 = (minetest.dir_to_facedir(dir) + 3) % 4
-                    minetest.set_node(pos, {name = itemstack:get_name(), param2 = param2})
-                    minetest.set_node(above1, {name = "unilib:flag_mast_hidden_1"})
-                    minetest.set_node(above2, {name = "unilib:flag_mast_hidden_2"})
+                    local dir = core.yaw_to_dir(yaw)
+                    local param2 = (core.dir_to_facedir(dir) + 3) % 4
+                    core.set_node(pos, {name = itemstack:get_name(), param2 = param2})
+                    core.set_node(above1, {name = "unilib:flag_mast_hidden_1"})
+                    core.set_node(above2, {name = "unilib:flag_mast_hidden_2"})
 
-                    if not unilib.is_creative(pn) then
+                    if not unilib.utils.is_creative(pn) then
                         itemstack:take_item()
                     end
 
-                    local def = minetest.registered_nodes[itemstack:get_name()]
+                    local def = core.registered_nodes[itemstack:get_name()]
                     if def and def.sounds then
-                        minetest.sound_play(def.sounds.place, {pos = pos}, true)
+                        core.sound_play(def.sounds.place, {pos = pos}, true)
                     end
 
                     return itemstack
@@ -714,7 +715,7 @@ function unilib.pkg.shared_offend_flags.exec()
                     local flag = spawn_flag(pos, flag_type)
                     if flag and flag:get_luaentity() then
 
-                        local meta = minetest.get_meta(pos)
+                        local meta = core.get_meta(pos)
                         meta:set_string("flag_type", flag:get_luaentity().flag_type)
 
                     end
@@ -723,7 +724,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
                 on_destruct = function(pos)
 
-                    local node_idx = minetest.hash_node_position(pos)
+                    local node_idx = core.hash_node_position(pos)
                     if active_flag_table[node_idx] then
                         active_flag_table[node_idx]:remove()
                     end
@@ -734,23 +735,23 @@ function unilib.pkg.shared_offend_flags.exec()
 
                     local above1 = {x = pos.x, y = pos.y + 1, z = pos.z}
                     local above2 = {x = pos.x, y = pos.y + 2, z = pos.z}
-                    if minetest.get_node(above1).name == "unilib:flag_mast_hidden_1" then
-                        minetest.remove_node(above1)
+                    if core.get_node(above1).name == "unilib:flag_mast_hidden_1" then
+                        core.remove_node(above1)
                     end
-                    if minetest.get_node(above2).name == "unilib:flag_mast_hidden_2" then
-                        minetest.remove_node(above2)
+                    if core.get_node(above2).name == "unilib:flag_mast_hidden_2" then
+                        core.remove_node(above2)
                     end
 
                 end,
 
                 on_rotate = function(pos, node, user, mode, new_param2)
 
-                    if unilib.pkg_executed_table["shared_screwdriver"] ~= nil and
+                    if unilib.global.pkg_executed_table["shared_screwdriver"] ~= nil and
                             mode == unilib.pkg.shared_screwdriver.rotate_axis then
                         return false
                     end
 
-                    local node_idx = minetest.hash_node_position(pos)
+                    local node_idx = core.hash_node_position(pos)
                     local aflag = active_flag_table[node_idx]
                     if aflag then
 
@@ -769,7 +770,7 @@ function unilib.pkg.shared_offend_flags.exec()
                         end
 
                         local flag_pos_idx = lua.node_idx
-                        local flag_pos = minetest.get_position_from_hash(flag_pos_idx)
+                        local flag_pos = core.get_position_from_hash(flag_pos_idx)
                         flag_pos = get_flag_pos(flag_pos, new_param2)
                         rotate_flag_by_param2(aflag, new_param2)
                         aflag:set_pos(flag_pos)
@@ -806,7 +807,7 @@ function unilib.pkg.shared_offend_flags.exec()
         -- (no description)
         -- (no tiles)
         groups = {not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         collision_box = {
             type = "fixed",
@@ -835,7 +836,7 @@ function unilib.pkg.shared_offend_flags.exec()
         -- (no description)
         -- (no tiles)
         groups = {not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         collision_box = {
             type = "fixed",
@@ -870,7 +871,7 @@ function unilib.pkg.shared_offend_flags.exec()
 
         action = function(pos, node)
 
-            local node_idx = minetest.hash_node_position(pos)
+            local node_idx = core.hash_node_position(pos)
             local aflag = active_flag_table[node_idx]
             if aflag then
                 return

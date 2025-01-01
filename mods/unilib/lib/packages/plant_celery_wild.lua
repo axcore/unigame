@@ -9,7 +9,7 @@
 unilib.pkg.plant_celery_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,11 +29,11 @@ function unilib.pkg.plant_celery_wild.exec()
 
     unilib.register_node("unilib:plant_celery_wild", "cropocalypse:wild_celery", mode, {
         -- From cropocalypse:wild_celery
-        description = unilib.annotate(S("Wild Celery"), "Apium graveolens"),
+        description = unilib.utils.annotate(S("Wild Celery"), "Apium graveolens"),
         tiles = {"unilib_plant_celery_wild.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, decorative_plants = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.plant_celery_wild.exec()
         waving = 1,
         wield_image = "unilib_plant_celery_wild.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:wild_celery
@@ -61,7 +61,7 @@ function unilib.pkg.plant_celery_wild.exec()
     end
     unilib.register_plant_in_pot("unilib:plant_celery_wild", "cropocalypse:wild_celery")
 
-    unilib.register_decoration("cropocalypse_plant_celery_wild", {
+    unilib.register_decoration_generic("cropocalypse_plant_celery_wild", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_celery_wild",

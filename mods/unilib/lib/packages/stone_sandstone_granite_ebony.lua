@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_granite_ebony = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_granite_ebony.exec()
         description = S("Ebony Granite Sandstone"),
 
         category = "sedimentary",
+        colour = "#79755C",
         grinder_flag = true,
         grinder_powder = "unilib:sand_granite_ebony",
         grinder_gravel = "unilib:gravel_granite_ebony",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_granite_ebony.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_granite_ebony_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, black_granite_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_granite_ebony.exec()
             replace_mode = mode,
             description = S("Ebony Granite Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_granite_ebony_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_granite_ebony_cobble_compressed
+            part_name = "sandstone_granite_ebony",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Ebony Granite Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_granite_ebony_cobble_condensed
+            part_name = "sandstone_granite_ebony",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Ebony Granite Sandstone Cobble"),
         })
 
     end

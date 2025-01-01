@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_dough_cone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.icecream.add_mode
+local mode = unilib.global.imported_mod_table.icecream.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.ingredient_dough_cone.exec()
         description = S("Ice Cream Cone Dough"),
         inventory_image = "unilib_ingredient_dough_cone.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_dough_cone", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_dough_cone", 1),
     })
     unilib.register_craft({
         -- From icecream:dough
@@ -40,7 +40,7 @@ function unilib.pkg.ingredient_dough_cone.exec()
             {"", "", ""},
             {"unilib:ingredient_flour_ordinary", "", "unilib:ingredient_flour_ordinary"},
             {"", "group:food_egg", ""},
-        }
+        },
     })
     unilib.register_external_ingredient("unilib:ingredient_dough_cone", {
         "group:food_egg",                       -- Originally group:food_egg
@@ -51,7 +51,7 @@ function unilib.pkg.ingredient_dough_cone.exec()
         description = S("Shaped Ice Cream Cone Dough"),
         inventory_image = "unilib_ingredient_dough_cone_shaped.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:ingredient_dough_cone_shaped", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:ingredient_dough_cone_shaped", 1),
     })
     unilib.register_craft({
         -- From icecream:notcone

@@ -9,7 +9,7 @@
 unilib.pkg.deco_vallee_des_roses_flower_hyacinth = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.vallee_des_roses.add_mode
+local mode = unilib.global.imported_mod_table.vallee_des_roses.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ end
 
 function unilib.pkg.deco_vallee_des_roses_flower_hyacinth.post()
 
-    unilib.register_decoration_now("vallee_des_roses_flower_hyacinth", nil, {
+    unilib.register_decoration_complete("vallee_des_roses_flower_hyacinth", nil, {
         -- From vallee_des_roses/init.lua
         -- Completes decoration in package "flower_hyacinth"
         biomes = {"default_grassland", "default_grassland_snowy", "default_taiga"},

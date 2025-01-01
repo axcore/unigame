@@ -9,7 +9,7 @@
 unilib.pkg.bucket_wood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bucket_wooden.add_mode
+local mode = unilib.global.imported_mod_table.bucket_wooden.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

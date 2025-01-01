@@ -9,7 +9,7 @@
 unilib.pkg.misc_cobweb = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,16 +32,18 @@ function unilib.pkg.misc_cobweb.exec()
         description = S("Cobweb"),
         tiles = {"unilib_misc_cobweb.png"},
         groups = {flammable = 3, liquid = 3, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_misc_cobweb.png",
-        liquidtype = "source",
-        liquid_alternative_flowing = "unilib:misc_cobweb",
-        liquid_alternative_source = "unilib:misc_cobweb",
-        liquid_range = 0,
-        liquid_renewable = false,
-        liquid_viscosity = 8,
+        -- N.B. Replaced liquid properties in the original mod's code, with move_resistance = 7
+--      liquidtype = "source",
+--      liquid_alternative_flowing = "unilib:misc_cobweb",
+--      liquid_alternative_source = "unilib:misc_cobweb",
+--      liquid_range = 0,
+--      liquid_renewable = false,
+--      liquid_viscosity = 8,
+        move_resistance = 7,
         paramtype = "light",
         selection_box = {type = "regular"},
         sunlight_propagates = true,
@@ -53,8 +55,8 @@ function unilib.pkg.misc_cobweb.exec()
         recipe = {
             {"unilib:item_string_ordinary", "", "unilib:item_string_ordinary"},
             {"", "unilib:item_string_ordinary", ""},
-            {"unilib:item_string_ordinary", "", "unilib:item_string_ordinary"}
-        }
+            {"unilib:item_string_ordinary", "", "unilib:item_string_ordinary"},
+        },
     })
 
 end

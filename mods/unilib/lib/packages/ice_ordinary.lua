@@ -17,9 +17,9 @@
 unilib.pkg.ice_ordinary = {}
 
 local S = unilib.intllib
-local default_add_mode = unilib.imported_mod_table.default.add_mode
-local ethereal_add_mode = unilib.imported_mod_table.ethereal.add_mode
-local mtg_plus_add_mode = unilib.imported_mod_table.mtg_plus.add_mode
+local default_add_mode = unilib.global.imported_mod_table.default.add_mode
+local ethereal_add_mode = unilib.global.imported_mod_table.ethereal.add_mode
+local mtg_plus_add_mode = unilib.global.imported_mod_table.mtg_plus.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -45,7 +45,7 @@ function unilib.pkg.ice_ordinary.exec()
         tiles = {"unilib_ice_ordinary.png"},
         -- N.B. melts = 1 and puts_out_fire = 1 not in original code
         groups = {cools_lava = 1, cracky = 3, melts = 1, puts_out_fire = 1, slippery = 3},
-        sounds = unilib.sound_table.ice,
+        sounds = unilib.global.sound_table.ice,
 
         is_ground_content = false,
         paramtype = "light",
@@ -66,13 +66,13 @@ function unilib.pkg.ice_ordinary.exec()
             cools_lava = 1, cracky = 3, melts = 1, not_in_creative_inventory = 1, puts_out_fire = 1,
             slippery = 3,
         },
-        sounds = unilib.sound_table.ice,
+        sounds = unilib.global.sound_table.ice,
 
         drop = "unilib:ice_ordinary",
         paramtype = "light",
     })
 
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         unilib.register_node("unilib:ice_ordinary_block", "mtg_plus:ice_block", mtg_plus_add_mode, {
             -- From mtg_plus:ice_block
@@ -80,7 +80,7 @@ function unilib.pkg.ice_ordinary.exec()
             tiles = {"unilib_ice_ordinary_block.png"},
             -- N.B. melts = 1 and puts_out_fire = 1 not in original code
             groups = {cools_lava = 1, cracky = 3, melts = 1, puts_out_fire = 1, slippery = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             is_ground_content = false,
             paramtype = "light",
@@ -100,11 +100,11 @@ function unilib.pkg.ice_ordinary.exec()
             {
                 description = S("Ordinary Ice Brick"),
                 tiles = {"unilib_ice_ordinary_brick.png"},
-                -- N.B. melts = 1 and slippery = 3 not in original code
+                -- N.B. melts = 1 not in original code
                 groups = {
                     cools_lava = 1, cracky = 3, melts = 1, puts_out_fire = 1, slippery = 3,
                 },
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 is_ground_content = false,
                 paramtype = "light",
@@ -116,7 +116,9 @@ function unilib.pkg.ice_ordinary.exec()
             ingredient = "unilib:ice_ordinary",
         })
         unilib.register_stairs("unilib:ice_ordinary_brick")
-        unilib.set_auto_rotate("unilib:ice_ordinary_brick", unilib.auto_rotate_brick_flag)
+        unilib.utils.set_auto_rotate(
+            "unilib:ice_ordinary_brick", unilib.setting.auto_rotate_brick_flag
+        )
 
         unilib.register_node("unilib:ice_ordinary_tile", "mtg_plus:ice_tile4", mtg_plus_add_mode, {
             -- From mtg_plus:ice_tile4
@@ -126,7 +128,7 @@ function unilib.pkg.ice_ordinary.exec()
             groups = {
                 cools_lava = 1, cracky = 3, level = 1, melts = 1, puts_out_fire = 1, slippery = 3,
             },
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             is_ground_content = false,
             paramtype = "light",
@@ -148,7 +150,7 @@ function unilib.pkg.ice_ordinary.exec()
                 tiles = {"unilib_ice_ordinary_tile_small.png"},
                 -- N.B. melts = 1 not in original code
                 groups = {cools_lava = 1, cracky = 3, level = 2, melts = 1, slippery = 2},
-                sounds = unilib.sound_table.glass,
+                sounds = unilib.global.sound_table.glass,
 
                 is_ground_content = false,
             }

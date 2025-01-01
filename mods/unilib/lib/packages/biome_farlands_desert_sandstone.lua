@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_desert_sandstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.biome_farlands_desert_sandstone.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "sandstone_desert" biome
         name = "farlands_desert_sandstone",
-        description = unilib.brackets(S("Sandstone desert biome"), "farlands"),
+        description = unilib.utils.brackets(S("Sandstone desert biome"), "farlands"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",
@@ -37,7 +37,7 @@ function unilib.pkg.biome_farlands_desert_sandstone.post()
         node_stone = "unilib:stone_sandstone_ordinary",
         node_riverbed = "unilib:sand_ordinary",
         depth_riverbed = 2,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
         heat_point = 60,
         humidity_point = 0,
@@ -46,7 +46,7 @@ function unilib.pkg.biome_farlands_desert_sandstone.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "sandstone_desert_ocean" biome
         name = "farlands_desert_sandstone_ocean",
-        description = unilib.brackets(S("Sandstone desert ocean biome"), "farlands"),
+        description = unilib.utils.brackets(S("Sandstone desert ocean biome"), "farlands"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

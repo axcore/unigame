@@ -9,7 +9,7 @@
 unilib.pkg.light_block_futuristic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_extras.add_mode
+local mode = unilib.global.imported_mod_table.morelights_extras.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,9 +35,11 @@ function unilib.pkg.light_block_futuristic.exec()
         description = S("Futuristic Lamp"),
         tiles = {"unilib_light_block_futuristic.png"},
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
     })
     unilib.register_craft({

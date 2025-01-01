@@ -9,7 +9,7 @@
 unilib.pkg.abm_snow_remove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,13 +18,13 @@ local mode = unilib.imported_mod_table.snow.add_mode
 function unilib.pkg.abm_snow_remove.init()
 
     return {
-        description = "Converts dirt with snow to ordinary dirt when without sunlight, etc",
+        description = "ABM to convert dirt with snow to ordinary dirt when covered (from snow)",
         depends = "dirt_ordinary",
     }
 
 end
 
-function unilib.pkg.abm_snow_remove.exec()
+function unilib.pkg.abm_snow_remove.post()
 
     -- If dirt with snow is covered by blocks that don't let light through, or have a light
     --      paramtype/liquidtype combination, convert it to ordinary dirt
@@ -37,14 +37,14 @@ function unilib.pkg.abm_snow_remove.exec()
 
         action = function(pos)
 
-            local name = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name
-            local nodedef = minetest.registered_nodes[name]
+            local name = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name
+            local nodedef = core.registered_nodes[name]
             if name ~= "ignore" and
                     nodedef and not (
-                        (nodedef.sunlight_propagates or nodedef.paramtype == "light")
-                        and nodedef.liquidtype == "none"
+                        (nodedef.sunlight_propagates or nodedef.paramtype == "light") and
+                        nodedef.liquidtype == "none"
                     ) then
-                minetest.set_node(pos, {name = "unilib:dirt_ordinary"})
+                core.set_node(pos, {name = "unilib:dirt_ordinary"})
             end
 
         end,

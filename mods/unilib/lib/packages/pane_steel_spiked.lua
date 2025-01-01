@@ -9,7 +9,7 @@
 unilib.pkg.pane_steel_spiked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glass_stained.add_mode
+local mode = unilib.global.imported_mod_table.glass_stained.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,10 +42,10 @@ function unilib.pkg.pane_steel_spiked.exec()
             textures = {
                 img,
                 "",
-                "unilib_glass_ordinary_detail.png",
+                "unilib_pane_steel_spiked_edge.png",
             },
             groups = {cracky = 2},
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
             inventory_image = img,
             recipe = {

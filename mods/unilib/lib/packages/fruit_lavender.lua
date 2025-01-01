@@ -9,7 +9,7 @@
 unilib.pkg.fruit_lavender = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.fruit_lavender.exec()
             leafdecay_drop = 1,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         -- N.B. inventory_image not in original code
@@ -51,9 +51,12 @@ function unilib.pkg.fruit_lavender.exec()
         visual_scale = 1,
         walkable = false,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_lavender", 1),
+        -- N.B. No standard .after_place_node for fruits, because of unsuitable texture
+
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_lavender", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,11 +68,20 @@ function unilib.pkg.fruit_lavender.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_lavender",
+        juice_description = S("Lavender Fruit"),
+        juice_type = "lavender",
+        rgb = "#c080ff",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_lavender.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_lavender",
 
         replace_mode = mode,

@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_grassland_snowy = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.biome_farlands_grassland_snowy.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "snowy_grassland" biome
         name = "farlands_grassland_snowy",
-        description = unilib.brackets(S("Snowy grassland biome"), "farlands"),
+        description = unilib.utils.brackets(S("Snowy grassland biome"), "farlands"),
         node_dust = "unilib:snow_ordinary",
         node_top = "unilib:dirt_ordinary_with_cover_snow",
         depth_top = 1,
@@ -37,7 +37,7 @@ function unilib.pkg.biome_farlands_grassland_snowy.post()
         depth_filler = 1,
         node_riverbed = "unilib:sand_ordinary",
         depth_riverbed = 2,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 5,
         heat_point = 20,
         humidity_point = 35,
@@ -46,7 +46,7 @@ function unilib.pkg.biome_farlands_grassland_snowy.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "snowy_grassland_ocean" biome
         name = "farlands_grassland_snowy_ocean",
-        description = unilib.brackets(S("Snowy grassland ocean biome"), "farlands"),
+        description = unilib.utils.brackets(S("Snowy grassland ocean biome"), "farlands"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

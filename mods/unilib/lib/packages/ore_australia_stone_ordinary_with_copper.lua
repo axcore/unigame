@@ -9,7 +9,7 @@
 unilib.pkg.ore_australia_stone_ordinary_with_copper = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,7 +34,7 @@ end
 
 function unilib.pkg.ore_australia_stone_ordinary_with_copper.post()
 
-    if unilib.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_flinders_lofty.lua
@@ -60,7 +60,7 @@ function unilib.pkg.ore_australia_stone_ordinary_with_copper.post()
 
     end
 
-    if unilib.pkg_executed_table["biome_australia_gulf_of_carpentaria"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_gulf_of_carpentaria"] ~= nil then
 
         unilib.register_ore({
             -- From australia/biome_gulf_of_carpentaria.lua

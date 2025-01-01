@@ -9,7 +9,7 @@
 unilib.pkg.light_lantern_vintage = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_vintage.add_mode
+local mode = unilib.global.imported_mod_table.morelights_vintage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,7 +19,7 @@ function unilib.pkg.light_lantern_vintage.init()
 
     return {
         description = "Vintage lantern",
-        depends = {"light_bulb_normal", "pane_glass_ordinary", "tree_jungle"}
+        depends = {"light_bulb_normal", "pane_glass_ordinary", "tree_jungle"},
     }
 
 end
@@ -34,9 +34,11 @@ function unilib.pkg.light_lantern_vintage.exec()
         description = S("Vintage Lantern"),
         tiles = {"unilib_light_lantern_vintage.png^unilib_light_lantern_vintage_overlay.png"},
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
-        light_source = unilib.light_max,
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
+        light_source = unilib.constant.light_max,
         paramtype = "light",
     })
     unilib.register_craft({

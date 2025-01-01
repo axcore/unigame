@@ -9,7 +9,7 @@
 unilib.pkg.grass_deciduous = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,13 @@ end
 
 function unilib.pkg.grass_deciduous.exec()
 
-    unilib.register_node("unilib:grass_deciduous", "mapgen:bush", mode, {
+    local full_name = "unilib:grass_deciduous"
+    local drop = full_name
+    if unilib.setting.disable_grass_drop_flag then
+        drop = ""
+    end
+
+    unilib.register_node(full_name, "mapgen:bush", mode, {
         -- From farlands, mapgen:bush
         description = S("Deciduous Forest Bush"),
         tiles = {"unilib_grass_deciduous.png"},
@@ -35,10 +41,12 @@ function unilib.pkg.grass_deciduous.exec()
             attached_node = 1, deciduous_grass = 1, flammable = 1, flora = 1, grass = 1,
             oddly_breakable_by_hand = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "firelike",
-        is_ground_content = false,
+        drop = drop,
+        -- N.B. removed is_ground_content = false to match other grasses
+--      is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -50,10 +58,10 @@ function unilib.pkg.grass_deciduous.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_grass_deciduous", {
+    unilib.register_decoration_generic("farlands_grass_deciduous", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
-        decoration = "unilib:grass_deciduous",
+        decoration = full_name,
 
         fill_ratio = 0.05,
         height = 1,

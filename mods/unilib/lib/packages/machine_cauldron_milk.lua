@@ -9,7 +9,7 @@
 unilib.pkg.machine_cauldron_milk = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 local inactive_nodebox = {
     type = "fixed",
@@ -73,31 +73,13 @@ local function is_milk_bucket(full_name)
 
     -- Generalised function for detecting milk buckets
 
-    if minetest.get_item_group(full_name, "food_milk") > 0 and
-            minetest.get_item_group(full_name, "food_vegan") == 0 then
+    if core.get_item_group(full_name, "food_milk") > 0 and
+            core.get_item_group(full_name, "food_vegan") == 0 then
         return true
     elseif string.find(full_name, "bucket") and string.find(full_name, "milk") then
         return true
     else
         return false
-    end
-
-end
-
-local function get_empty_container(full_name)
-
-    -- Original to unilib
-    -- Converts a full bucket (e.g. "unilib:bucket_steel_with_water_ordinary") into an empty bucket
-    --      (e.g. "unilib:bucket_steel_empty")
-    -- If it's not a unilib bucket (such as one from mobs_animal or petz), just return an empty
-    --      steel bucket or an empty bottle, assuming that it was the original ingredient
-
-    if unilib.empty_bucket_table[full_name] ~= nil then
-        return unilib.empty_bucket_table[full_name]
-    elseif string.find(full_name, "bucket") then
-        return "unilib:bucket_steel_empty"
-    else
-        return "unilib:vessel_bottle_glass_empty"
     end
 
 end
@@ -130,7 +112,7 @@ local function get_boiling_results(src_table)
 
             output.item = "unilib:ingredient_curd"
             output.second_item = "unilib:ingredient_whey"
-            output.replacement = get_empty_container(src_name)
+            output.replacement = unilib.liquids.get_empty_container(src_name)
             output.time = 8
             src:take_item()
 
@@ -191,50 +173,50 @@ end
 local function get_cauldron_active_formspec(fuel_percent, item_percent)
 
     return "formspec_version[5]" ..
-    "size[10.5,11]" ..
-    "list[context;src_slots;0.5,0.5;3,4]" ..
-    "list[context;src;4.7,1.3;1,1]" ..
-    "list[context;fuel;4.7,3.5;1,1]" ..
-    "image[4.7,2.4;1,1;unilib_machine_furnace_ordinary_fire_bg.png^[lowpart:" ..
-    fuel_percent .. ":unilib_machine_furnace_ordinary_fire_bg.png]" ..
-    "image[6.2,2.4;1,1;unilib_gui_furnace_arrow_bg.png^[lowpart:" ..
-    item_percent .. ":unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
-    "list[context;dst;7.7,0.5;2,4]" ..
-    "list[current_player;main;0.4,5.75;8,1]" ..
-    "list[current_player;main;0.4,7;8,3;8]" ..
-    "listring[context;dst]" ..
-    "listring[current_player;main]" ..
-    "listring[context;src]" ..
-    "listring[current_player;main]" ..
-    "listring[context;src_slots]" ..
-    "listring[current_player;main]" ..
-    "listring[context;fuel]" ..
-    "listring[current_player;main]" ..
-    unilib.get_hotbar_bg(0, 4.25)
+        "size[10.5,11]" ..
+        "list[context;src_slots;0.5,0.5;3,4]" ..
+        "list[context;src;4.7,1.3;1,1]" ..
+        "list[context;fuel;4.7,3.5;1,1]" ..
+        "image[4.7,2.4;1,1;unilib_machine_furnace_ordinary_fire_bg.png^[lowpart:" ..
+            fuel_percent .. ":unilib_machine_furnace_ordinary_fire_bg.png]" ..
+        "image[6.2,2.4;1,1;unilib_gui_furnace_arrow_bg.png^[lowpart:" ..
+            item_percent .. ":unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
+        "list[context;dst;7.7,0.5;2,4]" ..
+        "list[current_player;main;0.4,5.75;8,1]" ..
+        "list[current_player;main;0.4,7;8,3;8]" ..
+        "listring[context;dst]" ..
+        "listring[current_player;main]" ..
+        "listring[context;src]" ..
+        "listring[current_player;main]" ..
+        "listring[context;src_slots]" ..
+        "listring[current_player;main]" ..
+        "listring[context;fuel]" ..
+        "listring[current_player;main]" ..
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
 local function get_cauldron_inactive_formspec()
 
     return "formspec_version[5]" ..
-    "size[10.5,11]" ..
-    "list[context;src_slots;0.5,0.5;3,4]" ..
-    "list[context;src;4.7,1.3;1,1]" ..
-    "list[context;fuel;4.7,3.5;1,1]" ..
-    "image[4.7,2.4;1,1;unilib_machine_furnace_ordinary_fire_bg.png]" ..
-    "image[6.2,2.4;1,1;unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
-    "list[context;dst;7.7,0.5;2,4]" ..
-    "list[current_player;main;0.4,5.75;8,1]" ..
-    "list[current_player;main;0.4,7;8,3;8]" ..
-    "listring[context;dst]" ..
-    "listring[current_player;main]" ..
-    "listring[context;src]" ..
-    "listring[current_player;main]" ..
-    "listring[context;src_slots]" ..
-    "listring[current_player;main]" ..
-    "listring[context;fuel]" ..
-    "listring[current_player;main]" ..
-    unilib.get_hotbar_bg(0, 4.25)
+        "size[10.5,11]" ..
+        "list[context;src_slots;0.5,0.5;3,4]" ..
+        "list[context;src;4.7,1.3;1,1]" ..
+        "list[context;fuel;4.7,3.5;1,1]" ..
+        "image[4.7,2.4;1,1;unilib_machine_furnace_ordinary_fire_bg.png]" ..
+        "image[6.2,2.4;1,1;unilib_gui_furnace_arrow_bg.png^[transformR270]" ..
+        "list[context;dst;7.7,0.5;2,4]" ..
+        "list[current_player;main;0.4,5.75;8,1]" ..
+        "list[current_player;main;0.4,7;8,3;8]" ..
+        "listring[context;dst]" ..
+        "listring[current_player;main]" ..
+        "listring[context;src]" ..
+        "listring[current_player;main]" ..
+        "listring[context;src_slots]" ..
+        "listring[current_player;main]" ..
+        "listring[context;fuel]" ..
+        "listring[current_player;main]" ..
+        unilib.misc.get_hotbar_bg(0, 4.25)
 
 end
 
@@ -244,15 +226,15 @@ end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     if listname == "fuel" then
 
-        if minetest.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
+        if core.get_craft_result({method = "fuel", width = 1, items = {stack}}).time ~= 0 then
 
             if inv:is_empty("src") then
                 meta:set_string("infotext", S("Cauldron is empty"))
@@ -285,7 +267,7 @@ end
 local function allow_metadata_inventory_move(
     pos, from_list, from_index, to_list, to_index, count, player
 )
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local stack = inv:get_stack(from_list, from_index)
     return allow_metadata_inventory_put(pos, to_list, to_index, stack, player)
@@ -294,7 +276,7 @@ end
 
 local function allow_metadata_inventory_take(pos, listname, index, stack, player)
 
-    if minetest.is_protected(pos, player:get_player_name()) then
+    if core.is_protected(pos, player:get_player_name()) then
         return 0
     end
 
@@ -304,7 +286,7 @@ end
 
 local function can_dig(pos, player)
 
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     return inv:is_empty("fuel") and
             inv:is_empty("dst") and
@@ -315,13 +297,13 @@ end
 
 local function swap_node(pos, name)
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name == name or node.name == "ignore" then
         return
     end
 
     node.name = name
-    minetest.swap_node(pos, node)
+    core.swap_node(pos, node)
 
 end
 
@@ -332,7 +314,7 @@ end
 local function cauldron_node_timer(pos, elapsed)
 
     -- Initialise metadata
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local fuel_time = meta:get_float("fuel_time") or 0
     local src_time = meta:get_float("src_time") or 0
     local fuel_totaltime = meta:get_float("fuel_totaltime") or 0
@@ -403,11 +385,11 @@ local function cauldron_node_timer(pos, elapsed)
 
                         local leftover = inv:add_item("dst", cooked.item)
                         local above = vector.new(pos.x, pos.y + 1, pos.z)
-                        local drop_pos = minetest.find_node_near(above, 1, {"air"}) or above
+                        local drop_pos = core.find_node_near(above, 1, {"air"}) or above
 
                         if not leftover:is_empty() then
 
-                          minetest.item_drop(cooked.item, nil, drop_pos)
+                          core.item_drop(cooked.item, nil, drop_pos)
                           still_room_for_cooked_item_flag = false
 
                         end
@@ -422,7 +404,7 @@ local function cauldron_node_timer(pos, elapsed)
 
                                 dst_full_flag = true
                                 still_room_for_cooked_item_flag = false
-                                minetest.item_drop(cooked.second_item, nil, drop_pos)
+                                core.item_drop(cooked.second_item, nil, drop_pos)
 
                             end
 
@@ -438,7 +420,7 @@ local function cauldron_node_timer(pos, elapsed)
 
                                 dst_full_flag = true
                                 still_room_for_cooked_item_flag = false
-                                minetest.item_drop(cooked.replacement, nil, drop_pos)
+                                core.item_drop(cooked.replacement, nil, drop_pos)
 
                             end
 
@@ -473,7 +455,7 @@ local function cauldron_node_timer(pos, elapsed)
                     end
 
                     -- Play cooling sound
-                    minetest.sound_play(
+                    core.sound_play(
                         "unilib_cool_lava",
                         {pos = pos, max_hear_distance = 16, gain = 0.1},
                         true
@@ -495,7 +477,7 @@ local function cauldron_node_timer(pos, elapsed)
 
                 -- We need to get new fuel
                 local afterfuel
-                fuel, afterfuel = minetest.get_craft_result(
+                fuel, afterfuel = core.get_craft_result(
                     {method = "fuel", width = 1, items = fuel_list}
                 )
 
@@ -517,8 +499,8 @@ local function cauldron_node_timer(pos, elapsed)
                         if not leftover:is_empty() then
 
                             local above = vector.new(pos.x, pos.y + 1, pos.z)
-                            local drop_pos = minetest.find_node_near(above, 1, {"air"}) or above
-                            minetest.item_drop(replacements[1], nil, drop_pos)
+                            local drop_pos = core.find_node_near(above, 1, {"air"}) or above
+                            core.item_drop(replacements[1], nil, drop_pos)
 
                         end
 
@@ -601,7 +583,7 @@ local function cauldron_node_timer(pos, elapsed)
         -- Play sound every 9 seconds while the furnace is active
         if timer_elapsed == 0 or (timer_elapsed + 1) % 9 == 0 then
 
-            minetest.sound_play(
+            core.sound_play(
                 "unilib_cauldron_active",
                 {pos = pos, max_hear_distance = 16, gain = 0.5},
                 true
@@ -618,7 +600,7 @@ local function cauldron_node_timer(pos, elapsed)
         formspec = get_cauldron_inactive_formspec()
         swap_node(pos, "unilib:machine_cauldron_milk")
         -- Stop timer on the inactive furnace
-        minetest.get_node_timer(pos):stop()
+        core.get_node_timer(pos):stop()
         meta:set_int("timer_elapsed", 0)
 
     end
@@ -697,7 +679,7 @@ function unilib.pkg.machine_cauldron_milk.exec()
             "unilib_machine_cauldron_milk_side.png",
         },
         groups = {cracky = 2},
-        sounds = unilib.sound_table_metal,
+        sounds = unilib.global.sound_table_metal,
 
         collision_box = selection_box,
         drawtype = "nodebox",
@@ -718,20 +700,20 @@ function unilib.pkg.machine_cauldron_milk.exec()
         on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "src_slots", drops)
-            unilib.get_inventory_drops(pos, "src", drops)
-            unilib.get_inventory_drops(pos, "fuel", drops)
-            unilib.get_inventory_drops(pos, "dst", drops)
+            unilib.misc.get_inventory_drops(pos, "src_slots", drops)
+            unilib.misc.get_inventory_drops(pos, "src", drops)
+            unilib.misc.get_inventory_drops(pos, "fuel", drops)
+            unilib.misc.get_inventory_drops(pos, "dst", drops)
 
             drops[#drops + 1] = "unilib:machine_cauldron_milk"
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end,
 
         on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             inv:set_size('src', 1)
             inv:set_size('src_slots', 12)
@@ -743,20 +725,21 @@ function unilib.pkg.machine_cauldron_milk.exec()
 
         on_metadata_inventory_move = function(pos)
 
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
+
         end,
 
         on_metadata_inventory_put = function(pos)
 
             -- Decide whether the furnace can burn or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
         on_metadata_inventory_take = function(pos)
 
             -- Check whether the furnace is empty or not
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
 
         end,
 
@@ -797,7 +780,7 @@ function unilib.pkg.machine_cauldron_milk.exec()
                 "unilib_machine_cauldron_milk_active_side.png",
             },
             groups = {cracky = 2, not_in_creative_inventory = 1},
-            sounds = unilib.sound_table_metal,
+            sounds = unilib.global.sound_table.metal,
 
             collision_box = selection_box,
             drawtype = "nodebox",
@@ -830,7 +813,7 @@ function unilib.pkg.machine_cauldron_milk.post()
         {"unilib:ingredient_whey", "unilib:food_cheese_ricotta", nil, nil, 15},
     }
 
-    if minetest.get_modpath("animalia") then
+    if core.get_modpath("animalia") then
 
         table.insert(recipe_list, {
             "animalia:bucket_milk",
@@ -842,7 +825,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     end
 
-    if minetest.get_modpath("mobs_animal") then
+    if core.get_modpath("mobs_animal") then
 
         table.insert(recipe_list, {
             "mobs:bucket_milk",
@@ -852,7 +835,7 @@ function unilib.pkg.machine_cauldron_milk.post()
             8,
         })
 
-        if unilib.pkg_executed_table["bucket_wood"] ~= nil then
+        if unilib.global.pkg_executed_table["bucket_wood"] ~= nil then
 
             table.insert(recipe_list, {
                 "mobs:wooden_bucket_milk",
@@ -866,7 +849,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     end
 
-    if minetest.get_modpath("petz") then
+    if core.get_modpath("petz") then
 
         table.insert(recipe_list, {
             "petz:bucket_milk",
@@ -880,9 +863,9 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     -- Allow imitation cheeses only if the Minetest setting is enabled (as the original mod doesn't
     --      permit that)
-    if unilib.cheese_allow_imitation_flag then
+    if unilib.setting.cheese_allow_imitation_flag then
 
-        if unilib.pkg_executed_table["food_milk_coconut"] ~= nil then
+        if unilib.global.pkg_executed_table["food_milk_coconut"] ~= nil then
 
             table.insert(recipe_list, {
                 "unilib:food_milk_coconut",
@@ -894,7 +877,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
         end
 
-        if unilib.pkg_executed_table["food_milk_soy"] ~= nil then
+        if unilib.global.pkg_executed_table["food_milk_soy"] ~= nil then
 
             table.insert(recipe_list, {
                 "unilib:food_milk_soy",
@@ -906,7 +889,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
         end
 
-        if unilib.pkg_executed_table["food_milk_soy_red"] ~= nil then
+        if unilib.global.pkg_executed_table["food_milk_soy_red"] ~= nil then
 
             table.insert(recipe_list, {
                 "unilib:food_milk_soy_red",
@@ -920,7 +903,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     end
 
-    for bucket_type, _ in pairs(unilib.generic_bucket_table) do
+    for bucket_type, _ in pairs(unilib.global.generic_bucket_table) do
 
         local c_water_bucket = "unilib:" .. bucket_type .. "_with_water_ordinary"
         local c_empty_bucket = "unilib:" .. bucket_type .. "_empty"
@@ -936,8 +919,8 @@ function unilib.pkg.machine_cauldron_milk.post()
     end
 
     -- (These items only available in steel buckets)
-    if unilib.pkg_executed_table["bucket_steel_with_seaweed"] ~= nil and
-            unilib.pkg_executed_table["ingredient_agar_powder"] ~= nil then
+    if unilib.global.pkg_executed_table["bucket_steel_with_seaweed"] ~= nil and
+            unilib.global.pkg_executed_table["ingredient_agar_powder"] ~= nil then
 
         table.insert(recipe_list, {
             "unilib:bucket_steel_with_seaweed",
@@ -949,8 +932,8 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     end
 
-    if unilib.pkg_executed_table["bucket_steel_with_bones"] ~= nil and
-            unilib.pkg_executed_table["ingredient_gelatin_powder"] ~= nil then
+    if unilib.global.pkg_executed_table["bucket_steel_with_bones"] ~= nil and
+            unilib.global.pkg_executed_table["ingredient_gelatin_powder"] ~= nil then
 
         table.insert(recipe_list, {
             "unilib:bucket_steel_with_bones",
@@ -963,7 +946,7 @@ function unilib.pkg.machine_cauldron_milk.post()
     end
 
     -- Recipes complete, now update unified_inventory/I3 (if loaded) with custom craft types
-    if minetest.get_modpath("unified_inventory") ~= nil then
+    if core.get_modpath("unified_inventory") ~= nil then
 
         unified_inventory.register_craft_type("cauldron_boiling", {
             description = S("Boiling"),
@@ -973,7 +956,7 @@ function unilib.pkg.machine_cauldron_milk.post()
             uses_crafting_grid = false
         })
 
-    elseif minetest.get_modpath("i3") ~= nil then
+    elseif core.get_modpath("i3") ~= nil then
 
         i3.register_craft_type("cauldron_boiling", {
             description = S("Boiling"),
@@ -984,7 +967,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
     for _, mini_list in pairs(recipe_list) do
 
-        if minetest.get_modpath("unified_inventory") ~= nil then
+        if core.get_modpath("unified_inventory") ~= nil then
 
             unified_inventory.register_craft({
                 type = "cauldron_boiling",
@@ -1002,7 +985,7 @@ function unilib.pkg.machine_cauldron_milk.post()
 
             end
 
-        elseif minetest.get_modpath("i3") ~= nil then
+        elseif core.get_modpath("i3") ~= nil then
 
             i3.register_craft({
                 type = "cauldron_boiling",

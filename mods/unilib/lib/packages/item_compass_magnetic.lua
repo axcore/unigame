@@ -9,7 +9,7 @@
 unilib.pkg.item_compass_magnetic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.realcompass.add_mode
+local mode = unilib.global.imported_mod_table.realcompass.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 
 function unilib.pkg.item_compass_magnetic.exec()
 
-    minetest.register_globalstep(function(dtime)
+    core.register_globalstep(function(dtime)
 
-        local players = minetest.get_connected_players()
+        local players = core.get_connected_players()
         for i,player in ipairs(players) do
 
             local got_compass = false
@@ -78,7 +78,8 @@ function unilib.pkg.item_compass_magnetic.exec()
 
                 local dir = player:get_look_horizontal()
                 local angle_relative = math.deg(dir)
-                local compass_img = math.floor((angle_relative / 22.5) + 0.5) % 16
+                -- N.B. In original code, there were only 16 textures (and thus 16 compass variants)
+                local compass_img = math.floor((angle_relative / 11.25) + 0.5) % 32
                 local full_name = "unilib:item_compass_magnetic_" .. compass_img
 
                 -- Update compass image to point at target
@@ -92,7 +93,7 @@ function unilib.pkg.item_compass_magnetic.exec()
         end
     end)
 
-    for i = 0, 15 do
+    for i = 0, 31 do
 
         local img = "unilib_item_compass_magnetic_" .. i .. ".png"
         local inv = 1
@@ -100,13 +101,19 @@ function unilib.pkg.item_compass_magnetic.exec()
             inv = 0
         end
 
-        -- N.B. In original code, minetest.register_tool() was used
+        -- N.B. In original code, core.register_tool() was used
         unilib.register_craftitem("unilib:item_compass_magnetic_" .. i, "realcompass:" .. i, mode, {
             -- From realcompass:0, etc
             description = S("Magnetic Compass"),
             inventory_image = img,
-            groups = {not_in_creative_inventory = inv},
+            -- N.B. In the original code, only .not_in_creative_inventory was used. Added more
+            --      groups to match other unilib compasses
+            groups = {
+                disable_repair = 1, not_in_creative_inventory = inv, magnetic_compass = i, tool = 1,
+            },
 
+            -- N.B. no stack_max in original code
+            stack_max = 1,
             wield_image = img,
         })
 
@@ -119,7 +126,7 @@ function unilib.pkg.item_compass_magnetic.exec()
             {"", "unilib:metal_steel_ingot", ""},
             {"unilib:metal_copper_ingot", "unilib:glass_ordinary", "unilib:metal_copper_ingot"},
             {"", "unilib:metal_copper_ingot", ""},
-        }
+        },
     })
 
 end

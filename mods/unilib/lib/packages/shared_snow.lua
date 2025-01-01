@@ -9,7 +9,7 @@
 unilib.pkg.shared_snow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -20,9 +20,9 @@ local function is_uneven(pos)
     -- From snow/init.lua, was uneven()
     -- Checks if the snow level is even at any given pos
 
-    local num = minetest.get_node_level(pos)
-    local get_node = minetest.get_node
-    local add_node = minetest.add_node
+    local num = core.get_node_level(pos)
+    local get_node = core.get_node
+    local add_node = core.add_node
     local foundx, foundz
 
     for z = -1, 1 do
@@ -34,9 +34,9 @@ local function is_uneven(pos)
             p.y = p.y - 1
             local bnode = get_node(p)
 
-            if node    and
-                    minetest.registered_nodes[node.name] and
-                    minetest.registered_nodes[node.name].drawtype == "plantlike" and
+            if node and
+                    core.registered_nodes[node.name] and
+                    core.registered_nodes[node.name].drawtype == "plantlike" and
                     bnode.name == "unilib:dirt_ordinary_with_turf" then
 
                 add_node(p, {name = "unilib:dirt_ordinary_with_cover_snow"})
@@ -47,7 +47,7 @@ local function is_uneven(pos)
             p.y = p.y + 1
             if not (x == 0 and z == 0) and
                     node.name == "unilib:snow_ordinary" and
-                    minetest.get_node_level(p) < num then
+                    core.get_node_level(p) < num then
 
                 foundx = x
                 foundz = z
@@ -70,7 +70,7 @@ local function is_uneven(pos)
 
         local p = {x = pos.x + foundx, y = pos.y, z = pos.z + foundz}
         if not is_uneven(p) then
-            minetest.add_node_level(p, 7)
+            core.add_node_level(p, 7)
         end
 
         return true
@@ -86,9 +86,9 @@ end
 function unilib.pkg.shared_snow.snow_onto_dirt(pos)
 
     pos.y = pos.y - 1
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if node.name == "unilib:dirt_ordinary_with_turf" or node.name == "unilib:dirt_ordinary" then
-        minetest.set_node(pos, {name = "unilib:dirt_ordinary_with_cover_snow"})
+        core.set_node(pos, {name = "unilib:dirt_ordinary_with_cover_snow"})
     end
 
 end
@@ -99,48 +99,48 @@ function unilib.pkg.shared_snow.place(pos, disablesound)
     -- This function places snow checking at the same time for snow level and increasing as needed
     -- This also takes into account sourrounding snow and makes snow even
 
-    local node = minetest.get_node_or_nil(pos)
-    if not node or not minetest.registered_nodes[node.name] then
+    local node = core.get_node_or_nil(pos)
+    if not node or not core.registered_nodes[node.name] then
         return
     end
 
     if node.name == "unilib:snow_ordinary" then
 
-        local level = minetest.get_node_level(pos)
+        local level = core.get_node_level(pos)
         if level < 63 then
 
-            if minetest.get_item_group(
-                minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name, "leafdecay"
+            if core.get_item_group(
+                core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name, "leafdecay"
             ) == 0 and not is_uneven(pos) then
 
-                minetest.sound_play("unilib_snow_footstep", {pos = pos})
-                minetest.add_node_level(pos, 7)
+                core.sound_play("unilib_snow_footstep", {pos = pos})
+                core.add_node_level(pos, 7)
 
             end
 
         elseif level == 63 then
 
-            local p = minetest.find_node_near(pos, 10, "unilib:dirt_ordinary_with_turf")
-            if p and minetest.get_node_light(p, 0.5) == 15 then
+            local p = core.find_node_near(pos, 10, "unilib:dirt_ordinary_with_turf")
+            if p and core.get_node_light(p, 0.5) == 15 then
 
-                minetest.sound_play("unilib_grass_footstep", {pos = pos})
-                minetest.place_node(
+                core.sound_play("unilib_grass_footstep", {pos = pos})
+                core.place_node(
                     {x = pos.x, y = pos.y + 1, z = pos.z}, {name = "unilib:snow_ordinary"}
                 )
 
             else
 
-                minetest.sound_play("unilib_snow_footstep", {pos = pos})
-                minetest.add_node(pos, {name = "unilib:snow_ordinary_block"})
+                core.sound_play("unilib_snow_footstep", {pos = pos})
+                core.add_node(pos, {name = "unilib:snow_ordinary_block"})
 
             end
 
         end
 
     elseif node.name ~= "unilib:ice_ordinary" and
-            minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ~= "air" then
+            core.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name ~= "air" then
 
-        local data = minetest.registered_nodes[node.name]
+        local data = core.registered_nodes[node.name]
         local drawtype = data.drawtype
         if drawtype == "normal" or drawtype == "allfaces_optional" then
 
@@ -150,20 +150,20 @@ function unilib.pkg.shared_snow.place(pos, disablesound)
 
                 sound = sound.footstep
                 if sound then
-                    minetest.sound_play(sound.name, {pos = pos, gain = sound.gain})
+                    core.sound_play(sound.name, {pos = pos, gain = sound.gain})
                 end
 
             end
 
-            minetest.place_node(pos, {name = "unilib:snow_ordinary"})
+            core.place_node(pos, {name = "unilib:snow_ordinary"})
 
         elseif drawtype == "plantlike" then
 
             pos.y = pos.y - 1
-            if minetest.get_node(pos).name == "unilib:dirt_ordinary_with_turf" then
+            if core.get_node(pos).name == "unilib:dirt_ordinary_with_turf" then
 
-                minetest.sound_play("unilib_grass_footstep", {pos = pos})
-                minetest.add_node(pos, {name = "unilib:dirt_ordinary_with_cover_snow"})
+                core.sound_play("unilib_grass_footstep", {pos = pos})
+                core.add_node(pos, {name = "unilib:dirt_ordinary_with_cover_snow"})
 
             end
 

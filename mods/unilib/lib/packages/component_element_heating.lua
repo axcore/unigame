@@ -9,7 +9,7 @@
 unilib.pkg.component_element_heating = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.component_element_heating.exec()
     unilib.register_craftitem(
         -- From basic_materials:heating_element
         "unilib:component_element_heating",
-        "basic_materials:heating_element",
+        {"basic_materials:heating_element", "homedecor:heating_element"},
         mode,
         {
             description = S("Heating Element"),
@@ -44,7 +44,7 @@ function unilib.pkg.component_element_heating.exec()
                 "unilib:metal_copper_ingot",
                 "unilib:mineral_mese_crystal_fragment",
                 "unilib:metal_copper_ingot",
-            }
+            },
         },
     })
 

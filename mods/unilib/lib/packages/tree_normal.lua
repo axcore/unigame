@@ -9,7 +9,7 @@
 unilib.pkg.tree_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -61,7 +61,7 @@ function unilib.pkg.tree_normal.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
         under_list = {"unilib:dirt_ordinary_with_turf", "default:dirt_with_grass"},
     })
-    if unilib.pkg_executed_table["soil_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["soil_ordinary"] ~= nil then
 
         -- Craft sapling from apple (default) tree saplings
         unilib.register_craft({
@@ -78,10 +78,10 @@ function unilib.pkg.tree_normal.exec()
 
     end
 
-    unilib.register_decoration("ethereal_tree_normal", {
+    unilib.register_decoration_generic("ethereal_tree_normal", {
         -- From ethereal-ng/schems.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_normal.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_normal.mts",
 
         fill_ratio = 0.001,
         flags = "place_center_x, place_center_z",

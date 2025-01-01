@@ -9,7 +9,7 @@
 unilib.pkg.plant_devils_club = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,11 +27,11 @@ function unilib.pkg.plant_devils_club.exec()
 
     unilib.register_node("unilib:plant_devils_club", "cropocalypse:devils_club", mode, {
         -- From cropocalypse:devils_club
-        description = unilib.annotate(S("Devil's Club"), "Oplopanax horridus"),
+        description = unilib.utils.annotate(S("Devil's Club"), "Oplopanax horridus"),
         tiles = {"unilib_plant_devils_club.png"},
         -- N.B. flora = 1 not in original code
         groups = {attached_node = 1, flammable = 1, flora = 1, grave_plants = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.plant_devils_club.exec()
     })
     unilib.register_plant_in_pot("unilib:plant_devils_club", "cropocalypse:devils_club")
 
-    unilib.register_decoration("cropocalypse_plant_devils_club", {
+    unilib.register_decoration_generic("cropocalypse_plant_devils_club", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:plant_devils_club",

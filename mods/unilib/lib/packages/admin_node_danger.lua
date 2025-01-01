@@ -9,7 +9,7 @@
 unilib.pkg.admin_node_danger = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.maptools.add_mode
+local mode = unilib.global.imported_mod_table.maptools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,18 +35,20 @@ function unilib.pkg.admin_node_danger.exec()
             "maptools:damage_" .. i,
             mode,
             {
-                description = unilib.brackets(
+                description = unilib.utils.brackets(
                     S("Invisible Damaging Block"), S("Strength %s"):format(i)
                 ),
                 -- (no tiles)
                 -- N.B. not_in_creative_inventory not in original code
-                groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+                groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
                 -- (no sounds)
 
                 damage_per_second = i,
                 drawtype = "airlike",
                 inventory_image = "unilib_metal_steel_block.png" ..
                         "^unilib_crop_cotton_grow_" .. i .. ".png",
+                -- N.B. is_ground_content = false not in original code
+                is_ground_content = false,
                 paramtype = "light",
                 pointable = false,
                 sunlight_propagates = true,
@@ -66,12 +68,14 @@ function unilib.pkg.admin_node_danger.exec()
             description = S("Invisible Killing Block"),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             damage_per_second = 20,
             drawtype = "airlike",
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_black.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,
@@ -86,16 +90,20 @@ function unilib.pkg.admin_node_danger.exec()
         "maptools:drowning",
         mode,
         {
-            description = unilib.hint(S("Invisible Drowning Block"), S("place at head height")),
+            description = unilib.utils.hint(
+                S("Invisible Drowning Block"), S("place at head height")
+            ),
             -- (no tiles)
             -- N.B. not_in_creative_inventory not in original code
-            groups = {not_in_creative_inventory = unilib.show_admin_item_group},
+            groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             -- (no sounds)
 
             drawtype = "airlike",
             drowning = 1,
             -- N.B. switched duplicate dye texture in original code
             inventory_image = "unilib_metal_steel_block.png^unilib_dye_grey_dark.png",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype = "light",
             pointable = false,
             sunlight_propagates = true,

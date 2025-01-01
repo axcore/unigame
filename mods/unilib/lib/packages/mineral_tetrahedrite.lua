@@ -9,7 +9,7 @@
 unilib.pkg.mineral_tetrahedrite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ function unilib.pkg.mineral_tetrahedrite.exec()
         description = S("Tetrahedrite"),
 
         hardness = 2,
-        -- (Craft recipe provided by the "metal_copper_real" package)
-        metal_list = {"copper_real"},
+        -- (Craft recipe provided by the "metal_copper_rare" package)
+        metal_list = {"copper_rare"},
     })
 
     unilib.register_craftitem(
@@ -53,8 +53,8 @@ end
 function unilib.pkg.mineral_tetrahedrite.post()
 
     -- If the real copper package was not executed, smelt into regular copper instead
-    if unilib.pkg_executed_table["metal_copper_real"] == nil and
-            unilib.pkg_executed_table["metal_copper"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_copper_rare"] == nil and
+            unilib.global.pkg_executed_table["metal_copper"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -65,7 +65,7 @@ function unilib.pkg.mineral_tetrahedrite.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "tetrahedrite",
             metal_list = {"copper"},
         })

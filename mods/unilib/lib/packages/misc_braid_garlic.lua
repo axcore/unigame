@@ -9,7 +9,7 @@
 unilib.pkg.misc_braid_garlic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_braid_garlic.exec()
         -- From farming:garlic_braid
         description = S("Garlic Braid"),
         tiles = {
-            "unilib_misc_braid_garlic_side.png",
+            "unilib_misc_braid_garlic_top.png",
             "unilib_misc_braid_garlic.png",
             "unilib_misc_braid_garlic_side.png^[transformFx",
             "unilib_misc_braid_garlic_side.png",
@@ -40,10 +40,12 @@ function unilib.pkg.misc_braid_garlic.exec()
         -- N.B. removed vessel = 1 from original code
 --      groups = {dig_immediate = 3, flammable = 3, vessel = 1},
         groups = {dig_immediate = 3, flammable = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_braid_garlic.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {

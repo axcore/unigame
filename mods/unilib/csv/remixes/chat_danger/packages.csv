@@ -1,0 +1,15 @@
+# "chat_danger" remix - contains packages which define chat commands available only to players with
+#       the "unilib_danger" privilege
+# See the "chat" remix for a full of list chat command packages with expanded comments
+
+# node_name | original_mod
+
+chat_cut_trench|rocks
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

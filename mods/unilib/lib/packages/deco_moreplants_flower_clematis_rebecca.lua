@@ -9,7 +9,7 @@
 unilib.pkg.deco_moreplants_flower_clematis_rebecca = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_moreplants_flower_clematis_rebecca.post()
 
-    unilib.register_decoration_now("moreplants_flower_clematis_rebecca", nil, {
+    unilib.register_decoration_complete("moreplants_flower_clematis_rebecca", nil, {
         -- From moreplants/init.lua
         -- Completes decoration in package "flower_clematis_rebecca"
         biomes = "default_rainforest",

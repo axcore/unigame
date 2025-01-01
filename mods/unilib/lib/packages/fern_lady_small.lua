@@ -9,7 +9,7 @@
 unilib.pkg.fern_lady_small = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.fern_lady_small.exec()
 
     unilib.register_node("unilib:fern_lady_small", "lib_ecology:fern_ladyfern2", mode, {
         -- From GLEMr4, lib_ecology:fern_ladyfern2
-        description = unilib.annotate(S("Small Lady Fern"), "Athyrium filix-femina"),
+        description = unilib.utils.annotate(S("Small Lady Fern"), "Athyrium filix-femina"),
         tiles = {"unilib_fern_lady.png"},
         groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,5 +50,7 @@ function unilib.pkg.fern_lady_small.exec()
         waving = 1,
     })
     unilib.register_plant_in_pot("unilib:fern_lady_small", "lib_ecology:fern_ladyfern2")
+
+    unilib.register_decoration_spare("unilib:fern_lady_small")
 
 end

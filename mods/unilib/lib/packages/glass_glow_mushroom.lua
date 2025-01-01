@@ -9,7 +9,7 @@
 unilib.pkg.glass_glow_mushroom = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.glass_glow_mushroom.exec()
         description = S("Mushroom Glow Glass"),
         tiles = {"unilib_glass_glow_mushroom.png", "unilib_glass_glow_mushroom_detail.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed_optional",
         is_ground_content = false,
         light_source = 3,
         paramtype = "light",
-        paramtype2 = "glasslikeliquidlevel",
+        -- N.B. removed .paramtype2 to match the changes in minetest_game (Git #2693)
+--      paramtype2 = "glasslikeliquidlevel",
         sunlight_propagates = true,
     })
     unilib.register_craft({

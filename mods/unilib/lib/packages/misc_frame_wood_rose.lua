@@ -9,7 +9,7 @@
 unilib.pkg.misc_frame_wood_rose = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr6.add_mode
+local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,9 +34,11 @@ function unilib.pkg.misc_frame_wood_rose.exec()
         description = S("Wooden Rose Frame"),
         tiles = {"unilib_misc_frame_wood_rose.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "glasslike_framed",
+        -- N.B. is_ground_content = false not in original code; added to match other frames
+        is_ground_content = false,
         paramtype = "light",
         sunlight_propagates = true,
         use_texture_alpha = "blend",

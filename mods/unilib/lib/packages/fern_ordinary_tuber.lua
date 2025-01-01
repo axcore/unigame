@@ -9,7 +9,7 @@
 unilib.pkg.fern_ordinary_tuber = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ferns.add_mode
+local mode = unilib.global.imported_mod_table.ferns.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.fern_ordinary_tuber.exec()
             -- Not in original code; matches code in unilib:fern_boston_tubers
             groups = {flammable = 2, food_tuber = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:fern_ordinary_tuber", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:fern_ordinary_tuber", 3),
         }
     )
     unilib.register_craft({

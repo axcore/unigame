@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_iron = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,10 +28,11 @@ function unilib.pkg.stone_ordinary_with_iron.exec()
 
     unilib.register_node("unilib:stone_ordinary_with_iron", "default:stone_with_iron", mode, {
         -- From default:stone_with_iron
-        description = unilib.brackets(S("Iron Ore"), S("Ordinary Stone")),
+        description = unilib.utils.brackets(S("Iron Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_metal_iron.png"},
-        groups = {cracky = 2},
-        sounds = unilib.sound_table.stone,
+        -- N.B. ore = 1 not in original code
+        groups = {cracky = 2, ore = 1},
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:metal_iron_lump",
     })

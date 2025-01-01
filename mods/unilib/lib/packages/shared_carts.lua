@@ -9,7 +9,7 @@
 unilib.pkg.shared_carts = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local mode = unilib.global.imported_mod_table.carts.add_mode
 
 -- Table set by calls to unilib.pkg.shared_carts.register_rail(), and retrieved in calls to
 --      .get_railparams()
@@ -32,7 +32,7 @@ local v3_len = vector.length
 
 local function get_sign(z)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:get_sign()
 
     if z == 0 then
         return 0
@@ -44,7 +44,7 @@ end
 
 local function manage_attachment(player, obj)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:manage_attachment()
 
     if not player then
         return
@@ -77,36 +77,37 @@ end
 
 local function velocity_to_dir(v)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:velocity_to_dir()
 
     if math.abs(v.x) > math.abs(v.z) then
-        return {x = carts:get_sign(v.x), y = carts:get_sign(v.y), z = 0}
+        return {x = get_sign(v.x), y = get_sign(v.y), z = 0}
     else
-        return {x = 0, y = carts:get_sign(v.y), z = carts:get_sign(v.z)}
+        return {x = 0, y = get_sign(v.y), z = get_sign(v.z)}
     end
 
 end
 
 local function is_rail(pos, railtype)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:is_rail()
 
-    local node = minetest.get_node(pos).name
+    local node = core.get_node(pos).name
     if node == "ignore" then
 
-        local vm = minetest.get_voxel_manip()
+        local vm = core.get_voxel_manip()
         local emin, emax = vm:read_from_map(pos, pos)
         local area = VoxelArea:new{
             MinEdge = emin,
             MaxEdge = emax,
         }
+
         local data = vm:get_data()
         local vi = area:indexp(pos)
-        node = minetest.get_name_from_content_id(data[vi])
+        node = core.get_name_from_content_id(data[vi])
 
     end
 
-    if minetest.get_item_group(node, "rail") == 0 then
+    if core.get_item_group(node, "rail") == 0 then
         return false
     end
 
@@ -114,13 +115,13 @@ local function is_rail(pos, railtype)
         return true
     end
 
-    return minetest.get_item_group(node, "connect_to_raillike") == railtype
+    return core.get_item_group(node, "connect_to_raillike") == railtype
 
 end
 
 local function check_front_up_down(pos, dir_, check_up, railtype)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:check_front_up_down()
 
     local dir = vector.new(dir_)
     local cur
@@ -128,7 +129,7 @@ local function check_front_up_down(pos, dir_, check_up, railtype)
     -- Front
     dir.y = 0
     cur = vector.add(pos, dir)
-    if carts:is_rail(cur, railtype) then
+    if is_rail(cur, railtype) then
         return dir
     end
 
@@ -136,7 +137,7 @@ local function check_front_up_down(pos, dir_, check_up, railtype)
     if check_up then
         dir.y = 1
         cur = vector.add(pos, dir)
-        if carts:is_rail(cur, railtype) then
+        if is_rail(cur, railtype) then
             return dir
         end
     end
@@ -144,7 +145,7 @@ local function check_front_up_down(pos, dir_, check_up, railtype)
     -- Down
     dir.y = -1
     cur = vector.add(pos, dir)
-    if carts:is_rail(cur, railtype) then
+    if is_rail(cur, railtype) then
         return dir
     end
     return nil
@@ -153,7 +154,7 @@ end
 
 local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:get_rail_direction()
 
     local pos = vector.round(pos_)
     local cur
@@ -179,7 +180,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 
     -- Normal, to disallow rail switching up- & downhill
     if straight_priority then
-        cur = self:check_front_up_down(pos, dir, true, railtype)
+        cur = check_front_up_down(pos, dir, true, railtype)
         if cur then
             return cur
         end
@@ -195,7 +196,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 
         if ctrl.left and left_check then
 
-            cur = self:check_front_up_down(pos, left, false, railtype)
+            cur = check_front_up_down(pos, left, false, railtype)
             if cur then
                 return cur, 1
             end
@@ -205,7 +206,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 
         if ctrl.right and right_check then
 
-            cur = self:check_front_up_down(pos, right, false, railtype)
+            cur = check_front_up_down(pos, right, false, railtype)
             if cur then
                 return cur, 2
             end
@@ -218,7 +219,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
     -- Normal
     if not straight_priority then
 
-        cur = self:check_front_up_down(pos, dir, true, railtype)
+        cur = check_front_up_down(pos, dir, true, railtype)
         if cur then
             return cur
         end
@@ -228,7 +229,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
     -- Left, if not already checked
     if left_check then
 
-        cur = carts:check_front_up_down(pos, left, false, railtype)
+        cur = check_front_up_down(pos, left, false, railtype)
         if cur then
             return cur
         end
@@ -238,7 +239,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
     -- Right, if not already checked
     if right_check then
 
-        cur = carts:check_front_up_down(pos, right, false, railtype)
+        cur = check_front_up_down(pos, right, false, railtype)
         if cur then
             return cur
         end
@@ -248,13 +249,7 @@ local function get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
     -- Backwards
     if not old_switch then
 
-        cur = carts:check_front_up_down(
-            pos,
-            {x = -dir.x, y = dir.y, z = -dir.z},
-            true,
-            railtype
-        )
-
+        cur = check_front_up_down(pos, {x = -dir.x, y = dir.y, z = -dir.z}, true, railtype)
         if cur then
             return cur
         end
@@ -267,7 +262,7 @@ end
 
 local function pathfinder(pos_, old_pos, old_dir, distance, ctrl, pf_switch, railtype)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:pathfinder()
 
     local pos = vector.round(pos_)
     if vector.equals(old_pos, pos) then
@@ -280,7 +275,7 @@ local function pathfinder(pos_, old_pos, old_dir, distance, ctrl, pf_switch, rai
 
     for i = 1, distance do
 
-        pf_dir, pf_switch = self:get_rail_direction(
+        pf_dir, pf_switch = get_rail_direction(
             pf_pos,
             pf_dir,
             ctrl,
@@ -312,14 +307,14 @@ end
 
 local function get_rail_groups(additional_groups)
 
-    -- Adapted from carts/functions.lua
+    -- Adapted from carts/functions.lua, was carts:get_rail_groups()
 
     -- Get the default rail groups and add more when a table is given
     local groups = {
         dig_immediate = 2,
         attached_node = 1,
         rail = 1,
-        connect_to_raillike = minetest.raillike_group("rail")
+        connect_to_raillike = core.raillike_group("rail")
     }
 
     if type(additional_groups) == "table" then
@@ -338,7 +333,7 @@ end
 
 local function rail_on_step_event(handler, obj, dtime)
 
-    -- Adapted from carts/cart_entity.lua
+    -- Adapted from carts/cart_entity.lua, was rail_on_step_event()
 
     if handler then
         handler(obj, dtime)
@@ -348,7 +343,7 @@ end
 
 local function rail_sound(self, dtime)
 
-    -- Adapted from carts/cart_entity.lua
+    -- Adapted from carts/cart_entity.lua, was rail_sound()
     -- Sound refresh interval = 1.0sec
 
     if not self.sound_ttl then
@@ -368,7 +363,7 @@ local function rail_sound(self, dtime)
 
         local handle = self.sound_handle
         self.sound_handle = nil
-        minetest.after(0.2, minetest.sound_stop, handle)
+        core.after(0.2, core.sound_stop, handle)
 
     end
 
@@ -376,7 +371,7 @@ local function rail_sound(self, dtime)
     local speed = vector.length(vel)
     if speed > 0 then
 
-        self.sound_handle = minetest.sound_play(
+        self.sound_handle = core.sound_play(
             "unilib_cart_moving",
             {
                 object = self.object,
@@ -391,16 +386,16 @@ end
 
 local function get_railparams(pos)
 
-    -- Adapted from carts/cart_entity.lua
+    -- Adapted from carts/cart_entity.lua, was get_railparams()
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     return rail_param_table[node.name] or {}
 
 end
 
 local function rail_on_step(self, dtime)
 
-    -- Adapted from carts/cart_entity.lua
+    -- Adapted from carts/cart_entity.lua, was rail_on_step()
 
     local vel = self.object:get_velocity()
     if self.punched then
@@ -416,11 +411,11 @@ local function rail_on_step(self, dtime)
     end
 
     local pos = self.object:get_pos()
-    local cart_dir = carts:velocity_to_dir(vel)
-    local same_dir = vector.equals(cart_dir, self.old_dir)
+    local dir = velocity_to_dir(vel)
+    local dir_changed = not vector.equals(dir, self.old_dir)
     local update = {}
 
-    if self.old_pos and not self.punched and same_dir then
+    if self.old_pos and not self.punched and not dir_changed then
 
         local flo_pos = vector.round(pos)
         local flo_old = vector.round(self.old_pos)
@@ -438,7 +433,7 @@ local function rail_on_step(self, dtime)
     -- Get player controls
     if self.driver then
 
-        player = minetest.get_player_by_name(self.driver)
+        player = core.get_player_by_name(self.driver)
         if player then
             ctrl = player:get_player_control()
         end
@@ -446,14 +441,14 @@ local function rail_on_step(self, dtime)
     end
 
     local stop_wiggle = false
-    if self.old_pos and same_dir then
+    if self.old_pos and not dir_changed then
 
         -- Detection for "skipping" nodes (perhaps use average dtime?)
         -- It's sophisticated enough to take the acceleration into account
         local acc = self.object:get_acceleration()
         local distance = dtime * (v3_len(vel) + 0.5 * dtime * v3_len(acc))
 
-        local new_pos, new_dir = carts:pathfinder(
+        local new_pos, new_dir = pathfinder(
             pos, self.old_pos, self.old_dir, distance, ctrl,
             self.old_switch, self.railtype
         )
@@ -463,7 +458,7 @@ local function rail_on_step(self, dtime)
             -- No rail found: set to the expected position
             pos = new_pos
             update.pos = true
-            cart_dir = new_dir
+            dir = new_dir
 
         end
 
@@ -477,24 +472,36 @@ local function rail_on_step(self, dtime)
     local railparams
 
     -- dir:         New moving direction of the cart
-    -- switch_keys: Currently pressed L/R key, used to ignore the key on the next rail node
-    local dir, switch_keys = carts:get_rail_direction(
-        pos, cart_dir, ctrl, self.old_switch, self.railtype
+    -- switch_keys: Currently pressed L(1) or R(2) key, used to ignore the key on the next rail node
+    local switch_keys
+    dir, switch_keys = get_rail_direction(
+        pos, dir, ctrl, self.old_switch, self.railtype
     )
     local dir_changed = not vector.equals(dir, self.old_dir)
 
-    local new_acc = {x = 0, y = 0, z = 0}
+    local acc = 0
     if stop_wiggle or vector.equals(dir, {x = 0, y = 0, z = 0}) then
 
+        dir = vector.new(self.old_dir)
         vel = {x = 0, y = 0, z = 0}
         local pos_r = vector.round(pos)
-        if not carts:is_rail(pos_r, self.railtype) and self.old_pos then
+        if not is_rail(pos_r, self.railtype) and self.old_pos then
+
             pos = self.old_pos
+
         elseif not stop_wiggle then
+
+            -- End of rail; smooth out
             pos = pos_r
+            dir_changed = false
+            dir.y = 0
+
         else
+
             pos.y = math.floor(pos.y + 0.5)
+
         end
+
         update.pos = true
         update.vel = true
 
@@ -530,12 +537,12 @@ local function rail_on_step(self, dtime)
         end
 
         -- Slow down or speed up...
-        local acc = dir.y * -4.0
+        acc = dir.y * -4.0
 
         -- Get rail for corrected position
         railparams = get_railparams(pos)
 
-        -- no need to check for railparams == nil since we always make it exist.
+        -- No need to check for railparams == nil since we always make it exist
         local speed_mod = railparams.acceleration
         if speed_mod and speed_mod ~= 0 then
 
@@ -553,35 +560,31 @@ local function rail_on_step(self, dtime)
 
         end
 
-        new_acc = vector.multiply(dir, acc)
+    end
+
+    -- Limit cart speed
+    local vel_len = vector.length(vel)
+    if vel_len > speed_max then
+
+        vel = vector.multiply(vel, speed_max / vel_len)
+        update.vel = true
 
     end
 
-    -- Limits
-    local max_vel = speed_max
-    for _, v in pairs({"x","y","z"}) do
-
-        if math.abs(vel[v]) > max_vel then
-
-            vel[v] = carts:get_sign(vel[v]) * max_vel
-            new_acc[v] = 0
-            update.vel = true
-
-        end
-
+    if vel_len >= speed_max and acc > 0 then
+        acc = 0
     end
 
-    self.object:set_acceleration(new_acc)
+    self.object:set_acceleration(vector.multiply(dir, acc))
+
     self.old_pos = vector.round(pos)
-    if not vector.equals(dir, {x = 0, y = 0, z = 0}) and not stop_wiggle then
-        self.old_dir = vector.new(dir)
-    end
+    self.old_dir = vector.new(dir)
     self.old_switch = switch_keys
 
     if self.punched then
 
         -- Collect dropped items
-        for _, obj_ in pairs(minetest.get_objects_inside_radius(pos, 1)) do
+        for _, obj_ in pairs(core.get_objects_inside_radius(pos, 1)) do
 
             local ent = obj_:get_luaentity()
             -- Careful here: physical_state and disable_physics are item-internal APIs
@@ -610,13 +613,14 @@ local function rail_on_step(self, dtime)
     end
 
     local yaw = 0
-    if self.old_dir.x < 0 then
+    if dir.x < 0 then
         yaw = 0.5
-    elseif self.old_dir.x > 0 then
+    elseif dir.x > 0 then
         yaw = 1.5
-    elseif self.old_dir.z < 0 then
+    elseif dir.z < 0 then
         yaw = 1
     end
+
     self.object:set_yaw(yaw * math.pi)
 
     local anim = {x = 0, y = 0}
@@ -625,6 +629,7 @@ local function rail_on_step(self, dtime)
     elseif dir.y == 1 then
         anim = {x = 2, y = 2}
     end
+
     self.object:set_animation(anim, 1, 0)
 
     if update.vel then
@@ -677,6 +682,8 @@ local function prepare_cart_entity(full_name, part_name)
 
     function def_table:on_rightclick(clicker)
 
+        -- Was cart_entity:on_rightclick()
+
         if not clicker or not clicker:is_player() then
             return
         end
@@ -684,11 +691,11 @@ local function prepare_cart_entity(full_name, part_name)
         local player_name = clicker:get_player_name()
         if self.driver and player_name == self.driver then
 
-            carts:manage_attachment(clicker, nil)
+            manage_attachment(clicker, nil)
 
         elseif not self.driver then
 
-            carts:manage_attachment(clicker, self.object)
+            manage_attachment(clicker, self.object)
             self.driver = player_name
 
         end
@@ -697,26 +704,28 @@ local function prepare_cart_entity(full_name, part_name)
 
     function def_table:on_activate(staticdata, dtime_s)
 
+        -- Was cart_entity:on_activate()
+
         self.object:set_armor_groups({immortal = 1})
         if string.sub(staticdata, 1, string.len("return")) ~= "return" then
             return
         end
 
-        local data = minetest.deserialize(staticdata)
+        local data = core.deserialize(staticdata)
         if type(data) ~= "table" then
             return
         end
 
         self.railtype = data.railtype
-        if data.old_dir then
-            self.old_dir = data.old_dir
-        end
+        self.old_dir = data.old_dir or self.old_dir
 
     end
 
     function def_table:get_staticdata()
 
-        return minetest.serialize({
+        -- Was cart_entity:get_staticdata()
+
+        return core.serialize({
             railtype = self.railtype,
             old_dir = self.old_dir
         })
@@ -725,12 +734,13 @@ local function prepare_cart_entity(full_name, part_name)
 
     function def_table:on_detach_child(child)
 
+        -- Was cart_entity:on_detach_child()
         -- 0.5.x and later: When the driver leaves
 
         if child and child:get_player_name() == self.driver then
 
             -- Clean up eye height
-            carts:manage_attachment(child, nil)
+            manage_attachment(child, nil)
             self.driver = nil
 
         end
@@ -739,19 +749,21 @@ local function prepare_cart_entity(full_name, part_name)
 
     function def_table:on_punch(puncher, time_from_last_punch, tool_capabilities, direction)
 
+        -- Was cart_entity:on_punch()
+
         local pos = self.object:get_pos()
         local vel = self.object:get_velocity()
         if not self.railtype or vector.equals(vel, {x = 0, y = 0, z = 0}) then
 
-            local node = minetest.get_node(pos).name
-            self.railtype = minetest.get_item_group(node, "connect_to_raillike")
+            local node = core.get_node(pos).name
+            self.railtype = core.get_item_group(node, "connect_to_raillike")
 
         end
 
         -- Punched by non-player
         if not puncher or not puncher:is_player() then
 
-            local cart_dir = carts:get_rail_direction(pos, self.old_dir, nil, nil, self.railtype)
+            local cart_dir = get_rail_direction(pos, self.old_dir, nil, nil, self.railtype)
             if vector.equals(cart_dir, {x = 0, y = 0, z = 0}) then
                 return
             end
@@ -766,7 +778,7 @@ local function prepare_cart_entity(full_name, part_name)
         if puncher:get_player_control().sneak then
 
             if self.sound_handle then
-                minetest.sound_stop(self.sound_handle)
+                core.sound_stop(self.sound_handle)
             end
 
             -- Detach driver and items
@@ -776,8 +788,8 @@ local function prepare_cart_entity(full_name, part_name)
                     self.object:set_pos(self.old_pos)
                 end
 
-                local player = minetest.get_player_by_name(self.driver)
-                carts:manage_attachment(player, nil)
+                local player = core.get_player_by_name(self.driver)
+                manage_attachment(player, nil)
 
             end
 
@@ -791,13 +803,13 @@ local function prepare_cart_entity(full_name, part_name)
 
             -- Pick up cart
             local inv = puncher:get_inventory()
-            if not unilib.is_creative(puncher:get_player_name()) or
+            if not unilib.utils.is_creative(puncher:get_player_name()) or
                     not inv:contains_item("main", full_name) then
 
                 local leftover = inv:add_item("main", full_name)
                 -- If no room in inventory add a replacement cart to the world
                 if not leftover:is_empty() then
-                    minetest.add_item(self.object:get_pos(), leftover)
+                    core.add_item(self.object:get_pos(), leftover)
                 end
 
             end
@@ -815,9 +827,9 @@ local function prepare_cart_entity(full_name, part_name)
 
         end
 
-        local punch_dir = carts:velocity_to_dir(puncher:get_look_dir())
+        local punch_dir = velocity_to_dir(puncher:get_look_dir())
         punch_dir.y = 0
-        local cart_dir = carts:get_rail_direction(pos, punch_dir, nil, nil, self.railtype)
+        local cart_dir = get_rail_direction(pos, punch_dir, nil, nil, self.railtype)
         if vector.equals(cart_dir, {x = 0, y = 0, z = 0}) then
             return
         end
@@ -838,6 +850,8 @@ local function prepare_cart_entity(full_name, part_name)
     end
 
     function def_table:on_step(dtime)
+
+        -- Was cart_entity:on_step()
 
         rail_on_step(self, dtime)
         rail_sound(self, dtime)
@@ -879,9 +893,6 @@ function unilib.pkg.shared_carts.register_cart(data_table)
     local full_name = "unilib:cart_" .. part_name
     local entity_name = "unilib:entity_cart_" .. part_name
 
-    -- Carts require code imported from minetest_game/player_api, if not already loaded
-    unilib.load_player_api()
-
     -- Prepare the entity definition
     local def_table = prepare_cart_entity(full_name, part_name)
     -- Register the entity
@@ -890,8 +901,8 @@ function unilib.pkg.shared_carts.register_cart(data_table)
     -- Register the craftitem
     unilib.register_craftitem(full_name, orig_name, replace_mode, {
         -- From carts:cart
-        description = unilib.hint(description, S("Sneak + Click to pick up")),
-        inventory_image = minetest.inventorycube(
+        description = unilib.utils.hint(description, S("sneak + Click to pick up")),
+        inventory_image = core.inventorycube(
             "unilib_cart_" .. part_name .. "_top.png",
             "unilib_cart_" .. part_name .. "_front.png",
             "unilib_cart_" .. part_name .. "_side.png"
@@ -902,8 +913,8 @@ function unilib.pkg.shared_carts.register_cart(data_table)
         on_place = function(itemstack, placer, pointed_thing)
 
             local under = pointed_thing.under
-            local node = minetest.get_node(under)
-            local udef = minetest.registered_nodes[node.name]
+            local node = core.get_node(under)
+            local udef = core.registered_nodes[node.name]
             if udef and udef.on_rightclick and not (
                 placer and placer:is_player() and
                 placer:get_player_control().sneak
@@ -914,25 +925,26 @@ function unilib.pkg.shared_carts.register_cart(data_table)
 
             end
 
-            if not pointed_thing.type == "node" then
+            if pointed_thing.type ~= "node" then
                 return
             end
 
-            if carts:is_rail(pointed_thing.under) then
-                minetest.add_entity(pointed_thing.under, entity_name)
-            elseif carts:is_rail(pointed_thing.above) then
-                minetest.add_entity(pointed_thing.above, entity_name)
+            if is_rail(pointed_thing.under) then
+                core.add_entity(pointed_thing.under, entity_name)
+            elseif is_rail(pointed_thing.above) then
+                core.add_entity(pointed_thing.above, entity_name)
             else
                 return
             end
 
-            minetest.sound_play(
+            core.sound_play(
                 {name = "unilib_place_node_metal", gain = 0.5},
                 {pos = pointed_thing.above},
                 true
             )
 
-            if not unilib.is_creative(placer:get_player_name()) then
+            local player_name = placer and placer:get_player_name() or ""
+            if not unilib.utils.is_creative(player_name) then
                 itemstack:take_item()
             end
 
@@ -956,7 +968,7 @@ end
 
 function unilib.pkg.shared_carts.register_rail(data_table)
 
-    -- Adapted from carts/cart_entity.lua
+    -- Adapted from carts/cart_entity.lua, was carts:register_rail()
     -- Create a rail node for carts
     --
     -- data_table compulsory fields:
@@ -994,7 +1006,7 @@ function unilib.pkg.shared_carts.register_rail(data_table)
             type = "fixed",
             fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
         },
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
         sunlight_propagates = true,
         walkable = false,
     }

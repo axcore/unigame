@@ -9,7 +9,7 @@
 unilib.pkg.fruit_mirabelle = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr11.add_mode
+local mode = unilib.global.imported_mod_table.glemr11.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,7 +36,7 @@ function unilib.pkg.fruit_mirabelle.exec()
             leafdecay_drop = 1,
         },
         -- N.B. No sounds in original code
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         -- N.B. inventory_image not in original code
@@ -51,9 +51,19 @@ function unilib.pkg.fruit_mirabelle.exec()
         visual_scale = 1,
         walkable = false,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_mirabelle", 3),
+        -- N.B. No .after_place_node in original code
+        after_place_node = function(pos, placer)
+
+            if placer:is_player() then
+                core.set_node(pos, {name = "unilib:fruit_mirabelle", param2 = 1})
+            end
+
+        end,
+
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_mirabelle", 3),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -65,11 +75,20 @@ function unilib.pkg.fruit_mirabelle.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_mirabelle",
+        juice_description = S("Mirabelle Fruit"),
+        juice_type = "mirabelle",
+        rgb = "#b40f39",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_mirabelle.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_mirabelle",
 
         replace_mode = mode,

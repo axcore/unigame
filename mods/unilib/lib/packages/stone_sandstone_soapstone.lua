@@ -9,7 +9,7 @@
 unilib.pkg.stone_sandstone_soapstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ugbc.add_mode
+local mode = unilib.global.imported_mod_table.ugbc.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,7 @@ function unilib.pkg.stone_sandstone_soapstone.exec()
         description = S("Soapstone Sandstone"),
 
         category = "sedimentary",
+        colour = "#C1BDAB",
         grinder_flag = true,
         grinder_powder = "unilib:sand_soapstone",
         grinder_gravel = "unilib:gravel_soapstone",
@@ -75,7 +76,7 @@ function unilib.pkg.stone_sandstone_soapstone.exec()
         img_list = {top_img, bottom_img, "unilib_stone_sandstone_soapstone_brick.png"},
     })
 
-    if unilib.sandstone_cobble_rubble_flag then
+    if unilib.setting.sandstone_cobble_rubble_flag then
 
         unilib.register_stone_cobble({
             -- Textures from UGBC, soapstone_sandstone_*.png. Original code. Creates
@@ -86,6 +87,24 @@ function unilib.pkg.stone_sandstone_soapstone.exec()
             replace_mode = mode,
             description = S("Soapstone Sandstone Cobble"),
             img_list = {top_img, bottom_img, "unilib_stone_sandstone_soapstone_cobble.png"},
+        })
+
+        unilib.register_stone_cobble_compressed({
+            -- Original to unilib. Creates unilib:stone_sandstone_soapstone_cobble_compressed
+            part_name = "sandstone_soapstone",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Compressed Soapstone Sandstone Cobble"),
+        })
+
+        unilib.register_stone_cobble_condensed({
+            -- Original to unilib. Creates unilib:stone_sandstone_soapstone_cobble_condensed
+            part_name = "sandstone_soapstone",
+            orig_name = nil,
+
+            replace_mode = mode,
+            description = S("Condensed Soapstone Sandstone Cobble"),
         })
 
     end

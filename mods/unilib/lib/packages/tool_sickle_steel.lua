@@ -9,7 +9,7 @@
 unilib.pkg.tool_sickle_steel = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.sickles.add_mode
+local mode = unilib.global.imported_mod_table.sickles.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.tool_sickle_steel.exec()
         -- From sickles:sickle_steel
         description = S("Steel Sickle"),
         inventory_image = "unilib_tool_sickle_steel.png",
-        groups = {sickle = 1, sickle_uses = 120},
+        groups = {sickle = 1, sickle_uses = 300},
         sound = {breaks = "unilib_tool_breaks"},
 
         range = 6,
@@ -39,9 +39,9 @@ function unilib.pkg.tool_sickle_steel.exec()
             full_punch_interval = 0.8,
             max_drop_level = 1,
             groupcaps = {
-                snappy = {times = {[1] = 2.5, [2] = 1.20, [3] = 0.35}, uses = 60, maxlevel = 2},
+                snappy = {times = {[1] = 2.5, [2] = 1.20, [3] = 0.35}, uses = 150, maxlevel = 2},
             },
-            punch_attack_uses = 120,
+            punch_attack_uses = 150,
         },
     })
     unilib.register_craft_sickle({
@@ -49,5 +49,6 @@ function unilib.pkg.tool_sickle_steel.exec()
         part_name = "steel",
         ingredient = "unilib:metal_steel_ingot",
     })
+    unilib.tools.apply_toolranks("unilib:tool_sickle_steel", "sickle")
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.stone_goldstone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,6 +32,7 @@ function unilib.pkg.stone_goldstone.exec()
         description = S("Goldstone"),
 
         category = "other",
+        colour = "#F8D711",
         fictional_flag = true,
         grinder_flag = false,
         hardness = 1,
@@ -43,7 +44,7 @@ function unilib.pkg.stone_goldstone.exec()
         description = S("Goldstone"),
         tiles = {"unilib_stone_goldstone.png"},
         groups = {cracky = 3, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -54,7 +55,7 @@ function unilib.pkg.stone_goldstone.exec()
             {"group:stone", "group:stone", "group:stone"},
             {"group:stone", "unilib:metal_gold_ingot", "group:stone"},
             {"group:stone", "group:stone", "group:stone"},
-        }
+        },
     })
     --[[
     unilib.register_stairs("unilib:stone_goldstone", {

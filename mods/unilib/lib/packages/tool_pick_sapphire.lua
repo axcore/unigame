@@ -9,7 +9,7 @@
 unilib.pkg.tool_pick_sapphire = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.gemtools.add_mode
+local mode = unilib.global.imported_mod_table.gemtools.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,13 +42,13 @@ function unilib.pkg.tool_pick_sapphire.exec()
             max_drop_level = 3,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_pick({
         -- From gemtools:pick_sapphire
         part_name = "sapphire",
         ingredient = "unilib:mineral_sapphire_gem",
     })
-    unilib.apply_toolranks("unilib:tool_pick_sapphire", "pickaxe")
+    unilib.tools.apply_toolranks("unilib:tool_pick_sapphire", "pickaxe")
 
 end

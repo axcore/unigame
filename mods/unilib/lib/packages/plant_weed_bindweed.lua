@@ -9,7 +9,7 @@
 unilib.pkg.plant_weed_bindweed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,14 +27,14 @@ function unilib.pkg.plant_weed_bindweed.exec()
 
     unilib.register_node("unilib:plant_weed_bindweed", "mapgen:creeper", mode, {
         -- From farlands, mapgen:creeper
-        description = unilib.annotate(S("Bindweed"), "Convolvulus"),
+        description = unilib.utils.annotate(S("Bindweed"), "Convolvulus"),
         tiles = {
             "unilib_plant_weed_bindweed.png",
             "blank.png",
             "unilib_plant_weed_bindweed.png",
         },
         groups = {attached_node = 1, flammable = 1, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "firelike",
@@ -49,7 +49,7 @@ function unilib.pkg.plant_weed_bindweed.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farlands_plant_weed_bindweed", {
+    unilib.register_decoration_generic("farlands_plant_weed_bindweed", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "simple",
         decoration = "unilib:plant_weed_bindweed",

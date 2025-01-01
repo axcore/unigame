@@ -9,7 +9,7 @@
 unilib.pkg.material_oil_extract = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.basic_materials.add_mode
+local mode = unilib.global.imported_mod_table.basic_materials.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ function unilib.pkg.material_oil_extract.exec()
     unilib.register_craftitem(
         -- From basic_materials:oil_extract
         "unilib:material_oil_extract",
-        "basic_materials:oil_extract",
+        {"basic_materials:oil_extract", "homedecor:oil_extract"},
         mode,
         {
             description = S("Oil Extract"),
@@ -46,7 +46,7 @@ function unilib.pkg.material_oil_extract.exec()
             "group:leaves",
             "group:leaves",
             "group:leaves"
-        }
+        },
     })
     unilib.register_craft({
         -- From basic_materials:oil_extract

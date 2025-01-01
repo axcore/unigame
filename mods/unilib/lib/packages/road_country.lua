@@ -9,37 +9,32 @@
 unilib.pkg.road_country = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cottages.add_mode
+local mode = unilib.global.imported_mod_table.cottages.add_mode
 
 -- Supported road modes:
 --      "simple": only a straight dirt road; no curves, junctions etc
 --      "flat": each node is a full node; junction, t-junction and corner are included
 --      "nodebox": like flat - except that each node has a nodebox that fits to that road node
 --      "mesh": like nodebox - except that it uses a nice roundish model
-local road_mode = unilib.cottages_road_mode
+local road_mode = unilib.setting.cottages_road_mode
 if road_mode ~= "simple" and
         road_mode ~= "flat" and
         road_mode ~= "nodebox" and
         road_mode ~= "mesh" then
     road_mode = "mesh"
 end
-local dirt_img = "unilib_dirt_ordinary.png" -- Replaces "default_dirt.png"
-local dirt_grass_img = "unilib_dirt_ordinary.png^unilib_turf_ordinary_side_overlay.png"
-                                            -- Replaces "default_dirt.png^default_grass_side.png"
-local grass_img = "unilib_turf_ordinary_top.png"
-                                            -- Replaces "default_grass.png"
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function register_recipes(include_end_flag)
+local function register_recipes(full_name, include_end_flag)
 
-    local c_straight = "unilib:road_country_straight"
+    local c_straight = full_name .. "_with_road_country_straight"
 
     unilib.register_craft({
         -- From cottages:feldweg_crossing
-        output = "unilib:road_country_crossing 5",
+        output = full_name .. "_with_road_country_crossing 5",
         recipe = {
             {"", c_straight, ""},
             {c_straight, c_straight, c_straight},
@@ -49,7 +44,7 @@ local function register_recipes(include_end_flag)
 
     unilib.register_craft({
         -- From cottages:feldweg_t_junction
-        output = "unilib:road_country_junction 5",
+        output = full_name .. "_with_road_country_junction 5",
         recipe = {
             {"", c_straight, ""},
             {"", c_straight, ""},
@@ -60,7 +55,7 @@ local function register_recipes(include_end_flag)
 
     unilib.register_craft({
         -- From cottages:feldweg_curve
-        output = "unilib:road_country_curve 5",
+        output = full_name .. "_with_road_country_curve 5",
         recipe = {
             {c_straight, "", ""},
             {c_straight, "", ""},
@@ -72,7 +67,7 @@ local function register_recipes(include_end_flag)
 
         unilib.register_craft({
             -- From cottages:feldweg_end
-            output = "unilib:road_country_end 5",
+            output = full_name .. "_with_road_country_end 5",
             recipe = {
                 {c_straight, "", c_straight },
                 {c_straight, c_straight, c_straight}
@@ -83,103 +78,139 @@ local function register_recipes(include_end_flag)
 
 end
 
----------------------------------------------------------------------------------------------------
--- New code
----------------------------------------------------------------------------------------------------
+local function do_road(dirt_part_name, full_name)
 
-function unilib.pkg.road_country.init()
+    local c_straight = full_name .. "_with_road_country_straight"
 
-    return {
-        description = "Country roads",
-    }
+    -- e.g. "dirt_ordinary"
+    local dirt_full_name = unilib.global.fertile_dirt_table[dirt_part_name]
+    if dirt_full_name == nil then
+        return
+    end
 
-end
+    local dirt_def_table = core.registered_nodes[dirt_full_name]
+    if dirt_def_table == nil then
+        return
+    end
 
-function unilib.pkg.road_country.exec()
+    -- Replaces "default_dirt.png"
+    local dirt_img = dirt_def_table["tiles"][1]
 
-    local c_straight = "unilib:road_country_straight"
+    -- e.g. "unilib:dirt_ordinary_with_turf"
+    local turf_def_table = core.registered_nodes[full_name]
+    if turf_def_table == nil then
+        return
+    end
+
+    -- Replaces "default_grass.png"
+    local grass_img = turf_def_table["tiles"][1]
+    -- Replaces "default_dirt.png^default_grass_side.png"
+    local dirt_grass_img = turf_def_table["tiles"][3]
+
+    local straight_orig_name, crossing_orig_name, junction_orig_name, curve_orig_name,
+            end_orig_name, slope_orig_name, long_slope_orig_name
+    if full_name == "unilib:dirt_ordinary_with_turf" then
+
+        straight_orig_name = "cottages:feldweg"
+        crossing_orig_name = "cottages:feldweg_crossing"
+        junction_orig_name = "cottages:feldweg_t_junction"
+        curve_orig_name = "cottages:feldweg_curve"
+        end_orig_name = "cottages:feldweg_end"
+        slope_orig_name = "cottages:feldweg_slope"
+        long_slope_orig_name = "cottages:feldweg_slope_long"
+
+    end
 
     if road_mode == "simple" or road_mode == "flat" then
 
-        unilib.register_node("unilib:road_country_straight", "cottages:feldweg", mode, {
+        unilib.register_node(full_name .. "_with_road_country_straight", straight_orig_name, mode, {
             -- From cottages:feldweg
-            description = S("Straight Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Straight Country Road")),
             tiles = {
-                "unilib_road_country_straight.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_straight_overlay.png"),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = false,
             paramtype2 = "facedir",
         })
-        unilib.register_stairs("unilib:road_country_straight")
+        unilib.register_stairs(full_name .. "_with_road_country_straight")
 
     end
 
     if road_mode == "flat" then
 
-        unilib.register_node("unilib:road_country_crossing", "cottages:feldweg_crossing", mode, {
+        unilib.register_node(full_name .. "_with_road_country_crossing", crossing_orig_name, mode, {
             -- From cottages:feldweg_crossing
-            description = S("Country Road Crossing"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Crossing")),
             tiles = {
-                "unilib_road_country_crossing.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_crossing_overlay.png"),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = false,
             paramtype2 = "facedir",
         })
 
-        unilib.register_node("unilib:road_country_junction", "cottages:feldweg_t_junction", mode, {
+        unilib.register_node(full_name .. "_with_road_country_junction", junction_orig_name, mode, {
             -- From cottages:feldweg_t_junction
-            description = S("Country Road Junction"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Junction")),
             tiles = {
-                "unilib_road_country_junction.png^[transform2",
+                unilib.utils.concat_img(
+                    grass_img, "unilib_road_country_junction_overlay.png^[transform2"
+                ),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = false,
             paramtype2 = "facedir",
         })
 
-        unilib.register_node("unilib:road_country_curve", "cottages:feldweg_curve", mode, {
+        unilib.register_node(full_name .. "_with_road_country_curve", curve_orig_name, mode, {
             -- From cottages:feldweg_curve
-            description = S("Curved Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Curved Country Road")),
             tiles = {
-                "unilib_road_country_curve.png^[transform2",
+                unilib.utils.concat_img(
+                    grass_img, "unilib_road_country_curve_overlay.png^[transform2"
+                ),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = false,
             paramtype2 = "facedir",
         })
 
-        register_recipes(false)
+        register_recipes(full_name, false)
 
     elseif road_mode == "nodebox" then
 
-        unilib.register_node("unilib:road_country_straight", "cottages:feldweg", mode, {
+        unilib.register_node(full_name .. "_with_road_country_straight", straight_orig_name, mode, {
             -- From cottages:feldweg
-            description = S("Straight Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Straight Country Road")),
             tiles = {
-                "unilib_road_country_straight.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_straight_overlay.png"),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -202,18 +233,19 @@ function unilib.pkg.road_country.exec()
                 },
             },
         })
-        unilib.register_stairs("unilib:road_country_straight")
+        unilib.register_stairs(full_name .. "_with_road_country_straight")
 
-        unilib.register_node("unilib:road_country_crossing", "cottages:feldweg_crossing", mode, {
+        unilib.register_node(full_name .. "_with_road_country_crossing", crossing_orig_name, mode, {
             -- From cottages:feldweg_crossing
-            description = S("Country Road Crossing"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Crossing")),
             tiles = {
-                "unilib_road_country_crossing.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_crossing_overlay.png"),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -245,16 +277,19 @@ function unilib.pkg.road_country.exec()
             },
         })
 
-        unilib.register_node("unilib:road_country_junction", "cottages:feldweg_t_junction", mode, {
+        unilib.register_node(full_name .. "_with_road_country_junction", junction_orig_name, mode, {
             -- From cottages:feldweg_t_junction
-            description = S("Country Road Junction"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Junction")),
             tiles = {
-                "unilib_road_country_junction.png^[transform2",
+                unilib.utils.concat_img(
+                    grass_img, "unilib_road_country_junction_overlay.png^[transform2"
+                ),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -282,16 +317,19 @@ function unilib.pkg.road_country.exec()
             },
         })
 
-        unilib.register_node("unilib:road_country_curve", "cottages:feldweg_curve", mode, {
+        unilib.register_node(full_name .. "_with_road_country_curve", curve_orig_name, mode, {
             -- From cottages:feldweg_curve
-            description = S("Curved Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Curved Country Road")),
             tiles = {
-                "unilib_road_country_curve.png^[transform2",
+                unilib.utils.concat_img(
+                    grass_img, "unilib_road_country_curve_overlay.png^[transform2"
+                ),
                 dirt_img,
                 dirt_grass_img,
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "nodebox",
             is_ground_content = false,
@@ -318,23 +356,25 @@ function unilib.pkg.road_country.exec()
             },
         })
 
-        register_recipes(false)
+        register_recipes(full_name, false)
 
     elseif road_mode == "mesh" then
 
-        unilib.register_node("unilib:road_country_straight", "cottages:feldweg", mode, {
+        unilib.register_node(full_name .. "_with_road_country_straight", straight_orig_name, mode, {
             -- From cottages:feldweg
-            description = S("Straight Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Straight Country Road")),
             tiles = {
-                "unilib_road_country_end.png",
+                unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                 dirt_grass_img,
                 dirt_img,
                 grass_img,
                 "unilib_road_country_surface.png",
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--              "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "mesh",
             is_ground_content = false,
@@ -342,20 +382,22 @@ function unilib.pkg.road_country.exec()
             paramtype = "light",
             paramtype2 = "facedir",
         })
-        unilib.register_stairs("unilib:road_country_straight")
+        unilib.register_stairs(full_name .. "_with_road_country_straight")
 
-        unilib.register_node("unilib:road_country_crossing", "cottages:feldweg_crossing", mode, {
+        unilib.register_node(full_name .. "_with_road_country_crossing", crossing_orig_name, mode, {
             -- From cottages:feldweg_crossing
-            description = S("Country Road Crossing"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Crossing")),
             tiles = {
-                "unilib_road_country_end.png",
+                unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                 dirt_img,
                 grass_img,
                 "unilib_road_country_surface.png",
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--              "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "mesh",
             is_ground_content = false,
@@ -364,19 +406,21 @@ function unilib.pkg.road_country.exec()
             paramtype2 = "facedir",
         })
 
-        unilib.register_node("unilib:road_country_junction", "cottages:feldweg_t_junction", mode, {
+        unilib.register_node(full_name .. "_with_road_country_junction", junction_orig_name, mode, {
             -- From cottages:feldweg_t_junction
-            description = S("Country Road Junction"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Junction")),
             tiles = {
-                "unilib_road_country_end.png",
+                unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                 dirt_grass_img,
                 dirt_img,
                 grass_img,
                 "unilib_road_country_surface.png",
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--              "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "mesh",
             is_ground_content = false,
@@ -385,19 +429,21 @@ function unilib.pkg.road_country.exec()
             paramtype2 = "facedir",
         })
 
-        unilib.register_node("unilib:road_country_curve", "cottages:feldweg_curve", mode, {
+        unilib.register_node(full_name .. "_with_road_country_curve", curve_orig_name, mode, {
             -- From cottages:feldweg_curve
-            description = S("Curved Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Curved Country Road")),
             tiles = {
                 dirt_grass_img,
                 grass_img,
                 dirt_grass_img,
                 "unilib_road_country_surface.png",
                 dirt_img,
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--              "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "mesh",
             is_ground_content = false,
@@ -406,19 +452,21 @@ function unilib.pkg.road_country.exec()
             paramtype2 = "facedir",
         })
 
-        unilib.register_node("unilib:road_country_end", "cottages:feldweg_end", mode, {
+        unilib.register_node(full_name .. "_with_road_country_end", end_orig_name, mode, {
             -- From cottages:feldweg_end
-            description = S("End of Country Road"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("End of Country Road")),
             tiles = {
-                "unilib_road_country_end.png",
+                unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                 dirt_grass_img,
                 dirt_img,
                 grass_img,
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
                 "unilib_road_country_surface.png",
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             drawtype = "mesh",
             is_ground_content = false,
@@ -427,7 +475,7 @@ function unilib.pkg.road_country.exec()
             paramtype2 = "facedir",
         })
 
-        register_recipes(true)
+        register_recipes(full_name, true)
 
     end
 
@@ -440,7 +488,7 @@ function unilib.pkg.road_country.exec()
                 {-0.5, -0.25, -0.25, 0.5, 0, 0.5},
                 {-0.5, 0, 0, 0.5, 0.25, 0.5},
                 {-0.5, 0.25, 0.25, 0.5, 0.5, 0.5},
-            }
+            },
         }
 
         local long_slope_table = {
@@ -451,22 +499,24 @@ function unilib.pkg.road_country.exec()
                 {-0.5, -0.25, -1.0, 0.5, 0, 0.5},
                 {-0.5, 0, -0.5, 0.5, 0.25, 0.5},
                 {-0.5, 0.25, 0, 0.5, 0.5, 0.5},
-            }
+            },
         }
 
-        unilib.register_node("unilib:road_country_slope", "cottages:feldweg_slope", mode, {
+        unilib.register_node(full_name .. "_with_road_country_slope", slope_orig_name, mode, {
             -- From cottages:feldweg_slope
-            description = S("Country Road Slope"),
+            description =
+                    unilib.utils.brackets(turf_def_table.description, S("Country Road Slope")),
             tiles = {
-                "unilib_road_country_end.png",
+                unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                 dirt_grass_img,
                 dirt_img,
                 grass_img,
                 "unilib_road_country_surface.png",
-                "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--              "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
             },
             groups = {crumbly = 3},
-            sounds = unilib.sound_table.dirt,
+            sounds = unilib.global.sound_table.dirt,
 
             collision_box = slope_table,
             drawtype = "mesh",
@@ -478,30 +528,33 @@ function unilib.pkg.road_country.exec()
         })
         unilib.register_craft({
             -- From cottages:feldweg_slope
-            output = "unilib:road_country_slope 3",
+            output = full_name .. "_with_road_country_slope 3",
             recipe = {
                 {c_straight, "", "" },
-                {c_straight, c_straight, ""}
+                {c_straight, c_straight, ""},
             },
         })
 
         unilib.register_node(
             -- From cottages:feldweg_slope_long
-            "unilib:road_country_slope_long",
-            "cottages:feldweg_slope_long",
+            full_name .. "_with_road_country_slope_long",
+            long_slope_orig_name,
             mode,
             {
-                description = S("Country Road Long Slope"),
+                description = unilib.utils.brackets(
+                    turf_def_table.description, S("Country Road Long Slope")
+                ),
                 tiles = {
-                    "unilib_road_country_end.png",
+                    unilib.utils.concat_img(dirt_grass_img, "unilib_road_country_end_overlay.png"),
                     dirt_grass_img,
                     dirt_img,
                     grass_img,
                     "unilib_road_country_surface.png",
-                    "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+--                  "unilib_road_country_surface.png^unilib_road_country_edges_overlay.png",
+                    unilib.utils.concat_img(grass_img, "unilib_road_country_edges_overlay.png"),
                 },
                 groups = {crumbly = 3},
-                sounds = unilib.sound_table.dirt,
+                sounds = unilib.global.sound_table.dirt,
 
                 collision_box = long_slope_table,
                 drawtype = "mesh",
@@ -514,12 +567,57 @@ function unilib.pkg.road_country.exec()
         )
         unilib.register_craft({
             -- From cottages:feldweg_slope_long
-            output = "unilib:road_country_slope_long 4",
+            output = full_name .. "_with_road_country_slope_long 4",
             recipe = {
                 {c_straight, "", "" },
                 {c_straight, c_straight, c_straight}
             },
         })
+
+    end
+
+    -- Basic crafting recipe. Run a wagon wheel over dirt, and retain the wheel afterwards
+    unilib.register_craft({
+        -- From cottages:wagon_wheel
+        output = c_straight .. " 4",
+        recipe = {
+            {"", "unilib:misc_wheel_wagon", ""},
+            {full_name, full_name, full_name}
+        },
+        replacements = {
+            {"unilib:misc_wheel_wagon", "unilib:misc_wheel_wagon"},
+        },
+    })
+
+end
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.road_country.init()
+
+    return {
+        description = "Country roads",
+        notes = "Cuts country roads into dirt-with-turf nodes, using all available super dirts." ..
+                " The number of roads available, as well as their appearance, depends on a" ..
+                " Minetest setting",
+        depends = "misc_wheel_wagon",
+    }
+
+end
+
+function unilib.pkg.road_country.post()
+
+    for dirt_part_name, _ in pairs(unilib.global.super_dirt_table) do
+
+        if unilib.global.dirt_with_turf_reverse_table[dirt_part_name] ~= nil then
+
+            for _, full_name in pairs(unilib.global.dirt_with_turf_reverse_table[dirt_part_name]) do
+                do_road(dirt_part_name, full_name)
+            end
+
+        end
 
     end
 

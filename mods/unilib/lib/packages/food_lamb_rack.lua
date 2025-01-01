@@ -9,7 +9,7 @@
 unilib.pkg.food_lamb_rack = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.food_lamb_rack.exec()
         description = S("Raw Rack of Lamb"),
         inventory_image = "unilib_food_lamb_rack_raw.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_lamb_rack_raw", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_lamb_rack_raw", 5),
     })
     unilib.register_craft({
         -- From bbq:rack_lamb_raw
@@ -52,7 +52,7 @@ function unilib.pkg.food_lamb_rack.exec()
         description = S("Rack of Lamb"),
         inventory_image = "unilib_food_lamb_rack.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_lamb_rack", 10),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_lamb_rack", 10),
     })
     unilib.register_craft({
         -- From bbq:rack_lamb

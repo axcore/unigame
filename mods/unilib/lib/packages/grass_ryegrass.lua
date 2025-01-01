@@ -9,7 +9,7 @@
 unilib.pkg.grass_ryegrass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.beautiflowers.add_mode
+local mode = unilib.global.imported_mod_table.beautiflowers.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,20 +35,26 @@ function unilib.pkg.grass_ryegrass.exec()
             select_box = {-0.375, -0.5, -0.375, 0.375, 0.375, 0.375}
         end
 
+        local drop = full_name
+        if unilib.setting.disable_grass_drop_flag then
+            drop = ""
+        end
+
         unilib.register_node(full_name, "beautiflowers:pasto_" .. tostring(i), mode, {
             -- From beautiflowers:pasto_1, etc
             description = S("Ryegrass"),
             tiles = {img},
-            -- N.B. In original code, beautiflowers = 1 replaces the color-XXX group
+            -- N.B. In original code, beautiflowers = 1 replaces the colour-XXX group
             -- N.B. grass = 1, ryegrass = 1 not in original code
             groups = {
-                attached_node = 1, color_dark_green = 1, flammable = 1, flora = 1, flower = 1,
-                grass = 1, ryegrass = 1, snappy = 3,
+                attached_node = 1, color_green_dark = 1, colour_green_dark = 1, flammable = 1,
+                flora = 1, flower = 1, grass = 1, ryegrass = 1, snappy = 3,
             },
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             buildable_to = true,
             drawtype = "plantlike",
+            drop = drop,
             inventory_image = img,
             paramtype = "light",
             selection_box = {
@@ -61,7 +67,7 @@ function unilib.pkg.grass_ryegrass.exec()
             waving = 1,
             wield_image = img,
         })
-        if unilib.pkg_executed_table["dye_basic"] ~= nil then
+        if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
             unilib.register_craft({
                 -- From beautiflowers:pasto_1, etc
@@ -74,7 +80,7 @@ function unilib.pkg.grass_ryegrass.exec()
         end
         unilib.register_plant_in_pot(full_name, "beautiflowers:pasto_" .. tostring(i))
 
-        unilib.register_decoration("beautiflowers_grass_ryegrass_" .. tostring(i), {
+        unilib.register_decoration_generic("beautiflowers_grass_ryegrass_" .. tostring(i), {
             -- From beautiflowers:pasto_1, etc
             deco_type = "simple",
             decoration = full_name,

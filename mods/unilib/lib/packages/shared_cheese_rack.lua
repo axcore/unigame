@@ -9,7 +9,7 @@
 unilib.pkg.shared_cheese_rack = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -25,7 +25,7 @@ local function get_cheese(cheese_list)
     local adj_list = {}
     for _, part_name in pairs(cheese_list) do
 
-        if minetest.registered_craftitems["unilib:food_cheese_" .. part_name] ~= nil then
+        if core.registered_craftitems["unilib:food_cheese_" .. part_name] ~= nil then
             table.insert(adj_list, part_name)
         end
 
@@ -88,14 +88,14 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
         empty_group_table = {cheese_rack = 1, cracky = 2}
         active_group_table = {cheese_rack = 1, cracky = 2, not_in_creative_inventory = 1}
         full_group_table = {cheese_rack = 1, cracky = 2, not_in_creative_inventory = 1}
-        sound_table = unilib.sound_table.stone
+        sound_table = unilib.global.sound_table.stone
 
     else
 
         empty_group_table = {cheese_rack = 1, choppy = 2}
         active_group_table = {cheese_rack = 1, choppy = 2, not_in_creative_inventory = 1}
         full_group_table = {cheese_rack = 1, choppy = 2, not_in_creative_inventory = 1}
-        sound_table = unilib.sound_table.wood
+        sound_table = unilib.global.sound_table.wood
 
     end
 
@@ -105,7 +105,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
         "cheese:" .. orig_part_name .. "_empty",
         replace_mode,
         {
-            description = unilib.brackets(description, S("Empty")),
+            description = unilib.utils.brackets(description, S("Empty")),
             tiles = {img},
             groups = empty_group_table,
             sounds = sound_table,
@@ -114,9 +114,11 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 type = "fixed",
                 fixed = {
                     {-0.5, -0.5, -0.4375, 0.5, 0.5, 0.5},
-                }
+                },
             },
             drawtype = "nodebox",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -134,7 +136,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 type = "fixed",
                 fixed = {
                     {-0.5, -0.5, -0.4375, 0.5, 0.5, 0.5},
-                }
+                },
             },
 
             on_rightclick = function(pos, node, player, itemstack, pointed_thing)
@@ -143,16 +145,16 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 if player:is_player() and itemstack:get_name() == "unilib:ingredient_curd" then
 
                     itemstack:take_item()
-                    minetest.sound_play(
+                    core.sound_play(
                         "unilib_cheese_rack_insert",
                         {pos = pos, max_hear_distance = 8, gain = 0.5}
                     )
 
-                    minetest.set_node(
+                    core.set_node(
                         pos, {name = "unilib:" .. item_name .. "_active", param2 = node.param2}
                     )
 
-                    local meta = minetest.get_meta(pos)
+                    local meta = core.get_meta(pos)
                     meta:set_string("ageing", itemstack:get_name())
 
                 end
@@ -162,7 +164,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
             end,
         }
     )
-    if minetest.registered_nodes[ingredient .. "_stair_slab"] ~= nil then
+    if core.registered_nodes[ingredient .. "_stair_slab"] ~= nil then
 
         unilib.register_craft({
             output = "unilib:" .. item_name .. "_empty",
@@ -170,7 +172,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 {ingredient, ingredient .. "_stair_slab", ingredient},
                 {ingredient, ingredient .. "_stair_slab", ingredient},
                 {ingredient, ingredient .. "_stair_slab", ingredient},
-            }
+            },
         })
 
     else
@@ -183,7 +185,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 {ingredient, "", ingredient},
                 {ingredient, ingredient .. "_stair_slab", ingredient},
                 {ingredient, "", ingredient},
-            }
+            },
         })
 
     end
@@ -194,7 +196,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
         "cheese:" .. orig_part_name .. "_with_aging_cheese",
         replace_mode,
         {
-            description = unilib.brackets(description, S("with Ageing Cheese")),
+            description = unilib.utils.brackets(description, S("with Ageing Cheese")),
             tiles = {
                 img, img, img, img, img, img .. "^unilib_container_cheese_rack_active_overlay.png",
             },
@@ -209,6 +211,8 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
             },
             drawtype = "nodebox",
             drop = "unilib:" .. item_name .. "_empty",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -227,29 +231,29 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 type = "fixed",
                 fixed = {
                     {-0.5, -0.5, -0.4375, 0.5, 0.5, 0.5},
-                }
+                },
             },
 
             on_construct = function(pos)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 if meta:get_string("ageing") == nil or meta:get_string("ageing") == "" then
                     meta:set_string("ageing", "unilib:ingredient_curd")
                 end
 
-                local timer = minetest.get_node_timer(pos)
+                local timer = core.get_node_timer(pos)
                 timer:start(age_time + math.random(-3.0 , 3.0))
 
             end,
 
             on_timer = function(pos)
 
-                if minetest.get_node_light(pos) <= 11 and math.random(1, 10) <= 1 then
+                if core.get_node_light(pos) <= 11 and math.random(1, 10) <= 1 then
 
-                    local node = minetest.get_node(pos)
+                    local node = core.get_node(pos)
                     if node.name ~= "ignore" then
 
-                        minetest.set_node(
+                        core.set_node(
                             pos, {name = "unilib:" .. item_name .. "_full", param2 = node.param2}
                         )
 
@@ -271,7 +275,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
         "cheese:" .. orig_part_name .. "_with_cheese",
         replace_mode,
         {
-            description = unilib.brackets(description, S("with Aged Cheese")),
+            description = unilib.utils.brackets(description, S("with Aged Cheese")),
             tiles = {
                 img, img, img, img, img, img .. "^unilib_container_cheese_rack_full_overlay.png",
             },
@@ -286,6 +290,8 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
             },
             drawtype = "nodebox",
             drop = "unilib:" .. item_name .. "_empty",
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             node_box = {
                 type = "fixed",
                 fixed = {
@@ -315,7 +321,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
                 -- (If no cheese packages loaded, "cheese_name" will be nil)
                 if cheese_name ~= nil and player:is_player() then
 
-                    minetest.sound_play(
+                    core.sound_play(
                         "unilib_cheese_rack_extract",
                         {pos = pos, max_hear_distance = 8, gain = 0.5}
                     )
@@ -325,17 +331,17 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
 
                         leftover = inv:add_item("main", cheese_name)
                         if not leftover:is_empty() then
-                            minetest.add_item(player:get_pos(), leftover)
+                            core.add_item(player:get_pos(), leftover)
                         end
 
                     else
 
-                        minetest.add_item(player:get_pos(), cheese_name)
+                        core.add_item(player:get_pos(), cheese_name)
 
                     end
 
-                    local node = minetest.get_node(pos)
-                    minetest.set_node(
+                    local node = core.get_node(pos)
+                    core.set_node(
                         pos, {name = "unilib:" .. item_name .. "_empty", param2 = node.param2}
                     )
 
@@ -346,7 +352,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
     )
 
     -- Update unified_inventory/I3 (if loaded) with custom craft types
-    if minetest.get_modpath("unified_inventory") ~= nil then
+    if core.get_modpath("unified_inventory") ~= nil then
 
         unified_inventory.register_craft_type("cheese_rack_aging", {
             description = S("Cheese Rack Ageing"),
@@ -356,7 +362,7 @@ function unilib.pkg.shared_cheese_rack.register_cheese_rack(data_table)
             uses_crafting_grid = false
         })
 
-    elseif minetest.get_modpath("i3") ~= nil then
+    elseif core.get_modpath("i3") ~= nil then
 
         i3.register_craft_type("cheese_rack_aging", {
             description = S("Cheese Rack Ageing"),
@@ -375,7 +381,7 @@ function unilib.pkg.shared_cheese_rack.register_custom_craft(part_name)
     -- Args:
     --      part_name (str): e.g. "parmesan" for "unilib:food_cheese_parmesan
 
-    if minetest.get_modpath("unified_inventory") ~= nil then
+    if core.get_modpath("unified_inventory") ~= nil then
 
         unified_inventory.register_craft({
             type = "cheese_rack_aging",
@@ -383,7 +389,7 @@ function unilib.pkg.shared_cheese_rack.register_custom_craft(part_name)
             output = "unilib:_food_cheese_" .. part_name,
         })
 
-    elseif minetest.get_modpath("i3") ~= nil then
+    elseif core.get_modpath("i3") ~= nil then
 
         i3.register_craft({
             type = "cheese_rack_aging",

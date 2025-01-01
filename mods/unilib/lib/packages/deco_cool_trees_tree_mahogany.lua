@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_mahogany = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mahogany.add_mode
+local mode = unilib.global.imported_mod_table.mahogany.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_mahogany.post()
 
-    unilib.register_decoration_now("cool_trees_tree_mahogany", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_mahogany", nil, {
         -- From mahogany/init.lua
         -- Completes decoration in package "tree_mahogany"
         biomes = "default_rainforest",

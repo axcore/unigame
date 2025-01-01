@@ -9,7 +9,7 @@
 unilib.pkg.tree_bloodwood_swamp = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_bloodwood_swamp.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 2
     local sci_name = "Corymbia ptychocarpa"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_bloodwood_swamp.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_bloodwood_swamp_closed
+        -- Original to unilib. Creates unilib:gate_bloodwood_swamp_closed, etc
         part_name = "bloodwood_swamp",
         orig_name = {nil, nil},
 
@@ -121,10 +121,10 @@ function unilib.pkg.tree_bloodwood_swamp.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_bloodwood_swamp_in_kimberley_" .. i, {
+        unilib.register_decoration_generic("australia_tree_bloodwood_swamp_in_kimberley_" .. i, {
             -- From australia/biome_kimberley.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_bloodwood_swamp_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_bloodwood_swamp_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 10000,
             flags = "place_center_x, place_center_z",

@@ -9,7 +9,7 @@
 unilib.pkg.tree_bamboo_exotic = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,10 @@ end
 
 function unilib.pkg.tree_bamboo_exotic.exec()
 
-    -- (no burnlevel)
+    -- N.B. throughout this package, original node names are ignored when they use a mod name (e.g.
+    --      default, doors) that's also used by minetest_game
+
+    local burnlevel = 1
     -- (no sci_name)
 
     unilib.register_tree({
@@ -34,6 +37,7 @@ function unilib.pkg.tree_bamboo_exotic.exec()
         description = S("Exotic Bamboo Tree Wood"),
 
         not_super_flag = true,
+        slim_flag = true,
     })
 
     unilib.register_node("unilib:tree_bamboo_exotic_trunk", "mapgen:bamboo", mode, {
@@ -45,7 +49,7 @@ function unilib.pkg.tree_bamboo_exotic.exec()
             "unilib_tree_bamboo_exotic_trunk.png",
         },
         groups = {choppy = 1, flammable = 1, oddly_breakable_by_hand = 1, tree = 1},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         collision_box = {
             type = "fixed",
@@ -89,13 +93,13 @@ function unilib.pkg.tree_bamboo_exotic.exec()
                 "unilib_tree_bamboo_exotic_leaves.png^unilib_tree_bamboo_exotic_trunk.png",
             },
             groups = {choppy = 1, flammable = 1, leaves = 1, oddly_breakable_by_hand = 1, tree = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             collision_box = {
                 type = "fixed",
                 fixed = {
                     {-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875},
-                }
+                },
             },
             drawtype = "nodebox",
             drop = "unilib:tree_bamboo_exotic_trunk",
@@ -126,7 +130,7 @@ function unilib.pkg.tree_bamboo_exotic.exec()
         tiles = {"unilib_tree_bamboo_exotic_wood.png"},
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2, wood = 1},
         -- N.B. stone in the original code
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         -- N.B. Not in original code
         is_ground_content = false,
@@ -145,9 +149,11 @@ function unilib.pkg.tree_bamboo_exotic.exec()
             {"unilib:tree_bamboo_exotic_trunk_leafy"},
         },
     })
-    unilib.set_auto_rotate("unilib:tree_bamboo_exotic_wood", unilib.auto_rotate_wood_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:tree_bamboo_exotic_wood", unilib.setting.auto_rotate_wood_flag
+    )
 
-    local inv_img = unilib.filter_leaves_img("unilib_tree_bamboo_exotic_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_bamboo_exotic_leaves.png")
     unilib.register_node(
         -- From mapgen:bamboo_leaves
         "unilib:tree_bamboo_exotic_leaves",
@@ -157,7 +163,7 @@ function unilib.pkg.tree_bamboo_exotic.exec()
             description = S("Exotic Bamboo Tree Leaves"),
             tiles = {"unilib_tree_bamboo_exotic_leaves.png"},
             groups = {flammable = 1, leafdecay = 4, leaves = 1, snappy = 3},
-            sounds = unilib.sound_table.leaves,
+            sounds = unilib.global.sound_table.leaves,
 
             drawtype = "allfaces_optional",
             drop = {
@@ -175,11 +181,12 @@ function unilib.pkg.tree_bamboo_exotic.exec()
             waving = 1,
             wield_img = inv_img,
 
-            after_place_node = unilib.after_place_leaves,
+            after_place_node = unilib.flora.after_place_leaves,
         }
     )
     unilib.register_leafdecay({
         -- From mapgen:bamboo_leaves
+        trunk_type = "bamboo_exotic",
         trunks = {"unilib:tree_bamboo_exotic_trunk", "unilib:tree_bamboo_exotic_trunk_leafy"},
         leaves = {"unilib:tree_bamboo_exotic_leaves"},
         radius = 1,
@@ -262,11 +269,13 @@ function unilib.pkg.tree_bamboo_exotic.exec()
                 "unilib_tree_bamboo_exotic_block.png",
             },
             groups = {choppy = 1, oddly_breakable_by_hand = 2, wood = 1},
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
+            -- N.B. is_ground_content = false not in original code
+            is_ground_content = false,
             paramtype2 = "facedir",
 
-            on_place = minetest.rotate_node,
+            on_place = core.rotate_node,
         }
     )
     unilib.register_craft_2x2x4({
@@ -282,10 +291,10 @@ function unilib.pkg.tree_bamboo_exotic.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("farlands_tree_bamboo_exotic_" .. i, {
+        unilib.register_decoration_generic("farlands_tree_bamboo_exotic_" .. i, {
             -- From farlands, mapgen/mapgen.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_bamboo_exotic_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_bamboo_exotic_" .. i .. ".mts",
 
             flags = "place_center_x, place_center_z",
             noise_params = {

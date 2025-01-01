@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_plant_flax_antipodean = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,6 +28,7 @@ function unilib.pkg.deco_aotearoa_plant_flax_antipodean.init()
                 "biome_aotearoa_wetland",
             },
             {
+                "dirt_custom_antipodean",
                 "dirt_ordinary",
                 "dirt_peat_forest",
                 "dirt_peat_restiad",
@@ -42,7 +43,7 @@ end
 
 function unilib.pkg.deco_aotearoa_plant_flax_antipodean.post()
 
-    unilib.register_decoration_now("aotearoa_plant_flax_antipodean_normal", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_flax_antipodean_normal", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_flax_antipodean"
         biomes = {
@@ -55,8 +56,8 @@ function unilib.pkg.deco_aotearoa_plant_flax_antipodean.post()
             "aotearoa_scrubland_geothermal",
         },
         place_on = {
+            "unilib:dirt_antipodean_with_turf_coastal_scrub",
             "unilib:dirt_ordinary_with_litter_rainforest",
-            "unilib:dirt_ordinary_with_turf",
             "unilib:gravel_ordinary",
             "unilib:sand_ironsand",
             "unilib:sand_ordinary",
@@ -64,7 +65,7 @@ function unilib.pkg.deco_aotearoa_plant_flax_antipodean.post()
         y_max = 80,
         y_min = 3,
     })
-    unilib.register_decoration_now("aotearoa_plant_flax_antipodean_dense", nil, {
+    unilib.register_decoration_complete("aotearoa_plant_flax_antipodean_dense", nil, {
         -- From aotearoa/spawn_plants.lua
         -- Completes decoration in package "plant_flax_antipodean"
         biomes = {
@@ -73,7 +74,7 @@ function unilib.pkg.deco_aotearoa_plant_flax_antipodean.post()
             "aotearoa_wetland_kahikatea_swamp",
         },
         place_on = {
-            "unilib:dirt_ordinary_with_turf_dry",
+            "unilib:dirt_ordinary_with_turf_coastal_tussock",
             "unilib:dirt_peat_forest",
             "unilib:dirt_peat_restiad",
         },

@@ -9,7 +9,7 @@
 unilib.pkg.item_sextant_digital = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.orienteering.add_mode
+local mode = unilib.global.imported_mod_table.orienteering.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,9 @@ function unilib.pkg.item_sextant_digital.exec()
 
     unilib.register_tool("unilib:item_sextant_digital", "orienteering:sextant", mode, {
         -- From orienteering:sextant
-        description = S("Digital Sextant"),
+        description = unilib.utils.hint(
+            S("Digital Sextant"), S("shows pitch/vertical viewing angle")
+        ),
         inventory_image = "unilib_item_sextant_digital_inv.png",
         groups = {disable_repair = 1},
 

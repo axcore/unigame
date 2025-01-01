@@ -9,7 +9,7 @@
 unilib.pkg.ingredient_cone_spruce_mature = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -37,7 +37,7 @@ function unilib.pkg.ingredient_cone_spruce_mature.exec()
             groups = {
                 dig_immediate = 3, flammable = 2, fleshy = 3, leafdecay = 1, leafdecay_drop = 1,
             },
-            sounds = unilib.sound_table.node,
+            sounds = unilib.global.sound_table.node,
 
             drawtype = "plantlike",
             is_ground_content = false,
@@ -54,7 +54,7 @@ function unilib.pkg.ingredient_cone_spruce_mature.exec()
 
                 if placer:is_player() then
 
-                    minetest.set_node(
+                    core.set_node(
                         pos,
                         {name = "unilib:ingredient_cone_spruce_mature", param2 = 1}
                     )
@@ -69,7 +69,7 @@ end
 
 function unilib.pkg.ingredient_cone_spruce_mature.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:ingredient_cone_spruce_mature",
 
         replace_mode = mode,

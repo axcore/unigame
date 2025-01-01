@@ -9,7 +9,7 @@
 unilib.pkg.misc_weathervane_rooster = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,10 +31,12 @@ function unilib.pkg.misc_weathervane_rooster.exec()
         description = S("Rooster Weathervane"),
         tiles = {"unilib_misc_weathervane_rooster.png"},
         groups = {attached_node = 1, snappy = 3},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "torchlike",
         inventory_image = "unilib_misc_weathervane_rooster.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         paramtype2 = "facedir",
         sunlight_propagates = true,

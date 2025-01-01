@@ -9,7 +9,7 @@
 unilib.pkg.door_wood_baobab = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_wood_baobab.exec()
 
     unilib.register_door({
-        -- From farlands, doors:door_baobab_wood. Creates unilib:door_wood_baobab
+        -- From farlands, doors:door_baobab_wood. Creates unilib:door_wood_baobab_closed_left, etc
         part_name = "wood_baobab",
-        orig_name = {nil, nil, nil, nil},
+        orig_name_list = {nil, nil, nil, nil},
         def_table = {
             description = S("Baobab Wood Door"),
             tiles = {{name = "unilib_door_wood_baobab.png", backface_culling = true}},
@@ -42,7 +42,7 @@ function unilib.pkg.door_wood_baobab.exec()
                 {"unilib:tree_baobab_wood", "unilib:tree_baobab_wood"},
                 {"unilib:tree_baobab_wood", "unilib:tree_baobab_wood"},
                 {"unilib:tree_baobab_wood", "unilib:tree_baobab_wood"},
-            }
+            },
         },
 
         replace_mode = mode,

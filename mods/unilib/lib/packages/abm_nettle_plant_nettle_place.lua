@@ -9,7 +9,7 @@
 unilib.pkg.abm_nettle_plant_nettle_place = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.nettle.add_mode
+local mode = unilib.global.imported_mod_table.nettle.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -18,15 +18,16 @@ local mode = unilib.imported_mod_table.nettle.add_mode
 function unilib.pkg.abm_nettle_plant_nettle_place.init()
 
     return {
-        description = "ABM to place nettles at suitable locations, most commonly on cliff edges." ..
-                " To prevent that behaviour, don't include this package in your remix (and" ..
-                " create an ordinary decoration package in its place)",
+        description = "ABM to place nettles at suitable locations (from nettle)",
+        notes = "Suitable locations are commonly cliff edges. To prevent nettle placement, don't" ..
+                " include this package in your remix (and create an ordinary decoration package" ..
+                " in its place)",
         depends = {"plant_nettle_cleavers", "plant_nettle_impatiens", "plant_nettle_normal"},
     }
 
 end
 
-function unilib.pkg.abm_nettle_plant_nettle_place.exec()
+function unilib.pkg.abm_nettle_plant_nettle_place.post()
 
     unilib.register_abm({
         -- From nettle/init.lua
@@ -39,7 +40,7 @@ function unilib.pkg.abm_nettle_plant_nettle_place.exec()
         action = function(pos, node)
 
             local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-            if minetest.get_node(above).name ~= "air" then
+            if core.get_node(above).name ~= "air" then
                 return
             end
 
@@ -51,7 +52,7 @@ function unilib.pkg.abm_nettle_plant_nettle_place.exec()
 
                     for z_ = pos.z - 1, pos.z + 1 do
 
-                        local full_name = minetest.get_node({x = x_, y = y_, z = z_}).name
+                        local full_name = core.get_node({x = x_, y = y_, z = z_}).name
 
                         --[[
                         if full_name == "unilib:dirt_ordinary" or
@@ -59,13 +60,13 @@ function unilib.pkg.abm_nettle_plant_nettle_place.exec()
                             dirts = dirts + 1
                         end
                         ]]--
-                        if minetest.get_item_group(full_name, "soil") > 0 or
-                                minetest.get_item_group(full_name, "smoothstone") > 0 then
+                        if core.get_item_group(full_name, "soil") > 0 or
+                                core.get_item_group(full_name, "smoothstone") > 0 then
                             dirts = dirts + 1
                         end
 
                         if full_name == "air" or
-                                minetest.get_item_group(full_name, "flora") > 0 then
+                                core.get_item_group(full_name, "flora") > 0 then
                             airs = airs + 1
                         end
 
@@ -79,14 +80,14 @@ function unilib.pkg.abm_nettle_plant_nettle_place.exec()
             end
 
             if (
-                minetest.get_node({x = pos.x, y = pos.y+2, z = pos.z}).name ~= "air" or
-                        minetest.get_node_light(above, 0.5) < 8
+                core.get_node({x = pos.x, y = pos.y+2, z = pos.z}).name ~= "air" or
+                        core.get_node_light(above, 0.5) < 8
             ) then
-                minetest.set_node(above, {name = "unilib:plant_nettle_impatiens"})
-            elseif minetest.get_node_light(above, 0.5) < 13 then
-                minetest.set_node(above, {name = "unilib:plant_nettle_cleavers"})
+                core.set_node(above, {name = "unilib:plant_nettle_impatiens"})
+            elseif core.get_node_light(above, 0.5) < 13 then
+                core.set_node(above, {name = "unilib:plant_nettle_cleavers"})
             else
-                minetest.set_node(above, {name = "unilib:plant_nettle_normal"})
+                core.set_node(above, {name = "unilib:plant_nettle_normal"})
             end
         end
     })

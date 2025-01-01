@@ -9,7 +9,7 @@
 unilib.pkg.stone_marble_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.darkage.add_mode
+local mode = unilib.global.imported_mod_table.darkage.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_marble_grey.exec()
         description = S("Grey Marble"),
 
         category = "metamorphic",
+        colour = "#D7D7D7",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match cracky groups below, should be 3)
         hardness = 1,
@@ -38,7 +39,7 @@ function unilib.pkg.stone_marble_grey.exec()
         not_super_flag = true,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("marble_grey", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("marble_grey", 3, nil)
 
     unilib.register_node("unilib:stone_marble_grey", "darkage:marble", mode, {
         -- From darkage:marble
@@ -46,7 +47,7 @@ function unilib.pkg.stone_marble_grey.exec()
         tiles = {"unilib_stone_marble_grey.png"},
         -- N.B. marble = 1 not in original code
         groups = {cracky = smooth_cracky, marble = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     --[[
     unilib.register_stairs("unilib:stone_marble_grey", {
@@ -62,27 +63,53 @@ function unilib.pkg.stone_marble_grey.exec()
         drop_name = "unilib:stone_marble_grey",
     })
 
-    -- (no block/brick/cobble/rubble variants)
-
-    unilib.register_node("unilib:stone_marble_grey_tile", "darkage:marble_tile", mode, {
+    unilib.register_node("unilib:stone_marble_grey_block", "darkage:marble_tile", mode, {
         -- From darkage:marble_tile
-        description = S("Grey Marble Tile"),
-        tiles = {"unilib_stone_marble_grey_tile.png"},
+        description = S("Grey Marble Block"),
+        tiles = {"unilib_stone_marble_grey_block.png"},
         groups = {cracky = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
+    -- N.B. replaced original craft recipe for consistency with other marbles
+    --[[
     unilib.register_craft({
         -- From darkage:marble_tile
-        output = "unilib:stone_marble_grey_tile 2",
+        output = "unilib:stone_marble_grey_block 2",
         recipe = {
             {"unilib:stone_marble_grey", "unilib:stone_marble_grey"},
             {"unilib:stone_marble_grey", "unilib:stone_marble_grey"},
-        }
+        },
     })
-    if unilib.super_stone_table["marble_grey"] ~= nil then
-        unilib.register_stairs("unilib:stone_marble_grey_tile")
+    ]]--
+    unilib.register_craft_3x3x9({
+        -- Original to unilib
+        output = "unilib:stone_marble_grey_block",
+        ingredient = "unilib:stone_marble_grey",
+    })
+    if unilib.global.super_stone_table["marble_grey"] ~= nil then
+        unilib.register_stairs("unilib:stone_marble_grey_block")
     end
+
+    -- (no brick/cobble/rubble variants)
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_marble_grey_compressed
+        part_name = "marble_grey",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Grey Marble"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_marble_grey_condensed
+        part_name = "marble_grey",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Grey Marble"),
+    })
 
 end

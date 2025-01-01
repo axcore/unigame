@@ -9,7 +9,7 @@
 unilib.pkg.mineral_arsenopyrite_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,7 +28,7 @@ end
 function unilib.pkg.mineral_arsenopyrite_rock.exec()
 
     local c_lump = "unilib:mineral_arsenopyrite_lump"
-    local hardness = unilib.mineral_table["arsenopyrite"]["hardness"]
+    local hardness = unilib.global.mineral_table["arsenopyrite"]["hardness"]
 
     unilib.register_mineral_rock("arsenopyrite")
 
@@ -37,7 +37,7 @@ function unilib.pkg.mineral_arsenopyrite_rock.exec()
         description = S("Arsenopyrite Rock"),
         tiles = {"unilib_mineral_arsenopyrite_rock.png"},
         groups = {cracky = 1},
-        unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = {
             max_items = 1,

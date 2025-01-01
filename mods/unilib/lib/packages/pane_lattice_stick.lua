@@ -9,7 +9,7 @@
 unilib.pkg.pane_lattice_stick = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.pane_lattice_stick.exec()
             },
             groups = {cracky = 3, oddly_breakable_by_hand = 3, snappy = 2},
             -- N.B. glass in original code
-            sounds = unilib.sound_table.wood,
+            sounds = unilib.global.sound_table.wood,
 
             inventory_image = "unilib_pane_lattice_stick.png",
             recipe = {

@@ -9,7 +9,7 @@
 unilib.pkg.crop_quadrotriticale = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.grains.add_mode
+local mode = unilib.global.imported_mod_table.grains.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -76,7 +76,7 @@ function unilib.pkg.crop_quadrotriticale.exec()
         -- (As a wheat/rye hybrid hybrid, quadrotriticale can substitute for either in any craft
         --      recipes)
         harvest_group_table = {
-            flammable = 2, food_quadrotrticale = 1, food_rye = 1, food_wheat = 1,
+            flammable = 2, food_quadrotriticale = 1, food_rye = 1, food_wheat = 1,
         },
         paramtype2 = "meshoptions",
         place_param2 = 3,
@@ -91,7 +91,8 @@ function unilib.pkg.crop_quadrotriticale.exec()
             {c_rye, c_wheat, c_rye},
         },
     })
-    if unilib.dye_from_crops_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_crops_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

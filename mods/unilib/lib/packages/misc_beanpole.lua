@@ -9,7 +9,7 @@
 unilib.pkg.misc_beanpole = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,15 +28,19 @@ function unilib.pkg.misc_beanpole.exec()
 
     unilib.register_node("unilib:misc_beanpole", "farming:beanpole", mode, {
         -- From farming:beanpole
-        description = unilib.hint(S("Beanpole"), S("place on soil before planting green beans")),
+        description = unilib.utils.hint(
+            S("Beanpole"), S("place on soil before planting green beans")
+        ),
         tiles = {"unilib_misc_beanpole.png"},
         groups = {attached_node = 1, flammable = 2, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
         drop = "unilib:misc_beanpole",
         inventory_image = "unilib_misc_beanpole.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -55,26 +59,26 @@ function unilib.pkg.misc_beanpole.exec()
                 return
             end
 
-            local under = minetest.get_node(pt.under)
+            local under = core.get_node(pt.under)
 
             -- Return if any of the nodes are not registered
-            if not minetest.registered_nodes[under.name] then
+            if not core.registered_nodes[under.name] then
                 return
             end
 
             -- Is the player right-clicking on something that has a custom on_place set?
-            local def = minetest.registered_nodes[under.name]
+            local def = core.registered_nodes[under.name]
             if def and def.on_rightclick then
                 return def.on_rightclick(pt.under, under, placer, itemstack, pt)
             end
 
-            if minetest.is_protected(pt.above, placer:get_player_name()) then
+            if core.is_protected(pt.above, placer:get_player_name()) then
                 return
             end
 
             local nodename = under.name
 
-            if minetest.get_item_group(nodename, "soil") < 2 then
+            if core.get_item_group(nodename, "soil") < 2 then
                 return
             end
 
@@ -84,15 +88,14 @@ function unilib.pkg.misc_beanpole.exec()
                 z = pointed_thing.above.z
             }
 
-            nodename = minetest.get_node(top).name
-
+            nodename = core.get_node(top).name
             if nodename ~= "air" then
                 return
             end
 
-            minetest.set_node(pointed_thing.above, {name = "unilib:misc_beanpole"})
+            core.set_node(pointed_thing.above, {name = "unilib:misc_beanpole"})
 
-            if not unilib.is_creative(placer:get_player_name()) then
+            if not unilib.utils.is_creative(placer:get_player_name()) then
                 itemstack:take_item()
             end
 
@@ -107,7 +110,7 @@ function unilib.pkg.misc_beanpole.exec()
             {"", "", ""},
             {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
             {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
-        }
+        },
     })
     unilib.register_craft({
         -- From farming:beanpole
@@ -115,6 +118,6 @@ function unilib.pkg.misc_beanpole.exec()
         recipe = "unilib:misc_beanpole",
         burntime = 10,
     })
-    unilib.register_tool_no_scythe("unilib:misc_beanpole")
+    unilib.tools.register_no_scythe("unilib:misc_beanpole")
 
 end

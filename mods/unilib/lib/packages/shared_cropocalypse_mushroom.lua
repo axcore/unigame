@@ -9,7 +9,7 @@
 unilib.pkg.shared_cropocalypse_mushroom = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 local group_list = {}
 local particle_table = {}
@@ -21,17 +21,17 @@ local neighbour_table = {}
 
 local function do_spread(pos, node)
 
-    if minetest.get_node_light(pos, 0.5) > 10 then
+    if core.get_node_light(pos, 0.5) > 10 then
 
-        if minetest.get_node_light(pos, nil) >= 11 then
-            minetest.remove_node(pos)
+        if core.get_node_light(pos, nil) >= 11 then
+            core.remove_node(pos)
         end
 
         return
 
     end
 
-    local pos_list = minetest.find_nodes_in_area_under_air(
+    local pos_list = core.find_nodes_in_area_under_air(
         {x = pos.x - 75, y = pos.y - 50, z = pos.z - 75},
         {x = pos.x + 75, y = pos.y + 50, z = pos.z + 75},
         neighbour_table[node.name]
@@ -43,8 +43,8 @@ local function do_spread(pos, node)
 
     local pos2 = pos_list[math.random(#pos_list)]
     pos2.y = pos2.y + 1
-    if minetest.get_node_light(pos2, 0.5) <= 10 then
-        minetest.set_node(pos2, {name = node.name})
+    if core.get_node_light(pos2, 0.5) <= 10 then
+        core.set_node(pos2, {name = node.name})
     end
 
 end
@@ -94,7 +94,7 @@ function unilib.pkg.shared_cropocalypse_mushroom.post()
         end,
     })
 
-    if minetest.features.particlespawner_tweenable then
+    if core.features.particlespawner_tweenable then
 
         for group_name, particle_img in pairs(particle_table) do
 
@@ -109,7 +109,7 @@ function unilib.pkg.shared_cropocalypse_mushroom.post()
 
                 action = function(pos, node)
 
-                    minetest.add_particlespawner({
+                    core.add_particlespawner({
                         amount = 1,
                         time = 1,
 

@@ -9,7 +9,7 @@
 unilib.pkg.tree_mahogany = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.mahogany.add_mode
+local mode = unilib.global.imported_mod_table.mahogany.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.tree_mahogany.exec()
             carpet = 1, choppy = 2, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_mahogany_creeper.png",
@@ -67,7 +67,7 @@ function unilib.pkg.tree_mahogany.exec()
             carpet = 1, choppy = 2, falling_node = 1, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_mahogany_creeper_flowers.png",
@@ -90,7 +90,7 @@ function unilib.pkg.tree_mahogany.exec()
             carpet = 1, choppy = 2, falling_node = 1, flammable = 3, leafdecay = 3, leaves = 1,
             oddly_breakable_by_hand = 3, snappy = 2,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_tree_mahogany_creeper_hanging.png",
@@ -139,10 +139,11 @@ function unilib.pkg.tree_mahogany.exec()
     })
     unilib.register_leafdecay({
         -- From mahogany:leaves
+        trunk_type = "mahogany",
         trunks = {"unilib:tree_mahogany_trunk"},
         -- N.B. Only leaves in original code
-        leaves = {
-            "unilib:tree_mahogany_leaves",
+        leaves = {"unilib:tree_mahogany_leaves"},
+        others = {
             "unilib:tree_mahogany_creeper",
             "unilib:tree_mahogany_creeper_flowers",
             "unilib:tree_mahogany_creeper_hanging",
@@ -195,7 +196,7 @@ function unilib.pkg.tree_mahogany.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- From mahogany:gate. Creates unilib:gate_mahogany_closed
+        -- From mahogany:gate_closed, etc. Creates unilib:gate_mahogany_closed, etc
         part_name = "mahogany",
         orig_name = {"mahogany:gate_closed", "mahogany:gate_open"},
 
@@ -205,10 +206,10 @@ function unilib.pkg.tree_mahogany.exec()
         group_table = {choppy = 2, flammable = 2, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("cool_trees_tree_mahogany", {
+    unilib.register_decoration_generic("cool_trees_tree_mahogany", {
         -- From mahogany/init.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_mahogany.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_mahogany.mts",
 
         flags = "place_center_x, place_center_z, force_placement",
         height = 2,

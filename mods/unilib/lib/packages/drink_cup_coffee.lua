@@ -9,7 +9,7 @@
 unilib.pkg.drink_cup_coffee = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,10 +36,12 @@ function unilib.pkg.drink_cup_coffee.exec()
         tiles = {"unilib_drink_cup_coffee.png"},
         -- N.B. no food_coffee in original code
         groups = {attached_node = 1, dig_immediate = 3, drink = 1, food_coffee = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "torchlike",
         inventory_image = "unilib_drink_cup_coffee.png",
+        -- N.B. is_ground_content = false not in original code; added to match other food items
+        is_ground_content = false,
         paramtype = "light",
         selection_box = {
             type = "fixed",
@@ -48,7 +50,7 @@ function unilib.pkg.drink_cup_coffee.exec()
         walkable = false,
         wield_image = "unilib_drink_cup_coffee.png",
 
-        on_use = unilib.cuisine_drink_on_use(
+        on_use = unilib.cuisine.drink_on_use(
             "unilib:drink_cup_coffee", 2, "unilib:vessel_glass_empty"
         ),
     })
@@ -57,7 +59,7 @@ end
 
 function unilib.pkg.drink_cup_coffee.post()
 
-    local replace_table = unilib.clone_simple_table(unilib.potable_bucket_list)
+    local replace_table = unilib.utils.clone_simple_table(unilib.global.potable_bucket_list)
     table.insert(
         replace_table,
         {"unilib:utensil_saucepan_normal", "unilib:utensil_saucepan_normal"}
@@ -70,7 +72,7 @@ function unilib.pkg.drink_cup_coffee.post()
             {"unilib:utensil_saucepan_normal", "group:food_coffee", "group:potable_bucket"},
             {"", "unilib:vessel_glass_empty", ""},
         },
-        replacements = unilib.potable_bucket_list,
+        replacements = unilib.global.potable_bucket_list,
     })
 
 end

@@ -9,7 +9,7 @@
 unilib.pkg.stone_skarn_with_malachite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.rocks.add_mode
+local mode = unilib.global.imported_mod_table.rocks.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,11 +32,12 @@ function unilib.pkg.stone_skarn_with_malachite.exec()
         "mineral:skarn_malachyte",
         mode,
         {
-            description = unilib.brackets(S("Malachite Ore"), S("Skarn")),
+            description = unilib.utils.brackets(S("Malachite Ore"), S("Skarn")),
             -- (N.B. rocks does not provide a separate overlay for malachite, for some reason)
             tiles = {"unilib_stone_skarn.png^unilib_mineral_malachite.png"},
-            groups = {cracky = 3},
-            sounds = unilib.sound_table.stone,
+            -- N.B. ore = 1 not in original code
+            groups = {cracky = 3, ore = 1},
+            sounds = unilib.global.sound_table.stone,
 
             drop = "unilib:mineral_malachite_lump",
         }

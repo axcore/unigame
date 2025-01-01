@@ -9,7 +9,7 @@
 unilib.pkg.tree_gum_blue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_gum_blue.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Eucalyptus globulus"
 
     unilib.register_tree({
@@ -110,7 +110,7 @@ function unilib.pkg.tree_gum_blue.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_gum_blue_closed
+        -- Original to unilib. Creates unilib:gate_gum_blue_closed, etc
         part_name = "gum_blue",
         orig_name = {nil, nil},
 
@@ -121,10 +121,10 @@ function unilib.pkg.tree_gum_blue.exec()
 
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_gum_blue_in_range_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_blue_in_range_" .. i, {
             -- From australia/biome_great_dividing_range.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 8000,
             flags = "place_center_x, place_center_z",
@@ -135,10 +135,10 @@ function unilib.pkg.tree_gum_blue.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_gum_blue_in_tasmania_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_blue_in_tasmania_" .. i, {
             -- From australia/biome_tasmania.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 15000,
             flags = "place_center_x, place_center_z",
@@ -149,10 +149,10 @@ function unilib.pkg.tree_gum_blue.exec()
     end
     for i = 1, 2 do
 
-        unilib.register_decoration("australia_tree_gum_blue_in_victoria_" .. i, {
+        unilib.register_decoration_generic("australia_tree_gum_blue_in_victoria_" .. i, {
             -- From australia/biome_victorian_forests.lua
             deco_type = "schematic",
-            schematic = unilib.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
+            schematic = unilib.core.path_mod .. "/mts/unilib_tree_gum_blue_" .. i .. ".mts",
 
             fill_ratio = (2 - i + 1) / 7000,
             flags = "place_center_x, place_center_z",

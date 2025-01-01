@@ -9,7 +9,7 @@
 unilib.pkg.deco_herbs_flower_leontopodium_white = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.herbs.add_mode
+local mode = unilib.global.imported_mod_table.herbs.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,14 +20,14 @@ function unilib.pkg.deco_herbs_flower_leontopodium_white.init()
     return {
         description = "White leontopodium as decoration",
         depends = {"dirt_ordinary", "flower_leontopodium_white"},
-        at_least_one = {"biome_default_grassland", "biome_ethereal_mountain"}
+        at_least_one = {"biome_default_grassland", "biome_ethereal_mountain"},
     }
 
 end
 
 function unilib.pkg.deco_herbs_flower_leontopodium_white.post()
 
-    unilib.register_decoration_now("herbs_flower_leontopodium_white", nil, {
+    unilib.register_decoration_complete("herbs_flower_leontopodium_white", nil, {
         -- From herbs/mapgen.lua
         -- Completes decoration in package "flower_leontopodium_white"
         biomes = {"default_grassland", "ethereal_mountain"},
@@ -36,7 +36,7 @@ function unilib.pkg.deco_herbs_flower_leontopodium_white.post()
             "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_turf",
         },
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 70,
     })
 

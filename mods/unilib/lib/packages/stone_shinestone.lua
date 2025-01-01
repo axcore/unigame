@@ -9,7 +9,7 @@
 unilib.pkg.stone_shinestone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,6 +31,7 @@ function unilib.pkg.stone_shinestone.exec()
         description = S("Shinestone"),
 
         category = "other",
+        colour = "#FF9D58",
         fictional_flag = true,
         grinder_flag = false,
         hardness = 1,
@@ -42,9 +43,9 @@ function unilib.pkg.stone_shinestone.exec()
         description = S("Shinestone"),
         tiles = {"unilib_stone_shinestone.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
-        light_source = unilib.light_max,
+        light_source = unilib.constant.light_max,
     })
     unilib.register_stone_smooth_cuttings({
         part_name = "shinestone",

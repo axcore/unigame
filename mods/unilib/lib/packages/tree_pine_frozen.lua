@@ -9,7 +9,7 @@
 unilib.pkg.tree_pine_frozen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.snow.add_mode
+local mode = unilib.global.imported_mod_table.snow.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -22,8 +22,6 @@ function unilib.pkg.tree_pine_frozen.init()
         notes = "A special pine tree whose leaves drop Christmas tree saplings (if that" ..
                 " package is loaded)",
         depends = {"snow_ordinary", "tree_pine"},
-        -- (Required for leafdecay override below)
-        optional = "tree_pine_christmas",
     }
 
 end
@@ -44,53 +42,35 @@ function unilib.pkg.tree_pine_frozen.exec()
         not_super_flag = true,
     })
 
-    local drop_table = {
-        max_items = 1,
-        items = {
-            {items = {"unilib:tree_pine_frozen_sapling"}, rarity = 20},
-            {items = {"unilib:tree_pine_frozen_leaves"}},
-        },
-    }
-
-    if unilib.pkg_executed_table["tree_christmas"] ~= nil then
-
-        table.insert(drop_table.items, 1, {
-            items = {"unilib:tree_pine_christmas_sapling"},
-            rarity = 120,
-        })
-
-    end
-
-    local inv_img = unilib.filter_leaves_img("unilib_tree_pine_frozen_leaves.png")
+    local inv_img = unilib.flora.filter_leaves_img("unilib_tree_pine_frozen_leaves.png")
     unilib.register_node("unilib:tree_pine_frozen_leaves", "snow:needles", mode, {
         -- From snow:needles
-        description = unilib.annotate(S("Frozen Pine Tree Needles"), sci_name),
+        description = unilib.utils.annotate(S("Frozen Pine Tree Needles"), sci_name),
         tiles = {"unilib_tree_pine_frozen_leaves.png"},
         groups = {snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "allfaces_optional",
-        drop = drop_table,
+        drop = {
+            max_items = 1,
+            items = {
+                {items = {"unilib:tree_pine_frozen_sapling"}, rarity = 20},
+                {items = {"unilib:tree_pine_frozen_leaves"}},
+            },
+        },
         furnace_burntime = 1,
         inventory_image = inv_img,
+        -- N.B. is_ground_content = false not in original code; added to match other leaves
+        is_ground_content = false,
         paramtype = "light",
-        visual_scale = unilib.leaves_visual_scale,
+        visual_scale = unilib.global.leaves_visual_scale,
         -- N.B. walkable not in original code
-        walkable = unilib.walkable_leaves_flag,
+        walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
     })
-    unilib.register_leafdecay({
-        -- From snow:needles
-        trunks = {"unilib:tree_pine_trunk"},
-        leaves = {
-            "unilib:tree_pine_leaves",
-            "unilib:tree_pine_christmas_leaves",
-            "unilib:tree_pine_frozen_leaves",
-        },
-        -- N.B. 2 in original "snow" mod code
-        radius = 3,
-    })
+    -- N.B. .register_leafdecay() is called in the .post() function
+    unilib.register_tree_leaves_compacted("unilib:tree_pine_frozen_leaves", mode)
 
     unilib.register_tree_sapling({
         -- Code original to unilib, texture from snow mod
@@ -108,34 +88,82 @@ function unilib.pkg.tree_pine_frozen.exec()
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
 
-    unilib.register_decoration("snow_tree_pine_frozen_1", {
+    unilib.register_decoration_generic("snow_tree_pine_frozen_1", {
         -- From snow/mapgen_v7.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
 
         fill_ratio = 0.005,
         flags = "place_center_x, place_center_z",
         sidelen = 16,
     })
 
-    unilib.register_decoration("snow_tree_pine_frozen_2", {
+    unilib.register_decoration_generic("snow_tree_pine_frozen_2", {
         -- From snow/mapgen_v7.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
 
         fill_ratio = 0.05,
         flags = "place_center_x, place_center_z",
         sidelen = 16,
     })
 
-    unilib.register_decoration("snow_tree_pine_frozen_3", {
+    unilib.register_decoration_generic("snow_tree_pine_frozen_3", {
         -- From snow/mapgen_v7.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_pine_frozen.mts",
 
         fill_ratio = 0.1,
         flags = "place_center_x, place_center_z",
         sidelen = 16,
     })
+
+end
+
+function unilib.pkg.tree_pine_frozen.post()
+
+    -- N.B. We would like to make "tree_pine_christmas" an optional dependency of this package, but
+    --      it already depends on this package. Instead, put the leaf decay/drop code here
+    if unilib.global.pkg_executed_table["tree_pine_christmas"] == nil then
+
+        unilib.register_leafdecay({
+            -- From snow:needles
+            trunk_type = "pine",
+            trunks = {"unilib:tree_pine_trunk"},
+            leaves = {
+                "unilib:tree_pine_leaves",
+                "unilib:tree_pine_frozen_leaves",
+            },
+            -- N.B. 2 in original "snow" mod code
+            radius = 3,
+        })
+
+    else
+
+        unilib.override_item("unilib:tree_pine_frozen_leaves", {
+            drop = {
+                max_items = 1,
+                items = {
+                    {items = {"unilib:tree_pine_frozen_sapling"}, rarity = 20},
+                    {items = {"unilib:tree_pine_christmas_sapling"}, rarity = 120},
+                    {items = {"unilib:tree_pine_frozen_leaves"}},
+                },
+            },
+        })
+
+        unilib.register_leafdecay({
+            -- From snow:needles
+            trunk_type = "pine",
+            trunks = {"unilib:tree_pine_trunk"},
+            leaves = {
+                "unilib:tree_pine_leaves",
+                "unilib:tree_pine_christmas_leaves",
+                "unilib:tree_pine_frozen_leaves",
+            },
+            -- N.B. 2 in original "snow" mod code
+            radius = 3,
+        })
+
+    end
 
 end

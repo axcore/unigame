@@ -9,7 +9,7 @@
 unilib.pkg.food_cake_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.pie.add_mode
+local mode = unilib.global.imported_mod_table.pie.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code

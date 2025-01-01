@@ -1,7 +1,6 @@
 # "abristuff" remix - contains items from abriglass and other related packages
 # From abriglass itself, contains everything except the hidden light and crystal
 # From abriflame/abripanes/abritorch, contains everything
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -34,19 +33,17 @@ clay_ordinary|default
 dye_basic|dye bakedclay
 glass_ordinary|default moreblocks vessels
 metal_iron|default
-metal_steel|default technic
+metal_steel|default glemr11 technic
 mineral_coal|default technic
-mineral_mese|default
+mineral_mese|default glemr11
 torch_ordinary|default
 
 # supporting packages (.at_least_one)
-stone_desert|default moreblocks
-stone_ordinary|default moreblocks technic
-stone_sandstone_desert|default mtg_plus
-stone_sandstone_ordinary|default moreblocks mtg_plus
-stone_sandstone_silver|default mtg_plus
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
+#machine_furnace_induction|unilib
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
+
+# supporting packages (.suggested)

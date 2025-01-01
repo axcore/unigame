@@ -9,7 +9,7 @@
 unilib.pkg.plant_cotton_wild = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,13 +29,13 @@ function unilib.pkg.plant_cotton_wild.exec()
 
     unilib.register_node("unilib:plant_cotton_wild", "farming:cotton_wild", mode, {
         -- From farming:cotton_wild
-        description = unilib.annotate(S("Wild Cotton"), "Gossypium"),
+        description = unilib.utils.annotate(S("Wild Cotton"), "Gossypium"),
         tiles = {"unilib_plant_cotton_wild.png"},
         -- N.B. flora = 1, not_in_creative_inventory = 1 not in original code
         groups = {
             attached_node = 1, flammable = 4, flora = 1, not_in_creative_inventory = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -51,7 +51,7 @@ function unilib.pkg.plant_cotton_wild.exec()
         waving = 1,
         wield_image = "unilib_plant_cotton_wild.png",
     })
-    if unilib.mtgame_tweak_flag then
+    if unilib.setting.mtgame_tweak_flag then
 
         -- Adapted from farming_redo/crops/cotton.lua
         unilib.override_item("unilib:plant_cotton_wild", {
@@ -66,7 +66,7 @@ function unilib.pkg.plant_cotton_wild.exec()
     end
     -- (not compatible with flowerpots)
 
-    unilib.register_decoration("farming_plant_cotton_wild", {
+    unilib.register_decoration_generic("farming_plant_cotton_wild", {
         -- From farming/init.lua
         deco_type = "simple",
         decoration = "unilib:plant_cotton_wild",

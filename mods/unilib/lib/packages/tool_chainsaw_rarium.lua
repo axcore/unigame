@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    xtraores
+-- From:    xtraores/xtraores
 -- Code:    unknown
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.tool_chainsaw_rarium = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xtraores.add_mode
+local mode = unilib.global.imported_mod_table.xtraores.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.tool_chainsaw_rarium.exec()
         description = S("Rarium Chainsaw"),
         inventory_image = "unilib_tool_chainsaw_rarium.png",
         -- N.B. no groups in original code
-        groups = {axe = 1},
+        groups = {axe = 1, chainsaw = 1},
         sound = {breaks = "unilib_tool_breaks"},
 
         tool_capabilities = {
@@ -50,5 +50,6 @@ function unilib.pkg.tool_chainsaw_rarium.exec()
         ingredient = "unilib:metal_rarium_ingot",
         minor_ingredient = "unilib:metal_steel_ingot",
     })
+    unilib.tools.apply_toolranks("unilib:tool_chainsaw_rarium", "chainsaw")
 
 end

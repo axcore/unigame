@@ -13,7 +13,8 @@
 unilib.pkg.shared_default_chest = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.unilib.add_mode
+local FS = function(...) return core.formspec_escape(S(...)) end
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 -- Do not change these values
 -- The minimum chest inventory size for the "large" chest variant; the maximum inventory size for
@@ -27,9 +28,12 @@ local default_pages = 1
 --      value is a table of properties used to switch the "open" chest back to its "closed" state
 local open_chest_table = {}
 
+-- List of (closed) chest full_names, used to create an LBM below
+local open_chest_list = {}
+
 -- Pipeworks compatibility
 local pipeworks_flag = false
-if minetest.get_modpath("pipeworks") then
+if core.get_modpath("pipeworks") then
     pipeworks_flag = true
 end
 
@@ -46,14 +50,14 @@ local function get_pipeworks_switch(pos, y)
     else
 
         local formspec = pipeworks.fs_helpers.cycling_button(
-            minetest.get_meta(pos),
+            core.get_meta(pos),
             "image_button[0," .. tostring(y) .. ";1,0.6",
             "splitstacks",
             {pipeworks.button_off, pipeworks.button_on}
         )
 
         formspec = formspec .. "label[0.9," .. tostring(y) .. ";" ..
-                S("Allow splitting incoming stacks from tubes") .. "]"
+                FS("Allow splitting incoming stacks from tubes") .. "]"
 
         return formspec
 
@@ -70,7 +74,7 @@ local function get_chest_formspec(pos, large_flag)
 
         -- "small" chest variant. Adapted from default/chests.lua
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local grid_x = meta:get_int("x")
         local grid_y = meta:get_int("y")
 
@@ -96,13 +100,13 @@ local function get_chest_formspec(pos, large_flag)
             -- Player inventory (other)
             "listring[nodemeta:" .. pos_str .. ";main]" ..
             "listring[current_player;main]" ..
-            unilib.get_hotbar_bg(0, 4.85 - dy + pw_dy)
+            unilib.misc.get_hotbar_bg(0, 4.85 - dy + pw_dy)
 
     else
 
         -- "large" chest variant. Original to unilib
 
-        local meta = minetest.get_meta(pos)
+        local meta = core.get_meta(pos)
         local page = meta:get_int("page")
         local pagecount = meta:get_int("pagecount")
         local grid_x = meta:get_int("x")
@@ -144,7 +148,7 @@ local function get_chest_formspec(pos, large_flag)
             -- Player inventory (other)
             "listring[nodemeta:" .. pos_str .. ";main]" ..
             "listring[current_player;main]" ..
-            unilib.get_hotbar_bg(column, 4.35 + dy + pw_dy + 1)
+            unilib.misc.get_hotbar_bg(column, 4.35 + dy + pw_dy + 1)
 
     end
 
@@ -158,7 +162,7 @@ local function chest_page_update(pn, player, formname, fields)
 
     local chest_open_info = open_chest_table[pn]
     local pos = chest_open_info.pos
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
 
     local page = meta:get_int("page")
     if page == nil then
@@ -177,8 +181,8 @@ local function chest_page_update(pn, player, formname, fields)
 
         -- User has clicked the "-" (remove page) button
 
-        inv = meta:get_inventory()
-        stack_list = inv:get_list("main")
+        local inv = meta:get_inventory()
+        local stack_list = inv:get_list("main")
 
         -- Don't allow the user to remove the first (and only) page
         if pagecount > 1 then
@@ -186,10 +190,10 @@ local function chest_page_update(pn, player, formname, fields)
             -- Obviously only remove the last page if it's not empty
             for i = (((pagecount - 1) * pagesize) + 1), (pagecount * pagesize) do
 
-                stack = stack_list[i]
+                local stack = stack_list[i]
                 if stack ~= nil and stack:get_name() ~= "" then
 
-                    minetest.chat_send_player(
+                    core.chat_send_player(
                         player:get_player_name(),
                         S("The last page in the chest is not empty!")
                     )
@@ -229,8 +233,8 @@ local function chest_page_update(pn, player, formname, fields)
 
         -- User has clicked the "+" (add page) button
 
-        inv = meta:get_inventory()
-        max_pages = meta:get_int("page_max")
+        local inv = meta:get_inventory()
+        local max_pages = meta:get_int("page_max")
 
         if max_pages == 0 or pagecount < max_pages then
 
@@ -244,7 +248,7 @@ local function chest_page_update(pn, player, formname, fields)
     meta:set_int("page", page)
     meta:set_int("pagecount", pagecount)
 
-    minetest.show_formspec(
+    core.show_formspec(
         player:get_player_name(),
         formname,
         get_chest_formspec(pos, true)
@@ -258,16 +262,16 @@ local function chest_switch_update(pn, player, formname, fields)
 
     local chest_open_info = open_chest_table[pn]
     local pos = chest_open_info.pos
-    local meta = minetest.get_meta(pos)
+    local meta = core.get_meta(pos)
     local large_flag = false
-    if meta:get_int("page") then
+    if meta:get_int("page") > 0 then
         large_flag = true
     end
 
     if pipeworks.may_configure(pos, player) then
 
         pipeworks.fs_helpers.on_receive_fields(pos, fields)
-        minetest.show_formspec(
+        core.show_formspec(
             player:get_player_name(),
             formname,
             get_chest_formspec(pos, large_flag)
@@ -288,7 +292,7 @@ local function chest_lid_obstructed(pos)
     -- Adapted from default/chests.lua
 
     local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-    local def = minetest.registered_nodes[minetest.get_node(above).name]
+    local def = core.registered_nodes[core.get_node(above).name]
 
     -- Allow ladders, signs, wallmounted things and torches to not obstruct a chest
     if def and (
@@ -316,22 +320,37 @@ local function chest_lid_close(pn)
     open_chest_table[pn] = nil
     for k, v in pairs(open_chest_table) do
 
-        if v.pos.x == pos.x and v.pos.y == pos.y and v.pos.z == pos.z then
+        -- Is another player also looking at the chest
+        if vector.equals(v.pos, pos) then
             return true
         end
 
     end
 
-    local node = minetest.get_node(pos)
+    local node = core.get_node(pos)
     if not pipeworks_flag then
 
-        minetest.after(0.2, minetest.swap_node, pos, {name = swap, param2 = node.param2})
+        core.after(0.2, function()
+
+            local current_node = core.get_node(pos)
+            if current_node.name ~= swap .. "_open" then
+
+                -- The chest has already been replaced, don't try to replace what's there
+                return
+
+            else
+
+                core.swap_node(pos, {name = swap, param2 = node.param2})
+
+            end
+
+        end)
 
     else
 
-        minetest.after(0.2, function()
+        core.after(0.2, function()
 
-            minetest.swap_node(pos, {name = swap, param2 = node.param2})
+            core.swap_node(pos, {name = swap, param2 = node.param2})
             -- Pipeworks notification
             pipeworks.after_place(pos)
 
@@ -339,7 +358,7 @@ local function chest_lid_close(pn)
 
     end
 
-    minetest.sound_play(sound, {gain = 0.3, pos = pos, max_hear_distance = 10}, true)
+    core.sound_play(sound, {gain = 0.3, pos = pos, max_hear_distance = 10}, true)
 
 end
 
@@ -365,7 +384,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
     --
     -- data_table compulsory fields:
     --      part_name (str): e.g. "ordinary"
-    --      orig_name (list): The closed and open chests, in that order, e.g.
+    --      orig_name_list (list or nil): The closed and open chests, in that order, e.g.
     --          {"default:chest", "default:chest_open"},
     --      def_table (table): The partial definition table. See the packages mentioned above for
     --          practical examples
@@ -382,7 +401,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
     --          chests
 
     local part_name = data_table.part_name
-    local orig_name = data_table.orig_name
+    local orig_name_list = data_table.orig_name_list or {nil, nil}
     local def_table = data_table.def_table
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
@@ -451,11 +470,13 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.after_place_node = function(pos, placer)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("owner", placer:get_player_name() or "")
             meta:set_string(
                 "infotext",
-                unilib.brackets(def_table.description, S("owned by @1", meta:get_string("owner")))
+                unilib.utils.brackets(
+                    def_table.description, S("owned by @1", meta:get_string("owner"))
+                )
             )
 
             if pipeworks_flag then
@@ -467,7 +488,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
         def_table.allow_metadata_inventory_move = function(
             pos, from_list, from_index, to_list, to_index, count, player
         )
-            if not unilib.can_interact_with_node(player, pos) then
+            if not unilib.misc.can_interact_with_node(player, pos) then
                 return 0
             end
 
@@ -477,7 +498,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-            if not unilib.can_interact_with_node(player, pos) then
+            if not unilib.misc.can_interact_with_node(player, pos) then
                 return 0
             end
 
@@ -487,7 +508,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-            if not unilib.can_interact_with_node(player, pos) then
+            if not unilib.misc.can_interact_with_node(player, pos) then
                 return 0
             end
 
@@ -497,9 +518,9 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos);
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
-            return inv:is_empty("main") and unilib.can_interact_with_node(player, pos)
+            return inv:is_empty("main") and unilib.misc.can_interact_with_node(player, pos)
 
         end
 
@@ -507,7 +528,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("infotext", def_table.description)
             meta:set_string("owner", "")
             local inv = meta:get_inventory()
@@ -533,20 +554,20 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_key_use = function(pos, player)
 
-            local secret = minetest.get_meta(pos):get_string("key_lock_secret")
+            local secret = core.get_meta(pos):get_string("key_lock_secret")
             local itemstack = player:get_wielded_item()
             local key_meta = itemstack:get_meta()
 
-            if itemstack:get_metadata() == "" then
+            if itemstack:get_meta():get_string("") == "" then
                 return
             end
 
             if key_meta:get_string("secret") == "" then
 
                 key_meta:set_string(
-                    "secret",
-                    minetest.parse_json(itemstack:get_metadata()).secret
+                    "secret", core.parse_json(itemstack:get_meta():get_string("")).secret
                 )
+
                 itemstack:set_metadata("")
 
             end
@@ -555,7 +576,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
                 return
             end
 
-            minetest.show_formspec(
+            core.show_formspec(
                 player:get_player_name(),
                 full_name .. "_locked",
                 get_chest_formspec(pos, large_flag)
@@ -565,29 +586,34 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 
-            if not unilib.can_interact_with_node(clicker, pos) then
+            if not unilib.misc.can_interact_with_node(clicker, pos) then
                 return itemstack
             end
 
-            minetest.sound_play(
+            local cn = clicker:get_player_name()
+            if open_chest_table[cn] then
+                chest_lid_close(cn)
+            end
+
+            core.sound_play(
                 def_table.sound_open,
                 {gain = 0.3, pos = pos, max_hear_distance = 10},
                 true
             )
 
             if not chest_lid_obstructed(pos) then
-                minetest.swap_node(pos, { name = full_name .. "_open", param2 = node.param2 })
+                core.swap_node(pos, {name = full_name .. "_open", param2 = node.param2})
             end
 
-            minetest.after(
+            core.after(
                 0.2,
-                minetest.show_formspec,
-                clicker:get_player_name(),
+                core.show_formspec,
+                cn,
                 full_name,
                 get_chest_formspec(pos, large_flag)
             )
 
-            open_chest_table[clicker:get_player_name()] = {
+            open_chest_table[cn] = {
                 pos = pos,
                 sound = def_table.sound_close,
                 swap = full_name,
@@ -601,15 +627,15 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_skeleton_key_use = function(pos, player, newsecret)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             local owner = meta:get_string("owner")
             local pn = player:get_player_name()
 
             -- Verify placer is owner of lockable chest
             if owner ~= pn then
 
-                minetest.record_protection_violation(pos, pn)
-                minetest.chat_send_player(pn, S("You do not own this chest"))
+                core.record_protection_violation(pos, pn)
+                core.chat_send_player(pn, S("You do not own this chest"))
                 return nil
 
             end
@@ -637,7 +663,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.can_dig = function(pos,player)
 
-            local meta = minetest.get_meta(pos);
+            local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
             return inv:is_empty("main")
 
@@ -646,16 +672,16 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
         def_table.on_blast = function(pos)
 
             local drops = {}
-            unilib.get_inventory_drops(pos, "main", drops)
+            unilib.misc.get_inventory_drops(pos, "main", drops)
             drops[#drops + 1] = full_name
-            minetest.remove_node(pos)
+            core.remove_node(pos)
             return drops
 
         end
 
         def_table.on_construct = function(pos)
 
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("infotext", def_table.description)
             local inv = meta:get_inventory()
             if not large_flag then
@@ -679,25 +705,30 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_rightclick = function(pos, node, clicker)
 
-            minetest.sound_play(
+            local cn = clicker:get_player_name()
+            if open_chest_table[cn] then
+                chest_lid_close(cn)
+            end
+
+            core.sound_play(
                 def_table.sound_open,
                 {gain = 0.3, pos = pos, max_hear_distance = 10},
                 true
             )
 
             if not chest_lid_obstructed(pos) then
-                minetest.swap_node(pos, {name = full_name .. "_open", param2 = node.param2})
+                core.swap_node(pos, {name = full_name .. "_open", param2 = node.param2})
             end
 
-            minetest.after(
+            core.after(
                 0.2,
-                minetest.show_formspec,
-                clicker:get_player_name(),
+                core.show_formspec,
+                cn,
                 full_name,
                 get_chest_formspec(pos, large_flag)
             )
 
-            open_chest_table[clicker:get_player_name()] = {
+            open_chest_table[cn] = {
                 pos = pos,
                 sound = def_table.sound_close,
                 swap = full_name,
@@ -711,35 +742,39 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
     end
 
+    --[[
     def_table.on_metadata_inventory_move = function(
         pos, from_list, from_index, to_list, to_index, count, player
     )
-        unilib.log(
+        unilib.utils.log(
             "action",
-            player:get_player_name() .. " moves stuff in chest at " .. minetest.pos_to_string(pos)
+            player:get_player_name() .. " moves items in chest at " .. core.pos_to_string(pos)
         )
 
     end
 
     def_table.on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-        unilib.log(
+        unilib.utils.log(
             "action",
             player:get_player_name() .. " moves " .. stack:get_name() .. " to chest at " ..
-                    minetest.pos_to_string(pos)
+                    core.pos_to_string(pos)
         )
 
     end
 
     def_table.on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-        unilib.log(
+        unilib.utils.log(
             "action",
             player:get_player_name() .. " takes " .. stack:get_name() .. " from chest at " ..
-                    minetest.pos_to_string(pos)
+                    core.pos_to_string(pos)
         )
 
     end
+    ]]--
+
+    unilib.utils.set_inventory_action_loggers(def_table, "chest")
 
     if pipeworks_flag then
 
@@ -749,7 +784,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
             can_insert = function(pos, node, stack, direction)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
                 if meta:get_int("splitstacks") == 1 then
                     stack = stack:peek_item(1)
@@ -761,7 +796,7 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
             insert_object = function(pos, node, stack, direction)
 
-                local meta = minetest.get_meta(pos)
+                local meta = core.get_meta(pos)
                 local inv = meta:get_inventory()
                 return inv:add_item("main", stack)
 
@@ -805,58 +840,13 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
     def_closed.tiles[3] = def_table.tiles[3] .. "^[transformFX"
 
     -- ("orig_name" should be a list containing both variants, the "open" variant last)
-    unilib.register_node(full_name, orig_name, replace_mode, def_closed)
-    unilib.register_node(full_name .. "_open", nil, replace_mode, def_opened)
+    unilib.register_node(full_name, orig_name_list[1], replace_mode, def_closed)
+    unilib.register_node(full_name .. "_open", orig_name_list[2], replace_mode, def_opened)
+
+    -- Registration complete; add it to the LBM below
+    table.insert(open_chest_list, full_name .. "_open")
 
 end
-
----------------------------------------------------------------------------------------------------
--- Setup code
----------------------------------------------------------------------------------------------------
-
-minetest.register_on_player_receive_fields(function(player, formname, fields)
-
-    -- Adapted from default/chests.lua
-    -- Handles opening/closing the chest and responds to any button presses in the chest's formspec
-
-    if string.find(formname, "unilib:container_chest_") == nil or not player then
-        return
-    end
-
-    local pn = player:get_player_name()
-    if not open_chest_table[pn] then
-        return
-    end
-
-    if fields.delpage or fields.prevpage or fields.nextpage or fields.addpage then
-
-        chest_page_update(pn, player, formname, fields)
-        return true
-
-    elseif fields.quit then
-
-        chest_lid_close(pn)
-        return true
-
-    elseif pipeworks_flag then
-
-        -- (Returns nil or true)
-        return chest_switch_update(pn, player, formname, fields)
-
-    end
-
-end)
-
-minetest.register_on_leaveplayer(function(player)
-
-    -- Adapted from default/chests.lua
-
-    local pn = player:get_player_name()
-    if open_chest_table[pn] then
-        chest_lid_close(pn)
-    end
-
-end)
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -872,5 +862,80 @@ function unilib.pkg.shared_default_chest.init()
                 " on multiple pages, and can have a limited or infinite capacity",
         mod_optional = "pipeworks",
     }
+
+end
+
+function unilib.pkg.shared_default_chest.exec()
+
+    core.register_on_player_receive_fields(function(player, formname, fields)
+
+        -- Adapted from default/chests.lua
+        -- Handles opening/closing the chest and responds to any button presses in the chest's
+        --      formspec
+
+        local pn = player:get_player_name()
+        if string.find(formname, "unilib:container_chest_") == nil or not player then
+
+            if open_chest_table[pn] then
+                chest_lid_close(pn)
+            end
+
+            return
+
+        elseif fields.delpage or fields.prevpage or fields.nextpage or fields.addpage then
+
+            chest_page_update(pn, player, formname, fields)
+            return true
+
+        elseif fields.quit and open_chest_table[pn] then
+
+            chest_lid_close(pn)
+            return true
+
+        elseif pipeworks_flag then
+
+            -- (Returns nil or true)
+            return chest_switch_update(pn, player, formname, fields)
+
+        end
+
+    end)
+
+    core.register_on_leaveplayer(function(player)
+
+        -- Adapted from default/chests.lua
+
+        local pn = player:get_player_name()
+        if open_chest_table[pn] then
+            chest_lid_close(pn)
+        end
+
+    end)
+
+end
+
+function unilib.pkg.shared_default_chest.post()
+
+    if #open_chest_list > 0 then
+
+        -- Close opened chests on load
+        -- N.B. The call to unilib.register_obsolete_lbm() is made by the calling package
+        unilib.register_lbm({
+            label = "Close opened chests on load [shared_default_chest]",
+            name = "unilib:lbm_shared_default_chest",
+            nodenames = open_chest_list,
+
+            run_at_every_load = true,
+
+            action = function(pos, node)
+
+                local full_name = node.name
+                node.name = full_name:gsub("_open$", "")
+                core.swap_node(pos, node)
+
+            end,
+        })
+
+    end
 
 end

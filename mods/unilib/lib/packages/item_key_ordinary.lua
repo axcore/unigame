@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- From:    default
+-- From:    keys
 -- Code:    LGPL 2.1
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 unilib.pkg.item_key_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.keys.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,23 +27,22 @@ end
 
 function unilib.pkg.item_key_ordinary.exec()
 
-    -- ("default:key" is already aliased on to "keys:key" by something; maybe in the engine? Anyway,
-    --      we need to un-alias it to prevent a warning in debug.txt)
-    minetest.registered_aliases["default:key"] = nil
-
-    unilib.register_tool("unilib:item_key_ordinary", {"default:key", "keys:key"}, mode, {
+    -- (Note that keys were moved from minetest_game/default to minetest_game/keys in 2022)
+    unilib.register_craftitem("unilib:item_key_ordinary", {"default:key", "keys:key"}, mode, {
         -- From default:key
         description = S("Ordinary Key"),
         inventory_image = "unilib_item_key_ordinary.png",
         groups = {key = 1, not_in_creative_inventory = 1},
 
-        stack_max = 1,
+        -- N.B. Removing the following line from earlier versions of minetest_game allows keys to be
+        --      stackable, if they contain the same secret
+--      stack_max = 1,
 
         on_place = function(itemstack, placer, pointed_thing)
 
             local under = pointed_thing.under
-            local node = minetest.get_node(under)
-            local def = minetest.registered_nodes[node.name]
+            local node = core.get_node(under)
+            local def = core.registered_nodes[node.name]
 
             if def and def.on_rightclick and not (
                 placer and placer:is_player() and
@@ -57,13 +56,13 @@ function unilib.pkg.item_key_ordinary.exec()
             end
 
             local pos = pointed_thing.under
-            node = minetest.get_node(pos)
+            node = core.get_node(pos)
 
             if not node or node.name == "ignore" then
                 return itemstack
             end
 
-            local ndef = minetest.registered_nodes[node.name]
+            local ndef = core.registered_nodes[node.name]
             if not ndef then
                 return itemstack
             end

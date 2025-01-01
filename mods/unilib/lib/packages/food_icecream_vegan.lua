@@ -9,7 +9,7 @@
 unilib.pkg.food_icecream_vegan = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,9 +36,9 @@ function unilib.pkg.food_icecream_vegan.exec()
         inventory_image = "unilib_food_icecream_vegan.png",
         groups = {food = 5, food_icecream = 1, food_icecream_base = 1, vegan_alternative = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_icecream_vegan", 3),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_icecream_vegan", 3),
     })
-    if unilib.pkg_executed_table["food_milk_soy"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_soy"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -57,7 +57,7 @@ function unilib.pkg.food_icecream_vegan.exec()
         })
 
     end
-    if unilib.pkg_executed_table["food_milk_soy_red"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_soy_red"] ~= nil then
 
         unilib.register_craft({
             -- From cheese:vegan_ice_cream_base
@@ -76,7 +76,7 @@ function unilib.pkg.food_icecream_vegan.exec()
         })
 
     end
-    if unilib.pkg_executed_table["food_milk_coconut"] ~= nil then
+    if unilib.global.pkg_executed_table["food_milk_coconut"] ~= nil then
 
         unilib.register_craft({
             -- From cheese:vegan_ice_cream_base

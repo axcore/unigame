@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_plant_palm_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,9 +25,9 @@ function unilib.pkg.deco_australia_plant_palm_mangrove.init()
 
 end
 
-function unilib.pkg.deco_australia_plant_palm_mangrove.exec()
+function unilib.pkg.deco_australia_plant_palm_mangrove.post()
 
-    unilib.register_decoration_now("australia_plant_palm_mangrove", nil, {
+    unilib.register_decoration_complete("australia_plant_palm_mangrove", nil, {
         -- From australia/biome_mangroves.lua
         biomes = "australia_mangroves",
         place_on = {"unilib:dirt_mud_mangrove", "unilib:dirt_ordinary"},

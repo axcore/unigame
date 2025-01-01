@@ -9,7 +9,7 @@
 unilib.pkg.ladder_wood_extendable = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ropes.add_mode
+local mode = unilib.global.imported_mod_table.ropes.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -39,7 +39,7 @@ function unilib.pkg.ladder_wood_extendable.exec()
             "unilib_ladder_wood_ordinary.png",
         },
         groups = {choppy = 2, flammable = 2, flow_through = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.wood,
+        sounds = unilib.global.sound_table.wood,
 
         climbable = true,
         drawtype = "nodebox",
@@ -54,7 +54,7 @@ function unilib.pkg.ladder_wood_extendable.exec()
                 {-0.4375, -0.1875, 0.4375, 0.4375, -0.0625, 0.5},
                 {-0.4375, -0.4375, 0.4375, 0.4375, -0.3125, 0.5},
                 {-0.4375, 0.0625, 0.4375, 0.4375, 0.1875, 0.5},
-            }
+            },
         },
         paramtype = "light",
         paramtype2 = "facedir",

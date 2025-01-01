@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_flower_lily_darling = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -19,17 +19,21 @@ function unilib.pkg.deco_australia_flower_lily_darling.init()
 
     return {
         description = "Darling lily as decoration",
-        depends = {"biome_australia_murray_darling_basin", "dirt_ordinary", "flower_lily_darling"},
+        depends = {"biome_australia_murray_darling_basin", "flower_lily_darling"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
     }
 
 end
 
-function unilib.pkg.deco_australia_flower_lily_darling.exec()
+function unilib.pkg.deco_australia_flower_lily_darling.post()
 
-    unilib.register_decoration_now("australia_flower_lily_darling", nil, {
+    unilib.register_decoration_complete("australia_flower_lily_darling", nil, {
         -- From australia:darling_lily
         biomes = "australia_murray_darling_basin",
-        place_on = "unilib:dirt_ordinary_with_turf_dry",
+        place_on = {
+            "unilib:dirt_ordinary_with_turf_dry",
+            "unilib:dirt_ordinary_with_turf_murray_darling_basin",
+        },
         y_max = 200,
         y_min = 36,
     })

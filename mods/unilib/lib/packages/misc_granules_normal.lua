@@ -9,7 +9,7 @@
 unilib.pkg.misc_granules_normal = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.underch.add_mode
+local mode = unilib.global.imported_mod_table.underch.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_granules_normal.exec()
         description = S("Block of Normal Granules"),
         tiles = {"unilib_misc_granules_normal_block.png"},
         groups = {crumbly = 2, falling_node = 1},
-        sounds = unilib.sound_table.sand,
+        sounds = unilib.global.sound_table.sand,
     })
 
 end

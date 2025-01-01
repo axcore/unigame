@@ -9,7 +9,7 @@
 unilib.pkg.misc_sawdust = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bbq.add_mode
+local mode = unilib.global.imported_mod_table.bbq.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -32,10 +32,12 @@ function unilib.pkg.misc_sawdust.exec()
         description = S("Sawdust"),
         tiles = {"unilib_misc_sawdust.png"},
         groups = {choppy = 3, flammable = 3, oddly_breakable_by_hand = 2},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
         inventory_image = "unilib_misc_sawdust.png",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -46,7 +48,7 @@ function unilib.pkg.misc_sawdust.exec()
         paramtype2 = "facedir",
         wield_image = "unilib_misc_sawdust.png",
     })
-    if not minetest.get_modpath("technic") then
+    if not core.get_modpath("technic") then
 
         unilib.register_craft({
             -- From bbq:sawdust

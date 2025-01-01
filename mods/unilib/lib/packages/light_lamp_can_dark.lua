@@ -9,7 +9,7 @@
 unilib.pkg.light_lamp_can_dark = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.morelights_modern.add_mode
+local mode = unilib.global.imported_mod_table.morelights_modern.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,15 +29,17 @@ function unilib.pkg.light_lamp_can_dark.exec()
     unilib.register_node("unilib:light_lamp_can_dark", "morelights_modern:canlight_d", mode, {
         -- From morelights_modern:canlight_d
         description = S("Dark Modern Can Light"),
-        tiles = {"unilib_pole_metal_dark.png^unilib_light_lamp_can_overlay.png"},
+        tiles = {"unilib_hardware_pole_metal_dark.png^unilib_light_lamp_can_overlay.png"},
         groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3},
-        sounds = unilib.sound_table.metal,
+        sounds = unilib.global.sound_table.metal,
 
         collision_box = {
             type = "fixed",
             fixed = {-1/8, 0, -1/8, 1/8, 1/2, 1/8},
         },
         drawtype = "mesh",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         light_source = 12,
         mesh = "unilib_light_lamp_can.obj",
         paramtype = "light",
@@ -53,7 +55,7 @@ function unilib.pkg.light_lamp_can_dark.exec()
         recipe = {
             {"unilib:dye_grey_dark", "unilib:metal_steel_ingot", ""},
             {"unilib:metal_steel_ingot", "unilib:light_bulb_normal", "unilib:metal_steel_ingot"},
-        }
+        },
     })
 
 end

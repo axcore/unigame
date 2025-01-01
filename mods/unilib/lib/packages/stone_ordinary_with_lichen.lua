@@ -9,7 +9,7 @@
 unilib.pkg.stone_ordinary_with_lichen = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.caverealms.add_mode
+local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,7 @@ function unilib.pkg.stone_ordinary_with_lichen.init()
     return {
         description = "Ordinary cobblestone with lichen",
         depends = "stone_ordinary",
-        optional = "moss_purple",
+        optional = "moss_violet",
     }
 
 end
@@ -40,19 +40,19 @@ function unilib.pkg.stone_ordinary_with_lichen.exec()
                 "unilib_stone_ordinary_cobble.png^unilib_lichen_overlay_side.png",
             },
             groups = {crumbly = 3},
-            sounds = unilib.node_sound_dirt_defaults({
+            sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},
             }),
 
             drop = "unilib:stone_ordinary_cobble",
         }
     )
-    if unilib.pkg_executed_table["moss_purple"] ~= nil then
+    if unilib.global.pkg_executed_table["moss_violet"] ~= nil then
 
-        unilib.register_cuttable(
+        unilib.tools.make_cuttable(
             "unilib:stone_ordinary_cobble_with_lichen",
             "unilib:stone_ordinary_cobble",
-            "unilib:moss_purple"
+            "unilib:moss_violet"
         )
 
     end

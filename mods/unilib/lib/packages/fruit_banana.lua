@@ -9,7 +9,7 @@
 unilib.pkg.fruit_banana = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,12 +34,14 @@ function unilib.pkg.fruit_banana.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_banana = 1, leafdecay = 1,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "torchlike",
-        drop = "unilib:fruit_banana",
         inventory_image = "unilib_fruit_banana.png",
+        -- N.B. is_ground_content = false not in original code; added to match other fruit
+        is_ground_content = false,
         paramtype = "light",
+        place_param2 = 1,
         selection_box = {
             type = "fixed",
             fixed = {-0.31, -0.5, -0.31, 0.31, 0.5, 0.31}
@@ -48,17 +50,12 @@ function unilib.pkg.fruit_banana.exec()
         walkable = false,
         wield_image = "unilib_fruit_banana.png",
 
-        after_place_node = function(pos, placer)
+        -- N.B. No standard .after_place_node for fruits, because of unsuitable texture
 
-            if placer:is_player() then
-                minetest.set_node(pos, {name = "unilib:fruit_banana", param2 = 1})
-            end
-
-        end,
-
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_banana", 2),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_banana", 2),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -74,17 +71,17 @@ function unilib.pkg.fruit_banana.exec()
         -- From ethereal:banana_bunch
         description = S("Banana Bunch"),
         tiles = {"unilib_fruit_banana_bunch.png"},
-        -- N.B. no food_banana in original code
         groups = {
-            dig_immediate = 3, flammable = 2, fleshy = 3, food_banana = 1, leafdecay = 1,
-            leafdecay_drop = 1,
+            dig_immediate = 3, flammable = 2, fleshy = 3, leafdecay = 1, leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "torchlike",
-        drop = "unilib:fruit_banana_bunch",
         inventory_image = "unilib_fruit_banana_bunch.png",
+        -- N.B. is_ground_content = false not in original code; added to match other fruit
+        is_ground_content = false,
         paramtype = "light",
+        place_param2 = 1,
         selection_box = {
             type = "fixed",
             fixed = {-0.31, -0.5, -0.31, 0.31, 0.5, 0.31}
@@ -93,16 +90,8 @@ function unilib.pkg.fruit_banana.exec()
         walkable = false,
         wield_image = "unilib_fruit_banana_bunch.png",
 
-        after_place_node = function(pos, placer)
-
-            if placer:is_player() then
-                minetest.set_node(pos, {name = "unilib:fruit_banana_bunch", param2 = 1})
-            end
-
-        end,
-
---      on_use = minetest.item_eat(6),
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_banana", 6),
+--      on_use = core.item_eat(6),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_banana", 6),
     })
     unilib.register_craft({
         -- From ethereal:banana_bunch
@@ -118,7 +107,8 @@ function unilib.pkg.fruit_banana.exec()
             {"unilib:fruit_banana_bunch"},
         },
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -135,15 +125,16 @@ function unilib.pkg.fruit_banana.exec()
         juice_description = S("Banana"),
         juice_type = "banana",
         rgb = "#eced9f",
+
         orig_flag = true,
     })
-    unilib.register_juice_duplicate("banana", "unilib:fruit_banana_bunch")
+    unilib.juice.register_duplicate("banana", "unilib:fruit_banana_bunch")
 
 end
 
 function unilib.pkg.fruit_banana.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_banana",
 
         replace_mode = mode,
@@ -151,7 +142,7 @@ function unilib.pkg.fruit_banana.post()
         pkg_list = {"tree_banana"},
     })
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_banana_bunch",
 
         replace_mode = mode,

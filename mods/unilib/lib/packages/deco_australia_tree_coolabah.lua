@@ -9,7 +9,7 @@
 unilib.pkg.deco_australia_tree_coolabah = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,6 +29,7 @@ function unilib.pkg.deco_australia_tree_coolabah.init()
             "biome_australia_murray_darling_basin",
             "biome_australia_simpson_desert",
             "biome_australia_victorian_forests",
+            "dirt_custom_antipodean",
             "dirt_ordinary",
             "dirt_red_antipodean",
             "sand_red_antipodean",
@@ -39,12 +40,12 @@ end
 
 function unilib.pkg.deco_australia_tree_coolabah.post()
 
-    if unilib.pkg_executed_table["biome_australia_central_australia"] ~= nil and
-            unilib.pkg_executed_table["dirt_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_central_australia"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_red_antipodean"] ~= nil then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_central_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_central_" .. i, nil, {
                 -- From australia/biome_central_australia.lua
                 biomes = "australia_central_australia",
                 place_on = "unilib:dirt_red_antipodean",
@@ -55,15 +56,20 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_eastern_coasts"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_eastern_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_eastern_" .. i, nil, {
                 -- From australia/biome_eastern_coasts.lua
                 biomes = "australia_eastern_coasts",
-                place_on = "unilib:dirt_ordinary_with_turf",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_with_turf_eastern_coasts",
+                },
                 y_max = 35,
                 y_min = 7,
             })
@@ -71,15 +77,21 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
+
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_flinders_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_flinders_" .. i, nil, {
                 -- From australia/biome_flinders_lofty.lua
                 biomes = "australia_flinders_lofty",
-                place_on = "unilib:dirt_ordinary_with_turf_dry",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf_dry",
+                    "unilib:dirt_ordinary_with_turf_flinders_lofty",
+                },
                 y_max = 140,
                 y_min = 36,
             })
@@ -87,15 +99,20 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_jarrah_karri_forests"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_jarrah_karri_forests"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_forests_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_forests_" .. i, nil, {
                 -- From australia/biome_jarrah_karri_forests.lua
                 biomes = "australia_jarrah_karri_forests",
-                place_on = "unilib:dirt_ordinary_with_turf",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_dark_with_turf_jarrah_karri_forests",
+                },
                 y_max = 35,
                 y_min = 8,
             })
@@ -103,31 +120,45 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_mulga_lands"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_mulga_lands"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_mulga_lands_" .. i, nil, {
+            unilib.register_decoration_complete(
                 -- From australia/biome_mulga_lands.lua
-                biomes = "australia_mulga_lands",
-                place_on = "unilib:dirt_ordinary_with_turf_dry",
-                y_max = 140,
-                y_min = 36,
-            })
+                "australia_tree_coolabah_in_mulga_lands_" .. i,
+                nil,
+                {
+                    biomes = "australia_mulga_lands",
+                    place_on = {
+                        "unilib:dirt_ordinary_with_turf_dry",
+                        "unilib:dirt_ordinary_with_turf_mulga_lands",
+                    },
+                    y_max = 140,
+                    y_min = 36,
+                }
+            )
 
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_murray_darling_basin"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_murray_darling_basin"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_murray_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_murray_" .. i, nil, {
                 -- From australia/biome_murray_darling_basin.lua
                 biomes = "australia_murray_darling_basin",
-                place_on = "unilib:dirt_ordinary_with_turf_dry",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf_dry",
+                    "unilib:dirt_ordinary_with_turf_murray_darling_basin",
+                },
                 y_max = 140,
                 y_min = 36,
             })
@@ -135,12 +166,12 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_simpson_desert"] ~= nil and
-            unilib.pkg_executed_table["sand_red_antipodean"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_simpson_desert"] ~= nil and
+            unilib.global.pkg_executed_table["sand_red_antipodean"] ~= nil then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_simpson_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_simpson_" .. i, nil, {
                 -- From australia/biome_simpson_desert.lua
                 biomes = "australia_simpson_desert",
                 place_on = "unilib:sand_red_antipodean",
@@ -151,15 +182,20 @@ function unilib.pkg.deco_australia_tree_coolabah.post()
         end
 
     end
-    if unilib.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and
-            unilib.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
+        unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+    ) then
 
         for i = 1, 2 do
 
-            unilib.register_decoration_now("australia_tree_coolabah_in_victoria_" .. i, nil, {
+            unilib.register_decoration_complete("australia_tree_coolabah_in_victoria_" .. i, nil, {
                 -- From australia/biome_victorian_forests.lua
                 biomes = "australia_victorian_forests",
-                place_on = "unilib:dirt_ordinary_with_turf",
+                place_on = {
+                    "unilib:dirt_ordinary_with_turf",
+                    "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                },
                 y_max = 140,
                 y_min = 36,
             })

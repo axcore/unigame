@@ -9,7 +9,7 @@
 unilib.pkg.deco_moreplants_fern_christmas = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.moreplants.add_mode
+local mode = unilib.global.imported_mod_table.moreplants.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_moreplants_fern_christmas.post()
 
-    unilib.register_decoration_now("moreplants_fern_christmas", nil, {
+    unilib.register_decoration_complete("moreplants_fern_christmas", nil, {
         -- From moreplants/init.lua
         -- Completes decoration in package "fern_christmas"
         biomes = "default_forest_deciduous",

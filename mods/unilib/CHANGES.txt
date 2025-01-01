@@ -1,0 +1,13 @@
+v1.0.0 (1 Jan 2025)
+---------------------------------------------------------------------------------------------------
+
+- This is the first beta release
+- Future releases will NOT introduce game-breaking changes, so it is now safe to start a long-term
+    game (or a server)
+
+v0.15.0 (1 Oct 2023)
+---------------------------------------------------------------------------------------------------
+
+- This is the first alpha release
+- Future releases may introduce game-breaking changes. Don't invest a lot of time and energy into
+    your game (unless you are willing to maintain the code yourself)

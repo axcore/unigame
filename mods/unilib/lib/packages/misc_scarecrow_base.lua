@@ -9,7 +9,7 @@
 unilib.pkg.misc_scarecrow_base = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -34,6 +34,8 @@ function unilib.pkg.misc_scarecrow_base.exec()
         -- (no sounds)
 
         drawtype = "nodebox",
+        -- N.B. is_ground_content = false not in original code
+        is_ground_content = false,
         node_box = {
             type = "fixed",
             fixed = {
@@ -51,8 +53,8 @@ function unilib.pkg.misc_scarecrow_base.exec()
         recipe = {
             {"", "group:stick", ""},
             {"group:stick", "group:stick", "group:stick"},
-            {"", "group:stick", ""}
-        }
+            {"", "group:stick", ""},
+        },
     })
 
 end

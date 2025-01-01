@@ -1,0 +1,2352 @@
+# Vapourisation table, loaded by the "shared_atomic" package
+#
+# Vapourisation produces "samplings" representing chemical elements (specifically a small quantity
+#       of that element). Typically, multiple "samplings" can be used to craft a single ingot,
+#       chunk, substance sample (and so on) in the atomic collector
+# This file specifies the proportions of different samplings produced for each input item (i.e. each
+#       item placed in an atomic vapouriser). The number of samplings required to craft things is
+#       described in the construct.csv file
+# By default, every vapourisation is randomised (which can be temporarily disabled in the
+#       "shared_atomic" package, when necessary). Thus, when we talk about the proportions of gold
+#       and silver samplings produced by vapourising some mineral, we're actually talking about the
+#       maximum amount of gold and silver that any one vapourisation can produce
+#
+# Every line in this file consists of three columns
+# The first column is an item consumed by the atomic vapouriser, e.g. "unilib:stone_ordinary", or
+#       a list of items producing exactly identical output, e.g.
+#       "unilib:stone_ordinary unilib:stone_ordinary_block"
+# The second column is a factor by which the vapourisation output can be easily increased or
+#       decreased, in order to balance the game
+# The third column is a string describing the maximum proportions of the samplings produced. For
+#       example, "oxygen 60 silicon 40" means that a single input item generates a maximum of 60%
+#       oxygen samplings and 40% silicon samplings. Typically, the numbers add up to 100, meaning
+#       that they represent percentages. A total of 100 is not compulsory, however.
+#       "oxygen 50 silicon 30" would mean that up to 50 oxygen samplings would be produced for every
+#       30 silicon samplings
+# The maximum number of samplings produced is the product of the second column's vapourisation
+#       factor and the third column's proportions; for example, a factor of 0.5 and
+#       "oxygen 60 silicon 40" produce up to 30 oxygen samplings and 20 oxygen samplings. (The
+#       results of the multiplication are always rounded up, so the maximum number is always at
+#       least 1)
+# The ACTUAL number of samplings of each type, produced by each vapourisation, is a random number
+#       between 0 and the maximum (so even when the probability is 1, there's no guarantee that each
+#       type of sampling will be produced in a single vapourisation)
+#
+# The format of the third column is a sequence of "words", separated by whitespace
+# If a "word" containing an alphabetical character matches the name of an element, e.g. "hydrogen"
+#       (one of the elements in the third column of periodic_table.csv, converted to lower case),
+#       then the corresponding sampling is one of the products of the vapourisation process
+# The sampling can be followed by two optional numbers: the first is the proportion of samplings
+#       produced (an integer, 1 or above, default 1); the second is the probability that this
+#       element's samplings will be produced at all (a fractional number in the range 0-1,
+#       default 1)
+# The column may contain any number of words; leading or trailing numerical values are ignored, as
+#       are any optional numbers after the first two. Thus, the following two lines are identical
+#       (but in the second one, all the 99 values are ignored):
+#
+#   unilib:stone_ordinary|1|oxygen 60 1 silicon 40 1
+#   unilib:stone_ordinary|1|99 oxygen 60 1 99 silicon 40 1 99
+#
+# When the first column specifies an item group, rather than an item, then the output is produced by
+#       all items matching the group, IN ADDITION to the item's specific output. For example, these
+#       two lines would specify that "unilib:stone_ordinary" produces oxygen, silicon AND gold,
+#       in the proportions 60:40:10
+#
+#   group:smoothstone|1|gold 50 1
+#   unilib:stone_ordinary|1|oxygen 60 1 silicon 40 1
+#
+# Like specific input items, group inputs tend to use proportions that add up to 100. In this case,
+#       the word "other" can be used. Consider this example:
+#
+#   group:smoothstone|1|oxygen 60 1 silicon 30 1 other 10 1
+#   unilib:stone_ordinary|1|gold 50 1 silver 50 1
+#
+# In this case, "unilib:stone_ordinary" (which has the "smoothstone" group) produces up to 60%
+#       oxygen, 30% silicon and 10% of whatever is specified by "unilib:stone_ordinary". Thus, it
+#       produces up to 60% oxygen, 30% silicon, 5% gold and 5% silver.
+# In this situation, the vapourisation factor of "unilib:stone_ordinary" doesn't matter, because the
+#       "group:smoothstone" line specifies the combined maximum quantities. In this file, the
+#       IGNORE constant is used for the vapourisation factor in those lines
+# Also in this situation, the probability for "other" on the "group:smoothstone" line is ignored, so
+#       the "unilib:stone_ordinary" line can specify its own probabilities. In this file, "other"
+#       probabilities are omitted
+#
+# As a guide, with:
+#       - a vapourisation factor of 1
+#       - a sampling proportion of 50%
+#       - a probability of 1
+#       - a chain of tubes between the vapouriser and collector of the optimal length
+#       - one item of output (for example a mineral chunk) requiring 10 samplings
+# ...then a stack of input items will produce 55 output items, on average (or a full stack of output
+#       items when the debug flags in "atomic" remix packages are enabled)
+#
+# This file may be modified, but if you do modify it, you should enable the warnings in the
+#       "shared_atomic" package until you have eliminated any problems
+
+# input item|vapourisation string
+
+# - item groups -----------------------------------------------------------------------------------
+
+# bushes/trees - carbon 50%, oxygen 42%, hydrogen 6%, various 2% (inc nitrogen, calcium, potassium)
+group:tree|1|carbon 50 oxygen 40 hydrogen 7 nitrogen 1 calcium 1 potassium 1
+group:wood|0.25|carbon 50 oxygen 40 hydrogen 10
+group:leaves|0.33|carbon 50 oxygen 40 hydrogen 10
+group:sapling|0.1|carbon 50 oxygen 40 hydrogen 10
+group:fence|0.33|carbon 50 oxygen 40 hydrogen 10
+group:bush|0.33|carbon 50 oxygen 40 hydrogen 10
+group:bushstem|0.5|carbon 50 oxygen 40 hydrogen 10
+
+# stone: oxygen 46-50%, silicon 25-30%
+#group:smoothstone|1|oxygen 50 silicon 30 other 20
+#group:stoneblock|1|oxygen 55 silicon 35 other 10
+#group:stonebrick|1|oxygen 55 silicon 35 other 10
+#group:cobble|0.66|oxygen 55 silicon 35 other 10
+#group:rubble|0.5|oxygen 55 silicon 35 other 10
+#group:mossycobble|0.66|oxygen 55 silicon 35 other 10
+
+# clay: oxygen 50-60%, silicon 20-30%, aluminium 10-20%, various (inc iron, calcium, magnesium,
+#   potassium, sodium). The "other" component is exaggerated in proportion to match smoothstone)
+group:clay|1|oxygen 50 silicon 20 aluminium 10 0.5 other 20
+
+# coral: oxygen 48%, calcium 40%, carbon 12%
+group:coral|0.5|oxygen 48 calcium 40 carbon 12
+
+# dye: carbon 50-60%, oxygen 20-30%, hydrogen 5-10%, nitrogen 5-10%
+group:dye|0.25|carbon 55 oxygen 25 hydrogen 10 nitrogen 10
+
+# ferns/flowers/mushrooms: carbon 45-50%, oxygen 40-45%, hydrogen 5-8%, nitrogen 1-3%
+group:fern|0.5|carbon 45 oxygen 45 hydrogen 5 nitrogen 3 other 2
+group:flower|0.33|carbon 45 oxygen 45 hydrogen 5 nitrogen 3 other 2
+group:mushroom|0.25|carbon 45 oxygen 45 hydrogen 5 nitrogen 3 other 2
+
+# gravel: oxygen 45-50%, silicon 25-30%, aluminium 7-12%, iron 3-5%, calcium 1-2% (the "other"
+#       component is exaggerated so it's worth vapourising)
+group:gravel|1|oxygen 45 silicon 25 aluminium 10 iron 3 calcium 2 other 15
+
+# sand: oxygen 53%, silicon 47% (the "other" component is exaggerated so it's worth vapourising)
+group:sand|1|oxygen 42 silicon 38 other 20
+
+# (crop) seeds: carbon 40-50%, oxygen 30-40%, hydrogen 6-10%, nitrogen 1.5-5%, phosphorus 0.5-2%,
+#   calcium 0.1-0.5%, magnesium 0.1-0.3%, sulphur 0.1-0.3%, zinc/copper/manganese, iron < 0.1%
+group:seed|0.1|carbon 45 oxygen 40 hydrogen 5 nitrogen 3 phosphorus 2 other 5
+
+# soil/dirt: oxygen 46%, silicon 28%, carbon 5-10%, aluminium 8%, iron 5%, calcium 2%, magnesium 2%,
+#       potassium 2%, sodium 1%,
+group:soil|0.33|oxygen 45 silicon 30 carbon 10 aluminium 10 0.5 other 5
+
+# wool: carbon 50%, oxygen 25%, hydrogen 7%, nitrogen 16%, sulphur 2%
+group:wool|0.33|carbon 50 oxygen 25 hydrogen 7 nitrogen 16 sulphur 2
+
+# - clays (oxygen 50 silicon 20 aluminium 10 0.5 other 20) ---------------------------------------
+
+unilib:clay_andesite_white|IGNORE|iron 7 calcium 6 magnesium 5 sodium 5 titanium 1
+#unilib:clay_antipodean|IGNORE|
+unilib:clay_attapulgite|IGNORE|hydrogen 5 magnesium 2
+unilib:clay_attapulgite_lump|IGNORE|hydrogen 5 magnesium 2
+#unilib:clay_baked_black|IGNORE|
+#unilib:clay_baked_blue|IGNORE|
+#unilib:clay_baked_brown|IGNORE|
+#unilib:clay_baked_cyan|IGNORE|
+#unilib:clay_baked_green|IGNORE|
+#unilib:clay_baked_green_dark|IGNORE|
+#unilib:clay_baked_grey|IGNORE|
+#unilib:clay_baked_grey_dark|IGNORE|
+#unilib:clay_baked_magenta|IGNORE|
+#unilib:clay_baked_natural|IGNORE|
+#unilib:clay_baked_orange|IGNORE|
+#unilib:clay_baked_pink|IGNORE|
+#unilib:clay_baked_red|IGNORE|
+#unilib:clay_baked_violet|IGNORE|
+#unilib:clay_baked_white|IGNORE|
+#unilib:clay_baked_yellow|IGNORE|
+unilib:clay_basalt_pale|IGNORE|iron 12 calcium 8 magnesium 7 sodium 3 titanium 2
+unilib:clay_bentonite_calcium|IGNORE|calcium 3 magnesium 2 hydrogen 2 iron 1
+unilib:clay_bentonite_calcium_lump|IGNORE|calcium 3 magnesium 2 hydrogen 2 iron 1
+unilib:clay_bentonite_sodium|IGNORE|sodium 3 magnesium 2 calcium 1 hydrogen 1 iron 1
+unilib:clay_bentonite_sodium_lump|IGNORE|sodium 3 magnesium 2 calcium 1 hydrogen 1 iron 1
+#unilib:clay_brown|IGNORE|
+#unilib:clay_brown_lump|IGNORE|
+unilib:clay_chalk_pink|IGNORE|calcium 45 carbon 35 magnesium 5 iron 5
+unilib:clay_chert|IGNORE|iron 3 calcium 2
+unilib:clay_dacite|IGNORE|calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:clay_dolostone_dark|IGNORE|carbon 38 calcium 35 magnesium 22 iron 2
+unilib:clay_eclogite|IGNORE|calcium 10 magnesium 10 iron 9 sodium 4
+unilib:clay_gabbro_grey|IGNORE|calcium 10 iron 10 magnesium 7 sodium 3 titanium 2
+unilib:clay_gneiss_grey|IGNORE|iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:clay_granite_ebony|IGNORE|potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:clay_granite_orange|IGNORE|potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:clay_greywacke_pale|IGNORE|iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:clay_gumland_hardpan|IGNORE|iron 2 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_gumland_topsoil|IGNORE|iron 2 calcium 1 magnesium 1 potassium 1 sodium 1
+#unilib:clay_kaolinite|IGNORE|
+#unilib:clay_kaolinite_lump|IGNORE|
+unilib:clay_komatiite|IGNORE|magnesium 25 iron 12 calcium 10 sodium 2 potassium 1
+unilib:clay_lignite|IGNORE|carbon 65 hydrogen 5 sulphur 3 nitrogen 2
+unilib:clay_limestone_beige|IGNORE|calcium 45 carbon 35 magnesium 5 iron 5 sodium 2
+unilib:clay_marble_cream|IGNORE|calcium 50 carbon 45 magnesium 2 iron 1
+unilib:clay_migmatite|IGNORE|iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+#unilib:clay_ordinary|IGNORE|
+#unilib:clay_ordinary_hardened|IGNORE|
+#unilib:clay_ordinary_lump|IGNORE|
+unilib:clay_quartzite_red|IGNORE|iron 1
+#unilib:clay_red|IGNORE|
+unilib:clay_rhyolite_dark|IGNORE|potassium 5 sodium 5 iron 2 calcium 1 magnesium 1
+unilib:clay_schist_blue|IGNORE|iron 15 magnesium 5 calcium 5 potassium 5
+unilib:clay_schist_green_pale|IGNORE|iron 15 magnesium 5 calcium 5 potassium 5
+unilib:clay_shale_white|IGNORE|iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+unilib:clay_siltstone_pale|IGNORE|iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:clay_soapstone|IGNORE|magnesium 30 iron 3 calcium 1
+unilib:clay_terracotta_black|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_blue|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_brown|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_cyan|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_green|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_green_dark|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_grey|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_grey_dark|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_magenta|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_orange|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_pink|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_red|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_violet|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_white|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_terracotta_yellow|IGNORE|iron 5 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:clay_vermiculite|IGNORE|iron 10 magnesium 9 hydrogen 2
+unilib:clay_vermiculite_lump|IGNORE|iron 10 magnesium 9 hydrogen 2
+
+# - gravels (oxygen 45 silicon 25 aluminium 10 iron 3 calcium 2 other 15) -------------------------
+
+unilib:gravel_andesite_white|IGNORE|magnesium 5 sodium 5 titanium 2
+unilib:gravel_basalt_pale|IGNORE|magnesium 7 sodium 3 titanium 2
+unilib:gravel_chalk_pink|IGNORE|carbon 35 magnesium 5
+#unilib:gravel_chert|IGNORE|
+unilib:gravel_dacite|IGNORE|magnesium 3 sodium 3 potassium 2
+#unilib:gravel_dark|IGNORE|
+unilib:gravel_dolostone_dark|IGNORE|carbon 38 magnesium 22
+unilib:gravel_eclogite|IGNORE|magnesium 10 sodium 4
+unilib:gravel_gabbro_grey|IGNORE|magnesium 7 sodium 3 titanium 2
+unilib:gravel_gneiss_grey|IGNORE|magnesium 3 potassium 3 sodium 2
+unilib:gravel_granite_ebony|IGNORE|potassium 5 sodium 5 magnesium 1
+unilib:gravel_granite_orange|IGNORE|potassium 5 sodium 5 magnesium 1
+unilib:gravel_greywacke_pale|IGNORE|magnesium 3 potassium 2 sodium 2
+unilib:gravel_komatiite|IGNORE|magnesium 25 sodium 2 potassium 1
+unilib:gravel_lignite|IGNORE|carbon 65 sulphur 3 nitrogen 2
+unilib:gravel_limestone_beige|IGNORE|carbon 35 magnesium 5 sodium 2
+unilib:gravel_marble_cream|IGNORE|carbon 45 magnesium 2
+unilib:gravel_migmatite|IGNORE|magnesium 5 potassium 3 sodium 2
+#unilib:gravel_mossy|IGNORE|
+#unilib:gravel_ordinary|IGNORE|
+#unilib:gravel_ordinary_cobble|IGNORE|
+#unilib:gravel_quartzite_red|IGNORE|
+#unilib:gravel_red_antipodean|IGNORE|
+unilib:gravel_rhyolite_dark|IGNORE|potassium 5 sodium 5 magnesium 1
+#unilib:gravel_sandstone_desert|IGNORE|
+#unilib:gravel_sandstone_golden|IGNORE|
+#unilib:gravel_sandstone_ordinary|IGNORE|
+#unilib:gravel_sandstone_silver|IGNORE|
+unilib:gravel_schist_blue|IGNORE|magnesium 5 potassium 5
+unilib:gravel_schist_green_pale|IGNORE|magnesium 5 potassium 5
+unilib:gravel_shale_white|IGNORE|potassium 4 magnesium 3 sodium 3
+unilib:gravel_siltstone_pale|IGNORE|magnesium 3 potassium 2 sodium 2
+unilib:gravel_soapstone|IGNORE|magnesium 30
+#unilib:gravel_stone_desert|IGNORE|
+
+# - metals ----------------------------------------------------------------------------------------
+
+unilib:metal_actinium_sample|VAPOURISE_SAMPLE|actinium 100
+
+unilib:metal_adamantite_block|VAPOURISE_METAL_BLOCK|carbon 80 gold 10 silver 10
+unilib:metal_adamantite_block_chiselled|VAPOURISE_METAL_BLOCK|carbon 80 gold 10 silver 10
+unilib:metal_adamantite_brick|VAPOURISE_METAL_BRICK|carbon 80 gold 10 silver 10
+unilib:metal_adamantite_ingot|VAPOURISE_METAL_INGOT|carbon 80 gold 10 silver 10
+unilib:metal_adamantite_lump|VAPOURISE_LUMP|carbon 80 gold 10 silver 10
+unilib:metal_adamantite_powder|VAPOURISE_POWDER|carbon 80 gold 10 silver 10
+
+unilib:metal_albata_block|VAPOURISE_METAL_BLOCK|copper 60 nickel 20 zinc 20
+unilib:metal_albata_ingot|VAPOURISE_METAL_INGOT|copper 60 nickel 20 zinc 20
+unilib:metal_albata_powder|VAPOURISE_POWDER|copper 60 nickel 20 zinc 20
+
+unilib:metal_aluminium_block|VAPOURISE_METAL_BLOCK|aluminium 100
+unilib:metal_aluminium_ingot|VAPOURISE_METAL_INGOT|aluminium 100
+unilib:metal_aluminium_powder|VAPOURISE_POWDER|aluminium 100
+
+unilib:metal_americium_sample|VAPOURISE_SAMPLE|americium 100
+
+unilib:metal_antimony_chunk|VAPOURISE_METAL_INGOT|antimony 100
+
+unilib:metal_arsenic_sample|VAPOURISE_SAMPLE|arsenic 100
+
+unilib:metal_barium_chunk|VAPOURISE_METAL_INGOT|barium 100
+
+unilib:metal_berkelium_sample|VAPOURISE_SAMPLE|berkelium 100
+
+unilib:metal_beryllium_chunk|VAPOURISE_METAL_INGOT|beryllium 100
+
+unilib:metal_bismuth_block|VAPOURISE_METAL_BLOCK|bismuth 100
+unilib:metal_bismuth_ingot|VAPOURISE_METAL_INGOT|bismuth 100
+unilib:metal_bismuth_powder|VAPOURISE_POWDER|bismuth 100
+
+unilib:metal_bohrium_sample|VAPOURISE_SAMPLE|bohrium 100
+
+unilib:metal_boron_chunk|VAPOURISE_METAL_INGOT|boron 100
+
+# Alpha brasses
+unilib:metal_brass_block|VAPOURISE_METAL_BLOCK|copper 65 zinc 35
+unilib:metal_brass_ingot|VAPOURISE_METAL_INGOT|copper 65 zinc 35
+unilib:metal_brass_powder|VAPOURISE_POWDER|copper 65 zinc 35
+
+# Duplex brasses
+unilib:metal_brass_rare_block|VAPOURISE_METAL_BLOCK|copper 55 zinc 45
+unilib:metal_brass_rare_ingot|VAPOURISE_METAL_INGOT|copper 55 zinc 45
+unilib:metal_brass_rare_powder|VAPOURISE_POWDER|copper 55 zinc 45
+
+unilib:metal_bronze_block|VAPOURISE_METAL_BLOCK|copper 84 tin 12 aluminium 1 0.3 manganese 1 0.3 nickel 1 0.3 zinc 1 0.3
+unilib:metal_bronze_ingot|VAPOURISE_METAL_INGOT|copper 84 tin 12 aluminium 1 0.3 manganese 1 0.3 nickel 1 0.3 zinc 1 0.3
+unilib:metal_bronze_powder|VAPOURISE_POWDER|copper 84 tin 12 aluminium 1 0.3 manganese 1 0.3 nickel 1 0.3 zinc 1 0.3
+
+unilib:metal_bronze_bismuth_block|VAPOURISE_METAL_BLOCK|copper 82 tin 12 bismuth 6
+unilib:metal_bronze_bismuth_ingot|VAPOURISE_METAL_INGOT|copper 82 tin 12 bismuth 6
+unilib:metal_bronze_bismuth_powder|VAPOURISE_POWDER|copper 82 tin 12 bismuth 6
+
+unilib:metal_bronze_black_block|VAPOURISE_METAL_BLOCK|copper 70 gold 15 silver 15
+unilib:metal_bronze_black_ingot|VAPOURISE_METAL_INGOT|copper 70 gold 15 silver 15
+unilib:metal_bronze_black_powder|VAPOURISE_POWDER|copper 70 gold 15 silver 15
+
+unilib:metal_bronze_rare_block|VAPOURISE_METAL_BLOCK|copper 85 tin 12 phosphorus 1 0.3 arsenic 1 0.3 silicon 1 0.3
+unilib:metal_bronze_rare_ingot|VAPOURISE_METAL_INGOT|copper 85 tin 12 phosphorus 1 0.3 arsenic 1 0.3 silicon 1 0.3
+unilib:metal_bronze_rare_powder|VAPOURISE_POWDER|copper 85 tin 12 phosphorus 1 0.3 arsenic 1 0.3 silicon 1 0.3
+
+unilib:metal_cadmium_block|VAPOURISE_METAL_BLOCK|cadmium 100
+unilib:metal_cadmium_ingot|VAPOURISE_METAL_INGOT|cadmium 100
+unilib:metal_cadmium_powder|VAPOURISE_POWDER|cadmium 100
+
+unilib:metal_caesium_sample|VAPOURISE_SAMPLE|caesium 100
+
+unilib:metal_calcium_chunk|VAPOURISE_METAL_INGOT|calcium 100
+
+unilib:metal_californium_sample|VAPOURISE_SAMPLE|californium 100
+
+unilib:metal_cerium_chunk|VAPOURISE_METAL_INGOT|cerium 100
+
+unilib:metal_chromium_block|VAPOURISE_METAL_BLOCK|chromium 100
+unilib:metal_chromium_ingot|VAPOURISE_METAL_INGOT|chromium 100
+unilib:metal_chromium_lump|VAPOURISE_LUMP|chromium 100
+unilib:metal_chromium_powder|VAPOURISE_POWDER|chromium 100
+
+unilib:metal_cobalt_block|VAPOURISE_METAL_BLOCK|cobalt 100
+unilib:metal_cobalt_ingot|VAPOURISE_METAL_INGOT|cobalt 100
+unilib:metal_cobalt_powder|VAPOURISE_POWDER|cobalt 100
+
+unilib:metal_copernicium_sample|VAPOURISE_SAMPLE|copernicium 100
+
+unilib:metal_copper_block|VAPOURISE_METAL_BLOCK|copper 100
+unilib:metal_copper_ingot|VAPOURISE_METAL_INGOT|copper 100
+unilib:metal_copper_lump|VAPOURISE_LUMP|copper 100
+unilib:metal_copper_patina_block|VAPOURISE_METAL_BLOCK|copper 100
+unilib:metal_copper_powder|VAPOURISE_POWDER|copper 100
+
+unilib:metal_copper_rare_block|VAPOURISE_METAL_BLOCK|copper 90 oxygen 10
+unilib:metal_copper_rare_ingot|VAPOURISE_METAL_INGOT|copper 90 oxygen 10
+unilib:metal_copper_rare_powder|VAPOURISE_POWDER|copper 90 oxygen 10
+
+unilib:metal_curium_sample|VAPOURISE_SAMPLE|curium 100
+
+unilib:metal_darmstadtium_sample|VAPOURISE_SAMPLE|darmstadtium 100
+
+unilib:metal_dubnium_sample|VAPOURISE_SAMPLE|dubnium 100
+
+unilib:metal_dysprosium_chunk|VAPOURISE_METAL_INGOT|dysprosium 100
+
+unilib:metal_einsteinium_sample|VAPOURISE_SAMPLE|einsteinium 100
+
+unilib:metal_erbium_block|VAPOURISE_METAL_BLOCK|erbium 100
+unilib:metal_erbium_ingot|VAPOURISE_METAL_INGOT|erbium 100
+unilib:metal_erbium_powder|VAPOURISE_POWDER|erbium 100
+
+unilib:metal_europium_sample|VAPOURISE_SAMPLE|europium 100
+
+unilib:metal_fermium_sample|VAPOURISE_SAMPLE|fermium 100
+
+unilib:metal_flerovium_sample|VAPOURISE_SAMPLE|flerovium 100
+
+unilib:metal_francium_sample|VAPOURISE_SAMPLE|francium 100
+
+unilib:metal_gadolinium_chunk|VAPOURISE_METAL_INGOT|gadolinium 100
+
+unilib:metal_gallium_block|VAPOURISE_METAL_BLOCK|gallium 100
+unilib:metal_gallium_ingot|VAPOURISE_METAL_INGOT|gallium 100
+unilib:metal_gallium_powder|VAPOURISE_POWDER|gallium 100
+
+unilib:metal_geminitium_block|VAPOURISE_METAL_BLOCK|carbon 60 boron 10 gold 10 silver 10 nitrogen 5 silicon 5
+unilib:metal_geminitium_brick|VAPOURISE_METAL_BRICK|carbon 60 boron 10 gold 10 silver 10 nitrogen 5 silicon 5
+unilib:metal_geminitium_ingot|VAPOURISE_METAL_INGOT|carbon 60 boron 10 gold 10 silver 10 nitrogen 5 silicon 5
+unilib:metal_geminitium_lump|VAPOURISE_LUMP|carbon 60 boron 10 gold 10 silver 10 nitrogen 5 silicon 5
+
+unilib:metal_germanium_block|VAPOURISE_METAL_BLOCK|germanium 100
+unilib:metal_germanium_ingot|VAPOURISE_METAL_INGOT|germanium 100
+unilib:metal_germanium_powder|VAPOURISE_POWDER|germanium 100
+
+unilib:metal_gold_block|VAPOURISE_METAL_BLOCK|gold 100
+unilib:metal_gold_ingot|VAPOURISE_METAL_INGOT|gold 100
+unilib:metal_gold_lump|VAPOURISE_LUMP|gold 100
+unilib:metal_gold_powder|VAPOURISE_POWDER|gold 100
+
+unilib:metal_gold_rare_block|VAPOURISE_METAL_BLOCK|gold 90 silver 5 copper 3 palladium 2
+unilib:metal_gold_rare_ingot|VAPOURISE_METAL_INGOT|gold 90 silver 5 copper 3 palladium 2
+unilib:metal_gold_rare_powder|VAPOURISE_POWDER|gold 90 silver 5 copper 3 palladium 2
+
+unilib:metal_gold_rose_block|VAPOURISE_METAL_BLOCK|gold 75 copper 25
+unilib:metal_gold_rose_ingot|VAPOURISE_METAL_INGOT|gold 75 copper 25
+unilib:metal_gold_rose_powder|VAPOURISE_POWDER|gold 75 copper 25
+
+unilib:metal_hafnium_block|VAPOURISE_METAL_BLOCK|hafnium 100
+unilib:metal_hafnium_ingot|VAPOURISE_METAL_INGOT|hafnium 100
+unilib:metal_hafnium_powder|VAPOURISE_POWDER|hafnium 100
+
+unilib:metal_hassium_sample|VAPOURISE_SAMPLE|hassium 100
+
+unilib:metal_holmium_chunk|VAPOURISE_METAL_INGOT|holmium 100
+
+unilib:metal_indium_block|VAPOURISE_METAL_BLOCK|indium 100
+unilib:metal_indium_ingot|VAPOURISE_METAL_INGOT|indium 100
+unilib:metal_indium_powder|VAPOURISE_POWDER|indium 100
+
+unilib:metal_iridium_block|VAPOURISE_METAL_BLOCK|iridium 100
+unilib:metal_iridium_ingot|VAPOURISE_METAL_INGOT|iridium 100
+unilib:metal_iridium_powder|VAPOURISE_POWDER|iridium 100
+
+unilib:metal_iron_lump|VAPOURISE_LUMP|iron 100
+
+unilib:metal_iron_cast_block|VAPOURISE_METAL_BLOCK|iron 95 carbon 3 silicon 2
+unilib:metal_iron_cast_ingot|VAPOURISE_METAL_INGOT|iron 95 carbon 3 silicon 2
+unilib:metal_iron_cast_powder|VAPOURISE_POWDER|iron 95 carbon 3 silicon 2
+
+unilib:metal_iron_pig_block|VAPOURISE_METAL_BLOCK|iron 90 carbon 5 silicon 5
+unilib:metal_iron_pig_ingot|VAPOURISE_METAL_INGOT|iron 90 carbon 5 silicon 5
+unilib:metal_iron_pig_powder|VAPOURISE_POWDER|iron 90 carbon 5 silicon 5
+
+unilib:metal_iron_wrought_rare_block|VAPOURISE_METAL_BLOCK|iron 99 carbon 1
+unilib:metal_iron_wrought_rare_ingot|VAPOURISE_METAL_INGOT|iron 99 carbon 1
+
+unilib:metal_lanthanum_chunk|VAPOURISE_METAL_INGOT|lanthanum 100
+
+unilib:metal_lawrencium_sample|VAPOURISE_SAMPLE|lawrencium 100
+
+unilib:metal_lead_block|VAPOURISE_METAL_BLOCK|lead 100
+unilib:metal_lead_ingot|VAPOURISE_METAL_INGOT|lead 100
+unilib:metal_lead_lump|VAPOURISE_LUMP|lead 100
+unilib:metal_lead_powder|VAPOURISE_POWDER|lead 100
+
+unilib:metal_lead_rare_block|VAPOURISE_METAL_BLOCK|lead 95 silver 5
+unilib:metal_lead_rare_ingot|VAPOURISE_METAL_INGOT|lead 95 silver 5
+unilib:metal_lead_rare_powder|VAPOURISE_POWDER|lead 95 silver 5
+
+unilib:metal_lithium_chunk|VAPOURISE_METAL_INGOT|lithium 100
+
+unilib:metal_livermorium_sample|VAPOURISE_SAMPLE|livermorium 100
+
+unilib:metal_lutetium_chunk|VAPOURISE_METAL_INGOT|lutetium 100
+
+unilib:metal_magnesium_block|VAPOURISE_METAL_BLOCK|magnesium 100
+unilib:metal_magnesium_ingot|VAPOURISE_METAL_INGOT|magnesium 100
+unilib:metal_magnesium_powder|VAPOURISE_POWDER|magnesium 100
+
+unilib:metal_manganese_block|VAPOURISE_METAL_BLOCK|manganese 100
+unilib:metal_manganese_ingot|VAPOURISE_METAL_INGOT|manganese 100
+unilib:metal_manganese_powder|VAPOURISE_POWDER|manganese 100
+
+unilib:metal_meitnerium_sample|VAPOURISE_SAMPLE|meitnerium 100
+
+unilib:metal_mendelevium_sample|VAPOURISE_SAMPLE|mendelevium 100
+
+unilib:metal_mercury_sample|VAPOURISE_SAMPLE|mercury 100
+
+unilib:metal_mithril_block|VAPOURISE_METAL_BLOCK|titanium 50 chromium 25 vanadium 10 nickel 10 silver 5
+unilib:metal_mithril_ingot|VAPOURISE_METAL_INGOT|titanium 50 chromium 25 vanadium 10 nickel 10 silver 5
+unilib:metal_mithril_lump|VAPOURISE_LUMP|titanium 50 chromium 25 vanadium 10 nickel 10 silver 5
+unilib:metal_mithril_powder|VAPOURISE_POWDER|titanium 50 chromium 25 vanadium 10 nickel 10 silver 5
+
+unilib:metal_molybdenum_block|VAPOURISE_METAL_BLOCK|molybdenum 100
+unilib:metal_molybdenum_ingot|VAPOURISE_METAL_INGOT|molybdenum 100
+unilib:metal_molybdenum_powder|VAPOURISE_POWDER|molybdenum 100
+
+unilib:metal_monel_block|VAPOURISE_METAL_BLOCK|nickel 65 copper 30 iron 2 0.5 manganese 1 0.5 carbon 1 0.5 silicon 1 0.5
+unilib:metal_monel_ingot|VAPOURISE_METAL_INGOT|nickel 65 copper 30 iron 2 0.5 manganese 1 0.5 carbon 1 0.5 silicon 1 0.5
+unilib:metal_monel_powder|VAPOURISE_POWDER|nickel 65 copper 30 iron 2 0.5 manganese 1 0.5 carbon 1 0.5 silicon 1 0.5
+
+unilib:metal_moscovium_sample|VAPOURISE_SAMPLE|moscovium 100
+
+unilib:metal_neodymium_chunk|VAPOURISE_METAL_INGOT|neodymium 100
+
+unilib:metal_neptunium_sample|VAPOURISE_SAMPLE|neptunium 100
+
+unilib:metal_nickel_block|VAPOURISE_METAL_BLOCK|nickel 100
+unilib:metal_nickel_ingot|VAPOURISE_METAL_INGOT|nickel 100
+unilib:metal_nickel_powder|VAPOURISE_POWDER|nickel 100
+
+unilib:metal_nihonium_sample|VAPOURISE_SAMPLE|nihonium 100
+
+unilib:metal_niobium_block|VAPOURISE_METAL_BLOCK|niobium 100
+unilib:metal_niobium_ingot|VAPOURISE_METAL_INGOT|niobium 100
+unilib:metal_niobium_powder|VAPOURISE_POWDER|niobium 100
+
+unilib:metal_nobelium_sample|VAPOURISE_SAMPLE|nobelium 100
+
+unilib:metal_oroide_block|VAPOURISE_METAL_BLOCK|copper 50 tin 25 zinc 25
+unilib:metal_oroide_ingot|VAPOURISE_METAL_INGOT|copper 50 tin 25 zinc 25
+unilib:metal_oroide_powder|VAPOURISE_POWDER|copper 50 tin 25 zinc 25
+
+unilib:metal_osmium_block|VAPOURISE_METAL_BLOCK|osmium 100
+unilib:metal_osmium_ingot|VAPOURISE_METAL_INGOT|osmium 100
+unilib:metal_osmium_powder|VAPOURISE_POWDER|osmium 100
+
+unilib:metal_ozymandium_block|VAPOURISE_METAL_BLOCK|osmium 70 iridium 20 ruthenium 10
+unilib:metal_ozymandium_block_chiselled|VAPOURISE_METAL_BLOCK|osmium 70 iridium 20 ruthenium 10
+unilib:metal_ozymandium_brick|VAPOURISE_METAL_BRICK|osmium 70 iridium 20 ruthenium 10
+unilib:metal_ozymandium_ingot|VAPOURISE_METAL_INGOT|osmium 70 iridium 20 ruthenium 10
+unilib:metal_ozymandium_lump|VAPOURISE_LUMP|osmium 70 iridium 20 ruthenium 10
+unilib:metal_ozymandium_powder|VAPOURISE_POWDER|osmium 70 iridium 20 ruthenium 10
+
+unilib:metal_palladium_block|VAPOURISE_METAL_BLOCK|palladium 100
+unilib:metal_palladium_ingot|VAPOURISE_METAL_INGOT|palladium 100
+unilib:metal_palladium_powder|VAPOURISE_POWDER|palladium 100
+
+unilib:metal_planexium_block|VAPOURISE_METAL_BLOCK|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+unilib:metal_planexium_block_chiselled|VAPOURISE_METAL_BLOCK|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+unilib:metal_planexium_brick|VAPOURISE_METAL_BRICK|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+unilib:metal_planexium_ingot|VAPOURISE_METAL_INGOT|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+unilib:metal_planexium_lump|VAPOURISE_LUMP|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+unilib:metal_planexium_powder|VAPOURISE_POWDER|platinum 80 nickel 10 palladium 2 0.66 rhodium 2 0.66 iridium 2 0.66 osmium 2 0.66 ruthenium 2 0.66
+
+unilib:metal_platinum_block|VAPOURISE_METAL_BLOCK|platinum 100
+unilib:metal_platinum_ingot|VAPOURISE_METAL_INGOT|platinum 100
+unilib:metal_platinum_powder|VAPOURISE_POWDER|platinum 100
+
+unilib:metal_platinum_rare_block|VAPOURISE_METAL_BLOCK|platinum 85 nickel 5 copper 5 silver 5
+unilib:metal_platinum_rare_ingot|VAPOURISE_METAL_INGOT|platinum 85 nickel 5 copper 5 silver 5
+unilib:metal_platinum_rare_powder|VAPOURISE_POWDER|platinum 85 nickel 5 copper 5 silver 5
+
+unilib:metal_plutonium_sample|VAPOURISE_SAMPLE|plutonium 100
+
+unilib:metal_polonium_sample|VAPOURISE_SAMPLE|polonium 100
+
+unilib:metal_potassium_chunk|VAPOURISE_METAL_INGOT|potassium 100
+
+unilib:metal_praseodymium_chunk|VAPOURISE_METAL_INGOT|praseodymium 100
+
+unilib:metal_promethium_sample|VAPOURISE_SAMPLE|promethium 100
+
+unilib:metal_protactinium_sample|VAPOURISE_SAMPLE|protactinium 100
+
+unilib:metal_radium_sample|VAPOURISE_SAMPLE|radium 100
+
+unilib:metal_rarium_block|VAPOURISE_METAL_BLOCK|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+unilib:metal_rarium_block_chiselled|VAPOURISE_METAL_BLOCK|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+unilib:metal_rarium_brick|VAPOURISE_METAL_BRICK|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+unilib:metal_rarium_ingot|VAPOURISE_METAL_INGOT|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+unilib:metal_rarium_lump|VAPOURISE_LUMP|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+unilib:metal_rarium_powder|VAPOURISE_POWDER|aluminium 50 magnesium 25 phosphorus 10 titanium 10 silver 5
+
+unilib:metal_rhenium_sample|VAPOURISE_SAMPLE|rhenium 100
+unilib:metal_rhodium_block|VAPOURISE_METAL_BLOCK|rhenium 100
+unilib:metal_rhodium_ingot|VAPOURISE_METAL_INGOT|rhenium 100
+unilib:metal_rhodium_powder|VAPOURISE_POWDER|rhenium 100
+
+unilib:metal_roentgenium_sample|VAPOURISE_SAMPLE|roentgenium 100
+
+unilib:metal_rubidium_sample|VAPOURISE_SAMPLE|rubidium 100
+
+unilib:metal_ruthenium_block|VAPOURISE_METAL_BLOCK|ruthenium 100
+unilib:metal_ruthenium_ingot|VAPOURISE_METAL_INGOT|ruthenium 100
+unilib:metal_ruthenium_powder|VAPOURISE_POWDER|ruthenium 100
+
+unilib:metal_rutherfordium_sample|VAPOURISE_SAMPLE|rutherfordium 100
+
+unilib:metal_samarium_chunk|VAPOURISE_METAL_INGOT|samarium 100
+
+unilib:metal_scandium_block|VAPOURISE_METAL_BLOCK|scandium 100
+unilib:metal_scandium_ingot|VAPOURISE_METAL_INGOT|scandium 100
+unilib:metal_scandium_powder|VAPOURISE_POWDER|scandium 100
+
+unilib:metal_seaborgium_sample|VAPOURISE_SAMPLE|seaborgium 100
+
+unilib:metal_silicon_chunk|VAPOURISE_METAL_INGOT|silicon 100
+
+unilib:metal_silver_block|VAPOURISE_METAL_BLOCK|silver 100
+unilib:metal_silver_ingot|VAPOURISE_METAL_INGOT|silver 100
+unilib:metal_silver_lump|VAPOURISE_LUMP|silver 100
+unilib:metal_silver_powder|VAPOURISE_POWDER|silver 100
+
+unilib:metal_silver_german_block|VAPOURISE_METAL_BLOCK|copper 70 nickel 20 zinc 10
+unilib:metal_silver_german_ingot|VAPOURISE_METAL_INGOT|copper 70 nickel 20 zinc 10
+unilib:metal_silver_german_powder|VAPOURISE_POWDER|copper 70 nickel 20 zinc 10
+
+unilib:metal_silver_rare_block|VAPOURISE_METAL_BLOCK|silver 80 gold 5 copper 5 lead 5 zinc 5
+unilib:metal_silver_rare_ingot|VAPOURISE_METAL_INGOT|silver 80 gold 5 copper 5 lead 5 zinc 5
+unilib:metal_silver_rare_powder|VAPOURISE_POWDER|silver 80 gold 5 copper 5 lead 5 zinc 5
+
+unilib:metal_silver_sterling_block|VAPOURISE_METAL_BLOCK|silver 92 copper 8
+unilib:metal_silver_sterling_ingot|VAPOURISE_METAL_INGOT|silver 92 copper 8
+unilib:metal_silver_sterling_powder|VAPOURISE_POWDER|silver 92 copper 8
+
+unilib:metal_sodium_chunk|VAPOURISE_METAL_INGOT|sodium 100
+
+unilib:metal_steel_block|VAPOURISE_METAL_BLOCK|iron 98 carbon 2
+unilib:metal_steel_ingot|VAPOURISE_METAL_INGOT|iron 98 carbon 2
+unilib:metal_steel_powder|VAPOURISE_POWDER|iron 98 carbon 2
+unilib:metal_steel_rusty_brick|VAPOURISE_METAL_BRICK|iron 80 oxygen 17 carbon 2 hydrogen 1
+
+unilib:metal_steel_black_block|VAPOURISE_METAL_BLOCK|iron 80 nickel 10 copper 9 tin 1
+unilib:metal_steel_black_ingot|VAPOURISE_METAL_INGOT|iron 80 nickel 10 copper 9 tin 1
+unilib:metal_steel_black_powder|VAPOURISE_POWDER|iron 80 nickel 10 copper 9 tin 1
+
+unilib:metal_steel_carbon_block|VAPOURISE_METAL_BLOCK|iron 90 carbon 10
+unilib:metal_steel_carbon_ingot|VAPOURISE_METAL_INGOT|iron 90 carbon 10
+unilib:metal_steel_carbon_powder|VAPOURISE_POWDER|iron 90 carbon 10
+
+unilib:metal_steel_rare_block|VAPOURISE_METAL_BLOCK|iron 84 carbon 12 manganese 1 0.5 silicon 1 0.5 sulphur 1 0.2 phosphorus 1 0.2
+unilib:metal_steel_rare_ingot|VAPOURISE_METAL_INGOT|iron 84 carbon 12 manganese 1 0.5 silicon 1 0.5 sulphur 1 0.2 phosphorus 1 0.2
+unilib:metal_steel_rare_powder|VAPOURISE_POWDER|iron 84 carbon 12 manganese 1 0.5 silicon 1 0.5 sulphur 1 0.2 phosphorus 1 0.2
+
+unilib:metal_steel_stainless_block|VAPOURISE_METAL_BLOCK|iron 70 chromium 15 nickel 10 molybdenum 3 carbon 2
+unilib:metal_steel_stainless_ingot|VAPOURISE_METAL_INGOT|iron 70 chromium 15 nickel 10 molybdenum 3 carbon 2
+unilib:metal_steel_stainless_powder|VAPOURISE_POWDER|iron 70 chromium 15 nickel 10 molybdenum 3 carbon 2
+
+unilib:metal_strontium_chunk|VAPOURISE_METAL_INGOT|strontium 100
+
+unilib:metal_sybilline_block|VAPOURISE_METAL_BLOCK|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+unilib:metal_sybilline_block_chiselled|VAPOURISE_METAL_BLOCK|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+unilib:metal_sybilline_brick|VAPOURISE_METAL_BRICK|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+unilib:metal_sybilline_ingot|VAPOURISE_METAL_INGOT|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+unilib:metal_sybilline_lump|VAPOURISE_LUMP|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+unilib:metal_sybilline_powder|VAPOURISE_POWDER|cobalt 75 iron 10 copper 5 arsenic 5 sulphur 5
+
+unilib:metal_tantalum_block|VAPOURISE_METAL_BLOCK|tantalum 100
+unilib:metal_tantalum_ingot|VAPOURISE_METAL_INGOT|tantalum 100
+unilib:metal_tantalum_powder|VAPOURISE_POWDER|tantalum 100
+
+unilib:metal_technetium_block|VAPOURISE_METAL_BLOCK|technetium 100
+unilib:metal_technetium_ingot|VAPOURISE_METAL_INGOT|technetium 100
+unilib:metal_technetium_powder|VAPOURISE_POWDER|technetium 100
+
+unilib:metal_tellurium_block|VAPOURISE_METAL_BLOCK|tellurium 100
+unilib:metal_tellurium_ingot|VAPOURISE_METAL_INGOT|tellurium 100
+unilib:metal_tellurium_powder|VAPOURISE_POWDER|tellurium 100
+
+unilib:metal_terbium_chunk|VAPOURISE_METAL_INGOT|terbium 100
+
+unilib:metal_thallium_chunk|VAPOURISE_METAL_INGOT|thallium 100
+
+unilib:metal_thorium_sample|VAPOURISE_SAMPLE|thorium 100
+
+unilib:metal_thulium_chunk|VAPOURISE_METAL_INGOT|thulium 100
+
+unilib:metal_tin_block|VAPOURISE_METAL_BLOCK|tin 100
+unilib:metal_tin_ingot|VAPOURISE_METAL_INGOT|tin 100
+unilib:metal_tin_lump|VAPOURISE_LUMP|tin 100
+unilib:metal_tin_powder|VAPOURISE_POWDER|tin 100
+
+unilib:metal_tin_rare_block|VAPOURISE_METAL_BLOCK|tin 80 oxygen 15 iron 2 0.5 manganese 1 0.5 tungsten 1 0.5 tantalum 1 0.5
+unilib:metal_tin_rare_ingot|VAPOURISE_METAL_INGOT|tin 80 oxygen 15 iron 2 0.5 manganese 1 0.5 tungsten 1 0.5 tantalum 1 0.5
+unilib:metal_tin_rare_powder|VAPOURISE_POWDER|tin 80 oxygen 15 iron 2 0.5 manganese 1 0.5 tungsten 1 0.5 tantalum 1 0.5
+
+unilib:metal_titanium_block|VAPOURISE_METAL_BLOCK|titanium 100
+unilib:metal_titanium_ingot|VAPOURISE_METAL_INGOT|titanium 100
+unilib:metal_titanium_powder|VAPOURISE_POWDER|titanium 100
+
+unilib:metal_tritonium_block|VAPOURISE_METAL_BLOCK|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+unilib:metal_tritonium_block_chiselled|VAPOURISE_METAL_BLOCK|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+unilib:metal_tritonium_brick|VAPOURISE_METAL_BRICK|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+unilib:metal_tritonium_ingot|VAPOURISE_METAL_INGOT|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+unilib:metal_tritonium_lump|VAPOURISE_LUMP|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+unilib:metal_tritonium_powder|VAPOURISE_POWDER|titanium 70 oxygen 10 iron 10 magnesium 5 manganese 5
+
+unilib:metal_tumbaga_block|VAPOURISE_METAL_BLOCK|copper 70 gold 30
+unilib:metal_tumbaga_ingot|VAPOURISE_METAL_INGOT|copper 70 gold 30
+unilib:metal_tumbaga_powder|VAPOURISE_POWDER|copper 70 gold 30
+
+unilib:metal_tungsten_block|VAPOURISE_METAL_BLOCK|tungsten 100
+unilib:metal_tungsten_ingot|VAPOURISE_METAL_INGOT|tungsten 100
+unilib:metal_tungsten_powder|VAPOURISE_POWDER|tungsten 100
+
+unilib:metal_unobtainium_block|VAPOURISE_METAL_BLOCK|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+unilib:metal_unobtainium_block_chiselled|VAPOURISE_METAL_BLOCK|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+unilib:metal_unobtainium_brick|VAPOURISE_METAL_BRICK|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+unilib:metal_unobtainium_ingot|VAPOURISE_METAL_INGOT|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+unilib:metal_unobtainium_lump|VAPOURISE_LUMP|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+unilib:metal_unobtainium_powder|VAPOURISE_POWDER|iron 60 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5
+
+unilib:metal_uranium_block|VAPOURISE_METAL_BLOCK|uranium 100
+unilib:metal_uranium_ingot|VAPOURISE_METAL_INGOT|uranium 100
+unilib:metal_uranium_lump|VAPOURISE_LUMP|uranium 100
+unilib:metal_uranium_powder|VAPOURISE_POWDER|uranium 100
+
+unilib:metal_vanadium_block|VAPOURISE_METAL_BLOCK|vanadium 100
+unilib:metal_vanadium_ingot|VAPOURISE_METAL_INGOT|vanadium 100
+unilib:metal_vanadium_powder|VAPOURISE_POWDER|vanadium 100
+
+unilib:metal_ytterbium_chunk|VAPOURISE_METAL_INGOT|ytterbium 100
+
+unilib:metal_yttrium_chunk|VAPOURISE_METAL_INGOT|yttrium 100
+
+unilib:metal_zinc_block|VAPOURISE_METAL_BLOCK|zinc 100
+unilib:metal_zinc_ingot|VAPOURISE_METAL_INGOT|zinc 100
+unilib:metal_zinc_lump|VAPOURISE_LUMP|zinc 100
+unilib:metal_zinc_powder|VAPOURISE_POWDER|zinc 100
+
+unilib:metal_zinc_rare_block|VAPOURISE_METAL_BLOCK|zinc 80 sulphur 20
+unilib:metal_zinc_rare_ingot|VAPOURISE_METAL_INGOT|zinc 80 sulphur 20
+unilib:metal_zinc_rare_powder|VAPOURISE_POWDER|zinc 80 sulphur 20
+
+unilib:metal_zirconium_block|VAPOURISE_METAL_BLOCK|zirconium 100
+unilib:metal_zirconium_ingot|VAPOURISE_METAL_INGOT|zirconium 100
+unilib:metal_zirconium_powder|VAPOURISE_POWDER|zirconium 100
+
+# - minerals ------------------------------------------------------------------------------------
+
+unilib:mineral_acanthite_lump|VAPOURISE_MINERAL_LUMP|silver 87 sulphur 13
+unilib:mineral_acanthite_rock|VAPOURISE_MINERAL_ROCK|silver 87 sulphur 13
+
+unilib:mineral_aetherium_dust|VAPOURISE_POWDER|oxygen 55 silicon 22 aluminium 20 hydrogen 3
+
+unilib:mineral_agate_block|VAPOURISE_MINERAL_BLOCK|oxygen 53 silicon 47
+unilib:mineral_agate_gem|VAPOURISE_MINERAL_GEM|oxygen 53 silicon 47
+unilib:mineral_agate_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_agate_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+
+unilib:mineral_alabandite_lump|VAPOURISE_MINERAL_LUMP|manganese 63 sulphur 37
+unilib:mineral_alabandite_rock|VAPOURISE_MINERAL_ROCK|manganese 63 sulphur 37
+
+unilib:mineral_almandine_block|VAPOURISE_MINERAL_BLOCK|iron 35 oxygen 25 aluminium 20 silicon 20
+unilib:mineral_almandine_gem|VAPOURISE_MINERAL_GEM|iron 35 oxygen 25 aluminium 20 silicon 20
+unilib:mineral_almandine_lump|VAPOURISE_MINERAL_LUMP|iron 35 oxygen 25 aluminium 20 silicon 20
+unilib:mineral_almandine_rock|VAPOURISE_MINERAL_ROCK|iron 35 oxygen 25 aluminium 20 silicon 20
+
+unilib:mineral_alunite_lump|VAPOURISE_MINERAL_LUMP|oxygen 43 aluminium 21 sulphur 19 potassium 11 hydrogen 6
+unilib:mineral_alunite_rock|VAPOURISE_MINERAL_ROCK|oxygen 43 aluminium 21 sulphur 19 potassium 11 hydrogen 6
+
+unilib:mineral_amazonite_block|VAPOURISE_MINERAL_BLOCK|oxygen 54 silicon 22 potassium 14 aluminium 10
+unilib:mineral_amazonite_gem|VAPOURISE_MINERAL_GEM|oxygen 54 silicon 22 potassium 14 aluminium 10
+unilib:mineral_amazonite_lump|VAPOURISE_MINERAL_LUMP|oxygen 54 silicon 22 potassium 14 aluminium 10
+unilib:mineral_amazonite_rock|VAPOURISE_MINERAL_ROCK|oxygen 54 silicon 22 potassium 14 aluminium 10
+
+unilib:mineral_amethyst_block|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+unilib:mineral_amethyst_crystal|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_amethyst_crystal_large|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+
+unilib:mineral_amethyst_dark_block|VAPOURISE_MINERAL_BLOCK|oxygen 53 silicon 47
+unilib:mineral_amethyst_dark_gem|VAPOURISE_MINERAL_GEM|oxygen 53 silicon 47
+unilib:mineral_amethyst_dark_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_amethyst_dark_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+
+unilib:mineral_anatase_lump|VAPOURISE_MINERAL_LUMP|titanium 60 oxygen 40
+unilib:mineral_anatase_rock|VAPOURISE_MINERAL_ROCK|titanium 60 oxygen 40
+
+unilib:mineral_andradite_block|VAPOURISE_MINERAL_BLOCK|oxygen 38 iron 23 silicon 20 calcium 19
+unilib:mineral_andradite_gem|VAPOURISE_MINERAL_GEM|oxygen 38 iron 23 silicon 20 calcium 19
+unilib:mineral_andradite_lump|VAPOURISE_MINERAL_LUMP|oxygen 38 iron 23 silicon 20 calcium 19
+unilib:mineral_andradite_rock|VAPOURISE_MINERAL_ROCK|oxygen 38 iron 23 silicon 20 calcium 19
+
+unilib:mineral_anglesite_lump|VAPOURISE_MINERAL_LUMP|lead 68 oxygen 21 sulphur 11
+unilib:mineral_anglesite_rock|VAPOURISE_MINERAL_ROCK|lead 68 oxygen 21 sulphur 11
+
+unilib:mineral_anhydrite_lump|VAPOURISE_MINERAL_LUMP|oxygen 47 calcium 29 sulphur 24
+unilib:mineral_anhydrite_rock|VAPOURISE_MINERAL_ROCK|oxygen 47 calcium 29 sulphur 24
+
+unilib:mineral_anthracite_lump|VAPOURISE_MINERAL_LUMP|carbon 95 oxygen 2 hydrogen 1 nitrogen 1 0.5 sulphur 1 .05
+unilib:mineral_anthracite_rock|VAPOURISE_MINERAL_ROCK|carbon 95 oxygen 2 hydrogen 1 nitrogen 1 0.5 sulphur 1 .05
+
+unilib:mineral_apatite_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 calcium 40 phosphorus 18 fluorine 1 0.5 chlorine 1 0.5
+unilib:mineral_apatite_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 calcium 40 phosphorus 18 fluorine 1 0.5 chlorine 1 0.5
+
+unilib:mineral_aquamarine_block|VAPOURISE_MINERAL_ROCK|oxygen 54 silicon 31 aluminium 10 beryllium 5
+unilib:mineral_aquamarine_crystal|VAPOURISE_MINERAL_LUMP|oxygen 54 silicon 31 aluminium 10 beryllium 5
+unilib:mineral_aquamarine_crystal_large|VAPOURISE_MINERAL_LUMP|oxygen 54 silicon 31 aluminium 10 beryllium 5
+
+unilib:mineral_argutite_lump|VAPOURISE_MINERAL_LUMP|germanium 69 oxygen 31
+unilib:mineral_argutite_rock|VAPOURISE_MINERAL_ROCK|germanium 69 oxygen 31
+
+unilib:mineral_arsenopyrite_lump|VAPOURISE_MINERAL_LUMP|arsenic 46 iron 34 sulphur 20
+unilib:mineral_arsenopyrite_rock|VAPOURISE_MINERAL_ROCK|arsenic 46 iron 34 sulphur 20
+
+unilib:mineral_azurite_lump|VAPOURISE_MINERAL_LUMP|copper 55 oxygen 35 carbon 7 hydrogen 3
+unilib:mineral_azurite_rock|VAPOURISE_MINERAL_ROCK|copper 55 oxygen 35 carbon 7 hydrogen 3
+
+unilib:mineral_barite_lump|VAPOURISE_MINERAL_LUMP|barium 59 oxygen 27 sulphur 14
+unilib:mineral_barite_rock|VAPOURISE_MINERAL_ROCK|barium 59 oxygen 27 sulphur 14
+
+unilib:mineral_bastnasite_lump|VAPOURISE_MINERAL_LUMP|cerium 39 oxygen 28 lanthanum 24 carbon 8 fluorine 1
+unilib:mineral_bastnasite_rock|VAPOURISE_MINERAL_ROCK|cerium 39 oxygen 28 lanthanum 24 carbon 8 fluorine 1
+
+unilib:mineral_bauxite_lump|VAPOURISE_MINERAL_LUMP|aluminium 50 oxygen 35 iron 5 silicon 5 titanium 5
+unilib:mineral_bauxite_rock|VAPOURISE_MINERAL_ROCK|aluminium 50 oxygen 35 iron 5 silicon 5 titanium 5
+
+unilib:mineral_bismite_lump|VAPOURISE_MINERAL_LUMP|bismuth 90 oxygen 10
+unilib:mineral_bismite_rock|VAPOURISE_MINERAL_ROCK|bismuth 90 oxygen 10
+
+unilib:mineral_bismuth_native_lump|VAPOURISE_MINERAL_LUMP|bismuth 100
+unilib:mineral_bismuth_native_rock|VAPOURISE_MINERAL_ROCK|bismuth 100
+
+unilib:mineral_bismuthinite_lump|VAPOURISE_MINERAL_LUMP|bismuth 81 sulphur 19
+unilib:mineral_bismuthinite_rock|VAPOURISE_MINERAL_ROCK|bismuth 81 sulphur 19
+
+unilib:mineral_borax_lump|VAPOURISE_MINERAL_LUMP|oxygen 70 sodium 12 boron 11 hydrogen 7
+unilib:mineral_borax_rock|VAPOURISE_MINERAL_ROCK|oxygen 70 sodium 12 boron 11 hydrogen 7
+
+unilib:mineral_bornite_lump|VAPOURISE_MINERAL_LUMP|copper 63 sulphur 26 iron 11
+unilib:mineral_bornite_rock|VAPOURISE_MINERAL_ROCK|copper 63 sulphur 26 iron 11
+
+unilib:mineral_boulangerite_lump|VAPOURISE_MINERAL_LUMP|lead 56 antimony 38 sulphur 6
+unilib:mineral_boulangerite_rock|VAPOURISE_MINERAL_ROCK|lead 56 antimony 38 sulphur 6
+
+unilib:mineral_brookite_lump|VAPOURISE_MINERAL_LUMP|titanium 60 oxygen 40
+unilib:mineral_brookite_rock|VAPOURISE_MINERAL_ROCK|titanium 60 oxygen 40
+
+unilib:mineral_brucite_lump|VAPOURISE_MINERAL_LUMP|oxygen 55 magnesium 42 hydrogen 3
+unilib:mineral_brucite_rock|VAPOURISE_MINERAL_ROCK|oxygen 55 magnesium 42 hydrogen 3
+
+unilib:mineral_calcite_lump|VAPOURISE_MINERAL_LUMP|oxygen 48 calcium 40 carbon 12
+unilib:mineral_calcite_rock|VAPOURISE_MINERAL_ROCK|oxygen 48 calcium 40 carbon 12
+
+unilib:mineral_carnallite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 chlorine 22 potassium 14 magnesium 9 hydrogen 5
+unilib:mineral_carnallite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 chlorine 22 potassium 14 magnesium 9 hydrogen 5
+
+unilib:mineral_carnelian_block|VAPOURISE_MINERAL_BLOCK|oxygen 53 silicon 46 iron 1 0.5
+unilib:mineral_carnelian_gem|VAPOURISE_MINERAL_GEM|oxygen 53 silicon 46 iron 1 0.5
+unilib:mineral_carnelian_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 46 iron 1 0.5
+unilib:mineral_carnelian_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 46 iron 1 0.5
+
+unilib:mineral_carnotite_lump|VAPOURISE_MINERAL_LUMP|uranium 64 oxygen 13 vanadium 9 potassium 8 hydrogen 6
+unilib:mineral_carnotite_rock|VAPOURISE_MINERAL_ROCK|uranium 64 oxygen 13 vanadium 9 potassium 8 hydrogen 6
+
+unilib:mineral_carrollite_lump|VAPOURISE_MINERAL_LUMP|sulphur 50 cobalt 30 copper 20
+unilib:mineral_carrollite_rock|VAPOURISE_MINERAL_ROCK|sulphur 50 cobalt 30 copper 20
+
+unilib:mineral_cassiterite_antipodean_rock|VAPOURISE_MINERAL_ROCK|tin 79 oxygen 21
+
+unilib:mineral_cassiterite_lump|VAPOURISE_MINERAL_LUMP|tin 79 oxygen 21
+unilib:mineral_cassiterite_rock|VAPOURISE_MINERAL_ROCK|tin 79 oxygen 21
+
+unilib:mineral_celestine_lump|VAPOURISE_MINERAL_LUMP|strontium 47 oxygen 35 sulphur 18
+unilib:mineral_celestine_rock|VAPOURISE_MINERAL_ROCK|strontium 47 oxygen 35 sulphur 18
+
+unilib:mineral_cerussite_lump|VAPOURISE_MINERAL_LUMP|lead 78 oxygen 17 carbon 5
+unilib:mineral_cerussite_rock|VAPOURISE_MINERAL_ROCK|lead 78 oxygen 17 carbon 5
+
+unilib:mineral_chalcocite_lump|VAPOURISE_MINERAL_LUMP|copper 80 sulphur 20
+unilib:mineral_chalcocite_rock|VAPOURISE_MINERAL_ROCK|copper 80 sulphur 20
+
+unilib:mineral_chalcopyrite_antipodean_rock|VAPOURISE_MINERAL_ROCK|copper 35 sulphur 35 iron 30
+
+unilib:mineral_chalcopyrite_lump|VAPOURISE_MINERAL_LUMP|copper 35 sulphur 35 iron 30
+unilib:mineral_chalcopyrite_rock|VAPOURISE_MINERAL_ROCK|copper 35 sulphur 35 iron 30
+
+unilib:mineral_charcoal_natural_lump|VAPOURISE_MINERAL_LUMP|carbon 80 oxygen 10 hydrogen 4 nitrogen 3 calcium 1 0.5 magnesium 1 0.5 potassium 1 0.5
+unilib:mineral_charcoal_natural_rock|VAPOURISE_MINERAL_ROCK|carbon 80 oxygen 10 hydrogen 4 nitrogen 3 calcium 1 0.5 magnesium 1 0.5 potassium 1 0.5
+
+unilib:mineral_chromite_lump|VAPOURISE_MINERAL_LUMP|chromium 47 iron 32 oxygen 21
+unilib:mineral_chromite_rock|VAPOURISE_MINERAL_ROCK|chromium 47 iron 32 oxygen 21
+
+unilib:mineral_chrysocolla_block|VAPOURISE_MINERAL_BLOCK|copper 45 silicon 27 oxygen 24 hydrogen 4
+unilib:mineral_chrysocolla_gem|VAPOURISE_MINERAL_GEM|copper 45 silicon 27 oxygen 24 hydrogen 4
+unilib:mineral_chrysocolla_lump|VAPOURISE_MINERAL_LUMP|copper 45 silicon 27 oxygen 24 hydrogen 4
+unilib:mineral_chrysocolla_rock|VAPOURISE_MINERAL_ROCK|copper 45 silicon 27 oxygen 24 hydrogen 4
+
+unilib:mineral_chrysoprase_block|VAPOURISE_MINERAL_BLOCK|oxygen 50 silicon 47 nickel 3
+unilib:mineral_chrysoprase_gem|VAPOURISE_MINERAL_GEM|oxygen 50 silicon 47 nickel 3
+unilib:mineral_chrysoprase_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 47 nickel 3
+unilib:mineral_chrysoprase_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 47 nickel 3
+
+unilib:mineral_chrysotile_lump|VAPOURISE_MINERAL_LUMP|oxygen 48 magnesium 28 silicon 22 hydrogen 2
+unilib:mineral_chrysotile_rock|VAPOURISE_MINERAL_ROCK|oxygen 48 magnesium 28 silicon 22 hydrogen 2
+
+unilib:mineral_cinnabar_lump|VAPOURISE_MINERAL_LUMP|mercury 86 sulphur 14
+unilib:mineral_cinnabar_rock|VAPOURISE_MINERAL_ROCK|mercury 86 sulphur 14
+
+unilib:mineral_clausthalite_lump|VAPOURISE_MINERAL_LUMP|lead 72 selenium 28
+unilib:mineral_clausthalite_rock|VAPOURISE_MINERAL_ROCK|lead 72 selenium 28
+
+unilib:mineral_coal_bituminous_lump|VAPOURISE_MINERAL_LUMP|carbon 70 hydrogen 10 oxygen 10 nitrogen 5 sulphur 5
+unilib:mineral_coal_bituminous_rock|VAPOURISE_MINERAL_ROCK|carbon 70 hydrogen 10 oxygen 10 nitrogen 5 sulphur 5
+
+unilib:mineral_coal_block|VAPOURISE_MINERAL_ROCK|carbon 70 hydrogen 10 oxygen 10 nitrogen 5 sulphur 5
+unilib:mineral_coal_lump|VAPOURISE_MINERAL_LUMP|carbon 70 hydrogen 10 oxygen 10 nitrogen 5 sulphur 5
+
+unilib:mineral_cobaltite_lump|VAPOURISE_MINERAL_LUMP|arsenic 45 cobalt 36 sulphur 19
+unilib:mineral_cobaltite_rock|VAPOURISE_MINERAL_ROCK|arsenic 45 cobalt 36 sulphur 19
+
+unilib:mineral_coke_natural_lump|VAPOURISE_MINERAL_LUMP|carbon 85 hydrogen 5 oxygen 2 silicon 2 aluminium 2 iron 2 sulphur 1 nitrogen 1
+unilib:mineral_coke_natural_rock|VAPOURISE_MINERAL_ROCK|carbon 85 hydrogen 5 oxygen 2 silicon 2 aluminium 2 iron 2 sulphur 1 nitrogen 1
+
+unilib:mineral_columbite_lump|VAPOURISE_MINERAL_LUMP|niobium 40 tantalum 20 oxygen 20 iron 10 manganese 10
+unilib:mineral_columbite_rock|VAPOURISE_MINERAL_ROCK|niobium 40 tantalum 20 oxygen 20 iron 10 manganese 10
+
+unilib:mineral_copper_native_lump|VAPOURISE_MINERAL_LUMP|copper 100
+unilib:mineral_copper_native_rock|VAPOURISE_MINERAL_ROCK|copper 100
+
+unilib:mineral_covellite_lump|VAPOURISE_MINERAL_LUMP|copper 67 sulphur 33
+unilib:mineral_covellite_rock|VAPOURISE_MINERAL_ROCK|copper 67 sulphur 33
+
+unilib:mineral_cryolite_lump|VAPOURISE_MINERAL_LUMP|fluorine 54 sodium 33 aluminium 13
+unilib:mineral_cryolite_rock|VAPOURISE_MINERAL_ROCK|fluorine 54 sodium 33 aluminium 13
+
+unilib:mineral_crystallite_block|VAPOURISE_MINERAL_ROCK|calcium 25 oxygen 25 silicon 20 titanium 15 zinc 10 boron 5
+unilib:mineral_crystallite_ingot|VAPOURISE_MINERAL_LUMP|calcium 25 oxygen 25 silicon 20 titanium 15 zinc 10 boron 5
+unilib:mineral_crystallite_spike|VAPOURISE_MINERAL_LUMP|calcium 25 oxygen 25 silicon 20 titanium 15 zinc 10 boron 5
+
+unilib:mineral_cuprite_lump|VAPOURISE_MINERAL_LUMP|copper 89 oxygen 11
+unilib:mineral_cuprite_rock|VAPOURISE_MINERAL_ROCK|copper 89 oxygen 11
+
+unilib:mineral_descloizite_lump|VAPOURISE_MINERAL_LUMP|lead 51 vanadium 22 zinc 16 oxygen 9 copper 1 0.5 hydrogen 1 0.5
+unilib:mineral_descloizite_rock|VAPOURISE_MINERAL_ROCK|lead 51 vanadium 22 zinc 16 oxygen 9 copper 1 0.5 hydrogen 1 0.5
+
+unilib:mineral_diamond_block|VAPOURISE_MINERAL_ROCK|carbon 100
+unilib:mineral_diamond_block_gold|VAPOURISE_MINERAL_ROCK|carbon 100
+unilib:mineral_diamond_block_hard|VAPOURISE_MINERAL_ROCK|carbon 100
+unilib:mineral_diamond_gem|VAPOURISE_MINERAL_LUMP|carbon 100
+
+unilib:mineral_dilithium_lump|VAPOURISE_MINERAL_LUMP|lithium 60 titanium 20 ruthenium 10 carbon 10
+unilib:mineral_dilithium_rock|VAPOURISE_MINERAL_ROCK|lithium 60 titanium 20 ruthenium 10 carbon 10
+
+unilib:mineral_dolomite_lump|VAPOURISE_MINERAL_LUMP|oxygen 52 calcium 22 magnesium 13 carbon 13
+unilib:mineral_dolomite_rock|VAPOURISE_MINERAL_ROCK|oxygen 52 calcium 22 magnesium 13 carbon 13
+
+unilib:mineral_emerald_block|VAPOURISE_MINERAL_ROCK|oxygen 65 silicon 20 aluminium 10 beryllium 5
+unilib:mineral_emerald_crystal_large|VAPOURISE_MINERAL_LUMP|oxygen 65 silicon 20 aluminium 10 beryllium 5
+unilib:mineral_emerald_gem|VAPOURISE_MINERAL_LUMP|oxygen 65 silicon 20 aluminium 10 beryllium 5
+
+unilib:mineral_enargite_lump|VAPOURISE_MINERAL_LUMP|copper 40 sulphur 38 arsenic 22
+unilib:mineral_enargite_rock|VAPOURISE_MINERAL_ROCK|copper 40 sulphur 38 arsenic 22
+
+unilib:mineral_ferberite_lump|VAPOURISE_MINERAL_LUMP|tungsten 60 iron 24 oxygen 16
+unilib:mineral_ferberite_rock|VAPOURISE_MINERAL_ROCK|tungsten 60 iron 24 oxygen 16
+
+unilib:mineral_flint_block|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+unilib:mineral_flint_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+
+unilib:mineral_fluorite_lump|VAPOURISE_MINERAL_LUMP|calcium 51 fluorine 49
+unilib:mineral_fluorite_rock|VAPOURISE_MINERAL_ROCK|calcium 51 fluorine 49
+
+unilib:mineral_flux_lump|VAPOURISE_MINERAL_LUMP|calcium 51 fluorine 49
+unilib:mineral_flux_rock|VAPOURISE_MINERAL_ROCK|calcium 51 fluorine 49
+
+unilib:mineral_franklinite_lump|VAPOURISE_MINERAL_LUMP|iron 46 manganese 21 zinc 20 oxygen 13
+unilib:mineral_franklinite_rock|VAPOURISE_MINERAL_ROCK|iron 46 manganese 21 zinc 20 oxygen 13
+
+unilib:mineral_freibergite_lump|VAPOURISE_MINERAL_LUMP|silver 40 sulphur 22 antimony 19 copper 12 arsenic 4 iron 3
+unilib:mineral_freibergite_rock|VAPOURISE_MINERAL_ROCK|silver 40 sulphur 22 antimony 19 copper 12 arsenic 4 iron 3
+
+unilib:mineral_galena_lump|VAPOURISE_MINERAL_LUMP|lead 87 sulphur 13
+unilib:mineral_galena_rock|VAPOURISE_MINERAL_ROCK|lead 87 sulphur 13
+
+unilib:mineral_garnierite_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 nickel 30 magnesium 15 silicon 15
+unilib:mineral_garnierite_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 nickel 30 magnesium 15 silicon 15
+
+unilib:mineral_germanite_lump|VAPOURISE_MINERAL_LUMP|copper 52 sulphur 32 germanium 9 iron 7
+unilib:mineral_germanite_rock|VAPOURISE_MINERAL_ROCK|copper 52 sulphur 32 germanium 9 iron 7
+
+unilib:mineral_gersdorffite_lump|VAPOURISE_MINERAL_LUMP|sulphur 50 nickel 28 arsenic 22
+unilib:mineral_gersdorffite_rock|VAPOURISE_MINERAL_ROCK|sulphur 50 nickel 28 arsenic 22
+
+unilib:mineral_gold_native_lump|VAPOURISE_MINERAL_LUMP|gold 100
+unilib:mineral_gold_native_rock|VAPOURISE_MINERAL_ROCK|gold 100
+
+unilib:mineral_graphite_lump|VAPOURISE_MINERAL_LUMP|carbon 100
+unilib:mineral_graphite_rock|VAPOURISE_MINERAL_ROCK|carbon 100
+
+unilib:mineral_greenockite_lump|VAPOURISE_MINERAL_LUMP|cadmium 78 sulphur 22
+unilib:mineral_greenockite_rock|VAPOURISE_MINERAL_ROCK|cadmium 78 sulphur 22
+
+unilib:mineral_gypsum_lump|VAPOURISE_MINERAL_LUMP|oxygen 56 calcium 23 sulphur 19 hydrogen 2
+unilib:mineral_gypsum_rock|VAPOURISE_MINERAL_ROCK|oxygen 56 calcium 23 sulphur 19 hydrogen 2
+
+unilib:mineral_haematite_lump|VAPOURISE_MINERAL_LUMP|iron 70 oxygen 30
+unilib:mineral_haematite_rock|VAPOURISE_MINERAL_ROCK|iron 70 oxygen 30
+
+unilib:mineral_halite_lump|VAPOURISE_MINERAL_LUMP|chlorine 61 sodium 39
+unilib:mineral_halite_rock|VAPOURISE_MINERAL_ROCK|chlorine 61 sodium 39
+
+unilib:mineral_hausmannite_lump|VAPOURISE_MINERAL_LUMP|manganese 72 oxygen 28
+unilib:mineral_hausmannite_rock|VAPOURISE_MINERAL_ROCK|manganese 72 oxygen 28
+
+unilib:mineral_hauyne_block|VAPOURISE_MINERAL_BLOCK|oxygen 44 silicon 19 aluminium 15 sodium 8 calcium 7 sulphur 5 chlorine 2
+unilib:mineral_hauyne_gem|VAPOURISE_MINERAL_GEM|oxygen 44 silicon 19 aluminium 15 sodium 8 calcium 7 sulphur 5 chlorine 2
+unilib:mineral_hauyne_lump|VAPOURISE_MINERAL_LUMP|oxygen 44 silicon 19 aluminium 15 sodium 8 calcium 7 sulphur 5 chlorine 2
+unilib:mineral_hauyne_rock|VAPOURISE_MINERAL_ROCK|oxygen 44 silicon 19 aluminium 15 sodium 8 calcium 7 sulphur 5 chlorine 2
+
+unilib:mineral_heliotrope_block|VAPOURISE_MINERAL_BLOCK|oxygen 53 silicon 47
+unilib:mineral_heliotrope_gem|VAPOURISE_MINERAL_GEM|oxygen 53 silicon 47
+unilib:mineral_heliotrope_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_heliotrope_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+
+unilib:mineral_hemimorphite_lump|VAPOURISE_MINERAL_LUMP|zinc 49 oxygen 45 silicon 5 hydrogen 1
+unilib:mineral_hemimorphite_rock|VAPOURISE_MINERAL_ROCK|zinc 49 oxygen 45 silicon 5 hydrogen 1
+
+unilib:mineral_hollandite_lump|VAPOURISE_MINERAL_LUMP|manganese 56 oxygen 31 barium 13
+unilib:mineral_hollandite_rock|VAPOURISE_MINERAL_ROCK|manganese 56 oxygen 31 barium 13
+
+unilib:mineral_hubnerite_lump|VAPOURISE_MINERAL_LUMP|tungsten 61 manganese 28 oxygen 11
+unilib:mineral_hubnerite_rock|VAPOURISE_MINERAL_ROCK|tungsten 61 manganese 28 oxygen 11
+
+unilib:mineral_hydrozincite_lump|VAPOURISE_MINERAL_LUMP|zinc 59 oxygen 30 carbon 6 hydrogen 5
+unilib:mineral_hydrozincite_rock|VAPOURISE_MINERAL_ROCK|zinc 59 oxygen 30 carbon 6 hydrogen 5
+
+unilib:mineral_ilmenite_lump|VAPOURISE_MINERAL_LUMP|iron 37 titanium 32 oxygen 31
+unilib:mineral_ilmenite_rock|VAPOURISE_MINERAL_ROCK|iron 37 titanium 32 oxygen 31
+
+unilib:mineral_iron_telluric_lump|VAPOURISE_MINERAL_LUMP|iron 98 nickel 2
+unilib:mineral_iron_telluric_rock|VAPOURISE_MINERAL_ROCK|iron 98 nickel 2
+
+unilib:mineral_jade_block|VAPOURISE_MINERAL_BLOCK|oxygen 45 silicon 25 sodium 15 aluminium 10 iron 5
+unilib:mineral_jade_gem|VAPOURISE_MINERAL_GEM|oxygen 45 silicon 25 sodium 15 aluminium 10 iron 5
+unilib:mineral_jade_lump|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 25 sodium 15 aluminium 10 iron 5
+unilib:mineral_jade_rock|VAPOURISE_MINERAL_ROCK|oxygen 45 silicon 25 sodium 15 aluminium 10 iron 5
+
+unilib:mineral_jet_dark_lump|VAPOURISE_MINERAL_LUMP|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+unilib:mineral_jet_dark_rock|VAPOURISE_MINERAL_ROCK|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+
+unilib:mineral_jet_block|VAPOURISE_MINERAL_BLOCK|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+unilib:mineral_jet_gem|VAPOURISE_MINERAL_GEM|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+unilib:mineral_jet_lump|VAPOURISE_MINERAL_LUMP|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+unilib:mineral_jet_rock|VAPOURISE_MINERAL_ROCK|carbon 80 oxygen 10 hydrogen 7 sulphur 2 0.5 nitrogen 1 0.5
+
+unilib:mineral_kainite_lump|VAPOURISE_MINERAL_LUMP|oxygen 48 potassium 15 chlorine 12 sulphur 12 magnesium 11 hydrogen 2
+unilib:mineral_kainite_rock|VAPOURISE_MINERAL_ROCK|oxygen 48 potassium 15 chlorine 12 sulphur 12 magnesium 11 hydrogen 2
+
+unilib:mineral_kaolinite_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 silicon 22 aluminium 21 hydrogen 11
+unilib:mineral_kaolinite_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 silicon 22 aluminium 21 hydrogen 11
+
+unilib:mineral_kesterite_lump|VAPOURISE_MINERAL_LUMP|tin 33 sulphur 27 copper 27 zinc 10 iron 3
+unilib:mineral_kesterite_rock|VAPOURISE_MINERAL_ROCK|tin 33 sulphur 27 copper 27 zinc 10 iron 3
+
+unilib:mineral_kieserite_lump|VAPOURISE_MINERAL_LUMP|oxygen 58 sulphur 23 magnesium 18 hydrogen 1
+unilib:mineral_kieserite_rock|VAPOURISE_MINERAL_ROCK|oxygen 58 sulphur 23 magnesium 18 hydrogen 1
+
+unilib:mineral_kimberlite_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 silicon 30 iron 12 magnesium 10 calcium 5 potassium 1 titanium 1 0.5 sodium 1 0.5
+unilib:mineral_kimberlite_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 silicon 30 iron 12 magnesium 10 calcium 5 potassium 1 titanium 1 0.5 sodium 1 0.5
+
+unilib:mineral_kyanite_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 aluminium 29 silicon 25
+unilib:mineral_kyanite_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 aluminium 29 silicon 25
+
+unilib:mineral_lamproite_lump|VAPOURISE_MINERAL_LUMP|silicon 45 oxygen 30 magnesium 12 potassium 8 aluminium 2 calcium 1 sodium 1 titanium 1 0.5
+unilib:mineral_lamproite_rock|VAPOURISE_MINERAL_ROCK|silicon 45 oxygen 30 magnesium 12 potassium 8 aluminium 2 calcium 1 sodium 1 titanium 1 0.5
+
+unilib:mineral_langbeinite_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 sulphur 22 potassium 21 magnesium 11
+unilib:mineral_langbeinite_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 sulphur 22 potassium 21 magnesium 11
+
+unilib:mineral_lapis_lazuli_block|VAPOURISE_MINERAL_BLOCK|oxygen 45 silicon 24 calcium 14 sulphur 7 aluminium 6 sodium 4
+unilib:mineral_lapis_lazuli_gem|VAPOURISE_MINERAL_GEM|oxygen 45 silicon 24 calcium 14 sulphur 7 aluminium 6 sodium 4
+unilib:mineral_lapis_lazuli_lump|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 24 calcium 14 sulphur 7 aluminium 6 sodium 4
+
+unilib:mineral_lazurite_lump|VAPOURISE_MINERAL_LUMP|oxygen 24 silicon 27 aluminium 14 sodium 12 calcium 11 sulphur 8 chlorine 4
+unilib:mineral_lazurite_rock|VAPOURISE_MINERAL_ROCK|oxygen 24 silicon 27 aluminium 14 sodium 12 calcium 11 sulphur 8 chlorine 4
+
+unilib:mineral_lepidolite_lump|VAPOURISE_MINERAL_LUMP|oxygen 41 silicon 23 potassium 11 aluminium 10 fluorine 10 lithium 4 rubidium 1 0.5
+unilib:mineral_lepidolite_rock|VAPOURISE_MINERAL_ROCK|oxygen 41 silicon 23 potassium 11 aluminium 10 fluorine 10 lithium 4 rubidium 1 0.5
+
+unilib:mineral_leucite_lump|VAPOURISE_MINERAL_LUMP|oxygen 37 silicon 23 potassium 22 aluminium 18
+unilib:mineral_leucite_rock|VAPOURISE_MINERAL_ROCK|oxygen 37 silicon 23 potassium 22 aluminium 18
+
+unilib:mineral_lignite_lump|VAPOURISE_MINERAL_LUMP|carbon 45 oxygen 35 hydrogen 10 nitrogen 5 sulphur 5
+unilib:mineral_lignite_rock|VAPOURISE_MINERAL_ROCK|carbon 45 oxygen 35 hydrogen 10 nitrogen 5 sulphur 5
+
+unilib:mineral_limonite_antipodean_rock|VAPOURISE_MINERAL_ROCK|iron 60 oxygen 40
+
+unilib:mineral_limonite_brown_lump|VAPOURISE_MINERAL_LUMP|iron 60 oxygen 40
+
+unilib:mineral_limonite_lump|VAPOURISE_MINERAL_LUMP|iron 60 oxygen 40
+unilib:mineral_limonite_rock|VAPOURISE_MINERAL_ROCK|iron 60 oxygen 40
+
+unilib:mineral_limonite_yellow_lump|VAPOURISE_MINERAL_LUMP|iron 60 oxygen 40
+
+unilib:mineral_loellingite_lump|VAPOURISE_MINERAL_LUMP|iron 62 arsenic 38
+unilib:mineral_loellingite_rock|VAPOURISE_MINERAL_ROCK|iron 62 arsenic 38
+
+unilib:mineral_magnesite_lump|VAPOURISE_MINERAL_LUMP|oxygen 57 magnesium 29 carbon 14
+unilib:mineral_magnesite_rock|VAPOURISE_MINERAL_ROCK|oxygen 57 magnesium 29 carbon 14
+
+unilib:mineral_magnetite_lump|VAPOURISE_MINERAL_LUMP|iron 72 oxygen 28
+unilib:mineral_magnetite_rock|VAPOURISE_MINERAL_ROCK|iron 72 oxygen 28
+
+unilib:mineral_magnetite_vanadium_lump|VAPOURISE_MINERAL_LUMP|iron 70 titanium 12 vanadium 12 chromium 2 0.5 nickel 2 0.5 cobalt 2 0.5
+unilib:mineral_magnetite_vanadium_rock|VAPOURISE_MINERAL_ROCK|iron 70 titanium 12 vanadium 12 chromium 2 0.5 nickel 2 0.5 cobalt 2 0.5
+
+unilib:mineral_malachite_lump|VAPOURISE_MINERAL_LUMP|copper 58 oxygen 36 carbon 5 hydrogen 1 0.5
+unilib:mineral_malachite_rock|VAPOURISE_MINERAL_ROCK|copper 58 oxygen 36 carbon 5 hydrogen 1 0.5
+
+unilib:mineral_manganite_lump|VAPOURISE_MINERAL_LUMP|manganese 62 oxygen 27 hydrogen 11
+unilib:mineral_manganite_rock|VAPOURISE_MINERAL_ROCK|manganese 62 oxygen 27 hydrogen 11
+
+unilib:mineral_mese_block|VAPOURISE_MINERAL_ROCK|oxygen 45 silicon 20 lithium 15 beryllium 10 selenium 4 argon 2 neon 2 fluorine 2
+unilib:mineral_mese_crystal|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 20 lithium 15 beryllium 10 selenium 4 argon 2 neon 2 fluorine 2
+unilib:mineral_mese_crystal_large|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 20 lithium 15 beryllium 10 selenium 4 neon 2 argon 2 fluorine 2
+
+unilib:mineral_mica_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 silicon 21 aluminium 21 potassium 10 hydrogen 2
+unilib:mineral_mica_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 silicon 21 aluminium 21 potassium 10 hydrogen 2
+
+unilib:mineral_millerite_lump|VAPOURISE_MINERAL_LUMP|nickel 65 sulphur 35
+unilib:mineral_millerite_rock|VAPOURISE_MINERAL_ROCK|nickel 65 sulphur 35
+
+unilib:mineral_mirabilite_lump|VAPOURISE_MINERAL_LUMP|oxygen 56 sodium 19 hydrogen 18 sulphur 7
+unilib:mineral_mirabilite_rock|VAPOURISE_MINERAL_ROCK|oxygen 56 sodium 19 hydrogen 18 sulphur 7
+
+unilib:mineral_molybdenite_lump|VAPOURISE_MINERAL_LUMP|molybdenum 60 sulphur 40
+unilib:mineral_molybdenite_rock|VAPOURISE_MINERAL_ROCK|molybdenum 60 sulphur 40
+
+unilib:mineral_monazite_lump|VAPOURISE_MINERAL_LUMP|oxygen 32 phosphorus 16 cerium 13 lanthanum 13 neodymium 13 thorium 13
+unilib:mineral_monazite_rock|VAPOURISE_MINERAL_ROCK|oxygen 32 phosphorus 16 cerium 13 lanthanum 13 neodymium 13 thorium 13
+
+unilib:mineral_moonstone_block|VAPOURISE_MINERAL_BLOCK|oxygen 46 silicon 30 aluminium 10 potassium 7 sodium 7
+unilib:mineral_moonstone_gem|VAPOURISE_MINERAL_GEM|oxygen 46 silicon 30 aluminium 10 potassium 7 sodium 7
+unilib:mineral_moonstone_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 silicon 30 aluminium 10 potassium 7 sodium 7
+unilib:mineral_moonstone_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 silicon 30 aluminium 10 potassium 7 sodium 7
+
+unilib:mineral_nepheline_lump|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 28 aluminium 16 sodium 9 potassium 2
+unilib:mineral_nepheline_rock|VAPOURISE_MINERAL_ROCK|oxygen 45 silicon 28 aluminium 16 sodium 9 potassium 2
+
+unilib:mineral_nepouite_lump|VAPOURISE_MINERAL_LUMP|nickel 47 oxygen 28 silicon 21 hydrogen 4
+unilib:mineral_nepouite_rock|VAPOURISE_MINERAL_ROCK|nickel 47 oxygen 28 silicon 21 hydrogen 4
+
+unilib:mineral_nickeline_lump|VAPOURISE_MINERAL_LUMP|arsenic 56 nickel 44
+unilib:mineral_nickeline_rock|VAPOURISE_MINERAL_ROCK|arsenic 56 nickel 44
+
+unilib:mineral_nitratine_lump|VAPOURISE_MINERAL_LUMP|oxygen 56 sodium 28 nitrogen 16
+unilib:mineral_nitratine_rock|VAPOURISE_MINERAL_ROCK|oxygen 56 sodium 28 nitrogen 16
+
+unilib:mineral_olivine_lump|VAPOURISE_MINERAL_LUMP|oxygen 57 magnesium 22 silicon 20 iron 1 0.5
+unilib:mineral_olivine_rock|VAPOURISE_MINERAL_ROCK|oxygen 57 magnesium 22 silicon 20 iron 1 0.5
+
+unilib:mineral_onyx_block|VAPOURISE_MINERAL_BLOCK|oxygen 53 silicon 47
+unilib:mineral_onyx_gem|VAPOURISE_MINERAL_GEM|oxygen 53 silicon 47
+unilib:mineral_onyx_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_onyx_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+
+unilib:mineral_opal_block|VAPOURISE_MINERAL_BLOCK|oxygen 50 silicon 40 hydrogen 7 oxygen 3
+unilib:mineral_opal_gem|VAPOURISE_MINERAL_GEM|oxygen 50 silicon 40 hydrogen 7 oxygen 3
+unilib:mineral_opal_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 40 hydrogen 7 oxygen 3
+unilib:mineral_opal_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 40 hydrogen 7 oxygen 3
+
+unilib:mineral_orpiment_lump|VAPOURISE_MINERAL_LUMP|arsenic 61 sulphur 39
+unilib:mineral_orpiment_rock|VAPOURISE_MINERAL_ROCK|arsenic 61 sulphur 39
+
+unilib:mineral_otavite_lump|VAPOURISE_MINERAL_LUMP|cadmium 77 oxygen 17 carbon 6
+unilib:mineral_otavite_rock|VAPOURISE_MINERAL_ROCK|cadmium 77 oxygen 17 carbon 6
+
+unilib:mineral_pentlandite_lump|VAPOURISE_MINERAL_LUMP|nickel 34 sulphur 33 iron 33
+unilib:mineral_pentlandite_rock|VAPOURISE_MINERAL_ROCK|nickel 34 sulphur 33 iron 33
+
+unilib:mineral_peridot_block|VAPOURISE_MINERAL_BLOCK|oxygen 56 magnesium 27 silicon 16 iron 1
+unilib:mineral_peridot_gem|VAPOURISE_MINERAL_GEM|oxygen 56 magnesium 27 silicon 16 iron 1
+unilib:mineral_peridot_lump|VAPOURISE_MINERAL_LUMP|oxygen 56 magnesium 27 silicon 16 iron 1
+unilib:mineral_peridot_rock|VAPOURISE_MINERAL_ROCK|oxygen 56 magnesium 27 silicon 16 iron 1
+
+unilib:mineral_perlite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 35 aluminium 10 potassium 1 0.5 sodium 1 0.5 calcium 1 0.5 magnesium 1 0.5 iron 1 0.5
+unilib:mineral_perlite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 35 aluminium 10 potassium 1 0.5 sodium 1 0.5 calcium 1 0.5 magnesium 1 0.5 iron 1 0.5
+
+unilib:mineral_petalite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 30 aluminium 10 lithium 10
+unilib:mineral_petalite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 30 aluminium 10 lithium 10
+
+unilib:mineral_phosphorite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 calcium 30 phosphorus 16 fluorine 4
+unilib:mineral_phosphorite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 calcium 30 phosphorus 16 fluorine 4
+
+unilib:mineral_pietersite_block|VAPOURISE_MINERAL_BLOCK|oxygen 50 silicon 25 iron 15 aluminium 7 potassium 3
+unilib:mineral_pietersite_gem|VAPOURISE_MINERAL_GEM|oxygen 50 silicon 25 iron 15 aluminium 7 potassium 3
+unilib:mineral_pietersite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 25 iron 15 aluminium 7 potassium 3
+unilib:mineral_pietersite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 25 iron 15 aluminium 7 potassium 3
+
+unilib:mineral_pitchblende_lump|VAPOURISE_MINERAL_LUMP|uranium 88 oxygen 12
+unilib:mineral_pitchblende_rock|VAPOURISE_MINERAL_ROCK|uranium 88 oxygen 12
+
+unilib:mineral_platinum_native_lump|VAPOURISE_MINERAL_LUMP|platinum 90 iron 8 nickel 1 0.5 copper 1 0.5
+unilib:mineral_platinum_native_rock|VAPOURISE_MINERAL_ROCK|platinum 90 iron 8 nickel 1 0.5 copper 1 0.5
+
+unilib:mineral_pollucite_lump|VAPOURISE_MINERAL_LUMP|oxygen 47 silicon 21 caesium 19 aluminium 11 sodium 1 0.5 hydrogen 1 0.5
+unilib:mineral_pollucite_rock|VAPOURISE_MINERAL_ROCK|oxygen 47 silicon 21 caesium 19 aluminium 11 sodium 1 0.5 hydrogen 1 0.5
+
+unilib:mineral_polyhalite_lump|VAPOURISE_MINERAL_LUMP|oxygen 44 sulphur 21 potassium 16 calcium 9 magnesium 7 hydrogen 3
+unilib:mineral_polyhalite_rock|VAPOURISE_MINERAL_ROCK|oxygen 44 sulphur 21 potassium 16 calcium 9 magnesium 7 hydrogen 3
+
+unilib:mineral_polylithionite_lump|VAPOURISE_MINERAL_LUMP|oxygen 43 silicon 28 potassium 12 aluminium 7 lithium 6 fluorine 2 hydrogen 2
+unilib:mineral_polylithionite_rock|VAPOURISE_MINERAL_ROCK|oxygen 43 silicon 28 potassium 12 aluminium 7 lithium 6 fluorine 2 hydrogen 2
+
+unilib:mineral_proustite_lump|VAPOURISE_MINERAL_LUMP|silver 66 sulphur 19 arsenic 15
+unilib:mineral_proustite_rock|VAPOURISE_MINERAL_ROCK|silver 66 sulphur 19 arsenic 15
+
+unilib:mineral_pumice_lump|VAPOURISE_MINERAL_LUMP|silicon 70 aluminium 16 sodium 6 potassium 6 iron 1 0.5 magnesium 1 0.5
+unilib:mineral_pumice_rock|VAPOURISE_MINERAL_ROCK|silicon 70 aluminium 16 sodium 6 potassium 6 iron 1 0.5 magnesium 1 0.5
+
+unilib:mineral_pyrite_lump|VAPOURISE_MINERAL_LUMP|sulphur 53 iron 47
+unilib:mineral_pyrite_rock|VAPOURISE_MINERAL_ROCK|sulphur 53 iron 47
+
+unilib:mineral_pyrolusite_lump|VAPOURISE_MINERAL_LUMP|manganese 63 oxygen 37
+unilib:mineral_pyrolusite_rock|VAPOURISE_MINERAL_ROCK|manganese 63 oxygen 37
+
+unilib:mineral_pyromorphite_lump|VAPOURISE_MINERAL_LUMP|lead 76 oxygen 13 phosphorus 6 chlorine 5
+unilib:mineral_pyromorphite_rock|VAPOURISE_MINERAL_ROCK|lead 76 oxygen 13 phosphorus 6 chlorine 5
+
+unilib:mineral_pyrope_block|VAPOURISE_MINERAL_BLOCK|oxygen 41 magnesium 24 silicon 20 aluminium 15
+unilib:mineral_pyrope_gem|VAPOURISE_MINERAL_GEM|oxygen 41 magnesium 24 silicon 20 aluminium 15
+unilib:mineral_pyrope_lump|VAPOURISE_MINERAL_LUMP|oxygen 41 magnesium 24 silicon 20 aluminium 15
+unilib:mineral_pyrope_rock|VAPOURISE_MINERAL_ROCK|oxygen 41 magnesium 24 silicon 20 aluminium 15
+
+unilib:mineral_quartz_brown_lump|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_quartz_brown_rock|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+
+unilib:mineral_quartz_white_block|VAPOURISE_MINERAL_ROCK|oxygen 53 silicon 47
+unilib:mineral_quartz_white_crystal|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+unilib:mineral_quartz_white_crystal_large|VAPOURISE_MINERAL_LUMP|oxygen 53 silicon 47
+
+unilib:mineral_realgar_lump|VAPOURISE_MINERAL_LUMP|arsenic 70 sulphur 30
+unilib:mineral_realgar_rock|VAPOURISE_MINERAL_ROCK|arsenic 70 sulphur 30
+
+unilib:mineral_rhodochrosite_lump|VAPOURISE_MINERAL_LUMP|manganese 48 oxygen 40 carbon 12
+unilib:mineral_rhodochrosite_rock|VAPOURISE_MINERAL_ROCK|manganese 48 oxygen 40 carbon 12
+
+unilib:mineral_rhodonite_lump|VAPOURISE_MINERAL_LUMP|oxygen 43 silicon 19 manganese 35 iron 1 0.5 magnesium 1 0.5 calcium 1 0.5
+unilib:mineral_rhodonite_rock|VAPOURISE_MINERAL_ROCK|oxygen 43 silicon 19 manganese 35 iron 1 0.5 magnesium 1 0.5 calcium 1 0.5
+
+unilib:mineral_ruby_block|VAPOURISE_MINERAL_ROCK|aluminium 52 oxygen 47 chromium 1 0.5
+unilib:mineral_ruby_crystal_large|VAPOURISE_MINERAL_LUMP|aluminium 52 oxygen 47 chromium 1 0.5
+unilib:mineral_ruby_gem|VAPOURISE_MINERAL_LUMP|aluminium 52 oxygen 47 chromium 1 0.5
+
+unilib:mineral_ruby_dark_block|VAPOURISE_MINERAL_BLOCK|aluminium 52 oxygen 47 chromium 1 0.5
+unilib:mineral_ruby_dark_gem|VAPOURISE_MINERAL_GEM|aluminium 52 oxygen 47 chromium 1 0.5
+unilib:mineral_ruby_dark_lump|VAPOURISE_MINERAL_LUMP|aluminium 52 oxygen 47 chromium 1 0.5
+unilib:mineral_ruby_dark_rock|VAPOURISE_MINERAL_ROCK|aluminium 52 oxygen 47 chromium 1 0.5
+
+unilib:mineral_rutile_lump|VAPOURISE_MINERAL_LUMP|titanium 60 oxygen 40
+unilib:mineral_rutile_rock|VAPOURISE_MINERAL_ROCK|titanium 60 oxygen 40
+
+unilib:mineral_salt_block|VAPOURISE_MINERAL_ROCK|chlorine 61 sodium 39
+unilib:mineral_salt_pure_block|VAPOURISE_MINERAL_ROCK|chlorine 61 sodium 39
+
+unilib:mineral_saltpetre_lump|VAPOURISE_MINERAL_LUMP|oxygen 48 potassium 38 nitrogen 14
+unilib:mineral_saltpetre_rock|VAPOURISE_MINERAL_ROCK|oxygen 48 potassium 38 nitrogen 14
+
+unilib:mineral_samarskite_lump|VAPOURISE_MINERAL_LUMP|oxygen 35 niobium 25 tantalum 15 yttrium 5 iron 5 uranium 5 thorium 5 titanium 5
+unilib:mineral_samarskite_rock|VAPOURISE_MINERAL_ROCK|oxygen 35 niobium 25 tantalum 15 yttrium 5 iron 5 uranium 5 thorium 5 titanium 5
+
+unilib:mineral_samarskite_rare_lump|VAPOURISE_MINERAL_LUMP|oxygen 35 niobium 25 tantalum 15 yttrium 5 iron 5 uranium 5 thorium 5 titanium 5
+
+unilib:mineral_sapphire_block|VAPOURISE_MINERAL_ROCK|aluminium 53 oxygen 47
+unilib:mineral_sapphire_crystal_large|VAPOURISE_MINERAL_LUMP|aluminium 53 oxygen 47
+unilib:mineral_sapphire_gem|VAPOURISE_MINERAL_LUMP|aluminium 53 oxygen 47
+
+unilib:mineral_sapphire_dark_block|VAPOURISE_MINERAL_BLOCK|aluminium 53 oxygen 47
+unilib:mineral_sapphire_dark_gem|VAPOURISE_MINERAL_GEM|aluminium 53 oxygen 47
+unilib:mineral_sapphire_dark_lump|VAPOURISE_MINERAL_LUMP|aluminium 53 oxygen 47
+unilib:mineral_sapphire_dark_rock|VAPOURISE_MINERAL_ROCK|aluminium 53 oxygen 47
+
+unilib:mineral_satinspar_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 calcium 23 sulphur 19 hydrogen 12
+unilib:mineral_satinspar_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 calcium 23 sulphur 19 hydrogen 12
+
+unilib:mineral_scheelite_lump|VAPOURISE_MINERAL_LUMP|tungsten 80 calcium 20
+unilib:mineral_scheelite_rock|VAPOURISE_MINERAL_ROCK|tungsten 80 calcium 20
+
+unilib:mineral_selenite_lump|VAPOURISE_MINERAL_LUMP|oxygen 46 calcium 23 sulphur 19 hydrogen 12
+unilib:mineral_selenite_rock|VAPOURISE_MINERAL_ROCK|oxygen 46 calcium 23 sulphur 19 hydrogen 12
+
+unilib:mineral_serpentinite_lump|VAPOURISE_MINERAL_LUMP|oxygen 55 magnesium 25 silicon 19 hydrogen 1
+unilib:mineral_serpentinite_rock|VAPOURISE_MINERAL_ROCK|oxygen 55 magnesium 25 silicon 19 hydrogen 1
+
+unilib:mineral_siderite_lump|VAPOURISE_MINERAL_LUMP|iron 48 oxygen 38 carbon 14
+unilib:mineral_siderite_rock|VAPOURISE_MINERAL_ROCK|iron 48 oxygen 38 carbon 14
+
+unilib:mineral_silver_native_lump|VAPOURISE_MINERAL_LUMP|silver 100
+unilib:mineral_silver_native_rock|VAPOURISE_MINERAL_ROCK|silver 100
+
+unilib:mineral_skutterudite_lump|VAPOURISE_MINERAL_LUMP|arsenic 50 cobalt 25 nickel 15 iron 10
+unilib:mineral_skutterudite_rock|VAPOURISE_MINERAL_ROCK|arsenic 50 cobalt 25 nickel 15 iron 10
+
+unilib:mineral_smithsonite_lump|VAPOURISE_MINERAL_LUMP|zinc 52 oxygen 40 carbon 8
+unilib:mineral_smithsonite_rock|VAPOURISE_MINERAL_ROCK|zinc 52 oxygen 40 carbon 8
+
+unilib:mineral_sodalite_lump|VAPOURISE_MINERAL_LUMP|oxygen 36 sodium 25 silicon 19 aluminium 15 chlorine 5
+unilib:mineral_sodalite_rock|VAPOURISE_MINERAL_ROCK|oxygen 36 sodium 25 silicon 19 aluminium 15 chlorine 5
+
+unilib:mineral_spessartine_block|VAPOURISE_MINERAL_BLOCK|oxygen 40 manganese 35 silicon 20 aluminium 5
+unilib:mineral_spessartine_gem|VAPOURISE_MINERAL_GEM|oxygen 40 manganese 35 silicon 20 aluminium 5
+unilib:mineral_spessartine_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 manganese 35 silicon 20 aluminium 5
+unilib:mineral_spessartine_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 manganese 35 silicon 20 aluminium 5
+
+unilib:mineral_sphalerite_lump|VAPOURISE_MINERAL_LUMP|zinc 67 sulphur 33
+unilib:mineral_sphalerite_rock|VAPOURISE_MINERAL_ROCK|zinc 67 sulphur 33
+
+unilib:mineral_spinel_block|VAPOURISE_MINERAL_BLOCK|oxygen 42 aluminium 37 magnesium 21
+unilib:mineral_spinel_gem|VAPOURISE_MINERAL_GEM|oxygen 42 aluminium 37 magnesium 21
+unilib:mineral_spinel_lump|VAPOURISE_MINERAL_LUMP|oxygen 42 aluminium 37 magnesium 21
+unilib:mineral_spinel_rock|VAPOURISE_MINERAL_ROCK|oxygen 42 aluminium 37 magnesium 21
+
+unilib:mineral_spodumene_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 30 aluminium 12 lithium 8
+unilib:mineral_spodumene_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 30 aluminium 12 lithium 8
+
+unilib:mineral_stannite_lump|VAPOURISE_MINERAL_LUMP|copper 27 tin 23 sulphur 22 iron 14 zinc 14
+unilib:mineral_stannite_rock|VAPOURISE_MINERAL_ROCK|copper 27 tin 23 sulphur 22 iron 14 zinc 14
+
+unilib:mineral_steatite_lump|VAPOURISE_MINERAL_LUMP|oxygen 60 magnesium 32 silicon 8
+unilib:mineral_steatite_rock|VAPOURISE_MINERAL_ROCK|oxygen 60 magnesium 32 silicon 8
+
+unilib:mineral_stephanite_lump|VAPOURISE_MINERAL_LUMP|silver 70 antimony 15 sulphur 15
+unilib:mineral_stephanite_rock|VAPOURISE_MINERAL_ROCK|silver 70 antimony 15 sulphur 15
+
+unilib:mineral_stibnite_lump|VAPOURISE_MINERAL_LUMP|antimony 71 sulphur 29
+unilib:mineral_stibnite_rock|VAPOURISE_MINERAL_ROCK|antimony 71 sulphur 29
+
+unilib:mineral_strontianite_lump|VAPOURISE_MINERAL_LUMP|oxygen 48 strontium 40 carbon 12
+unilib:mineral_strontianite_rock|VAPOURISE_MINERAL_ROCK|oxygen 48 strontium 40 carbon 12
+
+unilib:mineral_sugilite_block|VAPOURISE_MINERAL_BLOCK|oxygen 45 silicon 20 manganese 15 iron 9 lithium 9 potassium 1 0.5 aluminium 1 0.5
+unilib:mineral_sugilite_gem|VAPOURISE_MINERAL_GEM|oxygen 45 silicon 20 manganese 15 iron 9 lithium 9 potassium 1 0.5 aluminium 1 0.5
+unilib:mineral_sugilite_lump|VAPOURISE_MINERAL_LUMP|oxygen 45 silicon 20 manganese 15 iron 9 lithium 9 potassium 1 0.5 aluminium 1 0.5
+unilib:mineral_sugilite_rock|VAPOURISE_MINERAL_ROCK|oxygen 45 silicon 20 manganese 15 iron 9 lithium 9 potassium 1 0.5 aluminium 1 0.5
+
+unilib:mineral_sulphur_lump|VAPOURISE_MINERAL_LUMP|sulphur 100
+
+unilib:mineral_sulphur_rare_lump|VAPOURISE_MINERAL_LUMP|sulphur 100
+unilib:mineral_sulphur_rare_rock|VAPOURISE_MINERAL_ROCK|sulphur 100
+
+unilib:mineral_sylvite_lump|VAPOURISE_MINERAL_LUMP|potassium 52 chlorine 48
+unilib:mineral_sylvite_rock|VAPOURISE_MINERAL_ROCK|potassium 52 chlorine 48
+
+unilib:mineral_tantalite_lump|VAPOURISE_MINERAL_LUMP|oxygen 45 tantalum 35 iron 8 manganese 8 niobium 4
+unilib:mineral_tantalite_rock|VAPOURISE_MINERAL_ROCK|oxygen 45 tantalum 35 iron 8 manganese 8 niobium 4
+
+unilib:mineral_tanzanite_block|VAPOURISE_MINERAL_BLOCK|oxygen 50 silicon 20 aluminium 15 calcium 10 hydrogen 5
+unilib:mineral_tanzanite_gem|VAPOURISE_MINERAL_GEM|oxygen 50 silicon 20 aluminium 15 calcium 10 hydrogen 5
+unilib:mineral_tanzanite_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 silicon 20 aluminium 15 calcium 10 hydrogen 5
+unilib:mineral_tanzanite_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 silicon 20 aluminium 15 calcium 10 hydrogen 5
+
+unilib:mineral_teallite_lump|VAPOURISE_MINERAL_LUMP|lead 54 tin 30 sulphur 16
+unilib:mineral_teallite_rock|VAPOURISE_MINERAL_ROCK|lead 54 tin 30 sulphur 16
+
+unilib:mineral_tennantite_lump|VAPOURISE_MINERAL_LUMP|copper 45 sulphur 25 arsenic 20 zinc 6 iron 4
+unilib:mineral_tennantite_rock|VAPOURISE_MINERAL_ROCK|copper 45 sulphur 25 arsenic 20 zinc 6 iron 4
+
+unilib:mineral_tenorite_lump|VAPOURISE_MINERAL_LUMP|copper 80 oxygen 20
+unilib:mineral_tenorite_rock|VAPOURISE_MINERAL_ROCK|copper 80 oxygen 20
+
+unilib:mineral_tetrahedrite_lump|VAPOURISE_MINERAL_LUMP|copper 35 antimony 30 sulphur 25 iron 10
+unilib:mineral_tetrahedrite_rock|VAPOURISE_MINERAL_ROCK|copper 35 antimony 30 sulphur 25 iron 10
+
+unilib:mineral_thorite_lump|VAPOURISE_MINERAL_LUMP|thorium 55 oxygen 25 silicon 15 uranium 2 iron 2 lanthanum 1
+unilib:mineral_thorite_rock|VAPOURISE_MINERAL_ROCK|thorium 55 oxygen 25 silicon 15 uranium 2 iron 2 lanthanum 1
+
+unilib:mineral_thortveitite_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 scandium 24 silicon 20 yttrium 16
+unilib:mineral_thortveitite_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 scandium 24 silicon 20 yttrium 16
+
+unilib:mineral_tin_native_lump|VAPOURISE_MINERAL_LUMP|tin 100
+unilib:mineral_tin_native_rock|VAPOURISE_MINERAL_ROCK|tin 100
+
+unilib:mineral_titanite_lump|VAPOURISE_MINERAL_LUMP|oxygen 35 calcium 25 silicon 20 titanium 15 iron 2 0.5 aluminium 2 0.5 cerium 1 0.33
+unilib:mineral_titanite_rock|VAPOURISE_MINERAL_ROCK|oxygen 35 calcium 25 silicon 20 titanium 15 iron 2 0.5 aluminium 2 0.5 cerium 1 0.33
+
+unilib:mineral_topaz_block|VAPOURISE_MINERAL_BLOCK|oxygen 33 aluminium 32 fluorine 20 silicon 15
+unilib:mineral_topaz_gem|VAPOURISE_MINERAL_GEM|oxygen 33 aluminium 32 fluorine 20 silicon 15
+unilib:mineral_topaz_lump|VAPOURISE_MINERAL_LUMP|oxygen 33 aluminium 32 fluorine 20 silicon 15
+unilib:mineral_topaz_rock|VAPOURISE_MINERAL_ROCK|oxygen 33 aluminium 32 fluorine 20 silicon 15
+
+unilib:mineral_torbernite_lump|VAPOURISE_MINERAL_LUMP|uranium 48 oxygen 37 copper 7 phosphorus 6 hydrogen 2
+unilib:mineral_torbernite_rock|VAPOURISE_MINERAL_ROCK|uranium 48 oxygen 37 copper 7 phosphorus 6 hydrogen 2
+
+unilib:mineral_tourmaline_block|VAPOURISE_MINERAL_BLOCK|oxygen 35 silicon 30 aluminium 20 sodium 5 boron 5 lithium 3 hydrogen 2
+unilib:mineral_tourmaline_gem|VAPOURISE_MINERAL_GEM|oxygen 35 silicon 30 aluminium 20 sodium 5 boron 5 lithium 3 hydrogen 2
+unilib:mineral_tourmaline_lump|VAPOURISE_MINERAL_LUMP|oxygen 35 silicon 30 aluminium 20 sodium 5 boron 5 lithium 3 hydrogen 2
+unilib:mineral_tourmaline_rock|VAPOURISE_MINERAL_ROCK|oxygen 35 silicon 30 aluminium 20 sodium 5 boron 5 lithium 3 hydrogen 2
+
+unilib:mineral_trona_lump|VAPOURISE_MINERAL_LUMP|oxygen 56 sodium 31 carbon 11 hydrogen 2
+unilib:mineral_trona_rock|VAPOURISE_MINERAL_ROCK|oxygen 56 sodium 31 carbon 11 hydrogen 2
+
+unilib:mineral_tsavorite_block|VAPOURISE_MINERAL_BLOCK|silicon 40 calcium 30 aluminium 20 oxygen 10
+unilib:mineral_tsavorite_gem|VAPOURISE_MINERAL_GEM|silicon 40 calcium 30 aluminium 20 oxygen 10
+unilib:mineral_tsavorite_lump|VAPOURISE_MINERAL_LUMP|silicon 40 calcium 30 aluminium 20 oxygen 10
+unilib:mineral_tsavorite_rock|VAPOURISE_MINERAL_ROCK|silicon 40 calcium 30 aluminium 20 oxygen 10
+
+unilib:mineral_turquoise_block|VAPOURISE_MINERAL_BLOCK|oxygen 50 aluminium 15 phosphorus 13 copper 12 hydrogen 10
+unilib:mineral_turquoise_gem|VAPOURISE_MINERAL_GEM|oxygen 50 aluminium 15 phosphorus 13 copper 12 hydrogen 10
+unilib:mineral_turquoise_lump|VAPOURISE_MINERAL_LUMP|oxygen 50 aluminium 15 phosphorus 13 copper 12 hydrogen 10
+unilib:mineral_turquoise_rock|VAPOURISE_MINERAL_ROCK|oxygen 50 aluminium 15 phosphorus 13 copper 12 hydrogen 10
+
+unilib:mineral_unakite_block|VAPOURISE_MINERAL_BLOCK|oxygen 40 silicon 35 calcium 10 aluminium 5 potassium 5 iron 5
+unilib:mineral_unakite_gem|VAPOURISE_MINERAL_GEM|oxygen 40 silicon 35 calcium 10 aluminium 5 potassium 5 iron 5
+unilib:mineral_unakite_lump|VAPOURISE_MINERAL_LUMP|oxygen 40 silicon 35 calcium 10 aluminium 5 potassium 5 iron 5
+unilib:mineral_unakite_rock|VAPOURISE_MINERAL_ROCK|oxygen 40 silicon 35 calcium 10 aluminium 5 potassium 5 iron 5
+
+unilib:mineral_uraninite_lump|VAPOURISE_MINERAL_LUMP|uranium 85 oxygen 10 lead 3 thorium 1 0.5 radium 1 0.5
+unilib:mineral_uraninite_rock|VAPOURISE_MINERAL_ROCK|uranium 85 oxygen 10 lead 3 thorium 1 0.5 radium 1 0.5
+
+unilib:mineral_vanadinite_lump|VAPOURISE_MINERAL_LUMP|lead 73 vanadium 11 oxygen 13 chlorine 3
+unilib:mineral_vanadinite_rock|VAPOURISE_MINERAL_ROCK|lead 73 vanadium 11 oxygen 13 chlorine 3
+
+unilib:mineral_wolframite_lump|VAPOURISE_MINERAL_LUMP|tungsten 77 manganese 14 iron 9
+unilib:mineral_wolframite_rock|VAPOURISE_MINERAL_ROCK|tungsten 77 manganese 14 iron 9
+
+unilib:mineral_wollastonite_lump|VAPOURISE_MINERAL_LUMP|oxygen 34 calcium 30 silicon 30 iron 2 0.5 magnesium 2 0.5 aluminium 2 0.5
+unilib:mineral_wollastonite_rock|VAPOURISE_MINERAL_ROCK|oxygen 34 calcium 30 silicon 30 iron 2 0.5 magnesium 2 0.5 aluminium 2 0.5
+
+unilib:mineral_wood_petrified_lump|VAPOURISE_MINERAL_LUMP|oxygen 60 silicon 30 iron 5 manganese 5
+
+unilib:mineral_wulfenite_lump|VAPOURISE_MINERAL_LUMP|lead 56 molybdenum 26 oxygen 18
+unilib:mineral_wulfenite_rock|VAPOURISE_MINERAL_ROCK|lead 56 molybdenum 26 oxygen 18
+
+unilib:mineral_zeolite_lump|VAPOURISE_MINERAL_LUMP|silicon 40 oxygen 30 aluminium 20 sodium 3 0.66 potassium 3 0.5 calcium 2 0.5 magnesium 2 0.5
+unilib:mineral_zeolite_rock|VAPOURISE_MINERAL_ROCK|silicon 40 oxygen 30 aluminium 20 sodium 3 0.66 potassium 3 0.5 calcium 2 0.5 magnesium 2 0.5
+
+unilib:mineral_zincite_lump|VAPOURISE_MINERAL_LUMP|zinc 70 oxygen 25 manganese 5
+unilib:mineral_zincite_rock|VAPOURISE_MINERAL_ROCK|zinc 70 oxygen 25 manganese 5
+
+unilib:mineral_zircon_lump|VAPOURISE_MINERAL_LUMP|zirconium 50 oxygen 30 silicon 17 hafnium 1 0.2 thorium 1 0.2 thorium 1 0.2
+unilib:mineral_zircon_rock|VAPOURISE_MINERAL_ROCK|zirconium 50 oxygen 30 silicon 17 hafnium 1 0.2 thorium 1 0.2 thorium 1 0.2
+
+# - sand (oxygen 42 silicon 38 other 20) ----------------------------------------------------------
+
+unilib:sand_andesite_white|IGNORE|iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+#unilib:sand_barren|IGNORE|
+unilib:sand_basalt_dark|IGNORE|aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 titanium 2
+unilib:sand_basalt_pale|IGNORE|aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 titanium 2
+#unilib:sand_beige|IGNORE|
+#unilib:sand_biogenic|IGNORE|
+#unilib:sand_brown|IGNORE|
+unilib:sand_cassiterite|IGNORE|tin 100
+unilib:sand_chalk_pink|IGNORE|calcium 45 carbon 35 magnesium 5 iron 5
+unilib:sand_chert|IGNORE|iron 3 calcium 2
+#unilib:sand_coral|IGNORE|
+unilib:sand_dacite|IGNORE|aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+#unilib:sand_desert|IGNORE|
+unilib:sand_diatomite|IGNORE|aluminium 3 iron 2 calcium 1 magnesium 1 potassium 1 sodium 1
+unilib:sand_dolostone_dark|IGNORE|carbon 38 calcium 35 magnesium 22 iron 2
+unilib:sand_eclogite|IGNORE|aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:sand_feldspar|IGNORE|aluminium 20 potassium 1 sodium 1 calcium 1
+unilib:sand_gabbro_grey|IGNORE|aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 titanium 2
+unilib:sand_garnet|IGNORE|aluminium 2 iron 2 magnesium 2 calcium 1 manganese 1 chromium 1
+unilib:sand_garnet_antipodean|IGNORE|aluminium 2 iron 2 magnesium 2 calcium 1 manganese 1 chromium 1
+#unilib:sand_glassy|IGNORE|
+unilib:sand_glauconite|IGNORE|iron 20 potassium 5 aluminium 2 magnesium 2 sodium 1 hydrogen 1
+unilib:sand_gneiss_grey|IGNORE|aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+#unilib:sand_golden|IGNORE|
+unilib:sand_granite_ebony|IGNORE|aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:sand_granite_orange|IGNORE|aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:sand_greensand_dark|IGNORE|iron 10 aluminium 5 potassium 4 magnesium 3 sodium 1 calcium 1
+unilib:sand_greensand_pale|IGNORE|iron 10 aluminium 5 potassium 4 magnesium 3 sodium 1 calcium 1
+unilib:sand_greywacke_pale|IGNORE|aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:sand_gypsum|IGNORE|calcium 23 sulphur 19 hydrogen 2
+unilib:sand_haematite|IGNORE|iron 100
+#unilib:sand_immature|IGNORE|
+unilib:sand_ironsand|IGNORE|iron 100
+unilib:sand_komatiite|IGNORE|magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1
+unilib:sand_lignite|IGNORE|carbon 65 hydrogen 5 sulphur 3 nitrogen 2
+unilib:sand_limestone_beige|IGNORE|calcium 45 carbon 35 magnesium 5 iron 5 aluminium 3 sodium 2
+unilib:sand_lithic|IGNORE|aluminium 5 iron 10 potassium 4 magnesium 3 calcium 1 sodium 1
+unilib:sand_marble_cream|IGNORE|calcium 50 carbon 45 magnesium 2 iron 1 aluminium 1
+unilib:sand_migmatite|IGNORE|aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:sand_mineral_basaltic|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+unilib:sand_mineral_granitic|IGNORE|aluminium 15 potassium 7 sodium 5 iron 5 calcium 1 magnesium 1
+unilib:sand_ooid|IGNORE|carbon 12 magnesium 2 iron 1
+#unilib:sand_ordinary|IGNORE|
+#unilib:sand_ordinary_glow|IGNORE|
+#unilib:sand_pale|IGNORE|
+#unilib:sand_pink|IGNORE|
+unilib:sand_quartz|IGNORE|aluminium 3 iron 1
+unilib:sand_quartzite_red|IGNORE|aluminium 3 iron 1
+#unilib:sand_quicksand|IGNORE|
+#unilib:sand_red|IGNORE|
+#unilib:sand_red_antipodean|IGNORE|
+unilib:sand_rhyolite_dark|IGNORE|aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1
+#unilib:sand_river|IGNORE|
+unilib:sand_schist_blue|IGNORE|aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:sand_schist_green_pale|IGNORE|aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:sand_seashells|IGNORE|carbon 12 magnesium 1 strontium 1
+unilib:sand_serpentine|IGNORE|magnesium 45 iron 7 aluminium 2 calcium 1
+unilib:sand_shale_white|IGNORE|aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+#unilib:sand_silica|IGNORE|
+unilib:sand_silt|IGNORE|aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:sand_silt_antipodean|IGNORE|aluminium 15 iron 8 calcium 5 magnesium 3 sodium 2
+unilib:sand_silt_lump|IGNORE|aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:sand_siltstone_pale|IGNORE|aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+#unilib:sand_silver|IGNORE|
+unilib:sand_soapstone|IGNORE|magnesium 30 iron 3 aluminium 1 calcium 1
+unilib:sand_sulphur|IGNORE|sulphur 100
+#unilib:sand_undersea|IGNORE|
+unilib:sand_volcanic|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+unilib:sand_volcanic_ash|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+unilib:sand_volcanic_dust|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+unilib:sand_volcanic_fine|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+unilib:sand_volcanic_glass|IGNORE|iron 15 magnesium 10 aluminium 5 calcium 3 sodium 1 potassium 1
+#unilib:sand_white|IGNORE|
+
+# - stone -----------------------------------------------------------------------------------------
+
+unilib:stone_afualite|VAPOURISE_STONE|silicon 50 oxygen 15 carbon 15 iron 8 magnesium 7 mercury 5
+unilib:stone_afualite_block|VAPOURISE_STONE|silicon 50 oxygen 15 carbon 15 iron 8 magnesium 7 mercury 5
+unilib:stone_afualite_brick|VAPOURISE_STONE|silicon 50 oxygen 15 carbon 15 iron 8 magnesium 7 mercury 5
+unilib:stone_afualite_cobble|VAPOURISE_COBBLE|silicon 50 oxygen 15 carbon 15 iron 8 magnesium 7 mercury 5
+
+unilib:stone_amphibolite|VAPOURISE_STONE|silicon 50 aluminium 15 iron 12 magnesium 10 calcium 8 sodium 3 potassium 2
+unilib:stone_amphibolite_block|VAPOURISE_STONE|silicon 50 aluminium 15 iron 12 magnesium 10 calcium 8 sodium 3 potassium 2
+unilib:stone_amphibolite_brick|VAPOURISE_STONE|silicon 50 aluminium 15 iron 12 magnesium 10 calcium 8 sodium 3 potassium 2
+unilib:stone_amphibolite_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 15 iron 12 magnesium 10 calcium 8 sodium 3 potassium 2
+unilib:stone_amphibolite_cobble_mossy|VAPOURISE_COBBLE|silicon 50 aluminium 15 iron 12 magnesium 10 calcium 8 sodium 3 potassium 2
+
+unilib:stone_andesite_antipodean|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_antipodean_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_antipodean_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_antipodean_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_andesite_dark|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_dark_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_dark_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_dark_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_dark_cobble_mossy|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_andesite_grey|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_grey_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_grey_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_grey_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_andesite_pale|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_pale_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_pale_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_pale_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_andesite_white|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_white_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_white_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_andesite_white_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_aplite|VAPOURISE_STONE|silicon 75 aluminium 15 potassium 6 sodium 2 iron 1 calcium 1
+unilib:stone_aplite_block|VAPOURISE_STONE|silicon 75 aluminium 15 potassium 6 sodium 2 iron 1 calcium 1
+unilib:stone_aplite_brick|VAPOURISE_STONE|silicon 75 aluminium 15 potassium 6 sodium 2 iron 1 calcium 1
+unilib:stone_aplite_cobble|VAPOURISE_COBBLE|silicon 75 aluminium 15 potassium 6 sodium 2 iron 1 calcium 1
+unilib:stone_aplite_cobble_mossy|VAPOURISE_COBBLE|silicon 75 aluminium 15 potassium 6 sodium 2 iron 1 calcium 1
+
+unilib:stone_basalt_black|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_black_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_black_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_black_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_blue|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_blue_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_blue_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_blue_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_blue_cobble_mossy|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_brown|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_brown_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_brown_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_brown_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_dark|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_dark_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_dark_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_dark_rubble|VAPOURISE_RUBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_grey|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_grey_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_grey_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_grey_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_pale|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_pale_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_pale_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_pale_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_basalt_red|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_red_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_red_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_basalt_red_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_bluestone|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 7 sodium 3 potassium 3 titanium 2
+unilib:stone_bluestone_block|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 7 sodium 3 potassium 3 titanium 2
+unilib:stone_bluestone_brick|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 7 sodium 3 potassium 3 titanium 2
+unilib:stone_bluestone_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 7 sodium 3 potassium 3 titanium 2
+
+unilib:stone_breccia|VAPOURISE_STONE|silicon 60 calcium 13 aluminium 10 iron 7 magnesium 5 sodium 3 potassium 2
+unilib:stone_breccia_block|VAPOURISE_STONE|silicon 60 calcium 13 aluminium 10 iron 7 magnesium 5 sodium 3 potassium 2
+unilib:stone_breccia_brick|VAPOURISE_STONE|silicon 60 calcium 13 aluminium 10 iron 7 magnesium 5 sodium 3 potassium 2
+unilib:stone_breccia_rubble|VAPOURISE_RUBBLE|silicon 60 calcium 13 aluminium 10 iron 7 magnesium 5 sodium 3 potassium 2
+
+unilib:stone_brownstone_dark|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_dark_block|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_dark_brick|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_dark_rubble|VAPOURISE_RUBBLE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+
+unilib:stone_brownstone_pale|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_pale_block|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_pale_brick|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_brownstone_pale_rubble|VAPOURISE_RUBBLE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+
+unilib:stone_carbonatite|VAPOURISE_STONE|calcium 40 carbon 30 magnesium 10 iron 10 silicon 10
+unilib:stone_carbonatite_block|VAPOURISE_STONE|calcium 40 carbon 30 magnesium 10 iron 10 silicon 10
+unilib:stone_carbonatite_brick|VAPOURISE_STONE|calcium 40 carbon 30 magnesium 10 iron 10 silicon 10
+unilib:stone_carbonatite_rubble|VAPOURISE_RUBBLE|calcium 40 carbon 30 magnesium 10 iron 10 silicon 10
+
+unilib:stone_chalk_pink|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_pink_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_pink_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_pink_cobble|VAPOURISE_COBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+
+unilib:stone_chalk_white|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_white_powder|VAPOURISE_POWDER|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+
+unilib:stone_chalk_yellow|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_yellow_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_yellow_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_chalk_yellow_cobble|VAPOURISE_COBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+
+unilib:stone_chert|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+unilib:stone_chert_block|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+unilib:stone_chert_brick|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+unilib:stone_chert_cobble|VAPOURISE_COBBLE|silicon 95 iron 3 0.5 calcium 2 0.5
+
+unilib:stone_claystone_red|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_red_block|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_red_brick|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_red_rubble|VAPOURISE_RUBBLE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_claystone_white|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_white_block|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_white_brick|VAPOURISE_STONE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+unilib:stone_claystone_white_rubble|VAPOURISE_RUBBLE|silicon 60 aluminium 20 iron 7 calcium 5 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_conglomerate_normal|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+unilib:stone_conglomerate_normal_block|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+unilib:stone_conglomerate_normal_brick|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+
+unilib:stone_conglomerate_rough|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+unilib:stone_conglomerate_rough_block|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+unilib:stone_conglomerate_rough_brick|VAPOURISE_STONE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+unilib:stone_conglomerate_rough_rubble|VAPOURISE_RUBBLE|silicon 65 calcium 12 aluminium 8 iron 7 magnesium 4 sodium 2 potassium 2
+
+unilib:stone_dacite|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:stone_dacite_block|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:stone_dacite_brick|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:stone_dacite_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+
+unilib:stone_desert|VAPOURISE_STONE|oxygen 50 silicon 30 iron 10 magnesium 5 titanium 5
+unilib:stone_desert_block|VAPOURISE_STONE|oxygen 50 silicon 30 iron 10 magnesium 5 titanium 5
+unilib:stone_desert_brick|VAPOURISE_STONE|oxygen 50 silicon 30 iron 10 magnesium 5 titanium 5
+unilib:stone_desert_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 30 iron 10 magnesium 5 titanium 5
+
+unilib:stone_diorite_dark|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_dark_block|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_dark_brick|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+
+unilib:stone_diorite_pale|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_pale_block|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_pale_brick|VAPOURISE_STONE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_pale_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+unilib:stone_diorite_pale_cobble_mossy|VAPOURISE_COBBLE|silicon 65 aluminium 16 calcium 7 magnesium 4 iron 3 sodium 3 potassium 2
+
+unilib:stone_dolostone_dark|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_dark_block|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_dark_brick|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_dark_rubble|VAPOURISE_RUBBLE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+
+unilib:stone_dolostone_pale|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_pale_block|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_pale_brick|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_pale_cobble|VAPOURISE_COBBLE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_dolostone_pale_cobble_mossy|VAPOURISE_COBBLE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+
+unilib:stone_eclogite|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:stone_eclogite_block|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:stone_eclogite_brick|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:stone_eclogite_cobble|VAPOURISE_COBBLE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+
+unilib:stone_emutite|VAPOURISE_STONE|oxygen 50 silicon 30 aluminium 5 calcium 5 magnesium 5 iron 5
+unilib:stone_emutite_block|VAPOURISE_STONE|oxygen 50 silicon 30 aluminium 5 calcium 5 magnesium 5 iron 5
+unilib:stone_emutite_brick|VAPOURISE_STONE|oxygen 50 silicon 30 aluminium 5 calcium 5 magnesium 5 iron 5
+unilib:stone_emutite_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 30 aluminium 5 calcium 5 magnesium 5 iron 5
+
+unilib:stone_gabbro_brown|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_brown_block|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_brown_brick|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_brown_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_brown_cobble_mossy|VAPOURISE_COBBLE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+
+unilib:stone_gabbro_grey|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_grey_block|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_grey_brick|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_grey_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+
+unilib:stone_gabbro_red|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_red_block|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_gabbro_red_brick|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+
+unilib:stone_gneiss_antipodean|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_antipodean_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_antipodean_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_antipodean_cobble|VAPOURISE_COBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_gneiss_black|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_black_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_black_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_black_cobble|VAPOURISE_COBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_black_cobble_mossy|VAPOURISE_COBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_gneiss_brown|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_brown_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_brown_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_brown_cobble|VAPOURISE_COBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_gneiss_grey|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_grey_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_grey_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_grey_cobble|VAPOURISE_COBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_gneiss_white|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_white_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_white_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_gneiss_white_rubble|VAPOURISE_RUBBLE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_goldstone|VAPOURISE_STONE|silicon 75 gold 10 aluminium 5 iron 5 calcium 5
+
+unilib:stone_granite_antipodean|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_antipodean_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_antipodean_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_antipodean_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_black|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_black_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_black_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_black_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_brown|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_brown_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_brown_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_brown_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_dark|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_ebony|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_ebony_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_ebony_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_ebony_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_grey|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_grey_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_grey_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_grey_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_orange|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_orange_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_orange_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_orange_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_pale|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pale_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pale_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pale_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_pink|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pink_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pink_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_pink_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_red|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_red_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_red_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_red_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_salmon|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_salmon_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_salmon_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_salmon_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_salmon_cobble_mossy|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_granite_white|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_white_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_white_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_granite_white_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_greenstone|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 8 sodium 5 potassium 2
+unilib:stone_greenstone_block|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 8 sodium 5 potassium 2
+unilib:stone_greenstone_brick|VAPOURISE_STONE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 8 sodium 5 potassium 2
+unilib:stone_greenstone_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 15 iron 10 calcium 10 magnesium 8 sodium 5 potassium 2
+
+unilib:stone_greywacke_dark|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_dark_block|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_dark_brick|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_dark_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_greywacke_pale|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_pale_block|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_pale_brick|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_greywacke_pale_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_hektorite|VAPOURISE_STONE|oxygen 50 silicon 30 hydrogen 7 lithium 7 magnesium 4 sodium 2
+unilib:stone_hektorite_block|VAPOURISE_STONE|oxygen 50 silicon 30 hydrogen 7 lithium 7 magnesium 4 sodium 2
+unilib:stone_hektorite_brick|VAPOURISE_STONE|oxygen 50 silicon 30 hydrogen 7 lithium 7 magnesium 4 sodium 2
+unilib:stone_hektorite_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 30 hydrogen 7 lithium 7 magnesium 4 sodium 2
+
+unilib:stone_hornfels|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 10 magnesium 5
+unilib:stone_hornfels_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 10 magnesium 5
+unilib:stone_hornfels_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 10 magnesium 5
+
+unilib:stone_jungle|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_jungle_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_jungle_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_jungle_cobble|VAPOURISE_COBBLE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_komatiite|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+unilib:stone_komatiite_block|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+unilib:stone_komatiite_brick|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+unilib:stone_komatiite_cobble|VAPOURISE_COBBLE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+
+unilib:stone_laterite|VAPOURISE_STONE|aluminium 35 silicon 30 iron 20 titanium 5 magnesium 4 potassium 3 sodium 3
+unilib:stone_laterite_block|VAPOURISE_STONE|aluminium 35 silicon 30 iron 20 titanium 5 magnesium 4 potassium 3 sodium 3
+unilib:stone_laterite_brick|VAPOURISE_STONE|aluminium 35 silicon 30 iron 20 titanium 5 magnesium 4 potassium 3 sodium 3
+unilib:stone_laterite_rubble|VAPOURISE_RUBBLE|aluminium 35 silicon 30 iron 20 titanium 5 magnesium 4 potassium 3 sodium 3
+
+unilib:stone_leafstone|VAPOURISE_STONE|oxygen 50 silicon 30 aluminium 10 calcium 5 bromine 3 iodine 2
+
+unilib:stone_lignite|VAPOURISE_STONE|carbon 65 oxygen 25 hydrogen 5 sulphur 3 nitrogen 2
+
+unilib:stone_limestone_antipodean|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_antipodean_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_antipodean_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_antipodean_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_beige|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_beige_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_beige_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_beige_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_coquina|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_coquina_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_coquina_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_coquina_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_dark|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_dark_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_dark_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_dark_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_grey|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_grey_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_grey_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_grey_cobble|VAPOURISE_COBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_grey_cobble_mossy|VAPOURISE_COBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_red|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_red_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_red_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_red_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_limestone_white|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_white_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_white_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_limestone_white_rubble|VAPOURISE_RUBBLE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_malachite|VAPOURISE_STONE|oxygen 60 copper 25 hydrogen 10 carbon 5
+
+unilib:stone_marble_blue|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_blue_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_brown|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_brown_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_brown_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_brown_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_carrara|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_carrara_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_carrara_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_carrara_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_carrara_cobble_mossy|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_cream|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_cream_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_cream_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_cream_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_grey|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_grey_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_red|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_red_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_red_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_red_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_silver|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_silver_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_silver_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_silver_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_marble_white|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_white_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_white_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_marble_white_cobble|VAPOURISE_COBBLE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_migmatite|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:stone_migmatite_block|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:stone_migmatite_brick|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:stone_migmatite_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+
+unilib:stone_mudstone|VAPOURISE_STONE|silicon 65 aluminium 20 iron 7 calcium 3 magnesium 3 potassium 1 sodium 1
+unilib:stone_mudstone_block|VAPOURISE_STONE|silicon 65 aluminium 20 iron 7 calcium 3 magnesium 3 potassium 1 sodium 1
+unilib:stone_mudstone_brick|VAPOURISE_STONE|silicon 65 aluminium 20 iron 7 calcium 3 magnesium 3 potassium 1 sodium 1
+unilib:stone_mudstone_rubble|VAPOURISE_RUBBLE|silicon 65 aluminium 20 iron 7 calcium 3 magnesium 3 potassium 1 sodium 1
+
+unilib:stone_obscurite|VAPOURISE_STONE|oxygen 60 magnesium 15 silicon 15 iron 5 calcium 5
+
+unilib:stone_obsidian|VAPOURISE_STONE|silicon 70 aluminium 15 sodium 5 potassium 5 iron 3 magnesium 1 calcium 1
+unilib:stone_obsidian_block|VAPOURISE_STONE|silicon 70 aluminium 15 sodium 5 potassium 5 iron 3 magnesium 1 calcium 1
+unilib:stone_obsidian_brick|VAPOURISE_STONE|silicon 70 aluminium 15 sodium 5 potassium 5 iron 3 magnesium 1 calcium 1
+unilib:stone_obsidian_hot|VAPOURISE_STONE|silicon 70 aluminium 15 sodium 5 potassium 5 iron 3 magnesium 1 calcium 1
+unilib:stone_obsidian_molten|VAPOURISE_STONE|silicon 70 aluminium 15 sodium 5 potassium 5 iron 3 magnesium 1 calcium 1
+
+unilib:stone_ocean|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_ocean_brick|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_ocean_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+
+unilib:stone_omphyrite|VAPOURISE_STONE|oxygen 50 silicon 25 sulphur 15 aluminium 5 calcium 3 magnesium 2
+unilib:stone_omphyrite_block|VAPOURISE_STONE|oxygen 50 silicon 25 sulphur 15 aluminium 5 calcium 3 magnesium 2
+unilib:stone_omphyrite_brick|VAPOURISE_STONE|oxygen 50 silicon 25 sulphur 15 aluminium 5 calcium 3 magnesium 2
+unilib:stone_omphyrite_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 25 sulphur 15 aluminium 5 calcium 3 magnesium 2
+unilib:stone_omphyrite_crack_lava|VAPOURISE_STONE|oxygen 50 silicon 25 sulphur 15 aluminium 5 calcium 3 magnesium 2
+
+unilib:stone_ordinary|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_ordinary_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_ordinary_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_ordinary_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+unilib:stone_ordinary_cobble_hot|VAPOURISE_COBBLE|oxygen 50 silicon 50
+unilib:stone_ordinary_cobble_mossy|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_pegmatite_red|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_red_block|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_red_brick|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_red_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_red_cobble_mossy|VAPOURISE_COBBLE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+
+unilib:stone_pegmatite_white|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_white_block|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_white_brick|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_pegmatite_white_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+
+unilib:stone_peridotite_dark|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_dark_block|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_dark_brick|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_dark_cobble|VAPOURISE_COBBLE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_dark_cobble_mossy|VAPOURISE_COBBLE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+
+unilib:stone_peridotite_pale|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_pale_block|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+unilib:stone_peridotite_pale_brick|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 calcium 3 aluminium 1 sodium 1 0.5
+
+unilib:stone_phonolite|VAPOURISE_STONE|silicon 55 aluminium 20 sodium 11 potassium 6 iron 5 calcium 2 magnesium 1 0.5
+unilib:stone_phonolite_block|VAPOURISE_STONE|silicon 55 aluminium 20 sodium 11 potassium 6 iron 5 calcium 2 magnesium 1 0.5
+unilib:stone_phonolite_brick|VAPOURISE_STONE|silicon 55 aluminium 20 sodium 11 potassium 6 iron 5 calcium 2 magnesium 1 0.5
+unilib:stone_phonolite_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 20 sodium 11 potassium 6 iron 5 calcium 2 magnesium 1 0.5
+unilib:stone_phonolite_cobble_mossy|VAPOURISE_COBBLE|silicon 55 aluminium 20 sodium 11 potassium 6 iron 5 calcium 2 magnesium 1 0.5
+
+unilib:stone_phyllite|VAPOURISE_STONE|silicon 55 aluminium 25 iron 10 magnesium 5 calcium 3 potassium 2
+unilib:stone_phyllite_block|VAPOURISE_STONE|silicon 55 aluminium 25 iron 10 magnesium 5 calcium 3 potassium 2
+unilib:stone_phyllite_brick|VAPOURISE_STONE|silicon 55 aluminium 25 iron 10 magnesium 5 calcium 3 potassium 2
+unilib:stone_phyllite_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 25 iron 10 magnesium 5 calcium 3 potassium 2
+unilib:stone_phyllite_cobble_mossy|VAPOURISE_COBBLE|silicon 55 aluminium 25 iron 10 magnesium 5 calcium 3 potassium 2
+
+unilib:stone_pounamu|VAPOURISE_STONE|silicon 65 aluminium 20 iron 5 magnesium 3 calcium 3 potassium 2 sodium 2
+unilib:stone_pounamu_block|VAPOURISE_STONE|silicon 65 aluminium 20 iron 5 magnesium 3 calcium 3 potassium 2 sodium 2
+unilib:stone_pounamu_brick|VAPOURISE_STONE|silicon 65 aluminium 20 iron 5 magnesium 3 calcium 3 potassium 2 sodium 2
+
+unilib:stone_quartz_antipodean|VAPOURISE_STONE|silicon 100
+
+unilib:stone_quartzite_brown|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_brown_block|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_brown_brick|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_brown_cobble|VAPOURISE_COBBLE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_brown_cobble_mossy|VAPOURISE_COBBLE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+
+unilib:stone_quartzite_red|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_red_block|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_red_brick|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_red_cobble|VAPOURISE_COBBLE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+
+unilib:stone_quartzite_white|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_white_block|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_quartzite_white_brick|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+
+unilib:stone_rhyolite_dark|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_dark_block|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_dark_brick|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_dark_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+
+unilib:stone_rhyolite_pale|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_pale_block|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_pale_brick|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_rhyolite_pale_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+
+unilib:stone_sandstone_andesite_white|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_sandstone_andesite_white_block|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+unilib:stone_sandstone_andesite_white_brick|VAPOURISE_STONE|silicon 55 aluminium 18 iron 7 calcium 6 magnesium 5 sodium 5 potassium 3 titanium 1
+
+unilib:stone_sandstone_antipodean|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_antipodean_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_antipodean_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_antipodean_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_barren|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_barren_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_barren_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_basalt_pale|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_sandstone_basalt_pale_block|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+unilib:stone_sandstone_basalt_pale_brick|VAPOURISE_STONE|silicon 50 aluminium 16 iron 12 calcium 8 magnesium 7 sodium 3 potassium 2 titanium 2
+
+unilib:stone_sandstone_beige|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_beige_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_beige_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_brown|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_sandstone_brown_block|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+unilib:stone_sandstone_brown_brick|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 oxygen 3 calcium 3 oxygen 2 magnesium 2
+
+unilib:stone_sandstone_chalk_pink|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_sandstone_chalk_pink_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+unilib:stone_sandstone_chalk_pink_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 oxygen 5
+
+unilib:stone_sandstone_chert|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+unilib:stone_sandstone_chert_block|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+unilib:stone_sandstone_chert_brick|VAPOURISE_STONE|silicon 95 iron 3 0.5 calcium 2 0.5
+
+unilib:stone_sandstone_dacite|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:stone_sandstone_dacite_block|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+unilib:stone_sandstone_dacite_brick|VAPOURISE_STONE|silicon 70 aluminium 15 calcium 4 magnesium 3 iron 3 sodium 3 potassium 2
+
+unilib:stone_sandstone_desert|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_desert_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_desert_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_desert_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_dolostone_dark|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_sandstone_dolostone_dark_block|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+unilib:stone_sandstone_dolostone_dark_brick|VAPOURISE_STONE|carbon 38 calcium 35 magnesium 22 silicon 3 iron 2
+
+unilib:stone_sandstone_eclogite|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:stone_sandstone_eclogite_block|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+unilib:stone_sandstone_eclogite_brick|VAPOURISE_STONE|silicon 53 aluminium 14 calcium 10 magnesium 10 iron 9 sodium 4
+
+unilib:stone_sandstone_gabbro_grey|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_sandstone_gabbro_grey_block|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+unilib:stone_sandstone_gabbro_grey_brick|VAPOURISE_STONE|silicon 50 aluminium 16 calcium 10 iron 10 magnesium 7 sodium 3 potassium 2 titanium 2 0.5
+
+unilib:stone_sandstone_gneiss_grey|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_sandstone_gneiss_grey_block|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+unilib:stone_sandstone_gneiss_grey_brick|VAPOURISE_STONE|silicon 60 aluminium 15 iron 10 calcium 7 magnesium 3 potassium 3 sodium 2
+
+unilib:stone_sandstone_golden|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_golden_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_golden_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_golden_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_granite_ebony|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_sandstone_granite_ebony_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_sandstone_granite_ebony_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_sandstone_granite_orange|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_sandstone_granite_orange_block|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+unilib:stone_sandstone_granite_orange_brick|VAPOURISE_STONE|silicon 70 aluminium 12 potassium 5 sodium 5 iron 5 calcium 2 magnesium 1
+
+unilib:stone_sandstone_grey|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_grey_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_grey_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_greywacke_pale|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_sandstone_greywacke_pale_block|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_sandstone_greywacke_pale_brick|VAPOURISE_STONE|silicon 65 aluminium 13 iron 10 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_sandstone_komatiite|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+unilib:stone_sandstone_komatiite_block|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+unilib:stone_sandstone_komatiite_brick|VAPOURISE_STONE|silicon 45 magnesium 25 iron 12 calcium 10 aluminium 5 sodium 2 potassium 1 0.5
+
+unilib:stone_sandstone_lignite|VAPOURISE_STONE|carbon 65 oxygen 25 hydrogen 5 sulphur 3 nitrogen 2
+unilib:stone_sandstone_lignite_block|VAPOURISE_STONE|carbon 65 oxygen 25 hydrogen 5 sulphur 3 nitrogen 2
+unilib:stone_sandstone_lignite_brick|VAPOURISE_STONE|carbon 65 oxygen 25 hydrogen 5 sulphur 3 nitrogen 2
+
+unilib:stone_sandstone_limestone_beige|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_sandstone_limestone_beige_block|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+unilib:stone_sandstone_limestone_beige_brick|VAPOURISE_STONE|calcium 45 carbon 35 magnesium 5 silicon 5 iron 5 aluminium 3 sodium 2
+
+unilib:stone_sandstone_marble_cream|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_sandstone_marble_cream_block|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+unilib:stone_sandstone_marble_cream_brick|VAPOURISE_STONE|calcium 50 carbon 45 magnesium 2 silicon 1 0.5 iron 1 0.5 aluminium 1 0.5
+
+unilib:stone_sandstone_migmatite|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:stone_sandstone_migmatite_block|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+unilib:stone_sandstone_migmatite_brick|VAPOURISE_STONE|silicon 65 aluminium 10 iron 10 calcium 5 magnesium 5 potassium 3 sodium 2
+
+unilib:stone_sandstone_old_red|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_old_red_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_old_red_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_old_red_rubble|VAPOURISE_RUBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_ordinary|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_ordinary_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_ordinary_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_ordinary_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_pale|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_pale_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_pale_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_pink|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_pink_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_pink_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_quartzite_red|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_quartzite_red_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_quartzite_red_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_red|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_sandstone_red_block|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+unilib:stone_sandstone_red_brick|VAPOURISE_STONE|silicon 95 aluminium 3 iron 1 0.5 oxygen 1 0.5
+
+unilib:stone_sandstone_rhyolite_dark|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_sandstone_rhyolite_dark_block|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+unilib:stone_sandstone_rhyolite_dark_brick|VAPOURISE_STONE|silicon 72 aluminium 14 potassium 5 sodium 5 iron 2 calcium 1 magnesium 1 0.5
+
+unilib:stone_sandstone_schist_blue|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_sandstone_schist_blue_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_sandstone_schist_blue_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_sandstone_schist_green_pale|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_sandstone_schist_green_pale_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_sandstone_schist_green_pale_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_sandstone_shale_white|VAPOURISE_STONE|silicon 60 aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+unilib:stone_sandstone_shale_white_block|VAPOURISE_STONE|silicon 60 aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+unilib:stone_sandstone_shale_white_brick|VAPOURISE_STONE|silicon 60 aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+
+unilib:stone_sandstone_siltstone_pale|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_sandstone_siltstone_pale_block|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_sandstone_siltstone_pale_brick|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_sandstone_silver|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_silver_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_silver_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_silver_cobble|VAPOURISE_COBBLE|oxygen 50 silicon 50
+
+unilib:stone_sandstone_soapstone|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_sandstone_soapstone_block|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_sandstone_soapstone_brick|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+
+unilib:stone_sandstone_white|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_white_block|VAPOURISE_STONE|oxygen 50 silicon 50
+unilib:stone_sandstone_white_brick|VAPOURISE_STONE|oxygen 50 silicon 50
+
+unilib:stone_savanna|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_savanna_block|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_savanna_brick|VAPOURISE_STONE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+unilib:stone_savanna_cobble|VAPOURISE_COBBLE|silicon 72 aluminium 13 potassium 6 sodium 5 iron 3 magnesium 1 0.5
+
+unilib:stone_schist_antipodean|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_antipodean_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_antipodean_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_antipodean_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_blue|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_blue_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_blue_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_blue_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_brown|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_brown_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_brown_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_brown_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_green_dark|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_dark_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_dark_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_dark_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_green_pale|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_pale_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_pale_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_green_pale_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_grey|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_grey_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_grey_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_grey_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_schist_red|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_red_block|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_red_brick|VAPOURISE_STONE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_red_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+unilib:stone_schist_red_cobble_mossy|VAPOURISE_COBBLE|silicon 50 aluminium 20 iron 15 magnesium 5 calcium 5 potassium 5
+
+unilib:stone_scoria|VAPOURISE_STONE|silicon 50 aluminium 15 iron 15 calcium 8 magnesium 5 sodium 4 potassium 3
+unilib:stone_scoria_block|VAPOURISE_STONE|silicon 50 aluminium 15 iron 15 calcium 8 magnesium 5 sodium 4 potassium 3
+unilib:stone_scoria_brick|VAPOURISE_STONE|silicon 50 aluminium 15 iron 15 calcium 8 magnesium 5 sodium 4 potassium 3
+unilib:stone_scoria_cobble|VAPOURISE_COBBLE|silicon 50 aluminium 15 iron 15 calcium 8 magnesium 5 sodium 4 potassium 3
+
+unilib:stone_serpentine|VAPOURISE_STONE|silicon 45 magnesium 45 iron 7 aluminium 2 calcium 1 0.5
+unilib:stone_serpentine_block|VAPOURISE_STONE|silicon 45 magnesium 45 iron 7 aluminium 2 calcium 1 0.5
+unilib:stone_serpentine_brick|VAPOURISE_STONE|silicon 45 magnesium 45 iron 7 aluminium 2 calcium 1 0.5
+unilib:stone_serpentine_cobble|VAPOURISE_COBBLE|silicon 45 magnesium 45 iron 7 aluminium 2 calcium 1 0.5
+
+unilib:stone_serpentinite_dark|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_dark_block|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_dark_brick|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_dark_cobble|VAPOURISE_COBBLE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+
+unilib:stone_serpentinite_pale|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_pale_block|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_pale_brick|VAPOURISE_STONE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+unilib:stone_serpentinite_pale_cobble|VAPOURISE_COBBLE|silicon 45 magnesium 40 iron 10 aluminium 3 calcium 2
+
+unilib:stone_shale_brown|VAPOURISE_STONE|silicon 60 aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+
+unilib:stone_shale_white|VAPOURISE_STONE|silicon 60 aluminium 17 iron 8 calcium 5 potassium 4 magnesium 3 sodium 3
+
+unilib:stone_shinestone|VAPOURISE_STONE|neon 25 krypton 25 argon 15 uranium 15 phosphorus 15 xenon 5
+
+unilib:stone_sichamine|VAPOURISE_STONE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_block|VAPOURISE_STONE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_brick|VAPOURISE_STONE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_cobble|VAPOURISE_COBBLE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_cobble_mossy|VAPOURISE_COBBLE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_dark|VAPOURISE_COBBLE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+unilib:stone_sichamine_weedy|VAPOURISE_COBBLE|oxygen 60 hydrogen 15 aluminium 10 phosphorus 10 copper 5
+
+unilib:stone_siltstone_dark|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_dark_block|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_dark_brick|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_dark_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_siltstone_pale|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_pale_block|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_pale_brick|VAPOURISE_STONE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+unilib:stone_siltstone_pale_cobble|VAPOURISE_COBBLE|silicon 65 aluminium 15 iron 8 calcium 5 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_skarn|VAPOURISE_STONE|silicon 40 calcium 30 aluminium 10 iron 10 magnesium 5 tungsten 2 copper 2 zinc 1
+unilib:stone_skarn_block|VAPOURISE_STONE|silicon 40 calcium 30 aluminium 10 iron 10 magnesium 5 tungsten 2 copper 2 zinc 1
+unilib:stone_skarn_brick|VAPOURISE_STONE|silicon 40 calcium 30 aluminium 10 iron 10 magnesium 5 tungsten 2 copper 2 zinc 1
+unilib:stone_skarn_cobble|VAPOURISE_COBBLE|silicon 40 calcium 30 aluminium 10 iron 10 magnesium 5 tungsten 2 copper 2 zinc 1
+
+unilib:stone_slate_antipodean|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_antipodean_block|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_antipodean_brick|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_antipodean_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+
+unilib:stone_slate_black|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_black_block|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_black_brick|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_black_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+
+unilib:stone_slate_grey|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_grey_block|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_grey_brick|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_grey_rubble|VAPOURISE_RUBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_grey_shingles|VAPOURISE_RUBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+
+unilib:stone_slate_red|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_red_block|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_red_brick|VAPOURISE_STONE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_red_cobble|VAPOURISE_COBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+unilib:stone_slate_red_cobble_mossy|VAPOURISE_COBBLE|silicon 55 aluminium 20 iron 10 calcium 5 magnesium 4 potassium 4 sodium 2
+
+unilib:stone_slimestone_black_block_slimy|VAPOURISE_STONE|oxygen 50 carbon 20 hydrogen 15 calcium 5 magnesium 5 vanadium 5
+unilib:stone_slimestone_black_brick_slimy|VAPOURISE_STONE|oxygen 50 carbon 20 hydrogen 15 calcium 5 magnesium 5 vanadium 5
+unilib:stone_slimestone_black_eye|0.5|oxygen 50 carbon 20 hydrogen 15 calcium 5 magnesium 5 vanadium 5
+unilib:stone_slimestone_black_eye_block|VAPOURISE_STONE|oxygen 50 carbon 20 hydrogen 15 calcium 5 magnesium 5 vanadium 5
+unilib:stone_slimestone_black_with_eye|VAPOURISE_STONE|oxygen 50 carbon 20 hydrogen 15 calcium 5 magnesium 5 vanadium 5
+
+unilib:stone_slimestone_green|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_block|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_block_slimy|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_brick|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_brick_slimy|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_cobble|VAPOURISE_COBBLE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_eye|0.5|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_eye_block|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+unilib:stone_slimestone_green_with_eye|VAPOURISE_STONE|hydrogen 40 oxygen 40 thorium 5 phosphorus 5 uranium 5 copper 5
+
+unilib:stone_slimestone_purple|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_block|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_block_slimy|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_brick|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_brick_slimy|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_cobble|VAPOURISE_COBBLE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_eye|0.5|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_eye_block|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+unilib:stone_slimestone_purple_with_eye|VAPOURISE_STONE|oxygen 60 aluminium 20 silicon 10 boron 5 iodine 3 bromine 2
+
+unilib:stone_slimestone_red|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_block|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_block_slimy|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_brick|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_brick_slimy|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_cobble|VAPOURISE_COBBLE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_eye|0.5|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_eye_block|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+unilib:stone_slimestone_red_with_eye|VAPOURISE_STONE|oxygen 55 hydrogen 15 carbon 10 calcium 10 iron 5 potassium 5
+
+unilib:stone_soapstone|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_soapstone_block|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_soapstone_brick|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_soapstone_cobble|VAPOURISE_COBBLE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+
+unilib:stone_travertine|VAPOURISE_STONE|calcium 50 carbon 40 silicon 5 magnesium 3 iron 2
+unilib:stone_travertine_block|VAPOURISE_STONE|calcium 50 carbon 40 silicon 5 magnesium 3 iron 2
+unilib:stone_travertine_brick|VAPOURISE_STONE|calcium 50 carbon 40 silicon 5 magnesium 3 iron 2
+unilib:stone_travertine_rubble|VAPOURISE_RUBBLE|calcium 50 carbon 40 silicon 5 magnesium 3 iron 2
+
+unilib:stone_tuff|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 calcium 3 magnesium 3 potassium 2 sodium 2
+unilib:stone_tuff_brick|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 calcium 3 magnesium 3 potassium 2 sodium 2
+unilib:stone_tuff_brick_old|VAPOURISE_STONE|silicon 70 aluminium 15 iron 5 calcium 3 magnesium 3 potassium 2 sodium 2
+unilib:stone_tuff_rubble|VAPOURISE_RUBBLE|silicon 70 aluminium 15 iron 5 calcium 3 magnesium 3 potassium 2 sodium 2
+
+unilib:stone_tuff_rhyolitic|VAPOURISE_STONE|silicon 70 aluminium 15 potassium 5 sodium 5 iron 2 calcium 2 magnesium 1
+unilib:stone_tuff_rhyolitic_brick|VAPOURISE_STONE|silicon 70 aluminium 15 potassium 5 sodium 5 iron 2 calcium 2 magnesium 1
+unilib:stone_tuff_rhyolitic_rubble|VAPOURISE_RUBBLE|silicon 70 aluminium 15 potassium 5 sodium 5 iron 2 calcium 2 magnesium 1
+
+unilib:stone_vindesite_blue|VAPOURISE_STONE|oxygen 60 hydrogen 10 iron 10 silicon 7 carbon 7 chromium 6
+unilib:stone_vindesite_blue_block|VAPOURISE_STONE|oxygen 60 hydrogen 10 iron 10 silicon 7 carbon 7 chromium 6
+unilib:stone_vindesite_blue_brick|VAPOURISE_STONE|oxygen 60 hydrogen 10 iron 10 silicon 7 carbon 7 chromium 6
+unilib:stone_vindesite_blue_cobble|VAPOURISE_COBBLE|oxygen 60 hydrogen 10 iron 10 silicon 7 carbon 7 chromium 6
+unilib:stone_vindesite_blue_cobble_mossy|VAPOURISE_COBBLE|oxygen 60 hydrogen 10 iron 10 silicon 7 carbon 7 chromium 6
+
+unilib:stone_vindesite_white|VAPOURISE_STONE|oxygen 60 silicon 15 magnesium 10 iron 5 boron 5 carbon 5
+unilib:stone_vindesite_white_block|VAPOURISE_STONE|oxygen 60 silicon 15 magnesium 10 iron 5 boron 5 carbon 5
+unilib:stone_vindesite_white_brick|VAPOURISE_STONE|oxygen 60 silicon 15 magnesium 10 iron 5 boron 5 carbon 5
+unilib:stone_vindesite_white_cobble|VAPOURISE_COBBLE|oxygen 60 silicon 15 magnesium 10 iron 5 boron 5 carbon 5
+unilib:stone_vindesite_white_cobble_mossy|VAPOURISE_COBBLE|oxygen 60 silicon 15 magnesium 10 iron 5 boron 5 carbon 5
+
+unilib:stone_whitestone|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_whitestone_block|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_whitestone_brick|VAPOURISE_STONE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+unilib:stone_whitestone_cobble|VAPOURISE_COBBLE|silicon 65 magnesium 30 iron 3 aluminium 1 0.5 calcium 1 0.5
+
+# - substances ------------------------------------------------------------------------------------
+
+unilib:substance_argon_sample|VAPOURISE_SAMPLE|argon 100
+unilib:substance_astatine_sample|VAPOURISE_SAMPLE|astatine 100
+unilib:substance_bromine_sample|VAPOURISE_SAMPLE|bromine 100
+unilib:substance_carbon_sample|VAPOURISE_SAMPLE|carbon 100
+unilib:substance_chlorine_sample|VAPOURISE_SAMPLE|chlorine 100
+unilib:substance_fluorine_sample|VAPOURISE_SAMPLE|fluorine 100
+unilib:substance_helium_sample|VAPOURISE_SAMPLE|helium 100
+unilib:substance_hydrogen_sample|VAPOURISE_SAMPLE|hydrogen 100
+unilib:substance_iodine_sample|VAPOURISE_SAMPLE|iodine 100
+unilib:substance_krypton_sample|VAPOURISE_SAMPLE|krypton 100
+unilib:substance_neon_sample|VAPOURISE_SAMPLE|neon 100
+unilib:substance_nitrogen_sample|VAPOURISE_SAMPLE|nitrogen 100
+unilib:substance_oganesson_sample|VAPOURISE_SAMPLE|oganesson 100
+unilib:substance_oxygen_sample|VAPOURISE_SAMPLE|oxygen 100
+unilib:substance_phosphorus_sample|VAPOURISE_SAMPLE|phosphorus 100
+unilib:substance_radon_sample|VAPOURISE_SAMPLE|radon 100
+unilib:substance_selenium_chunk|VAPOURISE_SAMPLE|selenium 100
+unilib:substance_tennessine_sample|VAPOURISE_SAMPLE|tennessine 100
+unilib:substance_xenon_sample|VAPOURISE_SAMPLE|xenon 100
+
+# - xtraores bonus --------------------------------------------------------------------------------
+
+# Provides all missing elements up to uranium (92)
+# Uncomment these lines, and comment out the corresponding lines above
+#unilib:metal_sybilline_lump|VAPOURISE_LUMP|cobalt 72 iron 10 copper 5 arsenic 5 sulphur 5 helium 1 0.05 europium 1 0.05 dysprosium 1 0.05
+#unilib:metal_ozymandium_lump|VAPOURISE_LUMP|osmium 67 iridium 20 ruthenium 10 praseodymium 1 0.02 gadolinium 1 0.02 holmium 1 0.02
+#unilib:metal_adamantite_lump|VAPOURISE_LUMP|carbon 77 gold 10 silver 10 samarium 1 0.01 terbium 1 0.01 thulium 1 0.01
+#unilib:metal_rarium_lump|VAPOURISE_LUMP|aluminium 48 magnesium 25 phosphorus 10 titanium 10 silver 5 ytterbium 1 0.005 thallium 1 0.005
+#unilib:metal_unobtainium_lump|VAPOURISE_LUMP|iron 58 rhenium 20 technetium 5 ruthenium 5 osmium 5 iridium 5 lutetium 1 0.003 protactinium 1 0.003
+#unilib:metal_tritonium_lump|VAPOURISE_LUMP|titanium 67 oxygen 10 iron 10 magnesium 5 manganese 5 promethium 1 0.002 astatine 1 0.002 francium 1 0.002
+#unilib:metal_geminitium_lump|VAPOURISE_LUMP|carbon 57 boron 10 gold 10 silver 10 nitrogen 5 silicon 5 polonium 1 0.001 radon 1 0.001 actinium 1 0.001

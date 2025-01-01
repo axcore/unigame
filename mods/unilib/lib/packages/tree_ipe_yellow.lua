@@ -9,7 +9,7 @@
 unilib.pkg.tree_ipe_yellow = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -25,7 +25,7 @@ end
 
 function unilib.pkg.tree_ipe_yellow.exec()
 
-    -- (no burnlevel)
+    local burnlevel = 5
     local sci_name = "Handroanthus chrysanthus"
 
     unilib.register_tree({
@@ -80,7 +80,7 @@ function unilib.pkg.tree_ipe_yellow.exec()
         max_volume = 4,
         maxp_table = {x = 2, y = 15, z = 2},
         minp_table = {x = -2, y = 1, z = -2},
-        offset_list = {0, 1, 0},
+        offset_list = {7, 1, 6},
         sci_name = sci_name,
         select_table = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16},
     })
@@ -109,7 +109,7 @@ function unilib.pkg.tree_ipe_yellow.exec()
     })
 
     unilib.register_fence_gate_quick({
-        -- Original to unilib. Creates unilib:gate_ipe_yellow_closed
+        -- Original to unilib. Creates unilib:gate_ipe_yellow_closed, etc
         part_name = "ipe_yellow",
         orig_name = {nil, nil},
 
@@ -118,10 +118,10 @@ function unilib.pkg.tree_ipe_yellow.exec()
         group_table = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2},
     })
 
-    unilib.register_decoration("farlands_tree_ipe_yellow", {
+    unilib.register_decoration_generic("farlands_tree_ipe_yellow", {
         -- From farlands, mapgen/mapgen.lua
         deco_type = "schematic",
-        schematic = unilib.path_mod .. "/mts/unilib_tree_ipe_yellow.mts",
+        schematic = unilib.core.path_mod .. "/mts/unilib_tree_ipe_yellow.mts",
 
         flags = "place_center_x, place_center_z",
         noise_params = {

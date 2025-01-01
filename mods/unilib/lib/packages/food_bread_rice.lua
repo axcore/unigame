@@ -9,7 +9,7 @@
 unilib.pkg.food_bread_rice = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farming.add_mode
+local mode = unilib.global.imported_mod_table.farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,7 +33,7 @@ function unilib.pkg.food_bread_rice.exec()
         -- N.B. food_bread group not in original code, but is added by cucina_vegana overrides
         groups = {flammable = 2, food_bread = 1, food_rice_bread = 1},
 
-        on_use = unilib.cuisine_eat_on_use("unilib:food_bread_rice", 5),
+        on_use = unilib.cuisine.eat_on_use("unilib:food_bread_rice", 5),
     })
     unilib.register_craft({
         -- From farming:rice_bread

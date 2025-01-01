@@ -13,8 +13,8 @@
 unilib.pkg.stone_basalt_brown = {}
 
 local S = unilib.intllib
-local material_add_mode = unilib.imported_mod_table.material.add_mode
-local mineral_add_mode = unilib.imported_mod_table.mineral.add_mode
+local material_add_mode = unilib.global.imported_mod_table.material.add_mode
+local mineral_add_mode = unilib.global.imported_mod_table.mineral.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -36,6 +36,7 @@ function unilib.pkg.stone_basalt_brown.exec()
         description = S("Brown Basalt"),
 
         category = "extrusive",
+        colour = "#4A402D",
         grinder_flag = true,
         hardness = 3,
     })
@@ -80,6 +81,24 @@ function unilib.pkg.stone_basalt_brown.exec()
         replace_mode = mineral_add_mode,
         description = S("Brown Basalt Cobble"),
         img_list = {"unilib_stone_basalt_brown.png^unilib_stone_cobble_overlay.png"},
+    })
+
+    unilib.register_stone_cobble_compressed({
+        -- Original to unilib. Creates unilib:stone_basalt_brown_cobble_compressed
+        part_name = "basalt_brown",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Compressed Brown Basalt Cobble"),
+    })
+
+    unilib.register_stone_cobble_condensed({
+        -- Original to unilib. Creates unilib:stone_basalt_brown_cobble_condensed
+        part_name = "basalt_brown",
+        orig_name = nil,
+
+        replace_mode = mineral_add_mode,
+        description = S("Condensed Brown Basalt Cobble"),
     })
 
 end

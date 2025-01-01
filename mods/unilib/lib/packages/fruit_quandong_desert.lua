@@ -9,7 +9,7 @@
 unilib.pkg.fruit_quandong_desert = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.fruit_quandong_desert.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_desert_quandong = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",
         inventory_image = "unilib_fruit_quandong_desert.png",
@@ -53,14 +53,15 @@ function unilib.pkg.fruit_quandong_desert.exec()
         after_place_node = function(pos, placer, itemstack)
 
             if placer:is_player() then
-                minetest.set_node(pos, {name = "unilib:fruit_quandong_desert", param2 = 1})
+                core.set_node(pos, {name = "unilib:fruit_quandong_desert", param2 = 1})
             end
 
         end,
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_quandong_desert", 1),
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_quandong_desert", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -72,11 +73,20 @@ function unilib.pkg.fruit_quandong_desert.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_quandong_desert",
+        juice_description = S("Quandong"),
+        juice_type = "quandong",
+        rgb = "#960a0d",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_quandong_desert.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_quandong_desert",
 
         replace_mode = mode,

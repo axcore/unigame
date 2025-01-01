@@ -13,7 +13,7 @@
 unilib.pkg.tool_axe_stone = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -46,14 +46,15 @@ function unilib.pkg.tool_axe_stone.exec()
             max_drop_level = 0,
         },
 
-        after_use = unilib.tool_after_use,
+        after_use = unilib.tools.after_use,
     })
     unilib.register_craft_axe({
         -- From default:axe_stone
         part_name = "stone",
         ingredient = "group:stone",
     })
-    if unilib.mtgame_tweak_flag and unilib.pkg_executed_table["gravel_ordinary"] ~= nil then
+    if unilib.setting.mtgame_tweak_flag and
+            unilib.global.pkg_executed_table["gravel_ordinary"] ~= nil then
 
         unilib.register_craft_axe({
             -- From default:axe_stone
@@ -62,6 +63,6 @@ function unilib.pkg.tool_axe_stone.exec()
         })
 
     end
-    unilib.apply_toolranks("unilib:tool_axe_stone", "axe")
+    unilib.tools.apply_toolranks("unilib:tool_axe_stone", "axe")
 
 end

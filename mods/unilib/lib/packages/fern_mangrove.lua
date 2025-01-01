@@ -9,7 +9,7 @@
 unilib.pkg.fern_mangrove = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.australia.add_mode
+local mode = unilib.global.imported_mod_table.australia.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ function unilib.pkg.fern_mangrove.exec()
 
     unilib.register_node("unilib:fern_mangrove", "australia:mangrove_fern", mode, {
         -- From australia:mangrove_fern
-        description = unilib.annotate(S("Mangrove Fern"), "Acrostichum speciosum"),
+        description = unilib.utils.annotate(S("Mangrove Fern"), "Acrostichum speciosum"),
         tiles = {"unilib_fern_mangrove.png"},
         groups = {attached_node = 1, flammable = 2, flora = 1, snappy = 3},
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = false,
         drawtype = "plantlike",
@@ -48,7 +48,7 @@ function unilib.pkg.fern_mangrove.exec()
     })
     unilib.register_plant_in_pot("unilib:fern_mangrove", "australia:mangrove_fern")
 
-    unilib.register_decoration("australia_fern_mangrove", {
+    unilib.register_decoration_generic("australia_fern_mangrove", {
         -- From australia:mangrove_fern
         deco_type = "simple",
         decoration = "unilib:plant_spinifex",

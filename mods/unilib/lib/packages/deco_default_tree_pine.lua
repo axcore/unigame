@@ -9,7 +9,7 @@
 unilib.pkg.deco_default_tree_pine = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,7 +29,7 @@ function unilib.pkg.deco_default_tree_pine.post()
 
     for _, part_name in pairs({"large", "small"}) do
 
-        unilib.register_decoration_now("default_tree_pine_" .. part_name, nil, {
+        unilib.register_decoration_complete("default_tree_pine_" .. part_name, nil, {
             -- From default/mapgen.lua
             -- Completes decoration in package "tree_pine"
             biomes = {"default_forest_coniferous", "default_taiga"},
@@ -37,7 +37,7 @@ function unilib.pkg.deco_default_tree_pine.post()
                 "unilib:dirt_ordinary_with_litter_coniferous",
                 "unilib:dirt_ordinary_with_cover_snow",
             },
-            y_max = unilib.y_max,
+            y_max = unilib.constant.y_max,
             y_min = 4,
         })
 

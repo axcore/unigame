@@ -9,7 +9,7 @@
 unilib.pkg.stone_andesite_grey = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.glemr4.add_mode
+local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,13 +31,14 @@ function unilib.pkg.stone_andesite_grey.exec()
         description = S("Grey Andesite"),
 
         category = "extrusive",
+        colour = "#ABA89D",
         grinder_flag = true,
         -- (N.B. In-game hardness adjusted to match original mod's code, should be 3)
         hardness = 1,
         hardness_real = 3,
     })
 
-    local smooth_cracky, block_cracky = unilib.get_adjusted_cracky("andesite_grey", 3, nil)
+    local smooth_cracky, block_cracky = unilib.stone.get_adjusted_cracky("andesite_grey", 3, nil)
 
     unilib.register_node("unilib:stone_andesite_grey", "lib_materials:stone_andesite", mode, {
         -- From GLEMr4, lib_materials:stone_andesite
@@ -45,7 +46,7 @@ function unilib.pkg.stone_andesite_grey.exec()
         tiles = {"unilib_stone_andesite_grey.png"},
         -- N.B. smoothstone = 1 not in original code
         groups = {cracky = smooth_cracky, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
     })
     unilib.register_stone_smooth_cuttings({
         part_name = "andesite_grey",
@@ -76,7 +77,13 @@ function unilib.pkg.stone_andesite_grey.exec()
         --      unilib:stone_andesite_grey_cobble, or unilib:stone_andesite_grey_rubble, or nothing
         part_name = "andesite_grey",
         cobble_description = S("Grey Andesite Cobble"),
+        cobble_compressed_description = S("Compressed Grey Andesite Cobble"),
+        cobble_condensed_description = S("Condensed Grey Andesite Cobble"),
         rubble_description = S("Grey Andesite Rubble"),
+        rubble_compressed_description = S("Compressed Grey Andesite Rubble"),
+        rubble_condensed_description = S("Condensed Grey Andesite Rubble"),
+        smooth_compressed_description = S("Compressed Grey Andesite"),
+        smooth_condensed_description = S("Condensed Grey Andesite"),
 
         replace_mode = mode,
         override_drop_flag = true,

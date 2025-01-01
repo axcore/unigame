@@ -9,7 +9,7 @@
 unilib.pkg.deco_aotearoa_bush_leatherwood = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,12 @@ function unilib.pkg.deco_aotearoa_bush_leatherwood.init()
                 "biome_aotearoa_coastal",
                 "biome_aotearoa_highland",
             },
-            {"dirt_antipodean", "dirt_ordinary", "stone_schist_antipodean"},
+            {
+                "dirt_antipodean",
+                "dirt_custom_antipodean",
+                "dirt_ordinary",
+                "stone_schist_antipodean",
+            },
         },
     }
 
@@ -36,7 +41,7 @@ function unilib.pkg.deco_aotearoa_bush_leatherwood.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_now("aotearoa_bush_leatherwood_dense_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_bush_leatherwood_dense_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "bush_leatherwood"
             biomes = "aotearoa_coastal_muttonbird_scrub",
@@ -44,7 +49,7 @@ function unilib.pkg.deco_aotearoa_bush_leatherwood.post()
             y_max = 14,
             y_min = 3,
         })
-        unilib.register_decoration_now("aotearoa_bush_leatherwood_normal_" .. i, nil, {
+        unilib.register_decoration_complete("aotearoa_bush_leatherwood_normal_" .. i, nil, {
             -- From aotearoa/spawn_trees.lua
             -- Completes decoration in package "bush_leatherwood"
             biomes = {
@@ -54,7 +59,7 @@ function unilib.pkg.deco_aotearoa_bush_leatherwood.post()
             },
             place_on = {
                 "unilib:dirt_antipodean_with_moss",
-                "unilib:dirt_ordinary_with_turf_dry",
+                "unilib:dirt_ordinary_with_turf_highland_mountain_tussock",
                 "unilib:stone_schist_antipodean",
             },
             y_max = 122,

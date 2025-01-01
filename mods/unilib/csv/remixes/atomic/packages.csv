@@ -1,0 +1,44 @@
+# "atomic" remix, providing machines to transform one material into another
+
+# node_name | original_mod
+
+# This package, if available, produces an optimised version of vapourise.csv, writing a new file
+#   in the same folder. In testing, it reduces the size of decorations.csv by about 50%
+# To use this package:
+#   - Uncomment the line below by removing the initial #
+#   - Start a Minetest game, using the "atomic" remix, then shut down the client
+#   - In the "atomic" remix folder, rename the original file to something like
+#           "vapourise_original.csv"
+#   - ...and rename the optimised file to "vapourise.csv"
+#   - Comment the line below by re-inserting the initial #
+#meta_atomic_optimise|unilib
+
+# atomic packages
+chat_show_elements|unilib
+machine_atomic_collector|unilib
+machine_atomic_vapouriser|unilib
+misc_atomic_tube|unilib
+shared_atomic|unilib
+
+# The "elements" remix specifies packages providing all 118 elements of the periodic table
+@elements
+# As normal, iron lumps produce steel ingots/powder
+metal_steel|default glemr11 technic
+
+# supporting packages (.depends)
+glass_obsidian|default moreblocks
+glass_ordinary|default moreblocks vessels
+light_block_mese|default
+metal_iron|default
+mineral_diamond|default mtg_plus
+mineral_mese|default glemr11
+stone_obsidian|default moreblocks
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#machine_furnace_induction|unilib
+#machine_polishing|unilib
+#metal_gold|default glemr11 technic
+
+# supporting packages (.suggested)

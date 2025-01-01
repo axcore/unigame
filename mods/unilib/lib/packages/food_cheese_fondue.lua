@@ -9,7 +9,7 @@
 unilib.pkg.food_cheese_fondue = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cheese.add_mode
+local mode = unilib.global.imported_mod_table.cheese.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.food_cheese_fondue.exec()
         inventory_image = "unilib_food_cheese_fondue.png",
         groups = {food = 8},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_cheese_fondue", 8, "unilib:metal_copper_ingot 3"
         ),
     })

@@ -9,7 +9,7 @@
 unilib.pkg.deco_farlands_flower_mixed = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -60,15 +60,15 @@ function unilib.pkg.deco_farlands_flower_mixed.post()
         -- (Will check that the flower package is loaded. For the sake of simplicity, assume that
         --      if this package deco package is loaded, then all the farlands biome/dirt packages
         --      are loaded too)
-        if unilib.pkg_executed_table["flower_" .. part_name] ~= nil then
+        if unilib.global.pkg_executed_table["flower_" .. part_name] ~= nil then
 
-            unilib.register_decoration_now("farlands_flower_" .. part_name, nil, {
+            unilib.register_decoration_complete("farlands_flower_" .. part_name, nil, {
                 -- From flowers_plus/init.lua
                 biomes = biome_name,
                 place_on = "unilib:" .. dirt_name,
                 -- (y_max and y_min not in original code, but added for consistency with other
                 --      flowers)
-                y_max = unilib.y_max,
+                y_max = unilib.constant.y_max,
                 y_min = 1,
             })
 

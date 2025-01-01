@@ -9,7 +9,7 @@
 unilib.pkg.fruit_hinau = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.fruit_hinau.exec()
             dig_immediate = 3, flammable = 2, fleshy = 3, food_hinau = 1, leafdecay = 3,
             leafdecay_drop = 1,
         },
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         drawtype = "plantlike",
         inventory_image = "unilib_fruit_hinau.png",
@@ -50,9 +50,12 @@ function unilib.pkg.fruit_hinau.exec()
         walkable = false,
         wield_image = "unilib_fruit_hinau.png",
 
-        on_use = unilib.cuisine_eat_on_use("unilib:fruit_hinau", 1),
+        -- N.B. No standard .after_place_node for fruits, because of unsuitable texture
+
+        on_use = unilib.cuisine.eat_on_use("unilib:fruit_hinau", 1),
     })
-    if unilib.dye_from_fruit_flag and unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.setting.dye_from_fruit_flag and
+            unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib
@@ -64,11 +67,20 @@ function unilib.pkg.fruit_hinau.exec()
 
     end
 
+    unilib.register_juice({
+        ingredient = "unilib:fruit_hinau",
+        juice_description = S("Hinau Fruit"),
+        juice_type = "hinau",
+        rgb = "#200b2f",
+
+        orig_flag = false,
+    })
+
 end
 
 function unilib.pkg.fruit_hinau.post()
 
-    unilib.setup_regrowing_fruit({
+    unilib.register_regrowing_fruit({
         fruit_name = "unilib:fruit_hinau",
 
         replace_mode = mode,

@@ -9,7 +9,7 @@
 unilib.pkg.misc_cloud_ordinary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.default.add_mode
+local mode = unilib.global.imported_mod_table.default.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -30,7 +30,7 @@ function unilib.pkg.misc_cloud_ordinary.exec()
         description = S("Ordinary Cloud"),
         tiles = {"unilib_misc_cloud_ordinary.png"},
         groups = {not_in_creative_inventory = 1},
-        sounds = unilib.sound_table.node,
+        sounds = unilib.global.sound_table.node,
 
         is_ground_content = false,
     })

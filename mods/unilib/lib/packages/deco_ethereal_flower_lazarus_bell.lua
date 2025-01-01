@@ -9,7 +9,7 @@
 unilib.pkg.deco_ethereal_flower_lazarus_bell = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,10 +27,10 @@ end
 
 function unilib.pkg.deco_ethereal_flower_lazarus_bell.post()
 
-    if unilib.pkg_executed_table["dirt_ordinary"] ~= nil or
-            unilib.pkg_executed_table["dirt_ordinary_with_turf_rainforest"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil or
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf_rainforest"] ~= nil then
 
-        unilib.register_decoration_now(
+        unilib.register_decoration_complete(
             -- From ethereal-ng/decor.lua
             -- Completes decoration in package "flower_lazarus_bell"
             "bakedclay_flower_lazarus_bell",

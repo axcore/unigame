@@ -9,7 +9,7 @@
 unilib.pkg.mapgen_farlands_grasses = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,20 +31,17 @@ function unilib.pkg.mapgen_farlands_grasses.post()
 
     -- N.B. Due to lack of testing time, it's not at all clear that this code actually removes
     --      anything, given the improbability of grasses spawning above water
-    minetest.register_on_generated(function(minp, maxp)
+    core.register_on_generated(function(minp, maxp)
 
         if maxp.y < -20 or maxp.y > 1000 then
             return
         end
 
-        local posn_list = minetest.find_nodes_in_area(
-            minp, maxp, {"unilib:liquid_water_dirty_source"}
-        )
-
+        local posn_list = core.find_nodes_in_area(minp, maxp, {"unilib:liquid_water_dirty_source"})
         for n = 1, #posn_list do
 
             local pos = {x = posn_list[n].x, y = posn_list[n].y, z = posn_list[n].z }
-            local name = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name
+            local name = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name
 
             if name == "unilib:flower_lavender" or
                     name == "unilib:grass_swamp_1" or
@@ -53,7 +50,7 @@ function unilib.pkg.mapgen_farlands_grasses.post()
                     name == "unilib:grass_swamp_3" or
                     name == "unilib:grass_swamp_4" or
                     name == "unilib:grass_swamp_5" then
-                minetest.remove_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                core.remove_node({x = pos.x, y = pos.y + 1, z = pos.z})
             end
 
         end

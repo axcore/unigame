@@ -9,7 +9,7 @@
 unilib.pkg.grass_spinifex = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -29,13 +29,13 @@ function unilib.pkg.grass_spinifex.exec()
 
     unilib.register_node("unilib:grass_spinifex", "aotearoa:spinifex", mode, {
         -- From aotearoa:spinifex
-        description = unilib.annotate(S("Spinifex Grass"), "Spinifex sericeus"),
+        description = unilib.utils.annotate(S("Spinifex Grass"), "Spinifex sericeus"),
         tiles = {"unilib_grass_spinifex.png"},
         -- N.B. flora = 1, grass = 1, spinifex_grass = 1 not in original code
         groups = {
             attached_node = 1, flammable = 1, flora = 1, grass = 1, snappy = 3, spinifex_grass = 1,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -59,7 +59,7 @@ function unilib.pkg.grass_spinifex.exec()
     })
     unilib.register_plant_in_pot("unilib:grass_spinifex", "aotearoa:spinifex")
 
-    unilib.register_decoration("aotearoa_grass_spinifex", {
+    unilib.register_decoration_generic("aotearoa_grass_spinifex", {
         -- From aotearoa/spawn_plants.lua
         deco_type = "simple",
         decoration = "unilib:grass_spinifex",

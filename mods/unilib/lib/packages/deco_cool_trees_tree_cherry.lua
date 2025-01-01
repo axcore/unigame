@@ -9,7 +9,7 @@
 unilib.pkg.deco_cool_trees_tree_cherry = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cherrytree.add_mode
+local mode = unilib.global.imported_mod_table.cherrytree.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.deco_cool_trees_tree_cherry.post()
 
-    unilib.register_decoration_now("cool_trees_tree_cherry", nil, {
+    unilib.register_decoration_complete("cool_trees_tree_cherry", nil, {
         -- From cherrytree/init.lua
         -- Completes decoration in package "tree_cherry"
         biomes = "default_forest_deciduous",

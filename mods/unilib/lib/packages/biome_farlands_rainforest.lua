@@ -9,7 +9,7 @@
 unilib.pkg.biome_farlands_rainforest = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.farlands.add_mode
+local mode = unilib.global.imported_mod_table.farlands.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.biome_farlands_rainforest.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "rainforest" biome
         name = "farlands_rainforest",
-        description = unilib.brackets(S("Rainforest biome"), "farlands"),
+        description = unilib.utils.brackets(S("Rainforest biome"), "farlands"),
         node_top = "unilib:dirt_ordinary_with_turf_forest",
         depth_top = 1,
         node_filler = "unilib:dirt_coarse",
@@ -43,7 +43,7 @@ function unilib.pkg.biome_farlands_rainforest.post()
         node_water = "unilib:liquid_water_dirty_source",
         node_riverbed = "unilib:sand_ordinary",
         depth_riverbed = 2,
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
         heat_point = 86,
         humidity_point = 65,
@@ -52,7 +52,7 @@ function unilib.pkg.biome_farlands_rainforest.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "rainforest_swamp" biome
         name = "farlands_rainforest_swamp",
-        description = unilib.brackets(S("Rainforest swamp biome"), "farlands"),
+        description = unilib.utils.brackets(S("Rainforest swamp biome"), "farlands"),
         node_top = "unilib:dirt_ordinary",
         depth_top = 1,
         node_filler = "unilib:dirt_ordinary",
@@ -68,7 +68,7 @@ function unilib.pkg.biome_farlands_rainforest.post()
     unilib.register_biome({
         -- From farlands, mapgen/mapgen.lua, "rainforest_ocean" biome
         name = "farlands_rainforest_ocean",
-        description = unilib.brackets(S("Rainforest ocean biome"), "farlands"),
+        description = unilib.utils.brackets(S("Rainforest ocean biome"), "farlands"),
         node_top = "unilib:sand_ordinary",
         depth_top = 1,
         node_filler = "unilib:sand_ordinary",

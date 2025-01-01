@@ -9,7 +9,7 @@
 unilib.pkg.food_slimestone_eye_baked = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.bakedeye.add_mode
+local mode = unilib.global.imported_mod_table.bakedeye.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -20,7 +20,7 @@ function unilib.pkg.food_slimestone_eye_baked.init()
     return {
         description = "Baked slimestone eye",
         at_least_one = {
-            "stone_slate_red_extra",
+            "stone_slimestone_black_extra",
             "stone_slimestone_green_extra",
             "stone_slimestone_purple_extra",
             "stone_slimestone_red_extra",
@@ -31,10 +31,10 @@ end
 
 function unilib.pkg.food_slimestone_eye_baked.exec()
 
-    if unilib.pkg_executed_table["stone_slate_red_extra"] ~= nil or
-            unilib.pkg_executed_table["stone_slimestone_green_extra"] ~= nil or
-            unilib.pkg_executed_table["stone_slimestone_purple_extra"] ~= nil or
-            unilib.pkg_executed_table["stone_slimestone_red_extra"] ~= nil then
+    if unilib.global.pkg_executed_table["stone_slimestone_black_extra"] ~= nil or
+            unilib.global.pkg_executed_table["stone_slimestone_green_extra"] ~= nil or
+            unilib.global.pkg_executed_table["stone_slimestone_purple_extra"] ~= nil or
+            unilib.global.pkg_executed_table["stone_slimestone_red_extra"] ~= nil then
 
         unilib.register_craftitem("unilib:food_slimestone_eye_baked", "bakedeye:food", mode, {
             -- From bakedeye:food
@@ -43,9 +43,9 @@ function unilib.pkg.food_slimestone_eye_baked.exec()
             -- N.B. No groups in original code
             groups = {food_slimestone_eye = 1},
 
-            on_use = unilib.cuisine_eat_on_use("unilib:food_slimestone_eye_baked", 3),
+            on_use = unilib.cuisine.eat_on_use("unilib:food_slimestone_eye_baked", 3),
         })
-        if unilib.pkg_executed_table["stone_slimestone_black_extra"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_slimestone_black_extra"] ~= nil then
 
             unilib.register_craft({
                 -- From bakedeye:food
@@ -55,7 +55,7 @@ function unilib.pkg.food_slimestone_eye_baked.exec()
             })
 
         end
-        if unilib.pkg_executed_table["stone_slimestone_green_extra"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_slimestone_green_extra"] ~= nil then
 
             unilib.register_craft({
                 -- From bakedeye:food
@@ -65,7 +65,7 @@ function unilib.pkg.food_slimestone_eye_baked.exec()
             })
 
         end
-        if unilib.pkg_executed_table["stone_slimestone_purple_extra"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_slimestone_purple_extra"] ~= nil then
 
             unilib.register_craft({
                 -- From bakedeye:food
@@ -75,7 +75,7 @@ function unilib.pkg.food_slimestone_eye_baked.exec()
             })
 
         end
-        if unilib.pkg_executed_table["stone_slimestone_red_extra"] ~= nil then
+        if unilib.global.pkg_executed_table["stone_slimestone_red_extra"] ~= nil then
 
             unilib.register_craft({
                 -- From bakedeye:food

@@ -9,7 +9,7 @@
 unilib.pkg.food_soup_mushroom = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.ethereal.add_mode
+local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,10 +33,10 @@ function unilib.pkg.food_soup_mushroom.exec()
         -- From ethereal:mushroom_soup
         description = S("Mushroom Soup"),
         inventory_image = "unilib_food_soup_mushroom.png",
-        -- N.B. no food_mushroom in original code
-        groups = {drink = 1, food_mushroom_soup = 1},
+        -- N.B. food_mushroom_soup = 1 not in original code
+        groups = {drink = 1, flammable = 2, food_mushroom_soup = 1},
 
-        on_use = unilib.cuisine_eat_on_use(
+        on_use = unilib.cuisine.eat_on_use(
             "unilib:food_soup_mushroom", 5, "unilib:utensil_bowl_wooden"
         )
     })

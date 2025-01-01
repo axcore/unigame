@@ -9,7 +9,7 @@
 unilib.pkg.deco_better_farming_produce_carrot_chantenay = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.better_farming.add_mode
+local mode = unilib.global.imported_mod_table.better_farming.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,12 +27,12 @@ end
 
 function unilib.pkg.deco_better_farming_produce_carrot_chantenay.post()
 
-    unilib.register_decoration_now("better_farming_produce_carrot_chantenay", nil, {
+    unilib.register_decoration_complete("better_farming_produce_carrot_chantenay", nil, {
         -- From better_farming, carrot.lua
         -- Completes decoration in package "produce_carrot_chantenay"
         biomes = {"default_desert", "default_grassland"},
         place_on = "unilib:dirt_ordinary_with_litter_coniferous",
-        y_max = unilib.y_max,
+        y_max = unilib.constant.y_max,
         y_min = 1,
     })
 

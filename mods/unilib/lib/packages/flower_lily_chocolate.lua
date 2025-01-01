@@ -9,7 +9,7 @@
 unilib.pkg.flower_lily_chocolate = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cropocalypse.add_mode
+local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -28,14 +28,15 @@ function unilib.pkg.flower_lily_chocolate.exec()
 
     unilib.register_node("unilib:flower_lily_chocolate", "cropocalypse:chocolate_lily", mode, {
         -- From cropocalypse:chocolate_lily
-        description = unilib.annotate(S("Chocolate Lily"), "Dichopogon strictus"),
+        description = unilib.utils.annotate(S("Chocolate Lily"), "Dichopogon strictus"),
         tiles = {"unilib_flower_lily_chocolate.png"},
         -- N.B. Replaced original groups with standard flower groups
 --      groups = {attached_node = 1, decorative_plants = 1, flammable = 1, snappy = 3},
         groups = {
-            attached_node = 1, color_brown = 1, flammable = 1, flora = 1, flower = 1, snappy = 3,
+            attached_node = 1, color_brown = 1, colour_brown = 1, flammable = 1, flora = 1,
+            flower = 1, snappy = 3,
         },
-        sounds = unilib.sound_table.leaves,
+        sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
         drawtype = "plantlike",
@@ -50,7 +51,7 @@ function unilib.pkg.flower_lily_chocolate.exec()
         waving = 1,
         wield_image = "unilib_flower_lily_chocolate.png",
     })
-    if unilib.pkg_executed_table["dye_basic"] ~= nil then
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
 
         unilib.register_craft({
             -- From cropocalypse:chocolate_lily
@@ -63,7 +64,7 @@ function unilib.pkg.flower_lily_chocolate.exec()
     end
     unilib.register_flower_in_pot("unilib:flower_lily_chocolate", "cropocalypse:chocolate_lily")
 
-    unilib.register_decoration("cropocalypse_flower_lily_chocolate", {
+    unilib.register_decoration_generic("cropocalypse_flower_lily_chocolate", {
         -- From cropocalypse/decorative_plants.lua
         deco_type = "simple",
         decoration = "unilib:flower_lily_chocolate",

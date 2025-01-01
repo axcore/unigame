@@ -9,7 +9,7 @@
 unilib.pkg.stone_pounamu = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,6 +42,7 @@ function unilib.pkg.stone_pounamu.exec()
         description = S("Pounamu"),
 
         category = "metamorphic",
+        colour = "#5B804F",
         grinder_flag = true,
         hardness = 4,
     })
@@ -52,7 +53,7 @@ function unilib.pkg.stone_pounamu.exec()
         tiles = {"unilib_stone_pounamu.png"},
         -- N.B. smoothstone = 1 not in original code
         groups = {cracky = 1, smoothstone = 1, stone = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         drop = "unilib:stone_pounamu",
     })
@@ -74,7 +75,10 @@ function unilib.pkg.stone_pounamu.exec()
         tiles = {"unilib_stone_pounamu_block.png"},
         -- N.B. stoneblock = 1 not in original code
         groups = {cracky = 1, stone = 1, stoneblock = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_3x3x9({
         -- From aotearoa:pounamu_block
@@ -96,7 +100,10 @@ function unilib.pkg.stone_pounamu.exec()
         tiles = {"unilib_stone_pounamu_brick.png"},
         -- N.B. stonebrick = 1 not in original code
         groups = {cracky = 1, stone = 1, stonebrick = 1},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
+
+        -- N.B. is_ground_content = false not in original code; added to match other stones
+        is_ground_content = false,
     })
     unilib.register_craft_2x2x4({
         -- From aotearoa:pounamubrick
@@ -111,7 +118,9 @@ function unilib.pkg.stone_pounamu.exec()
     unilib.register_stone_brick_cuttings({
         part_name = "pounamu",
     })
-    unilib.set_auto_rotate("unilib:stone_pounamu_brick", unilib.auto_rotate_brick_flag)
+    unilib.utils.set_auto_rotate(
+        "unilib:stone_pounamu_brick", unilib.setting.auto_rotate_brick_flag
+    )
 
     -- Artificial mese using a "hocus-pocus" recipe
     -- (N.B. Don't bother checking for the optional packages; let Minetest deal with it)
@@ -134,6 +143,24 @@ function unilib.pkg.stone_pounamu.exec()
                 "unilib:stone_limestone_antipodean",
             },
         },
+    })
+
+    unilib.register_stone_smooth_compressed({
+        -- Original to unilib. Creates unilib:stone_pounamu_compressed
+        part_name = "pounamu",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Compressed Pounamu"),
+    })
+
+    unilib.register_stone_smooth_condensed({
+        -- Original to unilib. Creates unilib:stone_pounamu_condensed
+        part_name = "pounamu",
+        orig_name = nil,
+
+        replace_mode = mode,
+        description = S("Condensed Pounamu"),
     })
 
 end

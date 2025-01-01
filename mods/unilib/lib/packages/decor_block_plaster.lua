@@ -9,7 +9,7 @@
 unilib.pkg.decor_block_plaster = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.plaster.add_mode
+local mode = unilib.global.imported_mod_table.plaster.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.decor_block_plaster.exec()
         description = S("Block of Plaster"),
         tiles = {"unilib_decor_block_plaster.png"},
         groups = {choppy = 2, cracky = 2},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         is_ground_content = false,
     })
@@ -60,7 +60,7 @@ function unilib.pkg.decor_block_plaster.post()
             {c_lime, "group:craftable_bucket", c_lime},
             {"group:sand", c_lime, "group:sand"},
         },
-        replacements = unilib.craftable_bucket_list,
+        replacements = unilib.global.craftable_bucket_list,
     })
 
 end

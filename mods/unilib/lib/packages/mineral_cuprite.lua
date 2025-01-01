@@ -9,7 +9,7 @@
 unilib.pkg.mineral_cuprite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_cuprite.exec()
         description = S("Cuprite Lump"),
         inventory_image = "unilib_mineral_cuprite_lump.png",
     })
-    if unilib.pkg_executed_table["metal_copper"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_copper"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

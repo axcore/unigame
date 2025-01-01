@@ -9,7 +9,7 @@
 unilib.pkg.utensil_bowl_glass = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -31,7 +31,7 @@ function unilib.pkg.utensil_bowl_glass.exec()
         description = S("Glass Bowl"),
         tiles = {"unilib_utensil_bowl_glass.png"},
         groups = {attached_node = 1, dig_immediate = 3, food_bowl = 1, vessel = 1},
-        sounds = unilib.sound_table.glass,
+        sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
         inventory_image = "unilib_utensil_bowl_glass.png",

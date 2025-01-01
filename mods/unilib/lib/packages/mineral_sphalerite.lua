@@ -9,7 +9,7 @@
 unilib.pkg.mineral_sphalerite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.real_minerals.add_mode
+local mode = unilib.global.imported_mod_table.real_minerals.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -33,8 +33,8 @@ function unilib.pkg.mineral_sphalerite.exec()
         description = S("Sphalerite"),
 
         hardness = 2,
-        -- (Craft recipe provided by the "metal_zinc_real" package)
-        metal_list = {"zinc_real"},
+        -- (Craft recipe provided by the "metal_zinc_rare" package)
+        metal_list = {"zinc_rare"},
     })
 
     unilib.register_craftitem("unilib:mineral_sphalerite_lump", "real_minerals:sphalerite", mode, {
@@ -48,8 +48,8 @@ end
 function unilib.pkg.mineral_sphalerite.post()
 
     -- If the real zinc package was not executed, smelt into regular zinc instead
-    if unilib.pkg_executed_table["metal_zinc_real"] == nil and
-            unilib.pkg_executed_table["metal_zinc"] ~= nil then
+    if unilib.global.pkg_executed_table["metal_zinc_rare"] == nil and
+            unilib.global.pkg_executed_table["metal_zinc"] ~= nil then
 
         unilib.register_craft({
             -- Unilib to unilib
@@ -60,7 +60,7 @@ function unilib.pkg.mineral_sphalerite.post()
             cooktime = 5,
         })
 
-        unilib.update_mineral({
+        unilib.minerals.update_mineral({
             part_name = "sphalerite",
             metal_list = {"zinc"},
         })

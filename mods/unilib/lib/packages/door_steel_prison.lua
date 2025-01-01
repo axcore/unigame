@@ -9,7 +9,7 @@
 unilib.pkg.door_steel_prison = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.xdecor.add_mode
+local mode = unilib.global.imported_mod_table.xdecor.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -27,9 +27,9 @@ end
 function unilib.pkg.door_steel_prison.exec()
 
     unilib.register_door({
-        -- From xdecor, doors:prison_door. Creates unilib:door_steel_prison
+        -- From xdecor, doors:prison_door. Creates unilib:door_steel_prison_closed_left, etc
         part_name = "steel_prison",
-        orig_name = {
+        orig_name_list = {
             "doors:prison_door_a",
             "doors:prison_door_b",
             "doors:prison_door_c",
@@ -38,9 +38,10 @@ function unilib.pkg.door_steel_prison.exec()
         def_table = {
             description = S("Steel Prison Door"),
             tiles = {{name = "unilib_door_steel_prison.png", backface_culling = true}},
-            groups = {choppy = 2, cracky = 2, door = 1, oddly_breakable_by_hand = 1},
+            -- N.B. node = 1 missing from original code
+            groups = {choppy = 2, cracky = 2, door = 1, node = 1, oddly_breakable_by_hand = 1},
             -- N.B. no sounds in original code
-            sounds = unilib.sound_table.metal,
+            sounds = unilib.global.sound_table.metal,
 
 
             inventory_image = "unilib_door_steel_prison_inv.png",

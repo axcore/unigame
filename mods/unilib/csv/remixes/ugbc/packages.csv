@@ -1,7 +1,6 @@
 # "ugbc" remix - contains all clay, gravel, sand and stone textures (for which original code has
 #       been created). Does not include the moss, fossils or items supporting third-party minecraft
 #       mods
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -127,6 +126,12 @@ stone_shale_white|ugbc
 stone_siltstone_pale|ugbc
 stone_soapstone|ugbc
 
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
 # supporting packages (.optional)
 #mineral_lignite|real_minerals
 #sand_silt|darkage
+
+# supporting packages (.suggested)

@@ -9,7 +9,7 @@
 unilib.pkg.mineral_limonite_antipodean_rock = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aotearoa.add_mode
+local mode = unilib.global.imported_mod_table.aotearoa.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -35,7 +35,7 @@ function unilib.pkg.mineral_limonite_antipodean_rock.exec()
         description = S("Antipodean Limonite Rock"),
         tiles = {"unilib_mineral_limonite_antipodean_rock.png"},
         groups = {cracky = 3},
-        sounds = unilib.sound_table.stone,
+        sounds = unilib.global.sound_table.stone,
 
         -- N.B. Tweaked the drop table to behave like other mineral-rocks
 --      drop = "unilib:metal_iron_lump",

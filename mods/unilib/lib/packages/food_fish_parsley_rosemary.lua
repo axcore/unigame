@@ -9,7 +9,7 @@
 unilib.pkg.food_fish_parsley_rosemary = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.cucina_vegana.add_mode
+local mode = unilib.global.imported_mod_table.cucina_vegana.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -44,7 +44,7 @@ function unilib.pkg.food_fish_parsley_rosemary.exec()
             description = S("Uncooked Fish on Parsley and Rosemary"),
             tiles = {"unilib_food_fish_parsley_rosemary_raw.png"},
             groups = {attached_node = 1, dig_immediate = 3},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_food_fish_parsley_rosemary_raw.png",
@@ -80,7 +80,7 @@ function unilib.pkg.food_fish_parsley_rosemary.exec()
             description = S("Cooked Fish on Parsley and Rosemary"),
             tiles = {"unilib_food_fish_parsley_rosemary_cooked.png"},
             groups = {attached_node = 1, dig_immediate = 3, eatable = 1},
-            sounds = unilib.sound_table.glass,
+            sounds = unilib.global.sound_table.glass,
 
             drawtype = "plantlike",
             inventory_image = "unilib_food_fish_parsley_rosemary_cooked.png",
@@ -93,7 +93,7 @@ function unilib.pkg.food_fish_parsley_rosemary.exec()
             walkable = false,
             wield_image = "unilib_food_fish_parsley_rosemary_cooked.png",
 
-            on_use = unilib.cuisine_eat_on_use(
+            on_use = unilib.cuisine.eat_on_use(
                 "unilib:food_fish_parsley_rosemary_cooked", 6, "unilib:utensil_plate_ceramic"
             ),
         }

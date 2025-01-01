@@ -9,7 +9,7 @@
 unilib.pkg.mineral_clausthalite = {}
 
 local S = unilib.intllib
-local mode = unilib.imported_mod_table.aato.add_mode
+local mode = unilib.global.imported_mod_table.aato.add_mode
 
 ---------------------------------------------------------------------------------------------------
 -- New code
@@ -42,7 +42,7 @@ function unilib.pkg.mineral_clausthalite.exec()
         description = S("Clausthalite Lump"),
         inventory_image = "unilib_mineral_clausthalite_lump.png",
     })
-    if unilib.pkg_executed_table["substance_selenium"] ~= nil then
+    if unilib.global.pkg_executed_table["substance_selenium"] ~= nil then
 
         unilib.register_craft({
             -- Original to unilib

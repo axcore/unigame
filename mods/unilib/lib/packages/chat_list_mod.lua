@@ -99,8 +99,8 @@ function unilib.pkg.chat_list_mod.exec()
         description = S("Lists all source mods, or just the specified source mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_list_mods(name, param)
+        func = function(pname, param)
+            return do_list_mods(pname, param)
         end,
     })
 
@@ -109,8 +109,8 @@ function unilib.pkg.chat_list_mod.exec()
         description = S("Lists all source mods, or just the specified source mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_list_mods(name, param)
+        func = function(pname, param)
+            return do_list_mods(pname, param)
         end,
     })
 

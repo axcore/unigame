@@ -21,7 +21,7 @@ function unilib.pkg.biome_snow_normal.init()
 
     return {
         description = "Normal snow biome",
-        depends = "dirt_ordinary",
+        depends = {"dirt_ordinary", "dirt_ordinary_with_cover_snow"},
     }
 
 end

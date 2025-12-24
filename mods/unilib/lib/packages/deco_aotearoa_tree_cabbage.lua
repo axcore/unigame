@@ -31,7 +31,9 @@ function unilib.pkg.deco_aotearoa_tree_cabbage.init()
             {
                 "dirt_antipodean",
                 "dirt_custom_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
                 "dirt_peat_forest",
                 "gravel_ordinary",
                 "sand_ironsand",

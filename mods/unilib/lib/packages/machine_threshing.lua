@@ -268,7 +268,7 @@ function unilib.pkg.machine_threshing.exec()
             end
 
             local hud0 = puncher:hud_add({
-                name = "threshing_0",
+                name = "unilib:hud_machine_threshing_0",
                 type = "image",
 
                 alignment = {x = 0, y = 0},
@@ -278,7 +278,7 @@ function unilib.pkg.machine_threshing.exec()
             })
 
             local hud1 = puncher:hud_add({
-                name = "threshing_1",
+                name = "unilib:hud_machine_threshing_1",
                 type = "image",
 
                 alignment = {x = 0, y = 0},
@@ -288,7 +288,7 @@ function unilib.pkg.machine_threshing.exec()
             })
 
             local hud2 = puncher:hud_add({
-                name = "threshing_2",
+                name = "unilib:hud_machine_threshing_2",
                 type = "image",
 
                 alignment = {x = 0, y = 0},
@@ -298,7 +298,7 @@ function unilib.pkg.machine_threshing.exec()
             })
 
             local hud3 = puncher:hud_add({
-                name = "threshing_3",
+                name = "unilib:hud_machine_threshing_3",
                 type = "image",
 
                 alignment = {x = 0, y = 0},
@@ -308,7 +308,7 @@ function unilib.pkg.machine_threshing.exec()
             })
 
             local hud4 = puncher:hud_add({
-                name = "threshing_4",
+                name = "unilib:hud_machine_threshing_4",
                 type = "text",
 
                 alignment = {x = 0, y = 0},
@@ -328,7 +328,7 @@ function unilib.pkg.machine_threshing.exec()
             end
 
             local hud5 = puncher:hud_add({
-                name = "threshing_5",
+                name = "unilib:hud_machine_threshing_5",
                 type = "text",
 
                 alignment = {x = 0, y = 0},
@@ -340,7 +340,7 @@ function unilib.pkg.machine_threshing.exec()
             })
 
             local hud6 = puncher:hud_add({
-                name = "threshing_6",
+                name = "unilib:hud_machine_threshing_6",
                 type = "text",
 
                 alignment = {x = 0, y = 0},
@@ -355,13 +355,13 @@ function unilib.pkg.machine_threshing.exec()
 
                 if puncher then
 
+                    if hud0 then puncher:hud_remove(hud0) end
                     if hud1 then puncher:hud_remove(hud1) end
                     if hud2 then puncher:hud_remove(hud2) end
                     if hud3 then puncher:hud_remove(hud3) end
                     if hud4 then puncher:hud_remove(hud4) end
                     if hud5 then puncher:hud_remove(hud5) end
                     if hud6 then puncher:hud_remove(hud6) end
-                    if hud0 then puncher:hud_remove(hud0) end
 
                 end
 

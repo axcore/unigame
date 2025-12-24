@@ -20,7 +20,7 @@ function unilib.pkg.deco_cucina_vegana_plant_tomato_beefsteak_wild.init()
     return {
         description = "Wild beefsteak tomato plant as decoration",
         depends = "plant_tomato_beefsteak_wild",
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf"},
     }
 
 end

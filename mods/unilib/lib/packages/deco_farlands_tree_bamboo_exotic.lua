@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_tree_bamboo_exotic.init()
 
     return {
         description = "Exotic bamboo tree as decoration",
-        depends = {"biome_farlands_forest_bamboo", "dirt_ordinary", "tree_bamboo_exotic"},
+        depends = {"biome_farlands_forest_bamboo", "dirt_ordinary_with_turf", "tree_bamboo_exotic"},
     }
 
 end

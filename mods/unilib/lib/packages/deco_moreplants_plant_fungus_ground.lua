@@ -19,7 +19,12 @@ function unilib.pkg.deco_moreplants_plant_fungus_ground.init()
 
     return {
         description = "Ground fungus as decoration",
-        depends = {"biome_default_taiga", "dirt_ordinary", "plant_fungus_ground", "snow_ordinary"},
+        depends = {
+            "biome_default_taiga",
+            "dirt_ordinary_with_cover_snow",
+            "plant_fungus_ground",
+            "snow_ordinary",
+        },
     }
 
 end

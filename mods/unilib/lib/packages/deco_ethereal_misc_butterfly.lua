@@ -28,7 +28,7 @@ function unilib.pkg.deco_ethereal_misc_butterfly.init()
                 "biome_ethereal_prairie",
             },
             {
-                "dirt_ordinary",
+                "dirt_ordinary_with_turf",
                 "dirt_ordinary_with_turf_prairie",
             },
         },

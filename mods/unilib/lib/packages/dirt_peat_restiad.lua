@@ -38,7 +38,8 @@ function unilib.pkg.dirt_peat_restiad.exec()
                 tileable_vertical = false,
             },
         },
-        groups = {crumbly = 3},
+        -- N.B. covered_dirt = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_dirt_mud_antipodean", gain = 0.4},
             dug = {name = "unilib_dirt_mud_antipodean", gain = 0.4},

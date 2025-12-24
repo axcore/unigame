@@ -92,8 +92,8 @@ function unilib.pkg.chat_list_compatible.exec()
         description = S("Lists all compatible mods, or just the specified compatible mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_list_mods(name, param)
+        func = function(pname, param)
+            return do_list_mods(pname, param)
         end,
     })
 

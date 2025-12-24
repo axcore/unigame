@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_grass_dead.init()
 
     return {
         description = "Dead grass as decoration",
-        depends = {"biome_farlands_savanna", "dirt_ordinary", "grass_dead"},
+        depends = {"biome_farlands_savanna", "dirt_ordinary_with_turf_dry", "grass_dead"},
         optional = {"biome_farlands_desert", "sand_desert"},
     }
 

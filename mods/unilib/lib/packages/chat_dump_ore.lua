@@ -85,8 +85,8 @@ function unilib.pkg.chat_dump_ore.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_ore(name, param)
+        func = function(pname, param)
+            return do_dump_ore(pname, param)
         end,
     })
 

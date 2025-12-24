@@ -19,7 +19,7 @@ function unilib.pkg.tree_birch.init()
 
     return {
         description = "Birch tree",
-        optional = "dirt_ordinary",
+        optional = "dirt_ordinary_with_turf",
     }
 
 end

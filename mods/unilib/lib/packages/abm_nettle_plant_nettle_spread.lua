@@ -133,7 +133,7 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.post()
 
                 if count_nodes(pos, "unilib:plant_nettle_cleavers") >= 4 then
 
-                    core.set_node(pos, {name = "unilib:plant_nettle_giant_hogweed"})
+                    core.set_node(pos, {name = "unilib:plant_nettle_hogweed_giant"})
                     return
 
                 end
@@ -145,7 +145,7 @@ function unilib.pkg.abm_nettle_plant_nettle_spread.post()
 
                 end
 
-                if has_neighbour(pos, "unilib:plant_nettle_giant_hogweed") then
+                if has_neighbour(pos, "unilib:plant_nettle_hogweed_giant") then
 
                     core.set_node(pos, {name = "unilib:plant_nettle_impatiens"})
                     return

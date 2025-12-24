@@ -177,15 +177,12 @@ end
 function unilib.pkg.shared_nsspf.register_truffle(data_table)
 
     -- Original to unilib
-    -- Register a truffle to be grown adjacent to a tree trunk tree trunk. This function should be
-    --      called from the package's .exec() function
+    -- Register a truffle, and a mycelium dirt in which it's found. This function should be called
+    --      from the package's .exec() function
     --
     -- data_table compulsory fields:
-    --      wall_name (str): e.g. "unilib:tree_pine_trunk", but can be any suitable node (e.g.
-    --          ordinary dirt)
     --      part_name (str): e.g. "white"
     --      orig_name (str): e.g. "nsspf:tuber_magnatum_pico", the original truffle craftitem
-    --      surface_list (list or nil): (Compuslory) list of surface node names (usually dirts)
     --
     -- data_table optional fields:
     --      replace_mode (str): e.g. "defer"
@@ -193,28 +190,13 @@ function unilib.pkg.shared_nsspf.register_truffle(data_table)
     --      eat (int): e.g. 10
     --      sci_name (str): e.g. "Tuber magnatum pico"
 
-    local wall_name = data_table.wall_name
     local part_name = data_table.part_name
     local orig_name = data_table.orig_name
-    local surface_list = data_table.surface_list
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
     local description = data_table.description or S("Truffle")
     local eat = data_table.eat or 10
     local sci_name = data_table.sci_name or nil
-
-    local surface_table = {}
-    for _, surface_name in pairs(surface_list) do
-        surface_table[surface_name] = true
-    end
-
-    local mini_list = {part_name, surface_table, {}}
-
-    if truffle_table[wall_name] == nil then
-        truffle_table[wall_name] = {}
-    end
-
-    table.insert(truffle_table[wall_name], mini_list)
 
     -- Create the truffle itself
     local truffle_name = "unilib:plant_tuber_truffle_" .. part_name
@@ -241,6 +223,37 @@ function unilib.pkg.shared_nsspf.register_truffle(data_table)
         -- N.B. is_ground_content = false not in original code; added to match other dirts
         is_ground_content = false,
     })
+
+end
+
+function unilib.pkg.shared_nsspf.register_truffle_location(data_table)
+
+    -- Original to unilib
+    -- Register a location at which truffles can appear. This function should be called following an
+    --      earlier call to unilib.pkg.shared_nsspf.register_truffle()
+    --
+    -- data_table compulsory fields:
+    --      wall_name (str): e.g. "unilib:tree_pine_trunk", but can be any suitable node (e.g.
+    --          ordinary dirt)
+    --      part_name (str): e.g. "white"
+    --      surface_list (list): (Compuslory) list of surface node names (usually dirts)
+
+    local wall_name = data_table.wall_name
+    local part_name = data_table.part_name
+    local surface_list = data_table.surface_list
+
+    local surface_table = {}
+    for _, surface_name in pairs(surface_list) do
+        surface_table[surface_name] = true
+    end
+
+    local mini_list = {part_name, surface_table, {}}
+
+    if truffle_table[wall_name] == nil then
+        truffle_table[wall_name] = {}
+    end
+
+    table.insert(truffle_table[wall_name], mini_list)
 
 end
 

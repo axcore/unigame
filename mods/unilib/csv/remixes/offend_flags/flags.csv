@@ -49,9 +49,22 @@ ukraine||Ukraine
 usa||United States
 wales||Wales
 
+# Item flags
+item_apple||Apple
+item_axe||Axe
+item_bucket||Bucket
+item_flower||Flower
+item_hoe||Hoe
+item_ingot||Ingot
+item_pickaxe||Pickaxe
+item_sapling||Sapling
+item_shovel||Shovel
+item_sword||Sword
+item_torch||Torch
+item_wheat||Wheat
+
 # Other flags
 ensign||Naval Ensign
-miner||Miner
 minetest||Minetest
 raf||Royal Air Force
 royal||Royal Standard

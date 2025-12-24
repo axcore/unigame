@@ -130,7 +130,7 @@ if special_flag or bin_flag or light_flag then
 
                 else
 
-                    --  Otherwise the probability depends on its igniter value
+                    --  Otherwise the chance depends on its igniter value
                     local burn_chance = self.flammable * core.get_item_group(node.name, "igniter")
                     if burn_chance > 0 and math.random(0, burn_chance) ~= 0 then
                         self:burn_up()

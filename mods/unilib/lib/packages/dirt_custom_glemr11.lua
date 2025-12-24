@@ -523,8 +523,6 @@ local function register_dirt_set(data_table)
     local dirt_name = "unilib:" .. item_name
     local dirt_img = "unilib_" .. item_name .. ".png"
 
-    -- N.B. spreading_dirt_type not in original GLEMr11 code, but is in original minetest_game
-    --      code
     local dry_dirt = nil
     if dry_dirt_flag == true then
         dry_dirt = 1
@@ -538,13 +536,19 @@ local function register_dirt_set(data_table)
 
     end
 
-    local group_table = {
+    -- N.B. covered_dirt = 1 not in original code
+    local covered_group_table = {
+        covered_dirt = 1,
         crumbly = 3,
         dry_dirt = dry_dirt,
         not_in_creative_inventory = unilib.hide_covered_dirt_group,
         soil = soil,
-        spreading_dirt_type = 1,
     }
+
+    -- N.B. spreading_dirt = 1 not in original GLEMr11 code, but spreading_dirt_type = 1 was in
+    --      original minetest_game code
+    local spreading_group_table = table.copy(covered_group_table)
+    spreading_group_table.spreading_dirt = 1
 
     -- Basic dirt with turf
     for _, mini_list in pairs(basic_list_with_turf) do
@@ -560,7 +564,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^" .. mini_list[5],
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
@@ -588,7 +592,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^" .. mini_list[5],
                 },
-                groups = group_table,
+                groups = covered_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
@@ -616,7 +620,7 @@ local function register_dirt_set(data_table)
                     dirt_img .. "^" .. mini_list[4],
                     dirt_img .. "^" .. mini_list[5],
                 },
-                groups = group_table,
+                groups = covered_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
@@ -636,7 +640,7 @@ local function register_dirt_set(data_table)
     for _, mini_list in pairs(biome_list) do
 
         register_biome_dirt(
-            dirt_name, orig_name, dirt_img, group_table,
+            dirt_name, orig_name, dirt_img, spreading_group_table,
             mini_list[1], mini_list[2], mini_list[3],
             soil_flag, dry_dirt_flag
         )
@@ -731,7 +735,7 @@ end
 function unilib.pkg.dirt_custom_glemr11.init()
 
     return {
-        description = "Creates various dirts with various turf covers from GLEMr11",
+        description = "Custom dirts for \"glemr11\"-compatible remixes",
         notes = "Combines various dirt types with various soil types to provide a set of" ..
                 " \"custom\" dirts",
         optional = {
@@ -760,6 +764,9 @@ function unilib.pkg.dirt_custom_glemr11.init()
             "sand_silt_antipodean",
             -- Soil types
             "soil_arid",
+            "soil_black",
+            "soil_brown",
+            "soil_dark",
             "soil_ordinary",
         },
     }

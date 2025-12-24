@@ -19,7 +19,7 @@ function unilib.pkg.deco_butterflies_misc_butterfly.init()
 
     return {
         description = "Butterflies as decoration",
-        depends = {"dirt_ordinary", "misc_butterfly"},
+        depends = {"dirt_ordinary_with_turf", "misc_butterfly"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

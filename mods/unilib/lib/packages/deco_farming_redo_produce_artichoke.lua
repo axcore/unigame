@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_produce_artichoke.init()
     return {
         description = "Artichoke as decoration",
         depends = "produce_artichoke",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_grove"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_grove"},
     }
 
 end

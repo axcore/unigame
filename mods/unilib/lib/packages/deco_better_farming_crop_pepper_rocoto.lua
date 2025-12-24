@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_crop_pepper_rocoto.init()
 
     return {
         description = "Rocoto pepper as decoration",
-        depends = {"biome_default_grassland", "crop_pepper_rocoto", "dirt_ordinary"},
+        depends = {"biome_default_grassland", "crop_pepper_rocoto", "dirt_ordinary_with_turf"},
     }
 
 end

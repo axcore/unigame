@@ -27,7 +27,10 @@ function unilib.pkg.deco_aotearoa_fern_crown_antipodean.init()
                 "biome_aotearoa_lowland",
                 "biome_aotearoa_scrubland",
             },
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 

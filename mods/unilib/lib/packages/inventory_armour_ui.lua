@@ -54,7 +54,7 @@ function unilib.pkg.inventory_armour_ui.exec()
 
             local pname = player:get_player_name()
             local player_data_table = unilib.armour.get_player_data(pname)
-            local player_texture_table = unilib.armour.get_player_texture(pname)
+            local player_texture_table = unilib.armour.get_player_texture_data(pname)
             local fire_protect = unilib.armour.get_config("fire_protect")
 
             local fy = perplayer_formspec.form_header_y + 0.5

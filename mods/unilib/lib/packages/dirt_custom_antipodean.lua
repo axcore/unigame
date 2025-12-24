@@ -30,7 +30,10 @@ function unilib.pkg.dirt_custom_antipodean.generate_ordinary_dirt(part_name, tur
                 "unilib_dirt_ordinary.png" ..
                         "^(unilib_turf_custom_dry_side_overlay.png^[colorize:" .. rgba .. ")",
             },
-            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            groups = {
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group,
+            },
             sounds = unilib.global.sound_table.dirt,
 
             drop = "unilib:dirt_ordinary",
@@ -62,7 +65,10 @@ function unilib.pkg.dirt_custom_antipodean.generate_antipodean_dirt(
                 "unilib_dirt_antipodean.png" ..
                         "^(unilib_turf_custom_side_overlay.png^[colorize:" .. rgba .. ")",
             },
-            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            groups = {
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group,
+            },
             sounds = unilib.global.sound_table.dirt,
 
             drop = "unilib:dirt_antipodean",
@@ -94,7 +100,10 @@ function unilib.pkg.dirt_custom_antipodean.generate_dark_antipodean_dirt(
                 "unilib_dirt_antipodean_dark.png" ..
                         "^(unilib_turf_custom_coastal_side_overlay.png^[colorize:" .. rgba .. ")",
             },
-            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            groups = {
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group,
+            },
             sounds = unilib.global.sound_table.dirt,
 
             drop = "unilib:dirt_antipodean_dark",

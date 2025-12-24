@@ -77,7 +77,7 @@ function unilib.pkg.produce_melon.exec()
     end
 
     unilib.register_produce_fredo({
-        -- From farming:melon (creates creates unilib:produce_melon_grow_8, aliased on to
+        -- From farming:melon (creates unilib:produce_melon_grow_8, aliased on to
         --      unilib:produce_melon_harvest), farming:melon_1 etc (creates
         --      unilib:produce_melon_grow_1 etc)
         part_name = "melon",

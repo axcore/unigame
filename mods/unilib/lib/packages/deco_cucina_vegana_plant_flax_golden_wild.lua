@@ -20,7 +20,7 @@ function unilib.pkg.deco_cucina_vegana_plant_flax_golden_wild.init()
     return {
         description = "Wild golden flax plant as decoration",
         depends = "plant_flax_golden_wild",
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -30,7 +30,7 @@ function unilib.pkg.deco_cucina_vegana_plant_flax_golden_wild.post()
     unilib.register_decoration_complete("cucina_vegana_plant_flax_golden_wild", nil, {
         -- From cucina_vegana, flax.lua
         -- Completes decoration in package "plant_flax_golden_wild"
-        place_on = {"unilib:dirt_ordinary_with_turf", "unilib:dirt_dry_with_turf_dry"},
+        place_on = {"unilib:dirt_dry_with_turf_dry", "unilib:dirt_ordinary_with_turf"},
         y_max = 100,
         y_min = 0,
     })

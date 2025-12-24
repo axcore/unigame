@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_bush_pine.init()
 
     return {
         description = "Alternative pine bush decoration from ethereal-ng",
-        depends = {"bush_pine", "dirt_ordinary"},
+        depends = {"bush_pine", "dirt_ordinary_with_cover_snow"},
         at_least_one = {"biome_ethereal_grassland_snowy", "biome_ethereal_taiga"},
     }
 

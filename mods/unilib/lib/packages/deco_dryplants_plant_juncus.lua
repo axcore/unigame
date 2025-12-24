@@ -19,7 +19,12 @@ function unilib.pkg.deco_dryplants_plant_juncus.init()
 
     return {
         description = "Juncus as decoration",
-        depends = {"dirt_ordinary", "liquid_water_ordinary", "plant_juncus", "sand_ordinary"},
+        depends = {
+            "dirt_ordinary_with_turf",
+            "liquid_water_ordinary",
+            "plant_juncus",
+            "sand_ordinary",
+        },
     }
 
 end

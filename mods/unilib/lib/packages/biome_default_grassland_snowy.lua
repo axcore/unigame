@@ -21,6 +21,7 @@ function unilib.pkg.biome_default_grassland_snowy.init()
         description = "Snowy grassland biomes",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_cover_snow",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

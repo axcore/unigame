@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_birch_mature.init()
 
     return {
         description = "Mature birch tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_birch_mature"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_birch_mature"},
     }
 
 end

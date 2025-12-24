@@ -62,13 +62,14 @@ tree_jungle|default doors moreblocks
 wool_basic|wool
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 machine_anvil_fancy|anvil
 
 # supporting packages (.optional)
 #brick_ordinary|default
 #bush_blueberry_ordinary|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #grass_jungle|default
 #machine_furnace_induction|unilib
 #material_terracotta|basic_materials

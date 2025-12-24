@@ -157,7 +157,7 @@ function unilib.pkg.shared_aqua_farming.register_crop(data_table)
     -- data_table optional fields:
     --      replace_mode (str): e.g. "defer"
     --      base_node (str): Replaces the soil node when it is dug, e.g. "unilib:gravel_ordinary"
-    --      chance (int): e.g. 10, a 1 in 10 chance to grow during every ABM check
+    --      chance (int): e.g. 10, representing a 1 in 10 chance to grow during every ABM check
     --      drop_table (table): Drop table for the final growth stage
     --      interval (int): e.g. 10, interval of 10 seconds between chances to grow. Must be a
     --          multiple of 5

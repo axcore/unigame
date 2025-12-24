@@ -19,7 +19,7 @@ function unilib.pkg.plant_tuber_truffle_black.init()
 
     return {
         description = "Black truffle",
-        depends = {"dirt_ordinary", "shared_nsspf", "tree_apple"},
+        depends = "shared_nsspf",
     }
 
 end
@@ -30,10 +30,8 @@ function unilib.pkg.plant_tuber_truffle_black.exec()
         -- Code original to unilib, replacing an ABM in the original code. From
         --      nsspf:tuber_melanosporum, creates unilib:plant_tuber_truffle_black and
         --      unilib:dirt_ordinary_with_mycelium_black
-        wall_name = "unilib:tree_apple_trunk",
         part_name = "black",
         orig_name = "nsspf:tuber_melanosporum",
-        surface_list = {"unilib:dirt_ordinary_with_turf"},
 
         replace_mode = mode,
         description = S("Black Truffle"),

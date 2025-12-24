@@ -3,9 +3,9 @@
 # General usage:
 # 1. Boil milk in a cauldron to obtain curd (and whey)
 # 2. Place the whey in a cheese rack, in a dark place, to obtain aged cheeses. Curd and whey can
-#       also be cooked in a furnace to produce a small range of cheeses
+#   also be cooked in a furnace to produce a small range of cheeses
 # 3. Craft stretched cheese from curd, water and salt, which produces cheeses like mozzarella. Of
-#       those, caciovallo must be hanged on a string (in a dark place) before it becomes eatable
+#   those, caciovallo must be hanged on a string (in a dark place) before it becomes eatable
 # 4. Right-click a cream centrigue with either whey or milk to produce cream
 # 5. Right-click a churn with either cream or milk to produce butter
 
@@ -84,7 +84,8 @@ liquid_water_river|default
 
 # supporting packages (.optional)
 #bucket_wood|bucket_wooden
-#dirt_ordinary|default farming moreblocks
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #dye_basic|dye bakedclay
 #food_porridge|farming
 #food_pulp_cactus|ethereal

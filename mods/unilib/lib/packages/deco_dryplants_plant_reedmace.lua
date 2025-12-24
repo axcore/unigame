@@ -21,6 +21,7 @@ function unilib.pkg.deco_dryplants_plant_reedmace.init()
         description = "Reedmace as decoration",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "liquid_water_ordinary",
             "plant_reedmace",
             "sand_desert",

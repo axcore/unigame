@@ -20,8 +20,13 @@ biome_default_tundra|default
 #   remixes
 
 # supporting packages (.depends)
-#dirt_dry|default
+#dirt_dry|default farming
+#dirt_dry_with_turf_dry|default
 #dirt_ordinary|default farming moreblocks
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_litter_coniferous|default farming
+#dirt_ordinary_with_litter_rainforest|default farming
+#dirt_ordinary_with_turf|default farming moreblocks
 #dirt_permafrost_ordinary|default
 #gravel_ordinary|default mtg_plus
 #ice_ordinary|default ethereal mtg_plus

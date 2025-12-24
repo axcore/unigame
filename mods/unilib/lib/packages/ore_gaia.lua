@@ -52,7 +52,6 @@ local stone_list = {
     "stone_brownstone_pale",    -- sedimentary
     "stone_desert",             -- other
     "stone_diorite_dark",       -- intrusive
-    "stone_limestone_white",    -- sedimentary
     "stone_gabbro_red",         -- intrusive
     "stone_gneiss_brown",       -- metamorphic
     "stone_granite_dark",       -- intrusive
@@ -62,6 +61,7 @@ local stone_list = {
     "stone_greenstone",         -- metamorphic
     "stone_limestone_beige",    -- sedimentary
     "stone_limestone_red",      -- sedimentary
+    "stone_limestone_white",    -- sedimentary
     "stone_ordinary",           -- other
     "stone_quartzite_brown",    -- metamorphic
     "stone_quartzite_red",      -- metamorphic
@@ -126,6 +126,20 @@ local y_min = unilib.constant.y_min
 --      function)
 local underworld_y_max = nil
 
+-- Table identical to the one used in ../lib/shared/stone/stone_smooth.lua, converting a PFAA
+--      hardness (in the range 1-5) into a Minetest cracky group
+local smooth_cracky_table = {3, 2, 1, 1, 1}
+
+-- Flag set to true if original ores (created in calls to register_ore_special() ) should be visible
+--      in the creative inventory, false if not. (By default, this package generates a great number
+--      of ores, so hiding them is probably beneficial)
+local show_ores_in_inventory_flag = false
+-- Flag set to true if new stone-with-ore nodes should be created (e.g. red gabbro with coal) so
+--      that the nodes match the surrounding non-ore nodes; false if the code should use pre-
+--      existing ore nodes (e.g. ordinary stone with coal) so that the ores usually don't match
+--      their surroundings
+local create_new_ores_flag = true
+
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
@@ -141,20 +155,120 @@ local function get_seed()
 
 end
 
-local function register_ore(data_table)
+local function register_ore(def_table)
 
     -- Don't place ores where hades/underch remixes are already placing ores
     if underworld_y_max ~= nil then
 
-        if data_table.y_max < underworld_y_max then
+        if def_table.y_max < underworld_y_max then
             return
-        elseif data_table.y_min < underworld_y_max then
-            data_table.y_min = underworld_y_max
+        elseif def_table.y_min < underworld_y_max then
+            def_table.y_min = underworld_y_max
         end
 
     end
 
-    unilib.register_ore(data_table)
+    unilib.register_ore(def_table)
+
+end
+
+local function register_ore_special(data_table, def_table)
+
+    -- Special function so that stone-with-ore nodes match their surrounding stone nodes (instead
+    --      of placing ordinary-stone-with-ore nodes everywhere)
+
+    if not create_new_ores_flag then
+
+        -- Do, in fact, place ordinary-stone-with-ore nodes everywhere
+
+        local wherein_list = {}
+        for _, item_name in ipairs(def_table.wherein) do
+            table.insert(wherein_list, "unilib:" .. item_name)
+        end
+
+        def_table.wherein = wherein_list
+        return register_ore(def_table)
+
+    end
+
+    -- Create new nodes for each stone-metal/mineral combination (but don't create duplicates)
+    for _, item_name in ipairs(def_table.wherein) do
+
+        local stone_name = "unilib:" .. item_name
+        local ore_name
+        local img = core.registered_nodes[stone_name].tiles[1]
+        -- The hardness of the new ore stone is the hardness of its mineral/metal
+        local level = 2
+
+        if data_table.metal ~= nil then
+
+            ore_name = stone_name .. "_with_" .. data_table.metal
+            img = img .. "^unilib_metal_" .. data_table.metal .. ".png"
+            if unilib.global.metal_table[data_table.metal] ~= nil then
+                level = unilib.global.metal_table[data_table.metal].hardness
+            end
+
+        elseif data_table.mineral ~= nil then
+
+            ore_name = stone_name .. "_with_" .. data_table.mineral
+            img = img .. "^unilib_mineral_" .. data_table.mineral .. ".png"
+            if unilib.global.mineral_table[data_table.mineral] ~= nil then
+                level = unilib.global.mineral_table[data_table.mineral].hardness
+            end
+
+        else
+
+            unilib.utils.show_warning("ore_gaia package, register_ore_special(): Invalid arguments")
+            return
+
+        end
+
+        -- Don't register duplicate ore nodes
+        if core.registered_nodes[ore_name] == nil then
+
+            local inv_hide = nil
+            if not show_ores_in_inventory_flag then
+                inv_hide = 1
+            end
+
+            -- Create the ore node
+            unilib.register_node(ore_name, nil, mode, {
+                -- Original to unilib
+                description = unilib.utils.brackets(
+                    core.registered_nodes[stone_name].description, data_table.description
+                ),
+                tiles = {img},
+                groups = {
+                    cracky = smooth_cracky_table[level],
+                    -- N.B. level group removed to allow basic ores (like iron) to be dug with
+                    --      basic tools (like stone picks). Compare the equivalent code in the
+                    --      "mapgen_hades" (etc) package, in which the level group is NOT removed
+--                  level = level,
+                    not_in_creative_inventory = inv_hide,
+                    ore = 1,
+                },
+                sounds = unilib.global.sound_table.stone,
+
+                drop = {
+                    max_items = 1,
+                    items = {
+                        -- N.B. rarity = 3, more rare than the equivalent "hades" code, rarity = 2
+                        {items = {data_table.output .. " 2"}, rarity = 3},
+                        {items = {data_table.output}},
+                    },
+                },
+            })
+
+        end
+
+        -- After creating a unique table for each ore, register the ore distribution
+        local adj_def_table = table.copy(def_table)
+        adj_def_table.ore = ore_name
+        adj_def_table.wherein = stone_name
+
+        register_ore(adj_def_table)
+
+    end
 
 end
 
@@ -165,7 +279,7 @@ end
 function unilib.pkg.ore_gaia.init()
 
     return {
-        description = "Ores for the \"gaia\" remix",
+        description = "Ores for \"gaia\"-compatible remixes",
         notes = "Ore distributions are mostly as they are in original mods, except that here they"
                 .. " occur in a wider range of stones. Very common ores (like iron) occur in all"
                 .. " stones in the selection; less common ones (such as silver from moreores)"
@@ -266,7 +380,13 @@ function unilib.pkg.ore_gaia.post()
     -- Mineral distributions from minetest_game
 
     -- Coal
-    register_ore({
+    local coal_table = {
+        mineral = "coal",
+        description = S("Coal"),
+        output = "unilib:mineral_coal_lump",
+    }
+
+    register_ore_special(coal_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_coal",
@@ -279,7 +399,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(coal_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_coal",
@@ -292,7 +412,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -127,
     })
 
-    register_ore({
+    register_ore_special(coal_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_coal",
@@ -306,7 +426,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Copper
-    register_ore({
+    local copper_table = {
+        metal = "copper",
+        description = S("Copper"),
+        output = "unilib:metal_copper_lump",
+    }
+
+    register_ore_special(copper_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_copper",
@@ -319,7 +445,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(copper_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_copper",
@@ -332,7 +458,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -127,
     })
 
-    register_ore({
+    register_ore_special(copper_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_copper",
@@ -346,7 +472,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Diamond
-    register_ore({
+    local diamond_table = {
+        mineral = "diamond",
+        description = S("Diamond"),
+        output = "unilib:mineral_diamond_gem",
+    }
+
+    register_ore_special(diamond_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_diamond",
@@ -359,7 +491,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(diamond_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_diamond",
@@ -372,7 +504,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -2047,
     })
 
-    register_ore({
+    register_ore_special(diamond_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_diamond",
@@ -386,7 +518,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Gold
-    register_ore({
+    local gold_table = {
+        metal = "gold",
+        description = S("Gold"),
+        output = "unilib:metal_gold_lump",
+    }
+
+    register_ore_special(gold_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_gold",
@@ -399,7 +537,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(gold_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_gold",
@@ -412,7 +550,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -511,
     })
 
-    register_ore({
+    register_ore_special(gold_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_gold",
@@ -426,7 +564,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Iron
-    register_ore({
+    local iron_table = {
+        metal = "iron",
+        description = S("Iron"),
+        output = "unilib:metal_iron_lump",
+    }
+
+    register_ore_special(iron_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_iron",
@@ -439,7 +583,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(iron_table, {
         -- Original to unilib (mtgame has no iron at this range, unless the v6 mapgen is being used;
         --      this is a compromise between the two)
         ore_type                = "scatter",
@@ -453,7 +597,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -127,
     })
 
-    register_ore({
+    register_ore_special(iron_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_iron",
@@ -466,7 +610,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -255,
     })
 
-    register_ore({
+    register_ore_special(iron_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_iron",
@@ -480,7 +624,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Mese crystal
-    register_ore({
+    local mese_table = {
+        mineral = "mese",
+        description = S("Mese"),
+        output = "unilib:mineral_mese_crystal",
+    }
+
+    register_ore_special(mese_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_mese",
@@ -493,7 +643,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(mese_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_mese",
@@ -506,7 +656,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -1023,
     })
 
-    register_ore({
+    register_ore_special(mese_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_mese",
@@ -560,7 +710,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Tin
-    register_ore({
+    local tin_table = {
+        metal = "tin",
+        description = S("Tin"),
+        output = "unilib:metal_tin_lump",
+    }
+
+    register_ore_special(tin_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_tin",
@@ -573,7 +729,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1025,
     })
 
-    register_ore({
+    register_ore_special(tin_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_tin",
@@ -586,7 +742,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -127,
     })
 
-    register_ore({
+    register_ore_special(tin_table, {
         -- From default/mapgen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_tin",
@@ -725,13 +881,13 @@ function unilib.pkg.ore_gaia.post()
 
     -- Mineral distributions from badlands (here, provides extra gold in hot humid and mild humid
     --      biomes)
-    register_ore({
+    register_ore_special(gold_table, {
         -- From badlands/init.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_gold",
         wherein                 = {
-            "unilib:clay_baked_orange",
-            "unilib:stone_sandstone_golden",
+            "clay_baked_orange",
+            "stone_sandstone_golden",
         },
 
         biomes                  = {
@@ -887,10 +1043,16 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = 1,
     })
 
-    -- Mineral distributions from moreores (here, found in metamorphic stone only)
+    -- Metal/mineral distributions from moreores (here, found in metamorphic stone only)
 
     -- Mithril
-    register_ore({
+    local mithril_table = {
+        metal = "mithril",
+        description = S("Mithril"),
+        output = "unilib:metal_mithril_lump",
+    }
+
+    register_ore_special(mithril_table, {
         -- From moreores/init.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_mithril",
@@ -904,7 +1066,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Silver
-    register_ore({
+    local silver_table = {
+        metal = "silver",
+        description = S("Silver"),
+        output = "unilib:metal_silver_lump",
+    }
+
+    register_ore_special(silver_table, {
         -- From moreores/init.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_silver",
@@ -917,10 +1085,16 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = y_min,
     })
 
-    -- Mineral distributions from technic (here, found in sedimentary stone only)
+    -- Metal/mineral distributions from technic (here, found in sedimentary stone only)
 
     -- Chromium
-    register_ore({
+    local chromium_table = {
+        metal = "chromium",
+        description = S("Chromium"),
+        output = "unilib:metal_chromium_lump",
+    }
+
+    register_ore_special(chromium_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_chromium",
@@ -942,7 +1116,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -200,
     })
 
-    register_ore({
+    register_ore_special(chromium_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_chromium",
@@ -966,7 +1140,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Lead
-    register_ore({
+    local lead_table = {
+        metal = "lead",
+        description = S("Lead"),
+        output = "unilib:metal_lead_lump",
+    }
+
+    register_ore_special(lead_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_lead",
@@ -988,7 +1168,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -16,
     })
 
-    register_ore({
+    register_ore_special(lead_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_lead",
@@ -1010,7 +1190,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -128,
     })
 
-    register_ore({
+    register_ore_special(lead_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_lead",
@@ -1036,7 +1216,13 @@ function unilib.pkg.ore_gaia.post()
     -- Sulphur (see code in the core.register_on_generated() function at the bottom)
 
     -- Uranium
-    register_ore({
+    local uranium_table = {
+        metal = "uranium",
+        description = S("Uranium"),
+        output = "unilib:metal_uranium_lump",
+    }
+
+    register_ore_special(uranium_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_uranium",
@@ -1059,7 +1245,13 @@ function unilib.pkg.ore_gaia.post()
     })
 
     -- Zinc
-    register_ore({
+    local zinc_table = {
+        metal = "zinc",
+        description = S("Zinc"),
+        output = "unilib:metal_zinc_lump",
+    }
+
+    register_ore_special(zinc_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_zinc",
@@ -1081,7 +1273,7 @@ function unilib.pkg.ore_gaia.post()
         y_min                   = -32,
     })
 
-    register_ore({
+    register_ore_special(zinc_table, {
         -- From technic/technic_worldgen/oregen.lua
         ore_type                = "scatter",
         ore                     = "unilib:stone_ordinary_with_zinc",

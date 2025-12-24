@@ -1,9 +1,9 @@
 # "farlands" remix - contains many (but not all) items from the farlands game, concentrating on the
-#       farlands/decoblocks and farlands/mapgen mods. Includes all biomes, decorations and ores
-#       (except those in farlands/farming)
+#   farlands/decoblocks and farlands/mapgen mods. Includes all biomes, decorations and ores (except
+#   those in farlands/farming)
 # Because many farlands mods share a name with minetest_game mods, everything has been grouped into
-#       a hypothetical "farlands" mod. Original names for items are only specified in code when
-#       their mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc)
+#   a hypothetical "farlands" mod. Original names for items are only specified in code when their
+#   mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc)
 
 # node_name | original_mod
 abm_farlands_disintegrate|farlands
@@ -267,6 +267,9 @@ coral_block_orange|default
 coral_block_skeleton|default
 crop_wheat|farming
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 dye_basic|dye bakedclay
 fruit_apple|default
 glass_ordinary|default moreblocks vessels
@@ -310,7 +313,7 @@ utensil_board_cutting|farming
 
 # supporting packages (.at_least_one)
 brick_ordinary|default
-dirt_dry|default
+dirt_dry|default farming
 sand_silver|default
 
 # supporting packages (.optional)

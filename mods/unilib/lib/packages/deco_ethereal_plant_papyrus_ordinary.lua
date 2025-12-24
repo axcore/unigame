@@ -19,11 +19,17 @@ function unilib.pkg.deco_ethereal_plant_papyrus_ordinary.init()
 
     return {
         description = "Ordinary papyrus as decoration",
-        depends = {"dirt_ordinary", "liquid_water_ordinary", "plant_papyrus_ordinary"},
+        depends = {"liquid_water_ordinary", "plant_papyrus_ordinary"},
         at_least_one = {
-            "biome_ethereal_forest_deciduous",
-            "biome_ethereal_rainforest",
-            "biome_ethereal_swamp",
+            {
+                "biome_ethereal_forest_deciduous",
+                "biome_ethereal_rainforest",
+                "biome_ethereal_swamp",
+            },
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 
@@ -54,8 +60,8 @@ function unilib.pkg.deco_ethereal_plant_papyrus_ordinary.post()
         },
         num_spawn_by = 1,
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_litter_rainforest",
+            "unilib:dirt_ordinary_with_turf",
         },
         spawn_by = "unilib:liquid_water_ordinary_source",
         y_max = 1,

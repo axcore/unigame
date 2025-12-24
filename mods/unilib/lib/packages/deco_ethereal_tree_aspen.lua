@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_aspen.init()
 
     return {
         description = "Alternative aspen tree decoration from ethereal-ng",
-        depends = {"biome_ethereal_grassy", "dirt_ordinary", "tree_aspen"},
+        depends = {"biome_ethereal_grassy", "dirt_ordinary_with_turf", "tree_aspen"},
     }
 
 end

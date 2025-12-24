@@ -75,6 +75,7 @@ crop_potato_sweet|cropocalypse
 crop_soy_red|cucina_vegana
 crop_wheat|farming
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 dye_basic|dye bakedclay
 food_bread_ordinary|farming
 food_cheese_parmesan|cheese
@@ -96,7 +97,6 @@ item_string_ordinary|farming
 item_sweeper|moreblocks
 item_worm_juicy|ethereal
 light_block_mese|default
-liquid_water_ordinary|default
 metal_copper|default glemr11 moreblocks technic
 metal_iron|default
 metal_steel|default glemr11 technic
@@ -122,14 +122,13 @@ utensil_tray_baking|farming
 vessel_bottle_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 metal_bronze|default glemr11 technic
 metal_gold|default glemr11 technic
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #crop_rice_white|farming
-#grass_dry|default
 #grass_ordinary|default
 #liquid_lava_cooling|glemr11
 #liquid_lava_ordinary|default

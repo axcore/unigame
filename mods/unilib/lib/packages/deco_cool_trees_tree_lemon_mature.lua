@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_lemon_mature.init()
 
     return {
         description = "Mature lemon tree as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "tree_lemon_mature"},
+        depends = {
+            "biome_default_forest_deciduous",
+            "dirt_ordinary_with_turf",
+            "tree_lemon_mature",
+        },
     }
 
 end

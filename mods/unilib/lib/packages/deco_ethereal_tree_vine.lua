@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_vine.init()
 
     return {
         description = "Vine tree as decoration",
-        depends = {"biome_ethereal_swamp", "dirt_ordinary", "tree_vine"},
+        depends = {"biome_ethereal_swamp", "dirt_ordinary_with_turf", "tree_vine"},
     }
 
 end

@@ -43,7 +43,7 @@ local function create_detached_inventory(meta, pname)
         {
             allow_move = function()
 
-                -- Moving nodes within the replacement node inventory is accetapble
+                -- Moving nodes within the replacement node inventory is acceptable
                 return count
 
             end,
@@ -351,9 +351,9 @@ function unilib.pkg.item_replacer_artisanal.init()
                 " top. The grid represents the probability of each node being placed. If you" ..
                 " drag one smoothstone and one cobblestone, they each have an equal chance of" ..
                 " being placed every time the tool is used; but if you drag three smoothstones" ..
-                " and one cobblestone, then there's only a 25% chance that the cobblestone will" ..
-                " be placed. When the formspec is open, you can switch between placing a node" ..
-                " next to the one you've clicked, or replacing the node you've clicked" ..
+                " and one cobblestone, then there's only a 25% probability that the cobblestone" ..
+                " will be placed. When the formspec is open, you can switch between placing a" ..
+                " node next to the one you've clicked, or replacing the node you've clicked" ..
                 " altogether. (This is a bit different from the \"normal\" tool, which uses both" ..
                 " left- and right-clicks for those purposes.)",
         depends = {"container_chest_ordinary", "item_stick_ordinary", "shared_replacer"},
@@ -393,7 +393,7 @@ function unilib.pkg.item_replacer_artisanal.exec()
             -- Handle right-clicks while wielding the tool, which opens the formspec
             core.show_formspec(
                 pname,
-                "unilib:formspec_item_replacer_artisanal",
+                "unilib:form_item_replacer_artisanal",
                 get_formspec(meta, pname)
             )
 
@@ -420,7 +420,7 @@ function unilib.pkg.item_replacer_artisanal.exec()
 
         -- The player has interacted with our formspec
         if not formname or
-                formname ~= "unilib:formspec_item_replacer_artisanal" or
+                formname ~= "unilib:form_item_replacer_artisanal" or
                 not fields then
             return false
         end
@@ -488,7 +488,7 @@ function unilib.pkg.item_replacer_artisanal.exec()
 
                 core.show_formspec(
                     pname,
-                    "unilib:formspec_item_replacer_artisanal",
+                    "unilib:form_item_replacer_artisanal",
                     get_formspec(meta, pname)
                 )
 

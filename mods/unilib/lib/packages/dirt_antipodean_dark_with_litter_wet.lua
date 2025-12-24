@@ -42,9 +42,11 @@ function unilib.pkg.dirt_antipodean_dark_with_litter_wet.exec()
                     tileable_vertical = false,
                 },
             },
+            -- N.B. covered_dirt = 1 not in original code
+            -- N.B. spreading_dirt_type = 1 omitted from original code
             groups = {
-                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
-                spreading_dirt_type = 1,
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
             },
             sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.4},

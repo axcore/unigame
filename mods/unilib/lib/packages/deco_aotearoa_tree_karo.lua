@@ -24,7 +24,7 @@ function unilib.pkg.deco_aotearoa_tree_karo.init()
             {"biome_aotearoa_coastal", "biome_aotearoa_dunes"},
             {
                 "dirt_custom_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
                 "gravel_ordinary",
                 "sand_ironsand",
                 "sand_ordinary",

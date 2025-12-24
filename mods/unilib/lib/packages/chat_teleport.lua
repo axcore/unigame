@@ -32,9 +32,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a start position in v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -49,9 +49,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a start position in v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -66,9 +66,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a start position in v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -83,9 +83,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a location with many trees v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -100,9 +100,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a location with coral v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -117,9 +117,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a location with valleys v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -134,9 +134,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a location with a jungle v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else
@@ -151,9 +151,9 @@ function unilib.pkg.chat_teleport.exec()
         description = S("Teleports to a location with flat land v7 map, seed \"test\""),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else

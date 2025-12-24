@@ -27,7 +27,11 @@ function unilib.pkg.deco_herbs_flower_trifolium_red.init()
                 "biome_default_grassland",
                 "biome_default_savanna",
             },
-            {"dirt_dry", "dirt_ordinary"},
+            {
+                "dirt_dry_with_turf_dry",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

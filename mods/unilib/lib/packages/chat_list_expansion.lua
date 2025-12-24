@@ -95,8 +95,8 @@ function unilib.pkg.chat_list_expansion.exec()
         description = S("Lists all known expansion packs, or just the specified expansion pack"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_list_mods(name, param)
+        func = function(pname, param)
+            return do_list_mods(pname, param)
         end,
     })
 

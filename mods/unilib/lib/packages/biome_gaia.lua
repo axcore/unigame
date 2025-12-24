@@ -38,6 +38,8 @@ local debug_warning_flag = false
 -- Shared variables
 ---------------------------------------------------------------------------------------------------
 
+-- Read CSVs from the first remix with the label "gaia"
+unilib.pkg.biome_gaia.remix_name = nil
 -- Constants read from the constants.csv must be available to other "gaia" packages
 unilib.pkg.biome_gaia.constant_flag = false
 unilib.pkg.biome_gaia.constant_table = {}
@@ -115,10 +117,10 @@ end
 function unilib.pkg.biome_gaia.init()
 
     return {
-        description = "Biomes for the \"gaia\" remix",
+        description = "Biomes for \"gaia\"-compatible remixes",
         notes = "Based on \"biome_glemr11\", changing just names and file locations. Code in" ..
-                " this package, and in other \"gaia\" packages, is also compatible with the" ..
-                " \"gaia_simple\" remix",
+                " this package, and in other \"gaia\" packages, is compatible with any remix" ..
+                " with the label \"gaia\"",
         depends = "dirt_custom_gaia",
         optional = "weather_snowflakes",
     }
@@ -126,6 +128,9 @@ function unilib.pkg.biome_gaia.init()
 end
 
 function unilib.pkg.biome_gaia.post()
+
+    -- Read CSVs from the first remix with the label "gaia" (default: the "gaia" remix itself)
+    unilib.pkg.biome_gaia.remix_name = unilib.utils.get_remix_by_label("gaia") or "gaia"
 
     -- Biomes for this remix are provided by the file biomes.csv. When loaded, the data is stored
     --      in unilib.global.biome_csv_setup_list until unilib is ready to create the biomes
@@ -138,8 +143,8 @@ function unilib.pkg.biome_gaia.post()
 
     for i, data_table in ipairs(unilib.global.biome_csv_setup_list) do
 
-        -- (Don't act on biomes provides by incompatible remixes)
-        if data_table.remix_name == "gaia" or data_table.remix_name == "gaia_simple" then
+        -- (Don't act on biomes provided by other remixes)
+        if data_table.remix_name == unilib.pkg.biome_gaia.remix_name then
 
             biome_name_table[data_table.biome_name] = true
 
@@ -184,22 +189,17 @@ function unilib.pkg.biome_gaia.post()
     -- The ecosystems are specified by an ecosystems.csv in the remix folder
 
     -- (This code is adapted from read_csv.lua)
-    local remix_dir
-    if unilib.global.remix_dir_table["gaia_simple"] ~= nil then
-        remix_dir = unilib.utils.get_remix_dir("gaia_simple")
-    else
-        remix_dir = unilib.utils.get_remix_dir("gaia")
-    end
-
+    local remix_dir = unilib.utils.get_remix_dir(unilib.pkg.biome_gaia.remix_name)
     local constants_path = remix_dir .. "/constants.csv"
     local ecosystems_path = remix_dir .. "/ecosystems.csv"
 
-    if unilib.utils.is_file(constants_path) then
+    if unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name] ~= nil then
 
-        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
+        for key, value in pairs(
+            unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name]
+        ) do
 
-            -- "key" is expected to contain at least one letter, "value" at least one digit
-            local key, value = unpack(csv_table)
+            -- Values read from constants.csv are in string format, so must be checked and converted
             if key ~= nil and value ~= nil then
 
                 if not string.find(key, "%a") then
@@ -403,7 +403,7 @@ function unilib.pkg.biome_gaia.post()
     end
 
     -- The snowflakes package, if loaded, must be asked to reduce the maximum temperature at which
-    --      it will act (default 35), to one that suits the "gaia" remix (default 25)
+    --      it will act (default 35), to one that suits this "gaia"-compatible remix (default 25)
     -- (To remove snowflake effects entirely, just comment out this package in the remix)
     if unilib.global.pkg_executed_table["weather_snowflakes"] ~= nil then
 

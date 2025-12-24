@@ -19,7 +19,7 @@ function unilib.pkg.plant_fungus_nightlight.init()
 
     return {
         description = "Nightlight fungus",
-        depends = {"dirt_ordinary", "shared_nsspf"},
+        depends = "shared_nsspf",
     }
 
 end
@@ -140,13 +140,6 @@ function unilib.pkg.plant_fungus_nightlight.exec()
             on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_nightlight_glowing", -2),
         }
     )
-
-    unilib.pkg.shared_nsspf.register_fungus({
-        -- Code original to unilib, replacing an ABM in the original code
-        -- N.B. Grows on the side of a dirt node, rather than on a tree node, as usual
-        wall_name = "unilib:dirt_ordinary",
-        plant_name = "unilib:plant_fungus_nightlight",
-    })
 
     -- (This fungus glows at night)
     unilib.pkg.shared_nsspf.register_glowing("unilib:plant_fungus_nightlight")

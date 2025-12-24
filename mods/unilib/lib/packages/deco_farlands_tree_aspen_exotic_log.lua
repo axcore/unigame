@@ -21,7 +21,7 @@ function unilib.pkg.deco_farlands_tree_aspen_exotic_log.init()
         description = "Exotic aspen tree log as decoration",
         depends = {
             "biome_farlands_forest_deciduous",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "mushroom_brown",
             "mushroom_red",
             "tree_aspen_exotic",

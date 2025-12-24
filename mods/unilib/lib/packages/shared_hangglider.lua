@@ -74,14 +74,14 @@ function unilib.pkg.shared_hangglider.exec()
             params = "<ID>",
             description = "Toggle airspace restrictions for area <ID>",
 
-            func = function(name, param)
+            func = function(pname, param)
 
                 local id = tonumber(param)
                 if not id then
                     return false, "Invalid usage, see /help no_fly_zone."
                 end
 
-                if not areas:isAreaOwner(id, name) then
+                if not areas:isAreaOwner(id, pname) then
                     return false, "Area " .. id .. " does not exist or is not owned by you."
                 end
 

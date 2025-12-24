@@ -27,7 +27,8 @@ function unilib.utils._get_startup_biome_msg()
         if unilib.global.remix_biome_count_table[remix_name] ~= nil then
 
             msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" .. tostring(unilib.global.remix_biome_count_table[remix_name]) .. "]"
+            msg = msg .. "[" ..
+                    tostring(unilib.global.remix_biome_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -53,7 +54,8 @@ function unilib.utils._get_startup_deco_msg()
         if unilib.global.remix_deco_count_table[remix_name] ~= nil then
 
             msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" .. tostring(unilib.global.remix_deco_count_table[remix_name]) .. "]"
+            msg = msg .. "[" ..
+                    tostring(unilib.global.remix_deco_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -96,7 +98,8 @@ function unilib.utils._get_startup_ore_msg()
         if unilib.global.remix_ore_count_table[remix_name] ~= nil then
 
             msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" .. tostring(unilib.global.remix_ore_count_table[remix_name]) .. "]"
+            msg = msg .. "[" ..
+                    tostring(unilib.global.remix_ore_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -118,10 +121,31 @@ function unilib.utils._get_startup_pkg_msg()
     for _, remix_name in ipairs(unilib.global.init_remix_list) do
 
         msg = msg .. " " .. remix_name .. " "
-        msg = msg .. "[" .. tostring(unilib.global.remix_pkg_count_table[remix_name]) .. "]"
+        msg = msg .. "[" .. tostring(unilib.global.remix_pkg_count_table[remix_name] or 0) .. "]"
 
     end
 
     return msg
+
+end
+
+function unilib.utils._get_startup_time_msg(start_time)
+
+    -- Produces a message, used by init.lua, to show how much time has elapsed since the mod started
+    --
+    -- Return values:
+    --      The message to display in the chat window (an empty string if the start time is
+    --          unavailable)
+
+    if not start_time then
+
+        return ""
+
+    else
+
+        local elapsed_time = os.clock() - start_time
+        return string.format("%.3f", elapsed_time)
+
+    end
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_flower_lavender_wild.init()
 
     return {
         description = "Wild lavender as decoration",
-        depends = {"dirt_ordinary", "flower_lavender_wild", "sand_ordinary"},
+        depends = {"dirt_ordinary_with_turf", "flower_lavender_wild", "sand_ordinary"},
     }
 
 end

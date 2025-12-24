@@ -20,7 +20,11 @@ function unilib.pkg.deco_farming_redo_produce_pepper.init()
     return {
         description = "Pepper as decoration",
         depends = "produce_pepper",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_prairie",
+        },
     }
 
 end
@@ -32,8 +36,8 @@ function unilib.pkg.deco_farming_redo_produce_pepper.post()
         -- Completes decoration in package "produce_pepper"
         num_spawn_by = 1,
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_litter_rainforest",
+            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_turf_prairie",
         },
         spawn_by = "group:tree",

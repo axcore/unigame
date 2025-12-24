@@ -7,6 +7,13 @@
 
 local S = unilib.intllib
 
+local trunk_rotate_table = {
+    [0] = 22,
+    [1] = 21,
+    [2] = 20,
+    [3] = 23,
+}
+
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
@@ -48,6 +55,47 @@ local function get_sapling_growth_time(minp_table, maxp_table)
 end
 
 ---------------------------------------------------------------------------------------------------
+-- Tree callbacks
+---------------------------------------------------------------------------------------------------
+
+function unilib.trees._on_place_trunk(itemstack, placer, pointed_thing)
+
+    -- Original to unilib
+    -- Functions in the "shared_woodsoils" package will place litter around tree trunks, even if
+    --      they're no longer part of a tree (but, for example, part of a building)
+    -- We can get around this by flipping the node upside-down, settings its .param2 to a value in
+    --      the range 20-23; unilib.pkg.shared_woodsoils.place_litter() won't act on trunk nodes
+    --      with a .param2 higher than 5
+    -- (Unless the trunks have some unusual textures, the user won't notice that the node has been
+    --      placed upside-down)
+
+    if unilib.global.pkg_executed_table["shared_woodsoils"] == nil then
+
+        -- No need to flip the trunk node; just place it in the direction the player is facing, as
+        --      normal
+        return core.rotate_node(itemstack, placer, pointed_thing)
+
+    else
+
+        -- Place the node, flipped upside down
+        local param2 = core.dir_to_facedir(placer:get_look_dir())
+        core.set_node(
+            pointed_thing.above,
+            {name = itemstack:get_name(), param2 = (trunk_rotate_table[param2] or param2)}
+        )
+
+        -- Consume inventory items
+        if not unilib.utils.is_creative(placer:get_player_name()) then
+            itemstack:take_item()
+        end
+
+        return itemstack
+
+    end
+
+end
+
+---------------------------------------------------------------------------------------------------
 -- Register tree types
 ---------------------------------------------------------------------------------------------------
 
@@ -82,7 +130,7 @@ function unilib.trees._register_tree(data_table)
     local part_name = data_table.part_name
     local description = data_table.description
 
-    local burnlevel = data_table.description or nil
+    local burnlevel = data_table.burnlevel or nil
     local incomplete_flag = data_table.incomplete_flag or false
     local not_super_flag = data_table.not_super_flag or false
     local slim_flag = data_table.slim_flag or false
@@ -195,7 +243,8 @@ function unilib.trees._register_trunk(data_table)
         is_ground_content = false,
         paramtype2 = "facedir",
 
-        on_place = core.rotate_node,
+--      on_place = core.rotate_node,
+        on_place = unilib.trees._on_place_trunk,
     })
     if burntime ~= 0 then
 
@@ -470,7 +519,7 @@ function unilib.trees._register_leaves(data_table)
     --      drawtype (str): If specified, "allfaces_optional" or "plantlike"
     --      drop_table (str): Complete drop table
     --      group_table (table): Complete group table
-    --      sapling_rarity (int): e.g. 20 (1 in 20 chance of dropping a sapling)
+    --      sapling_rarity (int): e.g. 20 (for a 1 in 20 probability of dropping a sapling)
     --      sci_name (str): e.g. "Populus tremula". The string may contain just the genus if the
     --          species isn't identifiable, or can be omitted entirely when necessary
     --      special_list (str or list): If specified, .special_tiles field for trees that need them
@@ -572,6 +621,10 @@ function unilib.trees._register_leaves(data_table)
     })
 
     unilib.register_tree_leaves_compacted(full_name, replace_mode, compacted_img)
+
+    if unilib.setting.slopes_enable_flag and unilib.setting.slopes_enable_leaves_flag then
+        unilib.slopes.register_slope_leaves(full_name)
+    end
 
     return full_name
 

@@ -75,10 +75,14 @@ function unilib.pkg.shared_default_sign.register_wall_sign(data_table)
 
         on_receive_fields = function(pos, formname, fields, sender)
 
-            local player_name = sender:get_player_name()
-            if core.is_protected(pos, player_name) then
+            if not fields.quit then
+                return
+            end
 
-                core.record_protection_violation(pos, player_name)
+            local pname = sender:get_player_name()
+            if core.is_protected(pos, pname) then
+
+                core.record_protection_violation(pos, pname)
                 return
 
             end
@@ -90,18 +94,18 @@ function unilib.pkg.shared_default_sign.register_wall_sign(data_table)
 
             if #text > 512 then
 
-                core.chat_send_player(player_name, S("Text too long"))
+                core.chat_send_player(pname, S("Text too long"))
                 return
 
             end
 
-            -- Strip naughty control characters (keeps \t and \n)
-            text = text:gsub("[%z-\8\11-\31\127]", "")
+            -- Strip naughty control characters (keeps \t and \n; doesn't strip minus character)
+            text = text:gsub("[%z\1-\8\11-\31\127]", "")
 
             --[[
             unilib.utils.log(
                 "action",
-                player_name .. " wrote \"" .. text .. "\" to the sign at " ..
+                pname .. " wrote \"" .. text .. "\" to the sign at " ..
                         core.pos_to_string(pos)
             )
             ]]--

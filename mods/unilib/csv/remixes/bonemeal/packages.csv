@@ -19,9 +19,6 @@ torch_ordinary|default
 # supporting packages (.optional)
 #coral_block_skeleton|default
 #dye_basic|dye bakedclay
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
 #soil_ordinary|farming
 
 # supporting packages (.suggested)

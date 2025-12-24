@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_apple_mature.init()
 
     return {
         description = "Mature apple tree as decoration",
-        depends = {"dirt_ordinary", "tree_apple_mature"},
+        depends = {"dirt_ordinary_with_turf", "tree_apple_mature"},
     }
 
 end

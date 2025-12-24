@@ -21,7 +21,7 @@ function unilib.pkg.deco_cropocalypse_plant_garlic_porcelain_wild.init()
         description = "Wild porcelain garlic plant as decoration",
         depends = {
             "biome_default_forest_deciduous",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "plant_garlic_porcelain_wild",
         },
     }

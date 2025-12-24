@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_produce_grape.init()
     return {
         description = "Grapes as decoration",
         depends = "produce_grape",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_prairie"},
     }
 
 end

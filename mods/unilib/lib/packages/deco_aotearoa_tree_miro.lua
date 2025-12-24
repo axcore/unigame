@@ -42,9 +42,9 @@ function unilib.pkg.deco_aotearoa_tree_miro.post()
                 "aotearoa_lowland_tawa_forest",
             },
             place_on = {
-                "unilib:dirt_antipodean_with_moss",
                 "unilib:dirt_antipodean_dark_with_litter_beech",
                 "unilib:dirt_antipodean_dark_with_litter_wet",
+                "unilib:dirt_antipodean_with_moss",
                 "unilib:dirt_ordinary_with_litter_dry",
             },
             y_max = 80,

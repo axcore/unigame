@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_oak_mature.init()
 
     return {
         description = "Mature oak tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_oak_mature"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_oak_mature"},
     }
 
 end

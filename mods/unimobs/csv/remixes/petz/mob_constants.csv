@@ -1,0 +1,118 @@
+# Constants for the "petz" remix, replacing values in the corresponding mob_settings.csv file
+
+# Ignored values (could be used to check that the settings CSV has the right number of columns)
+CHECK|check
+
+# Spawn control
+CANNOT_SPAWN|true
+DISABLE_SPAWN|true
+
+# Breeding control
+CANNOT_BREED|
+DISABLE_BREED|
+
+# Other column fillers (these values are ignored, but their existence makes editing mob_settings.csv
+#   in a text editor a little easier)
+CAN_SPAWN|
+NO_BIOME|
+NO_CONVERT_TO|
+NO_CONVERT_WITH|
+NO_CUSTOM_CONVERT|
+NO_CUSTOM_SPAWN|
+NO_CUSTOM_TAME|
+NO_DISTANCE|
+NO_EXTRA|
+NO_FEED|
+NO_FOLLOW|
+NO_HARMFUL|
+NO_HERD|
+NO_MAX_HEIGHT|
+NO_MIN_HEIGHT|
+NO_NODE|
+NO_PREDATOR|
+NO_PREY|
+NO_REPEL|
+
+# Petz mobs
+MOB_BUTTERFLY|unilib:mob_butterfly_normal
+MOB_CAMEL|unilib:mob_camel_normal
+MOB_CAT|unilib:mob_cat_normal
+MOB_CHICKLET|unilib:mob_chicken_chicklet
+MOB_CLOWNFISH|unilib:mob_fish_clownfish
+MOB_COW|unilib:mob_cow_normal
+MOB_DOG|unilib:mob_dog_normal
+MOB_DUCK|unilib:mob_duck_normal
+MOB_FOX|unilib:mob_fox_normal
+MOB_FROG|unilib:mob_frog_normal
+MOB_GOAT|unilib:mob_goat_normal
+MOB_GRIZZLY_BEAR|unilib:mob_bear_grizzly
+MOB_HAMSTER|unilib:mob_hamster_normal
+MOB_HEN|unilib:mob_chicken_hen
+MOB_LEOPARD|unilib:mob_leopard_normal
+MOB_LION|unilib:mob_lion_normal
+MOB_PENGUIN|unilib:mob_penguin_normal
+MOB_PIG|unilib:mob_pig_normal
+MOB_PONY|unilib:mob_pony_normal
+MOB_QUEEN_ANT|unilib:mob_ant_queen
+MOB_RABBIT|unilib:mob_rabbit_normal
+MOB_RAT|unilib:mob_rat_normal
+MOB_ROOSTER|unilib:mob_chicken_rooster
+MOB_SHEEP|unilib:mob_sheep_normal
+MOB_SQUIRREL|unilib:mob_squirrel_normal
+MOB_TROPICAL_FISH|unilib:mob_fish_tropical
+MOB_WOLF|unilib:mob_wolf_normal
+MOB_WORKER_ANT|unilib:mob_ant_worker
+
+# Petz spawn eggs
+SPAWNEGG_CLOWNFISH|unilib:spawnegg_fish_clownfish
+SPAWNEGG_SILKWORM|unilib:spawnegg_silkworm_normal
+
+# Petz items
+ANIMAL_BONE|unilib:item_bone_animal unilib:item_bone bonemeal:bone
+RAW_CHICKEN|unilib:food_chicken_raw
+XMAS_PRESENT|unilib:container_present_christmas
+
+# Crops/produce/fruit
+APPLE|unilib:fruit_apple default:apple
+BLUEBERRIES|unilib:fruit_blueberry_ordinary default:blueberries
+HARVESTED_WHEAT|unilib:crop_wheat_harvest farming:wheat
+PUMPKIN|unilib:produce_pumpkin_yellow_grow_8 farming:pumpkin
+WHEAT_SEED|unilib:crop_wheat_seed farming:seed_wheat
+
+# Dirts/sands
+DIRT_WITH_TURF|unilib:dirt_ordinary_with_turf default:dirt_with_grass
+DIRT_WITH_DRY_TURF|unilib:dirt_ordinary_with_turf_dry default:dirt_with_dry_grass
+DRY_DIRT|unilib:dirt_dry default:dry_dirt
+DRY_DIRT_WITH_DRY_TURF|unilib:dirt_dry_with_turf_dry default:dry_dirt_with_dry_grass
+CONIFEROUS_LITTER|unilib:dirt_ordinary_with_litter_coniferous default:dirt_with_coniferous_litter
+RAINFOREST_LITTER|unilib:dirt_ordinary_with_litter_rainforest default:dirt_with_rainforest_litter
+DESERT_SAND|unilib:sand_desert default:desert_sand
+
+# Groups
+RAW_MEAT|group:food_meat_raw
+
+# Liquids
+WATER_SOURCE|unilib:liquid_water_ordinary_source default:water_source
+RIVER_WATER_SOURCE|unilib:liquid_water_river_source default:river_water_source
+
+# Misc
+BROWN_CORAL|unilib:coral_block_brown default:coral_brown
+FIREFLIES|group:firefly
+KELP|unilib:plant_kelp_ordinary default:sand_with_kelp
+ORANGE_CORAL|unilib:coral_block_orange default:coral_orange
+ORDINARY_STRING|unilib:item_string_ordinary farming:string
+ORDINARY_TORCH|unilib:torch_ordinary default:torch
+
+# Plants/saplings/leaves
+ACACIA_SAPLING|unilib:tree_acacia_sapling default:acacia_sapling
+DRY_SHRUB|unilib:plant_shrub_dry default:dry_shrub
+PINE_LEAVES|unilib:tree_pine_leaves default:pine_needles
+ORDINARY_PAPYRUS|unilib:plant_papyrus_ordinary default:papyrus
+
+# Stone/snow/ice
+ORDINARY_ICE|unilib:ice_ordinary default:ice
+ORDINARY_STONE|unilib:stone_ordinary default:stone
+ORDINARY_SNOW_BLOCK|unilib:snow_ordinary_block default:snowblock
+
+# Biomes
+BIOME_ICE_SHEET|default_icesheet icesheet

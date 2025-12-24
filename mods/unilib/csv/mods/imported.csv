@@ -149,7 +149,7 @@ aqua_farming|detect|defer|
 australia|detect|defer|
 badlands|detect|defer|
 bakedclay|detect|defer|
-basic_materials|detect|defer|
+basic_materials|detect|replace|
 bbq|detect|defer|
 beacons|detect|defer|
 beautiflowers|detect|defer|
@@ -166,8 +166,9 @@ cement|detect|defer|
 cheese|detect|defer|
 chocolate|detect|defer|
 chunkkeeper|detect|defer|
-columnia|detect|defer|When "hide" or "replace" is specified, original carving nodes are removed. However, unilib equivalents are only added when Minetest settings allow
 colored_beds|detect|defer|
+colored-meselamps|detect|defer|
+columnia|detect|defer|When "hide" or "replace" is specified, original carving nodes are removed. However, unilib equivalents are only added when Minetest settings allow
 compass|detect|defer|
 cottages|detect|defer|
 cropocalypse|detect|defer|
@@ -207,12 +208,14 @@ more_coral|detect|defer|
 moreblocks|detect|defer|When "hide" or "replace" is specified, original stair nodes are removed. However, unilib equivalents are only added when Minetest settings allow. Almost all non-stair code has been imported
 morebricks|detect|defer|
 morelamps|detect|defer|
-moreores|detect|defer|
+moreores|detect|replace|
 moreplants|detect|defer|
 moretrapdoors|detect|defer|
 moretrees|detect|defer|
 mtg_plus|detect|defer|
 mymillwork|detect|defer|unilib cannot "hide" or "replace" carving nodes from this mod, due to arbitrary naming conventions
+naturalslopeslib|detect|defer|
+naturalslopes_minetest_game|detect|defer|
 nbea|detect|defer|
 nether|detect|replace|unilib does not define any new items, just a new portal definition; that definition is not used if the replace mode is "defer"
 nettle|detect|defer|

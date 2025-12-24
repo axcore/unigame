@@ -150,7 +150,7 @@ australia||20220620|https://github.com/vlapsley/australia|vlapsley|GPLv3/LGPL 2.
 badlands||20231101|https://content.minetest.net/packages/AwesomeDragon97/badlands/|AwesomeDragon97|LGPL-3.0|LGPL-3.0|Imported everything
 bakedclay||20211117|https://notabug.org/tenplus1/bakedclay|TenPlus1|MIT|CC|Imported everything except luckyblocks/coloured_clay/flowerpot compatibility code
 basic_materials||20211113|https://gitlab.com/VanessaE/basic_materials|Vanessa Dannenberg|LGPL 3.0|CC-by-SA 4.0|Imported everything
-bbq||20230307|https://github.com/Grizzly-Adam/BBQ|Grizzly Adam|LGPL-2.1+|CC-BY-SA-3.0/CC-BY-3.0|Imported everything except a few items provided by other mods (charcoal, molasses and sugar)
+bbq||20230307|https://github.com/Grizzly-Adam/BBQ|Grizzly Adam|LGPL-2.1+|CC-BY-SA-3.0/CC-BY-3.0|Imported everything except a few items provided by other mods (charcoal, molasses and sugar). Note that beer has been moved to the unidrinks expansion pack
 beacons||20221202|https://notabug.org/SpaghettiToastBook/beacons|SpaghettiToastBook|CC0|CC0|Imported everything
 beautiflowers||20220210|https://github.com/minefaco/beautiflowers|minefaco|GPLv3.0|CC0|Imported everything
 better_basic_materials||20241118|https://content.luanti.org/packages/AwesomeDragon97/better_basic_materials/|AwesomeDragon97|n/a|CC-BY-SA-3.0|Imported all four 16x16 replacement textures, using them to replace the 64x64 textures provided by basic_materials
@@ -167,6 +167,7 @@ cheese||20230303|https://github.com/AnnalysaTheMinetester/cheese|Annalysa|LGPL 2
 chocolate||20230306|https://content.minetest.net/packages/MCL/chocolate/|MCL|MIT|CC-BY-4.0|Imported the white chocolate only
 chunkkeeper||20221125|https://github.com/Beanzilla/chunkkeeper|Beanzilla|MIT|MIT|Imported everything
 colored_beds||20221113|https://forum.minetest.net/viewtopic.php?f=9&t=18775#|BlockMen|MIT|CC BY-SA 3.0|Used version 2 of the mod. Imported the full range of beds, retaining code from the original beds mod
+colored-meselamps||20251222|https://github.com/slashdevslashurandom/colored-meselamps|/dev/urandom|MIT|MIT|Imported everything
 columnia||20211103|https://github.com/Glunggi/columnia|Glunggi|LGPLv2.1+|CC BY-SA 3.0|Imported everything
 compass||20221125|https://github.com/Sokomine/compass|Sokomine|WTFPL|WTFPL|Also called "Static Compass". Imported everything
 cottages||20211123|https://github.com/Sokomine/cottages|Sokomine|GPLv3|CC/CC-by-SA/WTFPL|Imported everything except the rope-rail item
@@ -213,6 +214,8 @@ moretrapdoors||20230310|https://github.com/AtlanteFr/More-Trapdoors|Atlante|MIT|
 moretrees||20220608|https://github.com/mt-mods/moretrees|Vanessa Ezekowitz|LGPL 3.0|CC-by-SA 4.0|Imported everything, but some code has been simplified. Coconuts and dates do not regrow, and date palm trees are not pollinated. Raw coconuts have been merged with coconut slices from ethereal-ng. Calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in the same positions/quantities. Coconuts can only be cut with cutting boards
 mtg_plus||20220425|https://repo.or.cz/minetest_mtg_plus.git|Wuzzy|MIT|CC-BY-SA 3.0/CC-BY 3.0/MIT|Imported everything except the duplicate ice bricks, and the special textures for stairs/slabs
 mymillwork||20211103|https://github.com/minetest-mods/mymillwork|Don|DWYWPL|DWYWPL|Imported everything
+naturalslopeslib||20251206|https://www.cupnplategames.com/en/minetest-natural-slopes.html|Karamel|LGPLv2|CC-0|Imported everything except support for the poschangelib and twmlib mods
+naturalslopes_minetest_game||20251215|https://www.cupnplategames.com/en/minetest-natural-slopes.html|Karamel|LGPLv2|n/a|Adapted or imported everything. If settings are enabled, slope nodes are registered automatically for all biome surfaces; you can write your own packages to register slopes individually, if required
 nbea||20220812|https://github.com/Napiophelios/NBox_Abuse|Napiophelios|WTFPL|CC BY-SA 3.0|Imported decorative items and compatibility with mesecons, but no furniture
 nether||20241115|https://github.com/minetest-mods/nether|PilzAdam|ISC|CC-BY-SA-3.0|PilzAdam's nether mod. The "override_nether_portal" package creates a portal using unilib obsidian/mese, but nothing else has been imported. Compatible with unilib's implementation of armour and staff of light
 nettle||20220213|https://gitlab.com/h2mm/nettle|Hume2|MIT|MIT|Imported everything

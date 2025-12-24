@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_king.init()
 
     return {
         description = "King mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_king"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_king",
+        },
     }
 
 end

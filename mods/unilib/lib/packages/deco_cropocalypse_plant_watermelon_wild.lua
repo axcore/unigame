@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_plant_watermelon_wild.init()
 
     return {
         description = "Wild watermelon plant as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "plant_watermelon_wild"},
+        depends = {"biome_default_rainforest", "dirt_ordinary_with_turf", "plant_watermelon_wild"},
     }
 
 end

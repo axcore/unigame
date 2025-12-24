@@ -1,9 +1,9 @@
 # "glemr11" remix - contains almost everything from revision 11 of lib_materials/lib_ecology,
-#       (31st Aug 2019, dev branch). Some material of little value has been omitted. Code for
-#       modifying terrain (e.g. producing lakes) has also been omitted
+#   (31st Aug 2019, dev branch). Some material of little value has been omitted. Code for modifying
+#   terrain (e.g. producing lakes) has also been omitted
 # The original mods were not suitable for use in survival mode, and the same applies to this remix.
-#       Instead, this remix should be used as the basis for your own remixes. The section containing
-#       ore packages can also be removed, as it is again not very useful in survival mode
+#   Instead, this remix should be used as the basis for your own remixes. The section containing ore
+#   packages can also be removed, as it is again not very useful in survival mode
 
 # node_name | original_mod
 
@@ -24,6 +24,9 @@ liquid_lava_ordinary|default
 liquid_water_ordinary|default
 liquid_water_river|default
 soil_arid|farming
+soil_black|unilib
+soil_brown|unilib
+soil_dark|unilib
 soil_ordinary|farming
 stone_ordinary|default moreblocks technic
 
@@ -420,7 +423,9 @@ dirt_dried|ethereal
 dirt_mud_swamp|30biomes
 dirt_ordinary|default farming moreblocks
 #dirt_ordinary_with_cover_fungi|farlands
+dirt_ordinary_with_cover_snow|default
 dirt_ordinary_with_litter_leafy|farlands
+dirt_ordinary_with_litter_rainforest|default farming
 dirt_ordinary_with_turf_forest|farlands
 dirt_ordinary_with_turf_swamp|farlands
 dirt_parched|farlands
@@ -837,7 +842,7 @@ tree_palm_exotic|farlands
 # supporting packages (.depends)
 brick_ordinary|default
 decor_bricks_stone_chalked|darkage
-dirt_dry|default
+dirt_dry|default farming
 dye_basic|dye bakedclay
 fruit_coconut_exotic|farlands
 fruit_curly|moreplants
@@ -875,8 +880,10 @@ mineral_tin_native|aato
 #crop_oat|farming
 #crop_rice_white|farming
 #crop_rye|farming
+#dirt_ordinary_with_turf|default farming moreblocks
 #dirt_ordinary_with_turf_bamboo|ethereal
 #dirt_ordinary_with_turf_crystal|ethereal
+#dirt_ordinary_with_turf_dry|default farming
 #dirt_ordinary_with_turf_grey|ethereal
 #dirt_ordinary_with_turf_grove|ethereal
 #dirt_ordinary_with_turf_mushroom|ethereal

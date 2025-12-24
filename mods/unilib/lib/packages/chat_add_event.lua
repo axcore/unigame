@@ -30,15 +30,15 @@ function unilib.pkg.chat_add_event.exec()
         params = "[message]",
         description = S("Adds a calendar event, e.g. \"You ate a nice sandwich\""),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             elseif not unilib.setting.stats_bio_flag then
                 return false, S("Calendar events cannot be added when player stats are disabled")
             end
 
-            if not unilib.stats.add_player_event(name, "default", param) then
+            if not unilib.stats.add_player_event(pname, "default", param) then
                 return false, S("No events added")
             elseif param ~= nil and param ~= "" then
                 return true, S("Added event") .. ": " .. param

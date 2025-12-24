@@ -59,12 +59,12 @@ function unilib.pkg.chat_show_mod_attributes.exec()
         description = S("Shows a table of mod attributes"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             else
-                return do_show_mod_attributes(name, param)
+                return do_show_mod_attributes(pname, param)
             end
 
         end,
@@ -75,12 +75,12 @@ function unilib.pkg.chat_show_mod_attributes.exec()
         description = S("Shows a table of mod attributes"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             else
-                return do_show_mod_attributes(name, param)
+                return do_show_mod_attributes(pname, param)
             end
 
         end,

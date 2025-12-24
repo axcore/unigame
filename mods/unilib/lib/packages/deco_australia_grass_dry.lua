@@ -60,7 +60,8 @@ function unilib.pkg.deco_australia_grass_dry.init()
             "biome_australia_pilbara",
             "biome_australia_tasman_sea",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_dry",
             "dirt_red_antipodean",
             "gravel_red_antipodean",
             "sand_desert",
@@ -88,13 +89,13 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_far_north_queensland"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         local biome = "australia_far_north_queensland"
         local place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_with_turf_far_north_queensland",
+            "unilib:dirt_ordinary_with_turf",
         }
         local y_max = 35
         local y_min = 22
@@ -106,7 +107,7 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_flinders_lofty"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         local biome = "australia_flinders_lofty"
@@ -143,7 +144,7 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_gulf_of_carpentaria"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         local biome = "australia_gulf_of_carpentaria"
@@ -178,13 +179,13 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_jarrah_karri_forests"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         local biome = "australia_jarrah_karri_forests"
         local place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_dark_with_turf_jarrah_karri_forests",
+            "unilib:dirt_ordinary_with_turf",
         }
         local y_max = unilib.constant.y_max
         local y_min = 5
@@ -215,7 +216,7 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_mulga_lands"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         local biome = "australia_mulga_lands"
@@ -236,7 +237,7 @@ function unilib.pkg.deco_australia_grass_dry.post()
 
     if unilib.global.pkg_executed_table["biome_australia_murray_darling_basin"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         local biome = "australia_murray_darling_basin"

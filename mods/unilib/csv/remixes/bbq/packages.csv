@@ -1,10 +1,11 @@
-# "bbq" remix - contains everything from the bbq mod except a few items provided by other mods
-#       (charcoal, molasses and sugar)
+# "bbq" remix - contains nearly everything from the bbq mod
+# Does not include a few items provided by other mods (charcoal, molasses and sugar)
+# Does not provide beer; instead, the unidrinks expansion pack provides the "drink_beer_light"
+#   package in its "bbq_extra" remix
 
 # node_name | original_mod
 
 # bbq packages
-drink_beer_normal|bbq
 food_bacon|bbq
 food_beef_corned|bbq
 food_beef_jerky|bbq
@@ -87,7 +88,7 @@ vessel_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
 crop_cotton|farming
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)

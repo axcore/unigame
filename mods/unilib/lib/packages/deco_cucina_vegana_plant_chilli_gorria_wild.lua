@@ -20,7 +20,7 @@ function unilib.pkg.deco_cucina_vegana_plant_chilli_gorria_wild.init()
     return {
         description = "Wild gorria chilli plant as decoration",
         depends = "plant_chilli_gorria_wild",
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_litter_rainforest"},
     }
 
 end

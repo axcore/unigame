@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_oak.init()
 
     return {
         description = "Oak tree as decoration",
-        depends = {"dirt_ordinary", "tree_oak"},
+        depends = {"dirt_ordinary_with_turf", "tree_oak"},
     }
 
 end

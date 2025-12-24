@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_crop_tomato_cherry.init()
 
     return {
         description = "Cherry tomato as decoration",
-        depends = {"biome_default_forest_deciduous", "crop_tomato_cherry", "dirt_ordinary"},
+        depends = {
+            "biome_default_forest_deciduous",
+            "crop_tomato_cherry",
+            "dirt_ordinary_with_turf",
+        },
     }
 
 end

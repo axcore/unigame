@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_flower_lungwort.init()
 
     return {
         description = "Lungwort as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "flower_lungwort"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "flower_lungwort"},
     }
 
 end

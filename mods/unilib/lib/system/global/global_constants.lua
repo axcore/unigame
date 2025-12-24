@@ -28,6 +28,10 @@ unilib.constant.light_min_grow_crop = 12
 -- Maximum tool wear (as specified by Minetest)
 unilib.constant.max_tool_wear = 65535
 
+-- Gravity values. The non-negative value (slightly) simplifies some calculations
+unilib.constant.abs_gravity = tonumber(core.settings:get("movement_gravity")) or 9.81
+unilib.constant.gravity = unilib.constant.abs_gravity * -1
+
 -- World size limits (use these values instead of literal 31000 / -31000 values)
 unilib.constant.x_max = 31000
 unilib.constant.x_min = -31000

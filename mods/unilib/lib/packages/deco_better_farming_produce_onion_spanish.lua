@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_onion_spanish.init()
 
     return {
         description = "Spanish onion as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "produce_onion_spanish"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "produce_onion_spanish"},
     }
 
 end

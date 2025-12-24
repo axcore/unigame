@@ -20,12 +20,21 @@ local function do_dump_biome(pname, param)
     local biome_list = {}
     local count = 0
 
-    for k, _ in pairs(core.registered_biomes) do
+    if param ~= "" and core.registered_biomes[param] ~= nil then
 
-        if param == "" or string.find(k, param) then
+        table.insert(biome_list, core.registered_biomes[param].name)
+        count = 1
 
-            table.insert(biome_list, tostring(k))
-            count = count + 1
+    else
+
+        for k, _ in pairs(core.registered_biomes) do
+
+            if param == "" or string.find(k, param) then
+
+                table.insert(biome_list, tostring(k))
+                count = count + 1
+
+            end
 
         end
 
@@ -81,8 +90,8 @@ function unilib.pkg.chat_dump_biome.exec()
         description = S("Dumps biome definitions for any biome whose name matches the pattern"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_biome(name, param)
+        func = function(pname, param)
+            return do_dump_biome(pname, param)
         end,
     })
 

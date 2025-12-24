@@ -15,19 +15,21 @@ grass_reed_mannagrass|bakedclay
 shared_bakedclay|bakedclay
 
 # supporting packages (.depends)
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 dye_basic|dye bakedclay
 tree_jungle|default doors moreblocks
 
 # supporting packages (.at_least_one)
 clay_brown|underch
 clay_ordinary|default
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf_dry|default farming
 sand_ordinary|default
 
 # supporting packages (.optional)
 #brick_ordinary|default
 #bush_blueberry_ordinary|default
-#grass_dry|default
+#dirt_ordinary|default farming moreblocks
 #grass_jungle|default
 #grass_ordinary|default
 #mushroom_brown|flowers

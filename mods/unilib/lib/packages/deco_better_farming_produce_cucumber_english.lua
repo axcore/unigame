@@ -22,7 +22,7 @@ function unilib.pkg.deco_better_farming_produce_cucumber_english.init()
         depends = "produce_cucumber_english",
         at_least_one = {
             {"biome_default_desert", "biome_default_forest_coniferous"},
-            {"dirt_ordinary", "sand_desert"},
+            {"dirt_ordinary_with_litter_coniferous", "sand_desert"},
         },
     }
 

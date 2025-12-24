@@ -166,7 +166,13 @@ local function register_cabinet(data_table)
         },
     })
 
-    unilib.furniture.convert_to_container(full_name, 3, description, "wooden cabinet")
+    unilib.furniture.convert_to_container({
+        full_name = full_name,
+
+        description = description,
+        label = "wooden cabinet",
+        rows = 3,
+    })
 
     return full_name
 

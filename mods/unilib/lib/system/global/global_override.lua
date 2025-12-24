@@ -172,6 +172,21 @@ local S = unilib.intllib
 -- (moreblocks)
 --unilib.setting.moreblocks_hidden_trap_flag = false
 
+-- (naturalslopeslib)
+--unilib.setting.slopes_generation_method = "VoxelManip"
+--unilib.setting.slopes_rendering_mode = "Cubic"
+
+--unilib.setting.slopes_update_on_generate_flag = true
+--unilib.setting.slopes_update_on_dig_place_flag = true
+
+--unilib.setting.slopes_update_on_generate_factor = 0.05
+--unilib.setting.slopes_update_on_stomp_factor = 1.0
+--unilib.setting.slopes_update_on_dig_place_factor = 1.0
+--unilib.setting.slopes_update_on_time_factor = 1.0
+--unilib.setting.slopes_skip_nodes_on_generate = 0
+
+--unilib.setting.slopes_enable_revert_flag = false
+
 -- (nettle)
 --unilib.setting.nettle_damage_factor = 1.0
 
@@ -412,6 +427,10 @@ local S = unilib.intllib
 --unilib.setting.wield_view_enable_flag = true
 --unilib.setting.wield_view_update_time = 2
 --unilib.setting.wield_view_node_tiles_flag = false
+
+--unilib.setting.slopes_enable_flag = false
+--unilib.setting.slopes_enable_biomes_flag = false
+--unilib.setting.slopes_enable_leaves_flag = false
 
 --unilib.setting.alarm_enable_flag = true
 

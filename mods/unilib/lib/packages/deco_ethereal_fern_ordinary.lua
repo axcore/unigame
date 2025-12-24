@@ -20,7 +20,7 @@ function unilib.pkg.deco_ethereal_fern_ordinary.init()
     return {
         description = "Ordinary fern as decoration",
         depends = "fern_ordinary",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_cold"},
+        at_least_one = {"dirt_ordinary_with_litter_coniferous", "dirt_ordinary_with_turf_cold"},
     }
 
 end

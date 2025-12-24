@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_kohlrabi_wild.init()
 
     return {
         description = "Wild kohlrabi plant as decoration",
-        depends = {"dirt_ordinary", "plant_kohlrabi_wild"},
+        depends = "plant_kohlrabi_wild",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_dry"},
     }
 
 end

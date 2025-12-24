@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_brain.init()
 
     return {
         description = "Brain mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_brain"},
+        depends = "mushroom_brain",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

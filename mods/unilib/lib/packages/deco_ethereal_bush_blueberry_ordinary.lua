@@ -27,7 +27,8 @@ function unilib.pkg.deco_ethereal_bush_blueberry_ordinary.init()
                 "biome_ethereal_taiga",
             },
             {
-                "dirt_ordinary",
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
                 "dirt_ordinary_with_turf_cold",
             },
         },

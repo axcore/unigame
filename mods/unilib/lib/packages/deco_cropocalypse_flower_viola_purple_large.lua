@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_viola_purple_large.init()
 
     return {
         description = "Large purple viola as decoration",
-        depends = {"dirt_ordinary", "flower_viola_purple_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_viola_purple_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

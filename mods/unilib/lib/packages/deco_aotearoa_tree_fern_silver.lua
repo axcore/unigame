@@ -21,8 +21,15 @@ function unilib.pkg.deco_aotearoa_tree_fern_silver.init()
         description = "Silver fern tree as decoration",
         depends = "tree_fern_silver",
         at_least_one = {
-            {"biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "biome_aotearoa_lowland",
+                "biome_aotearoa_scrubland",
+            },
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 

@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_oyster_wild.init()
 
     return {
         description = "Wild oyster mushroom as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "mushroom_oyster_wild"},
+        depends = {
+            "biome_default_forest_coniferous",
+            "dirt_ordinary_with_litter_coniferous",
+            "mushroom_oyster_wild",
+        },
     }
 
 end

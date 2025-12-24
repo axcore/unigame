@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_plant_corn_dent_wild.init()
 
     return {
         description = "Wild dent corn plant as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "plant_corn_dent_wild"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "plant_corn_dent_wild"},
     }
 
 end

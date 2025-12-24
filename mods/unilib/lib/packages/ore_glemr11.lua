@@ -95,9 +95,9 @@ end
 function unilib.pkg.ore_glemr11.init()
 
     return {
-        description = "Ores for the GLEMr11 remix, combined into a single package",
-        notes = "This package should be used with the corresponding remix, as it assumes that" ..
-                " packages specified by the remix have been loaded",
+        description = "Ores for \"glemr11\"-compatible remixes",
+        notes = "This package should only be used with \"glemr11\"-compatible remixes, as it" ..
+                " assumes that packages specified by those remixes have been loaded",
         depends = {"biome_glemr11", "dirt_custom_glemr11"},
     }
 

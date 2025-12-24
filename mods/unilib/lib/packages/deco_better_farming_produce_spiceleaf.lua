@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_produce_spiceleaf.init()
 
     return {
         description = "Spiceleaf as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "produce_spiceleaf"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "produce_spiceleaf",
+        },
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_plant_clover.init()
 
     return {
         description = "Clover as decoration",
-        depends = {"dirt_ordinary", "plant_clover"},
+        depends = {"dirt_ordinary_with_turf", "plant_clover"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

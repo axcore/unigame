@@ -21,6 +21,7 @@ function unilib.pkg.biome_ethereal_forest_deciduous.init()
         description = "Deciduous forest biomes",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "gravel_ordinary",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",

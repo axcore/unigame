@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_liberty_cap.init()
 
     return {
         description = "Liberty cap mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_liberty_cap"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_liberty_cap",
+        },
     }
 
 end

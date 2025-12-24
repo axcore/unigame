@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_larch_bolete.init()
 
     return {
         description = "Larch bolete mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_larch_bolete", "tree_pine"},
+        depends = {"mushroom_larch_bolete", "tree_pine"},
+        at_least_one = {"dirt_ordinary_with_cover_snow", "dirt_ordinary_with_litter_coniferous"},
     }
 
 end
@@ -30,8 +31,8 @@ function unilib.pkg.deco_nsspf_mushroom_larch_bolete.post()
         -- Original to unilib, replacing the collection of ABMs in the original nsspf code
         -- Completes decoration in package "mushroom_larch_bolete"
         place_on = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         spawn_by = "unilib:tree_pine_trunk",
         y_max = unilib.constant.y_max,

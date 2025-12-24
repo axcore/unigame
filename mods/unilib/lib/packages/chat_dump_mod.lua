@@ -143,8 +143,8 @@ function unilib.pkg.chat_dump_mod.exec()
         description = S("Dumps details about all source mods, or just the specified source mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_mods(name, param)
+        func = function(pname, param)
+            return do_dump_mods(pname, param)
         end,
     })
 
@@ -153,8 +153,8 @@ function unilib.pkg.chat_dump_mod.exec()
         description = S("Dumps details about all source mods, or just the specified source mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_mods(name, param)
+        func = function(pname, param)
+            return do_dump_mods(pname, param)
         end,
     })
 

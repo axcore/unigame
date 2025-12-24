@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_liquid_water_ordinary.init()
 
     return {
         description = "Water pools in swamps as decoration",
-        depends = {"biome_ethereal_swamp", "dirt_ordinary", "liquid_water_ordinary"},
+        depends = {"biome_ethereal_swamp", "dirt_ordinary_with_turf", "liquid_water_ordinary"},
     }
 
 end

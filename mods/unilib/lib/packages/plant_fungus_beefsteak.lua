@@ -19,7 +19,6 @@ function unilib.pkg.plant_fungus_beefsteak.init()
 
     return {
         description = "Beefsteak fungus",
-        depends = {"shared_nsspf", "tree_pine"},
     }
 
 end
@@ -97,18 +96,6 @@ function unilib.pkg.plant_fungus_beefsteak.exec()
         output = "unilib:plant_fungus_beefsteak_cooked",
         recipe = "unilib:plant_fungus_beefsteak",
         cooktime = 10,
-    })
-
-    unilib.pkg.shared_nsspf.register_fungus({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_pine_trunk",
-        plant_name = "unilib:plant_fungus_beefsteak",
-
-        surface_list = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
-            "unilib:dirt_ordinary_with_cover_snow",
-        },
-        dust_list = {"unilib:snow_ordinary"},
     })
 
 end

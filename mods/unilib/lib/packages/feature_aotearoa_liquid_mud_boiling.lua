@@ -22,7 +22,7 @@ function unilib.pkg.feature_aotearoa_liquid_mud_boiling.init()
         depends = {"liquid_mud_boiling", "sand_silt_antipodean"},
         at_least_one = {
             {"biome_aotearoa_dunes", "biome_aotearoa_scrubland"},
-            {"dirt_ordinary", "sand_volcanic"},
+            {"dirt_ordinary_with_litter_rainforest", "sand_volcanic"},
         },
     }
 

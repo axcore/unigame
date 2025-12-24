@@ -31,9 +31,9 @@ function unilib.pkg.chat_reset_mod_attribute.exec()
         description = S("Resets the value of a mod attribute"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             end
 
@@ -45,7 +45,7 @@ function unilib.pkg.chat_reset_mod_attribute.exec()
             else
 
                 -- The function is expecting the "unilib:mattrib_" portion to be stripped off
-                name = unilib.core.name .. ":mattrib_"
+                local name = unilib.core.name .. ":mattrib_"
                 if string.sub(param_list[1], 1, string.len(name)) == name then
                     param_list[1] = string.sub(param_list[1], string.len(name) + 1)
                 end

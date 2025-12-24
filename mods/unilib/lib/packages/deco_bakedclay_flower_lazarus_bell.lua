@@ -19,7 +19,8 @@ function unilib.pkg.deco_bakedclay_flower_lazarus_bell.init()
 
     return {
         description = "Lazarus Bell as decoration",
-        depends = {"dirt_ordinary", "flower_lazarus_bell", "tree_jungle"},
+        depends = {"flower_lazarus_bell", "tree_jungle"},
+        at_least_one = {"dirt_ordinary_with_litter_rainforest", "dirt_ordinary_with_turf"},
     }
 
 end

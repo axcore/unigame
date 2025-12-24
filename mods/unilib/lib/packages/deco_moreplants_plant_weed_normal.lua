@@ -19,7 +19,8 @@ function unilib.pkg.deco_moreplants_plant_weed_normal.init()
 
     return {
         description = "Normal weed as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "plant_weed_normal"},
+        depends = {"biome_default_forest_coniferous", "plant_weed_normal"},
+        at_least_one = {"dirt_ordinary_with_litter_coniferous", "dirt_ordinary_with_turf"},
     }
 
 end

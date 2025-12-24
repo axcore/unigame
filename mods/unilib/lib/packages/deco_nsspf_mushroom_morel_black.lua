@@ -19,7 +19,7 @@ function unilib.pkg.deco_nsspf_mushroom_morel_black.init()
 
     return {
         description = "Black morel mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_morel_black", "tree_aspen"},
+        depends = {"dirt_ordinary_with_turf", "mushroom_morel_black", "tree_aspen"},
     }
 
 end

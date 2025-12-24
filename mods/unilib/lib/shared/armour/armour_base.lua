@@ -251,7 +251,7 @@ local function get_valid_player(player, msg)
 
     end
 
-    local armour_inv = core.get_inventory({type = "detached", name = pname .. "_armour"})
+    local armour_inv = core.get_inventory({type = "detached", name = "shared_armour_" .. pname})
     if not armour_inv then
 
         -- This check may fail when called inside "on_joinplayer"; in that case, the armour will be
@@ -1259,7 +1259,7 @@ local function init_player_armour(initplayer)
     -- Was init_player_armor()
 
     local pname = assert(initplayer:get_player_name())
-    local armour_inv = core.create_detached_inventory(pname .. "_armour", {
+    local armour_inv = core.create_detached_inventory("shared_armour_" .. pname, {
 
         allow_move = function(inv, from_list, from_index, to_list, to_index, count, player)
 
@@ -1902,7 +1902,7 @@ function unilib.armour._get_player_data(pname)
 
 end
 
-function unilib.armour._get_player_texture(pname)
+function unilib.armour._get_player_texture_data(pname)
 
     -- Original to unilib
     -- Returns the value of main_table.player_texture_table[pname], which may be nil
@@ -1911,7 +1911,7 @@ function unilib.armour._get_player_texture(pname)
 
 end
 
-function unilib.armour._set_player_texture(pname, k, v)
+function unilib.armour._set_player_texture_data(pname, k, v)
 
     -- Original to unilib
     -- Updates a player's texture table (if a table for the specified player exists)
@@ -1970,8 +1970,9 @@ core.after(0, function()
         -- The "skinsdb" mod calls 3d_armor functions; override its code, so that unilib functions
         --      are called instead
 
-        -- (This is required to make skin_class:apply_skin_to_player() work; an ugly hack, but it
-        --      works)
+        -- N.B. This hack is required to make skin_class:apply_skin_to_player() work. It is an ugly
+        --      hack, and it generates an "Undeclared global variable "armor" accessed at..."
+        --      warning, but it works        
         if armor == nil then
             armor = {}
         end

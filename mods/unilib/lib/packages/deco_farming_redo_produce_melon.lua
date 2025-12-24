@@ -19,7 +19,12 @@ function unilib.pkg.deco_farming_redo_produce_melon.init()
 
     return {
         description = "Melon as decoration",
-        depends = {"dirt_ordinary", "produce_melon"},
+        depends = "produce_melon",
+        at_least_one = {
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_dry",
+        },
     }
 
 end

@@ -80,7 +80,8 @@ function unilib.pkg.shared_woodsoils.place_litter(pos, replacement_dirt, replace
     -- N.B. When the "replacement_dirt" and "replacement_turf" arguments are specified, only the
     --      forest litters based on them are used as replacement nodes (as in the original code)
     -- N.B. Modified original code to prevent woodsoils being placed around logs (param2 < 6 is
-    --      based on how minetest_game places logs)
+    --      based on how minetest_game places logs), and around tree trunks placed manually by the
+    --      player (param2 in the range 20-23, thanks to code in unilib.trees.on_place_trunk() )
 
     if (
         core.get_item_group(
@@ -241,8 +242,8 @@ function unilib.pkg.shared_woodsoils.do_dirt(dirt_full_name)
             dirt_img,
             dirt_img .. "^unilib_litter_forest_medium_side_overlay.png",
         },
-        -- N.B. not_in_creative_inventory = 1 not in original code
-        groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
@@ -260,8 +261,8 @@ function unilib.pkg.shared_woodsoils.do_dirt(dirt_full_name)
             dirt_img,
             dirt_img .. "^unilib_litter_forest_heavy_side_overlay.png",
         },
-        -- N.B. not_in_creative_inventory = 1 not in original code
-        groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
@@ -327,8 +328,8 @@ function unilib.pkg.shared_woodsoils.do_turf(dirt_full_name, turf_full_name)
             dirt_img,
             unilib.utils.concat_img(turf_side_img, "unilib_litter_forest_medium_side_overlay.png"),
         },
-        -- N.B. not_in_creative_inventory = 1 not in original code
-        groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
@@ -346,8 +347,8 @@ function unilib.pkg.shared_woodsoils.do_turf(dirt_full_name, turf_full_name)
             dirt_img,
             unilib.utils.concat_img(turf_side_img, "unilib_litter_forest_light_side_overlay.png"),
         },
-        -- N.B. not_in_creative_inventory = 1 not in original code
-        groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),

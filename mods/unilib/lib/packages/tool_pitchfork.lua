@@ -79,7 +79,8 @@ function unilib.pkg.tool_pitchfork.init()
         description = "Pitchfork",
         nodes = "Tool for digging nodes with the group \"hay\". Creates hay when digging" ..
                 " dirt with turf. Can also be placed as a node",
-        depends = {"dirt_ordinary", "misc_hay_ordinary", "item_stick_ordinary"},
+        depends = {"misc_hay_ordinary", "item_stick_ordinary"},
+        optional = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -204,12 +205,7 @@ function unilib.pkg.tool_pitchfork.exec()
     })
 
     -- Handle digging turf with the pitchfork
-    if not unilib.setting.cottages_versatile_pitchfork_flag then
-
-        -- Only one type of dirt-with-turf can be used to make hay
-        modify_turf("unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary")
-
-    else
+    if unilib.setting.cottages_versatile_pitchfork_flag then
 
         -- Any "fertile" dirt-with-turf can be used to make hay
         for turf_name, data_table in pairs(unilib.global.dirt_with_turf_table) do
@@ -219,6 +215,12 @@ function unilib.pkg.tool_pitchfork.exec()
             end
 
         end
+
+    elseif unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
+
+        -- Only one type of dirt-with-turf can be used to make hay
+        modify_turf("unilib:dirt_ordinary_with_turf", "unilib:dirt_ordinary")
 
     end
 

@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_melting.init()
 
     return {
         description = "Melting mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_melting"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_melting",
+        },
     }
 
 end

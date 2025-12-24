@@ -19,7 +19,7 @@ function unilib.pkg.deco_flowers_flower_dandelion_yellow.init()
 
     return {
         description = "Yellow dandelion as decoration",
-        depends = {"dirt_ordinary", "flower_dandelion_yellow"},
+        depends = {"dirt_ordinary_with_turf", "flower_dandelion_yellow"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

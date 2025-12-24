@@ -1,5 +1,5 @@
 # "chat_normal" remix - contains packages which define chat commands available only to players
-#       without the "unilib_admin", "unilib_tools" and "unilib_danger" privileges
+#   without the "unilib_admin", "unilib_tools" and "unilib_danger" privileges
 # See the "chat" remix for a full of list chat command packages with expanded comments
 
 # node_name | original_mod

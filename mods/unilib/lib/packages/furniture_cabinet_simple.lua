@@ -63,12 +63,13 @@ function unilib.pkg.furniture_cabinet_simple.exec()
 
     end
 
-    unilib.furniture.convert_to_container(
-        "unilib:furniture_cabinet_simple",
-        3,
-        S("Simple Wooden Cabinet"),
-        "simple cabinet"
-    )
+    unilib.furniture.convert_to_container({
+        full_name = "unilib:furniture_cabinet_simple",
+
+        description = S("Simple Wooden Cabinet"),
+        label = "simple cabinet",
+        rows = 3,
+    })
 
     unilib.register_node(
         -- From xdecor:cabinet_half
@@ -117,12 +118,13 @@ function unilib.pkg.furniture_cabinet_simple.exec()
 
     end
 
-    unilib.furniture.convert_to_container(
-        "unilib:furniture_cabinet_simple_drawer_top",
-        1,
-        unilib.utils.brackets(S("Simple Wooden Cabinet"), S("Top Drawer")),
-        "simple cabinet drawer"
-    )
+    unilib.furniture.convert_to_container({
+        full_name = "unilib:furniture_cabinet_simple_drawer_top",
+
+        description = unilib.utils.brackets(S("Simple Wooden Cabinet"), S("Top Drawer")),
+        label = "simple cabinet drawer",
+        rows = 1,
+    })
 
     unilib.register_node("unilib:furniture_cabinet_simple_drawer_bottom", nil, mode, {
         -- Original to unilib, based on the "xdecor:cabinet_half" code above
@@ -166,11 +168,12 @@ function unilib.pkg.furniture_cabinet_simple.exec()
 
     end
 
-    unilib.furniture.convert_to_container(
-        "unilib:furniture_cabinet_simple_drawer_bottom",
-        1,
-        unilib.utils.brackets(S("Simple Wooden Cabinet"), S("Bottom Drawer")),
-        "simple cabinet drawer"
-    )
+    unilib.furniture.convert_to_container({
+        full_name = "unilib:furniture_cabinet_simple_drawer_bottom",
+
+        description = unilib.utils.brackets(S("Simple Wooden Cabinet"), S("Bottom Drawer")),
+        label = "simple cabinet drawer",
+        rows = 1,
+    })
 
 end

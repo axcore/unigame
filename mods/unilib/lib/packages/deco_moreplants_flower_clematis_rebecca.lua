@@ -19,7 +19,8 @@ function unilib.pkg.deco_moreplants_flower_clematis_rebecca.init()
 
     return {
         description = "Clematis Rebecca as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "flower_clematis_rebecca"},
+        depends = {"biome_default_rainforest", "flower_clematis_rebecca"},
+        at_least_one = {"dirt_ordinary_with_litter_rainforest", "dirt_ordinary_with_turf"},
     }
 
 end

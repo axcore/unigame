@@ -20,7 +20,6 @@ function unilib.pkg.plant_fungus_tinder.init()
     return {
         description = "Tinder fungus",
         notes = "Produces amadou, which can be used as a fuel",
-        depends = {"shared_nsspf", "tree_aspen"},
     }
 
 end
@@ -57,13 +56,5 @@ function unilib.pkg.plant_fungus_tinder.exec()
         on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_tinder", -1),
     })
     -- (not compatible with flowerpots)
-
-    unilib.pkg.shared_nsspf.register_fungus({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_aspen_trunk",
-        plant_name = "unilib:plant_fungus_tinder",
-
-        surface_list = {"unilib:dirt_ordinary_with_turf"},
-    })
 
 end

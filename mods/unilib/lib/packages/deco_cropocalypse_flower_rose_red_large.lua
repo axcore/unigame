@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_rose_red_large.init()
 
     return {
         description = "Large red rose as decoration",
-        depends = {"dirt_ordinary", "flower_rose_red_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_rose_red_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

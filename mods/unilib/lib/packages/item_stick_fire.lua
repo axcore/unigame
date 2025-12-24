@@ -65,12 +65,14 @@ function unilib.pkg.item_stick_fire.exec()
 
                 elseif core.get_item_group(node_under, "flammable") >= 1 and
                         core.get_node(pointed_thing.above).name == "air" then
+
                     core.set_node(pointed_thing.above, {name = "unilib:fire_ordinary"})
+
                 end
 
             end
 
-            if unilib.utils.is_creative(player_name) then
+            if not unilib.utils.is_creative(player_name) then
 
                 -- Wear the tool
                 local def_table = itemstack:get_definition()

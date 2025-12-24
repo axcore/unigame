@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_sequoia_mature.init()
 
     return {
         description = "Mature sequoia tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_sequoia_mature"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_sequoia_mature"},
     }
 
 end

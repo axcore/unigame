@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_produce_vanilla.init()
     return {
         description = "Vanilla as decoration",
         depends = "produce_vanilla",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_grove"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_grove"},
     }
 
 end

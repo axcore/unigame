@@ -19,7 +19,7 @@ function unilib.pkg.deco_vallee_des_roses_flower_marigold_small.init()
 
     return {
         description = "Small marigold as decoration",
-        depends = {"dirt_ordinary", "flower_marigold_small"},
+        depends = {"dirt_ordinary_with_turf", "flower_marigold_small"},
         at_least_one = {
             "biome_default_forest_coniferous",
             "biome_default_forest_deciduous",

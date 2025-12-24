@@ -19,7 +19,7 @@ function unilib.pkg.deco_snow_tree_pine_frozen.init()
 
     return {
         description = "Frozen pine tree as decoration",
-        depends = {"dirt_ordinary", "tree_pine_frozen"},
+        depends = {"dirt_ordinary_with_cover_snow", "tree_pine_frozen"},
         at_least_one = {"biome_snow_forest", "biome_snow_lush", "biome_snow_normal"},
     }
 

@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_potato_ancient_wild.init()
 
     return {
         description = "Wild ancient potato as decoration",
-        depends = {"dirt_ordinary", "plant_potato_ancient_wild"},
+        depends = {"dirt_ordinary_with_litter_rainforest", "plant_potato_ancient_wild"},
         at_least_one = {"grass_jungle", "tree_jungle"},
     }
 

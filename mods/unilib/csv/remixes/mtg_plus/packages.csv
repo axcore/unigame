@@ -71,16 +71,16 @@ trapdoor_steel|doors
 tree_jungle|default doors moreblocks
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 
 # supporting packages (.optional)
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #dye_basic|dye bakedclay
 #fire_ordinary|fire
 #fire_permanent|fire underch
 #glass_clean|moreblocks
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11

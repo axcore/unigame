@@ -32,9 +32,9 @@ function unilib.pkg.chat_dawn.exec()
         description = S("Changes time to dawn"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             end
 

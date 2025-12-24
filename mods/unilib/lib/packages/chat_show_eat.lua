@@ -31,35 +31,35 @@ function unilib.pkg.chat_show_eat.exec()
         params = "",
         description = S("Shows full list of items eaten/drunk by player"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             elseif not unilib.setting.stats_activity_flag then
                 return false, unilib.pkg.shared_chat_statistics.stats_fail_msg
             end
 
             local eat_table = unilib.pkg.shared_chat_statistics.get_activity_stat(
-                name, "eat_table"
+                pname, "eat_table"
             )
 
             if type(eat_table) ~= "table" or unilib.utils.is_table_empty(eat_table) then
-                return false, S("Player @1 has never eaten/drunk anything!", name)
+                return false, S("Player @1 has never eaten/drunk anything!", pname)
             end
 
-            unilib.utils.chat_send_player(name, S("Player eating/drinking list for @1", name))
+            unilib.utils.chat_send_player(pname, S("Player eating/drinking list for @1", pname))
 
             local count = 0
             for _, full_name in ipairs(unilib.utils.sort_table(eat_table)) do
 
                 count = count + 1
                 unilib.utils.chat_send_player(
-                    name, "   " .. string.format("%-5d", eat_table[full_name]) .. " " .. full_name
+                    pname, "   " .. string.format("%-5d", eat_table[full_name]) .. " " .. full_name
                 )
 
             end
 
-            unilib.utils.chat_send_player(name, S("End of list (unique items found: @1)", count))
+            unilib.utils.chat_send_player(pname, S("End of list (unique items found: @1)", count))
 
         end,
     })

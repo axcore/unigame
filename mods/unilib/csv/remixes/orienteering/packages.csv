@@ -31,7 +31,7 @@ plant_papyrus_ordinary|default mtg_plus
 stone_obsidian|default moreblocks
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)

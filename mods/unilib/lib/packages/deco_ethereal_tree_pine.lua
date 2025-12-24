@@ -19,15 +19,25 @@ function unilib.pkg.deco_ethereal_tree_pine.init()
 
     return {
         description = "Alternative pine tree decorations from ethereal-ng",
-        depends = {"dirt_ordinary", "tree_pine"},
-        at_least_one = {"biome_ethereal_forest_coniferous", "biome_ethereal_taiga"},
+        depends = "tree_pine",
+        at_least_one = {
+            {
+                "biome_ethereal_forest_coniferous",
+                "biome_ethereal_taiga",
+            },
+            {
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_cover_snow",
+            },
+        },
     }
 
 end
 
 function unilib.pkg.deco_ethereal_tree_pine.exec()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_forest_coniferous"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_forest_coniferous"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_coniferous"] ~= nil then
 
         -- Large pine tree for lower elevations
         unilib.register_decoration_generic("ethereal_tree_pine_lowland", {
@@ -53,7 +63,8 @@ function unilib.pkg.deco_ethereal_tree_pine.exec()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_taiga"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_taiga"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil then
 
         -- Snowy large pine tree for lower elevations
         unilib.register_decoration_generic("ethereal_tree_pine_snowy_lowland", {
@@ -85,7 +96,8 @@ end
 
 function unilib.pkg.deco_ethereal_tree_pine.post()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_forest_coniferous"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_forest_coniferous"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_coniferous"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_tree_pine_lowland", nil, {
             -- From ethereal-ng/decor.lua
@@ -105,7 +117,8 @@ function unilib.pkg.deco_ethereal_tree_pine.post()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_taiga"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_taiga"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_tree_pine_snowy_lowland", nil, {
             -- From ethereal-ng/decor.lua

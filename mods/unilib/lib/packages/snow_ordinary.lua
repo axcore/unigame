@@ -31,8 +31,8 @@ function unilib.pkg.snow_ordinary.init()
         description = "Ordinary snow",
         -- Required when the ice/snow-melting ABM is activated
         depends = "liquid_water_ordinary",
-        -- Replace dirt with ordinary grass, for dirt with ordinary snow
-        optional = "dirt_ordinary",
+        -- Replace dirt with ordinary turf, for dirt with snow cover
+        optional = {"dirt_ordinary_with_cover_snow", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -50,7 +50,7 @@ function unilib.pkg.snow_ordinary.exec()
         collision_box = {
             type = "fixed",
             fixed = {
-                {-0.5, -0.5, -0.5, 0.5, -6 / 16, 0.5},
+                {-0.5, -0.5, -0.5, 0.5, -6/16, 0.5},
             },
         },
         drawtype = "nodebox",
@@ -102,7 +102,8 @@ function unilib.pkg.snow_ordinary.exec()
         -- From default:snowblock
         description = S("Ordinary Snow Block"),
         tiles = {"unilib_snow_ordinary.png"},
-        groups = {cools_lava = 1, crumbly = 3, snowy = 1},
+        -- N.B. ground_snow = 1 not in original code
+        groups = {cools_lava = 1, crumbly = 3, ground_snow = 1, snowy = 1},
         sounds = unilib.global.sound_table.snow,
 
         on_construct = function(pos)

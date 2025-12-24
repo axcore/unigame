@@ -19,7 +19,7 @@ function unilib.pkg.food_beef_normal.init()
 
     return {
         description = "Normal beef",
-        mod_optional = {"animalia", "mobs_animal", "petz"},
+        mod_optional = {"animalia", "mobs_animal", "petz", "unimobs"},
     }
 
 end
@@ -54,32 +54,60 @@ function unilib.pkg.food_beef_normal.exec()
     if core.registered_items["mobs_animal:cow"] ~= nil then
 
         local def_table = core.registered_entities["mobs_animal:cow"]
-        def_table.drops = {
-            {name = "unilib:food_beef_normal_raw", chance = 1, min = 1, max = 3},
-            {name = "mobs:leather", chance = 1, min = 1, max = 2},
-        }
+        if def_table then
+
+            def_table.drops = {
+                {name = "unilib:food_beef_normal_raw", chance = 1, min = 1, max = 3},
+                {name = "mobs:leather", chance = 1, min = 1, max = 2},
+            }
+
+        end
 
     end
 
-    -- N.B. For consistency, we have to do the same thing with petz and animalia
+    -- N.B. For consistency, we have to do the same thing with unimobs, petz and animalia
+    if core.registered_items["unilib:mob_cow_normal"] ~= nil then
+
+        -- N.B. This entity is created by code in unimobs, not in unilib
+        local def_table = core.registered_entities["unilib:mob_cow_normal"]
+        if def_table then
+
+            def_table.drops = {
+                {name = "unilib:food_beef_normal_raw", chance = 1, min = 1, max = 1},
+                {name = "petz:leather", chance = 2, min = 1, max = 1},
+                {name = "petz:bone", chance = 4, min = 1, max = 1},
+            }
+
+        end
+
+    end
+
     if core.registered_items["animalia:cow"] ~= nil then
 
         local def_table = core.registered_entities["animalia:cow"]
-        def_table.drops = {
-            {name = "unilib:food_beef_normal_raw", min = 1, max = 3, chance = 1},
-            {name = "animalia:leather", min = 1, max = 3, chance = 2}
-        }
+        if def_table then
+
+            def_table.drops = {
+                {name = "unilib:food_beef_normal_raw", min = 1, max = 3, chance = 1},
+                {name = "animalia:leather", min = 1, max = 3, chance = 2}
+            }
+
+        end
 
     end
 
     if core.registered_items["petz:calf"] ~= nil then
 
         local def_table = core.registered_entities["petz:calf"]
-        def_table.drops = {
-            {name = "unilib:food_beef_normal_raw", chance = 1, min = 1, max = 1},
-            {name = "petz:leather", chance = 2, min = 1, max = 1},
-            {name = "petz:bone", chance = 4, min = 1, max = 1},
-        }
+        if def_table then
+
+            def_table.drops = {
+                {name = "unilib:food_beef_normal_raw", chance = 1, min = 1, max = 1},
+                {name = "petz:leather", chance = 2, min = 1, max = 1},
+                {name = "petz:bone", chance = 4, min = 1, max = 1},
+            }
+
+        end
 
     end
 

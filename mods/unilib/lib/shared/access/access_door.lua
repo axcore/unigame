@@ -352,8 +352,8 @@ function unilib.access._register_door(data_table)
                 return itemstack
             end
 
-            local pn = placer and placer:get_player_name() or ""
-            if core.is_protected(pos, pn) or core.is_protected(above, pn) then
+            local pname = placer and placer:get_player_name() or ""
+            if core.is_protected(pos, pname) or core.is_protected(above, pname) then
                 return itemstack
             end
 
@@ -391,12 +391,14 @@ function unilib.access._register_door(data_table)
 
             if def_table.protected_flag then
 
-                meta:set_string("owner", pn)
-                meta:set_string("infotext", def_table.description .. "\n" .. S("Owned by @1", pn))
+                meta:set_string("owner", pname)
+                meta:set_string(
+                    "infotext", def_table.description .. "\n" .. S("Owned by @1", pname)
+                )
 
             end
 
-            if not unilib.utils.is_creative(pn) then
+            if not unilib.utils.is_creative(pname) then
                 itemstack:take_item()
             end
 
@@ -652,12 +654,12 @@ function unilib.access._register_trapdoor(data_table)
 
         def_table.after_place_node = function(pos, placer, itemstack, pointed_thing)
 
-            local pn = placer:get_player_name()
+            local pname = placer:get_player_name()
             local meta = core.get_meta(pos)
-            meta:set_string("owner", pn)
-            meta:set_string("infotext", def_table.description .. "\n" .. S("Owned by @1", pn))
+            meta:set_string("owner", pname)
+            meta:set_string("infotext", def_table.description .. "\n" .. S("Owned by @1", pname))
 
-            return unilib.utils.is_creative(pn)
+            return unilib.utils.is_creative(pname)
 
         end
 

@@ -19,11 +19,18 @@ function unilib.pkg.deco_herbs_flower_plantago.init()
 
     return {
         description = "Plantago as decoration",
-        depends = {"dirt_ordinary", "flower_plantago"},
+        depends = "flower_plantago",
         at_least_one = {
-            "biome_default_forest_deciduous",
-            "biome_default_grassland",
-            "biome_ethereal_mountain",
+            {
+                "biome_default_forest_deciduous",
+                "biome_default_grassland",
+                "biome_ethereal_mountain",
+            },
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

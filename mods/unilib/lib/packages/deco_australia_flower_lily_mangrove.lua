@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_flower_lily_mangrove.init()
     return {
         description = "Mangrove lily as decoration",
         depends = {"biome_australia_mangroves", "flower_lily_mangrove"},
-        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary"},
+        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

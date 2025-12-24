@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_corn_ancient_wild.init()
 
     return {
         description = "Wild ancient corn as decoration",
-        depends = {"dirt_ordinary", "liquid_water_ordinary", "plant_corn_ancient_wild"},
+        depends = {"dirt_ordinary_with_turf", "liquid_water_ordinary", "plant_corn_ancient_wild"},
     }
 
 end

@@ -16,10 +16,9 @@ main_pkg_check_table = {}
 
 -- A table of remixes that were excluded, because in unilib.setting.init_remix_pkg_set they were
 --      preceded by the special character "!"
+-- N.B. Excluded packages are added directly to unilib.global.pkg_excluded_table, so that code in
+--      ../lib/system/load won't try to execute them
 remix_excluded_table = {}
--- A table of packages that were excluded, because in unilib.setting.init_remix_pkg_set they were
---      preceded by the special character "!"
-pkg_excluded_table = {}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -200,7 +199,8 @@ local function parse_init_set()
 
     end
 
-    -- Note that duplicate remixes are eliminated by the call to this function
+    -- Note that duplicate words are eliminated by the call to this function (but not necessarily
+    --      duplicate remixes/packages, if they are preceded by different special characters)
     local word_list =
             unilib.utils.split_string_by_whitespace(unilib.setting.init_remix_pkg_set, true)
 
@@ -264,7 +264,7 @@ local function parse_init_set()
 
     end
 
-    -- Remove remixes/packages preceded by the special character "!", and mark them as excluded
+    -- Mark remixes/package names preceded by the special character "!" as excluded
     local filtered_list = {}
     for _, word in pairs(word_list) do
 
@@ -272,20 +272,21 @@ local function parse_init_set()
         if name ~= nil then
 
             if special_char == "+" then
-                pkg_excluded_table[name] = true
+                unilib.global.pkg_excluded_table[name] = true
             else
                 remix_excluded_table[name] = true
             end
 
         else
 
+            -- Continue processing all words that don't begin with that special character
             table.insert(filtered_list, word)
 
         end
 
     end
 
-    -- The surviving remix/package names are added to global variables
+    -- Remix/package names can be added to global variables, if they were not excluded
     for _, word in ipairs(filtered_list) do
 
         local first_char = string.sub(word, 1, 1)
@@ -293,25 +294,27 @@ local function parse_init_set()
         -- Package names, always preceded by "+"
         if first_char == "+" then
 
-            table.insert(unilib.global.init_remix_pkg_list, word)
-            table.insert(unilib.global.init_pkg_list, string.sub(word, 2))
+            local name = string.sub(word, 2)
+            if unilib.global.pkg_excluded_table[name] == nil then
+
+                table.insert(unilib.global.init_remix_pkg_list, word)
+                table.insert(unilib.global.init_pkg_list, name)
+
+            end
 
         -- Remix names, optionally preceded by "@"
+        elseif first_char == "@" then
+
+            local name = string.sub(word, 2)
+            -- (The call to register_remix_path() checks that the remix is valid)
+            if remix_excluded_table[name] == nil and register_remix_path(name) then
+                table.insert(unilib.global.init_remix_pkg_list, word)
+            end
+
         else
 
-            if first_char == "@" then
-
-                -- Register each (real) remix in turn, first checking that it is valid
-                if register_remix_path(string.sub(word, 2)) then
-                    table.insert(unilib.global.init_remix_pkg_list, word)
-                end
-
-            else
-
-                if register_remix_path(word) then
-                    table.insert(unilib.global.init_remix_pkg_list, "@" .. word)
-                end
-
+            if remix_excluded_table[word] == nil and register_remix_path(word) then
+                table.insert(unilib.global.init_remix_pkg_list, "@" .. word)
             end
 
         end
@@ -384,6 +387,18 @@ local function parse_init_remix(remix_name)
                     parse_init_remix(other_remix_name)
                 end
 
+            elseif unilib.global.pkg_excluded_table[pkg_name] ~= nil then
+
+                if unilib.setting.show_pkg_debug_flag then
+
+                    unilib.utils.show_msg(
+                        "../lib/system/read/read_compile.lua, parse_init_remix():" ..
+                                " Package is directly excluded by the initial remix/package set",
+                        pkg_name
+                    )
+
+                end
+
             elseif check_package(packages_path, i, orig_mod_str, pkg_name, mini_check_table) then
 
                 table.insert(mini_check_list, pkg_name)
@@ -421,7 +436,7 @@ local function parse_init_pkg(pkg_name)
     --      must be imported, ignoring any duplicates
 
     -- Don't parse excluded packages
-    if pkg_excluded_table[pkg_name] ~= nil then
+    if unilib.global.pkg_excluded_table[pkg_name] ~= nil then
 
         if unilib.setting.show_pkg_debug_flag then
 
@@ -483,4 +498,3 @@ end
 main_remix_check_table = {}
 main_pkg_check_table = {}
 remix_excluded_table = {}
-pkg_excluded_table = {}

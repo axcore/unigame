@@ -133,8 +133,8 @@ function unilib.pkg.chat_list_mineral_products.exec()
         description = S("Lists all metals/elemental non-metals produced by minerals"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_mineral_products(name, param)
+        func = function(pname, param)
+            return do_list_mineral_products(pname, param)
         end,
     })
 
@@ -143,8 +143,8 @@ function unilib.pkg.chat_list_mineral_products.exec()
         description = S("Lists all metals/elemental non-metals produced by minerals"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_mineral_products(name, param)
+        func = function(pname, param)
+            return do_list_mineral_products(pname, param)
         end,
     })
 

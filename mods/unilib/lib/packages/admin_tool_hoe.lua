@@ -95,7 +95,6 @@ function unilib.pkg.admin_tool_hoe.init()
 
     return {
         description = "Admin hoe",
-
         notes = "A hoe that can remove turf over a wide area. Use by punching a dirt-with-turf" ..
                 " node, or \"throw\" the tool by punching the air above it",
     }

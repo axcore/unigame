@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_grass_frozen.init()
 
     return {
         description = "Frozen grass as decoration",
-        depends = {"dirt_ordinary", "grass_frozen"},
+        depends = {"dirt_ordinary_with_cover_snow", "grass_frozen"},
         at_least_one = {
             "biome_farlands_icesheet",
             "biome_farlands_taiga",

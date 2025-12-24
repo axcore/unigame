@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_puffed.init()
 
     return {
         description = "Puffed mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_puffed"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_puffed",
+        },
     }
 
 end

@@ -330,9 +330,9 @@ end
 -- Callbacks
 ---------------------------------------------------------------------------------------------------
 
-function unilib.calendars._on_receive_fields(player, formname, fields, full_name)
+function unilib.calendars._on_receive_fields(player, formname, fields)
 
-    if formname ~= full_name or not player:is_player() then
+    if formname ~= "unilib:form_shared_calendars" or not player:is_player() then
         return
     end
 
@@ -357,7 +357,10 @@ function unilib.calendars._on_receive_fields(player, formname, fields, full_name
 
         if fields["day_" .. i] ~= nil then
 
-            core.show_formspec(pname, full_name, unilib.calendars.get_day_formspec(pname, i))
+            core.show_formspec(
+                pname, "unilib:form_shared_calendars", unilib.calendars.get_day_formspec(pname, i)
+            )
+
             return
 
         end
@@ -397,7 +400,9 @@ function unilib.calendars._on_receive_fields(player, formname, fields, full_name
     end
 
     core.show_formspec(
-        pname, full_name, unilib.calendars.get_month_formspec(pname, year, month, nil)
+        pname,
+        "unilib:form_shared_calendars",
+        unilib.calendars.get_month_formspec(pname, year, month, nil)
     )
 
 end
@@ -807,7 +812,7 @@ function unilib.calendars._get_month_formspec(pname, year, month, day)
             end
 
             formspec = formspec .. "tooltip[" .. (x + grid_gap) .. "," .. (y + 1) .. ";1,1;" ..
-                    F(combi_msg) .. "]"
+                    combi_msg .. "]"
 
         end
 
@@ -1043,7 +1048,8 @@ function unilib.calendars._format_date(
 
     else
 
-        date_string = string.gsub(date_string, "%%T", "")
+        -- N.B. No time being displayed, the leading space character must also be removed
+        date_string = string.gsub(date_string, " %%T", "")
 
     end
 

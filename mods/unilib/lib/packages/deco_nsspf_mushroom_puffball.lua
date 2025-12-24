@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_puffball.init()
 
     return {
         description = "Puffball mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_puffball"},
+        depends = "mushroom_puffball",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

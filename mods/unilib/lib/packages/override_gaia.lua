@@ -42,9 +42,9 @@ function unilib.pkg.override_gaia.init()
     unilib.super_dirt_set = super_dirt_set
 
     return {
-        description = "Override package for the \"gaia\" remix",
-        notes = "This is an optional addition to the \"gaia\" remix, automatically overriding" ..
-                " some Minetest settings to produce a customised player experience",
+        description = "Override package for \"gaia\"-compatible remixes",
+        notes = "This is an optional addition \"gaia\"-compatible remixes, automatically" ..
+                " overriding some Minetest settings to produce a customised player experience",
     }
 
 end

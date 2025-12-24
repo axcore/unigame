@@ -19,8 +19,17 @@ function unilib.pkg.deco_default_tree_pine.init()
 
     return {
         description = "Pine tree as decoration",
-        depends = {"dirt_ordinary", "tree_pine"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_taiga"},
+        depends = "tree_pine",
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
+            },
+        },
     }
 
 end
@@ -34,8 +43,8 @@ function unilib.pkg.deco_default_tree_pine.post()
             -- Completes decoration in package "tree_pine"
             biomes = {"default_forest_coniferous", "default_taiga"},
             place_on = {
-                "unilib:dirt_ordinary_with_litter_coniferous",
                 "unilib:dirt_ordinary_with_cover_snow",
+                "unilib:dirt_ordinary_with_litter_coniferous",
             },
             y_max = unilib.constant.y_max,
             y_min = 4,

@@ -47,7 +47,6 @@ mushroom_gyromitra|herbs
 mushroom_macrolepiota|herbs
 
 # supporting packages (.depends)
-dirt_ordinary|default farming moreblocks
 
 # supporting packages (.at_least_one)
 biome_default_forest_coniferous|default
@@ -56,12 +55,12 @@ biome_default_grassland|default
 biome_default_rainforest|default
 biome_default_savanna|default
 biome_ethereal_mountain|ethereal
-dirt_dry|default
+dirt_dry_with_turf_dry|default
+dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 
 # supporting packages (.optional)
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
-#soil_ordinary|farming
 
 # supporting packages (.suggested)

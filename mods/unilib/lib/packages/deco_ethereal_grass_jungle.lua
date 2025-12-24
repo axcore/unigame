@@ -19,11 +19,17 @@ function unilib.pkg.deco_ethereal_grass_jungle.init()
 
     return {
         description = "Jungle grass as decoration",
-        depends = {"dirt_ordinary", "grass_jungle"},
+        depends = "grass_jungle",
         at_least_one = {
-            "biome_ethereal_jumble",
-            "biome_ethereal_rainforest",
-            "biome_ethereal_swamp",
+            {
+                "biome_ethereal_jumble",
+                "biome_ethereal_rainforest",
+                "biome_ethereal_swamp",
+            },
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 
@@ -31,7 +37,8 @@ end
 
 function unilib.pkg.deco_ethereal_grass_jungle.exec()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_rainforest"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_rainforest"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_rainforest"] ~= nil then
 
         unilib.register_decoration_generic("ethereal_grass_jungle_1", {
             -- From ethereal-ng/decor.lua
@@ -44,7 +51,8 @@ function unilib.pkg.deco_ethereal_grass_jungle.exec()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_jumble"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_jumble"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_generic("ethereal_grass_jungle_2", {
             -- From ethereal-ng/decor.lua
@@ -57,7 +65,8 @@ function unilib.pkg.deco_ethereal_grass_jungle.exec()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_generic("ethereal_grass_jungle_3", {
             -- From ethereal-ng/decor.lua
@@ -74,7 +83,8 @@ end
 
 function unilib.pkg.deco_ethereal_grass_jungle.post()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_rainforest"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_rainforest"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_litter_rainforest"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_grass_jungle_1", nil, {
             -- From ethereal-ng/decor.lua
@@ -86,7 +96,8 @@ function unilib.pkg.deco_ethereal_grass_jungle.post()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_jumble"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_jumble"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_grass_jungle_2", nil, {
             -- From ethereal-ng/decor.lua
@@ -98,7 +109,8 @@ function unilib.pkg.deco_ethereal_grass_jungle.post()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_grass_jungle_3", nil, {
             -- From ethereal-ng/decor.lua

@@ -109,10 +109,11 @@ dirt_clayey|valleys_c
 dirt_coarse|farlands
 dirt_dark|darkage
 dirt_dried|ethereal
-#dirt_dry|default
+#dirt_dry|default farming
 dirt_mud_dry|darkage
 #dirt_mud_swamp|30biomes
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
 #dirt_ordinary_with_turf_grey|ethereal
 dirt_parched|farlands
 dirt_peat_with_oil_crude|pfaa
@@ -353,6 +354,9 @@ shared_bakedclay|bakedclay
 shared_farlands_fruit|unilib
 snow_ordinary|default ethereal mtg_plus
 #soil_arid|farming
+soil_black|unilib
+soil_brown|unilib
+soil_dark|unilib
 soil_ordinary|farming
 stone_andesite_grey|glemr4
 stone_basalt_brown|material mineral
@@ -524,7 +528,7 @@ ore_gaia|badlands darkage default glemr4 moreores technic underch unilib
 # supporting packages (.depends)
 dye_basic|dye bakedclay
 fruit_apple|default
-#fruit_banana|ethereal
+fruit_banana|ethereal
 fruit_blueberry_ordinary|default
 fruit_coconut_exotic|farlands
 fruit_mango_exotic|farlands
@@ -534,8 +538,8 @@ ingredient_cone_cedar|moretrees
 ingredient_cone_spruce|moretrees
 ingredient_cone_spruce_mature|glemr4
 item_string_ordinary|farming
-#liquid_lava_ordinary|default
-#liquid_water_ordinary|default
+liquid_lava_ordinary|default
+liquid_water_ordinary|default
 metal_chromium|glemr11 technic_worldgen technic
 metal_copper|default glemr11 moreblocks technic
 metal_gold|default glemr11 technic
@@ -552,10 +556,10 @@ mineral_mese|default glemr11
 mineral_sulphur|technic_worldgen technic
 misc_butterfly|butterflies
 misc_firefly|fireflies
-#shared_ethereal_fish|ethereal
+shared_ethereal_fish|ethereal
 shared_moretrees|moretrees
 soil_sand_desert|farming
-#stone_ordinary|default moreblocks technic
+stone_ordinary|default moreblocks technic
 stone_ordinary_with_coal|default
 stone_ordinary_with_copper|default
 stone_ordinary_with_diamond|default
@@ -567,14 +571,17 @@ stone_ordinary_with_tin|default
 vine_jungle_knotted|glemr4
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 
 # supporting packages (.optional)
 #abm_farlands_bushes_trees|unilib
 #brick_ordinary|default
 #bucket_steel|bucket
 #container_chest_ordinary|default
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #dirt_ordinary_with_turf_bamboo|ethereal
+#dirt_ordinary_with_turf_dry|default farming
 #dirt_ordinary_with_turf_grey|ethereal
 #dirt_ordinary_with_turf_grove|ethereal
 #gravel_sandstone_ordinary|unilib

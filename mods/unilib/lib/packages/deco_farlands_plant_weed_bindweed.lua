@@ -19,7 +19,11 @@ function unilib.pkg.deco_farlands_plant_weed_bindweed.init()
 
     return {
         description = "Bindweed as decoration",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "plant_weed_bindweed"},
+        depends = {
+            "biome_farlands_forest_deciduous",
+            "dirt_ordinary_with_turf",
+            "plant_weed_bindweed",
+        },
     }
 
 end

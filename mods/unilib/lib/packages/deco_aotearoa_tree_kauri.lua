@@ -19,7 +19,7 @@ function unilib.pkg.deco_aotearoa_tree_kauri.init()
 
     return {
         description = "Kauri tree as decoration",
-        depends = {"biome_aotearoa_lowland", "dirt_antipodean", "tree_kauri"},
+        depends = {"biome_aotearoa_lowland", "dirt_ordinary_with_litter_dry", "tree_kauri"},
     }
 
 end

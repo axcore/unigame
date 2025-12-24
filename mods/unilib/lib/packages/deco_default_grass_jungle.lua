@@ -19,7 +19,11 @@ function unilib.pkg.deco_default_grass_jungle.init()
 
     return {
         description = "Jungle grass as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "grass_jungle"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "grass_jungle",
+        },
     }
 
 end

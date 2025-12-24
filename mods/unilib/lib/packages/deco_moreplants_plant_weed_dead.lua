@@ -19,7 +19,12 @@ function unilib.pkg.deco_moreplants_plant_weed_dead.init()
 
     return {
         description = "Dead weed as decoration",
-        depends = {"biome_default_taiga", "dirt_ordinary", "plant_weed_dead", "snow_ordinary"},
+        depends = {
+            "biome_default_taiga",
+            "dirt_ordinary_with_cover_snow",
+            "plant_weed_dead",
+            "snow_ordinary",
+        },
     }
 
 end

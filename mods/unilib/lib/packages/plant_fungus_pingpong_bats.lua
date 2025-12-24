@@ -19,7 +19,7 @@ function unilib.pkg.plant_fungus_pingpong_bats.init()
 
     return {
         description = "Little ping-pong bats fungus",
-        depends = {"shared_nsspf", "tree_apple"},
+        depends = "shared_nsspf",
     }
 
 end
@@ -140,14 +140,6 @@ function unilib.pkg.plant_fungus_pingpong_bats.exec()
             on_use = unilib.cuisine.eat_on_use("unilib:plant_fungus_pingpong_bats_glowing", -2),
         }
     )
-
-    unilib.pkg.shared_nsspf.register_fungus({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_apple_trunk",
-        plant_name = "unilib:plant_fungus_pingpong_bats",
-
-        surface_list = {"unilib:dirt_ordinary_with_turf"},
-    })
 
     -- (This fungus glows at night)
     unilib.pkg.shared_nsspf.register_glowing("unilib:plant_fungus_pingpong_bats")

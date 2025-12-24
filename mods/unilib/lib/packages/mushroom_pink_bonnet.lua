@@ -19,7 +19,6 @@ function unilib.pkg.mushroom_pink_bonnet.init()
 
     return {
         description = "Pink bonnet mushroom",
-        depends = "tree_jungle",
     }
 
 end
@@ -98,11 +97,5 @@ function unilib.pkg.mushroom_pink_bonnet.exec()
         recipe = "unilib:mushroom_pink_bonnet",
         cooktime = 10,
     })
-
-    -- (This mushroom grows on the top surface of a jungle tree trunk)
-    unilib.pkg.shared_nsspf.register_special(
-        "unilib:mushroom_pink_bonnet",
-        "unilib:tree_jungle_trunk"
-    )
 
 end

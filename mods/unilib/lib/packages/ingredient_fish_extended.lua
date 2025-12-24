@@ -19,8 +19,8 @@ function unilib.pkg.ingredient_fish_extended.init()
 
     return {
         description = "Extended raw fish set",
-        depends = "shared_ethereal_fish",
         notes = "Extends the \"ingredient_fish_basic\" package, providing 25 additional raw fish",
+        depends = "shared_ethereal_fish",
     }
 
 end
@@ -59,13 +59,22 @@ function unilib.pkg.ingredient_fish_extended.exec()
     -- Register fish
     for _, mini_list in ipairs(fish_list) do
 
+        local part_name = mini_list[1]
+        local glow_flag = false
+        if part_name == "tetra_blind" then
+            glow_flag = true
+        end
+
         unilib.pkg.shared_ethereal_fish.register_fish({
-            part_name = mini_list[1],
+            part_name = part_name,
             description = mini_list[2],
             tastiness = mini_list[4],
 
             orig_name = nil,
             biome_part_name = mini_list[5],
+            -- N.B. No .glow_flag or .rarity in original code
+            glow_flag = glow_flag,
+            rarity = 1,
             sci_name = mini_list[3],
         })
 

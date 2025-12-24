@@ -184,8 +184,8 @@ local function check_deco(data_table)
     -- Checks one of the values in unilib.global.deco_csv_setup_list (representing a decoration that
     --      hasn't been created yet) for validity
 
-     -- (Don't act on decorations provides by other remixes)
-    if data_table.remix_name ~= "glemr11" then
+     -- (Don't act on decorations provides by incompatible remixes)
+    if data_table.remix_name ~= unilib.pkg.biome_glemr11.remix_name then
         return false
     end
 
@@ -267,9 +267,9 @@ end
 function unilib.pkg.deco_glemr11.init()
 
     return {
-        description = "Decorations from GLEMr11",
-        notes = "This package should be used with the corresponding remix, as it assumes that" ..
-                " packages specified by the remix have been loaded",
+        description = "Decorations for \"glemr11\"-compatible remixes",
+        notes = "This package should only be used with \"glemr11\"-compatible remixes, as it" ..
+                " assumes that packages specified by those remixes have been loaded",
         depends = "biome_glemr11",
         -- A few lines in decorations.csv will generate errors when the replace_mode for
         --      minetest_game mods is "defer", because the corresponding packages won't have been

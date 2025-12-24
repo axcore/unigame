@@ -31,9 +31,10 @@ function unilib.pkg.chat_clear_food_history.exec()
         description = S("Clears your food history (if advanced cuisine is enabled)"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            local player = core.get_player_by_name(pname)
+            if not player then
                 return false, unilib.constant.chat_offline_msg
             end
 
@@ -43,7 +44,7 @@ function unilib.pkg.chat_clear_food_history.exec()
 
             else
 
-                unilib.cuisine.clear_history(core.get_player_by_name(name))
+                unilib.cuisine.clear_history(player)
                 return true, S("Food history has been cleared")
 
             end

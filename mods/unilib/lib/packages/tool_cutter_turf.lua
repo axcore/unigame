@@ -43,10 +43,8 @@ local function do_cut(itemstack, user, pointed_thing)
         local inv = user:get_inventory()
         inv:add_item("main", construction_name)
 
-        -- Chance of destroying dirt
-        -- N.B. In original code, was a 1 in 2 chance
-        local chance = math.random(1,2)
-        if chance == 1 then
+        -- 50% probability of destroying dirt
+        if math.random(1, 2) == 1 then
             core.set_node(pos, {name = "air"})
         else
             core.set_node(pos, {name = dirt_name})

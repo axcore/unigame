@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_cotton_ancient_wild.init()
 
     return {
         description = "Wild ancient cotton as decoration",
-        depends = {"dirt_ordinary", "plant_cotton_ancient_wild", "sand_desert"},
+        depends = {"dirt_ordinary_with_turf", "plant_cotton_ancient_wild", "sand_desert"},
     }
 
 end

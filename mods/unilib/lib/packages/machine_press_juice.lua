@@ -367,7 +367,7 @@ function unilib.pkg.machine_press_juice.exec()
                         meta_u:set_string("fullness", fullness)
                         meta_u:set_string(
                             "infotext",
-                            S("@1 % full of @2 juice.", (math.floor((fullness / 128) * 100)), fruit)
+                            S("@1% full of @2 juice.", (math.floor((fullness / 128) * 100)), fruit)
                         )
                         meta_u:set_string(
                             "formspec",
@@ -401,7 +401,7 @@ function unilib.pkg.machine_press_juice.exec()
                         meta_u:set_string("fullness", fullness)
                         meta_u:set_string(
                             "infotext",
-                            S("@1 % full of @2 juice.", (math.floor((fullness / 256) * 100)), fruit)
+                            S("@1% full of @2 juice.", (math.floor((fullness / 256) * 100)), fruit)
                         )
                         meta_u:set_string(
                             "formspec",

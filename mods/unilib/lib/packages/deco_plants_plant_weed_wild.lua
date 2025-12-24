@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_weed_wild.init()
 
     return {
         description = "Wild weed as decoration",
-        depends = {"dirt_ordinary", "plant_weed_wild"},
+        depends = {"dirt_ordinary_with_turf", "plant_weed_wild"},
     }
 
 end

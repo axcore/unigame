@@ -2,7 +2,9 @@
 
 # Unified Voxel Library for Minetest-compatible engines
 
-## Want to tinker? Download unilib [here](https://github.com/axcore/unilib).
+## Latest release: v1.1.0 (24 December 2025) (see recent [changes](CHANGES.txt))
+
+## Want to tinker? Download unilib [here](https://github.com/axcore/unilib)
 
 - **unilib** includes material from over 200 [Minetest](https://www.minetest.net/) mods and modpacks, reorganised as a single mod
 - None of this material is loaded automatically - it's up to you to choose what you want
@@ -11,8 +13,15 @@
 ## Want to play? Download unigame [here](https://github.com/axcore/unigame)
 
 - **unigame** is a traditional voxel game with many beautiful biomes and lots of stuff to collect
-- It includes [unilib](https://github.com/axcore/unilib), most of the core functions of [minetest_game](https://github.com/minetest/minetest_game), and much, much more besides
+- It includes [unilib](https://github.com/axcore/unilib), [unimobs](https://github.com/axcore/unimobs), most of the core functions of [minetest_game](https://github.com/minetest/minetest_game), and much, much more besides
 - Many optional features are turned **on** by default
+
+## Want more stuff? Add some expansion packs!
+
+- **unilib** expansion packs provide material that are not included in **unilib**, for one reason or another
+- The [unimobs](https://github.com/axcore/unimobs) pack provides dozens of creatures (and a few monsters)
+- The [unidrinks](https://github.com/axcore/unidrinks) pack (18+) provides various alcholic drinks
+- The [unitest](https://github.com/axcore/unitest) pack is an empty template for creating your own expansion packs
 
 ## unilib runs with (nearly) everything
 
@@ -27,7 +36,7 @@
 - For example, there is one package for sand, and another providing both stone and cobblestone
 - A *remix* is a list of packages
 - **unilib** provides a large selection of remixes, ready for you to use
-- If you can use a text editor, then you can create your own remixes!
+- If you can use a text editor or a spreadsheet, then you can create your own remixes!
 
 ## Tips for unigame players
 
@@ -42,12 +51,13 @@
     - Not all dirts can be used for farming
     - Most fruit trees regrow their fruits, so grab as much as you can!
     - Some kelps can be dried in a furnace, and then used as food
+    - Many creatures can be eaten, but watch out for the big, dangerous ones!
 - Different stones have different hardnesses
     - You might have to do some exploring before you can craft your first stone tools
     - Pebbles on the surface match the type of stone below the surface
     - A wooden pickaxe can't dig all kinds of stone, and is much slower than other picks
     - Some stones produce rubble, not cobblestone; rubble can't be used to make tools
-    - Most of the fun stuff is in the underground "biomes", which start about 200 metres below the surface
+    - There is lots of collectable stuff in the underground "biomes", which start about 200 metres below the surface
 - Torches burn out after a while
     - You should use some kind of lamp to illuminate your house
     - It's easier to see where you're going when you wield a torch
@@ -57,13 +67,28 @@
 - Stairs, carvings and walls exist, but are not visible in your crafting guide
     - Basic stairs and walls have traditional craft recipes
     - Other types of stairs and carvings can be made using machines
+- You now share your world with many different creatures
+    - Different creatures are tamed, bred, attracted or repelled using various different items
+    - Finding out which items to use with which creatures is a part of the game!
+    - To get started, try feeding some of the more common animals wheat, or maybe even a carrot or two
+    - Most creatures inherit the genetic traits of their parents
+    - Over many generations, you can use selective breeding to produce faster, stronger creatures
+    - Use a DNA Analyser to measure a creature's genetics
+    - Tamed creatures can be named by right-clicking them
+    - Some tamed creatures can be given orders
+    - Use a bestiary to help you identify unfamiliar creatures
+    - It's fun to collect as many animals as you can in a sketchbook
+    - Some monsters only spawn at certain times of the (real) year
+    - The [unimobs](https://github.com/axcore/unimobs) README describes each creature in detail
 - Brand new players should type /what in the chat window
-- If you want to load the mesecons or petz modpacks, see the compatibility notes in ../scripts/
 
-## This is an BETA release
+## This is a BETA release
 
-- **unilib** is fully playable, but has not been play tested
-- It contains no mobs, little industrialisation and only a few magical items
+- **unilib** is fully playable, but has not been thoroughly play-tested
+- **unilib** contains no mobs, little industrialisation and only a few magical items
+    - **unigame** includes the **unimobs** expansion pack, providing dozens of creatures
+    - **unilib** is compatible with popular mods such as [technic](https://github.com/minetest-mods/technic) and [mesecons](https://github.com/minetest-mods/mesecons)
+    - ...but note that **mesecons** must be patched, before use - see the compatibility notes in **../scripts/**
 - **unilib** is highly configurable (see the **Configuring unilib** section)
 - Future releases should be compatible with worlds you create now (within reason)
 - Minetest v5.6.0 (or later) is recommended
@@ -246,9 +271,37 @@ Usually, the order of packages doesn't matter. There are a couple of exceptions;
 
 **unilib's** built-in remixes contain, at the end of the **packages.csv** file, a list of package dependencies. This list is **optional** and **intended only for the convenience of remix writers**; when you start writing your own remixes, there is no need to list all the dependencies. Package dependencies are described in the next section.
 
-Some remixes contain other files, besides **packages.csv**. These additional files are ignored until some part of the code (usually a specific package) wants to read them. In many cases, the additional files can be edited by you, the player (but you'll have to read the package code first, so you can understand what it is you're editing.)
+Some remixes have names starting with an underline character, e.g. **_decorations_ORIGINAL.csv**. This shows a file that is for reference, not for loading. (This is merely a convention - your packages are free to read any CSV file they like.)
 
-## 1.10 Technical information about packages
+## 1.10 Optional remix files
+
+Every remix folder must contain a **packages.csv** file.
+
+Some remix folders contain other CSV files, which are available for any package to read. The following files are considered "standard", as they interact with **unilib**'s system code:
+
+- biomes.csv
+- constants.csv
+- decorations.csv
+- labels.csv
+- ore_blob.csv
+- ore_puff.csv
+- ore_scatter.csv
+- ore_sheet.csv
+- ore_stratum.csv
+- ore_vein.csv
+
+Most of these files are used to register biomes, decorations and ores, using text rather code.
+
+However, the **labels.csv** file has a different purpose. For example, data in the **gaia** remix is read by several packages (such as **biome_gaia**, **deco_gaia** and so on). Those same packages can read any other compatible remix - for example, the built-in **gaia_simple** remix, or a modified copy of the **gaia** remix you've made yourself.
+
+In this case, the definition of a "compatible" remix is any remix with the label **gaia**. You can label a remix by creating a **labels.csv** file in the remix folder. The file can contain one or more labels, in this case:
+
+        # Mark this remix as being compatible with packages, designed for the "gaia" remix
+        gaia
+
+Besides the "standard" CSV files, any remix may contain any number of custom CSV files (see the **atomic** remix for an example). These additional files are ignored until some part of the code (usually a specific package) wants to read them.
+
+## 1.11 Technical information about packages
 
 A package is defined as a **.lua** file inside **unilib**'s **../lib/packages/** folder (and a few other locations). The file is executed as [Lua](https://www.lua.org/) code.
 
@@ -281,7 +334,7 @@ Dependencies affect the order in which packages are executed. Specifically:
 - The **.exec()** function of all packages is called next; the order may be different, because if package A depends on package B, then package B is called first
 - The **.post()** function of all packages is called last, in the order specified by the remix
 
-## 1.11 Packages providing biomes, decorations and ores
+## 1.12 Packages providing biomes, decorations and ores
 
 Packages providing biomes, decorations and ores are named accordingly. Usually the package name includes the name of the original mod (because, for example, more than one mod creates a biome called **grassland**):
 
@@ -414,9 +467,9 @@ Shows the daily alarm you have set, if any.
 
 The following commands require the **unilib_admin** or **unilib_tool** privileges.
 
-        /show_biome
+        /display_biome
 
-Displays the biome at your character's location. Use this command to toggle the display on and off.
+Displays the biome at your character's location. Use this command to toggle the display on and off. If you just want to see the biome in the chat window, use /show_biome.
 
         /find_biome <biome>
         /find_biome
@@ -774,7 +827,8 @@ The turfing machine (**machine_turfing** package) is used to grow different turf
 - **deco_snow_flower_frozen**, **deco_snow_plant_shrub_frozen** packages: the flowers cannot yet be spawned in place of ordinary snow, due to engine limitations
 - The wielded light effect does not work underwater, either in unilib or in the original mod's code
 - **misc_butterfly** package: butterflies do not spawn at the same rate as they do in minetest_game for unknown reasons (but fireflies behave as expected)
-- Expansion packs such as [unitest](https://github.com/axcore/unilib) generate warnings in Minetest's debug.txt file; I haven't found a workaround for it yet
+- **FIXED** Expansion packs such as [unitest](https://github.com/axcore/unilib) generate warnings in Minetest's debug.txt file
+- Leaf decay does not work reliably for trees, when natural slopes are enabled (in settings)
 
 # 7 Credits
 

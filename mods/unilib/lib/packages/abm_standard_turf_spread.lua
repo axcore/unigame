@@ -59,9 +59,11 @@ function unilib.pkg.abm_standard_turf_spread.post()
                     return
                 end
 
-                -- Look for spreading_dirt_type neighbours, which are typically dirt-with-turf nodes
+                -- Look for "spreading_dirt" neighbours, which are typically unilib dirt-with-turf
+                --      nodes (not compatible with non-unilib nodes using the "spreading_dirt_type"
+                --      group)
                 -- Ignore a dirt-with-turf node of a different dirt type
-                local neighbour_pos = core.find_node_near(pos, 1, "group:spreading_dirt_type")
+                local neighbour_pos = core.find_node_near(pos, 1, "group:spreading_dirt")
                 if neighbour_pos then
 
                     local neighbour = core.get_node(neighbour_pos)
@@ -117,6 +119,69 @@ function unilib.pkg.abm_standard_turf_spread.post()
         unilib.register_obsolete_abm({
             mod_origin = "default",
             label = "Grass spread",
+        })
+
+    end
+
+    -- Dirts as natural slopes require a separate ABM
+    if unilib.setting.slopes_enable_flag then
+
+        unilib.register_abm({
+            label = "Sloped grass/turf spread [abm_standard_turf_spread]",
+            nodenames = "group:sloped_fertile_dirt",
+            neighbors = {
+                "air",
+                "group:grass",
+                "group:dry_grass",
+                "unilib:snow_ordinary",
+            },
+
+            catch_up = false,
+            chance = 50,
+            interval = 6 / unilib.setting.abm_spread_factor,
+
+            action = function(pos, node)
+
+                -- Check for darkness: night, shadow or under a light-blocking node
+                local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+                if (core.get_node_light(above) or 0) <
+                        unilib.constant.light_min_grow_sapling then
+                    return
+                end
+
+                -- Look for "spreading_dirt" neighbours, which are typically unilib dirt-with-turf
+                --      nodes (not compatible with non-unilib nodes using the "spreading_dirt_type"
+                --      group)
+                local neighbour_pos = core.find_node_near(pos, 1, "group:spreading_dirt")
+                if neighbour_pos then
+
+                    local neighbour = core.get_node(neighbour_pos)
+                    local shape_num = core.get_item_group(node.name, "natural_slope")
+                    local shape_list = unilib.slopes.get_all_shapes(neighbour.name)
+
+                    if #shape_list > 1 then
+                        core.set_node(pos, {name = shape_list[shape_num + 1], param2 = node.param2})
+                    else
+                        core.set_node(pos, {name = n3.name})
+                    end
+
+                    return
+
+                end
+
+                -- Otherwise, is there a turf seeder (e.g. dry grass or ordinary snow) just above?
+                --      If so, it seeds turf onto this dirt
+                local seeder_name = core.get_node(above).name
+                if unilib.global.turf_seeder_table[seeder_name] ~= nil and
+                        unilib.global.turf_seeder_table[seeder_name][node.name] ~= nil then
+
+                    core.set_node(
+                        pos, {name = unilib.global.turf_seeder_table[seeder_name][node.name]}
+                    )
+
+                end
+
+            end,
         })
 
     end

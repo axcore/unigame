@@ -19,7 +19,7 @@ function unilib.pkg.biome_australia_far_north_queensland.init()
 
     return {
         description = "Far North Queensland biome",
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end

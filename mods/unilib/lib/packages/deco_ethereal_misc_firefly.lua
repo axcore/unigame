@@ -30,6 +30,9 @@ function unilib.pkg.deco_ethereal_misc_firefly.init()
             },
             {
                 "dirt_ordinary",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
                 "dirt_ordinary_with_turf_prairie",
             },
         },

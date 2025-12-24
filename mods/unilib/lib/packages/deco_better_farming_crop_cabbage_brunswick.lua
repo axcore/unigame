@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_crop_cabbage_brunswick.init()
 
     return {
         description = "Brunswick cabbage as decoration",
-        depends = {"biome_default_forest_deciduous", "crop_cabbage_brunswick", "dirt_ordinary"},
+        depends = {
+            "biome_default_forest_deciduous",
+            "crop_cabbage_brunswick",
+            "dirt_ordinary_with_turf",
+        },
     }
 
 end

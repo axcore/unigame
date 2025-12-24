@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_larch.init()
 
     return {
         description = "Larch tree as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "tree_larch"},
+        depends = {
+            "biome_default_forest_coniferous",
+            "dirt_ordinary_with_litter_coniferous",
+            "tree_larch",
+        },
     }
 
 end

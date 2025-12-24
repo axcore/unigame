@@ -44,8 +44,8 @@ function unilib.pkg.deco_aotearoa_tree_rimu.post()
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_beech",
                 "unilib:dirt_antipodean_dark_with_litter_wet",
-                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_antipodean_with_moss",
+                "unilib:dirt_ordinary_with_litter_dry",
             },
             y_max = 80,
             y_min = 12,

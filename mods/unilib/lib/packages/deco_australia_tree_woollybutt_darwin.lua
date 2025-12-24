@@ -26,7 +26,8 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.init()
             "biome_australia_gulf_of_carpentaria",
             "biome_australia_kimberley",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_dry",
             "dirt_red_antipodean",
         },
     }
@@ -37,7 +38,7 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.post()
 
     if unilib.global.pkg_executed_table["biome_australia_arnhem_land"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -49,8 +50,8 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.post()
                 {
                     biomes = "australia_arnhem_land",
                     place_on = {
-                        "unilib:dirt_ordinary_with_turf",
                         "unilib:dirt_antipodean_with_turf_arnhem_land",
+                        "unilib:dirt_ordinary_with_turf",
                     },
                     y_max = 35,
                     y_min = 8,
@@ -62,7 +63,7 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_gulf_of_carpentaria"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -107,7 +108,7 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_far_north_queensland"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -119,8 +120,8 @@ function unilib.pkg.deco_australia_tree_woollybutt_darwin.post()
                 {
                     biomes = "australia_far_north_queensland",
                     place_on = {
-                        "unilib:dirt_ordinary_with_turf",
                         "unilib:dirt_antipodean_with_turf_far_north_queensland",
+                        "unilib:dirt_ordinary_with_turf",
                     },
                     y_max = 35,
                     y_min = 25,

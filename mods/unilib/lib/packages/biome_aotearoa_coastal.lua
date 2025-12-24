@@ -21,7 +21,9 @@ function unilib.pkg.biome_aotearoa_coastal.init()
         description = "Aotearoa coastal forest biomes",
         depends = {
             "clay_ordinary",
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_dry",
             "gravel_ordinary_with_algae",
             "liquid_water_river",
             "sand_river",

@@ -19,7 +19,7 @@ function unilib.pkg.deco_snow_plant_shrub_frozen.init()
 
     return {
         description = "Frozen shrub as decoration",
-        depends = {"dirt_ordinary", "plant_shrub_frozen"},
+        depends = {"dirt_ordinary_with_cover_snow", "plant_shrub_frozen"},
         at_least_one = {"biome_snow_forest", "biome_snow_lush", "biome_snow_normal"},
     }
 

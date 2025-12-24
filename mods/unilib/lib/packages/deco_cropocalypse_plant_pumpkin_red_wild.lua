@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_plant_pumpkin_red_wild.init()
 
     return {
         description = "Wild red pumpkin plant as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "plant_pumpkin_red_wild"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "plant_pumpkin_red_wild"},
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.biome_ethereal_grassy.init()
 
     return {
         description = "Grassy biomes",
-        depends = {"dirt_ordinary", "sand_ordinary", "stone_ordinary"},
+        depends = {"dirt_ordinary", "dirt_ordinary_with_turf", "sand_ordinary", "stone_ordinary"},
     }
 
 end

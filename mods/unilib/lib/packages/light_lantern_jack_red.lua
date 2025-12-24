@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 function unilib.pkg.light_lantern_jack_red.init()
 
     return {
-        description = "Red Jack 'O Lantern",
+        description = "Red Jack-o'-lantern",
         depends = {"plant_pumpkin_red_wild", "torch_ordinary"},
     }
 
@@ -28,7 +28,7 @@ function unilib.pkg.light_lantern_jack_red.exec()
 
     unilib.register_node("unilib:light_lantern_jack_red_off", "cropocalypse:carved_pumpkin", mode, {
         -- From cropocalypse:carved_pumpkin
-        description = unilib.utils.hint(S("Red Jack 'O Lantern"), S("punch to turn on and off")),
+        description = unilib.utils.hint(S("Red Jack-o'-lantern"), S("punch to turn on and off")),
         tiles = {
             "unilib_plant_pumpkin_red_wild_top.png",
             "unilib_plant_pumpkin_red_wild_bottom.png",
@@ -74,7 +74,7 @@ function unilib.pkg.light_lantern_jack_red.exec()
 
     unilib.register_node("unilib:light_lantern_jack_red_on", "cropocalypse:jack_olantern", mode, {
         -- From cropocalypse:jack_olantern
-        description = S("Red Jack O'Lantern"),
+        description = S("Red Jack-o'-lantern"),
         tiles = {
             "unilib_plant_pumpkin_red_wild_top.png",
             "unilib_plant_pumpkin_red_wild_bottom.png",

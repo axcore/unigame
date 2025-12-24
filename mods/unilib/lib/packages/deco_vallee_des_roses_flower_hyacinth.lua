@@ -19,11 +19,18 @@ function unilib.pkg.deco_vallee_des_roses_flower_hyacinth.init()
 
     return {
         description = "Hyacinth as decoration",
-        depends = {"dirt_ordinary", "flower_hyacinth"},
+        depends = "flower_hyacinth",
         at_least_one = {
-            "biome_default_grassland",
-            "biome_default_grassland_snowy",
-            "biome_default_taiga",
+            {
+                "biome_default_grassland",
+                "biome_default_grassland_snowy",
+                "biome_default_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 
@@ -36,8 +43,8 @@ function unilib.pkg.deco_vallee_des_roses_flower_hyacinth.post()
         -- Completes decoration in package "flower_hyacinth"
         biomes = {"default_grassland", "default_grassland_snowy", "default_taiga"},
         place_on = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_turf",
         },
         y_max = 200,

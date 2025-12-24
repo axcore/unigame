@@ -19,7 +19,11 @@ function unilib.pkg.deco_default_fern_ordinary.init()
 
     return {
         description = "Ordinary fern as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "fern_ordinary"},
+        depends = {
+            "biome_default_forest_coniferous",
+            "dirt_ordinary_with_litter_coniferous",
+            "fern_ordinary",
+        },
     }
 
 end

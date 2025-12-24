@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_crop_sunflower_giant.init()
     return {
         description = "Giant sunflower as decoration",
         depends = "crop_sunflower_giant",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_prairie"},
     }
 
 end

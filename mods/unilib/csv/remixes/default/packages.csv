@@ -75,8 +75,14 @@ deco_default_tree_jungle_log|default
 deco_default_tree_pine|default
 deco_default_tree_pine_log|default
 # Dirt
-dirt_dry|default
+dirt_dry|default farming
+dirt_dry_with_turf_dry|default
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 dirt_permafrost_ordinary|default
 # Ferns
 fern_ordinary|default
@@ -161,6 +167,7 @@ sand_ordinary|default
 sand_silver|default
 # Shared packages
 shared_boats|boats
+shared_default_book|default
 shared_default_chest|default pipeworks
 shared_default_furnace|default
 shared_default_sign|default

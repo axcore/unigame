@@ -19,7 +19,7 @@ function unilib.pkg.deco_snow_flower_frozen.init()
 
     return {
         description = "Frozen flowers as decorations",
-        depends = "flower_frozen",
+        depends = {"dirt_ordinary_with_cover_snow", "flower_frozen"},
         at_least_one = {"biome_snow_lush", "biome_snow_normal"},
     }
 

@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_coral.init()
 
     return {
-        description = "Coral for the \"gaia\" remix",
+        description = "Coral for \"gaia\"-compatible remixes",
         notes = "Based on \"deco_glemr11\" (just the coral reefs)",
         depends = "biome_gaia",
         optional = {

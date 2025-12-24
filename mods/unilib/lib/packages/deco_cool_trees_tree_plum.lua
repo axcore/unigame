@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_plum.init()
 
     return {
         description = "Plum tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_plum"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_plum"},
     }
 
 end

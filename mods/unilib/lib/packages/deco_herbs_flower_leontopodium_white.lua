@@ -19,8 +19,18 @@ function unilib.pkg.deco_herbs_flower_leontopodium_white.init()
 
     return {
         description = "White leontopodium as decoration",
-        depends = {"dirt_ordinary", "flower_leontopodium_white"},
-        at_least_one = {"biome_default_grassland", "biome_ethereal_mountain"},
+        depends = "flower_leontopodium_white",
+        at_least_one = {
+            {
+                "biome_default_grassland",
+                "biome_ethereal_mountain",
+            },
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

@@ -12,20 +12,29 @@ local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.unilib.add_mode
 
 ---------------------------------------------------------------------------------------------------
--- Local function
+-- Local functions
 ---------------------------------------------------------------------------------------------------
 
 local function use_tool(itemstack, user, pointed_thing)
 
-    local pos = core.get_pointed_thing_position(pointed_thing)
-    local node = core.get_node(pos)
 
     -- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     -- =                                ADD YOUR CODE HERE
     -- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+
+
+
+--  local pos = core.get_pointed_thing_position(pointed_thing)
+--  local node = core.get_node(pos)
 --  unilib.utils.log(node.name .. ", x: " .. pos.x .. " y: " .. pos.y .. " z: " .. pos.z)
 
+    unilib.utils.log(
+        S(
+            "This tool will do nothing, until you have added some test code to the" ..
+                " \"admin_tool_tester_general\" package"
+        )
+    )
 
 
 

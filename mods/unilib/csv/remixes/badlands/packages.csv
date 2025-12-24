@@ -22,7 +22,7 @@ shared_bakedclay|bakedclay
 stone_ordinary|default moreblocks technic
 stone_ordinary_with_gold|default
 
-# supporting packages (.at_least_one)
+## supporting packages (.at_least_one)
 clay_brown|underch
 clay_ordinary|default
 dirt_ordinary|default farming moreblocks

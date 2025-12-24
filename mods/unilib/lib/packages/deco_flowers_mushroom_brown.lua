@@ -19,10 +19,16 @@ function unilib.pkg.deco_flowers_mushroom_brown.init()
 
     return {
         description = "Brown mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_brown"},
+        depends = "mushroom_brown",
         at_least_one = {
-            "biome_default_forest_coniferous",
-            "biome_default_forest_deciduous",
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_forest_deciduous",
+            },
+            {
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

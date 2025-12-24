@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_maple_red.init()
 
     return {
         description = "Red maple tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_maple_red"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_maple_red"},
     }
 
 end

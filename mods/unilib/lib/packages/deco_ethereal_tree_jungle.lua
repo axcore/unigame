@@ -21,7 +21,7 @@ function unilib.pkg.deco_ethereal_tree_jungle.init()
         description = "Alternative jungle tree decoration from ethereal-ng",
         depends = {
             "biome_ethereal_rainforest",
-            "dirt_ordinary_with_turf_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
             "tree_jungle",
         },
     }

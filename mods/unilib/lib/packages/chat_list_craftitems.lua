@@ -44,7 +44,7 @@ local function do_list_craftitems(pname, param)
         elseif not_flag then
 
             return false, S(
-                "No craftitems are registered for mods other than the  \"@1\" mod", param
+                "No craftitems are registered for mods other than the \"@1\" mod", param
             )
 
         else
@@ -117,8 +117,8 @@ function unilib.pkg.chat_list_craftitems.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_craftitems(name, param)
+        func = function(pname, param)
+            return do_list_craftitems(pname, param)
         end,
     })
 
@@ -129,8 +129,8 @@ function unilib.pkg.chat_list_craftitems.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_craftitems(name, param)
+        func = function(pname, param)
+            return do_list_craftitems(pname, param)
         end,
     })
 

@@ -97,8 +97,8 @@ function unilib.pkg.chat_dump_lbm.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_lbm(name, param)
+        func = function(pname, param)
+            return do_dump_lbm(pname, param)
         end,
     })
 

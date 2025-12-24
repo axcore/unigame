@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_produce_jute.init()
 
     return {
         description = "Jute as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "produce_jute"},
+        depends = {
+            "biome_default_forest_coniferous",
+            "dirt_ordinary_with_litter_coniferous",
+            "produce_jute",
+        },
     }
 
 end

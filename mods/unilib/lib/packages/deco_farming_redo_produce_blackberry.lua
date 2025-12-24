@@ -19,7 +19,7 @@ function unilib.pkg.deco_farming_redo_produce_blackberry.init()
 
     return {
         description = "Wild blackberries as decoration",
-        depends = {"dirt_ordinary", "produce_blackberry"},
+        depends = {"dirt_ordinary_with_turf", "produce_blackberry"},
     }
 
 end

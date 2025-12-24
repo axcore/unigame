@@ -19,7 +19,7 @@ function unilib.pkg.deco_flowers_flower_viola_purple.init()
 
     return {
         description = "Purple viola as decoration",
-        depends = {"dirt_ordinary", "flower_viola_purple"},
+        depends = {"dirt_ordinary_with_turf", "flower_viola_purple"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

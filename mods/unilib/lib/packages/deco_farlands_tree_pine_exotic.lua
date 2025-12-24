@@ -23,8 +23,9 @@ function unilib.pkg.deco_farlands_tree_pine_exotic.init()
         optional = {
             "biome_farlands_taiga".
             "dirt_coarse",
-            "dirt_ordinary",
+            "dirt_ordinary_with_cover_snow",
             "dirt_ordinary_with_litter_leafy",
+            "dirt_ordinary_with_turf",
             "mushroom_red",
         },
     }
@@ -33,8 +34,8 @@ end
 
 function unilib.pkg.deco_farlands_tree_pine_exotic.post()
 
-    if unilib.global.pkg_executed_table["biome_farlands_taiga"] ~= nil and
-            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_complete("farlands_tree_pine_exotic_1", nil, {
             -- From farlands, mapgen/mapgen.lua, ../default/schematics/pine_tree.mts
@@ -75,8 +76,11 @@ function unilib.pkg.deco_farlands_tree_pine_exotic.post()
         end
 
         if unilib.global.pkg_executed_table["biome_farlands_taiga"] ~= nil and
-                unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil and
-                unilib.global.pkg_executed_table["mushroom_red"] ~= nil
+                unilib.global.pkg_executed_table["mushroom_red"] ~= nil and (
+                    unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil or
+                    unilib.global.pkg_executed_table["dirt_ordinary_with_litter_leafy"] ~= nil or
+                    unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
+                ) then
 
             unilib.register_decoration_complete("farlands_tree_pine_exotic_log", nil, {
                 -- From farlands, mapgen/mapgen.lua (schematic in code)

@@ -33,7 +33,7 @@ function unilib.pkg.chat_convert.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             local count = 0
 
@@ -45,7 +45,8 @@ function unilib.pkg.chat_convert.exec()
 
                     match_flag = true
                     unilib.utils.chat_send_player(
-                        name, "[node] " .. param .. " > " .. unilib.global.node_convert_table[param]
+                        pname,
+                        "[node] " .. param .. " > " .. unilib.global.node_convert_table[param]
                     )
 
                 end
@@ -54,7 +55,7 @@ function unilib.pkg.chat_convert.exec()
 
                     match_flag = true
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         "[craftitem] " .. param .. " > " ..
                                 unilib.global.craftitem_convert_table[param]
                     )
@@ -65,7 +66,8 @@ function unilib.pkg.chat_convert.exec()
 
                     match_flag = true
                     unilib.utils.chat_send_player(
-                        name, "[tool] " .. param .. " > " .. unilib.global.tool_convert_table[param]
+                        pname,
+                        "[tool] " .. param .. " > " .. unilib.global.tool_convert_table[param]
                     )
 
                 end
@@ -76,7 +78,9 @@ function unilib.pkg.chat_convert.exec()
 
             else
 
-                unilib.utils.chat_send_player(name, S("Original and unilib nodes/craftitems/tools"))
+                unilib.utils.chat_send_player(
+                    pname, S("Original and unilib nodes/craftitems/tools")
+                )
 
                 local node_list = {}
                 for k, v in pairs(unilib.global.node_convert_table) do
@@ -87,7 +91,7 @@ function unilib.pkg.chat_convert.exec()
                 for _, full_name in ipairs(node_list) do
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         "   [node] " .. full_name .. " > " ..
                                 unilib.global.node_convert_table[full_name]
                     )
@@ -105,7 +109,7 @@ function unilib.pkg.chat_convert.exec()
                 for _, full_name in ipairs(craftitem_list) do
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         "   [craftitem] " .. full_name .. " > " ..
                         unilib.global.craftitem_convert_table[full_name]
                     )
@@ -123,7 +127,7 @@ function unilib.pkg.chat_convert.exec()
                 for _, full_name in ipairs(tool_list) do
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         "   [tool] " .. full_name .. " > " ..
                                 unilib.global.tool_convert_table[full_name]
                     )
@@ -132,7 +136,7 @@ function unilib.pkg.chat_convert.exec()
 
                 end
 
-                unilib.utils.chat_send_player(name, S("End of list (items found: @1)", count))
+                unilib.utils.chat_send_player(pname, S("End of list (items found: @1)", count))
 
             end
 

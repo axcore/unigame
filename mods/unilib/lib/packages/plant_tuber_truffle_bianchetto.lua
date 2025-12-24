@@ -19,7 +19,7 @@ function unilib.pkg.plant_tuber_truffle_bianchetto.init()
 
     return {
         description = "Bianchetto truffle",
-        depends = {"dirt_ordinary", "shared_nsspf", "tree_aspen"},
+        depends = "shared_nsspf",
     }
 
 end
@@ -30,10 +30,8 @@ function unilib.pkg.plant_tuber_truffle_bianchetto.exec()
         -- Code original to unilib, replacing an ABM in the original code. From
         --      nsspf:tuber_borchii, creates unilib:plant_tuber_truffle_bianchetto and
         --      unilib:dirt_ordinary_with_mycelium_bianchetto
-        wall_name = "unilib:tree_aspen_trunk",
         part_name = "bianchetto",
         orig_name = "nsspf:tuber_borchii",
-        surface_list = {"unilib:dirt_ordinary_with_turf"},
 
         replace_mode = mode,
         description = S("Bianchetto Truffle"),

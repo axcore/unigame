@@ -21,12 +21,17 @@ function unilib.pkg.deco_aotearoa_tree_kowhai.init()
         description = "Kowhai tree as decoration",
         depends = "tree_kowhai",
         at_least_one = {
-            {"biome_aotearoa_coastal", "biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
+            {
+                "biome_aotearoa_coastal",
+                "biome_aotearoa_lowland",
+                "biome_aotearoa_scrubland",
+            },
             {
                 "dirt_antipodean",
                 "dirt_custom_antipodean",
                 "dirt_mud_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
                 "gravel_ordinary",
                 "gravel_ordinary_with_algae",
                 "liquid_water_river",

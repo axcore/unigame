@@ -169,7 +169,7 @@ local function use_rod(itemstack, player, pointed_thing)
         local obj = core.add_entity(pos, "unilib:entity_fishing_bob")
 
         obj:set_velocity({x = dir.x * 8, y = dir.y * 8, z = dir.z * 8})
-        obj:set_acceleration({x = dir.x * -3, y = (unilib.constant.gravity * -1), z = dir.z * -3})
+        obj:set_acceleration({x = dir.x * -3, y = unilib.constant.gravity, z = dir.z * -3})
         obj:get_luaentity().fisher = player and player:get_player_name()
 
     end

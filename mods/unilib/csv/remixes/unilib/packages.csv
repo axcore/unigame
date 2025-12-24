@@ -1,12 +1,12 @@
 # "unilib" remix - contains mostpackages which are original to unilib, and which typically do not
-#       appear in other remixes
+#   appear in other remixes
 # Note that some packages are listed here but commented out, despite being original to unilib
-#       (usually because they belong to a different remix)
+#   (usually because they belong to a different remix)
 #
 # For a list of packages providing chat commands, see the "chat" remix (those packages are NOT
-#       included in this remix)
+#   included in this remix)
 # For a list of packages providing all 118 chemical elements, use the "elements" remix (those
-#       packages ARE included in this remix)
+#   packages ARE included in this remix)
 
 # node_name | original_mod
 
@@ -384,6 +384,11 @@ sand_volcanic_glass|unilib
 shared_atomic|unilib
 shared_calendars|unilib
 #shared_farlands_fruit|unilib
+#soil_antipodean|unilib
+#soil_antipodean_dark|unilib
+#soil_black|unilib
+#soil_brown|unilib
+#soil_dark|unilib
 #stone_desert_with_coal|unilib
 #stone_desert_with_copper|unilib
 #stone_desert_with_diamond|unilib
@@ -543,7 +548,7 @@ stone_sandstone_golden|unilib
 #bush_ornamental_strawberry|bushes_classic
 #crop_strawberry_gariguette|better_farming
 #crop_undersea_strawberry|aqua_farming
-#dirt_dry|default
+#dirt_dry|default farming
 #dirt_ordinary|default farming moreblocks
 #produce_blackberry|farming
 #produce_raspberry|farming
@@ -552,6 +557,8 @@ stone_sandstone_golden|unilib
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #crop_rice_white|farming
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #food_cheese_toma|cheese
 #food_porridge|farming
 #grass_dry|default

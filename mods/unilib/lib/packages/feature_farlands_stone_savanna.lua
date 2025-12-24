@@ -19,7 +19,7 @@ function unilib.pkg.feature_farlands_stone_savanna.init()
 
     return {
         description = "Savanna stone rock formations",
-        depends = {"biome_farlands_forest_coniferous", "dirt_ordinary", "stone_savanna"},
+        depends = {"biome_farlands_forest_coniferous", "dirt_ordinary_with_turf", "stone_savanna"},
     }
 
 end

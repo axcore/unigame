@@ -1,8 +1,8 @@
 # "standard" remix - contains packages providing a "standard" set of ABMs and LBMs, imported from
-#       various source mods
+#   various source mods
 # Note that these packages are also specified in other remixes; those from minetest_game appear are
-#       specified by the "mtgame" remix, those from ethereal-ng are also specified by the "ethereal"
-#       remix, and so on
+#   specified by the "mtgame" remix, those from ethereal-ng are also specified by the "ethereal"
+#   remix, and so on
 
 # node_name | original_mod
 
@@ -45,9 +45,6 @@ torch_ordinary|default
 # supporting packages (.at_least_one)
 
 # supporting packages (.optional)
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
 #soil_ordinary|farming
 
 # supporting packages (.suggested)

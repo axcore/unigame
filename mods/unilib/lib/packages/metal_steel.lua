@@ -58,11 +58,17 @@ function unilib.pkg.metal_steel.exec()
     })
     if unilib.setting.technic_update_flag then
 
-        technic.register_grinder_recipe({
-            output = "unilib:metal_steel_powder " ..
-                    tostring(unilib.setting.technic_grind_metal_ratio),
-            input = {"unilib:metal_iron_lump"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_grinder_recipe({
+                output = "unilib:metal_steel_powder " ..
+                        tostring(unilib.setting.technic_grind_metal_ratio),
+                input = {"unilib:metal_iron_lump"},
+            })
+
+        end)
 
     end
 

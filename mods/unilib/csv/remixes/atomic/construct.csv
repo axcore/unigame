@@ -1,11 +1,11 @@
 # Construction table, loaded by the "shared_atomic" package
 # The atomic vapouriser "vapourises" an input item into its constituent elements (items known as
-#       "samplings". The atomic collector collects the samplings and converts them into other
-#       items (typically metallic/mineral ingots/samples)
+#   "samplings". The atomic collector collects the samplings and converts them into other items
+#   (typically metallic/mineral ingots/samples)
 # This table defines how many samplings are required to produce one output item
 #
 # This file may be modified, but if you do modify it, you should enable the warnings in the
-#       "shared_atomic" package until you have eliminated any mistakes
+#   "shared_atomic" package until you have eliminated any mistakes
 
 # input sampling|output item|number of samplings required
 hydrogen|unilib:substance_hydrogen_sample|CONSTRUCT_SAMPLE

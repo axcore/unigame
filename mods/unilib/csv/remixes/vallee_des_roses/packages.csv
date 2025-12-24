@@ -13,7 +13,7 @@ flower_marigold_small|vallee_des_roses
 flower_poppy_brittle|vallee_des_roses
 
 # supporting packages (.depends)
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 
 # supporting packages (.at_least_one)
 biome_default_forest_coniferous|default
@@ -21,9 +21,11 @@ biome_default_forest_deciduous|default
 biome_default_grassland|default
 biome_default_grassland_snowy|default
 biome_default_taiga|default
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
 
 # supporting packages (.optional)
-#grass_dry|default
+#dirt_ordinary|default farming moreblocks
 #grass_jungle|default
 #grass_ordinary|default
 #soil_ordinary|farming

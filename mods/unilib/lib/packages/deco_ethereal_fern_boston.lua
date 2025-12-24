@@ -24,7 +24,7 @@ function unilib.pkg.deco_ethereal_fern_boston.init()
             "biome_ethereal_frost",
             "biome_ethereal_grove",
             "biome_ethereal_swamp",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_crystal",
             "dirt_ordinary_with_turf_grove",
         },
@@ -38,7 +38,7 @@ function unilib.pkg.deco_ethereal_fern_boston.exec()
         unilib.global.pkg_executed_table["biome_ethereal_grove"] ~= nil or
         unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil
     ) and (
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil or
         unilib.global.pkg_executed_table["dirt_ordinary_with_turf_grove"] ~= nil
     ) then
 
@@ -75,7 +75,7 @@ function unilib.pkg.deco_ethereal_fern_boston.post()
         unilib.global.pkg_executed_table["biome_ethereal_grove"] ~= nil or
         unilib.global.pkg_executed_table["biome_ethereal_swamp"] ~= nil
     ) and (
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil or
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil or
         unilib.global.pkg_executed_table["dirt_ordinary_with_turf_grove"] ~= nil
     ) then
 
@@ -83,8 +83,8 @@ function unilib.pkg.deco_ethereal_fern_boston.post()
             -- From ethereal-ng/decor.lua
             biomes = {"ethereal_grove", "ethereal_swamp"},
             place_on = {
-                "unilib:dirt_ordinary_with_turf_grove",
                 "unilib:dirt_ordinary_with_turf",
+                "unilib:dirt_ordinary_with_turf_grove",
             },
             y_max = 100,
             y_min = 1,

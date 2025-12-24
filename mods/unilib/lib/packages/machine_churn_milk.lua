@@ -191,7 +191,7 @@ function unilib.pkg.machine_churn_milk.post()
     if unilib.global.pkg_executed_table["ingredient_cream_milk"] ~= nil and
             unilib.global.pkg_executed_table["ingredient_butter_normal"] ~= nil then
 
-        -- (group:food_milk provided by animalia, mobs_animals and petz)
+        -- (group:food_milk provided by unimobs, animalia, mobs_animals and petz)
         table.insert(recipe_list, {"group:food_milk", "unilib:ingredient_butter_normal"})
         table.insert(
             recipe_list,

@@ -5,6 +5,7 @@
 --      Initialise the mod
 ---------------------------------------------------------------------------------------------------
 
+local start_time = os.clock()
 local S = core.get_translator(core.get_current_modname())
 
 ---------------------------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ unilib.pkg = {}
 unilib.core.name = "unilib"
 
 unilib.core.ver_max = 1
-unilib.core.ver_min = 0
+unilib.core.ver_min = 1
 unilib.core.ver_rev = 0
 
 unilib.intllib = S
@@ -52,7 +53,7 @@ if show_flag then
 
         core.log(
             unilib.core.warning_header .. S(
-                "unilib may not work well with older engines; consider updating your engine"
+                "unilib may not work well with older games engines; consider updating it"
             )
         )
 
@@ -85,10 +86,16 @@ dofile(unilib.core.path_mod .. "/lib/main.lua")
 
 if show_flag then
 
-    -- As confirmation, show the number of packages imported for each remix
+    -- Show any expansion packs that were detected
+    msg = unilib.utils.get_startup_expansion_msg()
+    if msg ~= "" then
+        core.log(unilib.core.log_header .. S("Detected expansion packs: @1", msg))
+    end
+
+    -- Show the number of packages imported for each remix
     local msg = unilib.utils.get_startup_pkg_msg()
     if msg ~= "" then
-        core.log(unilib.core.log_header .. S("Imported packages from remixes:") .. msg)
+        core.log(unilib.core.log_header .. S("Imported packages from remixes: @1", msg))
     else
         core.log(unilib.core.log_header .. S("No packages imported"))
     end
@@ -96,23 +103,22 @@ if show_flag then
     -- Show the number of biomes/decorations/ores imported from remix CSVs (if any)
     msg = unilib.utils.get_startup_biome_msg()
     if msg ~= "" then
-        core.log(unilib.core.log_header .. S("Imported biomes from remix CSVs:") .. msg)
+        core.log(unilib.core.log_header .. S("Imported biomes from remix CSVs: @1", msg))
     end
 
     msg = unilib.utils.get_startup_deco_msg()
     if msg ~= "" then
-        core.log(unilib.core.log_header .. S("Imported decorations from remix CSVs:") .. msg)
+        core.log(unilib.core.log_header .. S("Imported decorations from remix CSVs: @1", msg))
     end
 
     msg = unilib.utils.get_startup_ore_msg()
     if msg ~= "" then
-        core.log(unilib.core.log_header .. S("Imported ores from remix CSVs:") .. msg)
+        core.log(unilib.core.log_header .. S("Imported ores from remix CSVs: @1", msg))
     end
 
-    -- Show any expansion packs that were detected
-    msg = unilib.utils.get_startup_expansion_msg()
+    msg = unilib.utils.get_startup_time_msg(start_time)
     if msg ~= "" then
-        core.log(unilib.core.log_header .. S("Detected expansion packs:") .. msg)
+        core.log(unilib.core.log_header .. S("Startup time: @1 seconds", msg))
     end
 
 end

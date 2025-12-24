@@ -1,5 +1,5 @@
 # "real_minerals" remix - contains all metals, minerals and ores from real_minerals. Does not
-#       contain the molds commented out molds in the original code
+#   contain the molds commented out molds in the original code
 
 # node_name | original_mod
 
@@ -163,9 +163,7 @@ stone_ordinary|default moreblocks technic
 mineral_tin_native|aato
 
 # supporting packages (.optional)
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_stone_desert|glemr11
 #machine_polishing|unilib
 #metal_copper|default glemr11 moreblocks technic

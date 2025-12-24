@@ -29,7 +29,6 @@ function unilib.pkg.food_flan_vanilla.init()
         suggested = {
             "food_milk_soy_red",                -- group:food_milk
             "ingredient_sugar_normal",          -- group:food_sugar
-
         },
     }
 
@@ -55,6 +54,8 @@ function unilib.pkg.food_flan_vanilla.exec()
         },
         replacements = {
             {"unilib:ingredient_extract_vanilla", "unilib:vessel_bottle_glass_empty"},
+            -- (From unimobs expansion pack)
+            {"unilib:bucket_steel_with_milk_cow", "unilib:bucket_steel_empty"},
             -- (From animalia mod)
             {"animalia:bucket_milk", "unilib:bucket_steel_empty"},
             -- (From mobs_animal mod)

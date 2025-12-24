@@ -2,7 +2,8 @@
 # unilib settings
 # -------------------------------------------------------------------------------------------------
 
-# A string containing the names of one or more remixes and/or packages, separated by whitespace.
+# A string containing the names of one or more remixes and/or packages, separated by whitespace
+#
 # Each name is the name of a remix, unless is it preceded by a special character: "@" for remix
 # names (optional), ":" for package names (compulsory). Each name or special character can also be
 # preceded by the "!" character, which means that the package/remix is NOT loaded. The remix names
@@ -98,13 +99,15 @@ unilib_protect_ores_flag (Prevent clearing of registered ores) bool false
 # exist in the original code (i.e. an apple wood bookshelf exists and is created by the "tree_apple"
 # package, but an aspen wood bookshelf does not exist, yet it is created by the "tree_aspen"
 # package
+#
 # The value of the flag also applies to tweaks; for example, moreblocks updates some craft recipes
 # from minetest_game; if this flag is true, the updates are applied to unilib as well
 unilib_mtgame_tweak_flag (Allow tweaks to code adapted from minetest_game) bool false
 # Flag set to true if ABMs and LBMs from minetest_game should be disabled, so that they don't
 # duplicate the action of unilib ABMs and LBMs
+#
 # Note that each ABM and LBM is disabled only when the unilib equivalent is specified. Note also
-# that the origianl ABM handling the spread of flora (flowers, mushrooms, grasses etc) will be
+# that the original ABM handling the spread of flora (flowers, mushrooms, grasses etc) will be
 # disabled regardless of the value of this setting, if the "abm_standard_flora_spread" package is
 # executed
 unilib_mtgame_disable_abm_lbm_flag (Disabled ABMs and LBMS from minetest_game) bool false
@@ -179,7 +182,6 @@ unilib_beautiflowers_spawn_ratio (Amount of beautiflowers to be created) int 5
 
 # biome_lib
 
-# The mod provides an API with two functions, both are simulated crudely by unilib decorations
 # For replacing biome_lib.register_on_generate() calls, a factor by which the equivalent
 # decoration's .fill_ratio is multiplied, so that the decorations are not too numerous
 unilib_biome_lib_spawn_factor (Reduce spawning of biome_lib decorations by factor) float 0.1
@@ -300,9 +302,54 @@ unilib_mesecons_door_flag (Mesecon circuits can open/close doors) bool true
 unilib_mesecons_trapdoor_flag (Mesecon circuits can open/close trapdoors) bool true
 
 # moreblocks
+
 # Flag set to true if stone/glass traps should look very similar to the non-trap node; false if they
 # are easily distinguishable (as in the original code)
 unilib_moreblocks_hidden_trap_flag (Glass/stone traps are hard to see) bool false
+
+# naturalslopeslib
+
+# Which method to use when generating a new area - "VoxelManip" or "progressive"
+# "VoxelManip" (default) is the most efficient method, but the area will be available only once it
+# is completely updated. This may be resource intensive, but is the preferred method as map 
+# generation is optimised to avoid impacting the game
+# "progressive" is much slower, but the area is available immediately in its untransformed shape.
+# The nodes will be updated one after another while the game is idle. This method is preferred on
+# single-core CPUs that cannot benefit from map generation optimisation, or alternatively when areas
+# are taking too long to emerge or if you prefer to see mountains smoothing themselves progressively
+unilib_slopes_generation_method (Slope generation method) enum VoxelManip VoxelManip,progressive
+# Rendering mode for slopes. The value of this setting only affects the visuals. The collision boxes
+# boxes always match the cubic style
+# Values are "cubic" (default; divides blocks into 8 and gives them a stair-like look), "smooth"
+# (uses smooth triangles), "rough" (shows more accidental slopes)
+unilib_slopes_rendering_mode (Slope rendering mode) enum cubic cubic,smooth,rough
+
+# Flag set to true to enable updating node shapes when the world is generated. This will probably
+# put a lot of pressure on the server (but hopefully it doesn't happen that frequently)
+unilib_slopes_update_on_generate_flag (Update slope shapes on generation) bool true
+# Flag set to true to enable updating node shapes when a node is dug/placed
+unilib_slopes_update_on_dig_place_flag (Update slope shapes on dig and place) bool true
+
+# Inverted chance factor for shape generation. The smaller the value, the more likely the node is
+# generated in its updated shape. A value of 0.1 corresponds to 10 times more likely
+unilib_slopes_update_on_generate_factor (Slope generation factor) float 0.05 0
+# Inverted chance factor when stomping. The smaller the value, the more likely the node will be
+# updated when walking on it. A value of 0.1 corresponds to 10 times more likely
+unilib_slopes_update_on_stomp_factor (Slope stomp factor) float 1.0 0
+# Inverted chance factor when digging/placing. The smaller the value, the more likely the node will
+# be updated when the neighbouring nodes change. A value of 0.1 corresponds to 10 times more likely
+unilib_slopes_update_on_dig_place_factor (Slope dig/place factor) float 1.0 0
+# Inverted chance factor for updating over time. The smaller the value, the more likely the node
+# will be updated over time. A value of 0.1 corresponds to 10 times more likely 
+unilib_slopes_update_on_dig_place_factor (Slope time factor) float 1.0 0
+# Number of nodes to skip when generating an area. The higher the value, the fewer the nodes that
+# can be updated (dramatically reducing the load on server resources)
+unilib_slopes_skip_nodes_on_generate (Skip nodes during slope generation) int 0 0
+
+# Flag set to true to prevent new updates and revert slopes to their originial block shape when they
+# are loaded. Enable this setting if you would like to deactive natural slopes in existing worlds.
+# The revert cannot be undone once blocks are loaded
+unilib_slopes_enable_revert_flag (Revert slopes to original form) bool false
 
 # nettle
 
@@ -568,8 +615,8 @@ unilib_regrow_fruit_flag (Fruit regrows automatically) bool false
 unilib_leaves_drop_sticks_flag (Leaves drop sticks as well as sapling) bool false
 # When a remix decorations.csv specifies "treelog" decorations, each log schematic should have the
 # same scarcity as the corresponding tree schematics. The log probabilities are then multipled by
-# this value, so that the ratio of trees to logs can be set in a uniform way across all biomes.
-# Use the value 0 to disable treelog decorations from CSVs altogether
+# this value, so that the ratio of trees to logs can be set in a uniform way across all biomes. Use
+# the value 0 to disable treelog decorations from CSVs altogether
 unilib_tree_to_log_factor (Ratio of trees to logs for compatible remixes) float 0.1
 
 # Minimum sapling growth time, in seconds. Actual time is a random value between the minimum/maximum
@@ -646,7 +693,9 @@ unilib_add_stairs_basic_flag (Enable basic stairs) bool true
 unilib_show_stairs_basic_flag (Show basic stairs in creative inventory) bool false
 # Flag set to true if basic stairs crafted from super stones and super trees should appear in the
 # creative inventory; if true, this flag overrides unilib.show_stairs_basic_flag
+#
 # This setting affects smooth stones, cobblestones and wood (but not bricks, blocks or tree panels)
+#
 # Note that the "unified_inventory" mob won't be able to display any craft recipes using stair
 # groups if both "show" flags are false; note also that basic stairs aren't created at all if the
 # "enable" flag is false
@@ -825,6 +874,16 @@ unilib_wield_view_update_time (Wieldview mode refresh rate (seconds)) int 2
 # Flag set to if nodes are shown as tiles in wieldview mode
 unilib_wield_view_node_tiles_flag (Show nodes as tiles in wieldview mode) bool true
 
+# Flag set to true to enable natural slopes
+unilib_slopes_enable_flag (Enable natural slopes) bool false
+# Flag set to true to enable slopes for all surface nodes in all biomes; if false, you can write
+# packages to create slopes only for the nodes you want. Ignored if natural slopes are not enabled
+# generally
+unilib_slopes_enable_biomes_flag (Generate slope nodes for all biome surfaces) bool false
+# Flag set to true to enable slope-like tree/bush leaves; ignored if natural slopes are not enabled
+# generally
+unilib_slopes_enable_leaves_flag (Enable slope-like tree/bush leaves) bool false
+
 # Flag set to true to enable daily alarms
 unilib_alarm_enable_flag (Enable daily alarms) bool true
 
@@ -863,16 +922,21 @@ unilib_calendar_week_start_offset (Start of calendar week) int 1
 # Age-appropriate settings
 # -------------------------------------------------------------------------------------------------
 
-# Flag set to true if packages providing alcoholic drinks are enabled. The setting is DISABLED BY
+# Flag set to true if packages providing adult content are permitted. The setting is DISABLED BY
 # DEFAULT. When disabled (set to false), any such packages are not executed, even when they are
 # specified by a remix
-# Note that unilib (and its "official" expansion packs) treat alcohol like an ordinary drink; there
-# are no game mechanics that simulate intoxication
-# Note also that unilib (and its "official" expansion packs) do not contain any other kind of
-# "adult" material. Subject to your own discretion, it may be appropriate to enable this setting for
-# worlds in which children are playing. You should, of course, check non-official expansion packs
-# before you install them
-unilib_enable_adult_content_flag (Allow alcoholic drinks) bool false
+#
+# The unilib mod itself does not contain any adult content. Some "official" expansion packs provide
+# alcoholic drinks such as beer and wine. These items do not have any intoxicating effects; they are
+# handled like any other kind of drink
+#
+# Apart from those alcoholic drinks, unilib and its "official" expansion packs do not contain any
+# other kind of adult content
+#
+# Subject to your own discretion, it may be appropriate to enable this setting for worlds in which
+# children are playing. You should, of course, check non-official expansion packs before you install
+# them
+unilib_enable_adult_content_flag (Allow limited adult content) bool false
 
 # -------------------------------------------------------------------------------------------------
 # Debug settings
@@ -903,6 +967,7 @@ unilib_debug_add_orig_name_flag (Add original names to descriptions) bool false
 unilib_debug_force_light_source (Make all nodes emit light) int 0
 # Flag set to true to make all stone transparent, and disable falling nodes (used for checking ore
 # distributions)
+#
 # N.B. This setting disables decorations (both in unilib, and in the original mod)
 # N.B. It is recommended that the debug ambient light setting be increased from 0
 # N.B. See also the /trench command

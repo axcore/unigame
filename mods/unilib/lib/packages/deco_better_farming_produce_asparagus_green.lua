@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_asparagus_green.init()
 
     return {
         description = "Green asparagus as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "produce_asparagus_green"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "produce_asparagus_green"},
     }
 
 end

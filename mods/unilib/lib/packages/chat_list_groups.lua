@@ -32,7 +32,7 @@ function unilib.pkg.chat_list_groups.exec()
         description = S("List groups, and the items that provide them"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             local group_table = unilib.pkg.shared_chat_missing.compile_group_table()
             if param ~= "" then
@@ -51,23 +51,23 @@ function unilib.pkg.chat_list_groups.exec()
 
             end
 
-            unilib.utils.chat_send_player(name, S("Registered groups"))
+            unilib.utils.chat_send_player(pname, S("Registered groups"))
 
             local group_list = unilib.utils.sort_table(group_table)
             for _, group_name in ipairs(group_list) do
 
-                unilib.utils.chat_send_player(name, S("Group: @1", group_name))
+                unilib.utils.chat_send_player(pname, S("Group: @1", group_name))
                 local item_list = group_table[group_name]
                 table.sort(item_list)
 
                 for _, full_name in ipairs(item_list) do
-                    unilib.utils.chat_send_player(name, "   " .. full_name)
+                    unilib.utils.chat_send_player(pname, "   " .. full_name)
                 end
 
             end
 
             unilib.utils.chat_send_player(
-                name, S("End of list (unique groups found: @1)", #group_list)
+                pname, S("End of list (unique groups found: @1)", #group_list)
             )
 
         end,

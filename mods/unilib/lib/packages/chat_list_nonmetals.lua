@@ -63,8 +63,8 @@ function unilib.pkg.chat_list_nonmetals.exec()
         description = S("Lists all registered elemental non-metal types"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_nonmetals(name, param)
+        func = function(pname, param)
+            return do_list_nonmetals(pname, param)
         end,
     })
 
@@ -73,8 +73,8 @@ function unilib.pkg.chat_list_nonmetals.exec()
         description = S("Lists all registered elemental non-metal types"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_nonmetals(name, param)
+        func = function(pname, param)
+            return do_list_nonmetals(pname, param)
         end,
     })
 

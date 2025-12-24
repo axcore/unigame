@@ -22,7 +22,7 @@ function unilib.pkg.deco_farlands_tree_palm_exotic.init()
         depends = {"tree_palm_exotic"},
         at_least_one = {
             "biome_farlands_rainforest",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_forest",
             "sand_ordinary",
         },
@@ -46,7 +46,7 @@ function unilib.pkg.deco_farlands_tree_palm_exotic.post()
     end
 
     if unilib.global.pkg_executed_table["biome_farlands_rainforest"] ~= nil and (
-            unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil or
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil or
             unilib.global.pkg_executed_table["dirt_ordinary_with_turf_forest"] ~= nil
     ) then
 

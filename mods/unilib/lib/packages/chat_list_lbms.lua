@@ -54,7 +54,7 @@ local function do_list_lbms(pname, param)
         if param == "" then
             return false, S("No LBMs are registered")
         elseif not_flag then
-            return false, S("No LBMs are registered for mods other than the  \"@1\" mod", param)
+            return false, S("No LBMs are registered for mods other than the \"@1\" mod", param)
         else
             return false, S("No LBMs are registered for the \"@1\" mod", param)
         end
@@ -115,8 +115,8 @@ function unilib.pkg.chat_list_lbms.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_lbms(name, param)
+        func = function(pname, param)
+            return do_list_lbms(pname, param)
         end,
     })
 
@@ -127,8 +127,8 @@ function unilib.pkg.chat_list_lbms.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_lbms(name, param)
+        func = function(pname, param)
+            return do_list_lbms(pname, param)
         end,
     })
 

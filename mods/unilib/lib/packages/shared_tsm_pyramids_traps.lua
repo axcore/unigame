@@ -42,7 +42,8 @@ local function create_real_trap(
 
                     if n.name == cracked_name then
 
-                        -- 70% chance to ignore player to make the time of falling less predictable
+                        -- 70% probability of ignoring a player to make the time of falling less
+                        --      predictable
                         if math.random(1, 10) >= 3 then
                             return true
                         end

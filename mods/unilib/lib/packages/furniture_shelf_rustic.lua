@@ -65,11 +65,12 @@ function unilib.pkg.furniture_shelf_rustic.exec()
 
     -- N.B. Original code had an inventory of 24; the inventory is now 16, to match standard
     --      bookshelves/itemshelves
-    unilib.furniture.convert_to_container(
-        "unilib:furniture_shelf_rustic",
-        2,
-        S("Rustic Wooden Shelves"),
-        "rustic shelf"
-    )
+    unilib.furniture.convert_to_container({
+        full_name = "unilib:furniture_shelf_rustic",
+
+        description = S("Rustic Wooden Shelves"),
+        label = "rustic shelf",
+        rows = 2,
+    })
 
 end

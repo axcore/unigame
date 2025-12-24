@@ -19,7 +19,7 @@ function unilib.pkg.deco_herbs_flower_digitalis_yellow.init()
 
     return {
         description = "Yellow digitalis as decoration",
-        depends = {"dirt_ordinary", "flower_digitalis_yellow"},
+        depends = {"dirt_ordinary_with_turf", "flower_digitalis_yellow"},
         at_least_one = {
             "biome_default_forest_deciduous",
             "biome_default_grassland",

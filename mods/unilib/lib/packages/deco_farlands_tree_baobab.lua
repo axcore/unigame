@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_tree_baobab.init()
 
     return {
         description = "Baobab tree as decoration",
-        depends = {"biome_farlands_savanna", "dirt_ordinary", "tree_baobab"},
+        depends = {"biome_farlands_savanna", "dirt_ordinary_with_turf_dry", "tree_baobab"},
     }
 
 end

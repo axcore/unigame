@@ -23,6 +23,13 @@ unilib.trees = {}
 -- Base API functions for trees
 local base_file = unilib.core.path_mod .. "/lib/shared/trees/trees_base.lua"
 
+function unilib.trees.on_place_trunk(...)
+
+    if not t[base_file] then t[base_file] = true; dofile(base_file) end
+    return unilib.trees._on_place_trunk(...)
+
+end
+
 function unilib.register_tree(...)
 
     if not t[base_file] then t[base_file] = true; dofile(base_file) end

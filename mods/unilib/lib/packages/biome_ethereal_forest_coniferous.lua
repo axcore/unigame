@@ -21,6 +21,7 @@ function unilib.pkg.biome_ethereal_forest_coniferous.init()
         description = "Coniferous forest biome",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_litter_coniferous",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

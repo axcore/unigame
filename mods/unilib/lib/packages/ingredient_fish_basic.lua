@@ -19,14 +19,14 @@ function unilib.pkg.ingredient_fish_basic.init()
 
     return {
         description = "Basic raw fish set",
-        depends = "shared_ethereal_fish",
         notes = "Includes 32 raw fish, some of which are edible while raw (but all of which can" ..
                 " be cooked)",
+        depends = "shared_ethereal_fish",
     }
 
 end
 
-function unilib.pkg.ingredient_fish_basic.post()
+function unilib.pkg.ingredient_fish_basic.exec()
 
     -- Basic raw fish set
     local fish_list = {
@@ -70,13 +70,22 @@ function unilib.pkg.ingredient_fish_basic.post()
     -- Register fish
     for _, mini_list in ipairs(fish_list) do
 
+        local part_name = mini_list[1]
+        local glow_flag = false
+        if part_name == "tetra_neon" then
+            glow_flag = true
+        end
+
         unilib.pkg.shared_ethereal_fish.register_fish({
-            part_name = mini_list[1],
+            part_name = part_name,
             description = mini_list[3],
             tastiness = mini_list[5],
 
             orig_name = "ethereal:fish_" .. mini_list[2],
             biome_part_name = mini_list[6],
+            -- N.B. No .glow_flag or .rarity in original code
+            glow_flag = glow_flag,
+            rarity = 1,
             sci_name = mini_list[4],
         })
 

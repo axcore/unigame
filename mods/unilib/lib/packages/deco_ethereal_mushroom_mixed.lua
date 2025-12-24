@@ -30,7 +30,8 @@ function unilib.pkg.deco_ethereal_mushroom_mixed.init()
                 "biome_ethereal_swamp",
             },
             {
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
                 "dirt_ordinary_with_turf_mushroom",
                 "dirt_ordinary_with_turf_prairie",
             },

@@ -428,8 +428,6 @@ local function register_dirt_set(data_table)
     local dirt_name = "unilib:" .. item_name
     local dirt_img = "unilib_" .. item_name .. ".png"
 
-    -- N.B. spreading_dirt_type not in original GLEMr4 code, but is in original minetest_game
-    --      code
     local dry_dirt = nil
     if dry_dirt_flag == true then
         dry_dirt = 1
@@ -443,13 +441,19 @@ local function register_dirt_set(data_table)
 
     end
 
-    local group_table = {
+    -- N.B. covered_dirt = 1 not in original code
+    local covered_group_table = {
+        covered_dirt = 1,
         crumbly = 3,
         dry_dirt = dry_dirt,
         not_in_creative_inventory = unilib.hide_covered_dirt_group,
         soil = soil,
-        spreading_dirt_type = 1,
     }
+
+    -- N.B. spreading_dirt = 1 not in original GLEMr6 code, but spreading_dirt_type = 1 was in
+    --      original minetest_game code
+    local spreading_group_table = table.copy(covered_group_table)
+    spreading_group_table.spreading_dirt = 1
 
     -- The "dirt_ordinary" package already provides several of these nodes
     if item_name ~= "dirt_ordinary" then
@@ -467,7 +471,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^unilib_turf_ordinary_side_overlay.png",
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.25},
                 }),
@@ -493,7 +497,7 @@ local function register_dirt_set(data_table)
                         tileable_vertical = false,
                     },
                 },
-                groups = group_table,
+                groups = covered_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
@@ -520,7 +524,7 @@ local function register_dirt_set(data_table)
                         tileable_vertical = false,
                     },
                 },
-                groups = group_table,
+                groups = covered_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.4},
                 }),
@@ -544,15 +548,17 @@ local function register_dirt_set(data_table)
                     tileable_vertical = false,
                 },
             },
-            -- N.B. snowy and spreading_dirt_type not in original GLEMr6 code, but is in original
-            --      minetest_game code
+            -- N.B. covered_dirt = 1 not in original code
+            -- N.B. spreading_dirt = 1 and snowy = 1 not in original GLEMr6 code, but
+            --      spreading_dirt_type = 1 and snowy = 1 was in original minetest_game code
             groups = {
+                covered_dirt = 1,
                 crumbly = 3,
                 dry_dirt = dry_dirt,
                 snowy = 1,
                 soil = soil,
                 not_in_creative_inventory = unilib.hide_covered_dirt_group,
-                spreading_dirt_type = 1,
+                spreading_dirt = 1,
             },
             -- N.B. Gain is 0.25 in original GLEMr6 code, but 0.2 in original minetest_game code
             sounds = unilib.sound.generate_dirt({
@@ -581,8 +587,10 @@ local function register_dirt_set(data_table)
                         tileable_vertical = false,
                     },
                 },
+                -- N.B. covered_dirt = 1 not in original code
                 -- N.B. As in the original minetest_game code, dry turf does not spread
                 groups = {
+                    covered_dirt = 1,
                     crumbly = 3,
                     dry_dirt = dry_dirt,
                     not_in_creative_inventory = unilib.hide_covered_dirt_group,
@@ -609,85 +617,85 @@ local function register_dirt_set(data_table)
 
     -- Biome-specific turfs
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "hot_humid", S("Hot Humid Turf"), TURF_HUMID_PALETTE_4,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "hot_semihumid", S("Hot Semi-Humid Turf"), TURF_SEMIHUMID_PALETTE_4,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "hot_temperate", S("Hot Temperate Turf"), TURF_TEMPERATE_PALETTE_4,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "hot_semiarid", S("Hot Semi-Arid Turf"), TURF_SEMIARID_PALETTE_4,
         soil_flag, dry_dirt_flag
     )
 
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "warm_humid", S("Warm Humid Turf"), TURF_HUMID_PALETTE_3,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "warm_semihumid", S("Warm Semi-Humid Turf"), TURF_SEMIHUMID_PALETTE_3,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "warm_temperate", S("Warm Temperate Turf"), TURF_TEMPERATE_PALETTE_3,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "warm_semiarid", S("Warm Semi-Arid Turf"), TURF_SEMIARID_PALETTE_3,
         soil_flag, dry_dirt_flag
     )
 
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "temperate_humid", S("Temperate Humid Turf"), TURF_HUMID_PALETTE_2,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "temperate_semihumid", S("Temperate Semi-Humid Turf"), TURF_SEMIHUMID_PALETTE_2,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "temperate_temperate", S("Temperate Temperate Turf"), TURF_TEMPERATE_PALETTE_2,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "temperate_semiarid", S("Temperate Semi-Arid Turf"), TURF_SEMIARID_PALETTE_2,
         soil_flag, dry_dirt_flag
     )
 
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "cool_humid", S("Cool Humid Turf"), TURF_HUMID_PALETTE_1,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "cool_semihumid", S("Cool Semi-Humid Turf"), TURF_SEMIHUMID_PALETTE_1,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "cool_temperate", S("Cool Temperate Turf"), TURF_TEMPERATE_PALETTE_1,
         soil_flag, dry_dirt_flag
     )
     register_biome_dirt(
-        dirt_name, orig_name, dirt_img, group_table,
+        dirt_name, orig_name, dirt_img, spreading_group_table,
         "cool_semiarid", S("Cool Semi-Arid Turf"), TURF_SEMIARID_PALETTE_1,
         soil_flag, dry_dirt_flag
     )
@@ -711,7 +719,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^(" .. TURF_JUNGLE_TEXTURE_SIDE .. "^[colorize:" .. palette .. ")",
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.25},
                 }),
@@ -735,7 +743,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^(" .. TURF_TEXTURE_SIDE .. "^[colorize:" .. palette .. ")",
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.25},
                 }),
@@ -759,7 +767,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^(" .. TURF_DRY_TEXTURE_SIDE .. "^[colorize:" .. palette .. ")",
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.25},
                 }),
@@ -783,7 +791,7 @@ local function register_dirt_set(data_table)
                     dirt_img,
                     dirt_img .. "^(" .. TURF_BROWN_TEXTURE_SIDE .. "^[colorize:" .. palette .. ")",
                 },
-                groups = group_table,
+                groups = spreading_group_table,
                 sounds = unilib.sound.generate_dirt({
                     footstep = {name = "unilib_grass_footstep", gain = 0.25},
                 }),
@@ -836,6 +844,9 @@ function unilib.pkg.dirt_custom_glemr6.init()
 --          "dirt_ordinary",
             -- Soil types
             "soil_arid",
+            "soil_black",
+            "soil_brown",
+            "soil_dark",
             "soil_ordinary",
         },
     }

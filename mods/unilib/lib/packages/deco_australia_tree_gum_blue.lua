@@ -35,7 +35,7 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
 
     if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -44,8 +44,8 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
                 -- From australia/biome_great_dividing_range.lua
                 biomes = "australia_great_dividing_range",
                 place_on = {
-                    "unilib:dirt_ordinary_with_turf",
                     "unilib:dirt_antipodean_with_turf_great_dividing_range",
+                    "unilib:dirt_ordinary_with_turf",
                 },
                 y_max = 180,
                 y_min = 36,
@@ -56,7 +56,7 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -65,8 +65,8 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
                 -- From australia/biome_tasmania.lua
                 biomes = "australia_tasmania",
                 place_on = {
-                    "unilib:dirt_ordinary_with_turf",
                     "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                    "unilib:dirt_ordinary_with_turf",
                 },
                 y_max = 170,
                 y_min = 36,
@@ -77,7 +77,7 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -86,8 +86,8 @@ function unilib.pkg.deco_australia_tree_gum_blue.post()
                 -- From australia/biome_victorian_forests.lua
                 biomes = "australia_victorian_forests",
                 place_on = {
-                    "unilib:dirt_ordinary_with_turf",
                     "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                    "unilib:dirt_ordinary_with_turf",
                 },
                 y_max = 180,
                 y_min = 36,

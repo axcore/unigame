@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_crop_beetroot_merlin.init()
 
     return {
         description = "Merlin beetroot as decoration",
-        depends = {"biome_default_grassland", "crop_beetroot_merlin", "dirt_ordinary"},
+        depends = {"biome_default_grassland", "crop_beetroot_merlin", "dirt_ordinary_with_turf"},
     }
 
 end

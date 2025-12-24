@@ -39,7 +39,11 @@ function unilib.pkg.dirt_ordinary_with_litter_leafy.exec()
                 "unilib_dirt_ordinary.png",
                 "unilib_dirt_ordinary.png^unilib_litter_leafy_side.png",
             },
-            groups = {crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group},
+            -- N.B. covered_dirt = 1 not in original code
+            groups = {
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group,
+            },
             sounds = unilib.global.sound_table.dirt,
 
             -- N.B. no drop in original code

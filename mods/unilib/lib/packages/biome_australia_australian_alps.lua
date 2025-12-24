@@ -19,7 +19,7 @@ function unilib.pkg.biome_australia_australian_alps.init()
 
     return {
         description = "Australian Alps biome",
-        depends = {"dirt_ordinary", "snow_ordinary"},
+        depends = {"dirt_ordinary_with_cover_snow", "snow_ordinary"},
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_dandelion_white_large.init()
 
     return {
         description = "Large white dandelion as decoration",
-        depends = {"dirt_ordinary", "flower_dandelion_white_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_dandelion_white_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

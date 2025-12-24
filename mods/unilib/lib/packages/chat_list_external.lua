@@ -90,8 +90,8 @@ function unilib.pkg.chat_list_external.exec()
         description = S("Lists all external mods, or just the specified external mod"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_list_mods(name, param)
+        func = function(pname, param)
+            return do_list_mods(pname, param)
         end,
     })
 

@@ -19,7 +19,7 @@ function unilib.pkg.deco_cucina_vegana_plant_onion_sweet_wild.init()
 
     return {
         description = "Wild sweet onion plant as decoration",
-        depends = {"dirt_ordinary", "plant_onion_sweet_wild"},
+        depends = {"dirt_ordinary_with_turf", "plant_onion_sweet_wild"},
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_clementine.init()
 
     return {
         description = "Clementine tree as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "tree_clementine"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "tree_clementine"},
     }
 
 end

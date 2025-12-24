@@ -31,11 +31,12 @@ function unilib.pkg.chat_set_alarm.exec()
         params = "<time>",
         description = S("Sets a daily alarm which rings at HH:MM (24-hour clock)"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
+            local player = core.get_player_by_name(pname)
             if not unilib.setting.alarm_enable_flag then
                 return false, unilib.pkg.shared_chat_alarm.unavailable_msg
-            elseif not core.get_player_by_name(name) then
+            elseif not player then
                 return false, unilib.constant.chat_offline_msg
             elseif param == nil or param == "" then
                 return false, unilib.pkg.shared_chat_alarm.invalid_time_msg
@@ -50,8 +51,8 @@ function unilib.pkg.chat_set_alarm.exec()
                 return false, unilib.pkg.shared_chat_alarm.invalid_time_msg
             end
 
-            unilib.utils.set_player_attribute(core.get_player_by_name(name), "alarm", param)
-            unilib.alarms.cancel_expired_alarm(name)
+            unilib.utils.set_player_attribute(player, "alarm", param)
+            unilib.alarms.cancel_expired_alarm(pname)
 
             local current_time, _ = unilib.utils.get_clock_time()
             return true,

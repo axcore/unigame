@@ -19,7 +19,7 @@ function unilib.pkg.deco_herbs_flower_centaurea.init()
 
     return {
         description = "Centaurea as decoration",
-        depends = {"dirt_ordinary", "flower_centaurea"},
+        depends = {"dirt_ordinary_with_turf", "flower_centaurea"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

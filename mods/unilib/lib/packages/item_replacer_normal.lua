@@ -65,13 +65,16 @@ saw_prefix_table = {}
 local function convert_turf_to_dirt(turf_name)
 
     -- e.g. Converts "unilib:dirt_ordinary_with_turf" to "unilib:dirt_ordinary"
-    -- Should work with non-unilib dirts, specifically anything in the .spreading_dirt_type group;
-    --      returns the .drop node
+    -- Should also work with non-unilib dirts, specifically anything in the .spreading_dirt_type
+    --      group
+    -- Returns the node specified by .drop (e.g. "unilib:dirt_ordinary")
 
     local def_table = core.registered_nodes[turf_name]
-    if def_table ~= nil and def_table.groups ~= nil and
-            def_table.groups.spreading_dirt_type == 1 and
-            def_table.drop ~= nil and type(def_table.drop) == "string" then
+    if def_table ~= nil and
+            def_table.groups ~= nil and (
+                def_table.groups.spreading_dirt == 1 or
+                def_table.groups.spreading_dirt_type == 1
+            ) and def_table.drop ~= nil and type(def_table.drop) == "string" then
 
         return def_table.drop
 
@@ -746,7 +749,7 @@ local function do_replace(itemstack, user, pointed_thing, mode)
 
         core.show_formspec(
             name,
-            "unilib:formspec_item_replacer_normal",
+            "unilib:form_item_replacer_normal",
             get_formspec(name, pattern, user)
         )
 
@@ -918,6 +921,7 @@ function unilib.pkg.item_replacer_normal.init()
         depends = {
             "container_chest_ordinary",
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "item_stick_ordinary",
             "shared_replacer",
         },
@@ -996,7 +1000,7 @@ function unilib.pkg.item_replacer_normal.exec()
     core.register_on_player_receive_fields(function(player, formname, fields)
 
         -- The player has interacted with our formspec
-        if not formname or formname ~= "unilib:formspec_item_replacer_normal" then
+        if not formname or formname ~= "unilib:form_item_replacer_normal" then
             return false
         end
 

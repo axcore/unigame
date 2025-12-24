@@ -21,7 +21,7 @@ function unilib.pkg.deco_default_tree_aspen_log.init()
         description = "Aspen tree log as decoration",
         depends = {
             "biome_default_forest_deciduous",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "mushroom_brown",
             "mushroom_red",
             "tree_aspen",

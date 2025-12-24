@@ -36,9 +36,10 @@ function unilib.pkg.chat_cripple_hunger.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            local player = core.get_player_by_name(pname)
+            if not player then
                 return false, unilib.constant.chat_offline_msg
             end
 
@@ -49,8 +50,7 @@ function unilib.pkg.chat_cripple_hunger.exec()
             else
 
                 unilib.stamina.set_saturation(
-                    core.get_player_by_name(name),
-                    unilib.pkg.shared_chat_cuisine.cuisine_cripple_level
+                    player, unilib.pkg.shared_chat_cuisine.cuisine_cripple_level
                 )
 
            end

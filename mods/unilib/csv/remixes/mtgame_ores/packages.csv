@@ -1,6 +1,6 @@
 # "mtgame_ores" remix - all ore packages from the "mtgame" remix
 # N.B. Some of these packages specify biome packages as dependencies; so this remix should probably
-#       be used together with the "mtgame_biomes" remix
+#   be used together with the "mtgame_biomes" remix
 
 # node_name | original_mod
 
@@ -64,9 +64,7 @@ ore_default_stone_sandstone_silver|default
 #biome_default_taiga|default
 
 # supporting packages (.optional)
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11

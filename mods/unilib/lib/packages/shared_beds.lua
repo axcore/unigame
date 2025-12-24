@@ -246,7 +246,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
         end
 
         -- Check if player is moving
-        if vector.length(player:get_velocity()) > 0.001 then
+        if vector.length(player:get_velocity()) > 0.05 then
 
             core.chat_send_player(name, S("You have to stop moving before going to bed!"))
             return false
@@ -329,7 +329,7 @@ local function update_formspecs(finished)
     end
 
     for name,_ in pairs(beds_player_table) do
-        core.show_formspec(name, "beds_form", form_n)
+        core.show_formspec(name, "unilib:form_shared_beds", form_n)
     end
 
 end
@@ -457,6 +457,8 @@ end
 
 local function remove_no_destruct(pos)
 
+    -- Adapted from beds/api.lua
+
     -- Removes a node without calling on on_destruct()
     -- We use this to mess with bed nodes without causing unwanted recursion
 
@@ -467,33 +469,49 @@ local function remove_no_destruct(pos)
 
 end
 
+local function get_other_bed_pos(pos, n)
+
+    -- Adapted from beds/api.lua
+    -- Returns the position of the other bed half (or nil on failure)
+
+    local node = core.get_node(pos)
+    local dir = core.facedir_to_dir(node.param2)
+    -- There are 255 possible param2 values; ignore bad ones
+    if not dir then
+        return
+    end
+
+    local other_pos
+    if n == 2 then
+        other_pos = vector.subtract(pos, dir)
+    elseif n == 1 then
+        other_pos = vector.add(pos, dir)
+    else
+        return nil
+    end
+
+    local other_node = core.get_node(other_pos)
+    if other_node.param2 == node.param2 and core.get_item_group(other_node.name, "bed") ~= 0 then
+        return other_pos
+    else
+        return nil
+    end
+
+end
+
 local function destruct_bed(pos, n)
 
     -- Adapted from beds/api.lua
 
-    local node = core.get_node(pos)
-    local other
+    local other_pos = get_other_bed_pos(pos, n)
+    if other_pos then
 
-    if n == 2 then
-
-        local dir = core.facedir_to_dir(node.param2)
-        other = vector.subtract(pos, dir)
-
-    elseif n == 1 then
-
-        local dir = core.facedir_to_dir(node.param2)
-        other = vector.add(pos, dir)
+        remove_no_destruct(other_pos)
+        remove_spawns_at(other_pos)
 
     end
 
-    local other_name = core.get_node(other).name
-    if core.get_item_group(other_name, "bed") ~= 0 then
-
-       remove_no_destruct(other)
-       remove_spawns_at(pos)
-       remove_spawns_at(other)
-
-    end
+    remove_spawns_at(pos)
 
 end
 
@@ -667,6 +685,10 @@ function unilib.pkg.shared_beds.register_bed(data_table)
         on_rotate = function(pos, node, user, _, new_param2)
 
             local dir = core.facedir_to_dir(node.param2)
+            if not dir then
+                return false
+            end
+
             -- Old position of the top node
             local p = vector.add(pos, dir)
             local node2 = core.get_node_or_nil(p)
@@ -718,7 +740,7 @@ function unilib.pkg.shared_beds.register_bed(data_table)
         sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",
-        drop = full_name .. "_bottom",
+        drop = "",
         is_ground_content = false,
         node_box = {
             type = "fixed",
@@ -726,15 +748,17 @@ function unilib.pkg.shared_beds.register_bed(data_table)
         },
         paramtype = "light",
         paramtype2 = "facedir",
-        pointable = false,
+        selection_box = {
+            type = "fixed",
+            -- Small selection box to allow digging stray top nodes
+            fixed = {-0.3, -0.3, -0.3, 0.3, -0.1, 0.3},
+        },
         use_texture_alpha = "clip",
 
         can_dig = function(pos, player)
 
-            local node = core.get_node(pos)
-            local dir = core.facedir_to_dir(node.param2)
-            local p = vector.add(pos, dir)
-            return can_dig(p)
+            local other_pos = get_other_bed_pos(pos, 2)
+            return (not other_pos) or can_dig(other_pos)
 
         end,
 
@@ -853,7 +877,7 @@ function unilib.pkg.shared_beds.exec()
 
         -- Adapted from beds/functions.lua
 
-        if formname ~= "beds_form" then
+        if formname ~= "unilib:form_shared_beds" then
             return
         end
 

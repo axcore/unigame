@@ -96,8 +96,8 @@ function unilib.pkg.chat_dump_compatible.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_mods(name, param)
+        func = function(pname, param)
+            return do_dump_mods(pname, param)
         end,
     })
 

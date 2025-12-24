@@ -21,8 +21,15 @@ function unilib.pkg.deco_aotearoa_tree_rangiora.init()
         description = "Rangiora tree as decoration",
         depends = "tree_rangiora",
         at_least_one = {
-            {"biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "biome_aotearoa_lowland",
+                "biome_aotearoa_scrubland",
+            },
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 
@@ -46,21 +53,25 @@ function unilib.pkg.deco_aotearoa_tree_rangiora.post()
             },
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_wet",
-                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_antipodean_with_moss",
+                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_ordinary_with_litter_rainforest",
             },
             y_max = 80,
             y_min = 12,
         })
-        unilib.register_decoration_complete("aotearoa_tree_rangiora_normal_" .. i, nil, {
-            -- From aotearoa/spawn_trees.lua
-            -- Completes decoration in package "tree_rangiora"
-            biomes = "aotearoa_scrubland_broadleaf",
-            place_on = "unilib:dirt_ordinary_with_litter_rainforest",
-            y_max = 80,
-            y_min = 12,
-        })
+        if unilib.global.pkg_executed_table["dirt_ordinary_with_litter_rainforest"] ~= nil then
+
+            unilib.register_decoration_complete("aotearoa_tree_rangiora_normal_" .. i, nil, {
+                -- From aotearoa/spawn_trees.lua
+                -- Completes decoration in package "tree_rangiora"
+                biomes = "aotearoa_scrubland_broadleaf",
+                place_on = "unilib:dirt_ordinary_with_litter_rainforest",
+                y_max = 80,
+                y_min = 12,
+            })
+
+        end
 
     end
 

@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_bean_adzuki.init()
 
     return {
         description = "Adzuki beans as decoration",
-        depends = {"produce_bean_adzuki", "dirt_ordinary"},
+        depends = {"dirt_ordinary_with_turf", "produce_bean_adzuki"},
         at_least_one = {"biome_default_grassland", "biome_default_rainforest"},
     }
 

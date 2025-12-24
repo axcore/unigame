@@ -38,7 +38,9 @@ function unilib.pkg.dirt_antipodean_dark_with_moss.exec()
                 tileable_vertical = false,
             },
         },
-        groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
+        -- N.B. covered_dirt = 1 not in original code
+        -- N.B. spreading_dirt_type = 1 omitted from original code
+        groups = {covered_dirt = 1, crumbly = 3, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),

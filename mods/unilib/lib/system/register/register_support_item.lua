@@ -10,7 +10,6 @@ local S = unilib.intllib
 -- Table of minetest_game nodes that are mapped on to Minetest standard aliases
 -- Used by unilib.register.replace_item(), so that the unilib node can be mapped on to that alias
 --      instead
--- Does not include v6 mapgen aliases, since unilib is not compatible with v6 anyway
 local standard_alias_table = {
     -- Essential aliases
     ["default:stone"] = "mapgen_stone",
@@ -19,6 +18,35 @@ local standard_alias_table = {
     -- Optional aliases
     ["default:lava_source"] = "mapgen_lava_source",
     ["default:cobble"] = "mapgen_cobble",
+    -- Superfluous aliases (included in minetest_game/mods/default/mapgen.lua)
+    -- Including these aliases here will prevent a broken and chaotic world, if the player adds
+    --      "mtgame" to their remix list
+    -- (If it causes any problems, all of these items can be removed)
+--  ["default:lava_source"] = "mapgen_lava_source",
+    ["default:dirt"] = "mapgen_dirt",
+    ["default:dirt_with_grass"] = "mapgen_dirt_with_grass",
+    ["default:sand"] = "mapgen_sand",
+    ["default:gravel"] = "mapgen_gravel",
+    ["default:desert_stone"] = "mapgen_desert_stone",
+    ["default:desert_sand"] = "mapgen_desert_sand",
+    ["default:dirt_with_snow"] = "mapgen_dirt_with_snow",
+    ["default:snowblock"] = "mapgen_snowblock",
+    ["default:snow"] = "mapgen_snow",
+    ["default:ice"] = "mapgen_ice",
+
+    ["default:tree"] = "mapgen_tree",
+    ["default:leaves"] = "mapgen_leaves",
+    ["default:apple"] = "mapgen_apple",
+    ["default:jungletree"] = "mapgen_jungletree",
+    ["default:jungleleaves"] = "mapgen_jungleleaves",
+    ["default:junglegrass"] = "mapgen_junglegrass",
+    ["default:pine_tree"] = "mapgen_pine_tree",
+    ["default:pine_needles"] = "mapgen_pine_needles",
+
+--  ["default:cobble"] = "mapgen_cobble",
+    ["stairs:stair_cobble"] = "mapgen_stair_cobble",
+    ["default:mossycobble"] = "mapgen_mossycobble",
+    ["stairs:stair_desert_stone"] = "mapgen_stair_desert_stone",
 }
 
 ---------------------------------------------------------------------------------------------------

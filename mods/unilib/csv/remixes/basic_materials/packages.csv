@@ -65,9 +65,6 @@ torch_ordinary|default
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #container_chest_ordinary|default
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
 #machine_furnace_induction|unilib
 #machine_polishing|unilib
 #material_scrap_steel|steel

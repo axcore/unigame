@@ -31,9 +31,10 @@ function unilib.pkg.chat_show_food_history.exec()
         description = S("Shows your food history (if advanced cuisine is enabled)"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            local player = core.get_player_by_name(pname)
+            if not player then
                 return false, unilib.constant.chat_offline_msg
             end
 
@@ -43,20 +44,20 @@ function unilib.pkg.chat_show_food_history.exec()
 
             else
 
-                local history_list = unilib.cuisine.get_history(core.get_player_by_name(name))
+                local history_list = unilib.cuisine.get_history(player)
                 if #history_list == 0 then
 
                     return false, S("Your food history is empty!")
 
                 else
 
-                    unilib.utils.chat_send_player(name, S("Food history for player @1", name))
+                    unilib.utils.chat_send_player(pname, S("Food history for player @1", pname))
                     for _, group in pairs(history_list) do
-                        unilib.utils.chat_send_player(name, "   " .. group)
+                        unilib.utils.chat_send_player(pname, "   " .. group)
                     end
 
                     unilib.utils.chat_send_player(
-                        name, S("End of list (food groups found: @1)", #history_list)
+                        pname, S("End of list (food groups found: @1)", #history_list)
                     )
 
                 end

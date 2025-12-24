@@ -1,6 +1,6 @@
 # "cool_trees" remix - contains most things from the cool_trees modpack
 # Bamboo trees, palm trees and pineapples were not imported (packages from ethereal-ng provide
-#       similar functionality); however the palm tree door was imported
+#   similar functionality); however the palm tree door was imported
 # Did not import the python_locale_tool mod
 # Longer growth times in cool_trees were not implemented for any package
 
@@ -106,8 +106,12 @@ biome_default_rainforest|default
 biome_default_savanna|default
 bucket_steel|bucket
 crop_wheat|farming
-dirt_dry|default
+dirt_dry|default farming
+dirt_dry_with_turf_dry|default
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 fruit_coconut|ethereal
 liquid_lava_ordinary|default
 liquid_water_ordinary|default

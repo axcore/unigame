@@ -19,8 +19,17 @@ function unilib.pkg.deco_better_farming_crop_bokchoy.init()
 
     return {
         description = "Bokchoy as decoration",
-        depends = {"crop_bokchoy", "dirt_ordinary"},
-        at_least_one = {"biome_default_forest_deciduous", "biome_default_rainforest"},
+        depends = "crop_bokchoy",
+        at_least_one = {
+            {
+                "biome_default_forest_deciduous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

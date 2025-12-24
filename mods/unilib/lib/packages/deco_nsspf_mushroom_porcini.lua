@@ -19,7 +19,7 @@ function unilib.pkg.deco_nsspf_mushroom_porcini.init()
 
     return {
         description = "Porcini mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_porcini", "tree_apple"},
+        depends = {"dirt_ordinary_with_turf", "mushroom_porcini", "tree_apple"},
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_bakedclay_flower_delphinium_blue.init()
 
     return {
         description = "Blue delphinium as decoration",
-        depends = {"dirt_ordinary", "flower_delphinium_blue"},
+        depends = {"dirt_ordinary_with_turf", "flower_delphinium_blue"},
     }
 
 end

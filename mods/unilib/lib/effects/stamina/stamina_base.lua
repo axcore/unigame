@@ -796,7 +796,7 @@ core.register_on_joinplayer(function(player)
 
     local level = unilib.stamina.get_saturation(player) or settings_table.visual_max
     local id = player:hud_add({
-        name = "stamina",
+        name = "unilib:hud_effects_stamina",
         type = "statbar",
 
         alignment = {x = -1, y = -1},

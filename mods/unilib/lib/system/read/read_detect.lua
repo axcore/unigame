@@ -13,15 +13,16 @@ local S = unilib.intllib
 
 local function detect_expansion_packs()
 
-    -- Expansion packs add themselves to a global namespace, "xunilib". This only works if the pack
-    --      has already been loaded (so all expansion packs must be in unilib's mod.conf)
-    if xunilib == nil or xunilib.ext_pack_list == nil then
+    -- Expansion packs add themselves to a global namespace, "unilib_expansion"
+    -- This only works reliably if the pack has already been loaded (so all expansion packs must be
+    --      in unilib's mod.conf)
+    if not core.global_exists("unilib_expansion") or unilib_expansion.ext_pack_list == nil then
         return
     end
 
     -- Ignore duplicate expansion packs
     local check_table = {}
-    for _, ext_pack_name in ipairs(xunilib.ext_pack_list) do
+    for _, ext_pack_name in ipairs(unilib_expansion.ext_pack_list) do
 
         local ext_pack_path = core.get_modpath(ext_pack_name)
         if ext_pack_path then

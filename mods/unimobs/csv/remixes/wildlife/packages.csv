@@ -1,0 +1,44 @@
+# "wildlife" remix - contains everything from the "wildlife" mod
+# The two mobs in this remix - simple deer and simple wolves - are somewhat simplistic, and are
+#   intended (both in the original code, and in unimobs) to be code examples rather than suitable
+#   for actual gameplay
+# As a result, they are not compatible with the Petz API. They cannot be bred, fed or tamed, and
+#   they do not have spawn eggs. Instead, the "opt_wildlife" package spawns them in all biomes
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Essential mobkit behaviours (used by code in /lib/system)
+@mobkit_essential
+
+# wildlife packages
+brain_deer_simple|wildlife
+brain_wolf_simple|wildlife
+mob_deer_simple|wildlife
+mob_wolf_simple|wildlife
+opt_wildlife|wildlife
+shared_wildlife|wildlife
+
+# supporting packages (.depends)
+#hqb_attack|mobkit
+#hqb_die|mobkit
+#hqb_evade|mobkit
+#hqb_find_land|mobkit
+#hqb_hunt|mobkit
+#hqb_roam|mobkit
+#hqb_swim_to|mobkit
+#hqb_warn|mobkit
+#lqb_dumb_jump|mobkit
+#lqb_dumb_walk|mobkit
+#lqb_fall_over|mobkit
+#lqb_free_jump|mobkit
+#lqb_idle|mobkit
+#lqb_jump_attack|mobkit petz
+#lqb_turn_to_pos|mobkit
+#mtb_dumb_step|mobkit
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

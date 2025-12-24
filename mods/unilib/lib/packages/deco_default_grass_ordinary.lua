@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_grass_ordinary.init()
 
     return {
         description = "Ordinary grass as decoration",
-        depends = {"dirt_ordinary", "grass_ordinary"},
+        depends = {"dirt_ordinary_with_turf", "grass_ordinary"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

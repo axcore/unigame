@@ -45,9 +45,12 @@ function unilib.pkg.dirt_ordinary_with_turf_rainforest.exec()
                     tileable_vertical = false
                 },
             },
+            -- N.B. covered_dirt = 1 not in original code
+            -- N.B. spreading_dirt_type = 1 in the original code
             groups = {
-                crumbly = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
-                spreading_dirt_type = 1,
+                covered_dirt = 1, crumbly = 3,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+                spreading_dirt = 1,
             },
             sounds = unilib.sound.generate_dirt({
                 footstep = {name = "unilib_grass_footstep", gain = 0.25},

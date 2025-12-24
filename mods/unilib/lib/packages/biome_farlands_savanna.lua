@@ -19,7 +19,12 @@ function unilib.pkg.biome_farlands_savanna.init()
 
     return {
         description = "Savanna biomes",
-        depends = {"dirt_ordinary", "sand_ordinary", "stone_savanna"},
+        depends = {
+            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
+            "sand_ordinary",
+            "stone_savanna",
+        },
     }
 
 end

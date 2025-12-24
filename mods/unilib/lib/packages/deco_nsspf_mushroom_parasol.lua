@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_parasol.init()
 
     return {
         description = "Parasol mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_parasol"},
+        depends = "mushroom_parasol",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

@@ -20,7 +20,8 @@ function unilib.pkg.deco_ferns_tree_fern_giant.init()
     return {
         description = "Giant fern tree as decoration",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf",
             "liquid_water_ordinary",
             "liquid_water_river",
             "sand_desert",

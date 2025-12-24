@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_slimy.init()
 
     return {
         description = "Slimy mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_slimy"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_slimy",
+        },
     }
 
 end

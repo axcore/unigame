@@ -22,7 +22,11 @@ function unilib.pkg.deco_aotearoa_tree_mamaku.init()
         depends = "tree_mamaku",
         at_least_one = {
             {"biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 

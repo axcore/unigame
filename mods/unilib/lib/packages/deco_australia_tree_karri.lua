@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_karri.init()
     return {
         description = "Karri tree as decoration",
         depends = {"biome_australia_jarrah_karri_forests", "tree_karri"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -33,8 +33,8 @@ function unilib.pkg.deco_australia_tree_karri.post()
             -- From australia/biome_jarrah_karri_forests.lua
             biomes = "australia_jarrah_karri_forests",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_jarrah_karri_forests",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 35,
             y_min = 12,

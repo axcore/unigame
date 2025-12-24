@@ -20,7 +20,7 @@ function unilib.pkg.deco_ethereal_produce_strawberry_normal.init()
     return {
         description = "Normal strawberry as decoration",
         depends = "produce_strawberry_normal",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_prairie"},
     }
 
 end

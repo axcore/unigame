@@ -26,14 +26,14 @@ function unilib.pkg.deco_snow_snow_ordinary.init()
             "biome_snow_lush",
             "biome_snow_normal",
         },
-        at_least_one = {"dirt_ordinary", "stone_ordinary"},
+        at_least_one = {"dirt_ordinary_with_cover_snow", "stone_ordinary"},
     }
 
 end
 
 function unilib.pkg.deco_snow_snow_ordinary.exec()
 
-    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil then
 
         unilib.register_decoration_generic("snow_snow_ordinary_1", {
             -- From snow/mapgen_v7.lua
@@ -63,7 +63,7 @@ end
 
 function unilib.pkg.deco_snow_snow_ordinary.post()
 
-    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil then
 
         unilib.register_decoration_complete("snow_snow_ordinary_1", nil, {
             -- From snow/mapgen_v7.lua

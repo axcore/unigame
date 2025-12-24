@@ -19,8 +19,17 @@ function unilib.pkg.deco_herbs_flower_papaver_red.init()
 
     return {
         description = "Red papaver as decoration",
-        depends = {"dirt_ordinary", "flower_papaver_red"},
-        at_least_one = {"biome_default_grassland", "biome_default_rainforest"},
+        depends = "flower_papaver_red",
+        at_least_one = {
+            {
+                "biome_default_grassland",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_chrysanthemum_green_large.init()
 
     return {
         description = "Large green chrysanthemum as decoration",
-        depends = {"dirt_ordinary", "flower_chrysanthemum_green_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_chrysanthemum_green_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

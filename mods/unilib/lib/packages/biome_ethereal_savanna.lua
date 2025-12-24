@@ -21,6 +21,7 @@ function unilib.pkg.biome_ethereal_savanna.init()
         description = "Savanna biomes",
         depends = {
             "dirt_dry",
+            "dirt_dry_with_turf_dry",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_parsley_curly_wild.init()
 
     return {
         description = "Wild curly leaf parsley plant as decoration",
-        depends = {"dirt_ordinary", "plant_parsley_curly_wild"},
+        depends = "plant_parsley_curly_wild",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_dry"},
     }
 
 end

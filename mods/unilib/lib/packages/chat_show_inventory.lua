@@ -15,21 +15,21 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function do_show(name, param)
+local function do_show(pname, param)
 
-    if not core.get_player_by_name(name) then
+    if not core.get_player_by_name(pname) then
         return false, unilib.constant.chat_offline_msg
     end
 
     local count = 0
-    local inv = core.get_inventory({type = "player", name = name})
+    local inv = core.get_inventory({type = "player", name = pname})
     local inv_dict = inv:get_lists()
 
-    unilib.utils.chat_send_player(name, S("Current inventory"))
+    unilib.utils.chat_send_player(pname, S("Current inventory"))
 
     for key, mini_list in pairs(inv_dict) do
 
-        unilib.utils.chat_send_player(name, "  " .. key)
+        unilib.utils.chat_send_player(pname, "  " .. key)
         for _, itemstack in ipairs(mini_list) do
 
             if itemstack:get_name() ~= "" then
@@ -38,13 +38,13 @@ local function do_show(name, param)
                 if itemstack:get_count() > 1 then
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         "    " .. itemstack:get_name() .. " " .. itemstack:get_count()
                     )
 
                 else
 
-                    unilib.utils.chat_send_player(name, "    " .. itemstack:get_name())
+                    unilib.utils.chat_send_player(pname, "    " .. itemstack:get_name())
 
                 end
 
@@ -54,7 +54,7 @@ local function do_show(name, param)
 
     end
 
-    unilib.utils.chat_send_player(name, S("End of list (occupied inventory slots: @1)", count))
+    unilib.utils.chat_send_player(pname, S("End of list (occupied inventory slots: @1)", count))
 
 end
 
@@ -78,8 +78,8 @@ function unilib.pkg.chat_show_inventory.exec()
         description = S("Displays your current inventory"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_show(name, param)
+        func = function(pname, param)
+            return do_show(pname, param)
         end,
     })
 
@@ -88,8 +88,8 @@ function unilib.pkg.chat_show_inventory.exec()
         description = S("Displays your current inventory"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_show(name, param)
+        func = function(pname, param)
+            return do_show(pname, param)
         end,
     })
 
@@ -98,8 +98,8 @@ function unilib.pkg.chat_show_inventory.exec()
         description = S("Displays your current inventory"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_show(name, param)
+        func = function(pname, param)
+            return do_show(pname, param)
         end,
     })
 

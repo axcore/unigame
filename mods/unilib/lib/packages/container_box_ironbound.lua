@@ -275,7 +275,7 @@ function unilib.pkg.container_box_ironbound.exec()
 
                 core.show_formspec(
                     clicker:get_player_name(),
-                    "unilib:container_box_ironbound",
+                    "unilib:form_container_box_ironbound",
                     get_formspec(pos)
                 )
 

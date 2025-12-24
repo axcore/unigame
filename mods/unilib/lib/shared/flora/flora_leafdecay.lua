@@ -7,9 +7,6 @@
 
 local S = unilib.intllib
 
--- (From default/functions.lua)
-local movement_gravity = tonumber(core.settings:get("movement_gravity")) or unilib.constant.gravity
-
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
@@ -135,8 +132,8 @@ local function leafdecay_on_timer(pos, def_table)
         minpos = vector.subtract(pos, {x = 0.5, y = 0.5, z = 0.5}),
         maxvel = vector.new(0.5, 0, 0.5),
         minvel = vector.new(-0.5, -1, -0.5),
-        maxacc = vector.new(0, -movement_gravity, 0),
-        minacc = vector.new(0, -movement_gravity, 0),
+        maxacc = vector.new(0, unilib.constant.gravity, 0),
+        minacc = vector.new(0, unilib.constant.gravity, 0),
         maxsize = 0,
         minsize = 0,
 
@@ -175,7 +172,20 @@ function unilib.flora._register_leafdecay(def_table)
     --      N.B. .trunk_type and .others are not used in the equivalent minetest_game code
 
     if def_table.leaves == nil then
+
         def_table.leaves = {}
+
+    elseif unilib.setting.slopes_enable_flag and
+            unilib.setting.slopes_enable_leaves_flag and
+            #def_table.leaves > 0 then
+
+        -- Assume that the first leaves node in def_table.leaves is the most important one, and
+        --      create sloped leaves for just that node
+        local slope_list = unilib.slopes.get_all_slopes(def_table.leaves[1])
+        for _, slope_name in ipairs(slope_list) do
+            table.insert(def_table.leaves, slope_name)
+        end
+
     end
 
     if def_table.others == nil then

@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_peanut_wild.init()
 
     return {
         description = "Wild peanut plant as decoration",
-        depends = {"dirt_ordinary", "plant_peanut_wild"},
+        depends = "plant_peanut_wild",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_dry"},
     }
 
 end

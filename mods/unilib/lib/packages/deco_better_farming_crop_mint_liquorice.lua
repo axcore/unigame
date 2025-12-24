@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_crop_mint_liquorice.init()
 
     return {
         description = "Liquorice mint as decoration",
-        depends = {"biome_default_grassland", "crop_mint_liquorice", "dirt_ordinary"},
+        depends = {"biome_default_grassland", "crop_mint_liquorice", "dirt_ordinary_with_turf"},
     }
 
 end

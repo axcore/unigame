@@ -207,16 +207,16 @@ local function prepare_boat_entity(full_name, part_name)
         local p = self.object:get_pos()
         p.y = p.y - 0.5
         local new_velo
-        local new_acce = {x = 0, y = 0, z = 0}
+        local new_accel = {x = 0, y = 0, z = 0}
 
         if not is_water(p) then
 
             local nodedef = core.registered_nodes[core.get_node(p).name]
             if (not nodedef) or nodedef.walkable then
                 self.v = 0
-                new_acce = {x = 0, y = 1, z = 0}
+                new_accel = {x = 0, y = 1, z = 0}
             else
-                new_acce = {x = 0, y = (unilib.constant.gravity * -1), z = 0}
+                new_accel = {x = 0, y = unilib.constant.gravity, z = 0}
             end
 
             new_velo = get_velocity(self.v, self.object:get_yaw(), self.object:get_velocity().y)
@@ -231,9 +231,9 @@ local function prepare_boat_entity(full_name, part_name)
                 if y >= 5 then
                     y = 5
                 elseif y < 0 then
-                    new_acce = {x = 0, y = 20, z = 0}
+                    new_accel = {x = 0, y = 20, z = 0}
                 else
-                    new_acce = {x = 0, y = 5, z = 0}
+                    new_accel = {x = 0, y = 5, z = 0}
                 end
 
                 new_velo = get_velocity(self.v, self.object:get_yaw(), y)
@@ -241,7 +241,7 @@ local function prepare_boat_entity(full_name, part_name)
 
             else
 
-                new_acce = {x = 0, y = 0, z = 0}
+                new_accel = {x = 0, y = 0, z = 0}
                 if math.abs(self.object:get_velocity().y) < 1 then
 
                     local pos = self.object:get_pos()
@@ -265,7 +265,7 @@ local function prepare_boat_entity(full_name, part_name)
         end
 
         self.object:set_velocity(new_velo)
-        self.object:set_acceleration(new_acce)
+        self.object:set_acceleration(new_accel)
 
     end
 

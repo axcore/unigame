@@ -52,6 +52,8 @@ function unilib.pkg.food_cake_jaffa.exec()
         },
         replacements = {
             {"unilib:utensil_tray_baking", "unilib:utensil_tray_baking"},
+            -- (From unimobs expansion pack)
+            {"unilib:bucket_steel_with_milk_cow", "unilib:bucket_steel_empty"},
             -- (From animalia mod)
             {"animalia:bucket_milk", "unilib:bucket_steel_empty"},
             -- (From mobs_animal mod)

@@ -21,8 +21,17 @@ function unilib.pkg.deco_30biomes_tree_fir_log.init()
         description = "Fir tree log as decoration",
         notes = "Original deco package so that 30biomes fir trees can be used with default" ..
                 " biomes, alongside pine trees (since no biomes from that mod have been imported)",
-        depends = {"dirt_ordinary", "mushroom_red", "tree_fir"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_taiga"},
+        depends = {"mushroom_red", "tree_fir"},
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

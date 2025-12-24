@@ -19,7 +19,8 @@ function unilib.pkg.deco_farming_redo_produce_pumpkin_yellow.init()
 
     return {
         description = "Yellow Pumpkin as decoration",
-        depends = {"dirt_ordinary", "produce_pumpkin_yellow"},
+        depends = "produce_pumpkin_yellow",
+        at_least_one = {"dirt_ordinary_with_litter_rainforest", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -31,8 +32,8 @@ function unilib.pkg.deco_farming_redo_produce_pumpkin_yellow.post()
         -- Completes decoration in package "produce_pumpkin_yellow"
         num_spawn_by = 1,
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_litter_rainforest",
+            "unilib:dirt_ordinary_with_turf",
         },
         spawn_by = {"group:water", "group:sand"},
         y_max = 3,

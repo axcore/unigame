@@ -21,7 +21,7 @@ function unilib.pkg.deco_aotearoa_stone_andesite_antipodean.init()
         description = "Antipodean andesite as decoration",
         depends = "stone_andesite_antipodean",
         at_least_one = {"biome_aotearoa_dunes", "biome_aotearoa_shore"},
-        optional = "dirt_ordinary",
+        optional = "dirt_ordinary_with_turf",
     }
 
 end

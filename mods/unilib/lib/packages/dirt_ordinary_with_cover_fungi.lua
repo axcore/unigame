@@ -39,8 +39,10 @@ function unilib.pkg.dirt_ordinary_with_cover_fungi.exec()
                 "unilib_dirt_ordinary.png",
                 "unilib_dirt_ordinary.png^unilib_cover_fungi_side.png",
             },
+            -- N.B. covered_dirt = 1 not in original code
             groups = {
-                crumbly = 1, not_in_creative_inventory = unilib.hide_covered_dirt_group,
+                covered_dirt = 1, crumbly = 1,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group,
                 oddly_breakable_by_hand = 1,
             },
             sounds = unilib.global.sound_table.dirt,

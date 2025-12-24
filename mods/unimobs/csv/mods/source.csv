@@ -1,0 +1,14 @@
+# mod_name | optional_modpack_name | download_date | download_url | author | code_licence | media_licence | notes
+unimobs||20250524|https://github.com/axcore/unimobs|A S Lewis|LGPL 2.1|CC BY-SA 3.0|Any original material is marked as being "imported" from unimobs
+
+# From mobkit
+mobkit||20250524|https://github.com/mt-mods/mobkit|TheTermos|MIT|n/a|Imported everything
+
+# From petz
+bale|petz|20250528|https://github.com/yl-whosit/petz/|runsy|GPL v3.0|CC BY-SA 4.0|Imported everything
+kitz|petz|20250528|https://github.com/yl-whosit/petz/|runsy|GPL v3.0|CC BY-SA 4.0|Imported everything
+petz|petz|20250528|https://github.com/yl-whosit/petz/|runsy|GPL v3.0|CC BY-SA 4.0|Imported almost everything (e.g. the unfinished lion cage was not imported)
+
+# All other mods
+vis_harm_1nd||20251128|https://codeberg.org/Mantar/vis_harm_1nd/|Mantar|GPL v3.0|CC0|Imported everything, but automatic support for the Exile game was removed
+wildlife||20250525|https://github.com/TheTermos/wildlife|TheTermos|MIT|MIT|Imported everything

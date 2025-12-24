@@ -19,7 +19,6 @@ function unilib.pkg.plant_fungus_honey.init()
 
     return {
         description = "Honey fungus",
-        depends = {"shared_nsspf", "tree_apple"},
     }
 
 end
@@ -97,14 +96,6 @@ function unilib.pkg.plant_fungus_honey.exec()
         output = "unilib:plant_fungus_honey_cooked",
         recipe = "unilib:plant_fungus_honey",
         cooktime = 10,
-    })
-
-    unilib.pkg.shared_nsspf.register_fungus({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_apple_trunk",
-        plant_name = "unilib:plant_fungus_honey",
-
-        surface_list = {"unilib:dirt_ordinary_with_turf"},
     })
 
 end

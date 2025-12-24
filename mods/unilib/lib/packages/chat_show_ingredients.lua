@@ -413,7 +413,7 @@ function unilib.pkg.chat_show_ingredients.exec()
         description = S("Displays full list of ingredients for crafting the specified item"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             -- Partial table of ingredients for <item>, omitting ingredients used in all
             --      intermediate crafting stages
@@ -490,12 +490,12 @@ function unilib.pkg.chat_show_ingredients.exec()
 
             -- Compile the tables of ingredients
             unilib.utils.chat_send_player(
-                name, S("Craft recipe chain for @1 > @2", base_name, base_multiple)
+                pname, S("Craft recipe chain for @1 > @2", base_name, base_multiple)
             )
-            unilib.utils.chat_send_player(name, string.format("  %s %d", base_name, base_multiple))
+            unilib.utils.chat_send_player(pname, string.format("  %s %d", base_name, base_multiple))
 
             success_flag, display_table = add_ingredients(
-                name,
+                pname,
                 excluded_mod_table,
                 excluded_item_table,
                 display_table,
@@ -509,14 +509,14 @@ function unilib.pkg.chat_show_ingredients.exec()
 
             if not success_flag or unilib.utils.is_table_empty(display_table) then
 
-                unilib.utils.chat_send_player(name, S("Item cannot be crafted easily", base_name))
-                unilib.utils.chat_send_player(name, S("End of chain"))
+                unilib.utils.chat_send_player(pname, S("Item cannot be crafted easily", base_name))
+                unilib.utils.chat_send_player(pname, S("End of chain"))
 
             else
 
-                unilib.utils.chat_send_player(name, S("End of chain"))
+                unilib.utils.chat_send_player(pname, S("End of chain"))
                 unilib.utils.chat_send_player(
-                    name, S("Basic ingredients for \"@1 @2\"", base_name, base_multiple)
+                    pname, S("Basic ingredients for \"@1 @2\"", base_name, base_multiple)
                 )
 
                 -- The ingredient tables might include unilib items or their original equivalents.
@@ -540,12 +540,12 @@ function unilib.pkg.chat_show_ingredients.exec()
 
                     -- Surely no craft recipe requires more than 100000 ingredients, right...?
                     unilib.utils.chat_send_player(
-                        name, string.format("%6d %s", convert_display_table[key], key)
+                        pname, string.format("%6d %s", convert_display_table[key], key)
                     )
 
                 end
 
-                unilib.utils.chat_send_player(name, S("End of chain"))
+                unilib.utils.chat_send_player(pname, S("End of chain"))
 
             end
 

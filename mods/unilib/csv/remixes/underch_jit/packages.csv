@@ -1,6 +1,6 @@
 # "underch-jit" remix - almost exactly the same as the "underch" remix (see below for a list of
-#       removed packages), but uses code from the "experimental" version of the underch mod, to
-#       produce just-in-time underground biome generation
+#   removed packages), but uses code from the "experimental" version of the underch mod, to produce
+#   just-in-time underground biome generation
 
 # node_name | original_mod
 
@@ -196,9 +196,7 @@ metal_zinc|glemr11 technic_worldgen technic
 # supporting packages (.optional)
 #container_chest_ordinary|default
 #fire_ordinary|fire
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #gravel_stone_desert|glemr11

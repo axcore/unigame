@@ -1,9 +1,14 @@
 The files in this folder are when unilib is copied into unigame (in its ../mods folder).
 
-1. settingtypes.txt replaces the file in unilib's main folder
-2. global_settings.lua replaces the file in unilib's ../lib/system/global/ folder
-3. In init.lua, must change the default value of the "unilib_show_startup_msg_flag" setting, by
-        replacing this line:
+1. settingtypes.txt replaces the file in the unigame copy of unilib's main folder
+
+2. global_settings.lua replaces the file in the unigame copy of unilib's ../lib/system/global/
+    folder
+
+3. imported.csv replaces the file in the unigame copy of unilib's ../csv/mods/ folder
+
+4. In init.lua, must change the default value of the "unilib_show_startup_msg_flag" setting, by
+    replacing this line:
 
         local show_flag = core.settings:get_bool("unilib_show_startup_msg_flag", true)
 

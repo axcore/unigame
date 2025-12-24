@@ -37,8 +37,12 @@ function unilib.tools._register_special_shovel(full_name)
 
         function core.handle_node_drops(pos, drops, digger)
 
+            if not digger then
+                return old_handle_node_drops(pos, drops, digger)
+            end
+
             local wielded_name = digger:get_wielded_item():get_name()
-            if not digger or unilib.global.special_shovel_table[wielded_name] == nil then
+            if unilib.global.special_shovel_table[wielded_name] == nil then
                 return old_handle_node_drops(pos, drops, digger)
             end
 

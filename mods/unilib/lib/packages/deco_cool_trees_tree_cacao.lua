@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_cacao.init()
 
     return {
         description = "Cacao tree as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "tree_cacao"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "tree_cacao",
+        },
     }
 
 end

@@ -76,7 +76,7 @@ function unilib.pkg.misc_calendar_fancy.exec()
     })
 
     core.register_on_player_receive_fields(function(player, formname, fields)
-        unilib.calendars.on_receive_fields(player, formname, fields, "unilib:misc_calendar_fancy")
+        unilib.calendars.on_receive_fields(player, formname, fields)
     end)
 
 end

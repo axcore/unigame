@@ -23,7 +23,8 @@ function unilib.pkg.deco_ethereal_plant_cotton_wild.init()
                 " later removed, to be replaced with a new decoration in the \"farming_redo\"" ..
                 " mod. This package preserves the original decoration, updated to match the new" ..
                 " code",
-        depends = {"dirt_dry", "plant_cotton_wild"},
+        depends = "plant_cotton_wild",
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf_dry"},
     }
 
 end

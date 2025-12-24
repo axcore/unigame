@@ -96,7 +96,7 @@ local function init_hud(player)
     for i = 1, hud_lines do
 
         player_hud_table[name]["hud_line" .. i] = player:hud_add({
-            name = "orienteering",
+            name = "unilib:hud_shared_orienteering",
             type = "text",
 
             alignment = hud_alignment,
@@ -266,7 +266,7 @@ local function update_hud_displays(player)
 
         local u = speed_unit
         str_speed = S(
-            "Speed: hor.: @1 @2, vert.: @3 @4",
+            "Speed: horiz.: @1 @2, vert.: @3 @4",
             string.format("%.1f", speed_hor),
             u,
             string.format("%.1f", speed_ver),

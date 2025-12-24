@@ -21,8 +21,17 @@ function unilib.pkg.deco_30biomes_tree_fir.init()
         description = "Fir tree as decoration",
         notes = "Original deco package so that 30biomes fir trees can be used with default" ..
                 " biomes, alongside pine trees (since no biomes from that mod have been imported)",
-        depends = {"dirt_ordinary", "tree_fir"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_taiga"},
+        depends = "tree_fir",
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
+            },
+        },
     }
 
 end
@@ -34,12 +43,12 @@ function unilib.pkg.deco_30biomes_tree_fir.post()
         biomes = {"default_forest_coniferous", "default_taiga"},
         num_spawn_by = 8,
         place_on = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         spawn_by = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         y_max = unilib.constant.y_max,
         y_min = 4,

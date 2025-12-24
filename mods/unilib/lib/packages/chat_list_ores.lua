@@ -157,8 +157,8 @@ function unilib.pkg.chat_list_ores.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_ores(name, param)
+        func = function(pname, param)
+            return do_list_ores(pname, param)
         end,
     })
 
@@ -171,8 +171,8 @@ function unilib.pkg.chat_list_ores.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_ores(name, param)
+        func = function(pname, param)
+            return do_list_ores(pname, param)
         end,
     })
 

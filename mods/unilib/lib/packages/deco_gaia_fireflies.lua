@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_fireflies.init()
 
     return {
-        description = "Fireflies for the \"gaia\" remix",
+        description = "Fireflies for \"gaia\"-compatible remixes",
         depends = {"biome_gaia", "misc_firefly"},
     }
 
@@ -48,7 +48,8 @@ function unilib.pkg.deco_gaia_fireflies.post()
 
         fill_ratio = 0.0005,
         place_offset_y = 2,
-        place_on = "group:spreading_dirt_type",
+        -- N.B. Compatibility with unilib and non-unilib dirt nodes
+        place_on = {"group:spreading_dirt", "group:spreading_dirt_type"},
         sidelen = 80,
         y_max = unilib.constant.y_max,
         y_min = -1,
@@ -63,7 +64,8 @@ function unilib.pkg.deco_gaia_fireflies.post()
 
         fill_ratio = 0.0005,
         place_offset_y = 3,
-        place_on = "group:spreading_dirt_type",
+        -- N.B. Compatibility with unilib and non-unilib dirt nodes
+        place_on = {"group:spreading_dirt", "group:spreading_dirt_type"},
         sidelen = 80,
         y_max = unilib.constant.y_max,
         y_min = -1,

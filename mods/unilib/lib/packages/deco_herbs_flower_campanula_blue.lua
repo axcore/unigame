@@ -19,7 +19,7 @@ function unilib.pkg.deco_herbs_flower_campanula_blue.init()
 
     return {
         description = "Blue campanula as decoration",
-        depends = {"dirt_ordinary", "flower_campanula_blue"},
+        depends = {"dirt_ordinary_with_turf", "flower_campanula_blue"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

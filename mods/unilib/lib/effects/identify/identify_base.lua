@@ -733,53 +733,65 @@ core.register_on_joinplayer(function(player)
     end
 
     local background_id_left = player:hud_add({
+        name = "unilib:hud_effects_identify_1",
         type = "image",
+
+        offset = {x = -50, y = 35},
         position = posn_table,
         scale = {x = 2, y = 2},
         text = "",
-        offset = {x = -50, y = 35},
     })
 
     local background_id_middle = player:hud_add({
+        name = "unilib:hud_effects_identify_2",
         type = "image",
+
+        alignment = {x = 1},
+        offset = {x = -37.5, y = 35},
         position = posn_table,
         scale = {x = 2, y = 2},
         text = "",
-        alignment = {x = 1},
-        offset = {x = -37.5, y = 35},
     })
 
     local background_id_right = player:hud_add({
+        name = "unilib:hud_effects_identify_3",
         type = "image",
+
+        offset = {x = 0, y = 35},
         position = posn_table,
         scale = {x = 2, y = 2},
         text = "",
-        offset = {x = 0, y = 35},
     })
 
     local image_id = player:hud_add({
+        name = "unilib:hud_effects_identify_4",
         type = "image",
+
+        offset = {x = -35, y = 35},
         position = posn_table,
         scale = {x = 0.3, y = 0.3},
-        offset = {x = -35, y = 35},
     })
 
     local name_id = player:hud_add({
+        name = "unilib:hud_effects_identify_5",
         type = "text",
+
+        alignment = {x = 1},
+        number = colour_white,
+        offset = {x = 0, y = 29},
         position = posn_table,
         scale = {x = 0.3, y = 0.3},
-        number = colour_white,
-        alignment = {x = 1},
-        offset = {x = 0, y = 29},
     })
 
     local mod_id = player:hud_add({
+        name = "unilib:hud_effects_identify_6",
         type = "text",
+
+        alignment = {x = 1},
+        number = colour_red,
+        offset = {x = 0, y = 46},
         position = posn_table,
         scale = {x = 0.3, y = 0.3},
-        number = colour_red,
-        alignment = {x = 1},
-        offset = {x = 0, y = 46},
     })
 
     unilib.utils.set_player_attribute(player, "identify_background_left", background_id_left)

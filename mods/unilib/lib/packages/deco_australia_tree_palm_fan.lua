@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_palm_fan.init()
     return {
         description = "Australian fan palm tree as decoration",
         depends = {"biome_australia_far_north_queensland", "tree_palm_fan"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -31,8 +31,8 @@ function unilib.pkg.deco_australia_tree_palm_fan.post()
         -- From australia/biome_far_north_queensland.lua
         biomes = "australia_far_north_queensland",
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_with_turf_far_north_queensland",
+            "unilib:dirt_ordinary_with_turf",
         },
         y_max = 20,
         y_min = 5,

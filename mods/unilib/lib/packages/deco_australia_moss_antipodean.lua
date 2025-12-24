@@ -25,7 +25,7 @@ function unilib.pkg.deco_australia_moss_antipodean.init()
             "biome_australia_tasmania",
             "biome_australia_victorian_forests",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
         },
     }
 
@@ -35,15 +35,15 @@ function unilib.pkg.deco_australia_moss_antipodean.post()
 
     if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("australia_moss_antipodean_in_range", nil, {
             -- From australia:moss
             biomes = "australia_great_dividing_range",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_with_turf_great_dividing_range",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = unilib.constant.y_max,
             y_min = 36,
@@ -53,15 +53,15 @@ function unilib.pkg.deco_australia_moss_antipodean.post()
 
     if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("australia_moss_antipodean_in_tasmania", nil, {
             -- From australia:moss
             biomes = "australia_tasmania",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = unilib.constant.y_max,
             y_min = 8,
@@ -71,8 +71,8 @@ function unilib.pkg.deco_australia_moss_antipodean.post()
             -- From australia:moss_with_fungus
             biomes = "australia_tasmania",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = unilib.constant.y_max,
             y_min = 8,
@@ -82,15 +82,15 @@ function unilib.pkg.deco_australia_moss_antipodean.post()
 
     if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("australia_moss_antipodean_in_victoria", nil, {
             -- From australia:moss
             biomes = "australia_victorian_forests",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 200,
             y_min = 36,

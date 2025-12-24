@@ -1,5 +1,5 @@
 # "underch" remix - contains everything from underch, and everything from the following ucho mods:
-#       compressed, condensed, bakedeye, gemtools, gravelcraft
+#   compressed, condensed, bakedeye, gemtools, gravelcraft
 
 # node_name | original_mod
 
@@ -124,9 +124,7 @@ stone_ordinary|default moreblocks technic
 # supporting packages (.optional)
 #brick_ordinary|default
 #fire_ordinary|fire
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #item_stick_ordinary|default
 #machine_furnace_induction|unilib
 #machine_polishing|unilib

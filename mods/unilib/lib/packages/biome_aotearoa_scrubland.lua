@@ -21,13 +21,13 @@ function unilib.pkg.biome_aotearoa_scrubland.init()
         description = "Aotearoa scrubland biomes",
         depends = {
             "clay_ordinary",
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_rainforest",
             "gravel_ordinary_with_algae",
             "liquid_water_river",
             "stone_schist_antipodean",
             "stone_sandstone_pale",
         },
-        optional = "dirt_custom_antipodean",
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

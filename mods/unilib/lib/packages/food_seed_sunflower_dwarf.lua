@@ -85,33 +85,39 @@ function unilib.pkg.food_seed_sunflower_dwarf.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        technic.register_separating_recipe({
-            -- From cucina_vegana:sunflower_seeds
-            output = {"unilib:food_seed_sunflower_dwarf 4", "unilib:dye_yellow", nil},
-            input = {"unilib:crop_sunflower_dwarf_harvest"},
-        })
-
-        if unilib.global.pkg_executed_table["flower_helianthus"] ~= nil then
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
 
             technic.register_separating_recipe({
                 -- From cucina_vegana:sunflower_seeds
                 output = {"unilib:food_seed_sunflower_dwarf 4", "unilib:dye_yellow", nil},
-                input = {"unilib:flower_helianthus"},
+                input = {"unilib:crop_sunflower_dwarf_harvest"},
             })
+
+            if unilib.global.pkg_executed_table["flower_helianthus"] ~= nil then
+
+                technic.register_separating_recipe({
+                    -- From cucina_vegana:sunflower_seeds
+                    output = {"unilib:food_seed_sunflower_dwarf 4", "unilib:dye_yellow", nil},
+                    input = {"unilib:flower_helianthus"},
+                })
+
+                technic.register_extractor_recipe({
+                    -- From cucina_vegana:sunflower_seeds
+                    output = "unilib:food_seed_sunflower_dwarf 4",
+                    input = {"unilib:flower_helianthus"},
+                })
+
+            end
 
             technic.register_extractor_recipe({
                 -- From cucina_vegana:sunflower_seeds
                 output = "unilib:food_seed_sunflower_dwarf 4",
-                input = {"unilib:flower_helianthus"},
+                input = {"unilib:crop_sunflower_dwarf_harvest"},
             })
 
-        end
-
-        technic.register_extractor_recipe({
-            -- From cucina_vegana:sunflower_seeds
-            output = "unilib:food_seed_sunflower_dwarf 4",
-            input = {"unilib:crop_sunflower_dwarf_harvest"},
-        })
+        end)
 
     end
 

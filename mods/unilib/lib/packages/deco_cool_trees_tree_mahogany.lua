@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_mahogany.init()
 
     return {
         description = "Mahogany tree as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "tree_mahogany"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "tree_mahogany",
+        },
     }
 
 end

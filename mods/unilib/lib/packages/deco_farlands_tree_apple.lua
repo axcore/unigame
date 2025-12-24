@@ -22,7 +22,7 @@ function unilib.pkg.deco_farlands_tree_apple.init()
         notes = "Because farlands apple trees share the same trunks and leaves as unilib" ..
                 " \"exotic\" trees, no new apple tree has been created for this package;" ..
                 " instead, we just re-use the existing one",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "tree_apple"},
+        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary_with_turf", "tree_apple"},
     }
 
 end

@@ -19,11 +19,17 @@ function unilib.pkg.deco_herbs_mushroom_galerina.init()
 
     return {
         description = "Galerina mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_galerina"},
+        depends = "mushroom_galerina",
         at_least_one = {
-            "biome_default_forest_coniferous",
-            "biome_default_forest_deciduous",
-            "biome_default_rainforest",
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_forest_deciduous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

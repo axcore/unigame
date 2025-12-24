@@ -30,7 +30,8 @@ function unilib.pkg.deco_aotearoa_misc_wood_rotten.init()
             {
                 "clay_gumland",
                 "dirt_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
                 "dirt_peat_forest",
                 "dirt_peat_restiad",
             },

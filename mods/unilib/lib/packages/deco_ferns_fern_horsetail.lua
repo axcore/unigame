@@ -20,7 +20,8 @@ function unilib.pkg.deco_ferns_fern_horsetail.init()
     return {
         description = "Horsetail fern as decoration",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_coniferous",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_short",
             "gravel_ordinary",
             "liquid_water_ordinary",

@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_produce_yucca.init()
 
     return {
         description = "Yucca as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "produce_yucca"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "produce_yucca",
+        },
     }
 
 end

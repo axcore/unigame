@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_tree_acacia_exotic_log.init()
 
     return {
         description = "Exotic acacia tree log as decoration",
-        depends = {"biome_farlands_savanna", "dirt_ordinary", "tree_acacia_exotic"},
+        depends = {"biome_farlands_savanna", "dirt_ordinary_with_turf_dry", "tree_acacia_exotic"},
     }
 
 end

@@ -1,5 +1,5 @@
 # Environment constants for the "glemr11" remix, replacing temperature/humidity/elevation values in
-#       the corresponding biomes.csv/decorations.csv files
+#   the corresponding biomes.csv/decorations.csv files
 
 # Temperatures
 HOT|100

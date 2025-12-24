@@ -191,7 +191,7 @@ function unilib.pkg.machine_centrifuge_cream.post()
 
     if unilib.global.pkg_executed_table["ingredient_cream_milk"] ~= nil then
 
-        -- (group:food_milk provided by animalia, mobs_animals and petz)
+        -- (group:food_milk provided by unimobs, animalia, mobs_animals and petz)
         table.insert(recipe_list, {"group:food_milk", "unilib:ingredient_cream_milk 3"})
         table.insert(recipe_list, {"unilib:ingredient_whey", "unilib:ingredient_cream_milk"})
 

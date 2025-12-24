@@ -49,6 +49,9 @@ bed_ordinary_quilt|colored_beds
 bed_fancy_quilt|colored_beds
 shared_beds|beds
 
+# colored-meselamps packages
+light_block_mese_tinted|colored-meselamps
+
 # clock/compass packages (various mods)
 decor_block_compass|compass
 item_compass_death|death_compass
@@ -197,6 +200,7 @@ crop_cotton|farming
 crop_sunflower_giant|farming
 crop_tomato_cherry|better_farming
 crop_wheat|farming
+dirt_ordinary_with_turf|default farming moreblocks
 dye_basic|dye bakedclay
 fire_ordinary|fire
 food_cheese_gorgonzola|cheese
@@ -268,7 +272,7 @@ wool_basic|wool
 biome_default_desert|default
 biome_default_rainforest|default
 biome_default_savanna|default
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 liquid_water_ordinary|default
 liquid_water_river|default
@@ -281,6 +285,7 @@ machine_anvil_simple|cottages
 #clay_baked_basic|bakedclay
 #clay_brown|underch
 #crop_rice_white|farming
+#dirt_ordinary_with_cover_snow|default
 #food_cheese_toma|cheese
 #food_porridge|farming
 #glass_clean|moreblocks
@@ -296,6 +301,7 @@ machine_anvil_simple|cottages
 #glass_glow_super|moreblocks
 #glass_iron|moreblocks
 #glass_obsidian|default moreblocks
+#grass_ordinary|default
 #gravel_sandstone_desert|glemr4
 #gravel_sandstone_ordinary|unilib
 #ingredient_cocoa_normal|cacaotree
@@ -310,6 +316,7 @@ machine_anvil_simple|cottages
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #shared_cheese_rack|cheese
+#soil_ordinary|farming
 #trapdoor_wood_ordinary|doors
 #tree_apple|default doors moreblocks
 #utensil_mortar_pestle|farming

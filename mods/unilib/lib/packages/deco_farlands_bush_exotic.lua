@@ -19,12 +19,13 @@ function unilib.pkg.deco_farlands_bush_exotic.init()
 
     return {
         description = "Exotic bush as decoration",
-        depends = {"biome_farlands_forest_bamboo", "bush_exotic", "dirt_ordinary"},
+        depends = {"biome_farlands_forest_bamboo", "bush_exotic", "dirt_ordinary_with_turf"},
         optional = {
             "biome_farlands_forest_coniferous",
             "biome_farlands_forest_deciduous",
             "biome_farlands_grassland",
             "biome_farlands_grassland_snowy",
+            "dirt_ordinary_with_cover_snow",
         },
     }
 

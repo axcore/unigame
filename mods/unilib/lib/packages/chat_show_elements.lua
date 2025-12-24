@@ -232,7 +232,7 @@ function unilib.pkg.chat_show_elements.exec()
         description = S("Shows the periodic table (from the \"atomic\" remix)"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
             return do_show_elements(param)
         end,
     })
@@ -242,7 +242,7 @@ function unilib.pkg.chat_show_elements.exec()
         description = S("Shows the periodic table (from the \"atomic\" remix)"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
             return do_show_elements(param)
         end,
     })
@@ -254,7 +254,7 @@ function unilib.pkg.chat_show_elements.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
             return do_show_rare_elements(param)
         end,
     })
@@ -266,7 +266,7 @@ function unilib.pkg.chat_show_elements.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
             return do_show_rare_elements(param)
         end,
     })

@@ -20,7 +20,7 @@ function unilib.pkg.deco_beautiflowers_mixed.init()
     return {
         description = "Generic decoration package placing flowers from the beautiflowers mod on" ..
                 " grass from default",
-        depends = "dirt_ordinary",
+        depends = "dirt_ordinary_with_turf",
     }
 
 end

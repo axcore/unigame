@@ -19,7 +19,7 @@ function unilib.pkg.deco_youngtrees_tree_young_apple.init()
 
     return {
         description = "Young apple tree as decoration",
-        depends = {"dirt_ordinary", "tree_young_apple"},
+        depends = {"dirt_ordinary_with_turf", "tree_young_apple"},
     }
 
 end

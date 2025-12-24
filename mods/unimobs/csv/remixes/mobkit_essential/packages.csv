@@ -1,0 +1,20 @@
+# "mobkit_essential" remix - contains only essential behaviours from the "mobkit" mod
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Essential mobkit behaviours (used by code in /lib/system)
+hqb_roam|mobkit
+lqb_turn_to_pos|mobkit
+lqb_dumb_walk|mobkit
+lqb_dumb_jump|mobkit
+
+# supporting packages (.depends)
+#lqb_idle|mobkit
+#mtb_dumb_step|mobkit
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

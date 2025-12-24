@@ -1,5 +1,5 @@
 # "grains" remix - contains everything from the "grains" mod that was not already imported via
-#       another mod (mostly from "farming_redo")
+#   another mod (mostly from "farming_redo")
 
 # node_name | original_mod
 
@@ -24,7 +24,7 @@ ingredient_sugar_normal|farming
 plant_papyrus_ordinary|default mtg_plus
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)

@@ -19,7 +19,7 @@ function unilib.pkg.deco_pl_sunflowers_flower_helianthus.init()
 
     return {
         description = "Helianthus as decoration",
-        depends = {"dirt_ordinary", "flower_helianthus"},
+        depends = {"dirt_ordinary_with_turf", "flower_helianthus"},
     }
 
 end

@@ -236,8 +236,8 @@ function unilib.pkg.bush_rhododendron.exec()
             "unilib:bush_rhododendron_leaves_flowering",
         },
 
---        chance = 1,
---        interval = math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max),
+--      chance = 1,
+--      interval = math.random(unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max),
         chance = 10,
         interval = math.random(
             unilib.setting.sapling_grow_min, unilib.setting.sapling_grow_max

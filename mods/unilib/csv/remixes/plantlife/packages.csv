@@ -1,12 +1,12 @@
 # "plantlife" remix - contains everything from the plantlife modpack
 # For all plantlife mods, calls to biome_lib have been crudely emulated by Minetest decorations, so
-#       trees will not spawn in the same positions/quantities
+#   trees will not spawn in the same positions/quantities
 # Did not import anything from the 3dmushrooms, nature_classic or vines mods
 # From cavestuff, imported the pebbles, did not import the stalactites
 # From dryplants, imported everything except the greater concentration of grass
 # From poisonivy, imported everything and made the ivy poisonous
 # From trunks, imported everything except roots (marked as "for testing purposes"), log decorations
-#       and moss on trees
+#   and moss on trees
 
 # node_name | original_mod
 
@@ -98,6 +98,7 @@ tree_young_bamboo|youngtrees
 # supporting packages (.depends)
 crop_wheat|farming
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 ingredient_flour_ordinary|farming
 item_stick_ordinary|default
 liquid_water_ordinary|default
@@ -107,6 +108,9 @@ sand_ordinary|default
 biome_default_forest_deciduous|default
 biome_default_rainforest|default
 biome_default_savanna|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf_bamboo|ethereal
 dirt_permafrost_ordinary|default
 fern_ordinary|default
 gravel_ordinary|default mtg_plus

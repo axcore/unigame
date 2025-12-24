@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_seagrass_decorations_sea.init()
 
     return {
-        description = "\"decorations_sea\" seagrass for the \"gaia\" remix",
+        description = "\"decorations_sea\" seagrass for \"gaia\"-compatible remixes",
         notes = "Based on various decorations_sea decoration packages, combined here into one" ..
                 " package with \"gaia\" biomes",
         depends = "biome_gaia",

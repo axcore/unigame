@@ -18,10 +18,10 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_pebbles.init()
 
     return {
-        description = "Pebbles for the \"gaia\" remix",
-        notes = "Creates large and small pebbles for every stone type found in gaia biomes (if" ..
-                " they don\'t already exist), then places them as decorations. The pebbles are" ..
-                " a visual guide to which types of stone can be found below the surface",
+        description = "Pebbles for \"gaia\"-compatible remixes",
+        notes = "Creates large and small pebbles for every stone type found in \"gaia\" biomes" ..
+                " (if they don\'t already exist), then places them as decorations. The pebbles" ..
+                " are a visual guide to which types of stone can be found below the surface",
         depends = {"biome_gaia", "deco_gaia"},
         at_least_one = {"pebble_large", "pebble_small"},
     }
@@ -39,7 +39,7 @@ function unilib.pkg.deco_gaia_pebbles.post()
     end
 
     -- A table of stone types and their corresponding (smooth) stone nodes. Unlike "convert_table",
-    --      this table only contains stones found in gaia's biomes.csv
+    --      this table only contains stones found in the remix biomes.csv
     -- Table in the form
     --      stone_table[stone_type] = list_of_node_names
     local stone_table = {}

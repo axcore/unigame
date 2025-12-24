@@ -52,6 +52,18 @@ function unilib.pkg.ingredient_curd.post()
 
     end
 
+    if core.get_modpath("unimobs") then
+
+        unilib.register_craft({
+            -- From cheese:curd
+            type = "cooking",
+            output = "unilib:food_cheese_normal",
+            recipe = "unilib:ingredient_curd",
+            cooktime = 20,
+        })
+
+    end
+
     if core.get_modpath("mobs_animal") then
 
         unilib.register_craft({

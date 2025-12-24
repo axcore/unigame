@@ -94,6 +94,7 @@ local function is_rail(pos, railtype)
     local node = core.get_node(pos).name
     if node == "ignore" then
 
+        --[[
         local vm = core.get_voxel_manip()
         local emin, emax = vm:read_from_map(pos, pos)
         local area = VoxelArea:new{
@@ -104,6 +105,10 @@ local function is_rail(pos, railtype)
         local data = vm:get_data()
         local vi = area:indexp(pos)
         node = core.get_name_from_content_id(data[vi])
+        ]]--
+        -- We really need to know, so load it
+        core.load_area(pos)
+        node = core.get_node(pos).name
 
     end
 

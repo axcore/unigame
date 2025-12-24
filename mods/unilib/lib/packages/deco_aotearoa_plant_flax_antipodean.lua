@@ -29,7 +29,7 @@ function unilib.pkg.deco_aotearoa_plant_flax_antipodean.init()
             },
             {
                 "dirt_custom_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
                 "dirt_peat_forest",
                 "dirt_peat_restiad",
                 "gravel_ordinary",

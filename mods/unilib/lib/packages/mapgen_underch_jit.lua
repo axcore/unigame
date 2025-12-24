@@ -199,7 +199,7 @@ local function create_dynamic_nodes()
             {x = 0, y = 1, z = 0},
             {x = 0, y = 1, z = 0},
         },
-        chance = 1 / 10,
+        probability = 1 / 10,
     })
 
     unilib.dynamic.register_extender({
@@ -230,7 +230,7 @@ local function create_dynamic_nodes()
             {x = 0, y = -2, z = 0},
             {x = 0, y = 2, z = 0},
         },
-        chance = 1 / 17,
+        probability = 1 / 17,
     })
 
     unilib.dynamic.register_extender({
@@ -245,7 +245,7 @@ local function create_dynamic_nodes()
             {x = 1, y = -1, z = -1},
             {x = -1, y = -1, z = -1},
         },
-        chance = 7 / 24,
+        probability = 7 / 24,
     })
 
     --[[
@@ -256,7 +256,7 @@ local function create_dynamic_nodes()
         output = "unilib:stone_omphyrite_crack_lava",
         replace_mode = mode,
         sides = "corners",
-        chance = 1 / 7,
+        probability = 1 / 7,
     })
     ]]--
 
@@ -273,7 +273,7 @@ local function create_dynamic_nodes()
             {x = 0, y = 0, z = -1},
             {x = 0, y = 0, z = 1},
         },
-        chance = 1 / 5,
+        probability = 1 / 5,
     })
 
     -- Flooders
@@ -286,10 +286,10 @@ local function create_dynamic_nodes()
         sides = "sides",
         size = 100,
         ore_table = {
-            {block = "unilib:dirt_mossy", chance = 2 / 3},
+            {block = "unilib:dirt_mossy", probability = 2 / 3},
         },
         top_table = {
-            {block = "unilib:dynamic_plant_bush_underground", chance = 1 / 5},
+            {block = "unilib:dynamic_plant_bush_underground", probability = 1 / 5},
         },
         jit_flag = true,
     })
@@ -303,10 +303,10 @@ local function create_dynamic_nodes()
         sides = "sides",
         size = 100,
         ore_table = {
-            {block = "unilib:dirt_mossy", chance = 2 / 3},
+            {block = "unilib:dirt_mossy", probability = 2 / 3},
         },
         top_table = {
-            {block = "unilib:plant_bush_underground_dead", chance = 1 / 9},
+            {block = "unilib:plant_bush_underground_dead", probability = 1 / 9},
         },
         jit_flag = true,
     })
@@ -321,10 +321,10 @@ local function create_dynamic_nodes()
         sides = "sides",
         size = 100,
         ore_table = {
-            {block = "unilib:dirt_mossy", chance = 2 / 3},
+            {block = "unilib:dirt_mossy", probability = 2 / 3},
         },
         top_table = {
-            {block = "unilib:dynamic_plant_bush_underground", chance = 1 / 5},
+            {block = "unilib:dynamic_plant_bush_underground", probability = 1 / 5},
         },
         jit_flag = true,
     })
@@ -340,7 +340,7 @@ local function create_dynamic_nodes()
         sides = "sides",
         size = 100,
         ore_table = {
-            {block = "unilib:dirt_mossy", chance = 2 / 3},
+            {block = "unilib:dirt_mossy", probability = 2 / 3},
         },
         jit_flag = true,
     })
@@ -388,7 +388,7 @@ local function create_dynamic_nodes()
         sidse = "sides",
         size = 30,
         top_table = {
-            {block = "unilib:fire_permanent", chance = 2 / 3},
+            {block = "unilib:fire_permanent", probability = 2 / 3},
         },
         jit_flag = true,
     })
@@ -475,7 +475,10 @@ local function create_dynamic_nodes()
             sides = "sides",
             size = 100,
             ore_table = {
-                {block = "unilib:stone_slimestone_" .. part_name .. "_with_eye", chance = 1 / 10},
+                {
+                    block = "unilib:stone_slimestone_" .. part_name .. "_with_eye",
+                    probability = 1 / 10,
+                },
             },
             jit_flag = true,
         })

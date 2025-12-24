@@ -1,9 +1,9 @@
 # "moretrees" remix - contains everything from moretrees
 # Some code has been simplified. Coconuts and dates do not regrow. Date palm trees are not
-#       pollinated
+#   pollinated
 # Raw coconuts have been merged with coconut slices from ethereal-ng
 # Calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in
-#       the same positions/quantities
+#   the same positions/quantities
 # Coconuts can only be cut with cutting boards
 
 # node_name | original_mod
@@ -55,7 +55,8 @@ tree_spruce|moretrees
 tree_willow_large|moretrees
 
 # supporting packages (.depends)
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 fruit_apple|default
 fruit_coconut|ethereal
 glass_ordinary|default moreblocks vessels
@@ -72,11 +73,12 @@ utensil_board_cutting|farming
 vessel_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
+dirt_ordinary_with_cover_snow|default
 ingredient_flour_ordinary|farming
 
 # supporting packages (.optional)
+#dirt_ordinary|default farming moreblocks
 #dye_basic|dye bakedclay
-#grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #machine_furnace_induction|unilib

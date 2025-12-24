@@ -15,9 +15,9 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function do_toggle(name, param)
+local function do_toggle(pname, param)
 
-    if not core.get_player_by_name(name) then
+    if not core.get_player_by_name(pname) then
         return false, unilib.constant.chat_offline_msg
     end
 
@@ -27,7 +27,7 @@ local function do_toggle(name, param)
 
     -- (When the HUD is only visible after punching, the confirm the change in the chat window;
     --      otherwise, don't bother)
-    local result = unilib.identify.toggle_mode(name)
+    local result = unilib.identify.toggle_mode(pname)
     if result ~= nil then
         return true, result
     end
@@ -53,8 +53,8 @@ function unilib.pkg.chat_toggle_identify.exec()
         params = "",
         description = S("Toggles the HUD for identifying the node at which the mouse is pointed"),
 
-        func = function(name, param)
-            return do_toggle(name, param)
+        func = function(pname, param)
+            return do_toggle(pname, param)
         end,
     })
 
@@ -62,8 +62,8 @@ function unilib.pkg.chat_toggle_identify.exec()
         params = "",
         description = S("Toggles the HUD for identifying the node at which the mouse is pointed"),
 
-        func = function(name, param)
-            return do_toggle(name, param)
+        func = function(pname, param)
+            return do_toggle(pname, param)
         end,
     })
 
@@ -71,8 +71,8 @@ function unilib.pkg.chat_toggle_identify.exec()
         params = "",
         description = S("Toggles the HUD for identifying the node at which the mouse is pointed"),
 
-        func = function(name, param)
-            return do_toggle(name, param)
+        func = function(pname, param)
+            return do_toggle(pname, param)
         end,
     })
 

@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_plant_flax_brown_wild.init()
 
     return {
         description = "Wild brown flax plant as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "plant_flax_brown_wild"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "plant_flax_brown_wild"},
     }
 
 end

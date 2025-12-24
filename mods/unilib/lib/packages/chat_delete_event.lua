@@ -38,16 +38,16 @@ function unilib.pkg.chat_delete_event.exec()
                     " /add_event command)"
         ),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             elseif not unilib.setting.stats_bio_flag then
                 return false, S("Calendar events cannot be modified when player stats are disabled")
             end
 
             -- N.B. only player events with the "default" event type are removed
-            if not unilib.stats.delete_player_event(name, param) then
+            if not unilib.stats.delete_player_event(pname, param) then
                 return false, S("No events removed")
             else
                 return true, S("Removed calendar events from game day @1", param)

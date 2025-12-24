@@ -47,7 +47,9 @@ function unilib.pkg.shared_calendars.open_fancy_calendar(clicker, full_name)
     local year, month, day = unilib.calendars.convert_minetest_epoch(epoch_day)
 
     local pname = clicker:get_player_name()
-    core.show_formspec(pname, full_name, unilib.calendars.get_month_formspec(pname))
+    core.show_formspec(
+        pname, "unilib:form_shared_calendars", unilib.calendars.get_month_formspec(pname)
+    )
 
 end
 

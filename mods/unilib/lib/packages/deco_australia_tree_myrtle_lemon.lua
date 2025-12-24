@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_myrtle_lemon.init()
     return {
         description = "Lemon myrtle tree as decoration",
         depends = {"biome_australia_eastern_coasts", "tree_myrtle_lemon"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -33,8 +33,8 @@ function unilib.pkg.deco_australia_tree_myrtle_lemon.post()
             -- From australia/biome_eastern_coasts.lua
             biomes = "australia_eastern_coasts",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_with_turf_eastern_coasts",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 35,
             y_min = 7,

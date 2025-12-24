@@ -1,11 +1,10 @@
 # "technic" remix - contains some items from the technic modpack
 # From technic_worldgen, provides all nodes, craftitems, ore distributions, and the rubber tree
 # The craft recipes for some ingots require a (technic) alloy machine. If technic is not loaded,
-#       unilib provides alternative craft recipes using just the crafting grid and an ordinary
-#       furnace
+#   unilib provides alternative craft recipes using just the crafting grid and an ordinary furnace
 # Technic's tree tap is modified to work with the rubber tree, if that package is executed
 # Unilib creates uranium ores/lumps, but the corresponding uranium ingot/block is only created if
-#       technic is not loaded (otherwise, nuclear power would not be available to the player)
+#   technic is not loaded (otherwise, nuclear power would not be available to the player)
 # From technic, provides various powders
 
 # node_name | original_mod

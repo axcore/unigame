@@ -22,7 +22,7 @@ function unilib.pkg.deco_aotearoa_tree_pohutukawa.init()
         depends = "tree_pohutukawa",
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_dunes"},
-            {"dirt_ordinary", "sand_ordinary"},
+            {"dirt_ordinary_with_litter_rainforest", "sand_ordinary"},
         },
     }
 

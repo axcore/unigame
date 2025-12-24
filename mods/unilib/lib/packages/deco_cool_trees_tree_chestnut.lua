@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_chestnut.init()
 
     return {
         description = "Chestnut tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_chestnut"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_chestnut"},
     }
 
 end

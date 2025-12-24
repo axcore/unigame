@@ -34,7 +34,7 @@ function unilib.pkg.chat_list_hidden.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             local hidden_list = {}
             local count = 0
@@ -52,15 +52,15 @@ function unilib.pkg.chat_list_hidden.exec()
 
             else
 
-                unilib.utils.chat_send_player(name, S("List of hidden items"))
+                unilib.utils.chat_send_player(pname, S("List of hidden items"))
 
                 table.sort(hidden_list)
                 for _, full_name in ipairs(hidden_list) do
-                    unilib.utils.chat_send_player(name, "   " .. full_name)
+                    unilib.utils.chat_send_player(pname, "   " .. full_name)
                 end
 
                 unilib.utils.chat_send_player(
-                    name, S("End of list (hidden items found: @1)", count)
+                    pname, S("End of list (hidden items found: @1)", count)
                 )
 
             end

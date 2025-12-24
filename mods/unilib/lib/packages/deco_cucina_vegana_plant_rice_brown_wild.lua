@@ -19,12 +19,19 @@ function unilib.pkg.deco_cucina_vegana_plant_rice_brown_wild.init()
 
     return {
         description = "Wild brown rice plant as decoration",
-        depends = {"dirt_ordinary", "plant_rice_brown_wild"},
+        depends = "plant_rice_brown_wild",
         at_least_one = {
-            "liquid_water_ordinary",
-            "liquid_water_river",
-            "plant_papyrus_ordinary",
-            "tree_jungle",
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+            {
+                "liquid_water_ordinary",
+                "liquid_water_river",
+                "plant_papyrus_ordinary",
+                "tree_jungle",
+            },
         },
     }
 

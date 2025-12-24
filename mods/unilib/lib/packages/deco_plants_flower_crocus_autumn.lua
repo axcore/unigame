@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_flower_crocus_autumn.init()
 
     return {
         description = "Autumn crocus as decoration",
-        depends = {"dirt_ordinary", "flower_crocus_autumn", "stone_ordinary_with_iron"},
+        depends = {"dirt_ordinary_with_turf", "flower_crocus_autumn", "stone_ordinary_with_iron"},
     }
 
 end

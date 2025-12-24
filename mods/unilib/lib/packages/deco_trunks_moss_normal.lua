@@ -19,7 +19,7 @@ function unilib.pkg.deco_trunks_moss_normal.init()
 
     return {
         description = "Normal moss as decoration",
-        depends = {"moss_normal", "dirt_ordinary"},
+        depends = {"moss_normal", "dirt_ordinary_with_turf"},
         optional = "fern_ordinary",
     }
 

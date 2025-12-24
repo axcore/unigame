@@ -84,16 +84,36 @@ function unilib.pkg.mineral_mese.exec()
         },
     })
 
-    unilib.register_node("unilib:mineral_mese_block", "default:mese", default_add_mode, {
-        -- From default:mese
-        description = S("Mese Block"),
-        tiles = {"unilib_mineral_mese_block.png"},
-        groups = {cracky = 1, level = 2},
-        sounds = unilib.global.sound_table.stone,
+    -- N.B. If mesecons is loaded, it needs to override mese blocks before unilib has created them
+    -- The code in ../scripts/mesecons_modpack/compat_unilib.lua therefore creates its own mese
+    --      block, which we override for a second time here, if necesssary
+    if minetest.registered_nodes["unilib:mineral_mese_block"] == nil then
 
-        light_source = 3,
-        paramtype = "light",
-    })
+        -- The block doesn't exist yet
+        unilib.register_node("unilib:mineral_mese_block", "default:mese", default_add_mode, {
+            -- From default:mese
+            description = S("Mese Block"),
+            tiles = {"unilib_mineral_mese_block.png"},
+            groups = {cracky = 1, level = 2},
+            sounds = unilib.global.sound_table.stone,
+
+            light_source = 3,
+            paramtype = "light",
+        })
+
+    else
+
+        -- The block already exists
+        core.override_item("unilib:mineral_mese_block", {
+            sounds = unilib.global.sound_table.stone,
+        })
+
+        -- Because we omit the node definition from this call to unilib.register_node(), it will do
+        --      everything EXCEPT actually register the node that already exists (for example, it
+        --      sets up unilib standard aliases and updates unilib global variables as normal)
+        unilib.register_node("unilib:mineral_mese_block", "default:mese", default_add_mode, nil)
+
+    end
     unilib.register_craft_3x3({
         -- From default:mese
         output = "unilib:mineral_mese_block",

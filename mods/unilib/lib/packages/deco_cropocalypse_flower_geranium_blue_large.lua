@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_geranium_blue_large.init()
 
     return {
         description = "Large blue geranium as decoration",
-        depends = {"dirt_ordinary", "flower_geranium_blue_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_geranium_blue_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

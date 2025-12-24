@@ -1,8 +1,8 @@
 # "xtraores" remix - contains almost everything from xtraores/xtraores, xtraores/xtraors_armor and
-#       xtraores/xtraores_rainbow, but not the other mods in that modpack
+#   xtraores/xtraores_rainbow, but not the other mods in that modpack
 # See also the "xtraores_mini" remix which contains only items from xtraores_xtraores
 # Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium,
-#       planexium and tritonium to avoid clashing with any code that wants the real-life metals
+#   planexium and tritonium to avoid clashing with any code that wants the real-life metals
 # The spelling of geminitinum has been tweaked to geminitium, because no-one can type it
 # Does not include support for awards (yet)
 

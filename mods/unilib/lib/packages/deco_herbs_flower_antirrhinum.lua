@@ -19,7 +19,7 @@ function unilib.pkg.deco_herbs_flower_antirrhinum.init()
 
     return {
         description = "Antirrhinum as decoration",
-        depends = {"dirt_ordinary", "flower_antirrhinum"},
+        depends = {"dirt_ordinary_with_turf", "flower_antirrhinum"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

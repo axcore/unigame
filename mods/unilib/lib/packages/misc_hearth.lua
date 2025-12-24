@@ -140,7 +140,7 @@ local function do_burn(pos, elapsed)
     ) then
         -- Randomly remove an item of fuel based on its burn time, so it can consume its fuel
         --      slowly, but still produce flames frequently, i.e. every x seconds it will have a
-        --      1/x chance of burning
+        --      1/x probability of burning
         local burn_time = fuel_burned * 30
         local burn_it = math.random(1, burn_time)
         if burn_it == 1 then

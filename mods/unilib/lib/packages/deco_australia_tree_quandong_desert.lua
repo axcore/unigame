@@ -26,7 +26,7 @@ function unilib.pkg.deco_australia_tree_quandong_desert.init()
             "biome_australia_mulga_lands",
             "biome_australia_murray_darling_basin",
             "biome_australia_simpson_desert",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
             "dirt_red_antipodean",
             "sand_desert",
             "sand_red_antipodean",
@@ -79,7 +79,7 @@ function unilib.pkg.deco_australia_tree_quandong_desert.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_mulga_lands"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -104,7 +104,7 @@ function unilib.pkg.deco_australia_tree_quandong_desert.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_murray_darling_basin"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         for i = 1, 2 do

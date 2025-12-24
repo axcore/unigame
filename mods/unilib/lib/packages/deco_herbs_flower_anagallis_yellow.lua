@@ -19,7 +19,7 @@ function unilib.pkg.deco_herbs_flower_anagallis_yellow.init()
 
     return {
         description = "Yellow anagallis as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "flower_anagallis_yellow"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "flower_anagallis_yellow"},
     }
 
 end

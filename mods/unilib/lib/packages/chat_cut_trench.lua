@@ -117,9 +117,9 @@ function unilib.pkg.chat_cut_trench.exec()
         ),
         privs = {unilib_danger = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             end
 
@@ -138,7 +138,7 @@ function unilib.pkg.chat_cut_trench.exec()
                 else
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         S(
                             "Digging deep trenches (width: @1) in all newly-generated terrain." ..
                             " Digging will cease when Minetest restarts.",

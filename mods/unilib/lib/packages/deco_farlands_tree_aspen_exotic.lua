@@ -19,7 +19,11 @@ function unilib.pkg.deco_farlands_tree_aspen_exotic.init()
 
     return {
         description = "Exotic aspen tree as decoration",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "tree_aspen_exotic"},
+        depends = {
+            "biome_farlands_forest_deciduous",
+            "dirt_ordinary_with_turf",
+            "tree_aspen_exotic",
+        },
     }
 
 end

@@ -135,11 +135,17 @@ function unilib.pkg.ingredient_flour_sunflower_seed.exec()
     end
     if unilib.setting.technic_extra_flag then
 
-        technic.register_grinder_recipe({
-            -- From cucina_vegana:sunflower_seeds_flour
-            output = "unilib:ingredient_flour_sunflower_seed",
-            input = {"unilib:food_seed_sunflower_dwarf 3"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_grinder_recipe({
+                -- From cucina_vegana:sunflower_seeds_flour
+                output = "unilib:ingredient_flour_sunflower_seed",
+                input = {"unilib:food_seed_sunflower_dwarf 3"},
+            })
+
+        end)
 
     end
 

@@ -20,7 +20,11 @@ function unilib.pkg.deco_farming_redo_crop_mint_normal.init()
     return {
         description = "Normal mint as decoration",
         depends = "crop_mint_normal",
-        at_lease_one = {"dirt_ordinary", "dirt_ordinary_with_turf_bamboo"},
+        at_least_one = {
+            "dirt_ordinary_with_litter_coniferous",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_bamboo",
+        },
     }
 
 end

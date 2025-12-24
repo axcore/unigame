@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_acacia_log.init()
 
     return {
         description = "Acacia tree log as decoration",
-        depends = {"biome_ethereal_savanna", "dirt_dry", "tree_acacia"},
+        depends = {"biome_ethereal_savanna", "dirt_dry_with_turf_dry", "tree_acacia"},
     }
 
 end

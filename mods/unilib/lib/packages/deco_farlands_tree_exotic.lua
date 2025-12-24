@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_tree_exotic.init()
 
     return {
         description = "Exotic tree as decoration",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "tree_exotic"},
+        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary_with_turf", "tree_exotic"},
     }
 
 end

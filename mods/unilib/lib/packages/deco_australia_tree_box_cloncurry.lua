@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_box_cloncurry.init()
     return {
         description = "Cloncurry box tree as decoration",
         depends = {"biome_australia_gulf_of_carpentaria", "tree_box_cloncurry"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

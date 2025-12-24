@@ -1,5 +1,5 @@
 # "aotearoa_mini" remix - the "aotearoa" remix without biomes, decorations or ores (or the base
-#       package; there are no ABM/LBM packages to omit)
+#   package; there are no ABM/LBM packages to omit)
 # unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
 #   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
 #   enable them by uncommenting the optional package below
@@ -236,9 +236,6 @@ coral_block_skeleton|default
 #coral_block_brown|default
 #coral_block_orange|default
 #food_fiddlehead|ferns
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
 #item_paper_ordinary|default moreblocks
 #item_stick_ordinary|default
 #machine_furnace_induction|unilib
@@ -246,6 +243,8 @@ coral_block_skeleton|default
 #mineral_mese|default glemr11
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
+#soil_antipodean|unilib
+#soil_antipodean_dark|unilib
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
 #stone_sandstone_desert|default mtg_plus

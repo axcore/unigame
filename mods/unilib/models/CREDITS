@@ -256,6 +256,20 @@ unilib_mill_crownmould_corner_inner.obj
 unilib_mill_crownmould_corner_outer.obj
 
 ---------------------------------------------------------------------------------------------------
+-- From:    naturalslopeslib
+-- Media:   CC-0
+---------------------------------------------------------------------------------------------------
+
+unilib_natslope_inner.obj
+unilib_natslope_inner_rough.obj
+unilib_natslope_outer.obj
+unilib_natslope_outer_rough.obj
+unilib_natslope_pike.obj
+unilib_natslope_pike_rough.obj
+unilib_natslope_straight.obj
+unilib_natslope_straight_rough.obj
+
+---------------------------------------------------------------------------------------------------
 -- From:    nettle
 -- Media:   MIT
 ---------------------------------------------------------------------------------------------------

@@ -384,7 +384,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 else
 
                     hud2 = puncher:hud_add({
-                        name = "anvil_background",
+                        name = "unilib_hud_machine_anvil_fancy_bg",
                         type = "statbar",
 
                         alignment = {x = 0, y = 0},
@@ -397,7 +397,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
                     })
 
                     hud3 = puncher:hud_add({
-                        name = "anvil_foreground",
+                        name = "unilib_hud_machine_anvil_fancy_fg",
                         type = "statbar",
 
                         alignment = {x = 0, y = 0},

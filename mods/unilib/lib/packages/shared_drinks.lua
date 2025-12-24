@@ -29,7 +29,7 @@ function retrieve_juice(liq_vol, ves_vol, pos, able_to_fill, leftover_count, out
     meta:set_string("fullness", fullness)
     meta:set_string(
         "infotext",
-        S("@1 % fullof @2 juice.", (math.floor((fullness / ves_vol) * 100)), fruit_name)
+        S("@1% full of @2 juice.", (math.floor((fullness / ves_vol) * 100)), fruit_name)
     )
 
     if ves_vol == 128 then
@@ -90,7 +90,7 @@ function add_juice(liq_vol, ves_typ, ves_vol, pos, inputcount, leftover_count, i
     inv:set_stack("dst", 1, inputstack .. " " .. leftover_count)
     meta:set_string(
         "infotext",
-        S("@1 % full of @2 juice.", (math.floor((fullness / ves_vol) * 100)), fruit_name)
+        S("@1% full of @2 juice.", (math.floor((fullness / ves_vol) * 100)), fruit_name)
     )
 
     if ves_vol == 256 then

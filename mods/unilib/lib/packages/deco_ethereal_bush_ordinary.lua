@@ -19,11 +19,17 @@ function unilib.pkg.deco_ethereal_bush_ordinary.init()
 
     return {
         description = "Alternative ordinary bush decoration from ethereal-ng",
-        depends = {"bush_ordinary", "dirt_ordinary"},
+        depends = "bush_ordinary",
         at_least_one = {
-            "biome_ethereal_forest_deciduous",
-            "biome_ethereal_grassy",
-            "biome_ethereal_jumble",
+            {
+                "biome_ethereal_forest_deciduous",
+                "biome_ethereal_grassy",
+                "biome_ethereal_jumble",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

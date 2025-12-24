@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_plant_soy_yellow_wild.init()
 
     return {
         description = "Wild yellow soy plant as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "plant_soy_yellow_wild"},
+        depends = {
+            "biome_default_forest_deciduous",
+            "dirt_ordinary_with_turf",
+            "plant_soy_yellow_wild",
+        },
     }
 
 end

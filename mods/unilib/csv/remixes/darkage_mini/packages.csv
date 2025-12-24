@@ -1,5 +1,5 @@
 # "darkage_mini" remix - the "darkage" remix without biomes, decorations or ores (there are no base
-#       packages or ABM/LBM packages to omit)
+#   packages or ABM/LBM packages to omit)
 
 # node_name | original_mod
 
@@ -57,6 +57,7 @@ stone_tuff_rhyolitic|darkage
 clay_ordinary|default
 crop_wheat|farming
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 dye_basic|dye bakedclay
 glass_ordinary|default moreblocks vessels
 gravel_ordinary|default mtg_plus
@@ -66,7 +67,7 @@ metal_steel|default glemr11 technic
 mineral_coal|default technic
 misc_straw_ordinary|farming darkage
 sand_ordinary|default
-soil_ordinary|farming
+soil_dark|unilib
 stone_desert|default moreblocks
 stone_ordinary|default moreblocks technic
 torch_ordinary|default
@@ -75,7 +76,6 @@ torch_ordinary|default
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
-#grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_stone_desert|glemr11
@@ -86,6 +86,7 @@ torch_ordinary|default
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #sand_red|unilib
+#soil_ordinary|farming
 #stone_sandstone_ordinary|default moreblocks mtg_plus
 #stone_serpentinite_pale|decoblocks
 

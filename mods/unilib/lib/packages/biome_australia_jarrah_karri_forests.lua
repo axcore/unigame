@@ -20,7 +20,7 @@ function unilib.pkg.biome_australia_jarrah_karri_forests.init()
     return {
         description = "Jarrah/Karri Forests biome",
         depends = {"liquid_water_river_muddy", "stone_sandstone_ordinary"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end

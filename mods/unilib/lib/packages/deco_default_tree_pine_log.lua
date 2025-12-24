@@ -19,8 +19,17 @@ function unilib.pkg.deco_default_tree_pine_log.init()
 
     return {
         description = "Pine tree log as decoration",
-        depends = {"dirt_ordinary", "mushroom_red", "tree_pine"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_taiga"},
+        depends = {"mushroom_red", "tree_pine"},
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
+            },
+        },
     }
 
 end
@@ -33,12 +42,12 @@ function unilib.pkg.deco_default_tree_pine_log.post()
         biomes = {"default_forest_coniferous", "default_taiga"},
         num_spawn_by = 8,
         place_on = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         spawn_by = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         y_max = unilib.constant.y_max,
         y_min = 4,

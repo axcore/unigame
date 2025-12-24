@@ -26,7 +26,11 @@ function unilib.pkg.deco_farlands_grass_ordinary.init()
                 "biome_farlands_forest_deciduous",
                 "biome_farlands_grassland",
             },
-            {"dirt_ordinary", "dirt_ordinary_with_litter_leafy", "sand_ordinary"},
+            {
+                "dirt_ordinary_with_litter_leafy",
+                "dirt_ordinary_with_turf",
+                "sand_ordinary",
+            },
         },
     }
 

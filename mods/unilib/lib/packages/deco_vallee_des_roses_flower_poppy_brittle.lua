@@ -19,7 +19,7 @@ function unilib.pkg.deco_vallee_des_roses_flower_poppy_brittle.init()
 
     return {
         description = "Brittle poppy as decoration",
-        depends = {"dirt_ordinary", "flower_poppy_brittle"},
+        depends = {"dirt_ordinary_with_turf", "flower_poppy_brittle"},
         at_least_one = {
             "biome_default_forest_coniferous",
             "biome_default_forest_deciduous",

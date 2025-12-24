@@ -67,8 +67,8 @@ function unilib.pkg.chat_list_biomes.exec()
         description = S("Lists all registered biomes"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_biomes(name, param)
+        func = function(pname, param)
+            return do_list_biomes(pname, param)
         end,
     })
 
@@ -77,8 +77,8 @@ function unilib.pkg.chat_list_biomes.exec()
         description = S("Lists all registered biomes"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_biomes(name, param)
+        func = function(pname, param)
+            return do_list_biomes(pname, param)
         end,
     })
 

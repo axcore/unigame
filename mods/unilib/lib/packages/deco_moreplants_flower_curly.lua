@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_flower_curly.init()
 
     return {
         description = "Curly flower as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "flower_curly"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "flower_curly"},
     }
 
 end

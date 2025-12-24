@@ -146,7 +146,13 @@ function unilib.trees._register_utility_shelf(data_table)
 
     -- N.B. Original code provided 3 rows of storage; here, it has been reduced to 2 rows to match
     --      bookshelves and vessels shelves
-    unilib.furniture.convert_to_container(full_name, 2, description, "utility shelf")
+    unilib.furniture.convert_to_container({
+        full_name = full_name,
+
+        description = description,
+        label = "utility shelf",
+        rows = 2,
+    })
 
     return full_name
 

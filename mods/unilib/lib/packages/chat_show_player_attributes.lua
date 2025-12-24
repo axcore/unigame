@@ -61,15 +61,15 @@ function unilib.pkg.chat_show_player_attributes.exec()
         description = S("Shows a table of player attributes"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             elseif not player.get_meta then
                 return false, S("Player attribute table not available")
             else
-                return do_show_player_attributes(name, param)
+                return do_show_player_attributes(pname, param)
             end
 
         end,
@@ -80,15 +80,15 @@ function unilib.pkg.chat_show_player_attributes.exec()
         description = S("Shows a table of player attributes"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             elseif not player.get_meta then
                 return false, S("Player attribute table not available")
             else
-                return do_show_player_attributes(name, param)
+                return do_show_player_attributes(pname, param)
             end
 
         end,

@@ -29,7 +29,7 @@ function unilib.pkg.deco_aotearoa_bush_leatherwood.init()
             {
                 "dirt_antipodean",
                 "dirt_custom_antipodean",
-                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
                 "stone_schist_antipodean",
             },
         },

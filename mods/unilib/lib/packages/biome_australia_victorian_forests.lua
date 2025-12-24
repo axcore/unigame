@@ -20,7 +20,7 @@ function unilib.pkg.biome_australia_victorian_forests.init()
     return {
         description = "Victorian Forests biome",
         depends = "liquid_water_river_muddy",
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end

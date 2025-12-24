@@ -72,9 +72,9 @@ local function after_dig_node(pos, oldnode, oldmetadata, digger)
     -- Digging with something like a shovel
     elseif groupcaps.crumbly then
 
-        -- With a chance of 1/3, return 2 bushes
+        -- With a probability of 33%, return 2 bushes
         local amount
-        if math.random(1,3) == 1 then
+        if math.random(1, 3) == 1 then
             amount = "2"
         else
             amount = "1"

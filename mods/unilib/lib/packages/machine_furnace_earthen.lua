@@ -61,7 +61,7 @@ function unilib.pkg.machine_furnace_earthen.exec()
         "unilib_machine_furnace_earthen_side.png",
         "unilib_machine_furnace_earthen_side.png",
         {
-            image = "unilib_machine_furnace_earthen_front_active.png",
+            name = "unilib_machine_furnace_earthen_front_active.png",
             backface_culling = false,
             animation = {
                 type = "vertical_frames",

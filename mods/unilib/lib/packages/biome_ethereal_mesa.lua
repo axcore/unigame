@@ -21,7 +21,7 @@ function unilib.pkg.biome_ethereal_mesa.init()
         description = "Mesa biomes",
         depends = {
             "clay_baked_ethereal",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
             "sand_desert",
             "sand_ordinary",
             "stone_ordinary",

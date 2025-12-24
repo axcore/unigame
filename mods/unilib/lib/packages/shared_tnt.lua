@@ -11,13 +11,34 @@ unilib.pkg.shared_tnt = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.tnt.add_mode
 
--- Loss probabilities array (one in X will be lost)
--- Retain the original nodes from default, in case its replace mode is "defer"
-local loss_prob = {}
-loss_prob["default:cobble"] = 3
-loss_prob["unilib:stone_ordinary_cobble"] = 3
-loss_prob["default:dirt"] = 4
-loss_prob["unilib:dirt_ordinary"] = 4
+-- Chance of loss table (one in every N will be lost)
+local loss_chance_table = {}
+-- Retain the original nodes from default, in case their replace mode is "defer"
+-- N.B. Code in the .post() function below adds all cobbles, mossy cobbles and fertile dirts to this
+--      table. This is a compromise between original "minetest_game" code, and the changes in commit
+--      "692ac2d", in which a ._tnt_loss property was added to a small selection of nodes
+loss_chance_table["unilib:stone_ordinary_cobble"] = 4
+    loss_chance_table["default:cobble"] = 4
+loss_chance_table["unilib:stone_ordinary_cobble_mossy"] = 4
+    loss_chance_table["default:mossycobble"] = 4
+loss_chance_table["unilib:stone_desert_cobble"] = 4
+    loss_chance_table["default:desert_cobble"] = 4
+loss_chance_table["unilib:dirt_ordinary"] = 3
+    loss_chance_table["default:dirt"] = 3
+loss_chance_table["unilib:dirt_dry"] = 3
+    loss_chance_table["default:dry_dirt"] = 3
+loss_chance_table["unilib:sand_ordinary"] = 2
+    loss_chance_table["default:sand"] = 2
+loss_chance_table["unilib:sand_desert"] = 2
+    loss_chance_table["default:desert_sand"] = 2
+loss_chance_table["unilib:sand_silver"] = 2
+    loss_chance_table["default:silver_sand"] = 2
+loss_chance_table["unilib:gravel_ordinary"] = 3
+    loss_chance_table["default:gravel"] = 3
+loss_chance_table["unilib:snow_ordinary"] = 1       -- Disappears entirely
+    loss_chance_table["default:snow"] = 1           -- Disappears entirely
+loss_chance_table["unilib:glass_ordinary"] = 2
+    loss_chance_table["default:glass"] = 2
 
 local cid_data = {}
 local generic_tnt_radius = tonumber(core.settings:get("tnt_radius") or 3)
@@ -27,6 +48,17 @@ local basic_flame_on_construct
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
+
+local function particle_texture(name)
+
+    local return_table = {name = name}
+    if core.features.particle_blend_clip then
+        return_table.blend = "clip"
+    end
+
+    return return_table
+
+end
 
 local function rand_pos(center, pos, radius)
 
@@ -99,7 +131,7 @@ local function add_drop(drops, item)
 
     item = ItemStack(item)
     local name = item:get_name()
-    if loss_prob[name] ~= nil and math.random(1, loss_prob[name]) == 1 then
+    if loss_chance_table[name] ~= nil and math.random(1, loss_chance_table[name]) == 1 then
         return
     end
 
@@ -284,7 +316,7 @@ local function add_effects(pos, radius, drops)
         glow = 15,
         pos = pos,
         size = radius * 10,
-        texture = "unilib_tnt_ordinary_boom.png",
+        texture = particle_texture("unilib_tnt_ordinary_boom.png"),
         velocity = vector.new(),
         vertical = false,
     })
@@ -292,7 +324,7 @@ local function add_effects(pos, radius, drops)
     core.add_particlespawner({
         amount = 64,
         time = 0.5,
-        texture = "unilib_tnt_ordinary_smoke.png",
+        texture = particle_texture("unilib_tnt_ordinary_smoke.png"),
 
         maxacc = vector.new(),
         minacc = vector.new(),
@@ -306,7 +338,7 @@ local function add_effects(pos, radius, drops)
         minvel = {x = -10, y = -10, z = -10},
     })
 
-    -- We just dropped some items. Look at the items entities and pick one of them to use as texture
+    -- We just dropped some items. Look at the items and pick one of them to use as texture
     local texture = "unilib_tnt_ordinary_blast.png"     -- Fallback texture
     local node
     local most = 0
@@ -409,6 +441,9 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
 
     vm1:set_data(data)
     vm1:write_to_map()
+    if vm1.close ~= nil then
+        vm1:close()
+    end
 
     -- Recalculate new radius
     radius = math.floor(radius * math.pow(count, 1/3))
@@ -429,6 +464,13 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
     --      "tnt_ordinary", for which we assume "fire_ordinary" is a dependent package
     basic_flame_on_construct = core.registered_nodes["unilib:fire_ordinary"].on_construct
 
+    -- Used to efficiently remove metadata of nodes that were destroyed.
+    -- Metadata is probably sparse, so this may save us some work.
+    local has_meta = {}
+    for _, p in ipairs(core.find_nodes_with_meta(p1, p2)) do
+        has_meta[a:indexp(p)] = true
+    end
+
     local c_fire = core.get_content_id("unilib:fire_ordinary")
     for z = -radius, radius do
 
@@ -444,10 +486,20 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
                     local p = {x = pos.x + x, y = pos.y + y, z = pos.z + z}
                     if cid ~= c_air and cid ~= c_ignore then
 
-                        data[vi] = destroy(
+                        local new_cid = destroy(
                             drops, p, cid, c_air, c_fire, on_blast_queue, on_construct_queue,
                             ignore_protection, ignore_on_blast, owner
                         )
+
+                        if new_cid ~= data[vi] then
+
+                            data[vi] = new_cid
+                            if has_meta[vi] then
+                                core.get_meta(p):from_table(nil)
+                            end
+
+                        end
+
 
                     end
 
@@ -463,8 +515,10 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
 
     vm:set_data(data)
     vm:write_to_map()
-    vm:update_map()
     vm:update_liquids()
+    if vm.close ~= nil then
+        vm:close()
+    end
 
     -- call check_single_for_falling for everything within 1.5x blast radius
     for y = -radius * 1.5, radius * 1.5 do
@@ -799,5 +853,35 @@ function unilib.pkg.shared_tnt.exec()
         end
 
     end)
+
+end
+
+function unilib.pkg.shared_tnt.post()
+
+    -- Original to unilib
+
+    -- Further populate the loss table with all known cobbles and dirts
+    for part_name, _ in pairs(unilib.global.stone_table) do
+
+        local cobble_name = "unilib:stone_" .. part_name .. "_cobble"
+        if core.registered_items[cobble_name] ~= nil then
+            loss_chance_table[cobble_name] = 4
+        end
+
+        local mossy_name = cobble_name .. "_mossy"
+        if core.registered_items[mossy_name] ~= nil then
+            loss_chance_table[mossy_name] = 4
+        end
+
+    end
+
+    for part_name, _ in pairs(unilib.global.fertile_dirt_table) do
+
+        local dirt_name = "unilib:" .. part_name
+        if core.registered_items[dirt_name] ~= nil then
+            loss_chance_table[dirt_name] = 3
+        end
+
+    end
 
 end

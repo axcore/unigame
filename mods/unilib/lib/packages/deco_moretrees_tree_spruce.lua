@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_spruce.init()
 
     return {
         description = "Spruce tree as decoration",
-        depends = {"dirt_ordinary", "tree_spruce"},
+        depends = {"dirt_ordinary_with_turf", "tree_spruce"},
     }
 
 end

@@ -19,11 +19,17 @@ function unilib.pkg.deco_farlands_plant_oat_wild.init()
 
     return {
         description = "Wild oat plant as decoration",
-        depends = {"dirt_ordinary", "plant_oat_wild"},
+        depends = "plant_oat_wild",
         at_least_one = {
-            "biome_farlands_forest_deciduous",
-            "biome_farlands_grassland",
-            "biome_farlands_savanna",
+            {
+                "biome_farlands_forest_deciduous",
+                "biome_farlands_grassland",
+                "biome_farlands_savanna",
+            },
+            {
+                "dirt_ordinary_with_turf",
+                "dirt_ordinary_with_turf_dry",
+            },
         },
     }
 
@@ -31,8 +37,10 @@ end
 
 function unilib.pkg.deco_farlands_plant_oat_wild.post()
 
-    if unilib.global.pkg_executed_table["biome_farlands_forest_deciduous"] ~= nil or
-            unilib.global.pkg_executed_table["biome_farlands_grassland"] ~= nil then
+    if (
+        unilib.global.pkg_executed_table["biome_farlands_forest_deciduous"] ~= nil or
+        unilib.global.pkg_executed_table["biome_farlands_grassland"] ~= nil
+    ) and unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_complete("farlands_plant_oat_wild", nil, {
             -- From farlands, mapgen/mapgen.lua
@@ -47,7 +55,8 @@ function unilib.pkg.deco_farlands_plant_oat_wild.post()
 
     end
 
-    if unilib.global.pkg_executed_table["biome_farlands_savanna"] ~= nil then
+    if unilib.global.pkg_executed_table["biome_farlands_savanna"] ~= nil and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil then
 
         unilib.register_decoration_complete("farlands_plant_oat_wild_dry", nil, {
             -- From farlands, mapgen/mapgen.lua

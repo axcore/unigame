@@ -32,9 +32,9 @@ function unilib.pkg.chat_cripple_health.exec()
         description = S("Reduces player health; the opposite command is /reset_health"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             else

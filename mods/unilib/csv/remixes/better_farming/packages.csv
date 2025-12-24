@@ -1,5 +1,5 @@
 # "better_farming" remix - contains everything from the better_farming mod except the onigiri, which
-#       is already provided by another package, and crates shaped as stairs
+#   is already provided by another package, and crates shaped as stairs
 
 # node_name | original_mod
 
@@ -105,6 +105,8 @@ biome_default_grassland|default
 crop_cotton|farming
 crop_wheat|farming
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 glass_ordinary|default moreblocks vessels
 ingredient_flour_ordinary|farming
 item_string_ordinary|farming
@@ -124,7 +126,9 @@ biome_default_rainforest|default
 biome_default_taiga|default
 biome_default_tundra|default
 crop_chilli_gorria|cucina_vegana
-dirt_dry|default
+dirt_dry|default farming
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_rainforest|default farming
 produce_chilli_normal|farming
 
 # supporting packages (.optional)

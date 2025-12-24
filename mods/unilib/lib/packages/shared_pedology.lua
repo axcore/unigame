@@ -233,7 +233,7 @@ local function get_drip_particle(pos, wet)
             maxpos = {pos.x + (45 / 100), pos.y - 0.5, pos.z + (45 / 100)},
             minpos = {pos.x - (45 / 100), pos.y - 0.5, pos.z - (45 / 100)},
             maxvel = {0, 0, 0},
-            minvel = {0, (unilib.constant.gravity * -1), 0},
+            minvel = {0, unilib.constant.gravity, 0},
 
             collisiondetection = true,
             vertical = true,

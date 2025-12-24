@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_rice_arborio.init()
 
     return {
         description = "Arborio rice as decoration",
-        depends = {"dirt_ordinary", "produce_rice_arborio"},
+        depends = {"dirt_ordinary_with_turf", "produce_rice_arborio"},
         at_least_one = {"biome_default_grassland", "biome_default_rainforest"},
     }
 

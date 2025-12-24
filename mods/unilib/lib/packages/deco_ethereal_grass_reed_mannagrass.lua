@@ -20,14 +20,14 @@ function unilib.pkg.deco_ethereal_grass_reed_mannagrass.init()
     return {
         description = "Reed mannagrass as decoration",
         depends = "grass_reed_mannagrass",
-        at_least_one = {"dirt_ordinary", "sand_ordinary"},
+        at_least_one = {"dirt_ordinary_with_turf", "sand_ordinary"},
     }
 
 end
 
 function unilib.pkg.deco_ethereal_grass_reed_mannagrass.post()
 
-    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil or
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil or
             unilib.global.pkg_executed_table["sand_ordinary"] ~= nil then
 
         unilib.register_decoration_complete(

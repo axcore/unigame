@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_ice_thin.init()
 
     return {
-        description = "Thin ice for the \"gaia\" remix",
+        description = "Thin ice for \"gaia\"-compatible remixes",
         notes = "Thin ice can't be added to the decorations CSV, because they don't support" ..
                 " .place_offset_y",
         depends = {"biome_gaia", "ice_thin"},

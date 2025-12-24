@@ -32,9 +32,9 @@ function unilib.pkg.chat_count_broken_recipes.exec()
         description = S("Checks for missing recipe ingredients, displaying the total number found"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local missing_count = unilib.pkg.shared_chat_missing.check_broken_recipes(name, false)
+            local missing_count = unilib.pkg.shared_chat_missing.check_broken_recipes(pname, false)
 
             if missing_count > 0 then
                 return false, S("Missing recipe ingredients detected: @1", missing_count)

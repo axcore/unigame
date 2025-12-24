@@ -19,8 +19,8 @@ function unilib.pkg.biome_australia_flinders_lofty.init()
 
     return {
         description = "Flinders Lofty biome",
-        depends = "liquid_water_river_muddy",
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        depends = {"dirt_ordinary", "liquid_water_river_muddy"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_pine_celerytop.init()
     return {
         description = "Celerytop pine tree as decoration",
         depends = {"biome_australia_tasmania", "tree_pine_celerytop"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -36,8 +36,8 @@ function unilib.pkg.deco_australia_tree_pine_celerytop.post()
             {
                 biomes = "australia_tasmania",
                 place_on = {
-                    "unilib:dirt_ordinary_with_turf",
                     "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                    "unilib:dirt_ordinary_with_turf",
                 },
                 y_max = 180,
                 y_min = 36,

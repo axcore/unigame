@@ -1,6 +1,6 @@
 # "castle" remix - contains everything in the castle modpack except the mods "anvil",
-#       "castle_weapons", "crafting_bench" and "ropes", from which nothing has been imported (in
-#       the case of "ropes", material has imported from the standalone mod with the same name)
+#   "castle_weapons", "crafting_bench" and "ropes", from which nothing has been imported (in the
+#   case of "ropes", material has imported from the standalone mod with the same name)
 
 # node_name | original_mod
 

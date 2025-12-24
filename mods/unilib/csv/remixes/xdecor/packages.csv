@@ -13,8 +13,6 @@ decor_bricks_runestone|xdecor
 decor_tiled_coal|xdecor
 decor_tiled_stone_desert|xdecor
 decor_tiled_wood_jointed|xdecor
-device_lever|xdecor
-device_plate_pressure|xdecor
 door_japanese|xdecor
 door_framed_glass|xdecor
 door_framed_paper|xdecor
@@ -38,6 +36,8 @@ light_lamp_traditional|xdecor
 light_lantern_iron|xdecor
 light_lantern_wood|xdecor
 machine_cauldron_soup|xdecor
+machine_lever|xdecor
+machine_plate_pressure|xdecor
 machine_table_enchanting_simple|xdecor
 machine_workbench|xdecor
 misc_barricade|xdecor
@@ -100,7 +100,7 @@ utensil_bowl_wooden|farming thirsty
 wool_basic|wool
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 machine_anvil_fancy|anvil
 machine_anvil_simple|cottages

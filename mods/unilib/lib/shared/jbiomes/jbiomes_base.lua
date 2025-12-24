@@ -160,11 +160,11 @@ function unilib.jbiomes.dig_shadow(pos, oldnode, oldmetadata, digger)
 
 end
 
-function unilib.jbiomes.ore(pos, node1, node2, chance)
+function unilib.jbiomes.ore(pos, node1, node2, probability)
 
     -- Adapted from underch/jit.lua, underch.jit.ore()
 
-    if (node1 == nil or core.get_node(pos).name == node1) and math.random() < chance then
+    if (node1 == nil or core.get_node(pos).name == node1) and math.random() < probability then
         core.set_node(pos, {name = node2})
     end
 
@@ -333,11 +333,11 @@ end
 ---------------------------------------------------------------------------------------------------
 
 function unilib.jbiomes.on_wall_f(
-    x, y, z, vi, area, data, p2data, def_wall, def1, def2, chance, lastlayer
+    x, y, z, vi, area, data, p2data, def_wall, def1, def2, probability, lastlayer
 )
     -- Adapted from underch/functions.lua, underch.functions.on_wall_f()
 
-    if data[vi] ~= def1 or math.random() > chance then
+    if data[vi] ~= def1 or math.random() > probability then
         return
     end
 
@@ -402,11 +402,11 @@ function unilib.jbiomes.on_wall_f(
 end
 
 function unilib.jbiomes.on_wall_w(
-    x, y, z, vi, area, data, p2data, def_wall, def1, def2, chance, lastlayer
+    x, y, z, vi, area, data, p2data, def_wall, def1, def2, probability, lastlayer
 )
     -- Adapted from underch/functions.lua, underch.functions.on_wall_w()
 
-    if data[vi] ~= def1 or math.random() > chance then
+    if data[vi] ~= def1 or math.random() > probability then
         return
     end
 

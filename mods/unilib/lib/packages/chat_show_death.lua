@@ -31,27 +31,27 @@ function unilib.pkg.chat_show_death.exec()
         params = "",
         description = S("Shows full list of player deaths"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             elseif not unilib.setting.stats_bio_flag then
                 return false, unilib.pkg.shared_chat_statistics.stats_fail_msg
             end
 
-            local death_list = unilib.pkg.shared_chat_statistics.get_bio_stat(name, "death_list")
+            local death_list = unilib.pkg.shared_chat_statistics.get_bio_stat(pname, "death_list")
             if type(death_list) ~= "table" or #death_list == 0 then
-                return false, S("Player @1 has never died!", name)
+                return false, S("Player @1 has never died!", pname)
             end
 
             unilib.utils.chat_send_player(
-                name, S("Player death list for @1 (game and real time)", name)
+                pname, S("Player death list for @1 (game and real time)", pname)
             )
 
             for i, mini_table in ipairs(death_list) do
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     " " .. string.format("%-5d", i) .. ": " ..
                     unilib.pkg.shared_chat_statistics.quick_format_game_date(
                         mini_table.date_game, mini_table.epoch
@@ -59,7 +59,7 @@ function unilib.pkg.chat_show_death.exec()
                 )
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     "        " .. unilib.pkg.shared_chat_statistics.quick_format_real_date(
                         mini_table.date_real
                     )
@@ -67,7 +67,7 @@ function unilib.pkg.chat_show_death.exec()
 
             end
 
-            unilib.utils.chat_send_player(name, S("End of list (deaths found: @1)", #death_list))
+            unilib.utils.chat_send_player(pname, S("End of list (deaths found: @1)", #death_list))
 
         end,
     })

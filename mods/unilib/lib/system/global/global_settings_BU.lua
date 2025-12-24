@@ -169,7 +169,7 @@ unilib.setting.mtgame_tweak_flag = core.settings:get_bool("unilib_mtgame_tweak_f
 -- Flag set to true if ABMs and LBMs from minetest_game should be disabled, so that they don't
 --      duplicate the action of unilib ABMs and LBMs
 -- Note that each ABM and LBM is disabled only when the unilib equivalent is specified. Note also
---      that the origianl ABM handling the spread of flora (flowers, mushrooms, grasses etc) will be
+--      that the original ABM handling the spread of flora (flowers, mushrooms, grasses etc) will be
 --      disabled regardless of the value of this setting, if the "abm_standard_flora_spread" package
 --      is executed
 unilib.setting.mtgame_disable_abm_lbm_flag =
@@ -394,6 +394,65 @@ unilib.setting.mesecons_trapdoor_flag =
 --      they are easily distinguishable (as in the original code)
 unilib.setting.moreblocks_hidden_trap_flag =
         core.settings:get_bool("unilib_moreblocks_hidden_trap_flag", false)
+
+-- (naturalslopeslib)
+-- Which method to use when generating a new area - "voxelmanip" or "progressive"
+-- "VoxelManip" (default) is the most efficient method, but the area will be available only once it
+--      is completely updated. This may be resource intensive, but is the preferred method as map
+--      generation is optimised to avoid impacting the game
+-- "progressive" is much slower, but the area is available immediately in its untransformed shape.
+--      The nodes will be updated one after another while the game is idle. This method is preferred
+--      on single-core CPUs that cannot benefit from map generation optimisation, or alternatively
+--      when areas are taking too long to emerge or if you prefer to see mountains smoothing
+--      themselves progressively
+unilib.setting.slopes_generation_method =
+        core.settings:get("unilib_slopes_generation_method") or "VoxelManip"
+-- Rendering mode for slopes. The value of this setting only affects the visuals. The collision
+--      boxes always match the cubic style
+-- Values are "cubic" (default; divides blocks into 8 and gives them a stair-like look), "smooth"
+--      (uses smooth triangles), "rough" (shows more accidental slopes)
+unilib.setting.slopes_rendering_mode = core.settings:get("unilib_slopes_rendering_mode") or "cubic"
+
+-- Flag set to true to enable updating node shapes when the world is generated. This will probably
+--      put a lot of pressure on the server (but hopefully it doesn't happen that frequently)
+unilib.setting.slopes_update_on_generate_flag =
+        core.settings:get_bool("unilib_slopes_update_on_generate_flag", true)
+-- Flag set to true to enable updating node shapes when a node is dug/placed
+unilib.setting.slopes_update_on_dig_place_flag =
+        core.settings:get_bool("unilib_slopes_update_on_dig_place_flag", true)
+
+-- Inverted chance factor for shape generation. The smaller the value, the more likely the node is
+--      generated in its updated shape. A value of 0.1 corresponds to 10 times more likely
+unilib.setting.slopes_update_on_generate_factor =
+        unilib.utils.settings_get_float("unilib_slopes_update_on_generate_factor") or 0.05
+-- Inverted chance factor when stomping. The smaller the value, the more likely the node will be
+--      updated when walking on it. A value of 0.1 corresponds to 10 times more likely
+unilib.setting.slopes_update_on_stomp_factor =
+        unilib.utils.settings_get_float("unilib_slopes_update_on_stomp_factor") or 1.0
+-- Inverted chance factor when digging/placing. The smaller the value, the more likely the node will
+--      be updated when the neighbouring nodes change. A value of 0.1 corresponds to 10 times more
+--      likely
+unilib.setting.slopes_update_on_dig_place_factor =
+        unilib.utils.settings_get_float("unilib_slopes_update_on_dig_place_factor") or 1.0
+-- Inverted chance factor for updating over time. The smaller the value, the more likely the node
+--      will be updated over time. A value of 0.1 corresponds to 10 times more likely
+unilib.setting.slopes_update_on_time_factor =
+        unilib.utils.settings_get_float("unilib_slopes_update_on_dig_place_factor") or 1.0
+-- Number of nodes to skip when generating an area. The higher the value, the fewer the nodes that
+--      can be updated (dramatically reducing the load on server resources)
+unilib.setting.slopes_skip_nodes_on_generate =
+        unilib.utils.settings_get_int("unilib_slopes_skip_nodes_on_generate") or 0
+
+-- Flag set to true to prevent new updates and revert slopes to their originial block shape when
+--      they are loaded. Enable this setting if you would like to deactive natural slopes in
+--      existing worlds. The revert cannot be undone once blocks are loaded
+unilib.setting.slopes_enable_revert_flag =
+        core.settings:get_bool("unilib_slopes_enable_revert_flag", false)
+
+-- N.B. If the "poschangelib" and/or "twmlib" mods are imported, these pseudo-settings could be
+--      converted into full settings
+unilib.setting.slopes_enable_surface_update_flag = false
+unilib.setting.slopes_enable_shape_on_walk_flag = false
 
 -- (nettle)
 -- Damage factor for nettles (default value is 1)
@@ -1038,6 +1097,18 @@ unilib.setting.wield_view_update_time =
 unilib.setting.wield_view_node_tiles_flag =
         core.settings:get_bool("unilib_wield_view_node_tiles_flag", true)
 
+-- Flag set to true to enable natural slopes
+unilib.setting.slopes_enable_flag = core.settings:get_bool("unilib_slopes_enable_flag", false)
+--  Flag set to true to enable slopes for all surface nodes in all biomes; if false, you can write
+--      packages to create slopes only for the nodes you want. Ignored if natural slopes are not
+--      enabled generally
+unilib.setting.slopes_enable_biomes_flag =
+        core.settings:get_bool("unilib_slopes_enable_biomes_flag", false)
+-- Flag set to true to enable slope-like tree/bush leaves; ignored if natural slopes are not enabled
+--      generally
+unilib.setting.slopes_enable_leaves_flag =
+        core.settings:get_bool("unilib_slopes_enable_leaves_flag", false)
+
 -- Flag set to true to enable daily alarms
 unilib.setting.alarm_enable_flag = core.settings:get_bool("unilib_alarm_enable_flag", true)
 
@@ -1087,15 +1158,17 @@ unilib.setting.calendar_week_start_offset =
 -- Age-appropriate settings
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
 
--- Flag set to true if packages providing alcoholic drinks are enabled. The setting is DISABLED BY
+-- Flag set to true if packages providing adult content are permitted. The setting is DISABLED BY
 --      DEFAULT. When disabled (set to false), any such packages are not executed, even when they
 --      are specified by a remix
--- Note that unilib (and its "official" expansion packs) treat alcohol like an ordinary drink; there
---      are no game mechanics that simulate intoxication
--- Note also that unilib (and its "official" expansion packs) do not contain any other kind of
---      "adult" material. Subject to your own discretion, it may be appropriate to enable this
---      setting for worlds in which children are playing. You should, of course, check non-official
---      expansion packs before you install them
+-- The unilib mod itself does not contain any adult content. Some "official" expansion packs provide
+--      alcoholic drinks such as beer and wine. These items do not have any intoxicating effects;
+--      they are handled like any other kind of drink
+-- Apart from those alcoholic drinks, unilib and its "official" expansion packs do not contain any
+--      other kind of adult content
+-- Subject to your own discretion, it may be appropriate to enable this setting for worlds in which
+--      children are playing. You should, of course, check non-official expansion packs before you
+--      install them
 unilib.setting.enable_adult_content_flag =
         core.settings:get_bool("unilib_enable_adult_content_flag", false)
 

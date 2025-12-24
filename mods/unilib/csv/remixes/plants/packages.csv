@@ -1,6 +1,6 @@
 # "plants" remix - contains many flowers, plants and mushrooms from the plants mod, but some have
-#       been omitted. Dependence on the "habitat" mod has been replaced with standard decorations.
-#       Support for plant regeneration was not imported
+#   been omitted. Dependence on the "habitat" mod has been replaced with standard decorations.
+#   Support for plant regeneration was not imported
 
 # node_name | original_mod
 
@@ -34,7 +34,8 @@ plant_weed_wild|plants
 
 # supporting packages (.depends)
 crop_cotton|farming
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 liquid_lava_ordinary|default
 liquid_water_ordinary|default
 metal_iron|default
@@ -54,8 +55,8 @@ plant_cactus_ordinary|default
 tree_jungle|default doors moreblocks
 
 # supporting packages (.optional)
+#dirt_ordinary|default farming moreblocks
 #dye_basic|dye bakedclay
-#grass_dry|default
 #grass_ordinary|default
 #mineral_mese|default glemr11
 #moss_green|sickles

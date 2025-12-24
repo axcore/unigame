@@ -28,7 +28,7 @@ function unilib.pkg.deco_ethereal_plant_shrub_dry.init()
             "biome_ethereal_sandstone_desert",
             "clay_baked_ethereal",
             "dirt_dried",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
             "sand_desert",
             "sand_ordinary",
             "stone_sandstone_ordinary",

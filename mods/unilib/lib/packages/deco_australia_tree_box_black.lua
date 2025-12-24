@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_box_black.init()
     return {
         description = "Black box tree as decoration",
         depends = {"biome_australia_murray_darling_basin", "tree_box_black"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

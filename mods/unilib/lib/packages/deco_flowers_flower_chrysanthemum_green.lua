@@ -19,7 +19,7 @@ function unilib.pkg.deco_flowers_flower_chrysanthemum_green.init()
 
     return {
         description = "Green chrysanthemum as decoration",
-        depends = {"dirt_ordinary", "flower_chrysanthemum_green"},
+        depends = {"dirt_ordinary_with_turf", "flower_chrysanthemum_green"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

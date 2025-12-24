@@ -71,7 +71,7 @@ end
 function unilib.pkg.deco_gaia_kelp.init()
 
     return {
-        description = "Kelp for the \"gaia\" remix",
+        description = "Kelp for \"gaia\"-compatible remixes",
         notes = "Based on \"deco_glemr11\" (just the kelps)",
         depends = "biome_gaia",
         at_least_one = {

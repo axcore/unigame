@@ -1,5 +1,5 @@
 # "chat_tools" remix - contains packages which define chat commands available only to players with
-#       the "unilib_tools" privilege
+#   the "unilib_tools" privilege
 # See the "chat" remix for a full of list chat command packages with expanded comments
 
 # node_name | original_mod
@@ -13,6 +13,8 @@ chat_count_broken_recipes|unilib
 chat_count_group_conflicts|unilib
 chat_count_recipe_conflicts|unilib
 chat_deconvert|unilib
+chat_display_biome|display_biome
+chat_display_light|unilib
 chat_list_abms|unilib
 chat_list_all|unilib
 chat_list_biomes|unilib
@@ -37,10 +39,11 @@ chat_list_ores|unilib
 chat_list_other_packages|unilib
 chat_list_packages|unilib
 chat_list_remixes|unilib
+chat_list_remix_labels|unilib
 chat_list_stones|unilib
 chat_list_tools|unilib
 chat_list_trees|unilib
-chat_show_biome|display_biome
+chat_show_biome|unilib
 chat_show_ingredients|unilib
 chat_show_inventory|unilib
 chat_show_light|unilib

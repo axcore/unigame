@@ -19,8 +19,18 @@ function unilib.pkg.deco_moreplants_fern_big.init()
 
     return {
         description = "Big fern as decoration",
-        depends = {"dirt_ordinary", "fern_big"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_rainforest"},
+        depends = "fern_big",
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

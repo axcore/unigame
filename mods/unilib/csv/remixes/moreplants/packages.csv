@@ -81,12 +81,14 @@ stone_ordinary|default moreblocks technic
 biome_default_forest_coniferous|default
 biome_default_rainforest|default
 biome_default_taiga|default
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_stone_desert|glemr11
 #item_paper_ordinary|default moreblocks
 #mineral_flint|default fire mtg_plus

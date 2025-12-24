@@ -19,7 +19,7 @@ function unilib.pkg.plant_tuber_truffle_desert.init()
 
     return {
         description = "Desert truffle",
-        depends = {"dirt_dry", "shared_nsspf", "tree_acacia"},
+        depends = "shared_nsspf",
     }
 
 end
@@ -30,10 +30,8 @@ function unilib.pkg.plant_tuber_truffle_desert.exec()
         -- Code original to unilib, replacing an ABM in the original code. From
         --      nsspf:terfezia_arenaria, creates unilib:plant_tuber_truffle_desert and
         --      unilib:dirt_ordinary_with_mycelium_desert
-        wall_name = "unilib:tree_acacia_trunk",
         part_name = "desert",
         orig_name = "nsspf:terfezia_arenaria",
-        surface_list = {"unilib:dirt_dry_with_turf_dry"},
 
         replace_mode = mode,
         description = S("Desert Truffle"),

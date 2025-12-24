@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_bush_acacia.init()
 
     return {
         description = "Acacia bush as decoration",
-        depends = {"biome_default_savanna", "bush_acacia", "dirt_dry"},
+        depends = {"biome_default_savanna", "bush_acacia", "dirt_dry_with_turf_dry"},
     }
 
 end

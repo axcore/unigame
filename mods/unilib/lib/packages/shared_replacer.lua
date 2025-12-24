@@ -69,7 +69,7 @@ function unilib.pkg.shared_replacer.is_owned(pos, placer)
     -- "Protector" mod by glomie, https://forum.minetest.net/viewtopic.php?id=2793
     -- Both have been superseded by more recent mods (e.g. "areas"); nevertheless the old
     --      compatibility code is retained here, in case someone is using a fork
-    local ownername = false
+    local owner_name = false
     if type(IsPlayerNodeOwner) == "function" then
 
         -- Returns true if the node is owned
@@ -80,16 +80,16 @@ function unilib.pkg.shared_replacer.is_owned(pos, placer)
                 -- Is an old version...
                 if type(getLastOwner) == "function" then
 
-                    ownername = getLastOwner(pos)
+                    owner_name = getLastOwner(pos)
 
                 -- Is a recent version...
                 elseif type(GetNodeOwnerName) == "function" then
 
-                    ownername = GetNodeOwnerName(pos)
+                    owner_name = GetNodeOwnerName(pos)
 
                 else
 
-                    ownername = "someone"
+                    owner_name = "someone"
 
                 end
 
@@ -99,16 +99,16 @@ function unilib.pkg.shared_replacer.is_owned(pos, placer)
     elseif type(isprotect) == "function" then
 
         if not isprotect(5, pos, placer) then
-            ownername = "someone"
+            owner_name = "someone"
         end
 
     end
 
-    if ownername ~= false then
+    if owner_name ~= false then
 
         core.chat_send_player(
             pname,
-            S("Node replacement error: Sorry, @1 owns that position", ownername)
+            S("Node replacement error: Sorry, @1 owns that position", owner_name)
         )
 
         return true

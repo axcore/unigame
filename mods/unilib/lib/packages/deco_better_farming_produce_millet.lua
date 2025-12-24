@@ -22,7 +22,7 @@ function unilib.pkg.deco_better_farming_produce_millet.init()
         depends = "produce_millet",
         at_least_one = {
             {"biome_default_forest_deciduous", "biome_default_grassland"},
-            {"dirt_ordinary", "sand_ordinary"},
+            {"dirt_ordinary_with_turf", "sand_ordinary"},
         },
     }
 

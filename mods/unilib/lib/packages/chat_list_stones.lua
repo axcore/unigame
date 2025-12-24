@@ -234,8 +234,8 @@ function unilib.pkg.chat_list_stones.exec()
         description = S("Lists all stone types, or details for the specified stone type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_stones(name, param)
+        func = function(pname, param)
+            return do_list_stones(pname, param)
         end,
     })
 
@@ -244,8 +244,8 @@ function unilib.pkg.chat_list_stones.exec()
         description = S("Lists all stone types, or details for the specified stone type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_stones(name, param)
+        func = function(pname, param)
+            return do_list_stones(pname, param)
         end,
     })
 

@@ -7,7 +7,7 @@
 # OVERRIDES
 
 # This package, present in @gaia, clashes with "plant_kelp_ordinary" in @mtgame_mini. Make sure the
-#       gaia version is the one loaded
+#   gaia version is the one loaded
 plant_kelp_ordinary_gaia|farlands
 
 # ================================================================================================
@@ -21,7 +21,7 @@ plant_kelp_ordinary_gaia|farlands
 
 # Above-ground biomes
 # The "gaia" remix provides a large selection of naturalistic biomes and decorations, and additional
-#       ores
+#   ores
 
 @gaia
 
@@ -124,6 +124,9 @@ food_chocolate_white|chocolate
 bed_ordinary_quilt|colored_beds
 bed_fancy_quilt|colored_beds
 shared_beds|beds
+
+# colored-meselamps packages
+light_block_mese_tinted|colored-meselamps
 
 # clock/compass packages (various mods)
 decor_block_compass|compass

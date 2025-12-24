@@ -1,5 +1,5 @@
 # "chat_admin" remix - contains packages which define chat commands available only to players with
-#       the "unilib_admin" privilege
+#   the "unilib_admin" privilege
 # See the "chat" remix for a full of list chat command packages with expanded comments
 
 # node_name | original_mod
@@ -47,6 +47,7 @@ chat_show_mod_attributes|unilib
 chat_show_player_attributes|unilib
 chat_teleport|unilib
 chat_test|unilib
+chat_update_slope|unilib
 
 # supporting packages (.depends)
 shared_chat_cuisine|unilib

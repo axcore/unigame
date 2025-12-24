@@ -8,8 +8,89 @@
 local S = unilib.intllib
 
 ---------------------------------------------------------------------------------------------------
+-- Local functions
+---------------------------------------------------------------------------------------------------
+
+local function find_end_of_initial_escape_sequences(msg)
+
+    -- See the comments in unilib.utils._capitalise_translation(), which is one of the callers of
+    --      this function
+
+    local i = 1
+    local len = #msg
+
+    while i <= len do
+
+        local esc = msg:sub(i, i)
+        if esc == "\27" then
+
+            local next_char = msg:sub(i + 1, i + 1)
+            if next_char == "(" then
+
+                local close_pos = msg:find(")", i + 2)
+                if close_pos then
+
+                    -- Skip ESC(xxx)
+                    i = close_pos + 1
+
+                else
+
+                    -- Invalid escape sequence
+                    break
+
+                end
+
+            elseif next_char:match("%a") then
+
+                -- Skip ESCx
+                i = i + 2
+
+            else
+
+                -- Invalid escape sequence
+                break
+
+            end
+
+        else
+
+            -- No more escape sequences
+            break
+
+        end
+
+    end
+
+    return i, len
+
+end
+
+---------------------------------------------------------------------------------------------------
 -- Shared functions
 ---------------------------------------------------------------------------------------------------
+
+function unilib.utils._capitalise_translation(msg)
+
+    -- Original to unilib
+    -- Replacement for unilib.utils.first_to_upper(), used when dealing with Minetest translated
+    --      strings. This function should be called for any translatable string containing a
+    --      substitution (@1, @2 etc), unless that substitution is a proper noun (such as a player
+    --      name), a number, a string that is already capitalised (such as a node description) or a
+    --      string which does not need to be capitalised (such as a node name)
+    -- Each translated string begins with one or more escape sequences in the form "ESC(xxx)", where
+    --      "xxx" is some arbitrary text, or "ESCx", where "x" is an arbitrary alphanumeric
+    --      character
+    -- Converts the first visible character (the first one after the initial escape sequences) to
+    --      an upper-case character, if possible
+
+    local index, len = find_end_of_initial_escape_sequences(msg)
+    if index <= len then
+        return msg:sub(1, index - 1) .. msg:sub(index, index):upper() .. msg:sub(index + 1)
+    else
+        return msg
+    end
+
+end
 
 function unilib.utils._contract_long_lines(arg, max_length)
 
@@ -25,10 +106,14 @@ function unilib.utils._contract_long_lines(arg, max_length)
 
     for line in string.gmatch(arg, "([^\n]+)") do
 
-        if string.len(line) <= max_length then
+        -- When contracting long lines, take into account the (invisible) escape sequences at the
+        --      beginning of the line; they shouldn't count towards "max_length"
+        local esc_seq_len, _ = find_end_of_initial_escape_sequences(line) - 1
+
+        if string.len(line) <= (esc_seq_len + max_length) then
             table.insert(line_list, line)
         else
-            table.insert(line_list, string.sub(line, 1, (max_length - 3)) .. "...")
+            table.insert(line_list, string.sub(line, 1, (esc_seq_len + max_length - 3)) .. "...")
         end
 
     end
@@ -39,7 +124,7 @@ end
 
 function unilib.utils._first_to_upper(arg)
 
-    return (arg:gsub("^%l", string.upper))
+    return arg:gsub("^%l", string.upper)
 
 end
 

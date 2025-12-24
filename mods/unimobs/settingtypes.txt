@@ -1,0 +1,449 @@
+# -------------------------------------------------------------------------------------------------
+# unimobs settings
+# -------------------------------------------------------------------------------------------------
+
+# If true, then tweaks to the mobkit engine, found in kitz, are applied. If false, only the original
+# mobkit engine code is used
+unimobs_tweak_mobkit_engine_flag (Apply kitz tweaks to mobkit engine) bool true
+# Flag set to true if wear should be applied to unimobs tools (lassos, nets etc); false if not
+unimobs_apply_tool_wear_flag (Apply wear to unimobs tools) bool true
+# Flag set to true, to enable some items to have special abilities in creative mode (the DNA
+# analyser requires no fuel, the sketchbook already contains all mobs, etc)
+unimobs_enable_creative_bonus_flag (Item bonus behaviours in creative mode) bool false
+
+# -------------------------------------------------------------------------------------------------
+# "vis_harm_1nd" mod settings
+# -------------------------------------------------------------------------------------------------
+
+# If true, visible harm bars are added to players whose health is not at its maximum
+unimobs_enable_harm_bar_players_flag (Enable visual harm bars on players) bool true
+# If true, visible harm bars are added to mobs whose health is not at its maximum
+unimobs_enable_harm_bar_mobs_flag (Enable visual harm bars on mobs) bool true
+# If true, visible harm bars are only added to petz-compatible mobs which were attacked by players.
+# Ignored if "unimobs_enable_harm_bar_mobs_flag" is false
+unimobs_enable_harm_bar_victim_flag (Only petz-compatible mobs attacked by players have harm bras) bool true
+
+# -------------------------------------------------------------------------------------------------
+# "wildlife" mod settings
+# -------------------------------------------------------------------------------------------------
+
+# From "wildlife" mod
+# Probability of spawning a mob when there are no other mobs in active_block_range around the player
+# Must be a float in the range 0 to 1, where 0 is never, and 1 is always
+unimobs_wildlife_spawn_probability (Simple deer/wolf spawn probability) float 0.3
+# Spawn probability is reduced by this factor for each mob within active_block_range
+# Must be a float in the range 0 to 1, where larger numbers apply a greater reduction
+unimobs_wildlife_spawn_reduction_factor (Simple deer/wolf spawn reduction factor) float 0.2
+
+# -------------------------------------------------------------------------------------------------
+# "petz" modpack settings
+# -------------------------------------------------------------------------------------------------
+
+# Settings specifying available mobs
+
+# Whitespace-separated string of items, e.g. "lion_normal frog". Any mobs whose name
+# (e.g. "unilib:mob_lion_normal") matches any of the items is removed from the world
+unimobs_petz_remove_list (Remove matching mobs from world) string
+# If true, monsters (mobs whose .is_monster_flag field is true) will not spawn
+unimobs_petz_disable_monsters_flag (Disable monsters) bool false
+
+# Server cron task settings
+
+# If true, a cron job clears untamed mobs in the server from time to time; use the value 0 to
+# disable it
+unimobs_petz_clear_untamed_mobs_interval (Clear untamed mobs in cron job; disable with 0) float 0
+
+# Behaviour settings
+# If true, some brain packages do fewer things, boosting overall performance; for example, in the
+# "brain_herbivore" package, mobs will not search for a bowl or bale
+unimobs_petz_streamline_behaviour_flag (Streamline behaviours for better performance) bool false
+# Flag set to true to enable the emergency suffocation recovery system (in the
+# "mtb_rescue_suffocating_mob" package). If enabled, mobs trapped inside nodes are teleported to an
+# adjacent node, but at the risk of them escaping from an enclosure
+unimobs_petz_enable_suffocation_recovery_flag (Enable suffocation recovery sytem) bool true
+# The "jump attack" behaviour is mobkit is less advanced than the one used in petz. If false, the
+# "lqb_jump_attack" package uses the original code imported from mobkit; if true, it uses the more
+# advanced code imported from petz
+unimobs_petz_use_petz_attack_flag (Use jump attacks from petz mod) bool true
+
+# Formspec settings
+
+# Flag set to true to show growth times (for babies and pregnant adults) in the main mob formspec
+unimobs_petz_show_formspec_time_flag (Show growth times in main mob formspec) bool true
+# Flag set to true to show the items used to repel, follow, feed, breed and capture mobs in the
+# main mob formspec. Note that the actual items may be concealed (shown as "?") if the
+# "conceal_unused_items_flag" setting is true
+unimobs_petz_show_formspec_items_flag (Show follow, feed etc times in main mob formspec) bool true
+# In the main mob formspec, order buttons are usually shown only in Tamagotchi Mode. Flag set to
+# true to show the buttons for any mob which has the .obeys_orders_flag property
+unimobs_petz_force_formspec_orders_flag (Show order buttons even without Tamagotchi Mode) bool true
+# Flag set to true, if the item(s) used for repelling/following/feeding/breeding/capturing should be
+# concealed in the mob's main formspec, until the player "discovers" them by using them. Note that
+# items are never concealed in creative mode, regardless of the value of this flag
+unimobs_petz_conceal_unused_items_flag (Conceal items in mob main formspec) bool false
+
+# Nametag background settings
+
+# Flag set to true to show nametag backgrounds
+unimobs_petz_enable_nametag_backgrounds_flag (Enable nametag backgrounds) bool false
+
+# Mob sound settings
+
+# How often mobs make one of their "misc" sounds at random
+unimobs_petz_random_sound_chance (Random mob sound chance) float 50
+# Maximum hearing distance for mob sounds
+unimobs_petz_max_hear_distance (Mob sounds can be heard at distance) int 8
+
+# Population control settings
+
+# Maximum number of mobs that can be tamed by a player (use -1 for no limit)
+unimobs_petz_max_tamed_by_owner (Max tamed mobs per owner; -1 for no limit) int -1
+
+# Mob spawning settings
+
+# Average interval, in seconds, between spawn attempts for each player
+unimobs_petz_spawn_interval (Time in seconds between mob spawn attemps) int 30
+# Default probability of spawning a mob, if there are no other objects in the area; value in the
+# range 0-1. The "meta_petz_settings" package uses this value for any mobs which have a
+# "custom_spawn_probability" property
+unimobs_petz_spawn_probability (Probability of spawning a mob, in the range 0-1) float 0.3
+# Max number of mobs in the active block range
+unimobs_petz_spawn_max_mobs (Max mobs in the active block range) int 60
+# Max number of mobs of the same mob type (matches .mob_table.mob_type) in the active block range
+unimobs_petz_spawn_max_mobs_of_matching_type (Max mobs of the same type in the active block range) int 10
+# If true, mobs are not spawned in protected areas
+unimobs_petz_disable_spawn_in_protected_areas_flag (Disable spawning mobs in protected areas) bool false
+# If specified, a whitespace-separated string of items. Each item consists of two positions in the
+# form (x,y,z);(x,y,z), e.g. "10,10,10;200,200,200 1000,1000,1000;1500,1500,1500"
+# If specified, mobs only spawn in those areas; otherwise mobs can spawn anywhere
+unimobs_petz_exclusive_spawn_area_list (Area in which mobs can spawn, in form: (x,y,z);(x,y,z)) string
+
+# Pathfinding settings
+
+# If true, mobs can jump over fences
+unimobs_petz_enable_jump_over_fences_flag (Enable mobs jumping over fences) bool false
+# If true, mobs can pass through open doors and gates
+unimobs_petz_enable_pass_through_opening_flag (Enable mobs passing through doors/gates) bool true
+
+# Default tame/lash/convert/replace settings
+
+# Default number of times needed to feed a mob, in order to tame it; minimum value 1
+unimobs_petz_default_tame_count (Default number of times to feed a mob, to tame it) int 5
+# Default number of times needed to lash a (wild) mob, in order to tame it; minimum value 1
+unimobs_petz_default_lash_count (Default number of times to lash a mob, to tame it) int 3
+# Default number of times needed to feed a mob, in order to convert it into another kind of mob;
+# minimum value 1
+unimobs_petz_default_convert_count (Default number of times to feed a mob, to convert it) int 5
+# Default number of times a mob needs to replace a node, in order to change its status (e.g. number
+# of grass nodes to replace, in order for a sheep to regrow its wool or a cow to refill its milk);
+# minimum value 1
+unimobs_petz_default_replace_count (Default number of nodes replaced by a mob, to replenish it) int 5
+
+# Breeding system settings
+
+# Default maximum number of pregnancies for any mob which doesn't specify its own value
+unimobs_petz_default_pregnancy_count (Default maximum number of pregnancies) int 5
+# Time in seconds from the start of a pregnancy to the creation of the baby mob
+unimobs_petz_default_pregnancy_interval (Default duration of pregnancies, in seconds) int 300
+# Time in seconds from the creation of the baby mob and its conversion into an adult
+unimobs_petz_default_baby_growth_interval (Default duration of baby growth, in seconds) int 1200
+# When breeding, the chance of producing a creature with a rare "mutation" skin. Must be an integer;
+# a value of 200 represents a probability of 1/200 (0.5%)
+unimobs_petz_mutation_chance (Chance of mutations during breeding) int 200
+# Breeding bonus. When a baby is produced, the chance of a ranged "gene" randomly receiving a +1
+# bonus (maximum one bonus per baby, use the value 0 to disable bonuses altogether)
+unimobs_petz_breeding_bonus_chance (Breeding bonus chance) float 10
+# If true, only owners can use a syringe to extract seed from compatible mobs
+unimobs_petz_disable_non_owner_syringe_flag (Disable non-owners from using syringes) bool true
+
+# Genetics system settings
+
+# If true, the "docility" gene is enabled (tamed mothers have a chance of giving birth to tamed
+# adults); if false, tamed mothers always give birth to tamed babies
+unimobs_petz_enable_genetic_docility_flag (Enable "docility" genes) bool true
+# The maximum factor by which the mob's .max_speed can be improved with the "agility" gene. Mobs
+# whose .max_speed doesn't exceed the default value are not affected. Mounted speeds have separate
+# genes, so they are not affected by the "agility" gene. Use a value of 0 to disable the "agility"
+# gene altogether
+unimobs_petz_genetic_agility_factor ("Agility" genes improve maximum speed by factor) float 0.2
+# The maximum factor by which the number of lashes required for taming a wild animal is reduced in
+# mobs with the "compliance" gene. By default, 3 lashings are required, so a factor of 0.67 reduces
+# that requirement to 1 lashing. Use a value of 0 to disable the "compliance" gene altogether
+unimobs_petz_genetic_compliance_factor ("Compliance" gene reduce number of lashes required by factor) float 0.67
+# The maximum factor by which the amount of food required for taming, converting and replacing is
+# reduced in mobs with the "digestion" gene. By default, 5 food items are required, so a factor of
+# 0.4 reduces that requirement to 3 food items). Use a value of 0 to disable the "digestion" gene
+# altogether
+unimobs_petz_genetic_digestion_factor ("Digestion" gene reduces food required by factor) float 0.4
+# The maximum factor by which the pregnancy/growth times are reduced in mobs with the "fertility"
+# gene. This value also increases the maximum number of pregnancies that a female mob can have. Use
+# a value of 0 to disable the "fertility" gene altogether
+unimobs_petz_genetic_fertility_factor ("Fertility" gene reduces pregnancy/growth times by factor) float 0.33
+# The maximum factor by which the probability of producing dung can be improved with the
+# "incontinence" gene. Use a value of 0 to disable the "incontinence" gene altogether
+unimobs_petz_genetic_incontinence_factor ("Incontinence" gene improves chance of dung by factor) float 0.5
+# The maximum factor by which the mob's .max_roam_height can be improved with the "loftiness" gene.
+# Mobs whose .max_roam_height doesn't exceed the default value are not affected. Use a value of 0 to
+# disable the "loftiness" gene altogether
+unimobs_petz_genetic_loftiness_factor ("Loftiness" gene improves max flying height by factor) float 1.0
+# The maximum factor by which the probability of getting a breeding bonus can be improved with the
+# "luckiness" gene. Use a value of 0 to disable the "luckiness" gene altogether
+unimobs_petz_genetic_luckiness_factor ("Luckiness" gene improves change of breeding bonus by factor) float 0.2
+# The maximum factor by which the mob's .view_range can be improved with the "perception" gene. Mobs
+# whose .view_range doesn't exceed the default value are not affected. Use a value of 0 to disable
+# the "perception" gene altogether
+unimobs_petz_genetic_perception_factor ("Perception" gene improves mob's view range by factor) float 0.4
+# The maximum factor by which the probability of laying an egg can be improved with the
+# "productivity" gene. The value also increases the maximum number of eggs that can be laid. Cannot
+# be used with ants. Use a value of 0 to disable the "productivity" gene altogether
+unimobs_petz_genetic_productivity_factor ("Productivity" gene improves chance of laying egg by factor) float 0.33
+# The maximum factor by which the mob's .jump_height can be improved with the "springiness" gene.
+# Mobs whose .jump_height doesn't exceed the default value are not affected
+# Use a value of 0 to disable the "springiness" gene altogether
+unimobs_petz_genetic_springiness_factor ("Springiness" gene improves mob's jump height by factor) float 0.2
+# The maximum factor by which the mob's .max_hp can be improved with the "toughness" gene. Mobs
+# whose .max_hp doesn't exceed the default value are not affected. Use a value of 0 to disable the
+# "toughness" gene altogether
+unimobs_petz_genetic_toughness_factor ("Toughness" gene improves mob's max health by factor) float 0.2
+# The maximum factor by which the probability of getting a mutation can be improved with the
+# "variability" gene. Use a value of 0 to disable the "variability" gene altogether
+unimobs_petz_genetic_variability_factor ("Variability" gene improves chance of mutations by factor) float 0.25
+
+# Lifespan settings
+
+# Lifespan of mobs, in seconds. Use the value -1 to disable lifespans
+unimobs_petz_default_lifespan (Lifespan of mobs in seconds; use -1 to disable lifespans) int -1
+# Variability in individual lifespans; a value in the range 0-1
+unimobs_petz_lifespan_variability (Variability of lifespans, in range 0-1) float 0.2
+# If true, lifespans are disabled for all mobs with the property .is_tamed_flag = true
+unimobs_petz_disable_lifespan_for_tamed_mobs_flag (Disable lifespans for tamed mobs) bool false
+# If true, lifespans are disabled for all mobs with the property .can_breed_flag = true
+unimobs_petz_disable_lifespan_for_breeding_mobs_flag (Disable lifespans for breedable mobs) bool false
+
+# Egg laying settings
+
+# Interval in seconds before laying eggs (subject to a random increase/decrease of up to 20%). The
+# default value of 1200 equates to one egg per day
+unimobs_petz_lay_egg_interval (Egg-laying interval in seconds) int 1200
+# Max eggs laid by any individual mob
+unimobs_petz_max_laid_eggs (Max eggs laid by each mob) int 10
+# Interval in seconds required to hatch an egg (subject to a random increase/decrease of up to 20%)
+unimobs_petz_hatch_egg_interval (Egg-hatching interval in seconds) int 500
+# Interval in seconds required to hatch a node egg (in the original code, produced only by ants and
+# geckos; subject to a random increase/decrease of up to 20%)
+unimobs_petz_hatch_node_egg_interval (Egg-hatching interval in seconds, for node eggs) int 250
+# (Not in original code)
+# The maximum size of a stack for mob eggs (minimum value 1)
+unimobs_petz_egg_stack_size (Egg stack size) int 16
+
+# Mob capture settings
+
+# Whitespace-separated string of items that can be used as lassos (to capture compatible mobs)
+unimobs_petz_lasso_list (Items used as lassos) string unilib:tool_lasso_normal
+# Whitespace-separated strings of items that can be used as (larger) nets to capture compatible
+# (larger) mobs
+unimobs_petz_animal_net_list (Items used as large nets) string unilib:item_net_animal mobs:net
+# Whitespace-separated strings of items that can be used as (smaller) nets to capture compatible
+# (smaller) mobs
+unimobs_petz_bug_net_list (Items used as small nets) string unilib:item_net_bug fireflies:bug_net
+# Whitespace-separated string of items that can be used as lashes (to tame compatible mobs)
+unimobs_petz_lash_list (Items used as lashes) string unilib:item_whip_obedience
+# If true, lassos/nets can be used to capture mobs that belong to other players
+unimobs_petz_enable_mob_theft_flag (Lassos and nets can steal other players' mobs) bool false
+
+# Shears settings
+
+# Whitespace-separated string of items that can be used as shears
+unimobs_petz_shears_list (Items used as shears) string unilib:tool_shears_steel
+
+# Damage settings
+
+# If true, checks the engine's "enable_damage" setting; if that setting is false, disables damage
+# for all mobs in unimobs.petz_global.mob_table
+unimobs_petz_disable_damage_in_peaceful_worlds_flag (Disable mob damage in peaceful worlds) bool false
+# If true, disables damage in protected areas for all petz-compatible mobs
+unimobs_petz_disable_damage_in_protected_areas_flag (Disable mob damage in protected areas) bool false
+# Damage in air (for aquatic mobs)
+unimobs_petz_air_damage (Aquatic mob damage in air) float 1
+# Damage from fire, lava and other igniters
+unimobs_petz_igniter_damage (Mob damage from fire and lava) float 1
+# Amount of damage dealt by the Jack-O'-Lantern Grenade
+unimobs_petz_pumpkin_grenade_damage (Mob damage from Jack-O'-Lantern grenades) float 8
+
+# Combat/death aesthetics settings
+
+# If true, show particles when a mob dies
+unimobs_petz_enable_death_particles_flag (Show death particles) bool true
+# If true, the mob is colourised when punched
+unimobs_petz_colourise_on_punch_mob_flag (Colourise mob when punched) bool true
+# The colour to use, when colourising a punched mob
+unimobs_petz_punched_mob_colour (Hex colour for punched mobs) string #FF0000
+# If true, blood particles are displayed when a mob is punched. As in the original code, set to
+# false by default for the benefit of younger players
+unimobs_petz_show_blood_on_punch_mob_flag (Show blood particles) bool false
+
+# Fly behaviour settings
+    
+# Interval in seconds between changes to a flying mob's behaviour (used by the "lqb_fly_wander"
+# package)
+unimobs_petz_check_fly_behaviour_interval (Interval in seconds between checks for flying mob's behaviour) int 3
+# Some birds (parrots and toucans) can perch on a player's shoulder; the interval in seconds after
+# which the bird automatically detaches itself
+unimobs_petz_detach_from_shoulder_interval (Interval in seconds for birds perched on player's shoulder) int 120
+
+# "look_at" behaviour settings
+
+# If true, enable the high-level behaviour, "hqb_look_at"
+unimobs_petz_enable_look_at_behaviour_flag (Enable mob look-at behaviours) bool true
+# Chance of engaging the "hqb_look_at" behaviour; a value of 10 corresponds to once per 10 seconds
+unimobs_petz_look_at_behaviour_chance (Chance of engaging look-at behaviour) float 10
+
+# Mountable mob settings (ponies, camels etc)
+    
+# True if the "driver" of a pony (etc) is pointable
+unimobs_petz_mounted_driver_is_pointable_flag (Driver of mounted mobs is pointable) bool true
+# Maximum time (in seconds) for gallop mode
+unimobs_petz_max_gallop_time (Maximum time in seconds for gallop mode) int 20
+# Recovery time (in seconds) after gallop mode
+unimobs_petz_gallop_recovery_time (Maximum time in seconds for recovery after gallop mode) int 60
+# A value representing the absolute maximum speed of mounted creatures (ponies, camels) etc before
+# any bonuses/penalties are applied (due to horseshoes, etc). The value is 10 by default; change it
+# only if you really need a pony that can run unrealistically fast/slow (minimum value 0,
+# representing the slowest possible speed)
+unimobs_petz_max_mounted_speed (Relative maximum speed for mounted mobs) float 10
+# The increase in speed for ponies (etc) with horseshoes; a value of 0.2 represents a 20% increase
+# in speed
+unimobs_petz_horseshoe_speed_increase (Increase in speed for mobs with horseshoes) float 0.2
+
+# Sleep settings
+
+# True to enable compatible mobs to fall asleep
+unimobs_petz_enable_sleeping_flag (Enable mob sleeping) bool true
+
+# Herding and shepherding settings
+
+# If true, herdring behaviours are enabled
+unimobs_petz_enable_herding_flag (Enable mob herding) bool true
+# When spawning, the maximum herd size (for compatible creatures). To disable herds, use the value 1
+unimobs_petz_max_spawn_herd_size (Maximum herd size, or 1 to disable) int 5
+# Chance of engaging the "mtb_find_herd" behaviour; a value of 3 corresponds to once per 3 seconds
+unimobs_petz_herding_behaviour_chance (Mob herding chance) float 3
+# Maximum distance between a mob and the nearest mob of the same type, before the herding behaviour
+# can be engaged
+unimobs_petz_herding_max_distance (Herding max distance) int 5
+# Maximum distance between a mob and player wielding a shepherd's crook, before the following
+# behaviour can be engaged
+unimobs_petz_shepherd_max_distance (Shepherding max distance) int 5
+
+# Straggle behind parents settings
+# If true, baby mobs straggle (follow behind) their parents (in original code, only used by
+# chickens; in unimobs, used by many different mobs)
+unimobs_petz_enable_straggle_flag (Enable baby mobs following their parents) bool true
+
+# Trade settings
+
+# If true, enable mob trading
+unimobs_petz_enable_trade_flag (Enable mob trading) bool true
+# The maximum number of items that can be traded for a mob
+unimobs_petz_max_trade_items (Max number of items that can be traded for a mob) int 99
+# Whitespace-separated string of items. The specified items, if any, can be traded for mobs
+unimobs_petz_trade_item_list (List of tradeable items) string unilib:metal_copper_lump default:copper_lump unilib:metal_copper_ingot default:copper_ingot unilib:metal_iron_lump default:iron_lump unilib:metal_steel_ingot default:steel_ingot unilib:metal_gold_lump default:gold_lump unilib:metal_gold_ingot default:gold_ingot unilib:mineral_diamond_gem default:diamond",
+
+# Dung settings
+
+# If true, mobs with the .dung_name property produce dung
+unimobs_petz_enable_dung_flag (Enable dung) bool true
+# The average rate at which a compatible mob produces dung; a value in seconds
+unimobs_petz_average_dung_production_rate (Dung production rate) int 600
+# The average rate at which dung decays; a value in seconds
+unimobs_petz_average_dung_decay_rate (Dung decay rate) int 1200
+
+# Tamagotchi mode settings
+
+# If true, Tamagotchi Mode applies to compatible mobs. When enabled, compatible mobs must be receive
+# attention from a player. All compatible mobs must be fed. Some compatible mobs must be brushed,
+# and others lashed. Failure to do this decreases the mob's "affinity" for its owner. When affinity
+# reaches zero, the mob loses its tamed status. Tamagotchi mode influences (hunger/brushing/lashing)
+# don't apply when the mob is standing on certain nodes
+unimobs_petz_enable_tamagotchi_mode_flag (Enable Tamagotchi Mode) bool true
+# The time in seconds between checks on Tamagotchi Mode influences for each mob. The default value,
+# 2400, corresponds to two game days; meaning that a tamed pet must be fed/brushed/lashed at least
+# once during that time
+unimobs_petz_tamagotchi_update_interval (Tamagotchi mode update interval in seconds) int 2400
+# Factor that can be increased or decreased from the default value of 0.3, in order to increase or
+# decrease the rate at which the mob's affinity changes in Tamagotchi Mode
+unimobs_petz_tamagotchi_affinity_reduction_factor (Mob affinity reduction factor over time) float 0.3
+# The rate at which a mob's affinity decreases in Tamagotchi Mode, when punched by its owner. The
+# default value of 0.3 represents a 30% decrease
+unimobs_petz_tamagotchi_punch_rate (Mob affinity reduction factor after being punched) float 0.3
+# The rate at which a mob's affinity AND hunger increase/reduces in Tamagotchi Mode, when fed (or
+# not fed) by its owner. The default value of 0.3 represents a 30% change
+unimobs_petz_tamagotchi_feed_hunger_rate (Mob affinity/hunger change factor) float 0.3
+# The rate at which a mob's affinity increases/decreases in Tamagotchi Mode, when groomed (or not
+# groomed) by its owner, using a brush or lotion. The default value of 0.2 represents a 20% change
+unimobs_petz_tamagotchi_groom_rate (Mob affinity increase factor after being groomed) float 0.2
+# The rate at which a mob's affinity decreases in Tamagotchi Mode, when not lashed by its owner. The
+# default value of 0.2 represents a 20% decrease
+unimobs_petz_tamagotchi_lash_rate (Mob affinity reduction factor when not lashed) float 0.2
+# The proportion of the mob's maximum health/affinity, below which a warning will be shown in
+# Tamagotchi Mode (as particles). Use the value 0 to disable warnings
+unimobs_petz_tamagotchi_warning_rate (Percentage of affinity reduction before warning particles are visible; use 0 to eliminate them) float 0.5
+# If true, Tamagotchi Mode only applies to a mob on a multi-player server, when the mob's owner is
+# online
+unimobs_petz_tamagotchi_require_online_owner_flag (On servers, Tamagotchi Mode only applies when a mob's owner is online) bool true
+# Whitespace-separated string of nodes (see the code below for an example value). Tamagotchi mode
+# influences such as hunger don't apply to a mob when it's standing on one of these nodes
+unimobs_petz_tamagotchi_safe_node_list (List of safe nodes for mobs in Tamagotchi Mode) string unilib:unilib_misc_shelter_kennel_floor unilib:misc_shelter_cage_floor
+
+# Ant and bee settings
+
+# Interval in seconds required to establish a colony (ant nest or bee hive, subject to a random
+# increase/decrease of up to 20%)
+unimobs_petz_establish_colony_interval (Interval in seconds to establish ant/bee colonies) int 120
+
+# Beehive settings
+    
+# Amount of honey in a newly-constructed beehive
+unimobs_petz_beehive_initial_honey (Amount of honey in new beehives) int 3
+# Maximum amount of pollen in a beehive; when the actual amount of pollen reaches this value, it's
+# converted into 1 honey. The original code generated 1 honey for every flower visited by a
+# returning bee; unimobs generates (by default) 1 honey for every 3 flowers visited. To restore the
+# original behaviour, use the value 1
+unimobs_petz_beehive_max_pollen (Amount of pollen required for 1 honey) int 3
+# Maximum amount of honey in a beehive
+unimobs_petz_beehive_max_honey (Maximum honey per beehive) int 10
+# Maximum number of bees attached to a beehive
+unimobs_petz_beehive_max_bees (Maximum number of bees per beehive) int 3
+# Chance that a bee will leave the hive to find pollen, every time the check is performed. A value
+# of 1 means that the bee leaves immediately
+unimobs_petz_beehive_dispatch_chance (Chance of beehive dispatching a bee) float 20
+# The time in seconds between a beehive, artificially crafted by the player, being placed in the
+# world, and a worker bee being automatically created for it
+unimobs_petz_beehive_create_first_worker_delay (Time in seconds for new beehive to produce first worker bee) int 300
+# Average time in seconds, after which a worker bee without a hive dies. Use the value 0 to force a
+# worker bee's death immediately after the destruction of its hive
+unimobs_petz_beehive_doomed_worker_delay (Average lifespan in seconds for worker bees without hives) int 30
+# Flag set to true, if beehives "belong" to the player that placed them
+unimobs_petz_beehive_protected_flag (Beehive belongs to the player that places it) bool false
+
+# Misc item settings
+# Non-randomised interval after which thrown cobwebs disappear, in seconds
+unimobs_petz_cobweb_decay_interval (Cobweb decay interval in seconds) int 1200
+# Used with tamed mobs which have dreamcatchers, when the player has enabled the "Automatic go home"
+# button in the main mob formspec. If the distance between the specified home position and the mob's
+# current position is greater than this value, then the mob is automatically teleported back to the
+# specified home position
+unimobs_petz_teleport_back_home_distance (Dreamcatcher teleport distance) int 50
+# If true, placement of mob shelters is disabled (but its constituent blocks will still exist in the
+# game). In the original code, this setting was used only with dog kennels
+unimobs_petz_disable_shelter_placement_flag (Disable shelter placement) bool false
+
+# Curse of Lycanthropy settings
+
+# Chance of a wolf infecting a player with the Curse of Lycanthropy
+unimobs_petz_lycanthropy_wolf_infection_chance (Chance of wolves infecting players) float 200
+# Chance of a werewolf infecting a player with the Curse of Lycanthropy
+unimobs_petz_lycanthropy_werewolf_infection_chance (Chance of werewolves infecting players) float 10
+# Players infected with the Curse of Lycanthropy take less damage; a value of 0.5 represents a
+# reduction of 50% in the amount of damage taken
+unimobs_petz_lycanthropy_damage_reduction_factor (Damage reduction factor for infected players) float 0.5

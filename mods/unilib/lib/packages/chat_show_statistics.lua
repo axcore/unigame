@@ -208,8 +208,8 @@ function unilib.pkg.chat_show_statistics.exec()
         params = "[player]",
         description = S("Shows general player statistics"),
 
-        func = function(name, param)
-            return do_show_statistics(name, param)
+        func = function(pname, param)
+            return do_show_statistics(pname, param)
         end,
     })
 
@@ -217,8 +217,8 @@ function unilib.pkg.chat_show_statistics.exec()
         params = "[player]",
         description = S("Shows general player statistics"),
 
-        func = function(name, param)
-            return do_show_statistics(name, param)
+        func = function(pname, param)
+            return do_show_statistics(pname, param)
         end,
     })
 

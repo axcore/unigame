@@ -111,6 +111,9 @@ dofile(unilib.core.path_mod .. "/lib/effects/hydration/hydration.lua")
 --Set up hunger and sprinting fatigue
 dofile(unilib.core.path_mod .. "/lib/effects/stamina/stamina.lua")
 
+-- Set up natural slopes
+dofile(unilib.core.path_mod .. "/lib/effects/slopes/slopes.lua")
+
 ---------------------------------------------------------------------------------------------------
 -- Load files - ../lib/system
 ---------------------------------------------------------------------------------------------------

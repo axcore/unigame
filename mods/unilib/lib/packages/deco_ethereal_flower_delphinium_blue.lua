@@ -21,7 +21,7 @@ function unilib.pkg.deco_ethereal_flower_delphinium_blue.init()
         description = "Blue delphinium as decoration",
         depends = "flower_delphinium_blue",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_grove",
             "dirt_ordinary_with_turf_prairie",
         },

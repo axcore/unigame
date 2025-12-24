@@ -35,7 +35,7 @@ function unilib.pkg.deco_ethereal_flower_mixed.init()
                 "biome_ethereal_prairie",
             },
             {
-                "dirt_ordinary",
+                "dirt_ordinary_with_turf",
                 "dirt_ordinary_with_turf_grove",
                 "dirt_ordinary_with_turf_prairie",
             },

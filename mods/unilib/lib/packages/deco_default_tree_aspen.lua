@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_tree_aspen.init()
 
     return {
         description = "Aspen tree as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "tree_aspen"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "tree_aspen"},
     }
 
 end

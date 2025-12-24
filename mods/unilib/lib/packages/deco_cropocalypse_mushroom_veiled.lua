@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_veiled.init()
 
     return {
         description = "Veiled mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_veiled"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_veiled",
+        },
     }
 
 end

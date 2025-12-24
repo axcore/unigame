@@ -31,7 +31,7 @@ function unilib.pkg.chat_show_package.exec()
         description = S("Shows the unilib package that created a node, craftitem or tool"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             if param == nil or param == "" then
                 return false, S("Show the parent package of which node, craftitem or tool?")

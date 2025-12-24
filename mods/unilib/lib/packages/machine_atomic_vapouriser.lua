@@ -112,6 +112,12 @@ function unilib.pkg.machine_atomic_vapouriser.init()
 
     return {
         description = "Atomic vapouriser",
+        notes = "Vapourises items and sends the residue along an atomic tube towards a" ..
+                " collector. The collector uses the residue to construct a variety of items." ..
+                " The optimal tube length is 20; above and below that value, the amount of" ..
+                " residue reaching the collector is reduced. The residues produced by each" ..
+                " input item, and the items constructed from residues, are specified by CSV" ..
+                " files in the \"atomic\" remix; you can modify them as you please",
         depends = {
             "glass_obsidian",
             "metal_steel",
@@ -119,12 +125,6 @@ function unilib.pkg.machine_atomic_vapouriser.init()
             "shared_atomic",
             "stone_obsidian",
         },
-        notes = "Vapourises items and sends the residue along an atomic tube towards a" ..
-                " collector. The collector uses the residue to construct a variety of items." ..
-                " The optimal tube length is 20; above and below that value, the amount of" ..
-                " residue reaching the collector is reduced. The residues produced by each" ..
-                " input item, and the items constructed from residues, are specified by CSV" ..
-                " files in the \"atomic\" remix; you can modify them as you please",
     }
 
 end

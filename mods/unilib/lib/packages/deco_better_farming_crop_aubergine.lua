@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_crop_aubergine.init()
 
     return {
         description = "Aubergine as decoration",
-        depends = {"biome_default_forest_deciduous", "crop_aubergine", "dirt_ordinary"},
+        depends = {"biome_default_forest_deciduous", "crop_aubergine", "dirt_ordinary_with_turf"},
     }
 
 end

@@ -19,7 +19,8 @@ function unilib.pkg.deco_farming_redo_produce_corn_normal.init()
 
     return {
         description = "Normal corn as decoration",
-        depends = {"dirt_ordinary", "produce_corn_normal"},
+        depends = "produce_corn_normal",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_prairie"},
     }
 
 end

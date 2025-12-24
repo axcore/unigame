@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_butterflies.init()
 
     return {
-        description = "Butterflies for the \"gaia\" remix",
+        description = "Butterflies for \"gaia\"-compatible remixes",
         depends = {"biome_gaia", "misc_butterfly"},
     }
 
@@ -52,7 +52,8 @@ function unilib.pkg.deco_gaia_butterflies.post()
         fill_ratio = 0.01,
         num_spawn_by = 1,
         place_offset_y = 2,
-        place_on = "group:spreading_dirt_type",
+        -- N.B. Compatibility with unilib and non-unilib dirt nodes
+        place_on = {"group:spreading_dirt", "group:spreading_dirt_type"},
         sidelen = 80,
         spawn_by = "group:flower",
         y_max = unilib.constant.y_max,

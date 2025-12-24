@@ -1,5 +1,5 @@
 # "australia_mini" remix - the "australia" remix without biomes, decorations or ores (or the base
-#       package; there are no ABM/LBM packages to omit)
+#   package; there are no ABM/LBM packages to omit)
 # unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
 #   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
 #   enable them by uncommenting the optional package below

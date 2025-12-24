@@ -1,8 +1,8 @@
 # "moreblocks" remix - contains almost everything from moreblocks
 # Code handling moreblocks stairs has been incorporated directly into unilib's core code
 # Due to the ubiquity of moreblocks, craft recipes involving only minetest_game items have been
-#       added to minetest_game packages, rather than being added to a separate moreblocks package,
-#       as they ordinarily would be
+#   added to minetest_game packages, rather than being added to a separate moreblocks package, as
+#   they ordinarily would be
 # moreblocks nodes marked as "deprecated" have not been imported
 
 # node_name | original_mod
@@ -64,5 +64,5 @@ mineral_diamond|default mtg_plus
 #plant_shrub_dry|default
 
 # supporting packages (.suggested)
-item_book_ordinary|default
-vessel_bottle_glass_empty|thirsty vessels
+#item_book_ordinary|default
+#vessel_bottle_glass_empty|thirsty vessels

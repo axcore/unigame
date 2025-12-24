@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_tree_ipe_yellow.init()
 
     return {
         description = "Yellow ipe tree as decoration",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "tree_ipe_yellow"},
+        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary_with_turf", "tree_ipe_yellow"},
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_nsspf_mushroom_black_snowbank.init()
 
     return {
         description = "Black snowbank mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_black_snowbank"},
+        depends = {"dirt_ordinary_with_cover_snow", "mushroom_black_snowbank"},
     }
 
 end

@@ -206,8 +206,8 @@ function unilib.pkg.chat_list_trees.exec()
         description = S("Lists all tree types, or details for the specified tree type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_trees(name, param)
+        func = function(pname, param)
+            return do_list_trees(pname, param)
         end,
     })
 
@@ -216,8 +216,8 @@ function unilib.pkg.chat_list_trees.exec()
         description = S("Lists all tree types, or details for the specified tree type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_trees(name, param)
+        func = function(pname, param)
+            return do_list_trees(pname, param)
         end,
     })
 

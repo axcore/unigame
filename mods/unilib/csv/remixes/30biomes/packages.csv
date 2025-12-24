@@ -10,17 +10,15 @@ dirt_mud_swamp|30biomes
 tree_fir|30biomes
 
 # supporting packages (.depends)
-dirt_ordinary|default farming moreblocks
 mushroom_red|flowers
 
 # supporting packages (.at_least_one)
 biome_default_forest_coniferous|default
 biome_default_taiga|default
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 
 # supporting packages (.optional)
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
-#soil_ordinary|farming
 
 # supporting packages (.suggested)

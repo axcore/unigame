@@ -94,13 +94,13 @@ plant_shrub_bonsai|beautiflowers
 
 # supporting packages (.depends)
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
 stone_ordinary|default moreblocks technic
 
 # supporting packages (.at_least_one)
 
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
-#grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #mineral_mese|default glemr11

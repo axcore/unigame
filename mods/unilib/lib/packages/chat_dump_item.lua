@@ -123,8 +123,8 @@ function unilib.pkg.chat_dump_item.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_item(name, param)
+        func = function(pname, param)
+            return do_dump_item(pname, param)
         end,
     })
 

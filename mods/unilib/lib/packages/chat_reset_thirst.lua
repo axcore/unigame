@@ -32,23 +32,17 @@ function unilib.pkg.chat_reset_thirst.exec()
         description = S("Resets player thirst (if hydration is enabled)"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            local player = core.get_player_by_name(pname)
+            if not player then
                 return false, unilib.constant.chat_offline_msg
             end
 
             if not unilib.setting.thirst_enable_flag then
-
                 return false, S("Hydration is not enabled!")
-
             else
-
-                unilib.hydration.do_drink(
-                    core.get_player_by_name(name),
-                    unilib.pkg.shared_chat_cuisine.cuisine_max_level
-                )
-
+                unilib.hydration.do_drink(player, unilib.pkg.shared_chat_cuisine.cuisine_max_level)
             end
 
         end,

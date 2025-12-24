@@ -21,14 +21,13 @@ function unilib.pkg.dirt_ordinary_with_turf_short.init()
         description = "Ordinary dirt with short turf",
         notes = "Turf can be shortened with a turf-cutting sickle",
         depends = "dirt_ordinary",
-        optional = "misc_patch_grass",
+        optional = {"dirt_ordinary_with_turf", "misc_patch_grass"},
     }
 
 end
 
 function unilib.pkg.dirt_ordinary_with_turf_short.exec()
 
-    -- Short turf turns back into (ordinary) turf over time
     unilib.register_node("unilib:dirt_ordinary_with_turf_short", "dryplants:grass_short", mode, {
         -- From dryplants:grass_short
         description = S("Ordinary Dirt with Short Turf"),
@@ -38,7 +37,8 @@ function unilib.pkg.dirt_ordinary_with_turf_short.exec()
             "unilib_dirt_ordinary.png^unilib_turf_ordinary_side_overlay.png" ..
                     "^unilib_dirt_ordinary_with_turf_short_side_overlay.png",
         },
-        groups = {crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+        -- N.B. covered_dirt = 1 not in original code
+        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.4},
         }),
@@ -55,23 +55,29 @@ function unilib.pkg.dirt_ordinary_with_turf_short.exec()
     })
     -- (not compatible with flowerpots)
 
-    unilib.register_abm({
-        label = "Short turf grows [dirt_ordinary_with_turf_short]",
-        nodenames = {"unilib:dirt_ordinary_with_turf_short"},
+    -- Short turf turns back into (ordinary) turf over time
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil and
+            unilib.global.pkg_executed_table["misc_patch_grass"] ~= nil then
 
-        chance = 100 / 5,
-        interval = 1200,
+        unilib.register_abm({
+            label = "Short turf grows [dirt_ordinary_with_turf_short]",
+            nodenames = {"unilib:dirt_ordinary_with_turf_short"},
 
-        action = function(pos)
+            chance = 100 / 5,
+            interval = 1200,
 
-            -- Only become dirt with turf if no cut turf lies on top
-            local above = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
-            if above.name ~= "unilib:misc_patch_grass" and
-                    above.name ~= "unilib:misc_patch_grass_dead" then
-                core.swap_node(pos, {name = "unilib:dirt_ordinary_with_turf"})
-            end
+            action = function(pos)
 
-        end,
-    })
+                -- Only become dirt with turf if no cut turf lies on top
+                local above = core.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
+                if above.name ~= "unilib:misc_patch_grass" and
+                        above.name ~= "unilib:misc_patch_grass_dead" then
+                    core.swap_node(pos, {name = "unilib:dirt_ordinary_with_turf"})
+                end
+
+            end,
+        })
+
+    end
 
 end

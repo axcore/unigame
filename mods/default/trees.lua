@@ -143,29 +143,3 @@ function default.grow_sapling(pos)
 	minetest.log("action", "Growing sapling " .. node.name .. " at " .. minetest.pos_to_string(pos))
 	sapling_def.grow(pos)
 end
-
-local function register_sapling_growth(nodename, grow)
-	default.register_sapling_growth("default:" .. nodename, {grow = grow})
-end
-
-if minetest.get_mapgen_setting("mg_name") == "v6" then
-	register_sapling_growth("sapling", function(pos)
-		default.grow_tree(pos, random(1, 4) == 1)
-	end)
-	register_sapling_growth("junglesapling", default.grow_jungle_tree)
-	register_sapling_growth("pine_sapling", function(pos)
-		local snow = is_snow_nearby(pos)
-		default.grow_pine_tree(pos, snow)
-	end)
-else
-	register_sapling_growth("sapling", default.grow_new_apple_tree)
-	register_sapling_growth("junglesapling", default.grow_new_jungle_tree)
-	register_sapling_growth("pine_sapling", function(pos)
-		local snow = is_snow_nearby(pos)
-		if snow then
-			default.grow_new_snowy_pine_tree(pos)
-		else
-			default.grow_new_pine_tree(pos)
-		end
-	end)
-end

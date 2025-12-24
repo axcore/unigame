@@ -209,7 +209,7 @@ local function update_hud(player, player_name, compass)
     if not id then
 
         id = player:hud_add({
-            name = "death_compass",
+            name = "unilib:hud_item_compass_death",
             type = "text",
 
             position = hud_posn_table,
@@ -360,7 +360,7 @@ function unilib.pkg.item_compass_death.exec()
     if unilib.setting.death_compass_duration > 0 then
 
         time_msg = S(
-            "The Death Compass' guidance will only last for @1 after death.",
+            "The Death Compass will guide you for @1 after death.",
             clock_string(unilib.setting.death_compass_duration, false)
         )
 

@@ -33,7 +33,7 @@ function unilib.pkg.chat_check_ingredients.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             -- Compile a list of registered nodes, craftitems and tools (from all loaded mods), and
             --      all the groups they provide
@@ -106,12 +106,12 @@ function unilib.pkg.chat_check_ingredients.exec()
                     count = count + 1
 
                     unilib.utils.chat_send_player(
-                        name,
+                        pname,
                         S("Missing external ingredients for @1", full_name)
                     )
 
                     for _, ingredient in ipairs(this_list) do
-                        unilib.utils.chat_send_player(name, "   " .. ingredient)
+                        unilib.utils.chat_send_player(pname, "   " .. ingredient)
                     end
 
                 end
@@ -119,35 +119,35 @@ function unilib.pkg.chat_check_ingredients.exec()
             end
 
             unilib.utils.chat_send_player(
-                name, S("End of list (items with missing external ingredients found: @1)", count)
+                pname, S("End of list (items with missing external ingredients found: @1)", count)
             )
 
             if found_table then
 
-                unilib.utils.chat_send_player(name, S("Summary of available external ingredients"))
+                unilib.utils.chat_send_player(pname, S("Summary of available external ingredients"))
 
                 local found_list = unilib.utils.sort_table(found_table)
                 for _, ingredient in ipairs(found_list) do
-                    unilib.utils.chat_send_player(name, "   " .. ingredient)
+                    unilib.utils.chat_send_player(pname, "   " .. ingredient)
                 end
 
                 unilib.utils.chat_send_player(
-                    name, S("End of list (available external ingredients found: @1)", #found_list)
+                    pname, S("End of list (available external ingredients found: @1)", #found_list)
                 )
 
             end
 
             if missing_table then
 
-                unilib.utils.chat_send_player(name, S("Summary of missing external ingredients"))
+                unilib.utils.chat_send_player(pname, S("Summary of missing external ingredients"))
 
                 local missing_list = unilib.utils.sort_table(missing_table)
                 for _, ingredient in ipairs(missing_list) do
-                    unilib.utils.chat_send_player(name, "   " .. ingredient)
+                    unilib.utils.chat_send_player(pname, "   " .. ingredient)
                 end
 
                 unilib.utils.chat_send_player(
-                    name, S("End of list (missing external ingredients found: @1)", #missing_list)
+                    pname, S("End of list (missing external ingredients found: @1)", #missing_list)
                 )
 
             end

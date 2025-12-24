@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_bush_pine.init()
 
     return {
         description = "Pine bush as decoration",
-        depends = {"bush_pine", "dirt_ordinary"},
+        depends = {"bush_pine", "dirt_ordinary_with_cover_snow"},
         at_least_one = {"biome_default_grassland_snowy", "biome_default_taiga"},
     }
 

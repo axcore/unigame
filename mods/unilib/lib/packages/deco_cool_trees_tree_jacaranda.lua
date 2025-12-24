@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_jacaranda.init()
 
     return {
         description = "Jacaranda tree as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "tree_jacaranda"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "tree_jacaranda",
+        },
     }
 
 end

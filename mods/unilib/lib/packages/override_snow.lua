@@ -17,7 +17,8 @@ local snowball_velocity, entity_attack_delay, someone_throwing, just_activated
 
 -- (Formerly Minetest settings. These two values can be changed, if required)
 local snowball_velocity = 19
-local snowball_gravity = 0.91
+-- (Air resistance reduces the snowball's acceleration on the y axis)
+local friction_factor = 0.91
 
 local entity_table = {
     initial_properties = {
@@ -40,13 +41,6 @@ local function update_snowball_vel(v)
 
 end
 
-local function get_gravity()
-
-    local grav = tonumber(core.settings:get("movement_gravity")) or unilib.constant.gravity
-    return grav * snowball_gravity
-
-end
-
 local function shoot_snowball(item, player)
 
     -- Was snow.shoot_snowball()
@@ -60,7 +54,9 @@ local function shoot_snowball(item, player)
     local pos = vector.add(player:get_pos(), addp)
     local obj = core.add_entity(pos, "unilib:entity_snow_ordinary_ball")
     obj:set_velocity(vector.multiply(dir, snowball_velocity))
-    obj:set_acceleration({x = dir.x * -3, y = -get_gravity(), z = dir.z * -3})
+    obj:set_acceleration(
+        {x = dir.x * -3, y = (unilib.constant.gravity * friction_factor), z = dir.z * -3}
+    )
     obj:get_luaentity().thrower = player:get_player_name()
     if creative_mode then
 
@@ -141,7 +137,7 @@ function entity_table.on_activate(self)
     self.object:set_properties(
         {textures = {"unilib_snow_ordinary_ball.png^[transform" .. math.random(0, 7)}}
     )
-    self.object:set_acceleration({x = 0, y = -get_gravity(), z = 0})
+    self.object:set_acceleration({x = 0, y = (unilib.constant.gravity * friction_factor), z = 0})
     self.lastpos = self.object:get_pos()
     core.after(0.1, function(obj)
 
@@ -237,7 +233,9 @@ function entity_table.on_step(self, dtime)
 
     if core.get_node(pos).name ~= "air" then
 
-        self.object:set_acceleration({x = 0, y = -get_gravity(), z = 0})
+        self.object:set_acceleration(
+            {x = 0, y = (unilib.constant.gravity * friction_factor), z = 0}
+        )
         pos = self.lastpos
         self.object:set_pos(pos)
         core.sound_play(
@@ -315,6 +313,7 @@ function unilib.pkg.override_snow.init()
                 " ice and snow, as well as snow moss, are supported (and not any other" ..
                 " variants of ice, snow or moss",
         depends = "shared_snow",
+        optional = {"dirt_ordinary", "dirt_ordinary_with_cover_snow", "dirt_ordinary_with_turf"},
         at_least_one = {"ice_ordinary", "moss_snow", "snow_ordinary"},
     }
 

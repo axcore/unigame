@@ -19,6 +19,7 @@ function unilib.pkg.dirt_brown.init()
 
     return {
         description = "Brown dirt",
+        optional = "soil_brown",
     }
 
 end
@@ -41,8 +42,9 @@ function unilib.pkg.dirt_brown.exec()
         replace_mode = mode,
         compressed_description = S("Compressed Brown Dirt"),
         compressed_group_table = {crumbly = 2},
-        dry_soil = "unilib:soil_ordinary",
-        wet_soil = "unilib:soil_ordinary_wet",
+        -- N.B. unilib:soil_ordinary, etc in original code
+        dry_soil = "unilib:soil_brown",
+        wet_soil = "unilib:soil_brown_wet",
     })
 
 end

@@ -20,7 +20,12 @@ function unilib.pkg.deco_farming_redo_produce_coffee.init()
     return {
         description = "Coffee as decoration",
         depends = "produce_coffee",
-        at_least_one = {"dirt_dry", "dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {
+            "dirt_dry_with_turf_dry",
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf_dry",
+            "dirt_ordinary_with_turf_prairie",
+        },
     }
 
 end

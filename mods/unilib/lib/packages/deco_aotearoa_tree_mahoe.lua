@@ -21,8 +21,15 @@ function unilib.pkg.deco_aotearoa_tree_mahoe.init()
         description = "Mahoe tree as decoration",
         depends = "tree_mahoe",
         at_least_one = {
-            {"biome_aotearoa_lowland", "biome_aotearoa_scrubland"},
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "biome_aotearoa_lowland",
+                "biome_aotearoa_scrubland",
+            },
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 
@@ -63,8 +70,8 @@ function unilib.pkg.deco_aotearoa_tree_mahoe.post()
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_beech",
                 "unilib:dirt_antipodean_dark_with_litter_wet",
-                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_antipodean_with_moss",
+                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_ordinary_with_litter_rainforest",
             },
             y_max = 80,

@@ -216,7 +216,7 @@ function unilib.pkg.item_hangglider.exec()
         if hud_overlay_flag then
 
             id_table[pname] = player:hud_add({
-                name = "hangglider",
+                name = "unilib:hud_item_hangglider",
                 type = "image",
 
                 alignment = {x = 1, y = 1},

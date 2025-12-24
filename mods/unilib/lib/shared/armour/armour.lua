@@ -166,17 +166,36 @@ function unilib.armour.get_player_data(...)
 
 end
 
+function unilib.armour.get_player_texture_data(...)
+
+    -- Replaces deprecated function unilib.armour.get_player_texture() as of v1.1.0
+    if not unilib.armour.active_flag then unilib.armour.active_flag = true; dofile(base_file) end
+    return unilib.armour._get_player_texture_data(...)
+
+end
+
 function unilib.armour.get_player_texture(...)
 
+    -- Deprecated as of v1.1.0; new code should call unilib.armour.get_player_texture_data() instead
     if not unilib.armour.active_flag then unilib.armour.active_flag = true; dofile(base_file) end
-    return unilib.armour._get_player_texture(...)
+    return unilib.armour._get_player_texture_data(...)
+
+end
+
+function unilib.armour.set_player_texture_data(...)
+
+    -- Replaces deprecated function unilib.armour.set_player_texture() as of v1.1.0
+    if not unilib.armour.active_flag then unilib.armour.active_flag = true; dofile(base_file) end
+    return unilib.armour._set_player_texture_data(...)
 
 end
 
 function unilib.armour.set_player_texture(...)
 
+    -- Deprecated as of v1.1.0; new code should call unilib.armour.set_player_texture_data() instead
+
     if not unilib.armour.active_flag then unilib.armour.active_flag = true; dofile(base_file) end
-    return unilib.armour._set_player_texture(...)
+    return unilib.armour._set_player_texture_data(...)
 
 end
 

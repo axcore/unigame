@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_mushroom_pink.init()
 
     return {
         description = "Pink mushroom as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "mushroom_pink"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "mushroom_pink"},
     }
 
 end

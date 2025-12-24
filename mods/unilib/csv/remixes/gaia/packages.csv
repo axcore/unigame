@@ -130,10 +130,11 @@ dirt_clayey|valleys_c
 dirt_coarse|farlands
 dirt_dark|darkage
 dirt_dried|ethereal
-dirt_dry|default
+dirt_dry|default farming
 dirt_mud_dry|darkage
 dirt_mud_swamp|30biomes
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
 dirt_ordinary_with_turf_grey|ethereal
 dirt_parched|farlands
 dirt_peat_with_oil_crude|pfaa
@@ -374,6 +375,9 @@ shared_ethereal_fish|ethereal
 shared_farlands_fruit|unilib
 snow_ordinary|default ethereal mtg_plus
 soil_arid|farming
+soil_black|unilib
+soil_brown|unilib
+soil_dark|unilib
 soil_ordinary|farming
 stone_andesite_grey|glemr4
 stone_basalt_brown|material mineral
@@ -584,7 +588,6 @@ misc_butterfly|butterflies
 misc_firefly|fireflies
 misc_trellis|farming
 shared_moretrees|moretrees
-shared_snow|snow
 soil_sand_desert|farming
 stone_ordinary|default moreblocks technic
 stone_ordinary_with_coal|default
@@ -608,8 +611,11 @@ plant_kelp_ordinary|default
 #brick_ordinary|default
 #bucket_steel|bucket
 #container_chest_ordinary|default
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #dirt_ordinary_with_turf_bamboo|ethereal
 #dirt_ordinary_with_turf_crystal|ethereal
+#dirt_ordinary_with_turf_dry|default farming
 #dirt_ordinary_with_turf_grove|ethereal
 #dirt_ordinary_with_turf_mushroom|ethereal
 #dirt_ordinary_with_turf_prairie|ethereal
@@ -653,5 +659,6 @@ plant_kelp_ordinary|default
 #torch_ordinary|default
 #utensil_mortar_pestle|farming
 #vessel_bottle_glass_empty|thirsty vessels
+#weather_snowflakes|snow
 
 # supporting packages (.suggested)

@@ -22,6 +22,7 @@ function unilib.pkg.biome_ethereal_swamp.init()
         depends = {
             "clay_ordinary",
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "sand_ordinary",
             "sand_quicksand",
             "stone_ordinary",

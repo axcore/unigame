@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_fern_mangrove.init()
     return {
         description = "Mangrove fern as decoration",
         depends = {"biome_australia_mangroves", "fern_mangrove"},
-        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary"},
+        at_least_one = {"dirt_mud_mangrove", "dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

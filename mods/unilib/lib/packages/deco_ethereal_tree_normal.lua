@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_normal.init()
 
     return {
         description = "Normal tree as decoration",
-        depends = {"biome_ethereal_jumble", "dirt_ordinary", "tree_normal"},
+        depends = {"biome_ethereal_jumble", "dirt_ordinary_with_turf", "tree_normal"},
     }
 
 end

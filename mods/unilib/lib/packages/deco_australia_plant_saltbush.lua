@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_plant_saltbush.init()
     return {
         description = "Saltbush as decoration",
         depends = {"biome_australia_murray_darling_basin", "plant_saltbush"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

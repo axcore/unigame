@@ -57,21 +57,27 @@ function unilib.metals._register_metal_powder(data_table)
 
     if unilib.setting.technic_update_flag then
 
-        if not no_lump_flag then
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
 
+            if not no_lump_flag then
+
+                technic.register_grinder_recipe({
+                    output = "unilib:metal_" .. part_name .. "_powder " ..
+                            tostring(unilib.setting.technic_grind_metal_ratio),
+                    input = {"unilib:metal_" .. part_name .. "_lump"},
+                    time = lump_time,
+                })
+
+            end
             technic.register_grinder_recipe({
-                output = "unilib:metal_" .. part_name .. "_powder " ..
-                        tostring(unilib.setting.technic_grind_metal_ratio),
-                input = {"unilib:metal_" .. part_name .. "_lump"},
-                time = lump_time,
+                output = "unilib:metal_" .. part_name .. "_powder",
+                input = {"unilib:metal_" .. part_name .. "_ingot"},
+                time = ingot_time,
             })
 
-        end
-        technic.register_grinder_recipe({
-            output = "unilib:metal_" .. part_name .. "_powder",
-            input = {"unilib:metal_" .. part_name .. "_ingot"},
-            time = ingot_time,
-        })
+        end)
 
     end
 
@@ -127,21 +133,28 @@ function unilib.metals._register_metal_powder_from_mineral(data_table)
 
     if unilib.technic_update_flag then
 
-        local mineral_part_name_list = unilib.utils.convert_to_list(mineral_part_name)
-        for _, this_mineral_part_name in ipairs(mineral_part_name_list) do
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
 
+            local mineral_part_name_list = unilib.utils.convert_to_list(mineral_part_name)
+            for _, this_mineral_part_name in ipairs(mineral_part_name_list) do
+
+                technic.register_grinder_recipe({
+                    output = full_name .. " " ..
+                            tostring(unilib.setting.technic_grind_mineral_ratio),
+                    input = {"unilib:mineral_" .. this_mineral_part_name .. "_lump"},
+                    time = lump_time,
+                })
+
+            end
             technic.register_grinder_recipe({
-                output = full_name .. " " .. tostring(unilib.setting.technic_grind_mineral_ratio),
-                input = {"unilib:mineral_" .. this_mineral_part_name .. "_lump"},
-                time = lump_time,
+                output = "unilib:metal_" .. metal_part_name .. "_powder",
+                input = {"unilib:metal_" .. metal_part_name .. "_ingot"},
+                time = ingot_time,
             })
 
-        end
-        technic.register_grinder_recipe({
-            output = "unilib:metal_" .. metal_part_name .. "_powder",
-            input = {"unilib:metal_" .. metal_part_name .. "_ingot"},
-            time = ingot_time,
-        })
+        end)
 
     end
 

@@ -104,6 +104,7 @@ function unilib.pkg.plant_ivy_poison.init()
         optional = {
             "brick_ordinary",
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "stone_ordinary",
             "stone_ordinary_with_coal",
             "stone_ordinary_with_iron",

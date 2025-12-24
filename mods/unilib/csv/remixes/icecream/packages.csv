@@ -51,7 +51,8 @@ fruit_blueberry_ordinary|default
 produce_blueberry_highbush|farming
 
 # supporting packages (.optional)
-#dirt_ordinary|default farming moreblocks
+#dirt_ordinary_with_cover_snow|default
+#dirt_ordinary_with_turf|default farming moreblocks
 #dye_basic|dye bakedclay
 #food_chocolate_biscuit|farming
 #ingredient_cocoa_normal|cacaotree

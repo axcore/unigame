@@ -21,8 +21,17 @@ function unilib.pkg.deco_aotearoa_tree_manuka.init()
         description = "Manuka tree as decoration",
         depends = "tree_manuka",
         at_least_one = {
-            {"biome_aotearoa_coastal", "biome_aotearoa_scrubland", "biome_aotearoa_wetland"},
-            {"clay_gumland", "dirt_custom_antipodean", "dirt_ordinary", "dirt_peat_restiad"},
+            {
+                "biome_aotearoa_coastal",
+                "biome_aotearoa_scrubland",
+                "biome_aotearoa_wetland",
+            },
+            {
+                "clay_gumland",
+                "dirt_custom_antipodean",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_peat_restiad",
+            },
         },
     }
 

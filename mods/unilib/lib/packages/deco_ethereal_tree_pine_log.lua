@@ -19,8 +19,17 @@ function unilib.pkg.deco_ethereal_tree_pine_log.init()
 
     return {
         description = "Pine tree log as decoration",
-        depends = {"dirt_ordinary", "tree_pine"},
-        at_least_one = {"biome_ethereal_forest_coniferous", "biome_ethereal_taiga"},
+        depends = "tree_pine",
+        at_least_one = {
+            {
+                "biome_ethereal_forest_coniferous",
+                "biome_ethereal_taiga",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_litter_coniferous",
+            },
+        },
     }
 
 end

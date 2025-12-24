@@ -19,9 +19,9 @@ function unilib.pkg.meta_atomic_optimise.init()
 
     return {
         description = "Experimental (but tested and working) package which reads from the" ..
-                " vapourise.csv file in the \"atomic\" remix, and attempts to optimise it," ..
-                " combining all items with identical proportions into a single line. Writes the" ..
-                " output to vapourise_optimised.csv",
+                " vapourise.csv file in the \"atomic\"-compatible remix, and attempts to" ..
+                " optimise it, combining all items with identical proportions into a single" ..
+                " line. Writes the output to vapourise_optimised.csv",
         notes = "Unlike the comparable \"meta_deco_optimise\", this package has no shared" ..
                 " functions; the optimisation is done whenever the package is loaded",
     }
@@ -34,7 +34,9 @@ function unilib.pkg.meta_atomic_optimise.exec()
     local original_count = 0
     local optimised_count = 0
 
-    local remix_dir = unilib.utils.get_remix_dir("atomic")
+    -- Read CSVs from the first remix with the label "atomic" (default: the "atomic" remix itself)
+    local remix_name = unilib.utils.get_remix_by_label("atomic") or "atomic"
+    local remix_dir = unilib.utils.get_remix_dir(remix_name)
     local input_path = remix_dir .. "/vapourise.csv"
     local output_path = remix_dir .. "/vapourise_optimised.csv"
 

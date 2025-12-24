@@ -1,0 +1,37 @@
+Mobs specify various forms of their own name: "dog", "a dog" and "the dog".
+
+There are actually six translatable versions of each name. We also have the strings "DOG", "A DOG"
+and "THE DOG".
+
+The strings in CAPITALS are meant to be used as the OBJECT of a sentence, for example:
+
+    You see my dog
+    You see a dog
+    You see the dog
+
+The other strings are meant to be used as the SUBJECT of a sentence, for example:
+
+    Your dog is here
+    A dog is here
+    The dog is here
+
+When you translate the strings, use normal capitalisation rules for your language. For example, in
+German all nouns are capitalised, so translate like this:
+
+    "dog"       >   "Hund"
+    "a dog"     >   "ein Hund"
+    "the dog"   >   "der Hund"
+
+    "DOG"       >   "Hund"
+    "A DOG"     >   "ein Hund"
+    "THE DOG"   >   "der Hund"
+
+But in Spanish, nouns are not automatically capitalised, so translate like this:
+
+    "dog"       >   "perro"
+    "a dog"     >   "un perro"
+    "the dog"   >   "el perro"
+
+    "DOG"       >   "perro"
+    "A DOG"     >   "un perro"
+    "THE DOG"   >   "el perro"

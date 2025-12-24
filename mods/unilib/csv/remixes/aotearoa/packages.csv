@@ -1,8 +1,8 @@
 # "aotearoa" remix - contains nearly everything from the aotearoa mod
 # Ambient sounds were not imported, and unilib does not create stairs from tree trunks (for
-#       consistency with everything else)
+#   consistency with everything else)
 # It is recommended that this remix is used together with the "mtgame_mini" and "mtgame_ores"
-#       remixes
+#   remixes
 # unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
 #   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
 #   enable them by uncommenting the optional package below
@@ -221,8 +221,10 @@ tree_wheki|aotearoa
 
 # supporting packages (.depends)
 clay_ordinary|default
-dirt_custom_antipodean|unilib
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 dye_basic|dye bakedclay
 gravel_ordinary|default mtg_plus
 ice_ordinary|default ethereal mtg_plus
@@ -244,11 +246,13 @@ stone_ordinary|default moreblocks technic
 
 # supporting packages (.at_least_one)
 coral_block_skeleton|default
+dirt_custom_antipodean|unilib
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #coral_block_brown|default
 #coral_block_orange|default
+#dirt_ordinary_with_cover_snow|default
 #food_fiddlehead|ferns
 #grass_dry|default
 #grass_jungle|default
@@ -263,6 +267,8 @@ coral_block_skeleton|default
 #moss_green|sickles
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
+#soil_antipodean|unilib
+#soil_antipodean_dark|unilib
 #soil_ordinary|farming
 #stone_sandstone_desert|default mtg_plus
 #stone_sandstone_ordinary|default moreblocks mtg_plus

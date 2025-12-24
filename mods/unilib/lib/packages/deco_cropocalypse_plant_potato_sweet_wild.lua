@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_plant_potato_sweet_wild.init()
 
     return {
         description = "Wild sweet potato plant as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "plant_potato_sweet_wild"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "plant_potato_sweet_wild",
+        },
     }
 
 end

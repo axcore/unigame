@@ -20,12 +20,21 @@ local function do_dump_craftitem(pname, param)
     local craftitem_list = {}
     local count = 0
 
-    for k, _ in pairs(core.registered_craftitems) do
+    if param ~= "" and core.registered_craftitems[param] ~= nil then
 
-        if param == "" or string.find(k, param) then
+        table.insert(craftitem_list, core.registered_craftitems[param].name)
+        count = 1
 
-            table.insert(craftitem_list, tostring(k))
-            count = count + 1
+    else
+
+        for k, _ in pairs(core.registered_craftitems) do
+
+            if param == "" or string.find(k, param) then
+
+                table.insert(craftitem_list, tostring(k))
+                count = count + 1
+
+            end
 
         end
 
@@ -85,8 +94,8 @@ function unilib.pkg.chat_dump_craftitem.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_craftitem(name, param)
+        func = function(pname, param)
+            return do_dump_craftitem(pname, param)
         end,
     })
 

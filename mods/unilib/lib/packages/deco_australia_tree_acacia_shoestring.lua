@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_acacia_shoestring.init()
     return {
         description = "Shoestring acacia tree as decoration",
         depends = {"biome_australia_mulga_lands", "tree_acacia_shoestring"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

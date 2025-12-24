@@ -19,7 +19,11 @@ function unilib.pkg.deco_cool_trees_tree_ebony.init()
 
     return {
         description = "Ebony tree as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "tree_ebony"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "tree_ebony",
+        },
     }
 
 end

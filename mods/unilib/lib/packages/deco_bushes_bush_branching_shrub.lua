@@ -19,7 +19,7 @@ function unilib.pkg.deco_bushes_bush_branching_shrub.init()
 
     return {
         description = "Branching bush shrub as decoration",
-        depends = {"bush_branching_shrub", "dirt_ordinary"},
+        depends = {"bush_branching_shrub", "dirt_ordinary_with_turf"},
     }
 
 end

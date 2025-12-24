@@ -67,7 +67,7 @@ local function generate_stratus(
 
     for i = 1,blocks do
 
-        if pr:next(1,stratus_chance) == 1 then
+        if pr:next(1, stratus_chance) == 1 then
 
             local y0 = y_max - radius_y + 1
             if y0 < y_min then
@@ -160,7 +160,7 @@ local function generate_claylike(
 
         for yy=minh, maxh do
 
-            local x = pr:next(1,chance)
+            local x = pr:next(1, chance)
             if x == 1 then
 
                 for divx = 0 + 1, divs - 1 - 1 do
@@ -337,6 +337,7 @@ function unilib.pkg.mapgen_darkage.init()
                 " nodes (from darkage)",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "liquid_water_ordinary",
             "sand_ordinary",
             "stone_ordinary",

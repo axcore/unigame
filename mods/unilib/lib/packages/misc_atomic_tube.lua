@@ -296,12 +296,12 @@ function unilib.pkg.misc_atomic_tube.init()
 
     return {
         description = "Atomic tubes",
-        depends = {"metal_steel", "shared_atomic"},
         notes = "A row of tubes connects an atomic vapouriser to an atomic collector. Tubes" ..
                 " must be placed in a straight line, and must connect to the vapouriser and" ..
                 " collector on the correct side. Occasional server glitches may produce a" ..
                 " \"broken\" tube, which can be \"repaired\" by digging and then placing" ..
                 " it back in its former position",
+        depends = {"metal_steel", "shared_atomic"},
     }
 
 end

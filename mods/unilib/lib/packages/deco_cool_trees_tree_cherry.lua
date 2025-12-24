@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_cherry.init()
 
     return {
         description = "Cherry tree as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "tree_cherry"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "tree_cherry"},
     }
 
 end

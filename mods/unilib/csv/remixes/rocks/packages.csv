@@ -1,6 +1,6 @@
 # "rocks" remix - contains a few items from rocks that are not found in AATO/PFAA (but are required
-#       by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest
-#       mod, everything has been grouped into a hypothetical "rocks" mod
+#   by GLEM). Used the Gael-de-Sailly fork. Because the "mineral" mod clashes with a Grailtest mod,
+#   everything has been grouped into a hypothetical "rocks" mod
 
 # node_name | original_mod
 

@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_fern_christmas.init()
 
     return {
         description = "Christmas fern as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "fern_christmas"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "fern_christmas"},
     }
 
 end

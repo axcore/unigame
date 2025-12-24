@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_corn_flint.init()
 
     return {
         description = "Flint corn as decoration",
-        depends = {"dirt_ordinary", "produce_corn_flint"},
+        depends = {"dirt_ordinary_with_turf", "produce_corn_flint"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

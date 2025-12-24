@@ -19,8 +19,18 @@ function unilib.pkg.deco_cucina_vegana_plant_asparagus_white_wild.init()
 
     return {
         description = "Wild white asparagus plant as decoration",
-        depends = {"dirt_ordinary", "plant_asparagus_white_wild"},
-        at_least_one = {"tree_apple", "tree_aspen", "tree_jungle"},
+        depends = "plant_asparagus_white_wild",
+        at_least_one = {
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+            {
+                "tree_apple",
+                "tree_aspen",
+                "tree_jungle",
+            },
+        },
     }
 
 end

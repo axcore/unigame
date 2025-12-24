@@ -26,8 +26,8 @@ function unilib.pkg.deco_ethereal_bush_acacia.init()
                 "biome_ethereal_savanna",
             },
             {
-                "dirt_dry",
-                "dirt_ordinary",
+                "dirt_dry_with_turf_dry",
+                "dirt_ordinary_with_turf_dry",
             },
         },
     }

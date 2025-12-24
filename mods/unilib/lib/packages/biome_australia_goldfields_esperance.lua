@@ -19,7 +19,7 @@ function unilib.pkg.biome_australia_goldfields_esperance.init()
 
     return {
         description = "Goldfields-Esperance biome",
-        depends = {"dirt_ordinary", "sand_desert", "stone_sandstone_ordinary"},
+        depends = {"dirt_ordinary_with_turf_dry", "sand_desert", "stone_sandstone_ordinary"},
     }
 
 end

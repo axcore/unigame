@@ -21,7 +21,7 @@ function unilib.pkg.deco_farming_redo_produce_parsley_flatleaf.init()
         description = "Flat leaf parsley as decoration",
         depends = "produce_parsley_flatleaf",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_grove",
             "dirt_ordinary_with_turf_prairie",
         },

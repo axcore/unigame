@@ -45,7 +45,7 @@ local function do_list_decorations(pname, param)
 
             unilib.utils.chat_send_player(
                 pname,
-                S("No decorations are registered for mods other than the  \"@1\" mod", param)
+                S("No decorations are registered for mods other than the \"@1\" mod", param)
             )
 
         else
@@ -109,8 +109,8 @@ function unilib.pkg.chat_list_decorations.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_decorations(name, param)
+        func = function(pname, param)
+            return do_list_decorations(pname, param)
         end,
     })
 
@@ -122,8 +122,8 @@ function unilib.pkg.chat_list_decorations.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_decorations(name, param)
+        func = function(pname, param)
+            return do_list_decorations(pname, param)
         end,
     })
 

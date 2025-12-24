@@ -1,6 +1,6 @@
 # Ecosystem table for the "glemr11" remix
 # Ecosystems create variety within biomes, placing ore distributions in which a unique selection of
-#       decorations can be placed
+#   decorations can be placed
 # This CSV is read by the "biome_glemr11" package
 
 #Ore_Type|Biome|Ore name|Wherein|Threshold|Max height|Min height

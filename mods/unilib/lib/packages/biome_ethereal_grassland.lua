@@ -21,6 +21,7 @@ function unilib.pkg.biome_ethereal_grassland.init()
         description = "Grassland biome",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

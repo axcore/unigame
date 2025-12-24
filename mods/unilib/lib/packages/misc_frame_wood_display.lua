@@ -71,7 +71,7 @@ local function update_item(pos, node)
         return
     end
 
-    -- Some items (e.g. the door lever in the "device_lever" package) are not centred, so they are
+    -- Some items (e.g. the door lever in the "machine_lever" package) are not centred, so they are
     --      not displayed in the frame correctly
     -- Any such items should add a .display_offset property to correct this problem (for example,
     --      the actual display frame below uses it, in case a frame is displayed inside another

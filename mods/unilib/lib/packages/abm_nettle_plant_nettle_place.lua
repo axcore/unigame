@@ -32,7 +32,8 @@ function unilib.pkg.abm_nettle_plant_nettle_place.post()
     unilib.register_abm({
         -- From nettle/init.lua
         label = "Spawn nettles [abm_nettle_plant_nettle_place]",
-        nodenames = {"group:spreading_dirt_type", "group:soil"},
+        -- N.B. Compatible with unilib and non-unilib dirt nodes
+        nodenames = {"group:spreading_dirt", "group:spreading_dirt_type", "group:soil"},
 
         chance = 50,
         interval = 240,

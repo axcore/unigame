@@ -1,0 +1,11 @@
+# Racing node settings for the "gaia_unimobs" remix
+#
+# List of nodes which increase/decrease a mounted mob's speed, when riding over them
+# The factor may be positive (e.g. 0.1, representing a 10% increase in speed), or negative
+#   (e.g. -0.1, representing a 10% decrease in speed)
+# Note that mounted mobs have a built-in speed limit, so it's not worth specifying very large
+#   increases. The absolute maximum/minimum values are 1 / -1
+
+#NODE|FACTOR
+unilib:dirt_ordinary_with_turf_racing_dry|0.1
+unilib:dirt_ordinary_with_turf_racing_wet|-0.1

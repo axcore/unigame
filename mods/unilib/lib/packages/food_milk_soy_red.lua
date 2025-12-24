@@ -55,11 +55,17 @@ function unilib.pkg.food_milk_soy_red.exec()
 
     if unilib.setting.technic_extra_flag then
 
-        technic.register_extractor_recipe({
-            -- From cucina_vegana:soy_milk
-            output = "unilib:food_milk_soy_red",
-            input = {"unilib:crop_soy_red_harvest 4"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_extractor_recipe({
+                -- From cucina_vegana:soy_milk
+                output = "unilib:food_milk_soy_red",
+                input = {"unilib:crop_soy_red_harvest 4"},
+            })
+
+        end)
 
     end
 

@@ -23,22 +23,40 @@ function unilib.register_node(full_name, orig_name, replace_mode, def_table)
     --      inventory; the supplementary items should be registered with core.register_node() as
     --      usual
     --
+    -- N.B. If the calling code accdientally uses the original argument list of
+    --      core.register_node(), i.e. (full_name, def_table), then this function will still
+    --      register the item
+    --
     -- Args:
     --      full_name (str): e.g. "unilib:stone_ordinary"
     --      orig_name (nil, str or list): e.g. "default:stone"
     --      replace_mode (str): "add", "defer", "replace" or "hide"
-    --      def_table (table): Usual definition table for the node
+    --
+    -- Optional args:
+    --      def_table (table): Usual definition table for the node. If omitted, then we assume that
+    --          core.register_node() has already been called for some reason, so it is not called a
+    --          second time. However, the rest of the code in this function is executed as normal
+    --          (aliases are created, unilib global variables are updated, and so on). See the
+    --          "mineral_mese" package for a practical example)
     --
     -- Return values:
     --      The specified full_name
 
-    -- Standard argument check (in case the package writer has forgotten to add "orig_name" and
-    --      "replace_mode")
+    -- Standard argument check
     if def_table == nil then
+
+        if replace_mode == nil then
+
+            -- Assume that the "def_table" argument was not omitted on purpose
+            unilib.utils.show_error(
+                "unilib.register_node(): Invalid arguments, ignoring node", full_name
+            )
+
+            return
 
         -- If the user has supplied arguments in the format expected by core.register_node(), then
         --      we can still register this node
-        if type(orig_name) == "table" then
+        elseif type(orig_name) == "table" then
 
             unilib.utils.show_warning(
                 "unilib.register_node(): Invalid arguments, recovering node definition table",
@@ -48,14 +66,6 @@ function unilib.register_node(full_name, orig_name, replace_mode, def_table)
             def_table = table.copy(orig_name)
             orig_name = ""
             replace_mode = unilib.default_replace_mode
-
-        else
-
-            unilib.utils.show_error(
-                "unilib.register_node(): Invalid arguments, ignoring node", full_name
-            )
-
-            return
 
         end
 
@@ -77,8 +87,11 @@ function unilib.register_node(full_name, orig_name, replace_mode, def_table)
         unilib.global.node_convert_table[this_orig_name] = full_name
     end
 
-    -- Register the node with Minetest
-    core.register_node(full_name, def_table)
+    -- Register the node with Minetest (unless core.register_node() has already been called, for
+    --      some reason)
+    if def_table ~= nil then
+        core.register_node(full_name, def_table)
+    end
 
     -- Handle nodes that must be replaced/hidden
     if replace_mode == "hide" then

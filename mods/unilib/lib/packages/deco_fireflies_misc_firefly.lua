@@ -19,11 +19,19 @@ function unilib.pkg.deco_fireflies_misc_firefly.init()
 
     return {
         description = "Fireflies as decoration",
-        depends = {"dirt_ordinary", "misc_firefly"},
+        depends = "misc_firefly",
         at_least_one = {
-            "biome_default_forest_coniferous",
-            "biome_default_forest_deciduous",
-            "biome_default_rainforest",
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_forest_deciduous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

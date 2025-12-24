@@ -43,12 +43,19 @@ function unilib.minerals._register_mineral_powder(data_table)
             description = description,
             inventory_image = "unilib_mineral_" .. part_name .. "_powder.png",
         })
-        technic.register_grinder_recipe({
-            output = "unilib:mineral_" .. part_name .. "_powder " ..
-                    tostring(unilib.setting.technic_grind_mineral_ratio),
-            input = {"unilib:mineral_" .. part_name .. "_lump"},
-            time = lump_time,
-        })
+
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_grinder_recipe({
+                output = "unilib:mineral_" .. part_name .. "_powder " ..
+                        tostring(unilib.setting.technic_grind_mineral_ratio),
+                input = {"unilib:mineral_" .. part_name .. "_lump"},
+                time = lump_time,
+            })
+
+        end)
 
         return full_name
 

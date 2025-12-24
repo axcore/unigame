@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_plant_bamboo_small.init()
 
     return {
         description = "Small bamboo plant as decoration",
-        depends = {"biome_farlands_forest_bamboo", "dirt_ordinary", "plant_bamboo_small"},
+        depends = {"biome_farlands_forest_bamboo", "dirt_ordinary_with_turf", "plant_bamboo_small"},
     }
 
 end

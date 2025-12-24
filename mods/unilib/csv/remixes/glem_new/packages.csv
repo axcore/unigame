@@ -1,7 +1,7 @@
-# "glem_new" remix - contains all new packages in all GLEM remixes, except biome, decoration and
-#       ore packages, and custom dirt packages
+# "glem_new" remix - contains all new packages in all GLEM remixes, except biome, decoration and ore
+#   packages, and custom dirt packages
 # ("new" means that the material was imported directly from GLEM, not from one of GLEM's source
-#       mods)
+#   mods)
 
 # node_name | original_mod
 
@@ -167,9 +167,7 @@ tree_jungle|default doors moreblocks
 #flower_geranium_blue|flowers
 #flower_rose_black|cropocalypse
 #flower_rose_red|flowers
-#grass_dry|default
 #grass_jungle|default
-#grass_ordinary|default
 #gravel_sandstone_ordinary|unilib
 #machine_furnace_induction|unilib
 #mineral_coal|default technic
@@ -180,10 +178,11 @@ tree_jungle|default doors moreblocks
 #plant_cactus_ordinary|default
 #plant_shrub_dry|default
 #sand_brown|unilib
+#soil_black|unilib
+#soil_brown|unilib
 #soil_ordinary|farming
 #stone_obsidian|default moreblocks
 #utensil_board_cutting|farming
 
 # supporting packages (.suggested)
 #tool_pick_wood|default
-

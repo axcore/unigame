@@ -19,7 +19,8 @@ function unilib.pkg.deco_youngtrees_tree_young_bamboo.init()
 
     return {
         description = "Young bamboo tree as decoration",
-        depends = {"dirt_ordinary", "tree_young_bamboo"},
+        depends = "tree_young_bamboo",
+        at_least_one = {"dirt_ordinary_with_litter_rainforest", "dirt_ordinary_with_turf_bamboo"},
     }
 
 end

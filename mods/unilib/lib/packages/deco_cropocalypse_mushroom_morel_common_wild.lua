@@ -21,7 +21,7 @@ function unilib.pkg.deco_cropocalypse_mushroom_morel_common_wild.init()
         description = "Wild common morel mushroom as decoration",
         depends = {
             "biome_default_forest_coniferous",
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_coniferous",
             "mushroom_morel_common_wild",
         },
     }

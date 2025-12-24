@@ -19,7 +19,8 @@ function unilib.pkg.deco_moreplants_plant_weed_umbrella.init()
 
     return {
         description = "Umbrella weed as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "plant_weed_umbrella"},
+        depends = {"biome_default_rainforest", "plant_weed_umbrella"},
+        depends = {"dirt_ordinary_with_litter_rainforest", "dirt_ordinary_with_turf"},
     }
 
 end

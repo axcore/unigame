@@ -58,6 +58,12 @@ function unilib.load.pkg_load(pkg_name, level)
 
     end
 
+    -- Don't bother loading excluded packages at all
+    -- (Without this check, the package's .init() function would still be executed)
+    if unilib.global.pkg_excluded_table[pkg_name] ~= nil then
+        return false
+    end
+
     -- Load the file (any syntax errors will cause a crash at this point)
     dofile(pkg_path)
 

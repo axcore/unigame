@@ -19,7 +19,7 @@ function unilib.pkg.deco_cool_trees_tree_holly.init()
 
     return {
         description = "Holly tree as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "tree_holly"},
+        depends = {"biome_default_grassland", "dirt_ordinary_with_turf", "tree_holly"},
     }
 
 end

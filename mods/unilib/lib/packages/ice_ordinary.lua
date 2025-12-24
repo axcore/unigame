@@ -43,8 +43,10 @@ function unilib.pkg.ice_ordinary.exec()
         -- From default:ice
         description = S("Ordinary Ice"),
         tiles = {"unilib_ice_ordinary.png"},
-        -- N.B. melts = 1 and puts_out_fire = 1 not in original code
-        groups = {cools_lava = 1, cracky = 3, melts = 1, puts_out_fire = 1, slippery = 3},
+        -- N.B. ground_ice = 1, melts = 1 and puts_out_fire = 1 not in original code
+        groups = {
+            cools_lava = 1, cracky = 3, ground_ice = 1, melts = 1, puts_out_fire = 1, slippery = 3,
+        },
         sounds = unilib.global.sound_table.ice,
 
         is_ground_content = false,
@@ -61,10 +63,10 @@ function unilib.pkg.ice_ordinary.exec()
         -- From default:cave_ice
         description = S("Ordinary Cave Ice"),
         tiles = {"unilib_ice_ordinary.png"},
-        -- N.B. melts = 1 and puts_out_fire = 1 not in original code
+        -- N.B. ground_ice = 1, melts = 1 and puts_out_fire = 1 not in original code
         groups = {
-            cools_lava = 1, cracky = 3, melts = 1, not_in_creative_inventory = 1, puts_out_fire = 1,
-            slippery = 3,
+            cools_lava = 1, cracky = 3, ground_ice = 1, melts = 1, not_in_creative_inventory = 1,
+            puts_out_fire = 1, slippery = 3,
         },
         sounds = unilib.global.sound_table.ice,
 

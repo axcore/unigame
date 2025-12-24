@@ -70,7 +70,8 @@ function unilib.pkg.dirt_permafrost_red.exec()
             },
         },
         groups = {
-            cracky = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, permafrost = 1,
+            covered_dirt = 1, cracky = 3,
+            not_in_creative_inventory = unilib.hide_covered_dirt_group, permafrost = 1,
         },
         sounds = unilib.sound.generate_dirt({
             footstep = {name = "unilib_grass_footstep", gain = 0.25},
@@ -97,7 +98,8 @@ function unilib.pkg.dirt_permafrost_red.exec()
             "unilib_dirt_permafrost_red.png^unilib_litter_stone_side_overlay.png",
         },
         groups = {
-            cracky = 3, not_in_creative_inventory = unilib.hide_covered_dirt_group, permafrost = 1,
+            covered_dirt = 1, cracky = 3,
+            not_in_creative_inventory = unilib.hide_covered_dirt_group, permafrost = 1,
         },
         sounds = unilib.global.sound_table.gravel,
 

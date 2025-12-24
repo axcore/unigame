@@ -1,3 +1,5 @@
 # expansion_pack_name | download_url | notes
 
+unidrinks|https://github.com/axcore/unidrinks|Full expansion pack, providing material from the "bbq" and "wine" mods
+unimobs|https://github.com/axcore/unidrinks|Full expansion pack, providing material from several modpacks and mods, including "mobkit" and "petz"
 unitest|https://github.com/axcore/unitest|Specimen expansion pack. Provides a single remix "unitest" and a single package "test_node", which overrides unilib's "test_node" package if loaded

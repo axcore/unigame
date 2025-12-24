@@ -15,7 +15,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function do_toggle(name, param)
+local function do_toggle(pname, param)
 
     if not unilib.setting.magnet_auto_get_flag then
 
@@ -23,11 +23,11 @@ local function do_toggle(name, param)
 
     else
 
-        local enabled_flag = unilib.magnet.toggle_player_auto_get(name)
+        local enabled_flag = unilib.magnet.toggle_player_auto_get(pname)
         if not enabled_flag then
-            return true, S("Auto-get has been disabled for @1", name)
+            return true, S("Auto-get has been disabled for @1", pname)
         else
-            return true, S("Auto-get has been enabled for @1", name)
+            return true, S("Auto-get has been enabled for @1", pname)
         end
 
     end
@@ -53,8 +53,8 @@ function unilib.pkg.chat_toggle_autoget.exec()
         params = "",
         description = S("Toggles auto-get for the player (if it's enabled on this server)"),
 
-        func = function(name, param)
-            return do_toggle(name, param)
+        func = function(pname, param)
+            return do_toggle(pname, param)
         end,
     })
 
@@ -62,8 +62,8 @@ function unilib.pkg.chat_toggle_autoget.exec()
         params = "",
         description = S("Toggles auto-get for the player (if it's enabled on this server)"),
 
-        func = function(name, param)
-            return do_toggle(name, param)
+        func = function(pname, param)
+            return do_toggle(pname, param)
         end,
     })
 

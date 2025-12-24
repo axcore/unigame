@@ -268,8 +268,8 @@ function unilib.pkg.shared_offend_flags.init()
     return {
         description = "Shared functions for animated flags (from offend_flags)",
         notes = "Flags can be created using a flag printer, a blank flag and some ink" ..
-                " cartridges. Although unilib provides a set of original flags, any texture" ..
-                " can be used as the basis of a flag. See the comments in the package",
+                " cartridges. Although unilib provides a set of flags, any texture can be used" ..
+                " as the basis of a flag: see the comments in the package",
         depends = "metal_steel",
         optional = "shared_screwdriver",
     }
@@ -278,10 +278,12 @@ end
 
 function unilib.pkg.shared_offend_flags.exec()
 
-    -- Read a list of flags from the .csv in the "offend_flags" remix
+    -- Read a list of flags from CSV files in all "offend_flags"-compatible remixes (any remix whose
+    --      labels.csv contains the label "offend_flags")
     --
-    -- Any textures can be used as the basis of a flag; just add a line to the .csv
-    -- Each line in the .csv consists of three components:
+    -- Any textures can be used as the basis of a flag; just add a line to the flags.csv file in the
+    --      remix
+    -- Each line in flags.csv consists of three components:
     --      - A short, unique flag name, e.g. "uk". Any name containing only alphanumeric/underline
     --          characters is acceptable, but the name "blank" is reserved
     --      - The name of the texture. If the texture's file name is in a standard format (e.g.
@@ -291,60 +293,65 @@ function unilib.pkg.shared_offend_flags.exec()
     --      - A capitalised description, e.g. "United Kingdom". If it is omitted, a generic
     --              description is used
 
-    local csv_path = unilib.utils.get_remix_dir("offend_flags") .. "/flags.csv"
-    if unilib.utils.is_file(csv_path) then
+    local check_table = {}
 
-        local check_table = {}
+    for _, remix_name in ipairs(unilib.utils.list_remixes_by_label("offend_flags")) do
 
-        for i, csv_table in ipairs(unilib.utils.read_csv(csv_path)) do
+        local csv_path = unilib.utils.get_remix_dir(remix_name) .. "/flags.csv"
+        if unilib.utils.is_file(csv_path) then
 
-            -- "key" is expected to contain at least one letter, "value" at least one digit
-            local flag_type, flag_img, flag_description = unpack(csv_table)
-            if flag_type ~= nil then
+            for i, csv_table in ipairs(unilib.utils.read_csv(csv_path)) do
 
-                if string.find(flag_type, "^%s*$") or
-                        string.find(flag_type, "[^%w_]+") or
-                        flag_type == "blank" then
+                -- "key" is expected to contain at least one letter, "value" at least one digit
+                local flag_type, flag_img, flag_description = unpack(csv_table)
+                if flag_type ~= nil then
 
-                    unilib.utils.show_warning(
-                        "shared_offend_flags package: Invalid flag name",
-                        csv_path,
-                        i
-                    )
+                    if string.find(flag_type, "^%s*$") or
+                            string.find(flag_type, "[^%w_]+") or
+                            flag_type == "blank" then
 
-                elseif check_table[flag_type] ~= nil then
+                        unilib.utils.show_warning(
+                            "shared_offend_flags package: Invalid flag name",
+                            csv_path,
+                            i
+                        )
 
-                    unilib.utils.show_warning(
-                        "shared_offend_flags package: Duplicate flag name",
-                        csv_path,
-                        i
-                    )
+                    elseif check_table[flag_type] ~= nil then
 
-                else
-
-                    if flag_img == nil or flag_img == "" then
-                        flag_img = "unilib_flag_" .. flag_type .. ".png"
-                    end
-
-                    if flag_description == nil or flag_description == "" then
-
-                        flag_description = S("Flag Pole")
+                        unilib.utils.show_warning(
+                            "shared_offend_flags package: Duplicate flag name",
+                            csv_path,
+                            i
+                        )
 
                     else
 
-                        flag_description = unilib.utils.brackets(
-                            S("Flag Pole with Flag"), S(flag_description)
-                        )
+                        if flag_img == nil or flag_img == "" then
+                            flag_img = "unilib_flag_" .. flag_type .. ".png"
+                        end
+
+                        if flag_description == nil or flag_description == "" then
+
+                            flag_description = S("Flag Pole")
+
+                        else
+
+                            flag_description = unilib.utils.brackets(
+                                S("Flag Pole with Flag"), S(flag_description)
+                            )
+
+                        end
+
+                        table.insert(unilib.pkg.shared_offend_flags.flag_type_list, flag_type)
+                        unilib.pkg.shared_offend_flags.description_table[flag_type] =
+                            flag_description
+                        unilib.pkg.shared_offend_flags.img_table[flag_type] = flag_img
+                        check_table[flag_type] = true
+
+                        unilib.pkg.shared_offend_flags.flag_count =
+                                unilib.pkg.shared_offend_flags.flag_count + 1
 
                     end
-
-                    table.insert(unilib.pkg.shared_offend_flags.flag_type_list, flag_type)
-                    unilib.pkg.shared_offend_flags.description_table[flag_type] = flag_description
-                    unilib.pkg.shared_offend_flags.img_table[flag_type] = flag_img
-                    check_table[flag_type] = true
-
-                    unilib.pkg.shared_offend_flags.flag_count =
-                            unilib.pkg.shared_offend_flags.flag_count + 1
 
                 end
 

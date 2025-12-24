@@ -23,7 +23,7 @@ function unilib.pkg.ingredient_fish_junk.init()
 
 end
 
-function unilib.pkg.ingredient_fish_junk.post()
+function unilib.pkg.ingredient_fish_junk.exec()
 
     -- Junk item set (includes items that were present in ethereal-ng 2021, but absent in
     --      ethereal-ng 2024)
@@ -48,6 +48,8 @@ function unilib.pkg.ingredient_fish_junk.post()
         unilib.fishing.register_junk({
             full_name = row_list[1],
             biome_part_name = row_list[2],
+            -- N.B. No .rarity in original code
+            rarity = 1,
             tool_wear = row_list[3],
         })
 

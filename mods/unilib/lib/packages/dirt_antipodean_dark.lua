@@ -19,6 +19,7 @@ function unilib.pkg.dirt_antipodean_dark.init()
 
     return {
         description = "Dark Antipodean dirt",
+        optional = "soil_antipodean_dark",
     }
 
 end
@@ -41,8 +42,9 @@ function unilib.pkg.dirt_antipodean_dark.exec()
         replace_mode = mode,
         compressed_description = S("Compressed Dark Antipodean Dirt"),
         compressed_group_table = {crumbly = 2},
-        dry_soil = "unilib:soil_ordinary",
-        wet_soil = "unilib:soil_ordinary_wet",
+        -- N.B. unilib:soil_ordinary, etc in original code
+        dry_soil = "unilib:soil_antipodean_dark",
+        wet_soil = "unilib:soil_antipodean_dark_wet",
     })
 
 end

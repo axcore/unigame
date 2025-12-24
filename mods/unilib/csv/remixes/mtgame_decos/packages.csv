@@ -59,8 +59,12 @@ deco_flowers_mushroom_red|flowers
 #bush_ordinary|default
 #bush_pine|default
 #crop_cotton|farming
-#dirt_dry|default
+#dirt_dry|default farming
+#dirt_dry_with_turf_dry|default
 #dirt_ordinary|default farming moreblocks
+#dirt_ordinary_with_litter_coniferous|default farming
+#dirt_ordinary_with_litter_rainforest|default farming
+#dirt_ordinary_with_turf|default farming moreblocks
 #dirt_permafrost_ordinary|default
 #fern_ordinary|default
 #flower_chrysanthemum_green|flowers
@@ -116,6 +120,7 @@ deco_flowers_mushroom_red|flowers
 #coral_rooted_cyan|default
 #coral_rooted_green|default
 #coral_rooted_pink|default
+#dirt_ordinary_with_cover_snow|default
 #sand_silver|default
 
 # supporting packages (.optional)

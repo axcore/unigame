@@ -19,7 +19,11 @@ function unilib.pkg.deco_ethereal_tree_jungle_log.init()
 
     return {
         description = "Jungle tree log as decoration",
-        depends = {"biome_ethereal_rainforest", "dirt_ordinary", "tree_jungle"},
+        depends = {
+            "biome_ethereal_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "tree_jungle",
+        },
     }
 
 end

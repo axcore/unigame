@@ -40,7 +40,7 @@ local scatter_table = {}
 -- Note that these statistics are not very accurate; they don't take account of ores placed via
 --      calls to distribute_blob() and distribute_scatter(), and they don't take account of
 --      maximum/minimum heights for each ore
-local ore_chance_table = {}
+local ore_probability_table = {}
 -- Adjusted ore probability table, in the form
 --      table[item_name] = factor
 -- ...where "factor" is multiplied against an ore's basic probability. If the value is 1.2, ores in
@@ -305,11 +305,12 @@ local optimised_flag = true
 
 -- Tables used to partially pre-calculate the positions of single ores
 -- Table in the form
---      single_ore_max_chance_table[item_name] = maximum_probability_for_any_ore_in_this_basic_stone
-local single_ore_max_chance_table = {}
+--      single_ore_max_probability_table[item_name] =
+--          maximum_probability_for_any_ore_in_this_basic_stone
+local single_ore_max_probability_table = {}
 -- Table in the form
---      single_ore_total_chance_table[item_name] = number_of_ores_in_this_basic_stone
-local single_ore_total_chance_table = {}
+--      single_ore_total_probability_table[item_name] = number_of_ores_in_this_basic_stone
+local single_ore_total_probability_table = {}
 
 -- Tables used to (quickly) convert a basic stone into the Minetest ID for an ore
 -- Tables in the form
@@ -427,22 +428,25 @@ local function balance_ores(basic_stone_count)
     if not ore_balance_flag then
 
         -- Don't balance ores; just set the multiplication factor to 1 for all pseudo-biomes
-        for item_name, _ in pairs(ore_chance_table) do
+        for item_name, _ in pairs(ore_probability_table) do
             ore_factor_table[item_name] = 1
         end
 
     else
 
-        local total_chance = 0
-        for _, chance in pairs (ore_chance_table) do
-            total_chance = total_chance + chance
+        local total_probability = 0
+        for _, probability in pairs (ore_probability_table) do
+            total_probability = total_probability + probability
         end
 
-        local average_chance = total_chance / basic_stone_count
+        local average_probability = total_probability / basic_stone_count
 
         -- (Round the factor to 2 decimal places; that should reduce computation times a little)
-        for item_name, chance in pairs (ore_chance_table) do
-            ore_factor_table[item_name] = unilib.utils.round_up((average_chance / chance), 2)
+        for item_name, probability in pairs (ore_probability_table) do
+
+            ore_factor_table[item_name] =
+                    unilib.utils.round_up((average_probability / probability), 2)
+
         end
 
     end
@@ -616,7 +620,7 @@ local function add_ore(data_table)
         drop = {
             max_items = 1,
             items = {
-                {items = {"unilib:" .. output .. " 2"}, rarity = 2},
+                {items = {"unilib:" .. output .. " 2"}, rarity = 3},
                 {items = {"unilib:" .. output}},
             },
         },
@@ -639,16 +643,16 @@ local function distribute_single_ore(data_table)
     --
     -- data_table optional fields:
     --      alt_ore (str): An "alternative" ore, e.g. "mineral_cinnabar_rock" (an item name)
-    --      chance (float): Probability of placing the ore node in a pseudo-biome. A value of 1/100
-    --          means that in the pseudo-biome, one out of every hundred standard stone nodes are
-    --          replaced by the ore node
+    --      probability (float): Probability of placing the ore node in a pseudo-biome. A value of
+    --          1/100 means that in the pseudo-biome, one out of every hundred standard stone nodes
+    --          are replaced by the ore node
     --      y_max, y_min (int): Maximum/minimum y-coordinates inside which the ore can be placed
 
     local wherein = data_table.wherein
     local ore = data_table.ore
 
     local alt_ore = data_table.alt_ore or nil
-    local chance = data_table.chance or 1/1000
+    local probability = data_table.probability or 1/1000
     local y_max = data_table.y_max or unilib.constant.y_max
     local y_min = data_table.y_min or unilib.constant.y_min
 
@@ -669,7 +673,7 @@ local function distribute_single_ore(data_table)
     local distrib_table = {}
 
     distrib_table["ore"] = ore
-    distrib_table["chance"] = chance * ore_global_factor
+    distrib_table["probability"] = probability * ore_global_factor
     distrib_table["y_min"] = y_min
     distrib_table["y_max"] = y_max
 
@@ -679,10 +683,10 @@ local function distribute_single_ore(data_table)
 
     table.insert(single_ore_table[wherein], distrib_table)
 
-    if ore_chance_table[wherein] == nil then
-        ore_chance_table[wherein] = chance
+    if ore_probability_table[wherein] == nil then
+        ore_probability_table[wherein] = probability
     else
-        ore_chance_table[wherein] = ore_chance_table[wherein] + chance
+        ore_probability_table[wherein] = ore_probability_table[wherein] + probability
     end
 
     -- (Also add the "alternative" ore, if specified)
@@ -703,12 +707,13 @@ local function distribute_single_ore(data_table)
         local alt_distrib_table = {}
 
         alt_distrib_table["ore"] = alt_ore
-        alt_distrib_table["chance"] = chance * ore_global_factor * alt_ore_factor
+        alt_distrib_table["probability"] = probability * ore_global_factor * alt_ore_factor
         alt_distrib_table["y_min"] = y_min
         alt_distrib_table["y_max"] = y_max
 
         table.insert(single_ore_table[wherein], alt_distrib_table)
-        ore_chance_table[wherein] = ore_chance_table[wherein] + (chance * alt_ore_factor)
+        ore_probability_table[wherein] =
+                ore_probability_table[wherein] + (probability * alt_ore_factor)
 
     end
 
@@ -1001,7 +1006,7 @@ local function populate_ore_tables()
         ore = "stone_andesite_pale_with_alunite",
 
         alt_ore = "mineral_alunite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- In basalts
@@ -1024,7 +1029,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_cinnabar",
 
             alt_ore = "mineral_cinnabar_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
     end
@@ -1043,7 +1048,7 @@ local function populate_ore_tables()
         ore = "stone_diorite_dark_with_chromite",
 
         alt_ore = "mineral_chromite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -1059,7 +1064,7 @@ local function populate_ore_tables()
         ore = "stone_diorite_dark_with_perlite",
 
         alt_ore = "mineral_perlite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- In gabbros
@@ -1082,7 +1087,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_perlite",
 
             alt_ore = "mineral_perlite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
     end
@@ -1107,7 +1112,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_cassiterite",
 
             alt_ore = "mineral_cassiterite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         if add_native_flag then
@@ -1125,7 +1130,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_tin_native",
 
                 alt_ore = "mineral_tin_native_rock",
-                chance = 0.1 / 100,
+                probability = 0.1 / 100,
             })
 
         end
@@ -1145,7 +1150,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_gold_native",
 
             alt_ore = "mineral_gold_native_rock",
-            chance = 0.1 / 100,
+            probability = 0.1 / 100,
         })
 
         if add_native_flag then
@@ -1163,7 +1168,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_silver_native",
 
                 alt_ore = "mineral_silver_native_rock",
-                chance = 0.1 / 100,
+                probability = 0.1 / 100,
             })
 
         end
@@ -1181,7 +1186,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_scheelite",
 
             alt_ore = "mineral_scheelite_rock",
-            chance = 0.1 / 100,
+            probability = 0.1 / 100,
         })
 
         add_ore({
@@ -1197,7 +1202,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_chalcopyrite",
 
             alt_ore = "mineral_chalcopyrite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1213,7 +1218,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnetite",
 
             alt_ore = "mineral_magnetite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1229,7 +1234,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_stibnite",
 
             alt_ore = "mineral_stibnite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1245,7 +1250,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_quartz_brown",
 
             alt_ore = "mineral_quartz_brown_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1261,7 +1266,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_realgar",
 
             alt_ore = "mineral_realgar_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         -- (Not in PFAA documentation, but a PFAA ore)
@@ -1278,7 +1283,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_fluorite",
 
             alt_ore = "mineral_fluorite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         -- (Not in PFAA, but required for bismuth)
@@ -1297,7 +1302,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_bismuth_native",
 
                 alt_ore = "mineral_bismuth_native_rock",
-                chance = 0.1 / 100,
+                probability = 0.1 / 100,
             })
 
         end
@@ -1318,7 +1323,7 @@ local function populate_ore_tables()
         ore = "stone_peridotite_pale_with_perlite",
 
         alt_ore = "mineral_perlite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- In pale rhyolite
@@ -1335,7 +1340,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_alunite",
 
         alt_ore = "mineral_alunite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -1380,7 +1385,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_anthracite",
 
                 alt_ore = "mineral_anthracite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -1396,7 +1401,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_coal_bituminous",
 
                 alt_ore = "mineral_coal_bituminous_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -1412,7 +1417,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_lignite",
 
                 alt_ore = "mineral_lignite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -1428,28 +1433,28 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_coke_natural",
 
                 alt_ore = "mineral_coke_natural_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "dirt_peat_with_oil_crude",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "dirt_peat_with_shale",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "sand_ordinary_with_oil_crude",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -1465,7 +1470,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_pyrolusite",
 
                 alt_ore = "mineral_pyrolusite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -1481,14 +1486,14 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_apatite",
 
                 alt_ore = "mineral_apatite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "sand_diatomite",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             -- (20% sandstone, as decribed above)
@@ -1496,14 +1501,14 @@ local function populate_ore_tables()
                 wherein = item_name,
                 ore = "sand_glauconite",
 
-                chance = 0.8 / 100,
+                probability = 0.8 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "stone_sandstone_ordinary",
 
-                chance = 0.2 / 100,
+                probability = 0.2 / 100,
             })
 
             -- (On this occasion, do use the mineral-rock variant, not the mineral-ore variant)
@@ -1511,21 +1516,21 @@ local function populate_ore_tables()
                 wherein = item_name,
                 ore = "mineral_zeolite_rock",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "clay_attapulgite",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "clay_kaolinite",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             -- (The following are not mentioned by PFAA documentation, but this is as good a place
@@ -1534,14 +1539,14 @@ local function populate_ore_tables()
                 wherein = item_name,
                 ore = "sand_quartz",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             distribute_single_ore({
                 wherein = item_name,
                 ore = "sand_sulphur",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             -- (Not in PFAA, but required for platinum)
@@ -1561,7 +1566,7 @@ local function populate_ore_tables()
                     ore = item_name .. "_with_platinum_native",
 
                     alt_ore = "mineral_platinum_native_rock",
-                    chance = 0.1 / 100,
+                    probability = 0.1 / 100,
                 })
 
             end
@@ -1610,7 +1615,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_steatite",
 
             alt_ore = "mineral_steatite_rock",
-            chance = 10 / 100,
+            probability = 10 / 100,
         })
 
         add_ore({
@@ -1626,7 +1631,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnesite",
 
             alt_ore = "mineral_magnesite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1642,7 +1647,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_chrysotile",
 
             alt_ore = "mineral_chrysotile_rock",
-            chance = 0.9 / 100,
+            probability = 0.9 / 100,
         })
 
         add_ore({
@@ -1658,7 +1663,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_pentlandite",
 
             alt_ore = "mineral_pentlandite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         -- Pale peridotite stone as ore
@@ -1666,7 +1671,7 @@ local function populate_ore_tables()
             wherein = item_name,
             ore = "stone_peridotite_pale",
 
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
     end
@@ -1705,7 +1710,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_gypsum",
 
             alt_ore = "mineral_gypsum_rock",
-            chance = 5 / 100,
+            probability = 5 / 100,
         })
 
         add_ore({
@@ -1721,7 +1726,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_halite",
 
             alt_ore = "mineral_halite_rock",
-            chance = 10 / 100,
+            probability = 10 / 100,
         })
 
         add_ore({
@@ -1737,7 +1742,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_celestine",
 
             alt_ore = "mineral_celestine_rock",
-            chance = 0.25 / 100,
+            probability = 0.25 / 100,
         })
 
     end
@@ -1781,7 +1786,7 @@ local function populate_ore_tables()
             wherein = item_name,
             ore = item_name .. "_with_gypsum",
 
-            chance = 5 / 100,
+            probability = 5 / 100,
             alt_ore = "mineral_gypsum_rock",
         })
 
@@ -1789,14 +1794,14 @@ local function populate_ore_tables()
             wherein = item_name,
             ore = "mineral_salt_block",
 
-            chance = 4 / 100,
+            probability = 4 / 100,
         })
 
         distribute_single_ore({
             wherein = item_name,
             ore = "mineral_salt_pure_block",
 
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
         add_ore({
@@ -1812,7 +1817,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_trona",
 
             alt_ore = "mineral_trona_rock",
-            chance = 0.7 / 100,
+            probability = 0.7 / 100,
         })
 
         add_ore({
@@ -1828,7 +1833,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_mirabilite",
 
             alt_ore = "mineral_mirabilite_rock",
-            chance = 0.15 / 100,
+            probability = 0.15 / 100,
         })
 
         add_ore({
@@ -1844,7 +1849,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_borax",
 
             alt_ore = "mineral_borax_rock",
-            chance = 0.15 / 100,
+            probability = 0.15 / 100,
         })
 
     end
@@ -1885,7 +1890,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_spodumene",
 
         alt_ore = "mineral_spodumene_rock",
-        chance = 7 / 100,
+        probability = 7 / 100,
     })
 
     add_ore({
@@ -1901,7 +1906,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_mica",
 
         alt_ore = "mineral_mica_rock",
-        chance = 7 / 100,
+        probability = 7 / 100,
     })
 
     add_ore({
@@ -1917,7 +1922,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_kyanite",
 
         alt_ore = "mineral_kyanite_rock",
-        chance = 5 / 100,
+        probability = 5 / 100,
     })
 
     add_ore({
@@ -1933,7 +1938,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_lepidolite",
 
         alt_ore = "mineral_lepidolite_rock",
-        chance = 2.5 / 100,
+        probability = 2.5 / 100,
     })
 
     add_ore({
@@ -1949,7 +1954,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_tantalite",
 
         alt_ore = "mineral_tantalite_rock",
-        chance = 2 / 100,
+        probability = 2 / 100,
     })
 
     add_ore({
@@ -1965,7 +1970,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_cassiterite",
 
         alt_ore = "mineral_cassiterite_rock",
-        chance = 1.5 / 100,
+        probability = 1.5 / 100,
     })
 
     add_ore({
@@ -1981,7 +1986,7 @@ local function populate_ore_tables()
         ore = "stone_pegmatite_white_with_wolframite",
 
         alt_ore = "mineral_wolframite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -1996,8 +2001,8 @@ local function populate_ore_tables()
         wherein = "stone_pegmatite_white",
         ore = "stone_pegmatite_white_with_pollucite",
 
-        chance = 0.1 / 100,
         alt_ore = "mineral_pollucite_rock",
+        probability = 0.1 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -2031,7 +2036,7 @@ local function populate_ore_tables()
         ore = "stone_carbonatite_with_bastnasite",
 
         alt_ore = "mineral_bastnasite_rock",
-        chance = 5 / 100,
+        probability = 5 / 100,
     })
 
     add_ore({
@@ -2047,14 +2052,14 @@ local function populate_ore_tables()
         ore = "stone_carbonatite_with_apatite",
 
         alt_ore = "mineral_apatite_rock",
-        chance = 5 / 100,
+        probability = 5 / 100,
     })
 
     distribute_single_ore({
         wherein = "stone_carbonatite",
         ore = "clay_vermiculite",
 
-        chance = 4 / 100,
+        probability = 4 / 100,
     })
 
     add_ore({
@@ -2070,7 +2075,7 @@ local function populate_ore_tables()
         ore = "stone_carbonatite_with_chalcopyrite",
 
         alt_ore = "mineral_chalcopyrite_rock",
-        chance = 2.5 / 100,
+        probability = 2.5 / 100,
     })
 
     add_ore({
@@ -2086,7 +2091,7 @@ local function populate_ore_tables()
         ore = "stone_carbonatite_with_barite",
 
         alt_ore = "mineral_barite_rock",
-        chance = 2.5 / 100,
+        probability = 2.5 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -2114,7 +2119,7 @@ local function populate_ore_tables()
         ore = "stone_carbonatite_with_uraninite",
 
         alt_ore = "mineral_uraninite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- In sandstones
@@ -2137,7 +2142,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_uraninite",
 
             alt_ore = "mineral_uraninite_rock",
-            chance = 1 / 100,
+            probability = 1 / 100,
         })
 
     end
@@ -2162,7 +2167,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_uraninite",
 
             alt_ore = "mineral_uraninite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
     end
@@ -2181,7 +2186,7 @@ local function populate_ore_tables()
         ore = "stone_conglomerate_rough_with_uraninite",
 
         alt_ore = "mineral_uraninite_rock",
-        chance = 0.2 / 100,
+        probability = 0.2 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -2221,7 +2226,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_chalcopyrite",
 
                 alt_ore = "mineral_chalcopyrite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -2237,7 +2242,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_sphalerite",
 
                 alt_ore = "mineral_sphalerite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -2253,7 +2258,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_galena",
 
                 alt_ore = "mineral_galena_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -2269,7 +2274,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_scheelite",
 
                 alt_ore = "mineral_scheelite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -2285,7 +2290,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_barite",
 
                 alt_ore = "mineral_barite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
         end
@@ -2341,7 +2346,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_sphalerite",
 
             alt_ore = "mineral_sphalerite_rock",
-            chance = (factor * 0.5) / 200,
+            probability = (factor * 0.5) / 200,
         })
 
         add_ore({
@@ -2357,7 +2362,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_galena",
 
             alt_ore = "mineral_galena_rock",
-            chance = (factor * 0.5) / 200,
+            probability = (factor * 0.5) / 200,
         })
 
         add_ore({
@@ -2373,14 +2378,14 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnesite",
 
             alt_ore = "mineral_magnesite_rock",
-            chance = (factor * 0.5) / 200,
+            probability = (factor * 0.5) / 200,
         })
 
         distribute_single_ore({
             wherein = item_name,
             ore = "clay_vermiculite",
 
-            chance = (factor * 0.5) / 200,
+            probability = (factor * 0.5) / 200,
         })
 
         add_ore({
@@ -2396,7 +2401,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnetite",
 
             alt_ore = "mineral_magnetite_rock",
-            chance = (factor * 1) / 200,
+            probability = (factor * 1) / 200,
         })
 
         add_ore({
@@ -2412,7 +2417,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_chalcopyrite",
 
             alt_ore = "mineral_chalcopyrite_rock",
-            chance = (factor * 0.7) / 200,
+            probability = (factor * 0.7) / 200,
         })
 
         add_ore({
@@ -2428,7 +2433,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_malachite",
 
             alt_ore = "mineral_malachite_rock",
-            chance = (factor * 0.3) / 200,
+            probability = (factor * 0.3) / 200,
         })
 
         add_ore({
@@ -2444,7 +2449,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_wollastonite",
 
             alt_ore = "mineral_wollastonite_rock",
-            chance = (factor * 1) / 200,
+            probability = (factor * 1) / 200,
         })
 
         add_ore({
@@ -2460,7 +2465,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_scheelite",
 
             alt_ore = "mineral_scheelite_rock",
-            chance = (factor * 1) / 200,
+            probability = (factor * 1) / 200,
         })
 
         -- (The documentation above suggests that lapis lazuli is quite rare)
@@ -2476,7 +2481,7 @@ local function populate_ore_tables()
             wherein = item_name,
             ore = item_name .. "_with_lapis_lazuli",
 
-            chance = (factor * 0.01) / 200,
+            probability = (factor * 0.01) / 200,
         })
 
     end
@@ -2514,7 +2519,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_sphalerite",
 
             alt_ore = "mineral_sphalerite_rock",
-            chance = 0.33 / 100,
+            probability = 0.33 / 100,
         })
 
         add_ore({
@@ -2530,7 +2535,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_galena",
 
             alt_ore = "mineral_galena_rock",
-            chance = 0.33 / 100,
+            probability = 0.33 / 100,
         })
 
         add_ore({
@@ -2546,7 +2551,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_barite",
 
             alt_ore = "mineral_barite_rock",
-            chance = 0.33 / 100,
+            probability = 0.33 / 100,
         })
 
     end
@@ -2565,7 +2570,7 @@ local function populate_ore_tables()
         ore = "stone_dolostone_dark_with_dolomite",
 
         alt_ore = "mineral_dolomite_rock",
-        chance = 5 / 100,
+        probability = 5 / 100,
     })
 
     add_ore({
@@ -2581,7 +2586,7 @@ local function populate_ore_tables()
         ore = "stone_dolostone_dark_with_magnesite",
 
         alt_ore = "mineral_magnesite_rock",
-        chance = 0.33 / 100,
+        probability = 0.33 / 100,
     })
 
     add_ore({
@@ -2597,7 +2602,7 @@ local function populate_ore_tables()
         ore = "stone_dolostone_dark_with_steatite",
 
         alt_ore = "mineral_steatite_rock",
-        chance = 0.33 / 100,
+        probability = 0.33 / 100,
     })
 
     add_ore({
@@ -2613,7 +2618,7 @@ local function populate_ore_tables()
         ore = "stone_dolostone_dark_with_wollastonite",
 
         alt_ore = "mineral_wollastonite_rock",
-        chance = 0.33 / 100,
+        probability = 0.33 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -2647,7 +2652,7 @@ local function populate_ore_tables()
         ore = "stone_peridotite_pale_with_magnesite",
 
         alt_ore = "mineral_magnesite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- (In PFAA, ferrovanadium ore seems to correspond to vanadium magnetite)
@@ -2664,7 +2669,7 @@ local function populate_ore_tables()
         ore = "stone_peridotite_pale_with_magnetite_vanadium",
 
         alt_ore = "mineral_magnetite_vanadium_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -2680,7 +2685,7 @@ local function populate_ore_tables()
         ore = "stone_peridotite_pale_with_pentlandite",
 
         alt_ore = "mineral_pentlandite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -2696,7 +2701,7 @@ local function populate_ore_tables()
         ore = "stone_peridotite_pale_with_serpentinite",
 
         alt_ore = "mineral_serpentinite_rock",
-        chance = 10 / 100,
+        probability = 10 / 100,
     })
 
     -- In dark diorite
@@ -2713,7 +2718,7 @@ local function populate_ore_tables()
         ore = "stone_diorite_dark_with_ilmenite",
 
         alt_ore = "mineral_ilmenite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -2729,14 +2734,14 @@ local function populate_ore_tables()
         ore = "stone_diorite_dark_with_chromite",
 
         alt_ore = "mineral_chromite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     distribute_single_ore({
         wherein = "stone_diorite_dark",
         ore = "clay_vermiculite",
 
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -- In gabbros. The PFAA documentation mentions the minerals "extending into the intervening
@@ -2760,7 +2765,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnesite",
 
             alt_ore = "mineral_magnesite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         add_ore({
@@ -2776,7 +2781,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_magnetite_vanadium",
 
             alt_ore = "mineral_magnetite_vanadium_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         add_ore({
@@ -2792,7 +2797,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_pentlandite",
 
             alt_ore = "mineral_pentlandite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         add_ore({
@@ -2808,7 +2813,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_serpentinite",
 
             alt_ore = "mineral_serpentinite_rock",
-            chance = 5 / 100,
+            probability = 5 / 100,
         })
 
         add_ore({
@@ -2824,7 +2829,7 @@ local function populate_ore_tables()
             ore = item_name .. "_with_ilmenite",
 
             alt_ore = "mineral_ilmenite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         add_ore({
@@ -2840,14 +2845,14 @@ local function populate_ore_tables()
             ore = item_name .. "_with_chromite",
 
             alt_ore = "mineral_chromite_rock",
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
         distribute_single_ore({
             wherein = item_name,
             ore = "clay_vermiculite",
 
-            chance = 0.5 / 100,
+            probability = 0.5 / 100,
         })
 
     end
@@ -2880,7 +2885,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_chalcopyrite",
 
         alt_ore = "mineral_chalcopyrite_rock",
-        chance = 2 / 100,
+        probability = 2 / 100,
     })
 
     add_ore({
@@ -2896,7 +2901,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_sphalerite",
 
         alt_ore = "mineral_sphalerite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -2912,7 +2917,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_galena",
 
         alt_ore = "mineral_galena_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -2928,7 +2933,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_gold_native",
 
         alt_ore = "mineral_gold_native_rock",
-        chance = 0.25 / 100,
+        probability = 0.25 / 100,
     })
 
     if add_native_flag then
@@ -2946,7 +2951,7 @@ local function populate_ore_tables()
             ore = "stone_rhyolite_pale_with_silver_native",
 
             alt_ore = "mineral_silver_native_rock",
-            chance = 0.25 / 100,
+            probability = 0.25 / 100,
         })
 
     end
@@ -2966,7 +2971,7 @@ local function populate_ore_tables()
         ore = "stone_rhyolite_pale_with_pyrite",
 
         alt_ore = "mineral_pyrite_rock",
-        chance = 0.5 / 100,
+        probability = 0.5 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -3001,7 +3006,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_haematite",
 
                 alt_ore = "mineral_haematite_rock",
-                chance = 0.5 / 100,
+                probability = 0.5 / 100,
             })
 
             add_ore({
@@ -3017,7 +3022,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_chalcopyrite",
 
                 alt_ore = "mineral_chalcopyrite_rock",
-                chance = 0.25 / 100,
+                probability = 0.25 / 100,
             })
 
             add_ore({
@@ -3033,7 +3038,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_gold_native",
 
                 alt_ore = "mineral_gold_native_rock",
-                chance = 0.25 / 100,
+                probability = 0.25 / 100,
             })
 
             if add_native_flag then
@@ -3052,7 +3057,7 @@ local function populate_ore_tables()
                     ore = item_name .. "_with_silver_native",
 
                     alt_ore = "mineral_silver_native_rock",
-                    chance = 0.25 / 100,
+                    probability = 0.25 / 100,
                 })
 
             end
@@ -3077,7 +3082,7 @@ local function populate_ore_tables()
         wherein = "stone_diorite_dark",
         ore = "stone_breccia",
 
-        chance = 7 / 100,
+        probability = 7 / 100,
     })
 
     add_ore({
@@ -3093,7 +3098,7 @@ local function populate_ore_tables()
         ore = "stone_breccia_with_chalcopyrite",
 
         alt_ore = "mineral_chalcopyrite_rock",
-        chance = 2 / 100,
+        probability = 2 / 100,
     })
 
     add_ore({
@@ -3109,7 +3114,7 @@ local function populate_ore_tables()
         ore = "stone_breccia_with_molybdenite",
 
         alt_ore = "mineral_molybdenite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -3264,7 +3269,7 @@ local function populate_ore_tables()
         ore = "stone_laterite_with_bauxite",
 
         alt_ore = "mineral_bauxite_rock",
-        chance = 1 / 100,
+        probability = 1 / 100,
     })
 
     add_ore({
@@ -3280,7 +3285,7 @@ local function populate_ore_tables()
         ore = "stone_laterite_with_limonite_brown",
 
         alt_ore = "mineral_limonite_rock",
-        chance = 0.5 / 100,
+        probability = 0.5 / 100,
     })
 
     add_ore({
@@ -3296,7 +3301,7 @@ local function populate_ore_tables()
         ore = "stone_laterite_with_limonite_yellow",
 
         alt_ore = "mineral_limonite_rock",
-        chance = 0.5 / 100,
+        probability = 0.5 / 100,
     })
 
     add_ore({
@@ -3312,7 +3317,7 @@ local function populate_ore_tables()
         ore = "stone_serpentinite_dark_with_garnierite",
 
         alt_ore = "mineral_garnierite_rock",
-        chance = 0.5 / 100,
+        probability = 0.5 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -3339,7 +3344,7 @@ local function populate_ore_tables()
         ore = "stone_serpentinite_dark_with_kimberlite",
 
         alt_ore = "mineral_kimberlite_rock",
-        chance = 0.5 / 100,
+        probability = 0.5 / 100,
     })
 
     add_ore({
@@ -3354,7 +3359,7 @@ local function populate_ore_tables()
         wherein = "stone_serpentinite_dark",
         ore = "stone_serpentinite_dark_with_diamond",
 
-        chance = 0.1 / 100,
+        probability = 0.1 / 100,
     })
 
     -----------------------------------------------------------------------------------------------
@@ -3390,7 +3395,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_cuprite",
 
                 alt_ore = "mineral_cuprite_rock",
-                chance = 2 / 100,
+                probability = 2 / 100,
             })
 
             add_ore({
@@ -3406,7 +3411,7 @@ local function populate_ore_tables()
                 ore = item_name .. "_with_chalcopyrite",
 
                 alt_ore = "mineral_chalcopyrite_rock",
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             add_ore({
@@ -3421,7 +3426,7 @@ local function populate_ore_tables()
                 wherein = item_name,
                 ore = item_name .. "_with_mese",
 
-                chance = 1 / 100,
+                probability = 1 / 100,
             })
 
             if add_native_flag then
@@ -3440,7 +3445,7 @@ local function populate_ore_tables()
                     ore = item_name .. "_with_cuprite",
 
                     alt_ore = "mineral_copper_native_rock",
-                    chance = 0.1 / 100,
+                    probability = 0.1 / 100,
                 })
 
             end
@@ -3611,7 +3616,7 @@ local function populate_ore_tables()
     local pbiome_count = #basic_stone_list
 
     -- List of mini-lists, each in the form
-    --      [ ore-part-name, alternative-ore-item-name, chance, wherein-part-name ]
+    --      [ ore-part-name, alternative-ore-item-name, probability, wherein-part-name ]
     -- ... in which all four arguments are optional. "wherein-part-name" should be one of the items
     --      in basic_stone_list
     local additional_list = {}
@@ -3817,7 +3822,7 @@ local function populate_ore_tables()
 
         local ore = mini_list[1]
         local alt_ore = mini_list[2]
-        local chance = mini_list[3] or 0.1
+        local probability = mini_list[3] or 0.1
         local wherein = mini_list[4] or basic_stone_list[math.random(1, pbiome_count)]
 
         local stone_name = "stone_" .. wherein
@@ -3843,7 +3848,7 @@ local function populate_ore_tables()
                 ore = stone_name .. "_with_" .. ore,
 
                 alt_ore = alt_ore,
-                chance = chance / 100,
+                probability = probability / 100,
             })
 
         elseif alt_ore ~= nil then
@@ -3852,7 +3857,7 @@ local function populate_ore_tables()
                 wherein = stone_name,
                 ore = alt_ore,
 
-                chance = chance / 100,
+                probability = probability / 100,
             })
 
         end
@@ -4107,19 +4112,20 @@ local function pre_calculate_single_ores()
 
     for stone_type, distrib_list in pairs(single_ore_table) do
 
-        single_ore_total_chance_table[stone_type] = #distrib_list
+        single_ore_total_probability_table[stone_type] = #distrib_list
 
-        local max_chance = 0
+        local max_probability = 0
         for _, distrib_table in pairs(distrib_list) do
 
-            if max_chance < distrib_table.chance then
-                max_chance = distrib_table.chance
+            if max_probability < distrib_table.probability then
+                max_probability = distrib_table.probability
             end
 
         end
 
         -- This value is multiplied by a height adjustment, and then tested against a random number
-        single_ore_max_chance_table[stone_type] = max_chance * ore_factor_table[stone_type]
+        single_ore_max_probability_table[stone_type] =
+                max_probability * ore_factor_table[stone_type]
 
     end
 
@@ -4437,8 +4443,11 @@ local function switch_stone_slow(vi, data, item_name, x, y, z)
 
                 if y <= distrib_table.y_max and
                         y >= distrib_table.y_min and
-                        math.random() <
-                            distrib_table.chance * ore_factor_table[item_name] * height_adjust then
+                        math.random() < (
+                            distrib_table.probability *
+                            ore_factor_table[item_name] *
+                            height_adjust
+                        ) then
 
                     -- (Replaces a call to unilib.pbiomes.ore(), which doesn't return a true/false
                     --      result, enabling us to return here)
@@ -4483,7 +4492,7 @@ local function switch_stone_slow(vi, data, item_name, x, y, z)
                 if y <= distrib_table.y_max and
                         y >= distrib_table.y_min and
                         math.random() <
-                            distrib_table.chance * ore_factor_table["all"] * height_adjust then
+                            distrib_table.probability * ore_factor_table["all"] * height_adjust then
 
                     -- (Replaces a call to unilib.pbiomes.ore(), which doesn't return a true/false
                     --      result, enabling us to return here)
@@ -4582,9 +4591,9 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
         --      single_ore_table["stone_X"] = list_of_tables
         -- ...in which each table represents a single ore
         --
-        -- Each ore has (for example) a 0.001 chance of spawning. We test a random number against
-        --      each ore, so in total there's a 0.001 * 50 = 0.05 chance of at least one ore
-        --      spawning
+        -- Each ore has (for example) a 0.001 probability of spawning. We test a random number
+        --      against each ore, so in total there's a 0.001 * 50 = 0.05 probability of at least
+        --      one ore spawning
         -- BUT, ores are always tested in the same order, so the last ore in the list would only
         --      spawn in the other 49 tests failed; this means that the list ore in the list
         --      spawns slightly less often than it would do, if it were the only ore in the list
@@ -4592,10 +4601,10 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
         --
         -- The optimised code in switch_stone_fast() works like this:
         --
-        -- In "stone_x", we have already worked out which of the 50 ores has the highest chance of
-        --      spawning. We generate a single random number, divide it by 50 (so the probability is
-        --      the same as testing 50 different random numbers), then test that probability
-        --      against the ore with the highest chance
+        -- In "stone_x", we have already worked out which of the 50 ores has the highest probability
+        --      of spawning. We generate a single random number, divide it by 50 (so the probability
+        --      is the same as testing 50 different random numbers), then test that probability
+        --      against the ore with the highest probability
         -- If the test succeeds, we then test the original random number (not multiplied by 50)
         --      against each of the 50 ores, starting at a random position in the list
         --
@@ -4605,14 +4614,14 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
         -- Create ore distributions for the specified pseudo-biome
         if single_ore_table[item_name] ~= nil then
 
-            local ore_count = single_ore_total_chance_table[item_name]
+            local ore_count = single_ore_total_probability_table[item_name]
             -- N.B. Dividing by half of 50, rather than by 50 as described above, produces results
             --      that are closer to the non-optimised code
 --          local this_random = math.random() / ore_count
             local this_random = math.random() / (ore_count / 2)
 
             -- Test the random number against the ore with the highest probability
-            if this_random < single_ore_max_chance_table[item_name] * height_adjust then
+            if this_random < single_ore_max_probability_table[item_name] * height_adjust then
 
                 -- Test passed; one of the ores in this basic stone will be spawned. Start searching
                 --      for one at a random position in the list
@@ -4624,7 +4633,7 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
                     local distrib_table = single_ore_table[item_name][index]
                     if y <= distrib_table.y_max and
                             y >= distrib_table.y_min and
-                            this_random < distrib_table.chance * ore_factor_table[item_name] *
+                            this_random < distrib_table.probability * ore_factor_table[item_name] *
                                     height_adjust then
 
                         -- (Replaces a call to unilib.pbiomes.ore(), which doesn't return a true/
@@ -4653,10 +4662,11 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
         if single_ore_table["all"] ~= nil then
 
             local this_random = math.random()
-            local ore_count = single_ore_total_chance_table["all"]
+            local ore_count = single_ore_total_probability_table["all"]
 
             -- Test the random number against the ore with the highest probability
-            if this_random / ore_count < single_ore_max_chance_table["all"] * height_adjust then
+            if (this_random / ore_count) <
+                    (single_ore_max_probability_table["all"] * height_adjust) then
 
                 -- Test passed; one of the ores in this basic stone will be spawned. Start searching
                 --      for one at a random position in the list
@@ -4675,7 +4685,7 @@ local function switch_stone_fast(vi, data, item_name, x, y, z)
                     local distrib_table = single_ore_table["all"][index]
                     if y <= distrib_table.y_max and
                             y >= distrib_table.y_min and
-                            this_random < distrib_table.chance * ore_factor_table["all"] *
+                            this_random < distrib_table.probability * ore_factor_table["all"] *
                                     height_adjust then
 
                         -- (Replaces a call to unilib.pbiomes.ore(), which doesn't return a true/

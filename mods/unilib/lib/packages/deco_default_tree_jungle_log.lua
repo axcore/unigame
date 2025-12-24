@@ -21,7 +21,7 @@ function unilib.pkg.deco_default_tree_jungle_log.init()
         description = "Jungle tree log as decoration",
         depends = {
             "biome_default_rainforest",
-            "dirt_ordinary",
+            "dirt_ordinary_with_litter_rainforest",
             "mushroom_brown",
             "tree_jungle",
         },

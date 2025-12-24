@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 function unilib.pkg.deco_gaia_papyrus.init()
 
     return {
-        description = "Papyrus for the \"gaia\" remix",
+        description = "Papyrus for \"gaia\"-compatible remixes",
         depends = {"abm_standard_papyrus_grow", "biome_gaia", "plant_papyrus_ordinary"},
     }
 

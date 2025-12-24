@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.farlands.add_mode
 function unilib.pkg.plant_kelp_ordinary_gaia.init()
 
     return {
-        description = "Ordinary kelp, modified for the \"gaia\" remix",
+        description = "Ordinary kelp, modified for \"gaia\"-compatible remixes",
         excludes = "plant_kelp_ordinary",
     }
 

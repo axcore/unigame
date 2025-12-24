@@ -141,7 +141,7 @@ function unilib.pkg.misc_firefly.exec()
         local img = "unilib_misc_firefly_" .. part_name .. ".png"
 
         unilib.register_node("unilib:misc_firefly_" .. part_name, visible_orig_name, mode, {
-            -- From fireflies:firefly
+            -- From fireflies:firefly. Creates unilib:misc_firefly_yellow, etc
             description = description,
             tiles = {{
                 name = "unilib_misc_firefly_" .. part_name .. "_animated.png",

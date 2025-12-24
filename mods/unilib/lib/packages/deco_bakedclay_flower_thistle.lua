@@ -19,7 +19,8 @@ function unilib.pkg.deco_bakedclay_flower_thistle.init()
 
     return {
         description = "Thistle as decoration",
-        depends = {"dirt_ordinary", "flower_thistle"},
+        depends = "flower_thistle",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_dry"},
     }
 
 end

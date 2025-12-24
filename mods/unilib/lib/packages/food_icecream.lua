@@ -50,6 +50,8 @@ function unilib.pkg.food_icecream.exec()
             "unilib:snow_ordinary",
         },
         replacements = {
+            -- (From unimobs expansion pack)
+            {"unilib:bucket_steel_with_milk_cow", "unilib:bucket_steel_empty"},
             -- (From animalia mod)
             {"animalia:bucket_milk", "unilib:bucket_steel_empty"},
             -- (From mobs_animal mod)

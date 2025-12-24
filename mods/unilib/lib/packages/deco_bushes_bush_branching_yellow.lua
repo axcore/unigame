@@ -19,7 +19,7 @@ function unilib.pkg.deco_bushes_bush_branching_yellow.init()
 
     return {
         description = "Yellow branching bush as decoration",
-        depends = {"bush_branching_yellow", "dirt_ordinary"},
+        depends = {"bush_branching_yellow", "dirt_ordinary_with_turf"},
     }
 
 end

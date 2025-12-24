@@ -20,12 +20,21 @@ local function do_dump_node(pname, param)
     local node_list = {}
     local count = 0
 
-    for k, _ in pairs(core.registered_nodes) do
+    if param ~= "" and core.registered_nodes[param] ~= nil then
 
-        if param == "" or string.find(k, param) then
+        table.insert(node_list, core.registered_nodes[param].name)
+        count = 1
 
-            table.insert(node_list, tostring(k))
-            count = count + 1
+    else
+
+        for k, _ in pairs(core.registered_nodes) do
+
+            if param == "" or string.find(k, param) then
+
+                table.insert(node_list, tostring(k))
+                count = count + 1
+
+            end
 
         end
 
@@ -81,8 +90,8 @@ function unilib.pkg.chat_dump_node.exec()
         description = S("Dumps node definitions for any node whose name matches the pattern"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_node(name, param)
+        func = function(pname, param)
+            return do_dump_node(pname, param)
         end,
     })
 

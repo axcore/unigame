@@ -19,8 +19,8 @@ function unilib.pkg.biome_australia_gulf_of_carpentaria.init()
 
     return {
         description = "Gulf of Carpentaria biome",
-        depends = {"liquid_water_river_muddy", "stone_sandstone_ordinary"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        depends = {"dirt_ordinary", "liquid_water_river_muddy", "stone_sandstone_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

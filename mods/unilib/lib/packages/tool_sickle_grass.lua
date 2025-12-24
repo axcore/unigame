@@ -113,7 +113,8 @@ local function sickle_on_use(itemstack, user, pointed_thing, uses)
         itemstack:add_wear(unilib.constant.max_tool_wear / (uses - 1))
         return itemstack
 
-    elseif string.find(under.name, "unilib:dirt_ordinary_with_turf") then
+    elseif string.find(under.name, "unilib:dirt_ordinary_with_turf") and
+            unilib.global.pkg_executed_table["dirt_ordinary_with_turf_short"] ~= nil then
 
         if core.is_protected(above_pos, user:get_player_name()) or above.name ~= "air" then
             return
@@ -141,8 +142,8 @@ function unilib.pkg.tool_sickle_grass.init()
     return {
         description = "Sickle for cutting grass",
         notes = "Turns nodes with group flora = 1 and flower = 0 into cut/short grass",
-        depends = {"dirt_ordinary_with_turf_short", "item_stick_ordinary", "misc_patch_grass"},
-        optional = "dirt_ordinary",
+        depends = {"item_stick_ordinary", "misc_patch_grass"},
+        optional = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_short"},
     }
 
 end

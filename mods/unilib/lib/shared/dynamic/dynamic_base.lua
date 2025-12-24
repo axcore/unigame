@@ -52,7 +52,7 @@ local function convert_sides(sides)
 
 end
 
-local function extend_me(pos, wherein, output, sides, chance)
+local function extend_me(pos, wherein, output, sides, probability)
 
     -- Adapted from underch/dynamic.lua
     -- Called from the LBM created by unilib.dynamic.register_extender(), to convert a dynamic node
@@ -61,8 +61,8 @@ local function extend_me(pos, wherein, output, sides, chance)
     for _, p in pairs(sides) do
 
         local pp = {x = pos.x + p.x, y = pos.y + p.y, z = pos.z + p.z}
-        if core.get_node(pp).name == wherein and math.random() < chance then
-            extend_me(pp, wherein, output, sides, chance)
+        if core.get_node(pp).name == wherein and math.random() < probability then
+            extend_me(pp, wherein, output, sides, probability)
         end
 
     end
@@ -113,7 +113,7 @@ local function flood_me(pos, wherein, output, sides, size, ore_table, top_table)
 
                 for _, o in pairs(ore_table) do
 
-                    if (math.random() < o.chance) then
+                    if (math.random() < o.probability) then
 
                         blockset = true
                         core.set_node(positions[i], {name = o.block})
@@ -138,7 +138,7 @@ local function flood_me(pos, wherein, output, sides, size, ore_table, top_table)
 
                     for _, t in pairs(top_table) do
 
-                        if (math.random() < t.chance) then
+                        if (math.random() < t.probability) then
 
                             core.set_node(above, {name = t.block})
                             break
@@ -199,7 +199,7 @@ local function flood_me_jit(pos, wherein, output, sides, size, ore_table, top_ta
 
                 for _, o in pairs(ore_table) do
 
-                    if (math.random() < o.chance) then
+                    if (math.random() < o.probability) then
 
                         blockset = true
                         core.set_node(positions[i], {name = o.block})
@@ -224,7 +224,7 @@ local function flood_me_jit(pos, wherein, output, sides, size, ore_table, top_ta
 
                     for _, t in pairs(top_table) do
 
-                        if (math.random() < t.chance) then
+                        if (math.random() < t.probability) then
 
                             core.set_node(above, {name = t.block})
                             break
@@ -277,8 +277,11 @@ function unilib.dynamic.register_extender(data_table)
     --      replace_mode (str): Replace mode for the calling package's original mod (e.g. "defer")
     --      sides (str or table): If a string, the values "sides" or "corners", which are converted
     --          into one of the tables defined above. Otherwise, a table in the same general format
-    --      chance (float): Probability (in range 0-1) that each successive "wherein" node will be
-    --          converted into the "output" node
+    --      probability (float): Probability (in range 0-1) that each successive "wherein" node will
+    --          be converted into the "output" node
+    --
+    -- data_table deprecated fields:
+    --      chance (float): Renamed as probability in v1.1.0
 
     local function my_lbm(pos)
 
@@ -287,7 +290,7 @@ function unilib.dynamic.register_extender(data_table)
             data_table.wherein,
             data_table.output,
             convert_sides(data_table.sides),
-            data_table.chance
+            data_table.probability
         )
 
     end
@@ -342,6 +345,10 @@ function unilib.dynamic.register_flooder(data_table)
     --      size (int): Typically 30 or 100
     --
     -- data_table optional fields:
+    --      ore_table (table): e.g. {{block = "unilib:dirt_mossy", probability = 2/3}}
+    --      top_table (table): e.g. {{block = "unilib:dynamic_underground_bush", probability = 1/5}}
+    --
+    -- data_table deprecated fields (since v1.1.0):
     --      ore_table (table): e.g. {{block = "unilib:dirt_mossy", chance = 2/3}}
     --      top_table (table): e.g. {{block = "unilib:dynamic_underground_bush", chance = 1/5}}
 
@@ -413,6 +420,10 @@ function unilib.dynamic.register_flooder_jit(data_table)
     -- data_table optional fields:
     --      ore_table (table): e.g. {{block = "unilib:dirt_mossy", chance = 2/3}}
     --      top_table (table): e.g. {{block = "unilib:dynamic_underground_bush", chance = 1/5}}
+    --
+    -- data_table deprecated fields (since v1.1.0):
+    --      ore_table (table): e.g. {{block = "unilib:dirt_mossy", probability = 2/3}}
+    --      top_table (table): e.g. {{block = "unilib:dynamic_underground_bush", probability = 1/5}}
 
     local function my_lbm(pos)
 

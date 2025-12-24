@@ -813,6 +813,18 @@ function unilib.pkg.machine_cauldron_milk.post()
         {"unilib:ingredient_whey", "unilib:food_cheese_ricotta", nil, nil, 15},
     }
 
+    if core.get_modpath("unimobs") then
+
+        table.insert(recipe_list, {
+            "unilib:bucket_steel_with_milk_cow",
+            "unilib:ingredient_curd",
+            "unilib:ingredient_whey",
+            "unilib:bucket_steel_empty",
+            8,
+        })
+
+    end
+
     if core.get_modpath("animalia") then
 
         table.insert(recipe_list, {

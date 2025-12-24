@@ -40,6 +40,7 @@ metal_tin|default glemr11 technic
 
 # supporting packages (.optional)
 #dirt_ordinary|default farming moreblocks
+#dirt_ordinary_with_turf|default farming moreblocks
 #dye_basic|dye bakedclay
 #flower_dandelion_white|flowers
 #flower_dandelion_yellow|flowers

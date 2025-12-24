@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_tansy_common.init()
 
     return {
         description = "Common tansy as decoration",
-        depends = {"dirt_ordinary", "plant_tansy_common"},
+        depends = {"dirt_ordinary_with_turf", "plant_tansy_common"},
     }
 
 end

@@ -11,63 +11,11 @@ local S = unilib.intllib
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function register_remix_constants(remix_name)
-
-    -- Read the remix CSV containing environmental constants, and return the data as a table, ready
-    --      for use as an argument in other function calls
-    -- Note that any constants specified by a constants.csv file should probably be in CAPITAL
-    --      LETTERS, like the default constants listed below
-
-    local constants_path = unilib.global.remix_dir_table[remix_name] .. "/constants.csv"
-    -- Get default height constants (which can be overriden by the CSV file, if required)
-    local constants_table = unilib.utils.get_height_constants()
-
-    -- Read environment constants
-    if unilib.utils.is_file(constants_path) then
-
-        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
-
-            -- "key" is expected to contain at least one letter, "value" at least one digit
-            local key, value = unpack(csv_table)
-            if key ~= nil and value ~= nil then
-
-                if not string.find(key, "%a") then
-
-                    unilib.utils.show_warning(
-                        "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
-                                " Invalid environment constant in remix",
-                        constants_path,
-                        i
-                    )
-
-                elseif not string.find(value, "[%d]") then
-
-                    unilib.utils.show_warning(
-                        "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
-                                " Invalid environment constant value in remix",
-                        constants_path,
-                        i
-                    )
-
-                else
-
-                    constants_table[key] = value
-
-                end
-
-            end
-
-        end
-
-    end
-
-    return constants_table
-
-end
-
-local function register_remix_biomes(remix_name, constants_table, biome_check_table)
+local function register_remix_biomes(remix_name, biome_check_table)
 
     -- Read the remix CSV containing biomes, and update global variables
+
+    local constants_table = unilib.global.remix_constants_table[remix_name]
 
     local biomes_path = unilib.global.remix_dir_table[remix_name] .. "/biomes.csv"
     local biome_count = 0
@@ -192,9 +140,66 @@ local function register_remix_biomes(remix_name, constants_table, biome_check_ta
 
 end
 
-local function register_remix_decorations(remix_name, constants_table)
+local function register_remix_constants(remix_name)
+
+    -- Read the remix CSV containing constants, and store the data in a global variable, ready for
+    --      anything that needs it
+    -- Note that any constants specified by a constants.csv file should probably be in CAPITAL
+    --      LETTERS, like the default constants listed below
+
+    local constants_path = unilib.global.remix_dir_table[remix_name] .. "/constants.csv"
+    -- Get default height constants (which can be overriden by the CSV file, if required)
+    local constants_table = unilib.utils.get_height_constants()
+
+    -- Read environment constants
+    if unilib.utils.is_file(constants_path) then
+
+        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
+
+            -- "key" is expected to contain at least one letter, "value" at least one digit
+            local key, value = unpack(csv_table)
+            if key ~= nil and value ~= nil then
+
+                if not string.find(key, "%a") then
+
+                    unilib.utils.show_warning(
+                        "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
+                                " Invalid environment constant in remix",
+                        constants_path,
+                        i
+                    )
+
+                elseif not string.find(value, "[%d]") then
+
+                    unilib.utils.show_warning(
+                        "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
+                                " Invalid environment constant value in remix",
+                        constants_path,
+                        i
+                    )
+
+                else
+
+                    constants_table[key] = value
+
+                end
+
+            end
+
+        end
+
+    end
+
+    -- Update global variables
+    unilib.global.remix_constants_table[remix_name] = constants_table
+
+end
+
+local function register_remix_decorations(remix_name)
 
     -- Read the remix CSV containing decorations, and update global variables
+
+    local constants_table = unilib.global.remix_constants_table[remix_name]
 
     local deco_path = unilib.global.remix_dir_table[remix_name] .. "/decorations.csv"
     local deco_count = 0
@@ -288,9 +293,56 @@ local function register_remix_decorations(remix_name, constants_table)
 
 end
 
-local function register_remix_ores(remix_name, constants_table)
+local function register_remix_labels(remix_name)
+
+    -- Read the remix CSV containing remix labels. A remix label is a type of "category" for
+    --      remixes, multiple remixes can share the same "category"
+
+    local labels_path = unilib.global.remix_dir_table[remix_name] .. "/labels.csv"
+    local labels_table = {}
+
+    if unilib.utils.is_file(labels_path) then
+
+        for i, csv_table in ipairs(unilib.utils.read_csv(labels_path)) do
+
+            -- "label" is expected to contain at least one letter
+            local label = unpack(csv_table)
+            if label ~= nil then
+
+                if not string.find(label, "%a") then
+
+                    unilib.utils.show_warning(
+                        "../lib/system/read/read_csv_remix.lua, register_remix_labels():" ..
+                                " Invalid remix label",
+                        labels_path,
+                        i
+                    )
+
+                else
+
+                    -- Eliminate duplicates
+                    labels_table[label] = true
+
+                end
+
+            end
+
+        end
+
+    end
+
+    -- Update global variables
+    if not unilib.utils.is_table_empty(labels_table) then
+        unilib.global.remix_label_table[remix_name] = labels_table
+    end
+
+end
+
+local function register_remix_ores(remix_name)
 
     -- Read the remix CSVs containing ores, and update global variables
+
+    local constants_table = unilib.global.remix_constants_table[remix_name]
 
     local ore_type_list = {"scatter", "sheet", "puff", "blob", "vein", "stratum"}
     local ore_path_list = {}
@@ -463,22 +515,35 @@ local function register_remix_ores(remix_name, constants_table)
 
 end
 
-local function register_remix_other()
+local function register_remix_files()
 
-    -- Read the optional CSVs for each remix
+    -- Read the standard optional CSVs for each remix:
+    --      biomes.csv
+    --      constants.csv
+    --      decorations.csv
+    --      labels.csv
+    --      ore_blob.csv
+    --      ore_puff.csv
+    --      ore_scatter.csv
+    --      ore_sheet.csv
+    --      ore_stratum.csv
+    --      ore_vein.csv
+    -- (Note that the only standard compulsory CSV, packages.csv, is read elsewhere)
+    --
     -- Compile an ordered list of biomes/decorations/ores that must be defined, ignoring any
-    --      duplicates
+    --      duplicates. They, along with data read from labels.csv, are stored in global variables,
+    --      ready for use
 
     local biome_check_table = {}
 
     for _, remix_name in ipairs(unilib.global.init_remix_list) do
 
-        local constants_table = register_remix_constants(remix_name)
+        register_remix_labels(remix_name)
+        register_remix_constants(remix_name)
 
-        biome_check_table = register_remix_biomes(remix_name, constants_table, biome_check_table)
-
-        register_remix_decorations(remix_name, constants_table)
-        register_remix_ores(remix_name, constants_table)
+        biome_check_table = register_remix_biomes(remix_name, biome_check_table)
+        register_remix_decorations(remix_name)
+        register_remix_ores(remix_name)
 
     end
 
@@ -489,4 +554,4 @@ end
 ---------------------------------------------------------------------------------------------------
 
 -- Register CSV files provided by individual remixes
-register_remix_other()
+register_remix_files()

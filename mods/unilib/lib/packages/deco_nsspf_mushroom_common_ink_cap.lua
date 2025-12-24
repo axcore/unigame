@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_common_ink_cap.init()
 
     return {
         description = "Common ink cap mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_common_ink_cap"},
+        depends = "mushroom_common_ink_cap",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

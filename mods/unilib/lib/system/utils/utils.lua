@@ -427,6 +427,13 @@ end
 -- Miscellaneous utility functions
 local misc_file = unilib.core.path_mod .. "/lib/system/utils/utils_misc.lua"
 
+function unilib.utils.compile_colour_list(...)
+
+    if not t[misc_file] then t[misc_file] = true; dofile(misc_file) end
+    return unilib.utils._compile_colour_list(...)
+
+end
+
 function unilib.utils.get_random_seed(...)
 
     if not t[misc_file] then t[misc_file] = true; dofile(misc_file) end
@@ -555,6 +562,13 @@ end
 -- Numeric/string utility functions
 local ns_file = unilib.core.path_mod .. "/lib/system/utils/utils_numeric_string.lua"
 
+function unilib.utils.capitalise_translation(...)
+
+    if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
+    return unilib.utils._capitalise_translation(...)
+
+end
+
 function unilib.utils.contract_long_lines(...)
 
     if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
@@ -611,6 +625,23 @@ function unilib.utils.strip_whitespace(...)
 
 end
 
+-- Remix utility functions
+local rmx_file = unilib.core.path_mod .. "/lib/system/utils/utils_remix.lua"
+
+function unilib.utils.get_remix_by_label(...)
+
+    if not t[rmx_file] then t[rmx_file] = true; dofile(rmx_file) end
+    return unilib.utils._get_remix_by_label(...)
+
+end
+
+function unilib.utils.list_remixes_by_label(...)
+
+    if not t[rmx_file] then t[rmx_file] = true; dofile(rmx_file) end
+    return unilib.utils._list_remixes_by_label(...)
+
+end
+
 -- Startup utility functions
 local stp_file = unilib.core.path_mod .. "/lib/system/utils/utils_startup.lua"
 
@@ -646,5 +677,12 @@ function unilib.utils.get_startup_pkg_msg(...)
 
     if not t[stp_file] then t[stp_file] = true; dofile(stp_file) end
     return unilib.utils._get_startup_pkg_msg(...)
+
+end
+
+function unilib.utils.get_startup_time_msg(...)
+
+    if not t[stp_file] then t[stp_file] = true; dofile(stp_file) end
+    return unilib.utils._get_startup_time_msg(...)
 
 end

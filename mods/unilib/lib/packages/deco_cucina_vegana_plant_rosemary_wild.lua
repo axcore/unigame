@@ -21,7 +21,7 @@ function unilib.pkg.deco_cucina_vegana_plant_rosemary_wild.init()
         description = "Wild rosemary plant as decoration",
         depends = "plant_rosemary_wild",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
             "liquid_water_ordinary",
             "liquid_water_river",
             "sand_ordinary",

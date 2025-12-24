@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_crop_spinach.init()
 
     return {
         description = "Spinach as decoration",
-        depends = {"biome_default_forest_deciduous", "crop_spinach", "dirt_ordinary"},
+        depends = {"biome_default_forest_deciduous", "crop_spinach", "dirt_ordinary_with_turf"},
     }
 
 end

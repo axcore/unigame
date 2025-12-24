@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_plant_waratah.init()
     return {
         description = "Waratah as decoration",
         depends = {"biome_australia_eastern_coasts", "plant_waratah"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -31,8 +31,8 @@ function unilib.pkg.deco_australia_plant_waratah.post()
         -- From australia:waratah
         biomes = "australia_eastern_coasts",
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_with_turf_eastern_coasts",
+            "unilib:dirt_ordinary_with_turf",
         },
         y_max = 35,
         y_min = 6,

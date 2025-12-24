@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.cropocalypse.add_mode
 function unilib.pkg.light_lantern_jack_green.init()
 
     return {
-        description = "Green Jack 'O Lantern",
+        description = "Green Jack-o'-lantern",
         depends = {"plant_watermelon_wild", "torch_ordinary"},
     }
 
@@ -33,7 +33,7 @@ function unilib.pkg.light_lantern_jack_green.exec()
         mode,
         {
             description = unilib.utils.hint(
-                S("Green Jack 'O Lantern"), S("punch to turn on and off")
+                S("Green Jack-o'-lantern"), S("punch to turn on and off")
             ),
             tiles = {
                 "unilib_plant_watermelon_wild_top.png",
@@ -86,7 +86,7 @@ function unilib.pkg.light_lantern_jack_green.exec()
         mode,
         {
             description = unilib.utils.hint(
-                S("Green Jack 'O Lantern"), S("punch to turn on and off")
+                S("Green Jack-o'-lantern"), S("punch to turn on and off")
             ),
             tiles = {
                 "unilib_plant_watermelon_wild_top.png",

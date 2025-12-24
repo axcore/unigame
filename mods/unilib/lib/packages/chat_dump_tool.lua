@@ -20,12 +20,21 @@ local function do_dump_tool(pname, param)
     local tool_list = {}
     local count = 0
 
-    for k, _ in pairs(core.registered_tools) do
+    if param ~= "" and core.registered_tools[param] ~= nil then
 
-        if param == "" or string.find(k, param) then
+        table.insert(tool_list, core.registered_tools[param].name)
+        count = 1
 
-            table.insert(tool_list, tostring(k))
-            count = count + 1
+    else
+
+        for k, _ in pairs(core.registered_tools) do
+
+            if param == "" or string.find(k, param) then
+
+                table.insert(tool_list, tostring(k))
+                count = count + 1
+
+            end
 
         end
 
@@ -81,8 +90,8 @@ function unilib.pkg.chat_dump_tool.exec()
         description = S("Dumps tool definitions for any tool whose name matches the pattern"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_tool(name, param)
+        func = function(pname, param)
+            return do_dump_tool(pname, param)
         end,
     })
 

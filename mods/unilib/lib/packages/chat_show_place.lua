@@ -31,35 +31,36 @@ function unilib.pkg.chat_show_place.exec()
         params = "",
         description = S("Shows full list of nodes placed by player"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            if not core.get_player_by_name(name) then
+            if not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             elseif not unilib.setting.stats_activity_flag then
                 return false, unilib.pkg.shared_chat_statistics.stats_fail_msg
             end
 
             local place_table = unilib.pkg.shared_chat_statistics.get_activity_stat(
-                name, "place_table"
+                pname, "place_table"
             )
 
             if type(place_table) ~= "table" or unilib.utils.is_table_empty(place_table) then
-                return false, S("Player @1 has never placed anything!", name)
+                return false, S("Player @1 has never placed anything!", pname)
             end
 
-            unilib.utils.chat_send_player(name, S("Player placing list for @1", name))
+            unilib.utils.chat_send_player(pname, S("Player placing list for @1", pname))
 
             local count = 0
             for _, full_name in ipairs(unilib.utils.sort_table(place_table)) do
 
                 count = count + 1
                 unilib.utils.chat_send_player(
-                    name, "   " .. string.format("%-5d", place_table[full_name]) .. " " .. full_name
+                    pname,
+                    "   " .. string.format("%-5d", place_table[full_name]) .. " " .. full_name
                 )
 
             end
 
-            unilib.utils.chat_send_player(name, S("End of list (unique items found: @1)", count))
+            unilib.utils.chat_send_player(pname, S("End of list (unique items found: @1)", count))
 
         end,
     })

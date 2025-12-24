@@ -31,9 +31,9 @@ function unilib.pkg.chat_reset_player_attribute.exec()
         description = S("Resets the value of a player attribute"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
 
                 return false, unilib.constant.chat_offline_msg
@@ -53,7 +53,7 @@ function unilib.pkg.chat_reset_player_attribute.exec()
                 else
 
                     -- The function is expecting the "unilib:pattrib_" portion to be stripped off
-                    name = unilib.core.name .. ":pattrib_"
+                    local name = unilib.core.name .. ":pattrib_"
                     if string.sub(param_list[1], 1, string.len(name)) == name then
                         param_list[1] = string.sub(param_list[1], string.len(name) + 1)
                     end

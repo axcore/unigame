@@ -21,7 +21,7 @@ function unilib.pkg.deco_ethereal_flower_thistle.init()
         description = "Thistle as decoration",
         depends = "flower_thistle",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_ordinary_with_turf_bamboo",
             "dirt_ordinary_with_turf_grove",
             "dirt_ordinary_with_turf_prairie",

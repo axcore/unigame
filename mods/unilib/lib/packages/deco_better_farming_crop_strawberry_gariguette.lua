@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_crop_strawberry_gariguette.init()
 
     return {
         description = "Gariguette strawberry as decoration",
-        depends = {"biome_default_grassland", "crop_strawberry_gariguette", "dirt_ordinary"},
+        depends = {
+            "biome_default_grassland",
+            "crop_strawberry_gariguette",
+            "dirt_ordinary_with_turf",
+        },
     }
 
 end

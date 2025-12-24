@@ -82,7 +82,7 @@ function unilib.pkg.produce_pumpkin_yellow.exec()
     end
 
     unilib.register_produce_fredo({
-        -- From farming:pumpkin (creates creates unilib:produce_pumpkin_yellow_grow_8, aliased on to
+        -- From farming:pumpkin (creates unilib:produce_pumpkin_yellow_grow_8, aliased on to
         --      unilib:produce_pumpkin_yellow_harvest), farming:pumpkin_1 etc (creates
         --      unilib:produce_pumpkin_yellow_grow_1 etc)
         part_name = "pumpkin_yellow",

@@ -32,7 +32,7 @@ local exception_table = {
 --      unilib.global.biome_csv_setup_list()
 local biome_check_table = {}
 
--- Flag set to true, to show a summary of "gaia" remix decorations on startup
+-- Flag set to true, to show a summary of "gaia"-compatible remix decorations on startup
 local deco_summary_flag = false
 -- Table of regions and their decorations, e.g.
 --      region_summary_table["hot_humid"] = frequency_table
@@ -206,7 +206,7 @@ local function check_deco(data_table)
     --      hasn't been created yet) for validity
 
      -- (Don't act on decorations provides by incompatible remixes)
-    if data_table.remix_name ~= "gaia" and data_table.remix_name ~= "gaia_simple" then
+    if data_table.remix_name ~= unilib.pkg.biome_gaia.remix_name then
         return false
     end
 
@@ -288,9 +288,9 @@ end
 function unilib.pkg.deco_gaia.init()
 
     return {
-        description = "Decorations for the \"gaia\" remix",
-        notes = "This package should be used with the corresponding remix, as it assumes that" ..
-                " packages specified by the remix have been loaded",
+        description = "Decorations for \"gaia\"-compatible remixes",
+        notes = "This package should only be used with \"gaia\"-compatible remixes, as it" ..
+                " assumes that packages specified by those remixes have been loaded",
         depends = "biome_gaia",
         -- A few lines in decorations.csv will generate errors when the replace_mode for
         --      minetest_game mods is "defer", because the corresponding packages won't have been

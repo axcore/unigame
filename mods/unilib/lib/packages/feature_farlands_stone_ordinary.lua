@@ -22,7 +22,7 @@ function unilib.pkg.feature_farlands_stone_ordinary.init()
         depends = {
             "biome_farlands_forest_deciduous",
             "biome_farlands_grassland",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "stone_ordinary",
         },
     }

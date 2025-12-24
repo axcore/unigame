@@ -22,7 +22,7 @@ function unilib.pkg.deco_aotearoa_plant_bracken.init()
         depends = "plant_bracken",
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_scrubland"},
-            {"dirt_custom_antipodean", "dirt_ordinary"},
+            {"dirt_custom_antipodean", "dirt_ordinary_with_litter_rainforest"},
         },
     }
 

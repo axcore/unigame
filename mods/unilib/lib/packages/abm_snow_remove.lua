@@ -19,7 +19,7 @@ function unilib.pkg.abm_snow_remove.init()
 
     return {
         description = "ABM to convert dirt with snow to ordinary dirt when covered (from snow)",
-        depends = "dirt_ordinary",
+        depends = {"dirt_ordinary", "dirt_ordinary_with_cover_snow"},
     }
 
 end

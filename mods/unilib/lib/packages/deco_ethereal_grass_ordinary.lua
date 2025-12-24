@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_grass_ordinary.init()
 
     return {
         description = "Ordinary grass as decoration",
-        depends = {"dirt_ordinary", "grass_ordinary"},
+        depends = "grass_ordinary",
         at_least_one = {
             {
                 "biome_ethereal_bamboo",
@@ -32,6 +32,7 @@ function unilib.pkg.deco_ethereal_grass_ordinary.init()
                 "biome_ethereal_rainforest",
             },
             {
+                "dirt_ordinary_with_litter_rainforest",
                 "dirt_ordinary_with_turf_bamboo",
                 "dirt_ordinary_with_turf_grove",
                 "dirt_ordinary_with_turf_rainforest",

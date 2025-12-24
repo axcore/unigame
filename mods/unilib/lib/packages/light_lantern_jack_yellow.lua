@@ -18,7 +18,7 @@ local mode = unilib.global.imported_mod_table.farming.add_mode
 function unilib.pkg.light_lantern_jack_yellow.init()
 
     return {
-        description = "Yellow Jack 'O Lantern",
+        description = "Yellow Jack-o'-lantern",
         depends = {"produce_pumpkin_yellow", "torch_ordinary"},
     }
 
@@ -28,7 +28,7 @@ function unilib.pkg.light_lantern_jack_yellow.exec()
 
     unilib.register_node("unilib:light_lantern_jack_yellow_off", "farming:jackolantern", mode, {
         -- From farming:jackolantern
-        description = unilib.utils.hint(S("Yellow Jack 'O Lantern"), S("punch to turn on and off")),
+        description = unilib.utils.hint(S("Yellow Jack-o'-lantern"), S("punch to turn on and off")),
         tiles = {
             "unilib_produce_pumpkin_yellow_grow_bottom.png" ..
                     "^unilib_produce_pumpkin_yellow_grow_top_overlay.png",
@@ -70,7 +70,7 @@ function unilib.pkg.light_lantern_jack_yellow.exec()
     unilib.register_node("unilib:light_lantern_jack_yellow_on", "farming:jackolantern_on", mode, {
         -- From farming:jackolantern_on
         -- N.B. description missing in original code
-        description = unilib.utils.hint(S("Yellow Jack 'O Lantern"), S("punch to turn on and off")),
+        description = unilib.utils.hint(S("Yellow Jack-o'-lantern"), S("punch to turn on and off")),
         tiles = {
             "unilib_produce_pumpkin_yellow_grow_bottom.png" ..
                     "^unilib_produce_pumpkin_yellow_grow_top_overlay.png",

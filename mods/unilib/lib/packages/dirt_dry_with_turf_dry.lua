@@ -1,0 +1,73 @@
+---------------------------------------------------------------------------------------------------
+-- unilib mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- From:    default
+-- Code:    LGPL 2.1
+-- Media:   CC BY-SA 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib.pkg.dirt_dry_with_turf_dry = {}
+
+local S = unilib.intllib
+local mode = unilib.global.imported_mod_table.default.add_mode
+
+---------------------------------------------------------------------------------------------------
+-- New code
+---------------------------------------------------------------------------------------------------
+
+function unilib.pkg.dirt_dry_with_turf_dry.init()
+
+    return {
+        description = "Dry (savanna) dirt with dry (savanna) turf",
+        optional = {"dirt_dry", "grass_dry", "soil_arid"},
+    }
+
+end
+
+function unilib.pkg.dirt_dry_with_turf_dry.exec()
+
+    unilib.register_dirt_with_turf({
+        -- From default:dry_dirt_with_dry_grass. Creates unilib:dirt_dry_with_turf_dry
+        dirt_part_name = "dirt_dry",
+        turf_part_name = "turf_dry",
+        orig_name = "default:dry_dirt_with_dry_grass",
+        def_table = {
+            description = S("Savanna Dirt with Savanna Turf"),
+            tiles = {
+                "unilib_turf_dry_top.png",
+                "unilib_dirt_dry.png",
+                {
+                    name = "unilib_dirt_dry.png^unilib_turf_dry_side_overlay.png",
+                    tileable_vertical = false,
+                },
+            },
+            -- N.B. covered_dirt = 1 not in original code
+            -- N.B. dry_dirt = 1 not in original code
+            groups = {
+                covered_dirt = 1, crumbly = 3, dry_dirt = 1,
+                not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
+            },
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
+
+            drop = "unilib:dirt_dry",
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+        },
+
+        replace_mode = mode,
+        dry_soil = "unilib:soil_arid",
+        wet_soil = "unilib:soil_arid_wet",
+        turf_description = S("Savanna Turf"),
+    })
+    if unilib.global.pkg_executed_table["grass_dry"] ~= nil then
+
+        unilib.tools.make_cuttable(
+            "unilib:dirt_dry_with_turf_dry",
+            "unilib:dirt_dry",
+            "unilib:grass_dry_1"
+        )
+
+    end
+
+end

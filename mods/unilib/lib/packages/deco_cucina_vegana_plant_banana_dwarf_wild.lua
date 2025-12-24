@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_banana_dwarf_wild.init()
 
     return {
         description = "Wild dwarf banana plant as decoration",
-        depends = {"dirt_ordinary", "plant_banana_dwarf_wild", "tree_jungle"},
+        depends = {"plant_banana_dwarf_wild", "tree_jungle"},
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_litter_rainforest"},
     }
 
 end

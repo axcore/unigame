@@ -27,8 +27,8 @@ function unilib.pkg.deco_farlands_grass_tall.init()
                 "biome_farlands_swamp",
             },
             {
-                "dirt_ordinary",
                 "dirt_ordinary_with_litter_leafy",
+                "dirt_ordinary_with_turf",
                 "dirt_ordinary_with_turf_swamp",
             },
         },

@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_produce_herb_medicinal.init()
 
     return {
         description = "Medicinal herb as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "produce_herb_medicinal"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_coniferous",
+            "produce_herb_medicinal",
+        },
     }
 
 end

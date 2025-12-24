@@ -19,7 +19,7 @@ function unilib.pkg.deco_flowers_flower_tulip_black.init()
 
     return {
         description = "Black tulip as decoration",
-        depends = {"dirt_ordinary", "flower_tulip_black"},
+        depends = {"dirt_ordinary_with_turf", "flower_tulip_black"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

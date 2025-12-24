@@ -112,7 +112,7 @@ local function sledge_on_click(self, player)
 
     --[[
     self.hud = player:hud_add({
-        name = "sledge",
+        name = "unilib:hud_item_sledge",
         type = "text",
 
         direction = 0,

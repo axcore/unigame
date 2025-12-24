@@ -19,7 +19,12 @@ function unilib.pkg.biome_farlands_grassland_snowy.init()
 
     return {
         description = "Snowy grassland biomes",
-        depends = {"dirt_ordinary", "sand_ordinary", "snow_ordinary"},
+        depends = {
+            "dirt_ordinary",
+            "dirt_ordinary_with_cover_snow",
+            "sand_ordinary",
+            "snow_ordinary",
+        },
     }
 
 end

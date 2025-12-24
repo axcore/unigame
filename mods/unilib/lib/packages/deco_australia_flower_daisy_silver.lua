@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_flower_daisy_silver.init()
     return {
         description = "Silver daisy as decoration",
         depends = {"biome_australia_murray_darling_basin", "flower_daisy_silver"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

@@ -19,7 +19,12 @@ function unilib.pkg.biome_farlands_forest_coniferous.init()
 
     return {
         description = "Coniferous forest biomes",
-        depends = {"dirt_ordinary", "dirt_ordinary_with_litter_leafy", "sand_ordinary"},
+        depends = {
+            "dirt_ordinary",
+            "dirt_ordinary_with_litter_leafy",
+            "dirt_ordinary_with_turf",
+            "sand_ordinary",
+        },
     }
 
 end

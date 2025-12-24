@@ -20,7 +20,7 @@ function unilib.pkg.tree_redwood.init()
     return {
         description = "Redwood tree",
         notes = "Two different saplings produce normal and giant redwood trees",
-        optional = "dirt_ordinary",
+        optional = "dirt_ordinary_with_turf_dry",
     }
 
 end

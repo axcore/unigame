@@ -19,7 +19,7 @@ function unilib.pkg.dirt_dark.init()
 
     return {
         description = "Dark dirt",
-        depends = {"dirt_ordinary", "gravel_ordinary", "soil_ordinary"},
+        depends = {"dirt_ordinary", "gravel_ordinary", "soil_dark"},
     }
 
 end
@@ -33,7 +33,8 @@ function unilib.pkg.dirt_dark.exec()
         def_table = {
             description = S("Dark Dirt"),
             tiles = {"unilib_dirt_dark.png"},
-            groups = {crumbly = 2},
+            -- N.B. soil = 1 not in original code
+            groups = {crumbly = 2, soil = 1},
             sounds = unilib.global.sound_table.dirt,
 
             is_ground_content = unilib.setting.caves_chop_dirt_flag,
@@ -42,9 +43,9 @@ function unilib.pkg.dirt_dark.exec()
         replace_mode = mode,
         compressed_description = S("Compressed Dark Dirt"),
         compressed_group_table = {crumbly = 1},
-        -- N.B. no soil in original code
-        dry_soil = "unilib:soil_ordinary",
-        wet_soil = "unilib:soil_ordinary_wet",
+        -- N.B. No soil in original code
+        dry_soil = "unilib:soil_dark",
+        wet_soil = "unilib:soil_dark_wet",
     })
     unilib.register_craft({
         -- From darkage:darkdirt

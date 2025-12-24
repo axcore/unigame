@@ -19,7 +19,8 @@ function unilib.pkg.deco_herbs_flower_trifolium_white.init()
 
     return {
         description = "White trifolium as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "flower_trifolium_white"},
+        depends = {"biome_default_grassland", "flower_trifolium_white"},
+        at_least_one = {"dirt_ordinary_with_litter_coniferous", "dirt_ordinary_with_turf"},
     }
 
 end

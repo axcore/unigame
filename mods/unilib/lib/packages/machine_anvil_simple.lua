@@ -307,7 +307,7 @@ function unilib.pkg.machine_anvil_simple.exec()
             end
 
             local hud1 = puncher:hud_add({
-                name = "anvil_1",
+                name = "unilib:hud_machine_anvil_simple_1",
                 type = "image",
 
                 alignment = {x = 0, y = 0},
@@ -322,7 +322,7 @@ function unilib.pkg.machine_anvil_simple.exec()
             if input:get_wear() > 0 then
 
                 hud2 = puncher:hud_add({
-                    name = "anvil_2",
+                    name = "unilib:hud_machine_anvil_simple_2",
                     type = "statbar",
 
                     alignment = {x = 0, y = 0},
@@ -335,7 +335,7 @@ function unilib.pkg.machine_anvil_simple.exec()
                 })
 
                 hud3 = puncher:hud_add({
-                    name = "anvil_3",
+                    name = "unilib:hud_machine_anvil_simple_3",
                     type = "statbar",
 
                     alignment = {x = 0, y = 0},
@@ -352,9 +352,11 @@ function unilib.pkg.machine_anvil_simple.exec()
             core.after(2, function()
 
                 if puncher then
+
                     if hud1 then puncher:hud_remove(hud1) end
                     if hud2 then puncher:hud_remove(hud2) end
                     if hud3 then puncher:hud_remove(hud3) end
+
                 end
 
             end)

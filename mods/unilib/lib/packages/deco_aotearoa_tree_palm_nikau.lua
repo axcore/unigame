@@ -21,8 +21,16 @@ function unilib.pkg.deco_aotearoa_tree_palm_nikau.init()
         description = "Nikau palm tree as decoration",
         depends = "tree_palm_nikau",
         at_least_one = {
-            {"biome_aotearoa_coastal", "biome_aotearoa_lowland"},
-            {"dirt_antipodean", "dirt_custom_antipodean", "dirt_ordinary"},
+            {
+                "biome_aotearoa_coastal",
+                "biome_aotearoa_lowland",
+            },
+            {
+                "dirt_antipodean",
+                "dirt_custom_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 

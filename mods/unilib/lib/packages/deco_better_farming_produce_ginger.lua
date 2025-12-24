@@ -19,8 +19,17 @@ function unilib.pkg.deco_better_farming_produce_ginger.init()
 
     return {
         description = "Ginger as decoration",
-        depends = {"dirt_ordinary", "produce_ginger"},
-        at_least_one = {"biome_default_taiga", "biome_default_tundra"},
+        depends = "produce_ginger",
+        at_least_one = {
+            {
+                "biome_default_taiga",
+                "biome_default_tundra",
+            },
+            {
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_cover_snow",
+            },
+        },
     }
 
 end

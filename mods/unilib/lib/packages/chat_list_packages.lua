@@ -246,18 +246,18 @@ function unilib.pkg.chat_list_packages.exec()
         description = S("Lists all loaded packages, or details for the specified package"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_packages(name, param)
+        func = function(pname, param)
+            return do_list_packages(pname, param)
         end,
     })
 
     core.register_chatcommand("list_package", {
-        params = "[packag_name]",
+        params = "[package_name]",
         description = S("Lists all loaded packages, or details for the specified package"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_packages(name, param)
+        func = function(pname, param)
+            return do_list_packages(pname, param)
         end,
     })
 

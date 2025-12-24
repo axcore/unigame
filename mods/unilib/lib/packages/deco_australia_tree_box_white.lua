@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_box_white.init()
     return {
         description = "White box tree as decoration",
         depends = {"biome_australia_victorian_forests", "tree_box_white"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -33,8 +33,8 @@ function unilib.pkg.deco_australia_tree_box_white.post()
             -- From australia/biome_victorian_forests.lua
             biomes = "australia_victorian_forests",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 175,
             y_min = 36,

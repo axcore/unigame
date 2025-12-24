@@ -29,7 +29,7 @@ function unilib.pkg.item_net_bug.exec()
 
     unilib.register_tool("unilib:item_net_bug", "fireflies:bug_net", mode, {
         -- From fireflies:bug_net
-        description = S("Bug Net"),
+        description = unilib.utils.hint(S("Bug Net"), S("left-click to capture bugs")),
         inventory_image = "unilib_item_net_bug.png",
         pointabilities = {nodes = {["group:catchable"] = true}},
 

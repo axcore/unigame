@@ -32,9 +32,9 @@ function unilib.pkg.chat_daylight.exec()
         description = S("Enables permanent daylight without changing the game time"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             end
@@ -62,9 +62,9 @@ function unilib.pkg.chat_daylight.exec()
         description = S("Enables permanent darkness without changing the game time"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             end

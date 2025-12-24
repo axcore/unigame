@@ -11,9 +11,6 @@ unilib.pkg.ice_blue = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.caverealms.add_mode
 
-local falling_icicles_flag = true
-local fall_chance = 0.33
-
 ---------------------------------------------------------------------------------------------------
 -- New code
 ---------------------------------------------------------------------------------------------------

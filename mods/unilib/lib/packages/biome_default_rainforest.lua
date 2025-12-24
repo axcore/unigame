@@ -21,6 +21,7 @@ function unilib.pkg.biome_default_rainforest.init()
         description = "Rainforest biomes",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_litter_rainforest",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

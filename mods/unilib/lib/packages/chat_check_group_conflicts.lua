@@ -36,15 +36,15 @@ function unilib.pkg.chat_check_group_conflicts.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
             local conflict_count =
-                    unilib.pkg.shared_chat_conflicts.check_recipe_conflicts(name, true, true)
+                    unilib.pkg.shared_chat_conflicts.check_recipe_conflicts(pname, true, true)
 
             if conflict_count > 0 then
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     S("Craft recipe conflicts detected: @1", conflict_count)
                 )
 

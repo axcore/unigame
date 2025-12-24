@@ -284,9 +284,9 @@ function unilib.pkg.chat_find_biome.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not unilib.global.mods_loaded_flag then
                 return false
             elseif not player then
@@ -357,9 +357,9 @@ function unilib.pkg.chat_find_biome.exec()
         description = S("Teleports to biomes in a repeating cycle"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             end

@@ -18,6 +18,7 @@ local mode = unilib.global.imported_mod_table.pie.add_mode
 -- Package dependencies for the replacement items are handled by this package, in the .init()
 --      function
 unilib.pkg.shared_pie.replace_table = {
+    {"unilib:bucket_steel_with_milk_cow", "unilib:bucket_steel_empty"},
     {"animalia:bucket_milk", "unilib:bucket_steel_empty"},
     {"mobs:bucket_milk", "unilib:bucket_steel_empty"},
     {"mobs:wooden_bucket_milk", "unilib:bucket_wood_empty"},

@@ -1,12 +1,12 @@
-# "chat" remix - contains packages which define chat commands that aren't tied to a specific
-#       package (or packages)
+# "chat" remix - contains packages which define chat commands that aren't tied to a specific package
+#   (or packages)
 # This remix contains all such packages; the following remixes contain a smaller selection of
-#       packages:
+#   packages:
 #
-#       "chat_admin" - commands available to players with the "unilib_admin" privilege
-#       "chat_danger" - commands available to players with the "unilib_danger" privilege
-#       "chat_tools" - commands available to players with the "unilib_tools" privilege
-#       "chat_normal" - commands available to players without special privileges
+#   "chat_admin" - commands available to players with the "unilib_admin" privilege
+#   "chat_danger" - commands available to players with the "unilib_danger" privilege
+#   "chat_tools" - commands available to players with the "unilib_tools" privilege
+#   "chat_normal" - commands available to players without special privileges
 
 # node_name | original_mod
 
@@ -140,11 +140,16 @@ chat_set_hotbar|unilib
 # /what
 chat_toggle_identify|unilib
 
+# /update_slope: Updates the shape of a slope node at the player's current position
+chat_update_slope|unilib
+
 # -------------------------------------------------------------------------------------------------
 # Chat commands for FINDING things
 
-# /show_biome: Toggles showing the current biome
-chat_show_biome|display_biome
+# /show_biome: Shows the current biome
+chat_show_biome|unilib
+# /display_biome: Toggles displaying the current biome
+chat_display_biome|display_biome
 # /find_biome: Finds and teleports to the first matching biome found (or the previous biome found
 #       with this command, if no pattern is specified
 # /switch_biome: Teleports to biomes in a repeating cycle
@@ -173,6 +178,10 @@ chat_list_all|unilib
 # /list_remixes: Lists all loaded remixes
 # /list_remix
 chat_list_remixes|unilib
+# /list_remix_labels: Lists all loaded remixes which have labels
+# /list_remix_label
+chat_list_remix_labels|unilib
+
 # /list_packages: Lists all loaded packages, or details for the specified package
 # /list_package
 chat_list_packages|unilib
@@ -313,8 +322,10 @@ chat_show_ingredients|unilib
 # /inventory
 # /inv
 chat_show_inventory|unilib
-# /show_light: Displays light at the player's location
+# /show_light: Show light at the player's location
 chat_show_light|unilib
+# /display_light: Toggles displaying the current light
+chat_display_light|unilib
 # /show_package: Show the unilib package that created a node, craftitem or tool
 chat_show_package|unilib
 

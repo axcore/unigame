@@ -1,6 +1,6 @@
 # "maptools" remix - contains many items from the maptools mod
 # Does not include the unbreakable fake nodes, the coins, the permanent/fake fires or the smoke
-#       block. The admin pickaxe does not interact with clouds
+#   block. The admin pickaxe does not interact with clouds
 # Note that the advertised light-blocking node is missing from the original mod's code
 
 # node_name | original_mod

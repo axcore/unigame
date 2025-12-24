@@ -20,7 +20,11 @@ function unilib.pkg.deco_farming_redo_produce_chilli_normal.init()
     return {
         description = "Normal chilli pepper as decoration",
         depends = "produce_chilli_normal",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {
+            "dirt_ordinary_with_litter_rainforest",
+            "dirt_ordinary_with_turf",
+            "dirt_ordinary_with_turf_prairie",
+        },
     }
 
 end

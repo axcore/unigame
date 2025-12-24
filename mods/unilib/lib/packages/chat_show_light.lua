@@ -19,7 +19,7 @@ function unilib.pkg.chat_show_light.init()
 
     return {
         description = "Chat command /show_light",
-        notes = "",
+        notes = "Shows light at the player's location",
     }
 
 end
@@ -28,12 +28,12 @@ function unilib.pkg.chat_show_light.exec()
 
     core.register_chatcommand("show_light", {
         params = "",
-        description = S("Displays light at the player's location"),
+        description = S("Shows light at the player's location"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             end

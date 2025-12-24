@@ -144,7 +144,7 @@ local function hud_init(player)
     local pname = player:get_player_name()
 
     player_table[pname].hud_id = player:hud_add({
-        name = "hydration",
+        name = "unilib:hud_effects_hydration",
         type = "statbar",
 
         direction = 0,

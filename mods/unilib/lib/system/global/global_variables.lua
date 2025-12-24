@@ -22,7 +22,10 @@ unilib.global.ext_pack_list = {}
 -- List of paths to folders where packages can be found. When looking for a package with a certain
 --      name, these folders are checked in order; the first package found is the one loaded
 -- A list of possible locations in expansion packs
-unilib.global.ext_pkg_path_list = {"/lib/packages/"}
+unilib.global.ext_pkg_path_list = {
+    "/lib/packages/dev/",
+    "/lib/packages/",
+}
 -- A list of possible locations in unilib
 unilib.global.base_pkg_path_list = {
     "/custom/packages/",
@@ -208,6 +211,29 @@ unilib.global.remix_pkg_table = {}
 --      remix_pkg_count_table[remix_name] = number_of_pkgs
 -- Table populated by code in ../lib/system/read/read_compile.lua
 unilib.global.remix_pkg_count_table = {}
+
+-- Some remixes contain a constants.csv file. This data in this file has two purposes; firstly, it's
+--      used by ../lib/system/read/read_csv_remix.lua when biomes, decorations and ores are being
+--      read from their own CSV files; secondly, individual packages may also want the data (for
+--      example, the "biome_gaia" needs the same constants when reading data for ecosystems)
+-- So that a constants.csv file doesn't have to be read twice, it's stored in a global variable
+-- Table in the form
+--      remix_constants_table[remix_name] = constants_table
+-- Note that every "constants_table" contains six standard constants (X_MAX, Y_MIN etc) supplied by
+--      a call to unilib.utils.get_height_constants(); if the constants.csv file actually specifies
+--      those constants, the corresponding values overwrite the default values
+unilib.global.remix_constants_table = {}
+-- Remix labels specify a "category" for a remix. For example, packages like "biome_gaia",
+--      "deco_gaia" "ore_gaia" (etc) are designed to read from EITHER the "gaia" remix OR the
+--      "gaia_simple" remix (or, indeed, from a new remix that the player has created themselves)
+-- Instead of looking for those remixes by name, those packages look for the first remix with the
+--      label "gaia" (by calling unilib.utils.get_remix_by_label() or
+--      unilib.utils.list_remixes_by_label() )
+-- Table of remixes and the labels that apply to them, in the form
+--      remix_label_table[remix_name] = mini_table
+-- ...where each "mini_table" is in the form
+--      mini_table[remix_label] = true
+unilib.global.remix_label_table = {}
 
 -- A list of package names specified by the loaded remixes, preserving the order in which they're
 --      specified, but with duplicate packages already eliminated
@@ -1131,6 +1157,7 @@ unilib.global.clay_baked_table = {}
 --      table.biome_part_name, e.g. "ethereal_grassland", "ocean" [or nil]
 --      table.rod_name, e.g. "unilib:item_rod_fishing" [or nil]
 --      table.tool_wear, e.g. 12000 [or nil]
+--      tabel.rarity, e.g. 1 [any value in the range 0-1; if 0, the fish can't be caught)
 -- Packages should call unilib.fishing.register_fish() to update this list
 unilib.global.fishing_fish_list = {}
 -- Packages should call unilib.fishing.register_bonus() to update this list

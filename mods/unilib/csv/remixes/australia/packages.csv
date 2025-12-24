@@ -1,7 +1,7 @@
 # "australia" remix - contains almost everything from the australia mod
 # Did not import the sunken ship, submarine and their chests
 # Used existing packages for metal ores and fern trees, rather than creating almost identical items
-#       from the australia mod. Add a tin ore for consistency (see the comments below)
+#   from the australia mod. Add a tin ore for consistency (see the comments below)
 # unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and
 #   unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default;
 #   enable them by uncommenting the optional package below
@@ -239,6 +239,8 @@ tree_fern_giant|ferns
 
 # supporting packages (.depends)
 clay_ordinary|default
+dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
 grass_dry|default
 grass_ordinary|default
 gravel_ordinary|default mtg_plus
@@ -268,7 +270,8 @@ biome_default_grassland|default
 biome_default_rainforest|default
 biome_default_taiga|default
 dirt_custom_antipodean|unilib
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 fern_ordinary|default
 fern_ordinary_tuber|ferns
 
@@ -284,5 +287,6 @@ fern_ordinary_tuber|ferns
 #machine_polishing|unilib
 #mineral_flint|default fire mtg_plus
 #moss_green|sickles
+#soil_ordinary|farming
 
 # supporting packages (.suggested)

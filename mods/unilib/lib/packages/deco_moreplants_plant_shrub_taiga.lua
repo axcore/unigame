@@ -19,7 +19,12 @@ function unilib.pkg.deco_moreplants_plant_shrub_taiga.init()
 
     return {
         description = "Taiga plant as decoration",
-        depends = {"biome_default_taiga", "dirt_ordinary", "plant_shrub_taiga", "snow_ordinary"},
+        depends = {
+            "biome_default_taiga",
+            "dirt_ordinary_with_cover_snow",
+            "plant_shrub_taiga",
+            "snow_ordinary",
+        },
     }
 
 end

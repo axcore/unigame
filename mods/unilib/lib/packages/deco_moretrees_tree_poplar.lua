@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_poplar.init()
 
     return {
         description = "Poplar tree as decoration",
-        depends = {"dirt_ordinary", "liquid_water_ordinary", "tree_poplar"},
+        depends = {"dirt_ordinary_with_turf", "liquid_water_ordinary", "tree_poplar"},
     }
 
 end

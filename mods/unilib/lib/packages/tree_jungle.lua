@@ -290,7 +290,19 @@ function unilib.pkg.tree_jungle.exec()
     })
 
     -- Due to 32 node height, altitude is limited and presence depends on chunksize
-    local chunksize = tonumber(core.get_mapgen_setting("chunksize"))
+--  local chunksize = tonumber(core.get_mapgen_setting("chunksize"))
+    local chunksize
+    if core.get_mapgen_chunksize then
+
+        local v = core.get_mapgen_chunksize()
+        chunksize = math.max(v.x, v.y, v.z)
+
+    else
+
+        chunksize = tonumber(core.get_mapgen_setting("chunksize"))
+
+    end
+
     if chunksize >= 5 then
 
         unilib.register_decoration_generic("default_tree_jungle_emergent", {

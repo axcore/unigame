@@ -31,7 +31,10 @@ function unilib.pkg.shared_ethereal_fish.register_fish(data_table)
     --      biome_part_name (str): A string matching a specific biome (e.g. "ethereal_sakura") or a
     --          general biome (e.g. "ocean", which matches any biome containing that word, e.g.
     --          "my_ocean_biome")
-    --      sci_name (str): e.g.
+    --      glow_flag (bool): If true, the fish glows slightly
+    --      rarity (float): Relative rarity. Use 1 for the most common fish, and lower values (e.g.
+    --          0.1, 0.01) for rarer fish. If not specified, the default value of 1 is used
+    --      sci_name (str): e.g. "Gadus morhua"
 
     local part_name = data_table.part_name
     local description = data_table.description
@@ -39,6 +42,8 @@ function unilib.pkg.shared_ethereal_fish.register_fish(data_table)
 
     local orig_name = data_table.orig_name or nil
     local biome_part_name = data_table.biome_part_name or nil
+    local glow_flag = data_table.glow_flag or false
+    local rarity = data_table.rarity or 1
     local sci_name = data_table.sci_name or nil
 
     -- The "food_fish_cookable" group replaces ethereal-ng's "ethereal_fish" group, and is used to
@@ -69,9 +74,8 @@ function unilib.pkg.shared_ethereal_fish.register_fish(data_table)
         description = unilib.utils.annotate(description, sci_name)
     end
 
-    -- (Make Neon Tetra glow slightly)
     local light_source
-    if part_name == "tetra" then
+    if glow_flag then
         light_source = 3
     end
 
@@ -91,6 +95,7 @@ function unilib.pkg.shared_ethereal_fish.register_fish(data_table)
     unilib.fishing.register_fish({
         full_name = "unilib:ingredient_fish_" .. part_name,
         biome_part_name = biome_part_name,
+        rarity = rarity,
     })
 
 end

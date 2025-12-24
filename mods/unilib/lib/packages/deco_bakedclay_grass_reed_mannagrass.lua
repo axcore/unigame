@@ -20,7 +20,7 @@ function unilib.pkg.deco_bakedclay_grass_reed_mannagrass.init()
     return {
         description = "Reed mannagrass as decoration",
         depends = "grass_reed_mannagrass",
-        at_least_one = {"dirt_ordinary", "sand_ordinary"},
+        at_least_one = {"dirt_ordinary_with_turf", "sand_ordinary"},
     }
 
 end

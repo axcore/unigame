@@ -1,5 +1,5 @@
-# Environment constants for the "gaia" remix, replacing temperature/humidity/elevation values in
-#       the corresponding biomes.csv/decorations.csv files
+# Environment constants for the "gaia" remix, replacing temperature/humidity/elevation values in the
+#   corresponding biomes.csv/decorations.csv files
 
 # Temperatures
 #BOILING|125
@@ -28,7 +28,8 @@ MANGROVE_MIN|-2
 BELOW_SEA_LEVEL|0
 SEA_LEVEL|1
 MANGROVE_MAX|2
-BEACH_MAX|4
+#BEACH_MAX|4
+BEACH_MAX|3
 COASTAL|40
 LOWLAND|80
 SHELF|120

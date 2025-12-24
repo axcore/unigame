@@ -103,7 +103,7 @@ local function pkg_exec(pkg_name, level)
 
         unilib.global.pkg_excluded_table[pkg_name] = true
         show_debug(
-            column .. "Package not executable due to the its source mod (which Minetest has" ..
+            column .. "Package not executable due to its source mod (which the engine has" ..
                     " loaded) having the replace mode \"defer\"",
             pkg_name,
             mod_list[1]

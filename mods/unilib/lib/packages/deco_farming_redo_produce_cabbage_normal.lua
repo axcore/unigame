@@ -19,7 +19,7 @@ function unilib.pkg.deco_farming_redo_produce_cabbage_normal.init()
 
     return {
         description = "Normal cabbage as decoration",
-        depends = {"dirt_ordinary", "produce_cabbage_normal"},
+        depends = {"dirt_ordinary_with_turf", "produce_cabbage_normal"},
     }
 
 end

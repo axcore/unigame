@@ -17,7 +17,7 @@ local S = unilib.intllib
 --      - Anywhere: graphical HUDs that are expected to be centred in the middle of the screen, such
 --          as the hangglider, anvils and threshing machines
 --
--- Packages are free to place their HUDs anywhere in the screen, following the arrangment above.
+-- Packages are free to place their HUDs anywhere in the screen, following the arrangement above.
 --      It's understood, for example, that the hangglider and anvil HUDs can't be visible at the
 --      same time, so there's no need to worry about whether they'll overlap
 -- Text HUDs are a different matter, however. All text HUDs should be handled by the Standard HUD,
@@ -90,7 +90,7 @@ local function add_line(player, pname, section_name, line_number, text, colour)
     end
 
     return player:hud_add({
-        name = "standard_hud_" .. pname .. "_" .. section_name,
+        name = "unilib:hud_standard_" .. pname .. "_" .. section_name,
         type = "text",
 
         alignment = {x = 0, y = 0},

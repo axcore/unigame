@@ -28,7 +28,7 @@ function unilib.pkg.base_gaia.init()
     end
 
     return {
-        description = "Base package for the \"gaia\" remix",
+        description = "Base package for \"gaia\"-compatible remixes",
         -- Another attempt to guarantee being first
         first = true,
     }
@@ -39,11 +39,8 @@ function unilib.pkg.base_gaia.post()
 
     if unilib.global.pkg_executed_table["meta_deco_optimise"] ~= nil then
 
-        if unilib.global.remix_dir_table["gaia_simple"] ~= nil then
-            unilib.pkg.meta_deco_optimise.do_optimise("gaia_simple")
-        else
-            unilib.pkg.meta_deco_optimise.do_optimise("gaia")
-        end
+        local remix_name = unilib.utils.get_remix_by_label("gaia") or "gaia"
+        unilib.pkg.meta_deco_optimise.do_optimise(remix_name)
 
     end
 

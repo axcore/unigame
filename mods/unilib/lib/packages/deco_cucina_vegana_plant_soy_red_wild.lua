@@ -19,7 +19,7 @@ function unilib.pkg.deco_cucina_vegana_plant_soy_red_wild.init()
 
     return {
         description = "Wild red soy plant as decoration",
-        depends = {"dirt_ordinary", "plant_soy_red_wild"},
+        depends = {"dirt_ordinary_with_turf", "plant_soy_red_wild"},
     }
 
 end

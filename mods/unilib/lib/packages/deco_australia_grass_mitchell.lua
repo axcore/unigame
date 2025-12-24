@@ -24,7 +24,7 @@ function unilib.pkg.deco_australia_grass_mitchell.init()
             "biome_australia_central_australia",
             "biome_australia_gulf_of_carpentaria",
             "biome_australia_pilbara",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf_dry",
             "dirt_red_antipodean",
             "gravel_red_antipodean",
         },
@@ -53,7 +53,7 @@ function unilib.pkg.deco_australia_grass_mitchell.post()
 
     if unilib.global.pkg_executed_table["biome_australia_gulf_of_carpentaria"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf_dry"] ~= nil
     ) then
 
         unilib.register_decoration_complete(

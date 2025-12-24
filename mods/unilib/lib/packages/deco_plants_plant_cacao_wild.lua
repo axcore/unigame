@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_plant_cacao_wild.init()
 
     return {
         description = "Wild cacao plant as decoration",
-        depends = {"dirt_ordinary", "plant_cacao_wild", "sand_desert"},
+        depends = {"dirt_ordinary_with_turf", "plant_cacao_wild", "sand_desert"},
     }
 
 end

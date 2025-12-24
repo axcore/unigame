@@ -19,8 +19,17 @@ function unilib.pkg.deco_better_farming_produce_potato_maris_piper.init()
 
     return {
         description = "Maris piper potato as decoration",
-        depends = {"dirt_ordinary", "produce_potato_maris_piper"},
-        at_least_one = {"biome_default_forest_coniferous", "biome_default_rainforest"},
+        depends = "produce_potato_maris_piper",
+        at_least_one = {
+            {
+                "biome_default_forest_coniferous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_litter_rainforest",
+            },
+        },
     }
 
 end

@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_plant_cocoa_trinitario_wild.init()
 
     return {
         description = "Wild trinitario cocoa plant as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "plant_cocoa_trinitario_wild"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "plant_cocoa_trinitario_wild",
+        },
     }
 
 end

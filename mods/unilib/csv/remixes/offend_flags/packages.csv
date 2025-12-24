@@ -1,5 +1,5 @@
 # "offend_flags" remix - contains the flag printer and flag-generation code from the "offend_flags"
-#       mod, and a (new) set of national flags
+#   mod, and a (new) set of national flags
 
 # node_name | original_mod
 
@@ -23,7 +23,7 @@ metal_tin|default glemr11 technic
 plant_papyrus_ordinary|default mtg_plus
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 dirt_ordinary|default farming moreblocks
 
 # supporting packages (.optional)

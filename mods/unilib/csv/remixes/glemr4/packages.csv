@@ -1,10 +1,10 @@
 # "glemr4" remix - contains almost everything from revision 4 of lib_materials/lib_ecology,
-#       (12 Dec 2018, ShadMordre-v2.0 branch). Some material of little value has been omitted
+#   (12 Dec 2018, ShadMordre-v2.0 branch). Some material of little value has been omitted
 # The original mods were not suitable for use in survival mode, and the same applies to this remix.
-#       Instead, this remix should be used as the basis for your own remixes. In particular, because
-#       so many items do not actually spawn in the world, you can omit everything that is not
-#       required for biomes and decorations. The section containing ore packages can also be
-#       removed, as it is again not very useful in survival mode
+#   Instead, this remix should be used as the basis for your own remixes. In particular, because so
+#   many items do not actually spawn in the world, you can omit everything that is not required for
+#   biomes and decorations. The section containing ore packages can also be removed, as it is again
+#   not very useful in survival mode
 
 # node_name | original_mod
 
@@ -22,6 +22,9 @@ liquid_lava_ordinary|default
 liquid_water_ordinary|default
 liquid_water_river|default
 soil_arid|farming
+soil_black|unilib
+soil_brown|unilib
+soil_dark|unilib
 soil_ordinary|farming
 stone_ordinary|default moreblocks technic
 
@@ -49,9 +52,14 @@ biome_glemr4|glemr4
 clay_ordinary|default
 dirt_dried|ethereal
 dirt_ordinary_with_cover_fungi|farlands
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 dirt_ordinary_with_turf_bamboo|ethereal
 dirt_ordinary_with_turf_cold|ethereal
 dirt_ordinary_with_turf_crystal|ethereal
+dirt_ordinary_with_turf_dry|default farming
 dirt_ordinary_with_turf_fiery|ethereal
 dirt_ordinary_with_turf_grey|ethereal
 dirt_ordinary_with_turf_grove|ethereal
@@ -456,7 +464,7 @@ brick_ordinary|default
 crop_cotton|farming
 crop_wheat|farming
 decor_bricks_stone_chalked|darkage
-dirt_dry|default
+dirt_dry|default farming
 dye_basic|dye bakedclay
 fruit_coconut_exotic|farlands
 fruit_mango_exotic|farlands

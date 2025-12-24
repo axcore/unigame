@@ -37,6 +37,8 @@ deco_snow_tree_apple_frozen|snow
 
 # supporting packages (.depends)
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_turf|default farming moreblocks
 fruit_apple|default
 ice_ordinary|default ethereal mtg_plus
 liquid_water_ordinary|default
@@ -47,19 +49,18 @@ tree_apple|default doors moreblocks
 tree_pine|default doors moreblocks
 
 # supporting packages (.at_least_one)
-flower_chrysanthemum_green|flowers
-flower_dandelion_white|flowers
-flower_dandelion_yellow|flowers
-flower_geranium_blue|flowers
-flower_rose_red|flowers
-flower_tulip_black|flowers
-flower_tulip_orange|flowers
-flower_viola_purple|flowers
-snow_ordinary|default ethereal mtg_plus
+#flower_chrysanthemum_green|flowers
+#flower_dandelion_white|flowers
+#flower_dandelion_yellow|flowers
+#flower_geranium_blue|flowers
+#flower_rose_red|flowers
+#flower_tulip_black|flowers
+#flower_tulip_orange|flowers
+#flower_viola_purple|flowers
+#snow_ordinary|default ethereal mtg_plus
 
 # supporting packages (.optional)
 #dye_basic|dye bakedclay
-#grass_dry|default
 #grass_jungle|default
 #grass_ordinary|default
 #item_stick_ordinary|default

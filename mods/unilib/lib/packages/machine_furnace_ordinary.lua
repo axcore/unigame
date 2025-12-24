@@ -53,7 +53,7 @@ function unilib.pkg.machine_furnace_ordinary.exec()
         "unilib_machine_furnace_ordinary_side.png",
         "unilib_machine_furnace_ordinary_side.png",
         {
-            image = "unilib_machine_furnace_ordinary_front_active.png",
+            name = "unilib_machine_furnace_ordinary_front_active.png",
             backface_culling = false,
             animation = {
                 type = "vertical_frames",

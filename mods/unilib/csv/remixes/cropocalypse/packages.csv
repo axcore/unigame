@@ -1,7 +1,7 @@
 # "cropocalypse" remix - contains everything from the cropocalypse mod, except the wooden bowl,
-#       light blue dye and ABMs for spawning full-block pumpkins/watermelons
+#   light blue dye and ABMs for spawning full-block pumpkins/watermelons
 # In the original mod, some items were only available when the "grave" mod was loaded. In this
-#       remix, those packages are commented out, and are instead available in the "grave" remix
+#   remix, those packages are commented out, and are instead available in the "grave" remix
 
 # node_name | original_mod
 
@@ -182,7 +182,9 @@ shared_cropocalypse_mushroom|cropocalypse
 
 # supporting packages (.depends)
 crop_wheat|farming
-dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
 food_bread_ordinary|farming
 fruit_apple|default
 glass_ordinary|default moreblocks vessels
@@ -208,6 +210,7 @@ biome_default_tundra|default
 
 # supporting packages (.optional)
 #crop_cotton|farming
+#dirt_ordinary|default farming moreblocks
 #dirt_permafrost_ordinary|default
 #dye_basic|dye bakedclay
 #grass_dry|default

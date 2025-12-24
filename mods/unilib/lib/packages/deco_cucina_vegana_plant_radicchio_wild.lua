@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_radicchio_wild.init()
 
     return {
         description = "Wild radicchio plant as decoration",
-        depends = {"dirt_ordinary", "plant_radicchio_wild"},
+        depends = "plant_radicchio_wild",
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_dry"},
     }
 
 end

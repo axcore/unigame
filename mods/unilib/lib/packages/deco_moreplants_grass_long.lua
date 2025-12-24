@@ -19,7 +19,7 @@ function unilib.pkg.deco_moreplants_grass_long.init()
 
     return {
         description = "Long grass as decoration",
-        depends = {"dirt_ordinary", "grass_long", "sand_ordinary"},
+        depends = {"dirt_ordinary_with_turf", "grass_long", "sand_ordinary"},
         at_least_one = {
             "biome_default_forest_coniferous",
             "biome_default_forest_deciduous",

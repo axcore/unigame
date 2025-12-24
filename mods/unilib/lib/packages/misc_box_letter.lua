@@ -212,7 +212,7 @@ local function on_rightclick(pos, node, clicker, itemstack, pointed_thing)
 
     core.show_formspec(
         player,
-        "unilib:misc_box_letter",
+        "unilib:form_misc_box_letter",
         get_formspec(pos, owner, (player == owner))
     )
 

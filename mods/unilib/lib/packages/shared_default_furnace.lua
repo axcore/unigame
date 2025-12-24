@@ -105,6 +105,19 @@ local function swap_node(pos, name)
 
 end
 
+local function add_item_or_drop(inv, pos, item)
+
+    local leftover = inv:add_item("dst", item)
+    if not leftover:is_empty() then
+
+        local above = vector.offset(pos, 0, 1, 0)
+        local drop_pos = core.find_node_near(pos, 1, {"air"}) or above
+        core.item_drop(leftover, nil, drop_pos)
+
+    end
+
+end
+
 ---------------------------------------------------------------------------------------------------
 -- Shared functions (pipeworks compatibility)
 ---------------------------------------------------------------------------------------------------
@@ -312,6 +325,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
                 src_time = src_time + el
                 if src_time >= cooked.time then
 
+                    --[[
                     -- Place result in dst list if possible
                     if inv:room_for_item("dst", cooked.item) then
 
@@ -319,6 +333,48 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
                         inv:set_stack("src", 1, aftercooked.items[1])
                         src_time = src_time - cooked.time
                         update = true
+
+                    else
+
+                        dst_full = true
+
+                    end
+                    ]]--
+
+                    -- Place result in dst list if possible
+                    if inv:room_for_item("dst", cooked.item) then
+
+                        inv:add_item("dst", cooked.item)
+
+                        -- Stop any final replacement from clogging "src"
+                        local can_cook = core.get_craft_result({
+                            method = "cooking",
+                            width = 1,
+                            items = {aftercooked.items[1]:to_string()}
+                        })
+
+                        can_cook = can_cook.time ~= 0 or not can_cook.item:is_empty()
+
+                        if aftercooked.items[1]:is_empty() or can_cook then
+
+                            -- Cook the final "src" item in the next cycle
+                            inv:set_stack("src", 1, aftercooked.items[1])
+
+                        else
+
+                            -- The final "src" item was replaced and is not cookable
+                            inv:set_stack("src", 1, "")
+                            add_item_or_drop(inv, pos, aftercooked.items[1])
+
+                        end
+
+                        src_time = src_time - cooked.time
+                        update = true
+
+                        -- Add replacement item to dst so they arent lost
+                        if cooked.replacements[1] then
+                            add_item_or_drop(inv, pos, cooked.replacements[1])
+                        end
 
                     else
 
@@ -377,6 +433,7 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
                     local replacements = fuel.replacements
                     if replacements[1] then
 
+                        --[[
                         local leftover = inv:add_item("dst", replacements[1])
                         if not leftover:is_empty() then
 
@@ -385,6 +442,8 @@ function unilib.pkg.shared_default_furnace.furnace_node_timer(
                             core.item_drop(replacements[1], nil, drop_pos)
 
                         end
+                        ]]--
+                        add_item_or_drop(inv, pos, replacements[1])
 
                     end
 

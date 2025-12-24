@@ -19,6 +19,9 @@ function unilib.pkg.vessel_bottle_glass_with_firefly.init()
 
     return {
         description = "Firefly in a glass bottle",
+        notes = "Both the animated textures and inventory textures have been given an internal" ..
+                " \"glow\", but due to engine issues, this is not visible in the animated" ..
+                " textures",
         depends = {"misc_firefly", "vessel_bottle_glass_empty"},
     }
 

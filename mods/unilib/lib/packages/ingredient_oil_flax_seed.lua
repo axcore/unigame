@@ -72,17 +72,23 @@ function unilib.pkg.ingredient_oil_flax_seed.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        technic.register_compressor_recipe({
-            -- From cucina_vegana:flax_seed_oil
-            output = "unilib:ingredient_oil_flax_seed",
-            input = {"unilib:crop_flax_golden_seed 6"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
 
-        technic.register_extractor_recipe({
-            -- From cucina_vegana:flax_seed_oil
-            output = "unilib:ingredient_oil_flax_seed",
-            input = {"unilib:crop_flax_golden_seed 6"},
-        })
+            technic.register_compressor_recipe({
+                -- From cucina_vegana:flax_seed_oil
+                output = "unilib:ingredient_oil_flax_seed",
+                input = {"unilib:crop_flax_golden_seed 6"},
+            })
+
+            technic.register_extractor_recipe({
+                -- From cucina_vegana:flax_seed_oil
+                output = "unilib:ingredient_oil_flax_seed",
+                input = {"unilib:crop_flax_golden_seed 6"},
+            })
+
+        end)
 
     end
 

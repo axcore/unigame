@@ -20,7 +20,7 @@ function unilib.pkg.deco_farlands_grass_bamboo.init()
     return {
         description = "Bamboo grass as decoration",
         depends = {"biome_farlands_forest_bamboo", "grass_bamboo"},
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_litter_leafy"},
+        at_least_one = {"dirt_ordinary_with_litter_leafy", "dirt_ordinary_with_turf"},
     }
 
 end

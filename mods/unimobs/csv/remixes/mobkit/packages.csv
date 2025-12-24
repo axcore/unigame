@@ -1,0 +1,42 @@
+# "mobkit" remix - contains everything from "mobkit" mod, including all core code and all built-in
+#   mob behaviours
+# Many function names have changed; before attempting to write new mobs, see the README
+# The mobkit.hq_follow0() function, marked for deletion in the original code, has not been imported
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Essential mobkit behaviours (used by code in /lib/system)
+hqb_roam|mobkit
+lqb_turn_to_pos|mobkit
+lqb_dumb_walk|mobkit
+lqb_dumb_jump|mobkit
+
+# Core mobkit behaviours
+hqb_aqua_attack|mobkit
+hqb_aqua_roam|mobkit
+hqb_aqua_turn|mobkit
+hqb_attack|mobkit
+hqb_die|mobkit
+hqb_evade|mobkit
+hqb_find_land|mobkit
+hqb_follow|mobkit
+hqb_goto|mobkit
+hqb_hunt|mobkit
+hqb_swim_to|mobkit
+hqb_warn|mobkit
+lqb_fall_over|mobkit
+lqb_free_jump|mobkit
+lqb_idle|mobkit
+lqb_jump_attack|mobkit petz
+lqb_short_jump|mobkit
+mtb_dumb_step|mobkit
+shared_mobkit_aqua|mobkit
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

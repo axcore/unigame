@@ -20,7 +20,11 @@ function unilib.pkg.deco_plants_plant_aloe_wild.init()
     return {
         description = "Wild aloe as decoration",
         depends = {"plant_aloe_wild", "sand_desert"},
-        at_least_one = {"dirt_ordinary", "liquid_water_ordinary", "plant_cactus_ordinary"},
+        at_least_one = {
+            "dirt_ordinary_with_turf",
+            "liquid_water_ordinary",
+            "plant_cactus_ordinary",
+        },
     }
 
 end

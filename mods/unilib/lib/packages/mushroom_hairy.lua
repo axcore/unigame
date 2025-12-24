@@ -19,7 +19,6 @@ function unilib.pkg.mushroom_hairy.init()
 
     return {
         description = "Hairy mushroom",
-        depends = "tree_jungle",
     }
 
 end
@@ -85,11 +84,5 @@ function unilib.pkg.mushroom_hairy.exec()
         recipe = "unilib:mushroom_hairy",
         cooktime = 10,
     })
-
-    -- (This mushroom grows on the top surface of a jungle tree trunk)
-    unilib.pkg.shared_nsspf.register_special(
-        "unilib:mushroom_hairy",
-        "unilib:tree_jungle_trunk"
-    )
 
 end

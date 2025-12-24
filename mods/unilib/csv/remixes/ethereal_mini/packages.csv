@@ -1,5 +1,5 @@
 # "ethereal_mini" remix - the "ethereal" remix without biomes, decorations or ores, without ABM and
-#       LBM packages, and without the base package
+#   LBM packages, and without the base package
 
 # node_name | original_mod
 
@@ -295,12 +295,13 @@ vessel_bottle_glass_empty|thirsty vessels
 vessel_glass_empty|thirsty vessels
 
 # supporting packages (.at_least_one)
-dirt_dry|default
+dirt_dry|default farming
 
 # supporting packages (.optional)
 #bush_blueberry_ordinary|default
 #clay_baked_basic|bakedclay
-#grass_dry|default
+#dirt_ordinary_with_turf|default farming moreblocks
+#dirt_ordinary_with_turf_dry|default farming
 #grass_jungle|default
 #grass_ordinary|default
 #gravel_ordinary|default mtg_plus

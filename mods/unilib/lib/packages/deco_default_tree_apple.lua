@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_tree_apple.init()
 
     return {
         description = "Apple tree as decoration",
-        depends = {"biome_default_forest_deciduous", "dirt_ordinary", "tree_apple"},
+        depends = {"biome_default_forest_deciduous", "dirt_ordinary_with_turf", "tree_apple"},
     }
 
 end

@@ -1,0 +1,14 @@
+# mod_name | detect_mode | replace_mode | notes
+unimobs|ignore|replace|By using "replace", packages whose source mod is marked as unilib in the unimobs will be executed
+
+# From mobkit
+mobkit|detect|replace|
+
+# From petz
+bale|detect|replace|
+kitz|detect|replace|
+petz|detect|replace|
+
+# All other mods
+vis_harm_1nd|detect|replace|
+wildlife|detect|replace|

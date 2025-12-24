@@ -120,8 +120,8 @@ function unilib.pkg.chat_list_buckets.exec()
         description = S("Lists bucket types, or a list of buckets of the specified type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_buckets(name, param)
+        func = function(pname, param)
+            return do_list_buckets(pname, param)
         end,
     })
 
@@ -130,8 +130,8 @@ function unilib.pkg.chat_list_buckets.exec()
         description = S("Lists bucket types, or a list of buckets of the specified type"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_buckets(name, param)
+        func = function(pname, param)
+            return do_list_buckets(pname, param)
         end,
     })
 

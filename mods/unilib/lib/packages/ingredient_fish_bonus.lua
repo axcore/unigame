@@ -23,7 +23,7 @@ function unilib.pkg.ingredient_fish_bonus.init()
 
 end
 
-function unilib.pkg.ingredient_fish_bonus.post()
+function unilib.pkg.ingredient_fish_bonus.exec()
 
     -- Bonus item set (includes items that were present in ethereal-ng 2021, but absent in
     --      ethereal-ng 2024)
@@ -37,6 +37,10 @@ function unilib.pkg.ingredient_fish_bonus.post()
         {"unilib:tnt_ordinary_stick",                       nil,                nil},
         {"unilib:tool_sword_steel",                         nil,                12000},
         {"unilib:vessel_bottle_glass_with_firefly_yellow",  nil,                nil},
+        -- From unimobs expansion pack (there is no name tag)
+        {"unilib:item_net_animal",                          nil,                nil},
+        {"unilib:item_saddle_normal",                       nil,                nil},
+        {"unilib:item_saddlebag_normal",                    nil,                nil},
         -- From animalia mod
         {"animalia:nametag",                                nil,                nil},
         {"animalia:net",                                    nil,                nil},
@@ -56,6 +60,8 @@ function unilib.pkg.ingredient_fish_bonus.post()
         unilib.fishing.register_bonus({
             full_name = row_list[1],
             biome_part_name = row_list[2],
+            -- N.B. No .rarity in original code
+            rarity = 1,
             tool_wear = row_list[3],
         })
 

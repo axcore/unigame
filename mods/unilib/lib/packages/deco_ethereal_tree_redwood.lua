@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_redwood.init()
 
     return {
         description = "Redwood tree as decoration",
-        depends = {"biome_ethereal_mesa", "dirt_ordinary", "tree_redwood"},
+        depends = {"biome_ethereal_mesa", "dirt_ordinary_with_turf_dry", "tree_redwood"},
     }
 
 end

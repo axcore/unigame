@@ -1,6 +1,6 @@
 # "cucina_vegana" remix - contains everything from the cucina_vegana mod, except for support for
-#       various technology/mob mods, and for some food mods that are not currently imported into
-#       unilib (but might be in the future)
+#   various technology/mob mods, and for some food mods that are not currently imported into unilib
+#   (but might be in the future)
 
 # node_name | original_mod
 
@@ -112,7 +112,6 @@ utensil_plate_ceramic|cucina_vegana
 # supporting packages (.depends)
 clay_ordinary|default
 crop_cotton|farming
-dirt_ordinary|default farming moreblocks
 dye_basic|dye bakedclay
 flower_dandelion_yellow|flowers
 glass_ordinary|default moreblocks vessels
@@ -130,7 +129,11 @@ wool_basic|wool
 # supporting packages (.at_least_one)
 bush_ornamental_blueberry|bushes_classic
 crop_flax_brown|cropocalypse
-dirt_dry|default
+dirt_dry_with_turf_dry|default
+dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 fruit_blueberry_ordinary|default
 liquid_water_ordinary|default
 liquid_water_river|default
@@ -152,16 +155,12 @@ utensil_mortar_pestle|farming
 #bush_blueberry_ordinary|default
 #crop_beet_sugar|agriculture
 #flower_helianthus|pl_sunflowers
-#grass_dry|default
-#grass_jungle|default
-#grass_ordinary|default
 #ingredient_flour_ordinary|farming
 #ingredient_sugar_cane|better_farming
 #mineral_mese|default glemr11
 #plant_cactus_ordinary|default
 #plant_kelp_ordinary|default
 #plant_shrub_dry|default
-#soil_ordinary|farming
 
 # supporting packages (.suggested)
 #bucket_steel|bucket

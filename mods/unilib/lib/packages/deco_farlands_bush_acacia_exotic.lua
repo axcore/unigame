@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_bush_acacia_exotic.init()
 
     return {
         description = "Exotic acacia bush as decoration",
-        depends = {"biome_farlands_savanna", "bush_acacia_exotic", "dirt_ordinary"},
+        depends = {"biome_farlands_savanna", "bush_acacia_exotic", "dirt_ordinary_with_turf_dry"},
     }
 
 end

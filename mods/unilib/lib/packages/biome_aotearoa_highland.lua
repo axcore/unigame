@@ -22,7 +22,6 @@ function unilib.pkg.biome_aotearoa_highland.init()
         depends = {
             "clay_ordinary",
             "dirt_antipodean",
-            "dirt_ordinary",
             "dirt_peat_antipodean",
             "dirt_peat_restiad",
             "gravel_ordinary",
@@ -35,7 +34,7 @@ function unilib.pkg.biome_aotearoa_highland.init()
             "stone_greywacke_dark",
             "stone_schist_antipodean",
         },
-        optional = "dirt_custom_antipodean",
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf_dry"},
     }
 
 end

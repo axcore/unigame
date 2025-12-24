@@ -19,7 +19,7 @@ function unilib.pkg.deco_farlands_grass_deciduous.init()
 
     return {
         description = "Deciduous forest grass as decoration",
-        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary", "grass_deciduous"},
+        depends = {"biome_farlands_forest_deciduous", "dirt_ordinary_with_turf", "grass_deciduous"},
     }
 
 end

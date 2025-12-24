@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_tree_pine_huon.init()
     return {
         description = "Huon pine tree as decoration",
         depends = {"biome_australia_tasmania", "tree_pine_huon"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -31,8 +31,8 @@ function unilib.pkg.deco_australia_tree_pine_huon.post()
         -- From australia/biome_tasmania.lua
         biomes = "australia_tasmania",
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_dark_with_turf_tasmania",
+            "unilib:dirt_ordinary_with_turf",
         },
         y_max = 150,
         y_min = 36,

@@ -19,8 +19,18 @@ function unilib.pkg.deco_herbs_flower_iris_blue.init()
 
     return {
         description = "Blue iris as decoration",
-        depends = {"dirt_ordinary", "flower_iris_blue"},
-        at_least_one = {"biome_default_forest_deciduous", "biome_default_rainforest"},
+        depends = "flower_iris_blue",
+        at_least_one = {
+            {
+                "biome_default_forest_deciduous",
+                "biome_default_rainforest",
+            },
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_rainforest",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

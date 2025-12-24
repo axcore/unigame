@@ -1,0 +1,134 @@
+# "petz_mini" remix - contains all brain and behaviour packages from the "petz" remix (but nothing
+#   else)
+# See the STANDARDS file for more information about what belongs in each category, and what does not
+
+# node_name | original_mod
+
+# Essential mobkit behaviours (used by code in /lib/system)
+@mobkit_essential
+
+# petz/petz packages
+brain_ant|petz
+brain_aquatic|petz
+brain_bee|petz
+brain_flying|petz
+brain_herbivore|petz
+brain_monster|petz
+brain_predator|petz
+brain_semiaquatic|petz
+hqb_approach_beehive|petz
+hqb_aqua_jump|petz
+hqb_climb_tree|petz
+hqb_evade_in_liquid_or_air|unimobs
+hqb_find_beehive|petz
+hqb_find_flower|petz
+hqb_find_liquid|petz
+hqb_fly_alight|petz
+hqb_fly_attack|petz
+hqb_fly_hunt|petz
+hqb_fly_liquid_recovery|petz
+hqb_fly_take_off|petz
+hqb_fly_wander|petz
+hqb_follow_and_drop|petz
+hqb_follow_in_liquid_or_air|petz
+hqb_goto_liquid|petz
+hqb_look_at|petz
+hqb_obey_driver|petz
+hqb_sleep_until_wake_up|petz
+hqb_terrestrial_jump|petz
+lqb_approach_beehive|petz
+lqb_climb_tree|petz
+lqb_find_beehive|petz
+lqb_find_flower|petz
+lqb_fly_alight|petz
+lqb_fly_attack|petz
+lqb_fly_take_off|petz
+lqb_fly_turn_to_yaw|petz
+lqb_fly_wander|petz
+lqb_follow_in_liquid_or_air|petz
+lqb_obey_driver|petz
+mtb_attack_player|petz
+mtb_breed|petz
+mtb_climb_tree|petz
+mtb_create_anthill|petz
+mtb_create_beehive|petz
+mtb_fall_asleep|petz
+mtb_find_herd|petz
+mtb_flee_player|unimobs
+mtb_flee_predator|petz
+mtb_fly_alight|petz
+mtb_fly_to|petz
+mtb_hunt_prey|petz
+mtb_lay_ant_egg|petz
+mtb_look_at|petz
+mtb_move_head|petz
+mtb_order_autonomy|petz
+mtb_order_follow|petz
+mtb_order_guard|petz
+mtb_order_stand|petz
+mtb_order_stand_here|petz
+mtb_replace_node_or_lay_egg|petz
+mtb_rescue_suffocating_mob|petz
+mtb_restore_head|petz
+mtb_set_forward_velocity|petz
+mtb_show_fear|petz
+mtb_start_following|petz
+mtb_start_repelling|unimobs
+mtb_stop_following|petz
+mtb_stop_repelling|unimobs
+mtb_straggle_parents|petz
+mtb_teleport_behind_player|petz
+mtb_turn_away_from_danger|petz
+
+# supporting packages (.depends)
+#crop_cotton|farming
+#crop_wheat|farming
+#egg_ant_generic|petz
+#food_honey_normal|petz
+#glass_ordinary|default moreblocks vessels
+#hqb_aqua_attack|mobkit
+#hqb_aqua_roam|mobkit
+#hqb_aqua_turn|mobkit
+#hqb_attack|mobkit
+#hqb_evade|mobkit
+#hqb_find_land|mobkit
+#hqb_follow|mobkit
+#hqb_goto|mobkit
+#hqb_hunt|mobkit
+#hqb_roam|mobkit
+#hqb_swim_to|mobkit
+#lqb_dumb_jump|mobkit
+#lqb_dumb_walk|mobkit
+#lqb_free_jump|mobkit
+#lqb_idle|mobkit
+#lqb_jump_attack|mobkit petz
+#lqb_turn_to_pos|mobkit
+#metal_iron|default
+#misc_anthill|petz
+#misc_hive_normal|petz
+#misc_honeycomb_normal|petz
+#misc_pollen_normal|petz
+#misc_wagon_pony|petz
+#mob_ant_misc|petz
+#mob_bee_misc|petz
+#mtb_dumb_step|mobkit
+#organ_ant_misc|petz
+#organ_sting_bee|petz
+#shared_mobkit_aqua|mobkit
+#shared_petz_straw|petz
+#vessel_bottle_glass_empty|thirsty vessels
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+#dye_basic|dye bakedclay
+#fruit_apple|default
+#fruit_blueberry_ordinary|default
+#metal_gold|default glemr11 technic
+#mineral_diamond|default mtg_plus
+#mineral_mese|default glemr11
+#mob_beaver_normal|petz
+#shared_petz_lycanthropy|petz
+#tool_crook_shepherd|petz
+
+# supporting packages (.suggested)

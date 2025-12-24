@@ -25,7 +25,7 @@ function unilib.pkg.deco_australia_fern_ground_ruddy.init()
             "biome_australia_tasmania",
             "biome_australia_victorian_forests",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
         },
     }
 
@@ -35,15 +35,15 @@ function unilib.pkg.deco_australia_fern_ground_ruddy.post()
 
     if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("australia_fern_ground_ruddy_1", nil, {
             -- From australia:fern
             biomes = "australia_tasmania",
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
                 "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 160,
             y_min = 36,
@@ -56,16 +56,16 @@ function unilib.pkg.deco_australia_fern_ground_ruddy.post()
         unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil
     ) and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("australia_fern_ground_ruddy_2", nil, {
             -- From australia:fern
             biomes = {"australia_great_dividing_range", "australia_victorian_forests"},
             place_on = {
-                "unilib:dirt_ordinary_with_turf",
-                "unilib:dirt_antipodean_with_turf_great_dividing_range",
                 "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                "unilib:dirt_antipodean_with_turf_great_dividing_range",
+                "unilib:dirt_ordinary_with_turf",
             },
             y_max = 160,
             y_min = 36,

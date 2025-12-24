@@ -369,7 +369,7 @@ local function update_wielded_item(player)
             return
         end
 
-        unilib.armour.set_player_texture(pname, "wielditem",  get_item_texture(full_name))
+        unilib.armour.set_player_texture_data(pname, "wielditem",  get_item_texture(full_name))
         unilib.armour.update_player_visuals(player)
 
     end

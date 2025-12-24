@@ -114,8 +114,8 @@ function unilib.pkg.chat_list_nonmetal_sources.exec()
         description = S("Lists all elemental non-metals provided by mineral sources"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_nonmetal_sources(name, param)
+        func = function(pname, param)
+            return do_list_nonmetal_sources(pname, param)
         end,
     })
 
@@ -124,8 +124,8 @@ function unilib.pkg.chat_list_nonmetal_sources.exec()
         description = S("Lists all elemental non-metals provided by mineral sources"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_nonmetal_sources(name, param)
+        func = function(pname, param)
+            return do_list_nonmetal_sources(pname, param)
         end,
     })
 

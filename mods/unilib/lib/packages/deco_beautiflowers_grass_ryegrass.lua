@@ -19,7 +19,7 @@ function unilib.pkg.deco_beautiflowers_grass_ryegrass.init()
 
     return {
         description = "Ryegrass as decoration",
-        depends = {"dirt_ordinary", "grass_ryegrass"},
+        depends = {"dirt_ordinary", "dirt_ordinary_with_turf", "grass_ryegrass"},
     }
 
 end

@@ -269,7 +269,7 @@ function unilib.pkg.shared_chunkkeeper.update_formspec(pos)
         else
 
             title = unilib.utils.brackets(
-                S("@1's Adming Caretaker Machine", owner), tostring(time_str)
+                S("@1's Admin Caretaker Machine", owner), tostring(time_str)
             )
 
         end

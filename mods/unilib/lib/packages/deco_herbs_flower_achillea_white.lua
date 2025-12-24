@@ -19,9 +19,18 @@ function unilib.pkg.deco_herbs_flower_achillea_white.init()
 
     return {
         description = "White achillea as decoration",
-        depends = {"dirt_ordinary", "flower_achillea_white"},
+        depends = "flower_achillea_white",
         at_least_one = {
-            "biome_default_forest_deciduous", "biome_default_grassland", "biome_ethereal_mountain",
+            {
+                "biome_default_forest_deciduous",
+                "biome_default_grassland",
+                "biome_ethereal_mountain",
+            },
+            {
+                "dirt_ordinary",
+                "dirt_ordinary_with_litter_coniferous",
+                "dirt_ordinary_with_turf",
+            },
         },
     }
 

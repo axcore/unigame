@@ -11,6 +11,35 @@ local S = unilib.intllib
 -- Shared functions
 ---------------------------------------------------------------------------------------------------
 
+function unilib.utils._compile_colour_list()
+
+    -- Original to unimobs
+    -- Returns a list of dye colours that are currently available, either from unilib's "dye_basic"
+    --      package, or from the "dye" mod in minetest_game
+    -- Note that this function assumes that the "dye_basic" package has already been loaded, if it's
+    --      going to be loaded at all; the calling code should take account of that
+
+    local colour_list = {}
+
+    -- Use unilib the standard unilib colour list, if available; otherwise use minetest_game colours
+    if unilib.global.pkg_executed_table["dye_basic"] ~= nil then
+
+        for _, mini_list in ipairs(unilib.pkg.dye_basic.dye_list) do
+            table.insert(colour_list, mini_list[1])
+        end
+
+    elseif dye ~= nil and dye.dyes ~= nil then
+
+        for _, row in ipairs(dye.dyes) do
+            table.insert(colour_list, row[1])
+        end
+
+    end
+
+    return colour_list
+
+end
+
 function unilib.utils._get_random_seed()
 
     -- Generates a random seed in the range -32768 to 32767 (an arbitrary range of integers, that is

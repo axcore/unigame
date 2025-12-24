@@ -135,11 +135,17 @@ function unilib.pkg.ingredient_flour_rice_brown.exec()
     end
     if unilib.setting.technic_extra_flag then
 
-        technic.register_grinder_recipe({
-            -- From cucina_vegana:rice_flour
-            output = "unilib:ingredient_flour_rice_brown",
-            input = {"unilib:crop_rice_brown_harvest 3"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_grinder_recipe({
+                -- From cucina_vegana:rice_flour
+                output = "unilib:ingredient_flour_rice_brown",
+                input = {"unilib:crop_rice_brown_harvest 3"},
+            })
+
+        end)
 
     end
 

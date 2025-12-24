@@ -21,6 +21,7 @@ function unilib.pkg.biome_default_taiga.init()
         description = "Taiga biomes",
         depends = {
             "dirt_ordinary",
+            "dirt_ordinary_with_cover_snow",
             "liquid_lava_ordinary",
             "liquid_water_ordinary",
             "sand_ordinary",

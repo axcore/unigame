@@ -19,7 +19,7 @@ function unilib.pkg.deco_molehills_misc_molehill.init()
 
     return {
         description = "Molehill as decoration",
-        depends = {"dirt_ordinary", "misc_molehill"},
+        depends = {"dirt_ordinary_with_turf", "misc_molehill"},
     }
 
 end

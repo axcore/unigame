@@ -19,7 +19,7 @@ function unilib.pkg.deco_poisonivy_plant_ivy_poison.init()
 
     return {
         description = "Poison ivy as decoration",
-        depends = {"dirt_ordinary", "plant_ivy_poison"},
+        depends = {"dirt_ordinary_with_turf", "plant_ivy_poison"},
     }
 
 end

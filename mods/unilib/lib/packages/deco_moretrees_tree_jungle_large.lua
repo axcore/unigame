@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_jungle_large.init()
 
     return {
         description = "Large jungle tree as decoration",
-        depends = {"dirt_ordinary", "tree_jungle", "tree_jungle_large"},
+        depends = {"dirt_ordinary_with_litter_rainforest", "tree_jungle", "tree_jungle_large"},
     }
 
 end

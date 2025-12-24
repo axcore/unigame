@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_sequoia.init()
 
     return {
         description = "Giant sequoia tree as decoration",
-        depends = {"dirt_ordinary", "tree_sequoia"},
+        depends = {"dirt_ordinary_with_turf", "tree_sequoia"},
     }
 
 end

@@ -26,7 +26,11 @@ function unilib.pkg.deco_aotearoa_tree_kamahi.init()
                 "biome_aotearoa_highland",
                 "biome_aotearoa_lowland",
             },
-            {"dirt_antipodean", "dirt_ordinary"},
+            {
+                "dirt_antipodean",
+                "dirt_ordinary_with_litter_dry",
+                "dirt_ordinary_with_litter_rainforest",
+            },
         },
     }
 
@@ -52,21 +56,25 @@ function unilib.pkg.deco_aotearoa_tree_kamahi.post()
             place_on = {
                 "unilib:dirt_antipodean_dark_with_litter_beech",
                 "unilib:dirt_antipodean_dark_with_litter_wet",
-                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_antipodean_with_moss",
+                "unilib:dirt_ordinary_with_litter_dry",
                 "unilib:dirt_ordinary_with_litter_rainforest",
             },
             y_max = 118,
             y_min = 8,
         })
-        unilib.register_decoration_complete("aotearoa_tree_kamahi_dense_" .. i, nil, {
-            -- From aotearoa/spawn_trees.lua
-            -- Completes decoration in package "tree_kamahi"
-            biomes = "aotearoa_lowland_kamahi_forest",
-            place_on = "unilib:dirt_antipodean_with_moss",
-            y_max = 80,
-            y_min = 12,
-        })
+        if unilib.global.pkg_executed_table["dirt_antipodean"] ~= nil then
+
+            unilib.register_decoration_complete("aotearoa_tree_kamahi_dense_" .. i, nil, {
+                -- From aotearoa/spawn_trees.lua
+                -- Completes decoration in package "tree_kamahi"
+                biomes = "aotearoa_lowland_kamahi_forest",
+                place_on = "unilib:dirt_antipodean_with_moss",
+                y_max = 80,
+                y_min = 12,
+            })
+
+        end
 
     end
 

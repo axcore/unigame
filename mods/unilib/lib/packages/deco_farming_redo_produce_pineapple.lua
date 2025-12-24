@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_produce_pineapple.init()
     return {
         description = "Pineapple as decoration",
         depends = "produce_pineapple",
-        at_least_one = {"dirt_ordinary", "dirt_dry"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf_dry"},
     }
 
 end

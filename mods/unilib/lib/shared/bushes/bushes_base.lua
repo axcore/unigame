@@ -129,6 +129,10 @@ function unilib.bushes._register_leaves(data_table)
         after_place_node = unilib.flora.after_place_leaves,
     })
 
+    if unilib.setting.slopes_enable_flag and unilib.setting.slopes_enable_leaves_flag then
+        unilib.slopes.register_slope_leaves(full_name)
+    end
+
     return full_name
 
 end

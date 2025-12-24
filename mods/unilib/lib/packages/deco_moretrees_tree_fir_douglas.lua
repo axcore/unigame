@@ -19,28 +19,37 @@ function unilib.pkg.deco_moretrees_tree_fir_douglas.init()
 
     return {
         description = "Douglas fir tree as decoration",
-        depends = {"dirt_ordinary", "tree_fir_douglas"},
+        depends = "tree_fir_douglas",
+        at_least_one = {"dirt_ordinary_with_cover_snow", "dirt_ordinary_with_turf"},
     }
 
 end
 
 function unilib.pkg.deco_moretrees_tree_fir_douglas.post()
 
-    unilib.register_decoration_complete("convert_tree_fir_douglas", nil, {
-        -- From moretrees/init.lua
-        -- Completes decoration in package "tree_fir_douglas"
-        place_on = "unilib:dirt_ordinary_with_turf",
-        y_max = unilib.constant.y_max,
-        y_min = 25,
-    })
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
-    -- N.B. The original code uses biome_lib to place the tree on actual snow; the code in this
-    --      package is an approximation of that behaviour
-    unilib.register_decoration_complete("convert_tree_fir_douglas_on_snow", nil, {
-        -- From moretrees/init.lua
-        -- Completes decoration in package "tree_fir_douglas"
-        place_on = "unilib:dirt_ordinary_with_cover_snow",
-    })
+        unilib.register_decoration_complete("convert_tree_fir_douglas", nil, {
+            -- From moretrees/init.lua
+            -- Completes decoration in package "tree_fir_douglas"
+            place_on = "unilib:dirt_ordinary_with_turf",
+            y_max = unilib.constant.y_max,
+            y_min = 25,
+        })
+
+    end
+
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_cover_snow"] ~= nil then
+
+        -- N.B. The original code uses biome_lib to place the tree on actual snow; the code in this
+        --      package is an approximation of that behaviour
+        unilib.register_decoration_complete("convert_tree_fir_douglas_on_snow", nil, {
+            -- From moretrees/init.lua
+            -- Completes decoration in package "tree_fir_douglas"
+            place_on = "unilib:dirt_ordinary_with_cover_snow",
+        })
+
+    end
 
 end
 

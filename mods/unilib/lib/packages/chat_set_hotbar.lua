@@ -30,7 +30,7 @@ function unilib.pkg.chat_set_hotbar.exec()
         params = "[size]",
         description = S("Sets the size of the player's hotbar"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
             param = tonumber(param)
             if param == nil then
@@ -43,7 +43,7 @@ function unilib.pkg.chat_set_hotbar.exec()
 
             else
 
-                local player = core.get_player_by_name(name)
+                local player = core.get_player_by_name(pname)
                 unilib.utils.set_player_attribute(player, "hotbar_size", param)
                 unilib.hotbar.set_size(player, param)
                 return true
@@ -57,9 +57,9 @@ function unilib.pkg.chat_set_hotbar.exec()
         params = "",
         description = S("Resets the size of the player's hotbar"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             unilib.utils.set_player_attribute(player, "hotbar_size", "")
 
             if unilib.setting.hotbar_size > 0 then

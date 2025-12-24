@@ -19,8 +19,17 @@ function unilib.pkg.deco_default_bush_blueberry_ordinary.init()
 
     return {
         description = "Blueberry bush as decoration",
-        depends = {"bush_blueberry_ordinary", "dirt_ordinary"},
-        at_least_one = {"biome_default_grassland", "biome_default_grassland_snowy"},
+        depends = "bush_blueberry_ordinary",
+        at_least_one = {
+            {
+                "biome_default_grassland",
+                "biome_default_grassland_snowy",
+            },
+            {
+                "dirt_ordinary_with_cover_snow",
+                "dirt_ordinary_with_turf",
+            },
+        },
     }
 
 end

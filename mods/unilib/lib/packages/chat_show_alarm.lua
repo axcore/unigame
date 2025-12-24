@@ -31,15 +31,15 @@ function unilib.pkg.chat_show_alarm.exec()
         params = "",
         description = S("Shows the current daily alarm (if any)"),
 
-        func = function(name, param)
+        func = function(pname, param)
 
             if not unilib.setting.alarm_enable_flag then
                 return false, unilib.pkg.shared_chat_alarm.unavailable_msg
-            elseif not core.get_player_by_name(name) then
+            elseif not core.get_player_by_name(pname) then
                 return false, unilib.constant.chat_offline_msg
             end
 
-            local alarm = unilib.utils.get_player_attribute(core.get_player_by_name(name), "alarm")
+            local alarm = unilib.utils.get_player_attribute(core.get_player_by_name(pname), "alarm")
             if alarm == nil or alarm == "" then
                 return false, S("Your daily alarm is not set")
             end

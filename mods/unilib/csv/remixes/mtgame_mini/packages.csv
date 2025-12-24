@@ -1,8 +1,8 @@
 # "mtgame_mini" remix - the "mtgame" remix without biomes, decorations or ores, without ABM and LBM
-#       packages, and without the base package
+#   packages, and without the base package
 # If you want to create a world that is free of minetest_game biomes, decorations and ores - but
-#       which contains everything else - then this remix should be used alongside the "minimal"
-#       remix (which provides a base package; note that the one below is commented out)
+#   which contains everything else - then this remix should be used alongside the "minimal" remix
+#   (which provides a base package; note that the one below is commented out)
 
 # node_name | original_mod
 
@@ -110,8 +110,14 @@ crop_wheat|farming
 #deco_flowers_mushroom_brown|flowers
 #deco_flowers_mushroom_red|flowers
 # Dirt
-dirt_dry|default
+dirt_dry|default farming
+dirt_dry_with_turf_dry|default
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 dirt_permafrost_ordinary|default
 # Doors
 door_glass_obsidian|doors
@@ -249,6 +255,7 @@ sand_silver|default
 shared_beds|beds
 shared_boats|boats
 shared_carts|carts
+shared_default_book|default
 shared_default_chest|default pipeworks
 shared_default_furnace|default
 shared_default_sign|default

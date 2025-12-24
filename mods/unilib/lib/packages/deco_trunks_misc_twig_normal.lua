@@ -20,7 +20,7 @@ function unilib.pkg.deco_trunks_misc_twig_normal.init()
     return {
         description = "Normal twigs as decoration",
         depends = "misc_twig_normal",
-        at_least_one = {"dirt_ordinary", "liquid_water_ordinary"},
+        at_least_one = {"dirt_ordinary_with_turf", "liquid_water_ordinary"},
         optional = "fern_ordinary",
     }
 
@@ -28,7 +28,7 @@ end
 
 function unilib.pkg.deco_trunks_misc_twig_normal.post()
 
-    if unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil then
+    if unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil then
 
         unilib.register_decoration_complete("convert_misc_twig_normal_on_ground", nil, {
             -- From trunks/generating.lua

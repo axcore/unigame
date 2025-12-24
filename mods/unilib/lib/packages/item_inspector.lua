@@ -584,7 +584,7 @@ local function show_crafting(name, node_name, fields)
 
     end
 
-    core.show_formspec(name, "unilib:formspec_item_inspector", formspec)
+    core.show_formspec(name, "unilib:form_item_inspector", formspec)
 
 end
 
@@ -593,7 +593,7 @@ local function form_input_handler(player, formname, fields)
     -- Was replacer.form_input_handler()
     -- Translate general formspec calls back to specific calls
 
-    if formname and formname == "unilib:formspec_item_inspector" and player and not fields.quit then
+    if formname and formname == "unilib:form_item_inspector" and player and not fields.quit then
 
         show_crafting(player:get_player_name(), nil, fields)
         return
@@ -682,7 +682,7 @@ local function do_inspect(itemstack, user, pointed_thing, mode, show_recipe_flag
         core.chat_send_player(
             name,
             S(
-                "Node inspection error: This is an unknown item of type '@1'." ..
+                "Node inspection error: This is an unknown item of type \"@1\"." ..
                         " No information available.",
                 tostring(pointed_thing.type)
             )

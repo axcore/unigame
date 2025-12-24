@@ -20,7 +20,7 @@ function unilib.pkg.deco_ethereal_tree_acacia.init()
     return {
         description = "Alternative acacia tree decoration from ethereal-ng",
         depends = {"biome_ethereal_savanna", "tree_acacia"},
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf_dry"},
     }
 
 end

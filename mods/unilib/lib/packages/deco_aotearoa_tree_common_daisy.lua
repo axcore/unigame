@@ -22,7 +22,7 @@ function unilib.pkg.deco_aotearoa_tree_common_daisy.init()
         depends = "tree_common_daisy",
         at_least_one = {
             {"biome_aotearoa_coastal", "biome_aotearoa_highland"},
-            {"dirt_antipodean", "dirt_ordinary"},
+            {"dirt_antipodean", "dirt_ordinary_with_litter_rainforest"},
         },
     }
 
@@ -32,22 +32,32 @@ function unilib.pkg.deco_aotearoa_tree_common_daisy.post()
 
     for i = 1, 2 do
 
-        unilib.register_decoration_complete("aotearoa_tree_common_daisy_clump_" .. i, nil, {
-            -- From aotearoa/spawn_trees.lua
-            -- Completes decoration in package "tree_common_daisy"
-            biomes = "aotearoa_coastal_muttonbird_scrub",
-            place_on = "unilib:dirt_ordinary_with_litter_rainforest",
-            y_max = 14,
-            y_min = 3,
-        })
-        unilib.register_decoration_complete("aotearoa_tree_common_daisy_rare_" .. i, nil, {
-            -- From aotearoa/spawn_trees.lua
-            -- Completes decoration in package "tree_common_daisy"
-            biomes = "aotearoa_highland_pahautea_forest",
-            place_on = "unilib:dirt_antipodean_with_moss",
-            y_max = 120,
-            y_min = 78,
-        })
+        if unilib.global.pkg_executed_table["biome_aotearoa_coastal"] ~= nil and
+                unilib.global.pkg_executed_table["dirt_ordinary_with_litter_rainforest"] ~= nil then
+
+            unilib.register_decoration_complete("aotearoa_tree_common_daisy_clump_" .. i, nil, {
+                -- From aotearoa/spawn_trees.lua
+                -- Completes decoration in package "tree_common_daisy"
+                biomes = "aotearoa_coastal_muttonbird_scrub",
+                place_on = "unilib:dirt_ordinary_with_litter_rainforest",
+                y_max = 14,
+                y_min = 3,
+            })
+
+        end
+        if unilib.global.pkg_executed_table["biome_aotearoa_highland"] ~= nil and
+                unilib.global.pkg_executed_table["dirt_antipodean"] ~= nil then
+
+            unilib.register_decoration_complete("aotearoa_tree_common_daisy_rare_" .. i, nil, {
+                -- From aotearoa/spawn_trees.lua
+                -- Completes decoration in package "tree_common_daisy"
+                biomes = "aotearoa_highland_pahautea_forest",
+                place_on = "unilib:dirt_antipodean_with_moss",
+                y_max = 120,
+                y_min = 78,
+            })
+
+        end
 
     end
 

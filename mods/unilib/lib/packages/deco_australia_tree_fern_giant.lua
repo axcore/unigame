@@ -26,7 +26,7 @@ function unilib.pkg.deco_australia_tree_fern_giant.init()
             "biome_australia_tasmania",
             "biome_australia_victorian_forests",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
         },
     }
 
@@ -112,7 +112,7 @@ function unilib.pkg.deco_australia_tree_fern_giant.post()
 
     if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("convert_tree_fern_giant_in_range", nil, {
@@ -130,7 +130,7 @@ function unilib.pkg.deco_australia_tree_fern_giant.post()
 
     if unilib.global.pkg_executed_table["biome_australia_far_north_queensland"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("convert_tree_fern_giant_in_queensland", nil, {
@@ -148,7 +148,7 @@ function unilib.pkg.deco_australia_tree_fern_giant.post()
 
     if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("convert_tree_fern_giant_in_tasmania", nil, {
@@ -166,7 +166,7 @@ function unilib.pkg.deco_australia_tree_fern_giant.post()
 
     if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         unilib.register_decoration_complete("convert_tree_fern_giant_in_victoria", nil, {

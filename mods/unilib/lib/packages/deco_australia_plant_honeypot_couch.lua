@@ -20,7 +20,7 @@ function unilib.pkg.deco_australia_plant_honeypot_couch.init()
     return {
         description = "Couch honeypot as decoration",
         depends = {"biome_australia_jarrah_karri_forests", "plant_honeypot_couch"},
-        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary"},
+        at_least_one = {"dirt_custom_antipodean", "dirt_ordinary_with_turf"},
     }
 
 end
@@ -31,8 +31,8 @@ function unilib.pkg.deco_australia_plant_honeypot_couch.post()
         -- From australia:couch_honeypot
         biomes = "australia_jarrah_karri_forests",
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_antipodean_dark_with_turf_jarrah_karri_forests",
+            "unilib:dirt_ordinary_with_turf",
         },
         -- (no max_y, min_y)
     })

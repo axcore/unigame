@@ -22,7 +22,7 @@ function unilib.pkg.deco_herbs_flower_leucanthemum_white.init()
         depends = "flower_leucanthemum_white",
         at_least_one = {
             {"biome_default_grassland", "biome_default_savanna"},
-            {"dirt_dry", "dirt_ordinary"},
+            {"dirt_dry_with_turf_dry", "dirt_ordinary_with_turf"},
         },
     }
 

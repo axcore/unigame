@@ -19,7 +19,7 @@ function unilib.pkg.deco_farming_redo_produce_bean_green.init()
 
     return {
         description = "Wild green bean bush as decoration",
-        depends = {"dirt_ordinary", "produce_bean_green"},
+        depends = {"dirt_ordinary_with_turf", "produce_bean_green"},
     }
 
 end

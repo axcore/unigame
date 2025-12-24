@@ -85,8 +85,8 @@ function unilib.pkg.chat_dump_abm.exec()
         description = S("Dumps ABM definitions for any ABM whose label matches the pattern"),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_abm(name, param)
+        func = function(pname, param)
+            return do_dump_abm(pname, param)
         end,
     })
 

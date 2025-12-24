@@ -21,7 +21,7 @@ function unilib.pkg.deco_farlands_plant_shrub_forest_deciduous.init()
         description = "Deciduous forest shrub as decoration",
         depends = {
             "biome_farlands_forest_deciduous",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "plant_shrub_forest_deciduous",
         },
     }

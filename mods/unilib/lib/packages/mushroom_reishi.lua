@@ -19,7 +19,6 @@ function unilib.pkg.mushroom_reishi.init()
 
     return {
         description = "Reishi mushroom",
-        depends = {"shared_nsspf", "tree_jungle"},
     }
 
 end
@@ -97,14 +96,6 @@ function unilib.pkg.mushroom_reishi.exec()
         output = "unilib:mushroom_reishi_cooked",
         recipe = "unilib:mushroom_reishi",
         cooktime = 10,
-    })
-
-    unilib.pkg.shared_nsspf.register_mushroom({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_jungle_trunk",
-        plant_name = "unilib:mushroom_reishi",
-
-        surface_list = {"unilib:dirt_ordinary_with_litter_rainforest"},
     })
 
 end

@@ -20,7 +20,11 @@ function unilib.pkg.deco_bushes_classic_bush_ornamental.init()
     return {
         description = "Ornamental bushes as decoration",
         depends = "shared_bushes_classic",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_litter_forest", "soil_ordinary"},
+        at_least_one = {
+            "dirt_ordinary_with_litter_forest",
+            "dirt_ordinary_with_turf",
+            "soil_ordinary",
+        },
     }
 
 end
@@ -31,8 +35,8 @@ function unilib.pkg.deco_bushes_classic_bush_ornamental.post()
         -- From bushes_classic/init.lua
         -- Completes decoration in package "shared_bushes_classic"
         place_on = {
-            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_litter_forest_medium",
+            "unilib:dirt_ordinary_with_turf",
             "unilib:dirt_ordinary_with_turf_with_litter_forest_medium",
             "unilib:dirt_ordinary_with_turf_with_litter_forest_light",
             "unilib:soil_ordinary",

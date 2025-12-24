@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_plant_beetroot_common_wild.init()
 
     return {
         description = "Wild common beetroot plant as decoration",
-        depends = {"biome_default_grassland", "dirt_ordinary", "plant_beetroot_common_wild"},
+        depends = {
+            "biome_default_grassland",
+            "dirt_ordinary_with_turf",
+            "plant_beetroot_common_wild",
+        },
     }
 
 end

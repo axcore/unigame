@@ -40,7 +40,7 @@ local function do_list_tools(pname, param)
         if param == "" then
             return false, S("No tools are registered")
         elseif not_flag then
-            return false, S("No tools are registered for mods other than the  \"@1\" mod", param)
+            return false, S("No tools are registered for mods other than the \"@1\" mod", param)
         else
             return false, S("No tools are registered for the \"@1\" mod", param)
         end
@@ -106,8 +106,8 @@ function unilib.pkg.chat_list_tools.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_tools(name, param)
+        func = function(pname, param)
+            return do_list_tools(pname, param)
         end,
     })
 
@@ -118,8 +118,8 @@ function unilib.pkg.chat_list_tools.exec()
         ),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_tools(name, param)
+        func = function(pname, param)
+            return do_list_tools(pname, param)
         end,
     })
 

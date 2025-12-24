@@ -24,7 +24,7 @@ function unilib.pkg.tree_normal.init()
                 " apple tree wood, if you don\'t want actual apple trees in your remix then" ..
                 " you can use this package instead",
         depends = "tree_apple",
-        optional = "dirt_ordinary",
+        optional = "dirt_ordinary_with_turf",
     }
 
 end

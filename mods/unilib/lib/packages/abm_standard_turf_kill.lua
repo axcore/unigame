@@ -30,7 +30,8 @@ function unilib.pkg.abm_standard_turf_kill.post()
 
     unilib.register_abm({
         label = "Remove turf in darkness [abm_standard_turf_kill]",
-        nodenames = {"group:spreading_dirt_type", "unilib:dirt_dry_with_turf_dry"},
+        -- N.B. Not compatible with non-unilib nodes using the "spreading_dirt_type" group
+        nodenames = {"group:spreading_dirt", "unilib:dirt_dry_with_turf_dry"},
 
         catch_up = false,
         chance = 50,

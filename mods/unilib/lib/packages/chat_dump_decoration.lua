@@ -20,12 +20,21 @@ local function do_dump_decoration(pname, param)
     local deco_list = {}
     local count = 0
 
-    for k, _ in pairs(core.registered_decorations) do
+    if param ~= "" and core.registered_decorations[param] ~= nil then
 
-        if param == "" or string.find(k, param) then
+        table.insert(deco_list, core.registered_decorations[param].name)
+        count = 1
 
-            table.insert(deco_list, tostring(k))
-            count = count + 1
+    else
+
+        for k, _ in pairs(core.registered_decorations) do
+
+            if param == "" or string.find(k, param) then
+
+                table.insert(deco_list, tostring(k))
+                count = count + 1
+
+            end
 
         end
 
@@ -85,8 +94,8 @@ function unilib.pkg.chat_dump_decoration.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return do_dump_decoration(name, param)
+        func = function(pname, param)
+            return do_dump_decoration(pname, param)
         end,
     })
 

@@ -51,6 +51,15 @@ function unilib.pkg.produce_corn_normal.exec()
                 visual_scale = 1.90,
             },
             {
+                -- N.B. Reduced output; it's too much
+                --[[
+                drop = {
+                    items = {
+                        {items = {"unilib:produce_corn_normal_harvest"}, rarity = 1},
+                        {items = {"unilib:produce_corn_normal_harvest"}, rarity = 3},
+                    },
+                },
+                ]]--
                 drop = {
                     items = {
                         {items = {"unilib:produce_corn_normal_harvest"}, rarity = 1},
@@ -61,11 +70,20 @@ function unilib.pkg.produce_corn_normal.exec()
                 visual_scale = 1.90,
             },
             {
+                --[[
                 drop = {
                     items = {
                         {items = {"unilib:produce_corn_normal_harvest 2"}, rarity = 1},
                         {items = {"unilib:produce_corn_normal_harvest 2"}, rarity = 2},
                         {items = {"unilib:produce_corn_normal_harvest 2"}, rarity = 2},
+                    },
+                },
+                ]]--
+                drop = {
+                    items = {
+                        {items = {"unilib:produce_corn_normal_harvest 2"}, rarity = 1},
+                        {items = {"unilib:produce_corn_normal_harvest"}, rarity = 2},
+                        {items = {"unilib:produce_corn_normal_harvest"}, rarity = 3},
                     },
                 },
                 visual_scale = 1.90,

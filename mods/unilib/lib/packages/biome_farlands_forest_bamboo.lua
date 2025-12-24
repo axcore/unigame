@@ -19,7 +19,7 @@ function unilib.pkg.biome_farlands_forest_bamboo.init()
 
     return {
         description = "Bamboo forest biome",
-        depends = {"dirt_ordinary", "sand_ordinary"},
+        depends = {"dirt_ordinary", "dirt_ordinary_with_turf", "sand_ordinary"},
     }
 
 end

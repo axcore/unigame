@@ -7,9 +7,63 @@
 
 local S = unilib.intllib
 
+-- Table of nodes for which slopes have been created; used to eliminate duplicate calls
+-- Table in the form
+--      slope_check_table[full_name] = true
+local slope_check_table = {}
+
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
+
+local function register_biome(def_table)
+
+    -- Original to unilib
+    -- Registers a biome definition with the Minetest engine, also setting up slopes for the top
+    --      layer (when required)
+
+    -- Register the biome
+    core.register_biome(def_table)
+
+    -- Register slopes, if enabled
+    if unilib.setting.slopes_enable_flag and
+            unilib.setting.slopes_enable_biomes_flag and
+            def_table.node_top and
+            slope_check_table[def_table.node_top] == nil then
+
+        -- Eliminate duplicate calls
+        slope_check_table[def_table.node_top] = true
+
+        -- Register the slope with appropriate attributes
+        if core.get_item_group(def_table.node_top, "permafrost") > 0 then
+            unilib.slopes.register_slope_dirt_permafrost(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "spreading_dirt") > 0 then
+            unilib.slopes.register_slope_dirt_spreading(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "covered_dirt") > 0 then
+            unilib.slopes.register_slope_dirt_covered(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "soil") > 0 then
+            unilib.slopes.register_slope_dirt(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "smoothstone") > 0 then
+            unilib.slopes.register_slope_stone_smooth(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "cobble") > 0 then
+            unilib.slopes.register_slope_stone_cobble(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "mossycobble") > 0 then
+            unilib.slopes.register_slope_stone_cobble_mossy(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "sand") > 0 then
+            unilib.slopes.register_slope_sand(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "gravel") > 0 then
+            unilib.slopes.register_slope_gravel(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "clay") > 0 then
+            unilib.slopes.register_slope_clay(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "ground_ice") > 0 then
+            unilib.slopes.register_slope_ice(def_table.node_top)
+        elseif core.get_item_group(def_table.node_top, "ground_snow") > 0 then
+            unilib.slopes.register_slope_snow(def_table.node_top)
+        end
+
+    end
+
+end
 
 local function register_ore(def_table)
 
@@ -90,11 +144,11 @@ end
 -- We can now register the biomes, decorations and ores with the Minetest engine, using CSV items
 --      first, followed by those created by packages
 for _, def_table in ipairs(unilib.global.biome_csv_final_list) do
-    core.register_biome(def_table)
+    register_biome(def_table)
 end
 
 for _, def_table in ipairs(unilib.global.biome_other_final_list) do
-    core.register_biome(def_table)
+    register_biome(def_table)
 end
 
 for _, def_table in ipairs(unilib.global.deco_csv_final_list) do
@@ -131,6 +185,8 @@ unilib.global.ore_csv_final_table = {}
 unilib.global.ore_other_final_table = {}
 unilib.global.biome_name_check_table = {}
 unilib.global.deco_name_check_table = {}
+-- ...including local variables
+slope_check_table = {}
 
 -- Set up growth of crop/produce items using code imported from the farming_redo mod
 unilib.farming.register_growth_stages()

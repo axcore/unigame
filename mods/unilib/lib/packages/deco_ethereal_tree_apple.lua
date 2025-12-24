@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_apple.init()
 
     return {
         description = "Alternative apple tree decoration from ethereal-ng",
-        depends = {"dirt_ordinary", "tree_apple"},
+        depends = {"dirt_ordinary_with_turf", "tree_apple"},
         at_least_one = {"biome_ethereal_forest_deciduous", "biome_ethereal_jumble"},
     }
 

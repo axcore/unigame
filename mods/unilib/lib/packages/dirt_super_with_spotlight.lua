@@ -33,7 +33,8 @@ local function do_light(dirt_part_name, turf_full_name)
             def_table.tiles[2],
             def_table.tiles[3],
         },
-        groups = {cracky = 2, handy = 1, oddly_breakable_by_hand = 3, soil = 1},
+        -- N.B. covered_dirt = 1 not in original code
+        groups = {covered_dirt = 1, cracky = 2, handy = 1, oddly_breakable_by_hand = 3, soil = 1},
         sounds = unilib.global.sound_table.glass,
 
         -- N.B. is_ground_content = false not in original code

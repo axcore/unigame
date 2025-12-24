@@ -156,11 +156,11 @@ local function get_chest_formspec(pos, large_flag)
 
 end
 
-local function chest_page_update(pn, player, formname, fields)
+local function chest_page_update(pname, player, formname, fields)
 
     -- Original to unilib
 
-    local chest_open_info = open_chest_table[pn]
+    local chest_open_info = open_chest_table[pname]
     local pos = chest_open_info.pos
     local meta = core.get_meta(pos)
 
@@ -256,11 +256,11 @@ local function chest_page_update(pn, player, formname, fields)
 
 end
 
-local function chest_switch_update(pn, player, formname, fields)
+local function chest_switch_update(pname, player, formname, fields)
 
     -- Adapted from pipeworks
 
-    local chest_open_info = open_chest_table[pn]
+    local chest_open_info = open_chest_table[pname]
     local pos = chest_open_info.pos
     local meta = core.get_meta(pos)
     local large_flag = false
@@ -308,16 +308,16 @@ local function chest_lid_obstructed(pos)
 
 end
 
-local function chest_lid_close(pn)
+local function chest_lid_close(pname)
 
     -- Adapted from default/chests.lua
 
-    local chest_open_info = open_chest_table[pn]
+    local chest_open_info = open_chest_table[pname]
     local pos = chest_open_info.pos
     local sound = chest_open_info.sound
     local swap = chest_open_info.swap
 
-    open_chest_table[pn] = nil
+    open_chest_table[pname] = nil
     for k, v in pairs(open_chest_table) do
 
         -- Is another player also looking at the chest
@@ -578,7 +578,8 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
             core.show_formspec(
                 player:get_player_name(),
-                full_name .. "_locked",
+--              full_name .. "_locked",
+                "unilib:form_shared_default_chest_locked",
                 get_chest_formspec(pos, large_flag)
             )
 
@@ -590,9 +591,9 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
                 return itemstack
             end
 
-            local cn = clicker:get_player_name()
-            if open_chest_table[cn] then
-                chest_lid_close(cn)
+            local pname = clicker:get_player_name()
+            if open_chest_table[pname] then
+                chest_lid_close(pname)
             end
 
             core.sound_play(
@@ -608,12 +609,13 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
             core.after(
                 0.2,
                 core.show_formspec,
-                cn,
-                full_name,
+                pname,
+--              full_name,
+                "unilib:form_shared_default_chest",
                 get_chest_formspec(pos, large_flag)
             )
 
-            open_chest_table[cn] = {
+            open_chest_table[pname] = {
                 pos = pos,
                 sound = def_table.sound_close,
                 swap = full_name,
@@ -629,13 +631,13 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
             local meta = core.get_meta(pos)
             local owner = meta:get_string("owner")
-            local pn = player:get_player_name()
+            local pname = player:get_player_name()
 
             -- Verify placer is owner of lockable chest
-            if owner ~= pn then
+            if owner ~= pname then
 
-                core.record_protection_violation(pos, pn)
-                core.chat_send_player(pn, S("You do not own this chest"))
+                core.record_protection_violation(pos, pname)
+                core.chat_send_player(pname, S("You do not own this chest"))
                 return nil
 
             end
@@ -705,9 +707,9 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
         def_table.on_rightclick = function(pos, node, clicker)
 
-            local cn = clicker:get_player_name()
-            if open_chest_table[cn] then
-                chest_lid_close(cn)
+            local pname = clicker:get_player_name()
+            if open_chest_table[pname] then
+                chest_lid_close(pname)
             end
 
             core.sound_play(
@@ -723,12 +725,13 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
             core.after(
                 0.2,
                 core.show_formspec,
-                cn,
-                full_name,
+                pname,
+--              full_name,
+                "unilib:form_shared_default_chest",
                 get_chest_formspec(pos, large_flag)
             )
 
-            open_chest_table[cn] = {
+            open_chest_table[pname] = {
                 pos = pos,
                 sound = def_table.sound_close,
                 swap = full_name,
@@ -805,43 +808,43 @@ function unilib.pkg.shared_default_chest.register_chest(data_table)
 
     end
 
-    local def_opened = table.copy(def_table)
-    local def_closed = table.copy(def_table)
+    local opened_def_table = table.copy(def_table)
+    local closed_def_table = table.copy(def_table)
 
-    def_opened.mesh = "unilib_chest_open.obj"
-    for i = 1, #def_opened.tiles do
+    opened_def_table.mesh = "unilib_chest_open.obj"
+    for i = 1, #opened_def_table.tiles do
 
-        if type(def_opened.tiles[i]) == "string" then
-            def_opened.tiles[i] = {name = def_opened.tiles[i], backface_culling = true}
-        elseif def_opened.tiles[i].backface_culling == nil then
-            def_opened.tiles[i].backface_culling = true
+        if type(opened_def_table.tiles[i]) == "string" then
+            opened_def_table.tiles[i] = {name = opened_def_table.tiles[i], backface_culling = true}
+        elseif opened_def_table.tiles[i].backface_culling == nil then
+            opened_def_table.tiles[i].backface_culling = true
         end
 
     end
 
-    def_opened.drop = full_name
-    def_opened.groups.not_in_creative_inventory = 1
-    def_opened.selection_box = {
+    opened_def_table.drop = full_name
+    opened_def_table.groups.not_in_creative_inventory = 1
+    opened_def_table.selection_box = {
         type = "fixed",
         fixed = {-1/2, -1/2, -1/2, 1/2, 3/16, 1/2},
     }
 
-    def_opened.can_dig = function()
+    opened_def_table.can_dig = function()
         return false
     end
 
-    def_opened.on_blast = function() end
+    opened_def_table.on_blast = function() end
 
-    def_closed.mesh = nil
-    def_closed.drawtype = nil
+    closed_def_table.mesh = nil
+    closed_def_table.drawtype = nil
     -- Swap textures around for "normal" drawtype to make them match the mesh
-    def_closed.tiles[6] = def_table.tiles[5]
-    def_closed.tiles[5] = def_table.tiles[3]
-    def_closed.tiles[3] = def_table.tiles[3] .. "^[transformFX"
+    closed_def_table.tiles[6] = def_table.tiles[5]
+    closed_def_table.tiles[5] = def_table.tiles[3]
+    closed_def_table.tiles[3] = def_table.tiles[3] .. "^[transformFX"
 
-    -- ("orig_name" should be a list containing both variants, the "open" variant last)
-    unilib.register_node(full_name, orig_name_list[1], replace_mode, def_closed)
-    unilib.register_node(full_name .. "_open", orig_name_list[2], replace_mode, def_opened)
+    -- ("orig_name_list" should be a list containing both variants, the "open" variant last)
+    unilib.register_node(full_name, orig_name_list[1], replace_mode, closed_def_table)
+    unilib.register_node(full_name .. "_open", orig_name_list[2], replace_mode, opened_def_table)
 
     -- Registration complete; add it to the LBM below
     table.insert(open_chest_list, full_name .. "_open")
@@ -873,29 +876,33 @@ function unilib.pkg.shared_default_chest.exec()
         -- Handles opening/closing the chest and responds to any button presses in the chest's
         --      formspec
 
-        local pn = player:get_player_name()
-        if string.find(formname, "unilib:container_chest_") == nil or not player then
+        if not player then
+            return
+        end
 
-            if open_chest_table[pn] then
-                chest_lid_close(pn)
+        local pname = player:get_player_name()
+        if formname ~= "unilib:form_shared_default_chest" then
+
+            if open_chest_table[pname] then
+                chest_lid_close(pname)
             end
 
             return
 
         elseif fields.delpage or fields.prevpage or fields.nextpage or fields.addpage then
 
-            chest_page_update(pn, player, formname, fields)
+            chest_page_update(pname, player, formname, fields)
             return true
 
-        elseif fields.quit and open_chest_table[pn] then
+        elseif fields.quit and open_chest_table[pname] then
 
-            chest_lid_close(pn)
+            chest_lid_close(pname)
             return true
 
         elseif pipeworks_flag then
 
             -- (Returns nil or true)
-            return chest_switch_update(pn, player, formname, fields)
+            return chest_switch_update(pname, player, formname, fields)
 
         end
 
@@ -905,9 +912,9 @@ function unilib.pkg.shared_default_chest.exec()
 
         -- Adapted from default/chests.lua
 
-        local pn = player:get_player_name()
-        if open_chest_table[pn] then
-            chest_lid_close(pn)
+        local pname = player:get_player_name()
+        if open_chest_table[pname] then
+            chest_lid_close(pname)
         end
 
     end)

@@ -19,7 +19,7 @@ function unilib.pkg.deco_vallee_des_roses_flower_buttercup_small.init()
 
     return {
         description = "Small buttercup as decoration",
-        depends = {"dirt_ordinary", "flower_buttercup_small"},
+        depends = {"dirt_ordinary_with_turf", "flower_buttercup_small"},
         at_least_one = {
             "biome_default_forest_coniferous",
             "biome_default_forest_deciduous",

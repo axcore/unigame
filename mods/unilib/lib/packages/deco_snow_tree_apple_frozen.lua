@@ -19,7 +19,12 @@ function unilib.pkg.deco_snow_tree_apple_frozen.init()
 
     return {
         description = "Frozen apple tree as decoration",
-        depends = {"biome_snow_normal", "dirt_ordinary", "fruit_apple_frozen", "tree_apple_frozen"},
+        depends = {
+            "biome_snow_normal",
+            "dirt_ordinary_with_cover_snow",
+            "fruit_apple_frozen",
+            "tree_apple_frozen",
+        },
     }
 
 end

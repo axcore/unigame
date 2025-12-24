@@ -28,7 +28,7 @@ function unilib.pkg.dirt_ordinary_with_litter_forest.init()
                 " the original mod's code. See also the \"dirt_super_with_litter_forest\"" ..
                 " package, which provides litters based on many different types of dirt",
         excludes = "dirt_super_with_litter_forest",
-        depends = {"dirt_ordinary", "shared_woodsoils"},
+        depends = {"dirt_ordinary", "dirt_ordinary_with_turf", "shared_woodsoils"},
     }
 
 end

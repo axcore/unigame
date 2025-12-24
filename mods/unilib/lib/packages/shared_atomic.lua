@@ -295,16 +295,22 @@ function unilib.pkg.shared_atomic.init()
 
     return {
         description = "Shared package for the \"atomic\" remix and its packages",
+        notes = "This package reads data from the first remix with the label \"atomic\" (by" ..
+                " default, the \"atomic\" remix itself)",
     }
 
 end
 
 function unilib.pkg.shared_atomic.post()
 
-    -- Read the constants table from the "atomic" remix CSV
-    local remix_dir = unilib.utils.get_remix_dir("atomic")
+    -- Read CSVs from the first remix with the label "atomic" (default: the "atomic" remix itself)
+    local remix_name = unilib.utils.get_remix_by_label("atomic") or "atomic"
+
+    -- Read the constants table
+    local remix_dir = unilib.utils.get_remix_dir(remix_name)
     local constants_path = remix_dir .. "/constants.csv"
-    if not unilib.utils.is_file(constants_path) then
+
+    if unilib.global.remix_constants_table[remix_name] == nil then
 
         if debug_warning_flag then
             unilib.utils.show_warning("shared_atomic package: Missing CSV file", constants_path)
@@ -312,31 +318,22 @@ function unilib.pkg.shared_atomic.post()
 
     else
 
-        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
+        for key, value in pairs(unilib.global.remix_constants_table[remix_name]) do
 
-            -- "key" is expected to contain at least one letter, "value" at least one digit
-            local key, value = unpack(csv_table)
+            -- Values read from constants.csv are in string format, so must be checked and converted
             if key ~= nil and value ~= nil then
 
                 if not string.find(key, "%a") then
 
-                    if debug_warning_flag then
-
-                        unilib.utils.show_warning(
-                            "shared_atomic package: Invalid constant", constants_path, i
-                        )
-
-                    end
+                    unilib.utils.show_warning(
+                        "shared_atomic: Invalid constant", constants_path, i
+                    )
 
                 elseif not string.find(value, "[%d]") then
 
-                    if debug_warning_flag then
-
-                        unilib.utils.show_warning(
-                            "shared_atomic package: Invalid constant value", constants_path, i
-                        )
-
-                    end
+                    unilib.utils.show_warning(
+                        "biome_gaia shared_atomic: Invalid constant value", constants_path, i
+                    )
 
                 else
 
@@ -352,7 +349,7 @@ function unilib.pkg.shared_atomic.post()
 
     end
 
-    -- Read the periodic table from the "atomic" remix CSV
+    -- Read the periodic table from the same remix
     local periodic_path = remix_dir .. "/periodic_table.csv"
     if not unilib.utils.is_file(periodic_path) then
 

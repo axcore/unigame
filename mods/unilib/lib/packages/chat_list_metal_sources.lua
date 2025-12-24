@@ -120,8 +120,8 @@ function unilib.pkg.chat_list_metal_sources.exec()
         description = S("Lists all metals provided by mineral sources"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_metal_sources(name, param)
+        func = function(pname, param)
+            return do_list_metal_sources(pname, param)
         end,
     })
 
@@ -130,8 +130,8 @@ function unilib.pkg.chat_list_metal_sources.exec()
         description = S("Lists all metals provided by mineral sources"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_metal_sources(name, param)
+        func = function(pname, param)
+            return do_list_metal_sources(pname, param)
         end,
     })
 

@@ -181,7 +181,7 @@ function unilib.pkg.shared_snow.init()
 
     return {
         description = "Shared functions for customised snow effects and items (from snow mod)",
-        depends = "dirt_ordinary",
+        depends = {"dirt_ordinary", "dirt_ordinary_with_cover_snow", "dirt_ordinary_with_turf"},
     }
 
 end

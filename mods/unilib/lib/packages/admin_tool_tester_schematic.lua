@@ -573,7 +573,7 @@ function unilib.pkg.admin_tool_tester_schematic.exec()
 
             core.show_formspec(
                 placer:get_player_name(),
-                "unilib:formspec_admin_tool_tester_schematic",
+                "unilib:form_admin_tool_tester_schematic",
                 get_formspec(itemstack)
             )
 
@@ -586,7 +586,7 @@ function unilib.pkg.admin_tool_tester_schematic.exec()
 
         -- The player has interacted with our formspec
         if not formname or
-                formname ~= "unilib:formspec_admin_tool_tester_schematic" or
+                formname ~= "unilib:form_admin_tool_tester_schematic" or
                 not fields then
             return false
         end
@@ -658,7 +658,7 @@ function unilib.pkg.admin_tool_tester_schematic.exec()
 
             core.show_formspec(
                 player:get_player_name(),
-                "unilib:formspec_admin_tool_tester_schematic",
+                "unilib:form_admin_tool_tester_schematic",
                 get_formspec(itemstack, preserve_search)
             )
 

@@ -19,7 +19,8 @@ function unilib.pkg.deco_moreplants_fern_spike.init()
 
     return {
         description = "Spike fern as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "fern_spike"},
+        depends = {"biome_default_forest_coniferous", "fern_spike"},
+        at_least_one = {"dirt_ordinary_with_litter_coniferous", "dirt_ordinary_with_turf"},
     }
 
 end

@@ -21,7 +21,7 @@ function unilib.pkg.deco_cavestuff_pebble_large_stone_ordinary.init()
         description = "Large ordinary stone pebble as decoration",
         depends = "pebble_large",
         at_least_one = {
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
             "dirt_permafrost_ordinary",
             "gravel_ordinary",
             "stone_ordinary",

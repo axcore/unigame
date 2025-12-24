@@ -25,6 +25,13 @@ local base_seed = unilib.utils.get_mod_attribute("storage_random_seed_offset")
 local debug_warning_flag = false
 
 ---------------------------------------------------------------------------------------------------
+-- Shared variables
+---------------------------------------------------------------------------------------------------
+
+-- Read CSVs from the first remix with the label "glemr11"
+unilib.pkg.biome_glemr11.remix_name = nil
+
+---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
@@ -87,15 +94,18 @@ end
 function unilib.pkg.biome_glemr11.init()
 
     return {
-        description = "Biomes from GLEMr11",
-        notes = "This package should be used with the corresponding remix, as it assumes that" ..
-                " packages specified by the remix have been loaded",
+        description = "Biomes for \"glemr11\"-compatible remixes",
+        notes = "This package should only be used with \"glemr11\"-compatible remixes, as it" ..
+                " assumes that packages specified by those remixes have been loaded",
         depends = "dirt_custom_glemr11",
     }
 
 end
 
 function unilib.pkg.biome_glemr11.post()
+
+    -- Read CSVs from the first remix with the label "glemr11" (default: the "glemr11" remix itself)
+    unilib.pkg.biome_glemr11.remix_name = unilib.utils.get_remix_by_label("glemr11") or "glemr11"
 
     -- Biomes for this remix are provided by the file biomes.csv. When loaded, the data is stored
     --      in unilib.global.biome_csv_setup_list until unilib is ready to create the biomes
@@ -108,8 +118,8 @@ function unilib.pkg.biome_glemr11.post()
 
     for i, data_table in ipairs(unilib.global.biome_csv_setup_list) do
 
-        -- (Don't act on biomes provides by other remixes)
-        if data_table.remix_name == "glemr11" then
+        -- (Don't act on biomes provided by other remixes)
+        if data_table.remix_name == unilib.pkg.biome_glemr11.remix_name then
 
             biome_name_table[data_table.biome_name] = true
 
@@ -154,25 +164,25 @@ function unilib.pkg.biome_glemr11.post()
     -- The ecosystems are specified by an ecosystems.csv in the remix folder
 
     -- (This code is adapted from read_csv.lua)
-    local remix_dir = unilib.utils.get_remix_dir("glemr11")
+    local remix_dir = unilib.utils.get_remix_dir(unilib.pkg.biome_glemr11.remix_name)
     local constants_path = remix_dir .. "/constants.csv"
     local constant_flag = false
     local constant_table = {}
-
     local ecosystems_path = remix_dir .. "/ecosystems.csv"
 
-    if unilib.utils.is_file(constants_path) then
+    if unilib.global.remix_constants_table[unilib.pkg.biome_glemr11.remix_name] ~= nil then
 
-        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
+        for key, value in pairs(
+            unilib.global.remix_constants_table[unilib.pkg.biome_glemr11.remix_name]
+        ) do
 
-            -- "key" is expected to contain at least one letter, "value" at least one digit
-            local key, value = unpack(csv_table)
+            -- Values read from constants.csv are in string format, so must be checked and converted
             if key ~= nil and value ~= nil then
 
                 if not string.find(key, "%a") then
 
                     unilib.utils.show_warning(
-                        "biome_glemr11 package: Invalid biome constant", constants_path, i
+                        "biome_glemr11: Invalid biome constant", constants_path, i
                     )
 
                 elseif not string.find(value, "[%d]") then

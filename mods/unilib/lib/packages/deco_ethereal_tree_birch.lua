@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_birch.init()
 
     return {
         description = "Birch tree as decoration",
-        depends = {"biome_ethereal_grassy", "dirt_ordinary", "tree_birch"},
+        depends = {"biome_ethereal_grassy", "dirt_ordinary_with_turf", "tree_birch"},
     }
 
 end

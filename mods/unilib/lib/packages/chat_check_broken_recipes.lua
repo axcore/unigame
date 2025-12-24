@@ -32,14 +32,14 @@ function unilib.pkg.chat_check_broken_recipes.exec()
         description = S("Checks for missing recipe ingredients, displaying detailed output"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local missing_count = unilib.pkg.shared_chat_missing.check_broken_recipes(name, true)
+            local missing_count = unilib.pkg.shared_chat_missing.check_broken_recipes(pname, true)
 
             if missing_count > 0 then
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     S("Missing recipe ingredients detected: @1", missing_count)
                 )
 

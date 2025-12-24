@@ -57,11 +57,17 @@ function unilib.pkg.food_tofu_red.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        technic.register_compressor_recipe({
-            -- From cucina_vegana:tofu
-            output = "unilib:food_tofu_red_raw",
-            input = {"unilib:crop_soy_red_harvest 8"},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
+
+            technic.register_compressor_recipe({
+                -- From cucina_vegana:tofu
+                output = "unilib:food_tofu_red_raw",
+                input = {"unilib:crop_soy_red_harvest 8"},
+            })
+
+        end)
 
     end
 

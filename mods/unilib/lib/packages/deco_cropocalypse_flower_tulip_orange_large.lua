@@ -19,7 +19,7 @@ function unilib.pkg.deco_cropocalypse_flower_tulip_orange_large.init()
 
     return {
         description = "Large orange tulip as decoration",
-        depends = {"dirt_ordinary", "flower_tulip_orange_large"},
+        depends = {"dirt_ordinary_with_turf", "flower_tulip_orange_large"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

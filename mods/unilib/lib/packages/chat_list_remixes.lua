@@ -63,8 +63,8 @@ function unilib.pkg.chat_list_remixes.exec()
         description = S("Lists all loaded remixes"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_remixes(name, param)
+        func = function(pname, param)
+            return do_list_remixes(pname, param)
         end,
     })
 
@@ -73,8 +73,8 @@ function unilib.pkg.chat_list_remixes.exec()
         description = S("Lists all loaded remixes"),
         privs = {unilib_tools = true},
 
-        func = function(name, param)
-            return do_list_remixes(name, param)
+        func = function(pname, param)
+            return do_list_remixes(pname, param)
         end,
     })
 

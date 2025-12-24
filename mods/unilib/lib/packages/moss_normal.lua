@@ -21,7 +21,7 @@ local function place_func(pos)
     local moss_type = math.random(1, 21)
     local rot = math.random(1, 4)
 
-    -- (1 in 21 chance of placing moss with fungus)
+    -- (1 in 21 probability of placing moss with fungus)
     if moss_type == 1 then
         core.swap_node(on_ground, {name = "unilib:moss_normal_with_fungus_" .. rot, param2 = 1})
     else

@@ -55,11 +55,12 @@ function unilib.pkg.furniture_shelf_fancy.exec()
 
     -- N.B. Original code had an inventory of 32; the inventory is now 16, to match standard
     --      bookshelves/itemshelves
-    unilib.furniture.convert_to_container(
-        "unilib:furniture_shelf_fancy",
-        2,
-        S("Fancy Wooden Shelves"),
-        "fancy shelf"
-    )
+    unilib.furniture.convert_to_container({
+        full_name = "unilib:furniture_shelf_fancy",
+
+        description = S("Fancy Wooden Shelves"),
+        label = "fancy shelf",
+        rows = 2,
+    })
 
 end

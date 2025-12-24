@@ -19,7 +19,8 @@ function unilib.pkg.deco_nsspf_mushroom_death_cap.init()
 
     return {
         description = "Death cap mushroom as decoration",
-        depends = {"dirt_ordinary", "mushroom_death_cap", "tree_pine"},
+        depends = {"mushroom_death_cap", "tree_pine"},
+        at_least_one = {"dirt_ordinary_with_cover_snow", "dirt_ordinary_with_litter_coniferous"},
     }
 
 end
@@ -30,8 +31,8 @@ function unilib.pkg.deco_nsspf_mushroom_death_cap.post()
         -- Original to unilib, replacing the collection of ABMs in the original nsspf code
         -- Completes decoration in package "mushroom_death_cap"
         place_on = {
-            "unilib:dirt_ordinary_with_litter_coniferous",
             "unilib:dirt_ordinary_with_cover_snow",
+            "unilib:dirt_ordinary_with_litter_coniferous",
         },
         spawn_by = "unilib:tree_pine_trunk",
         y_max = unilib.constant.y_max,

@@ -19,7 +19,6 @@ function unilib.pkg.mushroom_azurea.init()
 
     return {
         description = "Azurea mushroom",
-        depends = {"shared_nsspf", "tree_jungle"},
     }
 
 end
@@ -92,14 +91,6 @@ function unilib.pkg.mushroom_azurea.exec()
         output = "unilib:mushroom_azurea_cooked",
         recipe = "unilib:mushroom_azurea",
         cooktime = 10,
-    })
-
-    unilib.pkg.shared_nsspf.register_mushroom({
-        -- Code original to unilib, replacing an ABM in the original code
-        wall_name = "unilib:tree_jungle_trunk",
-        plant_name = "unilib:mushroom_azurea",
-
-        surface_list = {"unilib:dirt_ordinary_with_litter_rainforest"},
     })
 
 end

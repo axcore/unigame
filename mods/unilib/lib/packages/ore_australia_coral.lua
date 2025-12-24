@@ -19,9 +19,9 @@ function unilib.pkg.ore_australia_coral.init()
 
     return {
         description = "Australian coral as ore",
-        depends = {"sand_ordinary", "stone_ordinary_with_coral"},
         notes = "Corals from many different pacakges were grouped together in one ore package," ..
                 " because they only apply to one biome",
+        depends = {"sand_ordinary", "stone_ordinary_with_coral"},
         optional = {
             "biome_australia_great_barrier_reef",
             "coral_brain",

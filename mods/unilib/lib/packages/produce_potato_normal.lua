@@ -66,7 +66,7 @@ function unilib.pkg.produce_potato_normal.exec()
     unilib.override_item("unilib:produce_potato_normal_harvest", {
         on_use = function(itemstack, user, pointed_thing)
 
-            -- 1 in 3 chance of being poisoned
+            -- 33% probability of being poisoned
             -- N.B. No call to unilib.cuisine.eat_on_use(); checking food history doesn't matter
             --      when a food can be both nutritious and poisonous
             if user then

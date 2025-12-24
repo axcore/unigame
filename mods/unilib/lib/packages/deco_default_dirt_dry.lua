@@ -19,7 +19,7 @@ function unilib.pkg.deco_default_dirt_dry.init()
 
     return {
         description = "Dry dirt as decoration",
-        depends = {"biome_default_savanna", "dirt_dry"},
+        depends = {"biome_default_savanna", "dirt_dry_with_turf_dry"},
     }
 
 end

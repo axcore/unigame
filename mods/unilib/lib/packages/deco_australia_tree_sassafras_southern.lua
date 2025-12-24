@@ -25,7 +25,7 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.init()
             "biome_australia_tasmania",
             "biome_australia_victorian_forests",
             "dirt_custom_antipodean",
-            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
         },
     }
 
@@ -35,7 +35,7 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
 
     if unilib.global.pkg_executed_table["biome_australia_great_dividing_range"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -47,8 +47,8 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
                 {
                     biomes = "australia_great_dividing_range",
                     place_on = {
-                        "unilib:dirt_ordinary_with_turf",
                         "unilib:dirt_antipodean_with_turf_great_dividing_range",
+                        "unilib:dirt_ordinary_with_turf",
                     },
                     y_max = 180,
                     y_min = 36,
@@ -60,7 +60,7 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_tasmania"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -72,8 +72,8 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
                 {
                     biomes = "australia_tasmania",
                     place_on = {
-                        "unilib:dirt_ordinary_with_turf",
                         "unilib:dirt_antipodean_dark_with_turf_tasmania",
+                        "unilib:dirt_ordinary_with_turf",
                     },
                     y_max = 170,
                     y_min = 36,
@@ -85,7 +85,7 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
     end
     if unilib.global.pkg_executed_table["biome_australia_victorian_forests"] ~= nil and (
         unilib.global.pkg_executed_table["dirt_custom_antipodean"] ~= nil or
-        unilib.global.pkg_executed_table["dirt_ordinary"] ~= nil
+        unilib.global.pkg_executed_table["dirt_ordinary_with_turf"] ~= nil
     ) then
 
         for i = 1, 2 do
@@ -97,8 +97,8 @@ function unilib.pkg.deco_australia_tree_sassafras_southern.post()
                 {
                     biomes = "australia_victorian_forests",
                     place_on = {
-                        "unilib:dirt_ordinary_with_turf",
                         "unilib:dirt_antipodean_dark_with_turf_victorian_forests",
+                        "unilib:dirt_ordinary_with_turf",
                     },
                     y_max = 160,
                     y_min = 36,

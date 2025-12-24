@@ -19,7 +19,7 @@ function unilib.pkg.deco_farming_plant_cotton_wild.init()
 
     return {
         description = "Wild cotton plant as decoration",
-        depends = {"biome_default_savanna", "dirt_dry", "plant_cotton_wild"},
+        depends = {"biome_default_savanna", "dirt_dry_with_turf_dry", "plant_cotton_wild"},
     }
 
 end

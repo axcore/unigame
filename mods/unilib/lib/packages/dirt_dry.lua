@@ -22,8 +22,8 @@ local mode = unilib.global.imported_mod_table.default.add_mode
 function unilib.pkg.dirt_dry.init()
 
     return {
-        description = "Dry dirt",
-        optional = {"grass_dry", "soil_arid"},
+        description = "Dry (savanna) dirt",
+        optional = "soil_arid",
     }
 
 end
@@ -73,48 +73,5 @@ function unilib.pkg.dirt_dry.exec()
         place_offset_y = -1,
         sidelen = 4,
     })
-
-    unilib.register_dirt_with_turf({
-        -- From default:dry_dirt_with_dry_grass. Creates unilib:dirt_dry_with_turf_dry
-        dirt_part_name = "dirt_dry",
-        turf_part_name = "turf_dry",
-        orig_name = "default:dry_dirt_with_dry_grass",
-        def_table = {
-            description = S("Savanna Dirt with Savanna Turf"),
-            tiles = {
-                "unilib_turf_dry_top.png",
-                "unilib_dirt_dry.png",
-                {
-                    name = "unilib_dirt_dry.png^unilib_turf_dry_side_overlay.png",
-                    tileable_vertical = false,
-                },
-            },
-            -- N.B. dry_dirt = 1 not in original code
-            groups = {
-                crumbly = 3, dry_dirt = 1,
-                not_in_creative_inventory = unilib.hide_covered_dirt_group, soil = 1,
-            },
-            sounds = unilib.sound.generate_dirt({
-                footstep = {name = "unilib_grass_footstep", gain = 0.4},
-            }),
-
-            drop = "unilib:dirt_dry",
-            is_ground_content = unilib.setting.caves_chop_dirt_flag,
-        },
-
-        replace_mode = mode,
-        dry_soil = "unilib:soil_arid",
-        wet_soil = "unilib:soil_arid_wet",
-        turf_description = S("Savanna Turf"),
-    })
-    if unilib.global.pkg_executed_table["grass_dry"] ~= nil then
-
-        unilib.tools.make_cuttable(
-            "unilib:dirt_dry_with_turf_dry",
-            "unilib:dirt_dry",
-            "unilib:grass_dry_1"
-        )
-
-    end
 
 end

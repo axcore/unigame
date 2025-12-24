@@ -19,7 +19,7 @@ function unilib.pkg.deco_cucina_vegana_plant_chives_wild.init()
 
     return {
         description = "Wild chives plant as decoration",
-        depends = {"dirt_ordinary", "plant_chives_wild"},
+        depends = {"dirt_ordinary_with_turf", "plant_chives_wild"},
         at_least_one = {"liquid_water_ordinary", "liquid_water_river"},
     }
 

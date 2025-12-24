@@ -78,17 +78,23 @@ function unilib.pkg.ingredient_oil_sunflower_seed.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        technic.register_compressor_recipe({
-            -- From cucina_vegana:sunflower_seeds_oil
-            output = "unilib:ingredient_oil_sunflower_seed 6",
-            input = {c_seeds},
-        })
+        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
+        --      until all mods have been loaded
+        core.after(0.1, function()
 
-        technic.register_extractor_recipe({
-            -- From cucina_vegana:sunflower_seeds_oil
-            output = "unilib:ingredient_oil_sunflower_seed",
-            input = {"unilib:food_seed_sunflower_dwarf 6"},
-        })
+            technic.register_compressor_recipe({
+                -- From cucina_vegana:sunflower_seeds_oil
+                output = "unilib:ingredient_oil_sunflower_seed 6",
+                input = {c_seeds},
+            })
+
+            technic.register_extractor_recipe({
+                -- From cucina_vegana:sunflower_seeds_oil
+                output = "unilib:ingredient_oil_sunflower_seed",
+                input = {"unilib:food_seed_sunflower_dwarf 6"},
+            })
+
+        end)
 
     end
 

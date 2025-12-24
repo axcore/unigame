@@ -173,17 +173,17 @@ function unilib.pbiomes.replace(vi, data, def1, def2)
 
 end
 
-function unilib.pbiomes.ore(vi, data, def1, def2, chance)
+function unilib.pbiomes.ore(vi, data, def1, def2, probability)
 
     -- Adapted from underch/functions.lua, underch.functions.ore()
     -- See the "mapgen_underch" package for calling examples
 
-    if data[vi] == def1 and math.random() < chance then
+    if data[vi] == def1 and math.random() < probability then
         data[vi] = def2
     end
 end
 
-function unilib.pbiomes.on_floor(x, y, z, vi, area, data, def_floor, def1, def2, chance, alt)
+function unilib.pbiomes.on_floor(x, y, z, vi, area, data, def_floor, def1, def2, probability, alt)
 
     -- Adapted from underch/functions.lua, underch.functions.on_floor()
     -- See the "mapgen_underch" package for calling examples
@@ -192,13 +192,13 @@ function unilib.pbiomes.on_floor(x, y, z, vi, area, data, def_floor, def1, def2,
 
     if (data[bi] == def_floor or data[bi] == alt) and
             data[vi] == def1 and
-            math.random() < chance then
+            math.random() < probability then
         data[vi] = def2
     end
 
 end
 
-function unilib.pbiomes.in_floor(x, y, z, vi, area, data, def_floor, def1, def2, chance, alt)
+function unilib.pbiomes.in_floor(x, y, z, vi, area, data, def_floor, def1, def2, probability, alt)
 
     -- Adapted from underch/functions.lua, underch.functions.in_floor()
     -- See the "mapgen_underch" package for calling examples
@@ -207,14 +207,14 @@ function unilib.pbiomes.in_floor(x, y, z, vi, area, data, def_floor, def1, def2,
 
     if (data[vi] == def_floor or data[vi] == alt) and
             data[bi] == def1 and
-            math.random() < chance then
+            math.random() < probability then
         data[vi] = def2
     end
 
 end
 
 function unilib.pbiomes.on_floor_rr(
-    x, y, z, vi, area, data, p2data, def_floor, def1, def2, chance, alt
+    x, y, z, vi, area, data, p2data, def_floor, def1, def2, probability, alt
 )
     -- Adapted from underch/functions.lua, underch.functions.on_floor_rr()
     -- See the "mapgen_underch" package for calling examples
@@ -223,7 +223,7 @@ function unilib.pbiomes.on_floor_rr(
 
     if (data[bi] == def_floor or data[bi] == alt) and
             data[vi] == def1 and
-            math.random() < chance then
+            math.random() < probability then
 
         data[vi] = def2
         p2data[vi] = math.floor(4 * math.random())
@@ -233,7 +233,7 @@ function unilib.pbiomes.on_floor_rr(
 end
 
 function unilib.pbiomes.on_roof(
-    x, y, z, vi, area, data, def_roof, def1, def2, chance, lastlayer, alt
+    x, y, z, vi, area, data, def_roof, def1, def2, probability, lastlayer, alt
 )
     -- Adapted from underch/functions.lua, underch.functions.on_roof()
     -- See the "mapgen_underch" package for calling examples
@@ -243,14 +243,14 @@ function unilib.pbiomes.on_roof(
     if not lastlayer and
             (data[bi] == def_roof or data[bi] == alt) and
             data[vi] == def1 and
-            math.random() < chance then
+            math.random() < probability then
         data[vi] = def2
     end
 
 end
 
 function unilib.pbiomes.in_roof(
-    x, y, z, vi, area, data, def_floor, def1, def2, chance, lastlayer, alt
+    x, y, z, vi, area, data, def_floor, def1, def2, probability, lastlayer, alt
 )
     -- Adapted from underch/functions.lua, underch.functions.in_roof()
     -- See the "mapgen_underch" package for calling examples
@@ -260,19 +260,19 @@ function unilib.pbiomes.in_roof(
     if not lastlayer and
             (data[vi] == def_floor or data[vi] == alt) and
             data[bi] == def1 and
-            math.random() < chance then
+            math.random() < probability then
         data[vi] = def2
     end
 
 end
 
 function unilib.pbiomes.on_wall_f(
-    x, y, z, vi, area, data, p2data, def_wall, def1, def2, chance, lastlayer, alt
+    x, y, z, vi, area, data, p2data, def_wall, def1, def2, probability, lastlayer, alt
 )
     -- Adapted from underch/functions.lua, underch.functions.on_wall_f()
     -- See the "mapgen_underch" package for calling examples
 
-    if data[vi] ~= def1 or math.random() > chance then
+    if data[vi] ~= def1 or math.random() > probability then
         return
     end
 
@@ -332,12 +332,12 @@ function unilib.pbiomes.on_wall_f(
 end
 
 function unilib.pbiomes.on_wall_w(
-    x, y, z, vi, area, data, p2data, def_wall, def1, def2, chance, lastlayer, alt
+    x, y, z, vi, area, data, p2data, def_wall, def1, def2, probability, lastlayer, alt
 )
     -- Adapted from underch/functions.lua, underch.functions.on_wall_w()
     -- See the "mapgen_underch" package for calling examples
 
-    if data[vi] ~= def1 or math.random() > chance then
+    if data[vi] ~= def1 or math.random() > probability then
         return
     end
 

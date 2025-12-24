@@ -19,7 +19,7 @@ function unilib.pkg.deco_moretrees_tree_beech_common.init()
 
     return {
         description = "Common beech tree as decoration",
-        depends = {"dirt_ordinary", "tree_beech_common"},
+        depends = {"dirt_ordinary_with_turf", "tree_beech_common"},
     }
 
 end

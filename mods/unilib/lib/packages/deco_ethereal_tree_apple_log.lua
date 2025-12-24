@@ -19,12 +19,18 @@ function unilib.pkg.deco_ethereal_tree_apple_log.init()
 
     return {
         description = "Apple tree log as decoration",
-        depends = {"dirt_ordinary", "tree_apple"},
+        depends = "tree_apple",
         at_least_one = {
-            "biome_ethereal_forest_deciduous",
-            "biome_ethereal_jumble",
-            "biome_ethereal_swamp",
-            "biome_ethereal_prairie",
+            {
+                "biome_ethereal_forest_deciduous",
+                "biome_ethereal_jumble",
+                "biome_ethereal_swamp",
+                "biome_ethereal_prairie",
+            },
+            {
+                "dirt_ordinary_with_turf",
+                "dirt_ordinary_with_turf_prairie",
+            },
         },
     }
 

@@ -150,7 +150,13 @@ function unilib.pkg.shared_sickles.init()
 
     return {
         description = "Shared functions for mosses (from sickles mod)",
-        optional = {"dirt_ordinary", "dye_basic", "misc_hay_ordinary", "tool_pitchfork"},
+        optional = {
+            "dirt_ordinary",
+            "dirt_ordinary_with_turf",
+            "dye_basic",
+            "misc_hay_ordinary",
+            "tool_pitchfork",
+        },
     }
 
 end

@@ -19,7 +19,7 @@ function unilib.pkg.deco_better_farming_produce_carrot_chantenay.init()
 
     return {
         description = "Chantenay carrot as decoration",
-        depends = {"dirt_ordinary", "produce_carrot_chantenay"},
+        depends = {"dirt_ordinary_with_litter_coniferous", "produce_carrot_chantenay"},
         at_least_one = {"biome_default_desert", "biome_default_grassland"},
     }
 

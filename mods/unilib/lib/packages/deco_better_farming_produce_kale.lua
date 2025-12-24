@@ -19,7 +19,11 @@ function unilib.pkg.deco_better_farming_produce_kale.init()
 
     return {
         description = "Kale as decoration",
-        depends = {"biome_default_forest_coniferous", "dirt_ordinary", "produce_kale"},
+        depends = {
+            "biome_default_forest_coniferous",
+            "dirt_ordinary_with_litter_coniferous",
+            "produce_kale",
+        },
     }
 
 end

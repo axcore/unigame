@@ -20,7 +20,7 @@ function unilib.pkg.deco_cucina_vegana_plant_carrot_nantes_wild.init()
     return {
         description = "Wild nantes carrot plant as decoration",
         depends = "plant_carrot_nantes_wild",
-        at_least_one = {"dirt_dry", "dirt_ordinary"},
+        at_least_one = {"dirt_dry_with_turf_dry", "dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

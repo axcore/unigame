@@ -19,7 +19,11 @@ function unilib.pkg.deco_cropocalypse_mushroom_saucer.init()
 
     return {
         description = "Saucer mushroom as decoration",
-        depends = {"biome_default_rainforest", "dirt_ordinary", "mushroom_saucer"},
+        depends = {
+            "biome_default_rainforest",
+            "dirt_ordinary_with_litter_rainforest",
+            "mushroom_saucer",
+        },
     }
 
 end

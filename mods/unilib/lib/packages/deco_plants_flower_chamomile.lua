@@ -19,7 +19,7 @@ function unilib.pkg.deco_plants_flower_chamomile.init()
 
     return {
         description = "Chamomile flower as decoration",
-        depends = {"dirt_ordinary", "flower_chamomile", "stone_ordinary_with_coal"},
+        depends = {"dirt_ordinary_with_turf", "flower_chamomile", "stone_ordinary_with_coal"},
     }
 
 end

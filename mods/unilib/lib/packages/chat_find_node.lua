@@ -278,8 +278,8 @@ function unilib.pkg.chat_find_node.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return find_node(name, param, false)
+        func = function(pname, param)
+            return find_node(pname, param, false)
         end,
     })
 
@@ -293,8 +293,8 @@ function unilib.pkg.chat_find_node.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return find_node(name, param, false)
+        func = function(pname, param)
+            return find_node(pname, param, false)
         end,
     })
 
@@ -308,8 +308,8 @@ function unilib.pkg.chat_find_node.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
-            return find_node(name, param, true)
+        func = function(pname, param)
+            return find_node(pname, param, true)
         end,
     })
 
@@ -322,9 +322,9 @@ function unilib.pkg.chat_find_node.exec()
         ),
         privs = {unilib_admin = true},
 
-        func = function(name, param)
+        func = function(pname, param)
 
-            local player = core.get_player_by_name(name)
+            local player = core.get_player_by_name(pname)
             if not player then
                 return false, unilib.constant.chat_offline_msg
             elseif target_pos == nil then
@@ -334,10 +334,10 @@ function unilib.pkg.chat_find_node.exec()
 
             player:set_pos({x = target_pos.x, y = target_pos.y + 1, z = target_pos.z})
             unilib.utils.chat_send_player(
-                name,
+                pname,
                 S(
                     "Teleporting @1 to @2 at @3,@4,@5",
-                    name,
+                    pname,
                     target_name,
                     target_pos.x,
                     target_pos.y,

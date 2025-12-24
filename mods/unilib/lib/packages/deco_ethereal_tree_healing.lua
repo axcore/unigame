@@ -19,7 +19,7 @@ function unilib.pkg.deco_ethereal_tree_healing.init()
 
     return {
         description = "healing tree as decoration",
-        depends = {"dirt_ordinary", "tree_healing"},
+        depends = {"dirt_ordinary_with_cover_snow", "tree_healing"},
         at_least_one = {"biome_ethereal_glacier", "biome_ethereal_mountain"},
     }
 

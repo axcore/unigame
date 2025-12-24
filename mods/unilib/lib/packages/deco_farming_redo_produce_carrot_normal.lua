@@ -20,7 +20,7 @@ function unilib.pkg.deco_farming_redo_produce_carrot_normal.init()
     return {
         description = "Normal carrot as decoration",
         depends = "produce_carrot_normal",
-        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf_prairie"},
+        at_least_one = {"dirt_ordinary_with_turf", "dirt_ordinary_with_turf_prairie"},
     }
 
 end

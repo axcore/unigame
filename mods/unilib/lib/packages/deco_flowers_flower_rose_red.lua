@@ -19,7 +19,7 @@ function unilib.pkg.deco_flowers_flower_rose_red.init()
 
     return {
         description = "Red rose as decoration",
-        depends = {"dirt_ordinary", "flower_rose_red"},
+        depends = {"dirt_ordinary_with_turf", "flower_rose_red"},
         at_least_one = {"biome_default_forest_deciduous", "biome_default_grassland"},
     }
 

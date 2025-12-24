@@ -19,7 +19,8 @@ function unilib.pkg.deco_cucina_vegana_plant_garlic_silverskin_wild.init()
 
     return {
         description = "Wild silverskin garlic plant as decoration",
-        depends = {"dirt_ordinary", "plant_garlic_silverskin_wild"},
+        depends = "plant_garlic_silverskin_wild",
+        at_least_one = {"dirt_ordinary", "dirt_ordinary_with_turf"},
     }
 
 end

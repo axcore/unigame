@@ -1,0 +1,132 @@
+---------------------------------------------------------------------------------------------------
+-- unimobs mod by A S Lewis, incorporating materials from many other mods
+---------------------------------------------------------------------------------------------------
+-- mobkit_api.lua
+--      Provide the API from the "mokit" mod
+---------------------------------------------------------------------------------------------------
+
+local S = unimobs.intllib
+
+-- Create separate namespace for mobkit API functions
+unimobs.mobkit_api = {}
+
+---------------------------------------------------------------------------------------------------
+-- Notes
+---------------------------------------------------------------------------------------------------
+
+-- A summary of mobkit's mob properties
+--
+-- Mobkit API properties (should be specified by each mob package)
+--      .animation_table        TABLE (was .animation)
+--          Table of mini tables, each key (e.g. "run", "stand") corresponding to a mini-table in
+--              the form
+--                  {range = {x = NUM, y = NUM}, NUM = NUM, loop = BOOL},
+--      .armour_groups          TABLE (was .armor_groups)
+--          Table used by unilib's version of the 3d_armor mod (see
+--              unilib/lib/shared/armour/armour_base.lua)
+--      .attack_table           TABLE (was .attack)
+--          Table in the general form
+--              {range = NUM, damage_groups = {fleshy = NUM}},
+--      .bounciness             NUM (was .springiness)
+--          A measure of the mob's ability to rebound when landing; all petz mobs had a bounciness
+--              of 0
+--      .brain_func             FUNC (was .logic)
+--          Logic callback for the mob, e.g. unilib.pkg.brain_herbivore.brain
+--      .buoyancy               NUM
+--          The portion of the mob's hitbox that is submerged in liquids. Most petz mobs had a
+--              buoyancy of 0.5, but some aquatic animals had a bouyancy of 1.1
+--      .jump_height            NUM
+--          Maximum jump height, in blocks
+--      .lung_capacity          NUM
+--          Time in seconds before the mob drowns in a liquid. See also .oxygen
+--      .max_hp                 NUM
+--          Maximum health points, used to set .hp (this property is distinct from the Minetest
+--              object property, .hp_max)
+--      .max_speed              NUM
+--          Maximum speed
+--      .physics_func           FUNC (was .physics)
+--          Callback handling the mob's movement
+--      .sounds                 TABLE
+--          Table whose values are simple strings describing a sound file (e.g. "petz_goat_moaning")
+--              or a mini-list of sound files, one of which is played at random
+--      .timeout                NUM
+--          Time after which the mob's entity is automatically removed
+--      .view_range             NUM
+--          A measure of how far the mob "sees", specifically other mobs and players
+--
+-- Mob properties initialised by unimobs.mobkit_api.on_activate_callback()
+--
+--      .active_time            NUM
+--          Purpose unknown; it is set to 0 by unimobs.mobkit_api.on_activate_callback(), but then
+--              never referenced again
+--      .hqueue_list            LIST (was .hqueue)
+--          The high-level behaviour queue for this mob
+--      .last_velocity_table    TABLE (was .lastvelocity)
+--          Table in the form
+--              {x = NUM, y = NUM, z = NUM}
+--      .lqueue_list            LIST (was .lqueue)
+--          The low-level behaviour queue for this mob
+--      .memory_table           TABLE (was .memory)
+--          A table providing the mob with a "memory"; populate it using the shared functions in
+--              mobkit_memory.lua. Data in the "memory" is serialised, so ObjectRefs should not be
+--              stored
+--      .mob_texture_num        NUM (was .texture_no)
+--          The index of the mob's skin in its list property, .textures
+--      .nearby_obj_list        LIST (was .nearby_objects)
+--          Used only when unimobs.setting.tweak_mobkit_engine_flag == false. List of objects in the
+--              mob's vicinity, updated by calls to unimobs.mobkit_api.sensors_callback()
+--      .nearby_player_list     LIST
+--          Defined in the original mobkit code, but never used
+--      .oxygen                 NUM
+--          Time left before a mob suffocates/drowns; in air, is set to .lung_capacity
+--      .path_dir               NUM
+--          Used in calls to unimobs.mobkit_api.get_next_waypoint()
+--      .waypoint_history_list  LIST (was .pos_history)
+--          Used in calls to unimobs.mobkit_api.get_next_waypoint()
+--      .sensor_func            FUNC (was .sensefunc)
+--          Used only when unimobs.setting.tweak_mobkit_engine_flag == false. Callback used to
+--              compile the mob's .nearby_obj_list
+--      .time_total             NUM
+--          Value corresponding to the length of the mob's existence; used to adminster the mob's
+--              main timer (see code in unimobs.mobkit_api.check_main_timer() )
+--      .water_drag             NUM
+--          Value used to represent friction in water, 1 by default
+--
+-- Mob properties initialised by unimobs.mobkit_api.on_step_callback()
+--
+--      .col_info_table         TABLE (was .colinfo)
+--          Table of collision data that can be specified in calls to
+--              unimobs.mobkit_api.default_physics_callback(); however, it is not specified in any
+--              mobkit or petz code
+--      .height                 NUM
+--
+-- Mob properties initialised elsewhere
+--
+--      ._anim                  STRING unimobs.mobkit_api.do_entity_animation()
+--
+-- Notes from original code:
+-- "Some frequently used entity fields to be accessed directly for convenience"
+--
+--      .dtime                  NUM
+--          Step time, limit of 0.5 to prevent jerkiness on long steps
+--      .hp                     NUM
+--          Health points
+--      .isonground             BOOL
+--          True if in collision with negative Y
+--      .isinliquid             BOOL
+--          True if the node at foot level has .drawtype == "liquid"
+--
+-- Minetest object properties
+--
+--      .object                 OBJ
+--      .textures               LIST
+
+---------------------------------------------------------------------------------------------------
+-- Import files
+---------------------------------------------------------------------------------------------------
+
+dofile(unimobs.path_mod .. "/lib/system/mobkit/mobkit_callbacks.lua")
+dofile(unimobs.path_mod .. "/lib/system/mobkit/mobkit_failsafes.lua")
+dofile(unimobs.path_mod .. "/lib/system/mobkit/mobkit_memory.lua")
+dofile(unimobs.path_mod .. "/lib/system/mobkit/mobkit_queue.lua")
+dofile(unimobs.path_mod .. "/lib/system/mobkit/mobkit_utils.lua")

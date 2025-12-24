@@ -1,9 +1,9 @@
 # "ethereal" remix - contains everything from ethereal-ng
 # The original ethereal-ng mod clears biomes and decorations, but retains ore distributions;
-#       therefore, it is recommended that this remix is used together with the "mtgame_mini" and
-#       "mtgame_ores" remixes
+#   therefore, it is recommended that this remix is used together with the "mtgame_mini" and
+#   "mtgame_ores" remixes
 # Note that ethereal-ng adds more ore distributions that appear in desert stone, assuming that the
-#       ore distributions from minetest_game are still present
+#   ore distributions from minetest_game are still present
 # Coconuts now drop themselves, rather than coconut slices, for consistency with moretrees coconuts
 
 # node_name | original_mod
@@ -268,8 +268,14 @@ bush_ordinary|default
 bush_pine|default
 clay_ordinary|default
 crop_cotton|farming
-dirt_dry|default
+dirt_dry|default farming
+dirt_dry_with_turf_dry|default
 dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_litter_coniferous|default farming
+dirt_ordinary_with_litter_rainforest|default farming
+dirt_ordinary_with_turf|default farming moreblocks
+dirt_ordinary_with_turf_dry|default farming
 dirt_permafrost_ordinary|default
 dye_basic|dye bakedclay
 fern_ordinary|default

@@ -156,7 +156,7 @@ function unilib.utils._log_player_action(player, ...)
     -- The use of .is_fake_player is an unofficial standard between mods
     -- These non-players are marked by the content of .is_fake_player (if it is a string) or a
     --      "*" in brackets after the player name in the log
-    if player.is_fake_player or not player:is_player() then
+    if not unilib.utils.is_player(player) then
 
         if not unilib.setting.log_non_player_actions_flag then
             return

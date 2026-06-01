@@ -205,13 +205,13 @@ local function check_deco(data_table)
             if not string.find(item_name, ":") then
 
                 if not check_schematics({item_name}) then
-                    return
+                    return false
                 end
 
             else
 
                 if not check_nodes({item_name}) then
-                    return
+                    return false
                 end
 
             end

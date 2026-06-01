@@ -52,8 +52,8 @@ function unilib.trees._register_fence(data_table)
     unilib.register_craft({
         output = full_name .. " 4",
         recipe = {
-            {def_table.ingredient, 'group:stick', def_table.ingredient},
-            {def_table.ingredient, 'group:stick', def_table.ingredient},
+            {def_table.ingredient, "group:stick", def_table.ingredient},
+            {def_table.ingredient, "group:stick", def_table.ingredient},
         },
     })
     if burntime ~= 0 then

@@ -50,13 +50,12 @@ local function manage_attachment(player, obj)
         return
     end
 
-    local status = obj ~= nil
-    local player_name = player:get_player_name()
     if obj and player:get_attach() == obj then
         return
     end
 
-    unilib.player_api.set_player_attached(player_name, status)
+    local status = obj ~= nil
+    unilib.player_api.set_player_attached(player:get_player_name(), status)
 
     if status then
         player:set_attach(obj, "", {x = 0, y = -4.5, z = 0}, {x = 0, y = 0, z = 0})
@@ -693,15 +692,15 @@ local function prepare_cart_entity(full_name, part_name)
             return
         end
 
-        local player_name = clicker:get_player_name()
-        if self.driver and player_name == self.driver then
+        local pname = clicker:get_player_name()
+        if self.driver and pname == self.driver then
 
             manage_attachment(clicker, nil)
 
         elseif not self.driver then
 
             manage_attachment(clicker, self.object)
-            self.driver = player_name
+            self.driver = pname
 
         end
 
@@ -948,8 +947,8 @@ function unilib.pkg.shared_carts.register_cart(data_table)
                 true
             )
 
-            local player_name = placer and placer:get_player_name() or ""
-            if not unilib.utils.is_creative(player_name) then
+            local pname = placer and placer:get_player_name() or ""
+            if not unilib.utils.is_creative(pname) then
                 itemstack:take_item()
             end
 

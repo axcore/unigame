@@ -1,0 +1,7 @@
+Contains nearly everything from the aotearoa mod.
+
+Ambient sounds were not imported, and unilib does not create stairs from tree trunks (for consistency with everything else).
+
+It is recommended that this remix is used together with the "mtgame_mini" and "mtgame_ores" remixes.
+
+unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default; enable them by uncommenting the optional package in the packages.csv file.

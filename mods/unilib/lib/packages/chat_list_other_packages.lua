@@ -15,6 +15,36 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+local function process_item_of_unknown_type(msg, item, other_table)
+
+    -- Called recursively to handle the package's .at_least_one field, which can be a string, list,
+    --      or list of lists
+
+    if type(item) == "table" then
+
+        for _, other_item in ipairs(item) do
+            other_table = process_item_of_unknown_type(msg, other_item, other_table)
+        end
+
+    else
+
+        if unilib.global.pkg_loaded_table[item] == nil then
+
+            local this_msg = msg .. ": " .. pkg_name
+            if other_table[item] == nil then
+                other_table[item] = {this_msg}
+            else
+                table.insert(other_table[item], this_msg)
+            end
+
+        end
+
+    end
+
+    return other_table
+
+end
+
 local function do_list_other_packages(pname, param)
 
     if unilib.utils.is_table_empty(unilib.global.pkg_loaded_list) then
@@ -43,6 +73,7 @@ local function do_list_other_packages(pname, param)
 
             end
 
+            --[[
             for _, other_pkg_name in ipairs(
                 unilib.utils.convert_to_list(mini_table.at_least_one)
             ) do
@@ -57,6 +88,16 @@ local function do_list_other_packages(pname, param)
                     end
 
                 end
+
+            end
+            ]]--
+            -- N.B. .at_least_one can be a string, list, or list of lists, so it requires special
+            --      handling
+            for _, item in ipairs(unilib.utils.convert_to_list(mini_table.at_least_one)) do
+
+                other_table = process_item_of_unknown_type(
+                    S("Hard dependency (at least one package) of"), item, other_table
+                )
 
             end
 

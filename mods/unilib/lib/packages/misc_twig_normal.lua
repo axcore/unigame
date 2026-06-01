@@ -476,7 +476,8 @@ function unilib.pkg.misc_twig_normal.post()
         },
     })
 
-    -- Palm tree leaves do not produce twigs
+    -- Register exceptions to the recipe above: palm tree leaves do not produce twigs
+    -- (This code will produce results in /check_group_conflicts)
     for _, part_name in pairs({
         "tree_palm",
         "tree_palm_caribbean",

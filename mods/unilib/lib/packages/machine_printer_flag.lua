@@ -13,6 +13,8 @@ local FS = function(...) return core.formspec_escape(S(...)) end
 local mode = unilib.global.imported_mod_table.offend_flags.add_mode
 
 local flag_data_list = {}
+-- N.B. Before v1.2.0, cartridge refills required 2 dyes
+local ink_refill = 1
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
@@ -41,17 +43,20 @@ local function check_supplies(pos)
         return false
     end
 
-    local redcart_good = redcart:to_table().name == "unilib:item_cartridge_ink_red" and
+    local redcart_good_flag =
+            redcart:to_table().name == "unilib:item_cartridge_ink_red" and
             redcart:to_table().wear < unilib.pkg.shared_offend_flags.cartridge_max
-    local greencart_good = greencart:to_table().name == "unilib:item_cartridge_ink_green" and
+    local greencart_good_flag =
+            greencart:to_table().name == "unilib:item_cartridge_ink_green" and
             greencart:to_table().wear < unilib.pkg.shared_offend_flags.cartridge_max
-    local bluecart_good = bluecart:to_table().name == "unilib:item_cartridge_ink_blue" and
+    local bluecart_good_flag =
+            bluecart:to_table().name == "unilib:item_cartridge_ink_blue" and
             bluecart:to_table().wear < unilib.pkg.shared_offend_flags.cartridge_max
-    local mast_good = mast:to_table().name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
+    local mast_good_flag =
+            mast:to_table().name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
             unilib.pkg.shared_offend_flags.default_flag_type
-    local good = redcart_good and greencart_good and bluecart_good and mast_good
 
-    return good
+    return redcart_good_flag and greencart_good_flag and bluecart_good_flag and mast_good_flag
 
 end
 
@@ -89,18 +94,18 @@ local function populate_output(pos)
     -- Called by several functions
     -- Displays (or updates) the formspec for the flag printer
 
-    local typescount = unilib.pkg.shared_offend_flags.flag_count
-    local pagesize = 8 * 5
+    local types_count = unilib.pkg.shared_offend_flags.flag_count
+    local page_size = 8 * 5
     local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
     local page = meta:get_int("page")
-    local maxpage = math.ceil(typescount / pagesize)
+    local maxpage = math.ceil(types_count / page_size)
 
     inv:set_list("output", {})
     -- For aesthetic reasons, I prefer that the first page is a full 8x5 grid, even if all of the
     --      slots are empty. Later pages, however, can have exactly as many slots as they need
-    if typescount > 40 then
-        inv:set_size("output", typescount)
+    if types_count > 40 then
+        inv:set_size("output", types_count)
     else
         inv:set_size("output", 40)
     end
@@ -125,7 +130,7 @@ local function populate_output(pos)
         "label[0,3;" .. FS("Blank\nFlags") .. "]" ..
         "list[current_name;mast;1.5,3;1,1;]" ..
         -- List of flags
-        "list[current_name;output;2.8,0;8,5;" .. tostring((page - 1) * pagesize) .. "]" ..
+        "list[current_name;output;2.8,0;8,5;" .. tostring((page - 1) * page_size) .. "]" ..
         -- Player inventory
         "list[current_player;main;1.5,6.25;8,4;]" ..
         -- Page buttons
@@ -133,6 +138,8 @@ local function populate_output(pos)
         "button[8.5,5;1,1;nextpage;>>>]" ..
         "label[6.75,5.25;" .. FS("Page @1 of @2", page, maxpage) .. "]" ..
         -- List rings
+        "listring[current_player;main]" ..
+        "listring[current_name;input]"..
         "listring[current_player;main]" ..
         "listring[current_name;redcart]" ..
         "listring[current_player;main]" ..
@@ -143,13 +150,20 @@ local function populate_output(pos)
         "listring[current_name;mast]" ..
         "listring[current_player;main]"
     )
-    meta:set_int("maxpage",maxpage)
+    meta:set_int("maxpage", maxpage)
 
 end
 
 ---------------------------------------------------------------------------------------------------
 -- Callbacks
 ---------------------------------------------------------------------------------------------------
+
+local function allow_metadata_inventory_move(
+    pos, from_list, from_index, to_list, to_index, count, player
+)
+    return 0
+
+end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 
@@ -158,7 +172,6 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
     local stack_name = stack:get_name()
     local stack_count = stack:get_count()
     local player_inv = player:get_inventory()
-    local move_flag
 
     local ink_refund = 0
     local redcart = inv:get_stack("redcart", 1)
@@ -169,62 +182,116 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
     local mast = inv:get_stack("mast", 1)
 
     -- Deal with the right node in the right slot
-    if listname == "redcart" and stack_name == "unilib:item_cartridge_ink_red" then
-        return 1
-    elseif listname == "greencart" and stack_name == "unilib:item_cartridge_ink_green" then
-        return 1
-    elseif listname == "bluecart" and stack_name == "unilib:item_cartridge_ink_blue" then
-        return 1
-    elseif listname == "mast" and stack_name ==
-            unilib.pkg.shared_offend_flags.pole_name .. "_" ..
-            unilib.pkg.shared_offend_flags.default_flag_type then
-        return stack_count
+    if listname == "input" then
+
+        if stack_name == "unilib:item_cartridge_ink_red" or
+                stack_name == "unilib:item_cartridge_ink_green" or
+                stack_name == "unilib:item_cartridge_ink_blue" or
+                stack_name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
+                    unilib.pkg.shared_offend_flags.default_flag_type then
+
+            return stack_count
+
+        elseif (
+            stack_name == "unilib:dye_red" and
+            redcart:get_name() == "unilib:item_cartridge_ink_red"
+        ) or (
+            stack_name == "unilib:dye_green" and
+            greencart:get_name() == "unilib:item_cartridge_ink_green"
+        ) or (
+            stack_name == "unilib:dye_blue" and
+            bluecart:get_name() == "unilib:item_cartridge_ink_blue"
+        ) then
+
+            if stack:get_count() >= ink_refill then
+                return ink_refill
+            else
+                return 0
+            end
+
+        else
+
+            return 0
+
+        end
+
     end
 
-    if listname == "redcart" and stack_name == "unilib:dye_red" then
+    -- Refill empty cartridges (this can also be done by shift-clicking dyes in the player's "main"
+    --      inventory)
+    if listname == "redcart" then
 
-        if redcart:get_name() == "unilib:item_cartridge_ink_red" then
+        if stack_name == "unilib:item_cartridge_ink_red" then
 
-            redcart:set_wear(0)
-            inv:set_stack("redcart", 1, redcart)
-            stack:set_count(2)
-            player_inv:remove_item("main", stack)
-            stack:set_count(0)
-            populate_output(pos)
+            return 1
 
-        end
+        elseif stack_name == "unilib:dye_red" then
 
-        return 0
+            if redcart:get_name() == "unilib:item_cartridge_ink_red" then
 
-    elseif listname == "greencart" and stack_name == "unilib:dye_green" then
+                redcart:set_wear(0)
+                inv:set_stack("redcart", 1, redcart)
+                stack:set_count(ink_refill)
+                player_inv:remove_item("main", stack)
+                stack:set_count(0)
+                populate_output(pos)
 
-        if greencart:get_name() == "unilib:item_cartridge_ink_green" then
+            end
 
-            greencart:set_wear(0)
-            inv:set_stack("greencart", 1, greencart)
-            stack:set_count(2)
-            player_inv:remove_item("main", stack)
-            stack:set_count(0)
-            populate_output(pos)
+            return 0
 
         end
 
-        return 0
+    elseif listname == "greencart" then
 
-    elseif listname == "bluecart" and stack_name == "unilib:dye_blue" then
+        if stack_name == "unilib:item_cartridge_ink_green" then
 
-        if bluecart:get_name() == "unilib:item_cartridge_ink_blue" then
+            return 1
 
-            bluecart:set_wear(0)
-            inv:set_stack("bluecart", 1, bluecart)
-            stack:set_count(2)
-            player_inv:remove_item("main", stack)
-            stack:set_count(0)
-            populate_output(pos)
+        elseif stack_name == "unilib:dye_green" then
+
+            if greencart:get_name() == "unilib:item_cartridge_ink_green" then
+
+                greencart:set_wear(0)
+                inv:set_stack("greencart", 1, greencart)
+                stack:set_count(ink_refill)
+                player_inv:remove_item("main", stack)
+                stack:set_count(0)
+                populate_output(pos)
+
+            end
+
+            return 0
 
         end
 
-        return 0
+    elseif listname == "bluecart" then
+
+        if stack_name == "unilib:item_cartridge_ink_blue" then
+
+            return 1
+
+        elseif stack_name == "unilib:dye_blue" then
+
+            if bluecart:get_name() == "unilib:item_cartridge_ink_blue" then
+
+                bluecart:set_wear(0)
+                inv:set_stack("bluecart", 1, bluecart)
+                stack:set_count(ink_refill)
+                player_inv:remove_item("main", stack)
+                stack:set_count(0)
+                populate_output(pos)
+
+            end
+
+            return 0
+
+        end
+
+    elseif listname == "mast" and
+            stack_name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
+                unilib.pkg.shared_offend_flags.default_flag_type then
+        return stack_count
 
     elseif listname == "main" then
 
@@ -235,45 +302,6 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
             return 0
         end
 
-    end
-
-    -- Cannot rely on the listring to put the right type of cartridge into the right slot; a green
-    --      cartridge would be put into the red cartridge slot
-    -- The workaround is to move the green cartridge into the green slot directly
-    if stack_name == "unilib:item_cartridge_ink_green" and inv:is_empty("greencart") then
-
-        if player_inv:remove_item("main", stack) then
-
-            inv:add_item("greencart", stack)
-            move_flag = true
-
-        end
-
-    elseif stack_name == "unilib:item_cartridge_ink_blue" and inv:is_empty("bluecart") then
-
-        if player_inv:remove_item("main", stack) then
-
-            inv:add_item("bluecart", stack)
-            move_flag = true
-
-        end
-
-    elseif stack_name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
-            unilib.pkg.shared_offend_flags.default_flag_type and
-            inv:is_empty("mast") then
-
-        if player_inv:remove_item("main", stack) then
-
-            inv:add_item("mast", stack)
-            move_flag = true
-
-        end
-
-    end
-
-    -- In this situation, the list of printable flags is not updated automatically
-    if move_flag then
-        populate_output(pos)
     end
 
     -- Having put the green cartridge in the green slot, don't put the green cartridge in the red
@@ -287,12 +315,10 @@ local function can_dig(pos)
     local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
 
-    return (
-        inv:is_empty("redcart") and
-                inv:is_empty("greencart") and
-                inv:is_empty("bluecart") and
-                inv:is_empty("mast")
-    )
+    return inv:is_empty("redcart") and
+            inv:is_empty("greencart") and
+            inv:is_empty("bluecart") and
+            inv:is_empty("mast")
 
 end
 
@@ -304,6 +330,7 @@ local function on_construct(pos)
     meta:set_int("page", 1)
     meta:set_int("maxpage", 1)
 
+    inv:set_size("input", 1)
     inv:set_size("redcart", 1)
     inv:set_size("greencart", 1)
     inv:set_size("bluecart", 1)
@@ -313,7 +340,69 @@ local function on_construct(pos)
 
 end
 
-local function on_metadata_inventory_put(pos)
+local function on_metadata_inventory_put(pos, listname, index, stack)
+
+    if listname == "input" then
+
+        local meta = core.get_meta(pos)
+        local inv = meta:get_inventory()
+        local stack_name = stack:get_name()
+
+        local redcart = inv:get_stack("redcart", 1)
+        local greencart = inv:get_stack("greencart", 1)
+        local bluecart = inv:get_stack("bluecart", 1)
+
+        if stack_name == "unilib:item_cartridge_ink_red" then
+
+            inv:add_item("redcart", stack)
+            inv:set_stack("input", 1, nil)
+
+        elseif stack_name == "unilib:item_cartridge_ink_green" then
+
+            inv:add_item("greencart", stack)
+            inv:set_stack("input", 1, nil)
+
+        elseif stack_name == "unilib:item_cartridge_ink_blue" then
+
+            inv:add_item("bluecart", stack)
+            inv:set_stack("input", 1, nil)
+
+        elseif stack_name == unilib.pkg.shared_offend_flags.pole_name .. "_" ..
+                unilib.pkg.shared_offend_flags.default_flag_type then
+
+            inv:add_item("mast", stack)
+            inv:set_stack("input", 1, nil)
+
+        elseif stack_name == "unilib:dye_red" and
+                redcart:get_name() == "unilib:item_cartridge_ink_red" then
+
+            redcart:set_wear(0)
+            inv:set_stack("redcart", 1, redcart)
+            stack:set_count(ink_refill)
+            inv:remove_item("input", stack)
+            stack:set_count(0)
+
+        elseif stack_name == "unilib:dye_green" and
+                greencart:get_name() == "unilib:item_cartridge_ink_green" then
+
+            greencart:set_wear(0)
+            inv:set_stack("greencart", 1, greencart)
+            stack:set_count(ink_refill)
+            inv:remove_item("input", stack)
+            stack:set_count(0)
+
+        elseif stack_name == "unilib:dye_blue" and
+                bluecart:get_name() == "unilib:item_cartridge_ink_blue" then
+
+            bluecart:set_wear(0)
+            inv:set_stack("bluecart", 1, bluecart)
+            stack:set_count(ink_refill)
+            inv:remove_item("input", stack)
+            stack:set_count(0)
+
+        end
+
+    end
 
     populate_output(pos)
 
@@ -323,25 +412,25 @@ local function on_metadata_inventory_take(pos, listname, index, stack, player)
 
     local meta = core.get_meta(pos)
     local inv = meta:get_inventory()
-    local input_stack = inv:get_stack(listname,  index)
+    local incoming_stack = inv:get_stack(listname,  index)
 
     if listname == "output" then
 
         local cost = flag_data_list[index].ink_needed
         consume_ink(pos, cost)
 
-        if not input_stack:is_empty() and input_stack:get_name() ~= stack:get_name() then
+        if not incoming_stack:is_empty() and incoming_stack:get_name() ~= stack:get_name() then
 
             local player_inv = player:get_inventory()
-            if player_inv:room_for_item("main", input_stack) then
+            if player_inv:room_for_item("main", incoming_stack) then
 
                 -- If there is room in the player's inventory, the item is moved
-                player_inv:add_item("main", input_stack)
+                player_inv:add_item("main", incoming_stack)
 
             else
 
                 -- if there is no room, the item is dropped
-                core.item_drop(input_stack, player, pos)
+                core.item_drop(incoming_stack, player, pos)
 
             end
 
@@ -383,13 +472,6 @@ local function on_receive_fields(pos, formname, fields, sender)
 
     -- In all cases, redraw the list of flags
     populate_output(pos)
-
-end
-
-local function allow_metadata_inventory_move(
-    pos, from_list, from_index, to_list, to_index, count, player
-)
-    return 0
 
 end
 

@@ -111,7 +111,7 @@ local function toolranks_after_use(itemstack, user, node, digparams)
 
     if dugnodes > most_digs_count then
 
-        if unilib.setting.toolranks_announce_flag and most_digs_player ~= pname then
+        if unilib.setting.toolranks_notify_flag and most_digs_player ~= pname then
 
             core.chat_send_all(S(
                 "Most advanced tool is now a @1@2@3 owned by @4 with @5 uses.",

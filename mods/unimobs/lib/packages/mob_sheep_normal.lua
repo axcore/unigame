@@ -33,8 +33,8 @@ local function on_compose_skin_callback(self)
 
     if self.has_been_sheared_flag then
 
-        return "unilib_mob_" .. self.mob_type .. "_" .. skin_simple_list[self.mob_texture_num] ..
-                sheared_str .. "_sheared.png"
+        return "unilib_mob_" .. self.mob_type .. "_" ..
+                skin_simple_list[self.mob_texture_num] .. "_sheared.png"
 
     elseif self.modified_colour then
 
@@ -44,8 +44,8 @@ local function on_compose_skin_callback(self)
 
     else
 
-        return "unilib_mob_" .. self.mob_type .. "_" .. skin_simple_list[self.mob_texture_num] ..
-                ".png"
+        return "unilib_mob_" .. self.mob_type .. "_" ..
+                skin_simple_list[self.mob_texture_num] .. ".png"
 
     end
 
@@ -160,7 +160,8 @@ local function on_rightclick_mob_callback(self, clicker, wielded_item, wielded_n
             unimobs.mobkit_api.add_mob_memory(self, "has_been_sheared_flag", true)
     unimobs.petz_api.update_replace_countdown_from_genetics(self)
 
-    if unimobs.setting.apply_tool_wear_flag and not unilib.utils.is_creative(pname) then
+    if unimobs.setting.apply_tool_wear_flag and
+            not unilib.utils.is_creative(clicker:get_player_name()) then
 
         wielded_item:add_wear(unimobs.constant.tool_wear)
         clicker:set_wielded_item(wielded_item)
@@ -174,6 +175,11 @@ local function on_rightclick_mob_callback(self, clicker, wielded_item, wielded_n
     unimobs.kitz_api.make_sound(
         "object", self.object, "unilib_pop_petz", unimobs.petz_setting.max_hear_distance
     )
+
+    -- Update awards, if available
+    if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+        unilib.pkg.award_ranger.on_mob_shear(clicker, self)
+    end
 
     -- Do not apply the standard behaviour
     return true
@@ -207,7 +213,8 @@ function unilib.pkg.mob_sheep_normal.exec()
     -- Setup
     local p1 = {x = -0.0625, y = -0.5, z = -0.125}
     local p2 = {x = 0.125, y = -0.125, z = 0.1875}
-    local scale_factor = 2.5
+    -- N.B. scale_factor = 2.5 in original code
+    local scale_factor = 3
     local baby_scale_factor = 0.5
 
     local cbox, cbox_baby =

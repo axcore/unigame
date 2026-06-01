@@ -75,8 +75,8 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
             if def and def.liquidtype == "source" and
                     core.get_item_group(node.name, "water") > 0 then
 
-                local player_name = placer and placer:get_player_name() or ""
-                if not core.is_protected(pos, player_name) then
+                local pname = placer and placer:get_player_name() or ""
+                if not core.is_protected(pos, pname) then
 
                     core.set_node(
                         pos,
@@ -87,14 +87,14 @@ function unilib.pkg.flower_waterlily_ordinary.exec()
                         }
                     )
 
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
                         itemstack:take_item()
                     end
 
                 else
 
-                    core.chat_send_player(player_name, S("Node is protected"))
-                    core.record_protection_violation(pos, player_name)
+                    core.chat_send_player(pname, S("Node is protected"))
+                    core.record_protection_violation(pos, pname)
 
                 end
 

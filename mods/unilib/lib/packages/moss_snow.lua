@@ -38,7 +38,7 @@ function unilib.pkg.moss_snow.exec()
         -- (no sounds)
 
         drawtype = "signlike",
-        furnace_burntime = 3,
+--      furnace_burntime = 3,
         inventory_image = "unilib_moss_snow.png",
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -46,6 +46,12 @@ function unilib.pkg.moss_snow.exec()
             type = "wallmounted",
         },
         walkable = false,
+    })
+    unilib.register_craft({
+        -- Original to unilib, replaces the deprecated .furnace_burntime field
+        type = "fuel",
+        recipe = "unilib:moss_snow",
+        burntime = 1,
     })
     if unilib.global.pkg_executed_table["tree_pine_frozen"] ~= nil then
 

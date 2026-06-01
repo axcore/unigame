@@ -23,7 +23,7 @@ local function on_place_rooted_coral(itemstack, placer, pointed_thing)
         return itemstack
     end
 
-    local player_name = placer and placer:get_player_name()
+    local pname = placer and placer:get_player_name()
     local pos_under = pointed_thing.under
     local pos_above = pointed_thing.above
     local node_under = core.get_node(pos_under)
@@ -44,25 +44,25 @@ local function on_place_rooted_coral(itemstack, placer, pointed_thing)
         return itemstack
     end
 
-    if core.is_protected(pos_under, player_name) or core.is_protected(pos_above, player_name) then
+    if core.is_protected(pos_under, pname) or core.is_protected(pos_above, pname) then
 
 --      unilib.utils.log(
 --          "action",
---          player_name .. " tried to place " .. itemstack:get_name() ..
+--          pname .. " tried to place " .. itemstack:get_name() ..
 --                  " at protected position " .. core.pos_to_string(pos_under)
 --      )
         unilib.utils.log_player_action(
             placer, "tried to place", itemstack:get_name(), "at protected position", pos_under
         )
 
-        core.record_protection_violation(pos_under, player_name)
+        core.record_protection_violation(pos_under, pname)
         return itemstack
 
     end
 
     node_under.name = itemstack:get_name()
     core.set_node(pos_under, node_under)
-    if not unilib.utils.is_creative(player_name) then
+    if not unilib.utils.is_creative(pname) then
         itemstack:take_item()
     end
 

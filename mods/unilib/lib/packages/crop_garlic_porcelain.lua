@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.crop_garlic_porcelain.exec()
 
-    local fertility_list = {"desert_soil", "ordinary_soil"}
+    local fertility_list = {"desert_soil", "regular_soil"}
 
     local orig_name_list = {}
     for i = 1, 8 do

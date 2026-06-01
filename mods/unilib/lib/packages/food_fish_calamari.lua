@@ -41,7 +41,7 @@ function unilib.pkg.food_fish_calamari.exec()
         -- From ethereal:calamari_raw
         output = "unilib:food_fish_calamari_raw 2",
         recipe = {
-            {"unilib:utensil_board_cutting", "unilib:ingredient_fish_squid"},
+            {"unilib:utensil_board_cutting", "unilib:ingredient_fish_squid_humboldt"},
         },
         replacements = {
             {"unilib:utensil_board_cutting", "unilib:utensil_board_cutting"},

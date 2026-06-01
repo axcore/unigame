@@ -29,7 +29,10 @@ function unilib.pkg.fern_broad_leaf_young.exec()
         -- From GLEMr4, lib_ecology:fern_broadleaf_fern2
         description = S("Young Broad Leaf Fern"),
         tiles = {"unilib_fern_broad_leaf.png"},
-        groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
+        -- N.B. attached_node = 1 not in original code
+        groups = {
+            attached_node = 1, flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3,
+        },
         sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,

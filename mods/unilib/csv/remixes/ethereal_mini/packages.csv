@@ -17,6 +17,7 @@
 #biome_ethereal_caves|ethereal
 #biome_ethereal_desert|ethereal
 #biome_ethereal_desert_cold|ethereal
+#biome_ethereal_desert_sandstone|ethereal
 #biome_ethereal_fiery|ethereal
 #biome_ethereal_forest_coniferous|ethereal
 #biome_ethereal_forest_deciduous|ethereal
@@ -35,7 +36,6 @@
 #biome_ethereal_plains|ethereal
 #biome_ethereal_prairie|ethereal
 #biome_ethereal_rainforest|ethereal
-#biome_ethereal_sandstone_desert|ethereal
 #biome_ethereal_savanna|ethereal
 #biome_ethereal_swamp|ethereal
 #biome_ethereal_taiga|ethereal
@@ -187,7 +187,8 @@ mineral_crystallite|ethereal
 misc_flooring_bamboo|ethereal
 misc_leaves_pruned|ethereal
 misc_screen_shoji|ethereal
-misc_sponge|ethereal
+misc_sponge_air|ethereal
+misc_sponge_normal|ethereal
 mushroom_illumishroom_cyan|ethereal
 mushroom_illumishroom_green|ethereal
 mushroom_illumishroom_red|ethereal

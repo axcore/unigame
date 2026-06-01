@@ -154,6 +154,9 @@ function unilib.pkg.deco_gaia_pebbles.post()
     end
 
     -- Create decorations; small pebbles are relatively rare, and large pebbles are even rarer
+    local constants_table =
+            unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name] or {}
+
     for stone_type, biome_list in pairs(biome_table) do
 
         if unilib.global.pkg_executed_table["pebble_large"] ~= nil then
@@ -167,8 +170,8 @@ function unilib.pkg.deco_gaia_pebbles.post()
                 param2 = 0,
                 param2_max = 3,
                 place_on = surface_table[stone_type],
-                y_max = tonumber(unilib.pkg.biome_gaia.constant_table["STRATO"]),
-                y_min = tonumber(unilib.pkg.biome_gaia.constant_table["BEACH_MAX"]),
+                y_max = tonumber(constants_table["STRATO"]),
+                y_min = tonumber(constants_table["BEACH_MAX"]),
             })
 
         end
@@ -186,8 +189,8 @@ function unilib.pkg.deco_gaia_pebbles.post()
                     param2 = 0,
                     param2_max = 3,
                     place_on = surface_table[stone_type],
-                    y_max = tonumber(unilib.pkg.biome_gaia.constant_table["STRATO"]),
-                    y_min = tonumber(unilib.pkg.biome_gaia.constant_table["OCEAN"]),
+                    y_max = tonumber(constants_table["STRATO"]),
+                    y_min = tonumber(constants_table["OCEAN"]),
                 })
 
             end

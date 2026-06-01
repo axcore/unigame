@@ -32,7 +32,7 @@ function unilib.pkg.crop_quadrotriticale.exec()
     local c_rye = "unilib:crop_rye_seed"
     local c_wheat = "unilib:crop_wheat_seed"
 
-    local fertility_list = {"ordinary_soil"}
+    local fertility_list = {"regular_soil"}
 
     unilib.register_crop_fredo({
         -- Code original to unilib, textures from barley in the "grains" mod. Creates

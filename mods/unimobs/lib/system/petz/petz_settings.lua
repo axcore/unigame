@@ -392,7 +392,7 @@ unimobs.petz_setting = {
             core.settings:get_bool("unimobs_petz_disable_spawn_in_protected_areas_flag", false),
     -- (Was .spawn_areas)
     -- If specified, a whitespace-separated string of items. Each item consists of two positions in
-    --      the form (x,y,z);(x,y,z), e.g.
+    --      the form "x,y,z;x,y,z", e.g.
     --      "10,10,10;200,200,200 1000,1000,1000;1500,1500,1500"
     -- If specified, mobs only spawn in those areas; otherwise mobs can spawn anywhere
     exclusive_spawn_area_list = core.settings:get("unimobs_petz_exclusive_spawn_area_list") or "",

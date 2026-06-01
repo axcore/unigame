@@ -91,7 +91,7 @@ function unilib.pkg.coral_rooted_spider.exec()
                 return itemstack
             end
 
-            local player_name = placer:get_player_name()
+            local pname = placer:get_player_name()
             local pos_under = pointed_thing.under
             local pos_above = pointed_thing.above
 
@@ -100,17 +100,17 @@ function unilib.pkg.coral_rooted_spider.exec()
                 return itemstack
             end
 
-            if core.is_protected(pos_under, player_name) or
-                    core.is_protected(pos_above, player_name) then
+            if core.is_protected(pos_under, pname) or
+                    core.is_protected(pos_above, pname) then
 
-                core.chat_send_player(player_name, S("Node is protected"))
-                core.record_protection_violation(pos_under, player_name)
+                core.chat_send_player(pname, S("Node is protected"))
+                core.record_protection_violation(pos_under, pname)
                 return itemstack
 
             end
 
             core.set_node(pos_under, {name = "unilib:coral_rooted_spider"})
-            if not (creative and creative.is_enabled_for(player_name)) then
+            if not (creative and creative.is_enabled_for(pname)) then
                 itemstack:take_item()
             end
 

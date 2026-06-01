@@ -211,6 +211,15 @@ function unimobs.kitz_api.tame_mob(self, tame_count, owner_name, msg_tamed, limi
                 -- Clear previous behaviours (e.g. running away from the player)
                 unimobs.mobkit_api.clear_high_level_queue(self)
 
+                -- Update awards, if available
+                if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+
+                    unilib.pkg.award_zoologist.on_mob_tame(
+                        core.get_player_by_name(owner_name), self
+                    )
+
+                end
+
             end
 
         end

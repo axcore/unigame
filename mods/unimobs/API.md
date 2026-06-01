@@ -1973,7 +1973,7 @@ In general, mobkit-exclusive mobs should not call **unimobs.kitz_api** or **unim
 
 ## 7.2 Remix mob settings
 
-The remix provides two files used to configure petz-compatible mobs. The files are **mob_settings.csv** and **mob_constants.csv**, and they are described in detail above.
+The remix provides two files used to configure petz-compatible mobs. The files are **mob_settings.csv** and **constants.csv**, and they are described in detail above.
 
 The contents of these files are read into memory by the **meta_petz_settings** package, and any constants are converted. The data is then available to code in the global table, **unimobs.petz_msetting**.
 

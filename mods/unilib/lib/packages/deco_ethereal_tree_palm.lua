@@ -22,11 +22,11 @@ function unilib.pkg.deco_ethereal_tree_palm.init()
         depends = {"sand_ordinary", "tree_palm"},
         at_least_one = {
             "biome_ethereal_desert",
+            "biome_ethereal_desert_sandstone",
             "biome_ethereal_forest_deciduous",
             "biome_ethereal_grove",
             "biome_ethereal_mesa",
             "biome_ethereal_plains",
-            "biome_ethereal_sandstone_desert",
         },
     }
 
@@ -39,11 +39,11 @@ function unilib.pkg.deco_ethereal_tree_palm.post()
         -- Completes decoration in package "tree_palm"
         biomes = {
             "ethereal_desert_ocean",
+            "ethereal_desert_sandstone_ocean",
             "ethereal_forest_deciduous_ocean",
             "ethereal_grove_ocean",
             "ethereal_mesa_ocean",
             "ethereal_plains_ocean",
-            "ethereal_sandstone_desert_ocean",
         },
         place_on = "unilib:sand_ordinary",
         y_max = 1,

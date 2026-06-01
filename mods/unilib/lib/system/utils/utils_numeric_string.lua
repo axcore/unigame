@@ -92,6 +92,21 @@ function unilib.utils._capitalise_translation(msg)
 
 end
 
+function unilib.utils._clean_translation(msg)
+
+    -- Original to unilib
+    -- Removes the escape sequence present in all translated strings, and returns the remaining
+    --      string
+
+    local index, len = find_end_of_initial_escape_sequences(msg)
+    if index <= len then
+        return string.sub(msg, index)
+    else
+        return msg
+    end
+
+end
+
 function unilib.utils._contract_long_lines(arg, max_length)
 
     -- arg is a long string, possible including newline characters
@@ -179,6 +194,32 @@ function unilib.utils._round_up(num, dp)
 
     local mult = 10 ^ (dp or 0)
     return math.floor((num * mult) + 0.5) / mult
+
+end
+
+function unilib.utils._split_string_by_separator(arg, separator)
+
+    -- Used for reading a line from a CSV file, in which the default separator is |
+    --
+    -- Args:
+    --      arg(str): The string to split
+    --
+    -- Optional args:
+    --      separator (str): If not specified, the separator is "|"
+    --
+    -- Return values:
+    --      The list of items (which may be empty)
+
+    if separator == nil then
+        separator = "|"
+    end
+
+    local list = {}
+    for _, word in ipairs(arg:split(separator, true)) do
+        table.insert(list, unilib.utils.strip_whitespace(word))
+    end
+
+    return list
 
 end
 

@@ -1,4 +1,4 @@
-# "glemr11" remix - contains almost everything from revision 11 of lib_materials/lib_ecology,
+# "glemr11" remix - contains almost everything from revision 11 of lib_materials/lib_ecology
 #   (31st Aug 2019, dev branch). Some material of little value has been omitted. Code for modifying
 #   terrain (e.g. producing lakes) has also been omitted
 # The original mods were not suitable for use in survival mode, and the same applies to this remix.
@@ -28,6 +28,7 @@ soil_black|unilib
 soil_brown|unilib
 soil_dark|unilib
 soil_ordinary|farming
+soil_silt_fine|unilib
 stone_ordinary|default moreblocks technic
 
 # lib_materials packages

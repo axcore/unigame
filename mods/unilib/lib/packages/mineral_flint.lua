@@ -120,7 +120,7 @@ function unilib.pkg.mineral_flint.post()
                         true
                     )
 
-                    local player_name = user:get_player_name()
+                    local pname = user:get_player_name()
                     if pointed_thing.type == "node" then
 
                         local node_under = core.get_node(pointed_thing.under).name
@@ -129,9 +129,9 @@ function unilib.pkg.mineral_flint.post()
                             return
                         end
 
-                        if core.is_protected(pointed_thing.under, player_name) then
+                        if core.is_protected(pointed_thing.under, pname) then
 
-                            core.record_protection_violation(pointed_thing.under, player_name)
+                            core.record_protection_violation(pointed_thing.under, pname)
                             return
 
                         end
@@ -165,9 +165,9 @@ function unilib.pkg.mineral_flint.post()
                         elseif core.get_item_group(node_under, "flammable") >= 1
                                 and core.get_node(pointed_thing.above).name == "air" then
 
-                            if core.is_protected(pointed_thing.above, player_name) then
+                            if core.is_protected(pointed_thing.above, pname) then
 
-                                core.record_protection_violation(pointed_thing.above, player_name)
+                                core.record_protection_violation(pointed_thing.above, pname)
                                 return
 
                             end
@@ -178,7 +178,7 @@ function unilib.pkg.mineral_flint.post()
 
                     end
 
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
 
                         -- Wear tool
                         local wdef = itemstack:get_definition()

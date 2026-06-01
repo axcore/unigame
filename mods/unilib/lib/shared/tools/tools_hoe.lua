@@ -54,17 +54,16 @@ local function on_use_hoe(itemstack, user, pointed_thing, uses)
         return
     end
 
-    local player_name = user and user:get_player_name() or ""
+    local pname = user and user:get_player_name() or ""
+    if core.is_protected(pt.under, pname) then
 
-    if core.is_protected(pt.under, player_name) then
-
-        core.record_protection_violation(pt.under, player_name)
+        core.record_protection_violation(pt.under, pname)
         return
 
     end
-    if core.is_protected(pt.above, player_name) then
+    if core.is_protected(pt.above, pname) then
 
-        core.record_protection_violation(pt.above, player_name)
+        core.record_protection_violation(pt.above, pname)
         return
 
     end
@@ -77,7 +76,7 @@ local function on_use_hoe(itemstack, user, pointed_thing, uses)
         true
     )
 
-    if not unilib.utils.is_creative(player_name) then
+    if not unilib.utils.is_creative(pname) then
 
         -- Wear tool
         local wdef = itemstack:get_definition()

@@ -52,9 +52,9 @@ function unilib.pkg.pane_bars_wooden.exec()
             },
             ]]--
             recipe = {
+                {"unilib:item_stick_ordinary", "group:wood", "unilib:item_stick_ordinary"},
                 {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
-                {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
-                {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
+                {"unilib:item_stick_ordinary", "group:wood", "unilib:item_stick_ordinary"},
             },
             wield_image = "unilib_pane_bars_wooden.png",
         },

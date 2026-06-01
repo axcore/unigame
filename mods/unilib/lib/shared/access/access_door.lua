@@ -593,16 +593,24 @@ function unilib.access._register_door(data_table)
     -- ("orig_name_list" should be a list containing all four variants, the "_closed_left" variant
     --      first)
     def_table.mesh = "unilib_door_a.b3d"
-    unilib.register_node(full_name .. "_closed_left", orig_name_list[1], replace_mode, def_table)
+    unilib.register_node(
+        full_name .. "_closed_left", orig_name_list[1], replace_mode, table.copy(def_table)
+    )
 
     def_table.mesh = "unilib_door_b.b3d"
-    unilib.register_node(full_name .. "_closed_right", orig_name_list[2], replace_mode, def_table)
+    unilib.register_node(
+        full_name .. "_closed_right", orig_name_list[2], replace_mode, table.copy(def_table)
+    )
 
     def_table.mesh = "unilib_door_b.b3d"
-    unilib.register_node(full_name .. "_open_left", orig_name_list[3], replace_mode, def_table)
+    unilib.register_node(
+        full_name .. "_open_left", orig_name_list[3], replace_mode, table.copy(def_table)
+    )
 
     def_table.mesh = "unilib_door_a.b3d"
-    unilib.register_node(full_name .. "_open_right", orig_name_list[4], replace_mode, def_table)
+    unilib.register_node(
+        full_name .. "_open_right", orig_name_list[4], replace_mode, table.copy(def_table)
+    )
 
     registered_doors[full_name .. "_closed_left"] = true
     registered_doors[full_name .. "_closed_right"] = true

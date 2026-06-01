@@ -1,0 +1,2 @@
+The "ethereal" remix without biomes, decorations or ores, without ABM and LBM packages, and without the base package.
+

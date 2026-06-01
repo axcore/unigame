@@ -50,9 +50,9 @@ function unilib.utils._is_file(path)
         return false
     end
 
-    local fh = io.open(path, "r")
-    if fh ~= nil then
-        io.close(fh)
+    local file = io.open(path, "r")
+    if file ~= nil then
+        io.close(file)
         return true
     else
         return false

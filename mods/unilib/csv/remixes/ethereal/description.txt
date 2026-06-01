@@ -1,0 +1,7 @@
+Contains everything from the ethereal-ng mod.
+
+The original ethereal-ng mod clears biomes and decorations, but retains ore distributions; therefore, it is recommended that this remix is used together with the "mtgame_mini" and "mtgame_ores" remixes.
+
+Note that ethereal-ng adds more ore distributions that appear in desert stone, assuming that the ore distributions from minetest_game are still present.
+
+Coconuts now drop themselves, rather than coconut slices, for consistency with moretrees coconuts.

@@ -1,5 +1,5 @@
 Unified Voxel Library (unilib)
-Copyright (C) 2021-2025 A S Lewis
+Copyright (C) 2021-2026 A S Lewis
 
 ----------------------------------------------------------------------
 

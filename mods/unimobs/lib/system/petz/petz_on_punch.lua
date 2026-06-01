@@ -344,4 +344,11 @@ function unimobs.petz_api.on_punch_callback(
 
     end
 
+    -- Update awards, if available
+    if puncher_is_player_flag and
+            self.was_killed_by_player_flag and
+            unilib.global.pkg_executed_table["award_warrior"] ~= nil then
+        unilib.pkg.award_warrior.on_mob_kill(puncher, self)
+    end
+
 end

@@ -39,7 +39,7 @@ function unilib.pkg.bed_ordinary_quilt.exec()
         {"magenta",     "",             S("Ordinary Bed with Magenta Quilt")},
         {"orange",      "",             S("Ordinary Bed with Orange Quilt")},
         {"pink",        "",             S("Ordinary Bed with Pink Quilt")},
---      {"red",         "",             S("Ordinary Bed with Red Quilt")},
+        {"red",         "",             S("Ordinary Bed with Red Quilt")},
         {"violet",      "",             S("Ordinary Bed with Violet Quilt")},
         {"white",       "",             S("Ordinary Bed with White Quilt")},
         {"yellow",      "",             S("Ordinary Bed with Yellow Quilt")},
@@ -63,30 +63,23 @@ function unilib.pkg.bed_ordinary_quilt.exec()
         local orig_name = row_list[2]
         local description = row_list[3]
 
-        local recipe_table = {}
         local c_wool = "unilib:wool_" .. part_name
         local inv_img = "unilib_bed_ordinary_inv_overlay.png^unilib_wool_" .. part_name .. ".png" ..
                 "^unilib_bed_ordinary_inv_overlay.png^[makealpha:255,128,128"
 
-        if not unilib.setting.mtgame_tweak_flag then
-
-            -- Current minetest_game recipe
-            recipe_table = {
-                {"", "", ""},
-                {c_wool, c_wool, c_wool},
-                {"group:wood", "group:wood", "group:wood"},
-            }
-
-        else
-
-            -- Traditional recipe
-            recipe_table = {
-                {"", "", ""},
-                {c_wool, c_wool, "unilib:wool_white"},
-                {"group:wood", "group:wood", "group:wood"},
-            }
-
-        end
+        -- N.B. Original craft recipe conflicts with recipe in "bed_ordinary" package
+        --[[
+        local recipe_table = {
+            {"", "", ""},
+            {c_wool, c_wool, "unilib:wool_white"},
+            {"group:wood", "group:wood", "group:wood"},
+        }
+        ]]--
+        local recipe_table = {
+            {"", "", ""},
+            {"unilib:wool_white", c_wool, c_wool},
+            {"group:wood", "group:wood", "group:wood"},
+        }
 
         unilib.pkg.shared_beds.register_bed({
             -- Code adapted from the "bed_ordinary" package, textures from "colored_beds" mod.

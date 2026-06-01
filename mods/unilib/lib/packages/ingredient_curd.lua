@@ -50,9 +50,7 @@ function unilib.pkg.ingredient_curd.post()
             cooktime = 20,
         })
 
-    end
-
-    if core.get_modpath("unimobs") then
+    elseif core.get_modpath("unimobs") then
 
         unilib.register_craft({
             -- From cheese:curd
@@ -62,9 +60,7 @@ function unilib.pkg.ingredient_curd.post()
             cooktime = 20,
         })
 
-    end
-
-    if core.get_modpath("mobs_animal") then
+    elseif core.get_modpath("mobs_animal") then
 
         unilib.register_craft({
             -- From cheese:curd
@@ -74,9 +70,7 @@ function unilib.pkg.ingredient_curd.post()
             cooktime = 20,
         })
 
-    end
-
-    if core.get_modpath("petz") then
+    elseif core.get_modpath("petz") then
 
         unilib.register_craft({
             -- From cheese:curd

@@ -586,15 +586,15 @@ function unilib.farming._place_item_as_seed(
     end
 
     -- Check protection. farming_redo has no check for pt.under
-    local player_name = placer and placer:get_player_name() or ""
-    if farming_mode == "mtgame" and core.is_protected(pt.under, player_name) then
+    local pname = placer and placer:get_player_name() or ""
+    if farming_mode == "mtgame" and core.is_protected(pt.under, pname) then
 
-        core.record_protection_violation(pt.under, player_name)
+        core.record_protection_violation(pt.under, pname)
         return
 
-    elseif core.is_protected(pt.above, player_name) then
+    elseif core.is_protected(pt.above, pname) then
 
-        core.record_protection_violation(pt.above, player_name)
+        core.record_protection_violation(pt.above, pname)
         return
 
     end
@@ -607,7 +607,7 @@ function unilib.farming._place_item_as_seed(
         --[[
         unilib.utils.log(
             "action",
-            player_name .. " places node " .. placed_full_name .. " at " ..
+            pname .. " places node " .. placed_full_name .. " at " ..
                     core.pos_to_string(pt.above)
         )
         ]]--
@@ -616,7 +616,13 @@ function unilib.farming._place_item_as_seed(
         end
 
         core.add_node(pt.above, {name = placed_full_name, param2 = 1})
-        tick(pt.above)
+        -- N.B. Changed original code; seeds placed on the ground generally look bad, and bonemeal
+        --      can't be used on them. Instead of waiting several minutes to convert the seeds to
+        --      the first growth stage (depending on unilib.setting.farming_grow_default), convert
+        --      after just a few seconds. Note that when farming_mode is "fredo", the conversion
+        --      takes place instantly
+--      tick(pt.above)
+        core.get_node_timer(pt.above):start(math.random(1, 3))
 
     elseif farming_mode == "fredo" then
 
@@ -625,7 +631,7 @@ function unilib.farming._place_item_as_seed(
         --[[
         unilib.utils.log(
             "action",
-            player_name .. " places node " .. placed_full_name .. " at " ..
+            pname .. " places node " .. placed_full_name .. " at " ..
                     core.pos_to_string(pt.above)
         )
         ]]--
@@ -799,7 +805,7 @@ function unilib.farming._on_timer_do_growth(pos, elapsed, full_name)
     local under = core.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
     local match_flag = false
     local fertility_list = core.registered_nodes[full_name].fertility
-    if fertility_list ~= nil then
+    if fertility_list ~= nil and #fertility_list > 0 then
 
         for _, v in ipairs(fertility_list) do
 

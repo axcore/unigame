@@ -764,7 +764,7 @@ function unilib.pkg.machine_cauldron_milk.exec()
             description = S("Milk Cauldron"),
             tiles = {
                 {
-                    image = "unilib_machine_cauldron_milk_active_top.png",
+                    name = "unilib_machine_cauldron_milk_active_top.png",
                     backface_culling = false,
                     animation = {
                         type = "vertical_frames",

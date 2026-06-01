@@ -1,0 +1,1 @@
+Contains only the fir tree and mud from 30biomes.

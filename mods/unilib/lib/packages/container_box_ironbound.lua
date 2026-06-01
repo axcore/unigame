@@ -15,7 +15,7 @@ local mode = unilib.global.imported_mod_table.castle_storage.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local get_formspec = function(pos)
+local function get_formspec(pos)
 
     local spos = pos.x .. "," .. pos.y .. "," ..pos.z
     --[[

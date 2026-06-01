@@ -175,7 +175,8 @@ function unilib.pkg.produce_bean_green.exec()
     -- Wild bean bush (placed as a decoration, and the only natural source of green beans)
     unilib.register_node("unilib:produce_bean_green_wild", "farming:beanbush", mode, {
         -- From farming:beanbush
-        -- (no description)
+        -- (N.B. No description in original code)
+        description = S("Wild Bean Bush"),
         tiles = {"unilib_produce_bean_green_wild.png"},
         groups = {
             attached_node = 1, flammable = 2, not_in_creative_inventory = 1, plant = 1, snappy = 3,

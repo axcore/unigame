@@ -43,7 +43,7 @@ function unilib.pkg.item_stick_fire.exec()
                 {pos = sound_pos, gain = 0.5, max_hear_distance = 8}
             )
 
-            local player_name = user:get_player_name()
+            local pname = user:get_player_name()
             if pointed_thing.type == "node" then
 
                 local node_under = core.get_node(pointed_thing.under).name
@@ -52,9 +52,9 @@ function unilib.pkg.item_stick_fire.exec()
                     return
                 end
 
-                if core.is_protected(pointed_thing.under, player_name) then
+                if core.is_protected(pointed_thing.under, pname) then
 
-                    core.chat_send_player(player_name, S("This area is protected"))
+                    core.chat_send_player(pname, S("This area is protected"))
                     return
 
                 end
@@ -72,7 +72,7 @@ function unilib.pkg.item_stick_fire.exec()
 
             end
 
-            if not unilib.utils.is_creative(player_name) then
+            if not unilib.utils.is_creative(pname) then
 
                 -- Wear the tool
                 local def_table = itemstack:get_definition()

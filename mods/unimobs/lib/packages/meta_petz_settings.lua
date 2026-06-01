@@ -17,7 +17,7 @@ local debug_warning_flag = false
 -- Shared variables
 ---------------------------------------------------------------------------------------------------
 
--- Constants read from the mob_constants.csv file should be available to other packages
+-- Constants read from the constants.csv file should be available to other packages
 unilib.pkg.meta_petz_settings.constant_flag = false
 unilib.pkg.meta_petz_settings.constant_table = {}
 
@@ -294,48 +294,19 @@ function unilib.pkg.meta_petz_settings.exec()
     -- Read CSVs from the first remix with the label "petz" (default: the "petz" remix itself)
     local remix_name = unilib.utils.get_remix_by_label("petz") or "petz"
     local remix_dir = unilib.utils.get_remix_dir(remix_name)
-    local constants_path = remix_dir .. "/mob_constants.csv"
-    if not unilib.utils.is_file(constants_path) then
+    local constants_path = remix_dir .. "/constants.csv"
 
-        if debug_warning_flag then
+    if unilib.global.remix_constants_table[remix_name] ~= nil then
 
-            unilib.utils.show_warning(
-                "meta_petz_settings package: Missing CSV file", constants_path
-            )
+        for key, value in pairs(unilib.global.remix_constants_table[remix_name]) do
 
-        end
+            -- Values read from constants.csv are in string format; at this stage, we DON'T try to
+            --      convert them to numerals
+            if key ~= nil and value ~= nil then
 
-    else
-
-        for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
-
-            -- "key" is expected to contain at least one letter, "value" at least one alphanumeric
-            --      character
-            local key, value = unpack(csv_table)
-            if key ~= nil then
-
-                if not string.find(key, "%a") then
-
-                    if debug_warning_flag then
-
-                        unilib.utils.show_warning(
-                            "meta_petz_settings package: Invalid constant", constants_path, i
-                        )
-
-                    end
-
-                else
-
-                    -- Unspecified constants are allowed, so that empty columns can be marked
-                    if not string.find(value, "%w") then
-                        value = ""
-                    end
-
-                    unilib.pkg.meta_petz_settings.constant_table[key] = value
-                    -- (Table is not empty)
-                    unilib.pkg.meta_petz_settings.constant_flag = true
-
-                end
+                unilib.pkg.meta_petz_settings.constant_table[key] = value
+                -- (Table is not empty)
+                unilib.pkg.meta_petz_settings.constant_flag = true
 
             end
 

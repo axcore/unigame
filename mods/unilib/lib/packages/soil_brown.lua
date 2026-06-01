@@ -33,7 +33,10 @@ function unilib.pkg.soil_brown.exec()
             "unilib_dirt_brown.png^unilib_soil_brown_overlay.png",
             "unilib_dirt_brown.png",
         },
-        groups = {brown_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, soil = 2},
+        groups = {
+            brown_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, regular_soil = 1,
+            soil = 2,
+        },
         sounds = unilib.global.sound_table.dirt,
 
         drop = "unilib:dirt_brown",
@@ -52,8 +55,8 @@ function unilib.pkg.soil_brown.exec()
             "unilib_dirt_brown.png^unilib_soil_wet_side_overlay.png",
         },
         groups = {
-            brown_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, soil = 3,
-            wet = 1,
+            brown_soil = 1, crumbly = 3, field = 1, not_in_creative_inventory = 1, regular_soil = 1,
+            soil = 3, wet = 1,
         },
         sounds = unilib.global.sound_table.dirt,
 

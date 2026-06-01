@@ -1,4 +1,4 @@
-# Environment constants for the "gaia" remix, replacing temperature/humidity/elevation values in the
+# General constants for the "gaia" remix, replacing temperature/humidity/elevation values in the
 #   corresponding biomes.csv/decorations.csv files
 
 # Temperatures

@@ -50,6 +50,13 @@ function unilib.pkg.mtb_start_following.do_action(self, priority, player)
 
         -- Register the discovery of the correct following item
         unimobs.kitz_api.register_discovered_item(player, self.mob_type, "follow", wielded_name)
+
+        -- Update awards, if available
+        if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+            unilib.pkg.award_zoologist.on_mob_follow(player, self)
+        end
+
+        -- Action complete
         return true
 
     end

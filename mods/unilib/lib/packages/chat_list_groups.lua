@@ -19,7 +19,7 @@ function unilib.pkg.chat_list_groups.init()
 
     return {
         description = "Chat command /list_groups",
-        notes = "List groups, and the items that provide them",
+        notes = "List groups (or the specified group), and the items that provide them",
         depends = "shared_chat_missing",
     }
 
@@ -29,7 +29,7 @@ function unilib.pkg.chat_list_groups.exec()
 
     core.register_chatcommand("list_groups", {
         params = "[group_name]",
-        description = S("List groups, and the items that provide them"),
+        description = S("List groups (or the specified group), and the items that provide them"),
         privs = {unilib_tools = true},
 
         func = function(pname, param)

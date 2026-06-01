@@ -14,4 +14,5 @@ unimobs.misc_api = {}
 -- Import files
 ---------------------------------------------------------------------------------------------------
 
+dofile(unimobs.path_mod .. "/lib/system/misc/misc_edit_formspec.lua")
 dofile(unimobs.path_mod .. "/lib/system/misc/misc_harm_bars.lua")

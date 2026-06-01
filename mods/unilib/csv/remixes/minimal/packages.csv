@@ -1,4 +1,5 @@
-# "minimal" remix - the absolute minimum set of packages required for the minetest mapgen to work
+# "minimal" remix - provides the absolute minimum set of packages required for the Minetest mapgen
+#   to work
 
 # node_name | original_mod
 

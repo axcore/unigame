@@ -11,8 +11,7 @@ unilib.pkg.deco_glemr6 = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
--- Environmental constants (from lib_ecology/init.lua; must match values in the "biome_glemr6"
---      package)
+-- General constants (from lib_ecology/init.lua; must match values in the "biome_glemr6" package)
 local ALTITUDE_RANGE = 40
 
 local HEIGHT_OCEAN = -192
@@ -2494,7 +2493,7 @@ local function add_decorations_mixed()
         deco_type = "schematic",
         schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
-        biomes = {"glemr6_warm_arid_lowland", "glem6_temperate_arid_lowland"},
+        biomes = {"glemr6_warm_arid_lowland", "glemr6_temperate_arid_lowland"},
         fill_ratio = 0.002,
         flags = "place_center_x",
         place_on = {"unilib:dirt_parched_with_turf_dry", "unilib:sand_ordinary"},

@@ -297,7 +297,7 @@ local function sort_skin_list(itemstack, mob_type)
     local sorted_skin_list = unilib.utils.sort_table(sketch_table[mob_type])
     -- "sorted_skin_list" contains a list of "skin_type" values
     -- Sort in the order of the text that's actually visible in the formspec (i.e. the skin's
-    --      description, not its "skin_type"
+    --      description, not its "skin_type")
     table.sort(sorted_skin_list, function(a, b)
         return sketch_table[mob_type][a] < sketch_table[mob_type][b]
     end)
@@ -389,7 +389,7 @@ local function init_metadata(pname, itemstack)
 
 end
 
-local function update_sketch_counts(itemstack)
+local function update_sketch_counts(user, itemstack)
 
     local meta = itemstack:get_meta()
 
@@ -418,22 +418,38 @@ local function update_sketch_counts(itemstack)
 
     end
 
+    local mob_full_flag
     if mob_count < total_mob_count then
-        meta:set_string("mob_full_flag", "false")
+        mob_full_flag = false
     else
-        meta:set_string("mob_full_flag", "true")
+        mob_full_flag = true
     end
 
+    local skin_full_flag
     if skin_count < total_skin_count then
-        meta:set_string("skin_full_flag", "false")
+        skin_full_flag = false
     else
-        meta:set_string("skin_full_flag", "true")
+        skin_full_flag = true
     end
 
+    local mutation_full_flag
     if mutation_count < total_mutation_count then
-        meta:set_string("mutation_full_flag", "false")
+        mutation_full_flag = false
     else
-        meta:set_string("mutation_full_flag", "true")
+        mutation_full_flag = true
+    end
+
+    meta:set_string("mob_full_flag", tostring(mob_full_flag))
+    meta:set_string("skin_full_flag", tostring(skin_full_flag))
+    meta:set_string("mutation_full_flag", tostring(mutation_full_flag))
+
+    -- Update awards, if available
+    local advanced_flag = (itemstack:get_name() == "unilib:item_book_sketch_advanced")
+    if mob_full_flag and
+            skin_full_flag and
+            (mutation_full_flag or not advanced_flag) and
+            unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+        unilib.pkg.award_ranger.on_sketchbook_fill(user, advanced_flag)
     end
 
 end
@@ -529,7 +545,7 @@ local function use_tool(user, itemstack, luaent)
 
     -- Check whether the book is full, or not (must be done every time, in case mobs/skins have been
     --      added/removed since the last restart)
-    update_sketch_counts(itemstack)
+    update_sketch_counts(user, itemstack)
 
     -- Must also re-sort the list of mobs, in case any packages have been added/removed since the
     --      last restart
@@ -561,7 +577,7 @@ local function consult_tool(user, itemstack)
 
     -- Check whether the book is full, or not (must be done every time, in case mobs/skins have been
     --      added/removed since the last restart)
-    update_sketch_counts(itemstack)
+    update_sketch_counts(user, itemstack)
 
     -- Must also re-sort the list of mobs, in case any packages have been added/removed since the
     --      last restart
@@ -605,7 +621,7 @@ local function register_sketchbook(part_name, description, recipe_table)
     })
     unilib.register_craft({
         type = "shaped",
-        output = "unilib:item_book_sketch_name",
+        output = "unilib:item_book_sketch_" .. part_name,
         recipe = recipe_table,
     })
 
@@ -664,7 +680,7 @@ function unilib.pkg.item_book_sketch.exec()
         beginner_description,
         {
             {c_leather, c_paper, c_paper},
-            {c_leather, "group:dye", c_paper},
+            {c_leather, "unilib:dye_orange", c_paper},
             {c_leather, c_paper, c_paper},
         }
     )
@@ -675,7 +691,7 @@ function unilib.pkg.item_book_sketch.exec()
         advanced_description,
         {
             {c_leather, c_paper, c_paper},
-            {c_leather, "group:dye", c_paper},
+            {c_leather, "unilib:dye_red", c_paper},
             {c_leather, c_paper, c_paper},
         }
     )

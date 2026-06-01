@@ -317,14 +317,14 @@ local function is_my_crane_main(pos, player)
     end
 
     -- Check protection
-    local player_name = player and player:get_player_name() or ""
-    if core.is_protected(pos, player_name) then
+    local pname = player and player:get_player_name() or ""
+    if core.is_protected(pos, pname) then
         return false
     end
 
     -- Check owner
     local meta = core.get_meta(pos)
-    if not meta or player_name ~= meta:get_string("owner") then
+    if not meta or pname ~= meta:get_string("owner") then
         return false
     end
 
@@ -420,18 +420,18 @@ local function reset_operator_privs(player)
 
 end
 
-local function control_player(pos, pos1, pos2, player_name)
+local function control_player(pos, pos1, pos2, pname)
 
     -- Adapted from towercrane/control.lua, was .control_player()
 
-    if departed_player_table[player_name] then
+    if departed_player_table[pname] then
 
-        departed_player_table[player_name] = nil
+        departed_player_table[pname] = nil
         return
 
     end
 
-    local player = player_name and core.get_player_by_name(player_name)
+    local player = pname and core.get_player_by_name(pname)
     if player then
 
         if is_crane_running_control(pos) then
@@ -484,9 +484,9 @@ local function control_player(pos, pos1, pos2, player_name)
                 end
 
                 -- Check if a protected area is violated
-                if correction == false and core.is_protected(pl_pos, player_name) then
+                if correction == false and core.is_protected(pl_pos, pname) then
 
-                    chat(player_name, S("This crane cannot be erected in a protected area!"))
+                    chat(pname, S("This crane cannot be erected in a protected area!"))
                     correction = true
 
                 end
@@ -506,7 +506,7 @@ local function control_player(pos, pos1, pos2, player_name)
 
                 end
 
-                core.after(1, control_player, pos, pos1, pos2, player_name)
+                core.after(1, control_player, pos, pos1, pos2, pname)
 
             end
 
@@ -604,14 +604,14 @@ local function get_my_crane_pos(player)
     local pos = core.string_to_pos(
         unilib.utils.get_player_attribute(player, "pkg_shared_towercrane_pos")
     )
-    local player_name = (player and player:get_player_name()) or ""
+    local pname = (player and player:get_player_name()) or ""
     local data = get_crane_data_control(pos)
-    if not data or player_name ~= data.owner then
+    if not data or pname ~= data.owner then
         return
     end
 
     -- Check protection
-    if core.is_protected(pos, player_name) then
+    if core.is_protected(pos, pname) then
         return
     end
 
@@ -1014,7 +1014,6 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
             groups = {crumbly = 0, not_in_creative_inventory = 1},
             -- (no sounds)
 
-            drawtype = "node",
             is_ground_content = false,
             light_source = 3,
             paramtype = "light",
@@ -1060,7 +1059,6 @@ function unilib.pkg.shared_towercrane.register_crane(data_table)
             groups = {crumbly = 0, not_in_creative_inventory = 1},
             -- (no sounds)
 
-            drawtype = "node",
             is_ground_content = false,
             paramtype = "light",
             paramtype2 = "facedir",

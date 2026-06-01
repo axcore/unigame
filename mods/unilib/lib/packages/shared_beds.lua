@@ -176,8 +176,7 @@ local function check_in_beds(players)
 
     for n, player in ipairs(players) do
 
-        local name = player:get_player_name()
-        if not in_bed[name] then
+        if not in_bed[player:get_player_name()] then
             return false
         end
 
@@ -191,34 +190,34 @@ local function lay_down(player, pos, bed_pos, state, skip)
 
     -- Adapted from beds/functions.lua
 
-    local name = player:get_player_name()
+    local pname = player:get_player_name()
     local hud_flags = player:hud_get_flags()
 
-    if not player or not name then
+    if not player or not pname then
         return
     end
 
     -- Stand up
     if state ~= nil and not state then
 
-        if not beds_player_table[name] then
+        if not beds_player_table[pname] then
 
             -- Player not in bed, do nothing
             return false
 
         end
 
-        beds_position_table[name] = nil
+        beds_position_table[pname] = nil
         -- Skip here to prevent sending player specific changes (used for leaving players)
         if skip then
             return
         end
 
-        player:set_pos(beds_pos_table[name])
+        player:set_pos(beds_pos_table[pname])
 
         -- Physics, eye_offset, etc
-        local physics_override = beds_player_table[name].physics_override
-        beds_player_table[name] = nil
+        local physics_override = beds_player_table[pname].physics_override
+        beds_player_table[pname] = nil
         player:set_physics_override({
             gravity = physics_override.gravity,
             jump = physics_override.jump,
@@ -226,7 +225,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
         })
         player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
         player:set_look_horizontal(math.random(1, 180) / 100)
-        unilib.player_api.set_player_attached(name, false)
+        unilib.player_api.set_player_attached(pname, false)
         hud_flags.wielditem = true
         unilib.player_api.set_animation(player, "stand", 30)
 
@@ -238,7 +237,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
 
             if vector.distance(bed_pos, other_pos) < 0.1 then
 
-                core.chat_send_player(name, S("This bed is already occupied!"))
+                core.chat_send_player(pname, S("This bed is already occupied!"))
                 return false
 
             end
@@ -248,7 +247,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
         -- Check if player is moving
         if vector.length(player:get_velocity()) > 0.05 then
 
-            core.chat_send_player(name, S("You have to stop moving before going to bed!"))
+            core.chat_send_player(pname, S("You have to stop moving before going to bed!"))
             return false
 
         end
@@ -259,13 +258,13 @@ local function lay_down(player, pos, bed_pos, state, skip)
         end
 
         -- Check if player already in bed
-        if beds_player_table[name] then
+        if beds_player_table[pname] then
             return false
         end
 
-        beds_pos_table[name] = pos
-        beds_position_table[name] = bed_pos
-        beds_player_table[name] = {physics_override = player:get_physics_override()}
+        beds_pos_table[pname] = pos
+        beds_position_table[pname] = bed_pos
+        beds_player_table[pname] = {physics_override = player:get_physics_override()}
 
         -- Physics, eye_offset, etc
         local yaw, param2 = get_look_yaw(bed_pos)
@@ -281,7 +280,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
 
         player:set_physics_override({gravity = 0, jump = 0, speed = 0})
         player:set_pos(p)
-        unilib.player_api.set_player_attached(name, true)
+        unilib.player_api.set_player_attached(pname, true)
         hud_flags.wielditem = false
         unilib.player_api.set_animation(player, "lay", 0)
 
@@ -395,23 +394,23 @@ local function on_rightclick(pos, player)
 
     -- Adapted from beds/functions.lua
 
-    local name = player:get_player_name()
+    local pname = player:get_player_name()
     local ppos = player:get_pos()
     local tod = core.get_timeofday()
 
     if tod > day_interval_table.start and tod < day_interval_table.finish then
 
-        if beds_player_table[name] then
+        if beds_player_table[pname] then
             lay_down(player, nil, nil, false)
         end
 
-        core.chat_send_player(name, S("You can only sleep at night!"))
+        core.chat_send_player(pname, S("You can only sleep at night!"))
         return
 
     end
 
     -- Move to bed
-    if not beds_player_table[name] then
+    if not beds_player_table[pname] then
 
         lay_down(player, ppos, pos)
         -- Save respawn positions when entering bed
@@ -632,12 +631,12 @@ function unilib.pkg.shared_beds.register_bed(data_table)
                 pos = pointed_thing.above
             end
 
-            local player_name = placer and placer:get_player_name() or ""
+            local pname = placer and placer:get_player_name() or ""
 
-            if core.is_protected(pos, player_name) and
-                    not core.check_player_privs(player_name, "protection_bypass") then
+            if core.is_protected(pos, pname) and
+                    not core.check_player_privs(pname, "protection_bypass") then
 
-                core.record_protection_violation(pos, player_name)
+                core.record_protection_violation(pos, pname)
                 return itemstack
 
             end
@@ -651,10 +650,10 @@ function unilib.pkg.shared_beds.register_bed(data_table)
                     core.dir_to_facedir(placer:get_look_dir()) or 0
             local botpos = vector.add(pos, core.facedir_to_dir(dir))
 
-            if core.is_protected(botpos, player_name) and
-                    not core.check_player_privs(player_name, "protection_bypass") then
+            if core.is_protected(botpos, pname) and
+                    not core.check_player_privs(pname, "protection_bypass") then
 
-                core.record_protection_violation(botpos, player_name)
+                core.record_protection_violation(botpos, pname)
                 return itemstack
 
             end
@@ -667,7 +666,7 @@ function unilib.pkg.shared_beds.register_bed(data_table)
             core.set_node(pos, {name = full_name .. "_bottom", param2 = dir})
             core.set_node(botpos, {name = full_name .. "_top", param2 = dir})
 
-            if not unilib.utils.is_creative(player_name) then
+            if not unilib.utils.is_creative(pname) then
                 itemstack:take_item()
             end
 
@@ -843,9 +842,8 @@ function unilib.pkg.shared_beds.exec()
 
         -- Adapted from beds/functions.lua
 
-        local name = player:get_player_name()
         lay_down(player, nil, nil, false, true)
-        beds_player_table[name] = nil
+        beds_player_table[player:get_player_name()] = nil
 
         -- Skip the night and let all players stand up
         if check_in_beds() then
@@ -858,12 +856,11 @@ function unilib.pkg.shared_beds.exec()
 
         -- Adapted from beds/functions.lua
 
-        local name = player:get_player_name()
         local in_bed = beds_player_table
         local pos = player:get_pos()
         local yaw = get_look_yaw(pos)
 
-        if in_bed[name] then
+        if in_bed[player:get_player_name()] then
 
             lay_down(player, nil, pos, false)
             player:set_look_horizontal(yaw)

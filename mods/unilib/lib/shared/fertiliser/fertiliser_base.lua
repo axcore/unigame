@@ -10,12 +10,20 @@ local S = unilib.intllib
 -- Table used in calls to check_soil(), so that calculations for each node only need to be
 --      performed once
 local fertilise_table = {}
+-- Categories of node, on which fertilisers can be used (a table for quick lookup)
+local category_table = {
+    crop = true,
+    flower = true,
+    grass = true,
+    plant = true,
+    produce = true,
+}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function particle_effect(pos, part_name)
+local function do_particle_effect(pos, part_name)
 
     -- Adapted from bonemeal/init.lua
     -- Shows particles when fertiliser is applied to something suitable (whether growth occurs on
@@ -40,6 +48,55 @@ local function particle_effect(pos, part_name)
 
 end
 
+local function can_place_on(full_name, val)
+
+    -- Original to unilib, to replace faulty code in check_soil()
+    -- The original code assumed that a decoration's .place_on field was either nil or a full_name,
+    --      but could not handle a list or a string like "group:sand"
+    -- This function corrects that problem. "val" is the value of the decoration's .place_on field;
+    --      "full_name" is the node that has been punched (while wielding some kind of fertiliser)
+    -- If "val" is nil, or matches "full_name", then the decoration can be placed here (returning
+    --      true), otherwise it can't (returning false)
+
+    if val == nil or val == full_name then
+        return true
+    end
+
+    for _, this_name in ipairs(unilib.utils.convert_to_list(val)) do
+
+        if this_name == full_name or (
+             string.sub(this_name, 1, 6) == "group:" and
+             core.get_item_group(full_name, string.sub(this_name, 7)) > 0
+        ) then
+            return true
+        end
+
+    end
+
+    return false
+
+end
+
+local function is_decoration_compatible(val)
+
+    -- Original to unilib
+    -- "val" is the .decoration field of a "simple" decoration, which may be a string or a list
+    -- Return true if any the items specified by "val" are compatible with fertilisers (e.g.
+    --      plants, grasses, crops etc)
+
+    for _, this_name in ipairs(unilib.utils.convert_to_list(val)) do
+
+        local category = unilib.utils.get_first_component(this_name)
+        if category_table[category] then
+            return true
+        end
+
+    end
+
+    return false
+
+end
+
 local function check_soil(pos, full_name, part_name, strength)
 
     -- Adapted from bonemeal/init.lua
@@ -50,21 +107,20 @@ local function check_soil(pos, full_name, part_name, strength)
     local side = strength - 1
     local tall = math.max(strength - 2, 0)
 
-    -- Within that area, only place decorations on the same type of surface (any kind of soil any
+    -- Within that area, only place decorations on the same type of surface (any kind of soil, any
     --      kind of sand, or the exact same node)
     local group_table = (
         core.registered_items[full_name] and
         core.registered_items[full_name].groups
     ) or {}
 
-    local ground
-
+    local ground_list
     if group_table.soil then
-        ground = {"group:soil"}
+        ground_list = {"group:soil"}
     elseif group_table.sand then
-        ground = {"group:sand"}
+        ground_list = {"group:sand"}
     else
-        ground = {full_name}
+        ground_list = {full_name}
     end
 
     -- A list of nodes on which a decoration can be placed. Each item on the list is a table in
@@ -72,7 +128,7 @@ local function check_soil(pos, full_name, part_name, strength)
     local dirt_list = core.find_nodes_in_area_under_air(
         {x = pos.x - side, y = pos.y - tall, z = pos.z - side},
         {x = pos.x + side, y = pos.y + tall, z = pos.z + side},
-        ground
+        ground_list
     )
 
     -- Search decorations, looking for decorations which are allowed to grow on "full_name" (unlike
@@ -90,13 +146,11 @@ local function check_soil(pos, full_name, part_name, strength)
         for _, def_table in pairs(core.registered_decorations) do
 
             if def_table.deco_type == "simple" and
-            type (def_table.decoration) == "string" and
+            is_decoration_compatible(def_table.decoration) and
+            can_place_on(full_name, def_table.place_on) and
             def_table.spawn_by == nil and (
                 def_table.biomes == nil or
                 unilib.utils.is_value_scalar_or_in_list(biome_name, def_table.biomes)
-            ) and (
-                def_table.place_on == nil or
-                def_table.place_on == full_name
             ) and (
                 def_table.y_min == nil
                 or def_table.y_min <= pos.y
@@ -105,13 +159,17 @@ local function check_soil(pos, full_name, part_name, strength)
                 or def_table.y_max >= pos.y
             ) then
 
-                category = unilib.utils.get_first_component(def_table.decoration)
-                if category == "grass" then
-                    table.insert(common_list, def_table.decoration)
-                elseif category == "flower" or category == "plant" then
-                    table.insert(uncommon_list, def_table.decoration)
-                elseif category == "crop" or category == "produce" then
-                    table.insert(rare_list, def_table.decoration)
+                for _, this_name in ipairs(unilib.utils.convert_to_list(def_table.decoration)) do
+
+                    local category = unilib.utils.get_first_component(this_name)
+                    if category == "grass" then
+                        table.insert(common_list, this_name)
+                    elseif category == "flower" or category == "plant" then
+                        table.insert(uncommon_list, this_name)
+                    elseif category == "crop" or category == "produce" then
+                        table.insert(rare_list, this_name)
+                    end
+
                 end
 
             end
@@ -193,36 +251,44 @@ local function check_soil(pos, full_name, part_name, strength)
 
         end
 
-        particle_effect(above_pos, part_name)
+        do_particle_effect(above_pos, part_name)
 
     end
 
 end
 
-local function check_sapling(pos, full_name, part_name)
+local function check_sapling(pos, full_name, part_name, strength)
 
     -- Adapted from bonemeal/init.lua
     -- Check for tree/bush growth when pointing at saplings
     -- This code has been tested with both schematic-based trees and L-system trees
 
-    -- On what is the sapling placed?
-    local under = core.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
+    -- At the moment, only tree and bush saplings are supported
+    category = unilib.utils.get_first_component(full_name)
+    if (category == "tree" or category == "bush") and 
+            unilib.flora.can_grow_sapling(pos, full_name) then
 
-    if unilib.flora.can_grow_sapling(pos, full_name) then
+        if math.random(5 - strength) == 1 then
 
-        -- At the moment, only tree and bush saplings exist
-        category = unilib.utils.get_first_component(full_name)
-        if category == "tree" then
+            if category == "tree" then
 
-            particle_effect(pos, part_name)
-            unilib.trees.grow_sapling(pos, full_name)
-            return true
+                do_particle_effect(pos, part_name)
+                unilib.trees.grow_sapling(pos, full_name)
+                return true
 
-        elseif category == "bush" then
+            elseif category == "bush" then
 
-            particle_effect(pos, part_name)
-            unilib.bushes.grow_sapling(pos, full_name)
-            return true
+                do_particle_effect(pos, part_name)
+                unilib.bushes.grow_sapling(pos, full_name)
+                return true
+
+            end
+
+        else
+
+            -- Try again next time
+            do_particle_effect(pos, part_name)
+            return
 
         end
 
@@ -230,27 +296,30 @@ local function check_sapling(pos, full_name, part_name)
 
 end
 
-local function check_crops(pos, full_name, strength)
+local function check_crops(pos, full_name, part_name, strength)
 
     -- Adapted from bonemeal/init.lua
     -- Check for crop/produce growth when pointing at them
 
     local data_table = unilib.global.grow_stage_table[full_name]
-    if data_table == nil or
-            (data_table.mode ~= "crop" and data_table.mode ~= "produce") or
-            data_table.max == nil then
+    if data_table == nil or data_table.stage_max == nil or (
+        -- N.B. Crops have the .mode "mtgame" or "fredo", not "crop"
+        data_table.mode ~= "mtgame" and
+        data_table.mode ~= "fredo" and
+        data_table.mode ~= "produce"
+    ) then
         return
     end
 
     -- Increase the growth stage of the crop/produce by "strength"
     local new_name = data_table.base_name .. "_" ..
-            math.min(data_table.stage + strength, data_table.max)
+            math.min(data_table.stage + strength, data_table.stage_max)
 
     -- Check for the place_param setting
     local def_table = core.registered_nodes[new_name]
     local place_param2 = def_table and def_table.place_param2 or 0
     core.set_node(pos, {name = new_name, param2 = place_param2})
-    particle_effect(pos)
+    do_particle_effect(pos, part_name)
 
     return true
 
@@ -294,7 +363,7 @@ function unilib.fertiliser._callback_on_use(pos, part_name, strength, node)
     if unilib.global.special_fertiliser_table[node.name] ~= nil then
 
         unilib.global.special_fertiliser_table[node.name](pos, node)
-        particle_effect(pos, part_name)
+        do_particle_effect(pos, part_name)
         return true
 
     end
@@ -312,18 +381,7 @@ function unilib.fertiliser._callback_on_use(pos, part_name, strength, node)
 
     -- Check for tree/bush growth when pointing at saplings
     if core.get_item_group(node.name, "sapling") > 0 then
-
-        if math.random(5 - strength) == 1 then
-
-            check_sapling(pos, node.name, part_name)
-            return true
-
-        else
-
-            return
-
-        end
-
+        return check_sapling(pos, node.name, part_name, strength)
     end
 
     -- Light check depending on strength (strength of 4 = no light needed)
@@ -332,7 +390,7 @@ function unilib.fertiliser._callback_on_use(pos, part_name, strength, node)
     end
 
     -- Check for crop/produce growth when pointing at them
-    if check_crops(pos, node.name, strength) then
+    if check_crops(pos, node.name, part_name, strength) then
         return true
     end
 

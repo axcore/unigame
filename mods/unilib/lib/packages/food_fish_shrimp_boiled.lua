@@ -45,7 +45,7 @@ end
 
 function unilib.pkg.food_fish_shrimp_boiled.post()
 
-    local c_fish = "unilib:ingredient_fish_shrimp"
+    local c_fish = "unilib:ingredient_fish_shrimp_white"
 
     unilib.register_craft({
         -- From ethereal:fish_shrimp_cooked

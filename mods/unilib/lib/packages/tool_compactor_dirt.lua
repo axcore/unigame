@@ -19,8 +19,6 @@ local function do_compact(itemstack, user, pointed_thing)
 
     -- Was ram()
 
-    local player_name = user:get_player_name()
-
     if pointed_thing.type ~= "node" then
         return
     end
@@ -37,7 +35,7 @@ local function do_compact(itemstack, user, pointed_thing)
 
         core.set_node(pos, {name = "unilib:dirt_compacted"})
 
-        if unilib.utils.is_creative(player_name) then
+        if unilib.utils.is_creative(user:get_player_name()) then
 
             -- Wear the tool
             local def_table = itemstack:get_definition()

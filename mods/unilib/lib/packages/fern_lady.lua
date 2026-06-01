@@ -29,7 +29,10 @@ function unilib.pkg.fern_lady.exec()
         -- From farlands, mapgen:fern
         description = unilib.utils.annotate(S("Lady Fern"), "Athyrium filix-femina"),
         tiles = {"unilib_fern_lady.png"},
-        groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
+        -- N.B. attached_node = 1 not in original code
+        groups = {
+            attached_node = 1, flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3,
+        },
         sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,

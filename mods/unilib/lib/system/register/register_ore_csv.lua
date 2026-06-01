@@ -7,6 +7,9 @@
 
 local S = unilib.intllib
 
+-- When reading ores from CSV, show warnings if nodes don't exist
+local ore_check_table = {}
+
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
@@ -141,7 +144,9 @@ function unilib.register._register_ore_from_csv(data_table)
 
     end
 
-    def_table.biomes = unilib.utils.split_string_by_whitespace(data_table.biomes, true)
+    if data_table.biomes ~= "" then
+        def_table.biomes = unilib.utils.split_string_by_whitespace(data_table.biomes, true)
+    end
 
     -- Specific ore types
     if data_table.ore_type == "sheet" then

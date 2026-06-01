@@ -74,23 +74,17 @@ function unilib.pkg.ingredient_oil_peanut.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        technic.register_compressor_recipe({
+            -- From cucina_vegana:peanut_oil
+            output = "unilib:ingredient_oil_peanut",
+            input = {"unilib:crop_peanut_seed 6"},
+        })
 
-            technic.register_compressor_recipe({
-                -- From cucina_vegana:peanut_oil
-                output = "unilib:ingredient_oil_peanut",
-                input = {"unilib:crop_peanut_seed 6"},
-            })
-
-            technic.register_extractor_recipe({
-                -- From cucina_vegana:peanut_oil
-                output = "unilib:ingredient_oil_peanut",
-                input = {"unilib:crop_peanut_seed 6"},
-            })
-
-        end)
+        technic.register_extractor_recipe({
+            -- From cucina_vegana:peanut_oil
+            output = "unilib:ingredient_oil_peanut",
+            input = {"unilib:crop_peanut_seed 6"},
+        })
 
     end
 

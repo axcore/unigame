@@ -1,0 +1,3 @@
+Contains a few items from the rocks modpack (fork by Gael-de-Sailly) that are not found in AATO/PFAA (but are required by GLEM).
+
+Because the name of the mineral mod clashes with a Grailtest mod, everything has been grouped into a hypothetical "rocks" mod.

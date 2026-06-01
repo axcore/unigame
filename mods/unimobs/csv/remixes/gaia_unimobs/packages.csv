@@ -1,6 +1,5 @@
 # "gaia_unimobs" remix - provides packages and settings to enable mobs to spawn in world using
 #   unilib's "gaia" remix
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -12,6 +11,7 @@ misc_straw_ordinary_block|bale
 
 # petz/kitz packages
 chat_clear_mobs|kitz
+chat_examine_mob|unilib
 
 # petz/petz packages
 meta_petz_settings|petz

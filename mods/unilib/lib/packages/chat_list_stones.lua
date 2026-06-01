@@ -230,7 +230,7 @@ end
 function unilib.pkg.chat_list_stones.exec()
 
     core.register_chatcommand("list_stones", {
-        params = "",
+        params = "[type]",
         description = S("Lists all stone types, or details for the specified stone type"),
         privs = {unilib_tools = true},
 
@@ -240,7 +240,7 @@ function unilib.pkg.chat_list_stones.exec()
     })
 
     core.register_chatcommand("list_stone", {
-        params = "",
+        params = "[type]",
         description = S("Lists all stone types, or details for the specified stone type"),
         privs = {unilib_tools = true},
 

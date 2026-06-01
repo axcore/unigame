@@ -22,7 +22,7 @@ function unilib.pkg.deco_ethereal_plant_cactus_ordinary.init()
         depends = "plant_cactus_ordinary",
         optional = {
             "biome_ethereal_desert",
-            "biome_ethereal_sandstone_desert",
+            "biome_ethereal_desert_sandstone",
             "sand_desert",
             "stone_sandstone_ordinary",
         },
@@ -32,7 +32,7 @@ end
 
 function unilib.pkg.deco_ethereal_plant_cactus_ordinary.exec()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_sandstone_desert"] ~= nil and
+    if unilib.global.pkg_executed_table["biome_ethereal_desert_sandstone"] ~= nil and
             unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         -- Cactus decoration placed as a single node; the ABM causes it to grow upwards
@@ -88,12 +88,12 @@ end
 
 function unilib.pkg.deco_ethereal_plant_cactus_ordinary.post()
 
-    if unilib.global.pkg_executed_table["biome_ethereal_sandstone_desert"] ~= nil and
+    if unilib.global.pkg_executed_table["biome_ethereal_desert_sandstone"] ~= nil and
             unilib.global.pkg_executed_table["stone_sandstone_ordinary"] ~= nil then
 
         unilib.register_decoration_complete("ethereal_plant_cactus_ordinary_1", nil, {
             -- From ethereal-ng/decor.lua
-            biomes = "ethereal_sandstone_desert",
+            biomes = "ethereal_desert_sandstone",
             place_on = "unilib:stone_sandstone_ordinary",
             y_max = 100,
             y_min = 1,

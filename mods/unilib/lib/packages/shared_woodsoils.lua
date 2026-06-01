@@ -234,43 +234,55 @@ function unilib.pkg.shared_woodsoils.do_dirt(dirt_full_name)
 
     local dirt_img = dirt_def_table["tiles"][1]
 
-    unilib.register_node(dirt_medium_full_name, dirt_medium_orig_name, mode, {
-        -- From woodsoils:dirt_with_leaves_1
-        description = S("@1 with Medium Forest Litter", dirt_def_table.description),
-        tiles = {
-            dirt_img .. "^unilib_litter_forest_medium_overlay.png",
-            dirt_img,
-            dirt_img .. "^unilib_litter_forest_medium_side_overlay.png",
-        },
-        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
-        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-        sounds = unilib.sound.generate_dirt({
-            footstep = {name = "unilib_grass_footstep", gain = 0.4},
-        }),
+    -- N.B. The "dirt_custom_gaia" package creates nodes with the same name; don't try to
+    --      duplicate them
+    if core.registered_nodes[dirt_medium_full_name] == nil then
 
-        drop = dirt_full_name,
-        is_ground_content = unilib.setting.caves_chop_dirt_flag,
-        soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, dirt_medium_full_name),
-    })
+        unilib.register_node(dirt_medium_full_name, dirt_medium_orig_name, mode, {
+            -- From woodsoils:dirt_with_leaves_1
+            description = S("@1 with Medium Forest Litter", dirt_def_table.description),
+            tiles = {
+                dirt_img .. "^unilib_litter_forest_medium_overlay.png",
+                dirt_img,
+                dirt_img .. "^unilib_litter_forest_medium_side_overlay.png",
+            },
+            -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+            groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
 
-    unilib.register_node(dirt_heavy_full_name, dirt_heavy_orig_name, mode, {
-        -- From woodsoils:dirt_with_leaves_2
-        description = S("@1 with Heavy Forest Litter", dirt_def_table.description),
-        tiles = {
-            "unilib_litter_forest_heavy_underlay.png",
-            dirt_img,
-            dirt_img .. "^unilib_litter_forest_heavy_side_overlay.png",
-        },
-        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
-        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-        sounds = unilib.sound.generate_dirt({
-            footstep = {name = "unilib_grass_footstep", gain = 0.4},
-        }),
+            drop = dirt_full_name,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+            soil = unilib.pkg.shared_woodsoils.get_soil_table(
+                dirt_def_table, dirt_medium_full_name
+            ),
+        })
 
-        drop = dirt_full_name,
-        is_ground_content = unilib.setting.caves_chop_dirt_flag,
-        soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, dirt_heavy_full_name),
-    })
+    end
+
+    if core.registered_nodes[dirt_heavy_full_name] == nil then
+
+        unilib.register_node(dirt_heavy_full_name, dirt_heavy_orig_name, mode, {
+            -- From woodsoils:dirt_with_leaves_2
+            description = S("@1 with Heavy Forest Litter", dirt_def_table.description),
+            tiles = {
+                "unilib_litter_forest_heavy_underlay.png",
+                dirt_img,
+                dirt_img .. "^unilib_litter_forest_heavy_side_overlay.png",
+            },
+            -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+            groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
+
+            drop = dirt_full_name,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+            soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, dirt_heavy_full_name),
+        })
+
+    end
 
     -- N.B. This code from the "sickles" mod applies only for the dirt specified by the original
     --      "woodsoils" mod code
@@ -320,43 +332,57 @@ function unilib.pkg.shared_woodsoils.do_turf(dirt_full_name, turf_full_name)
     local turf_top_img = turf_def_table["tiles"][1]
     local turf_side_img = turf_def_table["tiles"][3]
 
-    unilib.register_node(turf_medium_full_name, turf_medium_orig_name, mode, {
-        -- From woodsoils:grass_with_leaves_2
-        description = S("@1 with Medium Forest Litter", turf_def_table.description),
-        tiles = {
-            unilib.utils.concat_img(turf_top_img, "unilib_litter_forest_medium_overlay.png"),
-            dirt_img,
-            unilib.utils.concat_img(turf_side_img, "unilib_litter_forest_medium_side_overlay.png"),
-        },
-        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
-        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-        sounds = unilib.sound.generate_dirt({
-            footstep = {name = "unilib_grass_footstep", gain = 0.4},
-        }),
+    if core.registered_nodes[turf_medium_full_name] == nil then
 
-        drop = dirt_full_name,
-        is_ground_content = unilib.setting.caves_chop_dirt_flag,
-        soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, turf_medium_full_name),
-    })
+        unilib.register_node(turf_medium_full_name, turf_medium_orig_name, mode, {
+            -- From woodsoils:grass_with_leaves_2
+            description = S("@1 with Medium Forest Litter", turf_def_table.description),
+            tiles = {
+                unilib.utils.concat_img(turf_top_img, "unilib_litter_forest_medium_overlay.png"),
+                dirt_img,
+                unilib.utils.concat_img(
+                    turf_side_img, "unilib_litter_forest_medium_side_overlay.png"
+                ),
+            },
+            -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+            groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
 
-    unilib.register_node(turf_light_full_name, turf_light_orig_name, mode, {
-        -- From woodsoils:grass_with_leaves_1
-        description = S("@1 with Light Forest Litter", turf_def_table.description),
-        tiles = {
-            unilib.utils.concat_img(turf_top_img, "unilib_litter_forest_light_overlay.png"),
-            dirt_img,
-            unilib.utils.concat_img(turf_side_img, "unilib_litter_forest_light_side_overlay.png"),
-        },
-        -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
-        groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
-        sounds = unilib.sound.generate_dirt({
-            footstep = {name = "unilib_grass_footstep", gain = 0.4},
-        }),
+            drop = dirt_full_name,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+            soil = unilib.pkg.shared_woodsoils.get_soil_table(
+                dirt_def_table, turf_medium_full_name
+            ),
+        })
 
-        drop = dirt_full_name,
-        is_ground_content = unilib.setting.caves_chop_dirt_flag,
-        soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, turf_light_full_name),
-    })
+    end
+
+    if core.registered_nodes[turf_medium_full_name] == nil then
+
+        unilib.register_node(turf_light_full_name, turf_light_orig_name, mode, {
+            -- From woodsoils:grass_with_leaves_1
+            description = S("@1 with Light Forest Litter", turf_def_table.description),
+            tiles = {
+                unilib.utils.concat_img(turf_top_img, "unilib_litter_forest_light_overlay.png"),
+                dirt_img,
+                unilib.utils.concat_img(
+                    turf_side_img, "unilib_litter_forest_light_side_overlay.png"
+                ),
+            },
+            -- N.B. covered_dirt = 1, not_in_creative_inventory = 1 not in original code
+            groups = {covered_dirt = 1, crumbly = 3, not_in_creative_inventory = 1, soil = 1},
+            sounds = unilib.sound.generate_dirt({
+                footstep = {name = "unilib_grass_footstep", gain = 0.4},
+            }),
+
+            drop = dirt_full_name,
+            is_ground_content = unilib.setting.caves_chop_dirt_flag,
+            soil = unilib.pkg.shared_woodsoils.get_soil_table(dirt_def_table, turf_light_full_name),
+        })
+
+    end
 
     -- N.B. This code from the "sickles" mod applies only for the dirt specified by the original
     --      "woodsoils" mod code

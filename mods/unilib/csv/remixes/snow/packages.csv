@@ -1,4 +1,4 @@
-# "snow" remix - contains everything from the "snow biomes" mod
+# "snow" remix - contains everything from the snow biomes mod
 
 # node_name | original_mod
 
@@ -19,7 +19,7 @@ snow_hard|snow
 tree_apple_frozen|snow
 tree_pine_christmas|snow
 tree_pine_frozen|snow
-weather_snowflakes|snow
+weather_snow_special|snow
 
 # snow packages (in original mod, disabled by default)
 biome_snow_alpine|snow

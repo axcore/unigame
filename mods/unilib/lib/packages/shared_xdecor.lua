@@ -20,7 +20,7 @@ function unilib.pkg.shared_xdecor.toggle_door(pos_actuator, pos_door, player)
     -- From xdecor/src/mechanisms.lua, was door_toggle()
     -- Called by door levers and pressure plates (etc) to open or close a door/trapdoor
 
-    local player_name = player:get_player_name()
+    local pname = player:get_player_name()
     local actuator = core.get_node(pos_actuator)
     local door = unilib.access.get_door(pos_door)
     if not door then
@@ -51,7 +51,7 @@ function unilib.pkg.shared_xdecor.toggle_door(pos_actuator, pos_door, player)
 
         -- Re-obtain player object (or nil) because 'player' could be an invalid object at this time
         --      (e.g. if the player left)
-        door:close(core.get_player_by_name(player_name))
+        door:close(core.get_player_by_name(pname))
 
     end)
 

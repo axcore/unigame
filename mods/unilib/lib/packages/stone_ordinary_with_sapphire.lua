@@ -34,8 +34,8 @@ function unilib.pkg.stone_ordinary_with_sapphire.exec()
         drop_name = "unilib:mineral_sapphire_lump"
     end
 
-    unilib.register_node("unilib:stone_ordinary_with_sapphire", "underch:sapphire_ore", mode, {
-        -- From underch:sapphire_ore
+    unilib.register_node("unilib:stone_ordinary_with_sapphire", "underch:saphire_ore", mode, {
+        -- From underch:saphire_ore
         description = unilib.utils.brackets(S("Sapphire Ore"), S("Ordinary Stone")),
         tiles = {"unilib_stone_ordinary.png^unilib_mineral_sapphire.png"},
         -- N.B. ore = 1 not in original code

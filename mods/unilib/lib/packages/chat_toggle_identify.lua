@@ -21,7 +21,7 @@ local function do_toggle(pname, param)
         return false, unilib.constant.chat_offline_msg
     end
 
-    if not unilib.setting.identify_enable_hud_flag then
+    if not unilib.setting.announce_enable_flag then
         return false, S("The \"identify\" effect has been disabled in settings")
     end
 

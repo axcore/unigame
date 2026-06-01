@@ -252,7 +252,6 @@ function unilib.slopes.get_slope_definitions(base_name, defn_change_table)
             (base_name or "nil")
         )
 
-
     end
 
     local full_copy_table = table.copy(def_table)

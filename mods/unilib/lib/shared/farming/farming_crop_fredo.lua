@@ -154,7 +154,7 @@ function unilib.farming._register_crop_fredo(data_table)
 
     -- Register growth stages
     local grow_def_table = {
-        description = unilib.utils.brackets(S("Crop"), S("Growing")),
+        description = unilib.utils.brackets(harvest_description, S("Growing")),
         -- (tiles defined below)
         -- (groups defined below)
         sounds = unilib.global.sound_table.leaves,
@@ -208,17 +208,23 @@ function unilib.farming._register_crop_fredo(data_table)
         --      after themselves)
         local this_grow_group_table = table.copy(grow_group_table)
         if i == steps then
-            this_grow_group_table.growing = 0
+
+            this_grow_group_table.growing = nil
+            this_grow_group_table.harvestable = 1
+
         else
+
             this_grow_group_table.growing = 1
+
         end
 
         this_def_table.groups = this_grow_group_table
 
-        local next_plant = nil
-
+        local next_plant
         if i < steps then
             next_plant = grow_name .. "_" .. (i + 1)
+        else
+            this_def_table.description = unilib.utils.brackets(harvest_description, S("Grown"))
         end
 
         this_def_table.next_plant = next_plant
@@ -227,7 +233,10 @@ function unilib.farming._register_crop_fredo(data_table)
         if grow_list ~= nil and grow_list[i] ~= nil then
 
             if i == #grow_list then
+
                 this_def_table.groups.growing = nil
+                this_def_table.groups.harvestable = 1
+
             end
 
             for k, v in pairs(grow_list[i]) do

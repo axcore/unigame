@@ -1,0 +1,1 @@
+Contains all metals, minerals and ores from the real_minerals mod. Does not contain the molds commented out in the original code.

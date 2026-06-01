@@ -19,8 +19,6 @@ local function do_cut(itemstack, user, pointed_thing)
 
     -- Was turf_cut()
 
-    local player_name = user:get_player_name()
-
     if pointed_thing.type ~= "node" then
         return
     end
@@ -50,7 +48,7 @@ local function do_cut(itemstack, user, pointed_thing)
             core.set_node(pos, {name = dirt_name})
         end
 
-        if unilib.utils.is_creative(player_name) then
+        if unilib.utils.is_creative(user:get_player_name()) then
 
             -- Wear the tool
             local def_table = itemstack:get_definition()

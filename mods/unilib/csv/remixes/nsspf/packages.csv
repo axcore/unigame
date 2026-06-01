@@ -1,4 +1,4 @@
-# "nsspf" remix - contains all mushrooms, fungi and truffles from the "nsspf" (Not So Simple Plants
+# "nsspf" remix - contains all mushrooms, fungi and truffles from the nsspf (Not So Simple Plants
 #   and Fungi) mod, but their behaviour has been changed in order to drastically improve the player
 #   experience (removing most ABMs)
 # Mushrooms/fungi growing on the ground now behave like minetest_game mushrooms (i.e. they are
@@ -9,7 +9,7 @@
 # node_name | original_mod
 
 # nsspf packages
-deco_nsspf_fungus_misc.lua
+deco_nsspf_fungus_misc|nsspf
 deco_nsspf_mushroom_amanita_fly|nsspf
 deco_nsspf_mushroom_black_snowbank|nsspf
 deco_nsspf_mushroom_brain|nsspf
@@ -19,7 +19,7 @@ deco_nsspf_mushroom_death_cap|nsspf
 deco_nsspf_mushroom_devils_bolete|nsspf
 deco_nsspf_mushroom_gold_cap|nsspf
 deco_nsspf_mushroom_larch_bolete|nsspf
-deco_nsspf_mushroom_misc.lua
+deco_nsspf_mushroom_misc|nsspf
 deco_nsspf_mushroom_morel_black|nsspf
 deco_nsspf_mushroom_parasol|nsspf
 deco_nsspf_mushroom_pine_bolete|nsspf
@@ -28,7 +28,7 @@ deco_nsspf_mushroom_porcini|nsspf
 deco_nsspf_mushroom_puffball|nsspf
 deco_nsspf_mushroom_shrimp|nsspf
 deco_nsspf_mushroom_white_snowbank|nsspf
-deco_nsspf_truffle_misc.lua
+deco_nsspf_truffle_misc|nsspf
 item_amadou|nsspf
 mushroom_amanita_fly|nsspf
 mushroom_azurea|nsspf

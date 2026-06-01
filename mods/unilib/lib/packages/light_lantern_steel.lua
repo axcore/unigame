@@ -76,7 +76,7 @@ function unilib.pkg.light_lantern_steel.exec()
         output = "unilib:light_lantern_steel 2",
         recipe = {
             {c_ingot, c_ingot, c_ingot},
-            {c_ingot, "unilib:unilib:mineral_mese_block", c_ingot},
+            {c_ingot, "unilib:mineral_mese_block", c_ingot},
             {c_ingot, c_ingot, c_ingot},
         },
     })

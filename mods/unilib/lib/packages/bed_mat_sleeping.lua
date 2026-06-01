@@ -35,7 +35,7 @@ function unilib.pkg.bed_mat_sleeping.exec()
         sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
-        -- N.B. Removed ,so that this item and "unilib:bed_mat_straw" are rotated the same way in
+        -- N.B. Removed, so that this item and "unilib:bed_mat_straw" are rotated the same way in
         --      the player's inventory
 --      inventory_image = "unilib_bed_mat_sleeping.png",
         is_ground_content = false,
@@ -84,7 +84,7 @@ function unilib.pkg.bed_mat_sleeping.exec()
         sounds = unilib.global.sound_table.leaves,
 
         drawtype = "nodebox",
-        -- N.B. Removed ,so that this item and "unilib:bed_mat_straw" are rotated the same way in
+        -- N.B. Removed, so that this item and "unilib:bed_mat_straw" are rotated the same way in
         --      the player's inventory
 --      inventory_image = "unilib_bed_mat_sleeping.png",
         is_ground_content = false,

@@ -540,7 +540,7 @@ local function set_inherited_skin(
     else
 
         -- Select a mutation skin
-        local mutation_num = random(1, #mutation_list)
+        local mutation_num = #skin_compound_list + random(1, #mutation_list)
 
         skin_a_num = mutation_num
         skin_b_num = mutation_num

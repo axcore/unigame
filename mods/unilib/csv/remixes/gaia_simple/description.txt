@@ -1,0 +1,3 @@
+A smaller collection of biomes, decorations and ores, based on the "gaia" remix, but with all ecosystems removed. This produces a less beautiful world but requires many fewer packages.
+
+See the notes in the packages.csv file for the "gaia" remix, all of which apply to this remix as well.

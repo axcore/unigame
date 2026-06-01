@@ -86,7 +86,7 @@ local function do_auto_drop()
 
         -- (Original code)
         --[[
-        if not player or player.is_fake_player then
+        if not unilib.utils.is_player(player) then
 
             -- Node Breaker and similar machines should receive items in the inventory
             return old_handle_node_drops(pos, drops, player)
@@ -95,8 +95,7 @@ local function do_auto_drop()
         ]]--
 
         -- (Modified unilib code, to enable toggling auto-get on a per-player basis)
-        if not player or
-                player.is_fake_player or
+        if not unilib.utils.is_player(player) or
                 not player_auto_drop_table[player:get_player_name()] then
 
             -- Node Breaker and similar machines should receive items in the inventory

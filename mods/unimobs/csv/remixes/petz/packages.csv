@@ -1,7 +1,6 @@
-# "petz" remix - contains almost everything from the "petz" modpack
+# "petz" remix - contains almost everything from the petz modpack
 # See also the "petz_mini" remix, which containss all brain and behaviour packages from the this
 #   remix (but nothing else)
-# See the STANDARDS file for more information about what belongs in each category, and what does not
 
 # node_name | original_mod
 
@@ -13,6 +12,7 @@ misc_straw_ordinary_block|bale
 
 # petz/kitz packages
 chat_clear_mobs|kitz
+chat_examine_mob|unilib
 
 # petz/petz packages
 meta_petz_settings|petz

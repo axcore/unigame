@@ -54,8 +54,10 @@ function unilib.farming._register_crop_mtgame(data_table)
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
     local eat = data_table.eat or nil
     local fertility_list = data_table.fertility_list or {}
-    local grow_group_table = data_table.grow_group_table or
-            {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, plant = 1, snappy = 3}
+    local grow_group_table = data_table.grow_group_table or {
+        attached_node = 1, flammable = 2, growing = 1, not_in_creative_inventory = 1, plant = 1,
+        snappy = 3,
+    }
     local harvest_description = data_table.harvest_description or
             part_name:gsub("^%l", string.upper)
     local harvest_group_table = data_table.harvest_group_table or {flammable = 2}
@@ -163,6 +165,7 @@ function unilib.farming._register_crop_mtgame(data_table)
 
     -- Each crop has a group named after itself
     grow_group_table[part_name] = 1
+
     -- Register growth stages
     for i = 1, steps do
 
@@ -181,15 +184,28 @@ function unilib.farming._register_crop_mtgame(data_table)
             }
         }
 
-        local next_plant = nil
-
+        local next_plant, harvest_hint
         if i < steps then
+
             next_plant = grow_name .. "_" .. (i + 1)
+            harvest_hint = S("Growing")
+
+        else
+
+            harvest_hint = S("Grown")
+
+        end
+
+        if i == steps then
+
+            grow_group_table.growing = nil
+            grow_group_table.harvestable = 1
+
         end
 
         -- Register each growth stage for the crop
         unilib.register_node(grow_name .. "_" .. i, grow_orig_name[i], replace_mode, {
-            description = unilib.utils.brackets(S("Crop"), S("Growing")),
+            description = unilib.utils.brackets(harvest_description, harvest_hint),
             tiles = {"unilib_crop_" .. part_name .. "_grow_" .. i .. ".png"},
             groups = grow_group_table,
             sounds = unilib.global.sound_table.leaves,

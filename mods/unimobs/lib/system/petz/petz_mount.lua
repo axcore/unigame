@@ -384,6 +384,17 @@ function unimobs.petz_api.mount_player_on_mob(entity, player)
 
     player:set_look_horizontal(entity.object:get_yaw() - rot_view)
 
+    -- Update awards, if available
+    if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+
+        if not entity.wagon then
+            unilib.pkg.award_ranger.on_mob_mount(player, entity)
+        else
+            unilib.pkg.award_ranger.on_wagon_ride(player, entity)
+        end
+
+    end
+
 end
 
 function unimobs.petz_api.force_dismount_player_from_mob(player)

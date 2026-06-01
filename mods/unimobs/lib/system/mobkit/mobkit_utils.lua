@@ -902,9 +902,6 @@ function unimobs.mobkit_api.get_random_nearby_player(self)
     else
 
         local pos = self.object:get_pos()
-        -- N.B. In the original code, 50% of self.view_range, but that's not enough for mobs to
-        --      comfortably follow a player
-        local range = self.view_range * 0.66
         -- N.B. In the original code, this "random" function returns the same player every time;
         --      instead, make sure it's actually a random choice each time
 --      for _, obj in ipairs(core.get_connected_players()) do
@@ -915,7 +912,9 @@ function unimobs.mobkit_api.get_random_nearby_player(self)
 
                 local obj_pos = obj:get_pos()
                 local obj_dist = abs(obj_pos.x - pos.x) + abs(obj_pos.z - pos.z)
-                if obj_dist <= range then
+                -- N.B. In the original code, 50% of self.view_range, but that's not enough for mobs
+                --      to comfortably follow a player
+                if obj_dist <= self.view_range then
                     return obj
                 end
 
@@ -1059,8 +1058,8 @@ function unimobs.mobkit_api.get_spawn_pos_kitz(abr)
                 ) then
 
             local spawn_in_area_flag = false
-            -- "this_area", in the form "(x,y,z);(x,y,z)", defines an area in which mobs
-            --      exclusively spawn
+            -- "this_area", in the form "x,y,z;x,y,z", defines an area in which mobs exclusively
+            --      spawn
             for _, this_area in ipairs(unimobs.petz_setting.exclusive_spawn_area_list) do
 
                 local point_list = string.split(this_area, ';')

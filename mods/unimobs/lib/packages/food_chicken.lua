@@ -29,7 +29,8 @@ function unilib.pkg.food_chicken.exec()
         -- From petz:raw_chicken
         description = S("Raw Normal Chicken"),
         inventory_image = "unilib_food_chicken_raw.png",
-        groups = {flammable = 2, food = 2, food_meat_raw = 1},
+        -- N.B. food_chicken_raw = 1 not in original code
+        groups = {flammable = 2, food = 2, food_chicken_raw = 1, food_meat_raw = 1},
 
         wield_image = "unilib_food_chicken_raw.png",
 
@@ -40,7 +41,8 @@ function unilib.pkg.food_chicken.exec()
         -- From petz:roasted_chicken
         description = S("Roasted Normal Chicken"),
         inventory_image = "unilib_food_chicken_roasted.png",
-        groups = {flammable = 2, food = 2, food_meat = 1},
+        -- N.B. food_chicken = 1 not in original code
+        groups = {flammable = 2, food = 2, food_chicken = 1, food_meat = 1},
 
         on_use = unilib.cuisine.eat_on_use("unilib:food_chicken_roasted", 3),
     })

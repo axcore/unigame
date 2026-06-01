@@ -54,26 +54,26 @@ function unilib.pkg.mineral_sapphire.exec()
 
     end
 
-    unilib.register_craftitem("unilib:mineral_sapphire_gem", "underch:sapphire", mode, {
-        -- From underch:sapphire
+    unilib.register_craftitem("unilib:mineral_sapphire_gem", "underch:saphire", mode, {
+        -- From underch:saphire
         description = S("Sapphire Gem"),
         inventory_image = "unilib_mineral_sapphire_gem.png",
     })
     unilib.register_craft({
-        -- From underch:sapphire
+        -- From underch:saphire
         type = "shapeless",
         output = "unilib:mineral_sapphire_gem 9",
         recipe = {"unilib:mineral_sapphire_block"},
     })
     unilib.register_craft({
-        -- From underch:sapphire
+        -- From underch:saphire
         type = "shapeless",
         output = "unilib:mineral_sapphire_gem 2",
         recipe = {"unilib:mineral_sapphire_crystal_large"},
     })
 
-    unilib.register_node("unilib:mineral_sapphire_block", "underch:sapphire_block", mode, {
-        -- From underch:sapphire_block
+    unilib.register_node("unilib:mineral_sapphire_block", "underch:saphire_block", mode, {
+        -- From underch:saphire_block
         description = S("Sapphire Block"),
         tiles = {"unilib_mineral_sapphire_block.png"},
         groups = {cracky = 3},
@@ -82,7 +82,7 @@ function unilib.pkg.mineral_sapphire.exec()
         is_ground_content = false,
     })
     unilib.register_craft_3x3({
-        -- From underch:sapphire_block
+        -- From underch:saphire_block
         output = "unilib:mineral_sapphire_block",
         ingredient = "unilib:mineral_sapphire_gem",
     })
@@ -92,9 +92,9 @@ function unilib.pkg.mineral_sapphire.exec()
     })
 
     unilib.register_node(
-        -- From underch:sapphire_crystal
+        -- From underch:saphire_crystal
         "unilib:mineral_sapphire_crystal_large",
-        "underch:sapphire_crystal",
+        "underch:saphire_crystal",
         mode,
         {
             description = S("Large Sapphire Crystal"),

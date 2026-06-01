@@ -1,0 +1,5 @@
+A remix containing templates for all standard .CSV files.
+
+If you want to create your own remix, you can copy this folder and its files into ../custom/remixes, or into your own unilib expansion pack (see the README).
+
+Any .CSV files you don't need can be discarded (but note that the packages.csv is compulsory)

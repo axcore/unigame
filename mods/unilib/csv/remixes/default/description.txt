@@ -1,0 +1,3 @@
+Contains almost everything from default mod in minetest_game.
+
+See also the "mtgame" remix, which contains almost everything in minetest_game.

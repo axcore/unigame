@@ -38,7 +38,11 @@ function unilib.pkg.misc_painting_small.exec()
         -- From xdecor:painting_1
         description = S("Small Painting"),
         tiles = {"unilib_misc_painting_small_1.png", "unilib_misc_painting_frame_small.png"},
-        groups = {attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
+        -- N.B. painting = 1, small_painting = 1 not in original code
+        groups = {
+            attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 2,
+            painting = 1, small_painting = 1,
+        },
         sounds = unilib.global.sound_table.wood,
 
         drawtype = "nodebox",

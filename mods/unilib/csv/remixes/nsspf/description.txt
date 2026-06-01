@@ -1,0 +1,3 @@
+Contains all mushrooms, fungi and truffles from the nsspf (Not So Simple Plants and Fungi) mod, but their behaviour has been changed in order to drastically improve the player experience (removing most ABMs).
+
+Mushrooms/fungi growing on the ground now behave like minetest_game mushrooms (i.e. they are spreadable). Other mushrooms/fungi tend to grow on trees, and are not spreadable or placeable. Truffles can be found growing at the base of some trees, just below the surface. Spores have not been imported at all.

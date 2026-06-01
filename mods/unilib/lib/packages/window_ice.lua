@@ -19,6 +19,7 @@ function unilib.pkg.window_ice.init()
 
     return {
         description = "Ice window",
+        notes = "Requires the \"Allow tweaks to code adapted from minetest_game\" setting",
         depends = "ice_ordinary",
         optional = "item_sweeper",
     }
@@ -27,6 +28,10 @@ end
 
 function unilib.pkg.window_ice.exec()
 
+    if not unilib.setting.mtgame_tweak_flag then
+        return
+    end
+    
     unilib.register_node("unilib:window_ice", "mtg_plus:ice_window", mode, {
         -- From mtg_plus:ice_window
         description = S("Ice Window"),
@@ -47,8 +52,7 @@ function unilib.pkg.window_ice.exec()
         cooktime = 1,
     })
 
-    if unilib.setting.mtgame_tweak_flag and
-            unilib.global.pkg_executed_table["item_sweeper"] ~= nil then
+    if unilib.global.pkg_executed_table["item_sweeper"] ~= nil then
 
         unilib.register_craft({
             -- From mtg_plus:ice_window

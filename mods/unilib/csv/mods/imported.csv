@@ -123,10 +123,21 @@ technic_worldgen|detect|replace|Various remixes, such as gaia, produce "unrecogn
 # From underch/uchu
 underch|detect|defer|
 bakedeye|detect|defer|
+bluecheese|detect|defer|
 compressed|detect|defer|
 condensed|detect|defer|
+froststaff|detect|defer|
+gemenergy|detect|defer|There is nothing to "replace"
 gemtools|detect|defer|
 gravelcraft|detect|defer|There is nothing to "replace"
+lightstaff|detect|defer|
+octu|detect|defer|
+quartzmese|detect|defer|There is nothing to "replace"
+slime_cans|detect|defer|
+stonemese|detect|defer|There is nothing to "replace"
+stonetechnic|detect|defer|There is nothing to "replace"
+tuber_honey|detect|defer|
+uchutechnic|detect|defer|
 
 # From xtraores
 xtraores|detect|defer|
@@ -143,6 +154,7 @@ abriglass|detect|defer|
 abripanes|detect|defer|
 abritorch|detect|defer|
 agriculture|detect|defer|
+airtanks|detect|defer|
 anvil|detect|defer|
 aotearoa|detect|defer|
 aqua_farming|detect|defer|
@@ -181,6 +193,7 @@ display_biome|ignore|defer|There is nothing to "replace"
 dreambuilder_hotbar|detect|defer|
 drinks|detect|defer|
 earthbuild|detect|defer|
+elysflowers|detect|defer|
 ethereal|detect|defer|
 facade|detect|defer|When "hide" or "replace" is specified, original carving nodes are removed. However, unilib equivalents are only added when Minetest settings allow
 fachwerk|detect|defer|
@@ -233,6 +246,7 @@ pizza|detect|defer|
 plants|detect|defer|
 plaster|detect|defer|
 plastic_block|detect|defer|
+pontoons|detect|defer|
 ptime|detect|defer|
 realcompass|detect|defer|
 real_minerals|detect|defer|

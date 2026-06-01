@@ -42,7 +42,7 @@ mode_description_list = {
             S("replace shape and orientation (if possible), while keeping the material"),
 }
 
--- Internal names for the above modes, stored in user_mode_table[player_name]
+-- Internal names for the above modes, stored in user_mode_table[pname]
 mode_name_list = {"normal", "material", "shape"}
 
 -- Node names for one or two materials from minetest_game do not follow the pattern of node names
@@ -153,41 +153,41 @@ local function get_human_readable_pattern(pattern)
 
 end
 
-local function update_history(player_name, pattern)
+local function update_history(pname, pattern)
 
     -- Was replacer.add_to_hist()
     -- Keep a history of stored patterns for each player (not for each replacer)
     -- This history is not saved between server shutdowns
 
-    if not player_name or not pattern or pattern == "" then
+    if not pname or not pattern or pattern == "" then
         return
     end
 
-    if not history_table[player_name] then
-        history_table[player_name] = {}
+    if not history_table[pname] then
+        history_table[pname] = {}
     end
 
-    local index = table.indexof(history_table[player_name], pattern)
+    local index = table.indexof(history_table[pname], pattern)
     -- Only add new entries; do not store duplicates
     if index and index > -1 then
         return
     end
 
     -- Remove the oldest entry
-    if #history_table[player_name] >= max_hist_size then
-        table.remove(history_table[player_name], 1)
+    if #history_table[pname] >= max_hist_size then
+        table.remove(history_table[pname], 1)
     end
 
-    table.insert(history_table[player_name], pattern)
+    table.insert(history_table[pname], pattern)
 
 end
 
-local function set_new_pattern(player_name, pattern, player, itemstack)
+local function set_new_pattern(pname, pattern, player, itemstack)
 
     -- Was replacer.set_to()
     -- Set the replacer to a new pattern
 
-    if not player_name or not player or not itemstack then
+    if not pname or not player or not itemstack then
         return itemstack
     end
 
@@ -209,18 +209,18 @@ local function set_new_pattern(player_name, pattern, player, itemstack)
     )
 
     core.chat_send_player(
-        player_name,
+        pname,
         S("Node replacement tool set to") .. ": " .. new_pattern .. " ["..tostring(pattern).."]"
     )
 
-    update_history(player_name, pattern)
+    update_history(pname, pattern)
 
     -- Nothing consumed but data changed
     return itemstack
 
 end
 
-local function get_formspec(player_name, current_pattern, player)
+local function get_formspec(pname, current_pattern, player)
 
     -- Was replacer.get_formspec()
     -- Shows a formspec with a history of stored patterns to select from (accessible with
@@ -229,9 +229,9 @@ local function get_formspec(player_name, current_pattern, player)
     -- Is the player in creative mode?
     --[[
     local in_creative_mode = core.settings:get_bool("creative_mode") or
-                core.check_player_privs(player_name, {creative = true})
+                core.check_player_privs(pname, {creative = true})
     ]]--
-    local in_creative_mode = unilib.utils.is_creative(player_name)
+    local in_creative_mode = unilib.utils.is_creative(pname)
 
     -- Count how many blocks of each type the player has in his inventory
     local counted_inv = {}
@@ -253,9 +253,9 @@ local function get_formspec(player_name, current_pattern, player)
 
     -- Find out which mode the player has currently selected
     local current_mode = 1
-    if user_mode_table and user_mode_table[player_name] then
+    if user_mode_table and user_mode_table[pname] then
 
-        current_mode = table.indexof(mode_name_list, user_mode_table[player_name])
+        current_mode = table.indexof(mode_name_list, user_mode_table[pname])
         if current_mode == -1 then
             current_mode = 1
         end
@@ -306,11 +306,11 @@ local function get_formspec(player_name, current_pattern, player)
         "table[0.2,2.6;17,5.5;replacer_history;"
 
     -- Make sure all variables exist and the current entry is stored
-    update_history(player_name, current_pattern)
+    update_history(pname, current_pattern)
 
     local hist_entry_table = {}
     local selected = 1
-    for i, v in ipairs(history_table[player_name]) do
+    for i, v in ipairs(history_table[pname]) do
 
         if v == current_pattern then
             selected = i
@@ -619,11 +619,11 @@ local function identify_shape_and_material(full_name)
 
 end
 
-local function get_new_node_data(old_node, stored_pattern, player_name)
+local function get_new_node_data(old_node, stored_pattern, pname)
 
     -- Was replacer.get_new_node_data()
     -- Try to convert the old node into the desired new node
-    -- The mode is stored in user_mode_table[player_name] (fallback value: "normal")
+    -- The mode is stored in user_mode_table[pname] (fallback value: "normal")
 
     if not old_node or not stored_pattern or not old_node.name then
         return nil
@@ -631,8 +631,8 @@ local function get_new_node_data(old_node, stored_pattern, player_name)
 
     -- Normal mode of operation: replace material, shape and orientation
     if unilib.utils.is_table_empty(user_mode_table) or
-            not user_mode_table[player_name] or
-            user_mode_table[player_name] == "normal" then
+            not user_mode_table[pname] or
+            user_mode_table[pname] == "normal" then
         return stored_pattern
     end
 
@@ -650,7 +650,7 @@ local function get_new_node_data(old_node, stored_pattern, player_name)
     end
 
     -- Replace material, but keep shape and orientation
-    if user_mode_table[player_name] == "material" then
+    if user_mode_table[pname] == "material" then
 
         -- Now try to replace the *material* of the old node while keeping prefix and postfix
         local new_name = old_data[3] .. ":" .. old_data[4] .. new_data[5] .. old_data[6]
@@ -674,7 +674,7 @@ local function get_new_node_data(old_node, stored_pattern, player_name)
         return {new_name, old_node.param1, old_node.param2}
 
     -- Replace shape and orientation, but keep material
-    elseif user_mode_table[player_name] == "shape" then
+    elseif user_mode_table[pname] == "shape" then
 
         -- Ttry to replace the *material* of the old node while keeping prefix and postfix
         local new_name = new_data[3] .. ":" .. new_data[4] .. old_data[5] .. new_data[6]
@@ -1004,20 +1004,20 @@ function unilib.pkg.item_replacer_normal.exec()
             return false
         end
 
-        local player_name = player:get_player_name()
+        local pname = player:get_player_name()
         -- The player clicked on an entry in the history
         if fields and fields.history_table and history_table and
-                history_table[player_name] then
+                history_table[pname] then
 
             -- Find out which line it was
             local selected = core.explode_table_event(fields.history_table)
             if selected and (selected.type == "CHG" or selected.type == "DLC") and
-                    selected.row <= #history_table[player_name] then
+                    selected.row <= #history_table[pname] then
 
                 local itemstack = player:get_wielded_item()
                 itemstack = set_new_pattern(
-                    player_name,
-                    history_table[player_name][selected.row],
+                    pname,
+                    history_table[pname][selected.row],
                     player,
                     itemstack
                 )
@@ -1033,7 +1033,7 @@ function unilib.pkg.item_replacer_normal.exec()
 
             local index = table.indexof(mode_description_list, F(fields.select_mode))
             if index and index > -1 and mode_name_list[index] then
-                user_mode_table[player_name] = mode_name_list[index]
+                user_mode_table[pname] = mode_name_list[index]
             end
 
         end

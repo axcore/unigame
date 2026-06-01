@@ -155,7 +155,7 @@ end
 function unilib.pkg.chat_list_liquids.exec()
 
     core.register_chatcommand("list_liquids", {
-        params = "",
+        params = "[type]",
         description = S("Lists all liquid types, or details for the specified liquid type"),
         privs = {unilib_tools = true},
 
@@ -165,7 +165,7 @@ function unilib.pkg.chat_list_liquids.exec()
     })
 
     core.register_chatcommand("list_liquid", {
-        params = "",
+        params = "[type]",
         description = S("Lists all liquid types, or details for the specified liquid type"),
         privs = {unilib_tools = true},
 

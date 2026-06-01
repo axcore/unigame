@@ -1,0 +1,3 @@
+Contains all new packages in all GLEM remixes, except biome, decoration and ore packages, and custom dirt packages.
+
+("new" means that the material was imported directly from GLEM, not from one of GLEM's source mods.)

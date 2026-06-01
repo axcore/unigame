@@ -204,7 +204,7 @@ function unilib.pkg.misc_ornament_diorama.post()
                 "unilib:plant_cactus_ordinary",
                 "unilib:tree_apple_trunk",
                 "unilib:tree_apple_leaves",
-                "unilib:grass_ordinary",
+                "unilib:grass_ordinary_1",
                 c_water_bucket,
             },
             replacements = {

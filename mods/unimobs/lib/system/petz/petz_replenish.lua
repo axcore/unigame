@@ -161,4 +161,9 @@ function unimobs.petz_api.extract_milk_from_mob(self, clicker, full_bucket_name)
     self.has_been_milked_flag =
             unimobs.mobkit_api.add_mob_memory(self, "has_been_milked_flag", true)
 
+    -- Update awards, if available
+    if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+        unilib.pkg.award_ranger.on_mob_milk(clicker, self)
+    end
+
 end

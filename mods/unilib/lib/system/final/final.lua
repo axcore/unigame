@@ -29,9 +29,6 @@ end
 
 if unilib.global.pkg_loaded_list then
 
-    -- Set up environmental sounds
-    dofile(unilib.core.path_mod .. "/lib/system/final/final_env_sound.lua")
-
     -- Set up tree trunks as fuel
     dofile(unilib.core.path_mod .. "/lib/system/final/final_fuel.lua")
 

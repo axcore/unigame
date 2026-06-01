@@ -1,0 +1,3 @@
+Contains most individual items from the caverealms mod, but not the fort/fountain structures, nor the crystal/mushroom structures.
+
+The code to dig enormous caves below the ground is also not included.

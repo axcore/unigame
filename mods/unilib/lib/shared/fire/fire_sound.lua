@@ -13,7 +13,7 @@ local S = unilib.intllib
 
 -- Adapted from fire/init.lua
 
-local handles = {}
+local handle_table = {}
 local timer = 0
 
 -- Parameters
@@ -23,7 +23,7 @@ local cycle = 3 -- Cycle time for sound updates
 -- Update sound for player
 local function update_player_sound(player)
 
-    local player_name = player:get_player_name()
+    local pname = player:get_player_name()
     -- Search for flame nodes in radius around player
     local ppos = player:get_pos()
     local areamin = vector.subtract(ppos, radius)
@@ -38,10 +38,10 @@ local function update_player_sound(player)
     local flames = (num["unilib:fire_ordinary"] or 0) + (num["unilib:fire_permanent"] or 0)
 
     -- Stop previous sound
-    if handles[player_name] then
+    if handle_table[pname] then
 
-        core.sound_stop(handles[player_name])
-        handles[player_name] = nil
+        core.sound_stop(handle_table[pname])
+        handle_table[pname] = nil
 
     end
 
@@ -92,13 +92,13 @@ local function update_player_sound(player)
                 loop = true,     -- In case of lag
                 max_hear_distance = 32,
                 pos = fposmid,
-                to_player = player_name,
+                to_player = pname,
             }
         )
 
         -- Store sound handle for this player
         if handle then
-            handles[player_name] = handle
+            handle_table[pname] = handle
         end
     end
 end
@@ -122,11 +122,11 @@ end)
 -- Stop sound and clear handle on player leave
 core.register_on_leaveplayer(function(player)
 
-    local player_name = player:get_player_name()
-    if handles[player_name] then
+    local pname = player:get_player_name()
+    if handle_table[pname] then
 
-        core.sound_stop(handles[player_name])
-        handles[player_name] = nil
+        core.sound_stop(handle_table[pname])
+        handle_table[pname] = nil
 
     end
 

@@ -1,0 +1,7 @@
+Contains most things from the cool_trees modpack.
+
+Bamboo trees, palm trees and pineapples were not imported (packages from ethereal-ng provide similar functionality); however the palm tree door was imported.
+
+Did not import the python_locale_tool mod.
+
+Longer growth times in cool_trees were not implemented for any package.

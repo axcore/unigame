@@ -1,0 +1,15 @@
+# "config" remix - provides system chat commands for configuring remixes in-game
+
+# node_name | original_mod
+
+chat_unilib|unilib
+chat_create_remix|unilib
+chat_edit_remix|unilib
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

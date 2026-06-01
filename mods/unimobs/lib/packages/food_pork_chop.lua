@@ -29,7 +29,8 @@ function unilib.pkg.food_pork_chop.exec()
         -- From petz:raw_porkchop
         description = S("Raw Pork Chop"),
         inventory_image = "unilib_food_pork_chop_raw.png",
-        groups = {flammable = 2, food = 2, food_meat_raw = 1},
+        -- N.B. food_pork_raw = 1 not in original code
+        groups = {flammable = 2, food = 2, food_meat_raw = 1, food_pork_raw = 1},
 
         wield_image = "unilib_food_pork_chop_raw.png",
 
@@ -40,7 +41,8 @@ function unilib.pkg.food_pork_chop.exec()
         -- From petz:roasted_porkchop
         description = S("Roasted Pork Chop"),
         inventory_image = "unilib_food_pork_chop_roasted.png",
-        groups = {flammable = 2, food = 2, food_meat = 1},
+        -- N.B. food_pork = 1 not in original code
+        groups = {flammable = 2, food = 2, food_meat = 1, food_pork = 1},
 
         on_use = unilib.cuisine.eat_on_use("unilib:food_pork_chop_roasted", 3),
     })

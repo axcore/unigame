@@ -26,6 +26,8 @@ end
 
 function unilib.pkg.bed_ordinary.exec()
 
+    -- N.B. removed the current minetest_game recipe, as it clashes with quilted beds
+    --[[
     local recipe_table = {}
     if not unilib.setting.mtgame_tweak_flag then
 
@@ -46,6 +48,12 @@ function unilib.pkg.bed_ordinary.exec()
         }
 
     end
+    ]]--
+    local recipe_table = {
+        {"", "", ""},
+        {"unilib:wool_red", "unilib:wool_red", "unilib:wool_white"},
+        {"group:wood", "group:wood", "group:wood"},
+    }
 
     unilib.pkg.shared_beds.register_bed({
         -- From beds:bed. Creates unilib:bed_ordinary

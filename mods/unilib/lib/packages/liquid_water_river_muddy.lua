@@ -123,7 +123,7 @@ function unilib.pkg.liquid_water_river_muddy.exec()
             post_effect_color = {r = 92, g = 80, b = 48, a = 232},
             special_tiles = {
                 {
-                    image = "unilib_liquid_water_river_muddy_flowing_animated.png",
+                    name = "unilib_liquid_water_river_muddy_flowing_animated.png",
                     backface_culling = false,
                     animation = {
                         type = "vertical_frames",
@@ -133,7 +133,7 @@ function unilib.pkg.liquid_water_river_muddy.exec()
                     },
                 },
                 {
-                    image = "unilib_liquid_water_river_muddy_flowing_animated.png",
+                    name = "unilib_liquid_water_river_muddy_flowing_animated.png",
                     backface_culling = true,
                     animation = {
                         type = "vertical_frames",

@@ -8,8 +8,8 @@
 #   described in the construct.csv file
 # By default, every vapourisation is randomised (which can be temporarily disabled in the
 #   "shared_atomic" package, when necessary). Thus, when we talk about the proportions of gold and
-#    silver samplings produced by vapourising some mineral, we're actually talking about the maximum
-#    amount of gold and silver that any one vapourisation can produce
+#   silver samplings produced by vapourising some mineral, we're actually talking about the maximum
+#   amount of gold and silver that any one vapourisation can produce
 #
 # Every line in this file consists of three columns
 # The first column is an item consumed by the atomic vapouriser, e.g. "unilib:stone_ordinary", or a
@@ -47,7 +47,7 @@
 # When the first column specifies an item group, rather than an item, then the output is produced by
 #   all items matching the group, IN ADDITION to the item's specific output. For example, these two
 #   lines would specify that "unilib:stone_ordinary" produces oxygen, silicon AND gold, in the
-#   proportions 60:40:10
+#   proportions 60:40:10:
 #
 #   group:smoothstone|1|gold 50 1
 #   unilib:stone_ordinary|1|oxygen 60 1 silicon 40 1

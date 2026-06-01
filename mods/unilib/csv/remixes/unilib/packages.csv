@@ -1,7 +1,7 @@
-# "unilib" remix - contains mostpackages which are original to unilib, and which typically do not
+# "unilib" remix - contains most packages which are original to unilib, and which typically do not
 #   appear in other remixes
 # Note that some packages are listed here but commented out, despite being original to unilib
-#   (usually because they belong to a different remix)
+#   (usually because it makes more sense to list them in a different remix)
 #
 # For a list of packages providing chat commands, see the "chat" remix (those packages are NOT
 #   included in this remix)
@@ -249,6 +249,7 @@ admin_tool_vapouriser|unilib
 #deco_gaia_seagrass|unilib
 #deco_gaia_seagrass_decorations_sea|unilib
 #deco_gaia_seagrass_xocean|unilib
+#deco_gaia_sponge|unilib
 #dirt_custom_antipodean|unilib
 #dirt_custom_gaia|unilib
 dirt_permafrost_blue|unilib
@@ -263,6 +264,7 @@ dirt_super_with_litter_forest|unilib
 food_burger_veggie|unilib
 food_burger_worm|unilib
 food_corn_cob_flint|unilib
+food_marmite|unilib
 food_jam_blackberry|unilib
 food_jam_gooseberry|unilib
 food_jam_raspberry|unilib
@@ -313,6 +315,7 @@ machine_turfing|unilib
 meta_skybox_sun_hexagonal|unilib
 meta_skybox_moon_hexagonal|unilib
 misc_atomic_tube|unilib
+misc_box_filtration|unilib
 misc_calendar_fancy|unilib
 misc_calendar_simple|unilib
 misc_frame_iron_rustic|unilib
@@ -321,6 +324,7 @@ misc_line_sounding_reinforced|unilib
 #misc_matrix_hades|unilib
 misc_shield_mounted_british|unilib
 misc_shield_mounted_extra|unilib
+misc_sponge_fiery|unilib
 moss_black|unilib
 moss_brown|unilib
 moss_cyan|unilib
@@ -360,6 +364,7 @@ pane_glass_ornamental_tiles_dark|unilib
 pane_glass_ornamental_tiles_pale|unilib
 pane_glass_ornamental_tiles_small|unilib
 pane_glass_ornamental_yellow|unilib
+potion_antidote_poison|unilib
 sand_basalt_dark|unilib
 sand_beige|unilib
 sand_biogenic|unilib
@@ -467,6 +472,8 @@ stone_sandstone_golden|unilib
 #item_worm_juicy|ethereal
 #light_block_mese|default
 #liquid_water_ordinary|default
+#liquid_water_river|default
+#material_charcoal_artificial_lump|ethereal
 #metal_copper|default glemr11 moreblocks technic
 #metal_iron|default
 #metal_steel|default glemr11 technic
@@ -518,6 +525,7 @@ stone_sandstone_golden|unilib
 #mineral_tsavorite|aato
 #mineral_turquoise|aato
 #mineral_unakite|aato
+#misc_sponge_air|ethereal
 #pane_glass_ordinary|xpanes
 #plant_papyrus_ordinary|default mtg_plus
 #produce_corn_flint|better_farming

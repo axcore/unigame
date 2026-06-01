@@ -1,0 +1,11 @@
+Contains packages which define chat commands that aren't tied to a specific package (or packages).
+
+This remix contains all such packages; the following remixes contain a smaller selection of packages:
+
+"chat_admin" - commands available to players with the "unilib_admin" privilege
+
+"chat_danger" - commands available to players with the "unilib_danger" privilege
+
+"chat_tools" - commands available to players with the "unilib_tools" privilege
+
+"chat_normal" - commands available to players without special privileges

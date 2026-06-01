@@ -24,6 +24,15 @@ function unilib.cuisine.drink_on_use(
     --      nothing but tea, good for them!
     return function(itemstack, player, pointed_thing)
 
+        -- Inform the relevant awards package, if loaded
+        if unilib.global.pkg_executed_table["award_gourmand"] ~= nil then
+
+            unilib.pkg.award_gourmand.on_collect_drink(
+                player, itemstack:get_name(), itemstack:get_count()
+            )
+
+        end
+
         -- We ignore the satiation value, increasing the player's hydration to its maximum
         -- (25 is the same value used by unilib:utensil_bowl_wooden)
         unilib.hydration.do_drink(player, 25, 25)
@@ -51,11 +60,11 @@ function unilib.cuisine.drink_on_use(
         end
 
         -- Call original on_use(), if provided
-        if old_on_use ~= nil then
-            return old_on_use(itemstack, player, pointed_thing)
-        else
-            return itemstack
+        if old_on_use then
+            old_on_use(itemstack, player, pointed_thing)
         end
+
+        return itemstack
 
     end
 

@@ -11,7 +11,7 @@ unilib.pkg.biome_glemr6 = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.glemr6.add_mode
 
--- Environmental constants (from lib_ecology/init.lua)
+-- General constants (from lib_ecology/init.lua)
 local ALTITUDE_RANGE = 40
 local BIOME_VERTICAL_BLEND = ALTITUDE_RANGE / 10
 if not unilib.setting.glem_biome_blend_flag then

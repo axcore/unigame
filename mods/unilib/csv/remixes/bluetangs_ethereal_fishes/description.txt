@@ -1,0 +1,1 @@
+Contains packages providing original code for many (but not all) textures from the Bluetangs-ethereal-fishes mod, that are not already in the ethereal-ng mod.

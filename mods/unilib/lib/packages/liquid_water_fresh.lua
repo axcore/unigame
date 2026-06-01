@@ -53,7 +53,7 @@ function unilib.pkg.liquid_water_fresh.exec()
         damage_per_second = 0,
         drowning = 2,
         flowing_description = S("Flowing Fresh Water"),
-        rgb_table = {r = 100, b = 200, g = 100, a = 60},
+        rgb_table = {r = 100, g = 100, b = 200, a = 60},
         source_description = S("Fresh Water Source"),
         viscosity = 1,
     })

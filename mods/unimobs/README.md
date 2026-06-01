@@ -2,7 +2,7 @@
 
 # Unified Mob Library (a unilib expansion pack)
 
-## Latest release: v1.0.0 (24 December 2025) (see recent [changes](CHANGES.txt))
+## Latest release: v1.1.0 (1 Jun 2026) (see recent [changes](CHANGES.txt))
 
 [unilib](https://github.com/axcore/unilib) is a mod for all Minetest-compatible engines, including [Luanti](https://www.luanti.org/).
 
@@ -20,20 +20,137 @@
 
 ## Want to tinker? Download unilib [here](https://github.com/axcore/unilib) and unimobs [here](https://github.com/axcore/unimobs).
 
-- **unimobs** requires **unilib** (version v1.1.0 or later); it has no other dependencies
-- No creatures are loaded automatically - it's up to you to choose what you want (see the section below)
+- **unimobs** requires **unilib** (version v1.2.0 or later); it has no other dependencies
+- No creatures are loaded automatically - it's up to you to choose what you want (see below)
 
-# 1. Major new features
+## 1 Setting up unimobs
+
+First, download the mod and its dependencies.
+
+- Download [unimobs](https://github.com/axcore/unimobs), and add it to Minetest's **mods** folder
+- Download [unilib](https://github.com/axcore/unilib) (v1.2.0 or later), and add it to Minetest's **mods** folder
+- **unilib** content is modularised; you must choose what content you want to load
+    - See the **List of included remixes** in the section below
+
+Alternatively, download **unigame**, which requires no setup, because it already includes both **unilib** and **unimobs**.
+
+- Download [unigame](https://github.com/axcore/unigame) (v1.2.0 or later), and add it to Minetest's **games** folder
+
+### 1.1 Use the in-game system
+
+This method requires **unilib** v1.2.0 (or later), or **unigame** v1.2.0 (or later).
+
+- In **Minetest**'s main menu, create a new world (or choose an existing one)
+- Click the **Select Mods** button, and enable both **unilib** and **unimobs**
+- Now start the game
+- New users will see a **Welcome to unilib** window
+- Click **Browse all remixes** to open a new window
+    - If the welcome window was not visible, type **/grantme unilib_admin**
+    - Then type **/unilib**
+- In the **List of remixes and packages**, add one or more of the remixes provided by **unimobs**
+- For new users, one of the following pairs is recommended:
+
+        mtgame petz
+        gaia gaia_unimobs
+
+- Click the **Save the list** button to apply the changes
+- Restart the game
+
+### 1.2 Creating custom remixes with the in-game system
+
+This method requires **unilib** v1.2.0 (or later), or **unigame** v1.2.0 (or later).
+
+You can easily create your own remix, and use it to specify which creatures you want in your game. You can also specify where they should spawn, what they should eat, and so on.
+
+Start by setting up a new world.
+
+- In **Minetest**'s main menu, create a new world (or choose an existing one)
+- Click the **Select Mods** button, and enable both **unilib** and **unimobs**
+
+Now start the game.
+
+- New users will see a **Welcome to unilib** window
+- Click **Create your own remix** to open a new window
+    - If the welcome window was not visible, type **/grantme unilib_admin**
+    - Then type **/unilib**
+- In the new window, type a unique remix name, e.g. **myremix**
+- Click the **Create new remix** button, and press ESCAPE to close the window
+
+You can now edit the new remix.
+
+- Type **/grantme unilib_admin**, if you haven't already
+- Type **/edit_remix myremix**
+- In the new window, open the **Mobs** tab
+- Select a mob type from the drop-down box, e.g. **cat_normal**
+- In the **Probability** box, add a number
+    - e.g. 1 for mobs that spawn very frequently
+    - e.g. 0.1 for mobs that spawn less frequently
+- Click the **Add** button
+- Now click the button with the yellow warning sign
+- In the new window, click **Add the package and label automatically**
+- The previous window has re-opend, so open the **Mobs** tab and click the **Save** button
+- Press ESCAPE to close the window
+
+Finally, add the new remix to the list of remixes that's loaded when the game starts.
+
+- Type **/unilib**
+- In the **List of remixes and packages**, add **myremix**
+- Click the **Save the list** button
+- Restart the game
+
+If you prefer to do all of this using a text editor, rather than with the in-game system, then see the **Configuring unimobs for new biomes** section below.
+
+### 1.3 Use Minetest settings
+
+This method works with all versions of **unilib**, but is not available for users of **unigame**.
+
+- In Minetest's main menu, create a new world (or choose an existing one)
+- Click the **Select Mods** button, and enable both **unilib** and **unimobs**
+- Now click the **Settings** button in the top right corner
+- In the left panel, scroll down and select **Unified Voxel Library (unilib)**
+- In the right panel, you should be able to see a box marked **List of remixes and packages to load**
+- In the box, add one or more of the remixes provided by **unimobs**
+- For new users, one of the following pairs is recommended:
+
+        mtgame petz
+        gaia gaia_unimobs
+
+- Click the **Set** button to apply the changes
+- When you're ready, start the game
+
+### 1.4 Patch unilib code directly
+
+This method works with all versions of **unilib** and **unigame**, but is only recommended if the methods above are not available.
+
+- Open Minetest's data folder
+- Navigate to **../mods/unilib/lib/system/global/**
+- In a text editor, open the file **global_overrides.lua**
+- Add the following lines:
+
+        unilib.setting.enable_adult_content_flag = true
+        unilib.setting.init_remix_pkg_set = "STUFF"
+
+- Replace STUFF with one or more of the remixes provided by **unimobs**, e.g.
+
+        unilib.setting.init_remix_pkg_set = "mtgame petz"
+        unilib.setting.init_remix_pkg_set = "gaia gaia_unimobs"
+
+- Save the file
+- In Minetest's main menu, create a new world (or choose an existing one)
+- Click the **Select Mods** button, and enable both **unilib** and **unimobs**
+- When you're ready, start the game
+
+# 2. Major new features
 
 For more information about remixes, packages and CSV files, see the **Setting up unimobs** section below.
 
-## 1.1 Custom spawning
+## 2.1 Custom spawning
 
 Creatures will not spawn anywhere - for example, dolphins will not spawn on land, and sheep will not spawn on sand.
 
 The **petz** and **gaia_unimobs** remixes each provide a CSV file which you can edit yourself (just use an ordinary text editor or a spreadsheet application). The file specifies where each creature will spawn.
 
-## 1.2 Custom interaction
+## 2.2 Custom interaction
 
 When creatures spawn in the world for the first time, they are untamed. Some wild animals (for example, lions) can be tamed using an obedience whip. Other creatures must be tamed by feeding them. A few types of creature can't be tamed at all.
 
@@ -43,7 +160,7 @@ Once a creature has been tamed, you can right-click it to see more information a
 
 You can edit the same CSV and choose a different selection of items for feeding, breeding and so on, if you want.
 
-## 1.3 Genetics
+## 2.3 Genetics
 
 In order to breed creatures, you must first find a male and a female (use a bestiary if you're not sure which is which).
 
@@ -89,7 +206,7 @@ Some creatures have unusual genetic traits. For example, frogs have genes for *c
 
 Creatures have a much greater range of skins than in the original **petz**. Ponies, for example, have up to 20 different skins. Skins are inherited from a creature's parents and grandparents. Some skins are rarer than others, and are more likely to be passed on to babies than other skins. There is also a small chance of a genetic mutation, which will give the creature a unique skin that doesn't occur naturally and can't be inherited.
 
-# 2. Major old features
+# 3. Major old features
 
 All tamed creatures can be given a name.
 
@@ -140,11 +257,11 @@ There is also a new chat command.
 - To remove all mobs within a 100 block range, type **/clear_mobs MOD**
 - Replace **MOD** with the name of the parent mod, e.g. **unimobs**
 
-# 3. List of mobs
+# 4. List of mobs
 
-## 3.1 Ants
+## 4.1 Ants
 
-### 3.1.1 Queen ants, warrior ants and worker ants
+### 4.1.1 Queen ants, warrior ants and worker ants
 
 - Queen ants spawn naturally, and will fight each other to the death
 - Queen ants build anthills near the coast or other bodies of water
@@ -161,40 +278,40 @@ You can place an ant colony artificially, if you want to.
 - The more you feed her, the more eggs will be produced
 - Warriors and workers have a limited lifespan, so the colony will soon reach a stable population, regardless of how much you feed the queen
 
-## 3.2 Bats
+## 4.2 Bats
 
-### 3.2.1 Normal bats
+### 4.2.1 Normal bats
 
 - Bats spawn shadowy places, not in direct sunlight
 - Bats are attracted to fireflies
 
-## 3.3 Bears
+## 4.3 Bears
 
-### 3.3.1 Grizzly bears
+### 4.3.1 Grizzly bears
 
 - Grizzly bears are wild animals, often found in forests, that attack players (and some other creatures)
 - They can be tamed with an obedience whip
 - Tamed grizzly bears can be ordered to stand guard, in which case they'll attack players that get too close
 - Bears produce dung (scat)
 
-### 3.3.2 Polar bears
+### 4.3.2 Polar bears
 
 - Polar bears are wild animals, often found in icy biomes, that attack players (and some other creatures)
 - They can be tamed with an obedience whip
 - Tamed polar bears cannot be given orders (unlike grizzly bears)
 - Bears produce dung (scat)
 
-## 3.4 Beavers
+## 4.4 Beavers
 
-### 3.4.1 Normal beavers
+### 4.4.1 Normal beavers
 
 - Beavers live near water, and occasionally build dams there
 - Kill a beaver to obtain beaver oil and/or a beaver fur
 - Beaver oil can be used in Tamagotchi Mode to keep some pets happy
 
-## 3.5 Bees
+## 4.5 Bees
 
-### 3.5.1 Queen bees and Worker bees
+### 4.5.1 Queen bees and Worker bees
 
 - Queen bees spawn naturally, and can create a beehive near trees
 - Worker bees do not spawn naturally, but instead live in their hives
@@ -217,9 +334,9 @@ This is how to farm honey from beehives:
 - Honeycomb can be used to craft beeswax, which can be used to craft candles
 - Honey blocks are decorative items, and also an inefficient way to store honeycomb (since the honey used to craft it is not returned)
 
-## 3.6 Butterflies
+## 4.6 Butterflies
 
-### 3.6.1 Large butterflies
+### 4.6.1 Large butterflies
 
 - Butterflies only spawn in bright areas; open plains are the best place to find them
 - Butterflies captured with a bug net can be used to craft a Butterfly Showcase
@@ -227,9 +344,9 @@ This is how to farm honey from beehives:
 - Butterflies can also be captured with an empty glass bottle
 - Break the bottle to release the butterfly, still alive
 
-## 3.7 Camels
+## 4.7 Camels
 
-### 3.7.1 Normal camels
+### 4.7.1 Normal camels
 
 - Camels - found in hot, dry places - are an alternative to ponies
 - After placing a saddle on a tamed camel, it can be ridden by players
@@ -244,9 +361,9 @@ This is how to farm honey from beehives:
 - Camels can be milked using an empty bucket; the milk can be cooked to make yoghurts
 - The milk is replenished after the camel has eaten some turf, or after being fed by a player
 
-## 3.8 Cats
+## 4.8 Cats
 
-### 3.8.1 Normal cats
+### 4.8.1 Normal cats
 
 - Cats like to sleep during the day
 - If you place your cat in a basket, it will sleep the whole day and night (useful for keeping you cat safe while you're away)
@@ -254,9 +371,9 @@ This is how to farm honey from beehives:
 - Right-click the basket to change its orientation
 - Cats have an unusually large number of skins
 
-## 3.9 Chickens
+## 4.9 Chickens
 
-### 3.9.1 Roosters, Hens and Chicklets
+### 4.9.1 Roosters, Hens and Chicklets
 
 - Hens produce eggs from time to time, if there is an empty nest nearby, and without being fed by players
 - You can breed chicklets by crafting empty nests, then waiting for the eggs to hatch
@@ -266,15 +383,15 @@ This is how to farm honey from beehives:
 - Use shears on a chicken to obtain a feather
 - Chickens provide a code example of a mob that has distinct forms (different entities) for male and female adults, and babies (see elephants for a comparable example)
 
-## 3.10 Chimpanzees
+## 4.10 Chimpanzees
 
-### 3.10.1 Normal chimpanzees
+### 4.10.1 Normal chimpanzees
 
 - Chimpanzees can climb trees (up to a certain height)
 
-## 3.11 Cows
+## 4.11 Cows
 
-### 3.11.1 Normal cows
+### 4.11.1 Normal cows
 
 - Use an empty bucket on a cow to get some milk
 - The milk is replenished after the cow has eaten some turf, or after being fed by a player
@@ -283,17 +400,17 @@ This is how to farm honey from beehives:
 - Their meat is edible, when cooked
 - Cows produce dung
 
-## 3.12 Deer
+## 4.12 Deer
 
-### 3.12.1 Simple deer
+### 4.12.1 Simple deer
 
 - This simplistic creature from the [wildlife mod](https://github.com/TheTermos/wildlife) was written as a demonstration of **mobkit**'s abilities
 - It cannot be tamed or bred, and it does not have a spawn egg
 - It flees from simple wolves
 
-## 3.13 Dogs
+## 4.13 Dogs
 
-### 3.13.1 Normal dogs
+### 4.13.1 Normal dogs
 
 - By default, dogs do not occur in nature
 - By default, you can convert a normal wolf into a dog by feeding it bones
@@ -301,16 +418,16 @@ This is how to farm honey from beehives:
 - Left-click while wielding the ball to throw it
 - If it lands near a tamed dog, the dog will bring the ball back to you
 
-## 3.14 Dolpins
+## 4.14 Dolpins
 
-### 3.14.1 Bottlenose dolphins
+### 4.14.1 Bottlenose dolphins
 
 - Dolphins live in the ocean
 - When killed, they drop a variety of fishes
 
-## 3.15 Ducks
+## 4.15 Ducks
 
-### 3.15.1 Normal ducks
+### 4.15.1 Normal ducks
 
 - Female ducks produce eggs from time to time, if there is an empty nest nearby, and without being fed by players
 - You can breed ducks by crafting empty nests, then waiting for the eggs to hatch
@@ -320,16 +437,16 @@ This is how to farm honey from beehives:
 - Use shears on a duck to obtain a feather
 - Their meat is edible, when cooked
 
-## 3.16 Elephants
+## 4.16 Elephants
 
-### 3.16.1 Normal elephants
+### 4.16.1 Normal elephants
 
 - Don't kill the elephants for their tusks, you monster!
 - Elephants provide a code example of a mob that has distinct forms (different entities) for male and female adults (see chickens for a comparable example)
 
-## 3.17 Fish
+## 4.17 Fish
 
-### 3.17.1 Clownfish and Tropical Fish
+### 4.17.1 Clownfish and Tropical Fish
 
 - Fish are fascinated by some types of coral
 - Fish can be captured and placed in a fish tank
@@ -338,39 +455,39 @@ This is how to farm honey from beehives:
 - Fish have genetic traits, just like most creatures. A fish doesn't lose its genetics when placed in a tank
 - Like all aquatic creatures, fish cannot survive without water
 
-## 3.18 Flamingoes
+## 4.18 Flamingoes
 
-### 3.18.1 Normal flamingoes
+### 4.18.1 Normal flamingoes
 
 - Use shears on a flamingo to obtain a feather
 - Flamingoes without feathers cannot fly
 - While wielding the feather, right-click the flamingo to restore its flying abilities
 
-## 3.19 Foxes
+## 4.19 Foxes
 
-### 3.19.1 Normal foxes
+### 4.19.1 Normal foxes
 
 - By default, foxes will hunt chickens, ducks and other small animals
 - So make sure vulnerable pets are safe inside some kind of enclosure!
 
-## 3.20 Frogs
+## 4.20 Frogs
 
-### 3.20.1 Normal frogs
+### 4.20.1 Normal frogs
 
 - Kill a frog to get a frog leg
 - Frog legs can be cooked to make a simple meal
 
-## 3.21 Geckos
+## 4.21 Geckos
 
-### 3.21.1 Normal geckos
+### 4.21.1 Normal geckos
 
 - Female geckos can lay eggs, but they don't require an empty nest (and don't need to be fed by players)
 - Geckos lay eggs only once in their life (by default)
 - This happens automatically, without being fed by players
 
-## 3.22 Goats
+## 4.22 Goats
 
-### 3.22.1 Normal goats
+### 4.22.1 Normal goats
 
 - Use an empty bucket on a goat to get some milk
 - The milk is replenished after the goat has eaten some turf, or after being fed by a player
@@ -379,43 +496,43 @@ This is how to farm honey from beehives:
 - Goats will form herds with other goats
 - Goats will follow their owner if wielding a shepherd's crook
 
-## 3.23 Hamsters
+## 4.23 Hamsters
 
-### 3.23.1 Normal hamsters
+### 4.23.1 Normal hamsters
 
 - Hamsters are so cute and adorable - especially ones with rare colours!
 - They can often be found in hot and arid regions
 
-## 3.24 Leopards
+## 4.24 Leopards
 
-### 3.24.1 Normal leopards and snow leopards
+### 4.24.1 Normal leopards and snow leopards
 
 - Leopards are aggressive, so try to keep your distance
 - When killed, they drop valuable skins
 
-## 3.25 Lions
+## 4.25 Lions
 
-### 3.25.1 Normal lions
+### 4.25.1 Normal lions
 
 - Lions are wild animals that attack players (and some other creatures)
 - By default, lions eat raw meat, and can be tamed with an obedience whip
 - Tamed lions can be ordered to stand guard, in which case they'll attack players that get too close
 
-## 3.26 Monsters
+## 4.26 Monsters
 
-### 3.26.1 Evil Santa
+### 4.26.1 Evil Santa
 
 - Evil Santa is a seasonal monster; by default, he appears only during the (real) month of December (and even then, only in darkness)
 - Evil Santa is tough, but if you manage to kill him, expect to be rewarded with presents!
 
-### 3.26.2 Mr Pumpkin
+### 4.26.2 Mr Pumpkin
 
 - Mr Pumpkin is a seasonal monster; by default, he appears only during the (real) month of October (and even then, only in darkness)
 - He will attack players on sight, throwing lantern grenades at his enemy
 - The grenades can set fire to flammable materials
 - Mr Pumpkin's special ability is teleportation - when fighting him, be careful that he doesn't re-appear behind you!
 
-### 3.26.3 Werewolves
+### 4.26.3 Werewolves
 
 - Werewolves are dangerous monsters that will attack players on sight
 - Werewolves spawn only in dark and shadowy places
@@ -427,9 +544,9 @@ This is how to farm honey from beehives:
 - Werewolves - as well as infected players - belong to one of four clans
 - You can disable the Curse of Lycanthropy by making sure that the **shared_petz_lycanthropy** package is not loaded
 
-## 3.27 Moths
+## 4.27 Moths
 
-### 3.27.1 Normal moths
+### 4.27.1 Normal moths
 
 - Moths spawn in dark and shadowy places, and will die in direct sunlight
 - Moths can be captured with an empty glass bottle
@@ -437,15 +554,15 @@ This is how to farm honey from beehives:
 - Female moths lay eggs without being fed by players
 - When the eggs hatch, silkworms are produced
 
-## 3.28 Pandas
+## 4.28 Pandas
 
-### 3.28.1 Normal pandas
+### 4.28.1 Normal pandas
 
 - Unlike in real life, pandas can be tamed, usually with some kind of bamboo
 
-## 3.29 Parrots
+## 4.29 Parrots
 
-### 3.29.1Normal parrots
+### 4.29.1Normal parrots
 
 - Tamed parrots respond well to orders
 - You can order a parrot to sit on your shoulder for a couple of minutes
@@ -457,9 +574,9 @@ This is how to farm honey from beehives:
 - While wielding the feather, right-click the parrot to restore its flying abilities
 - Parrot meat is edible (but is much more tasty after being cooked)
 
-## 3.30 Penguins
+## 4.30 Penguins
 
-### 3.30.1 Normal penguins
+### 4.30.1 Normal penguins
 
 - Penguins can lay eggs, but they don't require an empty nest (and don't need to be fed by players)
 - Penguins eggs can be used as ingredients in various food items (but players are not the only creatures interested in penguin eggs)
@@ -467,25 +584,25 @@ This is how to farm honey from beehives:
 - Use shears on a penguin to obtain a feather
 - Penguins produce dung (guano)
 
-## 3.31 Pigeons
+## 4.31 Pigeons
 
-### 3.31.1 Normal pigeons
+### 4.31.1 Normal pigeons
 
 - Use shears on a pigeon to obtain a feather
 - Pigeons without feathers cannot fly
 - While wielding the feather, right-click the pigeon to restore its flying abilities
 
-## 3.32 Pigs
+## 4.32 Pigs
 
-### 3.32.1 Normal pigs
+### 4.32.1 Normal pigs
 
 - Pigs are only useful for producing pork chops, which are dropped when you kill them
 - Pork chops taste much better when cooked
 - Pigs produce dung
 
-## 3.33 Ponies
+## 4.33 Ponies
 
-### 3.33.1 Normal ponies
+### 4.33.1 Normal ponies
 
 - After placing a saddle on a tamed pony, it can be ridden by players
 - Right-click the pony to place the saddle, then right-click again to mount or dismount the pony
@@ -502,23 +619,23 @@ This is how to farm honey from beehives:
 - Ponies have an unusually large number of skins
 - Ponies stay close to straw bales, and eat them if they're hungry
 
-## 3.34 Rabbits
+## 4.34 Rabbits
 
-### 3.34.1 Normal rabbits
+### 4.34.1 Normal rabbits
 
 - When killed, rabbits drop rabbit hides
 - Their meat is edible when cooked
 
-## 3.35 Rats
+## 4.35 Rats
 
-### 3.35.1 Normal rats
+### 4.35.1 Normal rats
 
 - Rats are disagreeable creatures that will attack players on sight
 - However, they only spawn in dark and shadowy places
 
-## 3.36 Sheep
+## 4.36 Sheep
 
-### 3.36.1 Normal sheep
+### 4.36.1 Normal sheep
 
 - Use shears on a sheep - or, just kill it - to get some wool
 - The wool regrows after the sheep has eaten some turf, or after being fed by a player
@@ -531,9 +648,9 @@ This is how to farm honey from beehives:
 - Sheep will follow their owner if wielding a shepherd's crook
 - Their meat is edible, when cooked
 
-## 3.37 Silkworms
+## 4.37 Silkworms
 
-### 3.37.1 Normal silkworms
+### 4.37.1 Normal silkworms
 
 - Silkworms eat leaves
 - From time to time, silkworms will form a cocoon (chrysalis), later re-emerging as a moth
@@ -547,25 +664,25 @@ To get a lot of silk, start a silk farm.
 - Silk bobbins can be crafted by hand, but it's much quicker to use a spinning wheel
 - Right-click the wheel with up to 3 cocoons to generate a bobbin
 
-## 3.38 Squirrels
+## 4.38 Squirrels
 
-### 3.38.1 Normal squirrels
+### 4.38.1 Normal squirrels
 
 - Squirrels can climb trees (up to a certain height)
 - Squirrels sometimes drop acorns (if they exist in your world)
 
-## 3.39 Tarantulas
+## 4.39 Tarantulas
 
-### 3.39.1 Normal tarantulas
+### 4.39.1 Normal tarantulas
 
 - Tarantulas are dangerous monsters that will attack players on sight
 - Tarantulas use cobwebs on their enemies
 - Tarantulas drop spider eyes when killed; the eyes are currently not used for anything
 - Tarantulas spawn only in dark and shadowy places
 
-## 3.40 Toucans
+## 4.40 Toucans
 
-### 3.40.1 Normal toucans
+### 4.40.1 Normal toucans
 
 - Toucans are typically found in forests
 - Tamed toucans respond well to orders
@@ -577,16 +694,16 @@ To get a lot of silk, start a silk farm.
 - Toucans missing a feather are unable to fly
 - While wielding the feather, right-click the toucan to restore its flying abilities
 
-## 3.41 Turtles
+## 4.41 Turtles
 
-### 3.41.1 Normal turtles
+### 4.41.1 Normal turtles
 
 - Turtles are semiaquatic animals that tend to eat aquatic plants like kelp and seagrass
 - When killed, they sometimes drop their shells
 
-## 3.42 Wolves
+## 4.42 Wolves
 
-### 3.42.1 Normal wolves
+### 4.42.1 Normal wolves
 
 - Wolves will back away from players, but they become aggressive when attacked
 - There is a small chance that a wolf can infect players with the Curse of Lycanthrophy (see werewolves for more information)
@@ -594,17 +711,17 @@ To get a lot of silk, start a silk farm.
 - Tamed wolves can be ordered to stand guard, in which case they'll attack players that get too close
 - A tamed wolf can be converted into a dog, usually using bones
 
-### 3.42.2 Simple wolves
+### 4.42.2 Simple wolves
 
 - This simplistic creature from the [wildlife mod](https://github.com/TheTermos/wildlife) was written as a demonstration of **mobkit**'s abilities
 - It cannot be tamed or bred, and it does not have a spawn egg
 - It hunts simple deer
 
-# 4. List of items
+# 5. List of items
 
 This list doesn't include items that have already been described above.
 
-## 4.1 Admin tools
+## 5.1 Admin tools
 
 Admin tools have no craft recipes, so are not available to ordinary players.
 
@@ -620,30 +737,30 @@ Admin tools have no craft recipes, so are not available to ordinary players.
 - The cobweb gun can be used to test cobwebs, usually produced by tarantulas
 - The lantern gun can be used to test lantern grenades, usually produced by Mr Pumpkin
 
-## 4.2 Animal bones
+## 5.2 Animal bones
 
 - Bones are often dropped when you kill a creature
 - They can be used to craft different types of fertiliser
 
-## 4.3 Animal cages and kennels
+## 5.3 Animal cages and kennels
 
 - After crafting a cage or a kennel, left-click to place it in the world
 - Cages and kennels are useful in Tamagotchi Mode (see above)
 
-## 4.4 Bestiaries
+## 5.4 Bestiaries
 
 - A bestiary is a book that helps you to identify different creatures
 - The bestiary works on most creatures, not just those you've tamed
 - To find out basic information about a creature, right-click it while wielding the bestiary
 - Be careful, though, not to get too close to aggressive creatures!
 
-## 4.5 Christmas presents
+## 5.5 Christmas presents
 
 - Christmas presents are dropped by Evil Santa (and can also be crafted)
 - You can surprise your friends by placing a present at their front door
 - Don't forget to write a nice message, and to fill the present with lots of goodies!
 
-## 4.6 Dreamcatchers
+## 5.6 Dreamcatchers
 
 Dreamcatchers can be used in three ways.
 
@@ -670,14 +787,14 @@ Dreamcatchers can also be used to keep track of your pets.
 
 **Warning**: dreamcatchers will not prevent the engine from deleting faraway pets, after a game restart.
 
-## 4.7 Dung
+## 5.7 Dung
 
 - Some creatures produce dung (including scat and guano)
 - If left alone, dung will disappear after a few minutes
 - Alternatively, you can use it for creating building materials
 - Dung can also be used to craft different types of fertiliser
 
-## 4.8 Name taggers
+## 5.8 Name taggers
 
 - The automatic name tagger is a labour-saving device
 - When used on a creature, it assigns a generic nametag like "Cat 32"
@@ -685,16 +802,16 @@ Dreamcatchers can also be used to keep track of your pets.
 - The generic nametag can be changed to a unique one in the normal way
 - A nametag - generic or unique - can also be removed using the tagger
 
-## 4.9 Parchment
+## 5.9 Parchment
 
 - Parchment is an alternative to paper, when crafting books
 
-## 4.10 Pet bowls
+## 5.10 Pet bowls
 
 - Pets will stay near a pet bowl, so place one in any house you build for your pets
 - In Tamagotchi Mode, a pet bowl feeds pets
 
-## 4.11 Racing turfs
+## 5.11 Racing turfs
 
 - In the original [petz modpack](https://github.com/yl-whosit/petz/), pony and camel races were not much fun, as those animals often had identical speeds
 - Racing turfs look superficially like ordinary dirt-with-turf nodes, but slightly increase (or decrease) the speed of the mounted animal passing over it
@@ -703,7 +820,7 @@ Dreamcatchers can also be used to keep track of your pets.
 - Any node can be used to increase or decrease the speed of the pony/camel
 - For the default list, see the file **../csv/remixes/petz/racing_nodes.csv**
 
-## 4.12 Sketchbooks
+## 5.12 Sketchbooks
 
 Sketchbooks are a game within a game.
 
@@ -724,7 +841,7 @@ There are two types of sketchbook aimed at beginner and advanced artists.
 
 New sketchbooks are empty, by default. If you want, you can modify settings in order to auto-fill them; this might be useful for authors who are writing new mobs, or tweaking the existing ones.
 
-## 4.13 Syringes
+## 5.13 Syringes
 
 - If two creatures are not at the same location, you can use a syringe for breeding
 - While wielding the syringe, get a DNA sample by right-clicking the father
@@ -733,7 +850,7 @@ New sketchbooks are empty, by default. If you want, you can modify settings in o
 - In **unimobs**, syringes can be used with most creatures
 - You can impregnate a creature that belongs to another player, but the babies will still belong to that player
 
-## 4.14 Whistles
+## 5.14 Whistles
 
 - Whistles are used to summon your pets, no matter how far away they are
 - Right click while wielding the whistle
@@ -741,48 +858,7 @@ New sketchbooks are empty, by default. If you want, you can modify settings in o
 - Click on one of the listed pets to summon it
 - Whistles only work on pets that you've named
 
-# 5. Setting up unimobs
-
-**Ignore this section if you're playing [unigame](https://github.com/axcore/unigame)**
-
-In both **unilib** and **unimobs**, the code has been divided into the smallest possible components, called *packages*. For example, **unilib** provides one package for sand, and another for both stone and cobblestone. **unimobs** provides one package for ponies, and another package for cats.
-
-You can create the game of your dreams - no coding skills required! - by making a list of the packages you want to load.
-
-A list of packages is called a **remix**. **unilib** and its expansion packs provide a large selection of remixes, ready for you to use.
-
-There are two pairs of remixes that are recommended for beginners, choose one pair or the other. Firstly:
-
-- **mtgame** contains everything from [minetest_game](https://github.com/minetest/minetest_game), a basic sandbox game
-- **petz** contains everything from the [petz modpack](https://github.com/yl-whosit/petz/), including about 50 different creatures
-
-Secondly:
-
-- **gaia** is a more detailed and naturalistic sandbox game
-- **gaia_unimobs** contains creatures from several mods, including **petz**, configured to spawn in **gaia**'s unique biomes
-
-To choose the remixes you want:
-
-- In **Minetest**'s main menu, create a new world
-- Click the **Select Mods** button, and select both **unilib** and **unimobs**
-- Now click the **Settings** button in the top right corner
-
-![Minetest menu screenshot](screenshots/settings_menu.png)
-
-- In the left panel, scroll down and select **Unified Voxel Library (unilib)**
-- In the right panel, you should be able to see a box marked **List of remixes and packages to load**
-- Empty the box, and then add the remixes you want to load, for example:
-
-        mtgame petz
-
-- Or, alternatively:
-
-        gaia gaia_unimobs
-
-- Click the **Set** button to apply the change
-- When you're ready, start the game!
-
-# 6. Remixes included
+# 6. List of included remixes
 
 For more information about remixes, packages and CSV files, see the **Setting up unimobs** section above.
 
@@ -821,6 +897,10 @@ This remix is based on the **petz** remix, but has been re-configured to use the
 The [wildlife mod](https://github.com/TheTermos/wildlife) was written as a demonstration of **mobkit**'s abilities. It provides just two simple creatures: a deer, and a wolf that hunts it.
 
 These creatures have none of the features imported from **petz** (they can't be tamed or bred); they serve mostly as code examples for authors who want to write new creatures without those features.
+
+# 6.7 awards_unimobs
+
+This remix provides awards for unimobs-based creatures and items. Awards must be enabled in settings.
 
 # 7. Configuring unimobs for new biomes
 
@@ -867,9 +947,9 @@ However, **DISABLE_SPAWN** should not be changed. It applies to creatures which 
 
 Note that **CAN_SPAWN**, **CANNOT_SPAWN** and **DISABLE_SPAWN** must always be in CAPITAL LETTERS, or they won't be recognised.
 
-## 7.4 Understanding mob_constants.csv
+## 7.4 Understanding constants.csv
 
-Now open **mob_constants.csv** in a suitable editor.
+Now open **constants.csv** in a suitable editor.
 
 This file converts values that are easy for a human to read, such as **CAN_SPAWN**, into the values used by **unimobs** internally. You can remove them if you don't need them, but don't modify them.
 
@@ -891,7 +971,7 @@ In **unimobs**, spawning works like this: every 30 seconds (by default) a locati
 
 Note that use of **NO_CUSTOM_SPAWN**. This is a *column filler* - a shortcut that is ignored by the **unimobs** code; it's there to tell you what sort of values should be added to this column.
 
-**NO_NODE** and **NO_BIOME** are also column fillers (see the **mob_constants.csv** file for a complete list of them). If you were to remove all of the column fillers from **mob_settings.csv**, nothing would happen.
+**NO_NODE** and **NO_BIOME** are also column fillers (see the **constants.csv** file for a complete list of them). If you were to remove all of the column fillers from **mob_settings.csv**, nothing would happen.
 
 - **spawn_node_str** - a list of one or more nodes on which the mob can spawn. **NO_NODE** means that the mob can spawn on any node (as long as other restrictions don't apply).
 

@@ -26,6 +26,7 @@ function unilib.pkg.mtb_stop_following.do_action(self, player)
     if not player then
 
         unilib.pkg.mtb_order_autonomy.do_action(self)
+        return true
 
     else
 

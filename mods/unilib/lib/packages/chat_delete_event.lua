@@ -20,7 +20,7 @@ function unilib.pkg.chat_delete_event.init()
     return {
         description = "Chat command /delete_event",
         notes = "Deletes calendar events from the specified game day (e.g. 1 for the first game" ..
-                " day, or a string in the form \"YYYYMMDD\"). N.B. Only events of the type" ..
+                " day, or a value in the form \"YYYYMMDD\"). N.B. Only events of the type" ..
                 " \"default\" can be removed with this command (such as those created with the" ..
                 " /add_event command)",
     }
@@ -33,7 +33,7 @@ function unilib.pkg.chat_delete_event.exec()
         params = "<game_day>",
         description = S(
             "Deletes calendar events from the specified game day (e.g. 1 for the first game" ..
-                    " day, or a string in the form \"YYYYMMDD\"). Only events of the \"default\"" ..
+                    " day, or a value in the form \"YYYYMMDD\"). Only events of the \"default\"" ..
                     " type can be removed with this command (such as those created with the" ..
                     " /add_event command)"
         ),

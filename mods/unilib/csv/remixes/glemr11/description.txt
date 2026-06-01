@@ -1,0 +1,3 @@
+Contains almost everything from revision 11 of lib_materials/lib_ecology (31st Aug 2019, dev branch). Some material of little value has been omitted. Code for modifying terrain (e.g. producing lakes) has also been omitted.
+
+The original mods were not suitable for use in survival mode, and the same applies to this remix. Instead, this remix should be used as the basis for your own remixes. The section containing ore packages can also be removed, as it is again not very useful in survival mode.

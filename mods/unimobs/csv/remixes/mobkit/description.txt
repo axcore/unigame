@@ -1,0 +1,5 @@
+Contains everything from mobkit mod, including all core code and all built-in mob behaviours.
+
+Many function names have changed; before attempting to write new mobs, see the README.
+
+The mobkit.hq_follow0() function, marked for deletion in the original code, has not been imported.

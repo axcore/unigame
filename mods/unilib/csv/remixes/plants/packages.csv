@@ -1,5 +1,5 @@
 # "plants" remix - contains many flowers, plants and mushrooms from the plants mod, but some have
-#   been omitted. Dependence on the "habitat" mod has been replaced with standard decorations.
+#   been omitted. Dependence on the habitat mod has been replaced with standard decorations.
 #   Support for plant regeneration was not imported
 
 # node_name | original_mod

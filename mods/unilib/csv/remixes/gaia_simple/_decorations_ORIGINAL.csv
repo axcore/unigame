@@ -28,7 +28,7 @@ treelog|unilib_glem_tree_mangrove_green_1 unilib:tree_mangrove_green_trunk|COAST
 
 # Hot humid coastal [unilib:dirt_silt_coarse_with_litter_rainforest]
 # (unilib:dirt_silt_coarse_with_litter_rainforest DEFAULT)
-simple|unilib:grass_jungle|COASTAL|MANGROVE_MAX|gaia_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|||0.01|||
+simple|unilib:grass_jungle|COASTAL|MANGROVE_MAX|gaia_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|||0.02|||
 simple|unilib:grass_tall|COASTAL|MANGROVE_MAX|gaia_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|||0.01|||
 simple|unilib:grass_rainforest_1|COASTAL|MANGROVE_MAX|gaia_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|||0.03|||
 simple|unilib:grass_rainforest_2|COASTAL|MANGROVE_MAX|gaia_hot_humid_coastal|unilib:dirt_silt_coarse_with_litter_rainforest|||0.01|||
@@ -55,7 +55,7 @@ schematic_no_rotate|unilib_glem_tree_fern_yellow|COASTAL|MANGROVE_MAX|gaia_hot_h
 
 # Hot humid lowland [unilib:dirt_silt_fine_with_turf_hot_humid_lowland]
 # (unilib:dirt_silt_fine_with_turf_hot_humid_lowland DEFAULT)
-simple|unilib:grass_jungle|LOWLAND|COASTAL|gaia_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|||0.01|||
+simple|unilib:grass_jungle|LOWLAND|COASTAL|gaia_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|||0.02|||
 simple|unilib:grass_tall|LOWLAND|COASTAL|gaia_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|||0.01|||
 simple|unilib:grass_rainforest_1|LOWLAND|COASTAL|gaia_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|||0.01|||
 simple|unilib:grass_rainforest_2|LOWLAND|COASTAL|gaia_hot_humid_lowland|unilib:dirt_silt_fine_with_turf_hot_humid_lowland|||0.01|||
@@ -85,7 +85,7 @@ schematic_no_rotate|unilib_glem_tree_fern_yellow|LOWLAND|COASTAL|gaia_hot_humid_
 
 # Hot humid shelf [unilib:dirt_dark_with_turf_hot_humid_shelf]
 # (unilib:dirt_dark_with_turf_hot_humid_shelf DEFAULT)
-simple|unilib:grass_jungle|SHELF|LOWLAND|gaia_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|||0.01|||
+simple|unilib:grass_jungle|SHELF|LOWLAND|gaia_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|||0.02|||
 simple|unilib:grass_bamboo|SHELF|LOWLAND|gaia_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|||0.01|||
 simple|unilib:grass_rainforest_1|SHELF|LOWLAND|gaia_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|||0.01|||
 simple|unilib:grass_rainforest_2|SHELF|LOWLAND|gaia_hot_humid_shelf|unilib:dirt_dark_with_turf_hot_humid_shelf|||0.01|||
@@ -121,7 +121,7 @@ schematic_no_rotate|unilib_glem_tree_fern_yellow|SHELF|LOWLAND|gaia_hot_humid_sh
 
 # Hot humid highland [unilib:dirt_ordinary_with_turf_hot_humid_highland]
 # (unilib:dirt_ordinary_with_turf_hot_humid_highland DEFAULT)
-simple|unilib:grass_jungle|HIGHLAND|SHELF|gaia_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|||0.01|||
+simple|unilib:grass_jungle|HIGHLAND|SHELF|gaia_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|||0.02|||
 simple|unilib:grass_bamboo|HIGHLAND|SHELF|gaia_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|||0.01|||
 simple|unilib:grass_rainforest_1|HIGHLAND|SHELF|gaia_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|||0.01|||
 simple|unilib:grass_rainforest_2|HIGHLAND|SHELF|gaia_hot_humid_highland|unilib:dirt_ordinary_with_turf_hot_humid_highland|||0.01|||
@@ -180,7 +180,7 @@ treelog|unilib_glem_tree_mangrove_green_6 unilib:tree_mangrove_green_trunk|MANGR
 
 # Hot semihumid coastal [unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal]
 # (unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal DEFAULT)
-simple|unilib:grass_jungle|COASTAL|BEACH_MAX|gaia_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|||0.1|||
+simple|unilib:grass_jungle|COASTAL|BEACH_MAX|gaia_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|||0.2|||
 simple|unilib:grass_rainforest_1|COASTAL|BEACH_MAX|gaia_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|||0.1|||
 simple|unilib:grass_rainforest_2|COASTAL|BEACH_MAX|gaia_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|||0.1|||
 simple|unilib:grass_rainforest_3|COASTAL|BEACH_MAX|gaia_hot_semihumid_coastal|unilib:dirt_silt_fine_with_turf_hot_semihumid_coastal|||0.1|||
@@ -207,7 +207,7 @@ schematic_no_rotate|unilib_glem_tree_fern_yellow|COASTAL|BEACH_MAX|gaia_hot_semi
 
 # Hot semihumid lowland [unilib:dirt_dark_with_turf_hot_semihumid_lowland]
 # (unilib:dirt_dark_with_turf_hot_semihumid_lowland DEFAULT)
-simple|unilib:grass_jungle|LOWLAND|COASTAL|gaia_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|||0.01|||
+simple|unilib:grass_jungle|LOWLAND|COASTAL|gaia_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|||0.02|||
 simple|unilib:grass_rainforest_1|LOWLAND|COASTAL|gaia_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|||0.01|||
 simple|unilib:grass_rainforest_2|LOWLAND|COASTAL|gaia_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|||0.01|||
 simple|unilib:grass_rainforest_3|LOWLAND|COASTAL|gaia_hot_semihumid_lowland|unilib:dirt_dark_with_turf_hot_semihumid_lowland|||0.01|||
@@ -251,7 +251,7 @@ schematic_no_rotate|unilib_glem_tree_fern_yellow|LOWLAND|COASTAL|gaia_hot_semihu
 
 # Hot semihumid shelf [unilib:dirt_ordinary_with_turf_hot_semihumid_shelf]
 # (unilib:dirt_ordinary_with_turf_hot_semihumid_shelf DEFAULT)
-simple|unilib:grass_jungle|SHELF|LOWLAND|gaia_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|||0.01|||
+simple|unilib:grass_jungle|SHELF|LOWLAND|gaia_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|||0.02|||
 simple|unilib:grass_rainforest_1|SHELF|LOWLAND|gaia_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|||0.01|||
 simple|unilib:grass_rainforest_2|SHELF|LOWLAND|gaia_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|||0.01|||
 simple|unilib:grass_rainforest_3|SHELF|LOWLAND|gaia_hot_semihumid_shelf|unilib:dirt_ordinary_with_turf_hot_semihumid_shelf|||0.01|||
@@ -1169,7 +1169,9 @@ simple|unilib:grass_ordinary_2|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unil
 simple|unilib:grass_ordinary_3|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
 simple|unilib:grass_ordinary_4|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
 simple|unilib:grass_ordinary_5|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
-simple|unilib:plant_cactus_purple_small|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
+simple|unilib:plant_cactus_purple_small|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.002|||
+simple|unilib:plant_cactus_purple_small_mature|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.001|||
+simple|unilib:plant_cactus_purple|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.0005|||
 simple|unilib:plant_cactus_small|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
 simple|unilib:plant_cactus_small_flowering|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.01|||
 treelog|unilib_glem_tree_cedar_1 unilib:tree_cedar_trunk|COASTAL|BEACH_MAX|gaia_mild_semiarid_coastal|unilib:dirt_ordinary_with_turf_mild_semiarid_coastal|||0.001|||
@@ -1191,7 +1193,9 @@ simple|unilib:grass_dry_2|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt
 simple|unilib:grass_dry_3|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.01|||
 simple|unilib:grass_dry_4|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.01|||
 simple|unilib:grass_dry_5|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.01|||
-simple|unilib:plant_cactus_purple_small|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.001|||
+simple|unilib:plant_cactus_purple_small|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.002|||
+simple|unilib:plant_cactus_purple_small_mature|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.001|||
+simple|unilib:plant_cactus_purple|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.0005|||
 simple|unilib:plant_cactus_small|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.001|||
 simple|unilib:plant_cactus_small_flowering|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.001|||
 simple|unilib:tree_young_palm_desert|LOWLAND|COASTAL|gaia_mild_semiarid_lowland|unilib:dirt_coarse_with_turf_mild_semiarid_lowland|||0.001|||
@@ -1210,7 +1214,8 @@ simple|unilib:grass_dry_3|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red
 simple|unilib:grass_dry_4|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
 simple|unilib:grass_dry_5|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
 simple|unilib:plant_cactus_thorny|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
-simple|unilib:plant_cactus_purple_small|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
+simple|unilib:plant_cactus_purple_small|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.002|||
+simple|unilib:plant_cactus_purple_small_mature|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.001|||
 simple|unilib:plant_cactus_small|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
 simple|unilib:plant_cactus_small_flowering|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.01|||
 schematic|unilib_glem_tree_cedar_1|SHELF|LOWLAND|gaia_mild_semiarid_shelf|unilib:clay_red_with_turf_mild_semiarid_shelf|||0.001|||
@@ -1528,45 +1533,45 @@ schematic|unilib_glem_tree_fir_1|HIGHLAND|SHELF|gaia_cool_temperate_highland|uni
 
 # Cool semiarid coastal [unilib:dirt_sandy_with_turf_cool_semiarid_coastal]
 # (unilib:dirt_sandy_with_turf_cool_semiarid_coastal DEFAULT)
-simple|unilib:grass_dry_1|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
-simple|unilib:grass_dry_2|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
-simple|unilib:grass_dry_3|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
-simple|unilib:grass_dry_4|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
-simple|unilib:grass_dry_5|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
+simple|unilib:grass_dry_1|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.005|||
+simple|unilib:grass_dry_2|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.005|||
+simple|unilib:grass_dry_3|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.005|||
+simple|unilib:grass_dry_4|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.005|||
+simple|unilib:grass_dry_5|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.005|||
 simple|unilib:plant_heath_red|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
 simple|unilib:plant_sandwort|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
-simple|unilib:plant_saxifrage_purple|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.01|||
+simple|unilib:plant_saxifrage_purple|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.003|||
 treelog|unilib_glem_tree_pine_ancient_1 unilib:tree_pine_ancient_trunk|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.002|||
 treelog|unilib_glem_tree_pine_ancient_3 unilib:tree_pine_ancient_trunk|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.002|||
 treelog|unilib_glem_tree_pine_ancient_6 unilib:tree_pine_ancient_trunk|COASTAL|BEACH_MAX|gaia_cool_semiarid_coastal|unilib:dirt_sandy_with_turf_cool_semiarid_coastal|||0.002|||
 
 # Cool semiarid lowland [unilib:dirt_coarse_with_turf_cool_semiarid_lowland]
 # (unilib:dirt_coarse_with_turf_cool_semiarid_lowland DEFAULT)
-simple|unilib:grass_dry_1|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
-simple|unilib:grass_dry_2|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
-simple|unilib:grass_dry_3|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
-simple|unilib:grass_dry_4|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
-simple|unilib:grass_dry_5|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
+simple|unilib:grass_dry_1|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
+simple|unilib:grass_dry_2|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
+simple|unilib:grass_dry_3|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
+simple|unilib:grass_dry_4|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
+simple|unilib:grass_dry_5|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
 simple|unilib:plant_heath_purple|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
 simple|unilib:plant_heath_red|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
 simple|unilib:plant_sandwort|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
-simple|unilib:plant_saxifrage_purple|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.005|||
+simple|unilib:plant_saxifrage_purple|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.003|||
 treelog|unilib_glem_tree_pine_ancient_3 unilib:tree_pine_ancient_trunk|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.002|||
 treelog|unilib_glem_tree_pine_ancient_5 unilib:tree_pine_ancient_trunk|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.002|||
 treelog|unilib_glem_tree_pine_ancient_6 unilib:tree_pine_ancient_trunk|LOWLAND|COASTAL|gaia_cool_semiarid_lowland|unilib:dirt_coarse_with_turf_cool_semiarid_lowland|||0.002|||
 
 # Cool semiarid shelf [unilib:clay_red_with_turf_cool_semiarid_shelf]
 # (unilib:clay_red_with_turf_cool_semiarid_shelf DEFAULT)
-simple|unilib:grass_dry_1|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
-simple|unilib:grass_dry_2|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
-simple|unilib:grass_dry_3|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
-simple|unilib:grass_dry_4|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
-simple|unilib:grass_dry_5|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
+simple|unilib:grass_dry_1|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
+simple|unilib:grass_dry_2|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
+simple|unilib:grass_dry_3|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
+simple|unilib:grass_dry_4|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
+simple|unilib:grass_dry_5|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
 simple|unilib:plant_heath_green|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
 simple|unilib:plant_heath_purple|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
 simple|unilib:plant_heath_red|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
 simple|unilib:plant_sandwort|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
-simple|unilib:plant_saxifrage_purple|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.003|||
+simple|unilib:plant_saxifrage_purple|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.002|||
 schematic|unilib_glem_tree_pine_ancient_7|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.001|||
 schematic|unilib_glem_tree_pine_ancient_8|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.001|||
 schematic|unilib_glem_tree_pine_ancient_9|SHELF|LOWLAND|gaia_cool_semiarid_shelf|unilib:clay_red_with_turf_cool_semiarid_shelf|||0.001|||
@@ -1891,13 +1896,13 @@ simple|unilib:grass_frozen_2|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib
 simple|unilib:grass_frozen_3|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib:dirt_permafrost_ordinary_with_litter_stone|||0.005|||
 simple|unilib:grass_frozen_4|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib:dirt_permafrost_ordinary_with_litter_stone|||0.005|||
 simple|unilib:grass_frozen_5|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib:dirt_permafrost_ordinary_with_litter_stone|||0.005|||
-simple|unilib:plant_nettle_carduus|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib:dirt_permafrost_ordinary_with_litter_stone|||0.005|||
+simple|unilib:plant_nettle_carduus|BEACH_MAX|SEA_LEVEL|gaia_cold_semiarid_beach|unilib:dirt_permafrost_ordinary_with_litter_stone|||0.003|||
 
 # Cold semiarid coastal [unilib:dirt_permafrost_ordinary]
 # (dirt_permafrost_ordinary DEFAULT)
 simple|unilib:plant_weed_stone|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.005|||
 simple|unilib:plant_saxifrage_purple|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.005|||
-simple|unilib:plant_nettle_carduus|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.005|||
+simple|unilib:plant_nettle_carduus|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.003|||
 simple|unilib:plant_shrub_snowy|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.005|||
 simple|unilib:grass_frozen_1|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.01|||
 simple|unilib:grass_frozen_2|COASTAL|BEACH_MAX|gaia_cold_semiarid_coastal|unilib:dirt_permafrost_ordinary|||0.01|||
@@ -1912,7 +1917,7 @@ simple|unilib:stone_sandstone_silver|COASTAL|BEACH_MAX|gaia_cold_semiarid_coasta
 # (dirt_permafrost_dark DEFAULT)
 simple|unilib:plant_weed_stone|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.005|||
 simple|unilib:plant_saxifrage_purple|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.005|||
-simple|unilib:plant_nettle_carduus|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.005|||
+simple|unilib:plant_nettle_carduus|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.003|||
 simple|unilib:plant_shrub_snowy|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.005|||
 simple|unilib:grass_frozen_1|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.0075|||
 simple|unilib:grass_frozen_2|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|unilib:dirt_permafrost_dark|||0.0075|||
@@ -1927,7 +1932,7 @@ simple|unilib:stone_sandstone_silver|LOWLAND|COASTAL|gaia_cold_semiarid_lowland|
 # (dirt_permafrost_dark_with_cover_snow DEFAULT)
 simple|unilib:plant_weed_stone|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.005|||
 simple|unilib:plant_saxifrage_purple|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.005|||
-simple|unilib:plant_nettle_carduus|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.005|||
+simple|unilib:plant_nettle_carduus|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.003|||
 simple|unilib:grass_frozen_1|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||
 simple|unilib:grass_frozen_2|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||
 simple|unilib:grass_frozen_3|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||
@@ -1937,7 +1942,7 @@ simple|unilib:grass_frozen_5|SHELF|LOWLAND|gaia_cold_semiarid_shelf|unilib:dirt_
 # Cold semiarid highland [unilib:dirt_permafrost_dark_with_cover_snow]
 # (dirt_permafrost_dark_with_cover_snow DEFAULT)
 simple|unilib:plant_saxifrage_purple|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.005|||
-simple|unilib:plant_nettle_carduus|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.005|||
+simple|unilib:plant_nettle_carduus|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.003|||
 simple|unilib:grass_frozen_1|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||
 simple|unilib:grass_frozen_2|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||
 simple|unilib:grass_frozen_3|HIGHLAND|SHELF|gaia_cold_semiarid_highland|unilib:dirt_permafrost_dark_with_cover_snow|||0.01|||

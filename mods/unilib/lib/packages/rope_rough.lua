@@ -134,10 +134,9 @@ function unilib.pkg.rope_rough.exec()
 
         on_punch = function(pos, node, puncher, pointed_thing)
 
-            local player_name = puncher:get_player_name()
-
-            if not core.is_protected(pos, player_name) or
-                    core.get_player_privs(player_name).protection_bypass then
+            local pname = puncher:get_player_name()
+            if not core.is_protected(pos, pname) or
+                    core.get_player_privs(pname).protection_bypass then
                 do_remove(pos, node, puncher, "unilib:rope_rough")
             end
 

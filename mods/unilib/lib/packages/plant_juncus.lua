@@ -68,7 +68,8 @@ function unilib.pkg.plant_juncus.exec()
             type = "fixed",
             fixed = {-7/16, -1/2, -7/16, 7/16, 0, 7/16},
         },
-        visual_scale = math.sqrt(8),
+        -- N.B. Textures have been resized, so .visual_scale is no longer required
+--      visual_scale = math.sqrt(8),
         walkable = false,
 
         on_place = function(itemstack, placer, pointed_thing)
@@ -144,7 +145,8 @@ function unilib.pkg.plant_juncus.exec()
             type = "fixed",
             fixed = {-7/16, -1/2, -7/16, 7/16, 0, 7/16},
         },
-        visual_scale = math.sqrt(8),
+        -- N.B. Textures have been resized, so .visual_scale is no longer required
+--      visual_scale = math.sqrt(8),
         walkable = false,
     })
     -- (not compatible with flowerpots)

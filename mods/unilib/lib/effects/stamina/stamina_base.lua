@@ -34,14 +34,6 @@ local function stamina_log(level, msg, ...)
 
 end
 
-local function is_player(player)
-
-    -- Adapted from stamina, was is_player()
-
-    return core.is_player(player) and not player.is_fake_player
-
-end
-
 local function get_hud_id(player)
 
     -- Adapted from stamina, was get_hud_id()
@@ -62,11 +54,11 @@ end
 -- Local functions (ticks)
 ---------------------------------------------------------------------------------------------------
 
-local function poison_tick(player_name, ticks, interval, elapsed)
+local function poison_tick(pname, ticks, interval, elapsed)
 
     -- Adapted from stamina, was poison_tick()
 
-    local player = core.get_player_by_name(player_name)
+    local player = core.get_player_by_name(pname)
     if not player or not unilib.stamina.is_poisoned(player) then
 
         return
@@ -82,7 +74,7 @@ local function poison_tick(player_name, ticks, interval, elapsed)
             player:set_hp(hp)
         end
 
-        core.after(interval, poison_tick, player_name, ticks, interval, elapsed + 1)
+        core.after(interval, poison_tick, pname, ticks, interval, elapsed + 1)
 
     end
 
@@ -363,7 +355,7 @@ function unilib.stamina.change_saturation(player, change)
     -- Adapted from stamina, was stamina.change_saturation()
     -- Updates a player's saturation by a delta, instead of an absolute value
 
-    if not is_player(player) or not change or change == 0 then
+    if not unilib.utils.is_player(player) or not change or change == 0 then
         return false
     end
 
@@ -438,13 +430,12 @@ function unilib.stamina.poison_player(player, ticks, interval)
 
     end
 
-    if not is_player(player) then
+    if not unilib.utils.is_player(player) then
         return
     end
 
     unilib.stamina.set_poisoned(player, true)
-    local player_name = player:get_player_name()
-    poison_tick(player_name, ticks, interval, 0)
+    poison_tick(player:get_player_name(), ticks, interval, 0)
 
 end
 
@@ -500,7 +491,7 @@ function unilib.stamina.exhaust_player(player, change, cause)
 
     end
 
-    if not is_player(player) then
+    if not unilib.utils.is_player(player) then
         return
     end
 
@@ -707,7 +698,7 @@ function core.do_item_eat(hp_change, replace_with_item, itemstack, player, point
 
     end
 
-    if not is_player(player) or not itemstack then
+    if not unilib.utils.is_player(player) or not itemstack then
         return itemstack
     end
 
@@ -844,8 +835,8 @@ core.register_on_punchplayer(
         )
 
     end
-
 )
+
 core.register_on_respawnplayer(function(player)
     unilib.stamina.update_saturation(player, settings_table.visual_max)
 end)

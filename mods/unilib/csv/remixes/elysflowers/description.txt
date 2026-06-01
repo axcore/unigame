@@ -1,0 +1,4 @@
+Contains everything from the elysflowers mod, including its original biome, and support for all
+biomes imported from minetest_game and ethereal-ng.
+
+Does not include support for biomes provided by other external mods.

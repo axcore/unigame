@@ -30,8 +30,12 @@ function unilib.pkg.plant_nettle_scotch_broom.exec()
         -- nettle:scotch_broom
         description = unilib.utils.annotate(S("Scotch Broom"), "Cytisus scoparius"),
         tiles = {"unilib_plant_nettle_scotch_broom.png"},
+        -- N.B. attached_node = 1 not in original code
         -- N.B. removed flora = 1 to prevent additional spreading
-        groups = {choppy = 2, flammable = 1, nettle_weed = 1, oddly_breakable_by_hand = 1},
+        groups = {
+            attached_node = 1, choppy = 2, flammable = 1, nettle_weed = 1,
+            oddly_breakable_by_hand = 1,
+        },
         sounds = unilib.global.sound_table.leaves,
 
         drawtype = "mesh",

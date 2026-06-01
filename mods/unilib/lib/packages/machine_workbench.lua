@@ -336,7 +336,7 @@ function unilib.pkg.machine_workbench.init()
         notes = "Prices for the node-cutting function may differ slightly from the corresponding" ..
                 " items in the original code, because unilib measures prices in eighths of a" ..
                 " block",
-        depends = "tool_hammer_blacksmith",
+        depends = {"item_stick_ordinary", "tool_hammer_blacksmith"},
         optional = "shared_screwdriver",
     }
 
@@ -382,12 +382,23 @@ function unilib.pkg.machine_workbench.exec()
 
         on_timer = on_timer,
     })
+    -- N.B. Original craft recipe conflicts with the recipe for all wooden stairs
+    --[[
     unilib.register_craft({
         -- From xdecor:workbench
         output = "unilib:machine_workbench",
         recipe = {
             {"group:wood", "group:wood"},
             {"group:wood", "group:wood"},
+        },
+    })
+    ]]--
+    unilib.register_craft({
+        -- From xdecor:workbench
+        output = "unilib:machine_workbench",
+        recipe = {
+            {"group:wood", "group:stone", "group:wood"},
+            {"unilib:item_stick_ordinary", "", "unilib:item_stick_ordinary"},
         },
     })
 

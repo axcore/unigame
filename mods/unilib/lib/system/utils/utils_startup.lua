@@ -26,9 +26,12 @@ function unilib.utils._get_startup_biome_msg()
 
         if unilib.global.remix_biome_count_table[remix_name] ~= nil then
 
-            msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" ..
-                    tostring(unilib.global.remix_biome_count_table[remix_name] or 0) .. "]"
+            if msg ~= "" then
+                msg = msg .. " "
+            end
+
+            msg = msg .. " " .. remix_name .. " [" ..
+                tostring(unilib.global.remix_biome_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -53,9 +56,12 @@ function unilib.utils._get_startup_deco_msg()
 
         if unilib.global.remix_deco_count_table[remix_name] ~= nil then
 
-            msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" ..
-                    tostring(unilib.global.remix_deco_count_table[remix_name] or 0) .. "]"
+            if msg ~= "" then
+                msg = msg .. " "
+            end
+
+            msg = msg .. remix_name .. " [" ..
+                tostring(unilib.global.remix_deco_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -76,7 +82,13 @@ function unilib.utils._get_startup_expansion_msg()
     local msg = ""
 
     for _, ext_name in ipairs(unilib.global.ext_pack_list) do
-        msg = msg .. " " .. ext_name
+
+        if msg ~= "" then
+            msg = msg .. " "
+        end
+
+        msg = msg .. ext_name
+
     end
 
     return msg
@@ -97,9 +109,12 @@ function unilib.utils._get_startup_ore_msg()
 
         if unilib.global.remix_ore_count_table[remix_name] ~= nil then
 
-            msg = msg .. " " .. remix_name .. " "
-            msg = msg .. "[" ..
-                    tostring(unilib.global.remix_ore_count_table[remix_name] or 0) .. "]"
+            if msg ~= "" then
+                msg = msg .. " "
+            end
+
+            msg = msg .. remix_name .. " [" ..
+                tostring(unilib.global.remix_ore_count_table[remix_name] or 0) .. "]"
 
         end
 
@@ -120,8 +135,12 @@ function unilib.utils._get_startup_pkg_msg()
 
     for _, remix_name in ipairs(unilib.global.init_remix_list) do
 
-        msg = msg .. " " .. remix_name .. " "
-        msg = msg .. "[" .. tostring(unilib.global.remix_pkg_count_table[remix_name] or 0) .. "]"
+        if msg ~= "" then
+            msg = msg .. " "
+        end
+
+        msg = msg .. remix_name .. " [" ..
+            tostring(unilib.global.remix_pkg_count_table[remix_name] or 0) .. "]"
 
     end
 

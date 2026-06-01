@@ -25,46 +25,40 @@ function unilib.misc._set_squeezed_recipes(ingredient, squeezed_name)
 
     if unilib.setting.squeezed_technic_flag and core.get_modpath("technic") ~= nil then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        if core.registered_nodes["technic:hv_compactor"] ~= nil then
 
-            if core.registered_nodes["technic:hv_compactor"] ~= nil then
+            -- Some forks of the technic mod use a compressor, rather than a compactor, for this
+            --      sort of thing
+            technic.register_compactor_recipe({
+                input = {ingredient .. " 8"},
+                output = squeezed_name,
+                time = 10,
+            })
+            unilib.register_craft({
+                type = "shapeless",
+                output = ingredient .. " 8",
+                recipe = {squeezed_name},
+            })
 
-                -- Some forks of the technic mod use a compressor, rather than a compactor, for this
-                --      sort of thing
-                technic.register_compactor_recipe({
-                    input = {ingredient .. " 8"},
-                    output = squeezed_name,
-                    time = 10,
-                })
-                unilib.register_craft({
-                    type = "shapeless",
-                    output = ingredient .. " 8",
-                    recipe = {squeezed_name},
-                })
+            return
 
-                return
+        elseif core.registered_nodes["technic:hv_compressor"] ~= nil then
 
-            elseif core.registered_nodes["technic:hv_compressor"] ~= nil then
+            -- The standard compressor is available
+            technic.register_compressor_recipe({
+                input = {ingredient .. " 8"},
+                output = squeezed_name,
+                time = 10,
+            })
+            unilib.register_craft({
+                type = "shapeless",
+                output = ingredient .. " 8",
+                recipe = {squeezed_name},
+            })
 
-                -- The standard compressor is available
-                technic.register_compressor_recipe({
-                    input = {ingredient .. " 8"},
-                    output = squeezed_name,
-                    time = 10,
-                })
-                unilib.register_craft({
-                    type = "shapeless",
-                    output = ingredient .. " 8",
-                    recipe = {squeezed_name},
-                })
+            return
 
-                return
-
-            end
-
-        end)
+        end
 
     end
 

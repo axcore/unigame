@@ -1,11 +1,11 @@
-# "moreores" remix - contains almost everything from moreores except the tin items already provided
-#   by minetest_game
+# "moreores" remix - contains almost everything from moreores mod except the tin items already
+#   provided by minetest_game
 # Includes the deprecated mithril/silver hoes
 # Does not include support for frames/toolranks (yet)
 
 # node_name | original_mod
 
-# moreblocks packages
+# moreores packages
 metal_mithril|glemr11 moreores technic
 metal_silver|glemr11 moreores technic
 ore_moreores_stone_ordinary_with_mithril|moreores

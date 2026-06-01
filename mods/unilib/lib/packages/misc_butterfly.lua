@@ -163,11 +163,11 @@ function unilib.pkg.misc_butterfly.exec()
             --[[
             on_place = function(itemstack, placer, pointed_thing)
 
-                local player_name = placer and placer:get_player_name() or ""
+                local pname = placer and placer:get_player_name() or ""
                 local pos = pointed_thing.above
 
-                if not core.is_protected(pos, player_name) and
-                        not core.is_protected(pointed_thing.under, player_name) and
+                if not core.is_protected(pos, pname) and
+                        not core.is_protected(pointed_thing.under, pname) and
                         core.get_node(pos).name == "air" then
 
                     core.set_node(pos, {name = "unilib:misc_butterfly_" .. part_name})
@@ -226,11 +226,11 @@ function unilib.pkg.misc_butterfly.exec()
                 --[[
                 on_place = function(itemstack, placer, pointed_thing)
 
-                    local player_name = placer and placer:get_player_name() or ""
+                    local pname = placer and placer:get_player_name() or ""
                     local pos = pointed_thing.above
 
-                    if not core.is_protected(pos, player_name) and
-                            not core.is_protected(pointed_thing.under, player_name) and
+                    if not core.is_protected(pos, pname) and
+                            not core.is_protected(pointed_thing.under, pname) and
                             core.get_node(pos).name == "air" then
 
                         core.set_node(

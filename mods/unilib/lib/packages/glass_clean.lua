@@ -52,18 +52,23 @@ function unilib.pkg.glass_clean.exec()
     unilib.register_carvings("unilib:glass_clean", {
         millwork_flag = true,
     })
-    unilib.register_glass_trap({
-        -- From moreblocks:trap_clean_glass. Creates unilib:glass_clean_trap
-        orig_name = "moreblocks:trap_clean_glass",
-        ingredient = "unilib:glass_clean",
-        replace_mode = mode,
-        group_table = {cracky = 3, oddly_breakable_by_hand = 3},
-    })
-    unilib.register_craft({
-        -- From moreblocks:trap_clean_glass
-        type = "shapeless",
-        output = "unilib:glass_clean_trap",
-        recipe = {"unilib:item_sweeper", "unilib:glass_ordinary_trap"},
-    })
+
+    if unilib.setting.mtgame_tweak_flag then
+    
+        unilib.register_glass_trap({
+            -- From moreblocks:trap_clean_glass. Creates unilib:glass_clean_trap
+            orig_name = "moreblocks:trap_clean_glass",
+            ingredient = "unilib:glass_clean",
+            replace_mode = mode,
+            group_table = {cracky = 3, oddly_breakable_by_hand = 3},
+        })
+        unilib.register_craft({
+            -- From moreblocks:trap_clean_glass
+            type = "shapeless",
+            output = "unilib:glass_clean_trap",
+            recipe = {"unilib:item_sweeper", "unilib:glass_ordinary_trap"},
+        })
+
+    end
 
 end

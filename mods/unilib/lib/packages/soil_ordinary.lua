@@ -33,11 +33,11 @@ function unilib.pkg.soil_ordinary.exec()
             "unilib_dirt_ordinary.png^unilib_soil_overlay.png",
             "unilib_dirt_ordinary.png",
         },
-        -- N.B. ordinary_soil = 1 not in original code. Note that grassland = 1 is not used by
-        --      unilib, but is retained for backwards compatibility
+        -- N.B. ordinary_soil = 1, regular_soil = 1 not in original code. Note that grassland = 1 is
+        --      not used by unilib, but is retained for backwards compatibility
         groups = {
             crumbly = 3, field = 1, grassland = 1, not_in_creative_inventory = 1,
-            ordinary_soil = 1, soil = 2,
+            ordinary_soil = 1, regular_soil = 1, soil = 2,
         },
         sounds = unilib.global.sound_table.dirt,
 
@@ -56,11 +56,11 @@ function unilib.pkg.soil_ordinary.exec()
             "unilib_dirt_ordinary.png^unilib_soil_wet_overlay.png",
             "unilib_dirt_ordinary.png^unilib_soil_wet_side_overlay.png",
         },
-        -- N.B. ordinary_soil = 1 not in original code. Note that grassland = 1 is not used by
-        --      unilib, but is retained for backwards compatibility
+        -- N.B. ordinary_soil = 1, regular_soil = 1 not in original code. Note that grassland = 1 is
+        --      not used by unilib, but is retained for backwards compatibility
         groups = {
             crumbly = 3, field = 1, grassland = 1, not_in_creative_inventory = 1,
-            ordinary_soil = 1, soil = 3, wet = 1,
+            ordinary_soil = 1, regular_soil = 1, soil = 3, wet = 1,
         },
         sounds = unilib.global.sound_table.dirt,
 

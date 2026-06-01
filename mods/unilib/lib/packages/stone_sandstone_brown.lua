@@ -47,7 +47,8 @@ function unilib.pkg.stone_sandstone_brown.exec()
         -- From GLEMr4, lib_materials:stone_sand
         description = S("Brown Sandstone"),
         tiles = {"unilib_stone_sandstone_brown.png"},
-        groups = {cracky = smooth_cracky, level = 2, stone = 1},
+        -- N.B. level = 2 in original code
+        groups = {cracky = smooth_cracky, stone = 1},
         sounds = unilib.global.sound_table.stone,
     })
     unilib.register_craft_2x2({

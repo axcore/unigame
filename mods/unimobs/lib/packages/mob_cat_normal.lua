@@ -53,7 +53,6 @@ function unilib.pkg.mob_cat_normal.exec()
         {"lemon", S("Lemon"), 0},
         {"mint", S("Mint"), 0},
         {"rose", S("Rose"), 0},
-
     }
     local genetic_init_list = {
         -- Standard genes

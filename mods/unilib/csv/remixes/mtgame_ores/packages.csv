@@ -1,4 +1,4 @@
-# "mtgame_ores" remix - all ore packages from the "mtgame" remix
+# "mtgame_ores" remix - contains all ore packages from the "mtgame" remix
 # N.B. Some of these packages specify biome packages as dependencies; so this remix should probably
 #   be used together with the "mtgame_biomes" remix
 

@@ -1,0 +1,1 @@
+Contains all suitable textures from the AATO (Almost All The Ores) mod, with original code and (where necessary) original textures. Only natural materials were imported; no machinery was imported.

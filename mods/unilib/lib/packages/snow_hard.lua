@@ -44,7 +44,7 @@ function unilib.pkg.snow_hard.exec()
         paramtype2 = "facedir",
         sunlight_propagates = true,
 
-        on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
+        on_construct = unilib.pkg.shared_snow.place_snow_on_dirt,
     })
     if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 
@@ -78,7 +78,7 @@ function unilib.pkg.snow_hard.exec()
         paramtype2 = "facedir",
         sunlight_propagates = true,
 
-        on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
+        on_construct = unilib.pkg.shared_snow.place_snow_on_dirt,
     })
     if unilib.global.pkg_executed_table["snow_ordinary"] ~= nil then
 

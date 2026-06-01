@@ -11,7 +11,7 @@ unilib.pkg.biome_glemr4 = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
--- Environmental constants (from lib_ecology/init.lua)
+-- General constants (from lib_ecology/init.lua)
 -- (Biome blending is not enabled in GLEMr4, but is added here for consistency with other GLEM
 --      revisions)
 local BIOME_VERTICAL_BLEND = 4

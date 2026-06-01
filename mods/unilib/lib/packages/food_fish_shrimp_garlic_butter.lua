@@ -30,7 +30,7 @@ end
 
 function unilib.pkg.food_fish_shrimp_garlic_butter.exec()
 
-    local c_fish = "unilib:ingredient_fish_shrimp"
+    local c_fish = "unilib:ingredient_fish_shrimp_white"
 
     unilib.register_craftitem(
         -- From ethereal:garlic_shrimp

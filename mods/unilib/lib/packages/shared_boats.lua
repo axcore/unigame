@@ -79,9 +79,10 @@ local function prepare_boat_entity(full_name, part_name)
     function def_table.on_detach_child(self, child)
 
         -- If driver leaves server while driving boat
-        if child and child:get_player_name() == self.driver then
+        local pname = child:get_player_name()
+        if child and pname == self.driver then
 
-            unilib.player_api.set_player_attached(child:get_player_name(), false)
+            unilib.player_api.set_player_attached(pname, false)
 
             self.driver = nil
             self.auto = false
@@ -96,12 +97,12 @@ local function prepare_boat_entity(full_name, part_name)
             return
         end
 
-        local name = puncher:get_player_name()
-        if self.driver and name == self.driver then
+        local pname = puncher:get_player_name()
+        if self.driver and pname == self.driver then
 
             self.driver = nil
             puncher:set_detach()
-            unilib.player_api.set_player_attached(name, false)
+            unilib.player_api.set_player_attached(pname, false)
 
         end
 
@@ -109,7 +110,7 @@ local function prepare_boat_entity(full_name, part_name)
 
             self.removed = true
             local inv = puncher:get_inventory()
-            if not unilib.utils.is_creative(name) or
+            if not unilib.utils.is_creative(pname) or
                     not inv:contains_item("main", full_name) then
 
                 local leftover = inv:add_item("main", full_name)
@@ -275,8 +276,8 @@ local function prepare_boat_entity(full_name, part_name)
             return
         end
 
-        local name = clicker:get_player_name()
-        if self.driver and name == self.driver then
+        local pname = clicker:get_player_name()
+        if self.driver and pname == self.driver then
 
             -- Cleanup happens in def_table.on_detach_child()
             clicker:set_detach()
@@ -292,8 +293,8 @@ local function prepare_boat_entity(full_name, part_name)
 
             clicker:set_attach(self.object, "", {x = 0.5, y = 1, z = -3}, {x = 0, y = 0, z = 0})
 
-            self.driver = name
-            unilib.player_api.set_player_attached(name, true)
+            self.driver = pname
+            unilib.player_api.set_player_attached(pname, true)
 
             core.after(0.2, function()
                 unilib.player_api.set_animation(clicker, "sit", 30)
@@ -399,15 +400,16 @@ function unilib.pkg.shared_boats.register_boat(data_table)
             end
 
             pointed_thing.under.y = pointed_thing.under.y + 0.5
-            boat = core.add_entity(pointed_thing.under, entity_name)
-            if boat then
+            
+            local boat_entity = core.add_entity(pointed_thing.under, entity_name)
+            if boat_entity then
 
                 if placer then
-                    boat:set_yaw(placer:get_look_horizontal())
+                    boat_entity:set_yaw(placer:get_look_horizontal())
                 end
 
-                local player_name = placer and placer:get_player_name() or ""
-                if not unilib.utils.is_creative(player_name) then
+                local pname = placer and placer:get_player_name() or ""
+                if not unilib.utils.is_creative(pname) then
                     itemstack:take_item()
                 end
 

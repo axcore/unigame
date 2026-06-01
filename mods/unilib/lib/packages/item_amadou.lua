@@ -31,7 +31,7 @@ function unilib.pkg.item_amadou.exec()
     unilib.register_craftitem("unilib:item_amadou", "nsspf:amadou", mode, {
         -- From nsspf:amadou
         description = S("Amadou"),
-        image = "unilib_item_amadou.png",
+        inventory_image = "unilib_item_amadou.png",
     })
     unilib.register_craft({
         -- From nsspf:amadou
@@ -51,7 +51,7 @@ function unilib.pkg.item_amadou.exec()
         unilib.register_craftitem("unilib:item_amadou_lasting", "nsspf:lasting_amadou", mode, {
             -- From nsspf:lasting_amadou
             description = S("Long-Lasting Amadou"),
-            image = "unilib_item_amadou_lasting.png",
+            inventory_image = "unilib_item_amadou_lasting.png",
         })
         unilib.register_craft({
             -- From nsspf:lasting_amadou

@@ -209,6 +209,13 @@ function unilib.utils.is_creative(...)
 
 end
 
+function unilib.utils.is_player(...)
+
+    if not t[eng_file] then t[eng_file] = true; dofile(eng_file) end
+    return unilib.utils._is_player(...)
+
+end
+
 function unilib.utils.settings_get_float(...)
 
     if not t[eng_file] then t[eng_file] = true; dofile(eng_file) end
@@ -569,6 +576,13 @@ function unilib.utils.capitalise_translation(...)
 
 end
 
+function unilib.utils.clean_translation(...)
+
+    if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
+    return unilib.utils._clean_translation(...)
+
+end
+
 function unilib.utils.contract_long_lines(...)
 
     if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
@@ -601,6 +615,13 @@ function unilib.utils.round_up(...)
 
     if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
     return unilib.utils._round_up(...)
+
+end
+
+function unilib.utils.split_string_by_separator(...)
+
+    if not t[ns_file] then t[ns_file] = true; dofile(ns_file) end
+    return unilib.utils._split_string_by_separator(...)
 
 end
 

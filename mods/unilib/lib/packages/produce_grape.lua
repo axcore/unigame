@@ -199,7 +199,8 @@ function unilib.pkg.produce_grape.exec()
     -- Wild grape bush (placed as a decoration, and the only natural source of grapes)
     unilib.register_node("unilib:produce_grape_wild", "farming:grapebush", mode, {
         -- From farming:grapebush
-        -- (no description)
+        -- (N.B. No description in original code)
+        description = S("Wild Grape Bush"),
         tiles = {"unilib_produce_grape_wild.png"},
         groups = {
             attached_node = 1, flammable = 2, not_in_creative_inventory = 1, plant = 1, snappy = 3,

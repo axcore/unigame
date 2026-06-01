@@ -34,7 +34,7 @@ function unilib.pkg.admin_node_colour.exec()
         mode,
         {
             description = S("Pure Black Node"),
-            tiles = {"unilib_admin_node_colour_black.png"},
+            tiles = {"unilib_template_black.png"},
             -- N.B. not_in_creative_inventory not in original code
             groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             sounds = unilib.global.sound_table.stone,
@@ -53,7 +53,7 @@ function unilib.pkg.admin_node_colour.exec()
         mode,
         {
             description = S("Pure White Node"),
-            tiles = {"unilib_admin_node_colour_white.png"},
+            tiles = {"unilib_template_white.png"},
             -- N.B. not_in_creative_inventory not in original code
             groups = {not_in_creative_inventory = unilib.globalshow_admin_item_group},
             sounds = unilib.global.sound_table.stone,

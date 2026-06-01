@@ -1,0 +1,3 @@
+Contains packages which define chat commands available to players without the "unilib_admin", "unilib_tools" and "unilib_danger" privileges.
+
+See the "chat" remix for a full of list chat command packages with expanded comments.

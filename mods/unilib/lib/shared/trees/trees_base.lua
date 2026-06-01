@@ -363,7 +363,7 @@ function unilib.trees._register_trunk_stripped(data_table)
         on_place = core.rotate_node,
     })
 
-    -- Reverse craft recipe to restore the trunk's bark
+    -- Reverse craft recipe to restore the trunk's bark...
     unilib.register_craft({
         output = full_name,
         recipe = {
@@ -373,6 +373,25 @@ function unilib.trees._register_trunk_stripped(data_table)
         },
     })
 
+    -- ...or convert to planks (but fewer than an unstripped trunk would produce)
+    if not variant_name then
+
+        local output = 2
+        if unilib.setting.reduced_wood_flag and
+            unilib.global.tree_table[part_name] ~= nil and
+            unilib.global.tree_table[part_name]["slim_flag"] then
+            output = 1
+        end
+
+        unilib.register_craft({
+            output = "unilib:tree_" .. part_name .. "_wood " .. output,
+            recipe = {
+                {strip_full_name},
+            },
+        })
+
+    end
+    
     return strip_full_name
 
 end

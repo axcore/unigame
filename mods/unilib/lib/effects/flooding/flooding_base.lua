@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
--- flooding.lua
+-- flooding_base.lua
 --      Set up flooding and flushing effects. Code adapted from "farming_flood" mod
 ---------------------------------------------------------------------------------------------------
 

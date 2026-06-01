@@ -86,9 +86,9 @@ function unilib.pkg.shared_default_book.on_use(itemstack, user)
 
     -- From default/craftitems.lua
 
-    local player_name = user:get_player_name()
+    local pname = user:get_player_name()
     local meta = itemstack:get_meta()
-    local title, text, owner = "", "", player_name
+    local title, text, owner = "", "", pname
     local page, page_max, lines, string = 1, 1, {}, ""
     local data = meta:to_table().fields
 
@@ -117,7 +117,7 @@ function unilib.pkg.shared_default_book.on_use(itemstack, user)
 
         formspec = formspec_write(title, text)
 
-    elseif owner == player_name then
+    elseif owner == pname then
 
         local tab = tab_number or 1
         if tab == 2 then
@@ -137,9 +137,9 @@ function unilib.pkg.shared_default_book.on_use(itemstack, user)
 
     end
 
-    core.show_formspec(player_name, "unilib:form_shared_default_book", formspec_size .. formspec)
+    core.show_formspec(pname, "unilib:form_shared_default_book", formspec_size .. formspec)
     -- Store the wield index in case the user accidentally switches before the formspec is shown
-    writer_table[player_name] = {wield_index = user:get_wield_index()}
+    writer_table[pname] = {wield_index = user:get_wield_index()}
 
     return itemstack
 
@@ -174,13 +174,13 @@ function unilib.pkg.shared_default_book.exec()
             return
         end
 
-        local player_name = player:get_player_name()
+        local pname = player:get_player_name()
         local inv = player:get_inventory()
-        if not writer_table[player_name] then
+        if not writer_table[pname] then
             return
         end
 
-        local wield_index = writer_table[player_name].wield_index
+        local wield_index = writer_table[pname].wield_index
         local wield_list = player:get_wield_list()
         local stack = inv:get_stack(wield_list, wield_index)
 
@@ -194,7 +194,7 @@ function unilib.pkg.shared_default_book.exec()
 
             -- No book in the wield slot, abort & inform the player
             core.chat_send_player(
-                player_name, S("The book in which you were writing has mysteriously disappeared.")
+                pname, S("The book in which you were writing has mysteriously disappeared.")
             )
 
             return
@@ -205,7 +205,7 @@ function unilib.pkg.shared_default_book.exec()
         local title = data.title or ""
         local text = data.text or ""
 
-        if fields.book_header ~= nil and data.owner == player_name then
+        if fields.book_header ~= nil and data.owner == pname then
 
             local contents
             local tab = tonumber(fields.book_header)
@@ -222,7 +222,7 @@ function unilib.pkg.shared_default_book.exec()
                 end
 
                 string = formspec_string(lpp, data.page, lines, string)
-                contents = formspec_read(player_name, title, string,
+                contents = formspec_read(pname, title, string,
                         text, data.page, data.page_max)
 
             else
@@ -234,13 +234,13 @@ function unilib.pkg.shared_default_book.exec()
 
             tab_number = tab
             local formspec = formspec_size .. formspec_core(tab) .. contents
-            core.show_formspec(player_name, "unilib:form_shared_default_book", formspec)
+            core.show_formspec(pname, "unilib:form_shared_default_book", formspec)
             return
 
         end
 
         if fields.quit then
-            writer_table[player_name] = nil
+            writer_table[pname] = nil
         end
 
         if fields.save and fields.title and fields.text then
@@ -263,7 +263,7 @@ function unilib.pkg.shared_default_book.exec()
 
             end
 
-            if data.owner ~= player_name and title ~= "" and text ~= "" then
+            if data.owner ~= pname and title ~= "" and text ~= "" then
                 return
             end
 

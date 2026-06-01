@@ -58,7 +58,7 @@ function unilib.pkg.tree_pine_frozen.exec()
                 {items = {"unilib:tree_pine_frozen_leaves"}},
             },
         },
-        furnace_burntime = 1,
+--      furnace_burntime = 1,
         inventory_image = inv_img,
         -- N.B. is_ground_content = false not in original code; added to match other leaves
         is_ground_content = false,
@@ -68,6 +68,12 @@ function unilib.pkg.tree_pine_frozen.exec()
         walkable = unilib.setting.walkable_leaves_flag,
         waving = 1,
         wield_img = inv_img,
+    })
+    unilib.register_craft({
+        -- Original to unilib, replaces the deprecated .furnace_burntime field
+        type = "fuel",
+        recipe = "unilib:tree_pine_frozen_leaves",
+        burntime = 1,
     })
     -- N.B. .register_leafdecay() is called in the .post() function
     unilib.register_tree_leaves_compacted("unilib:tree_pine_frozen_leaves", mode)

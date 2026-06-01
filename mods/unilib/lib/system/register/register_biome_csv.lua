@@ -48,7 +48,9 @@ function unilib.register._register_biome_from_csv(data_table)
     local def_table = {}
 
     def_table.name = data_table.biome_name
-    def_table.description = unilib.utils.brackets(data_table.description, data_table.remix_name)
+    if data_table.description ~= "" then
+        def_table.description = unilib.utils.brackets(data_table.description, data_table.remix_name)
+    end
 
     if data_table.dust ~= "" then
         def_table.node_dust = data_table.dust

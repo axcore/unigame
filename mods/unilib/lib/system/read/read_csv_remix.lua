@@ -11,6 +11,19 @@ local S = unilib.intllib
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+local function refine_value(value, constant_value)
+
+    -- Switch a value read from a remix CSV for the corresponding value in constants.csv, when
+    --      available
+
+    if value == nil or constant_value == nil then
+        return value
+    else
+        return constant_value
+    end
+
+end
+
 local function register_remix_biomes(remix_name, biome_check_table)
 
     -- Read the remix CSV containing biomes, and update global variables
@@ -60,56 +73,57 @@ local function register_remix_biomes(remix_name, biome_check_table)
 
                 else
 
-                    -- Replace constant values
-                    if y_max ~= nil and constants_table[y_max] ~= nil then
-                        y_max = constants_table[y_max]
-                    end
-
-                    if y_min ~= nil and constants_table[y_min] ~= nil then
-                        y_min = constants_table[y_min]
-                    end
-
-                    if blend ~= nil and constants_table[blend] ~= nil then
-                        blend = constants_table[blend]
-                    end
-
-                    if heat ~= nil and constants_table[heat] ~= nil then
-                        heat = constants_table[heat]
-                    end
-
-                    if humidity ~= nil and constants_table[humidity] ~= nil then
-                        humidity = constants_table[humidity]
-                    end
-
                     -- Update local variables
                     biome_check_table[biome_name] = ""
                     mini_check_table[biome_name] = ""
                     biome_count = biome_count + 1
-                    -- Update global variables
-                    table.insert(unilib.global.biome_csv_setup_list, {
-                        remix_name = remix_name,            -- (original to unilib)
 
-                        biome_name = biome_name,            -- .name
-                        description = description,          -- (original to unilib)
+                    -- Update global variables, replacing any constants
+                    -- N.B. "biome_name" cannot be replaced with a constant value
+                    table.insert(unilib.global.biome_csv_setup_list, {
+                        -- (original to unilib)
+                        remix_name = remix_name,
+
+                        -- .name
+                        biome_name = biome_name,
+                        -- (original to unilib)
+                        description = refine_value(description, constants_table[description]),
                         -- (original biome name ignored, if specified)
-                        dust = dust,                        -- .node_dust
-                        top_str = top_str,                  -- .node_top, .depth_top
-                        fill_str = fill_str,                -- .node_filler, .depth_filler
-                        stone = stone,                      -- .node_stone
-                        water_top_str = water_top_str,      -- .node_water_top, .depth_water_top
-                        water = water,                      -- .node_water
-                        river = river,                      -- .node_river_water
-                        riverbed_str = riverbed_str,        -- .node_riverbed, .depth_riverbed
-                        cave_liquid = cave_liquid,          -- .node_cave_liquid
-                        dungeon = dungeon,                  -- .node_dungeon
-                        dungeon_alt = dungeon_alt,          -- .node_dungeon_alt
-                        dungeon_stair = dungeon_stair,      -- .node_dungeon_stair
-                        y_max = y_max,                      -- .y_max
-                        y_min = y_min,                      -- .y_min
+                        -- .node_dust
+                        dust = refine_value(dust, constants_table[dust]),
+                        -- .node_top, .depth_top
+                        top_str = refine_value(top_str, constants_table[top_str]),
+                        -- .node_filler, .depth_filler
+                        fill_str = refine_value(fill_str, constants_table[fill_str]),
+                        -- .node_stone
+                        stone = refine_value(stone, constants_table[stone]),
+                        -- .node_water_top, .depth_water_top
+                        water_top_str = refine_value(water_top_str, constants_table[water_top_str]),
+                        -- .node_water
+                        water = refine_value(water, constants_table[water]),
+                        -- .node_river_water
+                        river = refine_value(river, constants_table[river]),
+                        -- .node_riverbed, .depth_riverbed
+                        riverbed_str = refine_value(riverbed_str, constants_table[riverbed_str]),
+                        -- .node_cave_liquid
+                        cave_liquid = refine_value(cave_liquid, constants_table[cave_liquid]),
+                        -- .node_dungeon
+                        dungeon = refine_value(dungeon, constants_table[dungeon]),
+                        -- .node_dungeon_alt
+                        dungeon_alt = refine_value(dungeon_alt, constants_table[dungeon_alt]),
+                        -- .node_dungeon_stair
+                        dungeon_stair = refine_value(dungeon_stair, constants_table[dungeon_stair]),
+                        -- .y_max
+                        y_max = refine_value(y_max, constants_table[y_max]),
+                        -- .y_min
+                        y_min = refine_value(y_min, constants_table[y_min]),
                         -- (.max_pos and .min_pos are not supported)
-                        blend = blend,                      -- .vertical_blend
-                        heat = heat,                        -- .heat_point
-                        humidity = humidity,                -- .humidity_point
+                        -- .vertical_blend
+                        blend = refine_value(blend, constants_table[blend]),
+                        -- .heat_point
+                        heat = refine_value(heat, constants_table[heat]),
+                        -- .humidity_point
+                        humidity = refine_value(humidity, constants_table[humidity]),
                     })
 
                 end
@@ -151,12 +165,13 @@ local function register_remix_constants(remix_name)
     -- Get default height constants (which can be overriden by the CSV file, if required)
     local constants_table = unilib.utils.get_height_constants()
 
-    -- Read environment constants
+    -- Read general constants
     if unilib.utils.is_file(constants_path) then
 
         for i, csv_table in ipairs(unilib.utils.read_csv(constants_path)) do
 
-            -- "key" is expected to contain at least one letter, "value" at least one digit
+            -- "key" is expected to contain at least one letter
+            -- "value" is now optional; before v1.2.0, it was expected to contain at least one digit
             local key, value = unpack(csv_table)
             if key ~= nil and value ~= nil then
 
@@ -164,23 +179,25 @@ local function register_remix_constants(remix_name)
 
                     unilib.utils.show_warning(
                         "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
-                                " Invalid environment constant in remix",
+                                " Invalid general constant in remix",
                         constants_path,
                         i
                     )
 
+                --[[
                 elseif not string.find(value, "[%d]") then
 
                     unilib.utils.show_warning(
                         "../lib/system/read/read_csv_remix.lua, register_remix_constants():" ..
-                                " Invalid environment constant value in remix",
+                                " Invalid general constant value in remix",
                         constants_path,
                         i
                     )
+                ]]--
 
                 else
 
-                    constants_table[key] = value
+                    constants_table[key] = unilib.utils.strip_whitespace(value)
 
                 end
 
@@ -237,34 +254,27 @@ local function register_remix_decorations(remix_name)
 
                 else
 
-                    -- Replace constant values
-                    if y_max ~= nil and constants_table[y_max] ~= nil then
-                        y_max = constants_table[y_max]
-                    end
-
-                    if y_min ~= nil and constants_table[y_min] ~= nil then
-                        y_min = constants_table[y_min]
-                    end
-
                     -- Update local variables
                     deco_count = deco_count + 1
-                    -- Update global variables. For acceptable values, see the comments in
-                    --      global.lua
+
+                    -- Update global variables, replacing any constants. For acceptable values, see
+                    --      the comments in ../lib/system/global/global_variables.lua
+                    -- N.B. "deco_name" and "deco_type" cannot be replaced with constant values
                     table.insert(unilib.global.deco_csv_setup_list, {
                         remix_name = remix_name,            -- (original to unilib)
 
                         deco_name = deco_name,
                         deco_type = deco_type,
-                        biomes = biomes,
-                        fill_ratio = fill_ratio,
-                        flags = flags,
-                        height_max = height_max,
-                        num_spawn_by = num_spawn_by,
-                        place_on = place_on,
-                        sidelen = sidelen,
-                        spawn_by = spawn_by,
-                        y_max = y_max,
-                        y_min = y_min,
+                        biomes = refine_value(biomes, constants_table[biomes]),
+                        fill_ratio = refine_value(fill_ratio, constants_table[fill_ratio]),
+                        flags = refine_value(flags, constants_table[flags]),
+                        height_max = refine_value(height_max, constants_table[height_max]),
+                        num_spawn_by = refine_value(num_spawn_by, constants_table[num_spawn_by]),
+                        place_on = refine_value(place_on, constants_table[place_on]),
+                        sidelen = refine_value(sidelen, constants_table[sidelen]),
+                        spawn_by = refine_value(spawn_by, constants_table[spawn_by]),
+                        y_max = refine_value(y_max, constants_table[y_max]),
+                        y_min = refine_value(y_min, constants_table[y_min]),
                     })
 
                 end
@@ -412,68 +422,69 @@ local function register_remix_ores(remix_name)
 
                 if ore ~= nil and string.find(ore, "%a") then
 
-                    -- Replace constant values
-                    if y_max ~= nil and constants_table[y_max] ~= nil then
-                        y_max = constants_table[y_max]
-                    end
-
-                    if y_min ~= nil and constants_table[y_min] ~= nil then
-                        y_min = constants_table[y_min]
-                    end
-
                     -- Update local variables
                     ore_count = ore_count + 1
-                    -- Update global variables. For acceptable values, see the comments in
-                    --      global.lua
+
+                    -- Update global variables, replacing any constants. For acceptable values, see
+                    --      the comments in ../lib/system/global/global_variables.lua
+                    -- N.B. "ore_type" cannot be replaced with a constant value
                     table.insert(unilib.global.ore_csv_setup_list, {
                         remix_name = remix_name,            -- (original to unilib)
                         ore_type = ore_type,                -- (original to unilib)
 
                         -- (All ore types)
-                        ore = ore,
-                        ore_param2 = ore_param2,
-                        wherein = wherein,
-                        clust_scarcity = clust_scarcity,
-                        clust_num_ores = clust_num_ores,
-                        clust_size = clust_size,
-                        y_max = y_max,
-                        y_min = y_min,
-                        flags = flags,
-                        noise_threshold = noise_threshold,
-                        np_offset = np_offset,
-                        np_scale = np_scale,
-                        np_spread = np_spread,
-                        np_seed = np_seed,
-                        np_octaves = np_octaves,
-                        np_persist = np_persist,
-                        biomes = biomes,
+                        ore = refine_value(ore, constants_table[ore]),
+                        ore_param2 = refine_value(ore_param2, constants_table[ore_param2]),
+                        wherein = refine_value(wherein, constants_table[wherein]),
+                        clust_scarcity =
+                                refine_value(clust_scarcity, constants_table[clust_scarcity]),
+                        clust_num_ores =
+                                refine_value(clust_num_ores, constants_table[clust_num_ores]),
+                        clust_size = refine_value(clust_size, constants_table[clust_size]),
+                        y_max = refine_value(y_max, constants_table[y_max]),
+                        y_min = refine_value(y_min, constants_table[y_min]),
+                        flags = refine_value(flags, constants_table[flags]),
+                        noise_threshold =
+                                refine_value(noise_threshold, constants_table[noise_threshold]),
+                        np_offset = refine_value(np_offset, constants_table[np_offset]),
+                        np_scale = refine_value(np_scale, constants_table[np_scale]),
+                        np_spread = refine_value(np_spread, constants_table[np_spread]),
+                        np_seed = refine_value(np_seed, constants_table[np_seed]),
+                        np_octaves = refine_value(np_octaves, constants_table[np_octaves]),
+                        np_persist = refine_value(np_persist, constants_table[np_persist]),
+                        biomes = refine_value(biomes, constants_table[biomes]),
                         -- ("sheet" only)
-                        column_height_max = column_height_max,
-                        column_height_min = column_height_min,
-                        column_midpoint_factor = column_midpoint_factor,
+                        column_height_max =
+                                refine_value(column_height_max, constants_table[column_height_max]),
+                        column_height_min =
+                                refine_value(column_height_min, constants_table[column_height_min]),
+                        column_midpoint_factor = refine_value(
+                            column_midpoint_factor, constants_table[column_midpoint_factor]
+                        ),
                         -- ("puff" only)
-                        nppt_offset = nppt_offset,
-                        nppt_scale = nppt_scale,
-                        nppt_spread = nppt_spread,
-                        nppt_seed = nppt_seed,
-                        nppt_octaves = nppt_octaves,
-                        nppt_persist = nppt_persist,
-                        nppb_offset = nppb_offset,
-                        nppb_scale = nppb_scale,
-                        nppb_spread = nppb_spread,
-                        nppb_seed = nppb_seed,
-                        nppb_octaves = nppb_octaves,
-                        nppb_persist = nppb_persist,
+                        nppt_offset = refine_value(nppt_offset, constants_table[nppt_offset]),
+                        nppt_scale = refine_value(nppt_scale, constants_table[nppt_scale]),
+                        nppt_spread = refine_value(nppt_spread, constants_table[nppt_spread]),
+                        nppt_seed = refine_value(nppt_seed, constants_table[nppt_seed]),
+                        nppt_octaves = refine_value(nppt_octaves, constants_table[nppt_octaves]),
+                        nppt_persist = refine_value(nppt_persist, constants_table[nppt_persist]),
+                        nppb_offset = refine_value(nppb_offset, constants_table[nppb_offset]),
+                        nppb_scale = refine_value(nppb_scale, constants_table[nppb_scale]),
+                        nppb_spread = refine_value(nppb_spread, constants_table[nppb_spread]),
+                        nppb_seed = refine_value(nppb_seed, constants_table[nppb_seed]),
+                        nppb_octaves = refine_value(nppb_octaves, constants_table[nppb_octaves]),
+                        nppb_persist = refine_value(nppb_persist, constants_table[nppb_persist]),
                         -- ("vein" only)
-                        random_factor = random_factor,
+                        random_factor = refine_value(random_factor, constants_table[random_factor]),
                         -- ("stratum" only)
-                        npst_offset = npst_offset,
-                        npst_scale = npst_scale,
-                        npst_spread = npst_spread,
-                        npst_seed = npst_seed,
-                        npst_octaves = npst_octaves,
-                        npst_persist = npst_persist,
-                        stratum_thickness = stratum_thickness,
+                        npst_offset = refine_value(npst_offset, constants_table[npst_offset]),
+                        npst_scale = refine_value(npst_scale, constants_table[npst_scale]),
+                        npst_spread = refine_value(npst_spread, constants_table[npst_spread]),
+                        npst_seed = refine_value(npst_seed, constants_table[npst_seed]),
+                        npst_octaves = refine_value(npst_octaves, constants_table[npst_octaves]),
+                        npst_persist = refine_value(npst_persist, constants_table[npst_persist]),
+                        stratum_thickness =
+                                refine_value(stratum_thickness, constants_table[stratum_thickness]),
                     })
 
                 end

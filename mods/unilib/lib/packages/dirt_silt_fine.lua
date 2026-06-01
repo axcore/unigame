@@ -19,6 +19,7 @@ function unilib.pkg.dirt_silt_fine.init()
 
     return {
         description = "Fine silty dirt",
+        depends = "soil_silt_fine",
     }
 
 end
@@ -41,6 +42,9 @@ function unilib.pkg.dirt_silt_fine.exec()
         replace_mode = mode,
         compressed_description = S("Compressed Fine Silty Dirt"),
         compressed_group_table = {crumbly = 2},
+        -- N.B. No soil in original code
+        dry_soil = "unilib:soil_silt_fine",
+        wet_soil = "unilib:soil_silt_fine_wet",
     })
 
 end

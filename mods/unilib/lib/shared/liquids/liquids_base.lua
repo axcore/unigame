@@ -176,7 +176,7 @@ function unilib.liquids._register_bucket(data_table)
                     source_neighbour = core.find_node_near(pos, 1, liquiddef.source_name)
                 end
 
-                if source_neighbor and liquiddef.force_renew_flag then
+                if source_neighbour and liquiddef.force_renew_flag then
 
                     log_action(
                         pos, pname, "picked up " .. liquiddef.source_name .. " (force renewed)"

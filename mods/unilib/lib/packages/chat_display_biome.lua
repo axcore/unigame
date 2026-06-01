@@ -171,10 +171,10 @@ function unilib.pkg.chat_display_biome.exec()
                     end
 
                     local heat, humidity, name
-                    local bdata = core.get_biome_data(bpos)
-                    heat = math.floor(bdata.heat + 0.5)
-                    humidity = math.floor(bdata.humidity + 0.5)
-                    name = core.get_biome_name(bdata.biome)
+                    local bdata_table = core.get_biome_data(bpos)
+                    heat = math.floor(bdata_table.heat + 0.5)
+                    humidity = math.floor(bdata_table.humidity + 0.5)
+                    name = core.get_biome_name(bdata_table.biome)
 
                     --[[
                     local msg = S("Temperature: @1\nHumidity: @2", heat, humidity)

@@ -1,4 +1,4 @@
-# Template environmental constants table for the "empty" remix
+# Template general constants table for the "empty" remix
 
 # N.B. These default constants are always available, so do not need to be specified
 #X_MAX|31000

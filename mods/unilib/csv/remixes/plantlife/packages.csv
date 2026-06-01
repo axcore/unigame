@@ -1,6 +1,6 @@
 # "plantlife" remix - contains everything from the plantlife modpack
-# For all plantlife mods, calls to biome_lib have been crudely emulated by Minetest decorations, so
-#   trees will not spawn in the same positions/quantities
+# For all plantlife mods, calls to biome_lib have been crudely re-implemented as Minetest decorations,
+#   so trees will not spawn in the same positions/quantities
 # Did not import anything from the 3dmushrooms, nature_classic or vines mods
 # From cavestuff, imported the pebbles, did not import the stalactites
 # From dryplants, imported everything except the greater concentration of grass

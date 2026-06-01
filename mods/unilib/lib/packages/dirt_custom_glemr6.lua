@@ -848,6 +848,7 @@ function unilib.pkg.dirt_custom_glemr6.init()
             "soil_brown",
             "soil_dark",
             "soil_ordinary",
+            "soil_silt_fine",
         },
     }
 
@@ -908,7 +909,7 @@ function unilib.pkg.dirt_custom_glemr6.exec()
     register_dirt_set({
         item_name = "dirt_silt_fine",
         orig_name = "lib_materials:dirt_silty",
-        soil_flag = false,
+        soil_flag = true,
     })
 
     -- (New in GLEMr6)

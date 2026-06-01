@@ -21,14 +21,15 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
 
     return function(itemstack, player, pointed_thing)
 
-        -- Revert to original Minetest code
-        core.item_eat(satiation, replacement_name)
-        -- Call original on_use(), if provided
-        if old_on_use ~= nil then
-            return old_on_use(itemstack, player, pointed_thing)
-        else
-            return itemstack
+        -- Revert to standard code
+        local func = core.item_eat(satiation, replacement_name)
+        func(itemstack, player, pointed_thing)
+
+        if old_on_use then
+            old_on_use(itemstack, player, pointed_thing)
         end
+
+        return itemstack
 
     end
 

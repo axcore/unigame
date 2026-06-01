@@ -26,6 +26,7 @@ local S = unilib.intllib
 --unilib.setting.log_chat_cmd_flag = false
 
 --unilib.setting.show_startup_msg_flag = true
+--unilib.setting.show_intro_win_flag = true
 
 --unilib.setting.show_msg_flag = true
 --unilib.setting.show_error_flag = true
@@ -50,7 +51,7 @@ local S = unilib.intllib
 -- Remix settings
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
 
---unilib.setting.init_remix_pkg_set = "nothing"
+--unilib.setting.init_remix_pkg_set = "config"
 
 --unilib.setting.force_load_dependent_pkg_flag = true
 --unilib.setting.force_load_minimal_pkg_flag = false
@@ -102,6 +103,10 @@ local S = unilib.intllib
 
 -- (advtrains)
 --unilib.setting.advtrains_update_flag = true
+
+-- (airtanks)
+--unilib.setting.airtanks_capacity_max = 3
+--unilib.setting.airtanks_compressor_fuel_flag = true
 
 -- (beacons)
 --unilib.setting.beacons_height_max = 0
@@ -205,8 +210,9 @@ local S = unilib.intllib
 --unilib.setting.plantlife_poison_ivy_poison_flag = false
 
 -- (real_torch)
---unilib.setting.real_torch_min_time = 480
---unilib.setting.real_torch_max_time = 600
+--unilib.setting.real_torch_min_time = 1200
+--unilib.setting.real_torch_max_time = 1800
+--unilib.setting.real_torch_tidy_flag = false
 
 -- (scaffolding)
 --unilib.setting.scaffolding_quick_remove_flag = false
@@ -214,9 +220,6 @@ local S = unilib.intllib
 -- (sickles)
 --unilib.setting.sickles_replant_flag = true
 --unilib.setting.sickles_override_pitchfork_flag = false
-
--- (snow)
---unilib.setting.snow_reduce_snowflakes_flag = true
 
 -- (technic)
 --unilib.setting.technic_update_flag = true
@@ -232,7 +235,7 @@ local S = unilib.intllib
 --unilib.setting.toolranks_speed_multiplier = 2.0
 --unilib.setting.toolranks_use_multiplier = 2.0
 
---unilib.setting.toolranks_announce_flag = false
+--unilib.setting.toolranks_notify_flag = false
 --unilib.setting.toolranks_progressive_flag = true
 --unilib.setting.toolranks_countdown_flag = true
 
@@ -364,9 +367,9 @@ local S = unilib.intllib
 
 --unilib.setting.add_walls_flag = true
 
---unilib.setting.add_carvings_column_flag = true
+--unilib.setting.add_carvings_column_flag = false
 --unilib.setting.show_carvings_column_flag = false
---unilib.setting.add_carvings_facade_flag = false
+--unilib.setting.add_carvings_facade_flag = true
 --unilib.setting.show_carvings_facade_flag = false
 --unilib.setting.add_carvings_millwork_flag = false
 --unilib.setting.show_carvings_millwork_flag = false
@@ -378,6 +381,15 @@ local S = unilib.intllib
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
 -- Player effects settings
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
+
+--unilib.setting.atmosphere_weather_enable_flag = true
+--unilib.setting.atmosphere_splash_enable_flag = true
+--unilib.setting.atmosphere_wind_enable_flag = true
+--unilib.setting.atmosphere_transition_duration = 1
+--unilib.setting.atmosphere_transition_smooth_factor = 1
+
+--unilib.setting.atmosphere_ambient_enable_flag = true
+--unilib.setting.atmosphere_environment_enable_flag = true
 
 --unilib.setting.builtin_entity_effects_flag = false
 
@@ -410,6 +422,7 @@ local S = unilib.intllib
 --unilib.setting.cuisine_advanced_flag = false
 --unilib.setting.cuisine_history_max_size = 10
 --unilib.setting.cuisine_novelty_factor = 1.5
+--unilib.setting.cuisine_avoid_starvation_flag = false
 
 --unilib.setting.hunger_enable_flag = false
 --unilib.setting.hunger_factor = 1.0
@@ -419,9 +432,10 @@ local S = unilib.intllib
 --unilib.setting.thirst_enable_flag = false
 --unilib.setting.thirst_factor = 1.0
 
---unilib.setting.identify_enable_hud_flag = true
---unilib.setting.identify_hud_mode = "fixed"
---unilib.setting.identify_optimise_hud_flag = false
+--unilib.setting.announce_enable_flag = true
+--unilib.setting.announce_hud_mode = "fixed"
+--unilib.setting.announce_optimise_flag = false
+
 --unilib.setting.identify_package_name_flag = false
 
 --unilib.setting.wield_view_enable_flag = true
@@ -435,11 +449,19 @@ local S = unilib.intllib
 --unilib.setting.alarm_enable_flag = true
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
--- Player effects settings (statistics and calendars)
+-- Player effects settings (statistics, awards and calendars)
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
 
 --unilib.setting.stats_bio_flag = false
 --unilib.setting.stats_activity_flag = false
+
+--unilib.setting.awards_enable_flag = true
+--unilib.setting.awards_disable_monitors_flag = false
+--unilib.setting.awards_announce_flag = false
+--unilib.setting.awards_text_flag = false
+--unilib.setting.awards_notify_flag = false
+--unilib.setting.awards_sound_flag = false
+--unilib.setting.awards_hints_flag = true
 
 --unilib.setting.calendar_year_offset = 1000
 --unilib.setting.calendar_month_offset = 1

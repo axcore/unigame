@@ -55,53 +55,47 @@ function unilib.pkg.food_bread_sunflower_dwarf.exec()
     if unilib.setting.technic_extra_flag and
             unilib.global.pkg_executed_table["food_seed_sunflower_dwarf"] ~= nil then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
 
-            if unilib.global.pkg_executed_table["ingredient_flour_ordinary"] ~= nil then
+            technic.register_alloy_recipe({
+                -- From cucina_vegana:sunflower_seeds_bread
+                output = "unilib:food_bread_sunflower_dwarf",
+                input = {
+                    "unilib:ingredient_flour_ordinary 3",
+                    "unilib:food_seed_sunflower_dwarf",
+                },
+                time = 0,
+            })
 
-                technic.register_alloy_recipe({
-                    -- From cucina_vegana:sunflower_seeds_bread
-                    output = "unilib:food_bread_sunflower_dwarf",
-                    input = {
-                        "unilib:ingredient_flour_ordinary 3",
-                        "unilib:food_seed_sunflower_dwarf",
-                    },
-                    time = 0,
-                })
+        end
 
-            end
+        if unilib.global.pkg_executed_table["ingredient_flour_sunflower_seed"] ~= nil then
 
-            if unilib.global.pkg_executed_table["ingredient_flour_sunflower_seed"] ~= nil then
+            technic.register_alloy_recipe({
+                -- From cucina_vegana:sunflower_seeds_bread
+                output = "unilib:food_bread_sunflower_dwarf",
+                input = {
+                    "unilib:ingredient_flour_sunflower_seed 3",
+                    "unilib:food_seed_sunflower_dwarf",
+                },
+                time = 0,
+            })
 
-                technic.register_alloy_recipe({
-                    -- From cucina_vegana:sunflower_seeds_bread
-                    output = "unilib:food_bread_sunflower_dwarf",
-                    input = {
-                        "unilib:ingredient_flour_sunflower_seed 3",
-                        "unilib:food_seed_sunflower_dwarf",
-                    },
-                    time = 0,
-                })
+        end
 
-            end
+        if unilib.global.pkg_executed_table["ingredient_flour_rice_brown"] ~= nil then
 
-            if unilib.global.pkg_executed_table["ingredient_flour_rice_brown"] ~= nil then
+            technic.register_alloy_recipe({
+                -- From cucina_vegana:sunflower_seeds_bread
+                output = "unilib:food_bread_sunflower_dwarf",
+                input = {
+                    "unilib:ingredient_flour_rice_brown 3",
+                    "unilib:food_seed_sunflower_dwarf",
+                },
+                time = 0,
+            })
 
-                technic.register_alloy_recipe({
-                    -- From cucina_vegana:sunflower_seeds_bread
-                    output = "unilib:food_bread_sunflower_dwarf",
-                    input = {
-                        "unilib:ingredient_flour_rice_brown 3",
-                        "unilib:food_seed_sunflower_dwarf",
-                    },
-                    time = 0,
-                })
-
-            end
-
-        end)
+        end
 
     end
 

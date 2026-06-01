@@ -53,16 +53,51 @@ local function register_remix_path(remix_name)
 
 end
 
-local function check_package(packages_path, i, orig_mod_str, pkg_name, mini_check_table)
+local function check_package_exists(packages_path, i, pkg_name, mini_check_table)
 
     -- Check the package file actually exists in any one of three locations
+
+    if mini_check_table[pkg_name] ~= nil then
+
+        unilib.utils.show_warning(
+            "../lib/system/read/read_compile.lua, check_package_exists():" ..
+                    " Duplicate package in remix",
+            packages_path,
+            i
+        )
+
+        return false
+
+    end
+
+    for _, folder_path in ipairs(unilib.global.pkg_path_list) do
+
+        if unilib.utils.is_file(folder_path .. pkg_name .. ".lua") then
+            return true
+        end
+
+    end
+
+    unilib.utils.show_warning(
+        "../lib/system/read/read_compile.lua, check_package_exists(): Missing package file",
+        packages_path,
+        i
+    )
+
+    return false
+
+end
+
+local function check_original_mods(packages_path, i, orig_mod_str)
+
+    -- Check that any original mods specified for a package are recognised
 
     for _, orig_mod_name in ipairs(unilib.utils.split_string_by_whitespace(orig_mod_str, true)) do
 
         if orig_mod_name == nil or orig_mod_name == "" then
 
             unilib.utils.show_warning(
-                "../lib/system/read/read_compile.lua, check_package():" ..
+                "../lib/system/read/read_compile.lua, check_original_mods():" ..
                         " Invalid package definition in remix",
                 packages_path,
                 i
@@ -73,7 +108,7 @@ local function check_package(packages_path, i, orig_mod_str, pkg_name, mini_chec
         elseif unilib.global.source_mod_table[orig_mod_name] == nil then
 
             unilib.utils.show_warning(
-                "../lib/system/read/read_compile.lua, check_package():" ..
+                "../lib/system/read/read_compile.lua, check_original_mods():" ..
                         " Unrecognised source mod in remix",
                 packages_path,
                 i
@@ -81,40 +116,18 @@ local function check_package(packages_path, i, orig_mod_str, pkg_name, mini_chec
 
             return false
 
-        elseif mini_check_table[pkg_name] ~= nil then
-
-            unilib.utils.show_warning(
-                "../lib/system/read/read_compile.lua, check_package():" ..
-                        " Duplicate package in remix",
-                packages_path,
-                i
-            )
-
-            return false
-
         end
-
-        for _, folder_path in ipairs(unilib.global.pkg_path_list) do
-
-            if unilib.utils.is_file(folder_path .. pkg_name .. ".lua") then
-                return true
-            end
-
-        end
-
-        unilib.utils.show_warning(
-            "../lib/system/read/read_compile.lua, check_package(): Missing package file",
-            packages_path,
-            i
-        )
-
-        return false
 
     end
 
+    -- In a remix packages.csv file, the original mods are optional; if not specified, the
+    --      "orig_mod_str" passed to this function is an empty string (which counts as a succesful
+    --      check)
+    return true
+
 end
 
-local function quick_check_package(pkg_name)
+local function quick_check_package_exists(pkg_name)
 
     -- Slimmed-down version of check_package(), for when a package name is specified directly in
     --      unilib.setting.init_remix_pkg_set
@@ -128,7 +141,7 @@ local function quick_check_package(pkg_name)
     end
 
     unilib.utils.show_warning(
-        "../lib/system/read/read_compile.lua, quick_check_package(): Missing package file",
+        "../lib/system/read/read_compile.lua, quick_check_package_exists(): Missing package file",
         pkg_name
     )
 
@@ -138,12 +151,18 @@ end
 
 local function warn_about_recurring_package(packages_path, i, orig_mod_str, pkg_name)
 
-    if not unilib.utils.test_equivalence_of_lists(
-        unilib.utils.split_string_by_whitespace(orig_mod_str, true),
-        unilib.utils.split_string_by_whitespace(
-            unilib.global.pkg_setup_table[pkg_name], true
-        )
-    ) then
+    -- N.B. In remix packages.csv files, there are two columns. The second column is supposed to be
+    --      optional; but if specified, it must match other remix packages.csv files, otherwise the
+    --      warning below is generated
+    local orig_list = unilib.utils.split_string_by_whitespace(orig_mod_str, true)
+    local compare_list = unilib.utils.split_string_by_whitespace(
+        unilib.global.pkg_setup_table[pkg_name], true
+    )
+
+    if #orig_list > 0 and
+            #compare_list > 0 and
+            not unilib.utils.test_equivalence_of_lists(orig_list, compare_list) then
+
         unilib.utils.show_msg(
             "../lib/system/read/read_compile.lua, warn_about_recurring_package():" ..
                     " Package is specified by a different remix, and with a different set of" ..
@@ -399,7 +418,8 @@ local function parse_init_remix(remix_name)
 
                 end
 
-            elseif check_package(packages_path, i, orig_mod_str, pkg_name, mini_check_table) then
+            elseif check_package_exists(packages_path, i, pkg_name, mini_check_table) and
+                    check_original_mods(packages_path, i, orig_mod_str) then
 
                 table.insert(mini_check_list, pkg_name)
                 mini_check_table[pkg_name] = ""
@@ -453,13 +473,13 @@ local function parse_init_pkg(pkg_name)
     end
 
     -- Parse the package
-    if quick_check_package(pkg_name) then
+    if quick_check_package_exists(pkg_name) then
 
         if main_pkg_check_table[pkg_name] ~= nil then
 
             -- Package already specified, either directly or in a previous remix; show
             --      warnings when necessary
-            warn_about_recurring_package(nil, pkg_name)
+            warn_about_recurring_package(nil, nil, nil, pkg_name)
 
         else
 

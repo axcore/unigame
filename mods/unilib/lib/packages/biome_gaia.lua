@@ -40,13 +40,24 @@ local debug_warning_flag = false
 
 -- Read CSVs from the first remix with the label "gaia"
 unilib.pkg.biome_gaia.remix_name = nil
--- Constants read from the constants.csv must be available to other "gaia" packages
-unilib.pkg.biome_gaia.constant_flag = false
-unilib.pkg.biome_gaia.constant_table = {}
 
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
+
+local function refine_value(value, constant_value)
+
+    -- Switch a value read from a remix CSV for the corresponding value in constants.csv, when
+    --      available
+    -- A copy of the function in ../lib/system/read/read_csv_remix.lua
+
+    if value == nil or constant_value == nil then
+        return value
+    else
+        return constant_value
+    end
+
+end
 
 local function register_dirt_on_demand(full_name)
 
@@ -122,7 +133,7 @@ function unilib.pkg.biome_gaia.init()
                 " this package, and in other \"gaia\" packages, is compatible with any remix" ..
                 " with the label \"gaia\"",
         depends = "dirt_custom_gaia",
-        optional = "weather_snowflakes",
+--      optional = "weather_snow_special",
     }
 
 end
@@ -187,47 +198,10 @@ function unilib.pkg.biome_gaia.post()
     -- Ecosystems create variety within biomes, placing ore distributions in which a unique
     --      selection of decorations can be placed
     -- The ecosystems are specified by an ecosystems.csv in the remix folder
-
-    -- (This code is adapted from read_csv.lua)
+    local constants_table =
+            unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name] or {}
     local remix_dir = unilib.utils.get_remix_dir(unilib.pkg.biome_gaia.remix_name)
-    local constants_path = remix_dir .. "/constants.csv"
     local ecosystems_path = remix_dir .. "/ecosystems.csv"
-
-    if unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name] ~= nil then
-
-        for key, value in pairs(
-            unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name]
-        ) do
-
-            -- Values read from constants.csv are in string format, so must be checked and converted
-            if key ~= nil and value ~= nil then
-
-                if not string.find(key, "%a") then
-
-                    unilib.utils.show_warning(
-                        "biome_gaia package: Invalid biome constant", constants_path, i
-                    )
-
-                elseif not string.find(value, "[%d]") then
-
-                    unilib.utils.show_warning(
-                        "biome_gaia package: Invalid biome constant value", constants_path, i
-                    )
-
-                else
-
-                    unilib.pkg.biome_gaia.constant_table[key] = tonumber(value)
-                    -- (Table is not empty)
-                    unilib.pkg.biome_gaia.constant_flag = true
-
-                end
-
-            end
-
-        end
-
-    end
-
     if unilib.utils.is_file(ecosystems_path) then
 
         for i, csv_table in ipairs(unilib.utils.read_csv(ecosystems_path)) do
@@ -256,17 +230,13 @@ function unilib.pkg.biome_gaia.post()
                     end
 
                     -- Replace constant values
-                    if unilib.pkg.biome_gaia.constant_flag then
-
-                        if y_max ~= nil and unilib.pkg.biome_gaia.constant_table[y_max] ~= nil then
-                            y_max = unilib.pkg.biome_gaia.constant_table[y_max]
-                        end
-
-                        if y_min ~= nil and unilib.pkg.biome_gaia.constant_table[y_min] ~= nil then
-                            y_min = unilib.pkg.biome_gaia.constant_table[y_min]
-                        end
-
-                    end
+                    -- N.B. "ore_type" cannot be replaced with a constant value
+                    biome_name = refine_value(biome_name, constants_table[biome_name])
+                    ore_name = refine_value(ore_name, constants_table[ore_name])
+                    wherein = refine_value(wherein, constants_table[wherein])
+                    threshold = refine_value(threshold, constants_table[threshold])
+                    y_max = refine_value(y_max, constants_table[y_max])
+                    y_min = refine_value(y_min, constants_table[y_min])
 
                     -- Register dirt on demand (see comments in the "dirt_custom_gaia" package)
                     if unilib.setting.dirt_on_demand_flag then
@@ -281,6 +251,11 @@ function unilib.pkg.biome_gaia.post()
                             register_dirt_on_demand(wherein)
                         end
 
+                    end
+
+                    -- (Minetest will show a warning if the ore's .biome is an empty string)
+                    if biome_name == "" then
+                        biome_name = nil
                     end
 
                     -- Check biome names (if specified)
@@ -349,12 +324,10 @@ function unilib.pkg.biome_gaia.post()
                                 },
                                 noise_threshold = tonumber(threshold),
                                 y_max = tonumber(y_max) or (
-                                    unilib.pkg.biome_gaia.constant_table[y_max] +
-                                    biome_vertical_blend
+                                    tonumber(constants_table[y_max]) + biome_vertical_blend
                                 ),
                                 y_min = tonumber(y_min) or (
-                                    unilib.pkg.biome_gaia.constant_table[y_min] -
-                                    biome_vertical_blend
+                                    tonumber(constants_table[y_min]) - biome_vertical_blend
                                 ),
                             })
 
@@ -398,20 +371,46 @@ function unilib.pkg.biome_gaia.post()
 
     -- Apply the upper limit for pseudo-biomes created by remixes like "hades", "hades_jit",
     --      "underch" and "underch_jit"
-    if unilib.pkg.biome_gaia.constant_table["OCEAN"] ~= nil then
-        unilib.global.pseudo_biome_limit = tonumber(unilib.pkg.biome_gaia.constant_table["OCEAN"])
+    if constants_table["OCEAN"] ~= nil then
+        unilib.global.pseudo_biome_limit = tonumber(constants_table["OCEAN"])
     end
 
+    -- N.B. In v1.2.0, removed compatibility with the "weather_snow_special" package, since unilib
+    --      now has its own weather system
+    -- If you want to reinsert it, uncomment the code below, uncomment the line above to reinstante
+    --      add "weather_snow_special" as an optional package, and add that package to the "gaia" or
+    --      "gaia_simple" remixes
+    --
     -- The snowflakes package, if loaded, must be asked to reduce the maximum temperature at which
     --      it will act (default 35), to one that suits this "gaia"-compatible remix (default 25)
     -- (To remove snowflake effects entirely, just comment out this package in the remix)
-    if unilib.global.pkg_executed_table["weather_snowflakes"] ~= nil then
+    --[[
+    if unilib.global.pkg_executed_table["weather_snow_special"] ~= nil then
 
-        local cool = unilib.pkg.biome_gaia.constant_table["COOL"]
+        local cool = tonumber(constants_table["COOL"])
         if cool ~= nil then
-            unilib.pkg.weather_snowflakes.set_max_temp(cool)
+            unilib.pkg.weather_snow_special.set_max_temp(cool)
+        end
+
+        -- We also restrict the biomes in which snowflake effects appear, for aesthetics
+        local cold = tonumber(constants_table["COLD"])
+        local temperate = tonumber(constants_table["TEMPERATE"])
+        if cold ~= nil and temperate ~= nil then
+
+            for i, data_table in ipairs(unilib.global.biome_csv_setup_list) do
+
+                local heat = tonumber(data_table.heat)
+                local humidity = tonumber(data_table.humidity)
+
+                if heat ~= nil and heat <= cold and humidity ~= nil and humidity >= temperate then
+                    unilib.pkg.weather_snow_special.set_exclusive_biome(data_table.biome_name)
+                end
+
+            end
+
         end
 
     end
+    ]]--
 
 end

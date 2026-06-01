@@ -20,7 +20,7 @@ unimobs = {}
 unimobs.name = "unimobs"
 
 unimobs.ver_max = 1
-unimobs.ver_min = 0
+unimobs.ver_min = 1
 unimobs.ver_rev = 0
 
 unimobs.intllib = S

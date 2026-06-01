@@ -47,7 +47,7 @@ function unilib.pkg.trapdoor_wood_ordinary.exec()
     })
     unilib.register_craft({
         -- From doors:trapdoor
-        output = "unilib:trapdoor_wood_ordinary 2",
+        output = "unilib:trapdoor_wood_ordinary_closed 2",
         recipe = {
             {"group:wood", "group:wood", "group:wood"},
             {"group:wood", "group:wood", "group:wood"},
@@ -57,7 +57,7 @@ function unilib.pkg.trapdoor_wood_ordinary.exec()
     unilib.register_craft({
         -- From doors:trapdoor
         type = "fuel",
-        recipe = "unilib:trapdoor_wood_ordinary",
+        recipe = "unilib:trapdoor_wood_ordinary_closed",
         burntime = 7,
     })
 

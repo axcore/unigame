@@ -363,17 +363,17 @@ minetest.register_node("default:steelblock", {
 
 -- @@@ Once the definitions have been overriden, we can hide them
 
-minetest.after(0.1, function()
+core.register_on_mods_loaded(function()
 
     for _, full_name in pairs({"default:gravel", "default:obsidian_glass", "default:steelblock"}) do
         
-        local def_table = minetest.registered_nodes[full_name]
+        local def_table = core.registered_nodes[full_name]
         if def_table ~= nil then
 
-            local group_table = def_table.groups
+            local group_table = table.copy(def_table.groups)
             group_table.not_in_creative_inventory = 1
 
-            minetest.override_item(full_name, {
+            core.override_item(full_name, {
                 groups = group_table,
             })
             

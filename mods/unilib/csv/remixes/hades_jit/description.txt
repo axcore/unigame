@@ -1,0 +1,9 @@
+Contains all the packages required by the "mapgen_hades_jit" package.
+
+That package is a simplistic implementation of PFAA Geologica's geology system, partly based on the underground challenge (underch) mod, but with a completely new set of stones and ores, which are placed in a semi-realistic way, making no effort to reproduce strata, pipes or other real-world geological formations (as PFAA tried to do). As in underch, each underground biome (pseudo-biome) has a characteristic basic stone, each with a characteristic set of ores.
+
+The "mapgen_hades" package includes a number of optional settings. Most of them are disabled by default. If you edit the package code to enable them, you should also uncomment all of the packages in the corresponding sections in the packages.csv.
+
+Note that, if you do this, you'll see some duplicate package warnings. The folder that contains this file, also contains the file "_packages_ALL_DEPENDENCIES.csv", which assumes that all the optional settings have been enabled. In that file, only duplicate packages are commented out.
+
+If you have enabled all of the optional settings, you should rename this file (to anything), and then rename that file to "packages.csv".

@@ -115,9 +115,9 @@ end
 local function after_place_node(pos, placer, itemstack)
 
     local meta = core.get_meta(pos)
-    local name = placer:get_player_name()
-    meta:set_string("owner", name)
-    meta:set_string("infotext", S("@1 (owned by @2)", S("Wooden Display Frame"), name))
+    local pname = placer:get_player_name()
+    meta:set_string("owner", pname)
+    meta:set_string("infotext", S("@1 (owned by @2)", S("Wooden Display Frame"), pname))
 
 end
 
@@ -128,11 +128,11 @@ local function can_dig(pos, player)
     end
 
     local meta = core.get_meta(pos)
-    local player_name = player and player:get_player_name()
+    local pname = player and player:get_player_name()
     local owner = meta:get_string("owner")
-    local admin = core.check_player_privs(player_name, "protection_bypass")
+    local admin = core.check_player_privs(pname, "protection_bypass")
 
-    return admin or player_name == owner
+    return admin or pname == owner
 
 end
 
@@ -181,11 +181,11 @@ end
 local function on_punch(pos, node, puncher)
 
     local meta = core.get_meta(pos)
-    local player_name = puncher:get_player_name()
+    local pname = puncher:get_player_name()
     local owner = meta:get_string("owner")
-    local admin = core.check_player_privs(player_name, "protection_bypass")
+    local admin = core.check_player_privs(pname, "protection_bypass")
 
-    if admin and player_name == owner then
+    if admin and pname == owner then
 
         drop_item(pos, node)
         update_infotext(meta)
@@ -197,11 +197,11 @@ end
 local function on_rightclick(pos, node, clicker, itemstack)
 
     local meta = core.get_meta(pos)
-    local player_name = clicker:get_player_name()
+    local pname = clicker:get_player_name()
     local owner = meta:get_string("owner")
-    local admin = core.check_player_privs(player_name, "protection_bypass")
+    local admin = core.check_player_privs(pname, "protection_bypass")
 
-    if not admin and (player_name ~= owner or not itemstack) then
+    if not admin and (pname ~= owner or not itemstack) then
         return itemstack
     end
 

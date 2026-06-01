@@ -107,54 +107,54 @@ local function get_destination(player, stack)
 
 end
 
-local function start_ticking(player_name)
+local function start_ticking(pname)
 
     -- Looped ticking sound if a duration is set
 
-    if not player_ticking_table[player_name] then
+    if not player_ticking_table[pname] then
 
-        player_ticking_table[player_name] = core.sound_play(
+        player_ticking_table[pname] = core.sound_play(
             "unilib_item_compass_death_tick",
-            {to_player = player_name, gain = 0.125, loop = true}
+            {to_player = pname, gain = 0.125, loop = true}
         )
 
     end
 
 end
 
-local function stop_ticking(player_name)
+local function stop_ticking(pname)
 
-    local tick_tock_handle = player_ticking_table[player_name]
+    local tick_tock_handle = player_ticking_table[pname]
     if tick_tock_handle then
 
         core.sound_stop(tick_tock_handle)
-        player_ticking_table[player_name] = nil
+        player_ticking_table[pname] = nil
 
     end
 
 end
 
-local function hide_hud(player, player_name)
+local function hide_hud(player, pname)
 
     --[[
-    local id = player_hud_table[player_name]
+    local id = player_hud_table[pname]
     if id then
 
         player:hud_remove(id)
-        player_hud_table[player_name] = nil
+        player_hud_table[pname] = nil
 
     end
     ]]--
-    if player_hud_table[player_name] then
+    if player_hud_table[pname] then
 
         unilib.hud.remove_section(player, "item_compass_death")
-        player_hud_table[player_name] = nil
+        player_hud_table[pname] = nil
 
     end
 
 end
 
-local function update_hud(player, player_name, compass)
+local function update_hud(player, pname, compass)
 
     local metadata = compass:get_meta()
 
@@ -205,7 +205,7 @@ local function update_hud(player, player_name, compass)
     end
 
     --[[
-    local id = player_hud_table[player_name]
+    local id = player_hud_table[pname]
     if not id then
 
         id = player:hud_add({
@@ -218,7 +218,7 @@ local function update_hud(player, player_name, compass)
             scale = 20,
         })
 
-        player_hud_table[player_name] = id
+        player_hud_table[pname] = id
 
     else
 
@@ -226,10 +226,10 @@ local function update_hud(player, player_name, compass)
 
     end
     ]]--
-    if not player_hud_table[player_name] then
+    if not player_hud_table[pname] then
 
         unilib.hud.add_section(player, "item_compass_death", 1)
-        player_hud_table[player_name] = true
+        player_hud_table[pname] = true
 
     end
 
@@ -256,17 +256,17 @@ local function get_compass_stack(player, stack)
 
     local pos = player:get_pos()
     local distance = vector.distance(pos, target)
-    local player_name = player:get_player_name()
+    local pname = player:get_player_name()
 
     if distance < range_to_inactivate then
 
-        stop_ticking(player_name)
+        stop_ticking(pname)
         core.sound_play(
             "unilib_item_compass_death_crunch",
-            {to_player = player_name, gain = 1.0}
+            {to_player = pname, gain = 1.0}
         )
         -- Change to original code: upon reaching the target, hide the HUD
-        hide_hud(player, player_name)
+        hide_hud(player, pname)
 
         return inactive_return
 
@@ -298,20 +298,20 @@ local function get_compass_stack(player, stack)
                 time_of_death + unilib.setting.death_compass_duration - core.get_gametime()
         if remaining < 0 then
 
-            stop_ticking(player_name)
+            stop_ticking(pname)
             core.sound_play(
                 "unilib_item_compass_death_crunch",
-                {to_player = player_name, gain = 1.0}
+                {to_player = pname, gain = 1.0}
             )
 
             -- Change to original code: upon expiration of time limit, hide the HUD
-            hide_hud(player, player_name)
+            hide_hud(player, pname)
 
             return inactive_return
 
         end
 
-        start_ticking(player_name)
+        start_ticking(pname)
 
     end
 
@@ -326,8 +326,8 @@ end
 
 local function display_doc(itemstack, user)
 
-    local player_name = user:get_player_name()
-    core.chat_send_player(player_name, inv_msg .. "\n" .. time_msg)
+    local pname = user:get_player_name()
+    core.chat_send_player(pname, inv_msg .. "\n" .. time_msg)
 
 end
 
@@ -375,7 +375,7 @@ function unilib.pkg.item_compass_death.exec()
 
         for i, player in ipairs(core.get_connected_players()) do
 
-            local player_name = player:get_player_name()
+            local pname = player:get_player_name()
             local compass_in_quickbar
             local inv = player:get_inventory()
 
@@ -402,9 +402,9 @@ function unilib.pkg.item_compass_death.exec()
 
                     local wielded = player:get_wielded_item()
                     if string.sub(wielded:get_name(), 0, 26) == "unilib:item_compass_death_" then
-                        update_hud(player, player_name, wielded)
+                        update_hud(player, pname, wielded)
                     else
-                        hide_hud(player, player_name)
+                        hide_hud(player, pname)
                     end
 
                 end
@@ -413,8 +413,8 @@ function unilib.pkg.item_compass_death.exec()
 
             if not compass_in_quickbar then
 
-                stop_ticking(player_name)
-                hide_hud(player, player_name)
+                stop_ticking(pname)
+                hide_hud(player, pname)
 
             end
 
@@ -500,8 +500,8 @@ function unilib.pkg.item_compass_death.exec()
         -- Notes from death_compass:
         -- "reason": a PlayerHPChangeReason table, see register_on_player_hpchange
 
-        local player_name = player:get_player_name()
-        local inv = core.get_inventory({type = "player", name = player:get_player_name()})
+        local pname = player:get_player_name()
+        local inv = core.get_inventory({type = "player", name = pname})
         local list = inv:get_list("main")
         local count = 0
 
@@ -527,7 +527,7 @@ function unilib.pkg.item_compass_death.exec()
         if count > 0 then
 
             inv:set_list("main", list)
-            player_death_location_table[player_name] = {count = count, pos = player:get_pos()}
+            player_death_location_table[pname] = {count = count, pos = player:get_pos()}
 
         end
 
@@ -547,12 +547,12 @@ function unilib.pkg.item_compass_death.exec()
     -- This function should return true to disable regular player placement
     core.register_on_respawnplayer(function(player)
 
-        local player_name = player:get_player_name()
-        local compasses = player_death_location_table[player_name]
+        local pname = player:get_player_name()
+        local compasses = player_death_location_table[pname]
 
         if compasses then
 
-            local inv = core.get_inventory({type = "player", name = player_name})
+            local inv = core.get_inventory({type = "player", name = pname})
 
             -- Remove any death compasses the player might still have for some reason
             local current = inv:get_list("main")
@@ -570,7 +570,7 @@ function unilib.pkg.item_compass_death.exec()
             for i = 1, compasses.count do
 
                 local compass = ItemStack("unilib:item_compass_death_0")
-                set_target(compass, compasses.pos, player_name)
+                set_target(compass, compasses.pos, pname)
                 inv:add_item("main", compass)
 
             end

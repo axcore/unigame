@@ -11,6 +11,17 @@
 # node_name | original_mod
 
 # -------------------------------------------------------------------------------------------------
+# Chat commands for UNILIB configuration
+
+# /unilib: Configures unilib remixes and packages
+chat_unilib|unilib
+# /create_remix: Creates a new remix
+chat_create_remix|unilib
+# /edit_remix: Edits an existing remix
+# /remix
+chat_edit_remix|unilib
+
+# -------------------------------------------------------------------------------------------------
 # Chat commands for player ALARMS
 
 # Shared functions for chat command packages for player alarms
@@ -24,13 +35,44 @@ chat_cancel_alarm|unilib
 chat_show_alarm|unilib
 
 # -------------------------------------------------------------------------------------------------
+# Chat commands for player AWARDS
+
+# /awards: Shows player awards
+chat_awards|unilib
+# /check_vocations: Checks that all levels in a vocation can be unlocked
+chat_check_vocations|unilib
+# /dump_achievement: Dumps data for any achievement whose name or title matches the pattern
+chat_dump_achievement|unilib
+# /dump_player_award: Dumps player award data for the specified player
+chat_dump_player_award|unilib
+# /dump_trigger: Dumps data for any trigger prototypes whose trigger type matches the pattern
+chat_dump_trigger|unilib
+# /dump_vocation: Dumps data for any vocation whose name or title matches the pattern"
+chat_dump_vocation|unilib
+# /show_achievement: Shows a list of achievement awards
+# /show_achievements
+chat_show_achievement|unilib
+# /show_trigger: Shows a list of trigger prototypes
+# /show_trigger
+chat_show_trigger|unilib
+# /show_vocation: Shows a list of vocation awards
+# /show_vocations
+chat_show_vocation|unilib
+# /unlock_achievement: Unlocks an achievement for a player
+# /lock_achievement: Locks an achievement for a player
+chat_unlock_achievement|unilib
+# /unlock_vocation: Unlocks the next level in the vocation for a player
+# /reset_vocation: Resets all levels in the vocation for a player
+chat_unlock_vocation|unilib
+
+# -------------------------------------------------------------------------------------------------
 # Chat commands for CHECKING things
 
 # /check_ingredients: Checks whether ingredients provided by external mods are actually available
 chat_check_ingredients|unilib
 
 # -------------------------------------------------------------------------------------------------
-# Chat commands for checking recipe CONFLICTS
+# Chat commands for handling craft recipe CONFLICTS
 
 # Shared functions for chat commands for checking recipe conflicts
 shared_chat_conflicts|unilib
@@ -47,43 +89,12 @@ chat_count_group_conflicts|unilib
 chat_check_group_conflicts|unilib
 
 # -------------------------------------------------------------------------------------------------
-# Chat commands for CONVERTing original items into unilib items, and vice-versa
+# Chat commands for CONVERTing original item names
 
 # /convert: Shows the unilib equivalent of a node/craftitems/tools from an original mod
 chat_convert|unilib
 # /deconvert: Shows the original mod equivalent or a node/craftitems/tools from unilib
 chat_deconvert|unilib
-
-# -------------------------------------------------------------------------------------------------
-# Chat commands for health, stamina, hydration and advanced CUISINE
-
-# Shared functions for chat commands for health, stamina, hydration and advanced cuisine
-shared_chat_cuisine|unilib
-
-# /reset_health: Resets player health
-chat_reset_health|unilib
-# /reset_hunger: Resets player hunger (if player hunger is enabled)
-chat_reset_hunger|unilib
-# /reset_thirst: Resets player thirst (if hydration is enabled)
-chat_reset_thirst|unilib
-# /reset_me: Resets player health, hunger and thirst
-chat_reset_me|unilib
-
-# /cripple_health: Reduces player health; the opposite command is /reset_health
-chat_cripple_health|unilib
-# /cripple_hunger: Reduces player hunger (if player hunger is enabled); the opposite command is
-#       /reset_hunger
-chat_cripple_hunger|unilib
-# /cripple_thirst: Reduces player thirst (if hydration is enabled); the opposite command is
-#       /reset_thirst
-chat_cripple_thirst|unilib
-# /cripple_me: Reduces player health, hunger and thirst; the opposite command is /reset_me
-chat_cripple_me|unilib
-
-# /clear_food_history: Clears the player's food history  (if advanced cuisine is enabled)
-chat_clear_food_history|unilib
-# /show_food_history: Shows the player's food history (if advanced cuisine is enabled)
-chat_show_food_history|unilib
 
 # -------------------------------------------------------------------------------------------------
 # Chat commands for DUMPING definitions (of nodes, etc) to the chat window
@@ -167,6 +178,37 @@ chat_find_biome|findbiomes unilib
 chat_find_node|unilib
 
 # -------------------------------------------------------------------------------------------------
+# Chat commands for HEALTH, stamina, hydration and advanced cuisine
+
+# Shared functions for chat commands for health, stamina, hydration and advanced cuisine
+shared_chat_cuisine|unilib
+
+# /reset_health: Resets player health
+chat_reset_health|unilib
+# /reset_hunger: Resets player hunger (if player hunger is enabled)
+chat_reset_hunger|unilib
+# /reset_thirst: Resets player thirst (if hydration is enabled)
+chat_reset_thirst|unilib
+# /reset_me: Resets player health, hunger and thirst
+chat_reset_me|unilib
+
+# /cripple_health: Reduces player health; the opposite command is /reset_health
+chat_cripple_health|unilib
+# /cripple_hunger: Reduces player hunger (if player hunger is enabled); the opposite command is
+#       /reset_hunger
+chat_cripple_hunger|unilib
+# /cripple_thirst: Reduces player thirst (if hydration is enabled); the opposite command is
+#       /reset_thirst
+chat_cripple_thirst|unilib
+# /cripple_me: Reduces player health, hunger and thirst; the opposite command is /reset_me
+chat_cripple_me|unilib
+
+# /clear_food_history: Clears the player's food history  (if advanced cuisine is enabled)
+chat_clear_food_history|unilib
+# /show_food_history: Shows the player's food history (if advanced cuisine is enabled)
+chat_show_food_history|unilib
+
+# -------------------------------------------------------------------------------------------------
 # Chat commands for LISTING registered things
 
 # Shared functions for chat commands for listing registered things
@@ -212,7 +254,7 @@ chat_list_lbms|unilib
 # /list_nodes: Lists all registered nodes, or just nodes from the specified mod
 # /list_node
 chat_list_nodes|unilib
-# /list_ores: "Lists all registered ores, or just ores of the specified type/mod/node/biome
+# /list_ores: Lists all registered ores, or just ores of the specified type/mod/node/biome
 # /list_ore
 chat_list_ores|unilib
 # /list_tools: Lists all registered tools, or just tools from the specified mod
@@ -284,7 +326,7 @@ chat_teleport|unilib
 chat_test|unilib
 
 # -------------------------------------------------------------------------------------------------
-# Chat commands for checking recipes with MISSING items
+# Chat commands for checking craft recipes with MISSING items
 
 # Shared functions for chat commands for checking recipes with missing items
 shared_chat_missing|unilib
@@ -294,11 +336,11 @@ chat_count_broken_recipes|unilib
 # /check_broken_recipes: Checks for missing recipe ingredients, displaying detailed output
 chat_check_broken_recipes|unilib
 
-# /list_groups: List groups, and the items that provide them
+# /list_groups: List groups (or the specified group), and the items that provide them
 chat_list_groups|unilib
 
 # -------------------------------------------------------------------------------------------------
-# Chat commands for SHOWING various data
+# Chat commands for SHOWING data
 
 # /show_mod_attributes: Shows table of mod attributes (i.e. mod storage)
 # /show_mod_attribute
@@ -329,15 +371,15 @@ chat_display_light|unilib
 # /show_package: Show the unilib package that created a node, craftitem or tool
 chat_show_package|unilib
 
-# /show_element: Shows the periodic table (from the "atomic" remix)
-# /show_elements
-# /show_rare_element: Shows elements not directly available from vapourisation (from the "atomic"
+# /show_elements: Shows the periodic table (from the "atomic" remix)
+# /show_element
+# /show_rare_elements: Shows elements not directly available from vapourisation (from the "atomic"
 #       remix)
-# /show_rare_elements
+# /show_rare_element
 chat_show_elements|unilib
 
 # -------------------------------------------------------------------------------------------------
-# Chat commands for showing player STATISTICS
+# Chat commands for player STATISTICS
 
 # Shared functions for chat commands for showing player statistics
 shared_chat_statistics|unilib
@@ -360,7 +402,7 @@ chat_show_eat|unilib
 # /add_event: Adds a calendar event, e.g. "You ate a nice sandwich"
 chat_add_event|unilib
 # /delete_event: Deletes calendar events from the specified game day (e.g. 1 for the first game
-#      day, or a string in the form "YYYYMMDD"). N.B. Only events of the type "default" can be
+#      day, or a value in the form "YYYYMMDD"). N.B. Only events of the type "default" can be
 #      removed with this command (such as those created with the /add_event command)
 chat_delete_event|unilib
 
@@ -379,6 +421,17 @@ chat_dusk|unilib
 # /daylight: Enables permanent daylight without changing the game time
 # /darkness: Enables permanent darkness without changing the game time
 chat_daylight|ptime
+
+# -------------------------------------------------------------------------------------------------
+# Chat commands for WEATHER
+
+# /reset_weather: Resets the current weather effect
+chat_reset_weather|unilib
+# /set_weather: Sets the current weather effect, by name or by tag
+chat_set_weather|unilib
+# /show_weather: Shows available weather effects
+# /show_weathers: Shows available weather effects
+chat_show_weather|unilib
 
 # -------------------------------------------------------------------------------------------------
 

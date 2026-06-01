@@ -111,7 +111,7 @@ function unilib.pkg.liquid_oil_normal.exec()
         post_effect_color = {r = 32, g = 20, b = 12, a = 255},
         special_tiles = {
             {
-                image = "unilib_liquid_oil_normal_flowing_animated.png",
+                name = "unilib_liquid_oil_normal_flowing_animated.png",
                 animation = {
                     type = "vertical_frames",
                     aspect_w = 16,
@@ -121,7 +121,7 @@ function unilib.pkg.liquid_oil_normal.exec()
                 backface_culling = false,
             },
             {
-                image = "unilib_liquid_oil_normal_flowing_animated.png",
+                name = "unilib_liquid_oil_normal_flowing_animated.png",
                 animation = {
                     type = "vertical_frames",
                     aspect_w = 16,

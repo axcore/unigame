@@ -135,7 +135,7 @@ function unimobs.kitz_api.refine_replace_data(entity_name)
                 core.registered_nodes[mini_list[1]] ~= nil
             ) and (
                 string.sub(mini_list[2], 1, 6) == "group:" or
-                core.registered_nodes[mini_list[2]] ~= nil            
+                core.registered_nodes[mini_list[2]] ~= nil
             ) then
                 table.insert(new_list, mini_list)
             end

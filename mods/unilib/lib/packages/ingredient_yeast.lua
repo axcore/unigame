@@ -33,7 +33,11 @@ function unilib.pkg.ingredient_yeast.exec()
         -- From bbq:yeast
         description = S("Yeast"),
         tiles = {"unilib_ingredient_yeast.png"},
-        groups = {attached_node = 1, dig_immediate = 3, food_vinegarmother = 1, vessel = 1},
+        -- N.B. food_vinegarmother = 1 in original code; food_yeast = 1 not present in original code
+        groups = {
+            attached_node = 1, dig_immediate = 3, food_vinegar_mother = 1, food_yeast = 1,
+            vessel = 1,
+        },
         sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",

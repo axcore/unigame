@@ -1,0 +1,16 @@
+# "awards_unimobs" remix - contains all unimobs award packages
+
+# node_name | original_mod
+
+# awards packages
+award_ranger|unimobs
+award_warrior|unimobs
+award_zoologist|unimobs
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

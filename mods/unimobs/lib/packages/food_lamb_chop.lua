@@ -29,7 +29,8 @@ function unilib.pkg.food_lamb_chop.exec()
         -- From petz:mini_lamb_chop
         description = S("Raw Lamb Chop"),
         inventory_image = "unilib_food_lamb_chop_raw.png",
-        groups = {flammable = 2, food = 2, food_meat_raw = 1},
+        -- N.B. food_mutton_raw = 1 not in original code
+        groups = {flammable = 2, food = 2, food_meat_raw = 1, food_mutton_raw = 1},
 
         wield_image = "unilib_food_lamb_chop_raw.png",
 
@@ -40,7 +41,8 @@ function unilib.pkg.food_lamb_chop.exec()
         -- From petz:roasted_lamb_chop
         description = S("Roasted Lamb Chop"),
         inventory_image = "unilib_food_lamb_chop_roasted.png",
-        groups = {flammable = 2, food = 2, food_meat = 1},
+        -- N.B. food_mutton = 1 not in original code
+        groups = {flammable = 2, food = 2, food_meat = 1, food_mutton = 1},
 
         on_use = unilib.cuisine.eat_on_use("unilib:food_lamb_chop_roasted", 3),
     })

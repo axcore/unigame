@@ -1,0 +1,9 @@
+Contains almost everything from the australia mod.
+
+Did not import the sunken ship, submarine and their chests.
+
+Used existing packages for metal ores and fern trees, rather than creating almost identical items from the australia mod. Added a tin ore for consistency.
+
+unilib provides a set of custom dirt-with-turf nodes, to replace the widespread (and unimaginative) use of dirts from minetest_game. The custom nodes are disabled by default; enable them by uncommenting the optional package in the packages.csv file.
+
+It is recommended that this remix is used together with the "mtgame_mini" remix.

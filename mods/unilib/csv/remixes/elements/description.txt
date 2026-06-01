@@ -1,0 +1,1 @@
+Contains packages which provide all 118 chemical elements, in the form of ingots/blocks/powder, or chunks, or samples, or mineral lumps (as appropriate).

@@ -112,7 +112,7 @@ function unilib.pkg.liquid_mud_normal.exec()
         post_effect_color = {r = 112, g = 64, b = 32, a = 224},
         special_tiles = {
             {
-                image = "unilib_liquid_mud_normal_animated.png",
+                name = "unilib_liquid_mud_normal_animated.png",
                 animation = {
                     type = "vertical_frames",
                     aspect_w = 16,
@@ -122,7 +122,7 @@ function unilib.pkg.liquid_mud_normal.exec()
                 backface_culling = false,
             },
             {
-                image = "unilib_liquid_mud_normal_animated.png",
+                name = "unilib_liquid_mud_normal_animated.png",
                 animation = {
                     type = "vertical_frames",
                     aspect_w = 16,

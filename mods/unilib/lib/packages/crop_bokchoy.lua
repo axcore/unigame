@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.crop_bokchoy.exec()
 
-    local fertility_list = {"ordinary_soil"}
+    local fertility_list = {"regular_soil"}
 
     local orig_name_list = {}
     for i = 1, 3 do

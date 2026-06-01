@@ -100,8 +100,8 @@ function unilib.pkg.container_gourd_bottle.exec()
 
         allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 
---              if is_owner(pos, player:get_player_name()) and
---                      not string.match(stack:get_name(), "backpacks:") then
+--          if is_owner(pos, player:get_player_name()) and
+--                  not string.match(stack:get_name(), "backpacks:") then
             if is_owner(pos, player:get_player_name()) then
                 return stack:get_count()
             end

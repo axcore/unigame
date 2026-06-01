@@ -1,0 +1,3 @@
+Contains many (but not all) items from the farlands game, concentrating on the farlands/decoblocks and farlands/mapgen mods. Includes all biomes, decorations and ores (except those in farlands/farming).
+
+Because many farlands mods share a name with minetest_game mods, everything has been grouped into a hypothetical "farlands" mod. Original names for items are only specified in code when their mods don't appear in minetest_game (e.g. decoblocks, mapgen, etc).

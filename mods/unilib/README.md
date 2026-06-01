@@ -2,7 +2,7 @@
 
 # Unified Voxel Library for Minetest-compatible engines
 
-## Latest release: v1.1.0 (24 December 2025) (see recent [changes](CHANGES.txt))
+## Latest release: v1.2.0 (1 Jun 2026) (see recent [changes](CHANGES.txt))
 
 ## Want to tinker? Download unilib [here](https://github.com/axcore/unilib)
 
@@ -29,14 +29,19 @@
 - **unilib** has no hard dependencies; it will run in any game
 - Due to the magic of aliases, **unilib** should be compatible with most mods
 
-## Create your own game
+## Tips for unilib players
 
 - You can easily create the game of your dreams - no coding skills required!
 - Code has been divided into the smallest possible components, called *packages*
-- For example, there is one package for sand, and another providing both stone and cobblestone
+    - For example, there is one package for sand, and another providing both stone and cobblestone
 - A *remix* is a list of packages
-- **unilib** provides a large selection of remixes, ready for you to use
-- If you can use a text editor or a spreadsheet, then you can create your own remixes!
+    - **unilib** provides a large selection of remixes, ready for you to use
+- When you start playing, **unilib** will ask you to choose the remixes you want
+    - To open the configuration window at any time, type **/unilib**
+- You can write your own remixes using a simple text editor (see below)
+    - To use the in-game system, type **/create_remix** or** /edit_remix**
+    - This in-game system can also create new biomes, decorations and ores
+    - If [unimobs](https://github.com/axcore/unimobs) is available, it can be used to configure mobs
 
 ## Tips for unigame players
 
@@ -44,7 +49,7 @@
     - This is a BETA release, so forget about game balance - because there isn't any!
 - Your first priority is to find food and water
     - You should build your first house near a water source
-    - If you don't enjoy standing in puddles, then wooden buckets are easy to craft
+    - If you don't enjoy standing in lakes, then wooden buckets are easy to craft
     - With advanced cuisine enabled, you will need to vary your diet
     - Crops and vegetables are more common in forests
     - Not all grasses drop seeds
@@ -63,7 +68,8 @@
     - It's easier to see where you're going when you wield a torch
     - Cook tree trunks in a furnace to produce charcoal, from which you can craft torches
 - More than one kind of bed is available
-    - Wool can be crafted from cotton; cotton seeds are dropped by some grasses
+    - Wool can be crafted from cotton
+    - Cotton seeds are dropped by jungle grass, found only in hot, rainy biomes
 - Stairs, carvings and walls exist, but are not visible in your crafting guide
     - Basic stairs and walls have traditional craft recipes
     - Other types of stairs and carvings can be made using machines
@@ -80,7 +86,15 @@
     - It's fun to collect as many animals as you can in a sketchbook
     - Some monsters only spawn at certain times of the (real) year
     - The [unimobs](https://github.com/axcore/unimobs) README describes each creature in detail
-- Brand new players should type /what in the chat window
+- The weather changes frequently
+    - Storms and lightning are a little scary, but they're not dangerous
+    - Cautious players can craft a weather forecasting console (just like in real life, it's not 100% accurate)
+- unilib provides over 700 different achievements
+    - Earn achievements for mining diamonds, harvesting crops, or just exploring the world!
+    - The more achievements you earn, the higher your level in career paths like **Lumberjack** or **Mountaineer**
+    - Reach the highest levels of a career path to obtain a small reward!
+- Brand new players should type **/what** in the chat window
+- To add new remixes and packages to the game, use **/unilib**, **/create_remix** and **/edit_remix**
 
 ## This is a BETA release
 
@@ -89,9 +103,11 @@
     - **unigame** includes the **unimobs** expansion pack, providing dozens of creatures
     - **unilib** is compatible with popular mods such as [technic](https://github.com/minetest-mods/technic) and [mesecons](https://github.com/minetest-mods/mesecons)
     - ...but note that **mesecons** must be patched, before use - see the compatibility notes in **../scripts/**
+- **unilib** is compatible with all popular inventory mods
+    - Some packages interact with [sfinv](https://github.com/luanti-org/minetest_game), [unified_inventory](https://github.com/minetest-mods/unified_inventory) and [inventory_plus](https://github.com/cornernote/minetest-inventory_plus) directly
 - **unilib** is highly configurable (see the **Configuring unilib** section)
 - Future releases should be compatible with worlds you create now (within reason)
-- Minetest v5.6.0 (or later) is recommended
+- The most recent release of Minetest/Luanti is recommended
 
 # 1. Remixes and packages
 
@@ -103,11 +119,31 @@ A remix is a list of packages. **unilib** includes over a hundred remixes for yo
 
 Many remixes are named after the mods they come from. For example **bonemeal** comes from [the mod with the same name](https://codeberg.org/tenplus1/bonemeal), and includes most of the same material. The **mtgame** remix contains most of the material from [minetest_game](https://github.com/minetest/minetest_game). Most of the time, players won't notice the difference between **unilib** and those original mods. (The imported code has been standardised, so there will always be *a few* changes.)
 
-The most important remix is called **playme**. It is loaded automatically by **unigame** but it also available for users of **unilib**. It provides a great many trees, plants, crops, biomes, stones, metals and minerals. However, it does not provide *all* of those items - that's where you come in! You can create your own customised game by selecting your own remixes, or by creating new ones.
+The most important remix is called **config**. This remix enables **unilib**'s in-game system for selecting, creating and editing remixes. If you don't want to use the in-game system, then a simple text editor or spreadsheet application is just as good. The **config** remix is selected by default; you can unselect it, if you don't need it.
+
+**unilib**'s showcase remix is called **playme**. It is loaded automatically by **unigame** but it also available for users of **unilib**. It provides a great many trees, plants, crops, biomes, stones, metals and minerals. However, it does not provide *all* of those items - that's where you come in! You can create your own customised game by selecting your own remixes, or by creating new ones.
 
 ## 1.1 Selecting remixes
 
-**unilib** users can choose the remixes they want in the engine's settings.
+The in-game system for selecting, creating and editing remixes can be accessed from the introductory window shown to all new users; otherwise, it requires special privileges.
+
+- Type **/grantme unilib_admin**
+
+You can now select the remixes and packages you want.
+
+- Type **/unilib** to open the configuration window
+- Items in the **List of remixes and packages** are loaded every time the game starts
+- The **Browse remixes** tab shows all available remixes
+    - Click a remix name for more information about it
+    - Double-click the remix name to add it to the list
+- The **Browse packages** tab gives more information about individual packages
+    - If you need a particular package, you can add it to the list
+    - By default, any dependencies for this package will be loaded automatically
+- When you're ready, click the **Save the list** button
+    - The changes are applied when you re-start the game
+    - If you have added a lot of biomes, decorations and ores, you should probably start a new world
+
+**unilib** users can choose the remixes they want in the engine's settings. (This is not possible in **unigame**.)
 
 - Click the **Settings** button in the top-right corner
 - On the left side, click on **Unified Voxel Library (unilib)**
@@ -119,11 +155,11 @@ The **unilib** code can be modified directly, if you prefer.
 
 - In the **unilib** folder (directory), open the file **../lib/system/global/global_override.lua**
 - Scroll down to the line containing **unilib.setting.init_remix_pkg_set**
-- Uncomment the line by removing the first two hyphen characters
-- Remove the word **nothing** and replace it with the names of the remixes you want, e.g. **mtgame bonemeal**
-- Don't forget to preserve the double quotes, for example:
+- Beneath it, add the following line, replacing LIST with one or more remix names
 
-        unilib.setting.init_remix_pkg_set = "mtgame bonemeal"
+        unilib.setting.init_remix_pkg_set = "LIST"
+
+For more information about creating and editing remixes, see the section below.
 
 ## 1.2 Replacing original items
 
@@ -173,7 +209,9 @@ If you have not added the original [minetest_game](https://github.com/minetest/m
 
 The **chat** remix provides all of unilib's chat commands. Some of these commands require special privileges (see the section below). The **chat_normal** remix includes only commands that are available to all players.
 
-This **standard** remix is included in **playme**, but the **chat** remixes are not.
+The **awards** remix provides a large number of awards. Awards are unlocked automatically when the player achieves something. Type **/awards** to see your progress so far.
+
+This **standard** and **awards** remixes are included in **playme**, but the **chat** remixes are not.
 
 ## 1.6 Other remixes
 
@@ -370,56 +408,271 @@ It's also possible to create biomes, decorations and ores using a spreadsheet (i
 
 That should give you an idea of what is possible; full instructions about how to create or modify packages, and how to design new biomes, decorations and ores, will appear in a later release.
 
-# 2 Creating new remixes
+# 2 Creating and editing remixes
 
-There are three ways to create your own remixes: two "wrong" ways and a "right" way.
+There are several ways to create your own remixes, or to modify existing remixes. You should read the whole of this section before choosing the most suitable method for you.
 
-The "wrong" ways are wrong, because any changes you make to **unilib** may be lost as soon as you download a new release. The "right" way involves creating your own **expansion pack** that you yourself control.
+## 2.1 Remix locations
 
-Both of the "wrong" ways are fine for testing, and they're also fine if you are careful about replacing an older version of **unilib** with a newer one. Nevertheless, if you create something worth preserving, consider preserving it using the "right" way!
+Remixes are loaded from one of several locations. If you've selected the **mtgame** remix, **unilib** will check the following list from top to bottom, loading the first **mtgame** remix it finds, and ignoring all the others:
 
-## 2.1 Method 1: Add a new remix to the /csv folder
+- [Minetest](https://minetest.org/)'s own **mod_data** folder
+- **unilib** expansion packs, in the order they were loaded
+- **unilib** itself, in its **/custom/remixes** folder
+- **unilib** itself, in its **/csv/remixes** folder
 
-To create a new remix:
+For security reasons, [Minetest](https://minetest.org/) doesn't allow mods to read and write files anywhere they like. Therefore, the in-game system will *only* modify remixes in [Minetest](https://minetest.org/)'s own **mod_data** folder. (It can also copy remixes from other locations into **mod_data**, and then you can edit the copy.)
 
-- Open the folder **../csv/remixes/**
-- Inside that folder, create a new folder, perhaps named **myremix**
-- Inside the new folder, create an empty file called **packages.csv**
+Of course, you could use a text editor to modify the files in **unilib**'s own folder. However, the next time you update **unilib**, any changes you make will be lost. The same applies to **unilib**'s "official" expansion packs, when you update them.
 
-That's it! **unilib** will not complain that the remix is empty, but let's add some packages anyway.
+All of the methods below will work, but there are only two *recommended* methods:
+
+- Edit remixes in [Minetest](https://minetest.org/)'s own **mod_data** folder
+- Create your own expansion pack, and edit remixes there
+
+Regardless of which method you choose, you should be diligent about creating backup copies of your work.
+
+## 2.2 Method 1: Using the in-game system
+
+### 2.2.1 Creating new remixes
+
+To create a new remix, type **/create_remix**, which will open a new window. You can skip this window by typing **/create_remix NAME**, replacing NAME with whatever you want.
+
+A remix consists of a folder containing one compulsory file, **packages.csv**, and several optional ones. If you didn't skip the window, you can use it to create some or all of the optional files automatically.
+
+### 2.2.2 Copying existing remixes
+
+As mentioned above, the in-game system can't modify remixes inside **unilib**'s own folder, but you can make a copy of those remixes in [Minetest](https://minetest.org/)'s own **mod_data** folder, and then edit the copy.
+
+To do this, type **/edit_remix NAME**, where NAME is the name of an existing remix, like **mtgame**.
+
+### 2.2.3 Editing remixes
+
+Once the remix has been created (or copied), you can start editing it.
+
+Type **/edit_remix NAME**, where NAME is the name of your new remix. **unilib** remembers which remix you're editing, so to re-open the editing window, you can just type **/edit_remix** or even **/remix**.
+
+The editing window contains six tabs, each corresponding to a different file inside the remix. Each file is not updated until you click its **Save** button, so do that regularly. (The **Reload** button will cancel any changes you've made since the last save.)
+
+### 2.2.4 The Packages tab
+
+The compulsory **packages.csv** file contains a list of packages to load.
+
+There's a complete list of available packages on the right. You can search for the packages you want, and then double-click to add them to the list.
+
+Alternatively, just type the names of the packages you want: either directly in the box at the top (one package per line), or in the **Package name** box, one at a time.
+
+The **Original mod name(s)** box is intended for developers; you should ignore it. Don't forget that more information about individual packages can be found in the **/unilib** window.
+
+### 2.2.5 The Description tab
+
+The optional **description.txt** file contains a bit more information about this remix (for the benefit of other users). If you choose to add some text here, it will be visible in the **/unilib** window.
+
+### 2.2.6 The Constants tab
+
+The in-game system can create new biomes, decorations and ores.
+
+For example, we might want to create a set of ores that occur at least 100 blocks below the surface. Of course, you could add the value **100** to every ore you create, but what if you change your mind later? Rather than manually updating hundeds of ore distributions, one at a time, we can instead create a **general constant** that only needs to be updated once.
+
+- In the **Constant name** box, type something like **ORE_TOP**
+    - Constant names must not contain spaces, so **ORE TOP** is not valid
+    - By convention, all constant names are in CAPITAL LETTERS
+- In the **Constant value** box, type 100
+- Click the **Add** button; the constant appears in the list above
+- Click the **Save** button to apply your changes
+- Now click on the **Ores** tab
+- When you start creating ores here, in the **Max height** box you would add **ORE_TOP** instead of **100**
+
+### 2.2.7 Standard constants
+
+When you start creating your own biomes, decorations and ores using the in-game system, files like **biomes.csv** and **decorations.csv** are created. These files can be quite tricky to modify later, as they contain a confusing mess of characters.
+
+The solution to this problem is to use **standard constants**. These are constants that have **no value** - in other words, they are ignored.
+
+Editing files is much easier when these ignorable values are included. If you want to specify a maximum height, where none was specified before, you can very easily find **NO_MAX_HEIGHT** and replace it with a real value.
+
+Most users should use standard constants:
+
+- In the **Constants** tab, click the **Add biome constants**, **Add decoration constants**, **Add ore constants** buttons
+- Click the **Save** button to update the file **constants.csv**
+- Now, in the **Biomes** tab, click the button with the same pencil icon
+- This will fill most fields with the correct standard constants
+- When creating biomes, just replace some of the standard constants with real values
+- Do the same thing in the **Decorations** and **Ores** tabs
+
+### 2.2.8 Creating biomes, decorations and ores
+
+The complexities of creating biomes, decorations and ores are beyond the scope of this document. For a more complete description, see the [Minetest](https://minetest.org/) documentation or the various modding guides that are available.
+
+However, it *is* feasible for all users - not just advanced ones - to create simple biomes, decorations and ores that can be used in your games right now. In the sections below we'll create one example of each, ignoring the complexities.
+
+### 2.2.9 The Biomes tab
+
+Every location in the world has a specific heat and humidity, typically a value in the range 0-100. That's why some areas have snow and trees (low heat, high humidity) but others are sandy deserts (high heat, low humidity).
+
+Biomes have **heat points** and **humidity points**. For example, the grassland biome from [minetest_game](https://github.com/minetest/minetest_game) has a heat point of 50 and a humidity point of 35.
+
+Wherever you go in the world, the biome you see is whichever biome is the closest match. For example, if your location has 51 heat and 36 humidity, the biome you see will probably be **default_grassland**. However, even if your location has 30 heat and 70 humidity, you might still see **default_grassland** if the other biomes in the game aren't closer matches.
+
+Now we can create a new biome. All fields are optional, except **Biome name** which is compulsory.
+
+- Enter a unique **Biome name**
+    - Enter a description if you like
+- Enter the maximum and minimum heights at which this biome is found
+    - e.g. maximum **50**, minimum **0**
+    - In [Minetest](https://minetest.org/), sea level is at height 1
+- Enter the heat and humidity points
+    - e.g. for a sandy desert, heat **80**, humidity **20**
+    - e.g. for a pine forest, heat **20**, humidity **60**
+- The **Dust node** is one which covers the surface, like fallen snow
+    - If this is a cold place, you could use **unilib:snow_ordinary**
+    - Otherwise ignore this field
+- The **Top node** is the node on the surface
+    - e.g. Ordinary dirt with turf, which in **unilib** is **unilib:dirt_ordinary_with_turf**
+    - This layer is 1 node deep unless you specify a depth, e.g. **unilib:sand_ordinary 3**
+- The **Fill node** is just below the surface
+    - e.g. Ordinary dirt, which in **unilib** is **unilib:dirt_ordinary**
+    - This layer is also 1 node deep unless you specify a depth, e.g. **unilib:dirt_ordinary 5**
+- The **Stone node** is everything beneath the **Fill node**
+    - If you don't specify it, **unilib:stone_ordinary** is used
+
+When you're ready, click the **Add** button. The new biome should appear in the list at the top; click the **Save** button to update the file itself.
+
+Note that, due to the magic of aliasing, you can (usually) use the original node names from [minetest_game](https://github.com/minetest/minetest_game), i.e. **default:sand** instead of **unilib:sand_ordinary**.
+
+### 2.2.10 The Decorations tab
+
+Decorations are items like grasses and trees which appear throughout the world, whenever it is generated.
+
+[Minetest](https://minetest.org/) provides two types of decoration:
+
+- Single nodes (grasses, flowers)
+- Multiple nodes (trees, cacti)
+
+The "plan" for a multiple-node decoration is called a **schematic**. Usually it's one of the files in **unilib**'s **../mts** folder, such as **unilib_tree_apple.mts**, although occasionally packages will create their own schematics on the fly.
+
+**unilib** remixes use four classes of decoration:
+
+- Simple - a single node
+- Schematic - multiple nodes
+- Schematic (no rotate) - multiple nodes, always placed in the same direction
+- Tree log - a single node (a tree trunk) or a schematic (containing mostly tree trunk nodes)
+
+Now we can create a new decoration. All fields are optional, except **Decoration name**.
+
+- In the dropdown box, select **Simple**
+- In the **Decoration name** field, type **unilib:grass_jungle**
+- Enter the maximum and minimum heights at which this decoration is found
+    - e.g. maximum **50**, minimum **0**
+    - In [Minetest](https://minetest.org/), sea level is at height 1
+- Enter biomes in which this decoration is found
+    - e.g. **default_grassland**
+- Enter a value in the **Fill ratio** field
+    - This value is the number of decorations per surface node
+    - e.g. **0.02** for 1 node in every 50
+
+When you're ready, click the **Add** button. The new decoration should appear in the list at the top; click the **Save** button to update the file itself.
+
+If you specify a schematic rather than a **Simple** decoration, then you should specify the name of the file in **unilib**'s **../mts** folder, e.g. **unilib_tree_apple.mts**, not the full file path.
+
+### 2.2.11 The Ores tab
+
+Ores are items that are embedded within other materials, for example iron ores which are found beneath the surface (or inside mountains).
+
+[Minetest](https://minetest.org/) provides six types of ore, each with different characteristics and properties. You can experiment with them and find the one that suits you best. **blob** and **scatter** are good for beginners.
+
+Note that <u>each type of ore has a different file</u>, so before switching from blobs to scatters, you should click the **Save** button to apply your changes.
+
+Now we can create a new ore distribution. All fields are optional, except the **Ore** field.
+
+- In the dropdown box, select **Blob**
+- In the **Ore** field, type the name of the ore node
+    - e.g. **unilib:stone_ordinary_with_iron**
+- In the **Wherein** field, type the name of the stone in which it's found
+    - e.g. **unilib:stone_ordinary**
+- Enter the maximum and minimum heights at which this ore is found
+    - e.g. maximum **-50**, minimum **-200**
+    - In [Minetest](https://minetest.org/), sea level is at height 1
+- In the **Cl. scarcity** field, specify how rare this ore is
+    - Normally we use cubed values, e.g. **125** (which is 5 * 5 * 5)
+    - The higher the number, the less common the ore is
+- In the **No. ores** field, specify how many iron ore nodes appear in each blob
+    - e.g. **3**
+- In the **Cl. size** field, specify how far apart the blob's nodes can be
+    - e.g. **5**
+
+When you're ready, click the **Add** button. The new ore distribution should appear in the list at the top; click the **Save** button to update the file itself.
+
+## 2.3 Method 2: Create/edit remixes manually
+
+If you don't want to use the in-game creation system, you can just create the remix folder and files yourself, using a text editor or spreadsheet application to edit them.
+
+As described above, there are four distinct locations from which remixes can be loaded.
+
+### 2.3.1 The mod_data folder
+
+This is a recommended location, as it will not be overwritten when you update **unilib**.
+
+- Open [Minetest](https://minetest.org/)'s data folder
+- Navigate to **../mod_data/unilib/remixes**
+- Inside this folder, create a sub-folder with the name of the remix
+    - e.g. **myremix**
+- Inside the sub-folder, create an empty file called **packages.csv**
+
+The remix now exists and can be loaded. **unilib** will not complain about the remix being empty, but let's add some packages anyway.
 
 - Open the new **packages.csv** file in a suitable text editor
-- Add the following lines:
+- Add the following lines, which specify packages adapted from the [bread](https://codeberg.org/Lahusen/bread) mod:
 
         food_bread_pitta
         food_bread_wholegrain_carrot
         ingredient_dough_pitta
         ingredient_dough_wholegrain_carrot
 
-These packages have been adapted from the [bread](https://codeberg.org/Lahusen/bread) mod. After adding **myremix** to your remix list (as described above), you can create a new world and start playing!
+After adding **myremix** to your remix list (as described above), you can create a new world and start eating!
 
-## 2.2 Method 2: Add a new remix to the /custom folder
+When you're ready, your new remixes can be copied to any of the other locations. The section above describes the order in which locations are checked; only the first **myremix** found is actually loaded.
 
-The problem with the first method is that some future **unilib** release might contain its own remix called **myremix**, which would overwrite yours.
+### 2.3.2 Create your own expansion pack
 
-Instead, you can use the **../custom/** folder. No future release will add any new remixes or packages to this folder. (There is still a risk that the *entire* **unilib** folder will be deleted during an update, of course.)
+Expansion packs are separate mods that provide new remixes and packages. This is a recommended method, as expansion packs are not overwritten when you update **unilib**.
 
-To add a remix here, create a new folder called **myremix** inside the **../custom/remixes/** folder, and repeat the process above.
+The [unitest](https://github.com/axcore/unilib) expansion pack provides a single test node, but no remixes of its own.  You can use **unitest** as the basis for your own customised expansion pack.
 
-## 2.3 Method 3: Create an expansion pack
+- Open [Minetest](https://minetest.org/)'s data folder
+- Navigate to **../mods/**
+- [Download](https://github.com/axcore/unilib) **unitest** and copy the files to that location
+- Rename the folder from **unitest** to (for example) **mypack**
+- Open the folder
+- Open the new mod's **mod.conf** file in a text editor
+    - Change the mod's name to **mypack**
+    - Recommended: In **unilib**'s own **mod.conf** file, add **mypack** as a dependency
+- Open the new mod's **init.lua** file in a text editor
+    - Replace all three mentions of **unitest** with **mypack**
 
-Expansion packs are separate mods that provide new remixes and packages.
+Now you can continue as above, creating a new remix inside **mypack**'s own **../csv/remixes/** folder.
 
-At the moment, there is only one "official" expansion pack called [unitest](https://github.com/axcore/unilib). It provides a single test node, but no remixes of its own.
+### 2.3.3 Use unilib's custom folder
 
-You can use this mod as the basis for your own customised expansion pack.
+**unilib**'s own **../custom/** folder is reserved for your own use. No future release will add any new remixes or packages to this folder, so in principle, it's safe to create new remixes here.
 
-- Download the expansion pack (mod) to the usual location
-- Rename the pack's folder from **unitest** to (for example) **mypack**
-- Edit the mod's **mod.conf** file to change its name to **mypack**
-- In **unilib**'s own **mod.conf** file, add **mypack** as a dependency
+Note that you will **still lose any changes if the whole unilib folder is deleted during an update**. Therefore this is not a recommended method, but it's fine if you can remember to make regular backups.
 
-Now you can continue as above, creating a new folder call **myremix** in **mypack**'s own **../csv/remixes/** folder.
+- Open [Minetest](https://minetest.org/)'s data folder
+- Navigate to **../mods/unilib/custom/remixes**
+
+You can now continue as above, creating a new remix inside this folder.
+
+### 2.3.4 Use unilib's standard folder
+
+**unilib**'s built-in remixes are found in its **../csv/remixes** folder. You can, if you really want to, create new remixes here, or edit existing ones.
+
+Note that you will **lose any changes if a remix with the same name is included in a future unilib release**. Therefore this is not a recommended method, but it's fine if you can remember to make regular backups.
+
+- Open [Minetest](https://minetest.org/)'s data folder
+- Navigate to **../mods/unilib/csv/remixes**
+
+You can now continue as above, creating a new remix inside this folder.
 
 # 3 Chat commands
 
@@ -429,7 +682,7 @@ All **unilib** chat commands are created by packages. For example, the **/list_n
 
 Not all **unilib** chat commands are available to all players. In particular, if you are running a server, you will have to consider which commands should be made available to which players.
 
-In order to have access to *all* commands, you must grant yourself the following privileges:
+In order to have access to *all* of **unilib**'s chat commands, you must grant yourself the following privileges:
 
         /grantme unilib_tools
         /grantme unilib_admin
@@ -437,23 +690,50 @@ In order to have access to *all* commands, you must grant yourself the following
 
 The **unilib_tools** privilege enables commands which *might* be suitable for all players on a server, or might *not*. For example, it enables the **/list_trees** command; if you don't want your players to know about every single **unilib** tree in the game, then don't grant them this privilege (or else don't load the **chat_list_trees** package in the first place).
 
-The **unilib_admin** privilege enables commands which are definitely only suitable for use by server administrators (or possibly suitable for you in your single-player worlds). For example, it enables the **/reset_health** command (which increases a player's health to the maximum).
+The **unilib_admin** privilege enables commands which are intended for use by server administrators. They might perhaps be appropriate for use in your single-player worlds, too. For example, it enables the **/reset_health** command (which increases a player's health to the maximum.
 
-You should not grant yourself the  **unilib_danger** privilege unless you're sure that you need it. It enables the **/cut_trench** command to cut a series of deep trenches into your world, destroying anything in its path.
+You should not grant yourself the **unilib_danger** privilege unless you're sure that you need it. It enables the **/cut_trench** command to cut a series of deep trenches into your world, destroying anything in its path.
 
-A complete description of chat commands will appear in a future release; a few of them are described below. In the meantime, you can get a list of commands by opening the engine's chat window and then typing **/help**. (The **packages.csv** file in the **chat** remix also contains a brief summary of each **unilib** chat command and its usage.)
+A complete list of chat commands appears below. This list doesn't mention chat commands provided by **unilib** expansion packs; see their documentation for more details
 
-## 3.1 Daily alarms
+While playing, you can get a list of commands by opening the engine's chat window and then typing **/help**. (The **packages.csv** file in the **chat** remix also contains a brief summary of each **unilib** chat command and its usage.)
 
-The following commands don't require any special privileges.
+In the lists below, **<ARG\>** represents a compulsory argument, and **[ARG]** represents an optional argument.
+
+## 3.1 unilib configuration
+
+*The following commands require the unilib_admin privilege.*
+
+For more about configuring **unilib** in-game, see the sections below and above.
+
+        /unilib
+
+Opens a window, in which you can configure the list of remixes and packages that's loaded, whenever the game starts.
+
+        /create_remix [remix]
+
+If a **[remix]** name is specified, creates a new remix with that name, also creating default remix files.
+
+Otherwise, opens a window in which you can specify the new remix name and the remix files you want to create.
+
+        /edit_remix <name>
+        /remix <name>
+
+Edits an existing remix. **unilib** remembers which remix you're currently editing, so you don't need to specify the **<name\>** more than once.
+
+Also copies an existing (built-in) remix to a new location, from which it can be edited. For more information, see the section above.
+
+## 3.2 Player ALARMS
+
+*The following commands don't require any special privileges.*
 
         /set_alarm <time>
 
 Sets an alarm which goes off every game day, until cancelled. The alarm is visible in the chat window and is audible (if your volume is not muted). Only you can see and hear your own alarm.
 
-<time\> is a 24-hour clock time in the form HH:MM, for example 13:30 for half-past one in the afternoon. Quarter-past seven in the morning can be expressed as either 07:15 or 7:15.
+**<time\>** is a 24-hour clock time in the form **HH:MM**, for example **13:30** for half-past one in the afternoon. Quarter-past seven in the morning can be expressed as either **07:15** or **7:15**.
 
-To get the current game time, use the engine's own chat command **/time**.
+To get the current game time, use the engine's built-in chat command, **/time**.
 
         /cancel_alarm
 
@@ -463,38 +743,624 @@ Cancels the daily alarm you have set, if any.
 
 Shows the daily alarm you have set, if any.
 
-## 3.2 Finding biomes
+## 3.3 Player AWARDS
 
-The following commands require the **unilib_admin** or **unilib_tool** privileges.
+*Most of the following commands require the unilib_admin privilege.*
+
+The **awards** remix provides a large number of awards. There are two types of award - **achievements** and **vocations**.
+
+An achievement is unlocked when the player reaches some milestone or other: for example, digging 1000 stone blocks, or harvesting 50 wheat.
+
+Achievements generally count towards vocations; for example digging stone blocks counts towards **Stonecutter**, and harvesting wheat counts towards **Farmer Sam**. Each vocation is made up of several levels; the more achievements you unlock, the higher your level in the vocation. Most vocations provide some kind of reward for reaching the highest levels.
+
+        /awards
+
+Shows your progress in all vocations and achievements. This command does not require any special privileges; the following awards commands do.
+
+        /check_vocations
+
+Checks whether every level in each vocation can be unlocked, by unlocking all of its achievements.
+
+        /show_vocation
+        /show_vocations
+        /show_achievement
+        /show_achievements
+
+Shows a list of vocations or achievements available to players in the game.
+
+        /show_trigger
+        /show_triggers
+
+Shows a list of trigger prototypes. A trigger "fires" when the player reaches some milestone or other (such as digging 1000 stone blocks). Trigger prototypes represent a group of similar triggers; for example, **unilib_break** represents many triggers for digging nodes.
+
+        /dump_vocation <pattern>
+        /dump_achievement <pattern>
+        /dump_trigger <pattern>
+
+Displays detailed information about any vocation/achievement/trigger prototype whose (internal) name or (visible) title matches the specified pattern.
+
+        /dump_player_award [player]
+
+Display details about the specified player's current progress in all vocations and achievements.
+
+        /unlock_vocation <vocation> [player]
+        /reset_vocation <vocation> [player]
+
+Unlocks the next level in the specified vocation, or resets the player back to level 0. If a player is not specified, then it's the player who typed the command.
+
+**vocation** is the vocation's internal name, e.g. **unilib_adventurer**.
+
+        /unlock_achievement <achievement> [player]
+        /lock_achievement <achievement> [player]
+
+Unlocks or locks the specified achievement. If a player is not specified, then it's the player who typed the command.
+
+**achievement** is the vocation's internal name, e.g. **unilib_mountaineer_comb_1**.
+
+## 3.4 CHECKING things
+
+*The following commands don't require any special privileges.*
+
+Some **unilib** items have craft recipes which require external mods. If those mods aren't loaded, it won't be possible for a player to craft the item.
+
+        /check_ingredients
+
+Checks whether the ingredients provided by external mods are actually available, or not. This command is intended for  people creating new remixes.
+
+## 3.5 Handling craft recipe CONFLICTS
+
+*The following commands require the unilib_tool privilege.*
+
+**unilib** provides thousands of items - not to mention those provided by expansion packs, and indeed by other mods - so when creating new remixes, it's useful to check whether there are any craft recipe conflicts (multiple items which are crafted using the same recipe).
+
+        /count_recipe_conflicts
+
+Checks all nodes, craftitems and tools (even those provided by expansion packs and external mods). Displays the total number of craft recipe conflicts found.
+
+        /check_recipe_conflicts
+
+Checks all nodes, craftitems and tools, displaying detailed output for any craft recipe conflicts found.
+
+        /count_group_conflicts
+        /check_group_conflicts
+
+These two commands check craft recipe conflicts, this time taking groups into account. For example, the **fruit_apple** package provides an apple with the **food_apple** group; these commands will check for conflicts in recipes which specify either **unilib:fruit_apple** or **group:food_apple**.
+
+## 3.6 CONVERTING item names
+
+*The following commands require the unilib_tool privilege.*
+
+These commands convert item *names*; they don't convert the items themselves.
+
+        /convert [item]
+
+Shows the **unilib** equivalent of a node, crafitem or tool. **[item]** is the original name of the item in the mod from which it was imported (e.g. **unilib:fruit_apple** is bades on an item originally named **default:apple**).
+
+        /deconvert [item]
+
+This is the same command in reverse, converting the name of a **unilib** **[item]** into the equivalent name in the original mod.
+
+## 3.7 DUMPING data
+
+*The following commands require the unilib_admin privilege.*
+
+These commands "dump" a bunch of information into the chat window.
+
+See also the section below for chat commands that list things. Often you'll need to use a command like **/list_biomes** before a command like **/dump_biome NAME**.
+
+        /dump_node <pattern>
+        /dump_craftitem <pattern>
+        /dump_tool <pattern>
+
+Dumps the (Lua) definitions of nodes, craftitems or tools.
+
+**<pattern\>** is a regular expression. If your pattern matches more than one item, they are all dumped.
+
+        /dump_item <pattern>
+
+Dumps the (Lua) definitions of all nodes, craftitems and tool matching the **<pattern\>**.
+
+        /dump <name>
+
+The commands just above can dump the definition of many different items all at once, which isn't much fun when you were expecting just a single definition.
+
+For example, if you're trying to see the definition of ordinary stone (**unilib:stone_ordinary)** you'll get many results, because the same **<name\>** also matches nodes like the iron ore, **unilib:stone_ordinary_with_iron**.
+
+This command requires an exact **<name\>**. It will dump either one definition, or none at all.
+
+        /dump_biome <pattern>
+
+Dumps the (Lua) definition of all biomes whose name matches the **<pattern\>**.
+
+        /dump_decoration <pattern>
+
+Dumps the (Lua) definition of all decorations whose name matches the **<pattern\>**.
+
+        /dump_ore <pattern>
+
+Dumps the (Lua) definition of all matching decorations. **<pattern\>** can match an ore type (e.g. **scatter**), the ore node itself (e.g. **unilib:stone_ordinary_with_iron**) or the node in which the ore is found (e.g. **unilib:stone_ordinary**).
+
+        /dump_abm <pattern>
+        /dump_lbm <pattern>
+
+Dumps the (Lua) definition of all matching ABMs (Active Block Modifier) or LBMs (Loading Block Modifier). **<pattern\>** matches the ABM label, LBM name or LBM label.
+
+Note that the definition typically consists of mostly Lua code which won't be visible in the dumped text.
+
+        /dump_mods [mod]
+        /dump_mod [mod]
+
+Dumps details about all source (original) mods, or just the specified source **[mod]**. These details are loaded from the **../csv/mods/source.csv** file, and its equivalents in any expansion packs.
+
+        /dump_compatible [mod]
+
+Dumps details about all mods which are in the list of **unilib**-compatible mods (and which are not already mentioned in the list of source mods). These details are loaded from the **../csv/mods/compatible.csv** file, and its equivalents in any expansion packs.
+
+Alternatively dumps details about the specified compatible **[mod]**.
+
+        /dump_external [mod]
+
+Dumps details about all mods from which items have been imported, via another mod. For example, **unilib:hardware_chainlink_steel** was imported from the [basic_materials](https://github.com/mt-mods/basic_materials) mod; the same item also exists (under a different name) in the [glooptest](https://github.com/minetest-mods/glooptest) mod.
+
+Alternatively dumps details about the specified external **[mod]**.
+
+These details are loaded from the **../csv/mods/external.csv** file, and its equivalents in any expansion packs.
+
+        /dump_expansion [mod]
+
+Dumps details about all known expansion packs, or just the pack called **[mod]**.
+
+## 3.8 Player EFFECTS
+
+*The following commands don't require any special privileges.*
+
+**Player effects** are features of the player experience. For example, when you dig a block of dirt, does it magically appear in your inventory (as in [Minetest](https://minetest.org/)), or does it drop to the floor (as in [Minecraft](https://www.minecraft.net/))?
+
+Player effects can be enabled or disabled in settings. Assuming that they have been enabled generally, a few effects can be toggled on a per-player basis using chat commands. For example, you can change what happens when you dig a block:
+
+        /toggle_autodrop
+        /autodrop
+
+You can also change what happens when you stand near a block that has been dropped on the floor:
+
+        /toggle_autoget
+        /autoget
+
+You can see more information about the node directly in front of you. All of the following commands have the same effect:
+
+        /toggle_identify
+        /identify
+        /what
+
+You can change the size of your hotbar:
+
+        /set_hotbar <size>
+
+**<size\>** should be a value in the range 1 to 32.
+
+        /reset_hotbar
+
+Resets the size of your hotbar back to the size specified by **unilib** settings (8, by default).
+
+Finally, when natural slopes are enabled, you can change the shape of a sloped node at your current position:
+
+        /update_slope
+
+## 3.9 FINDING things
+
+### 3.9.1 Finding biomes
+
+*The following commands require the unilib_admin or unilib_tool privileges.*
 
         /display_biome
 
-Displays the biome at your character's location. Use this command to toggle the display on and off. If you just want to see the biome in the chat window, use /show_biome.
+Displays the biome at your character's location. Use this command to toggle the display on and off.
 
-        /find_biome <biome>
-        /find_biome
+        /show_biome
 
-Attemps to teleport your character to the specified biome. <biome\> can be the full name of the biome, for example **default_grassland**. It can also be a partial name like **grassland**; **unilib** will teleport you to the closest matching biome. (You can use the **/list_biomes** command to get a list of available biomes.)
+Displays the biome at your character's location, in the chat window.
+
+        /find_biome [biome]
+
+Attemps to teleport your character to the specified biome. **[biome]** can be the full name of the biome, for example **default_grassland**. It can also be a partial name like **grassland**; **unilib** will teleport you to the closest matching biome. (You can use the **/list_biomes** command to get a list of available biomes.)
 
 This command is useful, but is not a universal panacea. You may find yourself teleported to a location in which the desired biome exists for just a few blocks. Sometimes the specified biome can't be found at all.
 
-**unilib** remembers which biome you are trying to find, so you don't need to type the biome name the second time.
+**unilib** remembers which biome you are trying to find, so you don't need to type the biome name a second time.
 
         /switch_biome
 
-Attempts to teleport your character to different biomes in a repeating cycle. You might be able to visit every possible biome just by typing this command repeatedly (subject to the limitation described above).
+Attempts to teleport your character to different biomes in a repeating cycle. You might be able to visit every possible biome just by typing this command repeatedly (subject to the limitations described above).
 
-## 3.3 Player statistics
+### 3.9.2 Finding nodes
 
-The following commands don't require any special privileges.
+*The following commands require the unilib_admin privilege.*
 
-**unilib** collects statistics about the player's in-game activities. These records are commonly used by [awards](https://gitlab.com/rubenwardy/awards) mods, but are also available to satisfy your own curiosity. (**unilib** currently contains no awards.)
+These commands are used to find nodes that have spawned in a world, particularly when they are rare.
 
-Collection is turned on by default, but can be turned off in settings. (There are two collections of data, biographical statistics, and activity statistics; so there are two settings to disable.)
+        /find_nodes <pattern> [width] [height]
+        /find_node <pattern> [width] [height]
 
-To see your statistics, type this:
+Finds the closest node matching **<pattern\>**, which is a regular expression. It can be a node name (e.g. **unilib:flower_rose_red**), a partial node name (e.g. **flower**) or a group name (e.g. **group:flower)**.
 
-        /show_statistics
+If **[width]** or **[height]** are specified, the search is restricted to that region.
+
+        /find_all_nodes <pattern> [width] [height]
+
+Finds all nodes matching **<pattern\>** within 100 blocks of your position, or within the surrounding region whose bounds are specified by **[width]** and **[height]**.
+
+        /teleport_to_node
+
+Teleports to the location of the nearest node found by the commands above. This is an blunt-edged command which might teleport you inside solid rock, so use with caution!
+
+## 3.10 HEALTH, stamina, hydration and advanced cuisine
+
+*The following commands require the unilib_admin privilege.*
+
+These commands allow you to tweak the current state of your character. They're intended for package writers who want to test their new code, rather than for players of a cheating mindset.
+
+Stamina, hydration and advanced cuisine are **unilib** effects which must first be enabled in settings.
+
+        /reset_health
+        /reset_hunger
+        /reset_thirst
+
+Resets your health, hunger or thirst bars.
+
+        /reset_me
+
+Resets your health, hunger *and* thirst bars, using a single command.
+
+        /cripple_health
+        /cripple_hunger
+        /cripple_thirst
+
+Reduces your health, hunger or thirst bars to a low level (but not so low, that you'll die immediately).
+
+        /cripple_me
+
+Reduces your health, hunger *and* thirst bars, using a single command.
+
+        /clear_food_history
+
+When advanced cuisine is enabled, the player is required to vary their diet. This command clears the list of recently-eaten foods, allowing you to get the normal hunger boost from eating any item.
+
+        /show_food_history
+
+Shows the list of items that your character has recently eaten.
+
+## 3.11 LISTING registered things
+
+### 3.11.1 Listing items
+
+*The following commands require the unilib_tools privilege.*
+
+        /list_nodes [mod]
+        /list_node [mod]
+        /list_crafitems [mod]
+        /list_craftitem [mod]
+        /list_tools [mod]
+        /list_tool [mod]
+
+Lists all registered nodes, craftitems or tools, or just items from the specified **[mod]**.
+
+Use **!NAME** to list nodes/craftitems/tools from all mods, except the one called NAME.
+
+        /list_items [mod]
+        /list_item [mod]
+
+Lists all registered nodes, craftitems and tools, or just items from the specified **[mod]**.
+
+Use **!NAME** to list items from all mods, except the one called NAME.
+
+        /list_hidden
+
+When both **unilib** and one of its source (original) mods are loaded at the same time, **unilib** can hide items from the source mod, so that only the **unilib** equivalents appear in the game. Depending on **unilib** settings, that behaviour may occur, or both items may exist in the world simultaneously.
+
+This commands lists any items which have been hidden.
+
+### 3.11.2 Listing types
+
+*The following commands require the unilib_tools privilege.*
+
+        /list_stones [type]
+        /list_stone [type]
+
+All **unilib** stones have a type which matches the name of the package that provides them, for example ordinary stone (from the **stone_ordinary** package) has the type **ordinary**.
+
+Lists all stone types, or displays more details about the specified stone **[type]**.
+
+        /list_trees [type]
+        /list_tree [type]
+
+All **unilib** trees have a type which matches the name of the package that provides them, for example apple trees (from the **tree_apple** package) have the type **apple**.
+
+Lists all tree types, or displays more details about the specified tree **[type]**.
+
+        /list_buckets [type]
+        /list_bucket [type]
+
+All **unilib** buckets have a type which matches the name of the package that provides them. For example, steel buckets (empty or full) all share the same type, **bucket_steel** (from the **bucket_steel** package).
+
+Lists all bucket types, or lists the buckets (empty and full) matching the specified **[type]**.
+
+        /list_liquids [type]
+        /list_liquid [type]
+
+All **unilib** liquids have a type which matches the name of the package that provides them. For example, both the source and flowing variants of ordinary water share the type **water_ordinary** (from the **liquid_water_ordinary** package).
+
+Lists all liquid types, or displays more details about the specified liquid **[type]**.
+
+        /list_metals
+        /list_metal
+
+All metals provided by **unilib** have a type which matches the package that provides them. For example, the type **gold** originates from the package **metal_iron**, but matches both the ore (e.g. **unilib:stone_ordinary_with_gold**), the lump obtained by mining it (e.g. **unilib:metal_gold_lump)**, and sometimes other related items.
+
+Lists all metal types.
+
+        /list_metal_sources
+        /list_metal_source
+
+Lists all metals and the minerals that provide them. Minerals that provide metals are quite rare, so don't be surprised if this list specifies no sources.
+
+        /list_nonmetals
+        /list_nonmetal
+
+Lists all elemental non-metals, such as **carbon** and **nitrogen**. The **elements** remix is a good source of these items.
+
+        /list_nonmetal_sources
+        /list_nonmetal_source
+
+Lists all elemental non-metals and the minerals that provide them. Most of **unilib**'s elemental non-metals have no sources; they're intended for package writers who want a complete list of chemical elements.
+
+        /list_minerals
+        /list_mineral
+
+All minerals provided by **unilib** have a type which matches the package that provides them. For example, the type **mese** originates from the package **mineral_mese**, but matches both the ore (e.g. **unilib:stone_ordinary_with_mese**), the crystal obtained by mining it (e.g. **unilib:mineral_mese_crystal)**, and sometimes other related items.
+
+        /list_mineral_products
+        /list_mineral_product
+
+Lists all metals and elemental non-metals produced by **unilib** minerals.
+
+### 3.11.3 Listing engine things
+
+*The following commands require the unilib_tools privilege.*
+
+        /list_biomes
+        /list_biome
+
+Lists all registered biomes.
+
+        /list_decorations [mod]
+        /list_decoration [mod]
+
+Lists all registered decorations, or just decorations from the specified **[mod]**.
+
+Use **!NAME** to list decorations from all mods, except the one called NAME.
+
+        /list_ores [matching_text]
+        /list_ore [matching_text]
+
+Lists all registered ores, or just ores of the specified ore type (e.g. **stratum**), from the specified mod, or matching the specified node/biome, or at the specified height.
+
+        /list_abms [mod]
+        /list_abm [mod]
+        /list_lbms [mod]
+        /list_lbm [mod]
+
+List all registered ABMs (Active Block Modifiers) or LBMS (Loaded Block Modifiers), or just the ABMs/LBMs from the specified **[mod]**.
+
+Use **!NAME** to list ABMs/LBMs from all mods, except the one called NAME.
+
+        /list_entities [mod]
+        /list_entity [mod]
+
+Lists all registered entities, or just entities from the specified **[mod]**.
+
+Use **!NAME** to list entities from all mods, except the one called NAME.
+
+### 3.11.4 Listing unilib things
+
+*The following commands require the unilib_admin or unilib_tool privileges.*
+
+        /list_remixes
+        /list_remix
+
+Lists all loaded remixes. The list won't include remixes that are available for use, but not currently loaded.
+
+        /list_remix_labels
+        /list_remix_label
+
+Lists all loaded remixes which have remix labels. For more information about remix labels, see the section above.
+
+        /list_packages [package_name]
+        /list_package [package_name]
+
+Lists all loaded packages, or details for the specified **[package_name]**. The list won't include packages that are available for use, but not currently loaded.
+
+        /list_other_packages
+
+Lists all packages which are *not* currently loaded, but which are mentioned as dependencies by packages that *are* currently loaded.
+
+        /list_mods [mod]
+        /list_mod [mod]
+
+Lists all source (original) mods, or just the specified source **[mod]**. This list is obtained from the **../csv/mods/source.csv** file, and its equivalents in any expansion packs.
+
+        /list_compatible [mod]
+
+Lists all mods which are in the list of **unilib**-compatible mods (and which are not already mentioned in the list of source mods). Alternatively just lists the specified **[mod]**.
+
+This list is obtained from the **../csv/mods/compatible.csv** file, and its equivalents in any expansion packs.
+
+        /list_external [mod]
+
+Lists all mods from which items have been imported, via another mod. For example, **unilib:hardware_chainlink_steel** was imported from the [basic_materials](https://github.com/mt-mods/basic_materials) mod; the same item also exists (under a different name) in the [glooptest](https://github.com/minetest-mods/glooptest) mod.
+
+Alternatively just lists the specified **[mod]**.
+
+This list is obtained from the **../csv/mods/external.csv** file, and its equivalents in any expansion packs.
+
+        /list_expansion [mod]
+
+Lists all all known expansion packs, or just the pack called **[mod]**.
+
+        /list_all
+
+Displays a list that tells you how many of each type of things exists in the game.
+
+## 3.12 MISCELLANEOUS chat commands
+
+### 3.12.1 Teleportation
+
+*The following commands require the unilib_admin privilege.*
+
+        /start1
+        /start2
+        /start3
+        /bay
+        /coral
+        /dale
+        /jungle
+        /meadow
+
+These commands were used during **unilib** development. They refer to a specific location in a world generated by the **v7** mapgen with the seed **test**.
+
+Typing any of these commands will teleport you to the named location.
+
+### 3.12.2 Testing
+
+*The following commands require the unilib_admin privilege.*
+
+        /test [param]
+
+This command is provided by the **chat_test** package. You can use it to run some arbitrary code, whnever you need it; just type **/test** as often as necesssary.
+
+You could edit the package to change the code that's executed. By default, it displays a simple "Hello world" message in the chat window.
+
+### 3.12.3 Trenches
+
+*The following commands require the unilib_danger privilege.*
+
+        /cut_trench [width]
+
+Cuts deep trenches in newly-generated terrain, destroying everything in its path.
+
+Trenches are cut at intervals of 100 blocks. If you want, you can specify the trench **[width]**.
+
+Because of its destructive potential, this command requires a special privilege.
+
+## 3.13 Checking craft recipes with MISSING items
+
+*The following commands require the unilib_tools privilege.*
+
+        /count_broken_recipes
+
+Checks for missing ingredients in craft recipes, displaying the total number found. Missing ingredients may occur when an expected package or mod have not been loaded, or by faulty code.
+
+        /check_broken_recipes
+
+Checks for missing ingredients in craft recipes, displaying detailed output.
+
+        /list_groups [group_name]
+
+Displays a list of node/craftitem/tool groups - or the specified **[group_name]** - and the items that provide them.
+
+## 3.14 SHOWING data
+
+### 3.14.1 Attributes
+
+*The following commands require the unilib_admin privilege.*
+
+Attributes are a set of data stored by **unilib**, which are still available for use when the same world restarts. Collectively, they are usually called *mod storage*.
+
+There are two types of attribute: player attributes (unique for each player) and mod attributes (the same for all players).
+
+        /set_mod_attribute <attribute> [value]
+        /reset_mod_attribute <attribute>
+
+Sets or resets the **[value]** of a mod **<attribute\>**.
+
+        /show_mod_attributes
+        /show_mod_attribute
+
+Shows a table of mod attributes.
+
+        /set_player_attribute <attribute> [value]
+        /reset_player_attribute <attribute>
+
+Sets or resets the **[value]** of a player **<attribute\>**.
+
+        /show_player_attributes
+        /show_player_attribute
+
+Shows a table of player attributes.
+
+### 3.14.2 Light
+
+*The following commands require the unilib_tools privilege.*
+
+        /display_light
+
+Displays the light level at your character's location. Use this command to toggle the display on and off.
+
+        /show_light
+
+Displays the light level at your character's location, in the chat window.
+
+### 3.14.3 Elements
+
+*The following commands require the unilib_admin privilege.*
+
+The **atomic** remix provides items representing the full list of chemical elements, as well as some equipment to extract samples from various materials. Those packages can be used with the following commands.
+
+        /show_elements [element]
+        /show_element [element]
+
+Shows the periodic table. If you specify a chemical **[element]**, only that item is shown.
+
+        /show_rare_elements
+        /show_rare_element
+
+Shows chemical elements which are not directly available (by vapourising various materials). This is deliberate; some elemental packages are provided for the benefit of package writers who want a complete Periodic Table available for use.
+
+### 3.14.4 Showing miscellaneous things
+
+*The following commands require the unilib_tools privilege.*
+
+        /show_ingredients <item> [multiple] [list_of_excluded_mods] [list_of_excluded_items]
+
+Displays the full list of ingredients required to craft the specified **<item\>**. Nested craft recipes are supported, so this command is especially useful for hi-tech items which must be crafted in multiple stages.
+
+If **<item\>** doesn't include a mod name, then **unilib** is assumed.
+
+If you specify a **[multiple]** such as 5, then you'll get a list of how many ingredients are required to craft 5 of the **<item\>**.
+
+        /show_inventory
+        /inventory
+        /inv
+
+Displays your current inventory in the chat window. This command is useful for finding the actual name of a node, craftitem or tool you've found or crafted.
+
+        /show_package <item>
+
+Shows the **unilib** package that provides the specified **<item\>**: a node, craftitem or tool.
+
+## 3.15 Player STATISTICS
+
+### 3.15.1 Player statistics
+
+*The following commands don't require any special privileges.*
+
+**unilib** collects statistics about the player's in-game activities. This system is independent of **unilib**'s awards, which keeps its own records (so you can enable one or the other, or both).
+
+Collection is turned on by default, but can be turned off in settings. There are two collections of data, biographical statistics, and activity statistics; so there are two settings to disable.
+
+To see your statistics, or those of another **[player]**, type this:
+
+        /show_statistics [player]
+        /show_stats [player]
 
 You can see more information about how your character has died:
 
@@ -507,33 +1373,57 @@ You can also see more about the items you have dug, placed, crafted or eaten:
         /show_craft
         /show_eat
 
-## 3.4 Player effects
+### 3.15.2 Calender events
 
-The following commands don't require any special privileges.
+*The following commands don't require any special privileges.*
 
-**Player effects** are features of the player experience. For example, when you dig a block of dirt, does it magically appear in your inventory (as in [Minetest](https://minetest.org/)), or does it drop to the floor (as in [Minecraft](https://www.minecraft.net/))?
+Events are visible in calendars, and describe important events that have taken place in your character's life. For more information about calendars, see the section below.
 
-Player effects can be enabled or disabled in settings. (See the section below for a longer list of them.)
+        /add_event [message]
 
-Assuming that they have been enabled generally, a few effects can be toggled on a per-player basis using chat commands. For example, you can change what happens when you dig a block:
+Adds an event to your personal calendar. Usually you'll specify a **[message]**, e.g. **I found my first diamond**, or **I survived a fight with a bear**, or even **I ate a nice sandwich**.
 
-        /toggle_autodrop
+        /delete_event <game_day>
 
-You can also change what happens when you stand near a block that has been dropped on the floor:
+Deletes events from your personal calendar on the specified **<game_day\>** - e.g. 1 for the first game day, or a value in the form **YYYYMMDD** (according to the in-game calendar).
 
-        /toggle_autoget
+Only events of the type **default**, such as those created with the **/add_event** command, can be removed with this command.
 
-You can see more information about the node directly in front of you. All of the following commands have the same effect:
+## 3.16 Changing the TIME
 
-        /toggle_identify
-        /identify
-        /what
+*The following commands require the unilib_admin privilege.*
 
-Finally, you can change the size of your hotbar:
+        /day
+        /night
+        /dawn
+        /dusk
 
-        /set_hotbar <size>
+Changes the game time to midday, midnight, dawn or dusk.
 
-<size\> should be a value in the range 1 to 32. To reset the size of your hotbar, omit the <size\> altogether.
+        /daylight
+        /darkness
+
+Enables permanent daylight or darkness, without changing the game time.
+
+## 3.17 Changing the WEATHER
+
+*The following commands require the unilib_admin privilege.*
+
+        /show_weather
+        /show_weathers
+
+Shows a list of available weather effects, and also a list of weather tags (with each tag describing one or more effects).
+
+        /set_weather <weather name> [player]
+        /set_weather <weather tag> [player]
+
+Sets the current weather effect for yourself, or for the specified **player**. If you specify a weather tag that applies to more than one effect, an effect is chosen at random.
+
+The new weather effect continues indefinitely, overriding **unilib**'s weather selection system. The weather is reset if you move some distance away, log out, or use the **/reset_weather command**.
+
+        /reset_weather [player]
+
+Resets the current weather effect for yourself, or for the specified **player**. This command cancels the effect set using the **/set_weather** command; it doesn't override **unilib**'s weather selection system for more than a few seconds.
 
 # 4 Configuring unilib
 
@@ -813,6 +1703,34 @@ The enlightening table (**machine_table_enlightening** package) uses mese crysta
 The turfing machine (**machine_turfing** package) is used to grow different turfs on different types of dirt. It's intended for use in worlds where other methods of obtaining a specific dirt-with-turf combination (such as the crystallite shovel from [ethereal-ng](https://notabug.org/tenplus1/ethereal)) are not available. To use the machine, place it on top of a dirt-with-turf node; that is the type of turf that will be grown. If you place the machine on some other type of node, then you must place a dirt-with-turf node in the machine's slot manually.
 
 **unilib** provides two sounding lines (from the **misc_line_sounding_normal** and **misc_line_sounding_reinforced** packages). They are used to measure the depths of holes and caves. The "reinforced" line will work in water or lava, whereas the "normal" line will not.
+
+## 5.10 Weather effects
+
+(Various packages in the **atmosphere** remix)
+
+**unilib** provides a few dozen weather effects, including snow, rain, hail, storms, sandstorms, overcast skies and fog. If weather effects are enabled in settings, you'll see some of these effects from time to time.
+
+Weather effects occur on a regional basis - that is, two players standing close to each other will (almost always) see the same effect, but the further away they get, the better the chance of seeing different weather.
+
+**unilib** provides a weather-switching machine and a weather-calming machine. You can use these machines to try out all the different weather effects. A weather effect chosen using the machine overrides **unilib**'s weather-selection system. The effect will last indefinitely unless you move some distance away or restart the game. (The **/set_weather** and **/reset_weather** commands behave in the same way, if you don't want to use the machines.)
+
+Every weather effect has a unique name, for example **unilib_rain_normal** or **unilib_storm_heavy**. **unilib** also provides weather *tags*. For example, the **snow** tag applies to all of the snowing effects. You can get a list of weather effects and tags using the **/show_weather** command.
+
+The weather-switching machine can be configured by right-clicking it. You can specify the exact weather effect you want. If you specify a weather tag, one of the corresponding weather effects is chosen at random. The **random** tag will choose from nearly all of the available effects.
+
+The **weather forecasting console** provides a weather forecast. As in real life, it's not completely accurate. If you have written your own weather effects, or tweaked existing ones, you can use the **weather monitor** over several hours to see how often they occur.
+
+## 5.11 Ambient and environment sound effects
+
+(Packages **ambient_forest_light** and **machine_noisy**).
+
+**unilib** provides ambient sound effects and environment sound effects.
+
+Ambient effects are usually heard over a wide area (for example, birdsong in a forest). Environment effects are usually associated with a particular node (for example, the sound of flowing water or lava).
+
+At the moment, **unilib** does not provide a large number of ambient and environment effects, but a couple of packages exist to show you how to write your create your own effects. (Since they're for testing purposes, they don't appear in any built-in remix.)
+
+Note that the sounds of flowing water and lava are available automatically.
 
 # 6 Known issues
 

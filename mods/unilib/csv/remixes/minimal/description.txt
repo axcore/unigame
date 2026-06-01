@@ -1,0 +1,1 @@
+Provides the absolute minimum set of packages required for the Minetest mapgen to work.

@@ -32,7 +32,7 @@ function unilib.pkg.glass_ornamental_yellow.exec()
 
     unilib.register_node(
         -- From abriglass:stainedglass_pattern03
-        "unilib:glass_ornamental_tiles_yellow",
+        "unilib:glass_ornamental_yellow",
         "abriglass:stainedglass_pattern03",
         mode,
         {
@@ -65,7 +65,9 @@ function unilib.pkg.glass_ornamental_yellow.exec()
         -- From abriglass:stainedglass_pattern03
         type = "cooking",
         output = c_clear,
-        recipe = "unilib:glass_ornamental_tiles_yellow",
+        recipe = "unilib:glass_ornamental_yellow",
     })
-
+    -- N.B. Before v1.2.0, this item was misnamed as "unilib:glass_ornamental_tiles_yellow"
+    core.register_alias("unilib:glass_ornamental_tiles_yellow", "unilib:glass_ornamental_yellow")
+    
 end

@@ -1,0 +1,7 @@
+Contains most packages which are original to unilib, and which typically do not appear in other remixes.
+
+Note that some packages are listed in packages.csv but commented out, despite being original to unilib (usually because it makes more sense to list them in a different remix).
+
+For a list of packages providing chat commands, see the "chat" remix (those packages are NOT included in this remix).
+
+For a list of packages providing all 118 chemical elements, use the "elements" remix (those packages ARE included in this remix).

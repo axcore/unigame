@@ -35,6 +35,20 @@ unilib.pkg.biome_glemr11.remix_name = nil
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
+local function refine_value(value, constant_value)
+
+    -- Switch a value read from a remix CSV for the corresponding value in constants.csv, when
+    --      available
+    -- A copy of the function in ../lib/system/read/read_csv_remix.lua
+
+    if value == nil or constant_value == nil then
+        return value
+    else
+        return constant_value
+    end
+
+end
+
 local function register_dirt_on_demand(full_name)
 
     local data_table = unilib.pkg.dirt_custom_glemr11.dirt_table[full_name]
@@ -162,49 +176,10 @@ function unilib.pkg.biome_glemr11.post()
     -- Ecosystems create variety within biomes, placing ore distributions in which a unique
     --      selection of decorations can be placed
     -- The ecosystems are specified by an ecosystems.csv in the remix folder
-
-    -- (This code is adapted from read_csv.lua)
+    local constants_table =
+            unilib.global.remix_constants_table[unilib.pkg.biome_glemr11.remix_name] or {}
     local remix_dir = unilib.utils.get_remix_dir(unilib.pkg.biome_glemr11.remix_name)
-    local constants_path = remix_dir .. "/constants.csv"
-    local constant_flag = false
-    local constant_table = {}
     local ecosystems_path = remix_dir .. "/ecosystems.csv"
-
-    if unilib.global.remix_constants_table[unilib.pkg.biome_glemr11.remix_name] ~= nil then
-
-        for key, value in pairs(
-            unilib.global.remix_constants_table[unilib.pkg.biome_glemr11.remix_name]
-        ) do
-
-            -- Values read from constants.csv are in string format, so must be checked and converted
-            if key ~= nil and value ~= nil then
-
-                if not string.find(key, "%a") then
-
-                    unilib.utils.show_warning(
-                        "biome_glemr11: Invalid biome constant", constants_path, i
-                    )
-
-                elseif not string.find(value, "[%d]") then
-
-                    unilib.utils.show_warning(
-                        "biome_glemr11 package: Invalid biome constant value", constants_path, i
-                    )
-
-                else
-
-                    constant_table[key] = tonumber(value)
-                    -- (Table is not empty)
-                    constant_flag = true
-
-                end
-
-            end
-
-        end
-
-    end
-
     if unilib.utils.is_file(ecosystems_path) then
 
         for i, csv_table in ipairs(unilib.utils.read_csv(ecosystems_path)) do
@@ -233,17 +208,13 @@ function unilib.pkg.biome_glemr11.post()
                     end
 
                     -- Replace constant values
-                    if constant_flag then
-
-                        if y_max ~= nil and constant_table[y_max] ~= nil then
-                            y_max = constant_table[y_max]
-                        end
-
-                        if y_min ~= nil and constant_table[y_min] ~= nil then
-                            y_min = constant_table[y_min]
-                        end
-
-                    end
+                    -- N.B. "ore_type" cannot be replaced with a constant value
+                    biome_name = refine_value(biome_name, constants_table[biome_name])
+                    ore_name = refine_value(ore_name, constants_table[ore_name])
+                    wherein = refine_value(wherein, constants_table[wherein])
+                    threshold = refine_value(threshold, constants_table[threshold])
+                    y_max = refine_value(y_max, constants_table[y_max])
+                    y_min = refine_value(y_min, constants_table[y_min])
 
                     -- Register dirt on demand (see comments in the "dirt_custom_glemr11" package)
                     if unilib.setting.dirt_on_demand_flag then
@@ -325,9 +296,9 @@ function unilib.pkg.biome_glemr11.post()
                                 },
                                 noise_threshold = tonumber(threshold),
                                 y_max = tonumber(y_max) or
-                                        (constant_table[y_max] + biome_vertical_blend),
+                                        (tonumber(constants_table[y_max]) + biome_vertical_blend),
                                 y_min = tonumber(y_min) or
-                                        (constant_table[y_min] - biome_vertical_blend),
+                                        (tonumber(constants_table[y_min]) - biome_vertical_blend),
                             })
 
                         elseif ore_type == "fungi" then
@@ -370,8 +341,8 @@ function unilib.pkg.biome_glemr11.post()
 
     -- Apply the upper limit for pseudo-biomes created by remixes like "hades", "hades_jit",
     --      "underch" and "underch_jit"
-    if constant_table["OCEAN"] ~= nil then
-        unilib.global.pseudo_biome_limit = tonumber(constant_table["OCEAN"])
+    if constants_table["OCEAN"] ~= nil then
+        unilib.global.pseudo_biome_limit = tonumber(constants_table["OCEAN"])
     end
 
 end

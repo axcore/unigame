@@ -43,7 +43,7 @@ function unilib.pkg.sand_ordinary_with_oil_crude.exec()
     unilib.register_craft({
         -- Texture from PFAA, crudeSand_oilSand.png. Original code
         type = "fuel",
-        recipe = "unilib:unilib_sand_ordinary_with_oil_crude",
+        recipe = "unilib:sand_ordinary_with_oil_crude",
         -- N.B. This is 75% of the burntime for unilib:dirt_peat_with_oil_crude
         burntime = 15,
     })

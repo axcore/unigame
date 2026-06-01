@@ -55,16 +55,16 @@ function unilib.pkg.item_sander_normal.exec()
         on_use = function(itemstack, user, pointed_thing)
 
             local node = core.get_node(pointed_thing.under).name
-            local player_name = user:get_player_name()
+            local pname = user:get_player_name()
             local node_pos = pointed_thing.under
 
             if node ~= "unilib:material_concrete_normal_rough" then
                 return
             end
 
-            if core.is_protected(node_pos, player_name) then
+            if core.is_protected(node_pos, pname) then
 
-                core.record_protection_violation(node_pos, player_name)
+                core.record_protection_violation(node_pos, pname)
                 return
 
             end

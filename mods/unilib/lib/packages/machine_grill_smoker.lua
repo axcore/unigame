@@ -157,7 +157,7 @@ function unilib.pkg.machine_grill_smoker.exec()
             "unilib_machine_grill_smoker_bottom.png",
             "unilib_machine_grill_smoker_bottom.png^[transformFY",
             {
-                image = "unilib_machine_grill_smoker_side_animated.png",
+                name = "unilib_machine_grill_smoker_side_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -167,7 +167,7 @@ function unilib.pkg.machine_grill_smoker.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_smoker_side_animated.png^[transformFX",
+                name = "unilib_machine_grill_smoker_side_animated.png^[transformFX",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -177,7 +177,7 @@ function unilib.pkg.machine_grill_smoker.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_smoker_back_animated.png",
+                name = "unilib_machine_grill_smoker_back_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -187,7 +187,7 @@ function unilib.pkg.machine_grill_smoker.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_smoker_animated.png",
+                name = "unilib_machine_grill_smoker_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",

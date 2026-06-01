@@ -51,17 +51,11 @@ function unilib.pkg.food_puree_gooseberry.exec()
 
     if unilib.setting.technic_extra_flag then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
-
-            technic.register_compressor_recipe({
-                -- Original to unilib
-                output = "unilib:food_puree_gooseberry",
-                input = {berry_name .. " 6"},
-            })
-
-        end)
+        technic.register_compressor_recipe({
+            -- Original to unilib
+            output = "unilib:food_puree_gooseberry",
+            input = {berry_name .. " 6"},
+        })
 
     end
 

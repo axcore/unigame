@@ -1,4 +1,4 @@
-# "glemr6" remix - contains almost everything from revision 6 of lib_materials/lib_ecology,
+# "glemr6" remix - contains almost everything from revision 6 of lib_materials/lib_ecology
 #   (19th Apr 2019, dev branch). Some material of little value has been omitted. Code for modifying
 #   terrain (e.g. producing lakes) has also been omitted
 # The original mods were not suitable for use in survival mode, and the same applies to this remix.
@@ -26,6 +26,7 @@ soil_black|unilib
 soil_brown|unilib
 soil_dark|unilib
 soil_ordinary|farming
+soil_silt_fine|unilib
 stone_ordinary|default moreblocks technic
 
 # lib_materials packages
@@ -602,7 +603,8 @@ mineral_magnesite|unilib
 mineral_magnetite|real_minerals
 mineral_malachite|real_minerals
 mineral_sphalerite|real_minerals
-misc_sponge|ethereal
+misc_sponge_air|ethereal
+misc_sponge_normal|ethereal
 misc_straw_ordinary|farming darkage
 plant_fungus_glowing_purple|caverealms
 roof_slate_normal|cottages

@@ -71,7 +71,7 @@ function unilib.pkg.inventory_armour_ui.exec()
                     FS("Armour")
                 ) ..
                 string.format(
-                    "list[detached:%s_armour;armour;%f,%f;2,3;]",
+                    "list[detached:shared_armour_%s;armour;%f,%f;2,3;]",
                     pname, gridx + ui.list_img_offset, gridy + ui.list_img_offset
                 ) ..
                 "image[3.5," .. (fy - 0.25) .. ";2,4;" .. player_texture_table.preview .. "]" ..
@@ -80,7 +80,7 @@ function unilib.pkg.inventory_armour_ui.exec()
                 "label[6.0," .. (fy + 0.5) .. ";" .. FS("Heal") .. ":  " ..
                         player_data_table.heal .. "]" ..
                 "listring[current_player;main]" ..
-                "listring[detached:" .. pname .. "_armour;armour]"
+                "listring[detached:shared_armour_" .. pname .. ";armour]"
 
             if fire_protect then
 

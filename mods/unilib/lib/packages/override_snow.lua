@@ -220,7 +220,7 @@ function entity_table.on_step(self, dtime)
 
         end
 
-        unilib.pkg.shared_snow.place(pos)
+        unilib.pkg.shared_snow.place_snow_on_ground(pos)
         self.object:remove()
         return
 
@@ -342,7 +342,7 @@ function unilib.pkg.override_snow.exec()
                 core.set_node(pos, {name = "unilib:ice_ordinary", param2 = math.random(0, 10)})
             end,
 
-            on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
+            on_construct = unilib.pkg.shared_snow.place_snow_on_dirt,
         })
 
     end
@@ -362,7 +362,7 @@ function unilib.pkg.override_snow.exec()
             paramtype = "light",
             sunlight_propagates = true,
 
-            on_construct = unilib.pkg.shared_snow.snow_onto_dirt,
+            on_construct = unilib.pkg.shared_snow.place_snow_on_dirt,
         })
 
         if unilib.global.pkg_executed_table["moss_snow"] ~= nil then

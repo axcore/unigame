@@ -210,7 +210,7 @@ function unilib.pkg.potion_flight.exec()
 
         on_use = function(itemstack, player, pointed_thing)
 
-            if player.is_fake_player then
+            if unilib.utils.is_player(player) then
                 return
             end
 

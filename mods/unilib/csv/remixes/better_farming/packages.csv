@@ -1,5 +1,5 @@
-# "better_farming" remix - contains everything from the better_farming mod except the onigiri, which
-#   is already provided by another package, and crates shaped as stairs
+# "better_farming" remix - contains everything from the better_farming mod (except the onigiri,
+#   which is already provided by another package), and crates shaped as stairs
 
 # node_name | original_mod
 

@@ -29,7 +29,7 @@ function unilib.pkg.chat_werewolf.exec()
     core.register_chatcommand("werewolf", {
         params = "<set|unset|cure|clan> <player>",
         description = S("Converts a player into a werewolf"),
-        privs = {server = true},
+        privs = {unilib_admin = true},
 
         func = function(pname, param)
 

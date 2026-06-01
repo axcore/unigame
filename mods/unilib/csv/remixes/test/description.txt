@@ -1,0 +1,1 @@
+Provides a minimal list of packages, and also a single test node.

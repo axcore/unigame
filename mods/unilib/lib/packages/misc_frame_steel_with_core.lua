@@ -57,7 +57,7 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
                     length = 4.0
                 },
                 backface_culling = false,
-                image = "unilib_misc_frame_steel_with_core_animated.png",
+                name = "unilib_misc_frame_steel_with_core_animated.png",
             },
         },
         groups = {cracky = 3},
@@ -143,7 +143,7 @@ function unilib.pkg.misc_frame_steel_with_core.exec()
                         length = 1.25
                     },
                     backface_culling = false,
-                    image = "unilib_misc_frame_steel_with_core_animated.png",
+                    name = "unilib_misc_frame_steel_with_core_animated.png",
                 },
             },
             groups = {cracky = 3, mesecon = 2, not_in_creative_inventory = 1},

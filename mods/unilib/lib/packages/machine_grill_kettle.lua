@@ -175,7 +175,7 @@ function unilib.pkg.machine_grill_kettle.exec()
             "unilib_machine_grill_kettle_ext_top_animated.png",
             "unilib_machine_grill_kettle_ext_top.png",
             {
-                image = "unilib_machine_grill_kettle_ext_animated.png",
+                name = "unilib_machine_grill_kettle_ext_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -185,7 +185,7 @@ function unilib.pkg.machine_grill_kettle.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_kettle_ext_animated.png",
+                name = "unilib_machine_grill_kettle_ext_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -195,7 +195,7 @@ function unilib.pkg.machine_grill_kettle.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_kettle_ext_animated.png",
+                name = "unilib_machine_grill_kettle_ext_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -205,7 +205,7 @@ function unilib.pkg.machine_grill_kettle.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_kettle_ext_animated.png",
+                name = "unilib_machine_grill_kettle_ext_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",

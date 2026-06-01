@@ -38,7 +38,7 @@ function unilib.pkg.inventory_armour_ip.exec()
         local pname = player:get_player_name()
         local formspec = unilib.armour.get_formspec(pname, true)
         local page = player:get_inventory_formspec()
-        if page:find("detached:" .. pname .. "_armour") then
+        if page:find("detached:shared_armour_" .. pname) then
             inventory_plus.set_inventory_formspec(player, formspec)
         end
 
@@ -60,8 +60,9 @@ function unilib.pkg.inventory_armour_ip.exec()
         if fields.armour then
 
             local pname = player:get_player_name()
-            if not pname or
-                    not core.get_inventory({type = "detached", name = pname .. "_armour"}) then
+            if not pname or not core.get_inventory(
+                {type = "detached", name = "shared_armour_" .. pname}
+            ) then
                 return
             end
 

@@ -35,7 +35,9 @@ function unilib.pkg.stone_siltstone_pale.exec()
         colour = "#F0B9A6",
         grinder_flag = true,
         grinder_powder = "unilib:sand_silt",
-        hardness = 2,
+        -- N.B. In-game hardness adjusted to match "stone_siltstone_dark"
+        hardness = 1,
+        hardness_real = 2,
     })
 
     unilib.register_stone_smooth({
@@ -44,6 +46,7 @@ function unilib.pkg.stone_siltstone_pale.exec()
         orig_name = nil,
 
         replace_mode = mode,
+        cobble_mode = "cobble",
         description = S("Pale Siltstone"),
     })
 

@@ -61,7 +61,7 @@ function unilib.utils._get_pointed_node(player)
 
 end
 
-function unilib.utils._is_creative(player_name)
+function unilib.utils._is_creative(pname)
 
     -- Adapted from farming_redo/init.lua
     -- Checks creative mode on a per-player basis (if a player name is specified), or for all
@@ -70,12 +70,32 @@ function unilib.utils._is_creative(player_name)
     -- All unilib code should call this function, rather than core.is_creative_enabled()
     --
     -- Args:
-    --      player_name (str or "" or nil): The optional player name, e.g. "singleplayer"
+    --      pname (str or "" or nil): The optional player name, e.g. "singleplayer"
 
-    if player_name == nil or player_name == "" then
+    if pname == nil or pname == "" then
         return creative_mode_cache
     else
-        return creative_mode_cache or core.check_player_privs(player_name, {creative = true})
+        return creative_mode_cache or core.check_player_privs(pname, {creative = true})
+    end
+
+end
+
+function unilib.utils._is_player(player)
+
+    -- Original to unilib
+    -- Returns true if the specified player is a real player, false otherwise (including when the
+    --      argument is nil)
+
+    -- Notes from original mod:
+    -- The use of .is_fake_player is an unofficial standard between mods
+    -- These non-players are marked by the content of .is_fake_player (if it is a string) or a
+    --      "*" in brackets after the player name in the log
+
+--  if not player or not player:is_player(player) or player.is_fake_player then
+    if not player or not core.is_player(player) or player.is_fake_player then
+        return false
+    else
+        return true
     end
 
 end

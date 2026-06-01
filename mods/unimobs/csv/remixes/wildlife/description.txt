@@ -1,0 +1,5 @@
+Contains everything from the wildlife mod.
+
+The two mobs in this remix - simple deer and simple wolves - are somewhat simplistic, and are intended (both in the original code, and in unimobs) to be code examples rather than suitable for actual gameplay.
+
+As a result, they are not compatible with the Petz API. They cannot be bred, fed or tamed, and they do not have spawn eggs. Instead, the "opt_wildlife" package spawns them in all biomes.

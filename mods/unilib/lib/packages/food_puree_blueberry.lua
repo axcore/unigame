@@ -123,21 +123,15 @@ function unilib.pkg.food_puree_blueberry.exec()
 
     if unilib.setting.technic_extra_flag then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        for _, berry_name in ipairs(berry_list) do
 
-            for _, berry_name in ipairs(berry_list) do
+            technic.register_compressor_recipe({
+                -- From cucina_vegana:blueberry_puree
+                output = "unilib:food_puree_blueberry",
+                input = {berry_name .. " 6"},
+            })
 
-                technic.register_compressor_recipe({
-                    -- From cucina_vegana:blueberry_puree
-                    output = "unilib:food_puree_blueberry",
-                    input = {berry_name .. " 6"},
-                })
-
-            end
-
-        end)
+        end
 
     end
 

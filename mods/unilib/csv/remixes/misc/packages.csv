@@ -136,6 +136,10 @@ food_pizza_veggie_supreme|unilib
 # plastic_block packages
 decor_block_plastic_basic|plastic_block
 
+# pontoons packages
+misc_pontoon_steel|pontoons
+misc_pontoon_wood|pontoons
+
 # real_torch packages
 item_match_ordinary|real_torch
 torch_unlit|real_torch

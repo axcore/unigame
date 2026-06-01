@@ -10,9 +10,9 @@
 # A set of custom dirts is created for each biome. Food is widely available, but crop and produce
 #   items are generally found in certain forested areas
 # Ore distributions from several mods have been added (namely badlands, darkage, minetest_game,
-#   GLEMr4, moreores, technic and underch). By default, these ore extend to the bottom of the world.
-#   If you want to change the lower limit, for example because this remix is being alongside a
-#   package like "magpen_underch", you can edit the variable in the "ore_gaia" package
+#   GLEMr4, moreores, technic and underch). By default, these ores extend to the bottom of the
+#   world. If you want to change the lower limit, for example because this remix is being alongside
+#   a package like "magpen_underch", you can edit the variable in the "ore_gaia" package
 #
 # The "gaia" remix should be played alongside the "mtgame_mini" remix, or some other suitable
 #   replacement
@@ -44,10 +44,15 @@ base_gaia|unilib
 # below
 override_gaia|unilib
 # This package converts dirts and dirts-with-turf near trees and ferns to woodsoils. You can enable
-#   this package if you want that behaviour. However, it will only work as inteded if the override
+#   this package if you want that behaviour. However, it will only work as intended if the override
 #   package above has been enabled, or if you have added all dirt types to unilib's super dirt set
 #   (in Minetest settings)
 #shared_woodsoils|woodsoils
+# These packages make ordinary water undrinkable. Players must craft a filter to convert ordinary
+#   water to (drinkable) river water. The early game will be much harder if these packages are
+#   enabled
+#override_unilib_salt_water|unilib
+#misc_box_filtration|unilib
 
 # Optimisation ####################################################################################
 
@@ -133,6 +138,7 @@ dirt_dried|ethereal
 dirt_dry|default farming
 dirt_mud_dry|darkage
 dirt_mud_swamp|30biomes
+dirt_mud_wet|glemr6
 dirt_ordinary|default farming moreblocks
 dirt_ordinary_with_litter_coniferous|default farming
 dirt_ordinary_with_turf_grey|ethereal
@@ -243,6 +249,9 @@ misc_patch_grass|dryplants
 misc_seashell_auger|decorations_sea
 misc_seashell_clam|decorations_sea
 misc_seashell_spiral|decorations_sea
+misc_sponge_air|ethereal
+misc_sponge_fiery|unilib
+misc_sponge_normal|ethereal
 misc_starfish_blue|decorations_sea
 misc_starfish_red|decorations_sea
 mushroom_blotchy|glemr4
@@ -379,7 +388,9 @@ soil_black|unilib
 soil_brown|unilib
 soil_dark|unilib
 soil_ordinary|farming
+soil_silt_fine|unilib
 stone_andesite_grey|glemr4
+stone_basalt_blue|underch compressed condensed
 stone_basalt_brown|material mineral
 stone_basalt_dark|darkage
 stone_bluestone|material mineral
@@ -388,14 +399,19 @@ stone_brownstone_pale|decoblocks
 stone_chalk_white|darkage
 stone_desert|default moreblocks
 stone_diorite_dark|pfaa
+stone_diorite_pale|underch compressed condensed
+stone_gabbro_brown|underch compressed condensed
 stone_gabbro_red|pfaa
+stone_gneiss_black|underch compressed condensed
 stone_gneiss_brown|pfaa
+stone_granite_brown|decoblocks
 stone_granite_dark|technic_worldgen
 stone_granite_orange|ugbc
 stone_granite_pink|farlands
 stone_granite_white|farlands
 stone_greenstone|material mineral
 stone_limestone_beige|ugbc
+stone_limestone_grey|underch compressed condensed
 stone_limestone_red|pfaa
 stone_limestone_white|farlands
 stone_marble_brown|technic_worldgen
@@ -422,6 +438,7 @@ stone_sandstone_white|glemr4
 stone_schist_grey|darkage
 stone_serpentinite_dark|pfaa
 stone_serpentinite_pale|decoblocks
+stone_siltstone_pale|ugbc
 stone_travertine|decoblocks
 stone_tuff|darkage
 stone_tuff_rhyolitic|darkage
@@ -521,7 +538,6 @@ tree_willow_weeping|ethereal
 tree_young_jungle|farlands
 tree_young_palm_desert|glemr4
 vine_jungle|farlands
-#weather_snowflakes|snow
 
 # Basic "gaia" remix packages #####################################################################
 
@@ -539,6 +555,7 @@ deco_gaia_pebbles|unilib
 deco_gaia_seagrass|unilib
 deco_gaia_seagrass_decorations_sea|unilib
 deco_gaia_seagrass_xocean|unilib
+deco_gaia_sponge|unilib
 dirt_custom_gaia|unilib
 ore_gaia|badlands darkage default glemr4 moreores technic underch unilib
 ore_gaia_hot_arid|unilib
@@ -659,6 +676,5 @@ plant_kelp_ordinary|default
 #torch_ordinary|default
 #utensil_mortar_pestle|farming
 #vessel_bottle_glass_empty|thirsty vessels
-#weather_snowflakes|snow
 
 # supporting packages (.suggested)

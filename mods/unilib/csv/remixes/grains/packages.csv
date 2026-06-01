@@ -1,5 +1,5 @@
-# "grains" remix - contains everything from the "grains" mod that was not already imported via
-#   another mod (mostly from "farming_redo")
+# "grains" remix - contains everything from the grains mod that was not already imported via another
+#   mod (mostly from the farming_redo mod)
 
 # node_name | original_mod
 

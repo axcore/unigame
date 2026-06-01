@@ -126,6 +126,12 @@ local function use_rod(itemstack, player, pointed_thing)
                 else
                     core.add_item(pos, new_stack)
                 end
+
+                -- Update awards, if available
+                if unilib.global.pkg_executed_table["award_fisherman"] ~= nil then
+                    unilib.pkg.award_fisherman.on_catch(player, full_name)
+                end
+
             end
 
             ent.object:remove()

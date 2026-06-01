@@ -48,7 +48,8 @@ function unilib.pkg.mob_dog_normal.exec()
     -- Setup
     local p1 = {x = -0.0625, y = -0.5, z = -0.125}
     local p2 = {x = 0.125, y = -0.1875, z = 0.25}
-    local scale_factor = 2.25
+    -- N.B. scale_factor = 2.25 in original code
+    local scale_factor = 2.5
     local baby_scale_factor = 0.5
 
     local cbox, cbox_baby =

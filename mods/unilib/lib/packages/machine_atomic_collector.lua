@@ -433,6 +433,15 @@ function unilib.pkg.machine_atomic_collector.exec()
 
                 end
 
+                -- Update awards, if available
+                if unilib.global.pkg_executed_table["award_atomic"] ~= nil then
+
+                    unilib.pkg.award_atomic.on_construct(
+                        player, stack:get_name(), stack:get_count()
+                    )
+
+                end
+
             end
 
         end,

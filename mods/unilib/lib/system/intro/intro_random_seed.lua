@@ -19,7 +19,7 @@ math.randomseed(os.time())
 
 -- For its decorations and ores, unilib uses pre-determined seeds by default. The Minetest settings
 --      below, if enabled, apply random-ish seeds instead
--- A seed offset is a random number between -32768 and 32767). This number is generated when a
+-- A seed offset is a random number between -32768 and 32767. This number is generated when a
 --      world is created, and then added to the seed of every decoration and ore, producing a
 --      "random" seed that is computationlly very cheap
 -- There are two ways to produce the seed offset; one is completely random, and the other is derived

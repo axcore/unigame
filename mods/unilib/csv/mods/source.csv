@@ -123,10 +123,21 @@ technic_worldgen|technic|20211121|https://github.com/minetest-mods/technic|RealB
 # From underch/uchu
 underch||20211106|https://gitlab.com/h2mm/underch|Hume2|CC0|CC-BY-SA 3.0|Using v1.1.4. Imported everything
 bakedeye|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+bluecheese|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
 compressed|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC-BY-SA 3.0|Imported everything
 condensed|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC-BY-SA 3.0|Imported everything
+froststaff|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+gemenergy|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
 gemtools|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|CC BY-SA 3.0|Imported everything
 gravelcraft|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|n/a|Imported everything
+lightstaff|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+octu|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+quartzmese|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+slime_cans|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+stonemese|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+stonetechnic|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+tuber_honey|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
+uchutechnic|uchu|20211106|https://gitlab.com/h2mm/uchu|Hume2|MIT|unknown|Imported everything
 
 # From xtraores
 xtraores|xtraores|20211113|https://github.com/GreenXenith/xtraores|GreenDimond|unknown|unknown|GreedDimond's fork. Imported everything except awards. Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium, planexium and tritonium to avoid clashing with any code that wants the real-life metals
@@ -143,6 +154,7 @@ abriglass||20221114|https://github.com/mt-mods/abriglass|Shara RedCat|MIT|CC BY-
 abripanes||20221114|https://github.com/mt-mods/abripanes|Shara RedCat|MIT|CC BY-SA 4.0|Imported everything
 abritorch||20221114|https://github.com/mt-mods/abritorch|Shara RedCat|MIT|CC-BY 3.0/CC0|Imported everything
 agriculture|agriculture|20230215|https://github.com/JBBgameich/agriculture/|Linus John|WTFPL|CC BY-SA 4.0|Imported the sugar beet crop and the scarecrow; did not import anything from else from any mod in the "agriculture" modpack
+airtanks||20260113|https://github.com/minetest-mods/airtanks|FaceDeer|MIT|MIT/CC0/CC BY 3.0|Imported everything
 anvil||20221208|https://github.com/minetest-mods/anvil|Sokomine/FaceDeer|GPL-3.0-only|GPL-3.0-only|Imported everything
 aotearoa||20220629|https://github.com/DokimiCU/aotearoa|Dokimi|LGPLv2+|CC BY-SA 3.0 Unported|Imported everything except ambient sounds and stairs for tree trunks
 aqua_farming||20230315|https://github.com/acmgit/aqua_farming|Clyde|GPL 3.0|CC-BY-3.0|Imported everything
@@ -181,6 +193,7 @@ display_biome||20211025|https://github.com/kestral246/display_biome|kestral246|L
 dreambuilder_hotbar||20221128|https://github.com/mt-mods/dreambuilder_hotbar|Calinou et al|LGPL 3.0|CC-by-SA 4.0|Imported code to set the hotbar size, using minetest settings. Did not import code to set the hotbar size from a chat command
 drinks||20230215|https://github.com/minetest-mods/drinks|Nathan Salapat|MIT|CC by SA 3.0|Imported everything
 earthbuild||20230313|https://github.com/DokimiCU/earthbuild|Dokimi|GPLv3|CC BY-SA 3.0 Unported|Imported everything except the bottlegourd cup
+elysflowers||20260114|https://github.com/blrbrb/elysflowers|FaceDeer|GPL-3.0-or-later|CC-BY-4.0|Imported everything, including its original biome and support for all minetest-game and ethereal-ng biomes (but not biomes provided by other external mods)
 ethereal||20220121|https://notabug.org/TenPlus1/ethereal|ChinChow/TenPlus1|MIT|MIT/CC0|ethereal-ng. Imported everything. Sapling growth has been standardised, replacing the ABM used in ethereal-ng
 facade||20211103|https://github.com/TumeniNodes/facade|TumeniNodes|LGPL 2.1|CC BY-SA 4.0|Imported everything
 fachwerk||20221202|https://github.com/JBBgameich/fachwerk|JBB|WTFPL|CC BY-SA 3.0|Imported everything
@@ -233,6 +246,7 @@ pizza||20230309|https://github.com/camus14/pizza|oscar14|MIT|MIT|Imported the th
 plants||20230228|https://github.com/bas080/plants|bas080|WTFPL|WTFPL|Imported many flowers, plants and mushrooms from the plants mod, but some have been omitted. Dependence on the "habitat" mod has been replaced with standard decorations. Support for plant regeneration was not imported
 plaster||20221202|https://github.com/Extex101/plaster|Extex101|CC BY-SA 3.0|CC BY-SA 3.0|Imported the plaster block, reusing the crushed lime from aotearoa to craft it. The shared fachwerk code produces its own timber frames, and new frames matching the ones in this mod (using new textures)
 plastic_block||20230815|https://github.com/Ghaydn/plastic_block|Nikita Egorov|LGPL 3.0|CC-by-SA 4.0|Imported everything
+pontoons||20260114|https://github.com/minetest-mods/pontoons|FaceDeer|MIT|MIT/CC BY-SA 3.0|Imported the pontoon blocks. Did not import the code to convert trunks/planks to pontoons
 ptime||20220902|https://github.com/xenonca/ptime|xenonca|MIT|MIT|Imported the chat commands, but not the unified_inventory button
 real_minerals||20211115|https://github.com/FaceDeer/real_minerals|FaceDeer|GPL 3.0|unknown|Mod adapted from RealTest, which was adapted from TerraFirmaCraft (MC). Imported everything
 real_torch||20221125|https://notabug.org/TenPlus1/real_torch|TenPlus1|MIT|CC BY-SA 3.0|Imported the unlit torch. Imported the coal powder as a match (to avoid clashing with other coal powders). Did not import compatibility with TNT

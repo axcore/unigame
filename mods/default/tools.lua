@@ -145,7 +145,7 @@ minetest.register_tool("default:sword_steel", {
 
 -- @@@ Once the definitions have been overriden, we can hide them
 
-minetest.after(0.1, function()
+core.register_on_mods_loaded(function()
 
     for _, full_name in pairs({
         "default:axe_bronze",
@@ -158,13 +158,13 @@ minetest.after(0.1, function()
         "default:sword_steel",
     }) do
         
-        local def_table = minetest.registered_tools[full_name]
+        local def_table = core.registered_tools[full_name]
         if def_table ~= nil then
 
-            local group_table = def_table.groups
+            local group_table = table.copy(def_table.groups)
             group_table.not_in_creative_inventory = 1
 
-            minetest.override_item(full_name, {
+            core.override_item(full_name, {
                 groups = group_table,
             })
             

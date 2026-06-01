@@ -218,6 +218,8 @@ local function on_metadata_inventory_take(pos, listname, index, stack, player)
         meta:set_string("mineral_type", "")
     elseif listname == "bucket" and inv:is_empty("bucket") then
         meta:set_string("bucket_type", "")
+    elseif listname == "output" and unilib.global.pkg_executed_table["award_geologist"] ~= nil then
+        unilib.pkg.award_geologist.on_collect_gem(player, stack:get_name(), stack:get_count())
     end
 
     -- Check whether the machine is empty or not
@@ -239,7 +241,8 @@ function unilib.pkg.machine_polishing.init()
                 " gems, when this polisher is available. To place a limit on the number of" ..
                 " \"precious\" gems a player can produce, the machine consumes a single mese" ..
                 " block (or nine mese crystals) to polish a single gem, taking forty-five" ..
-                " seconds to do so",
+                " seconds to do so. The polishing machine contributes towards achievements in" ..
+                " the \"award_geologist\" package, if loaded",
         depends = {"metal_steel", "mineral_mese"},
     }
 

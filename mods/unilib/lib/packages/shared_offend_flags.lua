@@ -15,13 +15,10 @@ local mode = unilib.global.imported_mod_table.offend_flags.add_mode
 -- Local variables (from the original mod)
 ---------------------------------------------------------------------------------------------------
 
-local wind_noise = PerlinNoise(204, 1, 0, 500)
-
--- Check whether the new .get_2d() Perlin function is available, otherwise use .get2d(). Needed to
---      suppress deprecation warning in newer Minetest versions
-local old_get2d = true
-if wind_noise.get_2d then
-    old_get2d = false
+-- Use fractal noise to generate wind speeds, unless unilib's weather-generation system is active
+local wind_noise
+if not unilib.setting.atmosphere_weather_enable_flag then
+    wind_noise = ValueNoise(204, 1, 0, 500)
 end
 
 -- List of active flags, used to handle the animations
@@ -244,18 +241,22 @@ function unilib.pkg.shared_offend_flags.get_wind(pos)
 
     -- Returns the wind strength at pos
 
-    -- The default wind function ignores pos
-    -- Returns a wind between ca. 0 and 55
-    local coords = {x = os.time() % 65535, y = 0}
-    local cur_wind
-    if old_get2d then
-        cur_wind = wind_noise:get2d(coords)
-    else
-        cur_wind = wind_noise:get_2d(coords)
-    end
+    if unilib.setting.atmosphere_weather_enable_flag then
 
-    cur_wind = cur_wind * 30 + 30
-    return cur_wind
+        -- Use unilib's own weather generation system (which may generated wind speeds greater than
+        --      55, occasionally)
+        local _, _, wind_speed = unilib.atmosphere.sample_wind(pos)
+        return wind_speed
+
+    else
+
+        -- The default wind function ignores pos
+        -- Returns a wind between ca. 0 and 55
+        local coords = {x = os.time() % 65535, y = 0}
+        local cur_wind = wind_noise:get_2d(coords)
+        return (cur_wind * 30) + 30
+
+    end
 
 end
 
@@ -475,22 +476,22 @@ function unilib.pkg.shared_offend_flags.exec()
             if cur_wind < 10 then
 
                 anim_speed = 10 -- 2 cycles
-                wave_sound = "unilib_flag_flap_1"
+                wave_sound = "unilib_flag_flap_weak"
 
             elseif cur_wind < 20 then
 
                 anim_speed = 20  -- 4 cycles
-                wave_sound = "unilib_flag_flap_1"
+                wave_sound = "unilib_flag_flap_weak"
 
             elseif cur_wind < 40 then
 
                 anim_speed = 40  -- 8 cycles
-                wave_sound = "unilib_flag_flap_2"
+                wave_sound = "unilib_flag_flap_medium"
 
             else
 
                 anim_speed = 80  -- 16 cycles
-                wave_sound = "unilib_flag_flap_3"
+                wave_sound = "unilib_flag_flap_strong"
 
             end
 

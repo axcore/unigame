@@ -17,7 +17,17 @@ local mode = unilib.global.imported_mod_table.ethereal.add_mode
 
 local function do_convert(pos, node)
 
-    if unilib.global.dirt_with_turf_table[node.name] ~= nil then
+    if unilib.global.dry_dirt_convert_table[node.name] ~= nil then
+
+        -- A dry dirt node with a registered wet dirt equivalent
+        -- If the key's corresponding value doesn't exist, or is the same as node.name, then don't
+        --      do the conversion
+        local wet_name = unilib.global.dry_dirt_convert_table[node.name]
+        if wet_name ~= node.name and core.registered_nodes[wet_name] ~= nil then
+            core.swap_node(pos, {name = wet_name})
+        end
+
+    elseif unilib.global.dirt_with_turf_table[node.name] ~= nil then
 
         -- A dirt-with-turf node. Convert the dry-dirt-with-turf into the wettened
         --      equivalent, if it exists (we don't try to convert the turf as well)
@@ -47,7 +57,7 @@ function unilib.pkg.abm_standard_dirt_convert.init()
 
     return {
         description = "ABM to convert dry dirts to ordinary dirt when water is nearby (from" ..
-                " ethereal-ng",
+                " ethereal-ng)",
         depends = "dirt_ordinary",
     }
 

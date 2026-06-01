@@ -51,7 +51,7 @@ function unilib.pkg.furniture_cabinet_simple.exec()
         output = "unilib:furniture_cabinet_simple",
         recipe = {
             {"group:wood", "group:wood", "group:wood"},
-            {"unilib:trapdoor_wood_ordinary", "", "unilib:trapdoor_wood_ordinary"},
+            {"unilib:trapdoor_wood_ordinary_closed", "", "unilib:trapdoor_wood_ordinary_closed"},
             {"group:wood", "group:wood", "group:wood"},
         },
     })

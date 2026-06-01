@@ -59,7 +59,7 @@ function unilib.farming._register_produce_fredo(data_table)
 
     local replace_mode = data_table.replace_mode or unilib.default_replace_mode
     local eat = data_table.eat or nil
-    local fertility_list = data_table.fertility_list or {}
+    local fertility_list = data_table.fertility_list or nil
     local grow_list = data_table.grow_list or {{}}
     local grow_group_table = data_table.grow_group_table or {
         attached_node = 1, flammable = 2, growing = 1, not_in_creative_inventory = 1, plant = 1,
@@ -77,8 +77,12 @@ function unilib.farming._register_produce_fredo(data_table)
 
     -- (As for seeds created in calls to unilib.register_crop_mtgame(), everything in fertility_list
     --      is added to the groups field of the growth stages)
-    for k, v in pairs(fertility_list) do
-        grow_group_table[v] = 1
+    if fertility_list ~= nil then
+
+        for k, v in pairs(fertility_list) do
+            grow_group_table[v] = 1
+        end
+
     end
 
     -- Register the harvested produce item (which can also be placed as a seed)
@@ -167,7 +171,11 @@ function unilib.farming._register_produce_fredo(data_table)
             this_def_table.tiles = {"unilib_produce_" .. part_name .. "_grow_" .. i .. ".png"}
 
             if i == #grow_list then
+
+                this_def_table.description = unilib.utils.brackets(description, S("Grown"))
+                this_def_table.groups.harvestable = 1
                 this_def_table.groups.growing = nil
+
             end
 
             for k, v in pairs(grow_list[i]) do

@@ -15,7 +15,7 @@ local mode = unilib.global.imported_mod_table.unilib.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function do_show_elements(param)
+local function do_show_elements(pname, param)
 
     if unilib.global.pkg_executed_table["shared_atomic"] == nil then
         return false, S("Periodic table is not available (\"shared_atomic\" package not loaded)")
@@ -64,7 +64,7 @@ local function do_show_elements(param)
     end
 
     -- Display the periodic table
-    unilib.utils.chat_send_player(name, S("Periodic table of elements"))
+    unilib.utils.chat_send_player(pname, S("Periodic table of elements"))
 
     local found_count = 0
     local missing_count = 0
@@ -78,7 +78,7 @@ local function do_show_elements(param)
                 missing_count = missing_count + 1
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     string.format("   %-3i unknown element", i)
                 )
 
@@ -97,7 +97,7 @@ local function do_show_elements(param)
                 end
 
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     string.format(
                         "   %-3i %-2s %-30s (%i/%i)",
                         i,
@@ -110,22 +110,22 @@ local function do_show_elements(param)
 
                 if vapourise_count > 0 then
 
-                    unilib.utils.chat_send_player(name, S("       Vapourised from") .. ":")
+                    unilib.utils.chat_send_player(pname, S("       Vapourised from") .. ":")
                     for _, full_name in ipairs(vapourise_table[mini_table.name]) do
-                        unilib.utils.chat_send_player(name, "          " .. full_name)
+                        unilib.utils.chat_send_player(pname, "          " .. full_name)
                     end
 
                 end
 
                 if construct_count > 0 then
 
-                    unilib.utils.chat_send_player(name, S("       Constructs") .. ":")
+                    unilib.utils.chat_send_player(pname, S("       Constructs") .. ":")
                     local mini_list =
                             unilib.pkg.shared_atomic.construct_table[mini_table.name]
                     for _, full_name in ipairs(mini_list[1]) do
 
                         unilib.utils.chat_send_player(
-                            name,
+                            pname,
                             "          " .. full_name .. " [" .. mini_list[2] .. "]"
                         )
 
@@ -141,12 +141,12 @@ local function do_show_elements(param)
 
     if missing_count == 0 then
 
-        unilib.utils.chat_send_player(name, S("End of list (elements found: @1)", found_count))
+        unilib.utils.chat_send_player(pname, S("End of list (elements found: @1)", found_count))
 
     else
 
         unilib.utils.chat_send_player(
-            name,
+            pname,
             S(
                 "End of list (elements found: @1, elements missing: @2)",
                 found_count,
@@ -158,7 +158,7 @@ local function do_show_elements(param)
 
 end
 
-local function do_show_rare_elements(param)
+local function do_show_rare_elements(pname, param)
 
     if unilib.global.pkg_executed_table["shared_atomic"] == nil then
         return false, S("Periodic table is not available (\"shared_atomic\" package not loaded)")
@@ -179,11 +179,11 @@ local function do_show_rare_elements(param)
     -- Display the list
     if unilib.utils.get_table_size(element_table) == 0 then
 
-        unilib.utils.chat_send_player(name, S("No rare elements found"))
+        unilib.utils.chat_send_player(pname, S("No rare elements found"))
 
     else
 
-        unilib.utils.chat_send_player(name, S("List of rare elements"))
+        unilib.utils.chat_send_player(pname, S("List of rare elements"))
 
         local count = 0
         for i = 1, unilib.pkg.shared_atomic.periodic_table_size do
@@ -193,7 +193,7 @@ local function do_show_rare_elements(param)
 
                 count = count + 1
                 unilib.utils.chat_send_player(
-                    name,
+                    pname,
                     string.format("   %-3i %s", i, mini_table.name)
                 )
 
@@ -202,7 +202,7 @@ local function do_show_rare_elements(param)
         end
 
         unilib.utils.chat_send_player(
-            name,
+            pname,
             S("End of list (orphaned elements found: @1)", count)
         )
 
@@ -233,7 +233,7 @@ function unilib.pkg.chat_show_elements.exec()
         privs = {unilib_admin = true},
 
         func = function(pname, param)
-            return do_show_elements(param)
+            return do_show_elements(pname, param)
         end,
     })
 
@@ -243,7 +243,7 @@ function unilib.pkg.chat_show_elements.exec()
         privs = {unilib_admin = true},
 
         func = function(pname, param)
-            return do_show_elements(param)
+            return do_show_elements(pname, param)
         end,
     })
 
@@ -255,7 +255,7 @@ function unilib.pkg.chat_show_elements.exec()
         privs = {unilib_admin = true},
 
         func = function(pname, param)
-            return do_show_rare_elements(param)
+            return do_show_rare_elements(pname, param)
         end,
     })
 
@@ -267,7 +267,7 @@ function unilib.pkg.chat_show_elements.exec()
         privs = {unilib_admin = true},
 
         func = function(pname, param)
-            return do_show_rare_elements(param)
+            return do_show_rare_elements(pname, param)
         end,
     })
 

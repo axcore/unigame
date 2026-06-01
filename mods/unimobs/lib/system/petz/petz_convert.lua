@@ -94,6 +94,15 @@ function unimobs.petz_api.convert_mob(self, pname, wielded_name)
                 )
             )
 
+            -- Update awards, if available
+            if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+
+                unilib.pkg.award_zoologist.on_mob_convert(
+                    core.get_player_by_name(pname), self, converted_luaent
+                )
+
+            end
+
         end
 
     else

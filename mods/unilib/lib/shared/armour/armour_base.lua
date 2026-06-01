@@ -1775,6 +1775,8 @@ function unilib.armour._update_player_visuals(player)
         return
     end
 
+    -- N.B. v1.2.0 - the call to skinsdb is no longer required
+    --[[
     if skin_mod == "skinsdb" then
 
         local skin = skins.get_player_skin(player)
@@ -1794,6 +1796,17 @@ function unilib.armour._update_player_visuals(player)
         end
 
     end
+    ]]--
+    local pname = player:get_player_name()
+    if main_table.player_texture_table[pname] then
+
+        unilib.player_api.set_textures(player, {
+            main_table.player_texture_table[pname].skin,
+            main_table.player_texture_table[pname].armour,
+            main_table.player_texture_table[pname].wielditem,
+        })
+
+    end    
 
     run_callbacks("on_update", player)
 
@@ -1816,13 +1829,13 @@ function unilib.armour._get_formspec(pname, listring_flag)
     -- Optional args:
     --      listring (bool): Use the "listring" formspec element (default is false)
 
-    local formspec = main_table.formspec .. "list[detached:" .. pname ..
-            "_armour;armour;0,0.5;2,3;]"
+    local formspec = main_table.formspec .. "list[detached:shared_armour_" .. pname ..
+            ";armour;0,0.5;2,3;]"
 
     if listring_flag == true then
 
-        formspec = formspec .. "listring[current_player;main]" .. "listring[detached:" ..
-                pname .. "_armour;armour]"
+        formspec = formspec .. "listring[current_player;main]" ..
+            "listring[detached:shared_armour" .. pname .. ";armour]"
 
     end
 
@@ -1935,12 +1948,13 @@ end
 -- Setup code (override other mods)
 ---------------------------------------------------------------------------------------------------
 
-core.after(0, function()
+if core.get_modpath("wardrobe_ad") then
 
-    if core.get_modpath("wardrobe_ad") then
+    -- The "wardrobe_ad" mod calls 3d_armor functions; override its code, so that unilib functions
+    --      are called instead
 
-        -- The "wardrobe_ad" mod calls 3d_armor functions; override its code, so that unilib
-        --      functions are called instead
+    core.after(0, function()
+
         function wardrobe.updatePlayerSkin(player)
             unilib.armour.update_player_visuals(player)
         end
@@ -1963,19 +1977,21 @@ core.after(0, function()
 
         end
 
+    end)
+
+end
+
+if core.get_modpath("skinsdb") then
+
+    -- The "skinsdb" mod calls "3d_armor" functions; override its code, so that unilib functions are
+    --      called instead
+
+    -- (Creating this namespace must be done outside of functions, or we'll get a warning)
+    if not core.get_modpath("3d_armor") then
+        armor = {}
     end
 
-    if core.get_modpath("skinsdb") then
-
-        -- The "skinsdb" mod calls 3d_armor functions; override its code, so that unilib functions
-        --      are called instead
-
-        -- N.B. This hack is required to make skin_class:apply_skin_to_player() work. It is an ugly
-        --      hack, and it generates an "Undeclared global variable "armor" accessed at..."
-        --      warning, but it works        
-        if armor == nil then
-            armor = {}
-        end
+    core.after(0, function()
 
         armor.textures = main_table.player_texture_table
 
@@ -1985,9 +2001,9 @@ core.after(0, function()
             set_player_armour(player)
         end
 
-    end
+    end)
 
-end)
+end
 
 ---------------------------------------------------------------------------------------------------
 -- Setup code (from 3d_armor/3d_armor/init.lua)

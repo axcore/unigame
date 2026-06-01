@@ -193,7 +193,7 @@ function unilib.pkg.machine_grill_propane.exec()
             "unilib_machine_grill_propane_top.png",
             "unilib_machine_grill_propane_bottom.png",
             {
-                image = "unilib_machine_grill_propane_side_active.png",
+                name = "unilib_machine_grill_propane_side_active.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -203,7 +203,7 @@ function unilib.pkg.machine_grill_propane.exec()
                 },
             },
             {
-                image = "unilib_machine_grill_propane_side_active.png",
+                name = "unilib_machine_grill_propane_side_active.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",
@@ -214,7 +214,7 @@ function unilib.pkg.machine_grill_propane.exec()
             },
             "unilib_machine_grill_propane_back.png",
             {
-                image = "unilib_machine_grill_propane_front_active.png",
+                name = "unilib_machine_grill_propane_front_active.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",

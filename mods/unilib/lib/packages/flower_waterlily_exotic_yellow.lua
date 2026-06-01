@@ -24,11 +24,11 @@ local function on_place(itemstack, placer, pointed_thing)
     local pos = pointed_thing.above
     local node = core.get_node(pointed_thing.under).name
     local def = core.registered_nodes[node]
-    local player_name = placer:get_player_name()
+    local pname = placer:get_player_name()
 
     if def and def.liquidtype == "source" and core.get_item_group(node, "water") > 0 then
 
-        if not core.is_protected(pos, player_name) then
+        if not core.is_protected(pos, pname) then
 
             if math.random(1, 2) == 1 then
 
@@ -55,8 +55,8 @@ local function on_place(itemstack, placer, pointed_thing)
 
         else
 
-            core.chat_send_player(player_name, S("Node is protected"))
-            core.record_protection_violation(pos, player_name)
+            core.chat_send_player(pname, S("Node is protected"))
+            core.record_protection_violation(pos, pname)
 
         end
 

@@ -1,0 +1,13 @@
+Contains a selection of packages that provide new functionality:
+
+- Highlights of packages that are completely original to unilib
+
+- Packages derived from mods by the same author
+
+- Packages from other mods, which have been heavily modified and/or given new functionality
+
+This remix omits packages from the "gaia" and "hades" remixes, which are mostly original to unilib.
+
+This remix also omits chat command packages, which are appear in the "chat" remix.
+
+For a more complete list of packages original to unilib, see the "unilib" remix.

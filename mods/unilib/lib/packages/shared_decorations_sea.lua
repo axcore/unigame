@@ -62,35 +62,39 @@ local noise_table = {
     },
 }
 
+local warm_biome_list = {
+    {"biome_default_desert", "default_desert_ocean"},
+    {"biome_default_desert_sandstone", "default_desert_sandstone_ocean"},
+    {"biome_default_rainforest", "default_rainforest_ocean"},
+    {"biome_default_savanna", "default_savanna_shore"},
+    {"biome_default_savanna", "default_savanna_ocean"},
+}
+
+local temperate_biome_list = {
+    {"biome_default_desert_cold", "default_desert_cold_ocean"},
+    {"biome_default_forest_coniferous", "default_forest_coniferous_ocean"},
+    {"biome_default_forest_deciduous", "default_forest_deciduous"},
+    {"biome_default_forest_deciduous", "default_forest_deciduous_ocean"},
+    {"biome_default_forest_deciduous", "default_forest_deciduous_shore"},
+    {"biome_default_grassland", "default_grassland"},
+    {"biome_default_grassland", "default_grassland_ocean"},
+}
+
+local frozen_biome_list = {
+    {"biome_default_grassland_snowy", "default_grassland_snowy_ocean"},
+    {"biome_default_icesheet", "default_icesheet_ocean"},
+    {"biome_default_taiga", "default_taiga_ocean"},
+    {"biome_default_tundra", "default_tundra_beach"},
+    {"biome_default_tundra", "default_tundra_ocean"},
+}
+
 ---------------------------------------------------------------------------------------------------
--- Shared variables
+-- Shared variables (populated below)
 ---------------------------------------------------------------------------------------------------
 
-unilib.pkg.shared_decorations_sea.warm_biome_list = {
-    "default_desert_ocean",             -- From package biome_default_desert
-    "default_desert_sandstone_ocean",   -- biome_default_desert_sandstone
-    "default_rainforest_ocean",         -- biome_default_rainforest
-    "default_savanna_shore",            -- biome_default_savanna
-    "default_savanna_ocean",            -- biome_default_savanna
-}
-
-unilib.pkg.shared_decorations_sea.temperate_biome_list = {
-    "default_desert_cold_ocean",        -- biome_default_desert_cold
-    "default_forest_coniferous_ocean",  -- biome_default_forest_coniferous
-    "default_forest_deciduous",         -- biome_default_forest_deciduous
-    "default_forest_deciduous_ocean",   -- biome_default_forest_deciduous
-    "default_forest_deciduous_shore",   -- biome_default_forest_deciduous
-    "default_grassland",                -- biome_default_grassland
-    "default_grassland_ocean",          -- biome_default_grassland
-}
-
-unilib.pkg.shared_decorations_sea.frozen_biome_list = {
-    "default_grassland_snowy_ocean",    -- biome_default_grassland_snowy
-    "default_icesheet_ocean",           -- biome_default_icesheet
-    "default_taiga_ocean",              -- biome_default_taiga
-    "default_tundra_beach",             -- biome_default_tundra
-    "default_tundra_ocean",             -- biome_default_tundra
-}
+unilib.pkg.shared_decorations_sea.warm_biome_list = {}
+unilib.pkg.shared_decorations_sea.temperate_biome_list = {}
+unilib.pkg.shared_decorations_sea.frozen_biome_list = {}
 
 ---------------------------------------------------------------------------------------------------
 -- Shared functions (register nodes/craftitems)
@@ -261,23 +265,23 @@ function unilib.pkg.shared_decorations_sea.register_seagrass(data_table)
             local pos_top = {x = pos.x, y = pos.y + height, z = pos.z}
             local node_top = core.get_node(pos_top)
             local def_top = core.registered_nodes[node_top.name]
-            local player_name = placer:get_player_name()
+            local pname = placer:get_player_name()
 
             if def_top and def_top.liquidtype == "source" and
                     core.get_item_group(node_top.name, "water") > 0 then
 
-                if not core.is_protected(pos, player_name) and
-                        not core.is_protected(pos_top, player_name) then
+                if not core.is_protected(pos, pname) and
+                        not core.is_protected(pos_top, pname) then
 
                     core.set_node(pos, {name = full_name, param2 = height * 16})
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
                         itemstack:take_item()
                     end
 
                 else
 
-                    core.chat_send_player(player_name, S("Node is protected"))
-                    core.record_protection_violation(pos, player_name)
+                    core.chat_send_player(pname, S("Node is protected"))
+                    core.record_protection_violation(pos, pname)
 
                 end
 
@@ -387,5 +391,37 @@ function unilib.pkg.shared_decorations_sea.init()
         description = "Shared functions for corals and seagrasses (from decorations_sea)",
         depends = "sand_ordinary",
     }
+
+end
+
+function unilib.pkg.shared_decorations_sea.exec()
+
+    -- Populate the shared variables
+    -- Biomes have not been registered yet, so we can't check the list of biomes; instead, must
+    --      check the list of packages
+
+    for _, mini_list in ipairs(warm_biome_list) do
+
+        if unilib.global.pkg_table[mini_list[1]] then
+            table.insert(unilib.pkg.shared_decorations_sea.warm_biome_list, mini_list[2])
+        end
+
+    end
+
+    for _, mini_list in ipairs(temperate_biome_list) do
+
+        if unilib.global.pkg_table[mini_list[1]] then
+            table.insert(unilib.pkg.shared_decorations_sea.temperate_biome_list, mini_list[2])
+        end
+
+    end
+
+    for _, mini_list in ipairs(frozen_biome_list) do
+
+        if unilib.global.pkg_table[mini_list[1]] then
+            table.insert(unilib.pkg.shared_decorations_sea.frozen_biome_list, mini_list[2])
+        end
+
+    end
 
 end

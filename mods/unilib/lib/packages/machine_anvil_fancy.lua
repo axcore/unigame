@@ -241,10 +241,10 @@ function unilib.pkg.machine_anvil_fancy.exec()
                 return 0
             end
 
-            local player_name = player:get_player_name()
+            local pname = player:get_player_name()
             if stack:get_wear() == 0 then
 
-                core.chat_send_player(player_name, S("This anvil is only for damaged tools"))
+                core.chat_send_player(pname, S("This anvil is only for damaged tools"))
                 return 0
 
             end
@@ -252,7 +252,7 @@ function unilib.pkg.machine_anvil_fancy.exec()
             local stack_name = stack:get_name()
             if unilib.global.tool_no_repair_table[stack_name] ~= nil then
 
-                core.chat_send_player(player_name, unilib.global.tool_no_repair_table[stack_name])
+                core.chat_send_player(pname, unilib.global.tool_no_repair_table[stack_name])
                 return 0
 
             end

@@ -78,6 +78,11 @@ function unilib.pkg.item_chisel_tree.exec()
 
                 end
 
+                core.sound_play(
+                    "unilib_item_chisel_tree",
+                    {pos = pos, gain = 1.0, max_hear_distance = 5}
+                )
+                
                 return itemstack
 
             end

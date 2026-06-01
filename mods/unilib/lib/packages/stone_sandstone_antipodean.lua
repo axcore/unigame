@@ -60,7 +60,7 @@ function unilib.pkg.stone_sandstone_antipodean.exec()
             -- Original to unilib
             output = "unilib:sand_red_antipodean 4",
             recipe = {
-                {"unilib:stone_san,dstone_antipodean"},
+                {"unilib:stone_sandstone_antipodean"},
             },
         })
 

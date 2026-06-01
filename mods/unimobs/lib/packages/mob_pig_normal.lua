@@ -30,7 +30,8 @@ function unilib.pkg.mob_pig_normal.exec()
     -- Setup
     local p1 = {x = -0.1875, y = -0.5, z = -0.4375}
     local p2 = {x = 0.1875, y = 0.375, z = 0.25}
-    local scale_factor = 1.275
+    -- N.B. scale_factor = 1.275 in original code
+    local scale_factor = 1.5
     local baby_scale_factor = 0.5
 
     local cbox, cbox_baby =

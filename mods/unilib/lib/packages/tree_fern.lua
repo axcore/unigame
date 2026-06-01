@@ -175,7 +175,8 @@ function unilib.pkg.tree_fern.exec()
 
     unilib.register_node("unilib:tree_fern_crown_small", "ferns:tree_fern_leaves_02", mode, {
         -- From ferns:tree_fern_leaves_02
-        -- (no description)
+        -- N.B. No description in original code
+        description = S("Fern Tree Crown"),
         tiles = {"unilib_tree_fern_crown_small.png"},
         groups = {attached_node = 1, flammable = 2, not_in_creative_inventory = 1, snappy = 3},
         sounds = unilib.global.sound_table.leaves,

@@ -34,7 +34,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
 
         buildable_to = true,
         drawtype = "plantlike",
-        furnace_burntime = 5,
+--      furnace_burntime = 5,
         inventory_image = "unilib_plant_shrub_frozen.png",
         paramtype = "light",
         selection_box = {
@@ -45,6 +45,12 @@ function unilib.pkg.plant_shrub_frozen.exec()
         waving = 1,
         walkable = false,
         wield_image = "unilib_plant_shrub_frozen.png",
+    })
+    unilib.register_craft({
+        -- Original to unilib, replaces the deprecated .furnace_burntime field
+        type = "fuel",
+        recipe = "unilib:plant_shrub_frozen",
+        burntime = 5,
     })
     unilib.register_plant_in_pot("unilib:plant_shrub_frozen", "snow:shrub")
 
@@ -58,7 +64,7 @@ function unilib.pkg.plant_shrub_frozen.exec()
         buildable_to = true,
         drawtype = "plantlike",
         drop = "unilib:plant_shrub_frozen",
-        furnace_burntime = 3,
+--      furnace_burntime = 3,
         inventory_image = "unilib_plant_shrub_frozen.png^unilib_plant_shrub_frozen_overlay.png",
         paramtype = "light",
         paramtype2 = "degrotate",
@@ -70,6 +76,12 @@ function unilib.pkg.plant_shrub_frozen.exec()
         waving = 1,
         walkable = false,
         wield_image = "unilib_plant_shrub_frozen.png^unilib_plant_shrub_frozen_overlay.png",
+    })
+    unilib.register_craft({
+        -- Original to unilib, replaces the deprecated .furnace_burntime field
+        type = "fuel",
+        recipe = "unilib:plant_shrub_frozen_covered",
+        burntime = 3,
     })
     -- (not compatible with flowerpots)
 

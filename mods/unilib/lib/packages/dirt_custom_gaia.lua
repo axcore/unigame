@@ -82,7 +82,8 @@ local biome_list = {
     },
     {
 --      "mild_semiarid", S("Mild Semi-Arid Turf"), "#e4d136:80", nil,   -- v1.0.0
-        "mild_semiarid", S("Mild Semi-Arid Turf"), "#34e440:72", nil,   -- v1.1.0
+--      "mild_semiarid", S("Mild Semi-Arid Turf"), "#34e440:72", nil,   -- v1.1.0
+        "mild_semiarid", S("Mild Semi-Arid Turf"), "#D8E43D:72", nil,   -- v1.2.0
     },
     {
         "mild_arid", S("Mild Arid Turf"), "#956401:128", nil,
@@ -1031,6 +1032,7 @@ function unilib.pkg.dirt_custom_gaia.init()
             "soil_brown",
             "soil_dark",
             "soil_ordinary",
+            "soil_silt_fine",
             -- Soil types, used by the "gaia" remix but not by this package specifically
 --          "soil_sand_desert",
         },
@@ -1196,6 +1198,10 @@ function unilib.pkg.dirt_custom_gaia.exec()
 
     register_dirt_set({
         item_name = "dirt_silt_fine",
+
+        soil_flag = true,
+        dry_soil = "unilib:soil_silt_fine",
+        wet_soil = "unilib:soil_silt_fine_wet",
     })
 
     -- Basic dirt types, not currently used

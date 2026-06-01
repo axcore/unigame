@@ -202,7 +202,7 @@ end
 function unilib.pkg.chat_list_trees.exec()
 
     core.register_chatcommand("list_trees", {
-        params = "",
+        params = "[type]",
         description = S("Lists all tree types, or details for the specified tree type"),
         privs = {unilib_tools = true},
 
@@ -212,7 +212,7 @@ function unilib.pkg.chat_list_trees.exec()
     })
 
     core.register_chatcommand("list_tree", {
-        params = "",
+        params = "[type]",
         description = S("Lists all tree types, or details for the specified tree type"),
         privs = {unilib_tools = true},
 

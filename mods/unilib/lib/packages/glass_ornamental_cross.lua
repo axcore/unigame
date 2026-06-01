@@ -33,7 +33,7 @@ function unilib.pkg.glass_ornamental_cross.exec()
 
     unilib.register_node(
         -- From abriglass:stainedglass_pattern04
-        "unilib:glass_ornamental_tiles_cross",
+        "unilib:glass_ornamental_cross",
         "abriglass:stainedglass_pattern04",
         mode,
         {
@@ -54,7 +54,7 @@ function unilib.pkg.glass_ornamental_cross.exec()
     )
     unilib.register_craft({
         -- From abriglass:stainedglass_pattern04
-        output = "unilib:glass_ornamental_tiles_cross 9",
+        output = "unilib:glass_ornamental_cross 9",
         recipe = {
             {c_glass_green, c_glass_red, c_glass_green},
             {c_glass_red, c_glass_blue, c_glass_red},
@@ -65,7 +65,9 @@ function unilib.pkg.glass_ornamental_cross.exec()
         -- From abriglass:stainedglass_pattern04
         type = "cooking",
         output = c_clear,
-        recipe = "unilib:glass_ornamental_tiles_cross",
+        recipe = "unilib:glass_ornamental_cross",
     })
+    -- N.B. Before v1.2.0, this item was misnamed as "unilib:glass_ornamental_tiles_cross"
+    core.register_alias("unilib:glass_ornamental_tiles_cross", "unilib:glass_ornamental_cross")
 
 end

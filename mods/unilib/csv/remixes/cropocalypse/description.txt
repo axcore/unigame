@@ -1,0 +1,3 @@
+Contains everything from the cropocalypse mod, except the wooden bowl, light blue dye and ABMs for spawning full-block pumpkins/watermelons.
+
+In the original mod, some items were only available when the "grave" mod was loaded. In this remix, those packages are commented out, and are instead available in the "grave" remix.

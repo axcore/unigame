@@ -26,16 +26,26 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
 
     return function(itemstack, player, pointed_thing)
 
+        -- Inform the relevant awards package, if loaded
+        if unilib.global.pkg_executed_table["award_gourmand"] ~= nil then
+
+            unilib.pkg.award_gourmand.on_collect_food(
+                player, itemstack:get_name(), itemstack:get_count()
+            )
+
+        end
+
+        -- For negative values of satiation (i.e. poison), revert to standard code
         if satiation <= 0 then
 
-            -- Revert to original Minetest code
-            core.item_eat(satiation, replacement_name)
-            -- Call original on_use(), if provided
-            if old_on_use ~= nil then
-                return old_on_use(itemstack, player, pointed_thing)
-            else
-                return itemstack
+            local func = core.item_eat(satiation, replacement_name)
+            func(itemstack, player, pointed_thing)
+
+            if old_on_use then
+                old_on_use(itemstack, player, pointed_thing)
             end
+
+            return itemstack
 
         end
 
@@ -76,23 +86,24 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
                 "unilib.cuisine.eat_on_use(): Non-existent craftitem/node", full_name
             )
 
-            -- Call original on_use(), if provided
-            if old_on_use ~= nil then
-                return old_on_use(itemstack, player, pointed_thing)
-            else
-                return itemstack
+            -- Revert to standard code
+            if old_on_use then
+                old_on_use(itemstack, player, pointed_thing)
             end
+
+            return itemstack
 
         elseif def_table.groups == nil then
 
-            -- No food groups assigned, so just revert to original Minetest code
-            core.item_eat(satiation, replacement_name)
-            -- Call original on_use(), if provided
-            if old_on_use ~= nil then
-                return old_on_use(itemstack, player, pointed_thing)
-            else
-                return itemstack
+            -- No food groups assigned, so just revert to standard code
+            local func = core.item_eat(satiation, replacement_name)
+            func(itemstack, player, pointed_thing)
+
+            if old_on_use then
+                old_on_use(itemstack, player, pointed_thing)
             end
+
+            return itemstack
 
         end
 
@@ -125,7 +136,7 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
         local new_satiation = satiation
         if match_group ~= nil then
 
-            -- Reduce satation by the specified factor
+            -- Reduce satiation by the specified factor
             local factor = 1
             for i = 1, match_count do
                 factor = factor + (factor * past_factor)
@@ -133,19 +144,39 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
 
             new_satiation = new_satiation - (new_satiation * (factor - 1))
 
-            -- Tiny satiation values are treated the same as 0 satiation
+            -- Tiny satiation values are treated the same as 0 satiation (unless starvation
+            --      avoidance mode is active)
             if new_satiation < minimum_satiation then
 
-                core.chat_send_player(
-                    player:get_player_name(),
-                    S("You are sick of @1!", unilib.utils.get_first_line(def_table.description))
-                )
+                if unilib.setting.hunger_enable_flag and
+                        unilib.setting.cuisine_avoid_starvation_flag and
+                        unilib.stamina.get_saturation(player) <= 2 then
 
-                -- Call original on_use(), if provided
-                if old_on_use ~= nil then
-                    return old_on_use(itemstack, player, pointed_thing)
+                    -- (Increase satiation by the minimum amount to avoid starvation)
+                    new_satiation = 1
+
+                    core.chat_send_player(
+                        player:get_player_name(),
+                        S(
+                            "You are sick of @1, but you are starving!",
+                            unilib.utils.get_first_line(def_table.description)
+                        )
+                    )
+
                 else
+
+                    core.chat_send_player(
+                        player:get_player_name(),
+                        S("You are sick of @1!", unilib.utils.get_first_line(def_table.description))
+                    )
+
+                    -- Revert to standard code
+                    if old_on_use then
+                        old_on_use(itemstack, player, pointed_thing)
+                    end
+
                     return itemstack
+
                 end
 
             end
@@ -184,11 +215,11 @@ function unilib.cuisine.eat_on_use(full_name, satiation, replacement_name, old_o
         end
 
         -- Call original on_use(), if provided
-        if old_on_use ~= nil then
-            return old_on_use(itemstack, player, pointed_thing)
-        else
-            return itemstack
+        if old_on_use then
+            old_on_use(itemstack, player, pointed_thing)
         end
+
+        return itemstack
 
     end
 

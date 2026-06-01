@@ -316,32 +316,23 @@ function unilib.pkg.shared_atomic.post()
             unilib.utils.show_warning("shared_atomic package: Missing CSV file", constants_path)
         end
 
+        -- This package, and the packages that depend on it, are specified by the "unilib" remix; if
+        --      the "atomic" remix hasn't been loaded, then its constants.csv has not been read, and
+        --      so there's nothing to do
+        return
+
     else
 
         for key, value in pairs(unilib.global.remix_constants_table[remix_name]) do
 
-            -- Values read from constants.csv are in string format, so must be checked and converted
+            -- Values read from constants.csv are in string format. We can ignore any that can't
+            --      be converted to numerals (assuming that they're intended for some other package)
+            value = tonumber(value)
             if key ~= nil and value ~= nil then
 
-                if not string.find(key, "%a") then
-
-                    unilib.utils.show_warning(
-                        "shared_atomic: Invalid constant", constants_path, i
-                    )
-
-                elseif not string.find(value, "[%d]") then
-
-                    unilib.utils.show_warning(
-                        "biome_gaia shared_atomic: Invalid constant value", constants_path, i
-                    )
-
-                else
-
-                    unilib.pkg.shared_atomic.constant_table[key] = tonumber(value)
-                    -- (Table is not empty)
-                    unilib.pkg.shared_atomic.constant_flag = true
-
-                end
+                unilib.pkg.shared_atomic.constant_table[key] = value
+                -- (Table is not empty)
+                unilib.pkg.shared_atomic.constant_flag = true
 
             end
 

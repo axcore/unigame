@@ -5,6 +5,7 @@
 # node_name | original_mod
 
 chat_clear_food_history|unilib
+chat_create_remix|unilib
 chat_cripple_health|unilib
 chat_cripple_hunger|unilib
 chat_cripple_me|unilib
@@ -27,6 +28,7 @@ chat_dump_node|unilib
 chat_dump_ore|unilib
 chat_dump_tool|unilib
 chat_dusk|unilib
+chat_edit_remix|unilib
 chat_find_biome|findbiomes unilib
 chat_find_node|unilib
 chat_list_expansion|unilib
@@ -39,14 +41,18 @@ chat_reset_me|unilib
 chat_reset_mod_attribute|unilib
 chat_reset_player_attribute|unilib
 chat_reset_thirst|unilib
+chat_reset_weather|unilib
 chat_set_mod_attribute|unilib
 chat_set_player_attribute|unilib
+chat_set_weather|unilib
 chat_show_elements|unilib
 chat_show_food_history|unilib
 chat_show_mod_attributes|unilib
 chat_show_player_attributes|unilib
+chat_show_weather|unilib
 chat_teleport|unilib
 chat_test|unilib
+chat_unilib|unilib
 chat_update_slope|unilib
 
 # supporting packages (.depends)

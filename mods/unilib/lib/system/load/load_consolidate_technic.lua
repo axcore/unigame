@@ -16,80 +16,74 @@ for part_name, data_table in pairs(unilib.global.stone_table) do
 
     if data_table.grinder_flag == true then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        local smooth_name = "unilib:stone_" .. part_name
+        local cobble_name = "unilib:stone_" .. part_name .. "_cobble"
+        local compressed_name = "unilib:stone_" .. part_name .. "_cobble_compressed"
 
-            local smooth_name = "unilib:stone_" .. part_name
-            local cobble_name = "unilib:stone_" .. part_name .. "_cobble"
-            local compressed_name = "unilib:stone_" .. part_name .. "_cobble_compressed"
+        if core.registered_nodes[smooth_name] ~= nil then
 
-            if core.registered_nodes[smooth_name] ~= nil then
+            if data_table.grinder_powder ~= nil and
+                    core.registered_nodes[data_table.grinder_powder] ~= nil then
 
-                if data_table.grinder_powder ~= nil and
-                        core.registered_nodes[data_table.grinder_powder] ~= nil then
+                technic.register_grinder_recipe({
+                    output = data_table.grinder_powder .. " " ..
+                            tostring(unilib.setting.technic_grind_stone_ratio),
+                    input = {smooth_name},
+                })
 
-                    technic.register_grinder_recipe({
-                        output = data_table.grinder_powder .. " " ..
-                                tostring(unilib.setting.technic_grind_stone_ratio),
-                        input = {smooth_name},
-                    })
+            elseif core.registered_nodes["unilib:stone_ordinary_powder"] ~= nil then
 
-                elseif core.registered_nodes["unilib:stone_ordinary_powder"] ~= nil then
-
-                    technic.register_grinder_recipe({
-                        output = "unilib:stone_ordinary_powder " ..
-                                tostring(unilib.setting.technic_grind_stone_ratio),
-                        input = {smooth_name},
-                    })
-
-                end
+                technic.register_grinder_recipe({
+                    output = "unilib:stone_ordinary_powder " ..
+                            tostring(unilib.setting.technic_grind_stone_ratio),
+                    input = {smooth_name},
+                })
 
             end
 
-            if core.registered_nodes[cobble_name] ~= nil then
+        end
 
-                if data_table.grinder_gravel ~= nil and
-                        core.registered_nodes[data_table.grinder_gravel] ~= nil then
+        if core.registered_nodes[cobble_name] ~= nil then
 
-                    technic.register_grinder_recipe({
-                        output = data_table.grinder_gravel,
-                        input = {cobble_name},
-                    })
+            if data_table.grinder_gravel ~= nil and
+                    core.registered_nodes[data_table.grinder_gravel] ~= nil then
 
-                elseif core.registered_nodes["unilib:gravel_ordinary"] ~= nil then
+                technic.register_grinder_recipe({
+                    output = data_table.grinder_gravel,
+                    input = {cobble_name},
+                })
 
-                    technic.register_grinder_recipe({
-                        output = "unilib:gravel_ordinary",
-                        input = {cobble_name},
-                    })
+            elseif core.registered_nodes["unilib:gravel_ordinary"] ~= nil then
 
-                end
-
-            end
-
-            if core.registered_nodes[compressed_name] ~= nil then
-
-                if data_table.grinder_gravel ~= nil and
-                        core.registered_nodes[data_table.grinder_gravel] ~= nil then
-
-                    technic.register_grinder_recipe({
-                        output = data_table.grinder_gravel .. " 9",
-                        input = {compressed_name},
-                    })
-
-                elseif core.registered_nodes["unilib:gravel_ordinary"] ~= nil then
-
-                    technic.register_grinder_recipe({
-                        output = "unilib:gravel_ordinary 9",
-                        input = {compressed_name},
-                    })
-
-                end
+                technic.register_grinder_recipe({
+                    output = "unilib:gravel_ordinary",
+                    input = {cobble_name},
+                })
 
             end
 
-        end)
+        end
+
+        if core.registered_nodes[compressed_name] ~= nil then
+
+            if data_table.grinder_gravel ~= nil and
+                    core.registered_nodes[data_table.grinder_gravel] ~= nil then
+
+                technic.register_grinder_recipe({
+                    output = data_table.grinder_gravel .. " 9",
+                    input = {compressed_name},
+                })
+
+            elseif core.registered_nodes["unilib:gravel_ordinary"] ~= nil then
+
+                technic.register_grinder_recipe({
+                    output = "unilib:gravel_ordinary 9",
+                    input = {compressed_name},
+                })
+
+            end
+
+        end
 
     end
 

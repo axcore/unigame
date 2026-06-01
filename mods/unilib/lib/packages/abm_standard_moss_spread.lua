@@ -42,7 +42,7 @@ function unilib.pkg.abm_standard_moss_spread.post()
 
             action = function(pos, node)
 
-                node.name = moss_table[node.name]
+                node.name = unilib.pkg.shared_standard.moss_table[node.name]
                 if node.name then
                     core.set_node(pos, node)
                 end

@@ -90,27 +90,27 @@ function unilib.pkg.plant_kelp_ordinary.exec()
             local pos_top = {x = pos.x, y = pos.y + height, z = pos.z}
             local node_top = core.get_node(pos_top)
             local def_top = core.registered_nodes[node_top.name]
-            local player_name = placer:get_player_name()
+            local pname = placer:get_player_name()
 
             if def_top and def_top.liquidtype == "source" and
                     core.get_item_group(node_top.name, "water") > 0 then
 
-                if not core.is_protected(pos, player_name) and
-                        not core.is_protected(pos_top, player_name) then
+                if not core.is_protected(pos, pname) and
+                        not core.is_protected(pos_top, pname) then
 
                     core.set_node(
                         pos,
                         {name = "unilib:plant_kelp_ordinary", param2 = height * 16}
                     )
 
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
                         itemstack:take_item()
                     end
 
                 else
 
-                    core.chat_send_player(player_name, S("Node is protected"))
-                    core.record_protection_violation(pos, player_name)
+                    core.chat_send_player(pname, S("Node is protected"))
+                    core.record_protection_violation(pos, pname)
 
                 end
 

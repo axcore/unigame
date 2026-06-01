@@ -1,0 +1,3 @@
+Contains everything from the columnia, facade and mymillwork mods.
+
+Code from these mods handling carvings has been incorporated directly into unilib's core code. This includes some nodes from farlands, whose packages are not otherwise included in this remix.

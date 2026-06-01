@@ -29,7 +29,10 @@ function unilib.pkg.plant_shrub_hog_peanut.exec()
         -- From farlands, mapgen:shrub
         description = unilib.utils.annotate(S("Hog Peanut Shrub"), "Amphicarpaea bracteata"),
         tiles = {"unilib_plant_shrub_hog_peanut.png"},
-        groups = {flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3},
+        -- N.B. attached_node = 1 not in original code
+        groups = {
+            attached_node = 1, flammable = 1, flora = 1, oddly_breakable_by_hand = 1, snappy = 3,
+        },
         sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,

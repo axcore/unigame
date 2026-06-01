@@ -1,0 +1,9 @@
+Contains items from the xtraores modpack (GreenDimond fork): almost everything from xtraores/xtraores, but not the other mods.
+
+See also the "xtraores" remix which does contain items from the other mods, as well as from xtraores/xtraores.
+
+Cobalt, osmium, platinum and titanium have been renamed as fictional sybilline, ozymandium, planexium and tritonium to avoid clashing with any code that wants the real-life metals.
+
+The spelling of geminitinum has been tweaked to geminitium, because no-one can type it.
+
+Does not include support for awards (yet).

@@ -1,0 +1,63 @@
+# "awards" remix - contains packages that define player awards
+
+# node_name | original_mod
+
+# awards packages
+award_addict|unilib
+award_adventurer|unilib
+award_armourer|unilib
+award_artisan|unilib
+award_atomic|unilib
+award_botanist|unilib
+award_carpenter|unilib
+award_craftsman|unilib
+award_daredevil|unilib
+award_engineer|unilib
+award_farmer|unilib
+award_fisherman|unilib
+award_general|unilib
+award_geologist|unilib
+award_gourmand|unilib
+award_killer|unilib
+award_lumberjack|unilib
+award_mountaineer|unilib
+award_random|unilib
+award_spelunker|unilib
+award_stonecutter|unilib
+award_toolsmith|unilib
+award_trainspotter|unilib
+award_voyager|unilib
+award_voyager_biomes|unilib
+award_weaponsmith|unilib
+chat_awards|unilib
+chat_check_vocations|unilib
+chat_dump_achievement|unilib
+chat_dump_player_award|unilib
+chat_dump_trigger|unilib
+chat_dump_vocation|unilib
+chat_show_achievement|unilib
+chat_show_trigger|unilib
+chat_show_vocation|unilib
+chat_unlock_achievement|unilib
+chat_unlock_vocation|unilib
+inventory_awards_ip|unilib
+inventory_awards_sfinv|unilib
+inventory_awards_ui|unilib
+item_certificate_award|unilib
+
+# awards packages (moved to unidrinks expansion pack)
+#award_brewer|unidrinks
+#award_fermenter|unidrinks
+
+# awards packages (moved to unimobs expansion pack)
+#award_ranger|unimobs
+#award_warrior|unimobs
+#award_zoologist|unimobs
+
+# supporting packages (.depends)
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

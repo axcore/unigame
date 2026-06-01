@@ -44,7 +44,7 @@ function unilib.pkg.mineral_almandine.exec()
 
         unilib.register_craftitem("unilib:mineral_almandine_gem", nil, mode, {
             -- Original to unilib
-            description = S("aalmandine Gem"),
+            description = S("Almandine Gem"),
             inventory_image = "unilib_mineral_almandine_gem.png",
         })
         unilib.register_craft({

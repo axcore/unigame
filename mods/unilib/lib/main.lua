@@ -24,6 +24,8 @@ dofile(unilib.core.path_mod .. "/lib/system/sound/sound.lua")
 -- Set up registration functions, including replacements for several Minetest registration functions
 dofile(unilib.core.path_mod .. "/lib/system/register/register.lua")
 
+-- Set up the unilib system GUI
+dofile(unilib.core.path_mod .. "/lib/system/gui/gui.lua")
 -- Set up the unilib HUD
 dofile(unilib.core.path_mod .. "/lib/system/hud/hud.lua")
 
@@ -104,6 +106,12 @@ dofile(unilib.core.path_mod .. "/lib/shared/dynamic/dynamic.lua")
 -- Load files - ../lib/effects
 ---------------------------------------------------------------------------------------------------
 
+-- Set up weather and ambient effects
+dofile(unilib.core.path_mod .. "/lib/effects/atmosphere/atmosphere.lua")
+
+-- Set up player awards
+dofile(unilib.core.path_mod .. "/lib/effects/awards/awards.lua")
+
 -- Set up advanced cuisine
 dofile(unilib.core.path_mod .. "/lib/effects/cuisine/cuisine.lua")
 -- Set up hydration/thirst
@@ -130,6 +138,9 @@ dofile(unilib.core.path_mod .. "/lib/system/load/load.lua")
 -- Set up player alarms
 dofile(unilib.core.path_mod .. "/lib/effects/alarms/alarms.lua")
 
+-- Set up HUD announcements
+dofile(unilib.core.path_mod .. "/lib/effects/announce/announce.lua")
+
 -- Apply special effects to Minetest builtin entities
 dofile(unilib.core.path_mod .. "/lib/effects/builtin/builtin.lua")
 
@@ -142,7 +153,7 @@ dofile(unilib.core.path_mod .. "/lib/effects/flooding/flooding.lua")
 -- Set the hotbar size for each player
 dofile(unilib.core.path_mod .. "/lib/effects/hotbar/hotbar.lua")
 
--- Set up the HUD window identifying the pointed-at node
+-- Set up the HUD announcement identifying the pointed-at node
 dofile(unilib.core.path_mod .. "/lib/effects/identify/identify.lua")
 
 -- Set up Minecraft-style item drop/get

@@ -23,9 +23,19 @@ local function do_dump_ore(pname, param)
     for _, ore_table in pairs(core.registered_ores) do
 
         if param == "" or
-                (ore_table.type ~= nil and string.find(ore_table.type, param)) or
-                (ore_table.ore ~= nil and string.find(ore_table.ore, param)) or
-                (ore_table.wherein ~= nil and string.find(ore_table.wherein, param)) then
+                (
+                    ore_table.type ~= nil and
+                    string.find(ore_table.type, param)
+                ) or (
+                    ore_table.ore ~= nil and
+                    string.find(ore_table.ore, param)
+                ) or (
+                    type(ore_table.wherein) == "string" and
+                    string.find(ore_table.wherein, param)
+                ) or (
+                    type(ore_table.wherein) == "table" and
+                    unilib.utils.is_value_in_list(param, ore_table.wherein)
+                ) then
 
             table.insert(ore_list, ore_table)
             count = count + 1

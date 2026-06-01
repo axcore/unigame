@@ -60,7 +60,8 @@ function unilib.pkg.flower_frozen.exec()
 
             unilib.register_node(full_name, orig_name, mode, {
                 -- From snow:flower_rose, etc
-                -- (no description)
+                -- N.B. No description in original code
+                description = unilib.utils.brackets(S("Frozen Flower"), def_table.description),
                 tiles = {"unilib_" .. pkg_name .. "_frozen.png"},
                 -- N.B. not_in_creative_inventory not in original code (added here for clarity)
                 groups = {attached_node = 1, not_in_creative_inventory = 1, snappy = 3},

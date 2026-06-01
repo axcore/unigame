@@ -170,7 +170,20 @@ function unilib.pkg.machine_atomic_vapouriser.exec()
 
         end,
 
-        on_metadata_inventory_put = function(pos)
+        on_metadata_inventory_move = function(
+            pos, from_list, from_index, to_list, to_index, count, player
+        )
+            -- Store the name of the player who placed items in each inventory slot (I tried storing
+            --      the name in each itemstack's metadata, but it didn't work as intended)
+            local meta = core.get_meta(pos)
+            -- N.B. If the player moves a partial stack from one inventory slot to another (for
+            --      some reason), then the receiving slot "wins"
+            meta:set_string("slot_" .. from_index, "")
+            meta:set_string("slot_" .. to_index, player:get_player_name())
+
+        end,
+
+        on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
             local meta = core.get_meta(pos)
             local inv = meta:get_inventory()
@@ -180,6 +193,15 @@ function unilib.pkg.machine_atomic_vapouriser.exec()
                 core.get_node_timer(pos):start(unilib.pkg.shared_atomic.transfer_time)
 
             end
+
+            meta:set_string("slot_" .. index, player:get_player_name())
+
+        end,
+
+        on_metadata_inventory_take = function(pos, listname, index, stack, player)
+
+            local meta = core.get_meta(pos)
+            meta:set_string("slot_" .. index, "")
 
         end,
 
@@ -210,7 +232,6 @@ function unilib.pkg.machine_atomic_vapouriser.exec()
 
             end
 
-
             -- Get the next (i.e. first remaining) itemstack in the vapouriser's inventory, which
             --      will be transferred to the first tube in the chain
             local stack, slot = get_next_item(pos)
@@ -223,9 +244,24 @@ function unilib.pkg.machine_atomic_vapouriser.exec()
 
             -- Pass the item to the tube...
             unilib.pkg.misc_atomic_tube.receive_input(pos, tube_pos, vector_pos, stack:get_name())
-            -- ...and remove it from our inventory
+            -- ...remove it from our inventory...
             stack:take_item(1)
             inv:set_stack("input", slot, stack)
+            -- ...and update awards, if available
+            if unilib.global.pkg_executed_table["award_atomic"] ~= nil then
+
+                local pname = meta:get_string("slot_" .. slot)
+                if pname then
+
+                    unilib.pkg.award_atomic.on_vapourise(
+                        core.get_player_by_name(pname),
+                        stack:get_name(),
+                        1
+                    )
+
+                end
+
+            end
 
             -- Continue the timer for the next item (if any)
             return true

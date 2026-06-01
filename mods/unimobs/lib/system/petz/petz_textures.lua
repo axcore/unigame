@@ -102,6 +102,24 @@ function unimobs.petz_api.get_skin_description(self)
 
 end
 
+function unimobs.petz_api.get_skin_type(self)
+
+    -- Original to unimobs
+    -- Get the skin type of the specified mob's current skin, or nil on failure
+
+    local skin_init_list
+    if self.petz_compat_flag then
+        skin_init_list = unimobs.petz_global.mob_table[self.mob_type]["skin_init_list"]
+    end
+
+    if not skin_init_list or not self.mob_texture_num then
+        return
+    else
+        return skin_init_list[self.mob_texture_num] or ""
+    end
+
+end
+
 ---------------------------------------------------------------------------------------------------
 -- Shared API functions (from petz/petz/api/api_colorize.lua)
 ---------------------------------------------------------------------------------------------------

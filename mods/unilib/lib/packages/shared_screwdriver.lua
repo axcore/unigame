@@ -181,11 +181,11 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
     end
 
     local pos = pointed_thing.under
-    local player_name = user and user:get_player_name() or ""
+    local pname = user and user:get_player_name() or ""
 
-    if core.is_protected(pos, player_name) then
+    if core.is_protected(pos, pname) then
 
-        core.record_protection_violation(pos, player_name)
+        core.record_protection_violation(pos, pname)
         return
 
     end
@@ -197,7 +197,13 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
     end
 
     -- Can we rotate this paramtype2?
-    local fn = screwdriver.rotate[ndef.paramtype2]
+    local fn
+    if ndef.paramtype2 == "4dir" then
+        fn = unilib.pkg.shared_screwdriver.rotate_4dir
+    elseif ndef.paramtype2 == "color4dir" then
+        fn = unilib.pkg.shared_screwdriver.rotate_colour_4dir
+    end
+    
     if not fn and not ndef.on_rotate then
         return itemstack
     end
@@ -256,7 +262,7 @@ function unilib.pkg.shared_screwdriver.handler(itemstack, user, pointed_thing, m
 
     end
 
-    if not unilib.utils.is_creative(player_name) then
+    if not unilib.utils.is_creative(pname) then
         itemstack:add_wear_by_uses(uses or 200)
     end
 

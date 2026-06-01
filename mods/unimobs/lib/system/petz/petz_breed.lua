@@ -515,18 +515,18 @@ local function create_baby_entity(self)
         )
 
         -- Retrieve the corresponding entity, and tweak its properties
-        local baby_luaent = baby_obj:get_luaentity()
+        local baby_entity = baby_obj:get_luaentity()
 
-        baby_luaent.is_baby_flag =
-                unimobs.mobkit_api.add_mob_memory(baby_luaent, "is_baby_flag", true)
-        baby_luaent.generation_count = unimobs.mobkit_api.add_mob_memory(
-            baby_luaent, "generation_count", baby_luaent.generation_count + 1
+        baby_entity.is_baby_flag =
+                unimobs.mobkit_api.add_mob_memory(baby_entity, "is_baby_flag", true)
+        baby_entity.generation_count = unimobs.mobkit_api.add_mob_memory(
+            baby_entity, "generation_count", baby_entity.generation_count + 1
         )
-        baby_luaent.baby_growth_max_time = unimobs.mobkit_api.add_mob_memory(
-            baby_luaent,
+        baby_entity.baby_growth_max_time = unimobs.mobkit_api.add_mob_memory(
+            baby_entity,
             "baby_growth_max_time",
             adjust_time_by_fertility(
-                baby_luaent,
+                baby_entity,
                 unimobs.petz_setting.default_baby_growth_interval
             )
         )
@@ -535,10 +535,10 @@ local function create_baby_entity(self)
         -- A tamed parent produces a tamed baby
         if self.owner ~= nil and self.owner ~= "" then
 
-            baby_luaent.is_tamed_flag =
-                    unimobs.mobkit_api.add_mob_memory(baby_luaent, "is_tamed_flag", true)
-            baby_luaent.owner =
-                    unimobs.mobkit_api.add_mob_memory(baby_luaent, "owner", self.owner)
+            baby_entity.is_tamed_flag =
+                    unimobs.mobkit_api.add_mob_memory(baby_entity, "is_tamed_flag", true)
+            baby_entity.owner =
+                    unimobs.mobkit_api.add_mob_memory(baby_entity, "owner", self.owner)
 
         end
         ]]--
@@ -573,16 +573,16 @@ local function create_baby_entity(self)
 
             if tame_baby_flag then
 
-                baby_luaent.is_tamed_flag =
-                        unimobs.mobkit_api.add_mob_memory(baby_luaent, "is_tamed_flag", true)
-                baby_luaent.owner =
-                        unimobs.mobkit_api.add_mob_memory(baby_luaent, "owner", self.owner)
+                baby_entity.is_tamed_flag =
+                        unimobs.mobkit_api.add_mob_memory(baby_entity, "is_tamed_flag", true)
+                baby_entity.owner =
+                        unimobs.mobkit_api.add_mob_memory(baby_entity, "owner", self.owner)
 
             end
 
         end
 
-        return baby_luaent
+        return baby_entity
 
     else
 
@@ -631,6 +631,27 @@ function unimobs.petz_api.pregnant_timer(self, dtime)
 
             inherit_genetics_from_parents(self, baby_entity)
             unimobs.petz_api.update_mob_properties_from_genetics(baby_entity)
+
+            -- Update awards, if available
+            if self.owner then
+
+                if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+
+                    unilib.pkg.award_zoologist.on_mob_breed(
+                        core.get_player_by_name(self.owner), baby_entity
+                    )
+
+                end
+
+                if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+
+                    unilib.pkg.award_ranger.on_mob_breed(
+                        core.get_player_by_name(self.owner), baby_entity
+                    )
+
+                end
+
+            end
 
         end
 

@@ -116,7 +116,7 @@ end
 function unilib.pkg.chat_list_buckets.exec()
 
     core.register_chatcommand("list_buckets", {
-        params = "",
+        params = "[type]",
         description = S("Lists bucket types, or a list of buckets of the specified type"),
         privs = {unilib_tools = true},
 
@@ -126,7 +126,7 @@ function unilib.pkg.chat_list_buckets.exec()
     })
 
     core.register_chatcommand("list_bucket", {
-        params = "",
+        params = "[type]",
         description = S("Lists bucket types, or a list of buckets of the specified type"),
         privs = {unilib_tools = true},
 

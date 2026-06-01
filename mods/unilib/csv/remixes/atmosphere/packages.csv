@@ -1,0 +1,81 @@
+# "atmosphere" remix - contains packages which define weather effects, ambient sound effects and
+#   environment sound effects
+
+# node_name | original_mod
+
+# Weather effect prototypes and shared packages (should not be commented out)
+shared_weather|unilib
+weather_prototype_default|unilib
+weather_prototype_rain|unilib
+weather_prototype_sandstorm|unilib
+weather_prototype_snow|unilib
+weather_prototype_storm|unilib
+
+# Weather effect packages (comment out any that you don't want in your world)
+weather_cloud_heavy|unilib
+weather_cloud_light|unilib
+weather_cloud_normal|unilib
+weather_fog_heavy|unilib
+weather_fog_light|unilib
+weather_fog_normal|unilib
+weather_hail_heavy|unilib
+weather_hail_normal|unilib
+weather_rain_drizzle|unilib
+weather_rain_heavy|unilib
+weather_rain_light|unilib
+weather_rain_normal|unilib
+weather_sandstorm_heavy|unilib
+weather_sandstorm_normal|unilib
+weather_snow_heavy|unilib
+weather_snow_light|unilib
+weather_snow_normal|unilib
+weather_storm_distant|unilib
+weather_storm_heavy|unilib
+weather_storm_light|unilib
+weather_storm_normal|unilib
+
+# Packages providing snowfall/puddles (comment out both, if you don't want snowfall or puddles on
+#   the ground)
+misc_puddle|unilib
+shared_snow|snow
+
+# Weather-related nodes and chat commands
+chat_reset_weather|unilib
+chat_set_weather|unilib
+chat_show_weather|unilib
+item_brush_water|unilib
+machine_weather_calmer|unilib
+machine_weather_forecaster|unilib
+machine_weather_monitor|unilib
+machine_weather_switcher|unilib
+
+# Ambient sound effects
+# unilib does not (currenty) provide a range of ambient sound effects, only this one package which
+#   serves as a code example (uncomment it, if you want to test it)
+#ambient_forest_light|unilib
+
+# Environment sound effects
+# Unilib does not (currently) provide a range of enviroment sound effects (besides those for
+#   water and lava, as in minetest_game); this one package serves as a code example (uncomment it,
+#   if you want to test it)
+#machine_noisy|unilib
+
+# supporting packages (.depends)
+dirt_ordinary|default farming moreblocks
+dirt_ordinary_with_cover_snow|default
+dirt_ordinary_with_turf|default farming moreblocks
+ice_ordinary|default ethereal mtg_plus
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_gold|default glemr11 technic
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+mineral_coal|default technic
+mineral_mese|default glemr11
+snow_ordinary|default ethereal mtg_plus
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+
+# supporting packages (.suggested)

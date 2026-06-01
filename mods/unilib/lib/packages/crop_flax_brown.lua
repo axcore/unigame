@@ -28,7 +28,7 @@ function unilib.pkg.crop_flax_brown.exec()
 
     local c_harvest = "unilib:crop_flax_brown_harvest"
 
-    local fertility_list = {"desert_soil", "ordinary_soil"}
+    local fertility_list = {"desert_soil", "regular_soil"}
 
     local orig_name_list = {}
     for i = 1, 8 do

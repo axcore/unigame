@@ -30,8 +30,8 @@ function unilib.pkg.plant_raupo.exec()
         -- From aotearoa:raupo
         description = unilib.utils.annotate(S("Raupo"), "Typha orientalis"),
         tiles = {"unilib_plant_raupo.png"},
-        -- N.B. flora = 1 not in original code
-        groups = {dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
+        -- N.B. attached_node = 1, flora = 1 not in original code
+        groups = {attached_node = 1, dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
         sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,
@@ -80,7 +80,8 @@ function unilib.pkg.plant_raupo.exec()
         -- From aotearoa:raupo_flower
         description = unilib.utils.annotate(S("Raupo with Flowers"), "Typha orientalis"),
         tiles = {"unilib_plant_raupo_flower.png"},
-        groups = {dry_grass = 1, flammable = 1, snappy = 3},
+        -- N.B. attached_node = 1, flora = 1 not in original code
+        groups = {attached_node = 1, dry_grass = 1, flammable = 1, flora = 1, snappy = 3},
         sounds = unilib.global.sound_table.leaves,
 
         buildable_to = true,

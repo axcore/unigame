@@ -52,7 +52,7 @@ function unilib.pkg.liquid_water_pond.exec()
         damage_per_second = 0,
         drowning = 3,
         flowing_description = S("Flowing Pond Water"),
-        rgb_table = {r = 85, g = 85, g = 60, a = 128},
+        rgb_table = {r = 85, g = 60, b = 85, a = 128},
         source_description = S("Pond Water Source"),
         viscosity = 4,
     })

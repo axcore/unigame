@@ -59,6 +59,11 @@ function unimobs.petz_api.tame_mob_with_lash(self, puncher)
                 -- The mob does not attack in response to the lashing
                 unimobs.mobkit_api.clear_high_level_queue(self)
 
+                -- Update awards, if available
+                if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+                    unilib.pkg.award_zoologist.on_mob_tame(puncher, self)
+                end
+
             end
 
             unimobs.kitz_api.make_sound(

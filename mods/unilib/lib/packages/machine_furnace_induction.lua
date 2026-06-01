@@ -352,7 +352,7 @@ function unilib.pkg.machine_furnace_induction.exec()
             "unilib_machine_furnace_induction_side.png",
                 "unilib_machine_furnace_induction_side.png",
             {
-                image = "unilib_machine_furnace_induction_active_front.png",
+                name = "unilib_machine_furnace_induction_active_front.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",

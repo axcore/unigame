@@ -1,0 +1,4 @@
+Contains decorative items and mesecons compatibility, but no furniture.
+
+Warning - some of these items are processor-intensive, and should not be used on a server.
+

@@ -1,0 +1,17 @@
+A large collection of biomes, ecosystems, decorations and ores with a focus on natural materials and naturalistic beauty, based on various versions of GLEM (but heavily modified).
+
+The world is divided into five temperature zones (hot, warm, mild, cool, cold), six humidity zones (humid, semihumid, temperate, semiarid, arid, desert) and eight height levels (ocean, beach, coastal, lowland, shelf, highland, mountain, strato) producing 240 unique biomes.
+
+In addition, each biome has a number of "ecosystems" - areas which are slightly different to their parent biome, in which a different selection of items are placed, so that each biome doesn't look the same in every direction. (Ecosystems are implemented as Minetest ores.)
+
+A set of custom dirts is created for each biome. Food is widely available, but crop and produce items are generally found in certain forested areas.
+
+Ore distributions from several mods have been added (namely badlands, darkage, minetest_game, GLEMr4, moreores, technic and underch). By default, these ores extend to the bottom of the world. If you want to change the lower limit, for example because this remix is being alongside a package like "magpen_underch", you can edit the variable in the "ore_gaia" package.
+
+The "gaia" remix should be played alongside the "mtgame_mini" remix, or some other suitable replacement.
+
+The "gaia" remix is designed to be compatible with the following remixes which generate underworld pseudo-biomes (below the OCEAN level, as defined in the constants.csv file): "mapgen_hades", "mapgen_hades_jit", "mapgen_underch", "mapgen_underch_jit"
+
+In this context, "compatible" means that "gaia" won't generate ores below that level, thus not duplicating ore distributions from the underworld remixes.
+
+A stripped-down version of this remix, "gaia_simple", is available. It removes all ecosystems and therefore requires fewer packages (at the cost of a less beautiful world).

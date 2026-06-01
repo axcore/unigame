@@ -15,15 +15,23 @@ local mode = unilib.global.imported_mod_table.flowerpot.add_mode
 -- Local functions
 ---------------------------------------------------------------------------------------------------
 
-local function get_tile(def_table)
+local function get_tile(full_name, tile_list)
 
     -- Adapted from flowerpot/init.lua, get_tile()
 
-    local tile = def_table.tiles[1]
-    if type (tile) == "table" then
-        return tile.name
+    if unilib.global.flowerpot_overlay_table[full_name] ~= nil then
+
+        return unilib.global.flowerpot_overlay_table[full_name]
+
     else
-        return tile
+
+        local item = tile_list[1]
+        if type (item) == "table" then
+            return item.name
+        else
+            return item
+        end
+
     end
 
 end
@@ -148,7 +156,7 @@ function unilib.pkg.flowerpot_normal.post()
 
             img_list = {
                 {name = "unilib_flowerpot_normal.png"},
-                {name = get_tile(def_table)},
+                {name = get_tile(full_name, def_table.tiles)},
                 {name = "blank.png"},
             }
 
@@ -157,7 +165,7 @@ function unilib.pkg.flowerpot_normal.post()
             img_list = {
                 {name = "unilib_flowerpot_normal.png"},
                 {name = "blank.png"},
-                {name = get_tile(def_table)},
+                {name = get_tile(full_name, def_table.tiles)},
             }
 
         end

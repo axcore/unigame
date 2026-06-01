@@ -41,8 +41,8 @@ function unilib.pkg.stone_brownstone_dark.exec()
         -- From GLEMr4, lib_materials:stone_brown
         description = S("Dark Brownstone"),
         tiles = {"unilib_stone_brownstone_dark.png"},
-        -- N.B. smoothstone = 1 not in original code
-        groups = {cracky = 3, level = 2, smoothstone = 1, stone = 1},
+        -- N.B. smoothstone = 1 not in original code; level = 2 was in original code
+        groups = {cracky = 3, smoothstone = 1, stone = 1},
         sounds = unilib.global.sound_table.stone,
 
         -- N.B. drop not in original code

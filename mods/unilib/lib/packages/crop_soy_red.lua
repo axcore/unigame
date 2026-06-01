@@ -26,7 +26,7 @@ end
 
 function unilib.pkg.crop_soy_red.exec()
 
-    local fertility_list = {"ordinary_soil"}
+    local fertility_list = {"regular_soil"}
 
     local orig_name_list = {}
     for i = 1, 8 do
@@ -72,9 +72,10 @@ function unilib.pkg.crop_soy_red.exec()
 
             replace_mode = mode,
             fertility_list = fertility_list,
+            -- N.B. growing = 1 not in original code
             grow_group_table = {
-                attached_node = 1, dig_immediate = 1, flammable = 4, not_in_creative_inventory = 1,
-                plant = 1, snappy = 3,
+                attached_node = 1, dig_immediate = 1, flammable = 4, growing = 1,
+                not_in_creative_inventory = 1, plant = 1, snappy = 3,
             },
             grow_list = {
                 {},

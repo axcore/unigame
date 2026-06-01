@@ -198,6 +198,18 @@ end
 -- Shared functions (other)
 ---------------------------------------------------------------------------------------------------
 
+function unilib.pkg.shared_default_furnace.allow_metadata_inventory_move(
+    pos, from_list, from_index, to_list, to_index, count, player
+)
+    local meta = core.get_meta(pos)
+    local inv = meta:get_inventory()
+    local stack = inv:get_stack(from_list, from_index)
+    return unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
+        pos, to_list, to_index, stack, player
+    )
+
+end
+
 function unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
     pos, listname, index, stack, player
 )
@@ -233,18 +245,6 @@ function unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
         return 0
 
     end
-
-end
-
-function unilib.pkg.shared_default_furnace.allow_metadata_inventory_move(
-    pos, from_list, from_index, to_list, to_index, count, player
-)
-    local meta = core.get_meta(pos)
-    local inv = meta:get_inventory()
-    local stack = inv:get_stack(from_list, from_index)
-    return unilib.pkg.shared_default_furnace.allow_metadata_inventory_put(
-        pos, to_list, to_index, stack, player
-    )
 
 end
 

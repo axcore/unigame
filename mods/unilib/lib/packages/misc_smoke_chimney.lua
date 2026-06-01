@@ -32,7 +32,7 @@ function unilib.pkg.misc_smoke_chimney.exec()
         description = S("Chimney Smoke"),
         tiles = {
             {
-                image = "unilib_misc_smoke_chimney_animated.png",
+                name = "unilib_misc_smoke_chimney_animated.png",
                 backface_culling = false,
                 animation = {
                     type = "vertical_frames",

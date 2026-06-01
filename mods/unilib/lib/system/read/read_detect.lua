@@ -40,7 +40,19 @@ end
 local function populate_file_locations()
 
     -- Global variables such as unilib.global.pkg_path_list must be populated with paths to various
-    --      folders, some in unilib, some in expansion packs
+    --      folders, some in unilib, some in expansion packs, some in mod data storage
+
+    for _, path in ipairs(unilib.global.data_pkg_path_list) do
+        table.insert(unilib.global.pkg_path_list, path)
+    end
+
+    for _, path in ipairs(unilib.global.data_remix_path_list) do
+        table.insert(unilib.global.remix_path_list, path)
+    end
+
+    for _, path in ipairs(unilib.global.data_info_path_list) do
+        table.insert(unilib.global.info_path_list, path)
+    end
 
     for _, ext_pack_name in ipairs(unilib.global.ext_pack_list) do
 

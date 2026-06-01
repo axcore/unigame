@@ -11,6 +11,9 @@ unilib.pkg.torch_unlit = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.real_torch.add_mode
 
+-- If the setting is enabled, how long an unlit can exist in the world, before disappearing
+local vanish_time = 60*60
+
 ---------------------------------------------------------------------------------------------------
 -- Local functions
 ---------------------------------------------------------------------------------------------------
@@ -348,4 +351,32 @@ function unilib.pkg.torch_unlit.exec()
         end,
     })
 
+    -- If the setting is enabled, override unlit torches so they disappear, after a time (original
+    --      to unilib)
+    if unilib.setting.real_torch_tidy_flag then
+
+        for _, full_name in ipairs({
+            "unilib:torch_unlit", "unilib:torch_unlit_wall", "unilib:torch_unlit_ceiling",
+        }) do
+
+            unilib.override_item(full_name, {
+
+                on_construct = function(pos)
+                    core.get_node_timer(pos):start(vanish_time)
+                end,
+
+                on_timer = function(pos, elapsed)
+
+                    local node = core.get_node(pos)
+                    if node and node.name == full_name then
+                        core.remove_node(pos)
+                    end
+                    
+                end,
+            })
+
+        end
+
+    end
+    
 end

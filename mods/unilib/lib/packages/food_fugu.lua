@@ -63,7 +63,7 @@ function unilib.pkg.food_fugu.exec()
         recipe = {
             {
                 "unilib:utensil_board_cutting",
-                "unilib:ingredient_fish_pufferfish",
+                "unilib:ingredient_fish_pufferfish_tiger",
                 "group:food_soy_sauce",
             },
         },

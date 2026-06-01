@@ -338,7 +338,10 @@ function unilib.register._replace_item(full_name, orig_name_list)
                 --      "item_key_ordinary" package tries to map both of them on to
                 --      "unilib:item_key_ordinary", causing a Minetest warning
                 -- In that case, this code resolves the situation without generating any warnings
-                core.register_alias_force(core.registered_aliases[orig_name], full_name)
+--              core.register_alias_force(core.registered_aliases[orig_name], full_name)
+                if full_name ~= core.registered_aliases[orig_name] then
+                    core.register_alias_force(core.registered_aliases[orig_name], full_name)
+                end
                 core.register_alias_force(orig_name, full_name)
 
             end

@@ -1,9 +1,9 @@
-# "moretrees" remix - contains everything from moretrees
+# "moretrees" remix - contains everything from the moretrees mod
 # Some code has been simplified. Coconuts and dates do not regrow. Date palm trees are not
 #   pollinated
 # Raw coconuts have been merged with coconut slices from ethereal-ng
-# Calls to biome_lib have been crudely emulated by Minetest decorations, so trees will not spawn in
-#   the same positions/quantities
+# Calls to biome_lib have been crudely re-implemented as Minetest decorations, so trees will not
+#   spawn in the same positions/quantities
 # Coconuts can only be cut with cutting boards
 
 # node_name | original_mod

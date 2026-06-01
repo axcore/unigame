@@ -69,7 +69,11 @@ function unilib.pkg.misc_painting_landscape.exec()
         -- Adapted from xdecor:painting_1, but with a new painting
         description = S("Landscape Painting"),
         tiles = {"unilib_misc_painting_landscape_1.png", "unilib_misc_painting_frame_large.png"},
-        groups = {attached_node = 1, choppy = 3, flammable = 2, oddly_breakable_by_hand = 2},
+        -- N.B. painting = 1 , landscape_painting = 1 not in original code
+        groups = {
+            attached_node = 1, choppy = 3, flammable = 2, landscape_painting = 1,
+            oddly_breakable_by_hand = 2, painting = 1,
+        },
         sounds = unilib.global.sound_table.wood,
 
         collision_box = selection_box,

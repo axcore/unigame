@@ -3,51 +3,118 @@
 #unique flag name|flag image|description
 
 # National flags
+albania||Albania
+andorra||Andorra
+argentina||Argentina
+armenia||Armenia
 australia||Australia
 austria||Austria
 belgium||Belgium
+bosnia||Bosnia and Herzogovina
+brazil||Brazil
 bulgaria||Bulgaria
 canada||Canada
+chile||Chile
+colombia||Colombia
 croatia||Croatia
 cyprus||Cyprus
 czech||Czech Republic
 denmark||Denmark
-england||England
+egypt||Egypt
 estonia||Estonia
-falklands||Falklands
 finland||Finland
 france||France
 georgia||Georgia
 germany||Germany
-gibraltar||Gibraltar
+ghana||Ghana
 greece||Greece
-guernsey||Guernsey
 hungary||Hungary
 iceland||Iceland
+india||India
+indonesia||Indonesia
 ireland||Ireland
 italy||Italy
-jersey||Jersey
+jamaica||Jamaica
+japan||Japan
+kenya||Kenya
 latvia||Latvia
+liechtenstein||Liechtenstein
 lithuania||Lithuania
 luxembourg||Luxembourg
 malta||Malta
-manx||Isle of Man
+mexico||Mexico
 moldova||Moldova
+monaco||Monaco
 netherlands||The Netherlands
-ni||Northern Ireland
+nigeria||Nigeria
+nkorea||North Korean
+nmacedonia||North Macedonia
 norway||Norway
 nz||New Zealand
+pakistan||Pakistan
+philippines||Philippines
 poland||Poland
 portugal||Portugal
 romania||Romania
-scotland||Scotland
+smarino||San Marino
+serbia||Serbia
+slovakia||Slovakia
+slovenia||Slovenia
+safrica||South Africa
+skorea||South Korea
 spain||Spain
 sweden||Sweden
 switzerland||Switzerland
+thailand||Thailand
+trinidad||Trinidad and Tobago
+turkey||Turkey
 uk||United Kingdom
 ukraine||Ukraine
 usa||United States
+
+# Regional flags
+beds||Bedfordshire
+bucks||Buckinghamshire
+cambs||Cambridgeshire
+camb_uni||University of Cambridge
+cornwall||Cornwall
+england||England
+falklands||Falklands
+gb||Great Britain
+gibraltar||Gibraltar
+greenland||Greenland
+guernsey||Guernsey
+herts||Hertfordshire
+hunts||Huntingdonshire
+jersey||Jersey
+kent||Kent
+lancs||Lancashire
+lincs||Lincolnshire
+manx||Isle of Man
+ni||Northern Ireland
+northants||Northamptonshire
+oxford_uni||University of Oxford
+scotland||Scotland
+somerset||Somerset
 wales||Wales
+yorks||Yorkshire
+
+# Dyed flags
+dyed_black||Dyed Black
+dyed_blue||Dyed Blue
+dyed_brown||Dyed Brown
+dyed_cyan||Dyed Cyan
+dyed_green||Dyed Green
+dyed_green_dark||Dyed Dark Green
+dyed_grey||Dyed Grey
+dyed_grey_dark||Dyed Dark Grey
+dyed_magenta||Dyed Magenta
+dyed_orange||Dyed Orange
+dyed_pink||Dyed Pink
+dyed_red||Dyed Red
+dyed_violet||Dyed Violet
+dyed_white||Dyed White
+dyed_yellow||Dyed Yellow
 
 # Item flags
 item_apple||Apple
@@ -64,12 +131,18 @@ item_torch||Torch
 item_wheat||Wheat
 
 # Other flags
+earth||Planet Earth
+esperanto||Esperanto
 ensign||Naval Ensign
 minetest||Minetest
+olympic||Olympic Flag
+pirate||Jolly Roger
 raf||Royal Air Force
+redcross||Red Cross
 royal||Royal Standard
 swim_bathing||Surfing Area
 swim_danger||Danger No Bathing
 swim_surfing||Safe Bathing
 tricolor||Tricolor
 un||United Nations
+unilib||Unified Voxel Library

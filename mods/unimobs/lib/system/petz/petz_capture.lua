@@ -252,6 +252,11 @@ function unimobs.petz_api.capture_mob(self, clicker, wielded_name, put_in_invent
 
     end
 
+    -- Update awards, if available
+    if unilib.global.pkg_executed_table["award_zoologist"] ~= nil then
+        unilib.pkg.award_zoologist.on_mob_capture(clicker, self)
+    end
+
     -- Having converted the entity into a spawn egg, remove the entity from the world
     unimobs.kitz_api.remove_mob(self)
 

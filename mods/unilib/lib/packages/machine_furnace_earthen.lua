@@ -47,7 +47,7 @@ function unilib.pkg.machine_furnace_earthen.exec()
 
     local active_img_list = {
         {
-            image = "unilib_machine_furnace_earthen_top_active.png",
+            name = "unilib_machine_furnace_earthen_top_active.png",
             backface_culling = false,
             animation = {
                 type = "vertical_frames",

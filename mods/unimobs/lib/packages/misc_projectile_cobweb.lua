@@ -76,12 +76,24 @@ function unilib.pkg.misc_projectile_cobweb.exec()
 
         end,
     })
+    -- N.B. Original craft recipe conflicts with recipe in "machine_plate_pressure" package
+    --[[
     unilib.register_craft({
         -- From petz:cobweb
         output = "unilib:misc_projectile_cobweb",
         recipe = {
             {c_string, "", c_string},
             {"", c_string, ""},
+            {c_string, "", c_string},
+        },
+    })
+    ]]--
+    unilib.register_craft({
+        -- From petz:cobweb
+        output = "unilib:misc_projectile_cobweb",
+        recipe = {
+            {c_string, "", c_string},
+            {"", "", ""},
             {c_string, "", c_string},
         },
     })

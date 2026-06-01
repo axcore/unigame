@@ -1,3 +1,40 @@
+v1.1.0 (1 Jun 2026)
+---------------------------------------------------------------------------------------------------
+
+MAJOR NEW FEATURES
+- This version of unimobs requires unilib v1.2.0, or later
+- unilib's new in-game editing system can configure the mobs in your game; see the unilib README for
+    more information
+- Added new packages for unilib's awards system. To add them to your game, use the "awards_unimobs"
+    remix
+    
+MINOR NEW FEATURES
+- Increased the distance at which creatures will follow a player (and so on) to the creature's full
+    view range (10 for most creatures); this should make rounding up your pets a lot easier
+- Updated remixes to satisfy the new unilib standard
+- New /chat_examine_mob command. Intended for admin users, it shows the items needed to tame, feed,
+    repel (etc) the specified creature
+- Updated the python scripts in ../scripts/unilib, to match the equivalent scripts in unilib v1.2.0
+- Slightly increased the size of dogs, pigs and sheep
+
+MAJOR FIXES
+- Fixed a crash that occured when a homeless bee tried to approach a non-existent beehive
+    ("hqb_approach_beehive" package)
+- Fixed a crash on startup, when a sheared sheep exists in the world ("mob_sheep_normal" package).
+    Also fixed a typo that could cause instability, in certain rare situations
+- Sketchbooks did not have craft recipes; fixed
+- Pregnancies never resulted in babies with mutation skins, due to a bug; fixed
+
+MINOR FIXES
+- settingtypes.txt is generating an error, because of faulty text formatting; fixed
+- Several chat commands required the "server" privilege, for no obvious reason; changed them to
+    require the "unilib_admin" privilege, as is standard for unilib
+- Items in the "food_chicken", "food_lamp_chop" and "food_pork_chop" did not provide the groups that
+    unilib code is expecting; added some new groups, as a result these animal meats can be used to
+    craft a wider range of foods
+- In the "misc_projectile_cobweb" package, modified the craft recipe which clashes with the one in
+    unilib's "misc_cobweb" package
+
 v1.0.0 (24 Dec 2025)
 ---------------------------------------------------------------------------------------------------
 

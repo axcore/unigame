@@ -22,10 +22,10 @@ function unilib.pkg.deco_ethereal_plant_shrub_dry.init()
         depends = "plant_shrub_dry",
         optional = {
             "biome_ethereal_desert",
+            "biome_ethereal_desert_sandstone",
             "biome_ethereal_forest_deciduous",
             "biome_ethereal_mesa",
             "biome_ethereal_plains",
-            "biome_ethereal_sandstone_desert",
             "clay_baked_ethereal",
             "dirt_dried",
             "dirt_ordinary_with_turf_dry",
@@ -61,10 +61,10 @@ function unilib.pkg.deco_ethereal_plant_shrub_dry.post()
         {
             biomes = {
                 "ethereal_desert",
+                "ethereal_desert_sandstone",
                 "ethereal_forest_deciduous_ocean",
                 "ethereal_mesa",
                 "ethereal_plains",
-                "ethereal_sandstone_desert",
             },
             place_on = {
                 "unilib:dirt_dried",

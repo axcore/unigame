@@ -29,8 +29,11 @@ function unilib.pkg.plant_shrub_scorched.exec()
         -- From GLEMr4, lib_ecology:plant_shrub_scorched
         description = S("Scorched Shrub"),
         tiles = {"unilib_plant_shrub_scorched.png"},
-        -- N.B. flora = 1 not in original code
-        groups = {flammable = 1, flora = 1, leaves = 1, oddly_breakable_by_hand = 1, snappy = 3},
+        -- N.B. attached_node = 1, flora = 1 not in original code
+        groups = {
+            attached_node = 1, flammable = 1, flora = 1, leaves = 1, oddly_breakable_by_hand = 1,
+            snappy = 3,
+        },
         sounds = unilib.global.sound_table.leaves,
 
         drawtype = "plantlike",

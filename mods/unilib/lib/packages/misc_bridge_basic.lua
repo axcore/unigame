@@ -327,7 +327,7 @@ function do_register(data_table)
 
     -- An automatic bridge-building machine. Once deployed, any leftover parts a placed inside the
     --      machine, which acts as a temporary chest
-    local machine_full_name = "unilib:machine_auto_bridge_" .. part_name
+    local machine_full_name = "unilib:machine_bridge_auto_" .. part_name
     local machine_orig_name
     if part_name == "apple" then
         machine_orig_name = "bridges:bridge_auto"
@@ -338,13 +338,12 @@ function do_register(data_table)
         tiles = {
             img,
             img,
-            img .. "^unilib_machine_auto_bridge_overlay.png",
+            img .. "^unilib_machine_bridge_auto_overlay.png",
         },
         groups = {choppy = 2, flammable = 3, oddly_breakable_by_hand = 2, snappy = 2},
         -- N.B. No sounds in original code
         sounds = unilib.global.sound_table.wood,
 
-        drawtype = "cube",
         -- Notes from bridges:
         -- All leftover parts are inside the machine
         drop = "",
@@ -488,6 +487,8 @@ function do_register(data_table)
         output = machine_full_name,
         ingredient = large_full_name,
     })
+    -- N.B. Items in this mod were renamed in unilib v1.2.0
+    core.register_alias("unilib:machine_auto_bridge_" .. part_name, machine_full_name)
 
 end
 

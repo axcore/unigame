@@ -202,7 +202,7 @@ function unilib.pkg.shared_nsspf.register_truffle(data_table)
     local truffle_name = "unilib:plant_tuber_truffle_" .. part_name
     unilib.register_craftitem(truffle_name, orig_name, replace_mode, {
         description = unilib.utils.annotate(description, sci_name),
-        image = "unilib_plant_tuber_truffle_" .. part_name .. ".png",
+        inventory_image = "unilib_plant_tuber_truffle_" .. part_name .. ".png",
 
         on_use = unilib.cuisine.eat_on_use(truffle_name, eat),
     })

@@ -125,10 +125,10 @@ end
 local function after_place_node(pos, placer)
 
     local meta = core.get_meta(pos)
-    local player_name = placer:get_player_name()
+    local pname = placer:get_player_name()
 
-    meta:set_string("owner", player_name)
-    meta:set_string("infotext", S("@1's Letter Box", player_name))
+    meta:set_string("owner", pname)
+    meta:set_string("infotext", S("@1's Letter Box", pname))
 
     local inv = meta:get_inventory()
     inv:set_size("letterbox", 6 * 4)
@@ -173,10 +173,10 @@ local function can_dig(pos, player)
 
     local meta = core.get_meta(pos)
     local owner = meta:get_string("owner")
-    local player_name = player and player:get_player_name()
+    local pname = player and player:get_player_name()
     local inv = meta:get_inventory()
 
-    return inv:is_empty("letterbox") and player_name == owner
+    return inv:is_empty("letterbox") and pname == owner
 
 end
 

@@ -39,21 +39,21 @@ function unilib.furniture._do_sit_chair(pos, node, clicker, pointed_thing)
         return
     end
 
-    local player_name = clicker:get_player_name()
+    local pname = clicker:get_player_name()
     local objs = core.get_objects_inside_radius(pos, 0.1)
     local vel = clicker:get_player_velocity()
     local ctrl = clicker:get_player_control()
 
     for _, obj in pairs(objs) do
 
-        if obj:is_player() and obj:get_player_name() ~= player_name then
+        if obj:is_player() and obj:get_player_name() ~= pname then
             return
         end
 
     end
 
---    if default.player_attached[player_name] then
-    if unilib.player_api.get_player_attached(player_name) then
+--    if default.player_attached[pname] then
+    if unilib.player_api.get_player_attached(pname) then
 
         -- N.B. Removed this xdecor adjustment, because the player appears to be standing inside the
         --      cushion/chair when it's executed
@@ -61,13 +61,13 @@ function unilib.furniture._do_sit_chair(pos, node, clicker, pointed_thing)
         clicker:set_pos(pos)
         clicker:set_eye_offset(vector.new(), vector.new())
         clicker:set_physics_override({gravity = 1, jump = 1, speed = 1})
---        default.player_attached[player_name] = false
-        unilib.player_api.set_player_attached(player_name, false)
+--        default.player_attached[pname] = false
+        unilib.player_api.set_player_attached(pname, false)
 --        default.player_set_animation(clicker, "stand", 30)
         unilib.player_api.set_animation(clicker, "stand", 30)
 
---    elseif not default.player_attached[player_name] and
-    elseif not unilib.player_api.get_player_attached(player_name) and
+--    elseif not default.player_attached[pname] and
+    elseif not unilib.player_api.get_player_attached(pname) and
             node.param2 <= 3 and
             not ctrl.sneak and
             vector.equals(vel, vector.new()) then
@@ -78,8 +78,8 @@ function unilib.furniture._do_sit_chair(pos, node, clicker, pointed_thing)
         clicker:set_eye_offset({x = 0, y = -3, z = 0}, vector.new())
         clicker:set_physics_override({gravity = 1, jump = 0, speed = 0})
         clicker:set_pos(pos)
---        default.player_attached[player_name] = true
-        unilib.player_api.set_player_attached(player_name, true)
+--        default.player_attached[pname] = true
+        unilib.player_api.set_player_attached(pname, true)
 --        default.player_set_animation(clicker, "sit", 30)
         unilib.player_api.set_animation(clicker, "sit", 30)
 

@@ -27,7 +27,7 @@ end
 function unilib.pkg.chat_show_package.exec()
 
     core.register_chatcommand("show_package", {
-        params = "<item> ",
+        params = "<item>",
         description = S("Shows the unilib package that created a node, craftitem or tool"),
         privs = {unilib_tools = true},
 

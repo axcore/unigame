@@ -19,6 +19,7 @@ function unilib.pkg.pane_window_ice.init()
 
     return {
         description = "Ice window pane",
+        notes = "Requires the \"Allow tweaks to code adapted from minetest_game\" setting",
         depends = "window_ice",
     }
 
@@ -28,6 +29,10 @@ function unilib.pkg.pane_window_ice.exec()
 
     local img = "unilib_window_ice.png"
 
+    if not unilib.setting.mtgame_tweak_flag then
+        return
+    end
+    
     unilib.register_pane({
         -- From mtg_plus mod, xpanes:ice_flat. Creates unilib:pane_window_ice_flat,
         --      unilib:pane_window_ice_crossed

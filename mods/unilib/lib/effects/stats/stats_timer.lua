@@ -2,7 +2,7 @@
 -- unilib mod by A S Lewis, incorporating materials from many other mods
 ---------------------------------------------------------------------------------------------------
 -- stats_timer.lua
---      Generates a timer to save biographical and activity statistics reguarlarly
+--      Generates a timer to save biographical and activity statistics regularly
 ---------------------------------------------------------------------------------------------------
 
 local S = unilib.intllib

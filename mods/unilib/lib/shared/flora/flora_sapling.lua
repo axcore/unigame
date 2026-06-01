@@ -79,12 +79,12 @@ function unilib.flora._sapling_on_place(
 
     end
 
-    local player_name = placer and placer:get_player_name() or ""
+    local pname = placer and placer:get_player_name() or ""
 
     -- Check sapling position for protection
-    if core.is_protected(pos, player_name) then
+    if core.is_protected(pos, pname) then
 
-        core.record_protection_violation(pos, player_name)
+        core.record_protection_violation(pos, pname)
         return itemstack
 
     end
@@ -93,12 +93,12 @@ function unilib.flora._sapling_on_place(
     if core.is_area_protected(
         vector.add(pos, minp_relative),
         vector.add(pos, maxp_relative),
-        player_name,
+        pname,
         interval
     ) then
-        core.record_protection_violation(pos, player_name)
+        core.record_protection_violation(pos, pname)
         -- Print extra information to explain
-        core.chat_send_player(player_name,
+        core.chat_send_player(pname,
             S(
                 "@1 will intersect protection on growth.",
                 itemstack:get_definition().description
@@ -112,14 +112,14 @@ function unilib.flora._sapling_on_place(
     --[[
     unilib.utils.log(
         "action",
-        player_name .. " places node " .. sapling_name .. " at " .. core.pos_to_string(pos)
+        pname .. " places node " .. sapling_name .. " at " .. core.pos_to_string(pos)
     )
     ]]--
     if placer then
         unilib.utils.log_player_action(placer, "places node", sapling_name, "at", pos)
     end
 
-    local take_item = not unilib.utils.is_creative(player_name)
+    local take_item = not unilib.utils.is_creative(pname)
     local newnode = {name = sapling_name}
     local ndef = core.registered_nodes[sapling_name]
     core.set_node(pos, newnode)

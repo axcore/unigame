@@ -11,8 +11,7 @@ unilib.pkg.deco_glemr4 = {}
 local S = unilib.intllib
 local mode = unilib.global.imported_mod_table.glemr4.add_mode
 
--- Environmental constants (from lib_ecology/init.lua; must match values in the "biome_glemr4"
---      package)
+-- General constants (from lib_ecology/init.lua; must match values in the "biome_glemr4" package)
 local HEIGHT_BEACH = 4
 local HEIGHT_COASTAL = 40
 local HEIGHT_LOWLAND = 80
@@ -2118,11 +2117,17 @@ local function add_decorations_ethereal()
 
     local list = {
         {"glemr4_ethereal_junglee", "unilib:dirt_ordinary_with_turf_rainforest"},
-        {"glemr4_ethereal_grassy", "unilib:dirt_ordinary_with_turf"},
-        {"glemr4_ethereal_grassytwo", "unilib:dirt_ordinary_with_turf"},
         {"glemr4_ethereal_prairie", "unilib:dirt_ordinary_with_turf_prairie"},
         {"glemr4_ethereal_snowy", "unilib:dirt_ordinary_with_turf"},
     }
+
+    if unilib.pkg.biome_glemr4.optional_biome_flag then
+
+        table.insert(list, {"glemr4_ethereal_grassy", "unilib:dirt_ordinary_with_turf"})
+        table.insert(list, {"glemr4_ethereal_grassytwo", "unilib:dirt_ordinary_with_turf"})
+
+    end
+
     for _, mini_list in pairs(list) do
 
         unilib.register_decoration_simple({
@@ -2171,7 +2176,7 @@ local function add_decorations_mixed()
         deco_type = "schematic",
         schematic = unilib.core.path_mod .. "/mts/unilib_plant_cactus_ordinary_large.mts",
 
-        biomes = {"glemr4_warm_arid_lowland", "glem4_temperate_arid_lowland"},
+        biomes = {"glemr4_warm_arid_lowland", "glemr4_temperate_arid_lowland"},
         fill_ratio = 0.002,
         flags = "place_center_x",
         place_on = {"unilib:dirt_parched_with_turf_dry", "unilib:sand_ordinary"},
@@ -2234,12 +2239,16 @@ end
 local function add_decorations_waterlily()
 
     -- place waterlily in beach areas
-    local biome_list = {
-        "glemr4_ethereal_desert",
-        "glemr4_ethereal_plains",
-        "glemr4_ethereal_sandclay",
-        "glemr4_ethereal_sandstone",
-    }
+    local biome_list = {}
+
+    if unilib.pkg.biome_glemr4.ethereal_biome_flag then
+
+        table.insert(biome_list, "glemr4_ethereal_desert")
+        table.insert(biome_list, "glemr4_ethereal_plains")
+        table.insert(biome_list, "glemr4_ethereal_sandclay")
+        table.insert(biome_list, "glemr4_ethereal_sandstone")
+
+    end
 
     if unilib.pkg.biome_glemr4.optional_biome_flag then
 

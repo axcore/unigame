@@ -121,8 +121,8 @@ function unilib.pkg.plant_seaweed_normal.exec()
 
                 end
 
-                local player_name = placer:get_player_name()
-                if not core.is_protected(place_pos, player_name) then
+                local pname = placer:get_player_name()
+                if not core.is_protected(place_pos, pname) then
 
                     -- Notes from corresponding code in pl_waterlilies:
                     -- If this block appears in the world, something went wrong
@@ -144,7 +144,7 @@ function unilib.pkg.plant_seaweed_normal.exec()
 
                     end
 
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
                         itemstack:take_item()
                     end
 

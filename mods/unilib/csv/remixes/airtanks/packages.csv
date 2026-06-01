@@ -1,0 +1,27 @@
+# "airtanks" remix - contains everything from the airtanks mod
+
+# node_name | original_mod
+
+# airtanks packages
+device_airtank_bronze|airtanks
+device_airtank_copper|airtanks
+device_airtank_steel|airtanks
+device_compressor_air|airtanks
+device_tube_breathing|airtanks
+shared_airtanks|airtanks
+
+# supporting packages (.depends)
+metal_bronze|default glemr11 technic
+metal_copper|default glemr11 moreblocks technic
+metal_iron|default
+metal_steel|default glemr11 technic
+metal_tin|default glemr11 technic
+mineral_mese|default glemr11
+
+# supporting packages (.at_least_one)
+
+# supporting packages (.optional)
+machine_furnace_induction|unilib
+material_plastic|basic_materials
+
+# supporting packages (.suggested)

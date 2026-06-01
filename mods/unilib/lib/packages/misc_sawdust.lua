@@ -60,16 +60,10 @@ function unilib.pkg.misc_sawdust.exec()
     else
 
         -- Original to unilib
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
-
-            technic.register_grinder_recipe({
-                output = "unilib:misc_sawdust",
-                input = {"unilib:item_stick_ordinary"},
-            })
-
-        end)
+        technic.register_grinder_recipe({
+            output = "unilib:misc_sawdust",
+            input = {"unilib:item_stick_ordinary"},
+        })
 
     end
 

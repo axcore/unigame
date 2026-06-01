@@ -82,13 +82,13 @@ function unilib.pkg.shared_sounding_line.on_rightclick(pos, node, player, itemst
 
     end
 
-    local player_name = player:get_player_name()
-
+    local pname = player:get_player_name()
     local status = S("Most recent sounding line reading:")
+
     if water_depth then
 
         local result = S("There is water @1m down", water_depth)
-        core.chat_send_player(player_name, result)
+        core.chat_send_player(pname, result)
         status = status .. "\n" .. result
 
     end
@@ -96,7 +96,7 @@ function unilib.pkg.shared_sounding_line.on_rightclick(pos, node, player, itemst
     if lava_depth and not encountered_lava_flag then
 
         local result = S("There is lava @1m down", lava_depth)
-        core.chat_send_player(player_name, result)
+        core.chat_send_player(pname, result)
         status = status .. "\n" .. result
 
     end
@@ -104,19 +104,19 @@ function unilib.pkg.shared_sounding_line.on_rightclick(pos, node, player, itemst
     if encountered_lava_flag then
 
         local result = S("The line burned up @1m down", end_depth)
-        core.chat_send_player(player_name, result)
+        core.chat_send_player(pname, result)
         status = status .. "\n" .. result
 
     elseif encountered_ignore_flag then
 
         local result = S("There is an unknown void @1m down", end_depth)
-        core.chat_send_player(player_name, result)
+        core.chat_send_player(pname, result)
         status = status .. "\n" .. result
 
     else
 
         local result = S("There is an obstruction @1m down", end_depth)
-        core.chat_send_player(player_name, result)
+        core.chat_send_player(pname, result)
         status = status .. "\n" .. result
 
     end

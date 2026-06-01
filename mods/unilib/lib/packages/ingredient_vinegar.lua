@@ -21,7 +21,9 @@ function unilib.pkg.ingredient_vinegar.init()
         description = "Vinegar",
         suggested = {
             "bucket_steel",                     -- group:potable_bucket
+            "fruit_apple",                      -- group:food_apple
             "ingredient_sugar_normal",          -- group:food_sugar
+            "mushroom_brown",                   -- group:food_mushroom
         },
     }
 
@@ -49,7 +51,8 @@ function unilib.pkg.ingredient_vinegar.exec()
         -- From bbq:vinegar_mother
         description = S("Vinegar Mother"),
         tiles = {"unilib_ingredient_vinegar_mother.png"},
-        groups = {attached_node = 1, dig_immediate = 3, food_vinegarmother = 1, vessel = 1},
+        -- N.B. food_vinegarmother = 1 in original code
+        groups = {attached_node = 1, dig_immediate = 3, food_vinegar_mother = 1, vessel = 1},
         sounds = unilib.global.sound_table.glass,
 
         drawtype = "plantlike",
@@ -69,7 +72,20 @@ function unilib.pkg.ingredient_vinegar.post()
         -- From bbq:vinegar
         type = "shapeless",
         output = "unilib:ingredient_vinegar",
-        recipe = {"group:food_vinegarmother", "group:food_sugar", "group:potable_bucket"},
+        recipe = {"group:food_vinegar_mother", "group:food_sugar", "group:potable_bucket"},
+        replacements = unilib.global.potable_bucket_list,
+    })
+
+    unilib.register_craft({
+        -- Original to unilib
+        type = "shapeless",
+        output = "unilib:ingredient_vinegar_mother",
+        recipe = {
+            "group:food_apple",
+            "group:food_mushroom",
+            "group:food_sugar",
+            "group:potable_bucket",
+        },
         replacements = unilib.global.potable_bucket_list,
     })
 

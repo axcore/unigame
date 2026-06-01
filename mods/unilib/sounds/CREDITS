@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+-- From:    airtanks
+-- Media:   MIT/CC0/CC BY 3.0
+---------------------------------------------------------------------------------------------------
+
+unilib_device_airtank_hiss.ogg
+unilib_device_compressor_air.ogg
+unilib_device_compressor_air_fail.ogg
+unilib_device_tube_breathing.ogg
+
+---------------------------------------------------------------------------------------------------
 -- From:    anvil
 -- Media:   GPL-3.0-only
 ---------------------------------------------------------------------------------------------------
@@ -309,9 +319,9 @@ unilib_ornament_sheep_hurt.ogg
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
 
-unilib_flag_flag_1.ogg
-unilib_flag_flag_2.ogg
-unilib_flag_flag_3.ogg
+unilib_flag_flap_weak.ogg
+unilib_flag_flap_medium.ogg
+unilib_flag_flap_strong.ogg
 
 ---------------------------------------------------------------------------------------------------
 -- From:    pedology
@@ -372,9 +382,9 @@ unilib_ignite_torch.ogg
 -- Media:   unknown
 ---------------------------------------------------------------------------------------------------
 
-unilib_rope_mining_creak_1.ogg
-unilib_rope_mining_creak_2.ogg
-unilib_rope_mining_creak_3.ogg
+unilib_rope_mining_creak.1.ogg
+unilib_rope_mining_creak.2.ogg
+unilib_rope_mining_creak.3.ogg
 
 ---------------------------------------------------------------------------------------------------
 -- From:    sickles
@@ -427,16 +437,147 @@ unilib_misc_bin_skip.ogg
 -- Media:   CC BY-SA 3.0
 ---------------------------------------------------------------------------------------------------
 
+unilib_ambient_single_crow.1.ogg
+unilib_ambient_single_crow.2.ogg
+    Author: Ambientsoundapp
+    Source: https://pixabay.com/sound-effects/nature-crow-64028/
+    License: Pixabay Content License    
+unilib_ambient_repeat_forest_light.1.ogg
+    Author: EmpressNefertitiMumbi
+    Source: https://pixabay.com/sound-effects/nature-birds-forest-ambiance-216623/
+    License: Pixabay Content License
 unilib_alarm.1.ogg
     Author: Mike Koenig
     Source: https://soundbible.com/165-Door-Bell.html
     Licence: Attribution 3.0
+unilib_award_achievement.1.ogg
+    Author: Daniel Simon
+    Source:  http://soundbible.com/2154-Text-Message-Alert-1.html
+    Licence: Attribution 3.0
+unilib_award_trophy.1.ogg
+    Author:  Yannick Lemieux
+    Source:  http://soundbible.com/1964-Small-Crowd-Applause.html
+    Licence: Attribution 3.0
+unilib_award_vocation.1.ogg
+    Author:  Daniel Simon
+    Source:  http://soundbible.com/2156-Text-Message-Alert-3.html
+    Licence: Attribution 3.0
+unilib_drink_potion.1.ogg
+    Author: ValentinPetiteau
+    Source: https://freesound.org/people/ValentinPetiteau/sounds/574077/?
+    Licence: CC0 1.0
 unilib_ice_melt_1.ogg
 unilib_ice_melt_2.ogg
 unilib_ice_melt_3.ogg
     Author: Takkyi
     Source: https://freesound.org/people/Takkyi/sounds/546831/
     Licence: CC0 1.0
+unilib_item_chisel_tree.1.ogg
+unilib_item_chisel_tree.2.ogg
+    Author: andersmmg
+    Source: https://freesound.org/people/andersmmg/sounds/516321/
+    License: Attribution 4.0
+unilib_machine_noisy.ogg
+    Author: Caitlin_100
+    Source: https://pixabay.com/sound-effects/film-special-effects-computer-hum-102466/
+    Licence: Pixabay Content License
+unilib_misc_puddle.1.ogg
+unilib_misc_puddle.2.ogg
+    Author: ahill86
+    Source: https://freesound.org/people/ahill86/sounds/207139/
+    Licence: CC0 1.0    
+unilib_weather_hail_heavy.1.ogg
+    Author: Simonus18
+    Source: https://pixabay.com/sound-effects/nature-hail-balls-of-ice-raining-onto-concrete-foley-198368/
+    Licence: Pixabay Content License
+unilib_weather_hail_heavy_cover.1.ogg
+    Author: Saturn-3-Music
+    Source: https://pixabay.com/sound-effects/nature-strong-hail-falling-against-the-window-116182/
+    Licence: Pixabay Content License
+unilib_weather_hail_normal.1.ogg
+    Author: MattLeschuck
+    Source: https://pixabay.com/sound-effects/nature-hail-rain-64832/
+    Licence: Pixabay Content License
+unilib_weather_hail_normal_cover.1.ogg
+    Author: twentysevensouls
+    Source: https://pixabay.com/sound-effects/nature-hail-on-window-2-55388/
+    Licence: Pixabay Content License
+unilib_weather_rain_drizzle.1.ogg
+    Author: timgormly
+    Source: https://pixabay.com/sound-effects/nature-acandlightrain-am-76704/
+    Licence: Pixabay Content License
+unilib_weather_rain_drizzle_cover.1.ogg
+    Author: dbsound
+    Source: https://pixabay.com/sound-effects/nature-forest-shelter-soft-rainfall-on-cabin-roof-335696/
+    Licence: Pixabay Content License
+unilib_weather_rain_heavy.1.ogg
+    Author: Mixkit
+    Source: https://mixkit.co/free-sound-effects/nature/, mixkit-heavy-rain-drops-2399.wav
+    Licence: Mixkit Sound Effects Free License
+unilib_weather_rain_heavy_cover.1.ogg
+    Author: ondondvo
+    Source: https://pixabay.com/sound-effects/city-rain-on-the-roof-metal-roof-closing-the-balcony-30865/
+    Licence: Pixabay Content License
+unilib_weather_rain_light.1.ogg
+    Author: SoundsForYou
+    Source: https://pixabay.com/sound-effects/soft-rain-ambient-111154/
+    Licence: Pixabay Content License
+unilib_weather_rain_light_cover.1.ogg
+    Author: dbsound
+    Source: https://pixabay.com/sound-effects/nature-rain-echo-roof-resonance-in-the-woods-335718/
+    Licence: Pixabay Content License
+unilib_weather_rain_normal.1.ogg
+    Author: Mixkit
+    Source: https://mixkit.co/free-sound-effects/nature/, mixkit-light-rain-loop-2393.wav
+    Licence: Mixkit Sound Effects Free License
+unilib_weather_rain_normal_cover.1.ogg
+    Author: dbsound
+    Source: https://pixabay.com/sound-effects/nature-roof-rainfall-ambient-drizzle-in-nature-335712/
+    Licence: Pixabay Content License
+unilib_weather_sandstorm_cover.1.ogg
+    Author: SoundReality
+    Source: https://pixabay.com/sound-effects/nature-wind-blowing-457954/
+    Licence: Pixabay Content License
+unilib_weather_sandstorm_heavy.1.ogg
+    Author: DRAGON-STUDIO
+    Source: https://pixabay.com/sound-effects/wind-blowing-sfx-07-423677/
+    Licence: Pixabay Content License
+unilib_weather_sandstorm_normal.1.ogg
+    Author: Shut-Up_Ghost
+    Source: https://pixabay.com/sound-effects/nature-smooth-cold-wind-looped-135538/
+    Licence: Pixabay Content License
+unilib_weather_storm_distant.1.ogg
+    Author: TRP
+    Source: https://pixabay.com/sound-effects/nature-thunder-dry-distant-rolling-field-notl-2011-48804/
+    Licence: Pixabay Content License
+unilib_weather_storm_distant_cover.1.ogg
+    Author: CapaholiczSFX
+    Source: https://pixabay.com/sound-effects/nature-distant-thunder-405128/
+    Licence: Pixabay Content License
+unilib_weather_storm_heavy.1.ogg
+    Author: AudioPapkin
+    Source: https://pixabay.com/sound-effects/nature-rain-and-little-storm-298087/
+    Licence: Pixabay Content License
+unilib_weather_storm_heavy_cover.1.ogg
+    Author: TRP
+    Source: https://pixabay.com/sound-effects/nature-rain-light-on-window-interior-winter-2011-62032/
+    Licence: Pixabay Content License
+unilib_weather_storm_light.1.ogg
+    Author: haruudu
+    Source: https://pixabay.com/sound-effects/nature-loud-rolling-thunder-with-gentle-rainfall-422430/
+    Licence: Pixabay Content License
+unilib_weather_storm_light_cover.1.ogg
+    Author: Jacksonfaction
+    Source: https://pixabay.com/sound-effects/nature-rain-and-thunder-61426/
+    Licence: Pixabay Content License
+unilib_weather_storm_normal.1.ogg
+    Author: SoundForYou
+    Source: https://pixabay.com/sound-effects/nature-rain-thunder-sounds-186390/
+    Licence: Pixabay Content License
+unilib_weather_storm_normal_cover.1.ogg
+    Author: 49656682
+    Source: https://pixabay.com/sound-effects/nature-steady-rain-with-rolling-thunder-in-the-distance-341895/
+    Licence: Pixabay Content License
     
 ---------------------------------------------------------------------------------------------------
 -- From:    xdecor

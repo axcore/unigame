@@ -21,28 +21,35 @@ unilib.global.ext_pack_list = {}
 
 -- List of paths to folders where packages can be found. When looking for a package with a certain
 --      name, these folders are checked in order; the first package found is the one loaded
--- A list of possible locations in expansion packs
+-- A list of possible locations in mod data storage (full file paths)
+unilib.global.data_pkg_path_list = {
+    unilib.core.path_mod_data .. "/packages/",
+}
+-- A list of possible locations in expansion packs (relative paths)
 unilib.global.ext_pkg_path_list = {
     "/lib/packages/dev/",
     "/lib/packages/",
 }
--- A list of possible locations in unilib
+-- A list of possible locations in unilib (relative paths)
 unilib.global.base_pkg_path_list = {
     "/custom/packages/",
     "/lib/packages/dev/",
     "/lib/packages/",
 }
--- Code in ../lib/system/read/read_detect.lua combines those two lists, expansion pack paths first,
---      followed by base paths. The last location in the list must exist; all the others are
---      optional
+-- Code in ../lib/system/read/read_detect.lua combines those three lists, converting them into
+--      full file paths. Mod data storage paths come first, followed by expansion pack paths,
+--      followed by base mod paths. The last path in the combined list must exist; all the others
+--      are optional
 unilib.global.pkg_path_list = {}
 
 -- Lists of paths to folders where remixes can be found
+unilib.global.data_remix_path_list = {unilib.core.path_mod_data .. "/remixes/"}
 unilib.global.ext_remix_path_list = {"/csv/remixes/"}
 unilib.global.base_remix_path_list = {"/csv/remixes/"}
 unilib.global.remix_path_list = {}
 
 -- List of paths to folders where mod information can be found
+unilib.global.data_info_path_list = {unilib.core.path_mod_data .. "/mods/"}
 unilib.global.ext_info_path_list = {"/csv/mods/"}
 unilib.global.base_info_path_list = {"/csv/mods/"}
 unilib.global.info_path_list = {}
@@ -212,10 +219,11 @@ unilib.global.remix_pkg_table = {}
 -- Table populated by code in ../lib/system/read/read_compile.lua
 unilib.global.remix_pkg_count_table = {}
 
--- Some remixes contain a constants.csv file. This data in this file has two purposes; firstly, it's
---      used by ../lib/system/read/read_csv_remix.lua when biomes, decorations and ores are being
---      read from their own CSV files; secondly, individual packages may also want the data (for
---      example, the "biome_gaia" needs the same constants when reading data for ecosystems)
+-- Some remixes contain a constants.csv file
+-- The "genereal constants" specified by this file have two purposes; firstly, it's used by
+--      ../lib/system/read/read_csv_remix.lua when biomes, decorations and ores are being read from
+--      their own CSV files; secondly, individual packages may also want the data (for example, the
+--      "biome_gaia" needs the same constants when reading data for ecosystems)
 -- So that a constants.csv file doesn't have to be read twice, it's stored in a global variable
 -- Table in the form
 --      remix_constants_table[remix_name] = constants_table
@@ -802,6 +810,17 @@ unilib.global.dirt_with_turf_reverse_table = {}
 --      data_table[dirt_name] = dirt_with_turf_name
 -- Packages should call unilib.register_dirt_with_turf() to update this table
 unilib.global.turf_seeder_table = {}
+-- Table of dry dirts (those with the group dry_dirt = 1), and their equivalent "wet" dirts
+-- For example, the "abm_standard_dirt_convert" package tries to convert dry dirts to a suitable
+--      dirt-with-turf node. Key-value pairs in this table act as exceptions; if the dry dirt
+--      exists as a key in the table, the corresponding value is used as a wet dirt
+-- This table can also be used to prevent the conversion altogether, by using the same value as both
+--      the key and the value. No conversion is attempted if the wet dirt doesn't exist
+-- Table in the form
+--      dry_dirt_convert_table[dry_name] = wet_name (allows conversions)
+--      dry_dirt_convert_table[dry_name] = dry_name (prevents conversions)
+-- Packages can add key-value pairs to this table directly
+unilib.global.dry_dirt_convert_table = {}
 -- Table of super dirts (see the comments above), populated by
 --      ../lib/system/global/global_update.lua
 -- Table in the form
@@ -942,7 +961,7 @@ unilib.global.sapling_table = {}
 -- Table of Lua schematics for treelogs; generated when required (by code in
 --      ../lib/shared/trees/trees_generate_log.lua), once for each tree type
 -- Table in the form
---      flowerpot_compat_table[trunk_full_name] = lua_schematic_table
+--      treelog_schem_table[trunk_full_name] = lua_schematic_table
 unilib.global.treelog_schem_table = {}
 
 -- Default values for leaves type/scale. These values are overwritten if the MT setting
@@ -977,9 +996,13 @@ unilib.global.grow_stage_table = {}
 --      flowerpot_compat_table[full_name] = orig_name
 -- ...where both the key and value are the full names of flower/plant/etc nodes
 -- Packages should call unilib.register_flower_in_pot(), unilib.register_mushroom_in_pot(),
---      unilib.register_plant_in_pot() or unilib.register_sapling_in_pot() to update this table
+--      unilib.register_plant_in_pot() or unilib.register_sapling_in_pot() to update these tables
 -- See also the Minetest settings above, unilib.setting.flowerpot_add_flowers_flag etc
 unilib.global.flowerpot_compat_table = {}
+-- Table containing a subset of keys from unilib.global.flowerpot_compat_table; the corresponding
+--      values specify a variant texture for the flower/plant/etc, when it's in a pot. If not
+--      specified by this table, the normal texture is used
+unilib.global.flowerpot_overlay_table = {}
 
 -- Table of full names of any items (cactus, papyrus etc) that require special code when a
 --      fertiliser (bonemeal, etc) is used on them, and the functions providing that code
@@ -1252,6 +1275,153 @@ unilib.global.carving_output_table = {}
 --      a player attribute when they leave)
 unilib.global.player_stats_bio_table = {}
 unilib.global.player_stats_activity_table = {}
+
+-- Awards (achievements and vocations) tables
+--
+-- An "achievement" is "unlocked" (awarded to the player) when an event takes place: a direct player
+--      action (e.g breaking, placing or crafting a node), or some other kind of event (e.g. joining
+--      the server, killing another player, or dying)
+-- Sometimes, a single event is enough to unlock the achievement (e.g. the player joins the server
+--      for the first time). Often, though, the event must take place several times before the
+--      achievement is unlocked (e.g. the player must dig 10 dirt nodes)
+-- Vocations are registered via a call to unilib.awards.register_achievement()
+--
+-- A "vocation" is an award for unlocking several related achievements (e.g. harvesting crops,
+--      cutting down trees, etc)
+-- Each vocation consists of one or more levels, which the player can "unlock" one at a time. The
+--      aim is for the player to unlock the final level, for which there is typically some kind of
+--      reward (although rewards may be granted at any level)
+-- Every level has a score, and every achievement also has a score. A new level is unlocked when the
+--      combined score for all related achievements unlocked by the player matches the level's
+--      score. Thus, the player has the freedom to unlock achievements in any order they like
+-- Achievements typically contribute to unlocking a single vocation, but they can "belong" to
+--      multiple vocations (if appropraite), and they can also be stand-alone awards, not
+--      contributing to any vocation
+-- Vocations are registered via a call to unilib.awards.register_vocation()
+--
+-- A trigger describes the conditions under which an achievement is unlocked. All achievements must
+--      specify a trigger
+-- There are three types of trigger:
+--      "simple" - for events not connected with any particular item (such as joining the server,
+--          killing another player, or dying)
+--      "complex" - for events connected with one or more items (digging ordinary sand, placing
+--          desert stone blocks)
+--      "custom" - a trigger handling any event, using custom code
+-- "simple" and "complex" triggers have a "target", specifying how many times the event must take
+--      place, in order to unlock the achievement. If not specified directly, the target is 1.
+--      When the target is reached, the achievement is unlocked automatically via a call to
+--      unilib.awards.increment_achievement_counter()
+-- "custom" triggers must be accompanied by custom code which decides when to unlock the
+--      achievement, calling unilib.awards.unlock_achievement() to do so. If "custom" triggers have
+--      a target, this is implemented by the custom code; it is not handled automatically
+--
+-- Triggers belong to a category, called a "trigger prototype". A single block of code is used to
+--      handle all triggers of the same prototype
+-- unilib provides several "standard" trigger prototypes, each of which is accompanied by system
+--      code to intercept events, passing them off to an event callback:
+--          unilib_break (handles breaking items)
+--          unilib_chat (handles player messages in the chat window)
+--          unilib_craft (handles crafting items)
+--          unilib_die (handles player deaths)
+--          unilib_eat (handles eating items)
+--          unilib_join (handles players joining the server)
+--          unilib_nothing (does nothing)
+--          unilib_place (handles placing itmes)
+--          unilib_receive (an alternative to "unilib_break", handles the items actually received by
+--              the player, after breaking an item)
+-- In addition, packages can define their own trigger prototypes, which must be accompanied by
+--      code to intercept events and to pass them off to event callbacks. These prototypes are
+--      normally named after their packages
+--
+-- Table of vocations, in the form
+--      awards_vocation_table[vocation_name] = mini_table
+-- ...where mini_table is in the form
+--      .title - e.g. "Lumberjack"
+--      .description -  e.g. "Cut down trees and plant saplings"
+--      .icon - Texture to use for this vocation; if not specified, a default texture is used
+--      .level_list - A list of mini-tables, each defining a level in this vocation, in the form
+--          .title - e.g. "Amateur Lumberjack"
+--          .score - The cumulative score required to unlock the level, e.g. 100
+--          .prize_list - [optional] Item(s) to be awarded to a player unlocking this level
+--      .requires_list - A list of achievement names (matching keys in
+--          unilib.global.awards_achievement_table). If not empty, this vocation is hidden and its
+--          levels cannot be unlocked until the player unlocks those achievements
+--      .secret_flag - If true, this vocation is hidden until the player unlocks the first level
+--      .sound - If specified, the sound to play when a level is unlocked
+--      .unlock_func - A callback called when a level is unlocked
+unilib.global.awards_vocation_table = {}
+-- Table of achievements, in the form
+--      awards_achievement_table[achievement_name] = mini_table
+-- ...where mini_table is in the form
+--      .title - e.g. "Better Lighting"
+--      .description - e.g. "Place 50 torches"
+--      .icon - Texture to use for this achievement; if not specified, a default texture is used
+--      .prize_list - Item(s) to be awarded to a player unlocking this achievement. Each item in the
+--          list is a string used to create an ItemStack, e.g. "unilib:dye_red 2"
+--      .requires_list - A list of achievement names (matching keys in
+--          unilib.global.awards_achievement_table). If not empty, this achievement is hidden and
+--          cannot be unlocked until the player unlocks those achievements
+--      .secret_flag - If true, this achievement is hidden until the player unlocks it
+--      .score - A score (e.g. 10) representing the relative difficulty of this achievement. When
+--          the achievement is unlocked, the score is passed to all vocations in .vocation_list,
+--          allowing the player to advance their level in that vocation. Default value: 10
+--      .sound - If specified, the sound to play when an achievement is unlocked
+--      .trigger_table - A trigger describes the conditions under which an achievement is
+--          unlocked. A table in the form
+--              prototype - The name of the trigger prototype (matches a key in
+--                  unilib.global.awards_trigger_prototype_table)
+--              target - [optional] The number of events that must occur in order to unlock the
+--                  achievement
+--              filter_list - [optional] Items used by some trigger to filter out certain events.
+--                  The items can be simple values or regexes. Used with "simple" triggers
+--              item_list - [optional] The full names of an item (e.g. nodes), and/or aliases and
+--                  group names (e.g. "group:stone"). Used with "complex" triggers
+--      .unlock_func - Callback called when the achievement is unlocked
+--      .vocation_list - A list of vocations which are dependent on this achievement. If not
+--          specified (or empty), the achievement is independent of any vocation. Otherwise,
+--          unlocking the achievement advances the player's level in the specified vocations
+unilib.global.awards_achievement_table = {}
+-- Table of trigger prototypes, in the form
+--      awards_trigger_prototype_table[prototype_name] = mini_table
+-- ...where mini_table is in the form
+--      .trigger type - "simple", "complex" or "custom"
+--      .hint_list - If specified, a list of two items, messages to display for an achievement that
+--          doesn't specify a .description. The first item is singular, the second plural, e.g.
+--          {"Break one block", "Break @1 blocks"}
+--      .progress_list - If specified, a list of two items, messages to display next to the
+--          achievement's progress bar. The first item is singular, the second plural, e.g.
+--          {"Break one block", "Break @1/@2 blocks"}
+unilib.global.awards_trigger_prototype_table = {}
+--
+-- Player awards table (stored in a table while the player is connected, then serialised as a player
+--      attribute when they leave)
+-- Table in the form
+--      awards_player_table[pname] = mini_table
+-- ...where mini_table is in the form
+--      .level_table - the player's progress in each vocation, a table in the form
+--              level_table[vocation_name] = level number (0 is the equivalent of nil)
+--      .score_table - the player's cumulative score from all achievements that unlock levels in
+--          this vocation; a table in the form
+--              score_table[vocation_name] = cumulative score
+--      .current_table - the player's current score in each achievement; a table in the form
+--              current_table[achievement_name] = current score
+--      .unlock_table - all achievements that have been unlocked by the player; a table in the form
+--              unlock_table[achievement_name] = true (if unlocked), nil (if locked)
+--      .data_table - data storage for any achievement that needs more than the simple integer
+--          provided by .current_table; a table in the form
+--              data_table[achievement_name] = any value (int, float, string, list or table)
+--      .monitor_table - tracks changes to the player and the world, allowing a (custom) trigger to
+--              be fired when something changes. The table contains an arbitrary set of key-value
+--              pairs
+--      .progres_list - a list of mini-tables, each one recording the time at which the player
+--          unlocked an achievement or level, in the order they unlocked (earliest first).
+--          Mini-tables in the form
+--              level_flag (str): false for achievements, true for vocations
+--              name (str): The vocation or achievement name
+--              level (int): For vocations, the level number; nil for achievements
+--              time (float): The time at which the level/achievement was unlocked; matches
+--                  os.time()
+unilib.global.awards_player_table = {}
 
 -- Lists of minetest_game ABMs/LBMs for which unilib equivalents exist. If the Minetest setting is
 --      enabled, the original ABMs/LBMs are disabled

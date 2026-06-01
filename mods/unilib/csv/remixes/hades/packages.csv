@@ -8,7 +8,7 @@
 #   default. If you edit the package code to enable them, you should also uncomment all of the
 #   packages in the corresponding sections below
 # Note that, if you do this, you'll see some duplicate package warnings. The folder that contains
-#   this file, also contains the file "packages_ALL_DEPENDENCIES.csv", which assumes that all the
+#   this file, also contains the file "_packages_ALL_DEPENDENCIES.csv", which assumes that all the
 #   optional settings have been enabled. In that file, only duplicate packages are commented out
 # If you have enabled all of the optional settings, you should rename this file (to anything), and
 #   then rename that file to "packages.csv"

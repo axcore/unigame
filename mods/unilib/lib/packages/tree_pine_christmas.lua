@@ -68,7 +68,7 @@ function unilib.pkg.tree_pine_christmas.exec()
                 {items = {"unilib:tree_pine_christmas_leaves"}},
             },
         },
-        furnace_burntime = 1,
+--      furnace_burntime = 1,
         inventory_image = core.inventorycube("unilib_tree_pine_christmas_leaves.png"),
         -- N.B. is_ground_content = false not in original code; added to match other leaves
         is_ground_content = false,
@@ -77,6 +77,12 @@ function unilib.pkg.tree_pine_christmas.exec()
         visual_scale = unilib.global.leaves_visual_scale,
         -- N.B. walkable not in original code
         walkable = unilib.setting.walkable_leaves_flag,
+    })
+    unilib.register_craft({
+        -- Original to unilib, replaces the deprecated .furnace_burntime field
+        type = "fuel",
+        recipe = "unilib:tree_pine_christmas_leaves",
+        burntime = 1,
     })
 
     unilib.register_tree_sapling({

@@ -362,13 +362,16 @@ end
 
 function unilib.pkg.ore_gaia.post()
 
+    local constants_table =
+            unilib.global.remix_constants_table[unilib.pkg.biome_gaia.remix_name] or {}
+
     -- Don't place ores where hades/underch remixes are already placing ores
     if unilib.global.pkg_executed_table["mapgen_hades"] ~= nil or
             unilib.global.pkg_executed_table["mapgen_hades_jit"] ~= nil or
             unilib.global.pkg_executed_table["mapgen_underch"] ~= nil or
             unilib.global.pkg_executed_table["mapgen_underch_jit"] ~= nil then
 
-        underworld_y_max = tonumber(unilib.pkg.biome_gaia.constant_table["OCEAN"])
+        underworld_y_max = tonumber(constants_table["OCEAN"])
         -- Code below won't work if OCEAN has been set to 0, for some reason; guard against that
         --      remote possibility
         if underworld_y_max == 0 then

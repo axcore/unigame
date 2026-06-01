@@ -331,6 +331,11 @@ function unilib.pkg.shared_petz_lycanthropy.cure_player(player)
     unilib.utils.set_player_attribute(player, "lycanthropy_is_infected", "false")
     core.chat_send_player(pname, S("You have been cured of the Curse of Lycanthropy!"))
 
+    -- Update awards, if available
+    if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+        unilib.pkg.award_ranger.on_lycanthropy_cure(player)
+    end
+
 end
 
 function unilib.pkg.shared_petz_lycanthropy.infect_player(player)
@@ -347,6 +352,11 @@ function unilib.pkg.shared_petz_lycanthropy.infect_player(player)
 
         core.chat_send_player(pname, S("You have been infected by the Curse of Lycanthropy!"))
         set_werewolf(player)
+
+        -- Update awards, if available
+        if unilib.global.pkg_executed_table["award_ranger"] ~= nil then
+            unilib.pkg.award_ranger.on_lycanthropy_infect(player)
+        end
 
     end
 

@@ -1,0 +1,3 @@
+Contains almost everything from revision 4 of lib_materials/lib_ecology (12 Dec 2018, ShadMordre-v2.0 branch). Some material of little value has been omitted.
+
+The original mods were not suitable for use in survival mode, and the same applies to this remix. Instead, this remix should be used as the basis for your own remixes. In particular, because so many items do not actually spawn in the world, you can omit everything that is not required for biomes and decorations. The section containing ore packages can also be removed, as it is again not very useful in survival mode.

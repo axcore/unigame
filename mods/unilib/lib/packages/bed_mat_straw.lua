@@ -92,13 +92,18 @@ function unilib.pkg.bed_mat_straw.exec()
                 {"unilib:bed_mat_straw"},
             },
         })
-        unilib.register_craft({
-            -- From cottages:straw_mat
-            output = "unilib:bed_mat_straw 3",
-            recipe = {
-                {"unilib:misc_straw_ordinary_bale"},
-            },
-        })
+
+        if unilib.setting.mtgame_tweak_flag then
+        
+            unilib.register_craft({
+                -- From cottages:straw_mat
+                output = "unilib:bed_mat_straw 3",
+                recipe = {
+                    {"unilib:misc_straw_ordinary_bale"},
+                },
+            })
+
+        end
 
     end
 

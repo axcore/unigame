@@ -1,0 +1,1 @@
+Contains everything from the xdecor mod, except the chess set; some magical packages have been commented out (to include them, use the "xdecor" remix).

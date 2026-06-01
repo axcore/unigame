@@ -19,7 +19,7 @@ function unilib.pkg.dirt_mud_dry.init()
 
     return {
         description = "Dru mud",
-        optional = {"clay_ordinary", "dirt_ordinary", "sand_silt"},
+        optional = {"clay_ordinary", "dirt_mud_wet", "dirt_ordinary", "sand_silt"},
     }
 
 end
@@ -66,3 +66,18 @@ function unilib.pkg.dirt_mud_dry.exec()
     })
 
 end
+
+function unilib.pkg.dirt_mud_dry.post()
+
+    -- The "abm_standard_dirt_convert" package converts dry dirts to wet dirts (or converts them to
+    --      ordinary dirt, as a failsafe)
+    -- This doesn't look very nice, so convert dry dirt to wet dirt, if it exists (otherwise block
+    --      conversions altogether, by using dry dirt as both the key and the value)
+    if unilib.global.pkg_executed_table["dirt_mud_wet"] ~= nil then
+        unilib.global.dry_dirt_convert_table["unilib:dirt_mud_dry"] = "unilib:dirt_mud_wet"
+    else
+        unilib.global.dry_dirt_convert_table["unilib:dirt_mud_dry"] = "unilib:dirt_mud_dry"
+    end
+
+end
+

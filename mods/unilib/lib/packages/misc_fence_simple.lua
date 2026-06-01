@@ -19,6 +19,7 @@ function unilib.pkg.misc_fence_simple.init()
 
     return {
         description = "Simple fence",
+        depends = "item_stick_ordinary",
     }
 
 end
@@ -54,11 +55,24 @@ function unilib.pkg.misc_fence_simple.exec()
             },
         },
     })
+    -- N.B. Original craft recipe conflicts with recipe in "machine_plate_pressure" package, and
+    --      with the pressure plate in mesecons
+    --[[
     unilib.register_craft({
         -- From cottages:fence_small
         output = "unilib:misc_fence_simple 3",
         recipe = {
             -- N.B. Was default wood in original code
+            {"group:wood", "group:wood"},
+        },
+    })
+    ]]--
+    unilib.register_craft({
+        -- From cottages:fence_small
+        output = "unilib:misc_fence_simple 3",
+        recipe = {
+            -- N.B. Was default wood in original code
+            {"unilib:item_stick_ordinary", "unilib:item_stick_ordinary"},
             {"group:wood", "group:wood"},
         },
     })

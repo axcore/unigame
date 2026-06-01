@@ -31,7 +31,7 @@ function unilib.pkg.chat_clear_mobs.exec()
         description = S(
             "Removes all untamed mobs (created by the specified mod) within a 100 block radius"
         ),
-        privs = {server = true},
+        privs = {unilib_admin = true},
 
         func = function(pname, param)
 

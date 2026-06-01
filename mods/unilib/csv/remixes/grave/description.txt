@@ -1,0 +1,3 @@
+Contains only dirt, trees and biomes from the grave mod (no mobs were imported).
+
+Also contains some packages from the "cropocalypse" mod which were only available when the "grave" mod was loaded. In the "cropocalypse" remix, those packages are commented out.

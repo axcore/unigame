@@ -42,7 +42,6 @@ sand_desert|default farming
 sand_silver|default
 
 # supporting packages (.optional)
-   .optional
 #bush_blueberry_ordinary|default
 #mineral_flint|default fire mtg_plus
 #plant_cactus_ordinary|default

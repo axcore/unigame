@@ -1,0 +1,1 @@
+Contains everything from the bakedclay mod except luckyblocks and coloured_clay compatibility code.

@@ -1,0 +1,3 @@
+The "mtgame" remix without biomes, decorations or ores, without ABM and LBM packages, and without the base package.
+
+If you want to create a world that is free of minetest_game biomes, decorations and ores - but which contains everything else - then this remix should be used alongside the "minimal" remix (which provides a base package; note that the one in this remix is commented out).

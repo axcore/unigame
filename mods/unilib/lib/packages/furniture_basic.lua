@@ -120,6 +120,8 @@ local function register_cabinet(data_table)
     local slab_name = "unilib:tree_" .. part_name .. "_wood_stair_slab"
     local img = "unilib_tree_" .. part_name .. "_wood.png"
 
+    local c_trapdoor = "unilib:trapdoor_wood_ordinary_closed"
+
     unilib.register_node(full_name, orig_name, replace_mode, {
         description = description,
         -- N.B. Removed chest textures as it doesn't look good
@@ -161,7 +163,7 @@ local function register_cabinet(data_table)
         output = full_name,
         recipe = {
             {slab_name, slab_name, slab_name},
-            {"unilib:trapdoor_wood_ordinary", slab_name, "unilib:trapdoor_wood_ordinary"},
+            {c_trapdoor, slab_name, c_trapdoor},
             {slab_name, slab_name, slab_name},
         },
     })

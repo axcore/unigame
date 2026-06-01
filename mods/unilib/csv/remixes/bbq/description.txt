@@ -1,0 +1,5 @@
+Contains nearly everything from the bbq mod.
+
+Does not include a few items provided by other mods (charcoal, molasses and sugar).
+
+Does not provide beer; instead, the unidrinks expansion pack provides the "drink_beer_light" package in its "bbq_extra" remix.

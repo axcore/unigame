@@ -70,9 +70,7 @@ end
 -- Serialise/deserialise when player joins/player leaves/on shutdown
 core.register_on_joinplayer(function(player, last_login)
 
-    local _, pname, epoch, date_game, date_real
-    pname = player:get_player_name()
-    epoch, _, _, _, date_game, date_real = get_epoch_and_date()
+    local pname = player:get_player_name()
 
     -- Import stats
     unilib.global.player_stats_activity_table[pname] =

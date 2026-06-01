@@ -16,7 +16,7 @@
 #   column (or leave it empty)
 #
 # Most columns supports contants values (all the values below which are in all-caps and which are
-#   defined in the file "mob_constants.csv")
+#   defined in the file "constants.csv")
 # The "harmful_node_str" and "custom_str" columns do NOT support constant values
 #
 # The "harmful_node_str" column, if specified, should be in the form

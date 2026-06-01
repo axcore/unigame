@@ -28,7 +28,7 @@ function unilib.pkg.hqb_approach_beehive.add_to_queue(self, priority)
     -- (Behaviour implemented as a closure to preserve state between calls)
     local func = function(self)
 
-        if not unimobs.mobkit_api.is_behaviour_safe(self) then
+        if not unimobs.mobkit_api.is_behaviour_safe(self) or not self.beehive_pos then
             return true
         end
 

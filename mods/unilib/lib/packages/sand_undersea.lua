@@ -34,7 +34,7 @@ function unilib.pkg.sand_undersea.init()
             "coral_rooted_orange_glow",
             "coral_rooted_pink_glow",
             "liquid_water_ordinary",
-            "misc_sponge",
+            "misc_sponge_normal",
             "plant_seaweed_undersea",
             "sand_ordinary",
         },
@@ -76,7 +76,7 @@ function unilib.pkg.sand_undersea.exec()
             local full_name = core.get_node(pos).name
             if full_name == "unilib:liquid_water_ordinary_source" and selection == 6 then
 
-                core.swap_node(pos, {name = "unilib:misc_sponge_wet"})
+                core.swap_node(pos, {name = "unilib:misc_sponge_normal_wet"})
                 return
 
             end

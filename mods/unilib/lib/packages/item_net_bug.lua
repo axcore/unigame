@@ -36,9 +36,9 @@ function unilib.pkg.item_net_bug.exec()
         --[[
         on_use = function(itemstack, player, pointed_thing)
 
-            local player_name = player and player:get_player_name() or ""
+            local pname = player and player:get_player_name() or ""
             if not pointed_thing or pointed_thing.type ~= "node" or
-                    core.is_protected(pointed_thing.under, player_name) then
+                    core.is_protected(pointed_thing.under, pname) then
                 return
             end
 
@@ -55,7 +55,7 @@ function unilib.pkg.item_net_bug.exec()
 
             end
 
-            if not unilib.utils.is_creative(player_name) then
+            if not unilib.utils.is_creative(pname) then
 
                 itemstack:add_wear_by_uses(256)
                 return itemstack

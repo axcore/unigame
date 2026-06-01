@@ -451,7 +451,7 @@ function unilib.stairs._prepare_stair(
 
                 local under = core.get_node(pointed_thing.under)
                 local wield_item = itemstack:get_name()
-                local player_name = placer and placer:get_player_name() or ""
+                local pname = placer and placer:get_player_name() or ""
 
                 if under and (
                     under.name:find("_stair_slab") or       -- unilib stair nodes
@@ -481,7 +481,7 @@ function unilib.stairs._prepare_stair(
 
                     -- Else attempt to place node with proper param2
                     core.item_place_node(ItemStack(wield_item), placer, pointed_thing, p2)
-                    if not unilib.utils.is_creative(player_name) then
+                    if not unilib.utils.is_creative(pname) then
                         itemstack:take_item()
                     end
 

@@ -1,4 +1,4 @@
-# "moreblocks" remix - contains almost everything from moreblocks
+# "moreblocks" remix - contains almost everything from the moreblocks mod
 # Code handling moreblocks stairs has been incorporated directly into unilib's core code
 # Due to the ubiquity of moreblocks, craft recipes involving only minetest_game items have been
 #   added to minetest_game packages, rather than being added to a separate moreblocks package, as

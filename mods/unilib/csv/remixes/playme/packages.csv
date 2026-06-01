@@ -1,5 +1,6 @@
 # "playme" remix
-# A collection of remixes and packages, ready for use in a typical Minetest game
+# A collection of remixes and packages, ready for use in a beautiful sandbox game
+# This is unilib's showcase remix
 
 # node_name | original_mod
 
@@ -17,6 +18,7 @@ plant_kelp_ordinary_gaia|farlands
 
 @mtgame_mini
 @standard
+@config
 @chat_normal
 
 # Above-ground biomes
@@ -44,12 +46,21 @@ plant_kelp_ordinary_gaia|farlands
 # @cucina_vegana
 # @farming_redo
 
+# Comment out this remix, if you don't want awards (vocations and achievements)
+
+@awards
+
+# Comment out this remix, if you don't want weather effects
+
+@atmosphere
+
 # ================================================================================================
 # OTHER STUFF
 
 @highlights
 
 @abristuff
+@airtanks
 @armour
 @atomic
 @basic_materials
@@ -192,6 +203,10 @@ food_pizza_veggie_supreme|unilib
 # plastic_block packages
 decor_block_plastic_basic|plastic_block
 
+# pontoons packages
+misc_pontoon_steel|pontoons
+misc_pontoon_wood|pontoons
+
 # real_torch packages
 item_match_ordinary|real_torch
 torch_unlit|real_torch
@@ -238,3 +253,4 @@ container_chest_compact|twchests
 # unilib packages
 meta_skybox_sun_hexagonal|unilib
 meta_skybox_moon_hexagonal|unilib
+potion_antidote_poison|unilib

@@ -1,0 +1,3 @@
+Contains everything from the underch mod, and everything from the following mods from the uchu modpack: compressed, condensed, bakedeye, gemtools, gravelcraft.
+
+For a more complete set of packages, see the "uchu" remix.

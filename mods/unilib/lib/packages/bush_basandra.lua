@@ -124,6 +124,7 @@ function unilib.pkg.bush_basandra.exec()
         base_img = "unilib_bush_basandra_wood.png",
         burnlevel = burnlevel,
         description = S("Basandra Wood Fence"),
+        ingredient = "unilib:bush_basandra_wood",
     })
 
     unilib.register_fence_rail_quick({
@@ -135,6 +136,7 @@ function unilib.pkg.bush_basandra.exec()
         burnlevel = burnlevel,
         base_img = "unilib_bush_basandra_wood.png",
         description = S("Basandra Wood Fence Rail"),
+        ingredient = "unilib:bush_basandra_wood",
     })
 
     unilib.register_fence_gate_quick({
@@ -146,6 +148,7 @@ function unilib.pkg.bush_basandra.exec()
         burnlevel = burnlevel,
         base_img = "unilib_bush_basandra_wood.png",
         description = S("Basandra Wood Fence Gate"),
+        ingredient = "unilib:bush_basandra_wood",
     })
 
     unilib.register_decoration_generic("ethereal_bush_basandra", {

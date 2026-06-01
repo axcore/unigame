@@ -1,6 +1,6 @@
 # "farming_redo" remix - contains everything in farming_redo that hasn't already been provided by
-#   other mods. Note that lucky_block stuff has not been imported, and that the sand soil created by
-#   minetest_game, but removed by farming_redo, is preserved in unilib
+#   other mods. Note that lucky_block items have not been imported, and that the sand soil created
+#   by minetest_game, but removed by farming_redo, is preserved in unilib
 
 # node_name | original_mod
 

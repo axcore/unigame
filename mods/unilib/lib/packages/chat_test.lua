@@ -27,7 +27,7 @@ end
 function unilib.pkg.chat_test.exec()
 
     core.register_chatcommand("test", {
-        params = "",
+        params = "[param]",
         description = S("Runs some arbitrary code"),
         privs = {unilib_admin = true},
 

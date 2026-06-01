@@ -67,40 +67,34 @@ function unilib.pkg.ingredient_molasses.exec()
     })
     if unilib.setting.technic_extra_flag then
 
-        -- N.B. To prevent problems with circular mod dependencies, calls to technic's API must wait
-        --      until all mods have been loaded
-        core.after(0.1, function()
+        technic.register_compressor_recipe({
+            -- From cucina_vegana:molasses
+            output = "unilib:ingredient_molasses",
+            input = {c_ingredient .. " 6"},
+        })
 
-            technic.register_compressor_recipe({
+        if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
+
+            technic.register_separating_recipe({
                 -- From cucina_vegana:molasses
-                output = "unilib:ingredient_molasses",
-                input = {c_ingredient .. " 6"},
+                output = {"unilib:ingredient_molasses", "unilib:tree_apple_leaves", nil},
+                input = {c_ingredient .. " 4"},
             })
 
-            if unilib.global.pkg_executed_table["tree_apple"] ~= nil then
+        end
 
-                technic.register_separating_recipe({
-                    -- From cucina_vegana:molasses
-                    output = {"unilib:ingredient_molasses", "unilib:tree_apple_leaves", nil},
-                    input = {c_ingredient .. " 4"},
-                })
+        technic.register_extractor_recipe({
+            -- From cucina_vegana:molasses
+            output = "unilib:ingredient_molasses",
+            input = {c_ingredient .. " 3"},
+        })
 
-            end
-
-            technic.register_extractor_recipe({
-                -- From cucina_vegana:molasses
-                output = "unilib:ingredient_molasses",
-                input = {c_ingredient .. " 3"},
-            })
-
-            technic.register_extractor_recipe({
-                -- From cucina_vegana:molasses
-                -- N.B. Original code's output is "bushes:sugar 2"
-                output = "unilib:ingredient_sugar_normal 2",
-                input = {"unilib:ingredient_molasses"},
-            })
-
-        end)
+        technic.register_extractor_recipe({
+            -- From cucina_vegana:molasses
+            -- N.B. Original code's output is "bushes:sugar 2"
+            output = "unilib:ingredient_sugar_normal 2",
+            input = {"unilib:ingredient_molasses"},
+        })
 
     end
 

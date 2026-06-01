@@ -1,0 +1,3 @@
+Contains almost everything from the petz modpack.
+
+See also the "petz_mini" remix, which containss all brain and behaviour packages from the this remix (but nothing else).

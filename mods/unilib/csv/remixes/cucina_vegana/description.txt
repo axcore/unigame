@@ -1,0 +1,1 @@
+Contains everything from the cucina_vegana mod, except for support for various technology/mob mods, and for some food mods that are not currently imported into unilib (but might be in the future).
